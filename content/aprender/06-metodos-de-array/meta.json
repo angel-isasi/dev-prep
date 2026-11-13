@@ -1,0 +1,7 @@
+{
+  "id": "metodos-de-array",
+  "titulo": "map, filter y reduce",
+  "orden": 6,
+  "descripcion": "Transformar, filtrar y resumir arrays sin bucles a mano, y saber qué devuelve cada método.",
+  "ejercicios": ["js-ej-001", "js-ej-002", "js-ej-003", "js-ej-016", "js-ej-018"]
+}

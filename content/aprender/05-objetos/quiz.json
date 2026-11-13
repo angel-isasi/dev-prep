@@ -1,0 +1,53 @@
+[
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst producto = { nombre: \"Polo\", precio: 30 };\nconst campo = \"precio\";\nconsole.log(producto.campo, producto[campo]);\n```",
+    "opciones": ["30 30", "undefined 30", "precio 30", "Error: campo no existe"],
+    "correcta": 1,
+    "explicacion": "`producto.campo` busca una propiedad que se llame literalmente \"campo\", que no existe, así que da `undefined` (sin error). `producto[campo]` usa el **valor** de la variable, o sea `producto[\"precio\"]`, que es 30."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst original = { nombre: \"Ana\", dir: { ciudad: \"Lima\" } };\nconst copia = { ...original };\ncopia.nombre = \"Eva\";\ncopia.dir.ciudad = \"Cusco\";\nconsole.log(original.nombre, original.dir.ciudad);\n```",
+    "opciones": ["Ana Lima", "Eva Cusco", "Eva Lima", "Ana Cusco"],
+    "correcta": 3,
+    "explicacion": "El spread hace una copia **superficial**: `nombre` es un texto (primitivo) y se copió, por eso cambiarlo en la copia no afecta al original. Pero `dir` es un objeto y las dos variables comparten el mismo, así que cambiar `copia.dir.ciudad` también cambia `original.dir.ciudad`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst a = { n: 1 };\nconst b = { n: 1 };\nconst c = a;\nconsole.log(a === b, a === c);\n```",
+    "opciones": ["false true", "true true", "true false", "false false"],
+    "correcta": 0,
+    "explicacion": "`===` entre objetos compara **referencias**, no contenido. `a` y `b` tienen lo mismo adentro pero son dos objetos distintos: `false`. `c = a` no crea otro objeto, apunta al mismo: `true`."
+  },
+  {
+    "pregunta": "¿Qué devuelve esta expresión?\n\n```js\nObject.fromEntries(\n  Object.entries({ a: 1, b: 2 }).map(([k, v]) => [v, k])\n);\n```",
+    "opciones": [
+      "{ a: 1, b: 2 }",
+      "[[1, \"a\"], [2, \"b\"]]",
+      "{ \"1\": \"a\", \"2\": \"b\" }",
+      "{ a: \"1\", b: \"2\" }"
+    ],
+    "correcta": 2,
+    "explicacion": "`Object.entries` da `[[\"a\", 1], [\"b\", 2]]`. El `map` invierte cada par: `[[1, \"a\"], [2, \"b\"]]` (eso sería la segunda opción, pero aún falta un paso). `Object.fromEntries` convierte esos pares en objeto, y como las claves siempre son texto, 1 y 2 pasan a ser \"1\" y \"2\". Es exactamente el ejercicio de invertir claves y valores."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst stock = { arroz: 0 };\nconsole.log(\n  stock.arroz ? \"hay clave\" : \"no hay clave\",\n  Object.hasOwn(stock, \"arroz\"),\n  \"toString\" in stock\n);\n```",
+    "opciones": [
+      "hay clave true false",
+      "no hay clave false false",
+      "hay clave true true",
+      "no hay clave true true"
+    ],
+    "correcta": 3,
+    "explicacion": "`stock.arroz` vale 0, que es falsy, así que el ternario dice \"no hay clave\" aunque la clave sí existe: por eso no se usa la veracidad para comprobar existencia. `Object.hasOwn` mira solo las propiedades propias: `true`. `in` también mira lo heredado del prototipo, y todo objeto hereda `toString`: `true`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst datos = { id: 1, nota: undefined, creado: new Date(0) };\nconst copia = JSON.parse(JSON.stringify(datos));\nconsole.log(Object.keys(copia), typeof copia.creado);\n```",
+    "opciones": [
+      "[\"id\", \"nota\", \"creado\"] object",
+      "[\"id\", \"creado\"] string",
+      "[\"id\", \"creado\"] object",
+      "[\"id\", \"nota\", \"creado\"] string"
+    ],
+    "correcta": 1,
+    "explicacion": "`JSON.stringify` omite las propiedades con valor `undefined`, así que `nota` desaparece. Las fechas se convierten a texto (formato ISO) y `JSON.parse` no las vuelve a convertir en `Date`, por eso `creado` es un string. Por estas pérdidas, para copias profundas se prefiere `structuredClone`."
+  }
+]

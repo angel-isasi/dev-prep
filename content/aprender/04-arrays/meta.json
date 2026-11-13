@@ -1,0 +1,7 @@
+{
+  "id": "arrays",
+  "titulo": "Arrays",
+  "orden": 4,
+  "descripcion": "Listas ordenadas: crear, leer, agregar, quitar, buscar y ordenar, sabiendo qué métodos cambian el original.",
+  "ejercicios": ["js-ej-005", "js-ej-010", "js-ej-014", "js-ej-012", "js-ej-011"]
+}

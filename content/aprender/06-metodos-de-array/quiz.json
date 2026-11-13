@@ -1,0 +1,48 @@
+[
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst r = [1, 2, 3].map((n) => { n * 10 });\nconsole.log(r);\n```",
+    "opciones": ["[10, 20, 30]", "[1, 2, 3]", "undefined", "[undefined, undefined, undefined]"],
+    "correcta": 3,
+    "explicacion": "Con llaves `{}` la flecha tiene un cuerpo de bloque y necesita `return`; como no lo tiene, devuelve `undefined` en cada vuelta. `map` igual arma un array del mismo largo, así que queda `[undefined, undefined, undefined]`. Para obtener `[10, 20, 30]`: `(n) => n * 10`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst r = [1, 2, 3, 4].forEach((n) => n * 2);\nconsole.log(r);\n```",
+    "opciones": ["undefined", "[2, 4, 6, 8]", "[1, 2, 3, 4]", "8"],
+    "correcta": 0,
+    "explicacion": "`forEach` siempre devuelve `undefined`, sin importar lo que retorne la función. Sirve para efectos (imprimir, tocar el DOM), no para crear arrays. `[2, 4, 6, 8]` sería el resultado con `map`."
+  },
+  {
+    "pregunta": "¿Qué vale `total`?\n\n```js\nconst carrito = [\n  { item: \"pan\", precio: 2, cantidad: 3 },\n  { item: \"leche\", precio: 5, cantidad: 0 },\n  { item: \"huevos\", precio: 1, cantidad: 6 },\n];\nconst total = carrito\n  .filter((p) => p.cantidad > 0)\n  .map((p) => p.precio * p.cantidad)\n  .reduce((acc, n) => acc + n, 0);\n```",
+    "opciones": ["8", "12", "11", "[6, 6]"],
+    "correcta": 1,
+    "explicacion": "`filter` saca la leche (cantidad 0). `map` calcula el subtotal de cada uno: pan 2 × 3 = 6 y huevos 1 × 6 = 6, o sea `[6, 6]`. `reduce` los suma desde 0: 12. `[6, 6]` es el paso intermedio, no el final; 8 sería sumar precios sin cantidades."
+  },
+  {
+    "pregunta": "¿Qué devuelve este código?\n\n```js\n[\"a\", \"b\", \"a\", \"c\", \"a\"].reduce((acc, letra) => {\n  acc[letra] = (acc[letra] ?? 0) + 1;\n  return acc;\n}, {});\n```",
+    "opciones": [
+      "3",
+      "{ a: 1, b: 1, c: 1 }",
+      "{ a: 3, b: 1, c: 1 }",
+      "[\"a\", \"b\", \"c\"]"
+    ],
+    "correcta": 2,
+    "explicacion": "El acumulador empieza como `{}`. En cada vuelta suma 1 a la clave de esa letra (si no existe, `?? 0` la arranca en 0) y devuelve el objeto para la siguiente vuelta. La \"a\" aparece 3 veces: `{ a: 3, b: 1, c: 1 }`. Es el patrón clásico de contar con `reduce`."
+  },
+  {
+    "pregunta": "¿Qué pasa al ejecutar esto?\n\n```js\nconst nums = [];\nconst suma = nums.reduce((acc, n) => acc + n);\n```",
+    "opciones": [
+      "suma vale 0",
+      "Lanza TypeError: Reduce of empty array with no initial value",
+      "suma vale undefined",
+      "suma vale NaN"
+    ],
+    "correcta": 1,
+    "explicacion": "Sin valor inicial, `reduce` usa el primer elemento como acumulador; si el array está vacío no hay ninguno y lanza un `TypeError`. Con `nums.reduce((acc, n) => acc + n, 0)` devolvería 0. Por eso conviene pasar siempre el valor inicial."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconsole.log([\"10\", \"10\", \"10\"].map(parseInt));\n```",
+    "opciones": ["[10, 10, 10]", "[\"10\", \"10\", \"10\"]", "[1, 0, 2]", "[10, NaN, 2]"],
+    "correcta": 3,
+    "explicacion": "`map` llama a la función con `(elemento, indice, array)`, y `parseInt` recibe el índice como segundo argumento: la **base**. `parseInt(\"10\", 0)` usa base 10 por defecto: 10. `parseInt(\"10\", 1)` es una base inválida: `NaN`. `parseInt(\"10\", 2)` lee \"10\" en binario: 2. La solución es `.map((s) => parseInt(s))` o `.map(Number)`."
+  }
+]

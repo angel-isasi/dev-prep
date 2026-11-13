@@ -1,0 +1,48 @@
+[
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst nums = [3, 20, 100];\nnums.sort();\nconsole.log(nums);\n```",
+    "opciones": ["[3, 20, 100]", "[100, 20, 3]", "[3, 100, 20]", "Error: sort necesita un comparador"],
+    "correcta": 1,
+    "explicacion": "Sin comparador, `sort` convierte los números a texto y ordena alfabéticamente: \"100\" < \"20\" < \"3\" porque compara carácter por carácter (\"1\" < \"2\" < \"3\"). No lanza error, y `[3, 100, 20]` no corresponde a ningún criterio de orden. Para orden numérico: `nums.sort((a, b) => a - b)`."
+  },
+  {
+    "pregunta": "¿Qué valen `quitados` y `a` al final?\n\n```js\nconst a = [10, 20, 30, 40];\nconst quitados = a.splice(1, 2);\n```",
+    "opciones": [
+      "quitados = [20, 30] y a = [10, 20, 30, 40]",
+      "quitados = [20] y a = [10, 30, 40]",
+      "quitados = [10, 40] y a = [20, 30]",
+      "quitados = [20, 30] y a = [10, 40]"
+    ],
+    "correcta": 3,
+    "explicacion": "`splice(1, 2)` empieza en el índice 1 y quita 2 elementos (20 y 30). Devuelve lo que quitó y **modifica** el original, que queda `[10, 40]`. La primera opción describe a `slice(1, 3)`, que no muta. El segundo argumento de `splice` es la cantidad, no el índice final."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst lista = [1, 2];\nconst resultado = lista.push(3);\nconsole.log(resultado);\n```",
+    "opciones": ["3", "[1, 2, 3]", "undefined", "[3]"],
+    "correcta": 0,
+    "explicacion": "`push` agrega al final y devuelve el **nuevo largo** del array, que es 3. El array `lista` sí queda como `[1, 2, 3]`, pero eso no es lo que devuelve `push`. Si quieres un array nuevo, usa `[...lista, 3]`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst original = [1, 2, 3];\nconst copia = original;\ncopia.pop();\nconsole.log(original.length);\n```",
+    "opciones": ["3", "Error, original es const", "2", "undefined"],
+    "correcta": 2,
+    "explicacion": "`copia = original` no crea un array nuevo: las dos variables apuntan al **mismo** array. Al hacer `pop` sobre `copia`, el array compartido queda con 2 elementos. `const` impide reasignar la variable, no impide cambiar el contenido del array. Para copiar de verdad: `[...original]`."
+  },
+  {
+    "pregunta": "```js\nconst usuarios = [\n  { nombre: \"Ana\", edad: 17 },\n  { nombre: \"Luis\", edad: 21 },\n  { nombre: \"Rosa\", edad: 25 },\n];\nconst r = usuarios.find((u) => u.edad >= 18);\n```\n\n¿Qué vale `r`?",
+    "opciones": [
+      "[{ nombre: \"Luis\", edad: 21 }, { nombre: \"Rosa\", edad: 25 }]",
+      "{ nombre: \"Luis\", edad: 21 }",
+      "1",
+      "true"
+    ],
+    "correcta": 1,
+    "explicacion": "`find` devuelve el **primer elemento** que cumple la condición, no un array: el objeto de Luis. La primera opción es lo que devolvería `filter`. `1` sería `findIndex` y `true` sería `some`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst [a, ...resto] = [5, 6, 7];\nconsole.log(a, resto, [].every((x) => x > 100));\n```",
+    "opciones": ["5 [6, 7] false", "[5] [6, 7] true", "5 [6, 7] true", "5 7 true"],
+    "correcta": 2,
+    "explicacion": "El destructuring toma el primer valor en `a` (5) y el rest `...resto` junta los demás en un array `[6, 7]`. `every` sobre un array vacío devuelve `true`, porque no hay ningún elemento que incumpla (se dice que es \"verdadero por vacío\"). En cambio `[].some(...)` sería `false`."
+  }
+]
