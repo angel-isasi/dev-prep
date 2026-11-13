@@ -1,0 +1,9 @@
+{
+  "id": "mix-047",
+  "titulo": "Galería con visor y teclado",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 3,
+  "tags": ["react", "useEffect", "eventos", "teclado", "accesibilidad", "mini-proyecto"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/47"
+}

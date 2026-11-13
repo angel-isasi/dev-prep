@@ -1,0 +1,9 @@
+{
+  "id": "mix-034",
+  "titulo": "Emisor de eventos con hook de suscripción",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "limpieza", "pub-sub", "closures", "Set"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/34"
+}

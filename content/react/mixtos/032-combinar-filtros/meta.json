@@ -1,0 +1,9 @@
+{
+  "id": "mix-032",
+  "titulo": "Combinar filtros",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 2,
+  "tags": ["react", "filtros", "closures", "funciones-de-orden-superior", "every", "composicion"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/32"
+}

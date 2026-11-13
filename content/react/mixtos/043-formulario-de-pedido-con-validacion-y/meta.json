@@ -1,0 +1,9 @@
+{
+  "id": "mix-043",
+  "titulo": "Formulario de pedido con validación y resumen",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 3,
+  "tags": ["react", "formularios", "validacion", "accesibilidad", "regex", "mini-proyecto"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/43"
+}

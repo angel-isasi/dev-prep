@@ -1,0 +1,9 @@
+{
+  "id": "mix-035",
+  "titulo": "Hook useThrottle",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["react", "custom-hook", "useRef", "useEffect", "throttle", "timers"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/35"
+}

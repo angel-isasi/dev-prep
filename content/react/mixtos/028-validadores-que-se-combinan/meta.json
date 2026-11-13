@@ -1,0 +1,9 @@
+{
+  "id": "mix-028",
+  "titulo": "Validadores que se combinan",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "formularios", "validacion", "closures", "funciones-de-orden-superior"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/28"
+}

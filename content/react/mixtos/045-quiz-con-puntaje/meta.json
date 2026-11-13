@@ -1,0 +1,9 @@
+{
+  "id": "mix-045",
+  "titulo": "Quiz con puntaje",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useState", "estado-derivado", "renderizado-condicional", "mini-proyecto"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/45"
+}

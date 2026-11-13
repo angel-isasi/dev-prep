@@ -1,0 +1,5 @@
+[
+  "Los dos manejadores hacen exactamente lo mismo; lo único que cambia es QUÉ campo del objeto actualizan. Esa diferencia puede ser un parámetro. La pregunta es: ¿cómo le pasas el nombre del campo si `onChange` solo te da el evento? Respuesta: con una función que recibe el campo y devuelve el manejador.",
+  "Escribe `const cambiar = (campo) => (evento) => ...`. La flecha de afuera recibe el campo; la de adentro es el manejador, y gracias al closure sigue viendo `campo`. Dentro, copia el objeto anterior con spread y sobrescribe la clave dinámica con una propiedad computada: `{ ...anteriores, [campo]: evento.target.value }`.",
+  "Esqueleto:\n\n```jsx\nconst [datos, setDatos] = useState({ nombre: \"\", distrito: \"\" });\n\nconst cambiar = (campo) => (evento) =>\n  setDatos((anteriores) => ({ /* copia + [campo]: valor */ }));\n\nreturn (\n  <form>\n    <input aria-label=\"Nombre\" value={datos.nombre} onChange={cambiar(\"nombre\")} />\n    <input aria-label=\"Distrito\" value={/* ... */} onChange={/* ... */} />\n    <output>{datos.nombre} / {datos.distrito}</output>\n  </form>\n);\n```"
+]

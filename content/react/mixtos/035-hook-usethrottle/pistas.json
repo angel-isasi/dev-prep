@@ -1,0 +1,5 @@
+[
+  "Necesitas recordar **cuándo** fue la última actualización. Con ese dato, ante cada cambio te preguntas: ¿ya pasaron `ms` milisegundos? Si sí, aplica ya; si no, programa la actualización para cuando se cumpla el plazo.",
+  "Guarda el valor limitado en `useState` (eso sí se muestra) y el momento de la última actualización en un `useRef` (no debe provocar renders). En un `useEffect` que dependa de `[valor, ms]`, calcula `falta = ms - (Date.now() - ultimo.current)`. Si `falta <= 0`, actualiza; si no, usa `setTimeout(aplicar, falta)` y límpialo con `clearTimeout` en el return.",
+  "Esqueleto:\n\n```jsx\nconst [limitado, setLimitado] = useState(valor);\nconst ultimo = useRef(0);\n\nuseEffect(() => {\n  const aplicar = () => {\n    ultimo.current = /* ahora */;\n    setLimitado(valor);\n  };\n  const falta = /* ms menos lo que pasó desde ultimo.current */;\n  if (falta <= 0) {\n    aplicar();\n    return;\n  }\n  const id = setTimeout(aplicar, falta);\n  return /* limpia el temporizador */;\n}, [valor, ms]);\n\nreturn limitado;\n```"
+]

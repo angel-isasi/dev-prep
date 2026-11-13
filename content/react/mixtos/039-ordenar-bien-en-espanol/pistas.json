@@ -1,0 +1,5 @@
+[
+  "Prueba en la consola `[\"ica\", \"Nasca\", \"Áncash\"].sort()`: el resultado está mal porque `sort()` compara códigos de caracteres, y en esa tabla las mayúsculas van antes que las minúsculas y las letras con tilde van al final. Necesitas una comparación que conozca el idioma.",
+  "JavaScript trae `Intl.Collator`: `new Intl.Collator(\"es\", { sensitivity: \"base\" })` crea un comparador para español que ignora mayúsculas y tildes; su propiedad `.compare` es una función `(a, b) => número` lista para pasar a `sort`. Para no mutar la prop, ordena una copia con `toSorted` (o `[...nombres].sort(...)`).",
+  "Esqueleto:\n\n```jsx\nexport const comparar = new Intl.Collator(/* idioma */, { sensitivity: /* ... */ }).compare;\n\nexport function Distritos({ nombres }) {\n  const ordenados = useMemo(() => /* copia ordenada con comparar */, [nombres]);\n  return (\n    <ul>\n      {ordenados.map((nombre) => (\n        <li key={nombre}>{nombre}</li>\n      ))}\n    </ul>\n  );\n}\n```"
+]

@@ -1,0 +1,9 @@
+{
+  "id": "mix-036",
+  "titulo": "No repetir un cálculo caro",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["react", "useMemo", "rendimiento", "reduce", "referencias"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/36"
+}

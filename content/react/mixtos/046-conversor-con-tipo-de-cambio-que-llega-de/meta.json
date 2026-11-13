@@ -1,0 +1,9 @@
+{
+  "id": "mix-046",
+  "titulo": "Conversor con tipo de cambio que llega de una API",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 3,
+  "tags": ["react", "useEffect", "promesas", "validacion", "numeros", "mini-proyecto"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/46"
+}

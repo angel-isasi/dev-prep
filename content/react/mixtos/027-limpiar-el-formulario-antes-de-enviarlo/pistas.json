@@ -1,0 +1,5 @@
+[
+  "Trata cada campo por separado: cada uno tiene su propia limpieza y ninguna depende de las otras. Y piensa en el resultado como un objeto NUEVO que armas campo por campo, no como cambios sobre el que recibes.",
+  "Para el nombre: `trim()` y luego `replace(/\\s+/g, \" \")` (uno o más espacios seguidos se vuelven uno). Para el teléfono: `replace(/\\D/g, \"\")` borra todo lo que NO es dígito. Para la cantidad: `Number.parseInt(texto, 10)` da `NaN` si no puede leer un número; `NaN || 1` da 1, y `Math.max(1, ...)` sube a 1 los ceros y negativos.",
+  "Esqueleto:\n\n```js\nexport function normalizarPedido(formulario) {\n  return {\n    nombre: formulario.nombre.trim().replace(/* espacios repetidos */, \" \"),\n    correo: /* trim + minúsculas */,\n    telefono: formulario.telefono.replace(/* todo lo que no es dígito */, \"\"),\n    cantidad: Math.max(1, Number.parseInt(formulario.cantidad, 10) || 1),\n  };\n}\n```"
+]

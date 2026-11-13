@@ -1,0 +1,5 @@
+[
+  "Un predicado es una función que recibe un elemento y responde `true` o `false`; es lo que `filter` necesita. Tus fábricas no filtran nada: reciben su configuración (la categoría, el máximo, el texto) y **devuelven** el predicado. Y `todos` también devuelve un predicado: uno que pregunta a los demás.",
+  "Cada fábrica tiene la forma `(config) => (pizza) => condición` (dos flechas: la de adentro recuerda `config` por closure). Para `todos`, recibe los predicados con el parámetro rest `...condiciones` (queda un arreglo) y usa `every`, que es `true` solo si todos cumplen, y `true` con un arreglo vacío. Para la categoría vacía: `!categoria || ...`.",
+  "Esqueleto:\n\n```js\nexport const todos = (...condiciones) => (item) =>\n  condiciones.every((cumple) => /* ... */);\n\nexport const deCategoria = (categoria) => (pizza) =>\n  !categoria || /* ... */;\n\nexport const hastaPrecio = (max) => (pizza) => /* ... */;\n\nexport const conTexto = (texto) => (pizza) =>\n  pizza.nombre.toLowerCase().includes(/* ... */);\n```"
+]

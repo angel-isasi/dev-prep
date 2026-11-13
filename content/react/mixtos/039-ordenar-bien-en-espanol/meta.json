@@ -1,0 +1,9 @@
+{
+  "id": "mix-039",
+  "titulo": "Ordenar bien en español",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["react", "Intl.Collator", "toSorted", "useMemo", "inmutabilidad", "strings"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/39"
+}

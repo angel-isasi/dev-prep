@@ -1,0 +1,9 @@
+{
+  "id": "mix-041",
+  "titulo": "Buscador de pizzas con espera y estados",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 3,
+  "tags": ["react", "useEffect", "debounce", "async-await", "condiciones-de-carrera", "estados-de-carga"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/41"
+}

@@ -1,0 +1,5 @@
+[
+  "Cuando cambias un estado, React vuelve a ejecutar **toda** la función del componente, línea por línea. Si llamas a `estadisticas(pedidos)` directamente en el cuerpo, corre en cada clic aunque `pedidos` sea el mismo. Necesitas que React **recuerde** el resultado mientras los datos de entrada no cambien.",
+  "Usa `useMemo(() => estadisticas(pedidos), [pedidos])`. React guarda el resultado y en cada render compara la dependencia `pedidos` con la anterior usando `Object.is` (misma referencia). Si es igual, devuelve lo guardado sin ejecutar la función. Para el botón, un `useState(0)` que sumas en `onClick`.",
+  "Esqueleto:\n\n```jsx\nexport function Reporte({ pedidos }) {\n  const [clics, setClics] = useState(0);\n  const datos = useMemo(() => /* ... */, [/* ... */]);\n\n  return (\n    <div>\n      <p>Total {datos.total}, mayor {datos.mayor}</p>\n      <button onClick={/* suma 1 a clics */}>Clics: {clics}</button>\n    </div>\n  );\n}\n```"
+]

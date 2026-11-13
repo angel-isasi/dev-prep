@@ -1,0 +1,5 @@
+[
+  "Todos los validadores cumplen el mismo contrato: reciben un valor y devuelven `null` o un mensaje. Gracias a eso `validar` no necesita saber qué hace cada uno: solo los llama en orden. `minimo` es distinto: no valida, **fabrica** un validador. Es una función que devuelve otra función.",
+  "Para `minimo(n)` escribe `(n) => (valor) => ...`: la función de adentro sigue viendo `n` aunque `minimo` ya terminó (eso es un closure). Para el correo usa la regex `/^\\S+@\\S+\\.\\S+$/` con `.test(valor)`. En `validar`, recorre `Object.entries(reglas)`, aplica los validadores con `map` y quédate con el primer mensaje con `find(Boolean)` (salta los `null`).",
+  "Esqueleto:\n\n```js\nexport const minimo = (n) => (valor) =>\n  String(valor).trim().length >= n ? null : `Escribe al menos ${n} caracteres`;\n\nexport function validar(valores, reglas) {\n  const errores = {};\n  for (const [campo, validadores] of Object.entries(reglas)) {\n    const valor = valores[campo] ?? \"\";\n    const mensaje = /* primer mensaje que no sea null */;\n    if (mensaje) errores[campo] = mensaje;\n  }\n  return errores;\n}\n```"
+]

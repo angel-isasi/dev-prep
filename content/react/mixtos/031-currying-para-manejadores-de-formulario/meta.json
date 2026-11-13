@@ -1,0 +1,9 @@
+{
+  "id": "mix-031",
+  "titulo": "Currying para manejadores de formulario",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "useState", "formularios", "currying", "closures", "propiedades-computadas"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/31"
+}

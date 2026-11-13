@@ -1,0 +1,5 @@
+[
+  "Hay dos cosas distintas: lo que se **ve** en el input (tiene que cambiar en cada tecla) y el **aviso** al padre (tiene que esperar). Cada tecla nueva debe cancelar el aviso que estaba programado y programar otro. Para cancelar un `setTimeout` necesitas guardar su id en algún lugar que sobreviva entre renders.",
+  "Usa `useState` para el texto del input y `useRef(null)` para el id del temporizador. En el `onChange`: actualiza el texto, haz `clearTimeout(temporizador.current)` y guarda en `temporizador.current` un nuevo `setTimeout(() => onBuscar(valor), espera)`. Agrega un `useEffect` con `[]` cuya limpieza haga `clearTimeout` para el desmontaje.",
+  "Esqueleto:\n\n```jsx\nexport function BuscadorConEspera({ onBuscar, espera = 300 }) {\n  const [texto, setTexto] = useState(\"\");\n  const temporizador = useRef(null);\n\n  function cambiar(evento) {\n    const valor = evento.target.value;\n    setTexto(valor);\n    clearTimeout(/* ... */);\n    temporizador.current = setTimeout(/* ... */, espera);\n  }\n\n  useEffect(() => () => /* cancela lo pendiente */, []);\n\n  return <input aria-label=\"Buscar\" value={texto} onChange={cambiar} />;\n}\n```"
+]

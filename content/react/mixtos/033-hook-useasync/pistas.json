@@ -1,0 +1,5 @@
+[
+  "Piensa en las fases como un solo dato que va cambiando: inicial, cargando, y después listo o error. `dato` y `error` siempre cambian a la vez que la fase, así que conviene guardarlos juntos en un solo objeto de estado. El hook devuelve ese objeto más la función `ejecutar`.",
+  "`ejecutar` es una función `async` que: 1) pone la fase en cargando, 2) hace `await fn(...args)` dentro de un `try`, 3) guarda listo con el dato y lo devuelve, 4) en el `catch` guarda la fase error con el error (sin `throw`). Envuélvela en `useCallback(..., [fn])` para que no cambie entre renders. Devuelve `{ ...estado, ejecutar }`.",
+  "Esqueleto:\n\n```jsx\nexport function useAsync(fn) {\n  const [estado, setEstado] = useState({ fase: \"inicial\", dato: null, error: null });\n\n  const ejecutar = useCallback(\n    async (...args) => {\n      setEstado(/* cargando */);\n      try {\n        const dato = await fn(...args);\n        setEstado(/* listo */);\n        return dato;\n      } catch (error) {\n        setEstado(/* error */);\n      }\n    },\n    [fn],\n  );\n\n  return { ...estado, ejecutar };\n}\n```"
+]

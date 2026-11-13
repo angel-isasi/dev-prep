@@ -1,0 +1,9 @@
+{
+  "id": "mix-029",
+  "titulo": "Estado inicial leído de localStorage sin romperse",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useState", "useEffect", "localStorage", "JSON", "try-catch"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/29"
+}

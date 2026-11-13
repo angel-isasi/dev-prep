@@ -1,0 +1,9 @@
+{
+  "id": "mix-040",
+  "titulo": "Debounce escrito a mano con un ref",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["react", "useRef", "debounce", "timers", "formularios", "useEffect"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/40"
+}

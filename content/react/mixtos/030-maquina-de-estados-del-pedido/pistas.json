@@ -1,0 +1,5 @@
+[
+  "La tabla `TRANSICIONES` ya tiene toda la información: para saber a dónde vas, buscas `TRANSICIONES[estado][evento]`. Si eso no existe, el evento no está permitido y te quedas donde estás. Y los botones que se muestran son justamente las claves de `TRANSICIONES[estado]`.",
+  "`siguiente` tiene la forma de un reducer `(estado, accion) => nuevoEstado`, así que se lo puedes pasar directo a `useReducer(siguiente, \"carrito\")`. Para no romperte con un estado inexistente usa encadenamiento opcional `?.` y para el caso \"no permitido\" usa `?? estado`. Los botones salen de `Object.keys(TRANSICIONES[estado]).map(...)`.",
+  "Esqueleto:\n\n```jsx\nexport const siguiente = (estado, evento) =>\n  TRANSICIONES[estado]?.[evento] ?? /* ... */;\n\nexport function Checkout() {\n  const [estado, enviar] = useReducer(siguiente, \"carrito\");\n  return (\n    <div>\n      <p>Paso: {estado}</p>\n      {Object.keys(/* eventos del estado actual */).map((evento) => (\n        <button key={evento} onClick={() => enviar(evento)}>{evento}</button>\n      ))}\n    </div>\n  );\n}\n```"
+]

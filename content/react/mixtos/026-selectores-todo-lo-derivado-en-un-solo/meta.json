@@ -1,0 +1,9 @@
+{
+  "id": "mix-026",
+  "titulo": "Selectores: todo lo derivado en un solo lugar",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "estado-derivado", "selectores", "filter", "toSorted", "funciones-puras"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/26"
+}

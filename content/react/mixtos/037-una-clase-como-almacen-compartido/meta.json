@@ -1,0 +1,9 @@
+{
+  "id": "mix-037",
+  "titulo": "Una clase como almacén compartido",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 3,
+  "tags": ["react", "clases", "campos-privados", "useSyncExternalStore", "inmutabilidad", "this"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/37"
+}

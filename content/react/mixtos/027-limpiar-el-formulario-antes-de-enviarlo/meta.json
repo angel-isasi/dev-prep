@@ -1,0 +1,9 @@
+{
+  "id": "mix-027",
+  "titulo": "Limpiar el formulario antes de enviarlo",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "formularios", "strings", "regex", "parseInt", "funciones-puras"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/27"
+}

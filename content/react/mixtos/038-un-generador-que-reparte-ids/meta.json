@@ -1,0 +1,9 @@
+{
+  "id": "mix-038",
+  "titulo": "Un generador que reparte ids",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 2,
+  "tags": ["react", "generadores", "useRef", "pureza", "listas", "key"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/38"
+}

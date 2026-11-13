@@ -1,0 +1,9 @@
+{
+  "id": "mix-050",
+  "titulo": "Temporizador Pomodoro con reducer",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 3,
+  "tags": ["react", "useReducer", "useEffect", "timers", "funciones-puras", "mini-proyecto"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/50"
+}

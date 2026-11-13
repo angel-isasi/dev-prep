@@ -1,0 +1,9 @@
+{
+  "id": "mix-030",
+  "titulo": "Máquina de estados del pedido",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useReducer", "maquina-de-estados", "objetos", "renderizado-condicional"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/30"
+}

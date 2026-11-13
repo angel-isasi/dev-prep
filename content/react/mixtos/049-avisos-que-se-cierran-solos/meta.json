@@ -1,0 +1,9 @@
+{
+  "id": "mix-049",
+  "titulo": "Avisos que se cierran solos",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 3,
+  "tags": ["react", "hooks-personalizados", "useRef", "useCallback", "timers", "Map", "mini-proyecto"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/49"
+}

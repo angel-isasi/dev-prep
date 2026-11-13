@@ -1,0 +1,5 @@
+[
+  "Hay dos momentos distintos: LEER (una sola vez, al montar, para el valor inicial) y GUARDAR (cada vez que el tema cambia). Y en la lectura hay dos casos raros: que no haya nada (`getItem` devuelve `null`) y que haya basura (`JSON.parse` lanza un error).",
+  "Envuelve `getItem` + `JSON.parse` en un `try { ... } catch { return respaldo; }`. Para leer solo en el primer render, pásale a `useState` una **función**: `useState(() => leerGuardado(\"tema\", \"claro\"))` (inicialización perezosa). Para guardar, usa `useEffect` con `[tema]` como dependencia y `JSON.stringify(tema)`.",
+  "Esqueleto:\n\n```jsx\nexport function leerGuardado(clave, respaldo) {\n  try {\n    const crudo = localStorage.getItem(clave);\n    return crudo === null ? /* ... */ : JSON.parse(crudo);\n  } catch {\n    return /* ... */;\n  }\n}\n\nexport function Preferencias() {\n  const [tema, setTema] = useState(() => /* leer */);\n  useEffect(() => {\n    /* guardar como JSON */\n  }, [tema]);\n  return <button onClick={/* alternar */}>Tema: {tema}</button>;\n}\n```"
+]

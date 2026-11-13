@@ -1,0 +1,5 @@
+[
+  "Piensa en el bus como una libreta: por cada nombre de evento anotas quiénes quieren enterarse. `emit` solo recorre esa lista y llama a cada uno. Lo importante para React es poder **borrarte** de la libreta cuando el componente desaparece.",
+  "Guarda los oyentes en un `Set` por evento (`this.oyentes[evento] ??= new Set()`), así `delete(fn)` es directo. Haz que `on` devuelva una función flecha que llama a `delete`: un **closure** que recuerda `evento` y `fn`. En el hook, usa `useEffect` y devuelve esa función como limpieza.",
+  "Esqueleto:\n\n```jsx\nexport const bus = {\n  oyentes: {},\n  on(evento, fn) {\n    (this.oyentes[evento] ??= new Set()).add(fn);\n    return () => /* quita fn del Set */;\n  },\n  emit(evento, dato) {\n    this.oyentes[evento]?.forEach(/* llama a cada fn con dato */);\n  },\n};\n\nexport function useEvento(evento, manejar) {\n  useEffect(() => {\n    const quitar = bus.on(evento, manejar);\n    return /* la limpieza */;\n  }, [evento, manejar]);\n}\n\nexport function Avisos() {\n  const [ultimo, setUltimo] = useState(\"ninguno\");\n  useEvento(\"pedido\", /* ... */);\n  return <p>Último pedido: {ultimo}</p>;\n}\n```"
+]

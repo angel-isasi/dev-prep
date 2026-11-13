@@ -1,0 +1,9 @@
+{
+  "id": "mix-048",
+  "titulo": "Tabla con búsqueda, orden y páginas",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 3,
+  "tags": ["react", "tablas", "useMemo", "ordenamiento", "paginacion", "estado-derivado", "mini-proyecto"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/48"
+}

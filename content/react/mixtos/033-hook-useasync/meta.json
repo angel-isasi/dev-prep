@@ -1,0 +1,9 @@
+{
+  "id": "mix-033",
+  "titulo": "Hook useAsync",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["react", "hooks-personalizados", "useCallback", "async-await", "try-catch", "estados-de-carga"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/33"
+}

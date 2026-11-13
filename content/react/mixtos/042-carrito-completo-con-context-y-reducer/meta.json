@@ -1,0 +1,9 @@
+{
+  "id": "mix-042",
+  "titulo": "Carrito completo con Context y reducer",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 3,
+  "tags": ["react", "useReducer", "useContext", "inmutabilidad", "estado-derivado", "mini-proyecto"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/42"
+}

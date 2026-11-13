@@ -1,0 +1,5 @@
+[
+  "Piensa en el resultado como tres preguntas sobre la misma lista: ¿qué pizzas pasan los filtros?, ¿cuántas son?, ¿cuál es la más barata? Las dos últimas salen de la primera, así que calcula primero `visibles` y después lo demás a partir de ella.",
+  "Usa valores por defecto en la desestructuración del parámetro: `{ busqueda = \"\", soloVeggie = false } = {}` (el `= {}` del final permite llamar sin segundo argumento). Filtra con `filter` + `includes`, y para la más barata usa `toSorted` (que NO modifica el arreglo, a diferencia de `sort`) y toma el primero, con `?? null` por si no hay ninguno.",
+  "Esqueleto:\n\n```js\nexport function seleccionar(pizzas, { busqueda = \"\", soloVeggie = false } = {}) {\n  const texto = /* busqueda sin espacios y en minúsculas */;\n  const visibles = pizzas.filter((pizza) =>\n    /* el nombre incluye texto */ && (!soloVeggie || pizza.veggie)\n  );\n  const masBarata = visibles.toSorted(/* por precio */)[0] ?? null;\n  return { visibles, cantidad: /* ... */, masBarata };\n}\n```"
+]

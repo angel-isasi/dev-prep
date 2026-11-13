@@ -1,0 +1,9 @@
+{
+  "id": "mix-044",
+  "titulo": "Lista de tareas con filtros",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 3,
+  "tags": ["react", "listas", "inmutabilidad", "estado-derivado", "formularios", "mini-proyecto"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/44"
+}
