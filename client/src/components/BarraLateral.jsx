@@ -8,6 +8,7 @@ import {
   IconoFuego,
   IconoInicio,
   IconoAprender,
+  IconoReferencia,
   IconoEntrevistas,
   IconoLuna,
   IconoPracticar,
@@ -22,6 +23,7 @@ const SECCIONES = [
   { a: "/practicar", texto: "Practicar", Icono: IconoPracticar },
   { a: "/entrevistas", texto: "Entrevistas", Icono: IconoEntrevistas },
   { a: "/progreso", texto: "Progreso", Icono: IconoProgreso },
+  { a: "/referencia", texto: "Referencia", Icono: IconoReferencia },
 ];
 
 export function BarraLateral() {

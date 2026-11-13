@@ -125,6 +125,15 @@ export async function crearProgreso({ datosDir }) {
 
     dePregunta: (id) => datos.preguntas[id],
 
+    /** Resultado de un quiz de Aprender: se guarda el mejor y el último. */
+    async guardarQuiz(id, aciertos, total) {
+      const previo = datos.quizzes[id];
+      datos.quizzes[id] = { mejor: Math.max(previo?.mejor ?? 0, aciertos), total, ultimo: aciertos, en: ahoraIso() };
+      await registrarEvento("quiz", id, { aciertos, total });
+      await guardar();
+      return datos.quizzes[id];
+    },
+
     /** Autoevaluación de una tarjeta de entrevista. */
     async calificarPregunta(id, nota) {
       datos.preguntas[id] = calificarPregunta(datos.preguntas[id], nota, fechaLocal());

@@ -41,6 +41,9 @@ export const IconoAjustes = () => (
 export const IconoFuego = () => (
   <svg {...base}><path d="M12 22c4 0 7-2.7 7-6.8 0-3.6-2.4-6-4.3-8.2-.6 2-1.6 3.2-2.9 3.7.2-3.1-1-5.8-3.8-8.7-.3 3.7-5 6.4-5 11.6C3 18.6 7 22 12 22z" /></svg>
 );
+export const IconoReferencia = () => (
+  <svg {...base}><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
+);
 export const IconoFlechaIzq = () => (
   <svg {...base}><path d="M15 6l-6 6 6 6" /></svg>
 );

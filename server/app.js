@@ -7,6 +7,7 @@ import { existsSync } from "node:fs";
 import { rutasEjercicios } from "./rutas/ejercicios.js";
 import { rutasProgreso } from "./rutas/progreso.js";
 import { rutasEntrevistas } from "./rutas/entrevistas.js";
+import { rutasAprender } from "./rutas/aprender.js";
 
 /**
  * @param {object} deps
@@ -21,6 +22,7 @@ export function crearApp(deps) {
   app.use("/api/ejercicios", rutasEjercicios(deps));
   if (deps.progreso) app.use("/api", rutasProgreso(deps));
   if (deps.entrevistas) app.use("/api", rutasEntrevistas(deps));
+  if (deps.aprender) app.use("/api", rutasAprender(deps));
   if (deps.eventos) app.get("/api/eventos", deps.eventos.manejador);
 
   app.use("/api", (req, res) => {

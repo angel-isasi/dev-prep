@@ -7,6 +7,9 @@ import { Inicio } from "./pages/Inicio.jsx";
 import { Progreso } from "./pages/Progreso.jsx";
 import { Ajustes } from "./pages/Ajustes.jsx";
 import { Entrevistas } from "./pages/Entrevistas.jsx";
+import { Aprender } from "./pages/Aprender.jsx";
+import { Tema } from "./pages/Tema.jsx";
+import { Referencia } from "./pages/Referencia.jsx";
 
 export function App() {
   return (
@@ -15,10 +18,9 @@ export function App() {
         <Route index element={<Inicio />} />
         <Route path="practicar" element={<Practicar />} />
         <Route path="practicar/:id" element={<Ejercicio />} />
-        <Route
-          path="aprender"
-          element={<Proximamente titulo="Aprender" texto="Teoría corta, ejercicios guiados, quizzes y una referencia offline de JavaScript y React." />}
-        />
+        <Route path="aprender" element={<Aprender />} />
+        <Route path="aprender/:id" element={<Tema />} />
+        <Route path="referencia" element={<Referencia />} />
         <Route path="entrevistas" element={<Entrevistas />} />
         <Route path="progreso" element={<Progreso />} />
         <Route path="ajustes" element={<Ajustes />} />

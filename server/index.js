@@ -7,6 +7,7 @@ import { crearCorredor } from "./corredor.js";
 import { crearProgreso } from "./progreso.js";
 import { cargarEntrevistas } from "./entrevistas.js";
 import { crearMisRespuestas } from "./mis-respuestas.js";
+import { cargarReferencia, cargarTemas } from "./aprender.js";
 import { exec } from "node:child_process";
 import { abrirEnVSCode } from "./vscode.js";
 import { crearApp } from "./app.js";
@@ -19,6 +20,9 @@ const eventos = crearEventos();
 const progreso = await crearProgreso({ datosDir: config.datosDir });
 const entrevistas = await cargarEntrevistas(config.contenidoDir);
 const misRespuestas = await crearMisRespuestas({ datosDir: config.datosDir });
+const aprender = await cargarTemas(config.contenidoDir);
+const referencia = await cargarReferencia(config.contenidoDir);
+for (const error of [...aprender.errores, ...referencia.errores]) console.warn(`[contenido] ${error}`);
 
 const corredor = await crearCorredor({
   workspace,
@@ -39,6 +43,8 @@ const app = crearApp({
   progreso,
   entrevistas,
   misRespuestas,
+  aprender,
+  referencia,
   vscode,
   clienteDir: config.clienteDir,
 });

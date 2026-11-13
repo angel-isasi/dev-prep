@@ -37,4 +37,13 @@ export const api = {
   ejerciciosEntrevista: () => pedir("/api/entrevistas/ejercicios"),
   misRespuestas: () => pedir("/api/mis-respuestas"),
   guardarMisRespuestas: (datos) => put("/api/mis-respuestas", datos),
+  temas: () => pedir("/api/aprender"),
+  tema: (id) => pedir(`/api/aprender/${encodeURIComponent(id)}`),
+  guardarQuiz: (id, aciertos) =>
+    pedir(`/api/aprender/${encodeURIComponent(id)}/quiz`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ aciertos }),
+    }),
+  referencia: () => pedir("/api/referencia"),
 };
