@@ -297,3 +297,110 @@
   margin-top: var(--espacio-5);
   font-size: 14px;
 }
+
+/* Tarjetas con anillo de progreso */
+.conAnillo {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+.numeroAnillo {
+  font-family: var(--fuente-titulos);
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.numeroAnillo small {
+  color: var(--texto-tenue);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.textoAnillo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  min-width: 0;
+}
+
+/* Saludo con un brillo suave que pasa una vez */
+.saludo {
+  background: linear-gradient(
+    100deg,
+    var(--texto) 0%,
+    var(--texto) 40%,
+    var(--acento) 50%,
+    var(--texto) 60%,
+    var(--texto) 100%
+  );
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: brillo-saludo 2.4s ease-out 0.3s 1 forwards;
+}
+
+@keyframes brillo-saludo {
+  to {
+    background-position: -50% 0;
+  }
+}
+
+/* "Haz de luz" que recorre el borde de la tarjeta "Para hoy" */
+@property --angulo-haz {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.haz {
+  position: relative;
+  border-color: transparent;
+  background:
+    linear-gradient(var(--fondo-solido), var(--fondo-solido)) padding-box,
+    conic-gradient(
+        from var(--angulo-haz),
+        var(--borde-fuerte) 0deg,
+        var(--borde-fuerte) 280deg,
+        var(--acento) 320deg,
+        var(--exito) 345deg,
+        var(--borde-fuerte) 360deg
+      )
+      border-box;
+  animation: girar-haz 4s linear infinite;
+}
+
+.haz:hover {
+  background:
+    linear-gradient(var(--acento-suave), var(--acento-suave)) padding-box,
+    linear-gradient(var(--fondo-solido), var(--fondo-solido)) padding-box,
+    conic-gradient(
+        from var(--angulo-haz),
+        var(--borde-fuerte) 0deg,
+        var(--borde-fuerte) 280deg,
+        var(--acento) 320deg,
+        var(--exito) 345deg,
+        var(--borde-fuerte) 360deg
+      )
+      border-box;
+}
+
+@keyframes girar-haz {
+  to {
+    --angulo-haz: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .haz,
+  .saludo {
+    animation: none;
+  }
+  .saludo {
+    color: var(--texto);
+    background: none;
+  }
+}

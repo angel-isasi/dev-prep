@@ -4,6 +4,8 @@ import { api } from "../lib/api.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { nombreTema } from "../lib/etiquetas.js";
 import { Insignia } from "../components/Insignia.jsx";
+import { NumeroAnimado } from "../components/NumeroAnimado.jsx";
+import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Inicio.module.css";
 
@@ -43,7 +45,7 @@ export function Inicio() {
     <section className={estilos.pagina}>
       <header className={estilos.cabecera}>
         <p className={estilos.fecha}>{fechaLarga(datos.hoy)}</p>
-        <h1>{config.nombre ? `Hola, ${config.nombre}` : "Hola"}</h1>
+        <h1 className={estilos.saludo}>{config.nombre ? `Hola, ${config.nombre}` : "Hola"}</h1>
         <p className={estilos.frase}>{frase}</p>
       </header>
 
@@ -72,45 +74,53 @@ export function Inicio() {
       <div className={estilos.tarjetas}>
         <div className={`${estilos.tarjeta} ${estilos.racha}`}>
           <span className={estilos.etiqueta}>Racha</span>
-          <strong className={estilos.numeroGrande}>{racha}</strong>
+          <strong className={estilos.numeroGrande}>
+            <NumeroAnimado valor={racha} />
+          </strong>
           <span className={estilos.detalle}>
             {racha === 1 ? "día seguido" : "días seguidos"}
             {!meta.cumplio && racha > 0 && " · cumple hoy para mantenerla"}
           </span>
         </div>
 
-        <div className={estilos.tarjeta}>
-          <span className={estilos.etiqueta}>Meta de hoy</span>
-          <strong className={estilos.numero}>
-            {meta.hecho}
-            <small>/{meta.objetivo}</small>
-          </strong>
-          <div className={estilos.barra}>
-            <div style={{ width: `${pctMeta}%` }} data-ok={meta.cumplio} />
+        <div className={`${estilos.tarjeta} ${estilos.conAnillo}`}>
+          <AnilloProgreso valor={pctMeta / 100} completo={meta.cumplio} tamano={70} grosor={7}>
+            <strong className={estilos.numeroAnillo}>
+              <NumeroAnimado valor={meta.hecho} />
+              <small>/{meta.objetivo}</small>
+            </strong>
+          </AnilloProgreso>
+          <div className={estilos.textoAnillo}>
+            <span className={estilos.etiqueta}>Meta de hoy</span>
+            <span className={estilos.detalle}>
+              {meta.cumplio
+                ? "¡Cumplida!"
+                : meta.deuda > 0
+                  ? `${config.metaDiaria} de meta + ${meta.deuda} de deuda`
+                  : "resueltos + repasos"}
+            </span>
           </div>
-          <span className={estilos.detalle}>
-            {meta.deuda > 0 ? `${config.metaDiaria} de meta + ${meta.deuda} de deuda` : "resueltos + repasos"}
-          </span>
         </div>
 
-        <div className={estilos.tarjeta}>
-          <span className={estilos.etiqueta}>Preparación</span>
-          <strong className={estilos.numero}>
-            {preparacion}
-            <small>%</small>
-          </strong>
-          <div className={estilos.barra}>
-            <div style={{ width: `${preparacion}%` }} />
+        <div className={`${estilos.tarjeta} ${estilos.conAnillo}`}>
+          <AnilloProgreso valor={preparacion / 100} tamano={70} grosor={7}>
+            <strong className={estilos.numeroAnillo}>
+              <NumeroAnimado valor={preparacion} decimales={preparacion % 1 ? 1 : 0} />
+              <small>%</small>
+            </strong>
+          </AnilloProgreso>
+          <div className={estilos.textoAnillo}>
+            <span className={estilos.etiqueta}>Preparación</span>
+            <span className={estilos.detalle}>
+              {totales.resueltos} de {totales.total} dominados
+            </span>
           </div>
-          <span className={estilos.detalle}>
-            {totales.resueltos} de {totales.total} ejercicios dominados
-          </span>
         </div>
 
         <div className={estilos.tarjeta}>
           <span className={estilos.etiqueta}>Fecha meta</span>
           <strong className={estilos.numero}>
-            {Math.max(0, ritmo.diasRestantes)}
+            <NumeroAnimado valor={Math.max(0, ritmo.diasRestantes)} />
             <small> días</small>
           </strong>
           <span className={estilos.chip} data-tipo={ritmoInfo.tipo}>
@@ -126,7 +136,7 @@ export function Inicio() {
         <div className={estilos.bloque}>
           <h2>Para hoy</h2>
           {proximo ? (
-            <Link to={`/practicar/${proximo.id}`} className={estilos.siguiente}>
+            <Link to={`/practicar/${proximo.id}`} className={`${estilos.siguiente} ${estilos.haz}`}>
               <span className={estilos.etiqueta}>{continuar ? "Continuar" : "Siguiente ejercicio"}</span>
               <strong>{proximo.titulo}</strong>
               <span className={estilos.detalle}>

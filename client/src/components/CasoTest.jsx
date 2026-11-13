@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { compactar } from "../lib/compactar.js";
 import { TextoConCodigo } from "./TextoConCodigo.jsx";
 import estilos from "./PanelTests.module.css";
@@ -6,22 +7,29 @@ import estilos from "./PanelTests.module.css";
  * Un caso de test: ✓ o ✕, y si falla, qué se esperaba y qué recibió.
  * `pista` es la explicación en español del error (o null).
  */
-export function CasoTest({ caso, pista }) {
+export function CasoTest({ caso, pista, indice = 0 }) {
+  // Cada caso entra un poco después del anterior
+  const entrada = {
+    initial: { opacity: 0, x: -6 },
+    animate: { opacity: 1, x: 0 },
+    transition: { delay: indice * 0.035, duration: 0.2 },
+  };
+
   if (caso.ok) {
     return (
-      <li className={estilos.caso}>
+      <motion.li className={estilos.caso} {...entrada}>
         <span className={estilos.icono} data-ok="true" aria-label="pasa">
           ✓
         </span>
         <span>{caso.nombre}</span>
-      </li>
+      </motion.li>
     );
   }
 
   const hayComparacion = caso.esperado != null || caso.recibido != null;
 
   return (
-    <li className={estilos.caso}>
+    <motion.li className={estilos.caso} {...entrada}>
       <span className={estilos.icono} data-ok="false" aria-label="falla">
         ✕
       </span>
@@ -47,6 +55,6 @@ export function CasoTest({ caso, pista }) {
           caso.mensaje && <pre className={estilos.mensaje}>{caso.mensaje}</pre>
         )}
       </div>
-    </li>
+    </motion.li>
   );
 }

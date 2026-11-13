@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 import { Markdown } from "./Markdown.jsx";
 import estilos from "./Quiz.module.css";
 
@@ -93,13 +94,19 @@ export function Quiz({ preguntas, alTerminar, mejor }) {
         })}
       </div>
       {respondida && (
-        <div className={estilos.explicacion} data-ok={elegida === p.correcta}>
+        <motion.div
+          className={estilos.explicacion}
+          data-ok={elegida === p.correcta}
+          initial={{ opacity: 0, y: 8 }}
+          animate={elegida === p.correcta ? { opacity: 1, y: 0 } : { opacity: 1, y: 0, x: [0, -6, 6, -3, 3, 0] }}
+          transition={{ duration: 0.35 }}
+        >
           <strong>{elegida === p.correcta ? "¡Correcto!" : "No es esa."}</strong>
           <Markdown>{p.explicacion}</Markdown>
           <button type="button" className="boton boton-primario" onClick={siguiente}>
             {indice + 1 >= preguntas.length ? "Ver resultado" : "Siguiente"}
           </button>
-        </div>
+        </motion.div>
       )}
     </div>
   );

@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { useAhora } from "../hooks/useAhora.js";
 import { explicarError } from "../lib/explicarError.js";
 import { CasoTest } from "./CasoTest.jsx";
@@ -58,12 +59,24 @@ export function PanelTests({ resultado, corriendo, preparado, ultimaCorrida }) {
     <aside className={estilos.panel} aria-live="polite">
       <div className={estilos.cabecera}>
         <h2 className={estilos.titulo}>Tests en vivo</h2>
-        <span className={estilos.contador} data-ok={todoBien}>
+        <motion.span
+          key={`${pasan}/${total}`}
+          className={estilos.contador}
+          data-ok={todoBien}
+          initial={{ scale: 1.3, opacity: 0.4 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 380, damping: 16 }}
+        >
           {pasan}/{total}
-        </span>
+        </motion.span>
       </div>
       <div className={estilos.barra}>
-        <div style={{ width: `${porcentaje}%` }} data-ok={todoBien} />
+        <motion.div
+          data-ok={todoBien}
+          initial={false}
+          animate={{ width: `${porcentaje}%` }}
+          transition={{ type: "spring", stiffness: 120, damping: 20 }}
+        />
       </div>
       <p className={estilos.estado}>
         {corriendo ? (
@@ -91,8 +104,8 @@ export function PanelTests({ resultado, corriendo, preparado, ultimaCorrida }) {
       )}
 
       <ul className={`${estilos.casos} ${corriendo ? estilos.atenuado : ""}`}>
-        {casos.map((caso) => (
-          <CasoTest key={caso.nombre} caso={caso} pista={pistaDe(caso)} />
+        {casos.map((caso, i) => (
+          <CasoTest key={caso.nombre} caso={caso} pista={pistaDe(caso)} indice={i} />
         ))}
       </ul>
 

@@ -13,6 +13,7 @@ import { SeccionExplicar } from "../components/SeccionExplicar.jsx";
 import { IconoFlechaIzq, IconoVSCode } from "../components/Iconos.jsx";
 import { Cronometro } from "../components/Cronometro.jsx";
 import { Confirmar } from "../components/Confirmar.jsx";
+import { celebrar } from "../lib/celebrar.js";
 import { Ayuda } from "../components/Ayuda.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Ejercicio.module.css";
@@ -73,9 +74,11 @@ export function Ejercicio() {
     setUltimaCorrida(Date.now());
     setEjercicio((e) => e && { ...e, estado: datos.progreso.estado, progreso: datos.progreso, preparado: true });
     if (datos.resueltoAhora) {
+      celebrar();
       setAviso({ tipo: "exito", texto: "¡Resuelto! Todos los tests pasan. Ahora explícalo con tus palabras." });
       cargar(); // trae la solución y la explicación modelo, ya desbloqueadas
     } else if (datos.repasoCompletado) {
+      celebrar();
       setAviso({
         tipo: "exito",
         texto: `¡Repaso completado! Lo volverás a ver el ${fechaCorta(datos.progreso.repaso.proximo)}.`,

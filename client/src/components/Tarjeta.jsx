@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "motion/react";
 import { Markdown } from "./Markdown.jsx";
 import estilos from "./Tarjeta.module.css";
 
@@ -17,7 +18,12 @@ export function Tarjeta({ pregunta, alCalificar, posicion }) {
   const [ingles, setIngles] = useState(false);
 
   return (
-    <article className={estilos.tarjeta}>
+    <motion.article
+      className={estilos.tarjeta}
+      initial={{ opacity: 0, y: 14, scale: 0.98 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ type: "spring", stiffness: 260, damping: 24 }}
+    >
       <header className={estilos.cabecera}>
         <span className={estilos.categoria}>{pregunta.categoria}</span>
         <div className={estilos.herramientas}>
@@ -43,7 +49,12 @@ export function Tarjeta({ pregunta, alCalificar, posicion }) {
           </button>
         </div>
       ) : (
-        <>
+        <motion.div
+          className={estilos.revelado}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
           <div className={estilos.respuesta}>
             <span className={estilos.etiqueta}>{ingles ? "Say this" : "Di esto"}</span>
             <Markdown>{ingles && pregunta.respuestaEn ? pregunta.respuestaEn : pregunta.respuesta}</Markdown>
@@ -76,8 +87,8 @@ export function Tarjeta({ pregunta, alCalificar, posicion }) {
               </button>
             ))}
           </div>
-        </>
+        </motion.div>
       )}
-    </article>
+    </motion.article>
   );
 }
