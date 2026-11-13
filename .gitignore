@@ -1,0 +1,14 @@
+# Dependencias y compilados
+node_modules/
+client/dist/
+
+# Datos personales: tu código y tu progreso no van al repo
+workspace/
+data/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+
