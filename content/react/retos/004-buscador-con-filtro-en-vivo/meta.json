@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-004",
+  "titulo": "Buscador con filtro en vivo",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useState", "estado-derivado", "formularios", "strings"],
+  "origen": "definitivo/03-retos/03-react/04"
+}

@@ -1,0 +1,5 @@
+[
+  "Piensa en un **objeto** donde cada palabra sea una clave y su valor sea un número que vas sumando. Antes de contar, ¿qué le tienes que hacer al texto para tener una lista de palabras limpias?",
+  "Tres herramientas en cadena: `toLowerCase()` para unificar mayúsculas, `split(/\\s+/)` para cortar por uno o más espacios y `filter(Boolean)` para quitar los textos vacíos. Después recorres la lista con `for...of`.",
+  "Esqueleto:\n\n```js\nconst conteo = {};\nfor (const palabra of /* tu lista de palabras limpias */) {\n  conteo[palabra] = /* lo que ya había, o 0 si no había nada */ + 1;\n}\nreturn conteo;\n```"
+]

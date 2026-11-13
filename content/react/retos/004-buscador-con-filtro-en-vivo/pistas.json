@@ -1,0 +1,5 @@
+[
+  "Pregúntate: ¿qué es lo **mínimo** que necesitas recordar entre un render y otro? Solo lo que escribió el usuario. La lista filtrada no hace falta guardarla: se puede **calcular** en cada render a partir del texto y de `items`.",
+  "Usa `useState(\"\")` para el texto del input (input controlado: `value` + `onChange`). Para comparar sin mayúsculas ni tildes, escribe una función `normalizar(texto)` con `normalize(\"NFD\")`, que separa la letra de su tilde, luego `replace(/[\\u0300-\\u036f]/g, \"\")` para borrar las tildes sueltas, y `toLowerCase()` y `trim()`. Después filtra con `filter` + `includes`.",
+  "Esqueleto:\n\n```jsx\nconst [consulta, setConsulta] = useState(\"\");\nconst filtrados = items.filter((item) =>\n  normalizar(item).includes(/* la consulta normalizada */)\n);\n\nreturn (\n  <div>\n    <input aria-label=\"Buscar\" value={consulta} onChange={/* actualiza consulta */} />\n    {filtrados.length > 0 ? (\n      <ul>{/* un <li key=...> por item */}</ul>\n    ) : (\n      <p>Sin resultados para \"{consulta}\"</p>\n    )}\n  </div>\n);\n```"
+]

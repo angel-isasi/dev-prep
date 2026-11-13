@@ -1,0 +1,5 @@
+[
+  "Para cada número, la pregunta no es \"¿con quién lo sumo?\" sino **\"¿cuánto me falta para llegar al objetivo?\"**. Si el objetivo es 9 y estás en el 2, buscas un 7. ¿Ya lo viste antes en el arreglo?",
+  "Guarda en un `Map` cada número que ya pasaste junto con su índice (`valor -> índice`). Así, preguntar \"¿ya vi el 7?\" es instantáneo con `has()`, en lugar de recorrer el arreglo otra vez. Ojo con el orden: **primero buscas, después guardas**.",
+  "Esqueleto:\n\n```js\nconst vistos = new Map();\nfor (let i = 0; i < nums.length; i++) {\n  const falta = /* cuánto me falta */;\n  if (/* ya vi `falta` */) {\n    return [/* índice de `falta` */, i];\n  }\n  vistos.set(/* clave */, /* valor */);\n}\n```"
+]

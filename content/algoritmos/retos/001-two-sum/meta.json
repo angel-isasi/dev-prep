@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-001",
+  "titulo": "Two Sum",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "map", "hash", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/01"
+}
