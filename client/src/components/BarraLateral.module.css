@@ -1,0 +1,86 @@
+.barra {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-5);
+  padding: var(--espacio-5) var(--espacio-3);
+  background: var(--superficie);
+  border-right: 1px solid var(--borde);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: 0 var(--espacio-3);
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radio);
+  background: var(--acento);
+  color: var(--fondo);
+  font-family: var(--fuente-codigo);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.enlace {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: 9px var(--espacio-3);
+  border-radius: var(--radio);
+  color: var(--texto-suave);
+  font-weight: 500;
+  transition: background var(--transicion), color var(--transicion);
+}
+
+.enlace:hover {
+  background: var(--superficie-2);
+  color: var(--texto);
+}
+
+.activo {
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
+.activo:hover {
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
+.pie {
+  margin-top: auto;
+}
+
+.tema {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  width: 100%;
+  padding: 9px var(--espacio-3);
+  border: none;
+  border-radius: var(--radio);
+  background: none;
+  color: var(--texto-suave);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tema:hover {
+  background: var(--superficie-2);
+  color: var(--texto);
+}

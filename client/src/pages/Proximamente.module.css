@@ -1,0 +1,26 @@
+.contenedor {
+  max-width: 560px;
+  margin: 15vh auto 0;
+  padding: var(--espacio-5);
+  text-align: center;
+}
+
+.contenedor h1 {
+  font-size: 26px;
+  margin-bottom: var(--espacio-3);
+}
+
+.contenedor p {
+  color: var(--texto-suave);
+  margin: 0 0 var(--espacio-5);
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--acento-suave);
+  color: var(--acento);
+  font-size: 13px;
+  font-weight: 600;
+}

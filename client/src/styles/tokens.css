@@ -1,0 +1,65 @@
+/* Variables de diseño: colores, espacios, radios y fuentes.
+   Los componentes solo usan estas variables, así el modo claro/oscuro
+   se cambia en un solo lugar (el atributo data-tema de <html>). */
+
+:root {
+  --fuente: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fuente-codigo: "JetBrains Mono Variable", ui-monospace, Consolas, monospace;
+
+  --espacio-1: 4px;
+  --espacio-2: 8px;
+  --espacio-3: 12px;
+  --espacio-4: 16px;
+  --espacio-5: 24px;
+  --espacio-6: 32px;
+  --espacio-7: 48px;
+
+  --radio: 8px;
+  --radio-grande: 12px;
+  --ancho-barra: 232px;
+  --transicion: 150ms ease;
+}
+
+:root[data-tema="oscuro"] {
+  color-scheme: dark;
+  --fondo: #0e1014;
+  --superficie: #15181e;
+  --superficie-2: #1c2028;
+  --borde: #262b35;
+  --borde-fuerte: #353b47;
+  --texto: #e7e9ee;
+  --texto-suave: #9aa2b1;
+  --texto-tenue: #6b7280;
+  --acento: #7c9cff;
+  --acento-suave: rgb(124 156 255 / 0.14);
+  --exito: #3fbf8f;
+  --exito-suave: rgb(63 191 143 / 0.14);
+  --error: #f07178;
+  --error-suave: rgb(240 113 120 / 0.13);
+  --aviso: #e6b450;
+  --aviso-suave: rgb(230 180 80 / 0.14);
+  --codigo-fondo: #11141a;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.25);
+}
+
+:root[data-tema="claro"] {
+  color-scheme: light;
+  --fondo: #f6f7f9;
+  --superficie: #ffffff;
+  --superficie-2: #f0f2f5;
+  --borde: #e3e6eb;
+  --borde-fuerte: #cfd4dc;
+  --texto: #171a21;
+  --texto-suave: #545c6b;
+  --texto-tenue: #8a919e;
+  --acento: #3f5fd9;
+  --acento-suave: rgb(63 95 217 / 0.1);
+  --exito: #16875f;
+  --exito-suave: rgb(22 135 95 / 0.1);
+  --error: #c9333b;
+  --error-suave: rgb(201 51 59 / 0.09);
+  --aviso: #a86b00;
+  --aviso-suave: rgb(168 107 0 / 0.1);
+  --codigo-fondo: #f3f4f7;
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.06), 0 8px 24px rgb(0 0 0 / 0.06);
+}

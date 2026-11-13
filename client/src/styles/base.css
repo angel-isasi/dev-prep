@@ -1,0 +1,161 @@
+/* Estilos globales mínimos. Lo demás vive en el .module.css de cada componente. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--texto);
+  background: var(--fondo);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  margin: 0;
+}
+
+a {
+  color: var(--acento);
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+code,
+pre {
+  font-family: var(--fuente-codigo);
+  font-size: 0.875em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--acento-suave);
+}
+
+/* Botones reutilizables */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  padding: 8px 14px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+  color: var(--texto);
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background var(--transicion), border-color var(--transicion);
+}
+
+.boton:hover:not(:disabled) {
+  border-color: var(--texto-tenue);
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.boton-primario {
+  background: var(--acento);
+  border-color: var(--acento);
+  color: #fff;
+}
+
+:root[data-tema="oscuro"] .boton-primario {
+  color: #0e1014;
+}
+
+.boton-primario:hover:not(:disabled) {
+  border-color: var(--acento);
+  filter: brightness(1.08);
+}
+
+.boton-peligro {
+  color: var(--error);
+}
+
+.boton-peligro-lleno {
+  background: var(--error);
+  border-color: var(--error);
+  color: #fff;
+}
+
+/* Colores del resaltado de código (highlight.js), con las variables del tema */
+.hljs-keyword,
+.hljs-built_in,
+.hljs-literal {
+  color: #c792ea;
+}
+.hljs-string,
+.hljs-regexp {
+  color: #9ece6a;
+}
+.hljs-number {
+  color: #ff9e64;
+}
+.hljs-comment {
+  color: var(--texto-tenue);
+  font-style: italic;
+}
+.hljs-title,
+.hljs-title.function_ {
+  color: #7aa2f7;
+}
+.hljs-attr,
+.hljs-property,
+.hljs-variable {
+  color: #73daca;
+}
+.hljs-tag,
+.hljs-name {
+  color: #f7768e;
+}
+
+:root[data-tema="claro"] .hljs-keyword,
+:root[data-tema="claro"] .hljs-built_in,
+:root[data-tema="claro"] .hljs-literal {
+  color: #8839ef;
+}
+:root[data-tema="claro"] .hljs-string,
+:root[data-tema="claro"] .hljs-regexp {
+  color: #2e7d32;
+}
+:root[data-tema="claro"] .hljs-number {
+  color: #c2410c;
+}
+:root[data-tema="claro"] .hljs-title,
+:root[data-tema="claro"] .hljs-title.function_ {
+  color: #1e56c9;
+}
+:root[data-tema="claro"] .hljs-attr,
+:root[data-tema="claro"] .hljs-property,
+:root[data-tema="claro"] .hljs-variable {
+  color: #0f766e;
+}
+:root[data-tema="claro"] .hljs-tag,
+:root[data-tema="claro"] .hljs-name {
+  color: #be123c;
+}
