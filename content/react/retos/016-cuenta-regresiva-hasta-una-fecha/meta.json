@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-016",
+  "titulo": "Cuenta regresiva hasta una fecha",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "setInterval", "fechas", "estado-derivado"],
+  "origen": "definitivo/03-retos/03-react/16"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-003",
+  "titulo": "Lista de tareas (to-do)",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["react", "useState", "inmutabilidad", "key", "formularios"],
+  "origen": "definitivo/03-retos/03-react/03"
+}

@@ -1,0 +1,5 @@
+[
+  "Por defecto, cuando el estado de `Padre` cambia, React vuelve a ejecutar `Padre` **y todos sus hijos**, cambien o no sus props. Para que `Fila` se salte el render cuando sus props son iguales, hay que \"memorizarla\". Pero ojo: `memo` compara las props con `===`, y una función creada dentro de `Padre` es **una función nueva en cada render**.",
+  "Envuelve el componente: `export const Fila = memo(function Fila(props) { ... })`. Luego, en `Padre`, envuelve `borrar` en `useCallback(fn, [])` para que sea la misma referencia en todos los renders. Como dentro usas la forma funcional `setItems((anteriores) => ...)`, no dependes de `items` y la lista de dependencias puede quedar vacía.",
+  "Esqueleto:\n\n```jsx\nexport const Fila = memo(function Fila({ texto, onBorrar }) {\n  rendersHijo++;\n  return (/* el mismo <li> de antes */);\n});\n\nexport function Padre() {\n  // ...\n  const borrar = useCallback((texto) => {\n    setItems((anteriores) => /* filtra */);\n  }, [/* ¿de qué depende? */]);\n  // ...\n}\n```"
+]

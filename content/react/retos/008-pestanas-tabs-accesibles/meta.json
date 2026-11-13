@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-008",
+  "titulo": "Pestañas (tabs) accesibles",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 2,
+  "tags": ["react", "useState", "useId", "accesibilidad", "teclado"],
+  "origen": "definitivo/03-retos/03-react/08"
+}

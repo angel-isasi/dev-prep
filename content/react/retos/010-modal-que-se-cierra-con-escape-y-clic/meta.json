@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-010",
+  "titulo": "Modal que se cierra con Escape y clic afuera",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "eventos", "stopPropagation", "accesibilidad"],
+  "origen": "definitivo/03-retos/03-react/10"
+}

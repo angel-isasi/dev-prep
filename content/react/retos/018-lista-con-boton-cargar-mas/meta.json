@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-018",
+  "titulo": "Lista con botón \"Cargar más\"",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 3,
+  "tags": ["react", "useEffect", "async-await", "paginacion", "estados-de-carga"],
+  "origen": "definitivo/03-retos/03-react/18"
+}

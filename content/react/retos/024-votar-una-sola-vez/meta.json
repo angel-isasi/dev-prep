@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-024",
+  "titulo": "Votar una sola vez",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 3,
+  "tags": ["react", "useState", "async-await", "manejo-de-errores", "doble-envio"],
+  "origen": "definitivo/03-retos/03-react/24"
+}

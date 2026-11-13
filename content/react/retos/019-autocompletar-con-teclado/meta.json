@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-019",
+  "titulo": "Autocompletar con teclado",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 3,
+  "tags": ["react", "useState", "teclado", "estado-derivado", "accesibilidad", "combobox"],
+  "origen": "definitivo/03-retos/03-react/19"
+}

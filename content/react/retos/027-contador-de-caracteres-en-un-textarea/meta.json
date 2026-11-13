@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-027",
+  "titulo": "Contador de caracteres en un textarea",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "useState", "estado-derivado", "formularios", "accesibilidad"],
+  "origen": "definitivo/03-retos/03-react/27"
+}

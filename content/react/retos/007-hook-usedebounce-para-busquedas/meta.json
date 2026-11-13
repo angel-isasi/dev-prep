@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-007",
+  "titulo": "Hook useDebounce para búsquedas",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 3,
+  "tags": ["react", "custom-hook", "useEffect", "setTimeout", "debounce"],
+  "origen": "definitivo/03-retos/03-react/07"
+}

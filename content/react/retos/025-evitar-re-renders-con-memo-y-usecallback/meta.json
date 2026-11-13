@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-025",
+  "titulo": "Evitar re-renders con memo y useCallback",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 3,
+  "tags": ["react", "memo", "useCallback", "rendimiento", "referencias"],
+  "origen": "definitivo/03-retos/03-react/25"
+}

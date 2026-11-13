@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-011",
+  "titulo": "Paginación",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["react", "useState", "estado-derivado", "listas", "slice"],
+  "origen": "definitivo/03-retos/03-react/11"
+}

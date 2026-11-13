@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-009",
+  "titulo": "Acordeón (solo uno abierto)",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 2,
+  "tags": ["react", "useState", "levantar-estado", "renderizado-condicional", "accesibilidad"],
+  "origen": "definitivo/03-retos/03-react/09"
+}

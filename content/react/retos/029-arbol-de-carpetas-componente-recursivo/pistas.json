@@ -1,0 +1,5 @@
+[
+  "Piensa como en una función recursiva: ¿cuál es el **caso base**? Un archivo (sin `hijos`): se pinta y listo. ¿Y el caso recursivo? Una carpeta: se pinta su nombre y, si está abierta, un `<ul>` con un `<Arbol>` por cada hijo. Cada `<Arbol>` es una instancia distinta, así que cada carpeta puede tener su propio estado de abierta o cerrada.",
+  "Usa `useState(false)` para `abierto` dentro de `Arbol`. Si `!nodo.hijos`, devuelve directamente el `<li>` del archivo (un `return` temprano). Si es carpeta, el botón alterna con `setAbierto((a) => !a)` y lleva `aria-expanded={abierto}`. Para los hijos usa `nodo.hijos.map(...)` con `key={hijo.nombre}`.",
+  "Esqueleto:\n\n```jsx\nexport function Arbol({ nodo }) {\n  const [abierto, setAbierto] = useState(false);\n\n  if (!nodo.hijos) return <li>📄 {nodo.nombre}</li>;\n\n  return (\n    <li>\n      <button aria-expanded={abierto} onClick={/* alterna */}>\n        {abierto ? \"📂\" : \"📁\"} {nodo.nombre}\n      </button>\n      {abierto && (\n        <ul>\n          {nodo.hijos.map((hijo) => (\n            /* <Arbol ... /> para cada hijo */\n          ))}\n        </ul>\n      )}\n    </li>\n  );\n}\n```"
+]

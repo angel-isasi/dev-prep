@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-012",
+  "titulo": "Carrito de compras con useReducer",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 3,
+  "tags": ["react", "useReducer", "inmutabilidad", "estado-derivado", "reduce"],
+  "origen": "definitivo/03-retos/03-react/12"
+}

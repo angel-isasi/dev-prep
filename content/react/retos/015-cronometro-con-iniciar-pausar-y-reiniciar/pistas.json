@@ -1,0 +1,5 @@
+[
+  "Necesitas dos datos en el estado: **cuánto tiempo lleva** (en milisegundos, un número entero, así evitas errores de decimales) y **si está corriendo** (un booleano). El texto `1.5 s` se calcula al pintar: `(ms / 1000).toFixed(1)`.",
+  "Crea el intervalo dentro de un `useEffect` que dependa de `corriendo`: si no está corriendo, no hagas nada; si está corriendo, `setInterval` que sume 100 cada 100 ms y **devuelve una función de limpieza** con `clearInterval`. Dentro del intervalo usa la forma funcional `setMs((m) => m + 100)`: si usaras `ms + 100`, el intervalo vería siempre el `ms` del momento en que se creó.",
+  "Esqueleto:\n\n```jsx\nconst [ms, setMs] = useState(0);\nconst [corriendo, setCorriendo] = useState(false);\n\nuseEffect(() => {\n  if (!corriendo) return;\n  const id = setInterval(() => /* suma 100 con la forma funcional */, 100);\n  return () => /* limpia el intervalo */;\n}, [corriendo]);\n\nreturn (\n  <div>\n    <p>{(ms / 1000).toFixed(1)} s</p>\n    <button onClick={/* alterna corriendo */}>{corriendo ? \"Pausar\" : \"Iniciar\"}</button>\n    <button onClick={/* detiene y pone 0 */}>Reiniciar</button>\n  </div>\n);\n```"
+]

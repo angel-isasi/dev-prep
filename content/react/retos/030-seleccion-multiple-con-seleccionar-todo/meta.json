@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-030",
+  "titulo": "Selección múltiple con \"Seleccionar todo\"",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 3,
+  "tags": ["react", "useState", "Set", "useRef", "checkbox", "estado-derivado"],
+  "origen": "definitivo/03-retos/03-react/30"
+}

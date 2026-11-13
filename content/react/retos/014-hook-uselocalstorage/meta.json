@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-014",
+  "titulo": "Hook useLocalStorage",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["react", "hooks-personalizados", "useState", "useEffect", "localStorage", "json"],
+  "origen": "definitivo/03-retos/03-react/14"
+}

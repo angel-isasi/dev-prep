@@ -1,0 +1,5 @@
+[
+  "Si cada sección tuviera su propio estado \"abierto\", ninguna sabría que otra se abrió. El estado tiene que vivir **arriba**, en `Acordeon`: guarda **cuál** está abierta (su índice) o `null` si ninguna.",
+  "Usa `useState(null)`. Al hacer clic en el item `i`: si ya era el abierto, pon `null` (se cierra); si no, pon `i`. Con la forma funcional: `setAbierto((actual) => (actual === i ? null : i))`. Para mostrar la respuesta usa `{abierto === i && <p>...</p>}`.",
+  "Esqueleto:\n\n```jsx\nconst [abierto, setAbierto] = useState(null);\n\nreturn (\n  <div>\n    {items.map((item, i) => (\n      <section key={item.pregunta}>\n        <button aria-expanded={/* ¿es el abierto? */} onClick={/* alterna i o null */}>\n          {item.pregunta}\n        </button>\n        {/* si es el abierto, la respuesta */}\n      </section>\n    ))}\n  </div>\n);\n```"
+]

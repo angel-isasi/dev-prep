@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-023",
+  "titulo": "Formulario de varios pasos (wizard)",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "useState", "formularios", "estado-en-el-padre", "renderizado-condicional"],
+  "origen": "definitivo/03-retos/03-react/23"
+}

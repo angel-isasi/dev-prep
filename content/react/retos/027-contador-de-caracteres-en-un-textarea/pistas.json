@@ -1,0 +1,5 @@
+[
+  "Lo único que cambia cuando el usuario escribe es **el texto**. El número de caracteres restantes y si el botón está habilitado se pueden **calcular** a partir del texto en cada render: no los guardes en otros `useState`.",
+  "Usa `useState(\"\")` para el texto y un textarea controlado (`value` + `onChange`). Calcula `const restantes = max - texto.length` y `const vacio = texto.trim() === \"\"`. El límite real lo pone el atributo `maxLength={max}` en el textarea. Para la etiqueta, `<label htmlFor={id}>` con el mismo `id` en el textarea (puedes generarlo con `useId()`).",
+  "Esqueleto:\n\n```jsx\nconst [texto, setTexto] = useState(\"\");\nconst restantes = /* max - largo */;\nconst vacio = /* ¿solo espacios? */;\n\nreturn (\n  <div>\n    <label htmlFor=\"comentario\">Comentario</label>\n    <textarea id=\"comentario\" value={texto} maxLength={max} onChange={/* ... */} />\n    <p>{restantes} caracteres restantes</p>\n    <button disabled={/* ... */}>Publicar</button>\n  </div>\n);\n```"
+]

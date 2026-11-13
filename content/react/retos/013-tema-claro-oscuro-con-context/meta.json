@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-013",
+  "titulo": "Tema claro/oscuro con Context",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 3,
+  "tags": ["react", "context", "useContext", "hooks-personalizados", "useMemo"],
+  "origen": "definitivo/03-retos/03-react/13"
+}

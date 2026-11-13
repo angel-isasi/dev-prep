@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-020",
+  "titulo": "Tabla ordenable por columna",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["react", "useState", "sort", "inmutabilidad", "localeCompare", "tablas"],
+  "origen": "definitivo/03-retos/03-react/20"
+}

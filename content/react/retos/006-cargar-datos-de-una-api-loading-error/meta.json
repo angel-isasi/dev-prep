@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-006",
+  "titulo": "Cargar datos de una API (loading, error, datos)",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "fetch", "async", "AbortController"],
+  "origen": "definitivo/03-retos/03-react/06"
+}

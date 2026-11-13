@@ -1,0 +1,5 @@
+[
+  "¿Qué cambia con el tiempo? Solo el número. Ese es tu único estado. Si el botón está deshabilitado o no, **no** es otro estado: se calcula comparando el valor con `min` y `max`.",
+  "Usa `useState(min)`. Para sumar o restar, usa la **forma funcional** del setter: `setValor((anterior) => ...)`, porque el nuevo valor depende del anterior. Limita con `Math.min(max, ...)` y `Math.max(min, ...)`, y pon `disabled={valor === max}` en el botón `+`.",
+  "Esqueleto:\n\n```jsx\nconst [valor, setValor] = useState(min);\n\nreturn (\n  <div>\n    <p>Valor: {valor}</p>\n    <button onClick={() => setValor((v) => /* resta sin bajar de min */)} disabled={/* ¿en el mínimo? */}>-</button>\n    <button onClick={() => setValor((v) => /* suma sin pasar de max */)} disabled={/* ¿en el máximo? */}>+</button>\n    <button onClick={/* vuelve a min */}>Reiniciar</button>\n  </div>\n);\n```"
+]

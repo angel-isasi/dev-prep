@@ -1,0 +1,5 @@
+[
+  "El estado es solo **qué luz está encendida** (`\"rojo\"`, `\"verde\"` o `\"amarillo\"`). Las duraciones y el orden no cambian nunca: no son estado, son **datos fijos**. Ponlos en un objeto fuera del componente: para cada luz, cuánto dura y cuál sigue.",
+  "Usa un `useEffect` que dependa de `[luz]`: cada vez que cambia la luz, programa con `setTimeout` el cambio a la siguiente. Devuelve una función de limpieza con `clearTimeout(id)`, así al desmontar (o si la luz cambia antes) no queda un temporizador colgado.",
+  "Esqueleto:\n\n```jsx\nconst LUCES = {\n  rojo: { duracion: 3000, siguiente: \"verde\" },\n  verde: { /* ... */ },\n  amarillo: { /* ... */ },\n};\n\nexport function Semaforo() {\n  const [luz, setLuz] = useState(\"rojo\");\n\n  useEffect(() => {\n    const id = setTimeout(() => setLuz(/* la siguiente */), /* la duración */);\n    return () => /* limpia el timeout */;\n  }, [luz]);\n\n  return <p data-testid=\"luz\">{luz}</p>;\n}\n```"
+]

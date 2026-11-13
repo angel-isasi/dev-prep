@@ -1,0 +1,5 @@
+[
+  "¿Qué necesitas recordar entre renders? Solo **en qué posición estás** (un número, el índice). El slide que se ve es `slides[indice]` y el indicador es `indice + 1`: ambos se calculan, no se guardan.",
+  "Usa `useState(0)` para el índice. Para dar la vuelta sin `if`, usa el operador módulo `%`: `(indice + paso + total) % total`, donde `paso` es `1` o `-1`. Sumar `total` antes del módulo evita que `0 - 1` quede en `-1` (en JavaScript `-1 % 3` es `-1`, no `2`).",
+  "Esqueleto:\n\n```jsx\nconst [indice, setIndice] = useState(0);\nconst total = slides.length;\n\nfunction mover(paso) {\n  setIndice((actual) => /* (actual + paso + total) % total */);\n}\n\nreturn (\n  <div>\n    <p>{slides[indice]}</p>\n    <button aria-label=\"Anterior\" onClick={/* mover(-1) */}>‹</button>\n    <span>{/* posición */} / {total}</span>\n    <button aria-label=\"Siguiente\" onClick={/* mover(1) */}>›</button>\n  </div>\n);\n```"
+]

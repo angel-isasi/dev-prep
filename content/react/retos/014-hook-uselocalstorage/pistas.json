@@ -1,0 +1,5 @@
+[
+  "Un hook personalizado es solo una función que empieza con `use` y usa otros hooks. Por dentro, esto es un `useState` normal más dos momentos extra: **leer** de `localStorage` una sola vez al inicio y **escribir** en `localStorage` cada vez que el valor cambia.",
+  "Para leer una sola vez usa la **inicialización perezosa**: `useState(() => { ... })`. Dentro, `localStorage.getItem(clave)`: si no es `null`, `JSON.parse`; si no, `inicial`. Envuélvelo en `try/catch` por si el JSON está corrupto. Para escribir, un `useEffect` con dependencias `[clave, valor]` que haga `localStorage.setItem(clave, JSON.stringify(valor))`. Devuelve `[valor, setValor]`: el `setValor` de `useState` ya acepta funciones.",
+  "Esqueleto:\n\n```jsx\nexport function useLocalStorage(clave, inicial) {\n  const [valor, setValor] = useState(() => {\n    try {\n      const guardado = localStorage.getItem(clave);\n      return /* ¿hay algo? JSON.parse : inicial */;\n    } catch {\n      return inicial;\n    }\n  });\n\n  useEffect(() => {\n    /* guarda JSON.stringify(valor) en la clave */\n  }, [/* ... */]);\n\n  return [valor, setValor];\n}\n```"
+]

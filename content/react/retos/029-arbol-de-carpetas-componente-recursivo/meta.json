@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-029",
+  "titulo": "Árbol de carpetas (componente recursivo)",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 2,
+  "tags": ["react", "recursion", "useState", "listas", "accesibilidad"],
+  "origen": "definitivo/03-retos/03-react/29"
+}

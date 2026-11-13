@@ -1,0 +1,5 @@
+[
+  "Solo hay una cosa que cambia: si la contraseña está **visible o no**. Eso es un booleano. El `type` del input y el texto del botón no se guardan: se **deciden** a partir de ese booleano en cada render.",
+  "Usa `useState(false)` y alterna con `setVisible((v) => !v)`. Con el operador ternario eliges el `type` (`visible ? \"text\" : \"password\"`) y el texto del botón. No olvides `type=\"button\"` en el botón y `aria-pressed={visible}`.",
+  "Esqueleto:\n\n```jsx\nconst [visible, setVisible] = useState(false);\n\nreturn (\n  <div>\n    <label htmlFor=\"clave\">Contraseña</label>\n    <input id=\"clave\" type={/* text o password */} />\n    <button type=\"button\" aria-pressed={visible} onClick={/* alterna */}>\n      {/* Ocultar o Mostrar */}\n    </button>\n  </div>\n);\n```"
+]

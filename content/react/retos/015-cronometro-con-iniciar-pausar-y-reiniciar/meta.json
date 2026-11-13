@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-015",
+  "titulo": "Cronómetro con iniciar, pausar y reiniciar",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 3,
+  "tags": ["react", "useEffect", "setInterval", "limpieza", "useRef", "closures"],
+  "origen": "definitivo/03-retos/03-react/15"
+}

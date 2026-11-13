@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-028",
+  "titulo": "Tres en raya (Tic Tac Toe)",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useState", "estado-derivado", "arrays", "inmutabilidad"],
+  "origen": "definitivo/03-retos/03-react/28"
+}

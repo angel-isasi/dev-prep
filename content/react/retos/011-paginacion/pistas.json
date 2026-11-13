@@ -1,0 +1,5 @@
+[
+  "¿Qué es lo único que cambia cuando el usuario hace clic? **La página actual.** El total de páginas y los items visibles se pueden calcular en cada render a partir de `pagina`, `items` y `porPagina`: no los guardes en el estado.",
+  "Guarda `pagina` con `useState(1)`. El total es `Math.ceil(items.length / porPagina)` (con `Math.max(1, ...)` para que una lista vacía tenga 1 página). Los visibles salen de `items.slice(inicio, inicio + porPagina)`, donde `inicio = (pagina - 1) * porPagina`. Deshabilita cada botón con `disabled={...}` cuando estés en un extremo.",
+  "Esqueleto:\n\n```jsx\nconst [pagina, setPagina] = useState(1);\nconst totalPaginas = Math.max(1, Math.ceil(/* ... */));\nconst inicio = (pagina - 1) * porPagina;\nconst visibles = items.slice(/* ... */);\n\nreturn (\n  <div>\n    <ul>{/* un <li key=...> por cada visible */}</ul>\n    <button onClick={/* página - 1 */} disabled={/* ¿primera? */}>Anterior</button>\n    <span> Página {pagina} de {totalPaginas} </span>\n    <button onClick={/* página + 1 */} disabled={/* ¿última? */}>Siguiente</button>\n  </div>\n);\n```"
+]

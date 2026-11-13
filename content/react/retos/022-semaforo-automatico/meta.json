@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-022",
+  "titulo": "Semáforo automático",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "setTimeout", "maquina-de-estados", "timers"],
+  "origen": "definitivo/03-retos/03-react/22"
+}

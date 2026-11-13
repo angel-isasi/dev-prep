@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-026",
+  "titulo": "Hook useFetch reutilizable",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 3,
+  "tags": ["react", "hooks-personalizados", "useEffect", "fetch", "condicion-de-carrera"],
+  "origen": "definitivo/03-retos/03-react/26"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-005",
+  "titulo": "Formulario con validación",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "formularios", "validacion", "useState", "accesibilidad"],
+  "origen": "definitivo/03-retos/03-react/05"
+}

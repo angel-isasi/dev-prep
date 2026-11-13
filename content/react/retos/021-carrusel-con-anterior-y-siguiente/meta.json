@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-021",
+  "titulo": "Carrusel con anterior y siguiente",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useState", "modulo", "navegacion-circular", "accesibilidad"],
+  "origen": "definitivo/03-retos/03-react/21"
+}

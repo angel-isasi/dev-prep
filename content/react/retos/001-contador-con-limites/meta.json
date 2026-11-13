@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-001",
+  "titulo": "Contador con límites",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useState", "actualizacion-funcional", "eventos", "disabled"],
+  "origen": "definitivo/03-retos/03-react/01"
+}

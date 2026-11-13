@@ -1,0 +1,5 @@
+[
+  "El hook necesita **recordar** el valor retrasado entre renders: eso es un `useState`. Y necesita reaccionar cada vez que `valor` cambia: eso es un `useEffect` con `valor` en sus dependencias.",
+  "Dentro del efecto, programa `setTimeout(() => setRetrasado(valor), ms)`. La clave está en la **función de limpieza**: devuelve `() => clearTimeout(id)`. React la ejecuta antes de volver a correr el efecto, así que si `valor` cambia antes de tiempo, el temporizador anterior se cancela y solo sobrevive el último.",
+  "Esqueleto:\n\n```jsx\nexport function useDebounce(valor, ms = 300) {\n  const [retrasado, setRetrasado] = useState(valor);\n\n  useEffect(() => {\n    const id = setTimeout(/* actualiza retrasado */, ms);\n    return () => /* cancela el temporizador */;\n  }, [/* ¿de qué depende? */]);\n\n  return retrasado;\n}\n```"
+]

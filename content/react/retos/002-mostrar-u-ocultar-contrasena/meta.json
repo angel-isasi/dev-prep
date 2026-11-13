@@ -1,0 +1,9 @@
+{
+  "id": "react-reto-002",
+  "titulo": "Mostrar u ocultar contraseña",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useState", "booleano", "renderizado-condicional", "accesibilidad"],
+  "origen": "definitivo/03-retos/03-react/02"
+}
