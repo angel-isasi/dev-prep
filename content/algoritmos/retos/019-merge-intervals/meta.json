@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-019",
+  "titulo": "Merge Intervals",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "intervalos", "ordenamiento", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/19"
+}

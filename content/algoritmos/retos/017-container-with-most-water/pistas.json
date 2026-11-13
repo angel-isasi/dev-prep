@@ -1,0 +1,5 @@
+[
+  "Empieza con las dos líneas **más lejanas** (los extremos): tienen el ancho máximo. Para encontrar algo mejor tendrás que acercarlas, perdiendo ancho. Pregúntate: si muevo la línea **más alta**, ¿puede crecer el área? El agua la limita la más baja...",
+  "Usa **dos punteros**: `i` al inicio y `j` al final. Calcula el área, guarda la mayor, y mueve **siempre el puntero de la línea más baja** hacia adentro. Mover la más alta nunca ayuda: el ancho baja y la altura sigue limitada por la baja. Repite mientras `i < j`.",
+  "Esqueleto:\n\n```js\nlet i = 0;\nlet j = alturas.length - 1;\nlet mejor = 0;\nwhile (i < j) {\n  const area = /* altura menor */ * /* distancia */;\n  mejor = Math.max(mejor, area);\n  if (/* la línea de i es más baja */) i++;\n  else j--;\n}\nreturn mejor;\n```"
+]

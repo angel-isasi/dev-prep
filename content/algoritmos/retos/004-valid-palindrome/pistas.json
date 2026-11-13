@@ -1,0 +1,5 @@
+[
+  "Separa el problema en dos partes: primero, **¿qué caracteres cuentan?** (letras y dígitos, todo en minúsculas). Segundo, con la frase ya limpia, **¿cómo compruebas que se lee igual al revés?**",
+  "Para limpiar: `toLowerCase()` y luego `replace` con una expresión regular que borre todo lo que **no** sea `a-z` ni `0-9`: `/[^a-z0-9]/g` (el `^` dentro de los corchetes significa \"no\"). Para comparar, usa **dos punteros**: uno al inicio y otro al final, que avanzan hacia el centro mientras los caracteres coincidan.",
+  "Esqueleto:\n\n```js\nconst limpio = s.toLowerCase().replace(/[^a-z0-9]/g, \"\");\nlet i = 0;\nlet j = /* último índice */;\nwhile (i < j) {\n  if (/* los caracteres en i y j son distintos */) return false;\n  /* acerca los punteros */\n}\nreturn true;\n```"
+]

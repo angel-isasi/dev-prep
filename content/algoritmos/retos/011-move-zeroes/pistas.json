@@ -1,0 +1,5 @@
+[
+  "En lugar de pensar \"¿cómo muevo los ceros al final?\", piensa al revés: **¿cómo muevo los NO ceros al inicio, en orden?** Si los no ceros quedan juntos adelante, los ceros quedan solos al final.",
+  "Usa **dos punteros** sobre el mismo arreglo: `i` recorre todo, y `escribir` marca la posición donde debe ir el próximo número distinto de cero. Cada vez que `nums[i]` no es cero, intercámbialo con `nums[escribir]` y avanza `escribir`.",
+  "Esqueleto:\n\n```js\nlet escribir = 0;\nfor (let i = 0; i < nums.length; i++) {\n  if (/* nums[i] no es cero */) {\n    [nums[escribir], nums[i]] = [/* ... */, /* ... */];\n    escribir++;\n  }\n}\nreturn nums;\n```"
+]

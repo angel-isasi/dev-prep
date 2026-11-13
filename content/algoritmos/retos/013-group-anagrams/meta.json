@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-013",
+  "titulo": "Group Anagrams",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["strings", "hash", "map", "ordenamiento", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/13"
+}

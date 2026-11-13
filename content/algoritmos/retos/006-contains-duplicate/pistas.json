@@ -1,0 +1,5 @@
+[
+  "Mientras recorres el arreglo, la pregunta en cada número es: **¿ya vi este valor antes?** Si recorres todo lo anterior para responderla, es lento. ¿Qué estructura responde \"¿ya está?\" al instante?",
+  "Un `Set` guarda valores **sin repetir** y `has(valor)` responde en O(1). Dos caminos: 1) convertir todo el arreglo en `Set` y comparar su `size` con el `length` del arreglo; 2) recorrer, y si el número ya está en el `Set` devolver `true`, si no, agregarlo.",
+  "Esqueleto (versión que corta apenas encuentra uno):\n\n```js\nconst vistos = new Set();\nfor (const n of nums) {\n  if (/* ya vi n */) return true;\n  /* recuerda n */\n}\nreturn false;\n```\n\nO en una línea: `return new Set(nums).size /* comparado con */ nums.length;`"
+]

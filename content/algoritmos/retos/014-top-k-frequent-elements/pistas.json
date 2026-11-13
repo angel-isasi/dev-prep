@@ -1,0 +1,5 @@
+[
+  "Divide el problema en dos: primero **cuenta** cuántas veces aparece cada número; después **elige** los `k` con mayor conteo. ¿Qué estructura usas para contar sin perder el tipo número de las claves?",
+  "Cuenta con un `Map` (`numero -> veces`). Para elegir: la forma simple es ordenar las entradas por frecuencia de mayor a menor y tomar las primeras `k` (O(n log n)). La forma O(n): crea **cubetas**, un arreglo donde `cubetas[f]` guarda los números que aparecen `f` veces, y recórrelo desde el final.",
+  "Esqueleto (cubetas):\n\n```js\nconst conteo = new Map();\nfor (const n of nums) conteo.set(n, /* conteo actual o 0, más 1 */);\n\nconst cubetas = Array.from({ length: nums.length + 1 }, () => []);\nfor (const [numero, frecuencia] of conteo) {\n  /* mete numero en la cubeta de su frecuencia */\n}\n\nconst resultado = [];\nfor (let f = cubetas.length - 1; f >= 0 && resultado.length < k; f--) {\n  /* agrega los números de la cubeta f */\n}\nreturn resultado.slice(0, k);\n```"
+]

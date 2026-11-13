@@ -1,0 +1,5 @@
+[
+  "Si **fijas** un número `a`, el problema se convierte en: \"encuentra dos números que sumen `-a`\". Eso se parece mucho a Two Sum. ¿Y si además el arreglo estuviera **ordenado**? Los repetidos quedarían juntos y sería fácil saltarlos.",
+  "Ordena una copia (`[...nums].sort((x, y) => x - y)`). Para cada `i`, usa **dos punteros**: `izq = i + 1` y `der` al final. Si la suma de los tres es menor que 0, mueve `izq` a la derecha (necesitas más); si es mayor, mueve `der` a la izquierda. Para no repetir: salta un `i` si es igual al anterior, y al encontrar un trío salta los valores iguales en `izq` y `der`.",
+  "Esqueleto:\n\n```js\nconst a = [...nums].sort((x, y) => x - y);\nconst resultado = [];\nfor (let i = 0; i < a.length - 2; i++) {\n  if (i > 0 && /* a[i] igual al anterior */) continue;\n  let izq = i + 1;\n  let der = a.length - 1;\n  while (izq < der) {\n    const suma = a[i] + a[izq] + a[der];\n    if (suma === 0) {\n      resultado.push([a[i], a[izq], a[der]]);\n      /* salta repetidos en izq y en der */\n      izq++;\n      der--;\n    } else if (suma < 0) /* ... */;\n    else /* ... */;\n  }\n}\nreturn resultado;\n```"
+]

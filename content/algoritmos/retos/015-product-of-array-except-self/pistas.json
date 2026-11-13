@@ -1,0 +1,5 @@
+[
+  "Mira la posición 2 de `[1, 2, 3, 4]`: \"todos menos yo\" es `(1 * 2)` por `(4)`. O sea, **el producto de lo que está a mi izquierda por el producto de lo que está a mi derecha**. ¿Puedes calcular esos dos productos para cada posición sin repetir multiplicaciones?",
+  "Haz **dos pasadas**. En la primera, de izquierda a derecha, lleva un acumulado `izquierda` (empieza en 1) y guarda en `resultado[i]` el producto de todo lo anterior a `i`. En la segunda, de derecha a izquierda, lleva un acumulado `derecha` y multiplica `resultado[i]` por él. Ojo con el orden: guardas o multiplicas **antes** de actualizar el acumulado con `nums[i]`.",
+  "Esqueleto:\n\n```js\nconst resultado = new Array(nums.length).fill(1);\nlet izquierda = 1;\nfor (let i = 0; i < nums.length; i++) {\n  resultado[i] = /* producto de lo anterior */;\n  izquierda *= /* ... */;\n}\nlet derecha = 1;\nfor (let i = nums.length - 1; i >= 0; i--) {\n  resultado[i] *= /* producto de lo posterior */;\n  derecha *= /* ... */;\n}\nreturn resultado;\n```"
+]

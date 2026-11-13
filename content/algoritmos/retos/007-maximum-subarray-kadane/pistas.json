@@ -1,0 +1,5 @@
+[
+  "Imagina que vas recorriendo y llevas la suma de un tramo. Al llegar a un número nuevo tienes dos opciones: **pegarlo al tramo que traes** o **empezar un tramo nuevo desde él**. ¿Cuándo te conviene empezar de nuevo? Cuando lo que traes ya es negativo, porque solo te resta.",
+  "Lleva dos variables: `actual` (la mejor suma de un tramo que termina justo en la posición actual) y `mejor` (la mayor suma vista en todo el recorrido). En cada número: `actual = Math.max(numero, actual + numero)`. Empieza las dos en `nums[0]`, **no en 0**, para que funcione si todos son negativos.",
+  "Esqueleto:\n\n```js\nlet actual = nums[0];\nlet mejor = nums[0];\nfor (let i = 1; i < nums.length; i++) {\n  actual = Math.max(/* empezar aquí */, /* seguir el tramo */);\n  mejor = /* el mayor entre mejor y actual */;\n}\nreturn mejor;\n```"
+]

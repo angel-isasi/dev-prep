@@ -1,0 +1,5 @@
+[
+  "Invertir la lista es **voltear cada flecha**: si `1 -> 2`, ahora `2 -> 1`. El problema es que al cambiar `nodo.next` pierdes el camino hacia el resto de la lista. ¿Qué tienes que guardar **antes** de cambiar la flecha?",
+  "Recorre con tres referencias: `anterior` (empieza en `null`), `actual` (empieza en la cabeza) y `siguiente`. En cada vuelta: guarda `siguiente = actual.next`, haz que `actual.next` apunte a `anterior`, y avanza: `anterior = actual`, `actual = siguiente`. Al final, `anterior` es la nueva cabeza.",
+  "Esqueleto:\n\n```js\nlet anterior = null;\nlet actual = cabeza;\nwhile (actual) {\n  const siguiente = /* guarda el resto */;\n  actual.next = /* voltea la flecha */;\n  anterior = /* ... */;\n  actual = /* ... */;\n}\nreturn anterior;\n```"
+]

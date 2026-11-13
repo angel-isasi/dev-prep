@@ -1,0 +1,5 @@
+[
+  "Imagina una **ventana** que va de una posición `inicio` hasta la posición actual `i`, y que nunca tiene repetidos. Cada vez que avanzas `i`, la ventana crece. ¿Qué tienes que hacer con `inicio` cuando el carácter nuevo **ya estaba dentro** de la ventana?",
+  "Guarda en un `Map` la **última posición** donde viste cada carácter. Si el carácter actual ya apareció y esa posición es `>= inicio` (está dentro de la ventana), mueve `inicio` a esa posición + 1. Después actualiza la posición del carácter y calcula el largo de la ventana: `i - inicio + 1`. Ojo con `\"abba\"`: la aparición vieja puede estar **fuera** de la ventana.",
+  "Esqueleto:\n\n```js\nconst ultimaPos = new Map();\nlet inicio = 0;\nlet mejor = 0;\nfor (let i = 0; i < s.length; i++) {\n  const c = s[i];\n  if (ultimaPos.has(c) && /* esa posición está dentro de la ventana */) {\n    inicio = /* justo después de esa posición */;\n  }\n  ultimaPos.set(c, i);\n  mejor = Math.max(mejor, /* largo de la ventana */);\n}\nreturn mejor;\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Si no faltara ninguno, el arreglo tendría **todos** los números del 0 al `n`. ¿Cuánto sumarían? Y lo que de verdad hay en el arreglo, ¿cuánto suma? Compara esas dos sumas.",
+  "La suma de 0 + 1 + 2 + ... + n tiene fórmula (la de **Gauss**): `n * (n + 1) / 2`, donde `n` es `nums.length`. Calcula la suma real con un bucle o con `reduce`. El número que falta es la **diferencia** entre las dos.",
+  "Esqueleto:\n\n```js\nconst n = nums.length;\nconst esperado = /* fórmula de Gauss con n */;\nconst real = nums.reduce((acumulado, x) => /* ... */, 0);\nreturn /* ... */;\n```"
+]

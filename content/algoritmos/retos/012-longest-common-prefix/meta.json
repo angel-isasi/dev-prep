@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-012",
+  "titulo": "Longest Common Prefix",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["strings", "arrays", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/12"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-022",
+  "titulo": "Roman to Integer",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["strings", "hash", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/22"
+}

@@ -1,0 +1,5 @@
+[
+  "Para saber si `i` es múltiplo de 3, mira el **resto** de dividirlo entre 3: `i % 3 === 0`. Y piensa en el 15: es múltiplo de 3 **y** de 5. ¿En qué orden revisas las condiciones para que no se quede solo en \"Fizz\"?",
+  "Una forma limpia: empieza cada número con un texto vacío. Si es múltiplo de 3, **agrega** `\"Fizz\"`; si es múltiplo de 5, **agrega** `\"Buzz\"`. El 15 recibe los dos y queda `\"FizzBuzz\"` sin un `if` especial. Si al final el texto sigue vacío, usa el número convertido a texto con `String(i)`.",
+  "Esqueleto:\n\n```js\nconst resultado = [];\nfor (let i = 1; i <= n; i++) {\n  let texto = \"\";\n  if (/* múltiplo de 3 */) texto += \"Fizz\";\n  if (/* múltiplo de 5 */) texto += \"Buzz\";\n  resultado.push(/* texto, o el número como string si texto está vacío */);\n}\nreturn resultado;\n```"
+]

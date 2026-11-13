@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-011",
+  "titulo": "Move Zeroes",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "dos-punteros", "in-place", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/11"
+}

@@ -1,0 +1,5 @@
+[
+  "Piensa en el **último paso**. Para llegar al escalón `n`, ¿desde dónde pudiste venir? Solo desde `n - 1` (con un paso de 1) o desde `n - 2` (con un paso de 2). Entonces, ¿cómo se relacionan las formas de llegar a `n` con las de `n - 1` y `n - 2`?",
+  "`formas(n) = formas(n - 1) + formas(n - 2)`: es la sucesión de **Fibonacci**. La recursión directa recalcula lo mismo millones de veces. Mejor construye de abajo hacia arriba: empieza con `formas(0) = 1` y `formas(1) = 1` y avanza guardando **solo los dos últimos valores**.",
+  "Esqueleto:\n\n```js\nlet anteAnterior = 1; // formas(0)\nlet anterior = 1;     // formas(1)\nfor (let i = 2; i <= n; i++) {\n  const actual = /* suma de los dos anteriores */;\n  anteAnterior = /* ... */;\n  anterior = /* ... */;\n}\nreturn anterior;\n```"
+]

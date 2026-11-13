@@ -1,0 +1,5 @@
+[
+  "El prefijo común nunca puede ser más largo que **cualquiera** de las palabras. Entonces, ¿qué tal si tomas la primera palabra entera como **candidato** y lo vas achicando hasta que sirva para todas?",
+  "Recorre las demás palabras. Para cada una, mientras la palabra **no empiece** con el candidato (`palabra.startsWith(prefijo)`), quítale al candidato su último carácter con `prefijo.slice(0, -1)`. Si el candidato queda vacío, ya puedes devolver `\"\"`.",
+  "Esqueleto:\n\n```js\nif (palabras.length === 0) return \"\";\nlet prefijo = palabras[0];\nfor (const palabra of palabras.slice(1)) {\n  while (/* palabra no empieza con prefijo */) {\n    prefijo = /* prefijo sin su último carácter */;\n    if (prefijo === \"\") return \"\";\n  }\n}\nreturn prefijo;\n```"
+]

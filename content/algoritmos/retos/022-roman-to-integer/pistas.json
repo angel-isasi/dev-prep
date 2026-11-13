@@ -1,0 +1,5 @@
+[
+  "Mira cada símbolo junto con **el que le sigue**. En `XIV`, la `I` va antes de la `V`, que es mayor: esa `I` resta. La `X` va antes de la `I`, que es menor: esa `X` suma. ¿Cuál es la regla general?",
+  "Guarda los valores en un objeto (`{ I: 1, V: 5, ... }`). Recorre con un `for` por índice: si el valor actual es **menor** que el siguiente, réstalo del total; si no, súmalo. El último símbolo no tiene siguiente: trátalo como si el siguiente valiera 0.",
+  "Esqueleto:\n\n```js\nconst VALORES = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };\nlet total = 0;\nfor (let i = 0; i < s.length; i++) {\n  const actual = VALORES[s[i]];\n  const siguiente = VALORES[s[i + 1]] || 0;\n  if (/* actual es menor que siguiente */) total -= actual;\n  else /* ... */;\n}\nreturn total;\n```"
+]

@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-029",
+  "titulo": "Min Stack",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["pila", "clases", "diseno", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/29"
+}

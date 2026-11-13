@@ -1,0 +1,5 @@
+[
+  "Guardar el mínimo en una sola variable funciona hasta que haces `pop` **del mínimo**: ¿cuál era el mínimo antes de que llegara? Para saberlo sin recorrer la pila, tendrías que haberlo **anotado** en algún lado. ¿Qué tal si anotas el mínimo en cada momento?",
+  "Usa **dos pilas** que crecen y se achican juntas: `pila` con los valores y `minimos`, donde cada posición guarda el mínimo de todo lo que había hasta ese punto. En `push(x)` agregas a `minimos` el menor entre `x` y el mínimo actual. En `pop` sacas de las dos. `getMin` es el tope de `minimos`.",
+  "Esqueleto:\n\n```js\nexport class MinStack {\n  constructor() {\n    this.pila = [];\n    this.minimos = [];\n  }\n  push(x) {\n    this.pila.push(x);\n    const minimo = /* x si está vacía; si no, el menor entre x y getMin() */;\n    this.minimos.push(minimo);\n  }\n  pop() {\n    /* saca de minimos */\n    return /* saca de pila */;\n  }\n  top() { return /* último de pila */; }\n  getMin() { return /* último de minimos */; }\n}\n```"
+]

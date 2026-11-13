@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-015",
+  "titulo": "Product of Array Except Self",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 3,
+  "tags": ["arrays", "prefijos", "sufijos", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/15"
+}

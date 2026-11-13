@@ -1,0 +1,5 @@
+[
+  "No importa el orden de las letras, solo **cuántas de cada una** tienes. Piensa en la revista como una bolsa de letras: ¿cuántas `a` hay, cuántas `b`...? Y luego, por cada letra que necesita la nota, ¿te queda alguna en la bolsa?",
+  "Cuenta las letras de la revista en un objeto (`letra -> cantidad`). Después recorre la nota **restando** una por cada letra que uses. Si alguna vez la cantidad es 0 o la letra no existe, devuelve `false`. Es el mismo patrón que en Valid Anagram.",
+  "Esqueleto:\n\n```js\nconst disponibles = {};\nfor (const letra of revista) {\n  disponibles[letra] = /* cantidad actual o 0, más 1 */;\n}\nfor (const letra of nota) {\n  if (/* no quedan de esta letra */) return false;\n  /* gasta una */\n}\nreturn true;\n```"
+]

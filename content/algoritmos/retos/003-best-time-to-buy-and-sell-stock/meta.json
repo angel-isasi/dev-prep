@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-003",
+  "titulo": "Best Time to Buy and Sell Stock",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "una-pasada", "minimo-acumulado", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/03"
+}

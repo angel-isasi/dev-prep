@@ -1,0 +1,5 @@
+[
+  "Busca algo que sea **idéntico para todos los anagramas** y distinto para lo demás. Por ejemplo: ¿qué pasa si ordenas alfabéticamente las letras de `\"eat\"`, `\"tea\"` y `\"ate\"`?",
+  "Las tres dan `\"aet\"`. Usa esa cadena ordenada como **clave** de un `Map`: `clave -> [palabras del grupo]`. Para cada palabra calculas su clave con `[...palabra].sort().join(\"\")`, y la agregas al grupo de esa clave (creándolo si no existe). Al final, los grupos son los valores del `Map`.",
+  "Esqueleto:\n\n```js\nconst grupos = new Map();\nfor (const palabra of palabras) {\n  const clave = /* letras ordenadas, unidas en una cadena */;\n  if (/* el Map no tiene la clave */) grupos.set(clave, []);\n  /* agrega la palabra al grupo de esa clave */\n}\nreturn [...grupos.values()];\n```"
+]

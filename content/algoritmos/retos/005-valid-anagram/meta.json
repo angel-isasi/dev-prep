@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-005",
+  "titulo": "Valid Anagram",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["strings", "hash", "conteo", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/05"
+}

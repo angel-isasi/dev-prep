@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-016",
+  "titulo": "Longest Substring Without Repeating Characters",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 3,
+  "tags": ["strings", "ventana-deslizante", "hash", "map", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/16"
+}

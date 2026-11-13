@@ -1,0 +1,5 @@
+[
+  "La forma más directa: **cuenta** cuántas veces aparece cada número y devuelve el que tenga más. Pero fíjate en el dato clave del problema: el mayoritario aparece **más de la mitad** de las veces. Eso significa que aparece más veces que todos los demás **juntos**.",
+  "Para O(1) de memoria, usa la **votación de Boyer-Moore**: lleva un `candidato` y un contador `votos`. Cada número igual al candidato suma 1 y cada distinto resta 1. Cuando `votos` llega a 0, el siguiente número se convierte en el nuevo candidato. Como el mayoritario es más de la mitad, siempre sobrevive.",
+  "Esqueleto:\n\n```js\nlet candidato = null;\nlet votos = 0;\nfor (const n of nums) {\n  if (votos === 0) /* n pasa a ser el candidato */;\n  votos += /* 1 si n es el candidato, -1 si no */;\n}\nreturn candidato;\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Cuando llega un símbolo de cierre, ¿con cuál apertura debe coincidir? No con cualquiera: con **la última que abriste y que todavía no se cerró**. Fíjate en `\"([)]\"`: el `)` llega cuando lo último abierto es `[`, y por eso falla.",
+  "Usa una **pila** (un arreglo con `push` y `pop`): lo último que entra es lo primero que sale. Apila cada apertura; con cada cierre, saca el tope y compáralo. Un objeto `{ \")\": \"(\", \"]\": \"[\", \"}\": \"{\" }` te dice qué apertura le corresponde a cada cierre. Al final, la pila debe quedar vacía.",
+  "Esqueleto:\n\n```js\nconst pares = { \")\": \"(\", \"]\": \"[\", \"}\": \"{\" };\nconst pila = [];\nfor (const c of s) {\n  if (c in pares) {\n    if (/* lo que saco de la pila */ !== pares[c]) return false;\n  } else {\n    /* guardo la apertura */\n  }\n}\nreturn /* ¿la pila quedó vacía? */;\n```"
+]

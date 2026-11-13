@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-024",
+  "titulo": "Reverse Linked List",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["listas-enlazadas", "punteros", "recursion", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/24"
+}

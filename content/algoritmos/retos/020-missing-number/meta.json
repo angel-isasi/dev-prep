@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-020",
+  "titulo": "Missing Number",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["arrays", "matematica", "suma-de-gauss", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/20"
+}

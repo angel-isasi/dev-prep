@@ -1,0 +1,5 @@
+[
+  "Recorre la grilla celda por celda. Cuando encuentras tierra, sabes que es parte de una isla. El problema es no volver a contar **la misma isla** cuando llegues a otra de sus celdas. ¿Qué podrías hacer con toda la isla apenas la cuentas?",
+  "Cuando encuentres un `\"1\"`, suma una isla y **húndela**: convierte esa celda en `\"0\"` y haz lo mismo, recursivamente, con sus 4 vecinas (arriba, abajo, izquierda, derecha) que sean tierra. Así, cuando el recorrido llegue a otra celda de esa isla, ya será agua. Trabaja sobre una **copia** de la grilla para no modificar la original.",
+  "Esqueleto:\n\n```js\nconst g = grilla.map((fila) => [...fila]);\nlet islas = 0;\nfunction hundir(f, c) {\n  if (/* fuera de la grilla */) return;\n  if (g[f][c] !== \"1\") return;\n  g[f][c] = \"0\";\n  /* hundir las 4 vecinas */\n}\nfor (let f = 0; f < g.length; f++) {\n  for (let c = 0; c < g[0].length; c++) {\n    if (g[f][c] === \"1\") {\n      islas++;\n      hundir(f, c);\n    }\n  }\n}\nreturn islas;\n```"
+]

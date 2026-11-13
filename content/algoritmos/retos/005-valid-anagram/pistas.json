@@ -1,0 +1,5 @@
+[
+  "¿Qué tienen en común dos anagramas, sin importar el orden? **Cuántas veces aparece cada letra.** Si las dos palabras tienen el mismo conteo de cada letra, son anagramas. Y antes de contar nada: si los largos son distintos, ya sabes la respuesta.",
+  "Usa un objeto (o un `Map`) como contador: recorre `a` sumando 1 por cada letra; luego recorre `b` **restando**. Si en algún momento te piden una letra cuyo conteo es 0 (o que no existe), devuelve `false`.",
+  "Esqueleto:\n\n```js\nif (a.length !== b.length) return false;\nconst conteo = {};\nfor (const letra of a) {\n  conteo[letra] = /* conteo actual o 0, más 1 */;\n}\nfor (const letra of b) {\n  if (/* no quedan de esta letra */) return false;\n  /* gasta una */\n}\nreturn true;\n```"
+]

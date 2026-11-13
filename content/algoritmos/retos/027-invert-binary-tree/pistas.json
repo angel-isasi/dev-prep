@@ -1,0 +1,5 @@
+[
+  "Invertir un árbol completo es: intercambiar los dos hijos de la raíz **y además** invertir cada uno de esos subárboles. Un subárbol es otro árbol más chico... ¿qué función ya sabe invertir un árbol?",
+  "**Recursión**. Caso base: si el nodo es `null`, devuelve `null`. Caso general: invierte el subárbol izquierdo y el derecho, y asígnalos **cruzados**: el izquierdo invertido va a `right` y el derecho invertido va a `left`. Cuidado: si haces la asignación en dos líneas, la segunda usaría un valor que ya cambiaste.",
+  "Esqueleto:\n\n```js\nexport function invertirArbol(nodo) {\n  if (!nodo) return null;\n  [nodo.left, nodo.right] = [/* el derecho invertido */, /* el izquierdo invertido */];\n  return nodo;\n}\n```"
+]

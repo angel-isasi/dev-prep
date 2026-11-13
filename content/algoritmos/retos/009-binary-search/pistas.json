@@ -1,0 +1,5 @@
+[
+  "Piensa en cómo buscas una palabra en un diccionario de papel: no lees página por página, abres por el **medio**. Si la palabra que buscas va antes, ¿qué mitad puedes ignorar por completo?",
+  "Usa dos índices, `izq` y `der`, que marcan el rango donde todavía puede estar el objetivo. Mira el elemento del medio: si es el objetivo, listo; si es **menor**, el objetivo está a la derecha (`izq = medio + 1`); si es **mayor**, a la izquierda (`der = medio - 1`). Repite mientras `izq <= der`.",
+  "Esqueleto:\n\n```js\nlet izq = 0;\nlet der = nums.length - 1;\nwhile (izq <= der) {\n  const medio = Math.floor(/* ... */);\n  if (nums[medio] === objetivo) return medio;\n  if (nums[medio] < objetivo) {\n    /* descarta la mitad izquierda */\n  } else {\n    /* descarta la mitad derecha */\n  }\n}\nreturn -1;\n```"
+]

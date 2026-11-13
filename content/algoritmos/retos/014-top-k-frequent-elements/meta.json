@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-014",
+  "titulo": "Top K Frequent Elements",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "hash", "conteo", "bucket-sort", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/14"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-017",
+  "titulo": "Container With Most Water",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 3,
+  "tags": ["arrays", "dos-punteros", "greedy", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/17"
+}

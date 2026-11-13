@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-023",
+  "titulo": "FizzBuzz",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["bucles", "condicionales", "modulo", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/23"
+}

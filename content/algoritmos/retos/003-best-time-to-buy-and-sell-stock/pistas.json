@@ -1,0 +1,5 @@
+[
+  "Piensa desde el día de la **venta**: si decides vender hoy, ¿cuándo te convenía haber comprado? En el día más barato **anterior** a hoy. Entonces no necesitas comparar todas las parejas, solo saber cuál fue el precio mínimo hasta ahora.",
+  "Recorre los precios una vez llevando dos variables: `minimo` (el precio más bajo visto hasta hoy) y `mejor` (la mejor ganancia encontrada). En cada día actualiza el mínimo y calcula cuánto ganarías vendiendo hoy. Empieza `minimo` en `Infinity` y `mejor` en `0`.",
+  "Esqueleto:\n\n```js\nlet minimo = Infinity;\nlet mejor = 0;\nfor (const precio of precios) {\n  minimo = /* el menor entre minimo y precio */;\n  mejor = /* el mayor entre mejor y la ganancia de vender hoy */;\n}\nreturn mejor;\n```"
+]

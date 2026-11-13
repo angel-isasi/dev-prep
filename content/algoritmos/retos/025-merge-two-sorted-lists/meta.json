@@ -1,0 +1,9 @@
+{
+  "id": "alg-reto-025",
+  "titulo": "Merge Two Sorted Lists",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["listas-enlazadas", "dos-punteros", "nodo-ficticio", "leetcode"],
+  "origen": "definitivo/03-retos/01-tipo-leetcode/25"
+}

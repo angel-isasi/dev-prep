@@ -1,0 +1,5 @@
+[
+  "Como las dos listas ya están ordenadas, el menor de todos está en **una de las dos cabezas**. Después de sacarlo, el siguiente menor vuelve a estar en una de las dos cabezas. ¿Ves el patrón? Es como juntar dos filas de personas ordenadas por estatura.",
+  "Compara `a.val` con `b.val`, engancha el nodo menor al final de tu resultado y avanza en esa lista. Para no tratar aparte \"el primer nodo del resultado\", crea un **nodo ficticio** `{ val: 0, next: null }` y una variable `cola` que apunte al último nodo enganchado. Cuando una lista se acabe, engancha lo que queda de la otra entero.",
+  "Esqueleto:\n\n```js\nconst inicio = { val: 0, next: null };\nlet cola = inicio;\nwhile (a && b) {\n  if (/* a es menor o igual */) {\n    cola.next = a;\n    a = /* avanza a */;\n  } else {\n    /* lo mismo con b */\n  }\n  cola = /* avanza la cola */;\n}\ncola.next = /* lo que quede de a o de b */;\nreturn inicio.next;\n```"
+]

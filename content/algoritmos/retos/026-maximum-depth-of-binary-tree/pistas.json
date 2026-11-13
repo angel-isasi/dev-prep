@@ -1,0 +1,5 @@
+[
+  "Piensa en un árbol como \"un nodo con dos árboles más chicos colgando\". Si alguien te dijera la profundidad del subárbol izquierdo y la del derecho, ¿cómo calcularías la del árbol completo? ¿Y cuál es el árbol más simple de todos?",
+  "Usa **recursión**. Caso base: si el nodo es `null` (o no existe), la profundidad es 0. Caso general: el nodo actual cuenta 1, más la **mayor** profundidad entre su hijo izquierdo y su hijo derecho (`Math.max`).",
+  "Esqueleto:\n\n```js\nexport function profundidad(nodo) {\n  if (/* no hay nodo */) return 0;\n  return 1 + Math.max(/* profundidad del izquierdo */, /* profundidad del derecho */);\n}\n```"
+]

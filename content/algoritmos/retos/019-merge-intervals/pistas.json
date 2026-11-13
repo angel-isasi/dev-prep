@@ -1,0 +1,5 @@
+[
+  "Si los intervalos estuvieran **ordenados por inicio**, los que se superponen quedarían uno al lado del otro. Entonces solo tendrías que comparar cada intervalo con **el último** que llevas en el resultado. ¿Cuándo se superponen dos intervalos ordenados así?",
+  "Ordena una copia con `sort((a, b) => a[0] - b[0])`. Recorre: si el inicio del actual es `<=` que el fin del último del resultado, se superponen y extiendes el fin del último con `Math.max` (el actual podría estar contenido). Si no, agregas el actual como intervalo nuevo.",
+  "Esqueleto:\n\n```js\nconst ordenados = [...intervalos].sort((a, b) => /* por inicio */);\nconst resultado = [];\nfor (const [inicio, fin] of ordenados) {\n  const ultimo = resultado[resultado.length - 1];\n  if (ultimo && /* se superpone con el último */) {\n    ultimo[1] = /* el mayor de los dos finales */;\n  } else {\n    resultado.push([inicio, fin]);\n  }\n}\nreturn resultado;\n```"
+]

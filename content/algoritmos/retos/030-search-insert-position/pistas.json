@@ -1,0 +1,5 @@
+[
+  "Fíjate que las dos preguntas (\"¿dónde está?\" y \"¿dónde lo insertaría?\") tienen la misma respuesta: **el primer índice cuyo valor es mayor o igual al objetivo**. Si no hay ninguno, es `nums.length`. Como el arreglo está ordenado, ¿qué búsqueda te sirve para encontrar ese primer índice rápido?",
+  "Búsqueda binaria con el rango **semiabierto** `[izq, der)`: `izq = 0` y `der = nums.length` (no `length - 1`, porque la respuesta puede ser \"al final\"). Si `nums[medio] < objetivo`, la respuesta está a la derecha: `izq = medio + 1`. Si no, `medio` podría ser la respuesta: `der = medio`. Repite mientras `izq < der` y devuelve `izq`.",
+  "Esqueleto:\n\n```js\nlet izq = 0;\nlet der = nums.length;\nwhile (izq < der) {\n  const medio = Math.floor((izq + der) / 2);\n  if (/* nums[medio] es menor que objetivo */) {\n    izq = /* ... */;\n  } else {\n    der = /* ... */;\n  }\n}\nreturn izq;\n```"
+]
