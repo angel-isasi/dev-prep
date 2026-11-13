@@ -44,6 +44,9 @@ export const IconoFuego = () => (
 export const IconoReferencia = () => (
   <svg {...base}><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.5-3.5" /></svg>
 );
+export const IconoApagar = () => (
+  <svg {...base}><path d="M12 3v9" /><path d="M6.3 6.3a8 8 0 1011.4 0" /></svg>
+);
 export const IconoFlechaIzq = () => (
   <svg {...base}><path d="M15 6l-6 6 6 6" /></svg>
 );

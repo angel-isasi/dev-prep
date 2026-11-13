@@ -47,6 +47,7 @@ const app = crearApp({
   referencia,
   vscode,
   clienteDir: config.clienteDir,
+  alApagar: () => apagar(),
 });
 
 const url = `http://localhost:${config.puerto}`;
@@ -66,9 +67,10 @@ servidor.on("error", (error) => {
   process.exit(1);
 });
 
-// Al cerrar con Ctrl + C, apaga Vitest ordenadamente.
-process.on("SIGINT", async () => {
+// Apaga Vitest y el servidor ordenadamente (Ctrl + C o botón "Cerrar dev-prep").
+async function apagar() {
   servidor.close();
   await corredor.cerrar().catch(() => {});
   process.exit(0);
-});
+}
+process.on("SIGINT", apagar);

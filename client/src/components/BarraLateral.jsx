@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 import { api } from "../lib/api.js";
 import { useEvento } from "../hooks/useEvento.js";
+import { Confirmar } from "./Confirmar.jsx";
 import { useTema } from "../hooks/useTema.js";
 import {
   IconoAjustes,
+  IconoApagar,
   IconoFuego,
   IconoInicio,
   IconoAprender,
@@ -29,6 +31,12 @@ const SECCIONES = [
 export function BarraLateral() {
   const { tema, alternar } = useTema();
   const [racha, setRacha] = useState(null);
+  const [cerrada, setCerrada] = useState(false);
+
+  async function cerrarApp() {
+    await api.apagar().catch(() => {});
+    setCerrada(true);
+  }
 
   // La racha siempre a la vista; se actualiza cuando resuelves o repasas algo.
   const cargarRacha = () => api.inicio().then((d) => setRacha({ dias: d.racha, cumplio: d.meta.cumplio }), () => {});
@@ -74,11 +82,29 @@ export function BarraLateral() {
           <IconoAjustes />
           Ajustes
         </NavLink>
+        <Confirmar
+          titulo="¿Cerrar dev-prep?"
+          descripcion="Se apaga el servidor de la app. Tu progreso ya está guardado. Para volver a abrirla, usa el acceso directo del escritorio."
+          textoConfirmar="Cerrar dev-prep"
+          alConfirmar={cerrarApp}
+          disparador={
+            <button type="button" className={estilos.tema}>
+              <IconoApagar />
+              Cerrar dev-prep
+            </button>
+          }
+        />
         <button type="button" className={estilos.tema} onClick={alternar}>
           {tema === "oscuro" ? <IconoSol /> : <IconoLuna />}
           {tema === "oscuro" ? "Modo claro" : "Modo oscuro"}
         </button>
       </div>
+      {cerrada && (
+        <div className={estilos.cerrada} role="status">
+          <strong>dev-prep está cerrado</strong>
+          <span>Tu progreso quedó guardado. Ya puedes cerrar esta pestaña.</span>
+        </div>
+      )}
     </aside>
   );
 }

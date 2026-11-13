@@ -38,10 +38,17 @@ npm install
 
 ## Uso diario
 
-Doble clic en **`iniciar.bat`**. Se abre el navegador en `http://localhost:4321`.
+**Acceso directo (recomendado).** Créalo una sola vez con:
 
-- Deja abierta la ventana negra mientras practicas: es el servidor. Para cerrar la app, ciérrala o presiona `Ctrl + C`.
-- Si haces doble clic otra vez con la app ya abierta, solo se abre el navegador.
+```
+npm run acceso-directo
+```
+
+Aparece **dev-prep** en tu escritorio. Con doble clic la app abre en el navegador en unos segundos, sin ventana negra. Si ya estaba abierta una versión anterior, la cierra y arranca la más reciente. Para cerrarla, usa **Cerrar dev-prep** en la barra lateral de la app.
+
+Puedes anclarlo a Inicio o a la barra de tareas: clic derecho sobre el acceso directo.
+
+**Con ventana (para ver errores).** Doble clic en `iniciar.bat`: muestra la consola del servidor. Ciérrala o presiona `Ctrl + C` para apagar la app.
 
 ### Cómo se practica un ejercicio
 
@@ -68,6 +75,7 @@ Ninguna de las dos carpetas se sube a Git.
 | Comando | Para qué sirve |
 |---|---|
 | `npm start` | Arranca la app (igual que `iniciar.bat`, sin abrir el navegador) |
+| `npm run acceso-directo` | Crea el acceso directo **dev-prep** en el escritorio |
 | `npm run dev` | Modo desarrollo: recarga la interfaz al cambiar el código (abre `http://localhost:5173`) |
 | `npm run build` | Compila la interfaz en `client/dist` |
 | `npm test` | Tests de la propia app |

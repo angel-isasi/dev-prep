@@ -118,3 +118,25 @@
   flex-direction: column;
   gap: 2px;
 }
+
+.cerrada {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-2);
+  background: var(--ambiente), var(--fondo);
+  text-align: center;
+}
+
+.cerrada strong {
+  font-family: var(--fuente-titulos);
+  font-size: 26px;
+}
+
+.cerrada span {
+  color: var(--texto-suave);
+}

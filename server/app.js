@@ -25,6 +25,14 @@ export function crearApp(deps) {
   if (deps.aprender) app.use("/api", rutasAprender(deps));
   if (deps.eventos) app.get("/api/eventos", deps.eventos.manejador);
 
+  // Botón "Cerrar dev-prep": responde y luego apaga el servidor.
+  if (deps.alApagar) {
+    app.post("/api/apagar", (req, res) => {
+      res.json({ ok: true });
+      setTimeout(deps.alApagar, 200);
+    });
+  }
+
   app.use("/api", (req, res) => {
     res.status(404).json({ error: `No existe la ruta ${req.method} ${req.originalUrl}` });
   });

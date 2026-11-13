@@ -46,4 +46,5 @@ export const api = {
       body: JSON.stringify({ aciertos }),
     }),
   referencia: () => pedir("/api/referencia"),
+  apagar: () => post("/api/apagar"),
 };

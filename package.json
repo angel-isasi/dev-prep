@@ -13,7 +13,8 @@
     "start": "node server/index.js",
     "validar": "node scripts/validar-contenido.js",
     "test": "vitest run --config vitest.config.js",
-    "validar:aprender": "node scripts/validar-aprender.js"
+    "validar:aprender": "node scripts/validar-aprender.js",
+    "acceso-directo": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/crear-acceso-directo.ps1"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.2",
