@@ -51,5 +51,41 @@ export function rutasEjercicios({ indice, progreso, workspace, corredor, vscode,
     });
   });
 
+  // Prepara workspace/<id>/, abre VS Code y corre los tests una primera vez.
+  router.post("/:id/abrir", async (req, res) => {
+    const ej = req.ejercicio;
+    const { creado } = await workspace.preparar(ej);
+    await progreso?.marcarAbierto(ej.id);
+
+    let avisoVSCode = null;
+    try {
+      await vscode(workspace.raiz, workspace.archivoDe(ej));
+    } catch (error) {
+      avisoVSCode = error.message;
+    }
+
+    corredor?.correr(ej);
+    res.json({ creado, avisoVSCode });
+  });
+
+  // Respalda tu archivo y vuelve al de inicio.
+  router.post("/:id/reiniciar", async (req, res) => {
+    const ej = req.ejercicio;
+    const { respaldo } = await workspace.reiniciar(ej);
+    await progreso?.registrarEvento("reiniciar", ej.id);
+    corredor?.correr(ej);
+    res.json({ respaldo: respaldo && path.relative(workspace.raiz, respaldo) });
+  });
+
+  // Vuelve a correr los tests sin guardar (botón "Correr tests").
+  router.post("/:id/correr", async (req, res) => {
+    const ej = req.ejercicio;
+    if (!(await workspace.existe(ej))) {
+      return res.status(409).json({ error: "Primero abre el ejercicio en VS Code." });
+    }
+    corredor?.correr(ej);
+    res.json({ ok: true });
+  });
+
   return router;
 }
