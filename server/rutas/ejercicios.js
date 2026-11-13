@@ -71,9 +71,9 @@ export function rutasEjercicios({ indice, progreso, workspace, corredor, vscode,
   // Respalda tu archivo y vuelve al de inicio.
   router.post("/:id/reiniciar", async (req, res) => {
     const ej = req.ejercicio;
+    corredor?.marcarManual(ej.id); // Vitest verá el archivo cambiado y correrá solo
     const { respaldo } = await workspace.reiniciar(ej);
     await progreso?.registrarEvento("reiniciar", ej.id);
-    corredor?.correr(ej);
     res.json({ respaldo: respaldo && path.relative(workspace.raiz, respaldo) });
   });
 

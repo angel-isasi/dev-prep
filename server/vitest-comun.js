@@ -22,6 +22,10 @@ const SETUP = path.join(path.dirname(fileURLToPath(import.meta.url)), "vitest-se
  * @property {string|null} error     error que impidió correr el archivo (p. ej. sintaxis)
  */
 
+const MAX_MENSAJE = 1500;
+const recortar = (texto) =>
+  texto && texto.length > MAX_MENSAJE ? texto.slice(0, MAX_MENSAJE) + "\n…" : texto ?? null;
+
 /** Convierte un módulo de tests de Vitest a un objeto simple para la app. */
 export function normalizarModulo(modulo) {
   const casos = [...modulo.children.allTests()].map((caso) => {
@@ -30,7 +34,7 @@ export function normalizarModulo(modulo) {
     return {
       nombre: caso.name,
       ok: resultado.state === "passed",
-      mensaje: error?.message ?? null,
+      mensaje: recortar(error?.message),
       esperado: error?.expected ?? null,
       recibido: error?.actual ?? null,
     };
@@ -41,7 +45,7 @@ export function normalizarModulo(modulo) {
     casos,
     pasan: casos.filter((c) => c.ok).length,
     total: casos.length,
-    error: errorArchivo ? errorArchivo.message : null,
+    error: recortar(errorArchivo?.message),
   };
 }
 
