@@ -6,6 +6,7 @@ import { Pestanas } from "../components/Pestanas.jsx";
 import { Insignia } from "../components/Insignia.jsx";
 import { Quiz } from "../components/Quiz.jsx";
 import { IconoFlechaIzq } from "../components/Iconos.jsx";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Tema.module.css";
 
 export function Tema() {
@@ -21,7 +22,7 @@ export function Tema() {
   }, [id]);
 
   if (error) return <p className={estilos.mensaje}>{error}</p>;
-  if (!tema) return <p className={estilos.mensaje}>Cargando…</p>;
+  if (!tema) return <Esqueleto variante="texto" />;
 
   async function terminarQuiz(aciertos) {
     const quiz = await api.guardarQuiz(tema.id, aciertos);

@@ -12,6 +12,9 @@ import { SeccionSolucion } from "../components/SeccionSolucion.jsx";
 import { SeccionExplicar } from "../components/SeccionExplicar.jsx";
 import { IconoFlechaIzq, IconoVSCode } from "../components/Iconos.jsx";
 import { Cronometro } from "../components/Cronometro.jsx";
+import { Confirmar } from "../components/Confirmar.jsx";
+import { Ayuda } from "../components/Ayuda.jsx";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Ejercicio.module.css";
 
 function fechaCorta(fecha) {
@@ -32,7 +35,6 @@ export function Ejercicio() {
   const [corriendo, setCorriendo] = useState(false);
   const [ultimaCorrida, setUltimaCorrida] = useState(null);
   const [aviso, setAviso] = useState(null); // { tipo: "info" | "error" | "exito", texto }
-  const [confirmarReinicio, setConfirmarReinicio] = useState(false);
   const [ocupado, setOcupado] = useState(false);
   const [pestana, setPestana] = useState("enunciado");
   const [cronometro, setCronometro] = useState(null); // Date.now() al empezar el modo entrevista
@@ -105,7 +107,6 @@ export function Ejercicio() {
 
   const reiniciar = () =>
     accion(async () => {
-      setConfirmarReinicio(false);
       const { respaldo } = await api.reiniciar(id);
       setAviso({
         tipo: "info",
@@ -152,7 +153,7 @@ export function Ejercicio() {
       </div>
     );
   }
-  if (!ejercicio) return <p className={estilos.mensaje}>Cargando…</p>;
+  if (!ejercicio) return <Esqueleto variante="ejercicio" />;
 
   const resuelto = ejercicio.estado === "resuelto";
   const progreso = ejercicio.progreso;
@@ -205,36 +206,31 @@ export function Ejercicio() {
               </button>
             </span>
           ) : (
-            <button
-              type="button"
-              className="boton"
-              title="20 minutos, como en una entrevista en vivo"
-              onClick={() => setCronometro(Date.now())}
-            >
-              Modo entrevista
-            </button>
+            <Ayuda texto="Cronómetro de 20 minutos, como en una entrevista en vivo">
+              <button type="button" className="boton" onClick={() => setCronometro(Date.now())}>
+                Modo entrevista
+              </button>
+            </Ayuda>
           )}
           {ejercicio.preparado && (
             <button type="button" className="boton" onClick={correr} disabled={corriendo}>
               Correr tests
             </button>
           )}
-          {ejercicio.preparado &&
-            (confirmarReinicio ? (
-              <span className={estilos.confirmar}>
-                ¿Volver al archivo inicial? Tu código se guarda en un respaldo.
-                <button type="button" className="boton boton-peligro-lleno" onClick={reiniciar}>
-                  Sí, reiniciar
+          {ejercicio.preparado && (
+            <Confirmar
+              titulo="¿Volver al archivo inicial?"
+              descripcion="Tu código actual se guarda en un respaldo (workspace/.respaldos), así que no lo pierdes."
+              textoConfirmar="Sí, reiniciar"
+              peligro
+              alConfirmar={reiniciar}
+              disparador={
+                <button type="button" className="boton boton-fantasma">
+                  Reiniciar
                 </button>
-                <button type="button" className="boton" onClick={() => setConfirmarReinicio(false)}>
-                  Cancelar
-                </button>
-              </span>
-            ) : (
-              <button type="button" className="boton boton-fantasma" onClick={() => setConfirmarReinicio(true)}>
-                Reiniciar
-              </button>
-            ))}
+              }
+            />
+          )}
         </div>
 
         {progreso?.repasando ? (

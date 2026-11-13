@@ -1,0 +1,76 @@
+.pagina {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--espacio-6);
+}
+
+.bloque {
+  border-radius: var(--radio);
+  background: linear-gradient(
+    90deg,
+    var(--superficie-2) 0%,
+    color-mix(in srgb, var(--superficie-2) 50%, var(--borde-fuerte)) 50%,
+    var(--superficie-2) 100%
+  );
+  background-size: 200% 100%;
+  animation: brillo 1.4s ease-in-out infinite;
+}
+
+@keyframes brillo {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bloque {
+    animation: none;
+  }
+}
+
+.titulo {
+  width: 220px;
+  height: 30px;
+  margin-bottom: var(--espacio-2);
+}
+
+.subtitulo {
+  width: 340px;
+  height: 14px;
+  margin-bottom: var(--espacio-6);
+}
+
+.fila {
+  height: 52px;
+  margin-bottom: var(--espacio-2);
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--espacio-3);
+}
+
+.tarjeta {
+  height: 170px;
+  border-radius: var(--radio-grande);
+}
+
+.linea {
+  height: 14px;
+  margin-bottom: var(--espacio-3);
+}
+
+.dosColumnas {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--espacio-6);
+}
+
+.panel {
+  height: 320px;
+  border-radius: var(--radio-grande);
+}

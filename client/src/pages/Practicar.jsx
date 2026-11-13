@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { api } from "../lib/api.js";
 import { AREAS, ejercicioAlAzar, siguienteEjercicio } from "../lib/areas.js";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Practicar.module.css";
 
 /** Entrada de Practicar: áreas (JavaScript, Algoritmos, React) con sus colecciones. */
@@ -16,7 +17,7 @@ export function Practicar() {
   }, []);
 
   if (error) return <p className={estilos.mensaje}>No se pudo cargar: {error}. Cierra la app y vuelve a abrir iniciar.bat.</p>;
-  if (!ejercicios) return <p className={estilos.mensaje}>Cargando…</p>;
+  if (!ejercicios) return <Esqueleto variante="tarjetas" />;
 
   const deColeccion = (id) => ejercicios.filter((e) => e.coleccion === id);
   const deArea = (area) => area.colecciones.flatMap((c) => deColeccion(c.id));

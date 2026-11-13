@@ -6,7 +6,9 @@ import { filtrarEjercicios } from "../lib/filtrarEjercicios.js";
 import { nombreColeccion, nombreTema } from "../lib/etiquetas.js";
 import { buscarColeccion, ejercicioAlAzar, siguienteEjercicio } from "../lib/areas.js";
 import { Insignia } from "../components/Insignia.jsx";
+import { Selector } from "../components/Selector.jsx";
 import { IconoFlechaIzq } from "../components/Iconos.jsx";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./ListaEjercicios.module.css";
 
 const ESTADOS = [
@@ -72,7 +74,7 @@ export function ListaEjercicios() {
   }
 
   if (error) return <p className={estilos.mensaje}>No se pudo cargar la lista: {error}</p>;
-  if (!ejercicios) return <p className={estilos.mensaje}>Cargando…</p>;
+  if (!ejercicios) return <Esqueleto variante="lista" />;
 
   const visibles = filtrarEjercicios(ejercicios, filtros);
   const resueltos = deColeccion.filter((e) => e.estado === "resuelto").length;
@@ -129,28 +131,31 @@ export function ListaEjercicios() {
           value={filtros.texto}
           onChange={(e) => cambiarFiltro("texto", e.target.value)}
         />
-        <select aria-label="Tema" value={filtros.tema} onChange={(e) => cambiarFiltro("tema", e.target.value)}>
-          <option value="">Todos los temas</option>
-          {temas.map((t) => (
-            <option key={t} value={t}>
-              {nombreTema(t)}
-            </option>
-          ))}
-        </select>
-        <select aria-label="Nivel" value={filtros.nivel} onChange={(e) => cambiarFiltro("nivel", e.target.value)}>
-          <option value="">Todos los niveles</option>
-          <option value="1">Básico</option>
-          <option value="2">Intermedio</option>
-          <option value="3">Difícil</option>
-        </select>
-        <select aria-label="Estado" value={filtros.estado} onChange={(e) => cambiarFiltro("estado", e.target.value)}>
-          <option value="">Todos los estados</option>
-          {ESTADOS.map(([valor, texto]) => (
-            <option key={valor} value={valor}>
-              {texto}
-            </option>
-          ))}
-        </select>
+        <Selector
+          etiqueta="Tema"
+          valor={filtros.tema}
+          alCambiar={(v) => cambiarFiltro("tema", v)}
+          textoTodos="Todos los temas"
+          opciones={temas.map((t) => ({ valor: t, texto: nombreTema(t) }))}
+        />
+        <Selector
+          etiqueta="Nivel"
+          valor={filtros.nivel}
+          alCambiar={(v) => cambiarFiltro("nivel", v)}
+          textoTodos="Todos los niveles"
+          opciones={[
+            { valor: "1", texto: "Básico" },
+            { valor: "2", texto: "Intermedio" },
+            { valor: "3", texto: "Difícil" },
+          ]}
+        />
+        <Selector
+          etiqueta="Estado"
+          valor={filtros.estado}
+          alCambiar={(v) => cambiarFiltro("estado", v)}
+          textoTodos="Todos los estados"
+          opciones={ESTADOS.map(([valor, texto]) => ({ valor, texto }))}
+        />
         {hayFiltros && (
           <button type="button" className={estilos.limpiar} onClick={limpiar}>
             Limpiar

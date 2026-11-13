@@ -4,6 +4,7 @@ import { api } from "../lib/api.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { nombreTema } from "../lib/etiquetas.js";
 import { Insignia } from "../components/Insignia.jsx";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Inicio.module.css";
 
 const RITMO = {
@@ -31,7 +32,7 @@ export function Inicio() {
   });
 
   if (error) return <p className={estilos.mensaje}>No se pudo cargar: {error}</p>;
-  if (!datos) return <p className={estilos.mensaje}>Cargando…</p>;
+  if (!datos) return <Esqueleto variante="tarjetas" />;
 
   const { config, meta, ayer, racha, preparacion, ritmo, semana, totales, repasos, continuar, siguiente, frase } = datos;
   const ritmoInfo = RITMO[ritmo.estado];

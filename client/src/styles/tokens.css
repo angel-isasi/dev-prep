@@ -4,6 +4,7 @@
 
 :root {
   --fuente: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fuente-titulos: "Bricolage Grotesque Variable", var(--fuente);
   --fuente-codigo: "JetBrains Mono Variable", ui-monospace, Consolas, monospace;
 
   --espacio-1: 4px;

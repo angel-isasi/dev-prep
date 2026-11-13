@@ -5,6 +5,7 @@ import { Markdown } from "../components/Markdown.jsx";
 import { Tarjeta } from "../components/Tarjeta.jsx";
 import { Simulacro } from "../components/Simulacro.jsx";
 import { PitchStar } from "../components/PitchStar.jsx";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Entrevistas.module.css";
 
 export function Entrevistas() {
@@ -33,7 +34,7 @@ export function Entrevistas() {
     cargar();
   }
 
-  if (!resumen) return <p className={estilos.mensaje}>Cargando…</p>;
+  if (!resumen) return <Esqueleto variante="tarjetas" />;
 
   const pestanas = [
     { id: "tarjetas", texto: "Tarjetas", extra: resumen.pendientesHoy ? `${resumen.pendientesHoy} hoy` : undefined },

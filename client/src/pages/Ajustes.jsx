@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Ajustes.module.css";
 
 export function Ajustes() {
@@ -10,7 +11,7 @@ export function Ajustes() {
     api.config().then(setForm);
   }, []);
 
-  if (!form) return <p className={estilos.mensaje}>Cargando…</p>;
+  if (!form) return <Esqueleto variante="texto" />;
 
   const cambiar = (campo, valor) => {
     setForm((f) => ({ ...f, [campo]: valor }));

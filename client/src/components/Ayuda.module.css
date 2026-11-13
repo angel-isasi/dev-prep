@@ -1,0 +1,24 @@
+.globo {
+  z-index: 60;
+  max-width: 260px;
+  padding: 6px 10px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 6px;
+  background: var(--fondo-solido);
+  box-shadow: var(--sombra);
+  color: var(--texto);
+  font-size: 12px;
+  line-height: 1.5;
+  animation: aparecer 120ms ease-out;
+}
+
+.flecha {
+  fill: var(--fondo-solido);
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+}

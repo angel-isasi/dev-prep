@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 import { api } from "../lib/api.js";
 import { Markdown } from "../components/Markdown.jsx";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Referencia.module.css";
 
 const normalizar = (texto) =>
@@ -54,7 +55,7 @@ export function Referencia() {
     setParams(nuevos, { replace: true });
   };
 
-  if (!datos) return <p className={estilos.mensaje}>Cargando…</p>;
+  if (!datos) return <Esqueleto variante="lista" />;
 
   return (
     <section className={estilos.pagina}>

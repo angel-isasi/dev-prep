@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { Markdown } from "./Markdown.jsx";
+import { Confirmar } from "./Confirmar.jsx";
 import estilos from "./Secciones.module.css";
 
 /**
@@ -8,7 +8,6 @@ import estilos from "./Secciones.module.css";
  * @param {{ solucion: { codigo: string, lenguaje: string, explicacion: string } | null, resuelto: boolean, alVer: () => void, ocupado: boolean }} props
  */
 export function SeccionSolucion({ solucion, resuelto, alVer, ocupado }) {
-  const [confirmando, setConfirmando] = useState(false);
 
   if (!solucion) {
     return (
@@ -21,30 +20,25 @@ export function SeccionSolucion({ solucion, resuelto, alVer, ocupado }) {
                 Ver solución y explicación
               </button>
             </>
-          ) : confirmando ? (
-            <>
-              <p className={estilos.advertencia}>
-                ¿Seguro? Si la ves antes de resolverlo, el ejercicio queda <strong>para repasar</strong> y no cuenta
-                como resuelto. Volverá en tus repasos.
-              </p>
-              <div className={estilos.fila}>
-                <button type="button" className="boton boton-peligro-lleno" onClick={alVer} disabled={ocupado}>
-                  Sí, ver la solución
-                </button>
-                <button type="button" className="boton" onClick={() => setConfirmando(false)}>
-                  Mejor sigo intentando
-                </button>
-              </div>
-            </>
           ) : (
             <>
               <p>
                 La solución está bloqueada hasta que lo resuelvas. Antes de verla, prueba con las pistas: aprendes
                 mucho más destrabándote tú.
               </p>
-              <button type="button" className="boton" onClick={() => setConfirmando(true)}>
-                Ver solución
-              </button>
+              <Confirmar
+                titulo="¿Ver la solución?"
+                descripcion="Si la ves antes de resolverlo, el ejercicio queda para repasar y no cuenta como resuelto. Volverá en tus repasos."
+                textoConfirmar="Sí, ver la solución"
+                textoCancelar="Mejor sigo intentando"
+                peligro
+                alConfirmar={alVer}
+                disparador={
+                  <button type="button" className="boton" disabled={ocupado}>
+                    Ver solución
+                  </button>
+                }
+              />
             </>
           )}
         </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
 import { nombreTema } from "../lib/etiquetas.js";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Progreso.module.css";
 
 const DIAS = ["L", "", "M", "", "V", "", "D"];
@@ -28,7 +29,7 @@ export function Progreso() {
   }, []);
 
   if (error) return <p className={estilos.mensaje}>No se pudo cargar: {error}</p>;
-  if (!datos) return <p className={estilos.mensaje}>Cargando…</p>;
+  if (!datos) return <Esqueleto variante="tarjetas" />;
 
   const { preparacion, racha, semana, ritmo, totales, calendario } = datos;
   const activos = calendario.filter((c) => c.nivel > 0).length;

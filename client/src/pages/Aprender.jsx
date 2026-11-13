@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { api } from "../lib/api.js";
 import { Pestanas } from "../components/Pestanas.jsx";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Aprender.module.css";
 
 const AREAS = [
@@ -20,7 +21,7 @@ export function Aprender() {
   }, []);
 
   if (error) return <p className={estilos.mensaje}>No se pudo cargar: {error}. Cierra la app y vuelve a abrir iniciar.bat.</p>;
-  if (!temas) return <p className={estilos.mensaje}>Cargando…</p>;
+  if (!temas) return <Esqueleto variante="lista" />;
 
   const delArea = temas.filter((t) => t.area === area);
   const info = AREAS.find((a) => a.id === area) ?? AREAS[0];
