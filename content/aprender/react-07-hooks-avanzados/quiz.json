@@ -1,0 +1,53 @@
+[
+  {
+    "pregunta": "Haces **3 clics** en el botón. ¿Qué muestra el párrafo?\n\n```jsx\nfunction Contador() {\n  const clics = useRef(0);\n\n  return (\n    <>\n      <button onClick={() => { clics.current++; }}>+</button>\n      <p>{clics.current}</p>\n    </>\n  );\n}\n```",
+    "opciones": ["3", "0", "1", "undefined"],
+    "correcta": 1,
+    "explicacion": "`clics.current` sí llega a 3, pero cambiar un ref **no provoca un render**. Nada vuelve a pintar el párrafo, así que sigue mostrando el 0 del primer render. Si el valor tiene que verse en pantalla, debe ser estado (`useState`)."
+  },
+  {
+    "pregunta": "Haces **2 clics** en el botón. ¿Qué muestra el párrafo?\n\n```jsx\nfunction reducer(estado, accion) {\n  if (accion.tipo === \"sumar\") {\n    estado.cuenta++;\n    return estado;\n  }\n  return estado;\n}\n\nfunction Contador() {\n  const [estado, dispatch] = useReducer(reducer, { cuenta: 0 });\n  return (\n    <>\n      <button onClick={() => dispatch({ tipo: \"sumar\" })}>+</button>\n      <p>Cuenta: {estado.cuenta}</p>\n    </>\n  );\n}\n```",
+    "opciones": ["Cuenta: 2", "Cuenta: 1", "Cuenta: 0", "React lanza un error por mutar el estado"],
+    "correcta": 2,
+    "explicacion": "El reducer **muta** el objeto y devuelve el **mismo**. React compara el estado nuevo con el anterior con `Object.is`; como es la misma referencia, concluye que nada cambió y no re-renderiza. La pantalla se queda en \"Cuenta: 0\" aunque el objeto por dentro cambió. React no lanza error, simplemente no se entera. Lo correcto: `return { ...estado, cuenta: estado.cuenta + 1 }`."
+  },
+  {
+    "pregunta": "¿Qué texto se ve en pantalla? (React 19)\n\n```jsx\nconst Tema = createContext(\"claro\");\n\nfunction Hijo() {\n  return <span>{useContext(Tema)} </span>;\n}\n\nfunction App() {\n  return (\n    <div>\n      <Tema value=\"oscuro\">\n        <Hijo />\n        <Tema value=\"azul\">\n          <Hijo />\n        </Tema>\n      </Tema>\n      <Hijo />\n    </div>\n  );\n}\n```",
+    "opciones": [
+      "oscuro oscuro claro",
+      "azul azul claro",
+      "oscuro azul oscuro",
+      "oscuro azul claro"
+    ],
+    "correcta": 3,
+    "explicacion": "`useContext` lee el valor del **proveedor más cercano hacia arriba**. El primer `Hijo` está dentro de \"oscuro\". El segundo tiene más cerca el proveedor \"azul\". El tercero está fuera de todo proveedor, así que recibe el **valor por defecto** de `createContext`: \"claro\". En React 19 se puede usar `<Tema value>` directamente; antes se escribía `<Tema.Provider value>`."
+  },
+  {
+    "pregunta": "Haces clic **2 veces** en \"sumar\" y luego 1 vez en \"mostrar\". ¿Qué se imprime?\n\n```jsx\nfunction Panel() {\n  const [cuenta, setCuenta] = useState(0);\n\n  const mostrar = useCallback(() => {\n    console.log(cuenta);\n  }, []);\n\n  return (\n    <>\n      <button onClick={() => setCuenta((c) => c + 1)}>sumar</button>\n      <button onClick={mostrar}>mostrar</button>\n    </>\n  );\n}\n```",
+    "opciones": ["0", "2", "1", "undefined"],
+    "correcta": 0,
+    "explicacion": "Con `[]`, `useCallback` guarda la función del **primer render** y la devuelve siempre. Esa función recuerda (closure) la `cuenta` de ese render, que valía 0. Aunque la pantalla ya muestra 2, `mostrar` imprime 0. Falta `cuenta` en las dependencias: `[cuenta]`."
+  },
+  {
+    "pregunta": "El padre se vuelve a renderizar 5 veces por otros motivos (un contador). ¿Cuántas veces en total se ejecuta `filtrar` dentro de `Lista`?\n\n```jsx\nfunction Padre() {\n  const [n, setN] = useState(0);\n  return (\n    <>\n      <button onClick={() => setN(n + 1)}>{n}</button>\n      <Lista items={[\"Hawaiana\", \"Americana\"]} texto=\"a\" />\n    </>\n  );\n}\n\nfunction Lista({ items, texto }) {\n  const visibles = useMemo(() => filtrar(items, texto), [items, texto]);\n  // ...\n}\n```",
+    "opciones": [
+      "1, porque `useMemo` guarda el resultado",
+      "2",
+      "6: 1 al montar y 1 por cada render del padre",
+      "0, porque `useMemo` no se ejecuta en el primer render"
+    ],
+    "correcta": 2,
+    "explicacion": "`[\"Hawaiana\", \"Americana\"]` escrito en el JSX crea un **arreglo nuevo** en cada render del padre. Para `useMemo` la dependencia `items` cambió (otra referencia, `Object.is` da false), así que recalcula siempre: 1 + 5 = 6. El `useMemo` no sirve de nada aquí. Hay que crear el arreglo fuera del componente o memorizarlo en el padre."
+  },
+  {
+    "pregunta": "Este proveedor se re-renderiza seguido y todos los componentes que usan `UsuarioContext` también, aunque `usuario` no cambie. ¿Cuál es la mejor solución?\n\n```jsx\nfunction UsuarioProvider({ children }) {\n  const [usuario, setUsuario] = useState(null);\n  return (\n    <UsuarioContext value={{ usuario, setUsuario }}>\n      {children}\n    </UsuarioContext>\n  );\n}\n```",
+    "opciones": [
+      "Cambiar `useState` por `useRef`",
+      "Envolver el objeto en `useMemo`: `const value = useMemo(() => ({ usuario, setUsuario }), [usuario])`",
+      "Usar `<UsuarioContext.Provider>` en vez de `<UsuarioContext>`",
+      "Mover el `useContext` dentro de un `useEffect`"
+    ],
+    "correcta": 1,
+    "explicacion": "`{ usuario, setUsuario }` crea un objeto nuevo en cada render, y React compara el `value` por referencia: para él siempre cambió y avisa a todos los consumidores. Con `useMemo` el objeto se mantiene igual mientras `usuario` no cambie. `.Provider` hace exactamente lo mismo que `<UsuarioContext>` en React 19. Con `useRef` los cambios ya no se verían. Y `useContext` es un hook: no se puede llamar dentro de un efecto."
+  }
+]

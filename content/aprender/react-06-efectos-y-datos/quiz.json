@@ -1,0 +1,58 @@
+[
+  {
+    "pregunta": "Sin `StrictMode`, el componente se monta y luego haces **2 clics** en el botón. ¿Cuántas veces se imprime \"efecto\"?\n\n```jsx\nfunction Contador() {\n  const [n, setN] = useState(0);\n\n  useEffect(() => {\n    console.log(\"efecto\");\n  });\n\n  return <button onClick={() => setN(n + 1)}>{n}</button>;\n}\n```",
+    "opciones": ["1", "2", "3", "Infinitas veces"],
+    "correcta": 2,
+    "explicacion": "**Sin arreglo de dependencias**, el efecto corre después de **cada** render: 1 al montar + 1 por cada clic (cada clic cambia el estado y provoca un render) = 3. Con `[]` sería solo 1. No es infinito porque el efecto no cambia ningún estado."
+  },
+  {
+    "pregunta": "La app está envuelta en `<StrictMode>` y corre en **desarrollo** (`npm run dev`). ¿Qué se ve en la consola al montar este componente?\n\n```jsx\nfunction Reloj() {\n  useEffect(() => {\n    console.log(\"efecto\");\n    return () => console.log(\"limpieza\");\n  }, []);\n  return null;\n}\n```",
+    "opciones": [
+      "efecto",
+      "efecto, efecto",
+      "efecto, limpieza",
+      "efecto, limpieza, efecto"
+    ],
+    "correcta": 3,
+    "explicacion": "En desarrollo, `StrictMode` monta el componente, lo **desmonta** (corre la limpieza) y lo vuelve a montar, para detectar efectos a los que les falta limpieza. Por eso: efecto, limpieza, efecto. En producción solo verías \"efecto\" una vez. La B olvida que entre los dos montajes se ejecuta la limpieza."
+  },
+  {
+    "pregunta": "¿Qué muestra el párrafo después de **5 segundos**?\n\n```jsx\nfunction Cronometro() {\n  const [seg, setSeg] = useState(0);\n\n  useEffect(() => {\n    const id = setInterval(() => setSeg(seg + 1), 1000);\n    return () => clearInterval(id);\n  }, []);\n\n  return <p>{seg}</p>;\n}\n```",
+    "opciones": ["1", "5", "0", "6"],
+    "correcta": 0,
+    "explicacion": "Es un **closure viejo**: el efecto corre una sola vez (`[]`) y la función del intervalo recuerda `seg` del primer render, que vale 0. Cada segundo hace `setSeg(0 + 1)`, o sea siempre 1. Se arregla con la actualización funcional `setSeg((s) => s + 1)`, que siempre recibe el valor actual."
+  },
+  {
+    "pregunta": "El padre cambia la prop `id` de 1 a 2. ¿Qué pasa?\n\n```jsx\nfunction Pizza({ id }) {\n  const [pizza, setPizza] = useState(null);\n\n  useEffect(() => {\n    fetch(`/api/pizzas/${id}`)\n      .then((r) => r.json())\n      .then(setPizza);\n  }, []);\n\n  return <p>{pizza?.nombre}</p>;\n}\n```",
+    "opciones": [
+      "Pide la pizza 2 y la muestra",
+      "Sigue mostrando la pizza 1: falta `id` en las dependencias",
+      "Entra en un bucle infinito de peticiones",
+      "Muestra un error porque `id` cambió"
+    ],
+    "correcta": 1,
+    "explicacion": "Con `[]` el efecto solo corre al montar, con `id = 1`. Cuando `id` cambia, React no lo vuelve a ejecutar, así que la pantalla se queda con la pizza 1. Toda variable del componente que uses dentro del efecto debe ir en las dependencias: `[id]`. No hay bucle porque `pizza` no está en las dependencias."
+  },
+  {
+    "pregunta": "¿Qué problema tiene este código?\n\n```jsx\nuseEffect(async () => {\n  const res = await fetch(\"/api/pizzas\");\n  setPizzas(await res.json());\n}, []);\n```",
+    "opciones": [
+      "`fetch` no se puede usar dentro de `useEffect`",
+      "Falta `setPizzas` en las dependencias",
+      "Una función `async` devuelve una promesa, y el efecto solo puede devolver una función de limpieza o nada",
+      "Ninguno, es la forma recomendada"
+    ],
+    "correcta": 2,
+    "explicacion": "React toma lo que devuelve el efecto como su limpieza. Una función `async` siempre devuelve una promesa, así que React avisa en la consola y no hay forma de limpiar. Lo correcto es declarar la función async **adentro** y llamarla: `useEffect(() => { async function cargar() {...} cargar(); }, [])`. Las funciones `set` de `useState` son estables, no hace falta ponerlas en las dependencias."
+  },
+  {
+    "pregunta": "El padre cambia `nombre` de \"Ana\" a \"Luis\". ¿Cuál es el problema de este componente?\n\n```jsx\nfunction Saludo({ nombre }) {\n  const [mensaje, setMensaje] = useState(\"\");\n\n  useEffect(() => {\n    setMensaje(`Hola, ${nombre}`);\n  }, [nombre]);\n\n  return <p>{mensaje}</p>;\n}\n```",
+    "opciones": [
+      "Entra en un bucle infinito",
+      "Nunca muestra \"Hola, Luis\"",
+      "Falta la función de limpieza",
+      "Hace dos renders y en el primero se pinta el mensaje viejo; bastaba con calcular el mensaje en el render, sin estado ni efecto"
+    ],
+    "correcta": 3,
+    "explicacion": "Es **estado derivado** escrito con un efecto. Al cambiar `nombre`, React renderiza con el `mensaje` viejo (\"Hola, Ana\"), pinta, corre el efecto, cambia el estado y vuelve a renderizar. Son 2 renders y uno con datos desactualizados. Si un valor se calcula con props o estado, se calcula en el render, sin `useState` ni `useEffect`. No hay bucle porque `mensaje` no está en las dependencias, y sí termina mostrando \"Hola, Luis\"."
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "id": "react-hooks-propios-y-patrones",
+  "titulo": "Hooks propios y patrones",
+  "area": "react",
+  "orden": 8,
+  "descripcion": "Hooks propios y sus reglas, componentes compuestos, portales, error boundaries, lazy y Suspense, memo y cómo pensar el rendimiento.",
+  "ejercicios": ["react-ej-021", "react-ej-036", "react-ej-042", "react-ej-038", "react-reto-025"]
+}

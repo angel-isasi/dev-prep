@@ -1,0 +1,63 @@
+[
+  {
+    "pregunta": "Haces **2 clics** en el botón de A. ¿Qué muestran los botones?\n\n```jsx\nfunction useContador() {\n  const [n, setN] = useState(0);\n  return [n, () => setN((x) => x + 1)];\n}\n\nfunction Boton({ etiqueta }) {\n  const [n, sumar] = useContador();\n  return <button onClick={sumar}>{etiqueta}: {n}</button>;\n}\n\n<Boton etiqueta=\"A\" />\n<Boton etiqueta=\"B\" />\n```",
+    "opciones": ["A: 2 y B: 2", "A: 2 y B: 0", "A: 1 y B: 1", "A: 0 y B: 0"],
+    "correcta": 1,
+    "explicacion": "Un hook propio comparte **lógica**, no estado. Cada vez que un componente llama a `useContador()`, se ejecuta su `useState` para ese componente, así que A y B tienen contadores separados. Para compartir el número, habría que subir el estado al padre o usar Context."
+  },
+  {
+    "pregunta": "El componente se monta con `logueado={false}` y luego el padre lo cambia a `true`. ¿Qué pasa?\n\n```jsx\nfunction Perfil({ logueado }) {\n  const [tema] = useState(\"claro\");\n  if (!logueado) {\n    return <p className={tema}>Inicia sesión</p>;\n  }\n  const [nombre, setNombre] = useState(\"\");\n  return <input className={tema} value={nombre} onChange={(e) => setNombre(e.target.value)} />;\n}\n```",
+    "opciones": [
+      "Muestra el input vacío sin problemas: el `return` temprano es válido",
+      "Muestra el input, pero con el texto \"claro\" adentro",
+      "React avisa que un componente no puede tener dos `return`",
+      "React lanza un error: este render llamó más hooks que el anterior, porque el segundo `useState` está después de un `return` condicional"
+    ],
+    "correcta": 3,
+    "explicacion": "Rompe la regla de los hooks: llamarlos siempre en el nivel superior y en el **mismo orden** en cada render. El primer render llamó 1 hook; el segundo llama 2. React identifica los hooks por su posición, detecta que cambió la cantidad y lanza el error \"Rendered more hooks than during the previous render\". La solución es llamar todos los `useState` **antes** del `if`. Tener varios `return` sí está permitido."
+  },
+  {
+    "pregunta": "Haces clic en el botón del padre. ¿`Fila` se vuelve a renderizar?\n\n```jsx\nconst Fila = memo(function Fila({ estilo }) {\n  return <li style={estilo}>Hawaiana</li>;\n});\n\nfunction Padre() {\n  const [n, setN] = useState(0);\n  return (\n    <>\n      <button onClick={() => setN(n + 1)}>{n}</button>\n      <Fila estilo={{ color: \"red\" }} />\n    </>\n  );\n}\n```",
+    "opciones": [
+      "Sí: `{ color: \"red\" }` es un objeto nuevo en cada render y `memo` lo ve distinto",
+      "No: `memo` compara el contenido del objeto y es el mismo",
+      "No: `Fila` no usa el estado `n`",
+      "Sí: `memo` solo funciona con componentes de clase"
+    ],
+    "correcta": 0,
+    "explicacion": "`memo` compara cada prop con `Object.is`, o sea **por referencia**. El objeto literal `{ color: \"red\" }` se crea de nuevo en cada render del padre, así que para `memo` es una prop distinta y vuelve a renderizar. Se arregla sacando el objeto fuera del componente (es constante) o con `useMemo`. Que `Fila` no use `n` no importa: sin `memo`, un hijo se re-renderiza siempre que su padre lo hace."
+  },
+  {
+    "pregunta": "¿Qué imprime la consola al hacer clic en el botón \"X\"?\n\n```jsx\nfunction Tarjeta() {\n  return (\n    <div onClick={() => console.log(\"padre\")}>\n      {createPortal(<button>X</button>, document.body)}\n    </div>\n  );\n}\n```",
+    "opciones": [
+      "Nada: en el DOM el botón está en `<body>`, fuera del `<div>`",
+      "\"padre\" dos veces",
+      "\"padre\": el evento sube por el árbol de React, no por el del DOM",
+      "Un error, porque un portal no puede estar dentro de un `<div>`"
+    ],
+    "correcta": 2,
+    "explicacion": "Aunque el botón se dibuja como hijo de `<body>`, en React sigue siendo hijo del `<div>`. Los eventos de React se propagan siguiendo el **árbol de componentes**, así que el `onClick` del `<div>` se ejecuta una vez. Lo mismo pasa con Context: el contenido del portal lee los proveedores de sus padres en React."
+  },
+  {
+    "pregunta": "`Pago` está envuelto en un error boundary. ¿En cuál de estos casos el error boundary **NO** atrapa el error?",
+    "opciones": [
+      "`Pago` lanza un error mientras renderiza, al leer `pedido.total` de un `pedido` que es `undefined`",
+      "Un hijo de `Pago` lanza un error al renderizar",
+      "Un `useEffect` de `Pago` lanza un error",
+      "El `onClick` del botón \"Pagar\" lanza un error"
+    ],
+    "correcta": 3,
+    "explicacion": "Los error boundaries atrapan errores que ocurren mientras React renderiza, en los efectos y en el ciclo de vida de los componentes de adentro (hijos incluidos). Un error en un **manejador de eventos** ocurre después, fuera del render, así que no llega al boundary. Esos se manejan con `try/catch` dentro del manejador (y, si quieres mostrar algo, guardando el error en el estado)."
+  },
+  {
+    "pregunta": "¿Qué problema tiene este código?\n\n```jsx\nfunction Locales() {\n  const [n, setN] = useState(0);\n  const Mapa = lazy(() => import(\"./Mapa.jsx\"));\n  return (\n    <>\n      <button onClick={() => setN(n + 1)}>Refrescar</button>\n      <Suspense fallback={<p>Cargando...</p>}>\n        <Mapa />\n      </Suspense>\n    </>\n  );\n}\n```",
+    "opciones": [
+      "`lazy` solo acepta rutas absolutas",
+      "Cada render crea un `lazy` nuevo que aún no ha cargado: en cada clic se vuelve a esconder el mapa y aparece otra vez \"Cargando...\"",
+      "Falta `await` antes de `import`",
+      "`Suspense` debe ir fuera del componente"
+    ],
+    "correcta": 1,
+    "explicacion": "`lazy` guarda el componente que cargó **dentro del objeto que devuelve**. Si se llama dentro de `Locales`, cada render crea un `lazy` nuevo y vacío: React vuelve a llamar a `import()`, el componente se suspende y `Suspense` esconde el mapa y muestra el fallback hasta que la promesa responde. Resultado: un parpadeo de \"Cargando...\" en cada render. `lazy` se declara una sola vez, **fuera** del componente. `import()` ya devuelve una promesa, que es lo que `lazy` espera; no hace falta `await`."
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "id": "react-efectos-y-datos",
+  "titulo": "Efectos y datos",
+  "area": "react",
+  "orden": 6,
+  "descripcion": "useEffect, cuándo no usarlo, dependencias, limpieza de timers y listeners, fetch con cargando, error y datos, condiciones de carrera y StrictMode.",
+  "ejercicios": ["react-ej-020", "react-reto-010", "react-reto-006", "react-ej-022", "mix-015"]
+}

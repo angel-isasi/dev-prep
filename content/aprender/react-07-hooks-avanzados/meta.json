@@ -1,0 +1,8 @@
+{
+  "id": "react-hooks-avanzados",
+  "titulo": "Hooks avanzados",
+  "area": "react",
+  "orden": 7,
+  "descripcion": "useRef para el DOM y valores que no re-renderizan, useMemo y useCallback, useReducer con un reducer puro y Context para compartir datos.",
+  "ejercicios": ["react-ej-024", "mix-036", "react-ej-031", "react-ej-030", "react-reto-013"]
+}

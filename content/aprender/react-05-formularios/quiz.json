@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "¿Qué pasa cuando el usuario intenta escribir en este input?\n\n```jsx\nfunction Nombre() {\n  const [nombre, setNombre] = useState(\"Ana\");\n  return <input value={nombre} />;\n}\n```",
+    "opciones": [
+      "Se escribe normal y `nombre` se actualiza solo",
+      "El texto no cambia: sigue diciendo \"Ana\" y React avisa en la consola",
+      "Se escribe normal, pero `nombre` sigue valiendo \"Ana\"",
+      "React lanza un error y el componente no se pinta"
+    ],
+    "correcta": 1,
+    "explicacion": "Con `value` el input queda **controlado**: siempre muestra lo que dice el estado. Como no hay `onChange`, el estado nunca cambia y el input se queda congelado en \"Ana\". React muestra una advertencia en la consola (no un error que rompa el render). Para que funcione falta `onChange={(e) => setNombre(e.target.value)}`, o usar `defaultValue` si no quieres controlarlo."
+  },
+  {
+    "pregunta": "El usuario escribe \"Ana\" en el campo nombre. ¿Qué valor tiene `form` después?\n\n```jsx\nconst [form, setForm] = useState({ nombre: \"\", email: \"luis@mail.com\" });\n\nfunction cambiar(e) {\n  setForm({ [e.target.name]: e.target.value });\n}\n\n<input name=\"nombre\" value={form.nombre} onChange={cambiar} />\n```",
+    "opciones": [
+      "`{ nombre: \"Ana\", email: \"luis@mail.com\" }`",
+      "`{ nombre: \"\", email: \"luis@mail.com\" }`",
+      "`{ \"e.target.name\": \"Ana\" }`",
+      "`{ nombre: \"Ana\" }`"
+    ],
+    "correcta": 3,
+    "explicacion": "`setForm` **reemplaza** el estado, no lo mezcla como hacía `this.setState` en las clases. El objeto nuevo solo tiene `nombre`, así que `email` desaparece. Los corchetes son una propiedad computada: la clave es el valor de `e.target.name` (\"nombre\"), no el texto literal. La forma correcta es `setForm((f) => ({ ...f, [e.target.name]: e.target.value }))`."
+  },
+  {
+    "pregunta": "Al enviar este formulario, el nombre es \"Ana\", el primer checkbox está marcado y el segundo no. ¿Qué objeto queda en `datos`?\n\n```jsx\nfunction enviar(e) {\n  e.preventDefault();\n  const datos = Object.fromEntries(new FormData(e.currentTarget));\n}\n\n<form onSubmit={enviar}>\n  <input name=\"nombre\" defaultValue=\"Ana\" />\n  <input type=\"checkbox\" name=\"promo\" defaultChecked />\n  <input type=\"checkbox\" name=\"factura\" />\n  <button>Enviar</button>\n</form>\n```",
+    "opciones": [
+      "`{ nombre: \"Ana\", promo: \"on\" }`",
+      "`{ nombre: \"Ana\", promo: true, factura: false }`",
+      "`{ nombre: \"Ana\", promo: \"on\", factura: \"off\" }`",
+      "`{ nombre: \"Ana\", promo: true }`"
+    ],
+    "correcta": 0,
+    "explicacion": "`FormData` funciona como el envío normal de HTML: un checkbox marcado sin atributo `value` envía el texto `\"on\"`, y uno **desmarcado no se envía**. Por eso `factura` no aparece. `FormData` nunca da booleanos: todo son textos. Para saber si está marcado puedes usar `datos.has(\"factura\")` o `datos.get(\"factura\") === \"on\"`."
+  },
+  {
+    "pregunta": "El usuario cambia la cantidad a 2. ¿Qué muestra el párrafo?\n\n```jsx\nconst [cantidad, setCantidad] = useState(1);\n\n<input\n  type=\"number\"\n  value={cantidad}\n  onChange={(e) => setCantidad(e.target.value)}\n/>\n<p>{cantidad + 1}</p>\n```",
+    "opciones": [
+      "3",
+      "NaN",
+      "21",
+      "2"
+    ],
+    "correcta": 2,
+    "explicacion": "`e.target.value` **siempre es un string**, incluso con `type=\"number\"`. Después del cambio, `cantidad` vale `\"2\"` y `\"2\" + 1` concatena: `\"21\"`. No es `NaN` porque `+` con un string no convierte a número. Se arregla con `setCantidad(Number(e.target.value))`."
+  },
+  {
+    "pregunta": "¿Cuál es la forma correcta de un checkbox controlado?",
+    "opciones": [
+      "`<input type=\"checkbox\" value={acepta} onChange={(e) => setAcepta(e.target.value)} />`",
+      "`<input type=\"checkbox\" checked={acepta} onChange={(e) => setAcepta(e.target.value)} />`",
+      "`<input type=\"checkbox\" defaultChecked={acepta} onClick={() => setAcepta(acepta)} />`",
+      "`<input type=\"checkbox\" checked={acepta} onChange={(e) => setAcepta(e.target.checked)} />`"
+    ],
+    "correcta": 3,
+    "explicacion": "En un checkbox el estado marcado/desmarcado está en `checked` (booleano), no en `value`. La A guarda un texto en vez de un booleano. La B pasa `checked` pero guarda `e.target.value`, que es el texto \"on\" (siempre truthy), así que nunca se desmarca. La C usa `defaultChecked` (no controlado) y además vuelve a guardar el mismo valor. La D lee y escribe el booleano correcto."
+  },
+  {
+    "pregunta": "Este campo tiene un error. ¿Qué le falta para que un lector de pantalla anuncie el mensaje y sepa que el campo es inválido?\n\n```jsx\n<label htmlFor=\"correo\">Correo</label>\n<input id=\"correo\" value={correo} onChange={cambiar} />\n{error && <p id=\"correo-error\">{error}</p>}\n```",
+    "opciones": [
+      "Cambiar `htmlFor` por `for`, que es el atributo de HTML",
+      "Poner el mensaje en un `alert()` del navegador",
+      "`aria-invalid=\"true\"` y `aria-describedby=\"correo-error\"` en el input, y `role=\"alert\"` en el párrafo",
+      "Pintar el borde del input en rojo con CSS"
+    ],
+    "correcta": 2,
+    "explicacion": "`aria-invalid` le dice al lector de pantalla que el campo tiene un error, `aria-describedby` conecta el input con el texto del mensaje y `role=\"alert\"` hace que se anuncie apenas aparece. En JSX se escribe `htmlFor`, no `for` (es palabra reservada de JavaScript). El borde rojo ayuda visualmente, pero quien no ve la pantalla no lo percibe; y `alert()` interrumpe y no queda asociado al campo."
+  }
+]

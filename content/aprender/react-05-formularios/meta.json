@@ -1,0 +1,8 @@
+{
+  "id": "react-formularios",
+  "titulo": "Formularios",
+  "area": "react",
+  "orden": 5,
+  "descripcion": "Inputs controlados y no controlados, checkbox, select y textarea, onSubmit, validación accesible y un solo estado para varios campos.",
+  "ejercicios": ["react-reto-027", "react-ej-023", "react-ej-028", "react-reto-005", "mix-043"]
+}
