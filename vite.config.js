@@ -6,7 +6,8 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   root: "client",
   plugins: [react()],
-  build: { outDir: "dist", emptyOutDir: true },
+  // La app se carga desde tu disco, no por internet: un archivo de ~600 kB no es problema.
+  build: { outDir: "dist", emptyOutDir: true, chunkSizeWarningLimit: 1000 },
   server: {
     port: 5173,
     // En desarrollo, /api va al servidor Express (incluido /api/eventos, SSE).

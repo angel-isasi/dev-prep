@@ -1,0 +1,114 @@
+.pagina {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
+  gap: var(--espacio-6);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--espacio-5) var(--espacio-6) var(--espacio-7);
+}
+
+@media (max-width: 1000px) {
+  .pagina {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mensaje {
+  padding: var(--espacio-6);
+  color: var(--texto-suave);
+}
+
+.volver {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-1);
+  margin-bottom: var(--espacio-4);
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.volver:hover {
+  color: var(--texto);
+}
+
+.cabecera h1 {
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin-top: var(--espacio-2);
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.intentos {
+  color: var(--texto-tenue);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin-top: var(--espacio-5);
+}
+
+.confirmar {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-2);
+  font-size: 14px;
+  color: var(--texto-suave);
+}
+
+.archivo {
+  margin: var(--espacio-3) 0 0;
+  color: var(--texto-tenue);
+  font-size: 13px;
+}
+
+.aviso {
+  margin: var(--espacio-4) 0 0;
+  padding: var(--espacio-3) var(--espacio-4);
+  border-radius: var(--radio);
+  background: var(--acento-suave);
+  font-size: 14px;
+}
+
+.aviso[data-tipo="error"] {
+  background: var(--error-suave);
+  color: var(--error);
+}
+
+.aviso[data-tipo="exito"] {
+  background: var(--exito-suave);
+  color: var(--exito);
+  font-weight: 600;
+}
+
+.enunciado {
+  margin-top: var(--espacio-5);
+  padding-top: var(--espacio-5);
+  border-top: 1px solid var(--borde);
+}
+
+.lateral {
+  position: sticky;
+  top: var(--espacio-5);
+  align-self: start;
+  max-height: calc(100vh - var(--espacio-6));
+  overflow-y: auto;
+}
+
+@media (max-width: 1000px) {
+  .lateral {
+    position: static;
+    max-height: none;
+  }
+}

@@ -1,0 +1,77 @@
+.markdown {
+  line-height: 1.7;
+}
+
+.markdown > :first-child {
+  margin-top: 0;
+}
+
+.markdown h2 {
+  font-size: 17px;
+  margin: var(--espacio-6) 0 var(--espacio-3);
+}
+
+.markdown h3 {
+  font-size: 15px;
+  margin: var(--espacio-5) 0 var(--espacio-2);
+}
+
+.markdown p,
+.markdown ul,
+.markdown ol {
+  margin: 0 0 var(--espacio-4);
+}
+
+.markdown li + li {
+  margin-top: var(--espacio-1);
+}
+
+.markdown :not(pre) > code {
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: var(--superficie-2);
+  border: 1px solid var(--borde);
+  font-size: 0.85em;
+}
+
+.markdown pre {
+  margin: 0 0 var(--espacio-4);
+  padding: var(--espacio-4);
+  border-radius: var(--radio);
+  background: var(--codigo-fondo);
+  border: 1px solid var(--borde);
+  overflow-x: auto;
+  line-height: 1.55;
+}
+
+.markdown table {
+  width: 100%;
+  margin: 0 0 var(--espacio-4);
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.markdown th,
+.markdown td {
+  padding: 8px 12px;
+  border: 1px solid var(--borde);
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown th {
+  background: var(--superficie-2);
+  font-weight: 600;
+}
+
+.markdown blockquote {
+  margin: 0 0 var(--espacio-4);
+  padding: var(--espacio-3) var(--espacio-4);
+  border-left: 3px solid var(--acento);
+  background: var(--acento-suave);
+  border-radius: 0 var(--radio) var(--radio) 0;
+}
+
+.markdown blockquote p:last-child {
+  margin-bottom: 0;
+}

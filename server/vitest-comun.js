@@ -23,8 +23,14 @@ const SETUP = path.join(path.dirname(fileURLToPath(import.meta.url)), "vitest-se
  */
 
 const MAX_MENSAJE = 1500;
-const recortar = (texto) =>
-  texto && texto.length > MAX_MENSAJE ? texto.slice(0, MAX_MENSAJE) + "\n…" : texto ?? null;
+// Códigos de color de la terminal (p. ej. "ESC[31m"): en el navegador se verían como basura.
+const COLORES_TERMINAL = /\u001b\[[0-9;]*m/g;
+
+const recortar = (texto) => {
+  if (!texto) return texto ?? null;
+  texto = texto.replace(COLORES_TERMINAL, "");
+  return texto.length > MAX_MENSAJE ? texto.slice(0, MAX_MENSAJE) + "\n…" : texto;
+};
 
 /** Convierte un módulo de tests de Vitest a un objeto simple para la app. */
 export function normalizarModulo(modulo) {

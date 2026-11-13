@@ -1,0 +1,27 @@
+.insignia {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+  background: var(--superficie-2);
+  color: var(--texto-suave);
+}
+
+.insignia[data-variante="exito"] {
+  background: var(--exito-suave);
+  color: var(--exito);
+}
+
+.insignia[data-variante="aviso"] {
+  background: var(--aviso-suave);
+  color: var(--aviso);
+}
+
+.insignia[data-variante="error"] {
+  background: var(--error-suave);
+  color: var(--error);
+}
