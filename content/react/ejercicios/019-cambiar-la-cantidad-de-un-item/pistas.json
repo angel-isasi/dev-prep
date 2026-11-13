@@ -1,0 +1,5 @@
+[
+  "El estado es el arreglo de items completo (`useState(inicial)`). Cambiar una cantidad significa crear un arreglo **nuevo** donde el item tocado es un objeto **nuevo** con otra `cantidad`, y el resto son los mismos objetos de antes.",
+  "Usa `map` sobre el arreglo: si `item.id === id`, devuelve `{ ...item, cantidad: nuevaCantidad }` (el spread copia todo y luego pisas `cantidad`); si no, devuelve `item` tal cual. Para que no baje de 1 usa `Math.max(1, item.cantidad + cambio)`. Una sola función `cambiarCantidad(id, cambio)` sirve para los dos botones, con `cambio` igual a `1` o `-1`.",
+  "Esqueleto:\n\n```jsx\nfunction cambiarCantidad(id, cambio) {\n  setItems((actuales) =>\n    actuales.map((item) =>\n      item.id === id ? { /* copia de item con cantidad nueva */ } : item\n    )\n  );\n}\n\nreturn (\n  <ul>\n    {items.map((item) => (\n      <li key={item.id}>\n        {item.nombre} x{item.cantidad}\n        <button aria-label={`Menos ${item.nombre}`} onClick={/* -1 */}>−</button>\n        <button aria-label={`Más ${item.nombre}`} onClick={/* +1 */}>+</button>\n      </li>\n    ))}\n  </ul>\n);\n```"
+]

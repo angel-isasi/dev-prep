@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-011",
+  "titulo": "Selector de tamaño",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 1,
+  "tags": ["react", "useState", "select", "input-controlado", "tabla-de-busqueda"],
+  "origen": "definitivo/01-ejercicios/02-react/11"
+}

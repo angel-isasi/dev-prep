@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-018",
+  "titulo": "Quitar del pedido",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["react", "useState", "listas", "filter", "inmutabilidad"],
+  "origen": "definitivo/01-ejercicios/02-react/18"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-003",
+  "titulo": "Abierto o cerrado",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 1,
+  "tags": ["react", "componentes", "props", "renderizado-condicional", "ternario"],
+  "origen": "definitivo/01-ejercicios/02-react/03"
+}

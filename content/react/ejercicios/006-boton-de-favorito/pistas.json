@@ -1,0 +1,5 @@
+[
+  "El componente tiene que **recordar** algo entre clics: si la pizza es favorita o no. Eso es un booleano que empieza en `false`. Una variable normal (`let`) no sirve: se reinicia cada vez que React vuelve a llamar a la función.",
+  "Usa `useState(false)`, que te da el valor actual y una función para cambiarlo. En el `onClick` del botón invierte el valor con la **forma funcional**: `setActivo((anterior) => !anterior)`. Para el texto, un ternario según `activo`; para la accesibilidad, `aria-pressed={activo}`.",
+  "Esqueleto:\n\n```jsx\nconst [activo, setActivo] = useState(false);\n\nreturn (\n  <button aria-pressed={activo} onClick={/* invierte activo */}>\n    {activo ? /* texto si es favorito */ : /* texto si no */}\n  </button>\n);\n```"
+]

@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-013",
+  "titulo": "Cada instancia tiene su propio estado",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 1,
+  "tags": ["react", "useState", "eventos", "instancias", "props"],
+  "origen": "definitivo/01-ejercicios/02-react/13"
+}

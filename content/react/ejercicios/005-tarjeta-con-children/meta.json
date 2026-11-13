@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-005",
+  "titulo": "Tarjeta con children",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 1,
+  "tags": ["react", "componentes", "props", "children", "composicion"],
+  "origen": "definitivo/01-ejercicios/02-react/05"
+}

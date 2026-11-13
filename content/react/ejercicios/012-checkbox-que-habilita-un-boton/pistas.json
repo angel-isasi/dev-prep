@@ -1,0 +1,5 @@
+[
+  "Lo único que tienes que recordar es un **sí o no**: ¿el usuario aceptó? Eso es un booleano en el estado. El botón no necesita estado propio: su `disabled` sale de ese booleano.",
+  "Usa `useState(false)`. En un checkbox el valor marcado se controla con **`checked`** (no con `value`) y en `onChange` se lee `evento.target.checked`, que es `true` o `false`. En el botón, `disabled={!acepta}`: deshabilitado cuando **no** acepta.",
+  "Esqueleto:\n\n```jsx\nconst [acepta, setAcepta] = useState(false);\n\nreturn (\n  <div>\n    <label>\n      <input type=\"checkbox\" checked={/* estado */} onChange={/* guarda e.target.checked */} />\n      Acepto los términos\n    </label>\n    <button disabled={/* ¿cuándo se bloquea? */}>Confirmar pedido</button>\n  </div>\n);\n```"
+]

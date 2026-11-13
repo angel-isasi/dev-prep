@@ -1,0 +1,5 @@
+[
+  "Un componente es una **función** que recibe un objeto (las props) y devuelve JSX. Aquí no hay estado: solo lees la prop `nombre` y la pones dentro de un `<h1>`. El caso especial es cuando `nombre` no llega: vale `undefined`.",
+  "Desestructura las props en los parámetros y dale un **valor por defecto**: `function Saludo({ nombre = \"invitado\" })`. Si `nombre` llega como `undefined`, JavaScript usa `\"invitado\"`. Dentro del JSX, las llaves `{ }` sirven para meter una expresión de JavaScript: `{nombre}`.",
+  "Esqueleto:\n\n```jsx\nexport function Saludo({ nombre = /* valor por defecto */ }) {\n  return <h1>Hola, {/* la prop */}</h1>;\n}\n```"
+]

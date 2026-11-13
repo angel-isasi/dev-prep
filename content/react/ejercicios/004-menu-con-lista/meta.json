@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-004",
+  "titulo": "Menú con lista",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 1,
+  "tags": ["react", "listas", "map", "key", "props"],
+  "origen": "definitivo/01-ejercicios/02-react/04"
+}

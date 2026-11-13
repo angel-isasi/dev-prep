@@ -1,0 +1,5 @@
+[
+  "No intentes armar el texto a mano (poner comas cada 3 cifras, agregar `.00`...). JavaScript ya trae una herramienta que conoce el formato de cada país y moneda. Tu componente solo tiene que **pasarle el número** y pintar el resultado.",
+  "Usa `new Intl.NumberFormat(\"es-PE\", { style: \"currency\", currency: \"PEN\" })`. Te devuelve un objeto con el método `.format(numero)`, que da el texto ya formateado. Créalo en una constante **fuera** de la función del componente: así no se reconstruye en cada render.",
+  "Esqueleto:\n\n```jsx\nconst formatoSoles = new Intl.NumberFormat(/* idioma */, {\n  style: /* tipo de formato */,\n  currency: /* código de moneda */,\n});\n\nexport function Precio({ monto }) {\n  return <span>{/* formatoSoles.format(...) */}</span>;\n}\n```"
+]

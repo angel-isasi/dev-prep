@@ -1,0 +1,5 @@
+[
+  "El título de la pestaña no es parte de lo que React pinta: está **fuera** de React, en `document.title`. Cambiar algo externo es un **efecto secundario**, y en React eso va dentro de `useEffect`, no suelto en el cuerpo del componente. No necesitas estado: el valor ya llega en la prop `cantidad`.",
+  "Usa `useEffect(() => { document.title = ... }, [cantidad])`. El arreglo `[cantidad]` le dice a React: \"vuelve a correr este efecto solo cuando `cantidad` cambie\". Para elegir el texto usa un ternario: `` cantidad > 0 ? `(${cantidad}) Padre Gino` : \"Padre Gino\" ``.",
+  "Esqueleto:\n\n```jsx\nexport function TituloPedido({ cantidad }) {\n  useEffect(() => {\n    document.title = /* ternario según cantidad */;\n  }, [/* dependencias */]);\n\n  return <p>{cantidad} en el carrito</p>;\n}\n```"
+]

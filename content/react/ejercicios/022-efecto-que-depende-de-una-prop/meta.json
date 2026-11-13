@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-022",
+  "titulo": "Efecto que depende de una prop",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "dependencias", "promesas", "condicion-de-carrera"],
+  "origen": "definitivo/01-ejercicios/02-react/22"
+}

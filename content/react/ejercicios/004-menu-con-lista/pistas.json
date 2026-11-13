@@ -1,0 +1,5 @@
+[
+  "Tienes un **arreglo de datos** y quieres un **arreglo de elementos `<li>`**. Es una transformación uno a uno: cada pizza se convierte en un `<li>`. ¿Qué método de array hace justo eso?",
+  "Usa `pizzas.map((pizza) => <li>...</li>)` dentro de las llaves del `<ul>`: React sabe pintar un arreglo de elementos. A cada `<li>` dale `key={pizza.id}`: la `key` le permite a React saber qué elemento es cuál entre un render y otro. No uses el índice si tienes un `id`.",
+  "Esqueleto:\n\n```jsx\nexport function Menu({ pizzas }) {\n  return (\n    <ul>\n      {pizzas.map((pizza) => (\n        <li key={/* algo único */}>{/* el nombre */}</li>\n      ))}\n    </ul>\n  );\n}\n```"
+]

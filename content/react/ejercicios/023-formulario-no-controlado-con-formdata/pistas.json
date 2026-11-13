@@ -1,0 +1,5 @@
+[
+  "Aquí no necesitas estado: los campos guardan su propio valor (eso es un formulario **no controlado**). Solo te interesan los datos en el momento de enviar. El evento `submit` del `<form>` te da acceso al formulario completo, y de ahí puedes leer todo lo que tenga atributo `name`.",
+  "Escucha `onSubmit` en el `<form>` (no `onClick` en el botón). Dentro: `evento.preventDefault()` para que no recargue, `new FormData(evento.currentTarget)` para leer los campos, y `Object.fromEntries(...)` para convertirlo en `{ nombre, mensaje }`. Al final, `evento.currentTarget.reset()` limpia el formulario. Pon `required` en el input del nombre y el navegador bloqueará el envío si está vacío.",
+  "Esqueleto:\n\n```jsx\nfunction enviar(evento) {\n  evento.preventDefault();\n  const datos = /* Object.fromEntries(new FormData(...)) */;\n  onEnviar(datos);\n  /* limpia el formulario */\n}\n\nreturn (\n  <form onSubmit={enviar}>\n    <label>\n      Nombre <input name=\"nombre\" required />\n    </label>\n    <label>\n      Mensaje <textarea name=\"mensaje\" />\n    </label>\n    <button>Enviar</button>\n  </form>\n);\n```"
+]

@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-015",
+  "titulo": "Layout con varias zonas",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 1,
+  "tags": ["react", "composicion", "children", "props-jsx", "html-semantico"],
+  "origen": "definitivo/01-ejercicios/02-react/15"
+}

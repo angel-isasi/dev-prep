@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-012",
+  "titulo": "Checkbox que habilita un botón",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 1,
+  "tags": ["react", "useState", "checkbox", "checked", "disabled"],
+  "origen": "definitivo/01-ejercicios/02-react/12"
+}

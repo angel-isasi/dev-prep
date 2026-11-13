@@ -1,0 +1,5 @@
+[
+  "Necesitas una \"caja\" que recuerde un valor entre renders **sin** provocar un render nuevo cuando la cambias (si provocara uno, entrarías en bucle). Y necesitas el orden correcto: devolver lo que había en la caja **antes** de guardar el valor actual.",
+  "Usa `useRef(undefined)` como caja. Devuelve `ref.current` al final del hook, y actualiza la caja dentro de un `useEffect`: los efectos corren **después** del render, así que cuando lees `ref.current` durante el render todavía tiene el valor anterior.",
+  "Esqueleto:\n\n```jsx\nexport function usePrevio(valor) {\n  const ref = useRef(undefined);\n\n  useEffect(() => {\n    /* guarda el valor actual en la ref */\n  }, [valor]);\n\n  return /* lo que tiene la ref ahora (el valor anterior) */;\n}\n```"
+]

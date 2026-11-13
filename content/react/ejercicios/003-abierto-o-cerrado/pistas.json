@@ -1,0 +1,5 @@
+[
+  "Siempre se pinta un `<p>`; lo único que cambia es **el texto de adentro**, y depende de una sola prop booleana. Piensa: ¿qué texto corresponde a `true` y cuál a `false`?",
+  "Dentro de las llaves `{ }` de JSX solo caben **expresiones** (algo que da un valor), no sentencias como `if`. La expresión que elige entre dos valores es el ternario: `condición ? valorSiTrue : valorSiFalse`.",
+  "Esqueleto:\n\n```jsx\nexport function Estado({ abierto }) {\n  return <p>{abierto ? /* texto si está abierto */ : /* texto si está cerrado */}</p>;\n}\n```"
+]

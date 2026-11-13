@@ -1,0 +1,5 @@
+[
+  "El componente tiene que **recordar un número** entre un clic y otro. Una variable normal (`let cantidad = 0`) no sirve: cada render vuelve a ejecutar la función y la reinicia. Necesitas la memoria de React.",
+  "Usa `useState(0)` **dentro** del componente. React guarda un estado distinto por cada lugar donde aparece `<Cantidad />`, así que no tienes que hacer nada especial para que sean independientes. En el botón, `onClick` llama al setter con el valor más 1.",
+  "Esqueleto:\n\n```jsx\nexport function Cantidad({ nombre }) {\n  const [cantidad, setCantidad] = useState(/* inicial */);\n  return (\n    <button onClick={() => /* suma 1 */}>\n      {nombre}: {cantidad}\n    </button>\n  );\n}\n```"
+]

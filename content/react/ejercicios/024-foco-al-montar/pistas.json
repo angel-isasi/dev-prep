@@ -1,0 +1,5 @@
+[
+  "Para enfocar necesitas el **elemento real del DOM** y llamar a su método `.focus()`. Pero ese elemento no existe mientras React ejecuta tu función: se crea cuando React pinta. Así que necesitas (1) una forma de guardar una referencia al input y (2) un momento **después** del pintado para usarla, y solo la primera vez.",
+  "`const campo = useRef(null)` crea una caja `{ current: null }`. Al poner `ref={campo}` en el `<input>`, React llena `campo.current` con el elemento cuando lo pinta. Luego, en `useEffect(() => { campo.current.focus(); }, [])`, el efecto corre después de pintar, y el `[]` hace que sea solo al montar.",
+  "Esqueleto:\n\n```jsx\nexport function Buscador() {\n  const campo = useRef(null);\n\n  useEffect(() => {\n    /* enfoca el elemento guardado en campo.current */\n  }, [/* ¿cuándo? solo al montar */]);\n\n  return <input ref={/* la ref */} aria-label=\"Buscar pizza\" />;\n}\n```"
+]

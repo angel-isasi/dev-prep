@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-014",
+  "titulo": "El hijo avisa al padre",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 1,
+  "tags": ["react", "props", "callbacks", "subir-estado", "eventos"],
+  "origen": "definitivo/01-ejercicios/02-react/14"
+}

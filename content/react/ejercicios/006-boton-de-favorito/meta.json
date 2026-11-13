@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-006",
+  "titulo": "Botón de favorito",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 1,
+  "tags": ["react", "useState", "eventos", "onClick", "aria-pressed"],
+  "origen": "definitivo/01-ejercicios/02-react/06"
+}

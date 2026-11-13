@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-021",
+  "titulo": "Hook useAnchoVentana",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["react", "custom-hook", "useEffect", "eventos", "limpieza"],
+  "origen": "definitivo/01-ejercicios/02-react/21"
+}

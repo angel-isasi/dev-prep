@@ -1,0 +1,5 @@
+[
+  "La `Tarjeta` no necesita saber **qué** contenido lleva: solo dónde ponerlo. Lo que el usuario escribe entre `<Tarjeta>` y `</Tarjeta>` React se lo entrega como una prop más, llamada `children`.",
+  "Desestructura `{ titulo, children }` y pinta `{children}` dentro del JSX igual que pintarías cualquier otra prop. React acepta en `children` un elemento, varios o texto: tú no tienes que recorrerlo ni transformarlo.",
+  "Esqueleto:\n\n```jsx\nexport function Tarjeta({ titulo, children }) {\n  return (\n    <section>\n      <h2>{/* título */}</h2>\n      {/* el contenido que llega en children */}\n    </section>\n  );\n}\n```"
+]

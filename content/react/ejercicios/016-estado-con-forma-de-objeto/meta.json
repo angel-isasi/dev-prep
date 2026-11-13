@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-016",
+  "titulo": "Estado con forma de objeto",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useState", "objetos", "spread", "formularios", "inmutabilidad"],
+  "origen": "definitivo/01-ejercicios/02-react/16"
+}

@@ -1,0 +1,5 @@
+[
+  "Tienes una relación fija **tipo → clase**. En vez de preguntar con `if` por cada tipo, guarda esa relación en un objeto y **búscala** con el tipo como clave. No olvides el caso de un tipo que no está en la tabla.",
+  "Crea fuera del componente un objeto como `{ nuevo: \"etiqueta verde\", ... }` y lee la clase con corchetes: `CLASES[tipo]`. Si el tipo no existe, eso da `undefined`; el operador `??` te deja poner un valor de respaldo: `CLASES[tipo] ?? \"etiqueta\"`. En JSX la clase se pone con `className`, no con `class`.",
+  "Esqueleto:\n\n```jsx\nconst CLASES = {\n  nuevo: \"etiqueta verde\",\n  /* agotado, picante */\n};\n\nexport function Etiqueta({ tipo }) {\n  return <span className={/* busca en CLASES, con respaldo */}>{tipo}</span>;\n}\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "¿Qué tienes que recordar entre un render y otro? Solo **qué tamaño está elegido** (`\"S\"`, `\"M\"` o `\"L\"`). El precio no hace falta guardarlo: sale del tamaño. Piensa también cómo pasar de `\"L\"` a `36` sin escribir tres `if`.",
+  "Guarda el tamaño con `useState(\"M\")` y haz el select **controlado**: `value={tamano}` en el `<select>` (no en cada `<option>`) y `onChange={(e) => setTamano(e.target.value)}`. Para el precio, crea fuera del componente un objeto `const PRECIOS = { S: 20, M: 28, L: 36 }` y lee `PRECIOS[tamano]`. Une la etiqueta con el select usando `htmlFor` y el mismo `id`.",
+  "Esqueleto:\n\n```jsx\nconst PRECIOS = { S: 20, M: 28, L: 36 };\n\nexport function Tamano() {\n  const [tamano, setTamano] = useState(/* valor inicial */);\n  return (\n    <div>\n      <label htmlFor=\"tamano\">Tamaño</label>\n      <select id=\"tamano\" value={tamano} onChange={/* actualiza el estado */}>\n        <option value=\"S\">Personal</option>\n        {/* las otras dos opciones */}\n      </select>\n      <p>Precio: S/ {/* precio según el tamaño */}</p>\n    </div>\n  );\n}\n```"
+]

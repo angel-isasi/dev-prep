@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-009",
+  "titulo": "Etiqueta con clase según el tipo",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 1,
+  "tags": ["react", "componentes", "className", "objeto-como-tabla", "nullish"],
+  "origen": "definitivo/01-ejercicios/02-react/09"
+}

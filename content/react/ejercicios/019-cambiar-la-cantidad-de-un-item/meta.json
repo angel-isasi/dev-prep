@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-019",
+  "titulo": "Cambiar la cantidad de un item",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["react", "useState", "listas", "map", "inmutabilidad", "spread"],
+  "origen": "definitivo/01-ejercicios/02-react/19"
+}

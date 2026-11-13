@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-008",
+  "titulo": "Precio con formato",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 1,
+  "tags": ["react", "componentes", "props", "Intl.NumberFormat", "formato"],
+  "origen": "definitivo/01-ejercicios/02-react/08"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-001",
+  "titulo": "Saludo",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 1,
+  "tags": ["react", "componentes", "props", "valores-por-defecto", "jsx"],
+  "origen": "definitivo/01-ejercicios/02-react/01"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-010",
+  "titulo": "Lista o mensaje de vacío",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 1,
+  "tags": ["react", "listas", "key", "renderizado-condicional", "return-temprano"],
+  "origen": "definitivo/01-ejercicios/02-react/10"
+}

@@ -1,0 +1,5 @@
+[
+  "¿Qué es lo mínimo que tienes que recordar? **Las pizzas agregadas** (un arreglo). La cantidad es el largo de ese arreglo y el total es la suma de sus precios: los dos se pueden **calcular** en cada render, no hace falta guardarlos.",
+  "Usa `useState([])`. Para agregar, crea un arreglo **nuevo** con spread: `setItems((anteriores) => [...anteriores, pizza])` (nunca `push`, que modifica el arreglo y React no se entera). Para el total, `items.reduce((suma, item) => suma + item.precio, 0)`. Para el singular, un ternario: `items.length === 1 ? \"pizza\" : \"pizzas\"`. Los botones salen de `MENU.map(...)` con `key={pizza.id}`.",
+  "Esqueleto:\n\n```jsx\nconst [items, setItems] = useState([]);\nconst total = items.reduce(/* suma de precios */, 0);\nconst palabra = /* \"pizza\" o \"pizzas\" */;\n\nreturn (\n  <div>\n    {MENU.map((pizza) => (\n      <button key={pizza.id} onClick={() => /* agrega pizza */}>\n        Agregar {pizza.nombre}\n      </button>\n    ))}\n    <p>{items.length} {palabra}, total S/ {total}</p>\n  </div>\n);\n```"
+]

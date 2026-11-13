@@ -1,0 +1,5 @@
+[
+  "¿Qué tiene que recordar el componente? Solo **lo que el usuario escribió**: un texto que empieza vacío (`\"\"`). El mensaje de abajo no se guarda: se **calcula** a partir de ese texto en cada render.",
+  "Haz un **input controlado**: `useState(\"\")` para el texto, `value={nombre}` en el input y `onChange={(e) => setNombre(e.target.value)}`. Para unir el label con el input usa `htmlFor=\"nombre\"` en el `<label>` e `id=\"nombre\"` en el `<input>` (en JSX es `htmlFor`, no `for`). Para el mensaje, un ternario: un texto vacío es *falsy*.",
+  "Esqueleto:\n\n```jsx\nconst [nombre, setNombre] = useState(\"\");\n\nreturn (\n  <div>\n    <label htmlFor=\"nombre\">Tu nombre</label>\n    <input id=\"nombre\" value={nombre} onChange={/* guarda e.target.value */} />\n    <p>{nombre ? /* `Pedido a nombre de ${...}` */ : \"Escribe tu nombre\"}</p>\n  </div>\n);\n```"
+]

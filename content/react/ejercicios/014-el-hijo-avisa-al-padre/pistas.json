@@ -1,0 +1,5 @@
+[
+  "¿Quién tiene que **recordar** la última pizza? El que la **muestra**: la `Tienda`. Entonces el estado vive en la `Tienda`, no en el botón. El botón solo necesita una forma de avisar \"me presionaron con esta pizza\".",
+  "La `Tienda` crea `const [ultima, setUltima] = useState(null)` y le pasa al hijo una función por props: `onAgregar={setUltima}`. El hijo, en su `onClick`, llama a `onAgregar(pizza)`. Para el mensaje usa renderizado condicional: `{ultima && <p>...</p>}` (con `null` no pinta nada).",
+  "Esqueleto:\n\n```jsx\nexport function BotonAgregar({ pizza, onAgregar }) {\n  return <button onClick={() => /* avisa al padre */}>Agregar {pizza}</button>;\n}\n\nexport function Tienda() {\n  const [ultima, setUltima] = useState(null);\n  return (\n    <div>\n      <BotonAgregar pizza=\"Margarita\" onAgregar={/* ... */} />\n      <BotonAgregar pizza=\"Pepperoni\" onAgregar={/* ... */} />\n      {/* si hay última: <p>Agregaste ...</p> */}\n    </div>\n  );\n}\n```"
+]

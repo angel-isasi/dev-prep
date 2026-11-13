@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-024",
+  "titulo": "Foco al montar",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["react", "useRef", "useEffect", "dom", "foco"],
+  "origen": "definitivo/01-ejercicios/02-react/24"
+}

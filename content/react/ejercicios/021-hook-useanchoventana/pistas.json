@@ -1,0 +1,5 @@
+[
+  "Necesitas **recordar** el ancho entre renders y volver a renderizar cuando cambie: eso es un estado, que empieza en `window.innerWidth`. Además necesitas **escuchar** el evento `\"resize\"` de `window` mientras el componente está en pantalla, y dejar de escucharlo cuando se va.",
+  "Usa `useState(() => window.innerWidth)` y un `useEffect` con dependencias `[]` (se suscribe una sola vez). Dentro, define una función `actualizar` que haga `setAncho(window.innerWidth)`, regístrala con `window.addEventListener(\"resize\", actualizar)` y **devuelve** una función de limpieza que llame a `window.removeEventListener(\"resize\", actualizar)` con esa misma función.",
+  "Esqueleto:\n\n```jsx\nexport function useAnchoVentana() {\n  const [ancho, setAncho] = useState(() => window.innerWidth);\n\n  useEffect(() => {\n    function actualizar() {\n      /* guarda el nuevo ancho */\n    }\n    window.addEventListener(\"resize\", actualizar);\n    return () => {\n      /* quita el mismo listener */\n    };\n  }, []);\n\n  return ancho;\n}\n```"
+]

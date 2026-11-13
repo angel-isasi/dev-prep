@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-017",
+  "titulo": "Agregar al pedido y mostrar el total",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useState", "arrays", "reduce", "estado-derivado", "inmutabilidad"],
+  "origen": "definitivo/01-ejercicios/02-react/17"
+}

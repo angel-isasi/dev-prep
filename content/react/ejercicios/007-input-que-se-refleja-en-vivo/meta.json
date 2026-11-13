@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-007",
+  "titulo": "Input que se refleja en vivo",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 1,
+  "tags": ["react", "useState", "input-controlado", "onChange", "label"],
+  "origen": "definitivo/01-ejercicios/02-react/07"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-020",
+  "titulo": "Título del documento",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "dependencias", "document-title"],
+  "origen": "definitivo/01-ejercicios/02-react/20"
+}

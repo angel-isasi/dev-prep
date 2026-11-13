@@ -1,0 +1,5 @@
+[
+  "Este componente no tiene estado: solo **coloca** lo que le pasan. Una prop puede contener JSX igual que un texto o un número, y `children` es una prop especial con lo que va entre `<Layout>` y `</Layout>`. Lo único que decides es dónde va cada cosa y qué pasa si falta el pie.",
+  "Devuelve un **fragmento** `<>...</>` (agrupa sin agregar un `<div>`) con `<header>{encabezado}</header>` y `<main>{children}</main>`. Para el pie usa renderizado condicional: `{pie && <footer>...</footer>}`. Si `pie` es `undefined`, la expresión vale `undefined` y React no pinta nada.",
+  "Esqueleto:\n\n```jsx\nexport function Layout({ encabezado, children, pie }) {\n  return (\n    <>\n      <header>{/* ... */}</header>\n      <main>{/* ... */}</main>\n      {/* footer solo si hay pie */}\n    </>\n  );\n}\n```"
+]

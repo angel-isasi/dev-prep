@@ -1,0 +1,5 @@
+[
+  "Guarda en el estado el **precio** que llegó, con `null` para \"todavía no hay\". Pedir el precio es un efecto (habla con algo externo), y debe repetirse cuando cambie `tamano`. Piensa también qué pasa si llegan dos respuestas en desorden: ¿cómo sabe la respuesta de \"M\" que ya no es la que importa?",
+  "Usa `useEffect` con dependencias `[tamano, obtenerPrecio]`. Dentro: `let vigente = true;`, `setPrecio(null)` para volver a \"Calculando…\", y `obtenerPrecio(tamano).then((p) => { if (vigente) setPrecio(p); })`. Devuelve una limpieza que haga `vigente = false`: React la ejecuta antes de correr el efecto con el tamaño nuevo, así la respuesta vieja queda marcada como no vigente.",
+  "Esqueleto:\n\n```jsx\nconst [precio, setPrecio] = useState(null);\n\nuseEffect(() => {\n  let vigente = true;\n  setPrecio(null);\n  obtenerPrecio(tamano).then((nuevoPrecio) => {\n    /* solo si sigue vigente */\n  });\n  return () => {\n    /* marca esta petición como vieja */\n  };\n}, [/* dependencias */]);\n\nreturn <p>{precio === null ? \"Calculando…\" : /* \"S/ \" + precio */}</p>;\n```"
+]

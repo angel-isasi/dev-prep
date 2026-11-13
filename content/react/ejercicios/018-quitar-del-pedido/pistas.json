@@ -1,0 +1,5 @@
+[
+  "La lista cambia cuando el usuario hace clic, así que tiene que vivir en el **estado**, no solo en la prop. La prop `inicial` sirve como valor de arranque: `useState(inicial)`. Para quitar una pizza no la borras del arreglo actual: creas un arreglo nuevo **sin** ella.",
+  "Usa `filter` para quedarte con todas las pizzas cuyo `id` es distinto del que quieres quitar: `actuales.filter((item) => item.id !== id)`. Pásalo con la forma funcional: `setItems((actuales) => ...)`. Para el `aria-label` usa un template string: `` aria-label={`Quitar ${item.nombre}`} ``.",
+  "Esqueleto:\n\n```jsx\nconst [items, setItems] = useState(inicial);\n\nreturn (\n  <ul>\n    {items.map((item) => (\n      <li key={/* algo único */}>\n        {item.nombre}\n        <button\n          aria-label={/* \"Quitar \" + nombre */}\n          onClick={() => setItems((actuales) => /* filter por id */)}\n        >\n          ×\n        </button>\n      </li>\n    ))}\n  </ul>\n);\n```"
+]

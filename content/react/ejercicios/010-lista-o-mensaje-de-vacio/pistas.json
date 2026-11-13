@@ -1,0 +1,5 @@
+[
+  "Hay dos casos que no se mezclan: o el arreglo está vacío (solo mensaje) o tiene elementos (solo lista). No necesitas estado: todo sale de la prop `items`. Pregúntate primero: ¿cómo sé si un arreglo está vacío?",
+  "Usa un **return temprano**: `if (items.length === 0) return <p>...</p>;`. Como el `return` corta la función, todo lo que viene después ya sabe que hay items. Para la lista, transforma cada texto en un `<li>` con `items.map(...)` y dale a cada uno una `key` única (el propio texto sirve).",
+  "Esqueleto:\n\n```jsx\nexport function Pedido({ items }) {\n  if (/* ¿está vacío? */) {\n    return <p>Tu pedido está vacío. Agrega una pizza del menú.</p>;\n  }\n\n  return (\n    <ul>\n      {items.map((item) => (\n        <li key={/* algo único */}>{/* el texto */}</li>\n      ))}\n    </ul>\n  );\n}\n```"
+]

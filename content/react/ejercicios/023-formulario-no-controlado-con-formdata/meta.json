@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-023",
+  "titulo": "Formulario no controlado con FormData",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "formularios", "FormData", "no-controlado", "onSubmit"],
+  "origen": "definitivo/01-ejercicios/02-react/23"
+}

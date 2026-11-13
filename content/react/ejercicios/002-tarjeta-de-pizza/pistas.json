@@ -1,0 +1,5 @@
+[
+  "No hay estado ni eventos: solo tienes que **colocar cada prop en su etiqueta**. Piensa en la estructura HTML primero: un contenedor `<article>` con un título, un párrafo de descripción y un párrafo de precio.",
+  "Dentro de JSX, `{ }` inserta cualquier expresión de JavaScript. Para los 2 decimales usa el método de los números `toFixed(2)`: `(28).toFixed(2)` da `\"28.00\"` y `(31.5).toFixed(2)` da `\"31.50\"`. Recuerda que un componente devuelve **un solo elemento raíz**, por eso todo va dentro del `<article>`.",
+  "Esqueleto:\n\n```jsx\nexport function Pizza({ nombre, descripcion, precio }) {\n  return (\n    <article>\n      <h2>{/* nombre */}</h2>\n      <p>{/* descripción */}</p>\n      <p>S/ {/* precio con 2 decimales */}</p>\n    </article>\n  );\n}\n```"
+]

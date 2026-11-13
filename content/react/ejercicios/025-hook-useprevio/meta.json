@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-025",
+  "titulo": "Hook usePrevio",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["react", "custom-hook", "useRef", "useEffect", "ciclo-de-render"],
+  "origen": "definitivo/01-ejercicios/02-react/25"
+}
