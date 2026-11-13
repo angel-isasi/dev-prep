@@ -172,8 +172,8 @@ export function Ejercicio() {
   return (
     <div className={estilos.pagina}>
       <div className={estilos.principal}>
-        <Link to="/practicar" className={estilos.volver}>
-          <IconoFlechaIzq /> Practicar
+        <Link to={`/practicar/lista?coleccion=${encodeURIComponent(ejercicio.coleccion)}`} className={estilos.volver}>
+          <IconoFlechaIzq /> {nombreColeccion(ejercicio.coleccion)}
         </Link>
 
         <header className={estilos.cabecera}>

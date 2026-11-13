@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router";
 import { Layout } from "./components/Layout.jsx";
 import { Practicar } from "./pages/Practicar.jsx";
+import { ListaEjercicios } from "./pages/ListaEjercicios.jsx";
 import { Ejercicio } from "./pages/Ejercicio.jsx";
 import { Proximamente } from "./pages/Proximamente.jsx";
 import { Inicio } from "./pages/Inicio.jsx";
@@ -17,6 +18,7 @@ export function App() {
       <Route element={<Layout />}>
         <Route index element={<Inicio />} />
         <Route path="practicar" element={<Practicar />} />
+        <Route path="practicar/lista" element={<ListaEjercicios />} />
         <Route path="practicar/:id" element={<Ejercicio />} />
         <Route path="aprender" element={<Aprender />} />
         <Route path="aprender/:id" element={<Tema />} />

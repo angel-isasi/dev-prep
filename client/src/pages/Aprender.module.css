@@ -87,3 +87,9 @@
   align-items: flex-end;
   font-family: var(--fuente-codigo);
 }
+
+.intro {
+  margin: var(--espacio-4) 0;
+  color: var(--texto-tenue);
+  font-size: 14px;
+}

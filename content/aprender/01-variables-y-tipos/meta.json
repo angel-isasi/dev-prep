@@ -1,7 +1,13 @@
 {
   "id": "variables-y-tipos",
   "titulo": "Variables y tipos",
+  "area": "javascript",
   "orden": 1,
   "descripcion": "let, const y var, primitivos vs objetos, typeof, coerción, == vs === y truthy/falsy.",
-  "ejercicios": ["js-gu-001", "js-gu-002", "js-gu-003", "js-gu-004"]
+  "ejercicios": [
+    "js-gu-001",
+    "js-gu-002",
+    "js-gu-003",
+    "js-gu-004"
+  ]
 }

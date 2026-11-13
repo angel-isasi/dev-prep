@@ -1,7 +1,13 @@
 {
   "id": "dom-y-eventos",
   "titulo": "DOM y eventos",
+  "area": "javascript",
   "orden": 10,
   "descripcion": "Seleccionar, crear y modificar elementos, textContent frente a innerHTML, classList, eventos, bubbling, delegación y formularios.",
-  "ejercicios": ["js-gu-023", "js-gu-024", "js-gu-025", "js-gu-026"]
+  "ejercicios": [
+    "js-gu-023",
+    "js-gu-024",
+    "js-gu-025",
+    "js-gu-026"
+  ]
 }

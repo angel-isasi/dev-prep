@@ -1,13 +1,13 @@
 // Textos legibles para los valores internos (ids de colección, tema...).
 
 const COLECCIONES = {
-  "javascript/guiados": "Guiados",
-  "javascript/ejercicios": "JavaScript",
-  "javascript/retos": "Retos JS",
+  "javascript/guiados": "JS · Fundamentos",
+  "javascript/ejercicios": "JS · Práctica",
+  "javascript/retos": "JS · Retos",
   "algoritmos/retos": "Algoritmos",
-  "react/ejercicios": "React",
+  "react/ejercicios": "React · Práctica",
   "react/mixtos": "JS + React",
-  "react/retos": "Retos React",
+  "react/retos": "React · Retos",
 };
 
 const TEMAS = {

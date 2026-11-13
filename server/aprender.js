@@ -4,6 +4,8 @@ import path from "node:path";
 
 /** Secciones obligatorias de cada teoria.md, en orden. */
 export const SECCIONES_TEORIA = ["En una frase", "Lo esencial", "Errores típicos", "Chuleta", "En la entrevista"];
+/** Áreas de Aprender, en el orden en que se muestran. */
+export const AREAS = ["javascript", "react"];
 const CAMPOS_REFERENCIA = ["id", "nombre", "firma", "descripcion", "ejemplo", "devuelve", "errorTipico"];
 
 /**
@@ -23,12 +25,12 @@ export async function cargarTemas(contenidoDir) {
       const meta = JSON.parse(await readFile(path.join(ruta, "meta.json"), "utf8"));
       const teoria = await readFile(path.join(ruta, "teoria.md"), "utf8");
       const quiz = JSON.parse(await readFile(path.join(ruta, "quiz.json"), "utf8"));
-      temas.push({ ...meta, ejercicios: meta.ejercicios ?? [], teoria, quiz, carpeta });
+      temas.push({ ...meta, area: meta.area ?? "javascript", ejercicios: meta.ejercicios ?? [], teoria, quiz, carpeta });
     } catch (error) {
       errores.push(`aprender/${carpeta}: ${error.message}`);
     }
   }
-  temas.sort((a, b) => (a.orden ?? 99) - (b.orden ?? 99));
+  temas.sort((a, b) => AREAS.indexOf(a.area) - AREAS.indexOf(b.area) || (a.orden ?? 99) - (b.orden ?? 99));
   return { temas, porId: new Map(temas.map((t) => [t.id, t])), errores };
 }
 
@@ -36,6 +38,7 @@ export async function cargarTemas(contenidoDir) {
 export function revisarTema(tema, idsEjercicios) {
   const problemas = [];
   if (!tema.id || !tema.titulo || !tema.descripcion) problemas.push("meta.json necesita id, titulo y descripcion");
+  if (!AREAS.includes(tema.area)) problemas.push(`area debe ser una de: ${AREAS.join(", ")}`);
   const titulos = [...tema.teoria.matchAll(/^## (.+)$/gm)].map((m) => m[1].trim());
   const faltan = SECCIONES_TEORIA.filter((s) => !titulos.includes(s));
   if (faltan.length) problemas.push(`a teoria.md le faltan secciones: ${faltan.join(", ")}`);

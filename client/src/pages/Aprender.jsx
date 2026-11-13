@@ -1,16 +1,29 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { api } from "../lib/api.js";
+import { Pestanas } from "../components/Pestanas.jsx";
 import estilos from "./Aprender.module.css";
+
+const AREAS = [
+  { id: "javascript", texto: "JavaScript", intro: "La base de todo: sin esto, React no se entiende." },
+  { id: "react", texto: "React", intro: "Cuando ya domines JavaScript: componentes, estado, efectos y hooks." },
+];
 
 export function Aprender() {
   const [temas, setTemas] = useState(null);
+  const [error, setError] = useState(null);
+  const [params, setParams] = useSearchParams();
+  const area = params.get("area") ?? "javascript";
 
   useEffect(() => {
-    api.temas().then(setTemas);
+    api.temas().then(setTemas, (e) => setError(e.message));
   }, []);
 
+  if (error) return <p className={estilos.mensaje}>No se pudo cargar: {error}. Cierra la app y vuelve a abrir iniciar.bat.</p>;
   if (!temas) return <p className={estilos.mensaje}>Cargando…</p>;
+
+  const delArea = temas.filter((t) => t.area === area);
+  const info = AREAS.find((a) => a.id === area) ?? AREAS[0];
 
   return (
     <section className={estilos.pagina}>
@@ -24,11 +37,22 @@ export function Aprender() {
         </Link>
       </header>
 
-      {temas.length === 0 ? (
-        <p className={estilos.mensaje}>Todavía no hay temas.</p>
+      <Pestanas
+        pestanas={AREAS.map((a) => ({
+          id: a.id,
+          texto: a.texto,
+          extra: String(temas.filter((t) => t.area === a.id).length),
+        }))}
+        activa={area}
+        alCambiar={(id) => setParams({ area: id }, { replace: true })}
+      />
+      <p className={estilos.intro}>{info.intro}</p>
+
+      {delArea.length === 0 ? (
+        <p className={estilos.mensaje}>Todavía no hay temas en esta área.</p>
       ) : (
         <ol className={estilos.temas}>
-          {temas.map((t) => {
+          {delArea.map((t) => {
             const completo = t.resueltos === t.totalEjercicios && t.quiz && t.quiz.mejor === t.quiz.total;
             return (
               <li key={t.id}>

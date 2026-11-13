@@ -1,7 +1,12 @@
 {
   "id": "this",
   "titulo": "this",
+  "area": "javascript",
   "orden": 8,
   "descripcion": "Cuánto vale this en un método, en una función suelta, en una flecha y en una clase, y cómo controlarlo con call, apply y bind.",
-  "ejercicios": ["js-gu-020", "js-gu-021", "js-gu-022"]
+  "ejercicios": [
+    "js-gu-020",
+    "js-gu-021",
+    "js-gu-022"
+  ]
 }

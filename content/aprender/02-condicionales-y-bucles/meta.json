@@ -1,7 +1,14 @@
 {
   "id": "condicionales-y-bucles",
   "titulo": "Condicionales y bucles",
+  "area": "javascript",
   "orden": 2,
   "descripcion": "if/else, ternario, switch, &&, || y ??, encadenamiento opcional, for, while, for...of vs for...in, break y continue.",
-  "ejercicios": ["js-gu-005", "js-gu-006", "js-gu-007", "js-gu-008", "js-gu-009"]
+  "ejercicios": [
+    "js-gu-005",
+    "js-gu-006",
+    "js-gu-007",
+    "js-gu-008",
+    "js-gu-009"
+  ]
 }

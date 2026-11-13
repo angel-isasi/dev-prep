@@ -1,7 +1,14 @@
 {
   "id": "closures-y-scope",
   "titulo": "Closures y scope",
+  "area": "javascript",
   "orden": 7,
   "descripcion": "Scope global, de función y de bloque, scope léxico, closures, estado privado, el bucle con var y setTimeout, hoisting y TDZ.",
-  "ejercicios": ["js-ej-019", "js-ej-026", "js-ej-020", "js-ej-022", "js-ej-023"]
+  "ejercicios": [
+    "js-ej-019",
+    "js-ej-026",
+    "js-ej-020",
+    "js-ej-022",
+    "js-ej-023"
+  ]
 }

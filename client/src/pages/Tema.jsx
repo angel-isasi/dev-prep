@@ -32,11 +32,13 @@ export function Tema() {
 
   return (
     <article className={estilos.pagina}>
-      <Link to="/aprender" className={estilos.volver}>
+      <Link to={`/aprender?area=${tema.area}`} className={estilos.volver}>
         <IconoFlechaIzq /> Aprender
       </Link>
       <header className={estilos.cabecera}>
-        <span className={estilos.numero}>Tema {String(tema.orden).padStart(2, "0")}</span>
+        <span className={estilos.numero}>
+          {tema.area === "react" ? "React" : "JavaScript"} · Tema {String(tema.orden).padStart(2, "0")}
+        </span>
         <h1>{tema.titulo}</h1>
         <p>{tema.descripcion}</p>
       </header>

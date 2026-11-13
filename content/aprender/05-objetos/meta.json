@@ -1,7 +1,12 @@
 {
   "id": "objetos",
   "titulo": "Objetos",
+  "area": "javascript",
   "orden": 5,
   "descripcion": "Datos con nombre: leer y crear propiedades, recorrerlos, copiarlos bien y entender que se pasan por referencia.",
-  "ejercicios": ["js-ej-015", "js-ej-009", "js-ej-013"]
+  "ejercicios": [
+    "js-ej-015",
+    "js-ej-009",
+    "js-ej-013"
+  ]
 }

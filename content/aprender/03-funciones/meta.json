@@ -1,7 +1,14 @@
 {
   "id": "funciones",
   "titulo": "Funciones",
+  "area": "javascript",
   "orden": 3,
   "descripcion": "Declaración, expresión y flecha, hoisting, parámetros por defecto, rest y spread, return, funciones como valores y callbacks.",
-  "ejercicios": ["js-gu-010", "js-ej-029", "js-ej-028", "js-ej-025", "js-ej-024"]
+  "ejercicios": [
+    "js-gu-010",
+    "js-ej-029",
+    "js-ej-028",
+    "js-ej-025",
+    "js-ej-024"
+  ]
 }

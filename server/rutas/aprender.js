@@ -17,6 +17,7 @@ export function rutasAprender({ aprender, referencia, indice, progreso }) {
     return {
       id: t.id,
       titulo: t.titulo,
+      area: t.area,
       orden: t.orden,
       descripcion: t.descripcion,
       totalEjercicios: t.ejercicios.length,
@@ -33,7 +34,9 @@ export function rutasAprender({ aprender, referencia, indice, progreso }) {
   router.get("/aprender/:id", (req, res) => {
     const tema = aprender.porId.get(req.params.id);
     if (!tema) return res.status(404).json({ error: "No existe ese tema." });
-    const orden = aprender.temas.indexOf(tema);
+    // Anterior y siguiente dentro de la misma área (JavaScript o React).
+    const delArea = aprender.temas.filter((t) => t.area === tema.area);
+    const orden = delArea.indexOf(tema);
     res.json({
       ...resumenTema(tema),
       teoria: tema.teoria,
@@ -42,8 +45,8 @@ export function rutasAprender({ aprender, referencia, indice, progreso }) {
         .map((id) => indice.porId.get(id))
         .filter(Boolean)
         .map((ej) => ({ id: ej.id, titulo: ej.titulo, nivel: ej.nivel, tema: ej.tema, estado: estadoDe(ej.id) })),
-      anterior: aprender.temas[orden - 1] ? { id: aprender.temas[orden - 1].id, titulo: aprender.temas[orden - 1].titulo } : null,
-      siguiente: aprender.temas[orden + 1] ? { id: aprender.temas[orden + 1].id, titulo: aprender.temas[orden + 1].titulo } : null,
+      anterior: delArea[orden - 1] ? { id: delArea[orden - 1].id, titulo: delArea[orden - 1].titulo } : null,
+      siguiente: delArea[orden + 1] ? { id: delArea[orden + 1].id, titulo: delArea[orden + 1].titulo } : null,
     });
   });
 
