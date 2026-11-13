@@ -17,3 +17,5 @@ Thumbs.db
 # Carpetas temporales de pruebas
 workspace-*/
 data-*/
+.tmp-*/
+.alt-check-tmp/
