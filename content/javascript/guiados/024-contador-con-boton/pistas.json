@@ -1,0 +1,5 @@
+[
+  "Separa el problema en tres partes: **el estado** (una variable con el número actual), **la vista** (los tres elementos que creas y agregas al contenedor) y **los eventos** (qué pasa con el estado y con la vista en cada clic).",
+  "Guarda el número en `let cuenta = inicial`. Crea cada elemento con `document.createElement`, ponle la clase con `className` y el texto con `textContent`. Con `boton.addEventListener(\"click\", () => { ... })` cambias `cuenta` y vuelves a escribir `valor.textContent = cuenta`. Al final, `contenedor.append(valor, sumar, reiniciar)`.",
+  "Esqueleto de un botón:\n\n```js\nlet cuenta = inicial;\n\nconst valor = document.createElement(\"span\");\nvalor.className = \"valor\";\nvalor.textContent = cuenta;\n\nconst sumar = document.createElement(\"button\");\nsumar.className = \"sumar\";\nsumar.textContent = \"+1\";\nsumar.addEventListener(\"click\", () => {\n  cuenta++;\n  valor.textContent = /* ... */;\n});\n\n// Haz lo mismo con el botón reiniciar\ncontenedor.append(/* los tres, en orden */);\n```"
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "pregunta": "¿En qué orden se imprimen las letras?\n\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nPromise.resolve().then(() => console.log(\"C\"));\nconsole.log(\"D\");\n```",
+    "opciones": ["A B C D", "A D B C", "A D C B", "A C D B"],
+    "correcta": 2,
+    "explicacion": "Primero corre todo lo síncrono: A y D. Después, las microtareas: el `.then` imprime C. Recién al final, la macrotarea del `setTimeout`: B. Aunque el `setTimeout` sea de 0 ms, siempre va después de las promesas ya resueltas."
+  },
+  {
+    "pregunta": "¿En qué orden se imprimen los números?\n\n```js\nasync function f() {\n  console.log(\"1\");\n  await null;\n  console.log(\"2\");\n}\n\nf();\nconsole.log(\"3\");\n```",
+    "opciones": ["1 3 2", "1 2 3", "3 1 2", "1 3 (el 2 nunca se imprime)"],
+    "correcta": 0,
+    "explicacion": "Una función `async` corre de forma síncrona hasta el primer `await`: imprime 1. El `await` pausa `f` y lo que sigue queda como microtarea, así que el control vuelve afuera e imprime 3. Cuando termina el código síncrono, se retoma `f` e imprime 2. Hacer `await` de un valor que no es promesa también pausa."
+  },
+  {
+    "pregunta": "¿En qué orden se imprime esto?\n\n```js\nconst p = new Promise((resolve) => {\n  console.log(\"A\");\n  resolve(\"B\");\n});\n\np.then((valor) => console.log(valor));\nconsole.log(\"C\");\n```",
+    "opciones": ["B A C", "A B C", "C A B", "A C B"],
+    "correcta": 3,
+    "explicacion": "La función que recibe `new Promise` se ejecuta **de inmediato**, así que A sale primero. `resolve(\"B\")` cumple la promesa, pero el callback del `.then` siempre corre como microtarea, después del código síncrono: primero C y luego B."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nPromise.all([\n  Promise.resolve(1),\n  Promise.reject(new Error(\"falló\")),\n  Promise.resolve(3),\n])\n  .then((valores) => console.log(\"then\", valores))\n  .catch((error) => console.log(\"catch\", error.message));\n```",
+    "opciones": [
+      "then [1, 3]",
+      "catch falló",
+      "then [1, undefined, 3]",
+      "then [1, Error, 3] y luego catch falló"
+    ],
+    "correcta": 1,
+    "explicacion": "`Promise.all` se rechaza apenas **una** de las promesas falla, con el error de esa promesa. Se salta el `.then` y va directo al `.catch`. Si quisieras los resultados de las que sí funcionaron, usarías `Promise.allSettled`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst esperar = (ms) => new Promise((r) => setTimeout(r, ms));\n\nasync function procesar() {\n  const hechos = [];\n  [1, 2, 3].forEach(async (n) => {\n    await esperar(10);\n    hechos.push(n);\n  });\n  console.log(hechos.length);\n}\n\nprocesar();\n```",
+    "opciones": ["3", "1", "0", "Un error, porque forEach no acepta funciones async"],
+    "correcta": 2,
+    "explicacion": "`forEach` llama a la función `async` tres veces, pero **no espera** las promesas que devuelven. Cada llamada se pausa en su `await` y el `console.log` corre de inmediato, cuando `hechos` sigue vacío: imprime 0. Para esperar, usa `for...of` con `await` o `await Promise.all([1, 2, 3].map(...))`."
+  },
+  {
+    "pregunta": "¿Qué se imprime y en qué orden?\n\n```js\nconst lento = new Promise((r) => setTimeout(() => r(\"lento\"), 100));\nconst falla = new Promise((_, rechazar) =>\n  setTimeout(() => rechazar(new Error(\"falla\")), 10)\n);\n\nPromise.any([lento, falla]).then((v) => console.log(\"any:\", v));\nPromise.race([lento, falla]).catch((e) => console.log(\"race:\", e.message));\n```",
+    "opciones": [
+      "any: lento, y luego race: falla",
+      "race: falla, y luego any: lento",
+      "Solo race: falla",
+      "race: falla, y luego un AggregateError"
+    ],
+    "correcta": 1,
+    "explicacion": "`race` se queda con la **primera que termina**, sea bien o mal: `falla` termina a los 10 ms y se rechaza, así que a los 10 ms imprime \"race: falla\". `any` ignora los rechazos y espera a la **primera que se cumple**: `lento`, a los 100 ms. `any` solo daría `AggregateError` si **todas** fallaran."
+  }
+]

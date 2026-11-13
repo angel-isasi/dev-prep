@@ -1,0 +1,43 @@
+[
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nfunction crear() {\n  let n = 0;\n  return () => ++n;\n}\n\nconst a = crear();\nconst b = crear();\na();\na();\nconsole.log(a(), b());\n```",
+    "opciones": ["3 3", "3 1", "1 1", "2 1"],
+    "correcta": 1,
+    "explicacion": "Cada llamada a `crear()` crea su **propia** variable `n`. La función `a` ya se llamó dos veces (n = 2), así que la tercera devuelve 3. La función `b` tiene otra `n`, que empieza en 0, y su primera llamada devuelve 1."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nfor (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}\n```",
+    "opciones": ["0 1 2", "undefined undefined undefined", "2 2 2", "3 3 3"],
+    "correcta": 3,
+    "explicacion": "Con `var` hay una sola `i` para todo el bucle. Los callbacks de `setTimeout` se ejecutan después de que el bucle terminó, cuando `i` ya vale 3 (el valor que hizo fallar la condición `i < 3`). Con `let i` imprimiría 0 1 2, porque cada vuelta tendría su propia variable."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconsole.log(x);\nvar x = 5;\n```",
+    "opciones": ["undefined", "5", "ReferenceError: x is not defined", "null"],
+    "correcta": 0,
+    "explicacion": "Por el hoisting, la declaración `var x` se registra al inicio con el valor `undefined`; la asignación `= 5` recién ocurre en su línea. Por eso imprime `undefined` sin error. Con `let` o `const` sería un ReferenceError por la TDZ."
+  },
+  {
+    "pregunta": "¿Qué pasa al ejecutar este código?\n\n```js\nlet y = 1;\n\nfunction f() {\n  console.log(y);\n  let y = 2;\n}\n\nf();\n```",
+    "opciones": [
+      "Imprime 1",
+      "Imprime 2",
+      "Lanza ReferenceError: Cannot access 'y' before initialization",
+      "Imprime undefined"
+    ],
+    "correcta": 2,
+    "explicacion": "El `let y` de adentro existe desde el inicio de la función y tapa al `y` de afuera. Pero hasta su línea está en la zona muerta temporal (TDZ), así que el `console.log(y)` lanza ReferenceError. No imprime 1: JavaScript no \"sale\" a buscar el `y` de afuera porque ya hay uno en el scope de la función."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst color = \"rojo\";\n\nfunction mostrar() {\n  console.log(color);\n}\n\nfunction pintar() {\n  const color = \"azul\";\n  mostrar();\n}\n\npintar();\n```",
+    "opciones": ["\"azul\"", "\"rojo\"", "undefined", "ReferenceError"],
+    "correcta": 1,
+    "explicacion": "El scope es **léxico**: `mostrar` busca `color` en el lugar donde fue **escrita**, no donde se llama. Fue escrita afuera, donde `color` es \"rojo\". El `color` \"azul\" de `pintar` solo existe dentro de `pintar`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nlet saludo = \"hola\";\nconst decir = () => saludo;\nsaludo = \"chau\";\nconsole.log(decir());\n```",
+    "opciones": ["\"hola\"", "undefined", "TypeError", "\"chau\""],
+    "correcta": 3,
+    "explicacion": "Un closure guarda la **variable**, no una foto de su valor al momento de crear la función. Cuando se llama `decir()`, lee `saludo` en ese momento, y ya vale \"chau\"."
+  }
+]

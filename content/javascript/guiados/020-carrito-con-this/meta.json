@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-020",
+  "titulo": "Carrito con this",
+  "tipo": "funcion",
+  "tema": "this",
+  "nivel": 1,
+  "tags": ["this", "objetos", "métodos", "encadenar"]
+}

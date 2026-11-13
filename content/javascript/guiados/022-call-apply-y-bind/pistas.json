@@ -1,0 +1,5 @@
+[
+  "Todas las funciones tienen tres métodos para elegir su `this`: `call`, `apply` y `bind`. Los tres reciben **primero** el objeto que será `this`. La diferencia está en cómo pasan los demás argumentos y en si ejecutan la función ya o no.",
+  "`fn.call(obj, a, b)` ejecuta ya, con argumentos sueltos. `fn.apply(obj, [a, b])` ejecuta ya, con argumentos en un arreglo (A de Apply, A de Arreglo). `fn.bind(obj)` **no ejecuta**: devuelve una función nueva con `this` fijo. Recuerda poner `return` en las dos primeras.",
+  "Las tres son de una línea:\n\n```js\nreturn presentarse.call(persona, /* los dos argumentos sueltos */);\n\nreturn presentarse.apply(persona, /* el arreglo tal cual */);\n\nreturn presentarse.bind(/* ¿a quién atas? */);\n```"
+]

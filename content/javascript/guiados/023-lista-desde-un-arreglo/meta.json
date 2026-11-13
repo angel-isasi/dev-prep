@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-023",
+  "titulo": "Lista desde un arreglo",
+  "tipo": "funcion",
+  "tema": "dom",
+  "nivel": 1,
+  "tags": ["dom", "createElement", "textContent", "append", "xss"]
+}

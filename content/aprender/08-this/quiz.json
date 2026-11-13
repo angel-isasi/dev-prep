@@ -1,0 +1,48 @@
+[
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst perro = {\n  nombre: \"Firulais\",\n  ladrar() {\n    return this.nombre;\n  },\n};\nconst otro = { nombre: \"Boby\", ladrar: perro.ladrar };\n\nconsole.log(otro.ladrar());\n```",
+    "opciones": ["\"Boby\"", "\"Firulais\"", "undefined", "TypeError"],
+    "correcta": 0,
+    "explicacion": "`this` se decide al llamar, no al escribir la función. En `otro.ladrar()` lo que está antes del punto es `otro`, así que `this.nombre` es \"Boby\". Que el método se haya escrito dentro de `perro` no importa."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst equipo = {\n  nombre: \"Los Pumas\",\n  jugadores: [\"Ana\", \"Luis\"],\n  listar() {\n    return this.jugadores.map((j) => `${j} de ${this.nombre}`);\n  },\n};\n\nconsole.log(equipo.listar());\n```",
+    "opciones": [
+      "[\"Ana de undefined\", \"Luis de undefined\"]",
+      "TypeError: Cannot read properties of undefined",
+      "[\"Ana de Los Pumas\", \"Luis de Los Pumas\"]",
+      "[undefined, undefined]"
+    ],
+    "correcta": 2,
+    "explicacion": "La flecha del `map` no tiene `this` propio: usa el de `listar`, que es `equipo` porque se llamó como `equipo.listar()`. Si en vez de la flecha hubieras usado `function (j) { ... }`, esa función tendría su propio `this` (`undefined`) y lanzaría TypeError."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nfunction sumar(a, b) {\n  return this.base + a + b;\n}\nconst obj = { base: 10 };\n\nconst f = sumar.bind(obj, 1);\nconsole.log(f(2), sumar.call(obj, 1, 2), sumar.apply(obj, [5, 5]));\n```",
+    "opciones": ["13 13 20", "NaN 13 20", "12 13 20", "13 13 NaN"],
+    "correcta": 0,
+    "explicacion": "`bind(obj, 1)` fija `this = obj` y también el primer argumento `a = 1`; al llamar `f(2)`, `b = 2`: 10 + 1 + 2 = 13. `call(obj, 1, 2)` pasa los argumentos sueltos: 13. `apply(obj, [5, 5])` los pasa en un arreglo: 10 + 5 + 5 = 20."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nfunction quien() {\n  return this.nombre;\n}\nconst a = { nombre: \"A\" };\nconst b = { nombre: \"B\" };\n\nconst f = quien.bind(a);\nconsole.log(f.call(b), f.bind(b)());\n```",
+    "opciones": ["\"B\" \"B\"", "\"A\" \"B\"", "\"B\" \"A\"", "\"A\" \"A\""],
+    "correcta": 3,
+    "explicacion": "Una función creada con `bind` tiene el `this` fijado **para siempre**. Ni `call` ni un segundo `bind` lo pueden cambiar, así que las dos llamadas devuelven \"A\"."
+  },
+  {
+    "pregunta": "¿Qué pasa al ejecutar este código?\n\n```js\nclass Contador {\n  constructor() {\n    this.n = 0;\n  }\n  sumar() {\n    this.n++;\n  }\n}\n\nconst c = new Contador();\n[1, 2, 3].forEach(c.sumar);\nconsole.log(c.n);\n```",
+    "opciones": [
+      "Imprime 3",
+      "Imprime 0",
+      "Lanza TypeError antes de llegar al console.log",
+      "Imprime NaN"
+    ],
+    "correcta": 2,
+    "explicacion": "`forEach(c.sumar)` recibe solo la función, sin el objeto. `forEach` la llama suelta, y como las clases están en modo estricto, `this` es `undefined`: `this.n++` lanza `TypeError: Cannot read properties of undefined (reading 'n')`. Se arregla con `forEach(() => c.sumar())` o `forEach(c.sumar.bind(c))`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nclass Persona {\n  constructor(nombre) {\n    this.nombre = nombre;\n  }\n  saludar = () => this.nombre;\n}\n\nconst { saludar } = new Persona(\"Rosa\");\nconsole.log(saludar());\n```",
+    "opciones": ["TypeError", "\"Rosa\"", "undefined", "\"\""],
+    "correcta": 1,
+    "explicacion": "`saludar` es un **campo con flecha**: se crea para cada instancia, y la flecha toma el `this` del momento en que se creó, que es la instancia nueva. Por eso sigue funcionando aunque la saques del objeto. Si fuera un método normal, `saludar() { ... }`, lanzaría TypeError."
+  }
+]

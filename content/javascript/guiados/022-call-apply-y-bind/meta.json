@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-022",
+  "titulo": "Prestar un método con call, apply y bind",
+  "tipo": "funcion",
+  "tema": "this",
+  "nivel": 2,
+  "tags": ["this", "call", "apply", "bind", "funciones"]
+}

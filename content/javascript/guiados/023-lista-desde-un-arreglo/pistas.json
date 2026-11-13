@@ -1,0 +1,5 @@
+[
+  "Necesitas crear un elemento `<ul>` vacío, después recorrer el arreglo y, por cada elemento, crear un `<li>`, ponerle el texto y meterlo dentro del `<ul>`. Al final, devuelve el `<ul>`.",
+  "`document.createElement(\"ul\")` crea el elemento (todavía no está en la página). Para el texto usa `li.textContent = item`, que lo trata como texto plano: así `\"<b>hola</b>\"` no se convierte en negrita. Para meter el `<li>` dentro del `<ul>` usa `ul.append(li)`.",
+  "Esqueleto:\n\n```js\nconst ul = document.createElement(\"ul\");\nfor (const item of items) {\n  const li = /* crea un li */;\n  li.textContent = /* ... */;\n  ul.append(/* ... */);\n}\nreturn ul;\n```"
+]

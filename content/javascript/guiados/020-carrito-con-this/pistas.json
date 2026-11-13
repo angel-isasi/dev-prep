@@ -1,0 +1,5 @@
+[
+  "`crearCarrito` tiene que **devolver un objeto** (`return { ... }`). Ese objeto tiene una propiedad `productos` y tres métodos. Dentro de cada método, ¿cómo llegas al arreglo `productos` del carrito que te está llamando?",
+  "Dentro de un método, `this` es el objeto que está antes del punto: en `carrito.agregar(...)`, `this` es `carrito`. Entonces `this.productos.push(...)` agrega al arreglo correcto. Para poder encadenar, `agregar` tiene que terminar con `return this`.",
+  "Esqueleto:\n\n```js\nreturn {\n  productos: [],\n  agregar(nombre, precio) {\n    this.productos.push(/* el objeto { nombre, precio } */);\n    return /* el propio carrito */;\n  },\n  total() {\n    return this.productos.reduce((suma, p) => /* ... */, 0);\n  },\n  cantidad() {\n    return /* cuántos hay en this.productos */;\n  },\n};\n```"
+]

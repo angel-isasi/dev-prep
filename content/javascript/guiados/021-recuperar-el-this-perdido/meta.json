@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-021",
+  "titulo": "Recuperar el this perdido",
+  "tipo": "funcion",
+  "tema": "this",
+  "nivel": 2,
+  "tags": ["this", "callbacks", "bind", "arrow functions", "clases"]
+}

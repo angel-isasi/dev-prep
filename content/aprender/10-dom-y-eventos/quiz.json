@@ -1,0 +1,58 @@
+[
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst div = document.createElement(\"div\");\ndiv.textContent = \"<b>Hola</b>\";\nconsole.log(div.children.length, div.innerHTML);\n```",
+    "opciones": [
+      "1 \"<b>Hola</b>\"",
+      "0 \"Hola\"",
+      "1 \"Hola\"",
+      "0 \"&lt;b&gt;Hola&lt;/b&gt;\""
+    ],
+    "correcta": 3,
+    "explicacion": "`textContent` trata todo como texto: no crea ningún elemento `<b>`, así que `children.length` es 0. Al leer `innerHTML`, el navegador devuelve ese texto escapado (`&lt;` es `<`), y en pantalla se ve `<b>Hola</b>` literal. Por eso `textContent` es seguro frente a XSS."
+  },
+  {
+    "pregunta": "Con este HTML: `<div id=\"padre\"><button id=\"hijo\">Clic</button></div>`, ¿qué imprime este código?\n\n```js\nconst padre = document.querySelector(\"#padre\");\nconst hijo = document.querySelector(\"#hijo\");\n\npadre.addEventListener(\"click\", () => console.log(\"padre\"));\nhijo.addEventListener(\"click\", () => console.log(\"hijo\"));\n\nhijo.click();\n```",
+    "opciones": ["\"padre\" y luego \"hijo\"", "\"hijo\" y luego \"padre\"", "Solo \"hijo\"", "Solo \"padre\""],
+    "correcta": 1,
+    "explicacion": "Por el **bubbling**, el evento ocurre primero en el elemento donde se hizo clic (`hijo`) y después sube por sus padres (`padre`). Para que solo se imprima \"hijo\", el listener del hijo tendría que llamar a `event.stopPropagation()`."
+  },
+  {
+    "pregunta": "Con este HTML: `<ul id=\"lista\"><li><span>Ana</span></li></ul>`, haces clic sobre el texto \"Ana\". ¿Qué imprime?\n\n```js\nconst lista = document.querySelector(\"#lista\");\nlista.addEventListener(\"click\", (event) => {\n  console.log(event.target.tagName, event.currentTarget.tagName);\n});\n```",
+    "opciones": ["SPAN UL", "UL UL", "LI UL", "SPAN SPAN"],
+    "correcta": 0,
+    "explicacion": "`event.target` es el elemento exacto donde empezó el evento: el `<span>` con el texto. `event.currentTarget` es el elemento que tiene el listener que se está ejecutando: el `<ul>`. Por eso en la delegación de eventos se usa `event.target.closest(\"li\")` para llegar al `<li>`."
+  },
+  {
+    "pregunta": "La página tiene una lista con tres `<li>`. ¿Qué pasa al ejecutar esto?\n\n```js\nconst items = document.querySelectorAll(\"li\");\nconsole.log(items.map((li) => li.textContent));\n```",
+    "opciones": [
+      "Imprime un arreglo con los tres textos",
+      "Imprime un arreglo vacío",
+      "Lanza TypeError: items.map is not a function",
+      "Imprime undefined"
+    ],
+    "correcta": 2,
+    "explicacion": "`querySelectorAll` devuelve una `NodeList`, no un arreglo. Tiene `forEach` y `length`, pero no `map`. Para usar `map` conviértela antes: `[...items].map(...)` o `Array.from(items, (li) => li.textContent)`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst el = document.createElement(\"div\");\nel.classList.add(\"a\");\nel.classList.toggle(\"a\");\nel.classList.toggle(\"b\");\nel.classList.toggle(\"b\", true);\nconsole.log(el.className);\n```",
+    "opciones": [
+      "\"a b\"",
+      "\"b\"",
+      "\"\" (vacío)",
+      "\"a\""
+    ],
+    "correcta": 1,
+    "explicacion": "`add(\"a\")` pone la clase a; el primer `toggle(\"a\")` la quita porque ya estaba. `toggle(\"b\")` pone b porque no estaba. `toggle(\"b\", true)` **fuerza** a que esté: como ya está, no cambia nada. Resultado: solo \"b\"."
+  },
+  {
+    "pregunta": "¿Cuántas veces se imprime \"hola\" si el usuario hace dos clics en el botón?\n\n```js\nfunction saludar() {\n  console.log(\"hola\");\n}\n\nboton.addEventListener(\"click\", saludar());\n```",
+    "opciones": [
+      "2 veces, una por clic",
+      "3 veces: una al registrar y una por clic",
+      "Ninguna",
+      "1 vez, al registrar el listener, y ninguna con los clics"
+    ],
+    "correcta": 3,
+    "explicacion": "`saludar()` con paréntesis **ejecuta** la función en ese momento (imprime \"hola\" una vez) y le pasa a `addEventListener` lo que devuelve: `undefined`. No queda ningún listener útil, así que los clics no hacen nada. Lo correcto es pasar la función sin llamarla: `addEventListener(\"click\", saludar)`."
+  }
+]

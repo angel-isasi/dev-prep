@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-026",
+  "titulo": "Modal que abre y cierra",
+  "tipo": "funcion",
+  "tema": "dom",
+  "nivel": 2,
+  "tags": ["dom", "eventos", "event.target", "bubbling", "keydown", "hidden"]
+}

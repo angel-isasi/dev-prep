@@ -1,0 +1,5 @@
+[
+  "`this` se decide **al llamar** la función. `contador.sumar()` tiene `contador` antes del punto; pero cuando el emisor hace `fn()`, no hay nada antes del punto. ¿Cómo le das al emisor una función que, al llamarse suelta, igual ejecute `sumar` con el contador correcto?",
+  "Tienes dos herramientas: `contador.sumar.bind(contador)` crea una copia de `sumar` con `this` fijado para siempre; y una función flecha `() => contador.sumar()` es una función nueva que, por dentro, llama a `sumar` **con el punto**. Cualquiera de las dos se la pasas a `emisor.on(...)`.",
+  "Es una sola línea:\n\n```js\nexport function registrar(contador, emisor) {\n  emisor.on(/* una función que llame a contador.sumar() con el punto */);\n}\n```"
+]

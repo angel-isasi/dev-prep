@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-024",
+  "titulo": "Contador con botón",
+  "tipo": "funcion",
+  "tema": "dom",
+  "nivel": 1,
+  "tags": ["dom", "eventos", "addEventListener", "click", "estado"]
+}

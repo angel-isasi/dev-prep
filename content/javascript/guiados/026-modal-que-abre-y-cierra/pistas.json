@@ -1,0 +1,5 @@
+[
+  "Primero arma la estructura con `createElement` y `append` (el h2, el p y el botón dentro de `.modal`; `.modal` dentro de `.fondo`; y el botón Abrir y `.fondo` dentro del contenedor). Abrir y cerrar es solo cambiar `fondo.hidden` a `false` o `true`. Lo difícil es el clic en el fondo: ¿qué pasa con un clic en el `<p>`, si el `<p>` está dentro del fondo?",
+  "Por el **bubbling**, un clic en el `<p>` también llega al listener del fondo. Para distinguirlos usa `event.target`, que es el elemento exacto donde se hizo clic: si `event.target === fondo`, el clic fue en la parte oscura; si no, fue dentro de la caja. Para Escape, escucha `keydown` en `document` y revisa `event.key`.",
+  "Los listeners:\n\n```js\nabrir.addEventListener(\"click\", () => { fondo.hidden = false; });\ncerrar.addEventListener(\"click\", () => { fondo.hidden = true; });\n\nfondo.addEventListener(\"click\", (event) => {\n  if (/* ¿el clic fue en el fondo mismo? */) fondo.hidden = true;\n});\n\ndocument.addEventListener(\"keydown\", (event) => {\n  if (event.key === /* ... */) fondo.hidden = true;\n});\n```"
+]

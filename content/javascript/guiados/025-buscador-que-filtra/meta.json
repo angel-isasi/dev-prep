@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-025",
+  "titulo": "Buscador que filtra mientras escribes",
+  "tipo": "funcion",
+  "tema": "dom",
+  "nivel": 2,
+  "tags": ["dom", "eventos", "input", "filter", "renderizar"]
+}

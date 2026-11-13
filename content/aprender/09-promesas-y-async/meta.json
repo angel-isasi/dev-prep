@@ -1,0 +1,7 @@
+{
+  "id": "promesas-y-async",
+  "titulo": "Promesas y async/await",
+  "orden": 9,
+  "descripcion": "Event loop, callbacks, promesas y sus estados, then/catch/finally, async/await con try/catch, Promise.all, allSettled, race y any.",
+  "ejercicios": ["js-ej-031", "js-ej-032", "js-ej-036", "js-ej-039", "js-ej-037"]
+}
