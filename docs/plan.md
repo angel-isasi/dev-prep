@@ -1,5 +1,9 @@
 # Plan v1: dev-prep, app de práctica offline (propuesta para iterar)
 
+## Estado (2026-11-13)
+
+Fases 1 a 7 terminadas. Contenido validado: 257 ejercicios (17 guiados, 50 de JavaScript, 30 retos de JS, 30 de algoritmos, 50 de React, 50 mixtos y 30 retos de React), 10 temas de Aprender, 146 entradas de Referencia y 100 preguntas de entrevista. Pendiente para más adelante: TypeScript, Electron, insignias y niveles.
+
 ## Contexto
 
 Angel quiere un "LeetCode personal" offline en Windows para llegar a su primer trabajo frontend junior en 2027: programa en VS Code, los tests corren solos al guardar y la app muestra el resultado en vivo, con progreso y presión diaria. El repo `D:\angel-isasi-dev\dev-prep` empezó solo con la especificación del proyecto (sin Git).
