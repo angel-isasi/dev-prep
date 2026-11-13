@@ -4,7 +4,8 @@ import { Router } from "express";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { seccionMarkdown } from "../contenido.js";
-import { solucionDesbloqueada } from "../progreso-reglas.js";
+import { estadoVisible, repasoPendiente, solucionDesbloqueada } from "../progreso-reglas.js";
+import { fechaLocal } from "../fechas.js";
 
 /** Lo que se manda al navegador de cada ejercicio (sin rutas de disco). */
 function resumen(ej, progreso) {
@@ -17,7 +18,7 @@ function resumen(ej, progreso) {
     nivel: ej.nivel,
     tags: ej.tags,
     coleccion: ej.coleccion,
-    estado: p?.estado ?? "pendiente",
+    estado: p ? estadoVisible(p, fechaLocal()) : "pendiente",
     ultimoResultado: p?.ultimoResultado ?? null,
   };
 }
@@ -73,8 +74,18 @@ export function rutasEjercicios({ indice, progreso, workspace, corredor, vscode,
       preparado: workspace ? await workspace.existe(ej) : false,
       corriendo: corredor?.estaCorriendo(ej.id) ?? false,
       resultado: corredor?.ultimoResultado(ej.id) ?? null,
-      progreso: progreso?.deEjercicio(ej.id) ?? null,
+      progreso: registro ?? null,
+      repasoPendiente: registro ? repasoPendiente(registro, fechaLocal()) : false,
     });
+  });
+
+  // Empezar un repaso: vuelve al archivo inicial (con respaldo) y lo resuelves de nuevo sin ayuda.
+  router.post("/:id/repasar", async (req, res) => {
+    const ej = req.ejercicio;
+    corredor?.marcarManual(ej.id);
+    const { respaldo } = await workspace.reiniciar(ej);
+    const registro = await progreso.iniciarRepaso(ej.id);
+    res.json({ progreso: registro, respaldo: respaldo && path.relative(workspace.raiz, respaldo) });
   });
 
   // Ver la pista n (1, 2 o 3), siempre en orden.

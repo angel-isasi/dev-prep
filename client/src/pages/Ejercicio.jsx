@@ -13,6 +13,11 @@ import { SeccionExplicar } from "../components/SeccionExplicar.jsx";
 import { IconoFlechaIzq, IconoVSCode } from "../components/Iconos.jsx";
 import estilos from "./Ejercicio.module.css";
 
+function fechaCorta(fecha) {
+  const [a, m, d] = fecha.split("-").map(Number);
+  return new Date(a, m - 1, d).toLocaleDateString("es-PE", { weekday: "long", day: "numeric", month: "long" });
+}
+
 function minutos(segundos) {
   const m = Math.round((segundos ?? 0) / 60);
   return m < 1 ? null : `${m} min de trabajo`;
@@ -66,6 +71,12 @@ export function Ejercicio() {
     if (datos.resueltoAhora) {
       setAviso({ tipo: "exito", texto: "¡Resuelto! Todos los tests pasan. Ahora explícalo con tus palabras." });
       cargar(); // trae la solución y la explicación modelo, ya desbloqueadas
+    } else if (datos.repasoCompletado) {
+      setAviso({
+        tipo: "exito",
+        texto: `¡Repaso completado! Lo volverás a ver el ${fechaCorta(datos.progreso.repaso.proximo)}.`,
+      });
+      cargar();
     }
   });
 
@@ -100,6 +111,18 @@ export function Ejercicio() {
           ? `Volviste al archivo inicial. Tu versión anterior quedó en workspace/${respaldo.replaceAll("\\", "/")}`
           : "Volviste al archivo inicial.",
       });
+    });
+
+  const empezarRepaso = () =>
+    accion(async () => {
+      const { progreso } = await api.repasar(id);
+      setEjercicio((e) => ({ ...e, progreso, pistas: [], solucion: null, preparado: true }));
+      setPestana("enunciado");
+      setAviso({
+        tipo: "info",
+        texto: "Modo repaso: tu archivo volvió al inicio (con respaldo). Resuélvelo de nuevo sin mirar la solución.",
+      });
+      await api.abrir(id).catch(() => {});
     });
 
   const verPista = (n) =>
@@ -194,6 +217,25 @@ export function Ejercicio() {
               </button>
             ))}
         </div>
+
+        {progreso?.repasando ? (
+          <p className={estilos.aviso} data-tipo="info">
+            <strong>Modo repaso.</strong> Resuélvelo sin mirar: la solución está bloqueada hasta que pasen todos los
+            tests.
+          </p>
+        ) : (
+          ejercicio.repasoPendiente && (
+            <div className={estilos.repaso}>
+              <div>
+                <strong>Te toca repasar este ejercicio.</strong>
+                <span>Resolverlo de nuevo días después es lo que hace que no se te olvide.</span>
+              </div>
+              <button type="button" className="boton boton-primario" onClick={empezarRepaso} disabled={ocupado}>
+                Empezar repaso
+              </button>
+            </div>
+          )
+        )}
 
         {ejercicio.preparado && (
           <p className={estilos.archivo}>

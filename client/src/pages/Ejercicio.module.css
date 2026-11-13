@@ -126,3 +126,25 @@
     max-height: none;
   }
 }
+
+.repaso {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-4);
+  margin-top: var(--espacio-4);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid color-mix(in srgb, var(--aviso) 35%, transparent);
+  border-radius: var(--radio);
+  background: var(--aviso-suave);
+  font-size: 14px;
+}
+
+.repaso div {
+  display: flex;
+  flex-direction: column;
+}
+
+.repaso span {
+  color: var(--texto-suave);
+}

@@ -21,4 +21,9 @@ export const api = {
   verPista: (id, n) => post(`${ruta(id)}/pistas/${n}`),
   verSolucion: (id) => post(`${ruta(id)}/solucion`),
   guardarExplicacion: (id, texto) => put(`${ruta(id)}/explicacion`, { texto }),
+  repasar: (id) => post(`${ruta(id)}/repasar`),
+  inicio: () => pedir("/api/inicio"),
+  progreso: () => pedir("/api/progreso"),
+  config: () => pedir("/api/config"),
+  guardarConfig: (cambios) => put("/api/config", cambios),
 };

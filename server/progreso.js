@@ -12,7 +12,17 @@ import {
   sumarTiempo,
   verPista,
   verSolucion,
+  iniciarRepaso,
 } from "./progreso-reglas.js";
+
+/** Campos de configuración que se pueden cambiar desde Ajustes, con su validación. */
+const CAMPOS_CONFIG = {
+  metaDiaria: (v) => Number.isInteger(v) && v >= 0 && v <= 20,
+  topeDeuda: (v) => Number.isInteger(v) && v >= 0 && v <= 50,
+  fechaMeta: (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v),
+  objetivo: (v) => typeof v === "string" && v.length <= 500,
+  nombre: (v) => typeof v === "string" && v.length <= 60,
+};
 
 const RESPALDOS_DIARIOS = 7;
 
@@ -103,6 +113,32 @@ export async function crearProgreso({ datosDir }) {
       return datos.ejercicios[id];
     },
 
+    async iniciarRepaso(id) {
+      datos.ejercicios[id] = iniciarRepaso(deEjercicio(id));
+      await registrarEvento("repaso-inicio", id);
+      await guardar();
+      return datos.ejercicios[id];
+    },
+
+    config: () => datos.config,
+
+    /** Cambia solo los campos válidos; devuelve la config resultante. */
+    async cambiarConfig(cambios) {
+      for (const [campo, valor] of Object.entries(cambios ?? {})) {
+        if (CAMPOS_CONFIG[campo]?.(valor)) datos.config[campo] = valor;
+      }
+      await guardar();
+      return datos.config;
+    },
+
+    /** Guarda la foto del % de preparación de hoy (para el resumen semanal). */
+    async anotarPreparacion(porcentaje) {
+      const hoy = fechaLocal();
+      if (datos.dias[hoy]?.preparacion === porcentaje) return;
+      datos.dias = { ...datos.dias, [hoy]: { ...(datos.dias[hoy] ?? { resueltos: 0, repasos: 0, preguntas: 0, segundos: 0 }), preparacion: porcentaje } };
+      await guardar();
+    },
+
     async guardarExplicacion(id, texto) {
       datos.ejercicios[id] = { ...deEjercicio(id), explicacion: texto };
       await registrarEvento("explicacion", id);
@@ -127,14 +163,16 @@ export async function crearProgreso({ datosDir }) {
     async registrarResultado(id, resultado, { esIntento }) {
       const ahora = ahoraIso();
       const aplicado = aplicarResultado(deEjercicio(id), resultado, { esIntento, ahora });
-      const { resueltoAhora } = aplicado;
+      const { resueltoAhora, repasoCompletado } = aplicado;
       const registro = esIntento ? conTiempo(aplicado.registro, ahora) : aplicado.registro;
       datos.ejercicios[id] = registro;
       if (resueltoAhora) datos.dias = sumarAlDia(datos.dias, fechaLocal(), "resueltos");
+      if (repasoCompletado) datos.dias = sumarAlDia(datos.dias, fechaLocal(), "repasos");
       await registrarEvento("corrida", id, { pasan: resultado.pasan, total: resultado.total, intento: esIntento });
       if (resueltoAhora) await registrarEvento("resuelto", id);
+      if (repasoCompletado) await registrarEvento("repaso", id, { caja: registro.repaso.caja });
       await guardar();
-      return { registro, resueltoAhora };
+      return { registro, resueltoAhora, repasoCompletado };
     },
   };
 }

@@ -32,6 +32,7 @@ export function registroVacio() {
     repaso: null,
     ultimaActividad: null,
     comparoSolucion: false,
+    repasando: false,
   };
 }
 
@@ -69,17 +70,68 @@ export function aplicarResultado(registro, resultado, { esIntento, ahora }) {
   nuevo.ultimoResultado = { pasan: resultado.pasan, total: resultado.total, en: ahora };
 
   const todosPasan = !resultado.error && resultado.total > 0 && resultado.pasan === resultado.total;
+  const hoy = ahora.slice(0, 10); // ahora es hora local: los 10 primeros caracteres son el día
   let resueltoAhora = false;
+  let repasoCompletado = false;
 
-  if (todosPasan && nuevo.vioSolucion) {
+  if (todosPasan && nuevo.repasando) {
+    // Terminaste un repaso. Sin mirar la solución: subes de caja. Mirándola: vuelves a la caja 1.
+    nuevo.repasando = false;
+    if (nuevo.vioSolucion) {
+      nuevo.estado = "repasar";
+      nuevo.repaso = programarRepaso(1, hoy);
+    } else {
+      nuevo.estado = "resuelto";
+      nuevo.repaso = programarRepaso(Math.min((registro.repaso?.caja ?? 1) + 1, INTERVALOS.length), hoy);
+      repasoCompletado = true;
+    }
+  } else if (todosPasan && nuevo.vioSolucion) {
     nuevo.estado = "repasar";
+    nuevo.repaso ??= programarRepaso(1, hoy);
   } else if (todosPasan && nuevo.estado !== "resuelto") {
     nuevo.estado = "resuelto";
     nuevo.resueltoEn = ahora;
+    // Con 2 o 3 pistas vuelve en 1 día; con 0 o 1, en 3 días.
+    nuevo.repaso = programarRepaso(nuevo.pistasVistas >= 2 ? 1 : 2, hoy);
     resueltoAhora = true;
   }
 
-  return { registro: nuevo, resueltoAhora };
+  return { registro: nuevo, resueltoAhora, repasoCompletado };
+}
+
+/** Repaso espaciado (cajas de Leitner): días de espera según la caja. */
+export const INTERVALOS = [1, 3, 7, 14, 30];
+
+/** "2026-11-13" + 3 -> "2026-11-16" (en hora local). */
+export function sumarDias(fecha, dias) {
+  const [a, m, d] = fecha.split("-").map(Number);
+  const nueva = new Date(a, m - 1, d + dias);
+  const dos = (n) => String(n).padStart(2, "0");
+  return `${nueva.getFullYear()}-${dos(nueva.getMonth() + 1)}-${dos(nueva.getDate())}`;
+}
+
+export function programarRepaso(caja, hoy) {
+  return { caja, proximo: sumarDias(hoy, INTERVALOS[caja - 1]) };
+}
+
+/** ¿Le toca repaso hoy? */
+export function repasoPendiente(registro, hoy) {
+  if (registro.repasando) return true;
+  if (registro.estado === "repasar") return !registro.repaso || registro.repaso.proximo <= hoy;
+  return registro.estado === "resuelto" && !!registro.repaso && registro.repaso.proximo <= hoy;
+}
+
+/** El estado que se muestra: un resuelto con repaso vencido aparece como "repasar". */
+export function estadoVisible(registro, hoy) {
+  if (registro.estado === "resuelto" && repasoPendiente(registro, hoy)) return "repasar";
+  return registro.estado;
+}
+
+/**
+ * Empiezas un repaso: lo resuelves de nuevo desde cero, sin pistas ni solución a la vista.
+ */
+export function iniciarRepaso(registro) {
+  return { ...registro, repasando: true, pistasVistas: 0, vioSolucion: false };
 }
 
 /** Suma a un contador del día (resueltos, repasos, segundos...). */
@@ -119,12 +171,13 @@ export function verPista(registro, n, ahora) {
  * Si ya lo habías resuelto, verla para comparar no penaliza.
  */
 export function verSolucion(registro, ahora) {
-  if (registro.estado === "resuelto") return { ...registro, comparoSolucion: true };
+  if (registro.estado === "resuelto" && !registro.repasando) return { ...registro, comparoSolucion: true };
   const nuevo = marcarAbierto(registro, ahora);
   return { ...nuevo, vioSolucion: true, estado: "repasar" };
 }
 
 /** ¿Se puede mostrar la solución sin preguntar? (ya resuelto o ya la viste) */
 export function solucionDesbloqueada(registro) {
+  if (registro.repasando) return registro.vioSolucion; // en repaso se vuelve a bloquear
   return registro.estado === "resuelto" || registro.vioSolucion;
 }

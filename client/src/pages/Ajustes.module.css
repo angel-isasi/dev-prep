@@ -1,0 +1,86 @@
+.pagina {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+}
+
+.pagina h1 {
+  font-size: 28px;
+  margin-bottom: var(--espacio-5);
+}
+
+.mensaje {
+  padding: var(--espacio-6);
+  color: var(--texto-suave);
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-5);
+  padding: var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  box-shadow: var(--brillo-borde);
+}
+
+.formulario label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+}
+
+.formulario label > span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.formulario small {
+  color: var(--texto-tenue);
+  font-size: 13px;
+}
+
+.formulario input,
+.formulario textarea {
+  margin-top: var(--espacio-1);
+  padding: 9px 12px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: 14px;
+}
+
+.formulario textarea {
+  resize: vertical;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espacio-4);
+}
+
+@media (max-width: 760px) {
+  .fila {
+    grid-template-columns: 1fr;
+  }
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+.ok {
+  color: var(--exito);
+  font-size: 14px;
+}
+
+.error {
+  color: var(--error);
+  font-size: 14px;
+}

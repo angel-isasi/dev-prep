@@ -21,8 +21,8 @@ const corredor = await crearCorredor({
   alEmpezar: (ids) => eventos.emitir("corriendo", { ids }),
   alResultado: async (id, resultado, info) => {
     if (!indice.porId.has(id)) return; // carpeta ajena en workspace/
-    const { registro, resueltoAhora } = await progreso.registrarResultado(id, resultado, info);
-    eventos.emitir("resultado", { id, resultado, progreso: registro, resueltoAhora });
+    const { registro, resueltoAhora, repasoCompletado } = await progreso.registrarResultado(id, resultado, info);
+    eventos.emitir("resultado", { id, resultado, progreso: registro, resueltoAhora, repasoCompletado });
   },
 });
 

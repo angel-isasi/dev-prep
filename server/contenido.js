@@ -9,6 +9,20 @@ export const EXTENSION = { funcion: "js", componente: "jsx" };
 
 export const NIVELES = { 1: "básico", 2: "intermedio", 3: "difícil" };
 
+/** Orden de estudio de las colecciones (las que no estén aquí van al final). */
+const ORDEN_COLECCIONES = [
+  "javascript/ejercicios",
+  "javascript/retos",
+  "algoritmos/retos",
+  "react/ejercicios",
+  "react/mixtos",
+  "react/retos",
+];
+const posicion = (coleccion) => {
+  const i = ORDEN_COLECCIONES.indexOf(coleccion);
+  return i === -1 ? ORDEN_COLECCIONES.length : i;
+};
+
 /** Secciones obligatorias de cada explicacion.md, en orden. */
 export const SECCIONES_EXPLICACION = [
   "Idea clave",
@@ -81,6 +95,8 @@ export async function escanearContenido(contenidoDir) {
       errores.push(`${relativa}: ${error.message}`);
     }
   }
+
+  ejercicios.sort((a, b) => posicion(a.coleccion) - posicion(b.coleccion) || a.carpeta.localeCompare(b.carpeta));
 
   const vistos = new Set();
   for (const ej of ejercicios) {

@@ -86,3 +86,35 @@
   background: var(--superficie-2);
   color: var(--texto);
 }
+
+.racha {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin: 0 var(--espacio-1) var(--espacio-3);
+  padding: 10px var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  color: var(--texto-tenue);
+  font-size: 13px;
+}
+
+.racha strong {
+  color: var(--texto);
+  font-size: 16px;
+}
+
+.racha[data-activa="true"] {
+  color: var(--texto-suave);
+  background: radial-gradient(120px 60px at 0% 0%, var(--aviso-suave), transparent 80%);
+}
+
+.racha[data-activa="true"] svg {
+  color: var(--aviso);
+}
+
+.pie {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}

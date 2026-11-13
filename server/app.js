@@ -5,6 +5,7 @@ import express from "express";
 import path from "node:path";
 import { existsSync } from "node:fs";
 import { rutasEjercicios } from "./rutas/ejercicios.js";
+import { rutasProgreso } from "./rutas/progreso.js";
 
 /**
  * @param {object} deps
@@ -17,6 +18,7 @@ export function crearApp(deps) {
   app.use(express.json());
 
   app.use("/api/ejercicios", rutasEjercicios(deps));
+  if (deps.progreso) app.use("/api", rutasProgreso(deps));
   if (deps.eventos) app.get("/api/eventos", deps.eventos.manejador);
 
   app.use("/api", (req, res) => {
