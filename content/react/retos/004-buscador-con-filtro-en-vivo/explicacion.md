@@ -7,7 +7,7 @@ Guarda en el estado **solo lo que escribe el usuario**. La lista filtrada es **e
 1. **Input controlado.** Crea el estado `consulta` con `useState("")` y conecta el input: `value={consulta}` y `onChange={(e) => setConsulta(e.target.value)}`. Cada tecla actualiza el estado y React vuelve a renderizar.
 2. **Función para normalizar.** Para comparar sin tildes ni mayúsculas, convierte los dos textos a una forma común:
    - `normalize("NFD")` separa cada letra de su tilde: `"ó"` pasa a ser `"o"` + una tilde suelta (un carácter invisible del rango `̀` a `ͯ`).
-   - `replace(/[̀-ͯ]/g, "")` borra esas tildes sueltas.
+   - `replace(/[\u0300-\u036f]/g, "")` borra esas tildes sueltas.
    - `toLowerCase()` y `trim()` terminan el trabajo.
 3. **Calcula los filtrados en el cuerpo del componente**, no en un `useEffect` ni en otro estado: `items.filter((item) => normalizar(item).includes(buscado))`.
 4. **Renderiza según el resultado**: si hay filtrados, una `<ul>` con un `<li key={item}>` por cada uno; si no, el mensaje "Sin resultados".
@@ -20,7 +20,7 @@ import { useState } from "react";
 function normalizar(texto) {
   return texto
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim();
 }

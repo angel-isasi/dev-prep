@@ -7,7 +7,7 @@ import estilos from "./Referencia.module.css";
 const normalizar = (texto) =>
   texto
     .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
+    .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 
 /** Puntaje de búsqueda: el nombre pesa más que la descripción. 0 = no coincide. */
