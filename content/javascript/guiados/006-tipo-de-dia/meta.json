@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-006",
+  "titulo": "¿Laboral o fin de semana?",
+  "tipo": "funcion",
+  "tema": "condicionales",
+  "nivel": 1,
+  "tags": ["condicionales", "switch", "strings"]
+}

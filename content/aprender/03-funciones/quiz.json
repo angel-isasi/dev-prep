@@ -1,0 +1,53 @@
+[
+  {
+    "pregunta": "¿Qué pasa al ejecutar este código?\n\n```js\nconsole.log(sumar(2, 3));\nconsole.log(restar(5, 1));\n\nfunction sumar(a, b) {\n  return a + b;\n}\nconst restar = (a, b) => a - b;\n```",
+    "opciones": [
+      "Imprime 5 y 4",
+      "Imprime 5 y luego lanza un ReferenceError",
+      "Imprime undefined y luego lanza un ReferenceError",
+      "Lanza un ReferenceError en la primera línea"
+    ],
+    "correcta": 1,
+    "explicacion": "`sumar` es una declaración: se eleva completa, así que se puede llamar antes y devuelve 5. `restar` es una flecha guardada en `const`: la variable existe pero está en la zona muerta temporal hasta su línea, así que usarla antes lanza `ReferenceError: Cannot access 'restar' before initialization`. Imprimiría 5 y 4 solo si `restar` también fuera una declaración con `function`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst doble = (n) => { n * 2 };\nconsole.log(doble(4));\n```",
+    "opciones": ["8", "NaN", "SyntaxError", "undefined"],
+    "correcta": 3,
+    "explicacion": "Con llaves, la flecha tiene un cuerpo normal y el `return` deja de ser implícito. Se calcula `n * 2` pero nadie lo devuelve, así que la función devuelve `undefined`. No es un error de sintaxis: el código es válido. Sería 8 con `(n) => n * 2` o con `{ return n * 2; }`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nfunction saludar(nombre = \"invitado\") {\n  return `Hola, ${nombre}`;\n}\nconsole.log(saludar(undefined));\nconsole.log(saludar(null));\n```",
+    "opciones": [
+      "\"Hola, invitado\" y \"Hola, invitado\"",
+      "\"Hola, undefined\" y \"Hola, null\"",
+      "\"Hola, invitado\" y \"Hola, null\"",
+      "\"Hola, undefined\" y \"Hola, invitado\""
+    ],
+    "correcta": 2,
+    "explicacion": "El valor por defecto se usa solo cuando el argumento falta o llega como `undefined`. Con `undefined` se usa \"invitado\". Con `null` no: `null` es un valor que pasaste a propósito, así que `nombre` vale `null` y el template literal lo convierte en el texto \"null\"."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nfunction contar(primero, ...resto) {\n  return resto.length;\n}\nconst datos = [10, 20, 30, 40];\nconsole.log(contar(...datos), contar(datos));\n```",
+    "opciones": ["3 0", "4 1", "3 1", "4 4"],
+    "correcta": 0,
+    "explicacion": "Con `contar(...datos)`, el spread pasa 4 argumentos sueltos: `primero` es 10 y el rest junta los demás en `[20, 30, 40]`, longitud 3. Con `contar(datos)` llega un solo argumento (el array entero) que va a `primero`, y `resto` queda como `[]`, longitud 0. El rest nunca incluye a los parámetros que van antes que él."
+  },
+  {
+    "pregunta": "¿Qué pasa al ejecutar este código?\n\n```js\nfunction ejecutar(fn) {\n  return fn(5);\n}\nconst triple = (n) => n * 3;\nconsole.log(ejecutar(triple));\nconsole.log(ejecutar(triple(2)));\n```",
+    "opciones": [
+      "Imprime 15 y 6",
+      "Imprime 15 y 30",
+      "Lanza un TypeError en la primera llamada",
+      "Imprime 15 y luego lanza TypeError: fn is not a function"
+    ],
+    "correcta": 3,
+    "explicacion": "En la primera llamada se pasa la función `triple` (sin paréntesis) y `ejecutar` la llama con 5: imprime 15. En la segunda, `triple(2)` se ejecuta antes y lo que se pasa es su resultado, el número 6. Dentro, `fn(5)` intenta llamar a un número y lanza `TypeError: fn is not a function`. Es el error de escribir `fn()` cuando había que pasar `fn`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nfunction crearSaludo(saludo) {\n  return (nombre) => `${saludo}, ${nombre}`;\n}\nconst hola = crearSaludo(\"Hola\");\nconsole.log(typeof hola, hola(\"Ana\"));\n```",
+    "opciones": ["object Hola, Ana", "function Hola, Ana", "string Hola, Ana", "function undefined, Ana"],
+    "correcta": 1,
+    "explicacion": "`crearSaludo` devuelve una función, así que `hola` es una función y `typeof hola` es `\"function\"` (no `\"object\"`, aunque las funciones sean objetos). Esa función recuerda el `saludo` con el que se creó, así que `hola(\"Ana\")` da \"Hola, Ana\". No es `\"string\"` porque `hola` todavía no se ha llamado en ese punto."
+  }
+]

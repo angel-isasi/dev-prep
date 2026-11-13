@@ -1,0 +1,5 @@
+[
+  "Antes del `switch`, pasa el día a minúsculas para comparar siempre contra el mismo texto. Luego piensa: cinco días comparten la misma respuesta, ¿cómo haces que varios `case` caigan en el mismo código?",
+  "Si pones varios `case` seguidos sin código entre ellos, todos ejecutan el bloque del último (`case \"lunes\": case \"martes\": ... return \"laboral\";`). Para lo que no coincide con ningún `case`, usa `default`.",
+  "Esqueleto:\n\n```js\nswitch (dia.toLowerCase()) {\n  case \"lunes\":\n  case \"martes\":\n  // ...los demás días laborales\n    return \"laboral\";\n  case \"sábado\":\n  case \"domingo\":\n    return /* ... */;\n  default:\n    return /* ... */;\n}\n```"
+]

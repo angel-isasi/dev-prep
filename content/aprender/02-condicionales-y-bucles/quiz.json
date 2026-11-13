@@ -1,0 +1,48 @@
+[
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst cantidad = 0;\nconsole.log(cantidad || 10, cantidad ?? 10);\n```",
+    "opciones": ["0 0", "10 10", "10 0", "0 10"],
+    "correcta": 2,
+    "explicacion": "`||` devuelve el lado derecho si el izquierdo es falsy, y `0` es falsy: da `10`. `??` solo usa el lado derecho si el izquierdo es `null` o `undefined`, y `0` no lo es: da `0`. Por eso `??` es el operador correcto cuando 0 es un valor válido. Las otras opciones tratan a los dos operadores como si fueran iguales o los invierten."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst numeros = [5, 6];\nfor (const i in numeros) {\n  console.log(i + 1);\n}\n```",
+    "opciones": ["\"01\" y \"11\"", "1 y 2", "6 y 7", "51 y 61"],
+    "correcta": 0,
+    "explicacion": "`for...in` recorre las **claves** del array, que son los índices como strings: `\"0\"` y `\"1\"`. Al sumarles 1, el `+` con un string concatena: `\"01\"` y `\"11\"`. Sería 1 y 2 si los índices fueran números, y 6 y 7 si recorriera los valores (eso hace `for...of`)."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst nivel = 2;\nswitch (nivel) {\n  case 1:\n    console.log(\"básico\");\n  case 2:\n    console.log(\"intermedio\");\n  case 3:\n    console.log(\"difícil\");\n    break;\n  default:\n    console.log(\"otro\");\n}\n```",
+    "opciones": [
+      "Solo \"intermedio\"",
+      "\"intermedio\" y \"difícil\"",
+      "\"intermedio\", \"difícil\" y \"otro\"",
+      "\"básico\", \"intermedio\" y \"difícil\""
+    ],
+    "correcta": 1,
+    "explicacion": "El `switch` entra en `case 2` (no ejecuta `case 1`, porque empieza donde coincide). Como `case 2` no tiene `break`, sigue cayendo a `case 3`, imprime \"difícil\" y ahí el `break` lo saca, así que nunca llega a `default`. Sería solo \"intermedio\" si `case 2` tuviera su propio `break`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nlet suma = 0;\nfor (let i = 1; i <= 6; i++) {\n  if (i % 2 === 0) continue;\n  if (i > 4) break;\n  suma += i;\n}\nconsole.log(suma);\n```",
+    "opciones": ["9", "12", "1", "4"],
+    "correcta": 3,
+    "explicacion": "Los pares se saltan con `continue`. Quedan los impares: con `i = 1` suma 1, con `i = 3` suma 3 (total 4), y con `i = 5` se cumple `i > 4` y el `break` corta el bucle antes de sumar. Resultado: 4. Sería 9 (1 + 3 + 5) sin el `break`, y 1 si `break` se confundiera con `continue` en el primer par."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst usuario = { perfil: null };\nconsole.log(usuario.perfil?.foto ?? \"sin foto\");\nconsole.log(usuario.ajustes?.tema);\n```",
+    "opciones": [
+      "\"sin foto\" y undefined",
+      "null y undefined",
+      "\"sin foto\" y luego un TypeError",
+      "Un TypeError en la primera línea"
+    ],
+    "correcta": 0,
+    "explicacion": "`usuario.perfil` es `null`, así que `?.foto` se detiene y da `undefined`; luego `?? \"sin foto\"` lo reemplaza. En la segunda línea, `usuario.ajustes` no existe (`undefined`) y `?.tema` también da `undefined` sin lanzar error. Habría TypeError solo si se usara `.` en lugar de `?.` sobre `null` o `undefined`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconsole.log(\"hola\" && 0 && \"chau\");\nconsole.log(null || \"\" || \"valor\");\n```",
+    "opciones": ["\"chau\" y \"valor\"", "false y true", "0 y \"valor\"", "0 y \"\""],
+    "correcta": 2,
+    "explicacion": "`&&` devuelve el primer valor falsy que encuentra (o el último si todos son truthy): `\"hola\"` es truthy, `0` es falsy, así que devuelve `0` y ni mira `\"chau\"`. `||` devuelve el primer valor truthy: `null` y `\"\"` son falsy, así que devuelve `\"valor\"`. Estos operadores no devuelven `true`/`false`, sino uno de los valores."
+  }
+]

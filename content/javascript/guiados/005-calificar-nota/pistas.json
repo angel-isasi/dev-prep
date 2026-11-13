@@ -1,0 +1,5 @@
+[
+  "Empieza por el caso raro: la nota fuera de rango. Después ve subiendo de rango en rango. Cada `return` corta la función, así que no hace falta repetir el límite de abajo.",
+  "Primero `if (nota < 0 || nota > 20) return \"nota inválida\";`. Luego pregunta `nota < 11`, después `nota < 14`, después `nota < 18`. Si no entró en ninguno, ya sabes que está entre 18 y 20.",
+  "Esqueleto:\n\n```js\nif (nota < 0 || nota > 20) return \"nota inválida\";\nif (nota < 11) return \"desaprobado\";\nif (/* ... */) return \"aprobado\";\nif (/* ... */) return \"bueno\";\nreturn \"excelente\";\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-007",
+  "titulo": "Stock seguro con ?. y ??",
+  "tipo": "funcion",
+  "tema": "condicionales",
+  "nivel": 1,
+  "tags": ["condicionales", "optional chaining", "nullish coalescing", "objetos"]
+}

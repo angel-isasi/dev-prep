@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-003",
+  "titulo": "Contar valores falsy",
+  "tipo": "funcion",
+  "tema": "variables",
+  "nivel": 1,
+  "tags": ["variables", "truthy", "falsy", "coerción"]
+}

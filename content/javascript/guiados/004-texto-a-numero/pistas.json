@@ -1,0 +1,5 @@
+[
+  "Hay dos casos que devuelven `null`: el texto vacío (con o sin espacios) y el texto que no se puede convertir. Atiende el vacío **antes** de convertir, porque `Number(\"\")` da `0`.",
+  "Primero `trim()` para quitar espacios. Si queda `\"\"`, devuelve `null`. Después convierte con `Number(...)`: si el texto es inválido te da `NaN`, y eso lo detectas con `Number.isNaN(...)` (no con `=== NaN`, que nunca es `true`).",
+  "Esqueleto:\n\n```js\nconst limpio = texto.trim();\nif (limpio === \"\") return null;\nconst numero = Number(limpio);\nif (/* numero es NaN */) return null;\nreturn numero;\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "No sabes cuántos parámetros vas a recibir, así que no puedes escribir `(a, b, c)`. Necesitas una forma de juntar **todos** los argumentos en un solo array.",
+  "Escribe el parámetro como `...numeros`: el parámetro rest junta todos los argumentos en un array de verdad (vacío si no llega ninguno). Después solo te queda sumar ese array, con un bucle o con `reduce`.",
+  "Esqueleto:\n\n```js\nexport function sumarTodos(...numeros) {\n  let suma = 0;\n  for (const n of numeros) {\n    suma += n;\n  }\n  return /* ... */;\n}\n```"
+]

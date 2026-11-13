@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-009",
+  "titulo": "Sumar hasta el cero",
+  "tipo": "funcion",
+  "tema": "condicionales",
+  "nivel": 1,
+  "tags": ["bucles", "break", "continue", "for...of"]
+}

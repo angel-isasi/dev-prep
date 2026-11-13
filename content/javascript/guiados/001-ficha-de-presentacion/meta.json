@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-001",
+  "titulo": "Ficha de presentación",
+  "tipo": "funcion",
+  "tema": "variables",
+  "nivel": 1,
+  "tags": ["variables", "strings", "template literals"]
+}

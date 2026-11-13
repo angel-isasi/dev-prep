@@ -1,0 +1,5 @@
+[
+  "Hay dos problemas: leer propiedades de algo que puede ser `null` o `undefined` sin que explote, y poner un valor por defecto cuando no hay dato, **sin** perder el `0`.",
+  "`a?.b` devuelve `undefined` en vez de lanzar error si `a` es `null` o `undefined`. Y `x ?? y` devuelve `y` solo si `x` es `null` o `undefined` (a diferencia de `||`, que también reemplaza el `0`).",
+  "Toda la solución cabe en una línea:\n\n```js\nreturn producto?.inventario?.stock ?? /* valor por defecto */;\n```"
+]

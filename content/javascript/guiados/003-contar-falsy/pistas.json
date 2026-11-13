@@ -1,0 +1,5 @@
+[
+  "No necesitas una lista de los valores falsy: JavaScript ya sabe cuáles son. ¿Qué pasa si metes cada valor directamente en un `if`?",
+  "Recorre el array con `for...of` y lleva un contador que arranca en 0. Si el valor es falsy, `!valor` es `true`: en ese caso sumas 1.",
+  "Esqueleto:\n\n```js\nlet contador = 0;\nfor (const valor of valores) {\n  if (/* el valor es falsy */) contador++;\n}\nreturn contador;\n```"
+]

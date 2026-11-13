@@ -1,0 +1,5 @@
+[
+  "`typeof` ya resuelve casi todo. Solo tienes que atender **antes** los dos casos donde se equivoca: `null` y los arrays. ¿Cómo preguntas por cada uno?",
+  "Para `null`, compáralo directo con `valor === null`. Para los arrays existe `Array.isArray(valor)`, que devuelve `true` o `false`. Si no es ninguno de los dos, devuelve `typeof valor`.",
+  "Esqueleto:\n\n```js\nif (valor === null) return \"null\";\nif (/* ¿es un array? */) return \"array\";\nreturn /* lo que diga typeof */;\n```"
+]

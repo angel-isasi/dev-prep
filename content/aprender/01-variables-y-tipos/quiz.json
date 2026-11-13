@@ -1,0 +1,43 @@
+[
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconst a = [1, 2];\nconst b = a;\nb.push(3);\nconsole.log(a.length);\n```",
+    "opciones": ["2", "3", "TypeError: Assignment to constant variable", "undefined"],
+    "correcta": 1,
+    "explicacion": "`b = a` no copia el array: copia la referencia, así que `a` y `b` son el mismo array y el `push` se ve en los dos. No es 2 porque no hay copia. No hay TypeError porque `const` solo impide reasignar la variable (`a = ...`), no modificar el contenido. Y `length` de un array nunca es `undefined`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconsole.log(typeof null, typeof []);\n```",
+    "opciones": ["null array", "object array", "null object", "object object"],
+    "correcta": 3,
+    "explicacion": "`typeof null` es `\"object\"` por un error histórico del lenguaje, y `typeof []` también es `\"object\"` porque los arrays son objetos. `typeof` nunca devuelve `\"null\"` ni `\"array\"`: para eso existen `valor === null` y `Array.isArray(valor)`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconsole.log(\"5\" + 2 - 1);\n```",
+    "opciones": ["51", "6", "\"521\"", "NaN"],
+    "correcta": 0,
+    "explicacion": "Se evalúa de izquierda a derecha. `\"5\" + 2` concatena porque hay un string: da `\"52\"`. Luego `\"52\" - 1`: el `-` solo funciona con números, así que convierte `\"52\"` en 52 y resta: `51` (un número). Sería 6 solo si el primer `+` sumara, y sería `\"521\"` si el `-` también concatenara, cosa que no hace. No es `NaN` porque `\"52\"` sí se puede convertir a número."
+  },
+  {
+    "pregunta": "¿Cuántas veces se imprime \"sí\"?\n\n```js\nconst valores = [0, \"0\", [], null, \" \", NaN];\nfor (const v of valores) {\n  if (v) console.log(\"sí\");\n}\n```",
+    "opciones": ["1", "2", "3", "6"],
+    "correcta": 2,
+    "explicacion": "Son truthy `\"0\"` (string no vacío), `[]` (todo objeto es truthy, aunque esté vacío) y `\" \"` (un espacio no es un string vacío): 3 veces. `0`, `null` y `NaN` están entre los 8 valores falsy. Elegir 1 o 2 suele venir de creer que `[]` o `\"0\"` son falsy."
+  },
+  {
+    "pregunta": "¿Qué pasa al ejecutar este código?\n\n```js\nconsole.log(x);\nvar x = 5;\nconsole.log(y);\nlet y = 5;\n```",
+    "opciones": [
+      "Imprime 5 y luego 5",
+      "Lanza un ReferenceError en la primera línea",
+      "Imprime undefined y luego undefined",
+      "Imprime undefined y luego lanza un ReferenceError"
+    ],
+    "correcta": 3,
+    "explicacion": "Las declaraciones con `var` se elevan (hoisting) y la variable existe desde el inicio con valor `undefined`, por eso la primera línea imprime `undefined`. Con `let` la variable también se eleva, pero queda en la zona muerta temporal hasta su declaración: usarla antes lanza `ReferenceError: Cannot access 'y' before initialization`. Nunca imprime 5 porque la asignación ocurre después de cada `console.log`."
+  },
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nconsole.log(null == undefined, null === undefined, NaN === NaN);\n```",
+    "opciones": ["true true false", "false false false", "true false false", "false false true"],
+    "correcta": 2,
+    "explicacion": "`null == undefined` es `true` por una regla especial del doble igual. `null === undefined` es `false` porque son tipos distintos y el triple igual no convierte. `NaN === NaN` es `false` porque `NaN` es el único valor que no es igual a sí mismo; para detectarlo se usa `Number.isNaN`."
+  }
+]

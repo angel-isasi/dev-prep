@@ -1,0 +1,5 @@
+[
+  "Recorre el array con un acumulador que arranca en 0. Para cada número hay tres caminos: es 0 (paras todo), es negativo (lo ignoras) o es positivo (lo sumas).",
+  "Dentro de un bucle, `break` termina el bucle completo y `continue` salta directo a la siguiente vuelta. Pregunta primero por el 0 y después por el negativo; lo que llegue al final del cuerpo del bucle es positivo y se suma.",
+  "Esqueleto:\n\n```js\nlet suma = 0;\nfor (const numero of numeros) {\n  if (numero === 0) break;\n  if (/* es negativo */) continue;\n  suma += numero;\n}\nreturn suma;\n```"
+]

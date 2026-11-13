@@ -1,0 +1,5 @@
+[
+  "Necesitas un bucle de 1 a `n` (ojo: incluyendo `n`) y un array donde vas agregando cada resultado. Para saber si un número es múltiplo de otro, mira el resto de la división: `i % 3`.",
+  "`i % 3 === 0` significa \"i es múltiplo de 3\". El orden importa: si preguntas primero por el 3, el 15 entra ahí y nunca llega a `\"FizzBuzz\"`. Pregunta primero por el caso más específico: múltiplo de 15 (o de 3 y de 5 a la vez).",
+  "Esqueleto:\n\n```js\nconst resultado = [];\nfor (let i = 1; i <= n; i++) {\n  if (i % 15 === 0) resultado.push(\"FizzBuzz\");\n  else if (/* múltiplo de 3 */) resultado.push(\"Fizz\");\n  else if (/* múltiplo de 5 */) resultado.push(\"Buzz\");\n  else resultado.push(/* el número */);\n}\nreturn resultado;\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Es un solo texto con tres huecos. ¿Qué tipo de comillas te deja meter variables dentro del texto sin usar `+`?",
+  "Usa comillas invertidas (el carácter `` ` ``, no la comilla simple) y mete cada dato con `${...}`. Para quitar los espacios de los costados, los strings tienen el método `trim()`.",
+  "Esqueleto:\n\n```js\nconst nombreLimpio = nombre.trim();\nconst ciudadLimpia = /* lo mismo con ciudad */;\nreturn `Me llamo ${nombreLimpio}, tengo ${/* edad */} años y vivo en ${/* ciudad */}.`;\n```"
+]

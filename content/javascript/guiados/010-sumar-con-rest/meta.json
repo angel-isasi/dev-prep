@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-010",
+  "titulo": "Sumar cualquier cantidad de números",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 1,
+  "tags": ["funciones", "rest", "spread", "parámetros"]
+}

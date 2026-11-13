@@ -1,0 +1,8 @@
+{
+  "id": "js-gu-008",
+  "titulo": "FizzBuzz",
+  "tipo": "funcion",
+  "tema": "condicionales",
+  "nivel": 1,
+  "tags": ["bucles", "condicionales", "módulo", "clásico de entrevista"]
+}
