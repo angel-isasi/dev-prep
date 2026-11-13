@@ -14,6 +14,10 @@ const TEMAS = {
   arrays: "Arrays",
   strings: "Strings",
   funciones: "Funciones",
+  closures: "Closures y scope",
+  asincronia: "Asincronía",
+  clases: "Clases y prototipos",
+  iteradores: "Iteradores y generadores",
   algoritmos: "Algoritmos",
   "react-estado": "React: estado",
 };

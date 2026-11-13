@@ -1,4 +1,5 @@
-// npm run validar
+// npm run validar                 -> todos los ejercicios
+// npm run validar -- js-ej-0      -> solo los que tengan ese texto en su id o en su carpeta
 // Revisa que cada ejercicio de content/ esté completo y que funcione:
 //   1. Tiene todos sus archivos, 3 pistas y las 7 secciones de la explicación.
 //   2. La solución oficial pasa TODOS sus tests (y hay al menos 3).
@@ -9,7 +10,10 @@ import { config } from "../server/config.js";
 import { escanearContenido, revisarEjercicio } from "../server/contenido.js";
 import { crearVitest, correrUnaVez } from "../server/vitest-comun.js";
 
-const TMP = path.join(config.raiz, ".validar-tmp");
+// Una carpeta temporal por proceso: así se pueden correr varias validaciones a la vez.
+const TMP_NOMBRE = `.validar-tmp-${process.pid}`;
+const TMP = path.join(config.raiz, TMP_NOMBRE);
+const FILTRO = process.argv[2] ?? "";
 const MIN_CASOS = 3;
 
 // En Windows "D:\x" y "d:\x" son la misma ruta.
@@ -32,7 +36,13 @@ async function correr(carpetas, include) {
   return resultados;
 }
 
-const { ejercicios, errores } = await escanearContenido(config.contenidoDir);
+const escaneo = await escanearContenido(config.contenidoDir);
+const ejercicios = escaneo.ejercicios.filter((ej) => !FILTRO || ej.id.includes(FILTRO) || ej.carpeta.includes(FILTRO));
+const errores = FILTRO ? [] : escaneo.errores;
+if (ejercicios.length === 0) {
+  console.log(`No hay ejercicios que coincidan con "${FILTRO}".`);
+  process.exit(1);
+}
 /** @type {Map<string, string[]>} id -> problemas */
 const problemas = new Map(ejercicios.map((ej) => [ej.id, []]));
 
@@ -40,7 +50,10 @@ const problemas = new Map(ejercicios.map((ej) => [ej.id, []]));
 for (const ej of ejercicios) problemas.get(ej.id).push(...(await revisarEjercicio(ej)));
 
 // 2. Las soluciones oficiales pasan
-const oficiales = await correr([config.contenidoDir], ["content/**/tests.test.{js,jsx}"]);
+const oficiales = await correr(
+  ejercicios.map((ej) => ej.carpeta),
+  ["content/**/tests.test.{js,jsx}"],
+);
 for (const ej of ejercicios) {
   const r = oficiales.get(clave(path.join(ej.carpeta, ej.archivos.tests)));
   const lista = problemas.get(ej.id);
@@ -61,7 +74,7 @@ for (const ej of ejercicios) {
   await cp(path.join(ej.carpeta, ej.archivos.tests), path.join(destino, ej.archivos.tests));
 }
 try {
-  const inicios = await correr([TMP], [".validar-tmp/**/tests.test.{js,jsx}"]);
+  const inicios = await correr([TMP], [`${TMP_NOMBRE}/**/tests.test.{js,jsx}`]);
   for (const ej of ejercicios) {
     const r = inicios.get(clave(path.join(TMP, ej.id, ej.archivos.tests)));
     const lista = problemas.get(ej.id);

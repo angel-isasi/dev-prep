@@ -12,7 +12,7 @@ Thumbs.db
 *.log
 .vscode/
 
-.validar-tmp/
+.validar-tmp-*/
 
 # Carpetas temporales de pruebas
 workspace-*/
