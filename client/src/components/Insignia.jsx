@@ -1,16 +1,32 @@
-// TU PARTE (tarea 1): instrucciones en docs/tareas/01-insignia-y-filtro.md
-// Los tests están en Insignia.test.jsx. Córrelos con: npm test
-//
-// Una etiqueta pequeña de color para el estado o el nivel de un ejercicio:
+// Etiqueta pequeña de color para el estado o el nivel de un ejercicio:
 //   <Insignia estado="resuelto" />   ->  "Resuelto" en verde
-//   <Insignia nivel={2} />           ->  "Intermedio" en amarillo
-//
-// Los colores ya están en Insignia.module.css: solo tienes que poner el
-// atributo data-variante="exito" | "aviso" | "error" | "neutro" en el <span>.
-
+//   <Insignia nivel={2} />           ->  "Intermedio" en ámbar
+// El color lo pone el CSS según el atributo data-variante.
 import estilos from "./Insignia.module.css";
 
+// Objetos como "tabla de búsqueda": más fácil de leer y ampliar que un switch.
+const ESTADOS = {
+  resuelto: { texto: "Resuelto", variante: "exito" },
+  "en-progreso": { texto: "En progreso", variante: "aviso" },
+  repasar: { texto: "Para repasar", variante: "error" },
+  pendiente: { texto: "Pendiente", variante: "neutro" },
+};
+
+const NIVELES = {
+  1: { texto: "Básico", variante: "exito" },
+  2: { texto: "Intermedio", variante: "aviso" },
+  3: { texto: "Difícil", variante: "error" },
+};
+
 export function Insignia({ estado, nivel }) {
-  // Por ahora muestra el valor tal cual. Reemplaza esto con tu código.
-  return <span className={estilos.insignia}>{estado ?? nivel}</span>;
+  const { texto, variante } =
+    estado !== undefined
+      ? (ESTADOS[estado] ?? { texto: estado, variante: "neutro" })
+      : (NIVELES[nivel] ?? { texto: String(nivel), variante: "neutro" });
+
+  return (
+    <span className={estilos.insignia} data-variante={variante}>
+      {texto}
+    </span>
+  );
 }
