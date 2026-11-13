@@ -1,0 +1,87 @@
+/* Estilos compartidos por las secciones Pistas, Solución y Explícalo */
+
+.seccion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  padding-top: var(--espacio-5);
+}
+
+.intro {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.tarjeta {
+  padding: var(--espacio-4) var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  box-shadow: var(--brillo-borde);
+}
+
+.etiqueta {
+  display: block;
+  margin-bottom: var(--espacio-2);
+  color: var(--acento);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bloqueada {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  padding: var(--espacio-5);
+  border: 1px dashed var(--borde-fuerte);
+  border-radius: var(--radio-grande);
+}
+
+.bloqueada p {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.advertencia {
+  padding: var(--espacio-3) var(--espacio-4);
+  border-radius: var(--radio);
+  background: var(--aviso-suave);
+  color: var(--aviso);
+  font-size: 14px;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.texto {
+  width: 100%;
+  min-height: 160px;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.guardado {
+  color: var(--exito);
+  font-size: 13px;
+}
+
+.modelo {
+  border-color: color-mix(in srgb, var(--acento) 35%, transparent);
+  background: var(--acento-suave);
+}

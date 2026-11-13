@@ -46,7 +46,7 @@
   font-size: 14px;
 }
 
-.intentos {
+.dato {
   color: var(--texto-tenue);
 }
 
@@ -92,10 +92,24 @@
   font-weight: 600;
 }
 
-.enunciado {
+.pestanas {
   margin-top: var(--espacio-5);
+}
+
+.enunciado {
   padding-top: var(--espacio-5);
-  border-top: 1px solid var(--borde);
+}
+
+.enlaceAviso {
+  margin-left: var(--espacio-3);
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }
 
 .lateral {

@@ -80,7 +80,7 @@ export function PanelTests({ resultado, corriendo, preparado, ultimaCorrida }) {
 
       {error && (
         <div className={estilos.errorArchivo}>
-          <strong>Tu archivo no se pudo ejecutar</strong>
+          <strong>{resultado.bucle ? "Posible bucle infinito" : "Tu archivo no se pudo ejecutar"}</strong>
           {pistaError && (
             <p>
               <TextoConCodigo>{pistaError}</TextoConCodigo>

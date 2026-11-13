@@ -2,6 +2,7 @@
 // Los originales de content/ nunca se tocan.
 import { access, copyFile, mkdir, readdir, readFile, rm } from "node:fs/promises";
 import path from "node:path";
+import { existsSync } from "node:fs";
 import { sello } from "./fechas.js";
 
 const existe = (ruta) => access(ruta).then(() => true, () => false);
@@ -13,6 +14,16 @@ export function crearWorkspace({ workspaceDir }) {
 
   const carpetaDe = (ej) => path.join(workspaceDir, ej.id);
   const archivoDe = (ej) => path.join(carpetaDe(ej), ej.archivos.solucion);
+  const carpetaDeId = (id) => path.join(workspaceDir, id);
+  /** Tu archivo de un ejercicio solo con su id (solucion.js o solucion.jsx). */
+  const archivoDeId = (id) => {
+    const carpeta = carpetaDeId(id);
+    for (const ext of ["js", "jsx"]) {
+      const ruta = path.join(carpeta, `solucion.${ext}`);
+      if (existsSync(ruta)) return ruta;
+    }
+    return null;
+  };
 
   /** Copia solo si el destino no existe o es distinto (así Vitest no corre de más). */
   async function copiarSiCambio(origen, destino) {
@@ -29,6 +40,8 @@ export function crearWorkspace({ workspaceDir }) {
   return {
     carpetaDe,
     archivoDe,
+    carpetaDeId,
+    archivoDeId,
     raiz: workspaceDir,
 
     existe: (ej) => existe(archivoDe(ej)),

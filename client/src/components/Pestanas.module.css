@@ -1,0 +1,53 @@
+.pestanas {
+  display: flex;
+  gap: var(--espacio-1);
+  border-bottom: 1px solid var(--borde);
+}
+
+.pestana {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  color: var(--texto-suave);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color var(--transicion);
+}
+
+.pestana:hover:not(:disabled) {
+  color: var(--texto);
+}
+
+.pestana:disabled {
+  color: var(--texto-tenue);
+  cursor: not-allowed;
+}
+
+.pestana[aria-selected="true"] {
+  color: var(--texto);
+}
+
+.pestana[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -1px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--acento);
+}
+
+.extra {
+  padding: 0 7px;
+  border-radius: 999px;
+  background: var(--superficie-2);
+  color: var(--texto-tenue);
+  font-size: 12px;
+  line-height: 18px;
+}

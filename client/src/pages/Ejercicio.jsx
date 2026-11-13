@@ -6,8 +6,17 @@ import { nombreColeccion, nombreTema } from "../lib/etiquetas.js";
 import { Insignia } from "../components/Insignia.jsx";
 import { Markdown } from "../components/Markdown.jsx";
 import { PanelTests } from "../components/PanelTests.jsx";
+import { Pestanas } from "../components/Pestanas.jsx";
+import { SeccionPistas } from "../components/SeccionPistas.jsx";
+import { SeccionSolucion } from "../components/SeccionSolucion.jsx";
+import { SeccionExplicar } from "../components/SeccionExplicar.jsx";
 import { IconoFlechaIzq, IconoVSCode } from "../components/Iconos.jsx";
 import estilos from "./Ejercicio.module.css";
+
+function minutos(segundos) {
+  const m = Math.round((segundos ?? 0) / 60);
+  return m < 1 ? null : `${m} min de trabajo`;
+}
 
 export function Ejercicio() {
   const { id } = useParams();
@@ -19,14 +28,21 @@ export function Ejercicio() {
   const [aviso, setAviso] = useState(null); // { tipo: "info" | "error" | "exito", texto }
   const [confirmarReinicio, setConfirmarReinicio] = useState(false);
   const [ocupado, setOcupado] = useState(false);
+  const [pestana, setPestana] = useState("enunciado");
+
+  async function cargar() {
+    const datos = await api.ejercicio(id);
+    setEjercicio(datos);
+    return datos;
+  }
 
   useEffect(() => {
     setEjercicio(null);
     setError(null);
     setAviso(null);
-    api.ejercicio(id).then(
+    setPestana("enunciado");
+    cargar().then(
       (datos) => {
-        setEjercicio(datos);
         setResultado(datos.resultado);
         setCorriendo(datos.corriendo);
         const en = datos.progreso?.ultimoResultado?.en;
@@ -34,6 +50,7 @@ export function Ejercicio() {
       },
       (e) => setError(e.message),
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEvento("corriendo", ({ ids }) => {
@@ -47,17 +64,15 @@ export function Ejercicio() {
     setUltimaCorrida(Date.now());
     setEjercicio((e) => e && { ...e, estado: datos.progreso.estado, progreso: datos.progreso, preparado: true });
     if (datos.resueltoAhora) {
-      setAviso({ tipo: "exito", texto: "¡Resuelto! Todos los tests pasan. Buen trabajo." });
+      setAviso({ tipo: "exito", texto: "¡Resuelto! Todos los tests pasan. Ahora explícalo con tus palabras." });
+      cargar(); // trae la solución y la explicación modelo, ya desbloqueadas
     }
   });
 
-  async function abrir() {
+  async function accion(fn) {
     setOcupado(true);
-    setAviso(null);
     try {
-      const { avisoVSCode } = await api.abrir(id);
-      setEjercicio((e) => ({ ...e, preparado: true, estado: e.estado === "pendiente" ? "en-progreso" : e.estado }));
-      if (avisoVSCode) setAviso({ tipo: "error", texto: avisoVSCode });
+      await fn();
     } catch (e) {
       setAviso({ tipo: "error", texto: e.message });
     } finally {
@@ -65,17 +80,19 @@ export function Ejercicio() {
     }
   }
 
-  async function correr() {
-    try {
-      await api.correr(id);
-    } catch (e) {
-      setAviso({ tipo: "error", texto: e.message });
-    }
-  }
+  const abrir = () =>
+    accion(async () => {
+      setAviso(null);
+      const { avisoVSCode } = await api.abrir(id);
+      setEjercicio((e) => ({ ...e, preparado: true, estado: e.estado === "pendiente" ? "en-progreso" : e.estado }));
+      if (avisoVSCode) setAviso({ tipo: "error", texto: avisoVSCode });
+    });
 
-  async function reiniciar() {
-    setConfirmarReinicio(false);
-    try {
+  const correr = () => accion(() => api.correr(id));
+
+  const reiniciar = () =>
+    accion(async () => {
+      setConfirmarReinicio(false);
       const { respaldo } = await api.reiniciar(id);
       setAviso({
         tipo: "info",
@@ -83,9 +100,23 @@ export function Ejercicio() {
           ? `Volviste al archivo inicial. Tu versión anterior quedó en workspace/${respaldo.replaceAll("\\", "/")}`
           : "Volviste al archivo inicial.",
       });
-    } catch (e) {
-      setAviso({ tipo: "error", texto: e.message });
-    }
+    });
+
+  const verPista = (n) =>
+    accion(async () => {
+      const { pistas, progreso } = await api.verPista(id, n);
+      setEjercicio((e) => ({ ...e, pistas, progreso, estado: progreso.estado }));
+    });
+
+  const verSolucion = () =>
+    accion(async () => {
+      const { solucion, progreso } = await api.verSolucion(id);
+      setEjercicio((e) => ({ ...e, solucion, progreso, estado: progreso.estado }));
+    });
+
+  async function guardarExplicacion(texto) {
+    const { progreso, modelo } = await api.guardarExplicacion(id, texto);
+    setEjercicio((e) => ({ ...e, progreso, modelo }));
   }
 
   if (error) {
@@ -97,6 +128,21 @@ export function Ejercicio() {
     );
   }
   if (!ejercicio) return <p className={estilos.mensaje}>Cargando…</p>;
+
+  const resuelto = ejercicio.estado === "resuelto";
+  const progreso = ejercicio.progreso;
+  const tiempo = minutos(progreso?.segundosActivos);
+
+  const pestanas = [
+    { id: "enunciado", texto: "Enunciado" },
+    {
+      id: "pistas",
+      texto: "Pistas",
+      extra: ejercicio.totalPistas ? `${ejercicio.pistas.length}/${ejercicio.totalPistas}` : undefined,
+    },
+    { id: "solucion", texto: "Solución", extra: ejercicio.solucion ? undefined : "bloqueada" },
+    { id: "explicar", texto: "Explícalo", extra: progreso?.explicacion ? "✓" : undefined },
+  ];
 
   return (
     <div className={estilos.pagina}>
@@ -113,11 +159,12 @@ export function Ejercicio() {
             <span>{nombreTema(ejercicio.tema)}</span>
             <Insignia nivel={ejercicio.nivel} />
             <Insignia estado={ejercicio.estado} />
-            {ejercicio.progreso?.intentos > 0 && (
-              <span className={estilos.intentos}>
-                {ejercicio.progreso.intentos} {ejercicio.progreso.intentos === 1 ? "intento" : "intentos"}
+            {progreso?.intentos > 0 && (
+              <span className={estilos.dato}>
+                {progreso.intentos} {progreso.intentos === 1 ? "intento" : "intentos"}
               </span>
             )}
+            {tiempo && <span className={estilos.dato}>{tiempo}</span>}
           </div>
         </header>
 
@@ -142,7 +189,7 @@ export function Ejercicio() {
                 </button>
               </span>
             ) : (
-              <button type="button" className="boton boton-peligro" onClick={() => setConfirmarReinicio(true)}>
+              <button type="button" className="boton boton-fantasma" onClick={() => setConfirmarReinicio(true)}>
                 Reiniciar
               </button>
             ))}
@@ -157,12 +204,38 @@ export function Ejercicio() {
         {aviso && (
           <p className={estilos.aviso} data-tipo={aviso.tipo} role="status">
             {aviso.texto}
+            {aviso.tipo === "exito" && pestana !== "explicar" && (
+              <button type="button" className={estilos.enlaceAviso} onClick={() => setPestana("explicar")}>
+                Explicarlo ahora
+              </button>
+            )}
           </p>
         )}
 
-        <article className={estilos.enunciado}>
-          <Markdown>{ejercicio.enunciado}</Markdown>
-        </article>
+        <div className={estilos.pestanas}>
+          <Pestanas pestanas={pestanas} activa={pestana} alCambiar={setPestana} />
+        </div>
+
+        {pestana === "enunciado" && (
+          <article className={estilos.enunciado}>
+            <Markdown>{ejercicio.enunciado}</Markdown>
+          </article>
+        )}
+        {pestana === "pistas" && (
+          <SeccionPistas pistas={ejercicio.pistas} total={ejercicio.totalPistas} alVer={verPista} ocupado={ocupado} />
+        )}
+        {pestana === "solucion" && (
+          <SeccionSolucion solucion={ejercicio.solucion} resuelto={resuelto} alVer={verSolucion} ocupado={ocupado} />
+        )}
+        {pestana === "explicar" && (
+          <SeccionExplicar
+            key={ejercicio.id}
+            resuelto={resuelto}
+            textoGuardado={progreso?.explicacion ?? ""}
+            modelo={ejercicio.modelo}
+            alGuardar={guardarExplicacion}
+          />
+        )}
       </div>
 
       <div className={estilos.lateral}>

@@ -3,7 +3,16 @@
 import { appendFile, copyFile, mkdir, readdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { ahoraIso, fechaLocal } from "./fechas.js";
-import { aplicarResultado, marcarAbierto, progresoVacio, registroVacio, sumarAlDia } from "./progreso-reglas.js";
+import {
+  aplicarResultado,
+  marcarAbierto,
+  progresoVacio,
+  registroVacio,
+  sumarAlDia,
+  sumarTiempo,
+  verPista,
+  verSolucion,
+} from "./progreso-reglas.js";
 
 const RESPALDOS_DIARIOS = 7;
 
@@ -61,18 +70,53 @@ export async function crearProgreso({ datosDir }) {
     await appendFile(historial, linea + "\n").catch((e) => console.error("[progreso]", e.message));
   }
 
-  const deEjercicio = (id) => datos.ejercicios[id] ?? registroVacio();
+  // Completa con valores por defecto los registros guardados con versiones anteriores.
+  const deEjercicio = (id) => ({ ...registroVacio(), ...datos.ejercicios[id] });
+
+  /** Suma tiempo activo al ejercicio y al día. */
+  function conTiempo(registro, ahora) {
+    const { registro: nuevo, segundos } = sumarTiempo(registro, ahora);
+    if (segundos) datos.dias = sumarAlDia(datos.dias, fechaLocal(), "segundos", segundos);
+    return nuevo;
+  }
 
   return {
     deEjercicio,
     datos: () => datos,
+
+    /** @returns {Promise<object|null>} el registro nuevo, o null si se salta una pista */
+    async verPista(id, n) {
+      const ahora = ahoraIso();
+      const registro = verPista(deEjercicio(id), n, ahora);
+      if (!registro) return null;
+      datos.ejercicios[id] = conTiempo(registro, ahora);
+      await registrarEvento("pista", id, { n });
+      await guardar();
+      return datos.ejercicios[id];
+    },
+
+    async verSolucion(id) {
+      const antes = deEjercicio(id);
+      datos.ejercicios[id] = verSolucion(antes, ahoraIso());
+      await registrarEvento("solucion", id, { penalidad: antes.estado !== "resuelto" });
+      await guardar();
+      return datos.ejercicios[id];
+    },
+
+    async guardarExplicacion(id, texto) {
+      datos.ejercicios[id] = { ...deEjercicio(id), explicacion: texto };
+      await registrarEvento("explicacion", id);
+      await guardar();
+      return datos.ejercicios[id];
+    },
     registrarEvento,
 
     async marcarAbierto(id) {
-      const antes = deEjercicio(id);
-      datos.ejercicios[id] = marcarAbierto(antes, ahoraIso());
+      const ahora = ahoraIso();
+      // Al abrir no se suma tiempo: solo se marca el inicio de esta sesión de trabajo.
+      datos.ejercicios[id] = { ...marcarAbierto(deEjercicio(id), ahora), ultimaActividad: ahora };
       await registrarEvento("abrir", id);
-      if (antes.estado === "pendiente") await guardar();
+      await guardar();
     },
 
     /**
@@ -82,7 +126,9 @@ export async function crearProgreso({ datosDir }) {
      */
     async registrarResultado(id, resultado, { esIntento }) {
       const ahora = ahoraIso();
-      const { registro, resueltoAhora } = aplicarResultado(deEjercicio(id), resultado, { esIntento, ahora });
+      const aplicado = aplicarResultado(deEjercicio(id), resultado, { esIntento, ahora });
+      const { resueltoAhora } = aplicado;
+      const registro = esIntento ? conTiempo(aplicado.registro, ahora) : aplicado.registro;
       datos.ejercicios[id] = registro;
       if (resueltoAhora) datos.dias = sumarAlDia(datos.dias, fechaLocal(), "resueltos");
       await registrarEvento("corrida", id, { pasan: resultado.pasan, total: resultado.total, intento: esIntento });

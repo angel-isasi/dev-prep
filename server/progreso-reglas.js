@@ -30,6 +30,8 @@ export function registroVacio() {
     segundosActivos: 0,
     explicacion: "",
     repaso: null,
+    ultimaActividad: null,
+    comparoSolucion: false,
   };
 }
 
@@ -80,8 +82,49 @@ export function aplicarResultado(registro, resultado, { esIntento, ahora }) {
   return { registro: nuevo, resueltoAhora };
 }
 
-/** Suma 1 a un contador del día (resueltos, repasos...). */
-export function sumarAlDia(dias, fecha, campo) {
+/** Suma a un contador del día (resueltos, repasos, segundos...). */
+export function sumarAlDia(dias, fecha, campo, cantidad = 1) {
   const dia = dias[fecha] ?? { resueltos: 0, repasos: 0, preguntas: 0, segundos: 0 };
-  return { ...dias, [fecha]: { ...dia, [campo]: (dia[campo] ?? 0) + 1 } };
+  return { ...dias, [fecha]: { ...dia, [campo]: (dia[campo] ?? 0) + cantidad } };
+}
+
+const TOPE_INTERVALO_S = 5 * 60; // si pasan más de 5 min sin guardar, asumimos que te fuiste
+
+/**
+ * Suma el tiempo desde tu última actividad (con tope de 5 min) y la actualiza.
+ * @returns {{ registro: RegistroEjercicio, segundos: number }}
+ */
+export function sumarTiempo(registro, ahora) {
+  const nuevo = { ...registro, ultimaActividad: ahora };
+  if (!registro.ultimaActividad) return { registro: nuevo, segundos: 0 };
+  const transcurrido = (Date.parse(ahora) - Date.parse(registro.ultimaActividad)) / 1000;
+  const segundos = Math.round(Math.min(Math.max(transcurrido, 0), TOPE_INTERVALO_S));
+  nuevo.segundosActivos = (registro.segundosActivos ?? 0) + segundos;
+  return { registro: nuevo, segundos };
+}
+
+/**
+ * Registra que viste la pista `n` (1, 2 o 3). Solo se puede ver en orden.
+ * @returns {RegistroEjercicio|null} null si intentas saltarte una pista
+ */
+export function verPista(registro, n, ahora) {
+  if (n < 1 || n > registro.pistasVistas + 1) return null;
+  const nuevo = marcarAbierto(registro, ahora);
+  return { ...nuevo, pistasVistas: Math.max(registro.pistasVistas, n) };
+}
+
+/**
+ * Ver la solución antes de resolverlo tiene penalidad: queda "para repasar"
+ * y no cuenta como resuelto aunque luego pasen los tests.
+ * Si ya lo habías resuelto, verla para comparar no penaliza.
+ */
+export function verSolucion(registro, ahora) {
+  if (registro.estado === "resuelto") return { ...registro, comparoSolucion: true };
+  const nuevo = marcarAbierto(registro, ahora);
+  return { ...nuevo, vioSolucion: true, estado: "repasar" };
+}
+
+/** ¿Se puede mostrar la solución sin preguntar? (ya resuelto o ya la viste) */
+export function solucionDesbloqueada(registro) {
+  return registro.estado === "resuelto" || registro.vioSolucion;
 }

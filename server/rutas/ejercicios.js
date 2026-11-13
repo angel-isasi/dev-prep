@@ -3,6 +3,8 @@
 import { Router } from "express";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { seccionMarkdown } from "../contenido.js";
+import { solucionDesbloqueada } from "../progreso-reglas.js";
 
 /** Lo que se manda al navegador de cada ejercicio (sin rutas de disco). */
 function resumen(ej, progreso) {
@@ -21,6 +23,24 @@ function resumen(ej, progreso) {
 }
 
 const leer = (ej, archivo) => readFile(path.join(ej.carpeta, archivo), "utf8");
+const leerPistas = async (ej) => JSON.parse(await leer(ej, "pistas.json").catch(() => "[]"));
+
+/** Solución oficial + explicación completa. */
+async function solucionCompleta(ej) {
+  return {
+    codigo: await leer(ej, ej.archivos.solucion),
+    lenguaje: ej.ext,
+    explicacion: await leer(ej, "explicacion.md").catch(() => ""),
+  };
+}
+
+const SECCION_MODELO = "Cómo explicarlo en la entrevista";
+
+/** La explicación modelo para la entrevista (sección de explicacion.md). */
+async function modelo(ej) {
+  const md = await leer(ej, "explicacion.md").catch(() => "");
+  return seccionMarkdown(md, SECCION_MODELO);
+}
 
 export function rutasEjercicios({ indice, progreso, workspace, corredor, vscode, eventos }) {
   const router = Router();
@@ -39,17 +59,51 @@ export function rutasEjercicios({ indice, progreso, workspace, corredor, vscode,
 
   router.get("/:id", async (req, res) => {
     const ej = req.ejercicio;
-    const pistas = JSON.parse(await leer(ej, "pistas.json").catch(() => "[]"));
+    const pistas = await leerPistas(ej);
+    const registro = progreso?.deEjercicio(ej.id);
+    const desbloqueada = registro ? solucionDesbloqueada(registro) : false;
     res.json({
       ...resumen(ej, progreso),
       enunciado: await leer(ej, "enunciado.md"),
       archivo: ej.archivos.solucion,
       totalPistas: pistas.length,
+      pistas: pistas.slice(0, registro?.pistasVistas ?? 0), // solo las que ya viste
+      solucion: desbloqueada ? await solucionCompleta(ej) : null,
+      modelo: registro?.estado === "resuelto" ? await modelo(ej) : null,
       preparado: workspace ? await workspace.existe(ej) : false,
       corriendo: corredor?.estaCorriendo(ej.id) ?? false,
       resultado: corredor?.ultimoResultado(ej.id) ?? null,
       progreso: progreso?.deEjercicio(ej.id) ?? null,
     });
+  });
+
+  // Ver la pista n (1, 2 o 3), siempre en orden.
+  router.post("/:id/pistas/:n", async (req, res) => {
+    const ej = req.ejercicio;
+    const n = Number(req.params.n);
+    const pistas = await leerPistas(ej);
+    if (!Number.isInteger(n) || n < 1 || n > pistas.length) {
+      return res.status(404).json({ error: "Esa pista no existe." });
+    }
+    const registro = await progreso.verPista(ej.id, n);
+    if (!registro) return res.status(409).json({ error: "Primero mira la pista anterior." });
+    res.json({ pistas: pistas.slice(0, registro.pistasVistas), progreso: registro });
+  });
+
+  // Ver la solución oficial y su explicación (con penalidad si no estaba resuelto).
+  router.post("/:id/solucion", async (req, res) => {
+    const ej = req.ejercicio;
+    const registro = await progreso.verSolucion(ej.id);
+    res.json({ solucion: await solucionCompleta(ej), progreso: registro });
+  });
+
+  // "Explícalo con tus palabras": guarda tu texto y devuelve la explicación modelo.
+  router.put("/:id/explicacion", async (req, res) => {
+    const ej = req.ejercicio;
+    const texto = typeof req.body?.texto === "string" ? req.body.texto.slice(0, 5000) : null;
+    if (texto === null) return res.status(400).json({ error: "Falta el texto." });
+    const registro = await progreso.guardarExplicacion(ej.id, texto);
+    res.json({ progreso: registro, modelo: await modelo(ej) });
   });
 
   // Prepara workspace/<id>/, abre VS Code y corre los tests una primera vez.
