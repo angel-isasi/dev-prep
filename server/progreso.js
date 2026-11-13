@@ -13,6 +13,7 @@ import {
   verPista,
   verSolucion,
   iniciarRepaso,
+  calificarPregunta,
 } from "./progreso-reglas.js";
 
 /** Campos de configuración que se pueden cambiar desde Ajustes, con su validación. */
@@ -121,6 +122,17 @@ export async function crearProgreso({ datosDir }) {
     },
 
     config: () => datos.config,
+
+    dePregunta: (id) => datos.preguntas[id],
+
+    /** Autoevaluación de una tarjeta de entrevista. */
+    async calificarPregunta(id, nota) {
+      datos.preguntas[id] = calificarPregunta(datos.preguntas[id], nota, fechaLocal());
+      datos.dias = sumarAlDia(datos.dias, fechaLocal(), "preguntas");
+      await registrarEvento("pregunta", id, { nota });
+      await guardar();
+      return datos.preguntas[id];
+    },
 
     /** Cambia solo los campos válidos; devuelve la config resultante. */
     async cambiarConfig(cambios) {

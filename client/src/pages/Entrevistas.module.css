@@ -1,0 +1,127 @@
+.pagina {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+}
+
+.mensaje {
+  padding: var(--espacio-6);
+  color: var(--texto-suave);
+}
+
+.cabecera {
+  margin-bottom: var(--espacio-5);
+}
+
+.cabecera h1 {
+  font-size: 28px;
+}
+
+.cabecera p {
+  margin: var(--espacio-1) 0 0;
+  color: var(--texto-suave);
+}
+
+.contenido {
+  padding-top: var(--espacio-5);
+}
+
+.mazos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--espacio-3);
+}
+
+.mazo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  padding: var(--espacio-4) var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  box-shadow: var(--brillo-borde);
+  color: var(--texto);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transicion), background var(--transicion);
+}
+
+.mazo:hover:not(:disabled) {
+  border-color: var(--borde-fuerte);
+  background: var(--superficie-2);
+}
+
+.mazo:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.mazo strong {
+  font-size: 15px;
+}
+
+.mazo span {
+  color: var(--texto-tenue);
+  font-size: 13px;
+}
+
+.destacado {
+  border-color: color-mix(in srgb, var(--acento) 40%, transparent);
+  background: linear-gradient(135deg, var(--acento-suave), transparent 80%), var(--superficie);
+}
+
+.barra {
+  height: 4px;
+  margin-top: var(--espacio-1);
+  border-radius: 999px;
+  background: var(--superficie-2);
+  overflow: hidden;
+}
+
+.barra > div {
+  height: 100%;
+  background: var(--exito);
+}
+
+.sesion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.sesionCabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.final {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  padding: var(--espacio-6);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.final h2 {
+  font-size: 20px;
+}
+
+.final p {
+  margin: 0;
+}
+
+.nota {
+  color: var(--texto-tenue);
+  font-size: 14px;
+}
+
+.guia {
+  max-width: 760px;
+}

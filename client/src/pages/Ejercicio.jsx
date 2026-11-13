@@ -11,6 +11,7 @@ import { SeccionPistas } from "../components/SeccionPistas.jsx";
 import { SeccionSolucion } from "../components/SeccionSolucion.jsx";
 import { SeccionExplicar } from "../components/SeccionExplicar.jsx";
 import { IconoFlechaIzq, IconoVSCode } from "../components/Iconos.jsx";
+import { Cronometro } from "../components/Cronometro.jsx";
 import estilos from "./Ejercicio.module.css";
 
 function fechaCorta(fecha) {
@@ -34,6 +35,7 @@ export function Ejercicio() {
   const [confirmarReinicio, setConfirmarReinicio] = useState(false);
   const [ocupado, setOcupado] = useState(false);
   const [pestana, setPestana] = useState("enunciado");
+  const [cronometro, setCronometro] = useState(null); // Date.now() al empezar el modo entrevista
 
   async function cargar() {
     const datos = await api.ejercicio(id);
@@ -195,6 +197,23 @@ export function Ejercicio() {
           <button type="button" className="boton boton-primario" onClick={abrir} disabled={ocupado}>
             <IconoVSCode /> {ejercicio.preparado ? "Abrir en VS Code" : "Empezar en VS Code"}
           </button>
+          {cronometro ? (
+            <span className={estilos.cronometro}>
+              <Cronometro inicio={cronometro} segundos={20 * 60} />
+              <button type="button" className="boton boton-fantasma" onClick={() => setCronometro(null)}>
+                Detener
+              </button>
+            </span>
+          ) : (
+            <button
+              type="button"
+              className="boton"
+              title="20 minutos, como en una entrevista en vivo"
+              onClick={() => setCronometro(Date.now())}
+            >
+              Modo entrevista
+            </button>
+          )}
           {ejercicio.preparado && (
             <button type="button" className="boton" onClick={correr} disabled={corriendo}>
               Correr tests

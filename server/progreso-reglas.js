@@ -181,3 +181,21 @@ export function solucionDesbloqueada(registro) {
   if (registro.repasando) return registro.vioSolucion; // en repaso se vuelve a bloquear
   return registro.estado === "resuelto" || registro.vioSolucion;
 }
+
+/**
+ * Autoevaluación de una tarjeta de entrevista (mismas cajas que los ejercicios):
+ * "sabia" sube de caja, "dude" se queda, "no" vuelve a la caja 1.
+ * @param {{ caja: number, proximo: string } | undefined} registro
+ * @param {"sabia"|"dude"|"no"} nota
+ */
+export function calificarPregunta(registro, nota, hoy) {
+  const cajaActual = registro?.caja ?? 0;
+  let caja;
+  if (nota === "sabia") caja = Math.min(cajaActual + 1, INTERVALOS.length);
+  else if (nota === "dude") caja = Math.max(cajaActual, 1);
+  else caja = 1;
+  return { ...programarRepaso(caja, hoy), ultima: nota, vistas: (registro?.vistas ?? 0) + 1 };
+}
+
+/** ¿Le toca repaso a la tarjeta hoy? (las nunca vistas no cuentan como repaso) */
+export const preguntaPendiente = (registro, hoy) => !!registro && registro.proximo <= hoy;

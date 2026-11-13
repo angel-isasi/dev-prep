@@ -5,6 +5,8 @@ import { crearWorkspace } from "./workspace.js";
 import { crearEventos } from "./eventos.js";
 import { crearCorredor } from "./corredor.js";
 import { crearProgreso } from "./progreso.js";
+import { cargarEntrevistas } from "./entrevistas.js";
+import { crearMisRespuestas } from "./mis-respuestas.js";
 import { exec } from "node:child_process";
 import { abrirEnVSCode } from "./vscode.js";
 import { crearApp } from "./app.js";
@@ -15,6 +17,8 @@ for (const error of indice.errores) console.warn(`[contenido] ${error}`);
 const workspace = crearWorkspace({ workspaceDir: config.workspaceDir });
 const eventos = crearEventos();
 const progreso = await crearProgreso({ datosDir: config.datosDir });
+const entrevistas = await cargarEntrevistas(config.contenidoDir);
+const misRespuestas = await crearMisRespuestas({ datosDir: config.datosDir });
 
 const corredor = await crearCorredor({
   workspace,
@@ -27,7 +31,17 @@ const corredor = await crearCorredor({
 });
 
 const vscode = config.abrirVSCode ? abrirEnVSCode : async () => {};
-const app = crearApp({ indice, workspace, corredor, eventos, progreso, vscode, clienteDir: config.clienteDir });
+const app = crearApp({
+  indice,
+  workspace,
+  corredor,
+  eventos,
+  progreso,
+  entrevistas,
+  misRespuestas,
+  vscode,
+  clienteDir: config.clienteDir,
+});
 
 const url = `http://localhost:${config.puerto}`;
 const servidor = app.listen(config.puerto, config.host, () => {

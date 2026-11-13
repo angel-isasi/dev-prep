@@ -1,0 +1,22 @@
+.cronometro {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 999px;
+  font-family: var(--fuente-codigo);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.cronometro[data-estado="poco"] {
+  border-color: var(--aviso);
+  color: var(--aviso);
+}
+
+.cronometro[data-estado="fin"] {
+  border-color: var(--error);
+  background: var(--error-suave);
+  color: var(--error);
+}

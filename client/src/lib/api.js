@@ -26,4 +26,15 @@ export const api = {
   progreso: () => pedir("/api/progreso"),
   config: () => pedir("/api/config"),
   guardarConfig: (cambios) => put("/api/config", cambios),
+  entrevistas: () => pedir("/api/entrevistas"),
+  tarjetas: (filtro) => pedir(`/api/entrevistas/tarjetas?${new URLSearchParams(filtro)}`),
+  calificar: (id, nota) =>
+    pedir(`/api/entrevistas/preguntas/${encodeURIComponent(id)}/calificar`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nota }),
+    }),
+  ejerciciosEntrevista: () => pedir("/api/entrevistas/ejercicios"),
+  misRespuestas: () => pedir("/api/mis-respuestas"),
+  guardarMisRespuestas: (datos) => put("/api/mis-respuestas", datos),
 };

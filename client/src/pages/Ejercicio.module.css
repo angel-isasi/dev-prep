@@ -148,3 +148,9 @@
 .repaso span {
   color: var(--texto-suave);
 }
+
+.cronometro {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-1);
+}
