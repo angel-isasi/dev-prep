@@ -1,0 +1,293 @@
+{
+  "categoria": "DOM y eventos",
+  "entradas": [
+    {
+      "id": "dom-queryselector",
+      "nombre": "document.querySelector()",
+      "firma": "elemento.querySelector(selectorCSS)",
+      "descripcion": "Devuelve el PRIMER elemento que coincide con un selector CSS, o null si no hay ninguno. Puedes llamarlo desde document o desde cualquier elemento para buscar solo dentro de él.",
+      "ejemplo": "const titulo = document.querySelector(\"h1\");\nconst boton = document.querySelector(\"#enviar\");     // por id\nconst primero = document.querySelector(\".lista li\"); // por clase\nconst email = form.querySelector('input[name=\"email\"]'); // dentro del form\nif (!boton) console.log(\"no existe\"); // revisa null antes de usarlo",
+      "devuelve": "Un elemento (Element) o `null` si no encuentra nada.",
+      "errorTipico": "Olvidar el punto o el # del selector: `querySelector(\"boton\")` busca una etiqueta `<boton>` y devuelve null. Luego `null.addEventListener` da \"Cannot read properties of null\". Pasa lo mismo si el script corre antes de que exista el HTML (usa `<script defer>`).",
+      "tags": [
+        "buscar elemento",
+        "seleccionar",
+        "selector css",
+        "obtener elemento"
+      ]
+    },
+    {
+      "id": "dom-queryselectorall",
+      "nombre": "document.querySelectorAll()",
+      "firma": "elemento.querySelectorAll(selectorCSS)",
+      "descripcion": "Devuelve TODOS los elementos que coinciden con el selector, en una NodeList. La lista es una foto del momento: no cambia si luego agregas o quitas elementos.",
+      "ejemplo": "const items = document.querySelectorAll(\".item\");\nconsole.log(items.length); // 3\nitems.forEach((li) => li.classList.add(\"visto\"));\nconst textos = [...items].map((li) => li.textContent);\n// [\"Pan\", \"Leche\", \"Huevos\"]",
+      "devuelve": "Una NodeList (vacía si no hay coincidencias, nunca null).",
+      "errorTipico": "Tratar la NodeList como un arreglo o como un elemento: no tiene `map` ni `filter` (conviértela con `[...items]` o `Array.from(items)`) y `items.addEventListener(...)` falla: hay que recorrerla y agregarlo a cada uno, o usar delegación.",
+      "tags": [
+        "seleccionar varios",
+        "todos los elementos",
+        "nodelist",
+        "recorrer elementos"
+      ]
+    },
+    {
+      "id": "dom-getelementbyid",
+      "nombre": "document.getElementById()",
+      "firma": "document.getElementById(id)",
+      "descripcion": "Busca un elemento por su atributo id. Recibe el id solo, SIN el #.",
+      "ejemplo": "// <p id=\"saludo\">Hola</p>\nconst p = document.getElementById(\"saludo\");\nconsole.log(p.textContent); // Hola\ndocument.getElementById(\"#saludo\"); // null (sobra el #)",
+      "devuelve": "El elemento o `null` si no existe ninguno con ese id.",
+      "errorTipico": "Ponerle el # como en CSS (`getElementById(\"#saludo\")` devuelve null) o repetir el mismo id en varios elementos: los id deben ser únicos y solo obtienes el primero.",
+      "tags": [
+        "buscar por id",
+        "id",
+        "obtener elemento"
+      ]
+    },
+    {
+      "id": "dom-createelement",
+      "nombre": "document.createElement()",
+      "firma": "document.createElement(etiqueta)",
+      "descripcion": "Crea un elemento HTML nuevo en memoria. No aparece en la página hasta que lo insertas con append, appendChild o similares.",
+      "ejemplo": "const li = document.createElement(\"li\");\nli.textContent = \"Comprar pan\";\nli.className = \"item\";\nli.dataset.id = \"7\";\ndocument.querySelector(\"ul\").append(li); // recién ahora se ve",
+      "devuelve": "El elemento nuevo (HTMLElement), todavía fuera del documento.",
+      "errorTipico": "Crearlo y olvidar insertarlo, o intentar insertar el MISMO elemento en dos lugares: un nodo solo puede estar en un sitio, el segundo `append` lo mueve. Si necesitas dos, crea otro o usa `li.cloneNode(true)`.",
+      "tags": [
+        "crear elemento",
+        "nuevo elemento",
+        "generar html",
+        "agregar a la pagina"
+      ]
+    },
+    {
+      "id": "dom-append",
+      "nombre": "append() / appendChild()",
+      "firma": "padre.append(...nodosOTextos)  /  padre.appendChild(nodo)",
+      "descripcion": "Insertan contenido al final del padre. append acepta varios nodos y textos a la vez; appendChild solo un nodo. Para otras posiciones existen prepend (al inicio), before y after.",
+      "ejemplo": "const ul = document.querySelector(\"ul\");\nconst a = document.createElement(\"li\");\nconst b = document.createElement(\"li\");\nul.append(a, b, \"texto suelto\");             // varios a la vez\nul.appendChild(document.createElement(\"li\")); // solo un nodo\nul.prepend(document.createElement(\"li\"));     // al inicio",
+      "devuelve": "`append` devuelve undefined; `appendChild` devuelve el nodo insertado.",
+      "errorTipico": "Pasarle texto a `appendChild`: `ul.appendChild(\"hola\")` lanza un TypeError porque solo acepta nodos. Para texto usa `append(\"hola\")` o `textContent`.",
+      "tags": [
+        "insertar",
+        "agregar hijo",
+        "añadir elemento",
+        "prepend",
+        "agregar al final"
+      ]
+    },
+    {
+      "id": "dom-remove",
+      "nombre": "elemento.remove()",
+      "firma": "elemento.remove()  /  padre.replaceChildren()",
+      "descripcion": "Quita el elemento de la página. Para vaciar un contenedor completo usa replaceChildren() sin argumentos.",
+      "ejemplo": "const item = document.querySelector(\"#item-3\");\nitem.remove(); // desaparece de la página\n\nconst lista = document.querySelector(\"ul\");\nlista.replaceChildren(); // la lista queda vacía",
+      "devuelve": "undefined.",
+      "errorTipico": "Borrar con un bucle `for` por índice sobre una colección \"viva\" (`getElementsByClassName`, `children`): al quitar uno, los demás se corren y te saltas elementos. Con `querySelectorAll` no pasa porque su lista no cambia.",
+      "tags": [
+        "eliminar elemento",
+        "borrar",
+        "quitar",
+        "vaciar lista",
+        "limpiar contenedor"
+      ]
+    },
+    {
+      "id": "dom-textcontent",
+      "nombre": "textContent",
+      "firma": "elemento.textContent  /  elemento.textContent = texto",
+      "descripcion": "Lee o reemplaza todo el texto de un elemento como texto plano. Es la forma segura de mostrar datos del usuario, porque no interpreta HTML.",
+      "ejemplo": "const p = document.querySelector(\"p\");\np.textContent = \"<b>Hola</b>\";\n// en pantalla se ve literalmente <b>Hola</b>, sin negrita\nconsole.log(p.textContent); // <b>Hola</b>",
+      "devuelve": "Un string con el texto del elemento y todos sus descendientes.",
+      "errorTipico": "Asignar `textContent` a un contenedor que tiene hijos: borra todos los elementos de adentro (botones, íconos, spans) y deja solo el texto. Cambia el texto del hijo concreto.",
+      "tags": [
+        "cambiar texto",
+        "texto",
+        "mostrar dato",
+        "seguro",
+        "innerText"
+      ]
+    },
+    {
+      "id": "dom-innerhtml",
+      "nombre": "innerHTML (y el riesgo de XSS)",
+      "firma": "elemento.innerHTML  /  elemento.innerHTML = htmlComoTexto",
+      "descripcion": "Lee o reemplaza el contenido de un elemento interpretando el texto como HTML. Es cómodo para plantillas, pero peligroso con datos que escribe el usuario o que vienen de una API.",
+      "ejemplo": "lista.innerHTML = \"<li>Pan</li><li>Leche</li>\"; // ok: el texto es tuyo\n\nconst comentario = '<img src=x onerror=\"alert(1)\">'; // escrito por un usuario\ncaja.innerHTML = comentario;   // PELIGRO: ejecuta código (XSS)\ncaja.textContent = comentario; // seguro: se muestra como texto",
+      "devuelve": "Un string con el HTML interno del elemento.",
+      "errorTipico": "Usar `innerHTML` con lo que escribe el usuario (un comentario, un nombre, una búsqueda): permite inyectar código (ataque XSS). Usa `textContent` o crea los elementos con `createElement`. También evita `innerHTML +=` en un bucle: reconstruye todo y borra los listeners que tenías.",
+      "tags": [
+        "html",
+        "plantilla",
+        "xss",
+        "seguridad",
+        "inyeccion",
+        "insertar html"
+      ]
+    },
+    {
+      "id": "dom-classlist",
+      "nombre": "classList",
+      "firma": "el.classList.add(clase) / remove(clase) / toggle(clase, forzar?) / contains(clase)",
+      "descripcion": "Maneja las clases CSS de un elemento sin tocar las demás. Es la forma normal de mostrar, ocultar o cambiar el estilo desde JavaScript.",
+      "ejemplo": "const menu = document.querySelector(\".menu\");\nmenu.classList.add(\"abierto\");\nmenu.classList.remove(\"oculto\");\nmenu.classList.toggle(\"activo\");       // la pone si no está, la quita si está\nmenu.classList.toggle(\"oscuro\", true); // fuerza ponerla\nconsole.log(menu.classList.contains(\"abierto\")); // true",
+      "devuelve": "`contains` devuelve un boolean; `toggle` devuelve true si la clase quedó puesta; `add` y `remove` devuelven undefined.",
+      "errorTipico": "Escribir el punto del selector: `classList.add(\".activo\")` agrega la clase \".activo\", que tu CSS no reconoce. Y usar `el.className = \"activo\"`, que borra todas las otras clases del elemento.",
+      "tags": [
+        "clases css",
+        "agregar clase",
+        "quitar clase",
+        "toggle",
+        "mostrar ocultar",
+        "estilos"
+      ]
+    },
+    {
+      "id": "dom-setattribute-dataset",
+      "nombre": "setAttribute() / dataset",
+      "firma": "el.setAttribute(nombre, valor) / el.getAttribute(nombre) / el.removeAttribute(nombre) / el.dataset.clave",
+      "descripcion": "setAttribute y getAttribute leen y cambian cualquier atributo HTML. dataset da acceso a los atributos data-*, pasando el nombre de kebab-case a camelCase (data-producto-id es dataset.productoId).",
+      "ejemplo": "// <button data-producto-id=\"42\">Comprar</button>\nconst btn = document.querySelector(\"button\");\nconsole.log(btn.dataset.productoId); // \"42\" (siempre string)\nbtn.dataset.estado = \"listo\";       // crea data-estado=\"listo\"\nbtn.setAttribute(\"aria-label\", \"Comprar producto\");\nbtn.removeAttribute(\"disabled\");",
+      "devuelve": "`getAttribute` y `dataset.x` devuelven un string (o null / undefined si no existe); `setAttribute` devuelve undefined.",
+      "errorTipico": "Olvidar que todo es texto: `btn.dataset.productoId === 42` da false (usa `Number(...)`), y `setAttribute(\"disabled\", false)` igual deshabilita el botón, porque basta con que el atributo exista. Usa `removeAttribute(\"disabled\")` o `btn.disabled = false`.",
+      "tags": [
+        "atributos",
+        "data atributos",
+        "data-id",
+        "guardar dato en html",
+        "aria"
+      ]
+    },
+    {
+      "id": "dom-addeventlistener",
+      "nombre": "addEventListener()",
+      "firma": "el.addEventListener(tipo, manejador, { once, passive, capture })",
+      "descripcion": "Ejecuta una función cada vez que ocurre un evento (click, input, submit, keydown...) en el elemento. Puedes registrar varios manejadores para el mismo evento.",
+      "ejemplo": "const boton = document.querySelector(\"#guardar\");\nboton.addEventListener(\"click\", (event) => {\n  console.log(\"clic en\", event.target);\n});\nfunction saludar() { console.log(\"hola\"); }\nboton.addEventListener(\"click\", saludar, { once: true }); // solo la 1.ª vez",
+      "devuelve": "undefined.",
+      "errorTipico": "Llamar la función al registrarla: `addEventListener(\"click\", saludar())` la ejecuta al instante y registra `undefined`. Pasa la referencia: `saludar`, o una flecha `() => saludar(\"Ana\")`. Tampoco lleva \"on\": es `\"click\"`, no `\"onclick\"`.",
+      "tags": [
+        "evento",
+        "escuchar",
+        "click",
+        "listener",
+        "manejador",
+        "on click"
+      ]
+    },
+    {
+      "id": "dom-removeeventlistener",
+      "nombre": "removeEventListener()",
+      "firma": "el.removeEventListener(tipo, mismaFuncion)",
+      "descripcion": "Quita un manejador que agregaste antes. Tienes que pasar exactamente la misma función, es decir, la misma referencia.",
+      "ejemplo": "function alHacerScroll() {\n  console.log(window.scrollY);\n}\nwindow.addEventListener(\"scroll\", alHacerScroll);\n// más tarde:\nwindow.removeEventListener(\"scroll\", alHacerScroll); // funciona",
+      "devuelve": "undefined (si la función no estaba registrada, no hace nada y no avisa).",
+      "errorTipico": "Intentar quitar una flecha escrita de nuevo: `removeEventListener(\"click\", () => saludar())` no quita nada, porque es otra función distinta aunque se vea igual. Guarda la función en una variable.",
+      "tags": [
+        "quitar evento",
+        "dejar de escuchar",
+        "eliminar listener",
+        "limpiar"
+      ]
+    },
+    {
+      "id": "dom-target-currenttarget",
+      "nombre": "event.target vs event.currentTarget",
+      "firma": "event.target  /  event.currentTarget",
+      "descripcion": "target es el elemento exacto donde ocurrió el evento (lo que realmente clicaste). currentTarget es el elemento que tiene el addEventListener que se está ejecutando.",
+      "ejemplo": "// <button id=\"btn\" data-id=\"5\"><span>Guardar</span></button>\nbtn.addEventListener(\"click\", (e) => {\n  console.log(e.target.tagName);        // SPAN (si clicas el texto)\n  console.log(e.currentTarget.tagName); // BUTTON (siempre)\n  console.log(e.currentTarget.dataset.id); // \"5\"\n});",
+      "devuelve": "Ambos devuelven un elemento del DOM.",
+      "errorTipico": "Leer `e.target.dataset.id` en un botón que tiene un ícono o texto adentro: si el usuario clica el ícono, `target` es el ícono y el dato sale `undefined`. Usa `e.currentTarget` o `e.target.closest(\"button\")`.",
+      "tags": [
+        "elemento clicado",
+        "target",
+        "currentTarget",
+        "quien disparo el evento"
+      ]
+    },
+    {
+      "id": "dom-preventdefault",
+      "nombre": "event.preventDefault()",
+      "firma": "event.preventDefault()",
+      "descripcion": "Cancela la acción que el navegador haría por defecto: que un formulario recargue la página, que un enlace navegue o que un checkbox se marque.",
+      "ejemplo": "form.addEventListener(\"submit\", (e) => {\n  e.preventDefault(); // la página NO se recarga\n  const datos = new FormData(form);\n  console.log(datos.get(\"email\")); // lo que escribió el usuario\n});",
+      "devuelve": "undefined.",
+      "errorTipico": "Olvidarlo en el `submit`: la página se recarga, se pierde todo lo que hiciste y parece que tu código \"no hizo nada\" (el `console.log` aparece y desaparece al instante).",
+      "tags": [
+        "evitar recarga",
+        "formulario",
+        "submit",
+        "cancelar accion",
+        "enlace"
+      ]
+    },
+    {
+      "id": "dom-stoppropagation",
+      "nombre": "event.stopPropagation()",
+      "firma": "event.stopPropagation()",
+      "descripcion": "Detiene la propagación: el evento deja de subir (burbujear) hacia los elementos padres. No cancela la acción del navegador, eso lo hace preventDefault.",
+      "ejemplo": "// Modal: clic en el fondo lo cierra, clic dentro de la caja no\nfondo.addEventListener(\"click\", cerrarModal);\ncaja.addEventListener(\"click\", (e) => {\n  e.stopPropagation(); // el clic ya no llega al fondo\n});\n// alternativa sin stopPropagation: if (e.target === fondo) cerrarModal();",
+      "devuelve": "undefined.",
+      "errorTipico": "Usarlo por costumbre \"para arreglar\" algo: rompe la delegación de eventos y cualquier listener de los padres (por ejemplo, un \"cerrar menú al hacer clic afuera\"). Muchas veces basta con revisar `e.target`.",
+      "tags": [
+        "burbujeo",
+        "propagacion",
+        "bubbling",
+        "detener evento",
+        "modal"
+      ]
+    },
+    {
+      "id": "dom-delegacion",
+      "nombre": "Delegación de eventos",
+      "firma": "padre.addEventListener(tipo, (e) => { const el = e.target.closest(selector); ... })",
+      "descripcion": "En vez de poner un listener en cada hijo, pones uno solo en el padre y averiguas con e.target qué hijo se clicó. Funciona también con los elementos que agregues después.",
+      "ejemplo": "// <ul id=\"lista\"><li>Pan <button class=\"borrar\">x</button></li>...</ul>\nlista.addEventListener(\"click\", (e) => {\n  const btn = e.target.closest(\"button.borrar\");\n  if (!btn) return; // el clic no fue en un botón borrar\n  btn.closest(\"li\").remove();\n});",
+      "devuelve": "Nada: es un patrón. Un solo listener en el padre maneja a todos los hijos, incluso a los creados después.",
+      "errorTipico": "Comparar con `e.target` directamente (`e.target.matches(\"button\")`) cuando el botón tiene un ícono o un span adentro: falla al clicar el ícono. Usa `closest`, que sube hasta encontrar el elemento.",
+      "tags": [
+        "delegar eventos",
+        "elementos dinamicos",
+        "lista",
+        "closest",
+        "un solo listener"
+      ]
+    },
+    {
+      "id": "dom-eventos-formulario",
+      "nombre": "Eventos input, change y submit",
+      "firma": "campo.addEventListener(\"input\" | \"change\", fn)  /  form.addEventListener(\"submit\", fn)",
+      "descripcion": "input se dispara con cada tecla; change cuando el valor se confirma (al salir del campo, o al elegir en un select o checkbox); submit cuando se envía el formulario, ya sea con el botón o con Enter.",
+      "ejemplo": "buscador.addEventListener(\"input\", (e) => filtrar(e.target.value)); // cada tecla\nselect.addEventListener(\"change\", (e) => console.log(e.target.value));\ncheck.addEventListener(\"change\", (e) => console.log(e.target.checked)); // true/false\nform.addEventListener(\"submit\", (e) => {\n  e.preventDefault();\n  enviar();\n});",
+      "devuelve": "`e.target.value` siempre es un string (convierte con `Number` si esperas un número); en checkbox usa `e.target.checked`, que es boolean.",
+      "errorTipico": "Usar `change` para un buscador en vivo: solo se dispara al salir del campo; para cada tecla es `input`. Y leer `.value` de un checkbox: siempre vale \"on\", lo que quieres es `.checked`.",
+      "tags": [
+        "formulario",
+        "input",
+        "change",
+        "submit",
+        "buscador",
+        "escribir",
+        "checkbox",
+        "select"
+      ]
+    },
+    {
+      "id": "dom-localstorage",
+      "nombre": "localStorage",
+      "firma": "localStorage.setItem(clave, texto) / getItem(clave) / removeItem(clave) / clear()",
+      "descripcion": "Guarda datos en el navegador que sobreviven al recargar o cerrar la pestaña. Solo guarda strings, así que los objetos y arreglos se pasan por JSON.",
+      "ejemplo": "const tareas = [{ id: 1, texto: \"Estudiar\" }];\nlocalStorage.setItem(\"tareas\", JSON.stringify(tareas));\n\nconst guardadas = JSON.parse(localStorage.getItem(\"tareas\")) ?? [];\nconsole.log(guardadas[0].texto); // Estudiar\nlocalStorage.removeItem(\"tareas\");",
+      "devuelve": "`getItem` devuelve el string guardado o `null` si la clave no existe; los demás devuelven undefined.",
+      "errorTipico": "Guardar un objeto sin `JSON.stringify`: se guarda el texto \"[object Object]\" y el dato se pierde. Tampoco guardes contraseñas ni tokens: cualquier script de la página puede leerlo.",
+      "tags": [
+        "guardar datos",
+        "persistir",
+        "almacenamiento",
+        "storage",
+        "recordar",
+        "json"
+      ]
+    }
+  ]
+}

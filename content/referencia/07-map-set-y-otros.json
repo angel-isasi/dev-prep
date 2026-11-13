@@ -1,0 +1,207 @@
+{
+  "categoria": "Map, Set y otros",
+  "entradas": [
+    {
+      "id": "otros-map",
+      "nombre": "Map",
+      "firma": "new Map([[clave, valor], ...])  ·  .set(k, v) / .get(k) / .has(k) / .delete(k) / .size",
+      "descripcion": "Colección de pares clave-valor donde la clave puede ser de cualquier tipo (números, objetos) y se respeta el orden de inserción. Es mejor que un objeto cuando agregas y quitas claves seguido.",
+      "ejemplo": "const stock = new Map();\nstock.set(\"pan\", 10).set(\"leche\", 5);\nconsole.log(stock.get(\"pan\"));   // 10\nconsole.log(stock.has(\"queso\")); // false\nstock.delete(\"leche\");\nconsole.log(stock.size);         // 1",
+      "devuelve": "`set` devuelve el mismo Map (se puede encadenar); `get` el valor o undefined; `has` y `delete` un boolean.",
+      "errorTipico": "Usar corchetes como en un objeto: `stock[\"pan\"] = 10` no agrega nada al Map (`stock.get(\"pan\")` da undefined). Y `size` es una propiedad, no una función: `stock.size()` da error.",
+      "tags": [
+        "diccionario",
+        "clave valor",
+        "mapa",
+        "contar",
+        "agrupar",
+        "hash"
+      ]
+    },
+    {
+      "id": "otros-map-iterar",
+      "nombre": "Iterar un Map",
+      "firma": "for (const [clave, valor] of mapa)  /  mapa.forEach((valor, clave) => ...)  /  .keys() .values() .entries()",
+      "descripcion": "Un Map se recorre con for...of en orden de inserción, recibiendo pares [clave, valor]. keys(), values() y entries() devuelven iteradores que puedes convertir en arreglos.",
+      "ejemplo": "const notas = new Map([[\"Ana\", 18], [\"Luis\", 14]]);\nfor (const [nombre, nota] of notas) {\n  console.log(nombre, nota); // Ana 18, luego Luis 14\n}\nconsole.log([...notas.values()]);       // [18, 14]\nconsole.log(Object.fromEntries(notas)); // { Ana: 18, Luis: 14 }",
+      "devuelve": "`keys`, `values` y `entries` devuelven iteradores (no arreglos); usa `[...it]` o `Array.from(it)` para tener un arreglo.",
+      "errorTipico": "Hacer `JSON.stringify(mapa)`: da \"{}\" y pierdes los datos. Conviértelo antes con `Object.fromEntries(mapa)`. Ojo también con `forEach`: el orden de los parámetros es (valor, clave), al revés de lo que muchos esperan.",
+      "tags": [
+        "recorrer map",
+        "for of",
+        "entries",
+        "convertir map",
+        "map a objeto"
+      ]
+    },
+    {
+      "id": "otros-set",
+      "nombre": "Set (quitar duplicados)",
+      "firma": "new Set(iterable)  ·  .add(v) / .has(v) / .delete(v) / .size",
+      "descripcion": "Colección de valores sin repetidos. Lo más usado: quitar duplicados de un arreglo y comprobar rápido si un valor ya está con has.",
+      "ejemplo": "const nums = [1, 2, 2, 3, 3, 3];\nconsole.log([...new Set(nums)]); // [1, 2, 3]\n\nconst vistos = new Set([\"ana\"]);\nvistos.add(\"luis\").add(\"ana\"); // \"ana\" no se repite\nconsole.log(vistos.size, vistos.has(\"luis\")); // 2 true",
+      "devuelve": "Un Set. `add` devuelve el mismo Set; `has` y `delete` un boolean.",
+      "errorTipico": "Esperar que quite objetos \"iguales\": `new Set([{ id: 1 }, { id: 1 }]).size` es 2, porque compara por referencia, no por contenido. Para objetos usa un Map con el id como clave.",
+      "tags": [
+        "unicos",
+        "sin duplicados",
+        "eliminar repetidos",
+        "conjunto",
+        "valores unicos"
+      ]
+    },
+    {
+      "id": "otros-weakmap",
+      "nombre": "WeakMap",
+      "firma": "new WeakMap()  ·  .set(objeto, valor) / .get(objeto) / .has(objeto) / .delete(objeto)",
+      "descripcion": "Como un Map, pero las claves deben ser objetos y no impiden que el recolector de basura los borre: sirve para guardar datos extra de un objeto sin causar fugas de memoria.",
+      "ejemplo": "const clics = new WeakMap();\nconst boton = { id: \"guardar\" }; // en la web sería un elemento del DOM\nclics.set(boton, 1);\nconsole.log(clics.get(boton)); // 1",
+      "devuelve": "Un WeakMap: igual que Map, pero sin `size` ni forma de recorrerlo.",
+      "errorTipico": "Usar un string o un número como clave: lanza un TypeError (\"Invalid value used as weak map key\"). Y querer recorrerlo: no tiene `size`, `keys` ni `forEach`.",
+      "tags": [
+        "memoria",
+        "claves objeto",
+        "datos privados",
+        "recolector de basura"
+      ]
+    },
+    {
+      "id": "otros-date",
+      "nombre": "Date",
+      "firma": "new Date()  /  new Date(año, mesDesde0, día)  /  fecha.toLocaleDateString(\"es-PE\", opciones)",
+      "descripcion": "Representa un momento en el tiempo. Lee sus partes con getFullYear(), getMonth() (0 a 11), getDate() (día del mes) y getDay() (día de la semana, 0 es domingo), y muéstrala bonita con toLocaleDateString.",
+      "ejemplo": "const meta = new Date(2027, 2, 1); // 1 de marzo de 2027 (mes 2 = marzo)\nconsole.log(meta.getFullYear()); // 2027\nconsole.log(meta.toLocaleDateString(\"es-PE\")); // 1/3/2027\nconst opciones = { weekday: \"long\", day: \"numeric\", month: \"long\" };\nconsole.log(meta.toLocaleDateString(\"es-PE\", opciones)); // lunes, 1 de marzo\nconst faltan = Math.ceil((meta - new Date()) / 86_400_000); // días que faltan",
+      "devuelve": "Un objeto Date. Restar dos fechas da la diferencia en milisegundos (un día son 86 400 000 ms).",
+      "errorTipico": "Olvidar que los meses van de 0 a 11 (`new Date(2027, 3, 1)` es ABRIL) y crear fechas con `new Date(\"2027-03-01\")`: ese formato se lee como hora UTC y en Perú (UTC-5) se muestra como 28 de febrero. Usa `new Date(2027, 2, 1)` o agrega la hora: `\"2027-03-01T00:00:00\"`.",
+      "tags": [
+        "fecha",
+        "hora",
+        "dia",
+        "formatear fecha",
+        "es-PE",
+        "cuenta regresiva",
+        "calendario"
+      ]
+    },
+    {
+      "id": "otros-intl-numberformat",
+      "nombre": "Intl.NumberFormat (soles)",
+      "firma": "new Intl.NumberFormat(\"es-PE\", { style: \"currency\", currency: \"PEN\" }).format(numero)",
+      "descripcion": "Formatea números según el país: moneda, separador de miles, decimales y porcentajes. Crea el formateador una vez y reúsalo con format().",
+      "ejemplo": "const soles = new Intl.NumberFormat(\"es-PE\", {\n  style: \"currency\",\n  currency: \"PEN\",\n});\nconsole.log(soles.format(1234.5)); // S/ 1,234.50\nconsole.log((0.5).toLocaleString(\"es-PE\", { style: \"percent\" })); // 50%",
+      "devuelve": "Un string con el número formateado.",
+      "errorTipico": "Armar el precio a mano (`\"S/ \" + precio.toFixed(2)`): no pone separador de miles. Y en un test comparar con `\"S/ 1,234.50\"` escrito con espacio normal: Intl usa un espacio especial que no se separa (\\u00A0), así que la comparación falla.",
+      "tags": [
+        "moneda",
+        "soles",
+        "precio",
+        "formatear numero",
+        "dinero",
+        "porcentaje",
+        "PEN"
+      ]
+    },
+    {
+      "id": "otros-symbol-iterator",
+      "nombre": "Symbol.iterator",
+      "firma": "objeto[Symbol.iterator]() { return iterador; }",
+      "descripcion": "Es la \"llave\" que hace que un objeto funcione con for...of, el spread [...] y la desestructuración. Arreglos, strings, Map y Set ya la traen; tus objetos solo si la defines.",
+      "ejemplo": "const rango = {\n  desde: 1,\n  hasta: 3,\n  *[Symbol.iterator]() {\n    for (let i = this.desde; i <= this.hasta; i++) yield i;\n  },\n};\nconsole.log([...rango]); // [1, 2, 3]",
+      "devuelve": "Un iterador: un objeto con un método `next()` que devuelve `{ value, done }`.",
+      "errorTipico": "Usar `for...of` sobre un objeto literal normal: lanza \"TypeError: obj is not iterable\". Para recorrer un objeto usa `Object.entries(obj)` o `for...in`.",
+      "tags": [
+        "iterable",
+        "iterador",
+        "for of",
+        "not iterable",
+        "recorrer objeto"
+      ]
+    },
+    {
+      "id": "otros-generadores",
+      "nombre": "Generadores: function* y yield",
+      "firma": "function* nombre() { yield valor; }",
+      "descripcion": "Un generador es una función que se puede pausar: cada yield entrega un valor y se detiene hasta que pidas el siguiente con next() o con for...of.",
+      "ejemplo": "function* contador() {\n  let n = 1;\n  while (true) yield n++;\n}\nconst gen = contador();\nconsole.log(gen.next().value); // 1\nconsole.log(gen.next().value); // 2\nconsole.log(gen.next());       // { value: 3, done: false }",
+      "devuelve": "Llamar a la función no ejecuta su código: devuelve un objeto generador, que es iterable y tiene `next()`.",
+      "errorTipico": "Hacer `[...contador()]` con un generador infinito: el programa se cuelga. Y llamar a `contador().next()` cada vez: creas un generador nuevo y siempre obtienes 1. Guarda el generador en una variable.",
+      "tags": [
+        "generador",
+        "yield",
+        "pausar funcion",
+        "secuencia",
+        "iterador",
+        "lazy"
+      ]
+    },
+    {
+      "id": "otros-class",
+      "nombre": "class (constructor, static, #privado, get/set)",
+      "firma": "class Nombre { static x; #privado; constructor(...) {} metodo() {} get prop() {} set prop(v) {} }",
+      "descripcion": "Plantilla para crear objetos con new. Dentro defines el constructor, métodos, campos privados con # (solo accesibles dentro de la clase), miembros static (de la clase, no de cada objeto) y get/set (propiedades calculadas que se usan sin paréntesis).",
+      "ejemplo": "class Cuenta {\n  static moneda = \"PEN\";\n  #saldo = 0; // privado: c.#saldo afuera da error\n  constructor(titular) { this.titular = titular; }\n  get saldo() { return this.#saldo; }\n  set saldo(v) { if (v >= 0) this.#saldo = v; } // valida\n}\nconst c = new Cuenta(\"Ana\"); c.saldo = 50; c.saldo = -9;\nconsole.log(c.saldo, Cuenta.moneda); // 50 PEN",
+      "devuelve": "`new Clase(...)` devuelve un objeto nuevo (una instancia) con los campos y métodos de la clase.",
+      "errorTipico": "Olvidar `new` (`Cuenta(\"Ana\")` lanza TypeError) o perder `this` al pasar un método como callback: `boton.addEventListener(\"click\", c.mostrar)` hace que dentro de `mostrar` el `this` ya no sea la cuenta. Usa una flecha: `() => c.mostrar()`.",
+      "tags": [
+        "clase",
+        "poo",
+        "objeto",
+        "constructor",
+        "privado",
+        "getter",
+        "setter",
+        "static"
+      ]
+    },
+    {
+      "id": "otros-class-extends",
+      "nombre": "extends y super",
+      "firma": "class Hija extends Padre { constructor(...) { super(...); } }",
+      "descripcion": "extends hace que una clase herede los métodos de otra. super(...) llama al constructor del padre y super.metodo() llama a la versión del padre de un método.",
+      "ejemplo": "class Animal {\n  constructor(nombre) { this.nombre = nombre; }\n  hablar() { return `${this.nombre} hace un sonido`; }\n}\nclass Perro extends Animal {\n  constructor(nombre, raza) { super(nombre); this.raza = raza; }\n  hablar() { return `${super.hablar()}: guau`; }\n}\nconsole.log(new Perro(\"Firulais\", \"chusco\").hablar()); // Firulais hace un sonido: guau",
+      "devuelve": "Una clase hija; sus instancias también son `instanceof` de la clase padre.",
+      "errorTipico": "Usar `this` en el constructor de la hija antes de llamar a `super()`: lanza un ReferenceError (\"Must call super constructor in derived class before accessing 'this'\").",
+      "tags": [
+        "herencia",
+        "heredar",
+        "clase padre",
+        "super",
+        "poo",
+        "sobrescribir metodo"
+      ]
+    },
+    {
+      "id": "otros-console",
+      "nombre": "console.table() / console.time()",
+      "firma": "console.table(datos)  /  console.time(etiqueta) ... console.timeEnd(etiqueta)",
+      "descripcion": "console.table muestra un arreglo de objetos como una tabla, mucho más fácil de leer que un log. console.time y console.timeEnd miden cuánto tarda un bloque de código.",
+      "ejemplo": "const usuarios = [{ nombre: \"Ana\", edad: 20 }, { nombre: \"Luis\", edad: 22 }];\nconsole.table(usuarios); // tabla con columnas (index), nombre, edad\n\nconsole.time(\"ordenar\");\nusuarios.sort((a, b) => b.edad - a.edad);\nconsole.timeEnd(\"ordenar\"); // ordenar: 0.05ms (varía)",
+      "devuelve": "undefined: solo imprimen en la consola.",
+      "errorTipico": "Escribir distinta la etiqueta en `time` y `timeEnd`: sale un aviso (\"No such label\") y no mide nada. Y dejar `console.log` de depuración en el código que entregas en una prueba técnica.",
+      "tags": [
+        "depurar",
+        "debug",
+        "consola",
+        "medir tiempo",
+        "rendimiento",
+        "tabla"
+      ]
+    },
+    {
+      "id": "otros-typeof-instanceof",
+      "nombre": "typeof vs instanceof",
+      "firma": "typeof valor  /  objeto instanceof Clase",
+      "descripcion": "typeof devuelve un string con el tipo básico de un valor. instanceof revisa si un objeto fue creado por una clase (o por una que hereda de ella).",
+      "ejemplo": "console.log(typeof \"hola\", typeof 42); // string number\nconsole.log(typeof undefined);         // undefined\nconsole.log(typeof null, typeof []);   // object object  (¡ojo!)\nconsole.log(Array.isArray([]));        // true\nconsole.log(new Date() instanceof Date); // true\nconsole.log([] instanceof Object);       // true (un arreglo también es objeto)",
+      "devuelve": "`typeof`: un string (\"string\", \"number\", \"boolean\", \"undefined\", \"object\", \"function\", \"bigint\" o \"symbol\"). `instanceof`: un boolean.",
+      "errorTipico": "Usar `typeof` para detectar arreglos o null: ambos dan \"object\". Usa `Array.isArray(x)` y `x === null`. Y `instanceof` no sirve con primitivos: `\"hola\" instanceof String` es false.",
+      "tags": [
+        "tipo de dato",
+        "comprobar tipo",
+        "es arreglo",
+        "null",
+        "tipos"
+      ]
+    }
+  ]
+}

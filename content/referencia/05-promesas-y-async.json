@@ -1,0 +1,271 @@
+{
+  "categoria": "Promesas y async",
+  "entradas": [
+    {
+      "id": "async-new-promise",
+      "nombre": "new Promise()",
+      "firma": "new Promise((resolve, reject) => { ... })",
+      "descripcion": "Crea una promesa a mano. Dentro llamas a resolve(valor) cuando la tarea termina bien o a reject(error) cuando falla; se usa sobre todo para convertir callbacks (como setTimeout) en promesas.",
+      "ejemplo": "const esperar = (ms) =>\n  new Promise((resolve) => setTimeout(resolve, ms));\n\nawait esperar(500);\nconsole.log(\"pasaron 500 ms\"); // pasaron 500 ms",
+      "devuelve": "Una promesa pendiente que pasa a cumplida (con resolve) o a rechazada (con reject). Solo cambia de estado una vez.",
+      "errorTipico": "Olvidar llamar a `resolve` o `reject` en algún camino (por ejemplo dentro de un if): la promesa queda pendiente para siempre y el `await` nunca continúa.",
+      "tags": [
+        "crear promesa",
+        "resolve",
+        "reject",
+        "promisificar",
+        "envolver callback",
+        "esperar"
+      ]
+    },
+    {
+      "id": "async-then",
+      "nombre": "promesa.then()",
+      "firma": "promesa.then(alCumplirse, alRechazarse?)",
+      "descripcion": "Registra una función que recibe el valor cuando la promesa se cumple. Devuelve una promesa nueva con lo que retornes, así que puedes encadenar varios then.",
+      "ejemplo": "Promise.resolve(2)\n  .then((n) => n * 10)\n  .then((n) => n + 1)\n  .then((n) => console.log(n)); // 21",
+      "devuelve": "Una promesa nueva que se cumple con el valor que retorne tu función (si retornas otra promesa, espera a esa).",
+      "errorTipico": "Usar llaves sin `return`: `.then((n) => { n * 10 })` hace que el siguiente then reciba `undefined`. Con llaves tienes que escribir `return n * 10`.",
+      "tags": [
+        "encadenar",
+        "cadena de promesas",
+        "valor de la promesa",
+        "callback"
+      ]
+    },
+    {
+      "id": "async-catch",
+      "nombre": "promesa.catch()",
+      "firma": "promesa.catch((error) => { ... })",
+      "descripcion": "Atrapa el error si la promesa, o cualquier then anterior de la cadena, se rechaza. Es lo mismo que `.then(undefined, fn)`.",
+      "ejemplo": "Promise.reject(new Error(\"falló la red\"))\n  .then(() => console.log(\"no llega aquí\"))\n  .catch((e) => console.log(e.message)); // falló la red",
+      "devuelve": "Una promesa nueva: si tu función no lanza otro error, la cadena sigue como cumplida con lo que retornes.",
+      "errorTipico": "No poner ningún `catch` (ni `try/catch`): el error aparece como \"Uncaught (in promise)\" o \"Unhandled promise rejection\" y en Node puede detener el programa.",
+      "tags": [
+        "error",
+        "manejar errores",
+        "rechazo",
+        "excepcion"
+      ]
+    },
+    {
+      "id": "async-finally",
+      "nombre": "promesa.finally()",
+      "firma": "promesa.finally(() => { ... })",
+      "descripcion": "Ejecuta una función al terminar la promesa, se haya cumplido o rechazado. Ideal para apagar un \"cargando...\" o cerrar algo.",
+      "ejemplo": "let cargando = true;\nPromise.reject(new Error(\"x\"))\n  .catch(() => console.log(\"hubo error\")) // hubo error\n  .finally(() => {\n    cargando = false;\n    console.log(cargando); // false\n  });",
+      "devuelve": "Una promesa con el mismo resultado que la original: finally no cambia el valor ni el error.",
+      "errorTipico": "Esperar que la función de `finally` reciba el valor o el error: no recibe ningún argumento. Para eso usa `then` y `catch`.",
+      "tags": [
+        "siempre",
+        "al terminar",
+        "cargando",
+        "limpieza"
+      ]
+    },
+    {
+      "id": "async-promise-resolve-reject",
+      "nombre": "Promise.resolve() / Promise.reject()",
+      "firma": "Promise.resolve(valor)  /  Promise.reject(error)",
+      "descripcion": "Crean una promesa que ya está cumplida o ya está rechazada. Útiles en tests, para simular una API o para que una función siempre devuelva una promesa.",
+      "ejemplo": "Promise.resolve(5).then((v) => console.log(v)); // 5\n\nPromise.reject(new Error(\"sin datos\"))\n  .catch((e) => console.log(e.message)); // sin datos",
+      "devuelve": "Una promesa ya resuelta con `valor`, o ya rechazada con `error`.",
+      "errorTipico": "Rechazar con un texto (`Promise.reject(\"falló\")`) en vez de un `new Error(\"falló\")`: pierdes la traza del error y `e.message` sale `undefined`.",
+      "tags": [
+        "promesa cumplida",
+        "promesa rechazada",
+        "simular api",
+        "mock"
+      ]
+    },
+    {
+      "id": "async-promise-all",
+      "nombre": "Promise.all()",
+      "firma": "Promise.all(promesas)",
+      "descripcion": "Espera a que TODAS las promesas se cumplan y devuelve sus resultados en el mismo orden. Si una falla, falla todo de inmediato.",
+      "ejemplo": "const pedir = (v, ms) => new Promise((r) => setTimeout(() => r(v), ms));\n\nconst [a, b] = await Promise.all([\n  pedir(\"A\", 300),\n  pedir(\"B\", 100),\n]);\nconsole.log(a, b); // A B (en unos 300 ms, no 400: corren en paralelo)",
+      "devuelve": "Una promesa con un arreglo de resultados, en el mismo orden en que pasaste las promesas (no en el que terminan).",
+      "errorTipico": "Usarlo cuando quieres los resultados aunque alguna falle: para eso existe `Promise.allSettled`. Otro clásico: hacer `await` uno por uno en un bucle cuando las peticiones podrían ir en paralelo con `Promise.all(lista.map(pedir))`.",
+      "tags": [
+        "paralelo",
+        "esperar varias",
+        "promesas",
+        "todas",
+        "concurrencia"
+      ]
+    },
+    {
+      "id": "async-promise-allsettled",
+      "nombre": "Promise.allSettled()",
+      "firma": "Promise.allSettled(promesas)",
+      "descripcion": "Espera a que todas las promesas terminen, bien o mal, y nunca falla. Te da un objeto por promesa que dice cómo terminó.",
+      "ejemplo": "const res = await Promise.allSettled([\n  Promise.resolve(1),\n  Promise.reject(new Error(\"caída\")),\n]);\nconsole.log(res.map((r) => r.status)); // [\"fulfilled\", \"rejected\"]\nconsole.log(res[0].value, res[1].reason.message); // 1 caída",
+      "devuelve": "Una promesa con un arreglo de objetos `{ status: \"fulfilled\", value }` o `{ status: \"rejected\", reason }`.",
+      "errorTipico": "Leer `r.value` en todos los resultados: en los rechazados no existe, el error está en `r.reason`. Filtra primero por `r.status === \"fulfilled\"`.",
+      "tags": [
+        "esperar todas",
+        "aunque fallen",
+        "resultados parciales",
+        "paralelo"
+      ]
+    },
+    {
+      "id": "async-promise-race",
+      "nombre": "Promise.race()",
+      "firma": "Promise.race(promesas)",
+      "descripcion": "Termina con la PRIMERA promesa que termine, sea éxito o error. El uso típico es ponerle un tiempo límite a una tarea.",
+      "ejemplo": "const limite = (ms) => new Promise((_, rej) =>\n  setTimeout(() => rej(new Error(\"tardó demasiado\")), ms));\nconst lenta = new Promise((r) => setTimeout(() => r(\"datos\"), 2000));\ntry {\n  await Promise.race([lenta, limite(500)]);\n} catch (e) {\n  console.log(e.message); // tardó demasiado\n}",
+      "devuelve": "Una promesa que se cumple o se rechaza igual que la primera que termine.",
+      "errorTipico": "Confundirlo con `Promise.any`: `race` también termina si la primera en acabar es un error. Además, las demás promesas no se cancelan, siguen corriendo (para cancelar un fetch usa `AbortController`).",
+      "tags": [
+        "carrera",
+        "la primera",
+        "tiempo limite",
+        "timeout"
+      ]
+    },
+    {
+      "id": "async-promise-any",
+      "nombre": "Promise.any()",
+      "firma": "Promise.any(promesas)",
+      "descripcion": "Se cumple con la primera promesa que tenga ÉXITO e ignora los errores. Solo falla si todas fallan.",
+      "ejemplo": "const r = await Promise.any([\n  Promise.reject(new Error(\"servidor 1 caído\")),\n  Promise.resolve(\"respuesta del servidor 2\"),\n]);\nconsole.log(r); // respuesta del servidor 2",
+      "devuelve": "Una promesa con el valor de la primera que se cumpla. Si todas fallan, se rechaza con un `AggregateError`.",
+      "errorTipico": "Esperar un error normal cuando todas fallan: llega un `AggregateError` cuyo mensaje es genérico; los errores reales están en `e.errors` (un arreglo).",
+      "tags": [
+        "la primera que funcione",
+        "respaldo",
+        "cualquiera",
+        "AggregateError"
+      ]
+    },
+    {
+      "id": "async-async",
+      "nombre": "async function",
+      "firma": "async function nombre() { ... }  /  const f = async () => { ... }",
+      "descripcion": "Una función async SIEMPRE devuelve una promesa: lo que retornes queda envuelto en una promesa cumplida y, si lanzas un error, la promesa se rechaza. Además te permite usar await adentro.",
+      "ejemplo": "async function doble(n) {\n  return n * 2;\n}\nconsole.log(doble(4)); // Promise { 8 }\ndoble(4).then((v) => console.log(v)); // 8\nconsole.log(await doble(4)); // 8",
+      "devuelve": "Una promesa con el valor del `return` (o rechazada con el error que se lance).",
+      "errorTipico": "Usar el resultado sin `await`: `const total = doble(4)` guarda una promesa, no 8, y `total + 1` da \"[object Promise]1\".",
+      "tags": [
+        "funcion asincrona",
+        "asincrono",
+        "devuelve promesa",
+        "async arrow"
+      ]
+    },
+    {
+      "id": "async-await",
+      "nombre": "await",
+      "firma": "const valor = await promesa",
+      "descripcion": "Pausa la función async hasta que la promesa termine y te da su valor. Si la promesa se rechaza, await lanza el error (atrápalo con try/catch).",
+      "ejemplo": "const pedir = (v) => new Promise((r) => setTimeout(() => r(v), 100));\n\nasync function main() {\n  const usuario = await pedir(\"Ana\");\n  console.log(usuario); // Ana\n}\nmain();",
+      "devuelve": "El valor con el que se cumple la promesa (si no es una promesa, devuelve el mismo valor).",
+      "errorTipico": "Usar `forEach` con `async`: `lista.forEach(async (x) => await guardar(x))` no espera nada y el código sigue antes de terminar. Usa `for (const x of lista) await guardar(x)` (en serie) o `await Promise.all(lista.map(guardar))` (en paralelo).",
+      "tags": [
+        "esperar",
+        "pausar",
+        "asincrono",
+        "forEach async",
+        "for of await"
+      ]
+    },
+    {
+      "id": "async-try-catch-await",
+      "nombre": "try/catch con await",
+      "firma": "try { await ... } catch (error) { ... } finally { ... }",
+      "descripcion": "Con async/await los errores de las promesas se manejan con try/catch, igual que los errores normales. finally corre siempre, haya error o no.",
+      "ejemplo": "// dentro de una función async (o en un módulo)\ntry {\n  await Promise.reject(new Error(\"404\"));\n} catch (e) {\n  console.log(\"Error:\", e.message); // Error: 404\n} finally {\n  console.log(\"fin\"); // fin\n}",
+      "devuelve": "Nada especial: es una estructura de control. La función async sigue devolviendo una promesa.",
+      "errorTipico": "Escribir `return pedir()` sin `await` dentro del `try`: si la promesa falla, el `catch` de esa función no se entera. Usa `return await pedir()`.",
+      "tags": [
+        "manejar errores",
+        "error async",
+        "try catch",
+        "excepcion"
+      ]
+    },
+    {
+      "id": "async-settimeout",
+      "nombre": "setTimeout() / clearTimeout()",
+      "firma": "const id = setTimeout(funcion, ms, ...args)  /  clearTimeout(id)",
+      "descripcion": "Ejecuta una función UNA vez después de al menos `ms` milisegundos. Se cancela antes de que ocurra con clearTimeout(id).",
+      "ejemplo": "console.log(\"1\");\nsetTimeout(() => console.log(\"3\"), 0);\nconsole.log(\"2\");\n// imprime 1, 2, 3: aunque sea 0 ms, espera a que termine el código actual\nconst id = setTimeout(() => console.log(\"nunca\"), 1000);\nclearTimeout(id); // cancelado",
+      "devuelve": "Un id (un número en el navegador, un objeto en Node) para cancelarlo con `clearTimeout`.",
+      "errorTipico": "Llamar la función en vez de pasarla: `setTimeout(saludar(), 1000)` la ejecuta al instante. Se escribe `setTimeout(saludar, 1000)` o `setTimeout(() => saludar(\"Ana\"), 1000)`.",
+      "tags": [
+        "esperar",
+        "retrasar",
+        "temporizador",
+        "delay",
+        "debounce",
+        "cancelar"
+      ]
+    },
+    {
+      "id": "async-setinterval",
+      "nombre": "setInterval() / clearInterval()",
+      "firma": "const id = setInterval(funcion, ms)  /  clearInterval(id)",
+      "descripcion": "Ejecuta una función una y otra vez cada `ms` milisegundos, hasta que la detienes con clearInterval(id).",
+      "ejemplo": "let n = 0;\nconst id = setInterval(() => {\n  n++;\n  console.log(\"tick\", n); // tick 1, tick 2, tick 3\n  if (n === 3) clearInterval(id);\n}, 100);",
+      "devuelve": "Un id para detenerlo con `clearInterval`.",
+      "errorTipico": "No guardar el id o no limpiarlo: el intervalo sigue corriendo para siempre. En React, si no lo limpias en el `return` del `useEffect`, se acumulan intervalos y el contador avanza cada vez más rápido.",
+      "tags": [
+        "repetir",
+        "cada segundo",
+        "reloj",
+        "intervalo",
+        "detener"
+      ]
+    },
+    {
+      "id": "async-queuemicrotask",
+      "nombre": "queueMicrotask()",
+      "firma": "queueMicrotask(funcion)",
+      "descripcion": "Programa una función para justo después del código actual, antes que cualquier setTimeout. Usa la misma cola de microtareas que los then de las promesas.",
+      "ejemplo": "setTimeout(() => console.log(\"timeout\"), 0);\nqueueMicrotask(() => console.log(\"microtarea\"));\nPromise.resolve().then(() => console.log(\"then\"));\nconsole.log(\"síncrono\");\n// síncrono, microtarea, then, timeout",
+      "devuelve": "undefined.",
+      "errorTipico": "Creer que `setTimeout(fn, 0)` corre antes que un `then`: primero va todo el código síncrono, luego TODAS las microtareas (promesas, `queueMicrotask`) y recién después los timers. Es pregunta clásica de entrevista sobre el event loop.",
+      "tags": [
+        "event loop",
+        "microtarea",
+        "orden de ejecucion",
+        "cola de tareas"
+      ]
+    },
+    {
+      "id": "async-fetch",
+      "nombre": "fetch()",
+      "firma": "const res = await fetch(url, { method, headers, body })",
+      "descripcion": "Hace una petición HTTP y devuelve una promesa con la respuesta (Response). Para leer el cuerpo llamas a res.json() o res.text(), que también son promesas.",
+      "ejemplo": "async function getUsuario(id) {\n  const res = await fetch(`/api/usuarios/${id}`);\n  if (!res.ok) throw new Error(`HTTP ${res.status}`);\n  return await res.json();\n}\nconsole.log(await getUsuario(1)); // { id: 1, nombre: \"Ana\" }\n// POST: fetch(url, { method: \"POST\", headers: { \"Content-Type\": \"application/json\" }, body: JSON.stringify(datos) })",
+      "devuelve": "Una promesa con un objeto Response: `ok` (true si el status es 200 a 299), `status`, `headers`, `json()` y `text()`.",
+      "errorTipico": "Creer que fetch falla con un 404 o un 500: solo se rechaza por errores de red. Siempre revisa `res.ok`. Otro error común: olvidar el `await` en `res.json()` y trabajar con una promesa.",
+      "tags": [
+        "peticion",
+        "api",
+        "http",
+        "ajax",
+        "consumir api",
+        "json",
+        "post"
+      ]
+    },
+    {
+      "id": "async-abortcontroller",
+      "nombre": "AbortController",
+      "firma": "const control = new AbortController();  fetch(url, { signal: control.signal });  control.abort()",
+      "descripcion": "Permite cancelar un fetch (u otra tarea) que está en curso. Pasas `control.signal` al fetch y, al llamar a `control.abort()`, el fetch se rechaza con un error llamado AbortError.",
+      "ejemplo": "const control = new AbortController();\nsetTimeout(() => control.abort(), 3000); // cancela a los 3 s\ntry {\n  await fetch(\"/api/lento\", { signal: control.signal });\n} catch (e) {\n  if (e.name === \"AbortError\") console.log(\"cancelado\"); // cancelado\n}",
+      "devuelve": "Un controlador con `signal` (lo pasas a fetch) y `abort()` (cancela). Un controlador sirve para una sola cancelación.",
+      "errorTipico": "No abortar en la limpieza de un `useEffect` que hace fetch: si el usuario cambia la búsqueda rápido, una respuesta vieja puede llegar después y pisar a la nueva. Devuelve `() => control.abort()` en el efecto.",
+      "tags": [
+        "cancelar fetch",
+        "abortar",
+        "signal",
+        "tiempo limite",
+        "carrera de respuestas"
+      ]
+    }
+  ]
+}

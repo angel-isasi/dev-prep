@@ -1,0 +1,258 @@
+{
+  "categoria": "React",
+  "entradas": [
+    {
+      "id": "react-usestate",
+      "nombre": "useState()",
+      "firma": "const [valor, setValor] = useState(valorInicial)",
+      "descripcion": "Guarda un dato que cambia dentro del componente; al llamar a setValor, React vuelve a renderizar con el valor nuevo. Si el nuevo valor depende del anterior, usa el actualizador funcional: setN((prev) => prev + 1).",
+      "ejemplo": "import { useState } from \"react\";\n\nfunction Contador() {\n  const [n, setN] = useState(0);\n  return <button onClick={() => setN((prev) => prev + 1)}>Clics: {n}</button>;\n}",
+      "devuelve": "Un arreglo de dos elementos: `[valorActual, funcionParaCambiarlo]`.",
+      "errorTipico": "Mutar el estado directamente (`lista.push(x); setLista(lista)`): React ve la misma referencia y no re-renderiza. Crea uno nuevo: `setLista([...lista, x])`. Y esperar que `n` cambie justo después de `setN(n + 1)`: dentro de ese render sigue siendo el valor viejo.",
+      "tags": [
+        "estado",
+        "state",
+        "hook",
+        "contador",
+        "actualizar estado",
+        "re-render"
+      ]
+    },
+    {
+      "id": "react-useeffect",
+      "nombre": "useEffect()",
+      "firma": "useEffect(() => { ...; return () => limpieza; }, [dependencias])",
+      "descripcion": "Ejecuta código DESPUÉS de que el componente se pinta, para sincronizarse con algo externo: un intervalo, un listener, una petición. Se vuelve a ejecutar cuando cambia algo del arreglo de dependencias, y la función que retornas limpia lo anterior.",
+      "ejemplo": "function Reloj() {\n  const [hora, setHora] = useState(new Date());\n  useEffect(() => {\n    const id = setInterval(() => setHora(new Date()), 1000);\n    return () => clearInterval(id); // limpieza al desmontar\n  }, []); // [] = solo al montar\n  return <p>{hora.toLocaleTimeString(\"es-PE\")}</p>;\n}",
+      "devuelve": "undefined. La función que tú retornas (opcional) es la limpieza: corre antes del siguiente efecto y al desmontar.",
+      "errorTipico": "Olvidar el arreglo de dependencias: el efecto corre en cada render y, si actualiza estado, se arma un bucle infinito. Omitir una variable que usas adentro también falla: el efecto se queda con el valor viejo. En desarrollo, StrictMode lo ejecuta dos veces a propósito para que notes si te falta la limpieza.",
+      "tags": [
+        "efecto",
+        "efectos secundarios",
+        "dependencias",
+        "limpieza",
+        "montar",
+        "desmontar",
+        "ciclo de vida"
+      ]
+    },
+    {
+      "id": "react-fetch-useeffect",
+      "nombre": "Pedir datos con useEffect",
+      "firma": "useEffect(() => { let activo = true; fetch(url)...; return () => { activo = false; }; }, [url])",
+      "descripcion": "Para cargar datos de una API al mostrar un componente, haces el fetch dentro de un useEffect y guardas el resultado en el estado. La limpieza evita guardar una respuesta vieja si el componente se desmonta o cambia la url.",
+      "ejemplo": "function Usuarios() {\n  const [usuarios, setUsuarios] = useState([]);\n  useEffect(() => {\n    let activo = true;\n    fetch(\"/api/usuarios\").then((r) => r.json()).then((d) => activo && setUsuarios(d));\n    return () => { activo = false; }; // ignora respuestas viejas\n  }, []);\n  return <ul>{usuarios.map((u) => <li key={u.id}>{u.nombre}</li>)}</ul>;\n}",
+      "devuelve": "Nada: es un patrón. Normalmente lo acompañas con estados `cargando` y `error` para mostrar algo mientras llega la respuesta.",
+      "errorTipico": "Poner `async` directo en el efecto (`useEffect(async () => {...})`): devuelve una promesa en vez de una función de limpieza y React lo marca como error. Declara una función async adentro y llámala: `const cargar = async () => {...}; cargar();`.",
+      "tags": [
+        "fetch",
+        "api",
+        "cargar datos",
+        "consumir api",
+        "async useEffect",
+        "peticion"
+      ]
+    },
+    {
+      "id": "react-useref",
+      "nombre": "useRef()",
+      "firma": "const ref = useRef(valorInicial)",
+      "descripcion": "Guarda un valor en ref.current que se mantiene entre renders SIN provocar un re-render al cambiarlo; también sirve para acceder a un elemento del DOM. En React 19 puedes pasar ref como una prop normal a tus componentes, sin forwardRef.",
+      "ejemplo": "function Buscador() {\n  const inputRef = useRef(null);\n  const enfocar = () => inputRef.current.focus();\n  return <><input ref={inputRef} /><button onClick={enfocar}>Ir al buscador</button></>;\n}",
+      "devuelve": "Un objeto `{ current: valorInicial }` que es el mismo en todos los renders.",
+      "errorTipico": "Usar un ref para algo que se muestra en pantalla: cambiar `ref.current` no actualiza la vista (para eso es `useState`). Y leer `ref.current` de un elemento durante el render: todavía es `null` hasta que el componente se monta.",
+      "tags": [
+        "referencia",
+        "dom",
+        "focus",
+        "valor persistente",
+        "sin re-render",
+        "forwardRef"
+      ]
+    },
+    {
+      "id": "react-usememo",
+      "nombre": "useMemo()",
+      "firma": "const valor = useMemo(() => calculo, [dependencias])",
+      "descripcion": "Memoriza el resultado de un cálculo y solo lo vuelve a calcular cuando cambian sus dependencias. Sirve para cálculos pesados o para mantener la misma referencia de un objeto o arreglo.",
+      "ejemplo": "function Lista({ productos, filtro }) {\n  const visibles = useMemo(\n    () => productos.filter((p) => p.nombre.includes(filtro)),\n    [productos, filtro]\n  );\n  return <ul>{visibles.map((p) => <li key={p.id}>{p.nombre}</li>)}</ul>;\n}",
+      "devuelve": "El valor calculado (no una función).",
+      "errorTipico": "Ponerlo en todo \"por si acaso\": en cálculos simples cuesta más de lo que ahorra y ensucia el código. Y olvidar una dependencia: el valor queda desactualizado y parece un bug misterioso.",
+      "tags": [
+        "memorizar",
+        "rendimiento",
+        "optimizar",
+        "calculo costoso",
+        "cache",
+        "memo"
+      ]
+    },
+    {
+      "id": "react-usecallback",
+      "nombre": "useCallback()",
+      "firma": "const fn = useCallback((args) => { ... }, [dependencias])",
+      "descripcion": "Memoriza una FUNCIÓN para que sea la misma referencia entre renders. Sirve cuando la pasas a un hijo envuelto en memo o cuando es dependencia de un useEffect.",
+      "ejemplo": "const Boton = memo(({ onClick }) => <button onClick={onClick}>Limpiar</button>);\n\nfunction Buscador() {\n  const [texto, setTexto] = useState(\"\");\n  const limpiar = useCallback(() => setTexto(\"\"), []); // Boton no se re-renderiza al escribir\n  return <><input value={texto} onChange={(e) => setTexto(e.target.value)} /><Boton onClick={limpiar} /></>;\n}",
+      "devuelve": "La misma función mientras no cambien las dependencias.",
+      "errorTipico": "Usarlo sin que el hijo esté envuelto en `memo` (no gana nada) o confundirlo con useMemo: `useCallback(fn, deps)` es lo mismo que `useMemo(() => fn, deps)`, guarda la función, no su resultado.",
+      "tags": [
+        "memorizar funcion",
+        "rendimiento",
+        "callback",
+        "memo",
+        "referencia estable"
+      ]
+    },
+    {
+      "id": "react-usecontext",
+      "nombre": "createContext() / useContext()",
+      "firma": "const Ctx = createContext(valorPorDefecto);  <Ctx value={...}>  ·  const v = useContext(Ctx)",
+      "descripcion": "Comparte un valor con todos los componentes de abajo sin pasarlo prop por prop (prop drilling). En React 19 el propio contexto funciona como proveedor: <TemaContext value=\"oscuro\">, ya no hace falta .Provider.",
+      "ejemplo": "const TemaContext = createContext(\"claro\");\n\nfunction App() {\n  return <TemaContext value=\"oscuro\"><Boton /></TemaContext>;\n}\nfunction Boton() {\n  const tema = useContext(TemaContext); // \"oscuro\"\n  return <button className={tema}>OK</button>;\n}",
+      "devuelve": "`useContext` devuelve el `value` del proveedor más cercano hacia arriba, o el valor por defecto si no hay ninguno.",
+      "errorTipico": "Usar el componente fuera del proveedor: recibe el valor por defecto y \"no funciona\" sin dar error. Y pasar un objeto nuevo en cada render (`value={{ usuario, setUsuario }}`) en un proveedor muy usado: re-renderiza a todos los que lo leen (memorízalo con useMemo).",
+      "tags": [
+        "contexto",
+        "estado global",
+        "prop drilling",
+        "provider",
+        "tema",
+        "compartir datos"
+      ]
+    },
+    {
+      "id": "react-usereducer",
+      "nombre": "useReducer()",
+      "firma": "const [estado, dispatch] = useReducer(reducer, estadoInicial)",
+      "descripcion": "Alternativa a useState cuando el estado tiene varias partes o muchas formas de cambiar. Toda la lógica vive en una función reducer(estado, accion) que devuelve el estado nuevo, y tú solo despachas acciones.",
+      "ejemplo": "function reducer(estado, accion) {\n  if (accion.type === \"sumar\") return { ...estado, n: estado.n + 1 };\n  if (accion.type === \"reiniciar\") return { ...estado, n: 0 };\n  return estado;\n}\nfunction Contador() {\n  const [estado, dispatch] = useReducer(reducer, { n: 0 });\n  return <button onClick={() => dispatch({ type: \"sumar\" })}>{estado.n}</button>;\n}",
+      "devuelve": "Un arreglo `[estadoActual, dispatch]`; `dispatch(accion)` llama a tu reducer y re-renderiza con lo que devuelva.",
+      "errorTipico": "Mutar el estado dentro del reducer (`estado.n++; return estado`): debe devolver un objeto NUEVO o React no re-renderiza. Y olvidar el `return estado` final: una acción desconocida deja el estado en `undefined`.",
+      "tags": [
+        "reducer",
+        "dispatch",
+        "acciones",
+        "estado complejo",
+        "redux"
+      ]
+    },
+    {
+      "id": "react-props-children",
+      "nombre": "props y children",
+      "firma": "function Componente({ prop1, prop2 = valorPorDefecto, children }) { ... }",
+      "descripcion": "Las props son los datos que un componente recibe de su padre, como los argumentos de una función, y son de solo lectura. children es lo que pones entre la etiqueta de apertura y la de cierre.",
+      "ejemplo": "function Tarjeta({ titulo, color = \"gris\", children }) {\n  return (\n    <div className={`tarjeta ${color}`}>\n      <h2>{titulo}</h2>\n      {children}\n    </div>\n  );\n}\n// uso: <Tarjeta titulo=\"Hola\"><p>Contenido</p></Tarjeta>",
+      "devuelve": "Las props llegan como un solo objeto (el primer parámetro); lo normal es desestructurarlo.",
+      "errorTipico": "Modificar una prop (`props.titulo = \"x\"`): son de solo lectura. Si el hijo necesita cambiar algo, el padre le pasa también una función (`onCambiar`). Y olvidar las llaves: `function Tarjeta(titulo)` recibe el objeto props completo, no el título.",
+      "tags": [
+        "props",
+        "propiedades",
+        "children",
+        "pasar datos",
+        "componente hijo",
+        "valores por defecto"
+      ]
+    },
+    {
+      "id": "react-key",
+      "nombre": "key en listas",
+      "firma": "lista.map((item) => <Componente key={item.id} ... />)",
+      "descripcion": "Cada elemento de una lista necesita una key única y estable entre sus hermanos, para que React sepa cuál se agregó, se movió o se borró.",
+      "ejemplo": "function Tareas({ tareas }) {\n  return (\n    <ul>\n      {tareas.map((t) => <li key={t.id}>{t.texto}</li>)}\n    </ul>\n  );\n}",
+      "devuelve": "Nada visible: `key` no llega como prop al componente, solo la usa React internamente.",
+      "errorTipico": "Usar el índice como key (`key={i}`) en listas que se reordenan, filtran o borran: los inputs y estados se cruzan entre filas. Usa un id real. Tampoco uses `Math.random()`: cambia en cada render y React recrea todos los elementos.",
+      "tags": [
+        "listas",
+        "map",
+        "key",
+        "renderizar lista",
+        "warning key",
+        "id"
+      ]
+    },
+    {
+      "id": "react-condicional",
+      "nombre": "Renderizado condicional",
+      "firma": "if (...) return ...  /  {condicion ? <A /> : <B />}  /  {condicion && <A />}",
+      "descripcion": "En JSX decides qué mostrar con JavaScript normal: un if con return temprano, el ternario ? : para elegir entre dos cosas, y && para mostrar algo o nada.",
+      "ejemplo": "function Panel({ cargando, items }) {\n  if (cargando) return <p>Cargando...</p>; // return temprano\n  return (\n    <div>\n      {items.length === 0 ? <p>Sin resultados</p> : <Lista items={items} />}\n      {items.length > 0 && <small>{items.length} resultados</small>}\n    </div>\n  );\n}",
+      "devuelve": "JSX, o `null` si no quieres mostrar nada.",
+      "errorTipico": "Usar `&&` con un número: `{items.length && <Lista />}` muestra un 0 en pantalla cuando la lista está vacía. Escribe una condición booleana: `items.length > 0 &&`.",
+      "tags": [
+        "condicional",
+        "mostrar ocultar",
+        "ternario",
+        "if en jsx",
+        "operador and",
+        "cargando"
+      ]
+    },
+    {
+      "id": "react-eventos",
+      "nombre": "Eventos en JSX (onClick, onChange)",
+      "firma": "<button onClick={manejador}>  /  <input onChange={(e) => ...} />",
+      "descripcion": "Los eventos se escriben en camelCase (onClick, onChange, onSubmit) y reciben una función. En React, onChange de un input se dispara en cada tecla, como el evento input del DOM.",
+      "ejemplo": "function Saludo() {\n  const saludar = (nombre) => alert(`Hola, ${nombre}`);\n  const escribir = (e) => console.log(e.target.value); // en cada tecla\n  return <><button onClick={() => saludar(\"Ana\")}>Saludar</button><input onChange={escribir} /></>;\n}",
+      "devuelve": "El manejador recibe un evento (sintético) con `target`, `preventDefault()` y `stopPropagation()`, igual que en el DOM.",
+      "errorTipico": "Llamar la función en vez de pasarla: `onClick={saludar(\"Ana\")}` se ejecuta en cada render, y si cambia estado da \"Too many re-renders\". Envuélvela: `onClick={() => saludar(\"Ana\")}`.",
+      "tags": [
+        "eventos",
+        "onClick",
+        "onChange",
+        "click",
+        "manejador",
+        "handler"
+      ]
+    },
+    {
+      "id": "react-input-controlado",
+      "nombre": "Input controlado",
+      "firma": "<input value={estado} onChange={(e) => setEstado(e.target.value)} />",
+      "descripcion": "El valor del input vive en el estado de React: value lo muestra y onChange lo actualiza en cada tecla. Así puedes validar, limpiar o filtrar mientras el usuario escribe.",
+      "ejemplo": "function Formulario() {\n  const [email, setEmail] = useState(\"\");\n  const enviar = (e) => { e.preventDefault(); console.log(email); };\n  return (\n    <form onSubmit={enviar}>\n      <input value={email} onChange={(e) => setEmail(e.target.value)} />\n      <button disabled={!email.includes(\"@\")}>Enviar</button>\n    </form>);\n}",
+      "devuelve": "Nada: es un patrón. El estado siempre tiene lo que se ve en el input.",
+      "errorTipico": "Poner `value` sin `onChange`: el input queda congelado y React avisa en la consola. Iniciar el estado en `undefined` en vez de `\"\"` (aviso de \"uncontrolled to controlled\"). Y en un checkbox usar `value`: lo correcto es `checked={marcado}` con `e.target.checked`.",
+      "tags": [
+        "formulario",
+        "input",
+        "controlado",
+        "value",
+        "onChange",
+        "validar formulario"
+      ]
+    },
+    {
+      "id": "react-componente-funcion",
+      "nombre": "Componentes de función",
+      "firma": "function NombreConMayuscula(props) { return <JSX />; }",
+      "descripcion": "Un componente es una función que recibe props y devuelve JSX. Su nombre empieza con mayúscula y devuelve un solo elemento raíz (usa un fragmento <>...</> si necesitas varios).",
+      "ejemplo": "function Saludo({ nombre }) {\n  return <h1>Hola, {nombre}</h1>;\n}\n\nexport default function App() {\n  return <><Saludo nombre=\"Ana\" /><Saludo nombre=\"Luis\" /></>;\n}",
+      "devuelve": "JSX, o `null` para no mostrar nada.",
+      "errorTipico": "Nombrarlo en minúscula (React trata `<saludo />` como una etiqueta HTML desconocida) o definir un componente DENTRO de otro: se crea de nuevo en cada render y pierde su estado (por ejemplo, el input pierde el foco al escribir).",
+      "tags": [
+        "componente",
+        "funcion",
+        "jsx",
+        "fragmento",
+        "export default",
+        "crear componente"
+      ]
+    },
+    {
+      "id": "react-custom-hook",
+      "nombre": "Custom hooks",
+      "firma": "function useAlgo(parametros) { /* usa otros hooks */ return valores; }",
+      "descripcion": "Una función cuyo nombre empieza con use y que usa otros hooks adentro, para reutilizar lógica con estado entre componentes. Cada componente que la usa tiene su propio estado independiente.",
+      "ejemplo": "function useLocalStorage(clave, inicial) {\n  const [valor, setValor] = useState(\n    () => JSON.parse(localStorage.getItem(clave)) ?? inicial\n  );\n  useEffect(() => localStorage.setItem(clave, JSON.stringify(valor)), [clave, valor]);\n  return [valor, setValor];\n}\n// uso: const [tema, setTema] = useLocalStorage(\"tema\", \"oscuro\");",
+      "devuelve": "Lo que tú decidas: normalmente un valor, un arreglo `[valor, setValor]` o un objeto `{ datos, cargando, error }`.",
+      "errorTipico": "Romper las reglas de los hooks: llamarlos dentro de un `if`, de un bucle o después de un `return` temprano. Los hooks deben llamarse siempre en el mismo orden, en el nivel superior del componente o del custom hook.",
+      "tags": [
+        "hook propio",
+        "reutilizar logica",
+        "reglas de los hooks",
+        "useLocalStorage",
+        "useFetch"
+      ]
+    }
+  ]
+}
