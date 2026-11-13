@@ -1,0 +1,5 @@
+[
+  "Si guardas soles y dólares en dos estados, tienes que mantenerlos sincronizados a mano y es fácil que se desfasen. Pregúntate: ¿cuál es el dato **mínimo** que necesito recordar? Basta con saber **qué input editó el usuario** y **qué escribió**. Todo lo demás se calcula en cada render.",
+  "Guarda un solo estado como `{ moneda: \"soles\", texto: \"\" }`. En cada render calcula los dos valores: el input que coincide con `moneda` muestra `texto` tal cual; el otro muestra la conversión. Escribe una función `convertir(texto, formula)` que devuelva `\"\"` si el texto está vacío o `Number(texto)` es `NaN`, y si no `formula(numero).toFixed(2)`.",
+  "Esqueleto:\n\n```jsx\nconst [editado, setEditado] = useState({ moneda: \"soles\", texto: \"\" });\nconst soles = editado.moneda === \"soles\"\n  ? editado.texto\n  : convertir(editado.texto, (d) => /* ... */);\nconst dolares = /* lo mismo, al revés */;\n\nreturn (\n  <div>\n    <label>Soles <input value={soles} onChange={(e) => setEditado({ moneda: \"soles\", texto: e.target.value })} /></label>\n    <label>Dólares <input value={dolares} onChange={/* ... */} /></label>\n  </div>\n);\n```"
+]

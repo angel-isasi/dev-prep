@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-030",
+  "titulo": "Carrito con Context",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "context", "useContext", "createContext", "prop-drilling", "useState"],
+  "origen": "definitivo/01-ejercicios/02-react/30"
+}

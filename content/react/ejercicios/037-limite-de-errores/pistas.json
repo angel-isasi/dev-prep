@@ -1,0 +1,5 @@
+[
+  "El componente necesita **recordar** si alguno de sus hijos falló, y según eso mostrar los hijos o el mensaje. En un componente de clase, lo que recuerda va en `this.state`. Falta saber cómo se entera React de que un hijo lanzó un error: hay un método especial de clase para eso.",
+  "Define `state = { fallo: false }` y el método **estático** `static getDerivedStateFromError() { return { fallo: true }; }`. React lo llama cuando un hijo lanza al renderizar y mezcla lo que devuelves con el estado. Luego, en `render()`, si `this.state.fallo` es `true` devuelve el `<p role=\"alert\">`; si no, `this.props.children`.",
+  "Esqueleto:\n\n```jsx\nexport class LimiteDeError extends Component {\n  state = { fallo: false };\n\n  static getDerivedStateFromError() {\n    return /* el nuevo estado */;\n  }\n\n  render() {\n    if (/* hubo error */) {\n      return <p role=\"alert\">Algo salió mal. Recarga la página.</p>;\n    }\n    return /* los hijos */;\n  }\n}\n```"
+]

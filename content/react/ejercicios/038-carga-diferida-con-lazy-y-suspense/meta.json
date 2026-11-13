@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-038",
+  "titulo": "Carga diferida con lazy y Suspense",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 3,
+  "tags": ["react", "lazy", "Suspense", "code-splitting", "rendimiento", "import-dinamico"],
+  "origen": "definitivo/01-ejercicios/02-react/38"
+}

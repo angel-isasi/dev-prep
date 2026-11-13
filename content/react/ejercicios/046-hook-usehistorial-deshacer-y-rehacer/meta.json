@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-046",
+  "titulo": "Hook useHistorial (deshacer y rehacer)",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 3,
+  "tags": ["react", "hooks-personalizados", "useState", "deshacer", "inmutabilidad", "pilas"],
+  "origen": "definitivo/01-ejercicios/02-react/46"
+}

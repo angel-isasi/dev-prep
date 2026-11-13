@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-035",
+  "titulo": "useId para unir label e input",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "useId", "accesibilidad", "label", "rest-props", "formularios"],
+  "origen": "definitivo/01-ejercicios/02-react/35"
+}

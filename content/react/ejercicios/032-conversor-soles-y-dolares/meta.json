@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-032",
+  "titulo": "Conversor soles y dólares",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "useState", "estado-derivado", "fuente-de-verdad", "inputs-controlados", "toFixed"],
+  "origen": "definitivo/01-ejercicios/02-react/32"
+}

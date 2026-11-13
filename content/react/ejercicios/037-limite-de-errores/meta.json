@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-037",
+  "titulo": "Límite de errores",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 3,
+  "tags": ["react", "error-boundary", "componentes-de-clase", "getDerivedStateFromError", "manejo-de-errores"],
+  "origen": "definitivo/01-ejercicios/02-react/37"
+}

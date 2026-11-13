@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-029",
+  "titulo": "Hook usePizzaDelDia",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "hooks-personalizados", "useEffect", "async", "condicion-de-carrera", "cleanup"],
+  "origen": "definitivo/01-ejercicios/02-react/29"
+}

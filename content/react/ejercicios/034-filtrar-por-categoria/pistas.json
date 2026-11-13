@@ -1,0 +1,5 @@
+[
+  "¿Qué cambia cuando el usuario hace clic? Solo **qué categoría eligió**. Los botones salen de las pizzas y la lista visible sale de las pizzas más la categoría elegida: las dos cosas se pueden **calcular** en cada render, no hace falta guardarlas.",
+  "Guarda `useState(\"todas\")`. Para las categorías sin repetir usa un `Set`: `[\"todas\", ...new Set(pizzas.map((p) => p.categoria))]` (el `Set` descarta repetidos y conserva el orden). Para la lista: si es \"todas\", `pizzas`; si no, `pizzas.filter(...)`. En cada botón, `aria-pressed={categoria === c}`.",
+  "Esqueleto:\n\n```jsx\nconst [categoria, setCategoria] = useState(\"todas\");\nconst categorias = [\"todas\", ...new Set(/* las categorías */)];\nconst visibles = categoria === \"todas\" ? pizzas : pizzas.filter(/* ... */);\n\nreturn (\n  <div>\n    {categorias.map((c) => (\n      <button key={c} aria-pressed={/* ... */} onClick={/* ... */}>{c}</button>\n    ))}\n    <ul>{visibles.map((p) => <li key={p.nombre}>{p.nombre}</li>)}</ul>\n  </div>\n);\n```"
+]

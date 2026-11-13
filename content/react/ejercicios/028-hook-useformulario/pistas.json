@@ -1,0 +1,5 @@
+[
+  "En lugar de un estado por campo, guarda **un objeto** con todos. El truco es que el evento ya trae todo lo que necesitas: `evento.target.name` dice **qué** campo cambió y `value` o `checked` dicen **a qué** valor. Solo tienes que actualizar esa propiedad del objeto sin perder las demás.",
+  "Usa `useState(inicial)`. En `cambiar`, desestructura `{ name, type, value, checked } = evento.target`. Crea un objeto nuevo con el spread `...anteriores` (copia lo que había) y una **propiedad computada** `[name]: ...` (la clave sale de una variable). Para el checkbox usa `checked`; para lo demás, `value`.",
+  "Esqueleto:\n\n```jsx\nexport function useFormulario(inicial) {\n  const [valores, setValores] = useState(inicial);\n  const cambiar = (evento) => {\n    const { name, type, value, checked } = evento.target;\n    setValores((anteriores) => ({\n      ...anteriores,\n      [name]: /* checked si es checkbox, si no value */,\n    }));\n  };\n  const reiniciar = () => /* ... */;\n  return { valores, cambiar, reiniciar };\n}\n```"
+]

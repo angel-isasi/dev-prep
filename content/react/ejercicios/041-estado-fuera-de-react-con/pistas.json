@@ -1,0 +1,5 @@
+[
+  "Piensa en un grupo de WhatsApp: el almacén guarda el valor y una lista de 'miembros' (oyentes). Cuando el valor cambia, les manda un aviso a todos. Cada miembro, al enterarse, vuelve a **leer** el valor. React necesita justo eso: una forma de suscribirse y una forma de leer.",
+  "Dentro de `crearAlmacen` usa dos variables locales: `let estado = inicial` y `const oyentes = new Set()`. Devuelve un objeto con `leer`, `cambiar` (actualiza `estado` y llama a cada oyente con `forEach`) y `suscribir` (hace `add` y devuelve `() => oyentes.delete(oyente)`). En `Visor`: `useSyncExternalStore(almacen.suscribir, almacen.leer)`.",
+  "Esqueleto:\n\n```jsx\nexport function crearAlmacen(inicial) {\n  let estado = inicial;\n  const oyentes = new Set();\n  return {\n    leer: () => /* ... */,\n    cambiar: (nuevo) => {\n      estado = nuevo;\n      /* avisa a cada oyente */\n    },\n    suscribir: (oyente) => {\n      oyentes.add(oyente);\n      return () => /* quítalo */;\n    },\n  };\n}\n\nexport function Visor() {\n  const valor = useSyncExternalStore(/* suscribir */, /* leer */);\n  return <p>Pedidos hoy: {valor}</p>;\n}\n```"
+]

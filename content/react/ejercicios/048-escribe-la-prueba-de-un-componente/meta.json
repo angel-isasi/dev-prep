@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-048",
+  "titulo": "Escribe la prueba de un componente",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 3,
+  "tags": ["react", "testing", "testing-library", "user-event", "vi.fn", "formularios"],
+  "origen": "definitivo/01-ejercicios/02-react/48"
+}

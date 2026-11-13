@@ -1,0 +1,5 @@
+[
+  "Primero resuelve unas pestañas normales: un estado con la pestaña actual y dos botones que lo cambian. Luego piensa: cambiar de pestaña podría tardar si el contenido es pesado. ¿Cómo le dices a React que ese cambio **no es urgente**, y cómo sabes si todavía lo está preparando?",
+  "`const [pendiente, iniciarTransicion] = useTransition()`. Envuelve el setState en la transición: `iniciarTransicion(() => setPestana(\"pedidos\"))`. `pendiente` es `true` mientras React prepara ese render; úsalo para mostrar \"Cambiando…\". En cada botón: `aria-pressed={pestana === valor}`.",
+  "Esqueleto:\n\n```jsx\nexport function Pestanas() {\n  const [pestana, setPestana] = useState(\"menu\");\n  const [pendiente, iniciarTransicion] = useTransition();\n  const cambiar = (valor) => iniciarTransicion(() => /* ... */);\n\n  return (\n    <div>\n      <button aria-pressed={/* ... */} onClick={() => cambiar(\"menu\")}>Menú</button>\n      <button aria-pressed={/* ... */} onClick={() => cambiar(\"pedidos\")}>Pedidos</button>\n      <p>{pendiente ? \"Cambiando…\" : `Viendo: ${/* ... */}`}</p>\n    </div>\n  );\n}\n```"
+]

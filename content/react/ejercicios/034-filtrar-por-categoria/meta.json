@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-034",
+  "titulo": "Filtrar por categoría",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["react", "useState", "estado-derivado", "filter", "Set", "aria-pressed"],
+  "origen": "definitivo/01-ejercicios/02-react/34"
+}

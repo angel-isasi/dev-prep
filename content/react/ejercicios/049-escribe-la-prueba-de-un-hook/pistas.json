@@ -1,0 +1,5 @@
+[
+  "Recorre la 'vida' del carrito como lo haría quien lo usa: ¿cómo está al empezar?, ¿qué pasa al agregar dos cosas?, ¿y al vaciarlo? En cada momento comprueba **las dos** cosas que devuelve: `items` y `total`. Si solo miras una, alguna versión rota se te escapa.",
+  "`const { result } = renderHook(() => useCarrito())` ejecuta el hook. Lee siempre `result.current.algo` justo cuando lo necesites (no lo guardes en una variable al inicio, porque se queda con el render viejo). Envuelve cada cambio en `act(() => result.current.agregar({...}))`. Para comparar arreglos usa `toEqual([])`, no `toBe([])`.",
+  "Esqueleto:\n\n```jsx\nexport function probarUseCarrito(useCarrito) {\n  const { result } = renderHook(() => useCarrito());\n  expect(result.current.items).toEqual(/* ... */);\n  expect(result.current.total).toBe(/* ... */);\n\n  act(() => result.current.agregar({ nombre: \"Margarita\", precio: 28 }));\n  act(() => /* agrega Pepperoni a 32 */);\n  expect(/* cantidad de items */).toBe(2);\n  expect(/* total */).toBe(60);\n\n  act(() => /* vacía */);\n  /* comprueba items y total otra vez */\n}\n```"
+]

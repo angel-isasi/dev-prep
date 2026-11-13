@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-040",
+  "titulo": "useTransition",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 3,
+  "tags": ["react", "useTransition", "concurrencia", "rendimiento", "pestanas", "aria-pressed"],
+  "origen": "definitivo/01-ejercicios/02-react/40"
+}

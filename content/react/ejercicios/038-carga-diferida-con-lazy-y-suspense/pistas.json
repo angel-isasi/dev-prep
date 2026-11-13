@@ -1,0 +1,5 @@
+[
+  "Hay dos piezas: algo que convierta 'una función que descarga un módulo' en un componente que se pueda usar en JSX, y algo que diga qué mostrar **mientras** ese componente todavía no llegó. Además, el mapa solo debe montarse cuando el usuario lo pide: eso es un estado y un renderizado condicional.",
+  "`lazy(descargarMapa)` devuelve un componente que, la primera vez que se renderiza, llama a `descargarMapa()` y 'suspende' hasta que la promesa se resuelve. `<Suspense fallback={<p>Cargando mapa…</p>}>` muestra el fallback mientras algún hijo esté suspendido. Crea el `lazy` fuera del componente, y en `Locales` usa `useState(false)` para saber si mostrar el mapa.",
+  "Esqueleto:\n\n```jsx\nexport const Mapa = lazy(/* ... */);\n\nexport function Locales() {\n  const [verMapa, setVerMapa] = useState(false);\n  return (\n    <section>\n      <button onClick={/* ... */}>Ver mapa</button>\n      {verMapa && (\n        <Suspense fallback={/* ... */}>\n          <Mapa />\n        </Suspense>\n      )}\n    </section>\n  );\n}\n```"
+]

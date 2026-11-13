@@ -1,0 +1,5 @@
+[
+  "Hay dos cosas que cambian a ritmos distintos: el **tiempo** del intervalo (rara vez) y el **callback** (en cada render, porque es una función nueva que 've' el estado nuevo). Si el intervalo dependiera del callback, se reiniciaría en cada render (y si el componente se renderiza seguido, nunca llegaría a dispararse). Necesitas un lugar donde guardar 'el callback más reciente' que el intervalo pueda consultar **sin** reiniciarse.",
+  "Ese lugar es un `useRef`: `const ultimoCallback = useRef(callback)`. Actualízalo después de cada render con un `useEffect` sin arreglo de dependencias (`ultimoCallback.current = callback`). En otro `useEffect` con `[ms]`, crea el intervalo que llama a `ultimoCallback.current()`, sal temprano si `ms === null`, y devuelve `() => clearInterval(id)`.",
+  "Esqueleto:\n\n```jsx\nexport function useIntervalo(callback, ms) {\n  const ultimoCallback = useRef(callback);\n\n  useEffect(() => {\n    ultimoCallback.current = /* ... */;\n  });\n\n  useEffect(() => {\n    if (ms === null) return;\n    const id = setInterval(() => /* llama al más reciente */, ms);\n    return () => /* ... */;\n  }, [/* ... */]);\n}\n```"
+]

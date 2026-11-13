@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-042",
+  "titulo": "Componentes compuestos",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 3,
+  "tags": ["react", "compound-components", "context", "useContext", "accesibilidad", "radiogroup"],
+  "origen": "definitivo/01-ejercicios/02-react/42"
+}

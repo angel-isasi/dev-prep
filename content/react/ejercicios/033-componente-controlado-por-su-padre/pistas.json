@@ -1,0 +1,5 @@
+[
+  "Pregúntate quién necesita saber si el delivery está activo. No solo el interruptor: también el padre, para mostrar el costo de envío. Por eso el estado vive en el **padre**, y el interruptor solo **muestra** lo que le dicen y **avisa** cuando lo tocan, como un input controlado.",
+  "`Interruptor` no usa `useState`: recibe `activo`, `onCambio` y `etiqueta`. Es un `<button role=\"switch\" aria-checked={activo}>` y en el `onClick` llama `onCambio(!activo)`. En `Opciones`, `useState(false)` y le pasas `activo={delivery}` y `onCambio={setDelivery}`. Para el costo, renderizado condicional con `&&`.",
+  "Esqueleto:\n\n```jsx\nexport function Interruptor({ activo, onCambio, etiqueta }) {\n  return (\n    <button role=\"switch\" aria-checked={activo} onClick={/* avisa con el contrario */}>\n      {etiqueta}: {/* sí o no */}\n    </button>\n  );\n}\n\nexport function Opciones() {\n  const [delivery, setDelivery] = useState(false);\n  return (\n    <div>\n      <Interruptor etiqueta=\"Delivery\" activo={/* ... */} onCambio={/* ... */} />\n      {/* si delivery: <p>Costo de envío: S/ 5</p> */}\n    </div>\n  );\n}\n```"
+]

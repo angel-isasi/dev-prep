@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-041",
+  "titulo": "Estado fuera de React con useSyncExternalStore",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 3,
+  "tags": ["react", "useSyncExternalStore", "store", "suscripciones", "patron-observador", "closures"],
+  "origen": "definitivo/01-ejercicios/02-react/41"
+}

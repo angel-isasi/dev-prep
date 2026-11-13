@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-028",
+  "titulo": "Hook useFormulario",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "hooks-personalizados", "formularios", "useState", "propiedades-computadas", "checkbox"],
+  "origen": "definitivo/01-ejercicios/02-react/28"
+}

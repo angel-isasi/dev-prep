@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-049",
+  "titulo": "Escribe la prueba de un hook",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 3,
+  "tags": ["react", "testing", "renderHook", "act", "hooks-personalizados"],
+  "origen": "definitivo/01-ejercicios/02-react/49"
+}

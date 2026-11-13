@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-047",
+  "titulo": "Lista dinámica de campos",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 3,
+  "tags": ["react", "formularios", "listas", "key", "useRef", "inmutabilidad"],
+  "origen": "definitivo/01-ejercicios/02-react/47"
+}

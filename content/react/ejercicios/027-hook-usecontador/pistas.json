@@ -1,0 +1,5 @@
+[
+  "Hay dos problemas separados: 1) leer las opciones con valores por defecto aunque no te pasen nada, y 2) 'recortar' el número para que no se salga de los límites. Lo segundo es como un tope: si `c + 1` se pasa del máximo, te quedas con el máximo.",
+  "Desestructura en los parámetros: `function useContador({ inicial = 0, min = -Infinity, max = Infinity } = {})`. El `= {}` final evita el error cuando se llama sin argumentos. Para los topes usa `Math.min(max, c + 1)` al sumar y `Math.max(min, c - 1)` al restar, siempre con la forma funcional `setCuenta((c) => ...)`.",
+  "Esqueleto:\n\n```jsx\nexport function useContador({ inicial = 0, min = -Infinity, max = Infinity } = {}) {\n  const [cuenta, setCuenta] = useState(inicial);\n  const sumar = () => setCuenta((c) => /* Math.min(...) */);\n  const restar = () => setCuenta((c) => /* Math.max(...) */);\n  const reiniciar = () => setCuenta(/* ... */);\n  return { /* ... */ };\n}\n```"
+]

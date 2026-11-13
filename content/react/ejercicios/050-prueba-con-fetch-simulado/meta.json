@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-050",
+  "titulo": "Prueba con fetch simulado",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 3,
+  "tags": ["react", "testing", "fetch", "mocks", "vi.fn", "async"],
+  "origen": "definitivo/01-ejercicios/02-react/50"
+}

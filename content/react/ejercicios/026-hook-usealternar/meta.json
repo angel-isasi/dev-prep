@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-026",
+  "titulo": "Hook useAlternar",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["react", "hooks-personalizados", "useState", "useCallback", "booleanos"],
+  "origen": "definitivo/01-ejercicios/02-react/26"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-036",
+  "titulo": "Modal con portal",
+  "tipo": "componente",
+  "tema": "react-patrones",
+  "nivel": 3,
+  "tags": ["react", "createPortal", "portales", "modal", "accesibilidad", "aria-modal"],
+  "origen": "definitivo/01-ejercicios/02-react/36"
+}

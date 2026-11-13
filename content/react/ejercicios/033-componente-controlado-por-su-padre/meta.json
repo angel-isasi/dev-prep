@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-033",
+  "titulo": "Componente controlado por su padre",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 2,
+  "tags": ["react", "componentes-controlados", "props", "levantar-estado", "accesibilidad", "aria-checked"],
+  "origen": "definitivo/01-ejercicios/02-react/33"
+}

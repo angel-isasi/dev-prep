@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-027",
+  "titulo": "Hook useContador",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["react", "hooks-personalizados", "useState", "limites", "Math.min"],
+  "origen": "definitivo/01-ejercicios/02-react/27"
+}

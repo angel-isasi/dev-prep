@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-031",
+  "titulo": "Contador con useReducer",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useReducer", "reducer", "acciones", "funciones-puras"],
+  "origen": "definitivo/01-ejercicios/02-react/31"
+}

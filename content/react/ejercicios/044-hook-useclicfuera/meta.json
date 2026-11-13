@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-044",
+  "titulo": "Hook useClicFuera",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 3,
+  "tags": ["react", "hooks-personalizados", "useRef", "useEffect", "eventos-del-document", "contains"],
+  "origen": "definitivo/01-ejercicios/02-react/44"
+}

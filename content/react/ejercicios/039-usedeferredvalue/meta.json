@@ -1,0 +1,9 @@
+{
+  "id": "react-ej-039",
+  "titulo": "useDeferredValue",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 3,
+  "tags": ["react", "useDeferredValue", "memo", "rendimiento", "concurrencia", "buscador"],
+  "origen": "definitivo/01-ejercicios/02-react/39"
+}

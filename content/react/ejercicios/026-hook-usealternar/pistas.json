@@ -1,0 +1,5 @@
+[
+  "Un hook propio es solo una función cuyo nombre empieza con `use` y que por dentro llama a otros hooks. Piensa: ¿qué hook de React ya sabe guardar un valor entre renders? Lo único que agregas tú es la función que lo invierte.",
+  "Usa `useState(inicial)` para el booleano. Para invertirlo usa la **forma funcional** `setValor((v) => !v)`, así no dependes del valor de ese render. Envuelve esa función en `useCallback(..., [])` para que sea siempre la misma referencia.",
+  "Esqueleto:\n\n```jsx\nexport function useAlternar(inicial = false) {\n  const [valor, setValor] = useState(/* ... */);\n  const alternar = useCallback(() => setValor(/* invierte v */), []);\n  return [/* ... */, /* ... */];\n}\n```"
+]

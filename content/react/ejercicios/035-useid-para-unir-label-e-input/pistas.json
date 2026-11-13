@@ -1,0 +1,5 @@
+[
+  "Un `<label>` se une a su input de dos formas: envolviéndolo, o con `for` (en JSX `htmlFor`) apuntando al `id` del input. Aquí deben ir separados, así que necesitas un `id`. El problema: si lo escribes a mano o lo sacas de la etiqueta, dos `Campo` iguales tendrían el mismo id. ¿Quién te puede dar un id único por cada vez que se usa el componente?",
+  "`const id = useId()` te da un id único y estable para esa instancia del componente. Úsalo en `<label htmlFor={id}>` y en `<input id={id}>`. Para pasar todas las demás props al input, recógelas con el parámetro rest `{ etiqueta, ...props }` y espárcelas con `<input {...props} />`.",
+  "Esqueleto:\n\n```jsx\nexport function Campo({ etiqueta, ...props }) {\n  const id = /* ... */;\n  return (\n    <div>\n      <label htmlFor={/* ... */}>{etiqueta}</label>\n      <input id={/* ... */} {/* el resto de props */} />\n    </div>\n  );\n}\n```"
+]
