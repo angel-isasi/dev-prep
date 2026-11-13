@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-004",
+  "titulo": "El clásico var en un bucle",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 2,
+  "tags": ["closures", "var vs let", "scope de bloque", "setTimeout"],
+  "origen": "definitivo/03-retos/02-javascript/04"
+}

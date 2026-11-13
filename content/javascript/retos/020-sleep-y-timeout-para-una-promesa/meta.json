@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-020",
+  "titulo": "sleep y timeout para una promesa",
+  "tipo": "funcion",
+  "tema": "asincronia",
+  "nivel": 2,
+  "tags": ["promesas", "Promise.race", "setTimeout", "clearTimeout", "finally"],
+  "origen": "definitivo/03-retos/02-javascript/20"
+}

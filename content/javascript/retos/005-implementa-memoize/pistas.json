@@ -1,0 +1,5 @@
+[
+  "Necesitas una **caché** que sobreviva entre llamadas y que sea de esta función memoizada y de ninguna otra. Ya conoces el truco: declárala dentro de `memoize`, fuera de la función que devuelves. Luego piensa: ¿cómo conviertes una lista de argumentos como `(10, 3)` en una sola clave?",
+  "Usa un `Map` como caché y `JSON.stringify(args)` como clave: `[10, 3]` se vuelve el texto `\"[10,3]\"`, distinto de `\"[3,10]\"`. Para saber si ya calculaste algo, usa `cache.has(clave)` y no `if (cache.get(clave))`, porque un resultado `0` o `undefined` parecería \"no guardado\".",
+  "Esqueleto:\n\n```js\nexport function memoize(fn) {\n  const cache = new Map();\n\n  return function (...args) {\n    const clave = /* convierte args en texto */;\n    if (/* ¿la caché ya tiene la clave? */) return cache.get(clave);\n\n    const resultado = fn.apply(this, args);\n    /* guarda el resultado en la caché */\n    return resultado;\n  };\n}\n```"
+]

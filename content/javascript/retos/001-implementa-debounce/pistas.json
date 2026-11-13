@@ -1,0 +1,5 @@
+[
+  "`debounce` no ejecuta nada al llamarla: **devuelve otra función**. Esa función interna necesita recordar algo entre una llamada y la siguiente: el temporizador que está esperando. ¿Dónde guardas un dato que sobreviva entre llamadas sin ser global?",
+  "Guarda el identificador que devuelve `setTimeout` en una variable declarada **fuera** de la función devuelta (closure). En cada llamada, primero cancela el temporizador anterior con `clearTimeout(id)` y luego crea uno nuevo. Usa `function (...args)` en lugar de flecha y `fn.apply(this, args)` para conservar el `this` y los argumentos.",
+  "Esqueleto:\n\n```js\nexport function debounce(fn, ms) {\n  let temporizador;\n\n  return function (...args) {\n    /* cancela el temporizador anterior */\n    temporizador = setTimeout(() => {\n      /* ejecuta fn con el mismo this y los args */\n    }, ms);\n  };\n}\n```"
+]

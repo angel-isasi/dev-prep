@@ -1,0 +1,5 @@
+[
+  "Cada vez que te llaman, solo hay dos caminos: **ya tienes suficientes argumentos** (ejecutas `fn`) o **te faltan** (devuelves otra función que espera más). ¿Cómo sabes cuántos necesita `fn`? Las funciones tienen una propiedad que te lo dice.",
+  "`fn.length` es la cantidad de parámetros declarados: `((a, b, c) => ...).length` es 3. Dale **nombre** a la función que devuelves (por ejemplo `curried`) para poder llamarla otra vez desde dentro. Cuando falten argumentos, devuelve una flecha que reciba `...mas` y llame a `curried` con `[...args, ...mas]`: los viejos más los nuevos.",
+  "Esqueleto:\n\n```js\nexport function curry(fn) {\n  return function curried(...args) {\n    if (/* ¿ya tengo fn.length argumentos o más? */) {\n      return fn(...args);\n    }\n    return (...mas) => /* vuelve a llamar a curried con args y mas juntos */;\n  };\n}\n```"
+]

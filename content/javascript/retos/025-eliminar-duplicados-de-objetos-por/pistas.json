@@ -1,0 +1,5 @@
+[
+  "Para primitivos existe una estructura que **por definición no guarda repetidos**. Para objetos no te sirve directamente: dos objetos con el mismo contenido son objetos distintos para JavaScript. Pero lo que sí puedes guardar ahí es el **valor de la propiedad** que los identifica, como el `id`.",
+  "`new Set(lista)` quita repetidos y `[...set]` lo vuelve arreglo. Para `unicosPor`, crea un `Set` vacío llamado `vistos` y recorre con `filter`: si `vistos.has(item[clave])`, ya lo viste y devuelves `false`; si no, lo agregas con `vistos.add(...)` y devuelves `true`.",
+  "Esqueleto:\n\n```js\nexport function unicos(lista) {\n  return [.../* un Set con la lista */];\n}\n\nexport function unicosPor(lista, clave) {\n  const vistos = new Set();\n  return lista.filter((item) => {\n    if (/* ¿ya viste item[clave]? */) return false;\n    /* anótalo como visto */\n    return true;\n  });\n}\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Convierte la ruta en una **lista de pasos** y baja nivel por nivel: empiezas en `obj`, y en cada paso te quedas con `actual[paso]`. Antes de cada paso, revisa si todavía hay algo por donde bajar. Primero resuelve un detalle: ¿cómo haces que `\"a.b[0].c\"` y `\"a.b.0.c\"` den la misma lista?",
+  "Con `ruta.replace(/\\[(\\d+)\\]/g, \".$1\")` conviertes cada `[0]` en `.0` (el `$1` es el número capturado entre paréntesis). Luego `split(\".\")` te da `[\"a\", \"b\", \"0\", \"c\"]`. En el bucle, si `actual == null` (eso atrapa `null` y `undefined` a la vez), devuelve `porDefecto`. Al final, devuelve `porDefecto` solo si el valor es exactamente `undefined`.",
+  "Esqueleto:\n\n```js\nexport function obtener(obj, ruta, porDefecto) {\n  const partes = /* normaliza los corchetes y corta por puntos */;\n\n  let actual = obj;\n  for (const parte of partes) {\n    if (/* actual es null o undefined */) return porDefecto;\n    actual = actual[parte];\n  }\n\n  return /* porDefecto si actual es undefined, si no actual */;\n}\n```"
+]

@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-005",
+  "titulo": "Implementa memoize",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 2,
+  "tags": ["closures", "Map", "caché", "funciones de orden superior"],
+  "origen": "definitivo/03-retos/02-javascript/05"
+}

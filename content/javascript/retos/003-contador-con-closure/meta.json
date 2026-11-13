@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-003",
+  "titulo": "Contador con closure",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 1,
+  "tags": ["closures", "estado privado", "objetos"],
+  "origen": "definitivo/03-retos/02-javascript/03"
+}

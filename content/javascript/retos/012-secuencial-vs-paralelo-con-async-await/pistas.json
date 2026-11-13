@@ -1,0 +1,5 @@
+[
+  "La clave está en **cuándo llamas a cada tarea**. Llamar a `tarea()` es lo que arranca el trabajo; `await` es lo que se queda esperando. En secuencial, llamas a una, esperas, y recién llamas a la siguiente. En paralelo, ¿qué pasa si llamas a todas primero y esperas después?",
+  "Para `secuencial`, recorre con `for...of` y haz `await tarea()` dentro del bucle, guardando cada resultado con `push` (ojo: `forEach` no espera a los `await`). Para `paralelo`, usa `tareas.map((t) => t())` para arrancarlas todas de golpe: eso te da un arreglo de promesas, y `Promise.all` las espera juntas.",
+  "Esqueleto:\n\n```js\nexport async function secuencial(tareas) {\n  const resultados = [];\n  for (const tarea of tareas) {\n    resultados.push(/* arranca y espera esta tarea */);\n  }\n  return resultados;\n}\n\nexport async function paralelo(tareas) {\n  const promesas = /* arranca todas las tareas */;\n  return /* espera todas juntas */;\n}\n```"
+]

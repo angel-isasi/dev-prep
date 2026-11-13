@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-025",
+  "titulo": "Eliminar duplicados de objetos por propiedad",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 2,
+  "tags": ["arrays", "Set", "filter", "duplicados", "referencias"],
+  "origen": "definitivo/03-retos/02-javascript/25"
+}

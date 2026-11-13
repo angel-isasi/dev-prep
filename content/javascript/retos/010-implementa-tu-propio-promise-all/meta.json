@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-010",
+  "titulo": "Implementa tu propio Promise.all",
+  "tipo": "funcion",
+  "tema": "asincronia",
+  "nivel": 3,
+  "tags": ["promesas", "Promise.all", "asincronía", "contador"],
+  "origen": "definitivo/03-retos/02-javascript/10"
+}

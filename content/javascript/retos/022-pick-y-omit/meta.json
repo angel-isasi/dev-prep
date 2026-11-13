@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-022",
+  "titulo": "pick y omit",
+  "tipo": "funcion",
+  "tema": "objetos",
+  "nivel": 2,
+  "tags": ["objetos", "Object.entries", "Object.fromEntries", "inmutabilidad"],
+  "origen": "definitivo/03-retos/02-javascript/22"
+}

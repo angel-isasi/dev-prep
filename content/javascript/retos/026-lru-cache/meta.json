@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-026",
+  "titulo": "LRU Cache",
+  "tipo": "funcion",
+  "tema": "clases",
+  "nivel": 3,
+  "tags": ["clases", "Map", "caché", "estructuras de datos", "O(1)"],
+  "origen": "definitivo/03-retos/02-javascript/26"
+}

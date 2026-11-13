@@ -1,0 +1,5 @@
+[
+  "Es como contar con un objeto, solo que en vez de sumar 1 **agregas el elemento a un arreglo**. Para cada elemento: averigua a qué grupo pertenece, asegúrate de que ese grupo exista y mete el elemento ahí. Primero resuelve: ¿cómo calculas el nombre del grupo si `clave` puede ser texto o función?",
+  "`typeof clave === \"function\"` te dice si es una función: si lo es, el grupo es `clave(item)`; si no, es `item[clave]`. Para crear el grupo solo la primera vez: `if (!grupos[grupo]) grupos[grupo] = [];` y luego `grupos[grupo].push(item)`. Puedes recorrer con `for...of` o con `reduce` empezando en `{}`.",
+  "Esqueleto:\n\n```js\nexport function agruparPor(lista, clave) {\n  const grupos = {};\n  for (const item of lista) {\n    const grupo = /* clave(item) o item[clave], según el tipo de clave */;\n    if (/* el grupo todavía no existe */) grupos[grupo] = [];\n    /* agrega el item a su grupo */\n  }\n  return grupos;\n}\n```"
+]

@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-007",
+  "titulo": "Deep clone",
+  "tipo": "funcion",
+  "tema": "objetos",
+  "nivel": 3,
+  "tags": ["objetos", "recursión", "referencias", "Date", "copia profunda"],
+  "origen": "definitivo/03-retos/02-javascript/07"
+}

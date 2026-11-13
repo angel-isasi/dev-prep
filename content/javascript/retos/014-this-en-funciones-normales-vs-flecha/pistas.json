@@ -1,0 +1,5 @@
+[
+  "En una función normal, `this` **no** depende de dónde la escribiste sino de **cómo la llamas**: en `rosa.saludar()`, `this` es lo que está antes del punto. Una función flecha, en cambio, no tiene `this` propio: usa el del lugar donde fue escrita. Piensa qué te conviene en cada parte de `saludarLuego`.",
+  "Usa la sintaxis de método, `saludar() { ... }`, para los dos métodos. Dentro de `saludarLuego`, el callback del `setTimeout` lo llama el temporizador, no tu objeto: si es una `function` normal, pierde el `this`; si es una **flecha**, hereda el `this` de `saludarLuego`. Para `saludoLigado`, `fn.bind(objeto)` crea una función nueva con el `this` fijado para siempre.",
+  "Esqueleto:\n\n```js\nexport const usuario = {\n  nombre: \"Angel\",\n  saludar() {\n    return `Hola, soy ${/* el nombre, con this */}`;\n  },\n  saludarLuego() {\n    return new Promise((resolver) => setTimeout(/* una flecha que resuelve con this.nombre */, 100));\n  },\n};\n\nexport const saludoLigado = usuario.saludar./* fija el this en usuario */;\n```"
+]

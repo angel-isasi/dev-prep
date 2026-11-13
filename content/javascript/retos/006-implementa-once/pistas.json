@@ -1,0 +1,5 @@
+[
+  "La función devuelta tiene que recordar **dos cosas** entre llamadas: si ya se ejecutó y qué resultado dio. Las dos viven en un closure, igual que el temporizador de debounce.",
+  "Usa una bandera `let hecho = false` y una variable `let resultado`. En cada llamada: si `hecho` es falso, márcalo como verdadero y guarda `fn.apply(this, args)` en `resultado`. Siempre devuelves `resultado`. No uses `resultado === undefined` como bandera: si `fn` devuelve `undefined`, se ejecutaría otra vez.",
+  "Esqueleto:\n\n```js\nexport function once(fn) {\n  let hecho = false;\n  let resultado;\n\n  return function (...args) {\n    if (/* ¿todavía no se ejecutó? */) {\n      /* márcalo como hecho y guarda el resultado de fn */\n    }\n    return resultado;\n  };\n}\n```"
+]

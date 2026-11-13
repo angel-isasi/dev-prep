@@ -1,0 +1,5 @@
+[
+  "Es un **bucle** de hasta `intentos` vueltas. En cada vuelta intentas llamar a `fn`: si sale bien, terminas ahí mismo devolviendo el valor; si falla, recuerdas el error y, si todavía quedan vueltas, esperas antes de la siguiente. ¿Con qué estructura capturas el error de un `await` sin que la función se detenga?",
+  "Usa `for (let i = 0; i < intentos; i++)` con un `try { return await fn(); } catch (error) { ... }` dentro. Ojo: sin el `await` dentro del `try`, el error no se captura. En el `catch` guarda el error y, si `i < intentos - 1`, espera con una promesa de `setTimeout` de `esperaMs * 2 ** i` milisegundos (`2 ** i` es 1, 2, 4...). Después del bucle, `throw` del último error.",
+  "Esqueleto:\n\n```js\nconst esperar = (ms) => new Promise((resolver) => setTimeout(resolver, ms));\n\nexport async function reintentar(fn, intentos = 3, esperaMs = 10) {\n  let ultimoError;\n  for (let i = 0; i < intentos; i++) {\n    try {\n      return /* espera a fn */;\n    } catch (error) {\n      ultimoError = error;\n      if (/* ¿quedan intentos? */) await esperar(/* esperaMs, duplicándose */);\n    }\n  }\n  /* lanza el último error */\n}\n```"
+]

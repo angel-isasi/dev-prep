@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-012",
+  "titulo": "Secuencial vs paralelo con async/await",
+  "tipo": "funcion",
+  "tema": "asincronia",
+  "nivel": 2,
+  "tags": ["async/await", "promesas", "Promise.all", "rendimiento"],
+  "origen": "definitivo/03-retos/02-javascript/12"
+}

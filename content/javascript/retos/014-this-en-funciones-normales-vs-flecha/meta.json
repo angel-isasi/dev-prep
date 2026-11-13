@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-014",
+  "titulo": "this en funciones normales vs flecha",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 2,
+  "tags": ["this", "funciones flecha", "bind", "métodos", "setTimeout"],
+  "origen": "definitivo/03-retos/02-javascript/14"
+}

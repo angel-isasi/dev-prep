@@ -1,0 +1,5 @@
+[
+  "Piensa en cómo guardar las suscripciones: por **cada nombre de evento**, una **lista de funciones**. Un objeto donde la clave es el nombre del evento y el valor es un arreglo de funciones encaja perfecto. ¿Dónde creas ese objeto para que cada emisor tenga el suyo?",
+  "Crea `this.eventos = {}` en el `constructor`. `on`: si no existe la lista del evento, créala con `[]`, y haz `push(fn)`. `off`: reemplaza la lista por una filtrada sin esa función (`filter((f) => f !== fn)`). `emit`: recorre la lista (o `[]` si no existe) y llama a cada función con `fn(...args)`. Para que `on` devuelva el \"desuscribir\", devuelve una flecha que llame a `this.off(evento, fn)`.",
+  "Esqueleto:\n\n```js\nexport class Emisor {\n  constructor() {\n    this.eventos = {};\n  }\n\n  on(evento, fn) {\n    /* crea la lista si no existe y agrega fn */\n    return () => /* desuscribe fn */;\n  }\n\n  off(evento, fn) {\n    this.eventos[evento] = /* la lista sin fn */;\n  }\n\n  emit(evento, ...args) {\n    /* llama a cada función de la lista con los args */\n  }\n}\n```"
+]

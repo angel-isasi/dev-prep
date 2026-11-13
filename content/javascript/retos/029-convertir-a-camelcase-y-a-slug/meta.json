@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-029",
+  "titulo": "Convertir a camelCase y a slug",
+  "tipo": "funcion",
+  "tema": "strings",
+  "nivel": 2,
+  "tags": ["strings", "expresiones regulares", "replace", "normalize", "tildes"],
+  "origen": "definitivo/03-retos/02-javascript/29"
+}

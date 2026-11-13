@@ -1,0 +1,5 @@
+[
+  "En vez de recorrer elemento por elemento, recorre **de grupo en grupo**: si el tamaño es 2, los grupos empiezan en los índices 0, 2, 4... ¿Cómo haces que un `for` avance de `tam` en `tam`?",
+  "Usa `for (let i = 0; i < arr.length; i += tam)`. En cada vuelta, `arr.slice(i, i + tam)` te da una copia del tramo que va desde `i` hasta **antes** de `i + tam`. Si `i + tam` se pasa del final, `slice` simplemente corta donde termina el arreglo, así que el último grupo sale solo.",
+  "Esqueleto:\n\n```js\nexport function partir(arr, tam) {\n  const grupos = [];\n  for (let i = 0; i < arr.length; /* avanza de tam en tam */) {\n    grupos.push(/* el tramo desde i, de tam elementos */);\n  }\n  return grupos;\n}\n```"
+]

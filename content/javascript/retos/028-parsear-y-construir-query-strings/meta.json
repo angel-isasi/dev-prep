@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-028",
+  "titulo": "Parsear y construir query strings",
+  "tipo": "funcion",
+  "tema": "strings",
+  "nivel": 2,
+  "tags": ["strings", "URLSearchParams", "URLs", "Object.fromEntries", "codificación"],
+  "origen": "definitivo/03-retos/02-javascript/28"
+}

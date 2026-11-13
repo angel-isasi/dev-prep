@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-023",
+  "titulo": "Comparación profunda (deepEqual)",
+  "tipo": "funcion",
+  "tema": "objetos",
+  "nivel": 3,
+  "tags": ["objetos", "recursión", "referencias", "comparación"],
+  "origen": "definitivo/03-retos/02-javascript/23"
+}

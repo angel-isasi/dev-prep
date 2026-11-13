@@ -1,0 +1,5 @@
+[
+  "Si guardas la cuenta como propiedad del objeto (`{ cuenta: 5 }`), cualquiera la ve y la cambia. Necesitas guardarla en un lugar que **solo las funciones del objeto** puedan alcanzar. ¿Qué pasa con una variable declarada dentro de `crearContador` cuando la función termina?",
+  "Declara `let cuenta = inicial` dentro de `crearContador` y devuelve un objeto cuyos métodos sean funciones que usan esa variable. Esas funciones forman un **closure**: siguen viendo `cuenta` aunque `crearContador` ya terminó. Para sumar y devolver a la vez, `++cuenta` (prefijo) devuelve el valor ya sumado.",
+  "Esqueleto:\n\n```js\nexport function crearContador(inicial = 0) {\n  let cuenta = inicial;\n\n  return {\n    incrementar: () => /* suma 1 y devuelve */,\n    decrementar: () => /* resta 1 y devuelve */,\n    valor: () => /* devuelve la cuenta */,\n  };\n}\n```"
+]

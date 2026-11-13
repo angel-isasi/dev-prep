@@ -1,0 +1,5 @@
+[
+  "Tienes que devolver **una promesa nueva** que tú controlas: `new Promise((resolver, rechazar) => { ... })`. Dentro, suscríbete a cada promesa de la lista. Dos preguntas: ¿cómo sabes que **todas** terminaron? y ¿cómo guardas cada resultado en **su** posición aunque llegue en desorden?",
+  "Lleva un **contador** `pendientes` que empieza en `promesas.length` y baja en 1 cada vez que una se cumple; cuando llega a 0, llamas a `resolver(resultados)`. Guarda cada valor con su índice: `resultados[i] = valor` (no uses `push`). Envuelve cada elemento con `Promise.resolve(x)` para que los valores normales también tengan `.then`. Pasa `rechazar` como segundo argumento de `.then`. Y no olvides el caso del arreglo vacío.",
+  "Esqueleto:\n\n```js\nexport function promiseAll(promesas) {\n  return new Promise((resolver, rechazar) => {\n    const resultados = [];\n    let pendientes = promesas.length;\n    if (pendientes === 0) { /* cumple con [] y sal */ }\n\n    promesas.forEach((promesa, i) => {\n      Promise.resolve(promesa).then((valor) => {\n        /* guarda en su índice, baja el contador y resuelve si llegó a 0 */\n      }, rechazar);\n    });\n  });\n}\n```"
+]

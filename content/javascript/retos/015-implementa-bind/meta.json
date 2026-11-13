@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-015",
+  "titulo": "Implementa bind",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 2,
+  "tags": ["this", "bind", "apply", "prototipos", "aplicación parcial"],
+  "origen": "definitivo/03-retos/02-javascript/15"
+}

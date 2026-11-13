@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-027",
+  "titulo": "Componer funciones (pipe y compose)",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 2,
+  "tags": ["funciones", "reduce", "reduceRight", "programación funcional", "closures"],
+  "origen": "definitivo/03-retos/02-javascript/27"
+}

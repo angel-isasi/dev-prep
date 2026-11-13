@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-009",
+  "titulo": "Currying",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 3,
+  "tags": ["funciones", "closures", "currying", "fn.length", "recursión"],
+  "origen": "definitivo/03-retos/02-javascript/09"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-013",
+  "titulo": "Orden del event loop",
+  "tipo": "funcion",
+  "tema": "asincronia",
+  "nivel": 2,
+  "tags": ["event loop", "microtareas", "macrotareas", "promesas", "setTimeout"],
+  "origen": "definitivo/03-retos/02-javascript/13"
+}

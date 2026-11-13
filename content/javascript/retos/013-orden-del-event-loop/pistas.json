@@ -1,0 +1,5 @@
+[
+  "Clasifica cada línea en una de tres filas: **síncrono** (se ejecuta ya), **microtarea** (`.then` de una promesa, o lo que viene después de un `await`) y **macrotarea** (`setTimeout`). El orden de las filas es siempre: síncrono, luego todas las microtareas, luego una macrotarea.",
+  "Dos trampas: el cuerpo de `new Promise((resolver) => { ... })` se ejecuta **al instante**, es síncrono; solo el `.then` espera. Y una función `async` corre de forma síncrona **hasta su primer `await`**; lo que viene después del `await` es una microtarea. En el fragmento 4, recuerda que después de **cada** `setTimeout` se vacían las microtareas que ese `setTimeout` haya creado, antes de pasar al siguiente.",
+  "Esqueleto para el fragmento 1 (los demás siguen la misma lógica):\n\n```js\nexport const prediccion1 = [\n  /* los dos síncronos, en el orden en que aparecen */,\n  /* la microtarea */,\n  /* la macrotarea */,\n];\n// Fragmento 2: ¿\"B\" se registra antes o después de \"C\"?\n// Fragmento 4: ¿\"M dentro de T1\" va antes o después de \"T2\"?\n```"
+]

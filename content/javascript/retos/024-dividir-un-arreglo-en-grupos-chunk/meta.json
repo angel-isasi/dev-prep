@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-024",
+  "titulo": "Dividir un arreglo en grupos (chunk)",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 1,
+  "tags": ["arrays", "slice", "bucles", "paginación"],
+  "origen": "definitivo/03-retos/02-javascript/24"
+}

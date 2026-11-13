@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-016",
+  "titulo": "Polyfill de map, filter y reduce",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 2,
+  "tags": ["arrays", "prototipos", "this", "map", "filter", "reduce"],
+  "origen": "definitivo/03-retos/02-javascript/16"
+}

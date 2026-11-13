@@ -1,0 +1,5 @@
+[
+  "Dentro de `miBind`, `this` es la **función original** (en `presentar.miBind(...)`, `this` es `presentar`). Tienes que devolver otra función que, cuando la llamen más tarde, ejecute esa original con el `this` y los argumentos correctos. Ojo: dentro de la función que devuelves, `this` ya será otra cosa.",
+  "Guarda la original en una variable, `const original = this`, para que la función devuelta la recuerde (closure). Para ejecutarla con un `this` elegido usa `original.apply(contexto, arregloDeArgumentos)` o `original.call(contexto, ...args)`. Junta los argumentos con `[...previos, ...args]`. Y devuelve lo que devuelva la original.",
+  "Esqueleto:\n\n```js\nFunction.prototype.miBind = function (contexto, ...previos) {\n  const original = this;\n\n  return function (...args) {\n    return original.apply(/* el contexto */, /* previos y args juntos */);\n  };\n};\n```"
+]

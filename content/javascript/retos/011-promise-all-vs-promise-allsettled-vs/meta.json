@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-011",
+  "titulo": "Promise.all vs allSettled vs race vs any",
+  "tipo": "funcion",
+  "tema": "asincronia",
+  "nivel": 2,
+  "tags": ["promesas", "Promise.all", "Promise.allSettled", "Promise.race", "Promise.any"],
+  "origen": "definitivo/03-retos/02-javascript/11"
+}

@@ -1,0 +1,5 @@
+[
+  "Un objeto puede tener objetos dentro, que a su vez tienen más objetos, sin límite de niveles. Cuando una estructura se repite dentro de sí misma, la herramienta natural es la **recursión**: `clonar` se llama a sí misma con cada valor interno. Piensa primero en el **caso base**: ¿qué valores se pueden devolver sin copiar nada?",
+  "Revisa el tipo en este orden: 1) si es `null` o `typeof valor !== \"object\"`, es primitivo y lo devuelves igual; 2) si es `instanceof Date`, devuelve `new Date(valor)`; 3) si es `Array.isArray(valor)`, devuelve `valor.map(clonar)`; 4) si no, es un objeto: crea `{}` y recorre `Object.entries(valor)` clonando cada valor.",
+  "Esqueleto:\n\n```js\nexport function clonar(valor) {\n  if (/* es null o no es objeto */) return valor;\n  if (/* es una fecha */) return /* una fecha nueva */;\n  if (/* es un arreglo */) return /* cada elemento clonado */;\n\n  const copia = {};\n  for (const [clave, interno] of Object.entries(valor)) {\n    copia[clave] = /* clona el valor interno */;\n  }\n  return copia;\n}\n```"
+]

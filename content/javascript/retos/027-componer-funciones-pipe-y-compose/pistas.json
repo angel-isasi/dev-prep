@@ -1,0 +1,5 @@
+[
+  "Las dos devuelven **una función** que recibe el valor inicial. Dentro, tienes un valor que va \"pasando de mano en mano\" por una lista de funciones: empieza siendo el valor inicial y, en cada paso, se convierte en `fn(valor)`. ¿Qué método de arreglo sirve para recorrer una lista arrastrando un valor acumulado?",
+  "Usa `reduce` con el valor inicial como acumulador: `fns.reduce((valor, fn) => fn(valor), valorInicial)`. Así, si no hay funciones, devuelve el valor inicial sin tocarlo. Para `compose` necesitas el mismo recorrido pero desde el final: `reduceRight` hace exactamente eso.",
+  "Esqueleto:\n\n```js\nexport function pipe(...fns) {\n  return (valorInicial) => fns.reduce((valor, fn) => /* aplica fn */, valorInicial);\n}\n\nexport function compose(...fns) {\n  return (valorInicial) => fns./* el mismo recorrido, de derecha a izquierda */;\n}\n```"
+]

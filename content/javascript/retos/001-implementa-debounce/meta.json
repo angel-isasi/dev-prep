@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-001",
+  "titulo": "Implementa debounce",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 2,
+  "tags": ["closures", "setTimeout", "funciones de orden superior", "rendimiento"],
+  "origen": "definitivo/03-retos/02-javascript/01"
+}

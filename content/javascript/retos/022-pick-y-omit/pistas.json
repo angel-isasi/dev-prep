@@ -1,0 +1,5 @@
+[
+  "No modifiques el original con `delete`: arma un objeto **nuevo**. En `pick` tu punto de partida son las **claves pedidas** (¿cuáles existen en el objeto?). En `omit` tu punto de partida son **todas las propiedades del objeto** (¿cuáles no están en la lista negra?).",
+  "Dos herramientas que se complementan: `Object.entries(obj)` convierte un objeto en pares `[[clave, valor], ...]` y `Object.fromEntries(pares)` hace lo contrario. Entre medio filtras con `filter`. Para saber si una clave existe usa `clave in obj` (no `obj[clave] !== undefined`, que falla con propiedades que valen `undefined`). Para saber si está en la lista, `claves.includes(clave)`.",
+  "Esqueleto:\n\n```js\nexport function pick(obj, claves) {\n  const pares = claves\n    .filter((clave) => /* ¿existe en obj? */)\n    .map((clave) => [clave, obj[clave]]);\n  return Object.fromEntries(pares);\n}\n\nexport function omit(obj, claves) {\n  const pares = Object.entries(obj).filter(([clave]) => /* ¿NO está en claves? */);\n  return Object.fromEntries(pares);\n}\n```"
+]

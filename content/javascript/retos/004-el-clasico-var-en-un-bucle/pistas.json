@@ -1,0 +1,5 @@
+[
+  "Para predecir, separa **cuándo se crea** cada flecha y **cuándo se ejecuta**. Las tres flechas se crean durante el bucle, pero se ejecutan después, cuando el bucle ya terminó. ¿Cuántas variables `i` existen con `var`? ¿Y cuánto vale esa `i` al final del bucle?",
+  "Con `var`, la variable pertenece a toda la función: hay **una sola** `i` compartida y las tres flechas leen la misma. Con `let`, la variable pertenece al bloque del `for`, y JavaScript crea **una `i` nueva en cada vuelta**, con su propio valor. Para arreglarlo basta con cambiar una palabra.",
+  "Esqueleto:\n\n```js\nexport const prediccion = [/* el valor de i cuando termina el bucle, tres veces */];\n\nexport function arreglado(n) {\n  const salida = [];\n  for (/* declara i con la palabra que crea una variable por vuelta */ = 0; i < n; i++) {\n    setTimeout(() => salida.push(i), 0);\n  }\n  return salida;\n}\n```"
+]

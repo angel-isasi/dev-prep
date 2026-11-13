@@ -1,0 +1,5 @@
+[
+  "Podrías cortar con `split(\"&\")` y `split(\"=\")`, pero tendrías que decodificar `%20`, `+`, `%C3%B1`... a mano. El navegador (y Node) ya traen un objeto que entiende query strings y se encarga de **codificar y decodificar**. Búscalo por su nombre: maneja los parámetros de búsqueda de una URL.",
+  "`new URLSearchParams(texto)` lee un query string y `new URLSearchParams(pares).toString()` lo arma a partir de un arreglo de pares `[clave, valor]`. Es iterable: `Object.fromEntries(params)` lo convierte en objeto. Quita el `?` inicial con `qs.replace(/^\\?/, \"\")` (`^` significa \"al inicio\"). Para crear, saca los pares con `Object.entries(obj)` y filtra los que valen `undefined` o `\"\"`.",
+  "Esqueleto:\n\n```js\nexport function parsearQuery(qs) {\n  const params = new URLSearchParams(/* qs sin el ? inicial */);\n  return /* conviértelo en objeto */;\n}\n\nexport function crearQuery(obj) {\n  const pares = Object.entries(obj).filter(([, valor]) => /* ni undefined ni \"\" */);\n  return new URLSearchParams(pares)./* a texto */;\n}\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Igual que en debounce, devuelves **otra función** que recuerda algo entre llamadas. Aquí no necesitas `setTimeout`: lo que tienes que recordar es **cuándo fue la última vez que ejecutaste `fn`**.",
+  "Guarda en un closure una variable `ultimaVez` (empieza en 0). En cada llamada, toma `Date.now()` y compara: si `ahora - ultimaVez >= ms`, actualizas `ultimaVez` y ejecutas `fn.apply(this, args)`. Si no, no haces nada.",
+  "Esqueleto:\n\n```js\nexport function throttle(fn, ms) {\n  let ultimaVez = 0;\n\n  return function (...args) {\n    const ahora = Date.now();\n    if (/* ¿ya pasaron ms desde ultimaVez? */) {\n      /* actualiza ultimaVez y ejecuta fn con this y args */\n    }\n  };\n}\n```"
+]

@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-002",
+  "titulo": "Implementa throttle",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 2,
+  "tags": ["closures", "Date.now", "funciones de orden superior", "rendimiento"],
+  "origen": "definitivo/03-retos/02-javascript/02"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-008",
+  "titulo": "Aplanar un arreglo anidado",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 2,
+  "tags": ["arrays", "recursión", "reduce", "flat"],
+  "origen": "definitivo/03-retos/02-javascript/08"
+}

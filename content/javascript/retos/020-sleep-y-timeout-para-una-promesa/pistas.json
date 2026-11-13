@@ -1,0 +1,5 @@
+[
+  "`sleep` es una promesa que envuelve un `setTimeout`. Para `conTimeout`, imagina una **carrera** entre dos promesas: la original y una \"alarma\" que se rechaza cuando se acaba el tiempo. La que termine primero decide el resultado. ¿Qué método de `Promise` hace exactamente eso?",
+  "Crea la alarma con `new Promise((_, rechazar) => { id = setTimeout(() => rechazar(new Error(\"Tiempo agotado\")), ms); })` y guarda el `id` en una variable de afuera. Haz la carrera con `Promise.race([promesa, alarma])`. Para limpiar pase lo que pase, encadena `.finally(() => clearTimeout(id))`: `finally` se ejecuta tanto si se cumple como si se rechaza, y no cambia el resultado.",
+  "Esqueleto:\n\n```js\nexport function sleep(ms) {\n  return new Promise((resolver) => /* programa resolver para dentro de ms */);\n}\n\nexport function conTimeout(promesa, ms) {\n  let id;\n  const limite = new Promise((_, rechazar) => {\n    id = setTimeout(/* rechaza con new Error(\"Tiempo agotado\") */, ms);\n  });\n  return Promise./* carrera */([promesa, limite]).finally(/* limpia el temporizador */);\n}\n```"
+]

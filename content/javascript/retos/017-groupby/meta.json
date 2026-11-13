@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-017",
+  "titulo": "groupBy",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 2,
+  "tags": ["arrays", "objetos", "reduce", "agrupar"],
+  "origen": "definitivo/03-retos/02-javascript/17"
+}

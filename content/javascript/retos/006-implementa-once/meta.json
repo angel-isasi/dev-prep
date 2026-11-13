@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-006",
+  "titulo": "Implementa once",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 1,
+  "tags": ["closures", "funciones de orden superior", "inicialización"],
+  "origen": "definitivo/03-retos/02-javascript/06"
+}

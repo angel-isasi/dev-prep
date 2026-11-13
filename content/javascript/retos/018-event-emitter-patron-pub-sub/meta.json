@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-018",
+  "titulo": "Event emitter (patrón pub/sub)",
+  "tipo": "funcion",
+  "tema": "clases",
+  "nivel": 2,
+  "tags": ["clases", "eventos", "pub/sub", "callbacks", "closures"],
+  "origen": "definitivo/03-retos/02-javascript/18"
+}

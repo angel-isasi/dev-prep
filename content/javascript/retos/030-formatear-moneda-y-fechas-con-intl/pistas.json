@@ -1,0 +1,5 @@
+[
+  "No armes el texto a mano: JavaScript trae un objeto global, `Intl`, que ya conoce las reglas de formato de cada país. Se usa en dos pasos: primero creas un **formateador** con el idioma y las opciones, y luego le pasas el valor a su método `format`.",
+  "Para el dinero: `new Intl.NumberFormat(\"es-PE\", { style: \"currency\", currency: \"PEN\" })`. Para la fecha: `new Intl.DateTimeFormat(\"es-PE\", { ... })` con las opciones `day: \"numeric\"`, `month: \"long\"`, `year: \"numeric\"` y `timeZone: \"America/Lima\"`. El texto ISO se convierte en fecha con `new Date(iso)`.",
+  "Esqueleto:\n\n```js\nexport function soles(monto) {\n  const formato = new Intl.NumberFormat(\"es-PE\", { /* estilo moneda, moneda PEN */ });\n  return formato.format(monto);\n}\n\nexport function fechaLarga(iso) {\n  const formato = new Intl.DateTimeFormat(\"es-PE\", {\n    /* día numérico, mes largo, año numérico, zona horaria de Lima */\n  });\n  return formato.format(/* convierte iso en Date */);\n}\n```"
+]

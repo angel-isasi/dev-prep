@@ -1,0 +1,5 @@
+[
+  "Recorre los elementos uno por uno y hazte una sola pregunta: **¿es un arreglo o no?** Si no lo es, va directo al resultado. Si lo es, tiene sus propios elementos que hay que aplanar... y para eso ya tienes una función.",
+  "`Array.isArray(x)` te dice si algo es un arreglo (no uses `typeof`, que da `\"object\"`). Cuando lo sea, llama a `aplanar(x)` (recursión) y agrega todos sus elementos al resultado con `push(...aplanar(x))` o con `concat`. Puedes hacerlo con un `for...of` o con `reduce`.",
+  "Esqueleto:\n\n```js\nexport function aplanar(arr) {\n  const resultado = [];\n  for (const elemento of arr) {\n    if (/* ¿es un arreglo? */) {\n      resultado.push(/* todos los elementos de ese arreglo ya aplanado */);\n    } else {\n      resultado.push(elemento);\n    }\n  }\n  return resultado;\n}\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Las cuatro funciones se resuelven con métodos que ya trae `Promise`. Hazte dos preguntas por cada una: **¿espero a todas o me basta con una?** y **¿qué pasa si alguna falla?**",
+  "Relaciónalas: esperar a todas y fallar si una falla es `Promise.all`; esperar a todas sin fallar nunca es `Promise.allSettled`; la primera en terminar, bien o mal, es `Promise.race`; la primera que sale bien es `Promise.any`. Ojo: `allSettled` no devuelve textos sino objetos como `{ status: \"fulfilled\", value: \"a\" }`; tendrás que quedarte solo con `status`.",
+  "Esqueleto:\n\n```js\nexport function todasONada(promesas) {\n  return Promise./* ... */(promesas);\n}\n\nexport async function resumenDeEstados(promesas) {\n  const resultados = await Promise./* ... */(promesas);\n  return resultados.map((r) => /* solo el estado */);\n}\n\nexport function primeraEnTerminar(promesas) {\n  return Promise./* ... */(promesas);\n}\n\nexport function primeraExitosa(promesas) {\n  return Promise./* ... */(promesas);\n}\n```"
+]

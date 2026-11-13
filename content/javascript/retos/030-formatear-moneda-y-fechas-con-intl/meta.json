@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-030",
+  "titulo": "Formatear moneda y fechas con Intl",
+  "tipo": "funcion",
+  "tema": "strings",
+  "nivel": 2,
+  "tags": ["Intl", "NumberFormat", "DateTimeFormat", "zonas horarias", "internacionalización"],
+  "origen": "definitivo/03-retos/02-javascript/30"
+}

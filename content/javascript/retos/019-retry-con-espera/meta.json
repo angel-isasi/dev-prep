@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-019",
+  "titulo": "retry con espera",
+  "tipo": "funcion",
+  "tema": "asincronia",
+  "nivel": 3,
+  "tags": ["async/await", "try/catch", "reintentos", "backoff exponencial", "setTimeout"],
+  "origen": "definitivo/03-retos/02-javascript/19"
+}

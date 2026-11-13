@@ -1,0 +1,9 @@
+{
+  "id": "js-reto-021",
+  "titulo": "Obtener un valor por ruta (get)",
+  "tipo": "funcion",
+  "tema": "objetos",
+  "nivel": 2,
+  "tags": ["objetos", "strings", "expresiones regulares", "optional chaining"],
+  "origen": "definitivo/03-retos/02-javascript/21"
+}
