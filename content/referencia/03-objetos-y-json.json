@@ -1,0 +1,263 @@
+{
+  "categoria": "Objetos y JSON",
+  "entradas": [
+    {
+      "id": "obj-keys",
+      "nombre": "Object.keys()",
+      "firma": "Object.keys(obj)",
+      "descripcion": "Devuelve un arreglo con los nombres de las propiedades propias del objeto.",
+      "ejemplo": "const p = { nombre: \"Ana\", edad: 20 };\nObject.keys(p); // [\"nombre\", \"edad\"]\nObject.keys(p).length; // 2\np.length; // undefined\nObject.keys({}).length === 0; // true",
+      "devuelve": "Un arreglo de strings.",
+      "errorTipico": "Usar `p.length` para contar propiedades: los objetos no tienen `length`. Usa `Object.keys(p).length`.",
+      "tags": [
+        "claves",
+        "propiedades",
+        "contar",
+        "objeto vacío",
+        "recorrer"
+      ]
+    },
+    {
+      "id": "obj-values",
+      "nombre": "Object.values()",
+      "firma": "Object.values(obj)",
+      "descripcion": "Devuelve un arreglo con los valores de las propiedades propias del objeto.",
+      "ejemplo": "const notas = { mate: 15, fisica: 12 };\nObject.values(notas); // [15, 12]\nObject.values(notas).reduce((a, b) => a + b, 0); // 27\nObject.values({ b: \"b\", 2: \"dos\", 1: \"uno\" }); // [\"uno\", \"dos\", \"b\"]",
+      "devuelve": "Un arreglo con los valores.",
+      "errorTipico": "Confiar en el orden de inserción cuando hay claves numéricas: esas van primero y ordenadas de menor a mayor.",
+      "tags": [
+        "valores",
+        "sumar",
+        "recorrer",
+        "promedio"
+      ]
+    },
+    {
+      "id": "obj-entries",
+      "nombre": "Object.entries()",
+      "firma": "Object.entries(obj)",
+      "descripcion": "Devuelve un arreglo de pares `[clave, valor]`. Permite usar `map`, `filter` y `for...of` sobre un objeto.",
+      "ejemplo": "const precios = { pan: 1, leche: 4 };\nObject.entries(precios); // [[\"pan\", 1], [\"leche\", 4]]\nObject.entries(precios).filter(([, v]) => v > 2); // [[\"leche\", 4]]\nfor (const [k, v] of Object.entries(precios)) console.log(k, v); // pan 1, luego leche 4",
+      "devuelve": "Un arreglo de pares `[clave, valor]`.",
+      "errorTipico": "Escribir `.map((k, v) => ...)`: el callback recibe un solo par, así que `v` sería el índice. Desestructura: `.map(([k, v]) => ...)`.",
+      "tags": [
+        "recorrer",
+        "pares",
+        "clave valor",
+        "iterar objeto",
+        "convertir a arreglo"
+      ]
+    },
+    {
+      "id": "obj-fromentries",
+      "nombre": "Object.fromEntries()",
+      "firma": "Object.fromEntries(pares)",
+      "descripcion": "Hace lo contrario de `Object.entries`: convierte un arreglo de pares `[clave, valor]` (o un Map) en un objeto.",
+      "ejemplo": "Object.fromEntries([[\"a\", 1], [\"b\", 2]]); // { a: 1, b: 2 }\nconst precios = { pan: 1, leche: 4 };\nObject.fromEntries(Object.entries(precios).map(([k, v]) => [k, v * 2])); // { pan: 2, leche: 8 }\nObject.fromEntries(new Map([[\"x\", 1]])); // { x: 1 }",
+      "devuelve": "Un objeto nuevo.",
+      "errorTipico": "Pasarle un arreglo plano como `[\"a\", 1]`: necesita un arreglo de pares, `[[\"a\", 1]]`.",
+      "tags": [
+        "crear objeto",
+        "convertir",
+        "transformar objeto",
+        "pares",
+        "map a objeto"
+      ]
+    },
+    {
+      "id": "obj-assign",
+      "nombre": "Object.assign()",
+      "firma": "Object.assign(destino, ...fuentes)",
+      "descripcion": "Copia las propiedades de las fuentes al objeto destino. Modifica el destino.",
+      "ejemplo": "const destino = { a: 1 };\nObject.assign(destino, { b: 2 }, { a: 9 }); // { a: 9, b: 2 }\ndestino; // { a: 9, b: 2 } (cambió)\nconst copia = Object.assign({}, destino);\ncopia === destino; // false",
+      "devuelve": "El mismo objeto destino, modificado.",
+      "errorTipico": "Pasar el objeto original como primer argumento cuando querías una copia: lo modifica. Pon `{}` primero o usa spread `{ ...obj }`.",
+      "tags": [
+        "copiar",
+        "fusionar",
+        "combinar",
+        "mezclar",
+        "mutar"
+      ]
+    },
+    {
+      "id": "obj-freeze",
+      "nombre": "Object.freeze()",
+      "firma": "Object.freeze(obj)",
+      "descripcion": "Congela el objeto: no se pueden agregar, borrar ni cambiar sus propiedades. Solo afecta al primer nivel.",
+      "ejemplo": "const config = Object.freeze({ tema: \"oscuro\", extra: { x: 1 } });\nconfig.tema = \"claro\";\nconfig.tema; // \"oscuro\" (no cambió)\nconfig.extra.x = 2;\nconfig.extra.x; // 2 (lo interno sí cambia)",
+      "devuelve": "El mismo objeto, congelado.",
+      "errorTipico": "Creer que congela en profundidad: los objetos internos siguen siendo editables. Además, fuera de modo estricto el cambio falla en silencio, sin error.",
+      "tags": [
+        "congelar",
+        "inmutable",
+        "constante",
+        "proteger"
+      ]
+    },
+    {
+      "id": "obj-spread",
+      "nombre": "Spread de objetos { ...obj }",
+      "firma": "{ ...obj, clave: valor }",
+      "descripcion": "Copia las propiedades de un objeto dentro de otro nuevo. Si una clave se repite, gana la última.",
+      "ejemplo": "const base = { a: 1, b: 2 };\n({ ...base, b: 3 }); // { a: 1, b: 3 }\n({ b: 3, ...base }); // { a: 1, b: 2 }\nconst user = { dir: { ciudad: \"Lima\" } };\nconst copia = { ...user }; copia.dir.ciudad = \"Cusco\";\nuser.dir.ciudad; // \"Cusco\" (copia superficial)",
+      "devuelve": "Un objeto nuevo.",
+      "errorTipico": "Olvidar que la copia es superficial: los objetos internos se comparten. En React, para cambiar algo anidado copia también ese nivel: `{ ...user, dir: { ...user.dir, ciudad: \"Cusco\" } }`.",
+      "tags": [
+        "copiar",
+        "combinar",
+        "actualizar",
+        "clonar",
+        "react",
+        "estado",
+        "tres puntos"
+      ]
+    },
+    {
+      "id": "obj-destructuring",
+      "nombre": "Destructuring de objetos",
+      "firma": "const { a, b: alias, c = defecto, ...resto } = obj",
+      "descripcion": "Saca propiedades de un objeto y las guarda en variables con el mismo nombre (o con otro, usando `:`).",
+      "ejemplo": "const user = { nombre: \"Ana\", edad: 20, dir: { ciudad: \"Lima\" } };\nconst { nombre, edad } = user; // nombre = \"Ana\", edad = 20\nconst { nombre: n, rol = \"alumno\" } = user; // n = \"Ana\", rol = \"alumno\"\nconst { dir: { ciudad } } = user; // ciudad = \"Lima\"\nconst { dir, ...resto } = user; // resto = { nombre: \"Ana\", edad: 20 }",
+      "devuelve": "Nada: crea variables.",
+      "errorTipico": "Desestructurar algo que puede ser `undefined`: `const { a } = undefined` lanza TypeError. En parámetros pon un valor por defecto: `function f({ a } = {})`.",
+      "tags": [
+        "desestructurar",
+        "extraer",
+        "props",
+        "variables",
+        "alias",
+        "react"
+      ]
+    },
+    {
+      "id": "obj-in",
+      "nombre": "Operador in",
+      "firma": "\"clave\" in obj",
+      "descripcion": "Indica si una propiedad existe en el objeto, aunque su valor sea `undefined`. También mira las propiedades heredadas.",
+      "ejemplo": "const p = { nombre: \"Ana\", apodo: undefined };\n\"apodo\" in p; // true\np.apodo !== undefined; // false\n\"toString\" in p; // true (heredada)\n2 in [5, 6, 7]; // true (índice, no valor)",
+      "devuelve": "`true` o `false`.",
+      "errorTipico": "Usarlo en arreglos para buscar un valor: `7 in [5, 6, 7]` es `false` porque busca índices. Para valores usa `includes`.",
+      "tags": [
+        "existe",
+        "propiedad",
+        "clave",
+        "comprobar",
+        "tiene"
+      ]
+    },
+    {
+      "id": "obj-hasown",
+      "nombre": "Object.hasOwn()",
+      "firma": "Object.hasOwn(obj, \"clave\")",
+      "descripcion": "Indica si el objeto tiene esa propiedad como propia (no heredada). Es la forma moderna de `hasOwnProperty`.",
+      "ejemplo": "const p = { stock: 0 };\nObject.hasOwn(p, \"stock\"); // true\nObject.hasOwn(p, \"toString\"); // false\nBoolean(p.stock); // false\nif (p.stock) console.log(\"existe\"); // no imprime nada",
+      "devuelve": "`true` o `false`.",
+      "errorTipico": "Comprobar si existe con `if (p.stock)`: falla cuando el valor es 0, `\"\"` o `false`. Usa `Object.hasOwn` o `in`.",
+      "tags": [
+        "existe",
+        "propiedad",
+        "comprobar",
+        "tiene",
+        "clave"
+      ]
+    },
+    {
+      "id": "obj-optional-chaining",
+      "nombre": "Optional chaining ?.",
+      "firma": "obj?.prop, obj?.[clave], fn?.()",
+      "descripcion": "Accede a una propiedad solo si lo anterior no es `null` ni `undefined`; si lo es, devuelve `undefined` en vez de lanzar un error.",
+      "ejemplo": "const user = { dir: { ciudad: \"Lima\" } };\nuser.dir?.ciudad; // \"Lima\"\nuser.trabajo?.empresa; // undefined\nuser.trabajo.empresa; // TypeError\nuser.saludar?.(); // undefined",
+      "devuelve": "El valor de la propiedad, o `undefined`.",
+      "errorTipico": "Ponerlo en todas partes: oculta errores reales de datos. Tampoco sirve para asignar: `user?.x = 1` es un error de sintaxis.",
+      "tags": [
+        "acceso seguro",
+        "null",
+        "undefined",
+        "evitar error",
+        "api",
+        "anidado"
+      ]
+    },
+    {
+      "id": "obj-nullish",
+      "nombre": "Nullish coalescing ??",
+      "firma": "valor ?? porDefecto",
+      "descripcion": "Devuelve el lado derecho solo si el izquierdo es `null` o `undefined`. A diferencia de `||`, respeta 0, `\"\"` y `false`.",
+      "ejemplo": "0 ?? 10; // 0\n0 || 10; // 10\nnull ?? 10; // 10\n\"\" ?? \"vacío\"; // \"\"\nundefined ?? \"anónimo\"; // \"anónimo\"",
+      "devuelve": "El valor izquierdo, o el derecho si el izquierdo es `null`/`undefined`.",
+      "errorTipico": "Usar `||` para valores por defecto cuando 0 o `\"\"` son válidos: `cantidad || 1` convierte un 0 real en 1.",
+      "tags": [
+        "valor por defecto",
+        "null",
+        "undefined",
+        "fallback",
+        "defecto"
+      ]
+    },
+    {
+      "id": "obj-structuredclone",
+      "nombre": "structuredClone()",
+      "firma": "structuredClone(valor)",
+      "descripcion": "Hace una copia profunda: copia también los objetos y arreglos internos. Conserva fechas, Map y Set.",
+      "ejemplo": "const original = { cursos: [\"JS\"], fecha: new Date(0) };\nconst copia = structuredClone(original);\ncopia.cursos.push(\"React\");\noriginal.cursos; // [\"JS\"] (intacto)\ncopia.fecha instanceof Date; // true\nstructuredClone({ f: () => 1 }); // DataCloneError",
+      "devuelve": "Una copia profunda nueva.",
+      "errorTipico": "Intentar clonar objetos con funciones: lanza DataCloneError. Y usar `JSON.parse(JSON.stringify(x))` como copia: pierde fechas, `undefined` y funciones.",
+      "tags": [
+        "copiar",
+        "clonar",
+        "copia profunda",
+        "duplicar"
+      ]
+    },
+    {
+      "id": "obj-json-stringify",
+      "nombre": "JSON.stringify()",
+      "firma": "JSON.stringify(valor, reemplazo?, espacios?)",
+      "descripcion": "Convierte un valor a texto JSON. Sirve para guardar en localStorage o enviar a una API.",
+      "ejemplo": "JSON.stringify({ a: 1, b: \"x\" }); // '{\"a\":1,\"b\":\"x\"}'\nJSON.stringify([1, \"a\"]); // '[1,\"a\"]'\nJSON.stringify({ a: undefined, f() {}, d: new Date(0) }); // '{\"d\":\"1970-01-01T00:00:00.000Z\"}'\nJSON.stringify({ a: 1 }, null, 2); // con saltos de línea y 2 espacios de sangría",
+      "devuelve": "Un string.",
+      "errorTipico": "Guardar un objeto en localStorage sin `stringify`: se guarda `\"[object Object]\"`. Además omite `undefined` y funciones, y las fechas se vuelven texto.",
+      "tags": [
+        "convertir a texto",
+        "serializar",
+        "guardar",
+        "localStorage",
+        "enviar",
+        "api"
+      ]
+    },
+    {
+      "id": "obj-json-parse",
+      "nombre": "JSON.parse()",
+      "firma": "JSON.parse(texto)",
+      "descripcion": "Convierte un texto JSON en un valor de JavaScript (objeto, arreglo, número...). Lanza error si el texto no es JSON válido.",
+      "ejemplo": "const texto = '{\"nombre\":\"Ana\",\"edad\":20}';\nJSON.parse(texto).edad; // 20\nJSON.parse(\"[1, 2]\"); // [1, 2]\nJSON.parse(\"{nombre: 'Ana'}\"); // SyntaxError\nJSON.parse(JSON.stringify({ d: new Date(0) })).d; // \"1970-01-01T00:00:00.000Z\"",
+      "devuelve": "El valor reconstruido.",
+      "errorTipico": "Parsear sin `try/catch` datos que pueden venir mal (comillas simples, claves sin comillas, coma al final). Y esperar fechas: vuelven como string.",
+      "tags": [
+        "convertir",
+        "leer",
+        "deserializar",
+        "localStorage",
+        "api",
+        "texto a objeto"
+      ]
+    },
+    {
+      "id": "obj-delete",
+      "nombre": "Operador delete",
+      "firma": "delete obj.prop",
+      "descripcion": "Elimina una propiedad de un objeto. Modifica el original.",
+      "ejemplo": "const p = { a: 1, b: 2 };\ndelete p.a; // true\np; // { b: 2 }\nconst arr = [1, 2, 3];\ndelete arr[1];\narr.length; // 3 (queda un hueco)",
+      "devuelve": "`true` (casi siempre, aunque la propiedad no existiera).",
+      "errorTipico": "Usarlo en arreglos: deja un hueco y `length` no cambia, usa `splice` o `filter`. En React no lo uses sobre el estado: crea una copia sin la clave con `const { a, ...sinA } = obj`.",
+      "tags": [
+        "eliminar",
+        "borrar",
+        "quitar propiedad",
+        "mutar"
+      ]
+    }
+  ]
+}

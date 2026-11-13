@@ -1,0 +1,351 @@
+{
+  "categoria": "Strings",
+  "entradas": [
+    {
+      "id": "string-length",
+      "nombre": "String.prototype.length",
+      "firma": "str.length",
+      "descripcion": "Cantidad de caracteres del string. Es una propiedad, no una función.",
+      "ejemplo": "\"hola\".length; // 4\n\"\".length; // 0\n\"  \".length; // 2\n\"hola\".length(); // TypeError",
+      "devuelve": "Un número entero.",
+      "errorTipico": "Escribir `length()` con paréntesis: lanza TypeError porque es una propiedad.",
+      "tags": [
+        "tamaño",
+        "longitud",
+        "contar caracteres",
+        "largo"
+      ]
+    },
+    {
+      "id": "string-at",
+      "nombre": "String.prototype.at() y charAt()",
+      "firma": "str.at(indice)",
+      "descripcion": "Devuelven el carácter en una posición. `at` acepta índices negativos (`-1` es el último).",
+      "ejemplo": "const s = \"hola\";\ns.at(-1); // \"a\"\ns[0]; // \"h\"\ns.charAt(10); // \"\"\ns[10]; // undefined",
+      "devuelve": "Un string de un carácter (`at` y `[i]` devuelven `undefined` fuera de rango; `charAt` devuelve `\"\"`).",
+      "errorTipico": "Intentar cambiar una letra con `s[0] = \"H\"`: los strings son inmutables y no cambia nada. Crea uno nuevo: `\"H\" + s.slice(1)`.",
+      "tags": [
+        "carácter",
+        "letra",
+        "posición",
+        "último",
+        "índice"
+      ]
+    },
+    {
+      "id": "string-includes",
+      "nombre": "String.prototype.includes()",
+      "firma": "str.includes(texto, desde?)",
+      "descripcion": "Indica si el string contiene el texto buscado. Distingue mayúsculas de minúsculas.",
+      "ejemplo": "\"JavaScript\".includes(\"Script\"); // true\n\"JavaScript\".includes(\"script\"); // false\n\"JavaScript\".toLowerCase().includes(\"script\"); // true",
+      "devuelve": "`true` o `false`.",
+      "errorTipico": "Olvidar que distingue mayúsculas: en un buscador convierte ambos lados con `toLowerCase()` antes de comparar.",
+      "tags": [
+        "buscar",
+        "contiene",
+        "buscador",
+        "filtrar texto"
+      ]
+    },
+    {
+      "id": "string-startswith",
+      "nombre": "String.prototype.startsWith() y endsWith()",
+      "firma": "str.startsWith(texto, posicion?)",
+      "descripcion": "Indican si el string empieza (`startsWith`) o termina (`endsWith`) con el texto dado.",
+      "ejemplo": "const archivo = \"foto.png\";\narchivo.endsWith(\".png\"); // true\narchivo.startsWith(\"foto\"); // true\narchivo.startsWith(\"png\", 5); // true\narchivo.endsWith(\".PNG\"); // false",
+      "devuelve": "`true` o `false`.",
+      "errorTipico": "Olvidar que distinguen mayúsculas: `\"FOTO.PNG\".endsWith(\".png\")` es `false`. Normaliza con `toLowerCase()`.",
+      "tags": [
+        "empieza",
+        "termina",
+        "prefijo",
+        "sufijo",
+        "extensión"
+      ]
+    },
+    {
+      "id": "string-indexof",
+      "nombre": "String.prototype.indexOf() y lastIndexOf()",
+      "firma": "str.indexOf(texto, desde?)",
+      "descripcion": "Devuelve la posición donde aparece el texto por primera vez (`lastIndexOf`: la última), o `-1` si no está.",
+      "ejemplo": "const s = \"banana\";\ns.indexOf(\"an\"); // 1\ns.lastIndexOf(\"an\"); // 3\ns.indexOf(\"x\"); // -1",
+      "devuelve": "Un índice, o `-1`.",
+      "errorTipico": "Escribir `if (s.indexOf(\"b\"))`: si está al inicio devuelve 0, que es falsy. Para saber si existe usa `includes`.",
+      "tags": [
+        "buscar",
+        "posición",
+        "encontrar",
+        "índice"
+      ]
+    },
+    {
+      "id": "string-slice",
+      "nombre": "String.prototype.slice()",
+      "firma": "str.slice(inicio?, fin?)",
+      "descripcion": "Devuelve una parte del string, desde `inicio` hasta antes de `fin`. Acepta índices negativos.",
+      "ejemplo": "const s = \"frontend\";\ns.slice(0, 5); // \"front\"\ns.slice(5); // \"end\"\ns.slice(-3); // \"end\"\ns.slice(0, -3); // \"front\"",
+      "devuelve": "Un string nuevo.",
+      "errorTipico": "Pensar que `fin` se incluye: `s.slice(0, 5)` toma las posiciones 0 a 4.",
+      "tags": [
+        "cortar",
+        "subcadena",
+        "recortar",
+        "extraer",
+        "parte"
+      ]
+    },
+    {
+      "id": "string-substring",
+      "nombre": "String.prototype.substring()",
+      "firma": "str.substring(inicio, fin?)",
+      "descripcion": "Parecido a `slice`, pero si `inicio` es mayor que `fin` los intercambia, y los negativos los trata como 0.",
+      "ejemplo": "const s = \"frontend\";\ns.substring(0, 5); // \"front\"\ns.substring(5, 0); // \"front\"\ns.substring(-3); // \"frontend\"\ns.slice(-3); // \"end\"",
+      "devuelve": "Un string nuevo.",
+      "errorTipico": "Pasarle negativos esperando contar desde el final: los convierte en 0 y te devuelve todo. En código nuevo prefiere `slice`.",
+      "tags": [
+        "cortar",
+        "subcadena",
+        "extraer",
+        "parte"
+      ]
+    },
+    {
+      "id": "string-split",
+      "nombre": "String.prototype.split()",
+      "firma": "str.split(separador, limite?)",
+      "descripcion": "Divide el string en un arreglo, cortando donde aparece el separador (texto o expresión regular).",
+      "ejemplo": "\"a,b,c\".split(\",\"); // [\"a\", \"b\", \"c\"]\n\"hola\".split(\"\"); // [\"h\", \"o\", \"l\", \"a\"]\n\"uno  dos\".split(\" \"); // [\"uno\", \"\", \"dos\"]\n\"  uno  dos \".trim().split(/\\s+/); // [\"uno\", \"dos\"]",
+      "devuelve": "Un arreglo de strings.",
+      "errorTipico": "Separar palabras por `\" \"` cuando hay espacios dobles: aparecen strings vacíos. Usa `trim()` y `split(/\\s+/)`.",
+      "tags": [
+        "dividir",
+        "separar",
+        "convertir a arreglo",
+        "palabras",
+        "partir"
+      ]
+    },
+    {
+      "id": "string-trim",
+      "nombre": "trim(), trimStart() y trimEnd()",
+      "firma": "str.trim()",
+      "descripcion": "Quitan los espacios (y saltos de línea) de ambos lados, del inicio o del final.",
+      "ejemplo": "\"  hola  \".trim(); // \"hola\"\n\"  hola  \".trimStart(); // \"hola  \"\n\"  hola  \".trimEnd(); // \"  hola\"\n\"   \".trim() === \"\"; // true",
+      "devuelve": "Un string nuevo.",
+      "errorTipico": "Validar un input sin `trim`: `\"   \"` tiene longitud 3 y pasa como \"no vacío\".",
+      "tags": [
+        "espacios",
+        "limpiar",
+        "validar",
+        "input",
+        "quitar espacios"
+      ]
+    },
+    {
+      "id": "string-case",
+      "nombre": "toUpperCase() y toLowerCase()",
+      "firma": "str.toUpperCase()",
+      "descripcion": "Devuelven el string en mayúsculas o en minúsculas. No modifican el original.",
+      "ejemplo": "\"Perú\".toUpperCase(); // \"PERÚ\"\nconst s = \"hola\";\ns.toUpperCase(); // \"HOLA\"\ns; // \"hola\" (intacto)\n\"ana\".at(0).toUpperCase() + \"ana\".slice(1); // \"Ana\"",
+      "devuelve": "Un string nuevo.",
+      "errorTipico": "Llamar `s.toUpperCase()` y esperar que `s` cambie: hay que guardar el resultado, `s = s.toUpperCase()`.",
+      "tags": [
+        "mayúsculas",
+        "minúsculas",
+        "capitalizar",
+        "comparar sin mayúsculas"
+      ]
+    },
+    {
+      "id": "string-replace",
+      "nombre": "String.prototype.replace()",
+      "firma": "str.replace(buscado, reemplazo)",
+      "descripcion": "Reemplaza la primera coincidencia. Con una expresión regular con flag `g` reemplaza todas.",
+      "ejemplo": "\"a-b-c\".replace(\"-\", \"+\"); // \"a+b-c\"\n\"a-b-c\".replace(/-/g, \"+\"); // \"a+b+c\"\n\"Hola Ana\".replace(/ana/i, \"Luis\"); // \"Hola Luis\"\n\"precio: 10\".replace(/\\d+/, (n) => n * 2); // \"precio: 20\"",
+      "devuelve": "Un string nuevo.",
+      "errorTipico": "Esperar que reemplace todas las apariciones con un texto: solo cambia la primera. Usa `replaceAll` o una regex con `g`.",
+      "tags": [
+        "reemplazar",
+        "cambiar",
+        "sustituir",
+        "regex"
+      ]
+    },
+    {
+      "id": "string-replaceall",
+      "nombre": "String.prototype.replaceAll()",
+      "firma": "str.replaceAll(buscado, reemplazo)",
+      "descripcion": "Reemplaza todas las apariciones del texto buscado.",
+      "ejemplo": "\"a-b-c\".replaceAll(\"-\", \"+\"); // \"a+b+c\"\n\"1.000.000\".replaceAll(\".\", \"\"); // \"1000000\"\n\"a-b\".replaceAll(/-/g, \"+\"); // \"a+b\"\n\"a-b\".replaceAll(/-/, \"+\"); // TypeError",
+      "devuelve": "Un string nuevo.",
+      "errorTipico": "Pasarle una regex sin el flag `g`: lanza TypeError.",
+      "tags": [
+        "reemplazar todo",
+        "cambiar",
+        "sustituir",
+        "quitar"
+      ]
+    },
+    {
+      "id": "string-repeat",
+      "nombre": "String.prototype.repeat()",
+      "firma": "str.repeat(veces)",
+      "descripcion": "Devuelve el string repetido la cantidad de veces indicada.",
+      "ejemplo": "\"ab\".repeat(3); // \"ababab\"\n\"-\".repeat(10); // \"----------\"\n\"*\".repeat(0); // \"\"\n\"x\".repeat(-1); // RangeError",
+      "devuelve": "Un string nuevo.",
+      "errorTipico": "Pasarle un número negativo o `Infinity`: lanza RangeError. Útil para dibujar pirámides o barras, cuida que `veces` sea entero positivo.",
+      "tags": [
+        "repetir",
+        "duplicar",
+        "patrón",
+        "pirámide",
+        "línea"
+      ]
+    },
+    {
+      "id": "string-pad",
+      "nombre": "padStart() y padEnd()",
+      "firma": "str.padStart(largo, relleno?)",
+      "descripcion": "Rellenan el string al inicio o al final hasta llegar a un largo. Si ya es más largo, no lo cortan.",
+      "ejemplo": "\"7\".padStart(3, \"0\"); // \"007\"\nString(5).padStart(2, \"0\") + \":\" + String(3).padStart(2, \"0\"); // \"05:03\"\n\"abc\".padEnd(6, \".\"); // \"abc...\"\n\"12345\".padStart(3, \"0\"); // \"12345\"",
+      "devuelve": "Un string nuevo.",
+      "errorTipico": "Llamarlo sobre un número: `(5).padStart` no existe. Conviértelo antes con `String(5)`.",
+      "tags": [
+        "rellenar",
+        "ceros a la izquierda",
+        "formato",
+        "hora",
+        "alinear"
+      ]
+    },
+    {
+      "id": "string-normalize",
+      "nombre": "normalize(\"NFD\") para quitar tildes",
+      "firma": "str.normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\")",
+      "descripcion": "`normalize(\"NFD\")` separa cada letra de su tilde; luego el `replace` borra las tildes sueltas. Sirve para buscadores que ignoran tildes.",
+      "ejemplo": "\"é\".length; // 1\n\"é\".normalize(\"NFD\").length; // 2\n\"canción\".normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\"); // \"cancion\"\n\"Ñandú\".normalize(\"NFD\").replace(/[\\u0300-\\u036f]/g, \"\"); // \"Nandu\"",
+      "devuelve": "Un string nuevo.",
+      "errorTipico": "Hacer solo el `replace` sin `normalize`: la \"ó\" es un único carácter y no se borra. Ojo: también convierte la ñ en n.",
+      "tags": [
+        "tildes",
+        "acentos",
+        "quitar tildes",
+        "buscador",
+        "normalizar"
+      ]
+    },
+    {
+      "id": "string-localecompare",
+      "nombre": "String.prototype.localeCompare()",
+      "firma": "a.localeCompare(b, idioma?)",
+      "descripcion": "Compara dos strings según el idioma: respeta tildes y ñ. Ideal como comparador de `sort`.",
+      "ejemplo": "\"a\".localeCompare(\"b\"); // -1\n\"b\".localeCompare(\"a\"); // 1\n[\"Óscar\", \"ana\", \"Bruno\"].sort(); // [\"Bruno\", \"ana\", \"Óscar\"]\n[\"Óscar\", \"ana\", \"Bruno\"].sort((a, b) => a.localeCompare(b, \"es\")); // [\"ana\", \"Bruno\", \"Óscar\"]",
+      "devuelve": "Un número negativo (a va antes), 0 (iguales) o positivo (a va después).",
+      "errorTipico": "Ordenar textos con `sort()` sin comparador: pone mayúsculas antes que minúsculas y las tildes al final.",
+      "tags": [
+        "ordenar",
+        "alfabético",
+        "comparar",
+        "tildes",
+        "sort"
+      ]
+    },
+    {
+      "id": "string-template-literals",
+      "nombre": "Template literals (comillas invertidas)",
+      "firma": "`texto ${expresion}`",
+      "descripcion": "Strings con comillas invertidas que permiten insertar expresiones con `${}` y escribir en varias líneas.",
+      "ejemplo": "const nombre = \"Ana\";\n`Hola, ${nombre}!`; // \"Hola, Ana!\"\n`2 + 3 = ${2 + 3}`; // \"2 + 3 = 5\"\n`Tienes ${3 > 1 ? \"varios\" : \"uno\"}`; // \"Tienes varios\"\n\"Hola, ${nombre}\"; // \"Hola, ${nombre}\" (no interpola)",
+      "devuelve": "Un string.",
+      "errorTipico": "Usar comillas simples o dobles en vez de comillas invertidas: el `${nombre}` se imprime tal cual.",
+      "tags": [
+        "interpolar",
+        "concatenar",
+        "plantilla",
+        "backticks",
+        "insertar variable"
+      ]
+    },
+    {
+      "id": "string-conversion",
+      "nombre": "String() y toString()",
+      "firma": "String(valor)",
+      "descripcion": "Convierten un valor a texto. `String()` funciona con cualquier valor, incluidos `null` y `undefined`.",
+      "ejemplo": "String(42); // \"42\"\nString(null); // \"null\"\n(255).toString(16); // \"ff\"\n[1, 2].toString(); // \"1,2\"\nconst v = null;\nv.toString(); // TypeError",
+      "devuelve": "Un string.",
+      "errorTipico": "Llamar `.toString()` sobre `null` o `undefined`: lanza TypeError. `String(v)` nunca falla.",
+      "tags": [
+        "convertir",
+        "a texto",
+        "número a string",
+        "base",
+        "hexadecimal"
+      ]
+    },
+    {
+      "id": "string-coercion",
+      "nombre": "Concatenar con + y conversión automática",
+      "firma": "\"a\" + valor",
+      "descripcion": "Si uno de los lados de `+` es string, JavaScript concatena. Los demás operadores (`-`, `*`, `/`) convierten a número.",
+      "ejemplo": "\"5\" + 3; // \"53\"\n\"5\" - 3; // 2\n\"5\" * \"2\"; // 10\n1 + 2 + \"3\"; // \"33\"\n\"3\" + 1 + 2; // \"312\"",
+      "devuelve": "Un string si algún lado es string; si no, un número.",
+      "errorTipico": "Sumar valores de inputs sin convertirlos: `input.value` siempre es string y `\"5\" + \"3\"` da `\"53\"`. Usa `Number()` antes.",
+      "tags": [
+        "sumar",
+        "concatenar",
+        "coerción",
+        "input",
+        "convertir"
+      ]
+    },
+    {
+      "id": "string-match-test",
+      "nombre": "regex.test() y str.match()",
+      "firma": "/patron/.test(str)",
+      "descripcion": "`test` indica si el string cumple un patrón. `match` devuelve las coincidencias (con flag `g`, todas), o `null`.",
+      "ejemplo": "/^\\d+$/.test(\"123\"); // true\n/^\\d+$/.test(\"12a\"); // false\n\"tel: 987-654\".match(/\\d+/g); // [\"987\", \"654\"]\n\"abc\".match(/\\d+/g); // null",
+      "devuelve": "`test`: `true` o `false`. `match`: un arreglo o `null`.",
+      "errorTipico": "Hacer `str.match(...).length` sin verificar: si no hay coincidencias devuelve `null` y lanza TypeError. Usa `(str.match(re) ?? []).length`.",
+      "tags": [
+        "regex",
+        "validar",
+        "patrón",
+        "expresión regular",
+        "buscar números"
+      ]
+    },
+    {
+      "id": "string-iterar",
+      "nombre": "Recorrer e invertir strings",
+      "firma": "for (const letra of str)",
+      "descripcion": "Un string se puede recorrer letra por letra con `for...of` o convertir a arreglo con spread.",
+      "ejemplo": "[...\"hola\"]; // [\"h\", \"o\", \"l\", \"a\"]\n[...\"hola\"].reverse().join(\"\"); // \"aloh\"\nlet vocales = 0;\nfor (const c of \"murcielago\") if (\"aeiou\".includes(c)) vocales++;\nvocales; // 5",
+      "devuelve": "`for...of` no devuelve nada; el spread devuelve un arreglo de caracteres.",
+      "errorTipico": "Escribir `\"hola\".reverse()`: los strings no tienen `reverse`. Conviértelo a arreglo primero.",
+      "tags": [
+        "recorrer",
+        "invertir",
+        "palíndromo",
+        "letras",
+        "contar vocales",
+        "iterar"
+      ]
+    },
+    {
+      "id": "string-comparar",
+      "nombre": "Comparar strings",
+      "firma": "a === b, a < b",
+      "descripcion": "`===` compara exacto (distingue mayúsculas). `<` y `>` comparan carácter por carácter según su código.",
+      "ejemplo": "\"Hola\" === \"hola\"; // false\n\"Hola\".toLowerCase() === \"hola\"; // true\n\"a\" < \"b\"; // true\n\"Z\" < \"a\"; // true\n\"10\" < \"9\"; // true",
+      "devuelve": "`true` o `false`.",
+      "errorTipico": "Comparar números guardados como texto: `\"10\" < \"9\"` es `true` porque compara el \"1\" con el \"9\". Conviértelos a número antes.",
+      "tags": [
+        "comparar",
+        "igualdad",
+        "mayor",
+        "menor",
+        "ordenar"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "categoria": "Números y Math",
+  "entradas": [
+    {
+      "id": "num-number",
+      "nombre": "Number()",
+      "firma": "Number(valor)",
+      "descripcion": "Convierte un valor a número. Si el texto no es un número completo, devuelve `NaN`.",
+      "ejemplo": "Number(\"42\"); // 42\nNumber(\"12px\"); // NaN\nNumber(\"\"); // 0\nNumber(null); // 0\nNumber(true); // 1\n+\"3.5\"; // 3.5",
+      "devuelve": "Un número (o `NaN`).",
+      "errorTipico": "No saber que `\"\"` y `null` se convierten en 0: un input vacío pasa como 0. Valida antes que no esté vacío.",
+      "tags": [
+        "convertir",
+        "a número",
+        "string a número",
+        "input",
+        "parsear"
+      ]
+    },
+    {
+      "id": "num-parseint",
+      "nombre": "parseInt()",
+      "firma": "parseInt(texto, base)",
+      "descripcion": "Lee un entero desde el inicio del texto y se detiene en el primer carácter que no sea dígito.",
+      "ejemplo": "parseInt(\"42px\", 10); // 42\nparseInt(\"3.99\", 10); // 3\nparseInt(\"abc\", 10); // NaN\nparseInt(\"ff\", 16); // 255\n[\"1\", \"2\", \"3\"].map(parseInt); // [1, NaN, NaN]\n[\"1\", \"2\", \"3\"].map(Number); // [1, 2, 3]",
+      "devuelve": "Un número entero (o `NaN`).",
+      "errorTipico": "Pasarlo directo a `map`: recibe el índice como base y da `NaN`. Usa `.map(Number)` y pasa siempre la base 10.",
+      "tags": [
+        "convertir",
+        "entero",
+        "a número",
+        "quitar decimales",
+        "parsear"
+      ]
+    },
+    {
+      "id": "num-parsefloat",
+      "nombre": "parseFloat()",
+      "firma": "parseFloat(texto)",
+      "descripcion": "Lee un número con decimales desde el inicio del texto y se detiene donde deja de ser número.",
+      "ejemplo": "parseFloat(\"3.14abc\"); // 3.14\nparseFloat(\".5\"); // 0.5\nparseFloat(\"1,5\"); // 1\nparseFloat(\"1,5\".replace(\",\", \".\")); // 1.5",
+      "devuelve": "Un número (o `NaN`).",
+      "errorTipico": "Leer decimales escritos con coma (\"1,5\"): se corta en la coma y da 1. Reemplaza la coma por punto antes.",
+      "tags": [
+        "convertir",
+        "decimal",
+        "a número",
+        "parsear",
+        "precio"
+      ]
+    },
+    {
+      "id": "num-isinteger",
+      "nombre": "Number.isInteger()",
+      "firma": "Number.isInteger(valor)",
+      "descripcion": "Indica si un valor es un número entero. No convierte strings.",
+      "ejemplo": "Number.isInteger(5); // true\nNumber.isInteger(5.0); // true\nNumber.isInteger(5.5); // false\nNumber.isInteger(\"5\"); // false\nNumber.isInteger(Number(\"5\")); // true",
+      "devuelve": "`true` o `false`.",
+      "errorTipico": "Pasarle directamente el valor de un input: siempre es string, así que da `false`. Conviértelo antes con `Number()`.",
+      "tags": [
+        "entero",
+        "validar",
+        "comprobar",
+        "decimal"
+      ]
+    },
+    {
+      "id": "num-isnan",
+      "nombre": "Number.isNaN() vs isNaN()",
+      "firma": "Number.isNaN(valor)",
+      "descripcion": "`Number.isNaN` indica si el valor es exactamente `NaN`. El `isNaN` global primero convierte a número, por eso da `true` con cualquier texto.",
+      "ejemplo": "NaN === NaN; // false\nNumber.isNaN(NaN); // true\nisNaN(\"hola\"); // true\nNumber.isNaN(\"hola\"); // false\nNumber.isNaN(Number(\"hola\")); // true",
+      "devuelve": "`true` o `false`.",
+      "errorTipico": "Comparar `x === NaN`: siempre es `false`, porque NaN no es igual ni a sí mismo.",
+      "tags": [
+        "nan",
+        "validar",
+        "no es número",
+        "comprobar"
+      ]
+    },
+    {
+      "id": "num-tofixed",
+      "nombre": "Number.prototype.toFixed()",
+      "firma": "num.toFixed(decimales)",
+      "descripcion": "Redondea el número a cierta cantidad de decimales y lo devuelve como texto.",
+      "ejemplo": "(3.14159).toFixed(2); // \"3.14\"\n(2).toFixed(2); // \"2.00\"\n(3.14159).toFixed(2) + 1; // \"3.141\"\nNumber((3.14159).toFixed(2)) * 2; // 6.28\n(1.005).toFixed(2); // \"1.00\"",
+      "devuelve": "Un string.",
+      "errorTipico": "Olvidar que devuelve string: luego `+` concatena en vez de sumar. Y no esperar redondeo exacto: `1.005` en binario es un poco menos.",
+      "tags": [
+        "redondear",
+        "decimales",
+        "formato",
+        "precio",
+        "moneda"
+      ]
+    },
+    {
+      "id": "num-redondeo",
+      "nombre": "Math.round(), floor(), ceil() y trunc()",
+      "firma": "Math.round(num)",
+      "descripcion": "`round` redondea al más cercano, `floor` baja, `ceil` sube y `trunc` corta los decimales.",
+      "ejemplo": "Math.round(2.5); // 3\nMath.round(-2.5); // -2\nMath.floor(-2.5); // -3\nMath.ceil(2.1); // 3\nMath.trunc(-2.7); // -2\nMath.round(3.14159 * 100) / 100; // 3.14",
+      "devuelve": "Un número entero (o el número redondeado).",
+      "errorTipico": "Usar `floor` para quitar decimales a negativos: `Math.floor(-2.5)` da -3. Para solo cortar usa `trunc`.",
+      "tags": [
+        "redondear",
+        "decimales",
+        "entero",
+        "bajar",
+        "subir",
+        "cortar"
+      ]
+    },
+    {
+      "id": "num-max-min",
+      "nombre": "Math.max() y Math.min()",
+      "firma": "Math.max(...numeros)",
+      "descripcion": "Devuelven el mayor o el menor de los números que les pases como argumentos separados.",
+      "ejemplo": "Math.max(3, 8, 1); // 8\nconst notas = [12, 18, 9];\nMath.max(...notas); // 18\nMath.min(...notas); // 9\nMath.max(notas); // NaN\nMath.max(); // -Infinity",
+      "devuelve": "Un número.",
+      "errorTipico": "Pasar el arreglo sin spread (`Math.max(notas)`) da `NaN`. Con un arreglo vacío da `-Infinity`: revisa que tenga elementos.",
+      "tags": [
+        "mayor",
+        "menor",
+        "máximo",
+        "mínimo",
+        "spread"
+      ]
+    },
+    {
+      "id": "num-abs",
+      "nombre": "Math.abs()",
+      "firma": "Math.abs(num)",
+      "descripcion": "Devuelve el valor absoluto: el número sin signo.",
+      "ejemplo": "Math.abs(-7); // 7\nMath.abs(7); // 7\nMath.abs(3 - 10); // 7\nMath.abs(\"-5\"); // 5\nMath.abs(\"hola\"); // NaN",
+      "devuelve": "Un número positivo o 0 (o `NaN`).",
+      "errorTipico": "Calcular la diferencia entre dos valores con una resta simple y obtener negativos: usa `Math.abs(a - b)` cuando solo importa la distancia.",
+      "tags": [
+        "absoluto",
+        "diferencia",
+        "distancia",
+        "positivo",
+        "signo"
+      ]
+    },
+    {
+      "id": "num-random",
+      "nombre": "Math.random() y entero en un rango",
+      "firma": "Math.floor(Math.random() * (max - min + 1)) + min",
+      "descripcion": "`Math.random()` da un decimal entre 0 (incluido) y 1 (excluido). Con la fórmula obtienes un entero entre `min` y `max`, ambos incluidos.",
+      "ejemplo": "Math.random(); // un decimal como 0.7319..., siempre menor que 1\nconst entre = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;\nentre(1, 6); // un entero del 1 al 6, como un dado\nconst lista = [\"a\", \"b\", \"c\"];\nlista[Math.floor(Math.random() * lista.length)]; // un elemento al azar",
+      "devuelve": "Un número decimal en [0, 1).",
+      "errorTipico": "Usar `Math.round` en la fórmula: los extremos salen con la mitad de probabilidad. Y olvidar el `+ 1`, con lo que `max` nunca sale.",
+      "tags": [
+        "aleatorio",
+        "azar",
+        "random",
+        "dado",
+        "rango",
+        "elegir"
+      ]
+    },
+    {
+      "id": "num-modulo",
+      "nombre": "Operador % (resto)",
+      "firma": "a % b",
+      "descripcion": "Devuelve el resto de dividir `a` entre `b`. Sirve para saber si un número es par, para ciclos y para convertir unidades.",
+      "ejemplo": "10 % 3; // 1\n8 % 2 === 0; // true (es par)\n125 % 60; // 5\n-7 % 2; // -1\n-7 % 2 !== 0; // true (es impar)",
+      "devuelve": "Un número, con el mismo signo que `a`.",
+      "errorTipico": "Comprobar impares con `n % 2 === 1`: falla con negativos porque da -1. Usa `n % 2 !== 0`.",
+      "tags": [
+        "resto",
+        "módulo",
+        "par",
+        "impar",
+        "divisible",
+        "residuo"
+      ]
+    },
+    {
+      "id": "num-typeof",
+      "nombre": "Operador typeof",
+      "firma": "typeof valor",
+      "descripcion": "Devuelve un texto con el tipo del valor: \"number\", \"string\", \"boolean\", \"undefined\", \"object\", \"function\"...",
+      "ejemplo": "typeof 42; // \"number\"\ntypeof NaN; // \"number\"\ntypeof \"42\"; // \"string\"\ntypeof undefined; // \"undefined\"\ntypeof null; // \"object\"\ntypeof []; // \"object\"",
+      "devuelve": "Un string con el nombre del tipo.",
+      "errorTipico": "Fiarse de `typeof` para `null` y arreglos: ambos dan \"object\". Usa `x === null` y `Array.isArray(x)`.",
+      "tags": [
+        "tipo",
+        "comprobar",
+        "validar",
+        "tipo de dato"
+      ]
+    },
+    {
+      "id": "num-max-safe-integer",
+      "nombre": "Number.MAX_SAFE_INTEGER y BigInt",
+      "firma": "Number.MAX_SAFE_INTEGER",
+      "descripcion": "El entero más grande que JavaScript representa sin perder precisión (2^53 - 1). Para enteros más grandes existe `BigInt` (números con `n` al final).",
+      "ejemplo": "Number.MAX_SAFE_INTEGER; // 9007199254740991\n9007199254740992 === 9007199254740993; // true\nNumber.isSafeInteger(2 ** 53); // false\n12345678901234567890n + 1n; // 12345678901234567891n",
+      "devuelve": "El número 9007199254740991.",
+      "errorTipico": "Guardar como número un ID muy largo que viene de una API: pierde precisión y apunta a otro registro. Trátalo como string.",
+      "tags": [
+        "número grande",
+        "precisión",
+        "bigint",
+        "límite",
+        "entero"
+      ]
+    },
+    {
+      "id": "num-precision",
+      "nombre": "Precisión decimal: 0.1 + 0.2",
+      "firma": "Math.abs(a - b) < Number.EPSILON",
+      "descripcion": "Los decimales se guardan en binario y algunos no son exactos, por eso `0.1 + 0.2` no da justo 0.3.",
+      "ejemplo": "0.1 + 0.2; // 0.30000000000000004\n0.1 + 0.2 === 0.3; // false\nMath.abs(0.1 + 0.2 - 0.3) < Number.EPSILON; // true\n(0.1 + 0.2).toFixed(2); // \"0.30\"\n(10 + 20) / 100; // 0.3 (trabajando en céntimos)",
+      "devuelve": "No aplica: es un comportamiento del lenguaje.",
+      "errorTipico": "Comparar decimales con `===`. Para dinero trabaja en céntimos (enteros) y divide entre 100 solo al mostrar.",
+      "tags": [
+        "decimales",
+        "precisión",
+        "dinero",
+        "redondeo",
+        "comparar",
+        "flotante"
+      ]
+    }
+  ]
+}
