@@ -47,6 +47,7 @@ export function rutasEjercicios({ indice, progreso, workspace, corredor, vscode,
       totalPistas: pistas.length,
       preparado: workspace ? await workspace.existe(ej) : false,
       corriendo: corredor?.estaCorriendo(ej.id) ?? false,
+      resultado: corredor?.ultimoResultado(ej.id) ?? null,
       progreso: progreso?.deEjercicio(ej.id) ?? null,
     });
   });
@@ -54,6 +55,7 @@ export function rutasEjercicios({ indice, progreso, workspace, corredor, vscode,
   // Prepara workspace/<id>/, abre VS Code y corre los tests una primera vez.
   router.post("/:id/abrir", async (req, res) => {
     const ej = req.ejercicio;
+    corredor?.marcarManual(ej.id); // copiar archivos puede hacer que Vitest corra solo
     const { creado } = await workspace.preparar(ej);
     await progreso?.marcarAbierto(ej.id);
 

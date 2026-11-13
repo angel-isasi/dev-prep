@@ -14,4 +14,5 @@ export const config = {
   clienteDir: path.join(RAIZ, "client", "dist"),
   host: "127.0.0.1", // solo tu PC puede conectarse, nunca la red
   puerto: Number(process.env.DEVPREP_PUERTO ?? 4321),
+  abrirVSCode: process.env.DEVPREP_VSCODE !== "0", // 0 = no abrir (para pruebas automáticas)
 };

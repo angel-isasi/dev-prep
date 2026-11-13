@@ -4,7 +4,9 @@ import { mkdir } from "node:fs/promises";
 import { crearVitest, correrUnaVez } from "./vitest-comun.js";
 
 const MAX_LOGS = 200; // líneas de consola guardadas por corrida
-const VENTANA_MANUAL_MS = 5000; // si la corrida pedida no empieza en 5 s, se olvida
+// Una corrida que empieza hasta 2 s después de que la app la pidió (o de que la app
+// copió archivos) no cuenta como intento. Nadie guarda tan rápido tras hacer clic.
+const VENTANA_MANUAL_MS = 2000;
 
 /**
  * @param {object} opciones
@@ -22,6 +24,8 @@ export async function crearCorredor({ workspace, alEmpezar, alResultado }) {
   const corridaManual = new Set();
   /** id -> console.log de la corrida actual */
   const consolas = new Map();
+  /** id -> último resultado completo (para mostrarlo al volver a la página) */
+  const ultimos = new Map();
 
   const vitest = await crearVitest({
     raiz: workspace.raiz,
@@ -34,7 +38,6 @@ export async function crearCorredor({ workspace, alEmpezar, alResultado }) {
         corriendo.add(id);
         consolas.set(id, []);
         const pedido = pedidos.get(id);
-        pedidos.delete(id);
         if (pedido && Date.now() - pedido < VENTANA_MANUAL_MS) corridaManual.add(id);
         else corridaManual.delete(id);
       }
@@ -46,10 +49,13 @@ export async function crearCorredor({ workspace, alEmpezar, alResultado }) {
         const id = workspace.idDeArchivo(r.archivo);
         if (!id) continue;
         corriendo.delete(id);
+        // No se borra aquí: si al abrir corren dos corridas a la vez, la segunda
+        // también debe saber que fue manual. Cada corrida nueva lo decide al empezar.
         const esIntento = !corridaManual.has(id);
-        corridaManual.delete(id);
         const { archivo, ...resto } = r; // la ruta de disco no viaja al navegador
-        alResultado(id, { ...resto, consola: consolas.get(id) ?? [] }, { esIntento });
+        const resultado = { ...resto, consola: consolas.get(id) ?? [] };
+        ultimos.set(id, resultado);
+        alResultado(id, resultado, { esIntento });
       }
     },
 
@@ -65,10 +71,11 @@ export async function crearCorredor({ workspace, alEmpezar, alResultado }) {
 
   return {
     estaCorriendo: (id) => corriendo.has(id),
+    ultimoResultado: (id) => ultimos.get(id) ?? null,
 
     /**
-     * La próxima corrida de este ejercicio la provoca la app (p. ej. al reiniciar,
-     * que cambia el archivo y Vitest lo detecta solo): no cuenta como intento.
+     * Las corridas que empiecen en los próximos 2 s las provoca la app (p. ej. al
+     * reiniciar, que cambia el archivo y Vitest lo detecta solo): no cuentan como intento.
      */
     marcarManual(id) {
       pedidos.set(id, Date.now());

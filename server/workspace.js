@@ -1,6 +1,6 @@
 // Tu carpeta de trabajo: workspace/<id>/ con tu solucion.js, los tests y el enunciado.
 // Los originales de content/ nunca se tocan.
-import { access, copyFile, mkdir, readdir, rm } from "node:fs/promises";
+import { access, copyFile, mkdir, readdir, readFile, rm } from "node:fs/promises";
 import path from "node:path";
 import { sello } from "./fechas.js";
 
@@ -14,10 +14,16 @@ export function crearWorkspace({ workspaceDir }) {
   const carpetaDe = (ej) => path.join(workspaceDir, ej.id);
   const archivoDe = (ej) => path.join(carpetaDe(ej), ej.archivos.solucion);
 
+  /** Copia solo si el destino no existe o es distinto (así Vitest no corre de más). */
+  async function copiarSiCambio(origen, destino) {
+    const [a, b] = await Promise.all([readFile(origen, "utf8"), readFile(destino, "utf8").catch(() => null)]);
+    if (a !== b) await copyFile(origen, destino);
+  }
+
   /** Copia (o actualiza) los tests y el enunciado. Tu solución no se toca. */
   async function copiarApoyo(ej) {
-    await copyFile(path.join(ej.carpeta, ej.archivos.tests), path.join(carpetaDe(ej), ej.archivos.tests));
-    await copyFile(path.join(ej.carpeta, "enunciado.md"), path.join(carpetaDe(ej), "enunciado.md"));
+    await copiarSiCambio(path.join(ej.carpeta, ej.archivos.tests), path.join(carpetaDe(ej), ej.archivos.tests));
+    await copiarSiCambio(path.join(ej.carpeta, "enunciado.md"), path.join(carpetaDe(ej), "enunciado.md"));
   }
 
   return {
