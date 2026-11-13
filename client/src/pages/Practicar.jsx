@@ -24,6 +24,7 @@ export function Practicar() {
     tema: params.get("tema") ?? "",
     nivel: params.get("nivel") ?? "",
     estado: params.get("estado") ?? "",
+    coleccion: params.get("coleccion") ?? "",
   };
 
   useEffect(() => {
@@ -39,7 +40,17 @@ export function Practicar() {
     );
   });
 
-  const temas = useMemo(() => [...new Set((ejercicios ?? []).map((e) => e.tema))].sort(), [ejercicios]);
+  // Los temas que se ofrecen dependen de la colección elegida.
+  const temas = useMemo(
+    () =>
+      [
+        ...new Set(
+          (ejercicios ?? []).filter((e) => !filtros.coleccion || e.coleccion === filtros.coleccion).map((e) => e.tema),
+        ),
+      ].sort(),
+    [ejercicios, filtros.coleccion],
+  );
+  const colecciones = useMemo(() => [...new Set((ejercicios ?? []).map((e) => e.coleccion))], [ejercicios]);
 
   function cambiarFiltro(nombre, valor) {
     const nuevos = new URLSearchParams(params);
@@ -85,6 +96,18 @@ export function Practicar() {
           value={filtros.texto}
           onChange={(e) => cambiarFiltro("texto", e.target.value)}
         />
+        <select
+          aria-label="Colección"
+          value={filtros.coleccion}
+          onChange={(e) => cambiarFiltro("coleccion", e.target.value)}
+        >
+          <option value="">Todas las colecciones</option>
+          {colecciones.map((c) => (
+            <option key={c} value={c}>
+              {nombreColeccion(c)}
+            </option>
+          ))}
+        </select>
         <select aria-label="Tema" value={filtros.tema} onChange={(e) => cambiarFiltro("tema", e.target.value)}>
           <option value="">Todos los temas</option>
           {temas.map((t) => (

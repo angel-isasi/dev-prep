@@ -44,6 +44,11 @@ describe("filtrarEjercicios", () => {
     expect(ids(filtrarEjercicios(LISTA, { ...SIN_FILTROS, texto: "  buscador " }))).toEqual(["c"]);
   });
 
+  test("filtra por colección", () => {
+    const conColeccion = LISTA.map((e, i) => ({ ...e, coleccion: i < 2 ? "javascript/ejercicios" : "react/retos" }));
+    expect(ids(filtrarEjercicios(conColeccion, { ...SIN_FILTROS, coleccion: "react/retos" }))).toEqual(["c", "d"]);
+  });
+
   test("si nada coincide devuelve un arreglo vacío", () => {
     expect(filtrarEjercicios(LISTA, { ...SIN_FILTROS, texto: "xyz" })).toEqual([]);
   });
