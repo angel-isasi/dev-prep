@@ -1,0 +1,5 @@
+[
+  "Prueba primero qué devuelve `lista.map(fn)` cuando `fn` es `async`: un arreglo de **promesas**. Ya tienes la mitad del trabajo hecho y todas las llamadas ya empezaron. Lo que te falta es una sola promesa que espere a todas esas y te dé sus valores.",
+  "`Promise.all(arregloDePromesas)` recibe un arreglo de promesas y devuelve **una** promesa que se cumple con el arreglo de valores, en el mismo orden. Si alguna se rechaza, se rechaza con ese error. Además, `map` ya le pasa `(elemento, indice)` a tu función.",
+  "Esqueleto:\n\n```js\nexport function mapAsync(lista, fn) {\n  const promesas = /* aplica fn a cada elemento con map */;\n  return /* una promesa que espere a todas */;\n}\n```"
+]

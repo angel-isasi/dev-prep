@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-041",
+  "titulo": "Pila",
+  "tipo": "funcion",
+  "tema": "clases",
+  "nivel": 2,
+  "tags": ["clases", "estructuras de datos", "campos privados", "getters"],
+  "origen": "definitivo/01-ejercicios/01-javascript/41"
+}

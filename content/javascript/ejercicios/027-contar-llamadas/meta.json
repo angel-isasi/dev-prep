@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-027",
+  "titulo": "Contar llamadas",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 2,
+  "tags": ["funciones", "orden superior", "funciones como objetos", "wrapper", "closures"],
+  "origen": "definitivo/01-ejercicios/01-javascript/27"
+}

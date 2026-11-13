@@ -1,0 +1,5 @@
+[
+  "Lee la firma con calma: `componer(f, g)` devuelve una **función**, y esa función recibe `x`. O sea, `componer` debe tener un `return` de una función, igual que en la fábrica de multiplicadores.",
+  "Dentro de la función que devuelves, el resultado de una función es la entrada de la otra. Primero calcula `g(x)` y ese valor pásaselo a `f`. Se puede escribir todo anidado en una sola expresión.",
+  "Esqueleto:\n\n```js\nexport function componer(f, g) {\n  return (x) => /* aplica g a x, y al resultado aplícale f */;\n}\n```"
+]

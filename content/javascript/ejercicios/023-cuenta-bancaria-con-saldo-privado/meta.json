@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-023",
+  "titulo": "Cuenta bancaria con saldo privado",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 2,
+  "tags": ["closures", "encapsulamiento", "estado privado", "errores", "objetos"],
+  "origen": "definitivo/01-ejercicios/01-javascript/23"
+}

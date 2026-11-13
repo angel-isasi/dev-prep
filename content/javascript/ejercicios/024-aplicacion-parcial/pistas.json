@@ -1,0 +1,5 @@
+[
+  "`parcial` no ejecuta `fn` todavía: devuelve una función que la ejecutará después. Esa función devuelta tiene que acordarse de los argumentos fijos (closure) y juntarlos con los que le lleguen.",
+  "En la firma, `...fijos` ya junta en un array todos los argumentos después de `fn`. Devuelve una arrow function que reciba `(...resto)` y llame a `fn` esparciendo los dos arrays con spread: primero `fijos`, después `resto`.",
+  "Esqueleto:\n\n```js\nexport function parcial(fn, ...fijos) {\n  return (...resto) => fn(/* esparce fijos y luego resto */);\n}\n```"
+]

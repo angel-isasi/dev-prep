@@ -1,0 +1,5 @@
+[
+  "Fíjate que las tareas son **funciones**, no promesas: la tarea empieza recién cuando la llamas con `tarea()`. Eso te da el control: si no la llamas hasta que la anterior terminó, nunca habrá dos a la vez.",
+  "Usa un bucle `for...of` con `await` dentro: en cada vuelta, `await tarea()` pausa la función hasta que esa tarea termine, y recién entonces pasa a la siguiente vuelta. **No uses `forEach`**: no espera a los `await` de su callback.",
+  "Esqueleto:\n\n```js\nexport async function enSerie(tareas) {\n  const resultados = [];\n  for (const tarea of tareas) {\n    /* llama a la tarea, espérala y guarda su resultado */\n  }\n  return resultados;\n}\n```"
+]

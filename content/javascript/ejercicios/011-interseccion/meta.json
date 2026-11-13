@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-011",
+  "titulo": "Intersección",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 2,
+  "tags": ["arrays", "set", "filter", "sin-duplicados"],
+  "origen": "definitivo/01-ejercicios/01-javascript/11"
+}

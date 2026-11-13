@@ -1,0 +1,5 @@
+[
+  "Son dos problemas juntos: **quedarte con los de `a` que también están en `b`** (eso es filtrar) y **no repetir** (eso es quitar duplicados). ¿Hay alguna estructura de JavaScript que, por definición, no guarde valores repetidos?",
+  "Un `Set` guarda valores sin repetir: `new Set([1, 2, 2])` tiene `1` y `2`. Con `[...new Set(a)]` obtienes `a` sin duplicados, en su orden. Y `new Set(b).has(x)` te dice si `x` está en `b` sin recorrer el arreglo. Junta eso con `filter`.",
+  "Esqueleto:\n\n```js\nexport function interseccion(a, b) {\n  const enB = new Set(b);\n  const aSinRepetir = /* a sin duplicados, como arreglo */;\n  return aSinRepetir.filter((x) => /* x está en enB */);\n}\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Primero decide **cuántos pares** va a tener el resultado: tantos como el largo del arreglo más corto. Después, para cada posición `i` de `0` hasta ese largo, armas el par con lo que hay en esa posición en cada arreglo.",
+  "`Math.min(a.length, b.length)` te da el largo del más corto. Puedes usar un `for` con índice y `push([a[i], b[i]])`, o recortar `a` con `slice(0, largo)` y usar `map`, recordando que `map` le pasa a tu función **el elemento y su índice**: `(x, i) => ...`.",
+  "Esqueleto:\n\n```js\nexport function zip(a, b) {\n  const largo = /* el largo del más corto */;\n  const pares = [];\n  for (let i = 0; i < largo; i++) {\n    pares.push(/* el par de la posición i */);\n  }\n  return pares;\n}\n```"
+]

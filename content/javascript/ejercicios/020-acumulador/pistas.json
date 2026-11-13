@@ -1,0 +1,5 @@
+[
+  "Necesitas un lugar donde el total **sobreviva** entre una llamada y otra, pero que no sea una variable global. ¿Qué pasa con una variable declarada dentro de `crearAcumulador` si la función que devuelves la sigue usando?",
+  "Declara `let total = 0` **dentro** de `crearAcumulador` (no dentro de la función que devuelves) y devuelve una función que reciba `n`, actualice `total` y lo devuelva. Gracias al closure, esa función recuerda su `total`.",
+  "Esqueleto:\n\n```js\nexport function crearAcumulador() {\n  let total = 0;\n  return (n) => {\n    /* actualiza total */\n    return /* ... */;\n  };\n}\n```"
+]

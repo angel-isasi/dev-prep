@@ -1,0 +1,5 @@
+[
+  "Necesitas recordar **en qué posición vas** entre una llamada y otra: un contador privado en un closure. La parte nueva es cómo hacer que, al pasarse del final, vuelva a 0.",
+  "Usa el operador `%` (módulo, el resto de una división). Con 2 valores: `0 % 2 = 0`, `1 % 2 = 1`, `2 % 2 = 0`, `3 % 2 = 1`... El resto nunca llega a `valores.length`, así que siempre es un índice válido. Declara `let i = 0`, lee `valores[i % valores.length]` y luego aumenta `i`.",
+  "Esqueleto:\n\n```js\nlet i = 0;\nreturn () => {\n  const valor = valores[/* índice que da la vuelta */];\n  /* avanza i */\n  return valor;\n};\n```"
+]

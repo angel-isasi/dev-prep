@@ -1,0 +1,5 @@
+[
+  "Fíjate en cómo se usa: `crearMultiplicador(3)` se guarda en `triple` y luego se llama `triple(5)`. O sea, lo que **devuelve** `crearMultiplicador` tiene que ser algo que se pueda llamar: una función.",
+  "Dentro de `crearMultiplicador` escribe `return` seguido de una función (puede ser una arrow function) que reciba `n`. Esa función interna puede usar `factor` aunque no lo reciba como parámetro, porque está escrita dentro de `crearMultiplicador`.",
+  "Esqueleto:\n\n```js\nexport function crearMultiplicador(factor) {\n  return (n) => /* ... */;\n}\n```"
+]

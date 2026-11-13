@@ -1,0 +1,5 @@
+[
+  "Tienes que hacer **lo mismo con cada elemento** (multiplicarlo por 2) y juntar los resultados en una lista nueva del mismo tamaño. ¿Qué método de array está hecho exactamente para eso?",
+  "Usa `map`: recorre el arreglo, llama a tu función con cada elemento y arma un **arreglo nuevo** con lo que esa función devuelve. No toca el original.",
+  "Esqueleto:\n\n```js\nexport function duplicar(nums) {\n  return nums.map((n) => /* qué hago con n */);\n}\n```"
+]

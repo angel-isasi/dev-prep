@@ -1,0 +1,5 @@
+[
+  "Es casi igual que construir `map`, pero esta vez no guardas lo que devuelve la función: la usas como una **pregunta** (\"¿este elemento se queda?\") y guardas el elemento original solo si la respuesta es sí.",
+  "Crea un array vacío, recorre la lista con un `for` clásico (necesitas el índice) y usa un `if (cumple(lista[i], i, lista))`. Dentro del `if`, haz `push` del **elemento**, no del resultado de `cumple`.",
+  "Esqueleto:\n\n```js\nconst resultado = [];\nfor (let i = 0; i < lista.length; i++) {\n  if (/* pregúntale a cumple por este elemento */) {\n    resultado.push(/* ... */);\n  }\n}\nreturn resultado;\n```"
+]

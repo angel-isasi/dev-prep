@@ -1,0 +1,5 @@
+[
+  "No transformas los números, solo decides **cuáles se quedan**. Necesitas dos cosas: una forma de saber si un número es par y un método que filtre una lista según una condición.",
+  "El operador `%` da el residuo de una división: `10 % 2` es `0` y `7 % 2` es `1`. Un número es par si `n % 2 === 0`. Para quedarte con los que cumplen eso, usa `filter`: devuelve un arreglo nuevo con los elementos para los que tu función devuelve `true`.",
+  "Esqueleto:\n\n```js\nexport function soloPares(nums) {\n  return nums.filter((n) => /* condición que es true si n es par */);\n}\n```"
+]

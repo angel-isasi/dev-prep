@@ -1,0 +1,5 @@
+[
+  "Recorre el texto letra por letra y pregúntate en cada una: ¿es vocal? Para no escribir `\"a\"`, `\"A\"`, `\"á\"`, `\"Á\"`... por separado, piensa cómo **unificar mayúsculas** y dónde guardar la lista de vocales válidas (incluidas las tildes y la `ü`).",
+  "Opción 1: `for...of` sobre `texto.toLowerCase()` y `\"aeiouáéíóúü\".includes(letra)` para decidir si sumas 1. Opción 2 (más corta): `texto.match(/[aeiouáéíóúü]/gi)` devuelve un arreglo con todas las vocales encontradas; la `g` busca todas y la `i` ignora mayúsculas. **Cuidado**: si no encuentra nada, `match` devuelve `null`, no `[]`.",
+  "Esqueleto con bucle:\n\n```js\nexport function contarVocales(texto) {\n  const vocales = \"aeiouáéíóúü\";\n  let cuenta = 0;\n  for (const letra of /* el texto en minúsculas */) {\n    if (/* vocales incluye a letra */) {\n      cuenta++;\n    }\n  }\n  return cuenta;\n}\n```"
+]

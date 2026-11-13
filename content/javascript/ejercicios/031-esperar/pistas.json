@@ -1,0 +1,5 @@
+[
+  "Ya conoces `setTimeout(funcion, ms)`: ejecuta algo después de un tiempo. El problema es que no devuelve una promesa, así que no puedes usar `await` con él. Tu trabajo es **envolverlo** en una promesa.",
+  "Crea la promesa con `new Promise((resolver, rechazar) => { ... })`. La función que le pasas se ejecuta al instante y recibe `resolver`: cuando lo llames, la promesa se cumple. ¿Quién debería llamar a `resolver`? El `setTimeout`.",
+  "Esqueleto:\n\n```js\nexport function esperar(ms) {\n  return new Promise((resolver) => {\n    setTimeout(/* ¿qué función se ejecuta al terminar? */, ms);\n  });\n}\n```"
+]

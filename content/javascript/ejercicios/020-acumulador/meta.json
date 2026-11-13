@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-020",
+  "titulo": "Acumulador",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 2,
+  "tags": ["closures", "estado privado", "funciones"],
+  "origen": "definitivo/01-ejercicios/01-javascript/20"
+}

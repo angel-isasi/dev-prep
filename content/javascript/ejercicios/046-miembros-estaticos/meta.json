@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-046",
+  "titulo": "Miembros estáticos",
+  "tipo": "funcion",
+  "tema": "clases",
+  "nivel": 2,
+  "tags": ["clases", "static", "campos privados", "getters", "métodos de fábrica"],
+  "origen": "definitivo/01-ejercicios/01-javascript/46"
+}

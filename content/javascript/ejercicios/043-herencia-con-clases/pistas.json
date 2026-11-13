@@ -1,0 +1,5 @@
+[
+  "Primero haz que `Usuario` funcione sola: constructor, `puede` y `describir`. Luego piensa qué cambia en `Editor`: **solo** el método `puede`. Todo lo demás debería venir del padre sin escribirlo de nuevo. Para `describir`, busca una forma de leer el nombre de la clase con la que se creó el objeto.",
+  "Herramientas: `class Editor extends Usuario` para heredar; dentro de `Editor`, `super.puede(accion)` llama al `puede` del padre; y `this.constructor.name` da el nombre de la clase del objeto (`\"Usuario\"` o `\"Editor\"`). Si `Editor` no tiene constructor propio, usa el del padre automáticamente.",
+  "Esqueleto:\n\n```js\nexport class Usuario {\n  constructor(nombre) {\n    /* guarda el nombre */\n  }\n  puede(accion) {\n    return /* ¿es \"leer\"? */;\n  }\n  describir() {\n    return `${/* nombre */} (${/* nombre de la clase */})`;\n  }\n}\n\nexport class Editor extends Usuario {\n  puede(accion) {\n    return /* ¿es \"publicar\"? */ || /* lo que diga el padre */;\n  }\n}\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Piensa en cómo sumarías un array \"a mano\": una variable `total` que empieza en 0 y en cada vuelta se actualiza. `reduce` es exactamente eso, pero el valor inicial y la forma de actualizar te los pasan como argumentos.",
+  "Declara `let acumulado = inicial;`, recorre la lista con un `for` y en cada vuelta **reemplaza** el acumulado por lo que devuelve `fn(acumulado, lista[i], i)`. Al final devuelve el acumulado.",
+  "Esqueleto:\n\n```js\nlet acumulado = /* ... */;\nfor (let i = 0; i < lista.length; i++) {\n  acumulado = /* llama a fn con el acumulado, el elemento y el índice */;\n}\nreturn acumulado;\n```"
+]

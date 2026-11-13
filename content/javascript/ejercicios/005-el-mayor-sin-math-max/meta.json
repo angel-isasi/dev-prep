@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-005",
+  "titulo": "El mayor, sin Math.max",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 1,
+  "tags": ["arrays", "reduce", "bucles", "casos-borde"],
+  "origen": "definitivo/01-ejercicios/01-javascript/05"
+}

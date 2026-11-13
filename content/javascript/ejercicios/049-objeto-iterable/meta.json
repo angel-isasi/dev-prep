@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-049",
+  "titulo": "Objeto iterable",
+  "tipo": "funcion",
+  "tema": "iteradores",
+  "nivel": 2,
+  "tags": ["iteradores", "Symbol.iterator", "generadores", "clases", "spread"],
+  "origen": "definitivo/01-ejercicios/01-javascript/49"
+}

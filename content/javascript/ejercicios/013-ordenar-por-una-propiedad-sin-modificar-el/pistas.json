@@ -1,0 +1,5 @@
+[
+  "Dos problemas: **ordenar** según una propiedad cuyo nombre te llega en una variable, y **no tocar** el arreglo original. ¿Qué pasa con la lista original cuando llamas a `sort` sobre ella? Pruébalo en la consola.",
+  "`sort` modifica el arreglo sobre el que lo llamas, así que primero haz una copia: `[...lista]`. Luego pásale a `sort` una **función de comparación** `(a, b) => ...` que devuelva un número negativo si `a` va antes, positivo si `a` va después y `0` si da igual. Para leer la propiedad usa corchetes: `a[clave]`, no `a.clave`.",
+  "Esqueleto:\n\n```js\nexport function ordenarPor(lista, clave) {\n  return [...lista].sort((a, b) => {\n    if (/* a[clave] es mayor que b[clave] */) return 1;\n    if (/* a[clave] es menor que b[clave] */) return -1;\n    return 0;\n  });\n}\n```"
+]

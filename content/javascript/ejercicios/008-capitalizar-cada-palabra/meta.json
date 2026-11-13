@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-008",
+  "titulo": "Capitalizar cada palabra",
+  "tipo": "funcion",
+  "tema": "strings",
+  "nivel": 1,
+  "tags": ["strings", "split", "map", "join"],
+  "origen": "definitivo/01-ejercicios/01-javascript/08"
+}

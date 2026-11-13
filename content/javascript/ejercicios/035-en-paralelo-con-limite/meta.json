@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-035",
+  "titulo": "En paralelo con límite",
+  "tipo": "funcion",
+  "tema": "asincronia",
+  "nivel": 3,
+  "tags": ["promesas", "async-await", "Promise.all", "concurrencia"],
+  "origen": "definitivo/01-ejercicios/01-javascript/35"
+}

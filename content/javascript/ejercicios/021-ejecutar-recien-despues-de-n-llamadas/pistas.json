@@ -1,0 +1,5 @@
+[
+  "La función que devuelves necesita **recordar cuántas veces la han llamado**. Ese número no puede reiniciarse en cada llamada, ni ser global. Es el mismo truco del acumulador: un contador privado en un closure.",
+  "Declara `let llamadas = 0` dentro de `despuesDe`. Devuelve una función que reciba `(...args)`, sume 1 a `llamadas` y, con un `if`, decida: si ya llegó a `veces`, devuelve `fn(...args)`; si no, devuelve `undefined`.",
+  "Esqueleto:\n\n```js\nlet llamadas = 0;\nreturn (...args) => {\n  llamadas++;\n  if (/* ¿ya llegó a veces? */) {\n    return fn(/* reenvía los argumentos */);\n  }\n  return undefined;\n};\n```"
+]

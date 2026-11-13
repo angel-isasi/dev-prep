@@ -1,0 +1,5 @@
+[
+  "Quieres que `pizza.precio = -5` ejecute **código tuyo** antes de guardar el valor. Eso lo hace un **setter**. Y para no repetir la validación, el constructor puede asignar con `this.precio = precio`: así también pasa por el setter.",
+  "Herramientas: un campo privado `#precio` donde guardas el valor de verdad; `get precio()` para leerlo; `set precio(valor)` para validarlo con `Number.isFinite(valor)` y `valor < 0`, y `throw new Error(\"Precio inválido\")` si no sirve; `get conIgv()` que usa `toFixed(2)` y lo convierte de nuevo a número con `Number(...)`.",
+  "Esqueleto:\n\n```js\nexport class Producto {\n  #precio = 0;\n\n  constructor(nombre, precio) {\n    this.nombre = nombre;\n    this.precio = /* ... */; // pasa por el setter\n  }\n\n  get precio() {\n    return /* el campo privado */;\n  }\n\n  set precio(valor) {\n    if (/* no es número finito */ || /* es negativo */) {\n      throw new Error(\"Precio inválido\");\n    }\n    /* guarda el valor en el campo privado */\n  }\n\n  get conIgv() {\n    return Number(/* precio * 1.18 con 2 decimales */);\n  }\n}\n```"
+]

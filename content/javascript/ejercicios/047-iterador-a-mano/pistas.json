@@ -1,0 +1,5 @@
+[
+  "El iterador tiene que **recordar por dónde va** entre una llamada y otra. ¿Dónde puedes guardar un número que sobreviva entre llamadas a `siguiente()`, pero que sea distinto para cada iterador que crees?",
+  "Herramienta: un **closure**. Declara `let indice = 0` dentro de `crearIterador` (no dentro de `siguiente`) y devuelve un objeto con el método `siguiente`. Ese método \"recuerda\" `indice` aunque `crearIterador` ya haya terminado. En cada llamada compara `indice` con `lista.length` para saber si quedan elementos.",
+  "Esqueleto:\n\n```js\nexport function crearIterador(lista) {\n  let indice = 0;\n\n  return {\n    siguiente() {\n      if (/* ¿quedan elementos? */) {\n        const valor = /* el elemento que toca */;\n        /* avanza el índice */\n        return { valor, listo: false };\n      }\n      return /* el objeto de \"ya terminé\" */;\n    },\n  };\n}\n```"
+]

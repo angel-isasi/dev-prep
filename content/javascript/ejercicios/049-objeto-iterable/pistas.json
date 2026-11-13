@@ -1,0 +1,5 @@
+[
+  "Hay dos partes: guardar las canciones y hacer el objeto recorrible. Para la primera, el constructor recibe una cantidad variable de argumentos. Para la segunda, `for...of` y spread buscan en el objeto un método con un nombre especial: si lo encuentran, lo llaman y usan lo que devuelve para pedir los valores uno por uno.",
+  "Herramientas: el parámetro **rest** `constructor(...canciones)` junta los argumentos en un arreglo. El nombre especial del método es `[Symbol.iterator]` (con corchetes, porque es un símbolo). La forma más simple es hacerlo **generador** con un asterisco delante: `*[Symbol.iterator]() { ... }`, y dentro usar `yield*`, que entrega uno por uno los elementos de otro iterable.",
+  "Esqueleto:\n\n```js\nexport class Playlist {\n  #canciones;\n\n  constructor(...canciones) {\n    /* guarda el arreglo en el campo privado */\n  }\n\n  *[Symbol.iterator]() {\n    yield* /* el arreglo de canciones */;\n  }\n}\n```"
+]

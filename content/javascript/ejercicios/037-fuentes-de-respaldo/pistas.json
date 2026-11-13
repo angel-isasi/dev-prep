@@ -1,0 +1,5 @@
+[
+  "Es un bucle que puede terminar antes de tiempo: recorre las fuentes en orden y, en cuanto una funciona, sal de la función con su resultado. Si una falla, recuerda su error y pasa a la siguiente. Si el bucle termina sin éxito, lanza el último error que guardaste.",
+  "Usa `for...of` con un `try { ... } catch (error) { ... }` dentro. En el `try`, escribe `return await fuente()`: el `await` es **obligatorio** para que el rechazo ocurra dentro del `try` y el `catch` lo atrape. Para la lista vacía, inicia tu variable de error con `new Error(\"No hay fuentes\")`.",
+  "Esqueleto:\n\n```js\nexport async function intentarEnOrden(fuentes) {\n  let ultimoError = new Error(\"No hay fuentes\");\n\n  for (const fuente of fuentes) {\n    try {\n      /* devuelve el resultado de la fuente, esperándolo */\n    } catch (error) {\n      /* guarda el error y deja que el bucle siga */\n    }\n  }\n\n  /* si llegaste aquí, todas fallaron */\n}\n```"
+]

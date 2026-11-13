@@ -1,0 +1,5 @@
+[
+  "`fn` es una función como cualquier otra: la puedes llamar dentro de tu código con `fn(algo)`. Piensa qué tienes que hacer con **cada** elemento del array y dónde vas guardando lo que devuelve `fn`.",
+  "Crea un array vacío `resultado`, recorre la lista con un `for` clásico (necesitas el índice `i`) y en cada vuelta haz `resultado.push(...)` con lo que devuelve `fn(lista[i], i, lista)`. Al final, devuelve `resultado`.",
+  "Esqueleto:\n\n```js\nconst resultado = [];\nfor (let i = 0; i < lista.length; i++) {\n  resultado.push(/* llama a fn con el elemento, el índice y la lista */);\n}\nreturn /* ... */;\n```"
+]

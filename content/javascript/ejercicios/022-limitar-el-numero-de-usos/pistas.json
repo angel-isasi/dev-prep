@@ -1,0 +1,5 @@
+[
+  "La función que devuelves necesita recordar **dos cosas** entre llamadas: cuántas veces ya ejecutó `fn` y qué resultado obtuvo la última vez. Las dos van en el closure.",
+  "Declara `let usos = 0` y `let ultimo` dentro de `limitar`. En la función devuelta, con `(...args)`: si `usos < max`, aumenta `usos` y guarda en `ultimo` lo que devuelve `fn(...args)`. Pase lo que pase, al final devuelve `ultimo`.",
+  "Esqueleto:\n\n```js\nlet usos = 0;\nlet ultimo;\nreturn (...args) => {\n  if (/* ¿todavía quedan usos? */) {\n    usos++;\n    ultimo = /* ... */;\n  }\n  return ultimo;\n};\n```"
+]

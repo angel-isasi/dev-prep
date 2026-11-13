@@ -1,0 +1,5 @@
+[
+  "Fíjate en `sumar.veces`: estás leyendo una **propiedad de una función**. En JavaScript las funciones son objetos, así que les puedes agregar propiedades igual que a `{}`.",
+  "Guarda la función nueva en una constante (por ejemplo `envuelta`), así puedes referirte a ella desde dentro de sí misma. Después de crearla, haz `envuelta.veces = 0`. Dentro de `envuelta`, aumenta `envuelta.veces` y devuelve `fn(...args)`.",
+  "Esqueleto:\n\n```js\nconst envuelta = (...args) => {\n  /* aumenta el contador de envuelta */\n  return /* llama a fn con los mismos argumentos */;\n};\nenvuelta.veces = /* ... */;\nreturn envuelta;\n```"
+]

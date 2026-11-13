@@ -1,0 +1,5 @@
+[
+  "Hay **dos funciones** en juego: `promisificar` (que solo prepara) y la que devuelves (que se llama después con los argumentos reales). Esa segunda función es la que crea la promesa y llama a `fn` por dentro.",
+  "Usa parámetros rest `(...args) =>` para recibir cualquier cantidad de argumentos, y `new Promise((resolver, rechazar) => { ... })` para crear la promesa. Dentro, llama a `fn(...args, tuCallback)`: tu callback recibe `(error, dato)` y decide si llamar a `rechazar` o a `resolver`.",
+  "Esqueleto:\n\n```js\nexport function promisificar(fn) {\n  return (...args) =>\n    new Promise((resolver, rechazar) => {\n      fn(...args, (error, dato) => {\n        /* si hay error: rechazar; si no: resolver con el dato */\n      });\n    });\n}\n```"
+]

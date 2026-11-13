@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-018",
+  "titulo": "Tu propio reduce",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 2,
+  "tags": ["funciones", "orden superior", "callbacks", "arrays", "reduce", "acumulador"],
+  "origen": "definitivo/01-ejercicios/01-javascript/18"
+}

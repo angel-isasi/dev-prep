@@ -1,0 +1,5 @@
+[
+  "Imagina que revisas una fila de números uno por uno y solo recuerdas **el mayor que has visto hasta ahora**. Cada vez que aparece uno más grande, lo reemplazas. La pregunta clave: ¿con qué valor empiezas ese \"mayor hasta ahora\"?",
+  "No empieces en `0`: si todos son negativos, `0` nunca se reemplaza y devolverías un número que ni está en la lista. Empieza con **el primer elemento**, `nums[0]`. Recorre con `for...of` o con `reduce` y compara con `>`.",
+  "Esqueleto con bucle:\n\n```js\nexport function mayor(nums) {\n  let max = /* el primer elemento */;\n  for (const n of nums) {\n    if (/* n es más grande que max */) {\n      max = n;\n    }\n  }\n  return max;\n}\n```"
+]

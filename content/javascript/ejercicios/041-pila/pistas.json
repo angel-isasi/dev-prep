@@ -1,0 +1,5 @@
+[
+  "Por dentro, una pila es solo un **arreglo** al que siempre le agregas y le quitas elementos por el **final**. El final del arreglo es el \"tope\" de la pila. Piensa qué métodos de array hacen justo eso.",
+  "Herramientas: un campo privado `#items = []` dentro de la clase, `push` para agregar al final, `pop` para quitar el último (y devolverlo), `at(-1)` para leer el último sin quitarlo, y un **getter** `get tamano() { ... }` para que `tamano` se lea sin paréntesis. Para encadenar, `apilar` debe terminar con `return this`.",
+  "Esqueleto:\n\n```js\nexport class Pila {\n  #items = [];\n\n  apilar(elemento) {\n    /* agrega al final */\n    return /* la misma pila */;\n  }\n\n  desapilar() {\n    return /* quita y devuelve el último */;\n  }\n\n  verTope() {\n    return /* lee el último sin quitarlo */;\n  }\n\n  get tamano() {\n    return /* cuántos hay */;\n  }\n}\n```"
+]

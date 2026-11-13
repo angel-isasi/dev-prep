@@ -1,0 +1,5 @@
+[
+  "Necesitas un arreglo vacío y un **bucle** que arranque en `inicio` y siga mientras no te pases de `fin`. En cada vuelta guardas el número y avanzas `paso` posiciones. Fíjate en la palabra **incluido**: ¿la condición del bucle es `<` o `<=`?",
+  "Un `for` clásico encaja perfecto: `for (let i = inicio; i <= fin; i += paso)`. Para que `paso` valga `1` cuando no te lo pasan, usa un **parámetro por defecto** en la firma: `function rango(inicio, fin, paso = 1)`.",
+  "Esqueleto:\n\n```js\nexport function rango(inicio, fin, paso = 1) {\n  const resultado = [];\n  for (let i = /* desde */; /* mientras */; /* avanza */) {\n    resultado.push(i);\n  }\n  return resultado;\n}\n```"
+]

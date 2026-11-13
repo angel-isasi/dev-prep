@@ -1,0 +1,5 @@
+[
+  "Si guardas el saldo como propiedad del objeto (`{ saldo: 100 }`), cualquiera puede escribir `cuenta.saldo = 1000000`. Para que sea privado, guárdalo en una **variable** dentro de `crearCuenta`: los métodos del objeto la pueden usar gracias al closure, pero desde afuera no se ve.",
+  "Declara `let saldo = saldoInicial` y devuelve un objeto con tres métodos (`depositar`, `retirar`, `verSaldo`). Cada método lee o cambia la variable `saldo`. Para las validaciones, **antes** de tocar el saldo usa `if (...) throw new Error(\"mensaje\")`: el `throw` corta la función ahí mismo.",
+  "Esqueleto:\n\n```js\nlet saldo = saldoInicial;\nreturn {\n  depositar(monto) {\n    if (/* monto inválido */) throw new Error(\"El monto debe ser mayor que cero\");\n    /* suma y devuelve el saldo */\n  },\n  retirar(monto) {\n    if (/* no alcanza */) throw new Error(\"Saldo insuficiente\");\n    /* resta y devuelve el saldo */\n  },\n  verSaldo() {\n    return /* ... */;\n  },\n};\n```"
+]

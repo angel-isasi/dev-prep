@@ -1,0 +1,5 @@
+[
+  "Para `fibonacci`, piensa en dos variables: el número actual y el siguiente. En cada paso **entregas** el actual y luego avanzas los dos. Como es infinito, el bucle puede ser `while (true)`: el `yield` pausa la función, así que no se cuelga. Para `tomar`, recorre el iterable y corta apenas tengas los que necesitas.",
+  "Herramientas: `yield valor` entrega un valor y pausa el generador hasta el siguiente `next()`. Para avanzar los dos números a la vez, usa desestructuración: `[a, b] = [b, a + b]`. En `tomar`, `for...of` funciona con generadores y arreglos, y `break` corta el bucle (y detiene el generador). Revisa el caso `cantidad === 0` antes de empezar.",
+  "Esqueleto:\n\n```js\nexport function* fibonacci() {\n  let [a, b] = [0, 1];\n  while (true) {\n    yield /* el actual */;\n    [a, b] = [/* ... */, /* ... */];\n  }\n}\n\nexport function tomar(iterable, cantidad) {\n  const resultado = [];\n  if (/* no hay que tomar nada */) return resultado;\n\n  for (const valor of iterable) {\n    /* agrégalo */\n    if (/* ya tienes suficientes */) break;\n  }\n  return resultado;\n}\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Divide el problema en tres: **separar** la frase en palabras, **transformar** cada palabra y **volver a unir** todo con espacios. Para una sola palabra, ¿cómo obtienes su primera letra y \"el resto\" por separado?",
+  "`split(\" \")` separa por espacios y `join(\" \")` vuelve a unir. Para transformar cada palabra, `map`. Dentro: `palabra[0]` es la primera letra y `palabra.slice(1)` es todo lo demás; luego `toUpperCase()` y `toLowerCase()`. **Ojo**: con dos espacios seguidos, `split` deja una palabra vacía `\"\"`, y `\"\"[0]` es `undefined`.",
+  "Esqueleto:\n\n```js\nexport function capitalizar(frase) {\n  return frase\n    .split(\" \")\n    .map((palabra) => {\n      if (palabra === \"\") return palabra;\n      return /* primera letra en mayúscula */ + /* el resto en minúscula */;\n    })\n    .join(\" \");\n}\n```"
+]

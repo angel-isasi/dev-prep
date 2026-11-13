@@ -1,0 +1,5 @@
+[
+  "Hay dos tipos de cosas aquí: lo que es **de cada voto** (`corto`) y lo que es **de la clase entera** (el contador y el método `desde`). Lo primero se guarda con `this` en el constructor; lo segundo se declara con la palabra `static`. ¿En qué momento exacto se crea un voto? Ahí es donde tienes que sumar 1.",
+  "Herramientas: `static #total = 0` (campo estático privado: uno solo para toda la clase y nadie lo toca desde fuera), `static get total()` para leerlo (sin setter, así queda de solo lectura), `static desde(texto)` que hace `new Voto(...)`, y `Voto.#total++` dentro del `constructor`. Para limpiar el texto: `trim()` y `toLowerCase()`.",
+  "Esqueleto:\n\n```js\nexport class Voto {\n  static #total = 0;\n\n  static get total() {\n    return /* el contador de la clase */;\n  }\n\n  static desde(texto) {\n    return new Voto(/* texto limpio */);\n  }\n\n  constructor(corto) {\n    /* guarda corto en este voto */\n    /* suma 1 al contador de la clase */\n  }\n}\n```"
+]

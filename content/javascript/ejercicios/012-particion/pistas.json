@@ -1,0 +1,5 @@
+[
+  "Imagina dos cajas vacías, una para \"sí cumple\" y otra para \"no cumple\". Recorres la lista una vez y cada elemento va a una de las dos cajas. Al final devuelves las dos cajas juntas en un arreglo. ¿Cómo sabes a qué caja va cada uno? Pregúntaselo a `cumple`.",
+  "`cumple` es una función como cualquier otra: la llamas con `cumple(item)` y te devuelve `true` o `false`. Usa dos arreglos (`si` y `no`), un `for...of` y un `if/else` con `push`. Devuelve `[si, no]`.",
+  "Esqueleto:\n\n```js\nexport function particion(lista, cumple) {\n  const si = [];\n  const no = [];\n  for (const item of lista) {\n    if (/* llama a la condición con item */) {\n      /* va a una caja */\n    } else {\n      /* va a la otra */\n    }\n  }\n  return /* las dos cajas */;\n}\n```"
+]

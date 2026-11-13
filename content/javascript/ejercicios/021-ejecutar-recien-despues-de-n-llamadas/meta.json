@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-021",
+  "titulo": "Ejecutar recién después de N llamadas",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 2,
+  "tags": ["closures", "contador", "orden superior", "rest parameters", "spread"],
+  "origen": "definitivo/01-ejercicios/01-javascript/21"
+}

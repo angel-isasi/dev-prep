@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-024",
+  "titulo": "Aplicación parcial",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 2,
+  "tags": ["funciones", "orden superior", "closures", "rest parameters", "spread"],
+  "origen": "definitivo/01-ejercicios/01-javascript/24"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-003",
+  "titulo": "Sumar todo",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 1,
+  "tags": ["arrays", "reduce", "acumulador"],
+  "origen": "definitivo/01-ejercicios/01-javascript/03"
+}

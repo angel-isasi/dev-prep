@@ -1,0 +1,5 @@
+[
+  "El promedio es **suma / cantidad**. Ya sabes sumar un arreglo; la cantidad te la da `nums.length`. Antes de dividir, pregúntate: ¿qué pasa si la cantidad es 0?",
+  "Prueba en la consola: `0 / 0` da `NaN`. Por eso necesitas revisar el caso vacío **antes** de dividir, con un `if (nums.length === 0) return 0;` al inicio. Para la suma usa `reduce` con valor inicial `0`.",
+  "Esqueleto:\n\n```js\nexport function promedio(nums) {\n  if (/* el arreglo está vacío */) return 0;\n\n  const suma = nums.reduce((total, n) => /* ... */, 0);\n  return /* suma dividida entre la cantidad */;\n}\n```"
+]

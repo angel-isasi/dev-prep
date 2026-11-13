@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-029",
+  "titulo": "Aplicar N veces",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 1,
+  "tags": ["funciones", "orden superior", "bucles", "acumulador"],
+  "origen": "definitivo/01-ejercicios/01-javascript/29"
+}

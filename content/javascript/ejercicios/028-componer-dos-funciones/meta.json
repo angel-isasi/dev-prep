@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-028",
+  "titulo": "Componer dos funciones",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 1,
+  "tags": ["funciones", "orden superior", "composicion"],
+  "origen": "definitivo/01-ejercicios/01-javascript/28"
+}

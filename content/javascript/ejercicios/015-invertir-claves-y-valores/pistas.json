@@ -1,0 +1,5 @@
+[
+  "Necesitas recorrer **cada par clave-valor** del objeto y, para cada uno, guardar en un objeto nuevo el valor como clave y la clave como valor. ¿Cómo recorres un objeto si no tiene `map` ni `for...of` directo?",
+  "Opción 1: un objeto vacío y un `for...in` (recorre las claves): `resultado[obj[clave]] = clave`. Opción 2: `Object.entries(obj)` convierte el objeto en un arreglo de pares `[[clave, valor], ...]`; lo transformas con `map` y lo vuelves a objeto con `Object.fromEntries`.",
+  "Esqueleto con `Object.entries`:\n\n```js\nexport function invertirObjeto(obj) {\n  const pares = Object.entries(obj);\n  const invertidos = pares.map(([clave, valor]) => /* el par al revés */);\n  return /* convierte los pares de vuelta en objeto */;\n}\n```"
+]

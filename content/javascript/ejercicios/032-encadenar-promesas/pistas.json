@@ -1,0 +1,5 @@
+[
+  "Divide el problema en dos pasos: primero consigue `a + b` con `sumarLento`, y después súmale `c` a ese resultado con otra llamada. El segundo paso **no puede empezar** hasta tener el resultado del primero.",
+  "Como `sumarTres` ya es `async`, puedes usar `await` dentro: `const parcial = await sumarLento(a, b)` pausa la función hasta tener el número. Recuerda que lo que hagas `return` dentro de una función `async` es el valor con el que se cumple su promesa.",
+  "Esqueleto:\n\n```js\nexport async function sumarTres(a, b, c) {\n  const parcial = await /* primera suma */;\n  return /* segunda suma, usando parcial y c */;\n}\n```"
+]

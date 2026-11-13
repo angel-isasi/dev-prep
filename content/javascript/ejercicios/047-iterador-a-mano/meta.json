@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-047",
+  "titulo": "Iterador a mano",
+  "tipo": "funcion",
+  "tema": "iteradores",
+  "nivel": 2,
+  "tags": ["iteradores", "closures", "objetos"],
+  "origen": "definitivo/01-ejercicios/01-javascript/47"
+}

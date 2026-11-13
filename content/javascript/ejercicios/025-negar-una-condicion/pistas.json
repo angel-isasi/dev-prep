@@ -1,0 +1,5 @@
+[
+  "`negar(esPar)` se usa dentro de `filter`, así que tiene que ser **una función**. Esa función nueva le pregunta a `cumple` y le da la vuelta a la respuesta.",
+  "Devuelve una arrow function que reciba todos sus argumentos con `(...args)`, se los pase a `cumple` con `cumple(...args)` y aplique el operador `!` al resultado. `!` invierte el valor y además siempre da un booleano.",
+  "Esqueleto:\n\n```js\nexport function negar(cumple) {\n  return (...args) => /* niega lo que responde cumple con esos args */;\n}\n```"
+]

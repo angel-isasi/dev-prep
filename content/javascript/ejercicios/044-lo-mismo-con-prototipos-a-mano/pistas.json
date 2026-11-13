@@ -1,0 +1,5 @@
+[
+  "Si escribes `saludar` dentro del objeto que devuelves, cada usuario recibe una función nueva. La idea es poner `saludar` **una sola vez** en un objeto aparte, **fuera** de `crearUsuario`, y hacer que cada usuario nuevo lo tenga como \"padre\" del que hereda.",
+  "Herramienta: `Object.create(proto)` crea un objeto vacío cuyo prototipo es `proto`. Cuando le pidas `usuario.saludar` y no lo tenga, JavaScript lo busca en `proto`. Dentro de `saludar`, usa `this.nombre`: `this` será el usuario sobre el que llamaste al método.",
+  "Esqueleto:\n\n```js\nconst metodosUsuario = {\n  saludar() {\n    return /* texto con this.nombre */;\n  },\n};\n\nexport function crearUsuario(nombre) {\n  const usuario = Object.create(/* ¿quién es el prototipo? */);\n  /* guarda el nombre en usuario */\n  return usuario;\n}\n```"
+]

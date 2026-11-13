@@ -1,0 +1,5 @@
+[
+  "Es un contador privado, como el acumulador: necesitas un número que **sobreviva** entre llamadas y que cada generador tenga el suyo. ¿Dónde lo declaras para que pase eso?",
+  "Declara `let siguiente = 1` dentro de `crearIds`. Devuelve una función que arme el texto con un template literal (`` `${prefijo}-${siguiente}` ``), aumente `siguiente` y devuelva el texto que armó **antes** de aumentar.",
+  "Esqueleto:\n\n```js\nlet siguiente = 1;\nreturn () => {\n  const id = /* arma el texto con prefijo y siguiente */;\n  /* aumenta siguiente */\n  return id;\n};\n```"
+]

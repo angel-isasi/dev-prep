@@ -1,0 +1,5 @@
+[
+  "Es casi igual a una pila, pero ahora **entras por un extremo y sales por el otro**. Si agregas al final del arreglo, ¿por qué extremo tienes que sacar para que salga el que llegó primero?",
+  "Herramientas: un campo privado `#items = []`, `push` para agregar al final, `shift` para quitar el **primero** (y devolverlo) y un **getter** `get vacia() { ... }` que devuelva un booleano comparando `length` con 0. Para encadenar, `encolar` termina con `return this`.",
+  "Esqueleto:\n\n```js\nexport class Cola {\n  #items = [];\n\n  encolar(elemento) {\n    /* agrega al final */\n    return /* la misma cola */;\n  }\n\n  atender() {\n    return /* quita y devuelve el primero */;\n  }\n\n  get vacia() {\n    return /* ¿no hay elementos? */;\n  }\n}\n```"
+]

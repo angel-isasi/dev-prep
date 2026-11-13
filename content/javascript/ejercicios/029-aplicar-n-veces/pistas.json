@@ -1,0 +1,5 @@
+[
+  "Necesitas una variable que vaya cambiando: empieza siendo `valor` y en cada vuelta se reemplaza por lo que devuelve `fn` aplicada sobre ella. Es el mismo patrón del acumulador de `reduce`.",
+  "Declara `let resultado = valor` y usa un `for` que dé exactamente `veces` vueltas (desde `0` mientras `i < veces`). Dentro, reasigna: `resultado = fn(resultado)`. Si `veces` es 0, el bucle no da ninguna vuelta y devuelves `valor` tal cual.",
+  "Esqueleto:\n\n```js\nlet resultado = valor;\nfor (let i = 0; i < /* ... */; i++) {\n  resultado = /* aplica fn al resultado actual */;\n}\nreturn resultado;\n```"
+]

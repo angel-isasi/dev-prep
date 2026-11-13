@@ -1,0 +1,5 @@
+[
+  "Los textos en JavaScript **no tienen** un método para invertirse, pero los arreglos sí. Piensa en tres pasos: convertir el texto en un arreglo de caracteres, invertir ese arreglo y volver a unirlo en un texto.",
+  "Para separar en caracteres usa el operador spread: `[...texto]` (respeta los emojis, a diferencia de `split(\"\")`). Para invertir, `reverse()`. Para unir sin nada entre medio, `join(\"\")`.",
+  "Esqueleto:\n\n```js\nexport function invertir(texto) {\n  const caracteres = /* el texto separado en un arreglo */;\n  return caracteres./* invertir */./* unir sin separador */;\n}\n```"
+]

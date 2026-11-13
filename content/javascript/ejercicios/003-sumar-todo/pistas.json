@@ -1,0 +1,5 @@
+[
+  "Piensa en cómo sumas a mano una lista: llevas un **total** que empieza en algo, y a ese total le vas agregando cada número. ¿En cuánto debe empezar el total para que el arreglo vacío dé 0?",
+  "Puedes hacerlo con un `for...of` y una variable `let total = 0`, o con `reduce`, que está hecho para \"convertir un arreglo en un solo valor\". Si usas `reduce`, **no olvides el segundo argumento**: el valor inicial.",
+  "Esqueleto con `reduce`:\n\n```js\nexport function sumar(nums) {\n  return nums.reduce((total, n) => /* nuevo total */, /* valor inicial */);\n}\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Parte de `esperar(ms)`: una promesa que envuelve un `setTimeout`. Ahora la promesa tiene **dos formas de terminar**: el temporizador llega (cumplir) o la señal avisa que se canceló (rechazar). Lo que pase primero gana, porque una promesa solo cambia de estado una vez.",
+  "La señal es un objeto que emite eventos, como un botón del DOM: `signal.addEventListener(\"abort\", () => { ... })` se ejecuta cuando alguien llama a `abort()`. Guarda el identificador que devuelve `setTimeout` para poder cancelarlo con `clearTimeout(id)`. Y revisa `signal.aborted` al principio, porque si ya estaba cancelada el evento no se volverá a disparar.",
+  "Esqueleto:\n\n```js\nexport function esperarCancelable(ms, signal) {\n  return new Promise((resolver, rechazar) => {\n    if (/* ¿ya estaba cancelada? */) {\n      /* rechaza y sal */\n    }\n\n    const id = setTimeout(resolver, ms);\n\n    signal.addEventListener(\"abort\", () => {\n      /* limpia el temporizador y rechaza con new Error(\"Cancelado\") */\n    });\n  });\n}\n```"
+]

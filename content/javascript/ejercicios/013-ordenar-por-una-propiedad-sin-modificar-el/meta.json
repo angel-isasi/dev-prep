@@ -1,0 +1,9 @@
+{
+  "id": "js-ej-013",
+  "titulo": "Ordenar por una propiedad, sin modificar el original",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 2,
+  "tags": ["arrays", "sort", "objetos", "inmutabilidad"],
+  "origen": "definitivo/01-ejercicios/01-javascript/13"
+}

@@ -1,0 +1,5 @@
+[
+  "Es un bucle con un número máximo de vueltas (`intentos`). En cada vuelta: consulta, y si la respuesta es verdadera, sal con ella. Si no, espera y da otra vuelta. Si el bucle termina sin salir, es que se agotaron los intentos. Ojo con el detalle: entre consultas se espera, pero **después de la última** no.",
+  "Usa un `for` con contador (`for (let i = 0; i < intentos; i++)`) dentro de la función `async`. Consulta con `await consultar()`, sal con `return` si hay resultado, y para esperar usa una promesa con `setTimeout` (la función `esperar` del ejercicio 31). Al final del bucle, `throw new Error(\"Se agotaron los intentos\")`.",
+  "Esqueleto:\n\n```js\nconst esperar = (ms) => new Promise((resolver) => setTimeout(resolver, ms));\n\nexport async function sondear(consultar, intervalo, intentos) {\n  for (let i = 0; i < intentos; i++) {\n    const resultado = /* consulta y espera la respuesta */;\n    if (/* ¿está listo? */) return resultado;\n    if (/* ¿no es la última vuelta? */) await esperar(intervalo);\n  }\n  /* se acabaron los intentos */\n}\n```"
+]
