@@ -1,0 +1,117 @@
+{
+  "categoria": "CSS",
+  "preguntas": [
+    {
+      "id": "ent-011",
+      "pregunta": "Explica el modelo de caja.",
+      "preguntaEn": "Explain the box model.",
+      "respuesta": "Cada elemento es una caja con contenido, padding, borde y margen. Por defecto, el ancho que defines no incluye padding ni borde, y eso desordena los cálculos. Por eso casi siempre pongo `box-sizing: border-box`, para que el ancho sea el total visible.",
+      "respuestaEn": "Every element is a box made of content, padding, border and margin. By default the width you set excludes padding and border, which makes sizing confusing. That is why I almost always set `box-sizing: border-box`, so the width is the full visible size.",
+      "claves": []
+    },
+    {
+      "id": "ent-012",
+      "pregunta": "¿Cuándo usas Flexbox y cuándo Grid?",
+      "preguntaEn": "When do you use Flexbox and when Grid?",
+      "respuesta": "Flexbox para una sola dirección: una fila de botones, una barra de navegación, centrar algo. Grid para dos dimensiones: una galería o el esqueleto de una página con columnas y filas. En la práctica los combino: Grid para la página y Flexbox dentro de cada pieza.",
+      "respuestaEn": "\"Flexbox for one direction: a row of buttons, a navbar, centering something. Grid for two dimensions: a gallery or a page skeleton with rows and columns. In practice I combine them: Grid for the page layout and Flexbox inside each component.\"\n\n```css\n.galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1.5rem; }\n.barra { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }\n```",
+      "claves": []
+    },
+    {
+      "id": "ent-013",
+      "pregunta": "¿Cómo centras un elemento horizontal y verticalmente?",
+      "preguntaEn": "How do you center an element both ways?",
+      "respuesta": "Con Grid son dos líneas en el contenedor: `display: grid` y `place-items: center`. Con Flexbox uso `justify-content` y `align-items` en `center`.",
+      "respuestaEn": "\"With Grid it takes two lines on the parent: `display: grid` and `place-items: center`. With Flexbox I set both `justify-content` and `align-items` to `center`.\"\n\n```css\n.contenedor { display: grid; place-items: center; min-height: 100dvh; }\n```",
+      "claves": []
+    },
+    {
+      "id": "ent-014",
+      "pregunta": "¿Qué es la especificidad?",
+      "preguntaEn": "What is specificity?",
+      "respuesta": "Es la regla que decide qué estilo gana cuando varios apuntan al mismo elemento. De menor a mayor: etiquetas, clases, ids y estilos en línea. Si empatan, gana el que está más abajo. Para no pelear con eso uso casi solo clases, y evito ids e `!important`.",
+      "respuestaEn": "It is the rule that decides which style wins when several target the same element. From lowest to highest: elements, classes, ids and inline styles. On a tie, the later rule wins. To avoid fighting it, I use classes almost exclusively and avoid ids and `!important`.",
+      "claves": []
+    },
+    {
+      "id": "ent-015",
+      "pregunta": "Explica los valores de `position`.",
+      "preguntaEn": "Explain the values of position.",
+      "respuesta": "`static` es el flujo normal. `relative` deja el elemento en su sitio pero permite moverlo y sirve de referencia para sus hijos. `absolute` lo saca del flujo y lo ubica respecto al ancestro posicionado más cercano. `fixed` lo fija a la ventana. Y `sticky` se comporta normal hasta que llega a un borde y ahí se queda pegado, como un encabezado.",
+      "respuestaEn": "`static` is normal flow. `relative` keeps the element in place but lets you offset it and makes it a reference for its children. `absolute` removes it from the flow and positions it against the nearest positioned ancestor. `fixed` pins it to the viewport. `sticky` behaves normally until it reaches an edge and then sticks, like a header.",
+      "claves": []
+    },
+    {
+      "id": "ent-016",
+      "pregunta": "¿Diferencia entre `rem`, `em`, `px` y `%`?",
+      "preguntaEn": "What is the difference between rem, em, px and percent?",
+      "respuesta": "`px` es fijo. `rem` es relativo al tamaño de letra de la raíz, así que respeta la configuración del usuario; lo uso para tipografía y espaciados. `em` es relativo al tamaño de letra del propio elemento, útil para que el padding de un botón crezca con su texto. Y `%` es relativo al padre.",
+      "respuestaEn": "`px` is fixed. `rem` is relative to the root font size, so it respects the user's settings; I use it for type and spacing. `em` is relative to the element's own font size, handy when a button's padding should scale with its text. `%` is relative to the parent.",
+      "claves": []
+    },
+    {
+      "id": "ent-017",
+      "pregunta": "¿Qué significa diseñar mobile first?",
+      "preguntaEn": "What does mobile first mean?",
+      "respuesta": "Escribir primero los estilos para pantallas pequeñas y luego agregar mejoras con `min-width` para pantallas grandes. El CSS queda más simple y me obliga a priorizar el contenido. En proyectos como el portal de mi facultad tiene todo el sentido, porque la mayoría entra desde el celular.",
+      "respuestaEn": "\"It means writing styles for small screens first and then adding enhancements with `min-width` queries for larger ones. The CSS ends up simpler and it forces me to prioritize content. On projects like my faculty's portal it makes sense because most visitors are on phones.\"\n\n```css\n.tarjetas { display: grid; gap: 1rem; }\n@media (min-width: 768px) { .tarjetas { grid-template-columns: repeat(3, 1fr); } }\n```",
+      "claves": []
+    },
+    {
+      "id": "ent-018",
+      "pregunta": "¿Qué son las variables de CSS?",
+      "preguntaEn": "What are CSS custom properties?",
+      "respuesta": "Son valores reutilizables que defino con dos guiones, como `--color-primario`, y uso con `var()`. A diferencia de las variables de Sass, existen en el navegador: puedo cambiarlas con JavaScript o dentro de un media query. Son la base para hacer temas, como el modo oscuro.",
+      "respuestaEn": "They are reusable values defined with two dashes, like `--color-primary`, and read with `var()`. Unlike Sass variables, they exist in the browser, so I can change them with JavaScript or inside a media query. They are the foundation for theming, such as dark mode.",
+      "claves": []
+    },
+    {
+      "id": "ent-019",
+      "pregunta": "¿Diferencia entre `display: none`, `visibility: hidden` y `opacity: 0`?",
+      "preguntaEn": "Difference between display none, visibility hidden and opacity zero?",
+      "respuesta": "`display: none` quita el elemento: no ocupa espacio ni lo leen los lectores de pantalla. `visibility: hidden` lo oculta pero conserva su espacio. `opacity: 0` lo vuelve transparente, pero sigue ahí y se puede hacer clic. Para ocultar algo visualmente pero dejarlo disponible al lector de pantalla uso una clase tipo `sr-only`.",
+      "respuestaEn": "`display: none` removes the element: it takes no space and screen readers ignore it. `visibility: hidden` hides it but keeps its space. `opacity: 0` makes it transparent, yet it is still there and clickable. To hide something visually but keep it for screen readers, I use an `sr-only` class.",
+      "claves": []
+    },
+    {
+      "id": "ent-020",
+      "pregunta": "¿Qué es el `z-index` y por qué a veces \"no funciona\"?",
+      "preguntaEn": "What is z-index and why does it sometimes not work?",
+      "respuesta": "Controla qué elemento queda encima, pero solo en elementos posicionados y dentro de su contexto de apilamiento. Si un padre crea un contexto nuevo, por ejemplo con `transform` u `opacity`, el hijo no puede salir de ahí aunque le ponga `z-index: 9999`. Cuando falla, reviso los ancestros.",
+      "respuestaEn": "It controls which element sits on top, but only for positioned elements and within their stacking context. If a parent creates a new context, for example with `transform` or `opacity`, the child cannot escape it even with `z-index: 9999`. When it fails, I check the ancestors.",
+      "claves": []
+    },
+    {
+      "id": "ent-021",
+      "pregunta": "¿Qué diferencia hay entre pseudo-clases y pseudo-elementos?",
+      "preguntaEn": "Difference between pseudo-classes and pseudo-elements?",
+      "respuesta": "Una pseudo-clase describe un estado, como `:hover`, `:focus-visible` o `:nth-child`. Un pseudo-elemento da estilo a una parte del elemento o crea una caja nueva, como `::before`, `::after` o `::placeholder`.",
+      "respuestaEn": "A pseudo-class describes a state, like `:hover`, `:focus-visible` or `:nth-child`. A pseudo-element styles part of an element or creates a new box, like `::before`, `::after` or `::placeholder`.",
+      "claves": []
+    },
+    {
+      "id": "ent-022",
+      "pregunta": "¿Transiciones o animaciones? ¿Y qué propiedades conviene animar?",
+      "preguntaEn": "Transitions or animations, and which properties are cheap to animate?",
+      "respuesta": "Una transición va de un estado a otro cuando algo cambia, como un hover. Una animación con `@keyframes` puede tener varios pasos y repetirse sola. Para que sea fluida animo `transform` y `opacity`, que no obligan al navegador a recalcular el diseño. Y respeto `prefers-reduced-motion` para quien pidió menos movimiento.",
+      "respuestaEn": "A transition goes from one state to another when something changes, like a hover. A `@keyframes` animation can have several steps and run on its own. For smooth motion I animate `transform` and `opacity`, which do not force layout recalculation. I also respect `prefers-reduced-motion` for users who asked for less motion.",
+      "claves": []
+    },
+    {
+      "id": "ent-023",
+      "pregunta": "¿Por qué usas Tailwind? ¿Qué desventajas tiene?",
+      "preguntaEn": "Why do you use Tailwind and what are its downsides?",
+      "respuesta": "Porque escribo los estilos junto al componente, no invento nombres de clases y todo sale de una misma escala de espacios y colores, así que el diseño queda consistente. La desventaja es que el HTML se llena de clases y hay una curva de aprendizaje. Lo manejo extrayendo componentes, no clases.",
+      "respuestaEn": "Because styles live next to the component, I do not have to invent class names, and everything comes from one scale of spacing and colors, so the design stays consistent. The downside is noisy markup and a learning curve. I handle that by extracting components rather than classes.",
+      "claves": []
+    },
+    {
+      "id": "ent-024",
+      "pregunta": "¿Cómo organizas el CSS en un proyecto grande?",
+      "preguntaEn": "How do you organize CSS in a large project?",
+      "respuesta": "Primero defino tokens: colores, tipografías y espacios como variables. Después los estilos viven con su componente, con Tailwind o CSS Modules, para que no se filtren a otros lados. Lo global lo dejo al mínimo: reset, tipografía base y los tokens.",
+      "respuestaEn": "I start with tokens: colors, type and spacing as variables. Then styles live with their component, using Tailwind or CSS Modules, so they do not leak. I keep global CSS minimal: a reset, base typography and the tokens.",
+      "claves": []
+    }
+  ]
+}

@@ -11,6 +11,7 @@ export const NIVELES = { 1: "básico", 2: "intermedio", 3: "difícil" };
 
 /** Orden de estudio de las colecciones (las que no estén aquí van al final). */
 const ORDEN_COLECCIONES = [
+  "javascript/guiados",
   "javascript/ejercicios",
   "javascript/retos",
   "algoritmos/retos",

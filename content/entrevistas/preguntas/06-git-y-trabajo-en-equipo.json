@@ -1,0 +1,69 @@
+{
+  "categoria": "Git y trabajo en equipo",
+  "preguntas": [
+    {
+      "id": "ent-083",
+      "pregunta": "¿Cuál es tu flujo de trabajo con Git?",
+      "preguntaEn": "What is your Git workflow?",
+      "respuesta": "Creo una rama por tarea desde la principal, hago commits pequeños con mensajes claros, subo la rama y abro un pull request. Un compañero lo revisa, corrijo lo que haga falta y se fusiona. Así trabajamos en el portal de mi facultad: rama por tarea, revisión cruzada y nada directo a la rama principal.",
+      "respuestaEn": "I create a branch per task from main, make small commits with clear messages, push the branch and open a pull request. A teammate reviews it, I fix what is needed, and it gets merged. That is how we work on my faculty's portal: a branch per task, cross review, and nothing pushed straight to main.",
+      "claves": []
+    },
+    {
+      "id": "ent-084",
+      "pregunta": "¿Diferencia entre `merge` y `rebase`?",
+      "preguntaEn": "Difference between merge and rebase?",
+      "respuesta": "Los dos integran cambios. `merge` crea un commit que une las dos historias y conserva todo tal como pasó. `rebase` vuelve a aplicar mis commits encima de la rama actualizada y deja una historia lineal. Uso rebase para poner al día mi rama local, pero nunca sobre commits que otras personas ya tienen.",
+      "respuestaEn": "Both integrate changes. `merge` creates a commit that joins the two histories and keeps everything as it happened. `rebase` replays my commits on top of the updated branch, giving a linear history. I use rebase to update my local branch, but never on commits other people already have.",
+      "claves": []
+    },
+    {
+      "id": "ent-085",
+      "pregunta": "¿Cómo resuelves un conflicto de merge?",
+      "preguntaEn": "How do you resolve a merge conflict?",
+      "respuesta": "Abro los archivos marcados, leo las dos versiones y entiendo qué quería cada cambio antes de elegir. A veces la respuesta es una combinación. Luego corro la aplicación y las pruebas, y recién ahí hago el commit. Si el cambio del otro no me queda claro, le pregunto en lugar de adivinar.",
+      "respuestaEn": "I open the flagged files, read both versions and understand what each change intended before choosing. Sometimes the answer is a combination. Then I run the app and the tests, and only then commit. If the other person's change is unclear, I ask instead of guessing.",
+      "claves": []
+    },
+    {
+      "id": "ent-086",
+      "pregunta": "¿Qué hace un buen pull request?",
+      "preguntaEn": "What makes a good pull request?",
+      "respuesta": "Es pequeño y resuelve una sola cosa. La descripción explica qué cambia y por qué, y cómo probarlo, con capturas si es visual. Antes de pedir revisión lo reviso yo mismo. Un PR chico se revisa rápido y bien; uno enorme se aprueba sin leer.",
+      "respuestaEn": "It is small and solves one thing. The description explains what changes and why, and how to test it, with screenshots if it is visual. I review it myself before asking for a review. A small PR gets a quick, careful review; a huge one gets approved without being read.",
+      "claves": []
+    },
+    {
+      "id": "ent-087",
+      "pregunta": "¿Cómo recibes y das feedback en una revisión de código?",
+      "preguntaEn": "How do you give and receive feedback in code review?",
+      "respuesta": "Cuando recibo, no lo tomo personal: el comentario es sobre el código. Si no estoy de acuerdo, explico mi razón y escucho. Cuando doy, pregunto antes de afirmar, explico el porqué y distingo lo que bloquea de lo que es solo una sugerencia.",
+      "respuestaEn": "When I receive feedback I do not take it personally; the comment is about the code. If I disagree, I explain my reasoning and listen. When I give it, I ask before asserting, explain why, and separate what blocks the merge from what is just a suggestion.",
+      "claves": []
+    },
+    {
+      "id": "ent-088",
+      "pregunta": "¿Qué es CI/CD?",
+      "preguntaEn": "What is CI/CD?",
+      "respuesta": "Integración continua es que, en cada cambio, se ejecuten automáticamente las pruebas y revisiones. Despliegue continuo es que, si todo pasa, el cambio se publique solo. En el repositorio del festival de mi facultad agregué un flujo que corre las pruebas en cada pull request, así los errores aparecen antes de fusionar.",
+      "respuestaEn": "Continuous integration means tests and checks run automatically on every change. Continuous deployment means that if everything passes, the change ships on its own. In my faculty's festival repository I added a workflow that runs the tests on every pull request, so errors show up before merging.",
+      "claves": []
+    },
+    {
+      "id": "ent-089",
+      "pregunta": "¿Has trabajado con Scrum? ¿Cómo es tu día a día en un equipo ágil?",
+      "preguntaEn": "Have you worked with Scrum? What does an agile team's day look like?",
+      "respuesta": "Sí, en proyectos de la universidad con tablero en Jira. Trabajamos por sprints: planificamos qué entra, tenemos una reunión diaria corta donde cada uno dice qué hizo, qué hará y qué lo bloquea, y al final mostramos lo terminado y revisamos qué mejorar. Yo participé como desarrollador.",
+      "respuestaEn": "Yes, on university projects with a Jira board. We work in sprints: we plan what goes in, hold a short daily meeting where each person says what they did, what they will do and what blocks them, and at the end we demo what is done and discuss improvements. I took part as a developer.",
+      "claves": []
+    },
+    {
+      "id": "ent-090",
+      "pregunta": "¿Qué haces si recibes una tarea poco clara?",
+      "preguntaEn": "What do you do when a task is unclear?",
+      "respuesta": "Antes de escribir código, la repito con mis palabras y pregunto lo que falta: quién lo va a usar, qué casos debe cubrir y cuándo se considera terminada. Si no hay respuesta rápida, avanzo con la interpretación más razonable, lo dejo escrito y muestro algo pronto para corregir a tiempo.",
+      "respuestaEn": "Before writing code, I restate it in my own words and ask what is missing: who will use it, which cases it must cover and when it counts as done. If there is no quick answer, I move forward with the most reasonable interpretation, write it down, and show something early so we can correct course in time.",
+      "claves": []
+    }
+  ]
+}

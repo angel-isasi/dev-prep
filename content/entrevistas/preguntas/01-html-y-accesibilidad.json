@@ -1,0 +1,85 @@
+{
+  "categoria": "HTML y accesibilidad",
+  "preguntas": [
+    {
+      "id": "ent-001",
+      "pregunta": "¿Qué es HTML semántico y por qué importa?",
+      "preguntaEn": "What is semantic HTML and why does it matter?",
+      "respuesta": "Es usar la etiqueta que describe el contenido: `header`, `nav`, `main`, `article`, `button`, en lugar de `div` para todo. Importa por tres razones: los lectores de pantalla entienden la página, Google la interpreta mejor y el código es más fácil de mantener. Por ejemplo, un `button` ya funciona con teclado; un `div` con `onClick` no.",
+      "respuestaEn": "It means using the element that describes the content, like `header`, `nav`, `main`, `article` or `button`, instead of a `div` for everything. It matters because screen readers understand the page, search engines read it better, and the code is easier to maintain. A real `button` works with the keyboard out of the box; a clickable `div` does not.",
+      "claves": []
+    },
+    {
+      "id": "ent-002",
+      "pregunta": "¿Cuándo usas `<button>` y cuándo `<a>`?",
+      "preguntaEn": "When do you use a button and when a link?",
+      "respuesta": "Si lleva a otra página o URL, es un enlace. Si ejecuta una acción en la página, como abrir un modal o enviar un formulario, es un botón. Confundirlos rompe cosas como abrir en pestaña nueva o navegar con teclado.",
+      "respuestaEn": "If it takes you to another URL, it is a link. If it performs an action on the page, like opening a modal or submitting a form, it is a button. Mixing them up breaks things like opening in a new tab or keyboard navigation.",
+      "claves": []
+    },
+    {
+      "id": "ent-003",
+      "pregunta": "¿Qué es el DOM?",
+      "preguntaEn": "What is the DOM?",
+      "respuesta": "Es la representación en memoria de la página como un árbol de nodos. El navegador lo construye a partir del HTML y JavaScript puede leerlo y cambiarlo. Cuando React actualiza la pantalla, al final lo que hace es modificar el DOM por mí.",
+      "respuestaEn": "It is the in-memory representation of the page as a tree of nodes. The browser builds it from the HTML, and JavaScript can read and change it. When React updates the screen, it is ultimately updating the DOM for me.",
+      "claves": []
+    },
+    {
+      "id": "ent-004",
+      "pregunta": "¿Diferencia entre `defer` y `async` en un script?",
+      "preguntaEn": "What is the difference between defer and async on a script tag?",
+      "respuesta": "Los dos descargan el script sin bloquear el HTML. `async` lo ejecuta apenas termina de descargar, sin respetar orden; sirve para scripts independientes como analítica. `defer` espera a que termine el HTML y respeta el orden; es lo que uso para el código de la aplicación.",
+      "respuestaEn": "Both download the script without blocking HTML parsing. `async` runs it as soon as it arrives, in no guaranteed order, which suits independent scripts like analytics. `defer` waits until parsing is done and keeps the order, so it is what I use for application code.",
+      "claves": []
+    },
+    {
+      "id": "ent-005",
+      "pregunta": "¿Cómo haces accesible un formulario?",
+      "preguntaEn": "How do you make a form accessible?",
+      "respuesta": "Cada campo con su `label` asociado, no solo un placeholder. Los errores en texto, cerca del campo y conectados con `aria-describedby`. Que todo se pueda usar con teclado y que el foco se vea. Y uso los tipos correctos, como `type='email'`, para que el celular muestre el teclado adecuado.",
+      "respuestaEn": "\"Every field has an associated `label`, not just a placeholder. Errors are written as text next to the field and linked with `aria-describedby`. Everything works with the keyboard and focus is visible. I also use the right input types, like `type='email'`, so phones show the right keyboard.\"\n\n```html\n<label for=\"correo\">Correo</label>\n<input id=\"correo\" type=\"email\" aria-describedby=\"error-correo\" aria-invalid=\"true\" />\n<p id=\"error-correo\" role=\"alert\">Ingresa un correo válido, por ejemplo nombre@unica.edu.pe</p>\n```",
+      "claves": []
+    },
+    {
+      "id": "ent-006",
+      "pregunta": "¿Qué es ARIA y cuándo lo usas?",
+      "preguntaEn": "What is ARIA and when do you use it?",
+      "respuesta": "Son atributos que dan información extra a las tecnologías de asistencia, como `aria-label` o `aria-expanded`. La primera regla es no usar ARIA si existe una etiqueta HTML que ya lo hace. Lo uso cuando construyo algo que HTML no trae, como pestañas o un menú desplegable.",
+      "respuestaEn": "ARIA attributes give extra information to assistive technology, like `aria-label` or `aria-expanded`. The first rule is not to use ARIA when a native HTML element already does the job. I use it for widgets HTML does not provide, like tabs or a dropdown menu.",
+      "claves": []
+    },
+    {
+      "id": "ent-007",
+      "pregunta": "¿Para qué sirve el atributo `alt`?",
+      "preguntaEn": "What is the alt attribute for?",
+      "respuesta": "Describe la imagen para quien no puede verla: lectores de pantalla, buscadores o cuando la imagen no carga. Si la imagen informa, describo lo que muestra. Si es decorativa, pongo `alt` vacío para que el lector la salte.",
+      "respuestaEn": "It describes the image for anyone who cannot see it: screen readers, search engines, or when the image fails to load. If the image carries information, I describe it. If it is decorative, I leave `alt` empty so screen readers skip it.",
+      "claves": []
+    },
+    {
+      "id": "ent-008",
+      "pregunta": "¿Diferencia entre `localStorage`, `sessionStorage` y cookies?",
+      "preguntaEn": "What is the difference between localStorage, sessionStorage and cookies?",
+      "respuesta": "`localStorage` guarda datos en el navegador sin fecha de vencimiento. `sessionStorage` dura mientras la pestaña esté abierta. Las cookies viajan al servidor en cada petición y pueden ser `HttpOnly`, o sea, invisibles para JavaScript. Por eso un token de sesión va mejor en una cookie `HttpOnly` que en `localStorage`, donde un ataque XSS podría leerlo.",
+      "respuestaEn": "`localStorage` keeps data in the browser with no expiry. `sessionStorage` lasts while the tab is open. Cookies are sent to the server on every request and can be `HttpOnly`, meaning JavaScript cannot read them. That is why a session token is safer in an `HttpOnly` cookie than in `localStorage`, where an XSS attack could read it.",
+      "claves": []
+    },
+    {
+      "id": "ent-009",
+      "pregunta": "¿Qué hace la etiqueta `meta viewport`?",
+      "preguntaEn": "What does the viewport meta tag do?",
+      "respuesta": "Le dice al celular que use el ancho real de la pantalla en lugar de simular una pantalla de escritorio. Sin ella, el diseño responsive no funciona: la página se ve diminuta y con zoom.",
+      "respuestaEn": "It tells mobile browsers to use the real device width instead of pretending to be a desktop screen. Without it, responsive design does not work and the page looks tiny and zoomed out.",
+      "claves": []
+    },
+    {
+      "id": "ent-010",
+      "pregunta": "¿Cómo mejoras el SEO desde el frontend?",
+      "preguntaEn": "How do you improve SEO from the frontend?",
+      "respuesta": "HTML semántico con un solo `h1`, títulos y descripciones únicos por página, URLs legibles, imágenes con `alt` y buen rendimiento. Y que el contenido llegue en el HTML, con renderizado en servidor o estático, que es una de las razones por las que uso Next.js.",
+      "respuestaEn": "Semantic HTML with a single `h1`, a unique title and description per page, readable URLs, images with `alt` text and good performance. I also make sure the content is in the HTML itself, using server or static rendering, which is one reason I use Next.js.",
+      "claves": []
+    }
+  ]
+}

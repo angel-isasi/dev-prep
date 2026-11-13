@@ -1,0 +1,85 @@
+{
+  "categoria": "Sobre ti (preguntas de comportamiento)",
+  "preguntas": [
+    {
+      "id": "ent-091",
+      "pregunta": "Cuéntame sobre ti.",
+      "preguntaEn": "Tell me about yourself.",
+      "respuesta": "Soy Angel, estudiante de Ingeniería de Sistemas en la Universidad Nacional San Luis Gonzaga de Ica. Me enfoco en frontend con React y Next.js. Tengo mi portafolio publicado, hice el sitio web de un restaurante como trabajo freelance y ahora formo parte del equipo que desarrolla el portal de una facultad de mi universidad. Busco mi primera experiencia en una empresa para aprender de un equipo y aportar desde el primer día.",
+      "respuestaEn": "I am Angel, a Systems Engineering student at Universidad Nacional San Luis Gonzaga in Ica, Peru. I focus on frontend with React and Next.js. I have a published portfolio, I built a restaurant's website as a freelance job, and I am now part of the team developing a faculty portal at my university. I am looking for my first role in a company to learn from a team and contribute from day one.",
+      "claves": []
+    },
+    {
+      "id": "ent-092",
+      "pregunta": "Háblame de un proyecto del que estés orgulloso.",
+      "preguntaEn": "Tell me about a project you are proud of.",
+      "respuesta": "El sistema de votación del festival de cortometrajes de una facultad de mi universidad. El reto era que el público votara una sola vez y sin bots. Yo me encargué del inicio de sesión con Google y de la protección contra bots con Cloudflare Turnstile: creé las cuentas, las configuré y probé el flujo completo en local. Estoy orgulloso porque lo usa gente real y porque tuve que aprender Laravel sobre la marcha.",
+      "respuestaEn": "The voting system for a short film festival at one of my university's faculties. The challenge was letting the public vote only once and keeping bots out. I handled Google sign-in and bot protection with Cloudflare Turnstile: I created the accounts, configured them and tested the whole flow locally. I am proud because real people use it and because I had to learn Laravel along the way.",
+      "claves": []
+    },
+    {
+      "id": "ent-093",
+      "pregunta": "Cuéntame de un error que cometiste y qué aprendiste.",
+      "preguntaEn": "Tell me about a mistake you made and what you learned.",
+      "respuesta": "[Usa uno real y pequeño.] Por ejemplo: en un proyecto subí un cambio sin probarlo en celular y el menú se rompía en pantallas pequeñas. Lo detecté al revisarlo en mi teléfono, lo corregí ese mismo día y avisé al equipo. Desde entonces pruebo siempre en móvil antes de abrir un pull request y lo tengo en mi lista de revisión.",
+      "respuestaEn": "[Use a real, small one.] For example: on a project I pushed a change without testing it on mobile and the menu broke on small screens. I noticed it when checking on my phone, fixed it the same day and told the team. Since then I always test on mobile before opening a pull request, and it is on my checklist.",
+      "claves": []
+    },
+    {
+      "id": "ent-094",
+      "pregunta": "Cuéntame de un conflicto o desacuerdo con un compañero.",
+      "preguntaEn": "Tell me about a disagreement with a teammate.",
+      "respuesta": "[Ajústalo a lo que pasó.] En un proyecto de equipo no estábamos de acuerdo sobre cómo organizar una parte del trabajo. En lugar de discutir por chat, propuse una llamada corta. Cada uno explicó su razón, vimos que queríamos lo mismo, que era terminar a tiempo, y acordamos una solución intermedia. Aprendí que la mayoría de conflictos son falta de contexto.",
+      "respuestaEn": "[Adapt it to what happened.] On a team project we disagreed about how to organize part of the work. Instead of arguing over chat, I suggested a short call. Each of us explained our reasoning, we realized we wanted the same thing, which was to finish on time, and we agreed on a middle ground. I learned that most conflicts come from missing context.",
+      "claves": []
+    },
+    {
+      "id": "ent-095",
+      "pregunta": "¿Cómo aprendes una tecnología nueva?",
+      "preguntaEn": "How do you learn a new technology?",
+      "respuesta": "Leo la documentación oficial para entender la idea central y enseguida construyo algo pequeño. Cuando entré al proyecto de mi facultad no conocía Laravel ni PHP. Instalé el entorno, levanté el proyecto en local, leí el código existente y empecé por una tarea acotada. En pocos días ya había abierto mi primer pull request.",
+      "respuestaEn": "I read the official documentation to grasp the core idea and then build something small right away. When I joined my faculty's project I did not know Laravel or PHP. I set up the environment, ran the project locally, read the existing code and started with a well-scoped task. Within a few days I had opened my first pull request.",
+      "claves": []
+    },
+    {
+      "id": "ent-096",
+      "pregunta": "¿Cómo manejas la presión y los plazos?",
+      "preguntaEn": "How do you handle pressure and deadlines?",
+      "respuesta": "Divido el trabajo en partes y ordeno por lo que más importa. Si veo que no llego, aviso temprano y propongo qué recortar, en lugar de callar hasta el final. En el festival de mi facultad había una fecha fija de salida, así que priorizamos lo indispensable: que se pudiera votar de forma segura.",
+      "respuestaEn": "I break the work into parts and order them by what matters most. If I see I will not make it, I say so early and suggest what to cut, rather than staying quiet until the end. On my faculty's festival there was a fixed launch date, so we prioritized the essentials: secure voting.",
+      "claves": []
+    },
+    {
+      "id": "ent-097",
+      "pregunta": "¿Cuáles son tus fortalezas y en qué estás mejorando?",
+      "preguntaEn": "What are your strengths and what are you improving?",
+      "respuesta": "Mi fortaleza es que tomo la iniciativa: si algo está trabado, busco cómo destrabarlo. En el proyecto de mi facultad, las cuentas para el inicio de sesión estaban pendientes, así que me ofrecí, hablé con el coordinador y las dejé configuradas. Lo que estoy mejorando es mi inglés hablado: tengo nivel B2 y practico explicando temas técnicos en voz alta.",
+      "respuestaEn": "My strength is taking initiative: when something is stuck, I look for a way to unblock it. On my faculty's project, the accounts needed for sign-in were pending, so I volunteered, talked to the coordinator and got them configured. What I am improving is my spoken English: I am at a B2 level and I practice by explaining technical topics out loud.",
+      "claves": []
+    },
+    {
+      "id": "ent-098",
+      "pregunta": "¿Por qué quieres trabajar aquí?",
+      "preguntaEn": "Why do you want to work here?",
+      "respuesta": "[Investiga la empresa antes.] Me interesa porque [algo concreto de su producto o tecnología]. Uso React y Next.js, que es parte de su stack, y busco un equipo donde pueda aprender buenas prácticas y recibir revisión de mi código. Creo que puedo aportar ganas de aprender, responsabilidad y experiencia real publicando proyectos.",
+      "respuestaEn": "[Research the company first.] I am interested because [something specific about their product or technology]. I use React and Next.js, which are part of your stack, and I am looking for a team where I can learn good practices and get my code reviewed. I believe I can bring eagerness to learn, responsibility and real experience shipping projects.",
+      "claves": []
+    },
+    {
+      "id": "ent-099",
+      "pregunta": "¿Dónde te ves en unos años?",
+      "preguntaEn": "Where do you see yourself in a few years?",
+      "respuesta": "Me veo como un desarrollador sólido en frontend, con buen manejo de backend y de la nube, capaz de llevar una funcionalidad de principio a fin. También quiero trabajar con equipos internacionales. Para eso estoy reforzando mi inglés y avanzando en certificaciones de AWS.",
+      "respuestaEn": "I see myself as a solid frontend developer with good backend and cloud skills, able to own a feature from start to finish. I also want to work with international teams. To get there I am strengthening my English and working toward AWS certifications.",
+      "claves": []
+    },
+    {
+      "id": "ent-100",
+      "pregunta": "¿Tienes alguna pregunta para nosotros?",
+      "preguntaEn": "Do you have any questions for us?",
+      "respuesta": "Sí, tres. ¿Cómo sería mi primer mes y qué esperarían que logre? ¿Cómo es el proceso de revisión de código en el equipo? ¿Qué diferencia a las personas que más crecen aquí?",
+      "respuestaEn": "\"Yes, three. What would my first month look like and what would you expect me to achieve? What is the code review process like on the team? What sets apart the people who grow the most here?\"\n\n**Consejo:** nunca digas que no tienes preguntas. Preguntar muestra interés y te ayuda a decidir si el lugar te conviene.",
+      "claves": []
+    }
+  ]
+}

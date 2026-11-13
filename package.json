@@ -12,7 +12,8 @@
     "build": "vite build",
     "start": "node server/index.js",
     "validar": "node scripts/validar-contenido.js",
-    "test": "vitest run --config vitest.config.js"
+    "test": "vitest run --config vitest.config.js",
+    "validar:aprender": "node scripts/validar-aprender.js"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.2",

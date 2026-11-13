@@ -1,6 +1,7 @@
 // Textos legibles para los valores internos (ids de colección, tema...).
 
 const COLECCIONES = {
+  "javascript/guiados": "Guiados",
   "javascript/ejercicios": "JavaScript",
   "javascript/retos": "Retos JS",
   "algoritmos/retos": "Algoritmos",
@@ -10,6 +11,10 @@ const COLECCIONES = {
 };
 
 const TEMAS = {
+  variables: "Variables y tipos",
+  condicionales: "Condicionales y bucles",
+  this: "this",
+  dom: "DOM y eventos",
   objetos: "Objetos",
   arrays: "Arrays",
   strings: "Strings",
