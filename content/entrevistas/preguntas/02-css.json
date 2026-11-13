@@ -7,7 +7,12 @@
       "preguntaEn": "Explain the box model.",
       "respuesta": "Cada elemento es una caja con contenido, padding, borde y margen. Por defecto, el ancho que defines no incluye padding ni borde, y eso desordena los cálculos. Por eso casi siempre pongo `box-sizing: border-box`, para que el ancho sea el total visible.",
       "respuestaEn": "Every element is a box made of content, padding, border and margin. By default the width you set excludes padding and border, which makes sizing confusing. That is why I almost always set `box-sizing: border-box`, so the width is the full visible size.",
-      "claves": []
+      "claves": [
+        "Con `content-box` (por defecto), `width: 200px` más `padding: 20px` y `border: 1px` ocupa 242 px de ancho.",
+        "El margen nunca entra en el ancho de la caja, ni siquiera con `border-box`.",
+        "Reset típico: `*, *::before, *::after { box-sizing: border-box; }`.",
+        "Trampa: el colapso de márgenes; los márgenes verticales entre bloques se fusionan y queda el mayor, no la suma."
+      ]
     },
     {
       "id": "ent-012",
@@ -15,7 +20,12 @@
       "preguntaEn": "When do you use Flexbox and when Grid?",
       "respuesta": "Flexbox para una sola dirección: una fila de botones, una barra de navegación, centrar algo. Grid para dos dimensiones: una galería o el esqueleto de una página con columnas y filas. En la práctica los combino: Grid para la página y Flexbox dentro de cada pieza.",
       "respuestaEn": "\"Flexbox for one direction: a row of buttons, a navbar, centering something. Grid for two dimensions: a gallery or a page skeleton with rows and columns. In practice I combine them: Grid for the page layout and Flexbox inside each component.\"\n\n```css\n.galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1.5rem; }\n.barra { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }\n```",
-      "claves": []
+      "claves": [
+        "Flexbox reparte el espacio según el contenido (`flex-grow`, `flex-shrink`, `flex-basis`); Grid define primero la estructura y luego coloca el contenido.",
+        "Grid hace galerías responsive sin media queries: `grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))`.",
+        "`gap` funciona en los dos, así que ya no hace falta separar con márgenes.",
+        "Trampa: decir que uno reemplaza al otro; se complementan."
+      ]
     },
     {
       "id": "ent-013",
@@ -23,7 +33,12 @@
       "preguntaEn": "How do you center an element both ways?",
       "respuesta": "Con Grid son dos líneas en el contenedor: `display: grid` y `place-items: center`. Con Flexbox uso `justify-content` y `align-items` en `center`.",
       "respuestaEn": "\"With Grid it takes two lines on the parent: `display: grid` and `place-items: center`. With Flexbox I set both `justify-content` and `align-items` to `center`.\"\n\n```css\n.contenedor { display: grid; place-items: center; min-height: 100dvh; }\n```",
-      "claves": []
+      "claves": [
+        "`place-items: center` es un atajo de `align-items` y `justify-items` a la vez.",
+        "El contenedor necesita altura (por ejemplo `min-height: 100vh`); si no, no hay espacio vertical donde centrar.",
+        "Alternativa clásica: `position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)`.",
+        "Solo horizontal, en un bloque con ancho definido: `margin: 0 auto`; para texto, `text-align: center`."
+      ]
     },
     {
       "id": "ent-014",
@@ -31,7 +46,12 @@
       "preguntaEn": "What is specificity?",
       "respuesta": "Es la regla que decide qué estilo gana cuando varios apuntan al mismo elemento. De menor a mayor: etiquetas, clases, ids y estilos en línea. Si empatan, gana el que está más abajo. Para no pelear con eso uso casi solo clases, y evito ids e `!important`.",
       "respuestaEn": "It is the rule that decides which style wins when several target the same element. From lowest to highest: elements, classes, ids and inline styles. On a tie, the later rule wins. To avoid fighting it, I use classes almost exclusively and avoid ids and `!important`.",
-      "claves": []
+      "claves": [
+        "Se cuenta en tres columnas (ids, clases/atributos/pseudo-clases, etiquetas): `#menu a` es (1,0,1) y le gana a `.nav .link a`, que es (0,2,1).",
+        "No es una suma en base 10: ninguna cantidad de clases le gana a un id.",
+        "`!important` le gana a todo lo normal, incluso a los estilos en línea; por eso crea guerras de especificidad.",
+        "`*` y los combinadores (`>`, `+`) no suman; `:where()` vale cero y `:is()`/`:not()` toman la del argumento más específico."
+      ]
     },
     {
       "id": "ent-015",
@@ -39,7 +59,12 @@
       "preguntaEn": "Explain the values of position.",
       "respuesta": "`static` es el flujo normal. `relative` deja el elemento en su sitio pero permite moverlo y sirve de referencia para sus hijos. `absolute` lo saca del flujo y lo ubica respecto al ancestro posicionado más cercano. `fixed` lo fija a la ventana. Y `sticky` se comporta normal hasta que llega a un borde y ahí se queda pegado, como un encabezado.",
       "respuestaEn": "`static` is normal flow. `relative` keeps the element in place but lets you offset it and makes it a reference for its children. `absolute` removes it from the flow and positions it against the nearest positioned ancestor. `fixed` pins it to the viewport. `sticky` behaves normally until it reaches an edge and then sticks, like a header.",
-      "claves": []
+      "claves": [
+        "`absolute` busca el ancestro más cercano con `position` distinto de `static`; si no hay ninguno, se ubica respecto a la página.",
+        "Patrón típico: padre `relative` e hijo `absolute` para un badge o un botón de cerrar.",
+        "`sticky` necesita un borde como `top: 0` y suele fallar si un ancestro tiene `overflow: hidden`.",
+        "Trampa: `fixed` deja de fijarse a la ventana si un ancestro tiene `transform` o `filter`; pasa a ubicarse respecto a ese ancestro."
+      ]
     },
     {
       "id": "ent-016",
@@ -47,7 +72,12 @@
       "preguntaEn": "What is the difference between rem, em, px and percent?",
       "respuesta": "`px` es fijo. `rem` es relativo al tamaño de letra de la raíz, así que respeta la configuración del usuario; lo uso para tipografía y espaciados. `em` es relativo al tamaño de letra del propio elemento, útil para que el padding de un botón crezca con su texto. Y `%` es relativo al padre.",
       "respuestaEn": "`px` is fixed. `rem` is relative to the root font size, so it respects the user's settings; I use it for type and spacing. `em` is relative to the element's own font size, handy when a button's padding should scale with its text. `%` is relative to the parent.",
-      "claves": []
+      "claves": [
+        "Por defecto `1rem` equivale a 16 px, pero si el usuario sube la letra del navegador, lo que está en `rem` crece y lo que está en `px` no.",
+        "`em` se acumula al anidar: un `font-size: 1.2em` dentro de otro `1.2em` da 1.44 veces el tamaño base.",
+        "Detalle: el `%` en `padding` y `margin` se calcula sobre el ancho del contenedor, incluso el vertical.",
+        "También existen `vw`/`vh` (relativos a la ventana) y `ch` (ancho de un carácter), útil para limitar el largo de las líneas."
+      ]
     },
     {
       "id": "ent-017",
@@ -55,7 +85,12 @@
       "preguntaEn": "What does mobile first mean?",
       "respuesta": "Escribir primero los estilos para pantallas pequeñas y luego agregar mejoras con `min-width` para pantallas grandes. El CSS queda más simple y me obliga a priorizar el contenido. En proyectos como el portal de mi facultad tiene todo el sentido, porque la mayoría entra desde el celular.",
       "respuestaEn": "\"It means writing styles for small screens first and then adding enhancements with `min-width` queries for larger ones. The CSS ends up simpler and it forces me to prioritize content. On projects like my faculty's portal it makes sense because most visitors are on phones.\"\n\n```css\n.tarjetas { display: grid; gap: 1rem; }\n@media (min-width: 768px) { .tarjetas { grid-template-columns: repeat(3, 1fr); } }\n```",
-      "claves": []
+      "claves": [
+        "Estructura: estilos base sin media query y luego `@media (min-width: 768px) { ... }` para pantallas más grandes.",
+        "Desktop first usa `max-width` y suele terminar sobrescribiendo muchos estilos para el celular.",
+        "Los breakpoints se eligen donde el diseño se rompe, no según modelos de celular.",
+        "Prueba en el modo responsive de DevTools y también en un celular real: el toque y el teclado virtual no se simulan igual."
+      ]
     },
     {
       "id": "ent-018",
@@ -63,7 +98,12 @@
       "preguntaEn": "What are CSS custom properties?",
       "respuesta": "Son valores reutilizables que defino con dos guiones, como `--color-primario`, y uso con `var()`. A diferencia de las variables de Sass, existen en el navegador: puedo cambiarlas con JavaScript o dentro de un media query. Son la base para hacer temas, como el modo oscuro.",
       "respuestaEn": "They are reusable values defined with two dashes, like `--color-primary`, and read with `var()`. Unlike Sass variables, they exist in the browser, so I can change them with JavaScript or inside a media query. They are the foundation for theming, such as dark mode.",
-      "claves": []
+      "claves": [
+        "Se definen normalmente en `:root` y se heredan: puedes redefinirlas en `[data-theme=\"dark\"]` o en un componente y todo lo de adentro cambia.",
+        "`var(--espacio, 1rem)`: el segundo valor es un respaldo si la variable no existe.",
+        "Desde JavaScript: `elemento.style.setProperty('--color-primario', '#0af')`.",
+        "Las variables de Sass se resuelven al compilar y desaparecen; las de CSS siguen vivas mientras la página corre."
+      ]
     },
     {
       "id": "ent-019",
@@ -71,7 +111,12 @@
       "preguntaEn": "Difference between display none, visibility hidden and opacity zero?",
       "respuesta": "`display: none` quita el elemento: no ocupa espacio ni lo leen los lectores de pantalla. `visibility: hidden` lo oculta pero conserva su espacio. `opacity: 0` lo vuelve transparente, pero sigue ahí y se puede hacer clic. Para ocultar algo visualmente pero dejarlo disponible al lector de pantalla uso una clase tipo `sr-only`.",
       "respuestaEn": "`display: none` removes the element: it takes no space and screen readers ignore it. `visibility: hidden` hides it but keeps its space. `opacity: 0` makes it transparent, yet it is still there and clickable. To hide something visually but keep it for screen readers, I use an `sr-only` class.",
-      "claves": []
+      "claves": [
+        "`display: none` y `visibility: hidden` sacan el elemento del árbol de accesibilidad; con `opacity: 0` el lector lo sigue leyendo.",
+        "`visibility: hidden` no recibe clics ni foco; con `opacity: 0` un botón invisible sigue recibiendo clics y foco con Tab.",
+        "`opacity` se anima con transiciones; `display` no se interpola, por eso los fundidos usan `opacity`.",
+        "`sr-only` combina tamaño de 1 px, `overflow: hidden` y `clip` para ocultar visualmente sin quitarlo del árbol de accesibilidad."
+      ]
     },
     {
       "id": "ent-020",
@@ -79,7 +124,12 @@
       "preguntaEn": "What is z-index and why does it sometimes not work?",
       "respuesta": "Controla qué elemento queda encima, pero solo en elementos posicionados y dentro de su contexto de apilamiento. Si un padre crea un contexto nuevo, por ejemplo con `transform` u `opacity`, el hijo no puede salir de ahí aunque le ponga `z-index: 9999`. Cuando falla, reviso los ancestros.",
       "respuestaEn": "It controls which element sits on top, but only for positioned elements and within their stacking context. If a parent creates a new context, for example with `transform` or `opacity`, the child cannot escape it even with `z-index: 9999`. When it fails, I check the ancestors.",
-      "claves": []
+      "claves": [
+        "Crean contexto de apilamiento: `position` con `z-index` distinto de `auto`, `opacity` menor que 1, `transform`, `filter` e `isolation: isolate`, entre otros.",
+        "Dentro de un contexto, los `z-index` solo compiten entre sí; el padre entero se apila como una sola unidad frente a los demás.",
+        "En elementos `static` el `z-index` no hace nada, salvo en hijos de flex o grid, donde sí aplica.",
+        "Solución común: renderizar modales y tooltips al final del `body` (en React, con un portal) y usar una escala de `z-index` definida."
+      ]
     },
     {
       "id": "ent-021",
@@ -87,7 +137,12 @@
       "preguntaEn": "Difference between pseudo-classes and pseudo-elements?",
       "respuesta": "Una pseudo-clase describe un estado, como `:hover`, `:focus-visible` o `:nth-child`. Un pseudo-elemento da estilo a una parte del elemento o crea una caja nueva, como `::before`, `::after` o `::placeholder`.",
       "respuestaEn": "A pseudo-class describes a state, like `:hover`, `:focus-visible` or `:nth-child`. A pseudo-element styles part of an element or creates a new box, like `::before`, `::after` or `::placeholder`.",
-      "claves": []
+      "claves": [
+        "Sintaxis: pseudo-clase con `:` y pseudo-elemento con `::` (el navegador acepta `:before` por compatibilidad).",
+        "`::before` y `::after` necesitan la propiedad `content` (aunque sea `content: ''`) para aparecer.",
+        "`:focus-visible` muestra el contorno solo al navegar con teclado; quitar el `outline` sin reemplazo rompe la accesibilidad.",
+        "No pongas contenido importante en `::before` o `::after`: no se puede seleccionar y los lectores de pantalla no lo tratan de forma consistente."
+      ]
     },
     {
       "id": "ent-022",
@@ -95,7 +150,12 @@
       "preguntaEn": "Transitions or animations, and which properties are cheap to animate?",
       "respuesta": "Una transición va de un estado a otro cuando algo cambia, como un hover. Una animación con `@keyframes` puede tener varios pasos y repetirse sola. Para que sea fluida animo `transform` y `opacity`, que no obligan al navegador a recalcular el diseño. Y respeto `prefers-reduced-motion` para quien pidió menos movimiento.",
       "respuestaEn": "A transition goes from one state to another when something changes, like a hover. A `@keyframes` animation can have several steps and run on its own. For smooth motion I animate `transform` and `opacity`, which do not force layout recalculation. I also respect `prefers-reduced-motion` for users who asked for less motion.",
-      "claves": []
+      "claves": [
+        "Una transición necesita un cambio de estado que la dispare (hover, una clase): `transition: transform 200ms ease-out`.",
+        "Animar `width`, `height`, `top` o `margin` recalcula el diseño en cada cuadro; `transform` (`translate`, `scale`) y `opacity` solo recomponen capas.",
+        "`@media (prefers-reduced-motion: reduce)` sirve para quitar o reducir las animaciones.",
+        "Trampa: `transition: all`; anima propiedades que no esperabas y cuesta más."
+      ]
     },
     {
       "id": "ent-023",
@@ -103,7 +163,12 @@
       "preguntaEn": "Why do you use Tailwind and what are its downsides?",
       "respuesta": "Porque escribo los estilos junto al componente, no invento nombres de clases y todo sale de una misma escala de espacios y colores, así que el diseño queda consistente. La desventaja es que el HTML se llena de clases y hay una curva de aprendizaje. Lo manejo extrayendo componentes, no clases.",
       "respuestaEn": "Because styles live next to the component, I do not have to invent class names, and everything comes from one scale of spacing and colors, so the design stays consistent. The downside is noisy markup and a learning curve. I handle that by extracting components rather than classes.",
-      "claves": []
+      "claves": [
+        "Al compilar, Tailwind genera solo las clases que usas, así que el CSS final suele ser pequeño.",
+        "Los colores y espaciados se configuran en el tema; los valores arbitrarios como `w-[37px]` existen, pero con moderación.",
+        "La repetición se resuelve con componentes de React, no con `@apply` por todos lados.",
+        "Tailwind no reemplaza saber CSS: hay que entender Flexbox, Grid y el modelo de caja para usar bien sus clases."
+      ]
     },
     {
       "id": "ent-024",
@@ -111,7 +176,12 @@
       "preguntaEn": "How do you organize CSS in a large project?",
       "respuesta": "Primero defino tokens: colores, tipografías y espacios como variables. Después los estilos viven con su componente, con Tailwind o CSS Modules, para que no se filtren a otros lados. Lo global lo dejo al mínimo: reset, tipografía base y los tokens.",
       "respuestaEn": "I start with tokens: colors, type and spacing as variables. Then styles live with their component, using Tailwind or CSS Modules, so they do not leak. I keep global CSS minimal: a reset, base typography and the tokens.",
-      "claves": []
+      "claves": [
+        "Tokens como variables CSS: cambiar el color primario o el tema se hace en un solo lugar.",
+        "CSS Modules genera nombres únicos por archivo (`.boton` pasa a algo como `Boton_boton__x1y2`), así no hay choques.",
+        "Si el CSS es global, una convención de nombres como BEM (`.card__titulo--destacado`) evita colisiones.",
+        "Selectores cortos y sin anidar de más: mantienen la especificidad baja y el CSS predecible."
+      ]
     }
   ]
 }

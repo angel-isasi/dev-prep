@@ -7,15 +7,25 @@
       "preguntaEn": "What happens when you type a URL and press Enter?",
       "respuesta": "El navegador resuelve el dominio a una IP con DNS, abre una conexión segura con el servidor y envía una petición HTTP. El servidor responde con HTML. El navegador lo lee, descarga CSS, JavaScript e imágenes, construye el DOM, calcula estilos y posiciones, y pinta la página. Después JavaScript la vuelve interactiva.",
       "respuestaEn": "The browser resolves the domain to an IP through DNS, opens a secure connection to the server and sends an HTTP request. The server replies with HTML. The browser parses it, downloads CSS, JavaScript and images, builds the DOM, computes styles and layout, and paints the page. Then JavaScript makes it interactive.",
-      "claves": []
+      "claves": [
+        "DNS puede responder desde caché (navegador, sistema operativo, router) antes de consultar a los servidores DNS.",
+        "Con HTTPS, después de la conexión TCP hay un handshake TLS donde se verifica el certificado del servidor.",
+        "Al construir la página: DOM + CSSOM, árbol de render, layout y paint.",
+        "Un `<script>` sin `defer` ni `async` bloquea el análisis del HTML; por eso se usa `defer` o se pone al final."
+      ]
     },
     {
       "id": "ent-072",
       "pregunta": "¿Qué métodos HTTP conoces y qué significan los códigos de estado?",
       "preguntaEn": "Which HTTP methods do you know and what do status codes mean?",
-      "respuesta": "`GET` lee, `POST` crea, `PUT` y `PATCH` actualizan, `DELETE` borra. Los códigos van por familias: 200 es éxito, 300 redirección, 400 error del cliente, como 401 sin autenticar, 403 sin permiso y 404 no encontrado, y 500 error del servidor.",
+      "respuesta": "`GET` lee, `POST` crea, `PUT` y `PATCH` actualizan, `DELETE` borra. Los códigos van por familias: 2xx es éxito, 3xx redirección, 4xx error del cliente, como 401 sin autenticar, 403 sin permiso y 404 no encontrado, y 5xx error del servidor.",
       "respuestaEn": "`GET` reads, `POST` creates, `PUT` and `PATCH` update, `DELETE` removes. Status codes come in families: 200s are success, 300s redirects, 400s client errors, like 401 unauthenticated, 403 forbidden and 404 not found, and 500s server errors.",
-      "claves": []
+      "claves": [
+        "`GET` no debe modificar datos; `PUT` reemplaza el recurso completo y `PATCH` modifica solo una parte.",
+        "Idempotente: repetir la petición deja el mismo resultado. `GET`, `PUT` y `DELETE` lo son; `POST` no.",
+        "Códigos útiles: `201` creado, `204` sin contenido, `301`/`302` redirección, `304` no modificado (usa la caché), `400` datos inválidos.",
+        "Trampa: confundir 401 (no sé quién eres, inicia sesión) con 403 (sé quién eres, pero no tienes permiso)."
+      ]
     },
     {
       "id": "ent-073",
@@ -23,15 +33,25 @@
       "preguntaEn": "What is a REST API?",
       "respuesta": "Es una forma de organizar una API alrededor de recursos con URLs claras, como `/noticias` o `/noticias/15`, usando los métodos HTTP para indicar la acción y devolviendo normalmente JSON. Cada petición lleva todo lo necesario; el servidor no guarda el estado de la conversación.",
       "respuestaEn": "It is a way to organize an API around resources with clear URLs, like `/news` or `/news/15`, using HTTP methods to express the action and usually returning JSON. Each request carries everything needed; the server keeps no conversation state.",
-      "claves": []
+      "claves": [
+        "Las URLs nombran recursos con sustantivos (`/usuarios/7`), no acciones (`/obtenerUsuario`).",
+        "Sin estado: la sesión no vive en el servidor por conversación, cada petición envía su credencial, por ejemplo un token.",
+        "Responde con códigos de estado correctos, no un `200` con `{ error: ... }` en el cuerpo.",
+        "Recursos anidados y filtros: `/usuarios/7/pedidos?estado=pagado`."
+      ]
     },
     {
       "id": "ent-074",
       "pregunta": "¿Qué es CORS?",
       "preguntaEn": "What is CORS?",
-      "respuesta": "Es un mecanismo de seguridad del navegador. Por defecto, una página no puede leer respuestas de otro dominio. CORS permite que el servidor diga, con cabeceras, qué orígenes sí pueden. Si veo un error de CORS, la solución está en el servidor: configurar bien esas cabeceras, no desactivar nada en el frontend.",
-      "respuestaEn": "It is a browser security mechanism. By default a page cannot read responses from another domain. CORS lets the server say, through headers, which origins are allowed. When I see a CORS error, the fix is on the server: configure those headers properly, not disable anything on the frontend.",
-      "claves": []
+      "respuesta": "Es un mecanismo de seguridad del navegador. Por defecto, una página no puede leer respuestas de otro origen (otro protocolo, dominio o puerto). CORS permite que el servidor diga, con cabeceras, qué orígenes sí pueden. Si veo un error de CORS, la solución está en el servidor: configurar bien esas cabeceras, no desactivar nada en el frontend.",
+      "respuestaEn": "It is a browser security mechanism. By default a page cannot read responses from another origin (a different protocol, domain or port). CORS lets the server say, through headers, which origins are allowed. When I see a CORS error, the fix is on the server: configure those headers properly, not disable anything on the frontend.",
+      "claves": [
+        "Origen = protocolo + dominio + puerto: `localhost:5173` y `localhost:3000` ya son orígenes distintos.",
+        "El servidor responde con `Access-Control-Allow-Origin`; si falta o no coincide, el navegador bloquea la lectura de la respuesta.",
+        "Peticiones con métodos como `PUT`/`DELETE` o cabeceras como `Content-Type: application/json` envían antes un preflight `OPTIONS`.",
+        "CORS solo existe en el navegador: Postman o un servidor no lo aplican. En desarrollo se puede usar el proxy de Vite."
+      ]
     },
     {
       "id": "ent-075",
@@ -39,7 +59,12 @@
       "preguntaEn": "What are XSS and CSRF and how do you prevent them?",
       "respuesta": "XSS es cuando un atacante logra inyectar JavaScript en mi página. React ayuda porque escapa el texto por defecto; evito `dangerouslySetInnerHTML` y nunca confío en lo que escribe el usuario. CSRF es cuando otro sitio hace peticiones usando la sesión del usuario; se previene con cookies `SameSite` y tokens anti-CSRF.",
       "respuestaEn": "XSS is when an attacker manages to inject JavaScript into my page. React helps because it escapes text by default; I avoid `dangerouslySetInnerHTML` and never trust user input. CSRF is when another site sends requests using the user's session; it is prevented with `SameSite` cookies and anti-CSRF tokens.",
-      "claves": []
+      "claves": [
+        "XSS tipos: almacenado (queda guardado en la base de datos) y reflejado (viene en la URL). La defensa es escapar o sanitizar la salida.",
+        "Si debes mostrar HTML del usuario, sanitízalo con una librería como DOMPurify; en JavaScript puro usa `textContent`, no `innerHTML`.",
+        "Valida las URLs que pones en `href`: una que empieza con `javascript:` también ejecuta código.",
+        "Una cabecera Content-Security-Policy (CSP) limita qué scripts puede ejecutar la página y reduce el daño de un XSS."
+      ]
     },
     {
       "id": "ent-076",
@@ -47,7 +72,12 @@
       "preguntaEn": "Authentication versus authorization? What is a JWT?",
       "respuesta": "Autenticación es comprobar quién eres; autorización es qué puedes hacer. Un JWT es un token firmado que lleva datos del usuario; el servidor verifica la firma sin consultar la base de datos. En el proyecto de mi facultad configuré inicio de sesión con Google usando OAuth, donde Google autentica y nosotros decidimos los permisos.",
       "respuestaEn": "Authentication verifies who you are; authorization decides what you can do. A JWT is a signed token carrying user data; the server verifies the signature without querying the database. On my faculty's project I set up Google sign-in with OAuth, where Google authenticates and we decide the permissions.",
-      "claves": []
+      "claves": [
+        "401 es fallo de autenticación; 403 es fallo de autorización.",
+        "Un JWT tiene tres partes: header, payload y firma. El payload está codificado en Base64URL, no cifrado: no metas secretos.",
+        "Desventaja: no se puede revocar fácilmente antes de que expire; por eso duran poco y se usan refresh tokens.",
+        "Guardarlo en `localStorage` lo expone a XSS; una cookie `HttpOnly`, `Secure` y `SameSite` es más segura."
+      ]
     },
     {
       "id": "ent-077",
@@ -55,7 +85,12 @@
       "preguntaEn": "What are Core Web Vitals?",
       "respuesta": "Son tres métricas de Google sobre la experiencia real. LCP mide cuánto tarda en verse el contenido principal. INP mide qué tan rápido responde la página a una interacción. CLS mide cuánto salta el diseño mientras carga. Las reviso con Lighthouse y PageSpeed Insights.",
       "respuestaEn": "They are three Google metrics about real user experience. LCP measures how long the main content takes to appear. INP measures how quickly the page responds to an interaction. CLS measures how much the layout shifts while loading. I check them with Lighthouse and PageSpeed Insights.",
-      "claves": []
+      "claves": [
+        "Umbrales \"buenos\": LCP ≤ 2,5 s, INP ≤ 200 ms y CLS ≤ 0,1.",
+        "INP reemplazó a FID en 2024: mide todas las interacciones de la visita, no solo la primera.",
+        "Lighthouse es una prueba de laboratorio; los datos de campo (usuarios reales) salen de CrUX, que muestra PageSpeed Insights.",
+        "Cómo mejorar cada uno: LCP con imagen principal optimizada, INP con menos JavaScript bloqueante, CLS reservando espacio."
+      ]
     },
     {
       "id": "ent-078",
@@ -63,7 +98,12 @@
       "preguntaEn": "How do you optimize a site's performance?",
       "respuesta": "Empiezo midiendo. Luego, lo que más suele pesar son las imágenes: formato moderno, tamaño correcto y carga diferida. Después reduzco JavaScript con división de código, renderizo en servidor lo que pueda, uso caché y reservo espacio para imágenes y fuentes para que nada salte.",
       "respuestaEn": "I start by measuring. Images are usually the heaviest part: modern formats, the right size and lazy loading. Then I cut JavaScript with code splitting, render on the server where I can, use caching, and reserve space for images and fonts so nothing shifts.",
-      "claves": []
+      "claves": [
+        "Mide primero con Lighthouse y la pestaña Network o Performance: no optimices a ciegas.",
+        "Cargar menos: dividir el código por rutas, quitar dependencias pesadas y diferir lo que no se ve al inicio.",
+        "Para la imagen principal (LCP) no uses lazy: cárgala con prioridad.",
+        "Relaciona cada acción con una métrica: imágenes y servidor con LCP, JavaScript con INP, espacio reservado con CLS."
+      ]
     },
     {
       "id": "ent-079",
@@ -71,7 +111,12 @@
       "preguntaEn": "How do you optimize images?",
       "respuesta": "Uso formatos como WebP o AVIF, sirvo el tamaño que corresponde a cada pantalla con `srcset`, declaro ancho y alto para que no salte el diseño y cargo con `loading='lazy'` las que están fuera de la vista. En Next.js el componente `Image` hace casi todo eso solo.",
       "respuestaEn": "I use formats like WebP or AVIF, serve the right size for each screen with `srcset`, declare width and height so the layout does not shift, and lazy-load images that are off screen. In Next.js the `Image` component does most of that for me.",
-      "claves": []
+      "claves": [
+        "`srcset` con `sizes` deja que el navegador elija el archivo según el ancho de pantalla y la densidad de píxeles.",
+        "`width` y `height` permiten reservar el espacio antes de que cargue la imagen: evita CLS.",
+        "Trampa: poner `loading=\"lazy\"` a la imagen principal empeora el LCP; esa va con `fetchpriority=\"high\"`.",
+        "`<picture>` con varios `<source>` sirve AVIF o WebP y deja JPG como respaldo para navegadores antiguos."
+      ]
     },
     {
       "id": "ent-080",
@@ -79,7 +124,12 @@
       "preguntaEn": "How does browser caching work and what is a CDN?",
       "respuesta": "El servidor indica con la cabecera `Cache-Control` cuánto tiempo puede guardarse un archivo. Los archivos con un hash en el nombre se guardan por mucho tiempo, porque si cambian, cambia el nombre. Un CDN es una red de servidores repartidos por el mundo que entrega esos archivos desde el punto más cercano al usuario.",
       "respuestaEn": "The server uses the `Cache-Control` header to say how long a file can be stored. Files with a hash in their name are cached for a long time, because if they change, the name changes. A CDN is a network of servers around the world that delivers those files from the location closest to the user.",
-      "claves": []
+      "claves": [
+        "`Cache-Control: max-age=31536000, immutable` para archivos con hash; `no-cache` para el HTML, que siempre se revalida.",
+        "`no-cache` no significa \"no guardar\": guarda pero pregunta al servidor antes de usarlo. `no-store` es no guardar.",
+        "Revalidación con `ETag`: si el archivo no cambió, el servidor responde `304` sin reenviar el contenido.",
+        "El CDN baja la latencia y la carga del servidor de origen; Vercel o Cloudflare lo incluyen."
+      ]
     },
     {
       "id": "ent-081",
@@ -87,7 +137,12 @@
       "preguntaEn": "What do a bundler and tools like Vite do?",
       "respuesta": "Toman mis archivos de código, estilos e imágenes y los preparan para producción: los unen, minifican, eliminan código sin usar y dividen el resultado en partes. Vite además da un servidor de desarrollo muy rápido que actualiza la página al instante cuando guardo.",
       "respuestaEn": "They take my code, styles and images and prepare them for production: bundling, minifying, removing unused code and splitting the output into chunks. Vite also gives a very fast dev server that updates the page instantly when I save.",
-      "claves": []
+      "claves": [
+        "Tree shaking: elimina exportaciones que nadie importa; funciona mejor con módulos ES (`import`/`export`).",
+        "Minificar quita espacios y acorta nombres; los source maps permiten depurar el código original.",
+        "En desarrollo Vite sirve módulos ES nativos sin empaquetar todo, por eso arranca rápido; HMR actualiza solo el módulo cambiado.",
+        "Para producción Vite hace un build optimizado con hash en los nombres de archivo (`vite build`)."
+      ]
     },
     {
       "id": "ent-082",
@@ -95,7 +150,12 @@
       "preguntaEn": "What are environment variables and what must never be in the frontend?",
       "respuesta": "Son valores de configuración que cambian según el entorno, como la URL de la API. Todo lo que llega al navegador es público, así que una clave secreta nunca va en el frontend: va en el servidor. En Next.js solo las variables que empiezan con `NEXT_PUBLIC_` llegan al cliente. Y el archivo `.env` nunca se sube al repositorio.",
       "respuestaEn": "They are configuration values that change per environment, like the API URL. Everything that reaches the browser is public, so a secret key never goes in the frontend; it stays on the server. In Next.js only variables starting with `NEXT_PUBLIC_` reach the client. And the `.env` file is never committed.",
-      "claves": []
+      "claves": [
+        "En Vite solo se exponen las variables que empiezan con `VITE_` y se leen con `import.meta.env`.",
+        "Se reemplazan en el build: cualquier persona puede verlas en el JavaScript descargado.",
+        "Sube un `.env.example` con los nombres sin valores, para que otros sepan qué configurar.",
+        "Si un secreto se subió al repositorio, no basta con borrarlo: queda en el historial, hay que rotarlo."
+      ]
     }
   ]
 }

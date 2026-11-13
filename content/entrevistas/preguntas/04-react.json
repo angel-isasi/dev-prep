@@ -7,7 +7,12 @@
       "preguntaEn": "What is React and why use it?",
       "respuesta": "Es una biblioteca para construir interfaces a partir de componentes. Yo describo cómo debe verse la pantalla según el estado, y React se encarga de actualizar el DOM. Lo uso porque los componentes se reutilizan, el flujo de datos es predecible y tiene un ecosistema enorme, con herramientas como Next.js.",
       "respuestaEn": "React is a library for building interfaces out of components. I describe what the screen should look like for a given state and React updates the DOM. I use it because components are reusable, data flow is predictable, and the ecosystem is huge, with tools like Next.js.",
-      "claves": []
+      "claves": [
+        "Es una biblioteca de UI, no un framework completo: rutas y datos los resuelven Next.js u otras librerías.",
+        "Declarativo: `UI = f(estado)`. Tú describes el resultado y React decide qué cambiar en el DOM.",
+        "Flujo de datos en un solo sentido: de padre a hijo por props, lo que hace predecible dónde cambia algo.",
+        "Trampa: decir que es rápido \"porque usa Virtual DOM\". La ventaja real es el modelo de componentes."
+      ]
     },
     {
       "id": "ent-050",
@@ -15,7 +20,12 @@
       "preguntaEn": "What is JSX?",
       "respuesta": "Es una sintaxis que parece HTML pero es JavaScript. Se compila a llamadas de función que crean elementos de React. Como es JavaScript, puedo usar variables y expresiones entre llaves. Tiene diferencias pequeñas, como `className` en lugar de `class`.",
       "respuestaEn": "JSX is syntax that looks like HTML but is JavaScript. It compiles to function calls that create React elements. Because it is JavaScript, I can use variables and expressions inside braces. It has small differences, like `className` instead of `class`.",
-      "claves": []
+      "claves": [
+        "`<h1 className=\"t\">Hola</h1>` se transforma en algo como `jsx(\"h1\", { className: \"t\", children: \"Hola\" })`.",
+        "Entre llaves van expresiones, no sentencias: usa ternario o `&&` en lugar de `if` o `for`.",
+        "Un componente devuelve un solo elemento raíz; si no quieres un `div` extra, usa un Fragment `<>...</>`.",
+        "Otras diferencias: `htmlFor` en lugar de `for`, atributos en camelCase (`onClick`) y `style` recibe un objeto."
+      ]
     },
     {
       "id": "ent-051",
@@ -23,7 +33,12 @@
       "preguntaEn": "Difference between props and state?",
       "respuesta": "Las props vienen del padre y el componente no las modifica: son como los argumentos de una función. El estado es la memoria propia del componente y cambia con el tiempo. Cuando cambia cualquiera de los dos, el componente se vuelve a renderizar.",
       "respuestaEn": "Props come from the parent and the component does not modify them; they are like function arguments. State is the component's own memory and changes over time. When either changes, the component re-renders.",
-      "claves": []
+      "claves": [
+        "Las props son de solo lectura: un hijo nunca las muta, si necesita cambiarlas llama a una función que le pasa el padre.",
+        "El estado es privado del componente y solo cambia con su función `set`, no asignando la variable.",
+        "Si un dato se puede calcular a partir de props u otro estado, no debería ser estado.",
+        "Trampa: copiar una prop en `useState` al inicio; luego no se actualiza cuando la prop cambia."
+      ]
     },
     {
       "id": "ent-052",
@@ -31,7 +46,12 @@
       "preguntaEn": "What are the Virtual DOM and reconciliation?",
       "respuesta": "Cuando cambia el estado, React vuelve a ejecutar el componente y obtiene una descripción nueva de la interfaz. La compara con la anterior, eso es la reconciliación, y aplica al DOM real solo las diferencias. Así yo escribo código declarativo y React hace los cambios mínimos.",
       "respuestaEn": "When state changes, React re-runs the component and gets a new description of the UI. It compares it with the previous one, which is reconciliation, and applies only the differences to the real DOM. I write declarative code and React makes the minimal changes.",
-      "claves": []
+      "claves": [
+        "El \"Virtual DOM\" son objetos de JavaScript que describen la UI, mucho más baratos de crear que nodos reales.",
+        "React compara por tipo y posición: si cambia el tipo del elemento (`div` a `span`), desmonta ese subárbol y su estado.",
+        "En listas usa las `key` para emparejar elementos entre renders.",
+        "Renderizar (ejecutar el componente) no es lo mismo que tocar el DOM: un render puede no producir ningún cambio real."
+      ]
     },
     {
       "id": "ent-053",
@@ -39,7 +59,12 @@
       "preguntaEn": "Why do keys matter in lists and why not use the index?",
       "respuesta": "La `key` le dice a React qué elemento es cuál entre un render y otro. Si uso el índice y la lista se reordena o se borra un elemento, React confunde las filas y puede mezclar su estado, por ejemplo el texto de un input. Uso un id estable que venga de los datos.",
       "respuestaEn": "\"The key tells React which item is which between renders. If I use the index and the list is reordered or an item is removed, React mixes up the rows and their state, such as an input's text. I use a stable id from the data.\"\n\n```jsx\n{tareas.map((tarea) => (\n  <Tarea key={tarea.id} tarea={tarea} />\n))}\n```",
-      "claves": []
+      "claves": [
+        "La `key` debe ser única entre hermanos y estable entre renders: un `id` del dato.",
+        "El índice solo es aceptable si la lista es estática: no se reordena, no se filtra y no se inserta al inicio.",
+        "`key={Math.random()}` es peor: en cada render React desmonta y vuelve a crear todos los elementos.",
+        "La `key` no llega como prop al componente; si la necesitas dentro, pásala con otro nombre."
+      ]
     },
     {
       "id": "ent-054",
@@ -47,7 +72,12 @@
       "preguntaEn": "Explain useState. Why does state not update immediately?",
       "respuesta": "`useState` le da memoria al componente: devuelve el valor actual y una función para cambiarlo. Llamar a esa función no cambia la variable en ese momento: pide un nuevo render, y en ese render el valor ya es el nuevo. Por eso, si el nuevo valor depende del anterior, uso la forma funcional.",
       "respuestaEn": "\"`useState` gives a component memory: it returns the current value and a setter. Calling the setter does not change the variable right away; it requests a new render, and in that render the value is the new one. That is why, when the next value depends on the previous one, I use the functional form.\"\n\n```jsx\nconst [cuenta, setCuenta] = useState(0);\n\nfunction sumarTres() {\n  setCuenta((c) => c + 1);\n  setCuenta((c) => c + 1);\n  setCuenta((c) => c + 1); // termina en 3; con setCuenta(cuenta + 1) terminaría en 1\n}\n```",
-      "claves": []
+      "claves": [
+        "Dentro de un render, `count` es una constante: es una \"foto\" del estado en ese render.",
+        "React agrupa (batching) varias actualizaciones de un mismo evento en un solo render.",
+        "`setCount(count + 1)` tres veces suma 1; `setCount(c => c + 1)` tres veces suma 3.",
+        "Con objetos y arrays crea uno nuevo (`{ ...obj, campo }`): si mutas y pasas la misma referencia, React no re-renderiza."
+      ]
     },
     {
       "id": "ent-055",
@@ -55,7 +85,12 @@
       "preguntaEn": "Explain useEffect: dependencies and cleanup.",
       "respuesta": "Sirve para sincronizar el componente con algo externo a React: una suscripción, un temporizador, el título del documento. El arreglo de dependencias dice cuándo volver a ejecutarlo: vacío es solo al montar; con valores, cuando cambian. Si devuelvo una función, React la ejecuta para limpiar antes de repetir el efecto y al desmontar.",
       "respuestaEn": "\"It synchronizes the component with something outside React: a subscription, a timer, the document title. The dependency array says when to re-run it: empty means only on mount; with values, when they change. If I return a function, React runs it to clean up before re-running the effect and on unmount.\"\n\n```jsx\nuseEffect(() => {\n  const id = setInterval(() => setSegundos((s) => s + 1), 1000);\n  return () => clearInterval(id); // limpieza\n}, []);\n```",
-      "claves": []
+      "claves": [
+        "Sin arreglo se ejecuta después de cada render; con `[]` solo al montar; con `[a, b]` cuando cambia alguno.",
+        "Las dependencias deben incluir todo valor reactivo que uses dentro; si faltan, lees valores viejos (closure obsoleto).",
+        "La limpieza evita fugas: `return () => clearInterval(id)` o quitar el listener.",
+        "En desarrollo con StrictMode el efecto se monta, limpia y vuelve a montar a propósito, para detectar limpiezas faltantes."
+      ]
     },
     {
       "id": "ent-056",
@@ -63,7 +98,12 @@
       "preguntaEn": "When do you not need an effect?",
       "respuesta": "Cuando puedo calcular algo durante el render. Si tengo una lista y un filtro, la lista filtrada la calculo directo; no la guardo en otro estado con un efecto, porque sería un render extra y riesgo de desincronizar. Tampoco para responder a un clic: eso va en el manejador del evento.",
       "respuestaEn": "\"When I can compute something during render. With a list and a filter, I compute the filtered list directly; I do not store it in another state with an effect, because that adds a render and a risk of getting out of sync. Nor for responding to a click: that belongs in the event handler.\"\n\n```jsx\n// Bien: valor derivado, sin efecto ni estado extra\nconst visibles = tareas.filter((t) => t.titulo.includes(busqueda));\n```",
-      "claves": []
+      "claves": [
+        "Datos derivados se calculan en el render: `const visibles = items.filter(...)`; si es costoso, `useMemo`.",
+        "Acciones del usuario (enviar un formulario, comprar) van en el manejador del evento, no en un efecto que observa estado.",
+        "Para reiniciar el estado cuando cambia una prop, usa una `key` distinta en el componente en lugar de un efecto.",
+        "Regla: el efecto es para sincronizar con algo externo a React; si no hay sistema externo, probablemente no lo necesitas."
+      ]
     },
     {
       "id": "ent-057",
@@ -71,7 +111,12 @@
       "preguntaEn": "What are the rules of hooks?",
       "respuesta": "Dos. Se llaman solo en el nivel superior del componente, nunca dentro de condiciones ni bucles, porque React los identifica por el orden. Y se llaman solo desde componentes o desde otros hooks. El plugin de ESLint lo revisa por mí.",
       "respuestaEn": "Two. Call them only at the top level of the component, never inside conditions or loops, because React identifies them by order. And call them only from components or other hooks. The ESLint plugin checks this for me.",
-      "claves": []
+      "claves": [
+        "React guarda el estado de cada hook según el orden de llamada; un `if` que salta uno desordena todos los siguientes.",
+        "Si necesitas una condición, ponla dentro del hook (por ejemplo, dentro del efecto), no alrededor.",
+        "Tampoco se llaman en funciones normales, manejadores de eventos ni después de un `return` temprano.",
+        "El plugin es `eslint-plugin-react-hooks`, que también avisa de dependencias faltantes en `useEffect`."
+      ]
     },
     {
       "id": "ent-058",
@@ -79,7 +124,12 @@
       "preguntaEn": "What is a custom hook? Give an example.",
       "respuesta": "Es una función que empieza con `use` y usa otros hooks. Sirve para reutilizar lógica con estado entre componentes sin repetir código. Por ejemplo, uno para saber si el usuario está en línea.",
       "respuestaEn": "\"A custom hook is a function whose name starts with `use` and that calls other hooks. It lets me reuse stateful logic across components without repeating code. For example, one that tells whether the user is online.\"\n\n```jsx\nfunction useEnLinea() {\n  const [enLinea, setEnLinea] = useState(true);\n  useEffect(() => {\n    const actualizar = () => setEnLinea(navigator.onLine);\n    actualizar();\n    window.addEventListener(\"online\", actualizar);\n    window.addEventListener(\"offline\", actualizar);\n    return () => {\n      window.removeEventListener(\"online\", actualizar);\n      window.removeEventListener(\"offline\", actualizar);\n    };\n  }, []);\n  return enLinea;\n}\n```",
-      "claves": []
+      "claves": [
+        "Comparte lógica, no estado: cada componente que llama al hook tiene su propia copia del estado.",
+        "El prefijo `use` le indica a React y al linter que ahí aplican las reglas de los hooks.",
+        "Ejemplo típico: `useFetch(url)` que devuelve `{ data, loading, error }`, o `useLocalStorage(clave, inicial)`.",
+        "Si la función no usa ningún hook, no es un custom hook: es una función normal y no debe empezar con `use`."
+      ]
     },
     {
       "id": "ent-059",
@@ -87,7 +137,12 @@
       "preguntaEn": "What are useMemo, useCallback and memo for?",
       "respuesta": "Son optimizaciones. `useMemo` guarda el resultado de un cálculo costoso. `useCallback` guarda la misma referencia de una función. `memo` evita volver a renderizar un componente si sus props no cambiaron. No los pongo por defecto: primero mido, porque también tienen costo. Además, el React Compiler ya puede aplicar esto automáticamente.",
       "respuestaEn": "They are optimizations. `useMemo` caches the result of an expensive calculation. `useCallback` keeps the same function reference. `memo` skips re-rendering a component when its props did not change. I do not add them by default; I measure first, because they have a cost too. Also, the React Compiler can now apply this automatically.",
-      "claves": []
+      "claves": [
+        "`useCallback(fn, deps)` equivale a `useMemo(() => fn, deps)`: memoriza la función, no su resultado.",
+        "`memo` compara props de forma superficial: si le pasas un objeto o función nuevo en cada render, no sirve de nada.",
+        "Por eso `useCallback` suele ir junto con un hijo envuelto en `memo` o como dependencia de un efecto.",
+        "Trampa: usarlos en todo \"por si acaso\"; agregan complejidad y no siempre mejoran algo."
+      ]
     },
     {
       "id": "ent-060",
@@ -95,7 +150,12 @@
       "preguntaEn": "What is useRef for?",
       "respuesta": "Para dos cosas. Una, acceder a un elemento del DOM, por ejemplo para darle foco a un input. Dos, guardar un valor que debe sobrevivir entre renders pero que al cambiar no debe provocar un render, como el id de un temporizador.",
       "respuestaEn": "\"Two things. One, accessing a DOM element, for example to focus an input. Two, holding a value that must survive between renders but should not trigger a render when it changes, like a timer id.\"\n\n```jsx\nconst campo = useRef(null);\nuseEffect(() => { campo.current?.focus(); }, []);\nreturn <input ref={campo} />;\n```",
-      "claves": []
+      "claves": [
+        "`useRef(inicial)` devuelve un objeto `{ current }` que es el mismo en todos los renders.",
+        "Cambiar `ref.current` no provoca render, por eso no sirve para mostrar datos en pantalla: para eso está el estado.",
+        "No leas ni escribas `ref.current` durante el render (salvo inicializarlo); hazlo en efectos o manejadores.",
+        "En React 19 un componente función puede recibir `ref` como prop normal, sin `forwardRef`."
+      ]
     },
     {
       "id": "ent-061",
@@ -103,7 +163,12 @@
       "preguntaEn": "useReducer or useState?",
       "respuesta": "`useState` para estado simple. `useReducer` cuando el estado tiene varias partes relacionadas o muchas formas de cambiar, como un carrito de compras. Toda la lógica queda en una función pura, el reducer, que es fácil de leer y de probar.",
       "respuestaEn": "`useState` for simple state. `useReducer` when the state has several related parts or many ways to change, like a shopping cart. All the logic lives in one pure function, the reducer, which is easy to read and test.",
-      "claves": []
+      "claves": [
+        "Firma: `const [state, dispatch] = useReducer(reducer, inicial)`, y `reducer(state, action)` devuelve el nuevo estado.",
+        "El reducer es puro: no muta el estado, no hace fetch ni efectos, solo calcula el siguiente estado.",
+        "Las acciones describen qué pasó (`{ type: \"agregar\", producto }`), así los componentes no saben cómo se actualiza.",
+        "Señal para cambiar: varios `useState` que siempre se actualizan juntos o manejadores con mucha lógica repetida."
+      ]
     },
     {
       "id": "ent-062",
@@ -111,7 +176,12 @@
       "preguntaEn": "What is Context and when do you use it? What is prop drilling?",
       "respuesta": "Prop drilling es pasar una prop por muchos niveles de componentes que no la usan, solo para que llegue abajo. Context lo evita: un proveedor comparte un valor y cualquier descendiente lo lee. Lo uso para datos globales que cambian poco, como el tema o el usuario. Para estado que cambia mucho prefiero una librería como Zustand.",
       "respuestaEn": "Prop drilling is passing a prop through many levels that do not use it, just to reach a deep component. Context avoids that: a provider shares a value and any descendant can read it. I use it for global data that rarely changes, like the theme or the user. For frequently changing state I prefer a library like Zustand.",
-      "claves": []
+      "claves": [
+        "Se usa con `createContext`, un proveedor que da el `value` y `useContext` (o `use` en React 19) para leerlo.",
+        "Cuando cambia el `value`, se re-renderizan todos los componentes que leen ese contexto.",
+        "Trampa: pasar un objeto nuevo en cada render (`value={{ user, setUser }}`) re-renderiza a todos; memorízalo o divide el contexto.",
+        "Antes de usar Context, prueba la composición: pasar componentes como `children` también evita el prop drilling."
+      ]
     },
     {
       "id": "ent-063",
@@ -119,7 +189,12 @@
       "preguntaEn": "Controlled versus uncontrolled components?",
       "respuesta": "En un input controlado, React guarda el valor en estado y lo actualiza en cada tecla: tengo control total para validar en vivo. En uno no controlado, el valor vive en el DOM y lo leo al enviar, con un ref o con `FormData`. Para formularios grandes uso React Hook Form, que es no controlado por dentro y muy rápido.",
       "respuestaEn": "In a controlled input, React holds the value in state and updates it on every keystroke, giving me full control for live validation. In an uncontrolled one, the value lives in the DOM and I read it on submit with a ref or `FormData`. For big forms I use React Hook Form, which is uncontrolled internally and very fast.",
-      "claves": []
+      "claves": [
+        "Controlado: `value={texto}` más `onChange={e => setTexto(e.target.value)}`; la fuente de verdad es el estado.",
+        "No controlado: usa `defaultValue` y lees el valor al enviar.",
+        "Trampa: poner `value` sin `onChange` deja el input de solo lectura y React muestra una advertencia.",
+        "No cambies un input de no controlado a controlado (por ejemplo, `value` que empieza `undefined`): inicializa con `\"\"`."
+      ]
     },
     {
       "id": "ent-064",
@@ -127,7 +202,12 @@
       "preguntaEn": "What does lifting state up mean?",
       "respuesta": "Cuando dos componentes necesitan el mismo dato, muevo ese estado a su padre común más cercano y se lo paso por props. Así hay una sola fuente de verdad. Un ejemplo es un acordeón donde solo puede haber una sección abierta: el padre guarda cuál es.",
       "respuestaEn": "When two components need the same data, I move that state to their closest common parent and pass it down as props. That way there is a single source of truth. One example is an accordion where only one section can be open: the parent keeps track of which one.",
-      "claves": []
+      "claves": [
+        "El hijo recibe el valor y una función por props (`activo`, `onCambiar`) en lugar de tener su propio estado.",
+        "El hijo pasa a ser controlado por el padre, lo que permite coordinarlo con sus hermanos.",
+        "No subas el estado más de lo necesario: muy arriba provoca re-renders en componentes que no lo usan.",
+        "Si tienes que subirlo muchos niveles y bajarlo por props, ahí entra Context."
+      ]
     },
     {
       "id": "ent-065",
@@ -135,7 +215,12 @@
       "preguntaEn": "How do you fetch data in React?",
       "respuesta": "En una app de cliente uso TanStack Query: maneja carga, error, caché y reintentos, y me evita escribir efectos a mano. En Next.js pido los datos en el servidor, dentro de Server Components, y el HTML ya llega con el contenido. Con `useEffect` directo solo en casos muy simples, cuidando abortar la petición.",
       "respuestaEn": "\"In a client app I use TanStack Query: it handles loading, errors, caching and retries, and saves me from hand-written effects. In Next.js I fetch on the server inside Server Components, so the HTML arrives with the content. I use a raw `useEffect` only for very simple cases, making sure to abort the request.\"\n\n```jsx\nconst { data, isPending, error } = useQuery({\n  queryKey: [\"noticias\"],\n  queryFn: () => fetch(\"/api/noticias\").then((r) => r.json()),\n});\n```",
-      "claves": []
+      "claves": [
+        "Siempre maneja los tres estados: cargando, error y datos (y el caso de lista vacía).",
+        "Con `useEffect` usa `AbortController` en la limpieza para evitar condiciones de carrera cuando cambia la búsqueda.",
+        "TanStack Query identifica cada petición por una `queryKey`, cachea, deduplica y vuelve a pedir datos según configures.",
+        "Trampa: `fetch` no lanza error con un 404 o 500; revisa `res.ok` antes de leer el JSON."
+      ]
     },
     {
       "id": "ent-066",
@@ -143,7 +228,12 @@
       "preguntaEn": "What causes a re-render and how do you avoid unnecessary ones?",
       "respuesta": "Un componente se renderiza de nuevo cuando cambia su estado, sus props, un contexto que lee, o cuando se renderiza su padre. Para evitar los que sobran, primero ubico el estado lo más cerca posible de donde se usa. Luego mido con el Profiler de React DevTools, y solo si hay un problema real uso `memo`.",
       "respuestaEn": "A component re-renders when its state, its props or a context it reads changes, or when its parent renders. To avoid unnecessary ones, I first keep state as close as possible to where it is used. Then I measure with the React DevTools Profiler, and only if there is a real problem do I use `memo`.",
-      "claves": []
+      "claves": [
+        "Cuando el padre se renderiza, sus hijos también, aunque sus props no hayan cambiado (salvo que usen `memo`).",
+        "Un re-render no es malo por sí solo: el problema es cuando es lento o muy frecuente.",
+        "Truco sin `memo`: pasar componentes como `children`; no se vuelven a renderizar cuando cambia el estado del padre que los envuelve.",
+        "Trampa: crear objetos o funciones en línea como props de un hijo con `memo` anula la optimización."
+      ]
     },
     {
       "id": "ent-067",
@@ -151,7 +241,12 @@
       "preguntaEn": "What is an error boundary?",
       "respuesta": "Es un componente que atrapa errores de renderizado de sus hijos y muestra una interfaz de respaldo en lugar de dejar la pantalla en blanco. Envuelvo secciones de la página para que, si una falla, el resto siga funcionando. En Next.js eso es el archivo `error.tsx`.",
       "respuestaEn": "An error boundary is a component that catches rendering errors in its children and shows a fallback UI instead of a blank screen. I wrap sections of the page so that if one fails, the rest keeps working. In Next.js that is the `error.tsx` file.",
-      "claves": []
+      "claves": [
+        "Hoy se escribe como componente de clase con `getDerivedStateFromError` o `componentDidCatch`, o con la librería `react-error-boundary`.",
+        "No atrapa errores en manejadores de eventos, en código asíncrono (`setTimeout`, promesas) ni dentro del propio boundary.",
+        "Los errores de eventos se manejan con `try/catch` normal y mostrando un estado de error.",
+        "Útil para registrar el error en un servicio de monitoreo y ofrecer un botón de \"reintentar\"."
+      ]
     },
     {
       "id": "ent-068",
@@ -159,7 +254,12 @@
       "preguntaEn": "What are Suspense and lazy loading?",
       "respuesta": "`lazy` permite cargar el código de un componente solo cuando se necesita, así el paquete inicial pesa menos. `Suspense` muestra un respaldo, como un esqueleto, mientras llega ese código o los datos. Lo uso en páginas pesadas o partes que no se ven al inicio, como un modal.",
       "respuestaEn": "`lazy` loads a component's code only when it is needed, so the initial bundle is smaller. `Suspense` shows a fallback, like a skeleton, while that code or data arrives. I use it for heavy pages or parts that are not visible at first, like a modal.",
-      "claves": []
+      "claves": [
+        "Uso: `const Modal = lazy(() => import(\"./Modal\"))` y renderizarlo dentro de `<Suspense fallback={<Spinner />}>`.",
+        "`lazy` se declara fuera del componente; si lo pones dentro, se recrea en cada render y pierde el estado.",
+        "Esto se llama code splitting: el bundler genera un archivo aparte que se descarga bajo demanda.",
+        "Suspense para datos requiere una fuente compatible (un framework como Next.js o `use` con una promesa); un `fetch` dentro de `useEffect` no lo activa."
+      ]
     },
     {
       "id": "ent-069",
@@ -167,7 +267,12 @@
       "preguntaEn": "What are Server Components and how do they differ from Client Components?",
       "respuesta": "Los Server Components se ejecutan solo en el servidor: pueden leer la base de datos directamente y su código no se envía al navegador. Los Client Components, marcados con `'use client'`, se envían al navegador y pueden usar estado y eventos. Mi regla es servidor por defecto y cliente solo donde hay interactividad, como un buscador.",
       "respuestaEn": "Server Components run only on the server: they can read the database directly and their code is not shipped to the browser. Client Components, marked with `'use client'`, are shipped to the browser and can use state and events. My rule is server by default and client only where there is interactivity, like a search box.",
-      "claves": []
+      "claves": [
+        "Los Server Components no pueden usar `useState`, `useEffect` ni eventos como `onClick`.",
+        "`'use client'` marca una frontera: ese archivo y todo lo que importa pasa a ser código de cliente.",
+        "Los Client Components también se pre-renderizan en el servidor a HTML; luego se hidratan en el navegador.",
+        "Las props que pasan de servidor a cliente deben ser serializables: no puedes pasar funciones normales."
+      ]
     },
     {
       "id": "ent-070",
@@ -175,7 +280,12 @@
       "preguntaEn": "What does Next.js add to React? SSR, SSG, ISR, CSR?",
       "respuesta": "Next.js agrega rutas por carpetas, renderizado en servidor, optimización de imágenes y más. CSR es renderizar en el navegador. SSR genera el HTML en el servidor en cada petición. SSG lo genera una vez al construir el sitio. ISR es SSG que se regenera cada cierto tiempo. Para un sitio de noticias uso contenido estático que se revalida, así es rápido y se mantiene al día.",
       "respuestaEn": "Next.js adds file-based routing, server rendering, image optimization and more. CSR renders in the browser. SSR generates HTML on the server per request. SSG generates it once at build time. ISR is SSG that regenerates periodically. For a news site I use static content that revalidates, so it is fast and stays up to date.",
-      "claves": []
+      "claves": [
+        "Elige según qué tan seguido cambian los datos: estático (SSG), cada cierto tiempo (ISR), por usuario o por petición (SSR).",
+        "CSR manda HTML casi vacío: es malo para SEO y para el primer contenido visible; SSR y SSG mandan HTML con contenido.",
+        "En el App Router estos modos dependen de cómo pides los datos y de la configuración de caché y `revalidate`.",
+        "Trampa: decir que SSR siempre es mejor; cuesta trabajo del servidor en cada petición y un CDN no puede cachearlo tan fácil."
+      ]
     }
   ]
 }

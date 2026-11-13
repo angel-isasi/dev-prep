@@ -7,7 +7,12 @@
       "preguntaEn": "What is the difference between var, let and const?",
       "respuesta": "`var` tiene alcance de función y se puede redeclarar, lo que causa errores raros. `let` y `const` tienen alcance de bloque. `const` no permite reasignar, aunque sí puedo modificar el contenido de un objeto o arreglo. Uso `const` por defecto y `let` solo cuando el valor va a cambiar.",
       "respuestaEn": "`var` is function-scoped and can be redeclared, which leads to subtle bugs. `let` and `const` are block-scoped. `const` cannot be reassigned, although the contents of an object or array can still change. I use `const` by default and `let` only when the value will change.",
-      "claves": []
+      "claves": [
+        "Alcance: `var` es de función; `let` y `const` son de bloque.",
+        "`const` impide reasignar, pero el contenido de un objeto o arreglo sí puede cambiar.",
+        "Hoisting: `var` se inicializa como `undefined`; `let`/`const` están en la zona muerta temporal hasta su declaración.",
+        "Buena práctica: `const` por defecto, `let` si cambia, nunca `var`."
+      ]
     },
     {
       "id": "ent-026",
@@ -15,7 +20,12 @@
       "preguntaEn": "What is hoisting?",
       "respuesta": "Es que JavaScript registra las declaraciones antes de ejecutar el código. Las funciones declaradas se pueden llamar antes de su línea. Las variables con `var` existen pero valen `undefined`. Las de `let` y `const` no se pueden usar antes de declararlas: eso se llama zona muerta temporal y lanza un error.",
       "respuestaEn": "\"JavaScript registers declarations before running the code. Function declarations can be called before their line. `var` variables exist but hold `undefined`. `let` and `const` cannot be used before they are declared; that is the temporal dead zone and it throws an error.\"\n\n```js\nsaludar(); // funciona: la declaración sube completa\nfunction saludar() { return \"hola\"; }\n\nlet error = null;\ntry { edad; } catch (e) { error = e.name; } // ReferenceError\nlet edad = 20;\n```",
-      "claves": []
+      "claves": [
+        "Se suben las declaraciones, no las asignaciones: `var x = 5` se comporta como `var x;` arriba y `x = 5` en su línea.",
+        "Las expresiones de función y las flechas (`const f = () => {}`) siguen la regla de su variable: no se pueden llamar antes.",
+        "Usar `let`/`const` antes de su línea lanza `ReferenceError`; con `var` solo da `undefined`, que es peor porque falla en silencio.",
+        "`class` también tiene zona muerta temporal: no puedes instanciarla antes de su declaración."
+      ]
     },
     {
       "id": "ent-027",
@@ -23,7 +33,12 @@
       "preguntaEn": "What is a closure? Give an example.",
       "respuesta": "Es una función que recuerda las variables del lugar donde fue creada, aunque esa función externa ya haya terminado. Sirve para tener estado privado. En React los uso todo el tiempo sin notarlo: un manejador de eventos recuerda el estado del render en que se creó.",
       "respuestaEn": "\"A closure is a function that remembers the variables from where it was created, even after the outer function has finished. It is useful for private state. In React I use them constantly without noticing: an event handler remembers the state of the render in which it was created.\"\n\n```js\nfunction crearContador() {\n  let cuenta = 0; // privada\n  return () => ++cuenta;\n}\nconst siguiente = crearContador();\nsiguiente(); // 1\nsiguiente(); // 2\n```",
-      "claves": []
+      "claves": [
+        "Ejemplo mínimo: `function contador() { let n = 0; return () => ++n; }`; cada llamada a `contador()` crea su propio `n`.",
+        "Usos reales: datos privados, fábricas de funciones, `debounce` y callbacks que recuerdan parámetros.",
+        "Clásico de entrevista: `for (var i = 0; i < 3; i++) setTimeout(() => console.log(i))` imprime 3, 3, 3; con `let` imprime 0, 1, 2 porque cada vuelta tiene su propio `i`.",
+        "En React, el lado malo son los closures obsoletos: un `setInterval` dentro de `useEffect` ve el estado viejo; se evita con `setX(prev => ...)` o dependencias correctas."
+      ]
     },
     {
       "id": "ent-028",
@@ -31,7 +46,12 @@
       "preguntaEn": "Difference between double and triple equals?",
       "respuesta": "`===` compara valor y tipo. `==` convierte los tipos antes de comparar, y eso da resultados sorpresivos, como que `0 == ''` sea verdadero. Uso siempre `===`.",
       "respuestaEn": "`===` compares value and type. `==` converts types before comparing, which gives surprising results, like `0 == ''` being true. I always use `===`.",
-      "claves": []
+      "claves": [
+        "Más casos raros de `==`: `null == undefined` es `true`, `'1' == 1` es `true` y `[] == false` es `true`.",
+        "Excepción aceptada: `x == null` detecta `null` y `undefined` a la vez.",
+        "Ni `===` sirve con `NaN`: `NaN === NaN` es `false`; usa `Number.isNaN()`.",
+        "Objetos y arreglos se comparan por referencia: `[1] === [1]` es `false`."
+      ]
     },
     {
       "id": "ent-029",
@@ -39,7 +59,12 @@
       "preguntaEn": "Which values are falsy?",
       "respuesta": "Son ocho: `false`, `0`, `-0`, `0n`, cadena vacía, `null`, `undefined` y `NaN`. Todo lo demás es truthy, incluidos un arreglo vacío y un objeto vacío. Hay que tener cuidado con el cero: si escribo `cantidad || 10`, un cero válido se reemplaza por 10. Para eso existe `??`, que solo actúa con `null` y `undefined`.",
       "respuestaEn": "\"There are eight: `false`, `0`, `-0`, `0n`, the empty string, `null`, `undefined` and `NaN`. Everything else is truthy, including empty arrays and objects. Zero is the trap: `count || 10` replaces a valid zero with 10. That is what `??` is for, since it only reacts to `null` and `undefined`.\"\n\n```js\nconst cantidad = 0;\nconst conOr = cantidad || 10;  // 10 (error típico)\nconst conNullish = cantidad ?? 10; // 0\n```",
-      "claves": []
+      "claves": [
+        "`[]`, `{}`, `'0'` y `'false'` son truthy: `if ([])` sí entra.",
+        "`??` solo reemplaza `null` y `undefined`: `0 ?? 10` da 0, mientras que `0 || 10` da 10.",
+        "Trampa en React: `{lista.length && <Lista />}` pinta un 0 cuando la lista está vacía; usa `lista.length > 0 &&`.",
+        "Para convertir a booleano: `Boolean(valor)` o `!!valor`."
+      ]
     },
     {
       "id": "ent-030",
@@ -47,7 +72,12 @@
       "preguntaEn": "Difference between null and undefined?",
       "respuesta": "`undefined` significa que algo no tiene valor asignado: una variable sin inicializar o una propiedad que no existe. `null` es un vacío que alguien puso a propósito. Para leer algo que puede no existir uso encadenamiento opcional, `usuario?.direccion?.ciudad`.",
       "respuestaEn": "`undefined` means no value was assigned: an uninitialized variable or a missing property. `null` is an intentional empty value. To read something that may not exist I use optional chaining, like `user?.address?.city`.",
-      "claves": []
+      "claves": [
+        "`typeof null` es `'object'` (un error histórico del lenguaje); `typeof undefined` es `'undefined'`.",
+        "`null == undefined` es `true`, pero `null === undefined` es `false`.",
+        "En JSON solo existe `null`: las propiedades con valor `undefined` desaparecen al hacer `JSON.stringify`.",
+        "Los parámetros por defecto solo se aplican con `undefined`, no con `null`."
+      ]
     },
     {
       "id": "ent-031",
@@ -55,7 +85,12 @@
       "preguntaEn": "How does this work?",
       "respuesta": "En una función normal, `this` depende de cómo se llama: si la llamo como método de un objeto, es ese objeto; si la llamo suelta, se pierde. Una función flecha no tiene `this` propio y usa el del lugar donde fue escrita. Por eso las flechas son cómodas para callbacks. Con `bind` puedo fijarlo a mano.",
       "respuestaEn": "In a regular function, `this` depends on how it is called: as an object method it is that object; called on its own, it is lost. An arrow function has no `this` of its own and uses the one from where it was written, which makes arrows convenient for callbacks. `bind` lets me fix it manually.",
-      "claves": []
+      "claves": [
+        "Cuatro reglas: como método (`obj.f()`, es `obj`), suelta (`undefined` en modo estricto), con `new` (el objeto nuevo) y con `call`/`apply`/`bind` (el que indiques).",
+        "Trampa: `const f = obj.metodo; f()` pierde el `this`; pasa lo mismo al pasar un método como callback, por ejemplo `setTimeout(obj.metodo, 100)`.",
+        "`call` y `apply` invocan al momento (`apply` recibe los argumentos en un arreglo); `bind` devuelve una función nueva con `this` fijo.",
+        "En un listener con función normal, `this` es el elemento que tiene el listener; con una flecha, no."
+      ]
     },
     {
       "id": "ent-032",
@@ -63,7 +98,12 @@
       "preguntaEn": "Arrow functions versus regular functions?",
       "respuesta": "Las flechas son más cortas, no tienen `this` propio ni `arguments` y no sirven como constructores. Las uso para callbacks y funciones pequeñas. Uso funciones normales cuando necesito `this` dinámico, como en métodos de un objeto, o cuando quiero aprovechar el hoisting.",
       "respuestaEn": "Arrow functions are shorter, have no `this` or `arguments` of their own and cannot be constructors. I use them for callbacks and small functions. I use regular functions when I need a dynamic `this`, as in object methods, or when I want hoisting.",
-      "claves": []
+      "claves": [
+        "Retorno implícito: `x => x * 2`; para devolver un objeto, envuélvelo en paréntesis: `() => ({ ok: true })`.",
+        "Trampa: usar flecha como método de un objeto (`{ saludar: () => this.nombre }`); ahí `this` no es el objeto.",
+        "Las flechas no tienen `arguments`: usa parámetros rest `(...args)`.",
+        "Llamar a una flecha con `new` lanza `TypeError`; tampoco tienen `prototype`."
+      ]
     },
     {
       "id": "ent-033",
@@ -71,7 +111,12 @@
       "preguntaEn": "Explain the event loop.",
       "respuesta": "JavaScript ejecuta una cosa a la vez. Lo asíncrono, como un `fetch` o un temporizador, lo maneja el navegador, y cuando termina deja su callback en una cola. El event loop revisa: si la pila está vacía, primero ejecuta todas las microtareas, que son las promesas, y después una macrotarea, como un `setTimeout`. Por eso una promesa resuelta siempre va antes que un `setTimeout` de cero.",
       "respuestaEn": "\"JavaScript runs one thing at a time. Asynchronous work, like a `fetch` or a timer, is handled by the browser, which queues the callback when done. The event loop checks: when the call stack is empty it first runs all microtasks, which are promises, and then one macrotask, such as a `setTimeout`. That is why a resolved promise always runs before a zero-delay timeout.\"\n\n```js\nconst orden = [];\norden.push(\"A\");\nsetTimeout(() => orden.push(\"D\"), 0);\nPromise.resolve().then(() => orden.push(\"C\"));\norden.push(\"B\");\n// al final: A, B, C, D\n```",
-      "claves": []
+      "claves": [
+        "Ejemplo clásico: `console.log(1); setTimeout(() => console.log(2)); Promise.resolve().then(() => console.log(3)); console.log(4)` imprime 1, 4, 3, 2.",
+        "Microtareas: `.then`, lo que sigue a un `await` y `queueMicrotask`; macrotareas: `setTimeout`, `setInterval` y eventos del usuario.",
+        "`setTimeout(fn, 0)` no es inmediato: significa “lo antes posible, después de vaciar la pila y las microtareas”.",
+        "Un bucle pesado bloquea el único hilo: la página no responde ni se repinta hasta que termine."
+      ]
     },
     {
       "id": "ent-034",
@@ -79,7 +124,12 @@
       "preguntaEn": "What is a promise?",
       "respuesta": "Es un objeto que representa un resultado que llegará después. Tiene tres estados: pendiente, cumplida o rechazada. Con `then` manejo el éxito, con `catch` el error y con `finally` lo que debe pasar siempre, como ocultar un indicador de carga.",
       "respuestaEn": "A promise is an object that represents a result that will arrive later. It has three states: pending, fulfilled or rejected. I handle success with `then`, errors with `catch`, and with `finally` whatever must always happen, like hiding a loading indicator.",
-      "claves": []
+      "claves": [
+        "Se crea con `new Promise((resolve, reject) => ...)`; una vez cumplida o rechazada, ya no cambia de estado.",
+        "`then` devuelve una promesa nueva, por eso se encadenan; si no haces `return` dentro del `then`, el siguiente recibe `undefined`.",
+        "Un rechazo sin `catch` termina como error no capturado en la consola (“Uncaught (in promise)”).",
+        "Resuelven el “callback hell”: los callbacks anidados se vuelven una cadena plana."
+      ]
     },
     {
       "id": "ent-035",
@@ -87,7 +137,12 @@
       "preguntaEn": "Async/await or then? How do you handle errors?",
       "respuesta": "Es lo mismo por debajo. `async/await` se lee como código normal, así que lo prefiero. Los errores van con `try/catch`. Algo importante: `fetch` no lanza error con un 404 o un 500, así que reviso `response.ok` yo mismo.",
       "respuestaEn": "\"They are the same underneath. `async/await` reads like synchronous code, so I prefer it. Errors go in `try/catch`. One important detail: `fetch` does not reject on a 404 or 500, so I check `response.ok` myself.\"\n\n```js\nasync function obtenerNoticias() {\n  try {\n    const respuesta = await fetch(\"/api/noticias\");\n    if (!respuesta.ok) throw new Error(`Error ${respuesta.status}`);\n    return await respuesta.json();\n  } catch (error) {\n    console.error(\"No se pudieron cargar las noticias:\", error.message);\n    return [];\n  }\n}\n```",
-      "claves": []
+      "claves": [
+        "Una función `async` siempre devuelve una promesa; `await` pausa solo esa función, no todo el programa.",
+        "`fetch` solo rechaza por fallos de red o si se aborta; con 404 o 500 hay que hacer `if (!res.ok) throw new Error(...)`.",
+        "Trampa: poner `await` en serie para peticiones independientes; si no dependen una de otra, usa `Promise.all` para hacerlas en paralelo.",
+        "`await` dentro de `forEach` no espera; usa `for...of` o `Promise.all` con `map`."
+      ]
     },
     {
       "id": "ent-036",
@@ -95,7 +150,12 @@
       "preguntaEn": "Promise.all, allSettled, race and any?",
       "respuesta": "`all` espera a todas y falla si una falla; lo uso cuando necesito todos los datos. `allSettled` espera a todas y me dice cuál salió bien y cuál mal. `race` devuelve la primera que termine, bien o mal; sirve para poner un tiempo límite. `any` devuelve la primera que salga bien.",
       "respuestaEn": "`all` waits for every promise and fails if one fails; I use it when I need all the data. `allSettled` waits for all and reports which succeeded and which failed. `race` returns the first to settle, success or failure, which is handy for timeouts. `any` returns the first to succeed.",
-      "claves": []
+      "claves": [
+        "`all` devuelve los resultados en el mismo orden del arreglo de entrada, no en el orden en que terminan.",
+        "`allSettled` nunca rechaza: devuelve objetos `{ status: 'fulfilled', value }` o `{ status: 'rejected', reason }`.",
+        "`any` solo rechaza si todas fallan, con un `AggregateError`.",
+        "Cuando `all` falla, las demás promesas no se cancelan: siguen corriendo y sus resultados se ignoran."
+      ]
     },
     {
       "id": "ent-037",
@@ -103,7 +163,12 @@
       "preguntaEn": "Difference between map, filter, reduce and forEach?",
       "respuesta": "`map` transforma cada elemento y devuelve un arreglo del mismo tamaño. `filter` devuelve solo los que cumplen una condición. `reduce` acumula todo en un solo valor, como un total. `forEach` solo recorre y no devuelve nada. Los tres primeros no modifican el arreglo original, por eso se llevan bien con React.",
       "respuestaEn": "\"`map` transforms each item and returns an array of the same length. `filter` returns only the items that pass a test. `reduce` accumulates everything into one value, such as a total. `forEach` just iterates and returns nothing. The first three do not mutate the original array, which is why they fit React well.\"\n\n```js\nconst pedidos = [{ plato: \"Ceviche\", precio: 35, pagado: true }, { plato: \"Lomo\", precio: 42, pagado: false }];\nconst nombres = pedidos.map((p) => p.plato);                       // [\"Ceviche\", \"Lomo\"]\nconst pagados = pedidos.filter((p) => p.pagado);                   // solo Ceviche\nconst total = pedidos.reduce((suma, p) => suma + p.precio, 0);     // 77\n```",
-      "claves": []
+      "claves": [
+        "Si el callback de `map` no hace `return`, el arreglo nuevo se llena de `undefined`.",
+        "`reduce` con valor inicial: `nums.reduce((acc, n) => acc + n, 0)`; sin él, lanza error con un arreglo vacío.",
+        "Se encadenan: `productos.filter(p => p.stock > 0).map(p => p.nombre)`.",
+        "`forEach` no se puede cortar con `break`; si necesitas detenerte, usa `for...of`, `some` o `find`."
+      ]
     },
     {
       "id": "ent-038",
@@ -111,7 +176,12 @@
       "preguntaEn": "What is immutability and why does it matter in React?",
       "respuesta": "Es no modificar un dato existente, sino crear una copia con el cambio. Importa porque React detecta cambios comparando referencias: si modifico el mismo arreglo con `push`, la referencia no cambia y React no se entera. Por eso uso spread, `map` y `filter`.",
       "respuestaEn": "\"It means not changing existing data but creating a copy with the change. It matters because React detects changes by comparing references: if I mutate the same array with `push`, the reference stays the same and React does not notice. So I use spread, `map` and `filter`.\"\n\n```js\nconst tareas = [{ id: 1, hecha: false }];\nconst conNueva = [...tareas, { id: 2, hecha: false }];\nconst actualizada = tareas.map((t) => (t.id === 1 ? { ...t, hecha: true } : t));\nconst sinPrimera = tareas.filter((t) => t.id !== 1);\n```",
-      "claves": []
+      "claves": [
+        "React compara con `Object.is`: el mismo objeto en memoria significa “no cambió”, aunque su contenido sea distinto.",
+        "Agregar: `[...lista, nuevo]`; quitar: `lista.filter(x => x.id !== id)`; editar: `lista.map(x => x.id === id ? { ...x, hecho: true } : x)`.",
+        "Métodos que mutan y hay que evitar en el estado: `push`, `splice`, `sort`, `reverse`; `toSorted` y `toReversed` devuelven una copia.",
+        "Comparar referencias es barato, y eso permite optimizaciones como `React.memo`."
+      ]
     },
     {
       "id": "ent-039",
@@ -119,7 +189,12 @@
       "preguntaEn": "Shallow copy versus deep copy?",
       "respuesta": "El spread copia solo el primer nivel: los objetos de adentro siguen compartidos, así que si cambio uno anidado, cambia en los dos. Para una copia completa uso `structuredClone`. En React normalmente no copio todo: copio solo la rama que cambia.",
       "respuestaEn": "\"Spread copies only the first level: nested objects are still shared, so changing a nested one changes both. For a full copy I use `structuredClone`. In React I usually do not copy everything, only the branch that changes.\"\n\n```js\nconst original = { nombre: \"Ana\", direccion: { ciudad: \"Ica\" } };\nconst superficial = { ...original };\nsuperficial.direccion.ciudad = \"Lima\"; // también cambia en original\nconst profunda = structuredClone(original);\nprofunda.direccion.ciudad = \"Cusco\";   // original no cambia\n```",
-      "claves": []
+      "claves": [
+        "Ejemplo: `const b = { ...a }; b.direccion.ciudad = 'Lima'` también cambia `a.direccion.ciudad`.",
+        "`Object.assign`, `slice` y `Array.from` también hacen copias superficiales.",
+        "`JSON.parse(JSON.stringify(x))` es el truco viejo, pero convierte fechas en texto y pierde funciones y `undefined`.",
+        "`structuredClone` conserva fechas, `Map` y `Set`, pero no puede copiar funciones."
+      ]
     },
     {
       "id": "ent-040",
@@ -127,7 +202,12 @@
       "preguntaEn": "What are destructuring and the spread and rest operators?",
       "respuesta": "Desestructurar es sacar valores de un objeto o arreglo a variables en una sola línea. Los tres puntos hacen dos cosas según dónde estén: como spread, esparcen los elementos, por ejemplo para copiar; como rest, juntan lo que sobra en una variable.",
       "respuestaEn": "\"Destructuring pulls values out of an object or array into variables in one line. The three dots do two things depending on position: as spread they expand items, for example to copy; as rest they collect whatever is left into one variable.\"\n\n```js\nconst usuario = { id: 7, nombre: \"Angel\", clave: \"secreta\" };\nconst { clave, ...publico } = usuario; // publico = { id: 7, nombre: \"Angel\" }\nconst [primero, ...resto] = [10, 20, 30]; // primero = 10, resto = [20, 30]\n```",
-      "claves": []
+      "claves": [
+        "Objetos: `const { nombre, edad = 18 } = usuario` con valor por defecto; para renombrar, `const { nombre: n } = usuario`.",
+        "Arreglos por posición: `const [primero, , tercero] = lista`; intercambiar valores: `[a, b] = [b, a]`.",
+        "El rest siempre va al final: `function sumar(...nums)` o `const { password, ...publico } = usuario` para quitar un campo.",
+        "En React aparece en las props (`function Card({ titulo })`) y en `const [valor, setValor] = useState()`."
+      ]
     },
     {
       "id": "ent-041",
@@ -135,7 +215,12 @@
       "preguntaEn": "What is event delegation?",
       "respuesta": "Es poner un solo listener en el padre en lugar de uno por cada hijo, aprovechando que los eventos suben por el DOM. Con `event.target` sé en qué hijo se hizo clic. Ahorra memoria y funciona con elementos que se agregan después.",
       "respuestaEn": "It means attaching one listener to the parent instead of one per child, taking advantage of events bubbling up the DOM. `event.target` tells me which child was clicked. It saves memory and works for elements added later.",
-      "claves": []
+      "claves": [
+        "Funciona gracias al burbujeo (bubbling): el evento ocurre en el hijo y sube por sus ancestros.",
+        "Usa `event.target.closest('.item')`, porque el clic puede caer en un hijo interno, como un ícono dentro del botón.",
+        "`event.target` es donde se hizo clic; `event.currentTarget` es el elemento que tiene el listener.",
+        "No todos los eventos burbujean: `focus` y `blur` no; para delegarlos usa `focusin` y `focusout`."
+      ]
     },
     {
       "id": "ent-042",
@@ -143,7 +228,12 @@
       "preguntaEn": "Difference between preventDefault and stopPropagation?",
       "respuesta": "`preventDefault` cancela lo que el navegador haría por defecto, como recargar la página al enviar un formulario. `stopPropagation` evita que el evento siga subiendo a los elementos padres. Son cosas distintas y a veces se necesitan las dos.",
       "respuestaEn": "`preventDefault` cancels the browser's default behavior, like reloading the page on form submit. `stopPropagation` stops the event from bubbling up to parent elements. They are different things and sometimes you need both.",
-      "claves": []
+      "claves": [
+        "Un evento viaja en tres fases: captura (baja), objetivo y burbujeo (sube); `stopPropagation` corta ese viaje.",
+        "Ejemplo: un botón “eliminar” dentro de una tarjeta clickeable usa `stopPropagation` para no abrir también la tarjeta.",
+        "En React, `return false` no cancela nada: hay que llamar a `e.preventDefault()`.",
+        "Trampa: abusar de `stopPropagation` rompe la delegación y cosas como cerrar un menú al hacer clic fuera."
+      ]
     },
     {
       "id": "ent-043",
@@ -151,7 +241,12 @@
       "preguntaEn": "What are debounce and throttle?",
       "respuesta": "Las dos limitan cuántas veces se ejecuta una función. Debounce espera a que el usuario pare: lo uso en un buscador para no pedir datos por cada tecla. Throttle ejecuta como máximo una vez cada cierto tiempo: lo uso en eventos de scroll.",
       "respuestaEn": "\"Both limit how often a function runs. Debounce waits until the user stops: I use it in a search box so I do not fetch on every keystroke. Throttle runs at most once per interval: I use it for scroll events.\"\n\n```js\nfunction debounce(fn, ms) {\n  let temporizador;\n  return (...args) => {\n    clearTimeout(temporizador);\n    temporizador = setTimeout(() => fn(...args), ms);\n  };\n}\n```",
-      "claves": []
+      "claves": [
+        "Debounce: cada llamada reinicia un temporizador; la función solo corre cuando pasan, por ejemplo, 300 ms sin llamadas nuevas.",
+        "Throttle: garantiza ejecuciones regulares mientras el evento sigue ocurriendo, útil en scroll, resize o al arrastrar.",
+        "Se implementa con un closure que guarda el id del temporizador: `clearTimeout(id)` y vuelve a programar con `setTimeout`.",
+        "Para detectar elementos visibles al hacer scroll, `IntersectionObserver` suele ser mejor opción que throttle."
+      ]
     },
     {
       "id": "ent-044",
@@ -159,7 +254,12 @@
       "preguntaEn": "What are ES modules?",
       "respuesta": "Son la forma estándar de dividir el código en archivos con `import` y `export`. Cada módulo tiene su propio alcance, así que no contamina lo global. Además permiten que las herramientas eliminen el código que no se usa, lo que se llama tree shaking.",
       "respuestaEn": "They are the standard way to split code into files using `import` and `export`. Each module has its own scope, so nothing leaks into the global scope. They also let build tools remove unused code, which is called tree shaking.",
-      "claves": []
+      "claves": [
+        "Exportación nombrada (`export function x`, se importa con llaves) contra por defecto (`export default`, una por archivo, se importa sin llaves).",
+        "Los módulos corren en modo estricto automáticamente y se ejecutan una sola vez, aunque se importen desde varios archivos.",
+        "`import()` dinámico carga código bajo demanda (code splitting), que es lo que usa `React.lazy`.",
+        "CommonJS (`require` y `module.exports`) es el sistema antiguo de Node; ES modules es el estándar del lenguaje."
+      ]
     },
     {
       "id": "ent-045",
@@ -167,7 +267,12 @@
       "preguntaEn": "How does prototypal inheritance work?",
       "respuesta": "Cada objeto tiene un enlace a otro objeto llamado prototipo. Si pido una propiedad que no tiene, JavaScript la busca en su prototipo, y así hacia arriba. Las clases son una sintaxis más cómoda sobre ese mismo mecanismo. Por eso todos los arreglos tienen `map`: está en `Array.prototype`.",
       "respuestaEn": "Every object has a link to another object called its prototype. If I ask for a property it does not have, JavaScript looks it up on the prototype, and so on up the chain. Classes are nicer syntax over the same mechanism. That is why every array has `map`: it lives on `Array.prototype`.",
-      "claves": []
+      "claves": [
+        "La cadena de un arreglo: `arreglo` → `Array.prototype` → `Object.prototype` → `null`.",
+        "Se consulta con `Object.getPrototypeOf(obj)`; `__proto__` es una forma antigua que conviene evitar.",
+        "Los métodos del prototipo se comparten entre todas las instancias: no se duplican en memoria por cada objeto.",
+        "`class` no es como en Java: por debajo, `extends` solo enlaza prototipos."
+      ]
     },
     {
       "id": "ent-046",
@@ -175,7 +280,12 @@
       "preguntaEn": "What does TypeScript add?",
       "respuesta": "Tipos que se revisan antes de ejecutar. Me avisa de errores mientras escribo, como pasar un número donde va un texto o leer una propiedad que no existe. También mejora el autocompletado y sirve de documentación. En React lo uso para tipar props y respuestas de la API.",
       "respuestaEn": "\"Types that are checked before the code runs. It catches mistakes while I type, like passing a number where a string is expected or reading a property that does not exist. It also improves autocomplete and works as documentation. In React I use it to type props and API responses.\"\n\n```ts\ntype Noticia = { id: string; titulo: string; fecha: string; destacada?: boolean };\n\nfunction TarjetaNoticia({ noticia }: { noticia: Noticia }) {\n  return <h2>{noticia.titulo}</h2>;\n}\n```",
-      "claves": []
+      "claves": [
+        "Los tipos se revisan al compilar y luego se borran: en ejecución no validan nada, así que los datos de una API conviene validarlos (por ejemplo con Zod).",
+        "`interface` o `type` para describir objetos; uniones como `'cargando' | 'error' | 'listo'` para modelar estados.",
+        "Trampa: usar `any` por todos lados apaga el chequeo; mejor `unknown` y validar.",
+        "No hace falta tipar todo: TypeScript infiere que `const n = 5` es un número."
+      ]
     },
     {
       "id": "ent-047",
@@ -183,7 +293,12 @@
       "preguntaEn": "How do you debug an error in the browser?",
       "respuesta": "Primero leo el mensaje completo y la línea que señala. Lo reproduzco con el caso más simple. Reviso la consola y la pestaña Network para ver si el problema es mío o de la API. Si no es obvio, pongo un breakpoint y miro los valores paso a paso. Cuando lo arreglo, pienso cómo evitar que se repita, por ejemplo con una prueba.",
       "respuestaEn": "First I read the whole message and the line it points to. I reproduce it with the simplest case. I check the console and the Network tab to see whether the problem is mine or the API's. If it is not obvious, I set a breakpoint and inspect values step by step. Once fixed, I think about preventing it, for example with a test.",
-      "claves": []
+      "claves": [
+        "En el stack trace busca la primera línea que sea de tu código; las líneas de librerías rara vez son el origen.",
+        "Herramientas: la instrucción `debugger`, breakpoints condicionales y la pestaña Sources de DevTools.",
+        "En Network revisa el código de estado, el cuerpo de la respuesta y errores de CORS: así sabes si el fallo es del frontend o del backend.",
+        "Cambia una sola cosa a la vez y comprueba; cambiar cosas al azar hasta que funcione no es depurar."
+      ]
     },
     {
       "id": "ent-048",
@@ -191,7 +306,12 @@
       "preguntaEn": "How do you test your code?",
       "respuesta": "Para lógica uso pruebas unitarias con Vitest. Para componentes uso React Testing Library y pruebo como lo haría un usuario: busco un botón por su texto, hago clic y reviso qué aparece en pantalla, sin fijarme en detalles internos. En un proyecto de AWS con mis hermanos también configuré pruebas en el CI para que corran en cada cambio.",
       "respuestaEn": "\"For logic I write unit tests with Vitest. For components I use React Testing Library and test as a user would: find a button by its text, click it and check what shows on screen, without relying on internals. On an AWS project with my brothers I also set up tests in CI so they run on every change.\"\n\n```jsx\ntest(\"suma uno al hacer clic\", async () => {\n  render(<Contador />);\n  await userEvent.click(screen.getByRole(\"button\", { name: \"Sumar\" }));\n  expect(screen.getByText(\"Total: 1\")).toBeInTheDocument();\n});\n```",
-      "claves": []
+      "claves": [
+        "Orden de consultas en Testing Library: `getByRole` primero, luego `getByLabelText` y `getByText`; `getByTestId` como último recurso.",
+        "Estructura de un test: preparar, actuar y verificar (Arrange, Act, Assert).",
+        "Pruebo comportamiento, no implementación: si refactorizo sin cambiar lo que ve el usuario, los tests no deberían romperse.",
+        "Para las peticiones a una API simulo `fetch` con `vi.fn()` o con MSW, así los tests no dependen de la red."
+      ]
     }
   ]
 }

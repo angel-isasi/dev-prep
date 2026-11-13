@@ -7,7 +7,12 @@
       "preguntaEn": "What is your Git workflow?",
       "respuesta": "Creo una rama por tarea desde la principal, hago commits pequeños con mensajes claros, subo la rama y abro un pull request. Un compañero lo revisa, corrijo lo que haga falta y se fusiona. Así trabajamos en el portal de mi facultad: rama por tarea, revisión cruzada y nada directo a la rama principal.",
       "respuestaEn": "I create a branch per task from main, make small commits with clear messages, push the branch and open a pull request. A teammate reviews it, I fix what is needed, and it gets merged. That is how we work on my faculty's portal: a branch per task, cross review, and nothing pushed straight to main.",
-      "claves": []
+      "claves": [
+        "Antes de crear la rama, actualiza la principal con `git pull` para partir del código más reciente.",
+        "Nombres de rama descriptivos (`feat/login-google`, `fix/menu-movil`) y mensajes de commit en imperativo.",
+        "Mantén tu rama al día con la principal para que los conflictos sean pequeños.",
+        "La protección de la rama principal (PR obligatorio y CI en verde) evita los empujes directos."
+      ]
     },
     {
       "id": "ent-084",
@@ -15,7 +20,12 @@
       "preguntaEn": "Difference between merge and rebase?",
       "respuesta": "Los dos integran cambios. `merge` crea un commit que une las dos historias y conserva todo tal como pasó. `rebase` vuelve a aplicar mis commits encima de la rama actualizada y deja una historia lineal. Uso rebase para poner al día mi rama local, pero nunca sobre commits que otras personas ya tienen.",
       "respuestaEn": "Both integrate changes. `merge` creates a commit that joins the two histories and keeps everything as it happened. `rebase` replays my commits on top of the updated branch, giving a linear history. I use rebase to update my local branch, but never on commits other people already have.",
-      "claves": []
+      "claves": [
+        "`rebase` reescribe los commits: cambian sus hashes, por eso se rompe la historia de quien ya los tenía.",
+        "Si ya subiste la rama y haces rebase, necesitas `git push --force-with-lease`, que es más seguro que `--force`.",
+        "`git pull --rebase` evita commits de merge innecesarios al traer cambios.",
+        "Regla corta: rebase en tu rama privada, merge para integrar en ramas compartidas."
+      ]
     },
     {
       "id": "ent-085",
@@ -23,7 +33,12 @@
       "preguntaEn": "How do you resolve a merge conflict?",
       "respuesta": "Abro los archivos marcados, leo las dos versiones y entiendo qué quería cada cambio antes de elegir. A veces la respuesta es una combinación. Luego corro la aplicación y las pruebas, y recién ahí hago el commit. Si el cambio del otro no me queda claro, le pregunto en lugar de adivinar.",
       "respuestaEn": "I open the flagged files, read both versions and understand what each change intended before choosing. Sometimes the answer is a combination. Then I run the app and the tests, and only then commit. If the other person's change is unclear, I ask instead of guessing.",
-      "claves": []
+      "claves": [
+        "Git marca el conflicto con `<<<<<<<`, `=======` y `>>>>>>>`; hay que borrar esas marcas al resolver.",
+        "Después: `git add` del archivo y continuar con `git commit` (merge) o `git rebase --continue`.",
+        "Si te enredas, `git merge --abort` o `git rebase --abort` te devuelve al estado anterior.",
+        "Prevención: ramas cortas y sincronizarse seguido con la principal."
+      ]
     },
     {
       "id": "ent-086",
@@ -31,7 +46,12 @@
       "preguntaEn": "What makes a good pull request?",
       "respuesta": "Es pequeño y resuelve una sola cosa. La descripción explica qué cambia y por qué, y cómo probarlo, con capturas si es visual. Antes de pedir revisión lo reviso yo mismo. Un PR chico se revisa rápido y bien; uno enorme se aprueba sin leer.",
       "respuestaEn": "It is small and solves one thing. The description explains what changes and why, and how to test it, with screenshots if it is visual. I review it myself before asking for a review. A small PR gets a quick, careful review; a huge one gets approved without being read.",
-      "claves": []
+      "claves": [
+        "El título resume el cambio y la descripción enlaza la tarea o issue.",
+        "Los commits no relacionados (formateo masivo, refactor) van en otro PR para no esconder el cambio real.",
+        "CI en verde y sin código comentado ni `console.log` olvidados antes de pedir revisión.",
+        "Responde cada comentario de la revisión, aunque sea con \"listo\" o explicando por qué no se cambió."
+      ]
     },
     {
       "id": "ent-087",
@@ -39,7 +59,12 @@
       "preguntaEn": "How do you give and receive feedback in code review?",
       "respuesta": "Cuando recibo, no lo tomo personal: el comentario es sobre el código. Si no estoy de acuerdo, explico mi razón y escucho. Cuando doy, pregunto antes de afirmar, explico el porqué y distingo lo que bloquea de lo que es solo una sugerencia.",
       "respuestaEn": "When I receive feedback I do not take it personally; the comment is about the code. If I disagree, I explain my reasoning and listen. When I give it, I ask before asserting, explain why, and separate what blocks the merge from what is just a suggestion.",
-      "claves": []
+      "claves": [
+        "Agradece la revisión: alguien dedicó tiempo a mejorar tu código.",
+        "Comenta el código, no a la persona: \"esta función\" en lugar de \"tú hiciste\".",
+        "Si una discusión se alarga en comentarios, es mejor una llamada corta y dejar escrito lo que se acordó.",
+        "Trampa: ponerse a la defensiva o aceptar todo sin entenderlo; pregunta si algo no está claro."
+      ]
     },
     {
       "id": "ent-088",
@@ -47,7 +72,12 @@
       "preguntaEn": "What is CI/CD?",
       "respuesta": "Integración continua es que, en cada cambio, se ejecuten automáticamente las pruebas y revisiones. Despliegue continuo es que, si todo pasa, el cambio se publique solo. En el repositorio del festival de mi facultad agregué un flujo que corre las pruebas en cada pull request, así los errores aparecen antes de fusionar.",
       "respuestaEn": "Continuous integration means tests and checks run automatically on every change. Continuous deployment means that if everything passes, the change ships on its own. In my faculty's festival repository I added a workflow that runs the tests on every pull request, so errors show up before merging.",
-      "claves": []
+      "claves": [
+        "CI detecta errores de integración pronto: tests, linter y build en cada push o PR.",
+        "Herramientas comunes: GitHub Actions, con archivos YAML en `.github/workflows/`.",
+        "Diferencia: continuous delivery deja todo listo para publicar con un clic; continuous deployment publica solo.",
+        "Vercel o Netlify crean un despliegue de vista previa por cada PR para revisarlo en vivo."
+      ]
     },
     {
       "id": "ent-089",
@@ -55,7 +85,12 @@
       "preguntaEn": "Have you worked with Scrum? What does an agile team's day look like?",
       "respuesta": "Sí, en proyectos de la universidad con tablero en Jira. Trabajamos por sprints: planificamos qué entra, tenemos una reunión diaria corta donde cada uno dice qué hizo, qué hará y qué lo bloquea, y al final mostramos lo terminado y revisamos qué mejorar. Yo participé como desarrollador.",
       "respuestaEn": "Yes, on university projects with a Jira board. We work in sprints: we plan what goes in, hold a short daily meeting where each person says what they did, what they will do and what blocks them, and at the end we demo what is done and discuss improvements. I took part as a developer.",
-      "claves": []
+      "claves": [
+        "Roles: Product Owner prioriza el backlog, Scrum Master facilita y quita bloqueos, el equipo de desarrollo construye.",
+        "Eventos: planificación del sprint, daily, review (mostrar lo terminado) y retrospectiva (cómo mejorar).",
+        "La daily no es un reporte al jefe: sirve para coordinar y detectar bloqueos, en unos 15 minutos.",
+        "Muestra que avisas un bloqueo pronto en lugar de esperar a la siguiente daily."
+      ]
     },
     {
       "id": "ent-090",
@@ -63,7 +98,12 @@
       "preguntaEn": "What do you do when a task is unclear?",
       "respuesta": "Antes de escribir código, la repito con mis palabras y pregunto lo que falta: quién lo va a usar, qué casos debe cubrir y cuándo se considera terminada. Si no hay respuesta rápida, avanzo con la interpretación más razonable, lo dejo escrito y muestro algo pronto para corregir a tiempo.",
       "respuestaEn": "Before writing code, I restate it in my own words and ask what is missing: who will use it, which cases it must cover and when it counts as done. If there is no quick answer, I move forward with the most reasonable interpretation, write it down, and show something early so we can correct course in time.",
-      "claves": []
+      "claves": [
+        "Pide criterios de aceptación: qué tiene que pasar para que la tarea se considere terminada.",
+        "Haz preguntas concretas y agrupadas, no un mensaje por duda.",
+        "Mostrar un borrador o boceto temprano evita construir lo que no se pedía.",
+        "Trampa: quedarse bloqueado en silencio o adivinar sin avisar."
+      ]
     }
   ]
 }
