@@ -6,7 +6,7 @@ $ruta = Join-Path $escritorio "dev-prep.lnk"
 
 $shell = New-Object -ComObject WScript.Shell
 $acceso = $shell.CreateShortcut($ruta)
-$acceso.TargetPath = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
+$acceso.TargetPath = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
 $acceso.Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File `"" + (Join-Path $raiz "scripts\abrir.ps1") + "`""
 $acceso.WorkingDirectory = $raiz
 $acceso.IconLocation = (Join-Path $raiz "client\public\dev-prep.ico") + ",0"
