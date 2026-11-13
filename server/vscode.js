@@ -11,7 +11,10 @@ const comillas = (texto) => `"${texto}"`;
  */
 export function abrirEnVSCode(carpeta, archivo) {
   return new Promise((resolve, reject) => {
-    const proceso = spawn("code", [comillas(carpeta), "-g", comillas(archivo)], {
+    // Con shell: true se pasa el comando completo como texto (Node desaconseja pasar
+    // argumentos sueltos con shell). Las rutas van entre comillas por si tienen espacios.
+    const comando = `code ${comillas(carpeta)} -g ${comillas(archivo)}`;
+    const proceso = spawn(comando, {
       shell: true,
       windowsHide: true,
       stdio: "ignore",
