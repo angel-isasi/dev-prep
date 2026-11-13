@@ -4,16 +4,21 @@ App local y 100% offline para practicar JavaScript y React rumbo a un puesto fro
 
 Programas en VS Code, guardas con `Ctrl + S` y la app muestra al instante qué tests pasan y cuáles no, con lo que se esperaba y lo que devolvió tu código. Tu progreso se guarda en tu laptop.
 
-## Qué tiene (versión 1, en construcción)
+## Qué tiene
 
-- **Practicar**: ejercicios de JavaScript, algoritmos tipo LeetCode y componentes de React, con filtros por tema, nivel y estado.
-- **Tests en vivo**: cada vez que guardas, Vitest corre los tests de ese ejercicio y la app muestra el resultado sin recargar.
-- **Errores explicados**: los errores más comunes ("is not a function", `undefined`, sintaxis...) vienen con una pista en español.
-- **Abrir en VS Code** con un clic y **reiniciar** un ejercicio sin perder tu versión anterior (queda un respaldo).
-- **Progreso local**: estado de cada ejercicio, intentos y último resultado.
+- **Inicio**: tu objetivo, la racha, la meta del día (con la deuda de los días que fallaste), tu porcentaje de preparación y la cuenta regresiva a tu fecha meta, con aviso de si vas atrasado.
+- **Aprender**: 10 temas de JavaScript, cada uno con teoría de una pantalla, ejercicios guiados y un quiz.
+- **Practicar**: ejercicios de JavaScript, algoritmos y React, con filtros por tema, nivel y estado.
+  - **Tests en vivo**: guardas en VS Code y la app muestra al instante qué pasa y qué falla, con lo esperado y lo recibido, más tu `console.log`.
+  - **Errores explicados** en español y **aviso de bucle infinito**.
+  - **Pistas progresivas** (3 por ejercicio) y **solución con explicación completa**, bloqueada hasta que la pidas (con penalidad si no lo resolviste).
+  - **Explícalo con tus palabras** y compáralo con la respuesta modelo.
+  - **Repaso espaciado**: lo que resolviste vuelve en 1, 3, 7, 14 y 30 días.
+  - **Modo entrevista**: cronómetro de 20 minutos.
+- **Entrevistas**: 100 preguntas en tarjetas (español e inglés) con lo que el entrevistador quiere escuchar, simulacro de 30 minutos, tu pitch de 1 minuto y tus historias STAR.
+- **Progreso**: calendario de actividad, avance por tema y resumen semanal.
+- **Referencia**: un mini MDN offline con buscador (arrays, strings, objetos, promesas, DOM, React...).
 - Modo oscuro y modo claro.
-
-Próximas fases: pistas y soluciones con explicación, repaso espaciado, racha y meta diaria, entrevistas simuladas y una sección para aprender cada tema.
 
 ## Requisitos
 
@@ -53,6 +58,7 @@ Si quieres empezar de cero, **Reiniciar** vuelve al archivo inicial y guarda tu 
 |---|---|
 | `workspace/` | Tu código de cada ejercicio |
 | `data/progreso.json` | Tu progreso (con una copia diaria en `data/respaldos/`) |
+| `data/mis-respuestas.json` | Tu pitch y tus historias STAR |
 | `data/eventos.jsonl` | Historial de lo que haces, para estadísticas futuras |
 
 Ninguna de las dos carpetas se sube a Git.
@@ -66,6 +72,7 @@ Ninguna de las dos carpetas se sube a Git.
 | `npm run build` | Compila la interfaz en `client/dist` |
 | `npm test` | Tests de la propia app |
 | `npm run validar` | Revisa que cada ejercicio esté completo, que su solución pase y que el archivo inicial falle |
+| `npm run validar:aprender` | Revisa los temas de Aprender y las entradas de la Referencia |
 
 ## Cómo está hecha
 
