@@ -18,8 +18,10 @@ body {
   font-size: 15px;
   line-height: 1.6;
   color: var(--texto);
-  background: var(--fondo);
+  background: var(--ambiente), var(--fondo);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv11", "ss01";
 }
 
 h1,
@@ -27,6 +29,8 @@ h2,
 h3 {
   line-height: 1.25;
   margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 a {
@@ -44,6 +48,11 @@ pre {
   font-size: 0.875em;
 }
 
+option {
+  background: var(--fondo-solido);
+  color: var(--texto);
+}
+
 :focus-visible {
   outline: 2px solid var(--acento);
   outline-offset: 2px;
@@ -53,44 +62,50 @@ pre {
   background: var(--acento-suave);
 }
 
+/* Barras de desplazamiento discretas */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--borde-fuerte) transparent;
+}
+
 /* Botones reutilizables */
 .boton {
   display: inline-flex;
   align-items: center;
   gap: var(--espacio-2);
-  padding: 8px 14px;
+  height: 36px;
+  padding: 0 14px;
   border: 1px solid var(--borde-fuerte);
   border-radius: var(--radio);
-  background: var(--superficie-2);
+  background: var(--superficie);
   color: var(--texto);
   font-weight: 500;
   font-size: 14px;
   cursor: pointer;
-  transition: background var(--transicion), border-color var(--transicion);
+  transition:
+    background var(--transicion),
+    border-color var(--transicion),
+    opacity var(--transicion);
 }
 
 .boton:hover:not(:disabled) {
-  border-color: var(--texto-tenue);
+  background: var(--superficie-2);
 }
 
 .boton:disabled {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
 .boton-primario {
-  background: var(--acento);
-  border-color: var(--acento);
-  color: #fff;
-}
-
-:root[data-tema="oscuro"] .boton-primario {
-  color: #0e1014;
+  background: var(--boton-principal);
+  border-color: var(--boton-principal);
+  color: var(--sobre-boton-principal);
 }
 
 .boton-primario:hover:not(:disabled) {
-  border-color: var(--acento);
-  filter: brightness(1.08);
+  background: var(--boton-principal);
+  opacity: 0.88;
 }
 
 .boton-peligro {
@@ -103,18 +118,41 @@ pre {
   color: #fff;
 }
 
-/* Colores del resaltado de código (highlight.js), con las variables del tema */
+.boton-peligro-lleno:hover:not(:disabled) {
+  background: var(--error);
+  opacity: 0.88;
+}
+
+.boton-fantasma {
+  border-color: transparent;
+  background: none;
+  color: var(--texto-suave);
+}
+
+.boton-fantasma:hover:not(:disabled) {
+  color: var(--texto);
+}
+
+/* Tarjeta: superficie translúcida con borde fino */
+.tarjeta {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  box-shadow: var(--brillo-borde);
+}
+
+/* Colores del resaltado de código (highlight.js) */
 .hljs-keyword,
 .hljs-built_in,
 .hljs-literal {
-  color: #c792ea;
+  color: #c4b5fd;
 }
 .hljs-string,
 .hljs-regexp {
-  color: #9ece6a;
+  color: #a7e3b8;
 }
 .hljs-number {
-  color: #ff9e64;
+  color: #f5c08a;
 }
 .hljs-comment {
   color: var(--texto-tenue);
@@ -122,33 +160,33 @@ pre {
 }
 .hljs-title,
 .hljs-title.function_ {
-  color: #7aa2f7;
+  color: #93c5fd;
 }
 .hljs-attr,
 .hljs-property,
 .hljs-variable {
-  color: #73daca;
+  color: #8fdcd0;
 }
 .hljs-tag,
 .hljs-name {
-  color: #f7768e;
+  color: #f9a8b8;
 }
 
 :root[data-tema="claro"] .hljs-keyword,
 :root[data-tema="claro"] .hljs-built_in,
 :root[data-tema="claro"] .hljs-literal {
-  color: #8839ef;
+  color: #6d28d9;
 }
 :root[data-tema="claro"] .hljs-string,
 :root[data-tema="claro"] .hljs-regexp {
-  color: #2e7d32;
+  color: #15803d;
 }
 :root[data-tema="claro"] .hljs-number {
   color: #c2410c;
 }
 :root[data-tema="claro"] .hljs-title,
 :root[data-tema="claro"] .hljs-title.function_ {
-  color: #1e56c9;
+  color: #1d4ed8;
 }
 :root[data-tema="claro"] .hljs-attr,
 :root[data-tema="claro"] .hljs-property,

@@ -3,8 +3,9 @@
   flex-direction: column;
   gap: var(--espacio-5);
   padding: var(--espacio-5) var(--espacio-3);
-  background: var(--superficie);
+  background: var(--barra-fondo);
   border-right: 1px solid var(--borde);
+  backdrop-filter: blur(12px);
 }
 
 .marca {
@@ -23,8 +24,9 @@
   width: 30px;
   height: 30px;
   border-radius: var(--radio);
-  background: var(--acento);
-  color: var(--fondo);
+  background: linear-gradient(135deg, var(--acento), color-mix(in srgb, var(--acento) 55%, #5fd3be));
+  color: var(--sobre-acento);
+  box-shadow: 0 0 24px var(--acento-suave);
   font-family: var(--fuente-codigo);
   font-size: 11px;
   font-weight: 700;

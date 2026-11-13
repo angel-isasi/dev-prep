@@ -20,6 +20,7 @@
   padding: 4px 12px;
   border-radius: 999px;
   background: var(--acento-suave);
+  border: 1px solid color-mix(in srgb, var(--acento) 30%, transparent);
   color: var(--acento);
   font-size: 13px;
   font-weight: 600;

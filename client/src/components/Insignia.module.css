@@ -9,6 +9,8 @@
   white-space: nowrap;
   background: var(--superficie-2);
   color: var(--texto-suave);
+  border: 1px solid transparent;
+  letter-spacing: 0.01em;
 }
 
 .insignia[data-variante="exito"] {

@@ -18,7 +18,7 @@
 }
 
 .cabecera h1 {
-  font-size: 26px;
+  font-size: 28px;
   letter-spacing: -0.02em;
 }
 
@@ -38,7 +38,7 @@
 
 .barraProgreso > div {
   height: 100%;
-  background: var(--exito);
+  background: linear-gradient(90deg, var(--acento), var(--exito));
   border-radius: inherit;
   transition: width 300ms ease;
 }
@@ -89,6 +89,7 @@
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
   background: var(--superficie);
+  box-shadow: var(--brillo-borde);
   overflow: hidden;
 }
 
