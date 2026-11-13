@@ -49,12 +49,17 @@ export const SECCIONES_EXPLICACION = [
  * @property {{ inicio: string, solucion: string, tests: string }} archivos
  */
 
+/** Carpetas de content/ que no son ejercicios (tienen su propio formato). */
+const NO_EJERCICIOS = new Set(["aprender", "referencia", "entrevistas"]);
+
 /** Busca recursivamente todas las carpetas que tienen meta.json. */
-async function buscarCarpetas(dir) {
-  const entradas = await readdir(dir, { withFileTypes: true });
+async function buscarCarpetas(dir, raiz = dir) {
+  const entradas = (await readdir(dir, { withFileTypes: true })).filter(
+    (e) => !(dir === raiz && e.isDirectory() && NO_EJERCICIOS.has(e.name)),
+  );
   if (entradas.some((e) => e.isFile() && e.name === "meta.json")) return [dir];
   const subcarpetas = entradas.filter((e) => e.isDirectory()).map((e) => path.join(dir, e.name));
-  const resultados = await Promise.all(subcarpetas.map(buscarCarpetas));
+  const resultados = await Promise.all(subcarpetas.map((d) => buscarCarpetas(d, raiz)));
   return resultados.flat();
 }
 
