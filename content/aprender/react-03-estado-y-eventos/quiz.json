@@ -1,0 +1,53 @@
+[
+  {
+    "pregunta": "Haces **un** clic en el botón. ¿Qué número se ve?\n\n```jsx\nfunction Contador() {\n  const [n, setN] = useState(0);\n  function sumar() {\n    setN(n + 1);\n    setN(n + 1);\n    setN(n + 1);\n  }\n  return <button onClick={sumar}>{n}</button>;\n}\n```",
+    "opciones": ["3", "1", "0", "Error: Too many re-renders"],
+    "correcta": 1,
+    "explicacion": "En ese render `n` vale 0 y no cambia hasta el siguiente render. Las tres líneas piden lo mismo: \"ponlo en 0 + 1\". React agrupa los cambios y renderiza una vez con 1. Sería 3 con el actualizador funcional. No hay bucle infinito porque los `set` están dentro de un evento, no sueltos en el render."
+  },
+  {
+    "pregunta": "Haces **un** clic en el botón. ¿Qué número se ve?\n\n```jsx\nfunction Contador() {\n  const [n, setN] = useState(0);\n  function sumar() {\n    setN((prev) => prev + 1);\n    setN((prev) => prev + 1);\n    setN((prev) => prev + 1);\n  }\n  return <button onClick={sumar}>{n}</button>;\n}\n```",
+    "opciones": ["1", "0", "2", "3"],
+    "correcta": 3,
+    "explicacion": "Con una función, React encola las tres actualizaciones y aplica cada una sobre el resultado de la anterior: 0 → 1 → 2 → 3. Por eso se ve 3. Es la forma correcta cuando el valor nuevo depende del anterior."
+  },
+  {
+    "pregunta": "Haces un clic. ¿Qué se imprime en consola y qué se ve en el botón?\n\n```jsx\nfunction Contador() {\n  const [n, setN] = useState(0);\n  function sumar() {\n    setN(n + 1);\n    console.log(n);\n  }\n  return <button onClick={sumar}>{n}</button>;\n}\n```",
+    "opciones": [
+      "Consola: 0. Botón: 1",
+      "Consola: 1. Botón: 1",
+      "Consola: 0. Botón: 0",
+      "Consola: undefined. Botón: 1"
+    ],
+    "correcta": 0,
+    "explicacion": "`setN` no cambia la variable `n` del render actual: programa un render nuevo. Por eso el `console.log` todavía ve 0. Luego React vuelve a llamar a `Contador`, ahora `n` vale 1 y el botón muestra 1."
+  },
+  {
+    "pregunta": "¿Qué se ve en el párrafo después de hacer clic en \"Agregar\"?\n\n```jsx\nfunction Lista() {\n  const [items, setItems] = useState([\"Pan\"]);\n  function agregar() {\n    items.push(\"Leche\");\n    setItems(items);\n  }\n  return (\n    <>\n      <button onClick={agregar}>Agregar</button>\n      <p>{items.length} productos</p>\n    </>\n  );\n}\n```",
+    "opciones": [
+      "2 productos",
+      "Error: no se puede usar push con estado",
+      "1 productos",
+      "0 productos"
+    ],
+    "correcta": 2,
+    "explicacion": "`push` modifica el mismo arreglo y `setItems(items)` le pasa a React **la misma referencia**. React compara con `Object.is`, ve que es el mismo arreglo y no repinta, así que sigue mostrando 1. No hay error, solo un bug silencioso. Lo correcto: `setItems([...items, \"Leche\"])`."
+  },
+  {
+    "pregunta": "Haces clic **dos** veces. ¿Qué dice el botón?\n\n```jsx\nfunction Contador() {\n  let clics = 0;\n  return (\n    <button onClick={() => { clics = clics + 1; }}>\n      Clics: {clics}\n    </button>\n  );\n}\n```",
+    "opciones": ["Clics: 2", "Clics: 1", "Error: no se puede reasignar", "Clics: 0"],
+    "correcta": 3,
+    "explicacion": "La variable sí cambia en memoria, pero React no se entera porque no se llamó a ningún `set`, así que no hay render y la pantalla sigue en 0. Y si hubiera un render, `let clics = 0` volvería a empezar. Para que React recuerde y repinte necesitas `useState`."
+  },
+  {
+    "pregunta": "Escribes una letra \"A\" en el input. ¿Qué se ve en el párrafo?\n\n```jsx\nfunction Perfil() {\n  const [form, setForm] = useState({ nombre: \"\", edad: 20 });\n  return (\n    <>\n      <input\n        value={form.nombre}\n        onChange={(e) => setForm({ nombre: e.target.value })}\n      />\n      <p>Edad: {form.edad}</p>\n    </>\n  );\n}\n```",
+    "opciones": [
+      "Edad: 20",
+      "Edad: (vacío, sin número)",
+      "Edad: undefined",
+      "Edad: A"
+    ],
+    "correcta": 1,
+    "explicacion": "La función `set` **reemplaza** el estado completo, no lo mezcla con el anterior. El nuevo objeto es `{ nombre: \"A\" }`, así que `form.edad` es `undefined`, y React no pinta `undefined`: queda \"Edad: \" sin número (no aparece el texto \"undefined\"). Lo correcto es copiar lo anterior: `setForm({ ...form, nombre: e.target.value })`."
+  }
+]

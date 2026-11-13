@@ -1,0 +1,8 @@
+{
+  "id": "react-jsx-y-componentes",
+  "titulo": "JSX y componentes",
+  "area": "react",
+  "orden": 1,
+  "descripcion": "Qué es un componente, cómo se escribe JSX sin romper sus reglas, import/export y cómo se monta una app de React.",
+  "ejercicios": ["react-ej-002", "react-ej-009", "react-ej-008", "mix-003"]
+}

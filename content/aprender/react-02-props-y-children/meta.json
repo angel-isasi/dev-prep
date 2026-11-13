@@ -1,0 +1,8 @@
+{
+  "id": "react-props-y-children",
+  "titulo": "Props y children",
+  "area": "react",
+  "orden": 2,
+  "descripcion": "Pasar datos de padre a hijo con props, valores por defecto, children, funciones como props y por qué las props no se modifican.",
+  "ejercicios": ["react-ej-001", "react-ej-005", "react-ej-014", "mix-010"]
+}

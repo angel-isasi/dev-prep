@@ -1,0 +1,8 @@
+{
+  "id": "react-listas-y-condicionales",
+  "titulo": "Listas y renderizado condicional",
+  "area": "react",
+  "orden": 4,
+  "descripcion": "Pintar listas con map y key, mostrar u ocultar con &&, ternario y return temprano, la trampa del 0 && y las listas vacías.",
+  "ejercicios": ["react-ej-003", "react-ej-004", "react-ej-010", "react-ej-018", "react-ej-034"]
+}

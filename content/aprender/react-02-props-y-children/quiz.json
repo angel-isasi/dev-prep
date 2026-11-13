@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "¿Qué se ve en pantalla?\n\n```jsx\nfunction Precio({ monto = 0, moneda = \"S/\" }) {\n  return <p>{moneda} {monto}</p>;\n}\n\n<Precio monto={null} />\n```",
+    "opciones": [
+      "S/ 0",
+      "S/ null",
+      "S/ (sin ningún número)",
+      "Un error, porque monto es null"
+    ],
+    "correcta": 2,
+    "explicacion": "El valor por defecto solo se aplica cuando la prop llega como `undefined`. Aquí llega `null`, así que `monto` vale `null`, y React no pinta `null`: queda solo `S/ `. No sale el texto \"null\" ni hay error. `moneda` sí toma su valor por defecto porque no se pasó. Para cubrir también `null` usa `monto ?? 0`."
+  },
+  {
+    "pregunta": "¿Qué se ve en pantalla?\n\n```jsx\nfunction Caja({ titulo }) {\n  return <h2>{titulo}</h2>;\n}\n\n<Caja titulo=\"Promo\">\n  <p>2x1 los martes</p>\n</Caja>\n```",
+    "opciones": [
+      "Promo y debajo 2x1 los martes",
+      "Solo 2x1 los martes",
+      "Un error porque Caja no acepta children",
+      "Solo Promo"
+    ],
+    "correcta": 3,
+    "explicacion": "Lo que va entre `<Caja>` y `</Caja>` llega en la prop `children`, pero `Caja` no la lee ni la pinta. React no lanza error: ese contenido simplemente se ignora. Para que aparezca, el componente debe recibir `children` y ponerlo en su JSX: `function Caja({ titulo, children })` y `<><h2>{titulo}</h2>{children}</>`."
+  },
+  {
+    "pregunta": "¿Qué pasa con este código?\n\n```jsx\nfunction Boton({ onClick }) {\n  return <button onClick={onClick}>OK</button>;\n}\n\nfunction App() {\n  const avisar = () => console.log(\"clic\");\n  return <Boton onClick={avisar()} />;\n}\n```",
+    "opciones": [
+      "Imprime \"clic\" cada vez que haces clic",
+      "Imprime \"clic\" al renderizar, y al hacer clic no pasa nada",
+      "No imprime nada nunca",
+      "Lanza un error al hacer clic"
+    ],
+    "correcta": 1,
+    "explicacion": "`avisar()` con paréntesis **ejecuta** la función mientras se arma el JSX, o sea durante el render, y lo que se pasa como prop es lo que devuelve: `undefined`. El botón queda sin manejador, así que el clic no hace nada (tampoco da error). Lo correcto es pasar la función sin llamarla: `onClick={avisar}`."
+  },
+  {
+    "pregunta": "¿Qué pasa al renderizar `<Saludo nombre=\"Ana\" />`?\n\n```jsx\nfunction Saludo(nombre) {\n  return <p>Hola, {nombre}</p>;\n}\n```",
+    "opciones": [
+      "Error: el parámetro es el objeto de props y React no puede pintar un objeto",
+      "Se ve: Hola, Ana",
+      "Se ve: Hola, undefined",
+      "Se ve: Hola, [object Object]"
+    ],
+    "correcta": 0,
+    "explicacion": "Un componente recibe **un solo** parámetro: el objeto con todas las props, `{ nombre: \"Ana\" }`. Aquí ese objeto se llama `nombre`, y al ponerlo en `{}` React intenta pintar un objeto, lo que lanza \"Objects are not valid as a React child\". No lo convierte a texto. La forma correcta es desestructurar: `function Saludo({ nombre })`."
+  },
+  {
+    "pregunta": "Un componente `Item` (hijo) tiene un botón \"Quitar\" y la lista de items vive en el estado de `Lista` (padre). ¿Cómo logra el hijo que el padre quite ese item?",
+    "opciones": [
+      "El hijo modifica la prop `items` que recibió del padre",
+      "El hijo importa el estado del padre con `import`",
+      "El padre le pasa una función, por ejemplo `onQuitar`, y el hijo la llama al hacer clic",
+      "El hijo crea su propio `useState` con la lista y la cambia"
+    ],
+    "correcta": 2,
+    "explicacion": "En React los datos bajan por props y los avisos suben llamando funciones. El padre pasa `onQuitar={quitar}` y el hijo hace `onClick={() => onQuitar(id)}`; el padre actualiza su estado y vuelve a renderizar. Las props no se modifican, el estado de otro componente no se importa, y un estado propio en el hijo sería una copia que el padre nunca vería."
+  },
+  {
+    "pregunta": "¿Qué pasa al renderizar `<Saludo nombre=\"ana\" />` en desarrollo?\n\n```jsx\nfunction Saludo(props) {\n  props.nombre = props.nombre.toUpperCase();\n  return <p>{props.nombre}</p>;\n}\n```",
+    "opciones": [
+      "Se ve: ANA",
+      "Se ve: ana, el cambio se ignora en silencio",
+      "Se ve: ANA, pero solo en el primer render",
+      "Lanza un TypeError: las props son de solo lectura"
+    ],
+    "correcta": 3,
+    "explicacion": "En desarrollo React congela el objeto de props (`Object.freeze`), y como los módulos corren en modo estricto, asignar una propiedad lanza `TypeError: Cannot assign to read only property 'nombre'`. Aunque en producción no fallara, modificar props está prohibido. Lo correcto es una variable nueva: `const mayus = nombre.toUpperCase();`."
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "¿Qué se ve en pantalla con `<Carrito cantidad={0} />`?\n\n```jsx\nfunction Carrito({ cantidad }) {\n  return <div>{cantidad && <p>Tienes {cantidad} pizzas</p>}</div>;\n}\n```",
+    "opciones": [
+      "Nada, el div queda vacío",
+      "Tienes 0 pizzas",
+      "false",
+      "0"
+    ],
+    "correcta": 3,
+    "explicacion": "`0 && algo` devuelve `0` (el primer valor falsy) sin evaluar el párrafo. React ignora `false`, `null` y `undefined`, pero los números sí los pinta, así que aparece un `0` suelto. No es `false` porque `&&` no convierte a booleano. Arreglo: `{cantidad > 0 && <p>...</p>}`."
+  },
+  {
+    "pregunta": "¿Qué se pinta?\n\n```jsx\nconst items = [\"Pan\", \"Leche\"];\n\nfunction Lista() {\n  return (\n    <ul>\n      {items.map((item) => {\n        <li key={item}>{item}</li>;\n      })}\n    </ul>\n  );\n}\n```",
+    "opciones": [
+      "Una lista con Pan y Leche",
+      "Una <ul> vacía",
+      "Error: falta la key",
+      "Una lista con dos elementos vacíos"
+    ],
+    "correcta": 1,
+    "explicacion": "Con llaves `{}` el cuerpo de la flecha es un bloque y necesita `return`. Como no lo tiene, cada vuelta devuelve `undefined`, `map` arma `[undefined, undefined]` y React no pinta nada. La key no es el problema (sí está). Arreglo: `(item) => (<li key={item}>{item}</li>)`."
+  },
+  {
+    "pregunta": "Cada nombre tiene un `<input>`. Escribes \"hola\" en el input de **Ana** y luego haces clic en \"Agregar\", que pone \"Rosa\" **al inicio**. ¿Cómo queda?\n\n```jsx\nfunction Lista() {\n  const [nombres, setNombres] = useState([\"Ana\", \"Luis\"]);\n  return (\n    <>\n      <button onClick={() => setNombres([\"Rosa\", ...nombres])}>Agregar</button>\n      <ul>\n        {nombres.map((n, i) => (\n          <li key={i}>{n} <input /></li>\n        ))}\n      </ul>\n    </>\n  );\n}\n```",
+    "opciones": [
+      "Rosa [hola], Ana [ ], Luis [ ]",
+      "Rosa [ ], Ana [hola], Luis [ ]",
+      "Rosa [ ], Ana [ ], Luis [ ]: se borra todo",
+      "Error porque la key no puede ser un número"
+    ],
+    "correcta": 0,
+    "explicacion": "La key es el índice. Antes, la key 0 era Ana; después, la key 0 es Rosa. React cree que el elemento 0 es el mismo, cambia solo el texto y deja el input (con \"hola\") donde estaba: ahora junto a Rosa. Con `key={n}` o un id, React movería el input junto con Ana y quedaría Rosa [ ], Ana [hola], Luis [ ]. Una key numérica es válida; el problema es que no es estable."
+  },
+  {
+    "pregunta": "¿Qué pasa con este código?\n\n```jsx\nfunction Item({ texto }) {\n  return <li key={texto}>{texto}</li>;\n}\n\nfunction Lista() {\n  return <ul>{[\"a\", \"b\"].map((t) => <Item texto={t} />)}</ul>;\n}\n```",
+    "opciones": [
+      "Todo bien: cada <li> tiene su key",
+      "No se pinta nada porque Item no recibe key",
+      "Se pinta la lista, pero React advierte que falta la key: debe ir en <Item>, dentro del map",
+      "Error: no se puede usar key en un <li>"
+    ],
+    "correcta": 2,
+    "explicacion": "La key tiene que estar en el elemento que devuelve el `map`, que aquí es `<Item>`, no el `<li>` de adentro. La lista se pinta igual, pero React muestra en consola \"Each child in a list should have a unique key prop\". Lo correcto: `<Item key={t} texto={t} />`. Poner key en un `<li>` no da error, solo no sirve en ese lugar."
+  },
+  {
+    "pregunta": "¿Qué se ve con `<Resultados lista={[]} />`?\n\n```jsx\nfunction Resultados({ lista }) {\n  if (lista.length === 0) return <p>Sin resultados</p>;\n  return (\n    <ul>\n      {lista.map((r) => <li key={r.id}>{r.nombre}</li>)}\n    </ul>\n  );\n}\n```",
+    "opciones": [
+      "Una <ul> vacía",
+      "0",
+      "Nada",
+      "Sin resultados"
+    ],
+    "correcta": 3,
+    "explicacion": "Es un `return` temprano: como la lista está vacía, el componente devuelve el párrafo y nunca llega a la `<ul>`. No aparece `0` porque se usa una comparación (`=== 0`) que da booleano dentro de un `if`, no `lista.length &&` dentro del JSX."
+  },
+  {
+    "pregunta": "¿Cuál es la **mejor** key para esta lista de tareas que el usuario puede ordenar, completar y borrar?\n\n```jsx\nconst tareas = [\n  { id: \"t1\", texto: \"Estudiar React\", hecha: false },\n  { id: \"t2\", texto: \"Practicar map\", hecha: true },\n];\n```",
+    "opciones": [
+      "`key={i}` (el índice del map)",
+      "`key={tarea.id}`",
+      "`key={Math.random()}`",
+      "`key={tarea.hecha}`"
+    ],
+    "correcta": 1,
+    "explicacion": "La key debe ser única entre hermanos y estable: el `id` cumple ambas cosas. El índice cambia de dueño cuando ordenas o borras. `Math.random()` cambia en cada render y obliga a React a recrear todos los elementos (pierden su estado). `hecha` se repite (varias tareas pueden ser `true`) y además cambia."
+  }
+]

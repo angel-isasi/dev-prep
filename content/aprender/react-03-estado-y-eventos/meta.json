@@ -1,0 +1,8 @@
+{
+  "id": "react-estado-y-eventos",
+  "titulo": "Estado y eventos",
+  "area": "react",
+  "orden": 3,
+  "descripcion": "useState, onClick y onChange, re-render, el actualizador funcional, objetos y arreglos sin mutar, estado derivado y levantar el estado.",
+  "ejercicios": ["react-ej-006", "react-ej-013", "react-ej-016", "react-ej-017", "react-ej-033"]
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "¿Qué pasa con este componente?\n\n```jsx\nfunction Info() {\n  return <h1>Menú</h1><p>Pizzas al horno</p>;\n}\n```",
+    "opciones": [
+      "Se ven el título y el párrafo",
+      "Solo se ve el título \"Menú\"",
+      "Error de sintaxis: JSX necesita un solo elemento padre",
+      "Solo se ve el párrafo, porque es el último"
+    ],
+    "correcta": 2,
+    "explicacion": "Un `return` solo puede devolver una cosa, y dos etiquetas JSX hermanas sin padre no forman una sola expresión, así que el código ni siquiera compila. Por eso no se ve nada parcial (ni solo el título ni solo el párrafo). La solución es envolverlos en un fragmento `<>...</>` o en un `<div>`."
+  },
+  {
+    "pregunta": "¿Qué texto se ve en pantalla?\n\n```jsx\nfunction App() {\n  return <p>{true}{false}{null}{undefined}{0}{\"hola\"}</p>;\n}\n```",
+    "opciones": [
+      "truefalsenullundefined0hola",
+      "0hola",
+      "hola",
+      "false0hola"
+    ],
+    "correcta": 1,
+    "explicacion": "React no pinta `true`, `false`, `null` ni `undefined`: los ignora. Pero los números sí se pintan, incluido el `0`. Por eso queda `0hola`. Esta regla es la base de la trampa del `0 &&` que verás en el tema de renderizado condicional."
+  },
+  {
+    "pregunta": "¿Qué se ve en pantalla?\n\n```jsx\nfunction saludo() {\n  return <p>Hola</p>;\n}\n\nfunction App() {\n  return <saludo />;\n}\n```",
+    "opciones": [
+      "Hola",
+      "Un error que detiene la app",
+      "El texto \"saludo\"",
+      "Nada visible: React crea una etiqueta HTML <saludo> vacía"
+    ],
+    "correcta": 3,
+    "explicacion": "Con la primera letra en minúscula, React interpreta `<saludo />` como una etiqueta HTML (igual que `<div>`), no como tu componente. Crea un `<saludo></saludo>` vacío y muestra una advertencia en consola, pero no se rompe la app ni aparece \"Hola\". Los componentes siempre van con Mayúscula: `function Saludo()` y `<Saludo />`."
+  },
+  {
+    "pregunta": "Tienes estos dos archivos. ¿Qué pasa?\n\n```jsx\n// Boton.jsx\nexport default function Boton() {\n  return <button>OK</button>;\n}\n\n// App.jsx\nimport { Boton } from \"./Boton.jsx\";\n```",
+    "opciones": [
+      "Falla: `Boton` se exportó por defecto, pero se importa con llaves como si fuera nombrado",
+      "Funciona igual, las llaves son opcionales",
+      "Funciona, pero React muestra una advertencia",
+      "Falla porque el archivo debería llamarse boton.jsx"
+    ],
+    "correcta": 0,
+    "explicacion": "Las llaves en un `import` piden un export **nombrado** con ese nombre exacto, y aquí solo hay un export por defecto. Lo correcto es `import Boton from \"./Boton.jsx\"`. Las llaves no son opcionales: cambian el significado. El nombre del archivo no tiene que ver con el error."
+  },
+  {
+    "pregunta": "¿Cuál de estas líneas es JSX **válido**?",
+    "opciones": [
+      "`<p>{if (abierto) \"Abierto\"}</p>`",
+      "`<p>{for (const p of pizzas) p}</p>`",
+      "`<p>{abierto ? \"Abierto\" : \"Cerrado\"}</p>`",
+      "`<p>{const total = 10}</p>`"
+    ],
+    "correcta": 2,
+    "explicacion": "Dentro de `{}` solo van **expresiones**, es decir, cosas que producen un valor. El ternario es una expresión, por eso es válido. `if`, `for` y `const` son sentencias: no producen un valor y dan error de sintaxis. Si necesitas un `if`, ponlo antes del `return`."
+  },
+  {
+    "pregunta": "¿Cuál es la forma correcta de pintar este párrafo en rojo y con letra de 20px?",
+    "opciones": [
+      "`<p style=\"color: red; font-size: 20px\">Agotado</p>`",
+      "`<p style={{ color: \"red\", fontSize: 20 }}>Agotado</p>`",
+      "`<p style={{ color: red, font-size: 20px }}>Agotado</p>`",
+      "`<p css=\"color: red\">Agotado</p>`"
+    ],
+    "correcta": 1,
+    "explicacion": "En React, `style` recibe un **objeto**: las llaves de fuera significan \"aquí va JavaScript\" y las de dentro crean el objeto. Las propiedades van en camelCase (`fontSize`) y un número se toma como píxeles. Pasar un texto como en HTML lanza un error; `red` sin comillas sería una variable inexistente y `font-size` no es un nombre válido de propiedad sin comillas; `css` no es un atributo de React."
+  }
+]
