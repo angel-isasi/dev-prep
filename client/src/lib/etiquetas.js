@@ -24,7 +24,13 @@ const TEMAS = {
   clases: "Clases y prototipos",
   iteradores: "Iteradores y generadores",
   algoritmos: "Algoritmos",
-  "react-estado": "React: estado",
+  "react-componentes": "React: componentes y props",
+  "react-estado": "React: estado y eventos",
+  "react-listas": "React: listas y condicionales",
+  "react-formularios": "React: formularios",
+  "react-efectos": "React: efectos y datos",
+  "react-hooks": "React: hooks avanzados",
+  "react-patrones": "React: patrones y rendimiento",
 };
 
 const capitalizar = (texto) => texto.charAt(0).toUpperCase() + texto.slice(1).replaceAll("-", " ");
