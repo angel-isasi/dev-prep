@@ -1,0 +1,5 @@
+[
+  "Hay tres situaciones posibles y solo una a la vez: cargando, error o listo. ¿Y si el estado fuera un solo objeto que diga en qué \"fase\" estás? Piensa también: la carga inicial y el botón Reintentar hacen exactamente lo mismo. ¿Puedes escribir esa lógica una sola vez?",
+  "Estado: `useState({ fase: \"cargando\" })`. Escribe una función `intentar` que ponga `fase: \"cargando\"`, llame a `cargar()` y en el `.then(éxito, error)` guarde `{ fase: \"listo\", dato }` o `{ fase: \"error\" }`. Envuélvela en `useCallback(..., [cargar])` y llámala desde un `useEffect` con `[intentar]` como dependencia. El botón usa `onClick={intentar}`.",
+  "Esqueleto:\n\n```jsx\nconst [estado, setEstado] = useState({ fase: \"cargando\" });\n\nconst intentar = useCallback(() => {\n  setEstado({ fase: \"cargando\" });\n  cargar().then(\n    (dato) => /* fase listo con el dato */,\n    () => /* fase error */\n  );\n}, [cargar]);\n\nuseEffect(() => {\n  intentar();\n}, [intentar]);\n\nif (estado.fase === \"cargando\") return <p>Cargando…</p>;\nif (estado.fase === \"error\") return (/* alerta + botón Reintentar */);\nreturn <p>{estado.dato}</p>;\n```"
+]

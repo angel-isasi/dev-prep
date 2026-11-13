@@ -1,0 +1,5 @@
+[
+  "Hay dos casos: el elemento ya está (hay que sacarlo) o no está (hay que meterlo). En los dos, la respuesta tiene que ser un arreglo **nuevo**. ¿Qué métodos de arreglo crean uno nuevo en lugar de modificar el original?",
+  "Para saber si está: `seleccion.includes(id)`. Para sacarlo sin mutar: `seleccion.filter((x) => x !== id)`. Para agregarlo sin mutar: `[...seleccion, id]`. Un ternario los une en una línea. En el componente, la casilla es controlada: `checked={seleccion.includes(opcion)}` y `onChange={() => setSeleccion((actual) => alternar(actual, opcion))}`.",
+  "Esqueleto:\n\n```jsx\nexport function alternar(seleccion, id) {\n  return seleccion.includes(id) ? /* sin id */ : /* con id al final */;\n}\n\nexport function SelectorIngredientes({ opciones }) {\n  const [seleccion, setSeleccion] = useState([]);\n  return (\n    <fieldset>\n      {opciones.map((opcion) => (\n        <label key={opcion}>\n          <input type=\"checkbox\" checked={/* ... */} onChange={/* ... */} />\n          {opcion}\n        </label>\n      ))}\n      <p>{/* \"Elegiste: ...\" o \"No elegiste nada\" */}</p>\n    </fieldset>\n  );\n}\n```"
+]

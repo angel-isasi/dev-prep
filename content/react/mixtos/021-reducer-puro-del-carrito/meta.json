@@ -1,0 +1,9 @@
+{
+  "id": "mix-021",
+  "titulo": "Reducer puro del carrito",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "useReducer", "reducer", "inmutabilidad", "funciones-puras", "carrito"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/21"
+}

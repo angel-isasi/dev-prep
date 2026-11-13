@@ -1,0 +1,9 @@
+{
+  "id": "mix-020",
+  "titulo": "Caché con Map para no repetir peticiones",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 3,
+  "tags": ["react", "useEffect", "Map", "cache", "promesas", "closures"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/20"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "mix-009",
+  "titulo": "Normalizar por id",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["react", "Object.fromEntries", "useMemo", "optional-chaining", "normalizar"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/09"
+}

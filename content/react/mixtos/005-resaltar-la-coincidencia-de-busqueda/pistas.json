@@ -1,0 +1,5 @@
+[
+  "Piensa en el texto como una lista de pedazos: los que coinciden con la búsqueda y los que no. Si tuvieras esa lista, solo tendrías que envolver en `<mark>` los que coinciden. ¿Cómo partes un texto en pedazos **sin perder** las partes que coinciden?",
+  "`` texto.split(new RegExp(`(${busqueda})`, \"gi\")) ``: con paréntesis (un grupo de captura), `split` incluye las coincidencias en el resultado; `g` busca todas e `i` ignora mayúsculas. Antes, escapa los caracteres especiales con `busqueda.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$&\")`. Luego, en el `map`, compara cada pedazo en minúsculas con la búsqueda en minúsculas.",
+  "Esqueleto:\n\n```jsx\nfunction escaparRegex(texto) {\n  return texto.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$&\");\n}\n\nexport function Resaltar({ texto, busqueda }) {\n  if (/* búsqueda vacía o en blanco */) return <>{texto}</>;\n  const partes = texto.split(new RegExp(`(${escaparRegex(busqueda)})`, \"gi\"));\n  return (\n    <>\n      {partes.map((parte, i) =>\n        /* ¿coincide? */ ? <mark key={i}>{parte}</mark> : parte\n      )}\n    </>\n  );\n}\n```"
+]

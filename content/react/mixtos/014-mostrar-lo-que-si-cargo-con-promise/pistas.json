@@ -1,0 +1,5 @@
+[
+  "Necesitas esperar a **todas** las fuentes, pero sin que un fallo arruine a las demás. `Promise.all` se rechaza apenas una falla, así que no sirve. ¿Hay alguna variante que espere a todas y te cuente cómo terminó cada una?",
+  "`Promise.allSettled(fuentes.map((f) => f.cargar()))` nunca se rechaza: devuelve un arreglo con un objeto por promesa, `{ status: \"fulfilled\", value }` o `{ status: \"rejected\", reason }`, en el mismo orden. Guárdalo en el estado dentro de un `useEffect` y, al pintar, usa el índice para saber a qué fuente corresponde cada resultado.",
+  "Esqueleto:\n\n```jsx\nconst [resultados, setResultados] = useState(null);\n\nuseEffect(() => {\n  let vigente = true;\n  Promise.allSettled(/* llama a cada cargar */).then((lista) => {\n    if (vigente) setResultados(lista);\n  });\n  return () => { vigente = false; };\n}, [fuentes]);\n\nif (!resultados) return <p>Cargando…</p>;\nreturn (\n  <ul>\n    {resultados.map((r, i) => (\n      <li key={fuentes[i].nombre}>\n        {fuentes[i].nombre}: {/* valor o \"no disponible\" según r.status */}\n      </li>\n    ))}\n  </ul>\n);\n```"
+]

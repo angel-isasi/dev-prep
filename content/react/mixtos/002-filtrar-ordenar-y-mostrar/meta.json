@@ -1,0 +1,9 @@
+{
+  "id": "mix-002",
+  "titulo": "Filtrar, ordenar y mostrar",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 1,
+  "tags": ["react", "filter", "toSorted", "inmutabilidad", "props", "listas"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/02"
+}

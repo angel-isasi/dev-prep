@@ -1,0 +1,5 @@
+[
+  "Todo sale de un solo número: el subtotal. El IGV y el total se calculan a partir de él. ¿Qué método de arreglo convierte una lista de items en un solo número? Y ojo: ¿qué debería pasar con una lista vacía?",
+  "Usa `reduce((suma, item) => suma + item.precio * item.cantidad, 0)`: el `0` final es el valor inicial y evita el error con el carrito vacío. Para el formato, `monto.toFixed(2)` devuelve un texto con dos decimales.",
+  "Esqueleto:\n\n```jsx\nexport function soles(monto) {\n  return `S/ ${/* monto con 2 decimales */}`;\n}\n\nexport function ResumenPedido({ items }) {\n  const subtotal = items.reduce((suma, item) => /* ... */, 0);\n  const igv = /* 18% del subtotal */;\n  return (\n    <dl>\n      <dt>Subtotal</dt>\n      <dd>{soles(subtotal)}</dd>\n      {/* IGV (18%) y Total igual */}\n    </dl>\n  );\n}\n```"
+]

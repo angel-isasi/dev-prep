@@ -1,0 +1,9 @@
+{
+  "id": "mix-005",
+  "titulo": "Resaltar la coincidencia de búsqueda",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 3,
+  "tags": ["react", "regex", "split", "strings", "busqueda", "seguridad"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/05"
+}

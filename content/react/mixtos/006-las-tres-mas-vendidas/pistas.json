@@ -1,0 +1,5 @@
+[
+  "Un objeto no se puede ordenar ni recorrer con `map`. Primero conviértelo en un arreglo donde cada elemento tenga el nombre y la cantidad juntos; después ordénalo y quédate con los primeros.",
+  "`Object.entries(ventas)` devuelve pares `[nombre, cantidad]`. Ordénalos con `toSorted` comparando la posición 1 de cada par (puedes desestructurar: `([, a], [, b]) => b - a`) y corta con `slice(0, 3)`.",
+  "Esqueleto:\n\n```jsx\nexport function MasVendidas({ ventas }) {\n  const top = Object.entries(ventas)\n    .toSorted(([, a], [, b]) => /* mayor primero */)\n    .slice(/* ... */);\n\n  return (\n    <ol>\n      {top.map(([nombre, cantidad]) => (\n        <li key={nombre}>{/* Nombre (cantidad) */}</li>\n      ))}\n    </ol>\n  );\n}\n```"
+]

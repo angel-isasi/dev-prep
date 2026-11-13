@@ -1,0 +1,9 @@
+{
+  "id": "mix-010",
+  "titulo": "Props con rest y spread",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 2,
+  "tags": ["react", "props", "rest", "spread", "destructuring", "componentes-reutilizables"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/10"
+}

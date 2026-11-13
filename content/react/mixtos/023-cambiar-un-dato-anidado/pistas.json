@@ -1,0 +1,5 @@
+[
+  "Para cambiar algo que está dos niveles adentro sin mutar, necesitas un objeto nuevo en **cada nivel del camino** hasta ese dato: un cliente nuevo y una dirección nueva. Lo que no está en el camino (nombre, pedidos) no hace falta copiarlo.",
+  "Usa spread anidado: `{ ...cliente, direccion: { ...cliente.direccion, distrito } }`. El primer spread copia las propiedades del cliente; luego `direccion` se reemplaza por un objeto nuevo que copia la dirección y sobrescribe `distrito`. En el componente: `useState(clienteInicial)` y en el `onChange`, `setCliente((actual) => cambiarDistrito(actual, valor))`.",
+  "Esqueleto:\n\n```jsx\nexport function cambiarDistrito(cliente, distrito) {\n  return {\n    ...cliente,\n    direccion: { /* copia la dirección y cambia distrito */ },\n  };\n}\n\nexport function PerfilCliente({ clienteInicial }) {\n  const [cliente, setCliente] = useState(clienteInicial);\n  return (\n    <div>\n      <p>{cliente.nombre} vive en {/* distrito */}</p>\n      <input aria-label=\"Distrito\" value={/* ... */} onChange={(e) => {\n        const distrito = e.target.value;\n        setCliente(/* ... */);\n      }} />\n    </div>\n  );\n}\n```"
+]

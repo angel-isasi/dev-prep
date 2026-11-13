@@ -1,0 +1,9 @@
+{
+  "id": "mix-007",
+  "titulo": "Etiquetas únicas",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 1,
+  "tags": ["react", "flatMap", "Set", "localeCompare", "listas"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/07"
+}

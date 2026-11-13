@@ -1,0 +1,5 @@
+[
+  "Necesitas que el componente \"sepa\" si hay un pago en curso, y que eso cambie lo que se ve (texto y botón deshabilitado). Eso es estado. Luego piensa: ¿en qué momento vuelve a `false`? Tiene que pasar tanto si el pago sale bien como si falla.",
+  "Usa `useState(false)` para `enviando` y otro para el `error`. El manejador del clic puede ser `async`: pon `setEnviando(true)`, luego `try { await pagar() } catch { setError(true) } finally { setEnviando(false) }`. En el botón: `disabled={enviando}`.",
+  "Esqueleto:\n\n```jsx\nconst [enviando, setEnviando] = useState(false);\nconst [error, setError] = useState(false);\n\nasync function manejarClic() {\n  if (enviando) return;\n  setEnviando(true);\n  setError(false);\n  try {\n    await pagar();\n  } catch {\n    /* marca el error */\n  } finally {\n    /* vuelve a habilitar */\n  }\n}\n\nreturn (\n  <div>\n    <button onClick={manejarClic} disabled={/* ... */}>{/* Pagar o Pagando… */}</button>\n    {error && <p role=\"alert\">No se pudo procesar el pago</p>}\n  </div>\n);\n```"
+]

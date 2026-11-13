@@ -1,0 +1,5 @@
+[
+  "Son dos pasos sobre los datos antes de pintar: quedarte con las disponibles y ordenarlas por precio. Piensa también en esto: ¿cuál de esos métodos modifica el arreglo original? Las props no se deben tocar.",
+  "Usa `filter` para quedarte con las que tienen `disponible: true` y `toSorted` (no `sort`) con el comparador `(a, b) => a.precio - b.precio`. `toSorted` devuelve una copia ordenada; `sort` ordena el arreglo en su lugar.",
+  "Esqueleto:\n\n```jsx\nexport function Disponibles({ pizzas }) {\n  const lista = pizzas\n    .filter((pizza) => /* ¿está disponible? */)\n    .toSorted((a, b) => /* menor precio primero */);\n\n  return <ol>{lista.map((pizza) => <li key={pizza.nombre}>{/* nombre */}</li>)}</ol>;\n}\n```"
+]

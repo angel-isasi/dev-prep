@@ -1,0 +1,5 @@
+[
+  "Contar es recorrer los pedidos una vez e ir llevando una \"libreta\" con cuántos van de cada estado. Esa libreta es un objeto. Después, para el texto, necesitas convertir la libreta en frases y unirlas.",
+  "Usa `reduce` con `{}` como valor inicial. En cada pedido: `conteo[estado] = (conteo[estado] ?? 0) + 1`. Para el texto: `Object.entries(conteo)`, un `map` que arme `` `${cantidad} ${estado}` `` y `join(\", \")`. No olvides el caso de la lista vacía.",
+  "Esqueleto:\n\n```jsx\nexport function contarPorEstado(pedidos) {\n  return pedidos.reduce((conteo, pedido) => {\n    conteo[pedido.estado] = /* lo que había (o 0) + 1 */;\n    return conteo;\n  }, {});\n}\n\nexport function ResumenEstados({ pedidos }) {\n  if (/* no hay pedidos */) return <p>Sin pedidos</p>;\n  const texto = Object.entries(contarPorEstado(pedidos))\n    .map(([estado, cantidad]) => /* \"2 en horno\" */)\n    .join(/* ... */);\n  return <p>{texto}</p>;\n}\n```"
+]

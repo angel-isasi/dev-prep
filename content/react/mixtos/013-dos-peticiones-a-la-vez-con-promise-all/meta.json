@@ -1,0 +1,9 @@
+{
+  "id": "mix-013",
+  "titulo": "Dos peticiones a la vez con Promise.all",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "Promise.all", "promesas", "carga-de-datos", "limpieza"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/13"
+}

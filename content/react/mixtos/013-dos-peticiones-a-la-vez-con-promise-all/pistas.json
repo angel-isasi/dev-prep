@@ -1,0 +1,5 @@
+[
+  "Pedir datos al montar es un efecto (`useEffect`). La pregunta clave es: si las dos peticiones no dependen una de la otra, ¿por qué esperar a que termine la primera para lanzar la segunda? Hay una función de las promesas que espera a varias a la vez.",
+  "Dentro del efecto: `Promise.all([obtenerMenu(), obtenerPromos()])` llama a las dos en el mismo instante y devuelve una promesa con `[menu, promos]`. Usa `.then` para guardar los datos y `.catch` para el error. Agrega `let vigente = true` y en la limpieza `vigente = false`, y solo actualiza el estado si `vigente`.",
+  "Esqueleto:\n\n```jsx\nconst [datos, setDatos] = useState(null);\nconst [error, setError] = useState(false);\n\nuseEffect(() => {\n  let vigente = true;\n  Promise.all([/* las dos llamadas */])\n    .then(([menu, promos]) => { if (vigente) setDatos({ menu, promos }); })\n    .catch(() => { if (vigente) setError(true); });\n  return () => { vigente = false; };\n}, [obtenerMenu, obtenerPromos]);\n\nif (error) return <p role=\"alert\">No se pudo cargar el panel</p>;\nif (!datos) return <p>Cargando…</p>;\nreturn <p>{/* n pizzas y m promos */}</p>;\n```"
+]

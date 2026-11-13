@@ -1,0 +1,9 @@
+{
+  "id": "mix-014",
+  "titulo": "Mostrar lo que sí cargó con Promise.allSettled",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "Promise.allSettled", "promesas", "errores-parciales"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/14"
+}

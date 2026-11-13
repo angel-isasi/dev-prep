@@ -1,0 +1,9 @@
+{
+  "id": "mix-019",
+  "titulo": "Consultar cada cierto tiempo hasta terminar",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 3,
+  "tags": ["react", "useEffect", "setInterval", "polling", "async-await", "limpieza"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/19"
+}

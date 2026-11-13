@@ -1,0 +1,9 @@
+{
+  "id": "mix-012",
+  "titulo": "Evitar el doble envío",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["react", "async-await", "try-catch-finally", "useState", "eventos", "promesas"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/12"
+}

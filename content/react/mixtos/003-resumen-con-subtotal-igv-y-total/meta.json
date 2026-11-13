@@ -1,0 +1,9 @@
+{
+  "id": "mix-003",
+  "titulo": "Resumen con subtotal, IGV y total",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 1,
+  "tags": ["react", "reduce", "toFixed", "dinero", "estado-derivado"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/03"
+}

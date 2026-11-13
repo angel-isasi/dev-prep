@@ -1,0 +1,9 @@
+{
+  "id": "mix-017",
+  "titulo": "Una petición que depende de otra",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "async-await", "peticiones-encadenadas", "try-catch"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/17"
+}

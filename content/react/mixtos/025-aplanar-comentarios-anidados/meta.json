@@ -1,0 +1,9 @@
+{
+  "id": "mix-025",
+  "titulo": "Aplanar comentarios anidados",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 3,
+  "tags": ["react", "recursion", "flatMap", "arboles", "listas", "estilos-en-linea"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/25"
+}

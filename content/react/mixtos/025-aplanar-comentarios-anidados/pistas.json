@@ -1,0 +1,5 @@
+[
+  "Piensa en un solo comentario: el resultado para él es \"yo, con mi nivel\" seguido de \"mis respuestas aplanadas, un nivel más adentro\". Y aplanar las respuestas es... exactamente el mismo problema, solo que más chico. Cuando una función se llama a sí misma con un problema más pequeño, eso es recursión. ¿Cuándo se detiene?",
+  "Usa `flatMap` sobre los comentarios: por cada uno devuelve un arreglo `[{ id, texto, nivel }, ...aplanar(respuestas, nivel + 1)]`. `flatMap` une todos esos arreglos en uno. Si `respuestas` no existe, usa `?? []`: con un arreglo vacío la recursión termina sola. En el componente: `style={{ marginLeft: nivel * 24 }}` (React agrega `px` a los números).",
+  "Esqueleto:\n\n```jsx\nexport function aplanar(comentarios, nivel = 0) {\n  return comentarios.flatMap((comentario) => [\n    { id: comentario.id, texto: comentario.texto, nivel },\n    ...aplanar(/* respuestas o [] */, /* nivel siguiente */),\n  ]);\n}\n\nexport function Hilo({ comentarios }) {\n  return (\n    <ul>\n      {aplanar(comentarios).map((c) => (\n        <li key={c.id} style={{ marginLeft: /* ... */ }}>{c.texto}</li>\n      ))}\n    </ul>\n  );\n}\n```"
+]

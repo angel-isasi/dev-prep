@@ -1,0 +1,9 @@
+{
+  "id": "mix-022",
+  "titulo": "Marcar y desmarcar en una selección",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 1,
+  "tags": ["react", "inmutabilidad", "checkbox", "filter", "spread", "funciones-puras"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/22"
+}

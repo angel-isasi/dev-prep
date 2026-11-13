@@ -1,0 +1,9 @@
+{
+  "id": "mix-018",
+  "titulo": "Actualización optimista con marcha atrás",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 3,
+  "tags": ["react", "useState", "closures", "async-await", "actualizacion-optimista", "aria-pressed"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/18"
+}

@@ -1,0 +1,5 @@
+[
+  "Hay dos grupos de props: las que tu componente usa para algo (la variante, las clases, el contenido) y todas las demás, que solo tiene que \"dejar pasar\" al `<button>`. ¿Cómo separas unas de otras sin nombrar cada una?",
+  "En la desestructuración de los parámetros, `...resto` junta todas las props que no nombraste. En el JSX, `{...resto}` las reparte como atributos del `<button>`. Para la clase, arma un template string y quita el espacio sobrante con `trim()`. Los valores por defecto van en la propia desestructuración: `variante = \"primario\"`.",
+  "Esqueleto:\n\n```jsx\nexport function Boton({ variante = \"primario\", className = \"\", children, ...resto }) {\n  const clases = `boton boton-${variante} ${className}`/* sin espacios sobrantes */;\n  return (\n    <button className={clases} {/* reparte el resto */}>\n      {children}\n    </button>\n  );\n}\n```"
+]

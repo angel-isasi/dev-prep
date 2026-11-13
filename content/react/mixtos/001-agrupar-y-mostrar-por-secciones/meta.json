@@ -1,0 +1,9 @@
+{
+  "id": "mix-001",
+  "titulo": "Agrupar y mostrar por secciones",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["react", "reduce", "agrupar", "Object.entries", "listas", "key"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/01"
+}

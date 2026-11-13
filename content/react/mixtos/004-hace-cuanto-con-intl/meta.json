@@ -1,0 +1,9 @@
+{
+  "id": "mix-004",
+  "titulo": "\"Hace cuánto\" con Intl",
+  "tipo": "componente",
+  "tema": "react-componentes",
+  "nivel": 2,
+  "tags": ["react", "Intl", "fechas", "funciones-puras", "testing"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/04"
+}

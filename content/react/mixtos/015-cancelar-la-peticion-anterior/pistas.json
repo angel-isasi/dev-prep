@@ -1,0 +1,5 @@
+[
+  "Buscar al cambiar `texto` es un efecto con `texto` en las dependencias. Ahora piensa: ¿qué parte de `useEffect` se ejecuta justo **antes** de que el efecto se vuelva a correr con el texto nuevo? Ese es el lugar perfecto para cancelar la búsqueda anterior.",
+  "En el efecto crea `const control = new AbortController()` y pasa `control.signal` a `buscar`. En la limpieza (`return () => ...`) llama a `control.abort()`. Como cada ejecución del efecto tiene su propio `control`, la limpieza aborta justo el anterior. En el `.catch`, ignora el error si `error.name === \"AbortError\"`.",
+  "Esqueleto:\n\n```jsx\nconst [items, setItems] = useState([]);\n\nuseEffect(() => {\n  const control = new AbortController();\n  buscar(texto, control.signal)\n    .then(setItems)\n    .catch((error) => {\n      if (/* no es una cancelación */) setItems([]);\n    });\n  return () => /* cancela */;\n}, [texto, buscar]);\n\nreturn <ul>{items.map((item) => <li key={item}>{item}</li>)}</ul>;\n```"
+]

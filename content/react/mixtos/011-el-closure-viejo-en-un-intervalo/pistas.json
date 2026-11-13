@@ -1,0 +1,5 @@
+[
+  "El efecto tiene `[]` como dependencias: se ejecuta una sola vez, en el primer render. La función que le pasas a `setInterval` se creó en ese render. ¿Cuánto valía `segundos` en ese momento? Esa función ¿alguna vez \"ve\" un valor nuevo?",
+  "`setSegundos` acepta una **función** en lugar de un valor: `setSegundos((anterior) => anterior + 1)`. React la llama con el valor actual del estado, así no dependes del `segundos` que quedó atrapado en el closure.",
+  "Esqueleto:\n\n```jsx\nuseEffect(() => {\n  const id = setInterval(() => setSegundos(/* función que recibe el valor actual */), 1000);\n  return () => clearInterval(id);\n}, []);\n```"
+]

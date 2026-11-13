@@ -1,0 +1,9 @@
+{
+  "id": "mix-023",
+  "titulo": "Cambiar un dato anidado",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 1,
+  "tags": ["react", "inmutabilidad", "spread", "objetos-anidados", "useState", "formularios"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/23"
+}

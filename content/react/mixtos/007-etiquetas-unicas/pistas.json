@@ -1,0 +1,5 @@
+[
+  "Son tres transformaciones seguidas: juntar las etiquetas de todas las pizzas en un solo arreglo, quitar los repetidos y ordenar. ¿Qué estructura de JavaScript, por definición, no admite valores repetidos?",
+  "`pizzas.flatMap((p) => p.etiquetas)` te da un arreglo plano con todas. `new Set(arreglo)` elimina repetidos y `[...set]` lo vuelve arreglo. Para ordenar en español usa `sort((a, b) => a.localeCompare(b, \"es\"))`.",
+  "Esqueleto:\n\n```jsx\nexport function Etiquetas({ pizzas }) {\n  const todas = pizzas.flatMap(/* ... */);\n  const unicas = [...new Set(todas)].sort((a, b) => /* comparar en español */);\n  return <ul>{unicas.map((e) => <li key={e}>{e}</li>)}</ul>;\n}\n```"
+]

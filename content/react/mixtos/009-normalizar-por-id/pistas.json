@@ -1,0 +1,5 @@
+[
+  "Si para cada id del pedido haces `pizzas.find(...)`, recorres el catálogo una vez por id. ¿Y si primero armas un objeto donde la clave sea el id? Así `catalogo[\"p2\"]` te da la pizza directo. Piensa también qué devuelve un objeto cuando la clave no existe.",
+  "`lista.map((item) => [item.id, item])` te da pares `[clave, valor]`, y `Object.fromEntries(pares)` los convierte en objeto. En el componente, envuelve `porId(pizzas)` en `useMemo(() => ..., [pizzas])`. Para el id que no existe, `catalogo[id]` es `undefined`: usa `?.nombre` y `??` para el texto por defecto.",
+  "Esqueleto:\n\n```jsx\nexport function porId(lista) {\n  return Object.fromEntries(lista.map((item) => /* [clave, valor] */));\n}\n\nexport function DetallePedido({ pedido, pizzas }) {\n  const catalogo = useMemo(() => porId(pizzas), [/* dependencias */]);\n  return (\n    <ul>\n      {pedido.map((id) => (\n        <li key={id}>{/* nombre o \"Pizza no disponible\" */}</li>\n      ))}\n    </ul>\n  );\n}\n```"
+]

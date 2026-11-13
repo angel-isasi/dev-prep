@@ -1,0 +1,9 @@
+{
+  "id": "mix-016",
+  "titulo": "Botón de reintentar",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "useEffect", "useCallback", "promesas", "estados-de-carga", "errores"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/16"
+}

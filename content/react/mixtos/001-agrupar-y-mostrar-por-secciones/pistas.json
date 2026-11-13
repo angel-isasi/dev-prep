@@ -1,0 +1,5 @@
+[
+  "Divide el problema en dos: primero, ¿cómo convierto el arreglo plano en un objeto `{ categoria: [pizzas] }`? Eso es JavaScript puro, sin React. Segundo, ¿cómo recorro ese objeto en JSX? Si resuelves lo primero, lo segundo es solo un par de `map`.",
+  "Para agrupar usa `reduce` con un objeto vacío `{}` como valor inicial: en cada vuelta, si el grupo no existe lo creas (`grupos[valor] ??= []`) y haces `push`. Para pintar, `Object.entries(grupos)` te da pares `[categoria, items]` que puedes recorrer con `map`.",
+  "Esqueleto:\n\n```jsx\nexport function agrupar(lista, clave) {\n  return lista.reduce((grupos, item) => {\n    (grupos[/* valor de la clave */] ??= []).push(item);\n    return grupos;\n  }, {});\n}\n\nexport function MenuPorCategoria({ pizzas }) {\n  const grupos = agrupar(pizzas, \"categoria\");\n  return (\n    <>\n      {Object.entries(grupos).map(([categoria, items]) => (\n        <section key={categoria} aria-label={categoria}>\n          <h2>{categoria}</h2>\n          <ul>{/* un <li> por pizza */}</ul>\n        </section>\n      ))}\n    </>\n  );\n}\n```"
+]

@@ -1,0 +1,9 @@
+{
+  "id": "mix-024",
+  "titulo": "Mover un elemento arriba o abajo",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["react", "inmutabilidad", "destructuring", "intercambio", "listas", "useState"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/24"
+}

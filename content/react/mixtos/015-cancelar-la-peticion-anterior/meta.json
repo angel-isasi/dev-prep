@@ -1,0 +1,9 @@
+{
+  "id": "mix-015",
+  "titulo": "Cancelar la petición anterior",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 3,
+  "tags": ["react", "useEffect", "AbortController", "condiciones-de-carrera", "limpieza", "busqueda"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/15"
+}

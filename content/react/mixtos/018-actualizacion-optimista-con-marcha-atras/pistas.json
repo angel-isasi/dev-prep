@@ -1,0 +1,5 @@
+[
+  "Antes de cambiar nada, piensa: si el servidor falla, ¿a qué valor vuelves? Necesitas \"anotar\" el valor de antes del clic en algún lugar que siga disponible cuando llegue la respuesta del servidor, aunque el estado ya haya cambiado.",
+  "En el manejador `async`, guarda `const anterior = activo` y calcula `const nuevo = !anterior`. Llama a `setActivo(nuevo)` antes del `await`. Luego `try { await guardar(nuevo) } catch { setActivo(anterior); setError(true) }`. La constante `anterior` vive en el closure de esa llamada. En el botón: `aria-pressed={activo}`.",
+  "Esqueleto:\n\n```jsx\nconst [activo, setActivo] = useState(false);\nconst [error, setError] = useState(false);\n\nasync function alternar() {\n  const anterior = activo;\n  const nuevo = !anterior;\n  setActivo(/* ... */);\n  setError(false);\n  try {\n    await guardar(nuevo);\n  } catch {\n    /* vuelve atrás y marca el error */\n  }\n}\n\nreturn (\n  <div>\n    <button aria-pressed={activo} onClick={alternar}>Me gusta</button>\n    {error && <p role=\"alert\">No se guardó. Inténtalo otra vez.</p>}\n  </div>\n);\n```"
+]

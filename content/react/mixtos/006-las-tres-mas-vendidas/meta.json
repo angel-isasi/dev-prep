@@ -1,0 +1,9 @@
+{
+  "id": "mix-006",
+  "titulo": "Las tres más vendidas",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 1,
+  "tags": ["react", "Object.entries", "toSorted", "slice", "destructuring", "listas"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/06"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "mix-011",
+  "titulo": "El closure viejo en un intervalo",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "closures", "useEffect", "setInterval", "actualizacion-funcional", "stale-closure"],
+  "origen": "definitivo/01-ejercicios/03-mixtos/11"
+}

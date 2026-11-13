@@ -1,0 +1,5 @@
+[
+  "Un intervalo que vive mientras el componente está montado es un efecto con limpieza. La parte interesante es la parada: ¿y si el efecto dependiera del `estado`? Cada vez que el estado cambia, el efecto se vuelve a ejecutar... y en ese momento puede decidir no crear un intervalo nuevo.",
+  "En el `useEffect`, primero: `if (estado === \"entregado\") return;`. Si no, crea `setInterval(async () => { ... }, cada)` cuyo callback haga `setEstado(await consultar())` dentro de un `try/catch`. Devuelve `() => clearInterval(id)`. Dependencias: `[estado, consultar, cada]`.",
+  "Esqueleto:\n\n```jsx\nconst [estado, setEstado] = useState(\"preparando\");\n\nuseEffect(() => {\n  if (/* ya terminó */) return;\n  const id = setInterval(async () => {\n    try {\n      setEstado(/* resultado de consultar */);\n    } catch {\n      /* ignora y reintenta en la siguiente vuelta */\n    }\n  }, cada);\n  return () => clearInterval(id);\n}, [estado, consultar, cada]);\n\nreturn <p>Tu pedido está: {estado}</p>;\n```"
+]

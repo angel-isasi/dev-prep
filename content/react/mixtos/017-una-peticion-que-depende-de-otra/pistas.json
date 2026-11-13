@@ -1,0 +1,5 @@
+[
+  "La segunda petición necesita un dato de la primera (`usuario.id`), así que no pueden ir en paralelo: tienes que esperar. `await` es perfecto para eso, pero `useEffect(async () => ...)` no está permitido. ¿Dónde puedes poner una función `async`?",
+  "Dentro del efecto, define `async function cargar() { ... }` y llámala enseguida. Adentro: `const usuario = await api.usuario()`, luego `const pedidos = await api.pedidosDe(usuario.id)`. Envuelve todo en `try/catch`: un solo `catch` atrapa el fallo de cualquiera de los dos `await`. Usa `let vigente = true` y la limpieza para no actualizar si se desmontó.",
+  "Esqueleto:\n\n```jsx\nconst [texto, setTexto] = useState(\"Cargando…\");\n\nuseEffect(() => {\n  let vigente = true;\n  async function cargar() {\n    try {\n      const usuario = await /* ... */;\n      const pedidos = await /* ... con usuario.id */;\n      if (vigente) setTexto(/* \"Angel tiene 2 pedidos\" */);\n    } catch {\n      if (vigente) setTexto(\"No pudimos cargar tus pedidos\");\n    }\n  }\n  cargar();\n  return () => { vigente = false; };\n}, [api]);\n\nreturn <p>{texto}</p>;\n```"
+]
