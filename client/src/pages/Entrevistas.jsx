@@ -6,6 +6,12 @@ import { Tarjeta } from "../components/Tarjeta.jsx";
 import { Simulacro } from "../components/Simulacro.jsx";
 import { PitchStar } from "../components/PitchStar.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
+import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
+import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
+import { AnimatedGroup } from "../components/ui/animated-group.jsx";
+import { MagicCard } from "../components/ui/magic-card.jsx";
+import { ShineBorder } from "../components/ui/shine-border.jsx";
+import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import estilos from "./Entrevistas.module.css";
 
 export function Entrevistas() {
@@ -45,10 +51,12 @@ export function Entrevistas() {
 
   return (
     <section className={estilos.pagina}>
-      <header className={estilos.cabecera}>
-        <h1>Entrevistas</h1>
-        <p>Preguntas reales de entrevistas junior, con la respuesta que conviene dar. Respóndelas en voz alta.</p>
-      </header>
+      <CabeceraPagina
+        etiqueta={`${resumen.categorias.reduce((a, c) => a + c.dominadas, 0)} de ${resumen.categorias.reduce((a, c) => a + c.total, 0)} preguntas dominadas`}
+        titulo="Entrevistas"
+      >
+        Preguntas reales de entrevistas junior, con la respuesta que conviene dar. Respóndelas en voz alta.
+      </CabeceraPagina>
 
       <Pestanas pestanas={pestanas} activa={pestana} alCambiar={(p) => (setPestana(p), setSesion(null))} />
 
@@ -72,43 +80,58 @@ export function Entrevistas() {
 }
 
 function ElegirMazo({ resumen, alEmpezar }) {
+  const hoy = resumen.pendientesHoy;
   return (
-    <div className={estilos.mazos}>
-      <button
-        type="button"
-        className={`${estilos.mazo} ${estilos.destacado}`}
-        disabled={resumen.pendientesHoy === 0}
-        onClick={() => alEmpezar("Repaso de hoy", { modo: "repaso" })}
-      >
-        <strong>Repaso de hoy</strong>
-        <span>
-          {resumen.pendientesHoy
-            ? `${resumen.pendientesHoy} tarjetas te tocan hoy`
-            : "Nada pendiente. Practica una categoría nueva."}
-        </span>
-      </button>
-      <button type="button" className={estilos.mazo} onClick={() => alEmpezar("Preguntas nuevas", { modo: "nuevas" })}>
-        <strong>Preguntas nuevas</strong>
-        <span>Las que nunca respondiste, de todas las categorías</span>
-      </button>
-      {resumen.categorias.map((c) => (
+    <>
+      <div className={estilos.principales}>
+        {/* Repaso de hoy: el número grande es lo primero que ves */}
         <button
-          key={c.nombre}
           type="button"
-          className={estilos.mazo}
-          onClick={() => alEmpezar(c.nombre, { categoria: c.nombre })}
+          className={`${estilos.mazo} ${estilos.destacado}`}
+          disabled={hoy === 0}
+          onClick={() => alEmpezar("Repaso de hoy", { modo: "repaso" })}
         >
-          <strong>{c.nombre}</strong>
-          <span>
-            {c.vistas}/{c.total} vistas · {c.dominadas} dominadas
-            {c.pendientes > 0 && ` · ${c.pendientes} para hoy`}
+          {hoy > 0 && <ShineBorder shineColor={["var(--acento)", "var(--exito)"]} duration={12} />}
+          <span className={estilos.numeroGrande}>
+            <SlidingNumber number={hoy} />
           </span>
-          <div className={estilos.barra}>
-            <div style={{ width: `${(c.dominadas / c.total) * 100}%` }} />
-          </div>
+          <span className={estilos.mazoTexto}>
+            <strong>Repaso de hoy</strong>
+            <span>{hoy ? (hoy === 1 ? "tarjeta te toca hoy" : "tarjetas te tocan hoy") : "Nada pendiente. Practica una categoría nueva."}</span>
+          </span>
+          {hoy > 0 && <span className={estilos.ir}>Empezar →</span>}
         </button>
-      ))}
-    </div>
+        <button type="button" className={estilos.mazo} onClick={() => alEmpezar("Preguntas nuevas", { modo: "nuevas" })}>
+          <span className={estilos.mazoIcono} aria-hidden>
+            ✦
+          </span>
+          <span className={estilos.mazoTexto}>
+            <strong>Preguntas nuevas</strong>
+            <span>Las que nunca respondiste, de todas las categorías</span>
+          </span>
+        </button>
+      </div>
+
+      <h2 className={estilos.subtitulo}>Por categoría</h2>
+      <AnimatedGroup preset="slide" stagger={0.04} className={estilos.categorias} itemClassName={estilos.celda}>
+        {resumen.categorias.map((c) => (
+          <MagicCard key={c.nombre} className={estilos.tarjetaCategoria}>
+            <button type="button" className={estilos.categoria} onClick={() => alEmpezar(c.nombre, { categoria: c.nombre })}>
+              <AnilloProgreso valor={c.total ? c.dominadas / c.total : 0} tamano={54} grosor={5} completo={c.total > 0 && c.dominadas === c.total}>
+                <span className={estilos.anilloTexto}>{c.dominadas}</span>
+              </AnilloProgreso>
+              <span className={estilos.mazoTexto}>
+                <strong>{c.nombre}</strong>
+                <span>
+                  {c.vistas}/{c.total} vistas · {c.dominadas} dominadas
+                </span>
+                {c.pendientes > 0 && <span className={estilos.paraHoy}>{c.pendientes} para hoy</span>}
+              </span>
+            </button>
+          </MagicCard>
+        ))}
+      </AnimatedGroup>
+    </>
   );
 }
 
@@ -130,11 +153,22 @@ function SesionTarjetas({ sesion, alCalificar, alTerminar }) {
     const cuenta = (n) => notas.filter((x) => x === n).length;
     return (
       <div className={estilos.final}>
-        <h2>Terminaste: {titulo}</h2>
-        <p>
-          Lo sabías: <strong>{cuenta("sabia")}</strong> · Dudaste: <strong>{cuenta("dude")}</strong> · No lo sabías:{" "}
-          <strong>{cuenta("no")}</strong>
-        </p>
+        <span className={estilos.finalEtiqueta}>Terminaste</span>
+        <h2>{titulo}</h2>
+        <dl className={estilos.cuentas}>
+          <div data-tipo="exito">
+            <dt>Lo sabías</dt>
+            <dd>{cuenta("sabia")}</dd>
+          </div>
+          <div data-tipo="aviso">
+            <dt>Dudaste</dt>
+            <dd>{cuenta("dude")}</dd>
+          </div>
+          <div data-tipo="error">
+            <dt>No lo sabías</dt>
+            <dd>{cuenta("no")}</dd>
+          </div>
+        </dl>
         <p className={estilos.nota}>Las que no sabías vuelven mañana; las que sabías, en unos días.</p>
         <button type="button" className="boton boton-primario" onClick={alTerminar}>
           Volver a los mazos

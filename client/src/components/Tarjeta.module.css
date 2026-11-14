@@ -7,7 +7,8 @@
   border-radius: var(--radio-grande);
   background:
     radial-gradient(500px 220px at 0% 0%, var(--acento-suave), transparent 70%),
-    var(--superficie);
+    linear-gradient(var(--superficie), var(--superficie)),
+    var(--fondo-solido);
   box-shadow: var(--brillo-borde);
 }
 
@@ -56,7 +57,9 @@
 }
 
 .pregunta {
-  font-size: 22px;
+  font-family: var(--fuente-titulos);
+  font-size: 28px;
+  letter-spacing: -0.02em;
   line-height: 1.35;
 }
 

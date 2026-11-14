@@ -6,7 +6,7 @@
   padding: var(--espacio-6);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
-  background: var(--superficie);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
   box-shadow: var(--brillo-borde);
 }
 
