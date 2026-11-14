@@ -1,0 +1,8 @@
+{
+  "id": "node-pr-007",
+  "titulo": "Tareas en paralelo",
+  "tipo": "funcion",
+  "tema": "node-async",
+  "nivel": 2,
+  "tags": ["node", "promesas", "promise-all", "allsettled", "async-await"]
+}

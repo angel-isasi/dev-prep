@@ -1,0 +1,5 @@
+[
+  "La clave está en **cuándo** llamas a cada tarea. Si haces `await tarea()` dentro de un bucle, la siguiente no empieza hasta que termine la anterior: eso es en serie. Para que vayan en paralelo, primero las **arrancas todas** (sin esperar) y recién después **esperas el conjunto**.",
+  "`tareas.map((tarea) => tarea())` llama a todas en el acto y te da un arreglo de promesas. Ese arreglo se lo pasas a `Promise.all` (falla si una falla) o a `Promise.allSettled` (nunca falla, te dice cómo terminó cada una con `status`, `value` y `reason`).",
+  "Esqueleto:\n\n```js\nexport async function cargarTodo(tareas) {\n  const promesas = /* llama a cada tarea */;\n  return /* espera todas */;\n}\n\nexport async function cargarLoQueSePueda(tareas) {\n  const resultados = await Promise.allSettled(/* ... */);\n  const exitos = [];\n  const fallos = [];\n  for (const r of resultados) {\n    if (r.status === \"fulfilled\") /* guarda r.value */;\n    else /* guarda el mensaje de r.reason */;\n  }\n  return { exitos, fallos };\n}\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Es un bucle con un límite: como máximo `intentos` vueltas. En cada vuelta intentas; si sale bien, **sales de la función** con el valor; si falla, recuerdas el error y, **solo si quedan intentos**, esperas antes de la siguiente vuelta. Si el bucle termina sin éxito, te queda el último error para lanzarlo.",
+  "Usa un `for` de 1 a `intentos` con un `try/catch` dentro. En el `try`, `return await tarea()` (el `await` es necesario para que el rechazo caiga en tu `catch`). En el `catch`, guarda el error y, si `intento < intentos`, haz `await esperar(espera)` y duplica `espera`. Después del bucle, `throw ultimoError`.",
+  "Esqueleto:\n\n```js\nexport async function reintentar(tarea, { intentos = 3, esperaInicial = 100 } = {}) {\n  let ultimoError;\n  let espera = esperaInicial;\n\n  for (let intento = 1; intento <= intentos; intento++) {\n    try {\n      return /* intenta */;\n    } catch (error) {\n      ultimoError = error;\n      if (/* quedan intentos */) {\n        await /* espera */;\n        /* duplica la espera */\n      }\n    }\n  }\n\n  throw /* ... */;\n}\n```"
+]

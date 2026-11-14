@@ -1,0 +1,5 @@
+[
+  "Piensa en tres etapas: **leer** el archivo completo como texto, **partirlo** en líneas útiles (sin las vacías) y **recorrer** cada línea para sumar en el resumen. Prepara el objeto resumen antes del bucle, con los tres niveles en 0 y el arreglo de errores vacío.",
+  "Lee con `await readFile(ruta, \"utf8\")`. Parte con `texto.split(/\\r?\\n/)` y filtra con `linea.trim() !== \"\"`. En cada línea, `linea.split(\" \")` da `[fecha, hora, nivel, ...palabras del mensaje]`: con desestructuración y el operador rest (`...palabras`) te quedas con el nivel y el resto, que vuelves a unir con `join(\" \")`. Para saber si el nivel es uno de los tres, `nivel in resumen.porNivel`.",
+  "Esqueleto:\n\n```js\nconst texto = await readFile(ruta, \"utf8\");\nconst lineas = texto.split(/\\r?\\n/).filter(/* no vacías */);\n\nconst resumen = { total: /* ... */, porNivel: { INFO: 0, WARN: 0, ERROR: 0 }, errores: [] };\n\nfor (const linea of lineas) {\n  const [, , nivel, ...palabras] = /* parte la línea */;\n  if (/* nivel desconocido */) continue;\n  /* suma 1 a ese nivel */\n  if (nivel === \"ERROR\") /* guarda el mensaje */;\n}\nreturn resumen;\n```"
+]

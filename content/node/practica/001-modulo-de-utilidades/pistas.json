@@ -1,0 +1,5 @@
+[
+  "Tienes dos tareas distintas: escribir tres funciones pequeñas (cada una es de una línea) y decidir **qué sale del archivo**. Todo lo que quieras usar desde otro archivo tiene que llevar `export`. Para `unirLineas` necesitas algo que no está en JavaScript puro, sino en Node: el salto de línea del sistema.",
+  "Herramientas: `monto.toFixed(2)` para los decimales; `trim()`, `toLowerCase()`, `split(/\\s+/)` y `join(\"-\")` para el slug; `lineas.join(EOL)` con `import { EOL } from \"node:os\";` al inicio del archivo. El export por defecto se escribe `export default { ... }` y puedes usar la forma corta de objetos: `{ formatearPrecio }` es lo mismo que `{ formatearPrecio: formatearPrecio }`.",
+  "Esqueleto:\n\n```js\nimport { EOL } from \"node:os\";\n\nexport function formatearPrecio(monto) {\n  return `S/ ${/* monto con dos decimales */}`;\n}\n\nexport function crearSlug(titulo) {\n  return titulo /* .trim() ... .split(...) ... .join(...) */;\n}\n\nexport function unirLineas(lineas) {\n  return /* une con EOL */;\n}\n\nexport default { /* las tres funciones */ };\n```"
+]

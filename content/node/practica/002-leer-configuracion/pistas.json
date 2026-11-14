@@ -1,0 +1,5 @@
+[
+  "Separa el problema en dos momentos que pueden fallar por motivos distintos: **leer** el archivo (puede no existir) y **convertir** el texto en objeto (puede estar mal escrito). Cada momento merece su propio `try/catch`, porque la reacción es distinta: uno devuelve los valores por defecto y el otro lanza un error.",
+  "Lee con `await readFile(ruta, \"utf8\")`. En el `catch` mira `error.code`: si es `\"ENOENT\"`, devuelve una copia `{ ...CONFIG_POR_DEFECTO }`; si no, vuelve a lanzar el error con `throw error`. Para combinar usa el spread: `{ ...CONFIG_POR_DEFECTO, ...datos }`, donde lo que va después gana.",
+  "Esqueleto:\n\n```js\nexport async function leerConfiguracion(ruta) {\n  let texto;\n  try {\n    texto = await /* leer el archivo como texto */;\n  } catch (error) {\n    if (/* no existe */) return /* copia de los valores por defecto */;\n    throw error;\n  }\n\n  let datos;\n  try {\n    datos = /* texto -> objeto */;\n  } catch {\n    throw new Error(/* mensaje con \"JSON inválido\" */);\n  }\n\n  return { /* por defecto, luego datos */ };\n}\n```"
+]

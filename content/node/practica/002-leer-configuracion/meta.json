@@ -1,0 +1,8 @@
+{
+  "id": "node-pr-002",
+  "titulo": "Leer la configuración",
+  "tipo": "funcion",
+  "tema": "node-archivos",
+  "nivel": 1,
+  "tags": ["node", "fs", "json", "async-await", "errores"]
+}

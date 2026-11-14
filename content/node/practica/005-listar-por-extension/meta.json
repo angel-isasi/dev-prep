@@ -1,0 +1,8 @@
+{
+  "id": "node-pr-005",
+  "titulo": "Listar archivos por extensión",
+  "tipo": "funcion",
+  "tema": "node-archivos",
+  "nivel": 2,
+  "tags": ["node", "fs", "readdir", "path", "archivos"]
+}
