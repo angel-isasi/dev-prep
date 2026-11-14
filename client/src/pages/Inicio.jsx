@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { api } from "../lib/api.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { nombreTema } from "../lib/etiquetas.js";
@@ -7,6 +7,16 @@ import { Insignia } from "../components/Insignia.jsx";
 import { NumeroAnimado } from "../components/NumeroAnimado.jsx";
 import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
+import { useColorTema } from "../hooks/useColorTema.js";
+import { AnimatedGroup } from "../components/ui/animated-group.jsx";
+import { AuroraText } from "../components/ui/aurora-text.jsx";
+import { BorderBeam } from "../components/ui/border-beam.jsx";
+import { LiquidButton } from "../components/ui/liquid-button.jsx";
+import { MagicCard } from "../components/ui/magic-card.jsx";
+import { Particles } from "../components/ui/particles.jsx";
+import { SlidingNumber } from "../components/ui/sliding-number.jsx";
+import { Spotlight } from "../components/ui/spotlight.jsx";
+import { TextEffect } from "../components/ui/text-effect.jsx";
 import estilos from "./Inicio.module.css";
 
 const RITMO = {
@@ -24,6 +34,9 @@ function fechaLarga(fecha) {
 export function Inicio() {
   const [datos, setDatos] = useState(null);
   const [error, setError] = useState(null);
+  const navegar = useNavigate();
+  const colorAcento = useColorTema("--acento");
+  const colorAviso = useColorTema("--aviso");
 
   const cargar = () => api.inicio().then(setDatos, (e) => setError(e.message));
   useEffect(() => {
@@ -42,11 +55,26 @@ export function Inicio() {
   const pctMeta = meta.objetivo ? Math.min(100, (meta.hecho / meta.objetivo) * 100) : 100;
 
   return (
+    <div className={estilos.escena}>
+      {/* Fondo de Inicio: foco de luz (Aceternity) y partículas que siguen al mouse (Magic UI) */}
+      <Spotlight />
+      <Particles className={estilos.particulas} quantity={45} color={colorAcento} staticity={40} />
+
     <section className={estilos.pagina}>
       <header className={estilos.cabecera}>
         <p className={estilos.fecha}>{fechaLarga(datos.hoy)}</p>
-        <h1 className={estilos.saludo}>{config.nombre ? `Hola, ${config.nombre}` : "Hola"}</h1>
-        <p className={estilos.frase}>{frase}</p>
+        <h1 className={estilos.saludo}>
+          {config.nombre ? (
+            <>
+              Hola, <AuroraText>{config.nombre}</AuroraText>
+            </>
+          ) : (
+            <AuroraText>Hola</AuroraText>
+          )}
+        </h1>
+        <TextEffect as="p" preset="fade-in-blur" per="word" delay={0.25} speedReveal={1.2} className={estilos.frase}>
+          {frase}
+        </TextEffect>
       </header>
 
       {config.objetivo ? (
@@ -71,19 +99,24 @@ export function Inicio() {
         </p>
       ) : null}
 
-      <div className={estilos.tarjetas}>
-        <div className={`${estilos.tarjeta} ${estilos.racha}`}>
+      <AnimatedGroup preset="blur-slide" stagger={0.08} className={estilos.tarjetas} itemClassName={estilos.celda}>
+        <MagicCard className={estilos.tarjeta} gradientFrom="var(--aviso)" gradientTo="var(--error)" gradientColor="var(--aviso-suave)">
+          {/* Chispas que suben: más chispas cuanto más larga la racha */}
+          <Particles className={estilos.chispas} quantity={Math.min(14 + racha * 3, 50)} color={colorAviso} vy={-0.35} size={0.6} staticity={80} />
+          <div className={`${estilos.contenido} ${estilos.racha}`}>
           <span className={estilos.etiqueta}>Racha</span>
           <strong className={estilos.numeroGrande}>
-            <NumeroAnimado valor={racha} />
+            <SlidingNumber number={racha} />
           </strong>
           <span className={estilos.detalle}>
             {racha === 1 ? "día seguido" : "días seguidos"}
             {!meta.cumplio && racha > 0 && " · cumple hoy para mantenerla"}
           </span>
-        </div>
+          </div>
+        </MagicCard>
 
-        <div className={`${estilos.tarjeta} ${estilos.conAnillo}`}>
+        <MagicCard className={estilos.tarjeta}>
+          <div className={`${estilos.contenido} ${estilos.conAnillo}`}>
           <AnilloProgreso valor={pctMeta / 100} completo={meta.cumplio} tamano={70} grosor={7}>
             <strong className={estilos.numeroAnillo}>
               <NumeroAnimado valor={meta.hecho} />
@@ -100,9 +133,11 @@ export function Inicio() {
                   : "resueltos + repasos"}
             </span>
           </div>
-        </div>
+          </div>
+        </MagicCard>
 
-        <div className={`${estilos.tarjeta} ${estilos.conAnillo}`}>
+        <MagicCard className={estilos.tarjeta}>
+          <div className={`${estilos.contenido} ${estilos.conAnillo}`}>
           <AnilloProgreso valor={preparacion / 100} tamano={70} grosor={7}>
             <strong className={estilos.numeroAnillo}>
               <NumeroAnimado valor={preparacion} decimales={preparacion % 1 ? 1 : 0} />
@@ -115,12 +150,14 @@ export function Inicio() {
               {totales.resueltos} de {totales.total} dominados
             </span>
           </div>
-        </div>
+          </div>
+        </MagicCard>
 
-        <div className={estilos.tarjeta}>
+        <MagicCard className={estilos.tarjeta}>
+          <div className={estilos.contenido}>
           <span className={estilos.etiqueta}>Fecha meta</span>
           <strong className={estilos.numero}>
-            <NumeroAnimado valor={Math.max(0, ritmo.diasRestantes)} />
+            <SlidingNumber number={Math.max(0, ritmo.diasRestantes)} />
             <small> días</small>
           </strong>
           <span className={estilos.chip} data-tipo={ritmoInfo.tipo}>
@@ -129,20 +166,29 @@ export function Inicio() {
           <span className={estilos.detalle}>
             Necesitas {ritmo.necesarioPorDia}/día · llevas {ritmo.promedioSemana}/día
           </span>
-        </div>
-      </div>
+          </div>
+        </MagicCard>
+      </AnimatedGroup>
 
       <div className={estilos.columnas}>
         <div className={estilos.bloque}>
           <h2>Para hoy</h2>
           {proximo ? (
-            <Link to={`/practicar/${proximo.id}`} className={`${estilos.siguiente} ${estilos.haz}`}>
-              <span className={estilos.etiqueta}>{continuar ? "Continuar" : "Siguiente ejercicio"}</span>
-              <strong>{proximo.titulo}</strong>
-              <span className={estilos.detalle}>
-                {nombreTema(proximo.tema)} · <Insignia nivel={proximo.nivel} />
-              </span>
-            </Link>
+            <div className={estilos.siguiente}>
+              <BorderBeam size={90} duration={7} />
+              <div className={estilos.siguienteTexto}>
+                <span className={estilos.etiqueta}>{continuar ? "Continuar" : "Siguiente ejercicio"}</span>
+                <Link to={`/practicar/${proximo.id}`} className={estilos.siguienteTitulo}>
+                  {proximo.titulo}
+                </Link>
+                <span className={estilos.detalle}>
+                  {nombreTema(proximo.tema)} · <Insignia nivel={proximo.nivel} />
+                </span>
+              </div>
+              <LiquidButton onClick={() => navegar(`/practicar/${proximo.id}`)}>
+                {continuar ? "Continuar" : "Empezar"} →
+              </LiquidButton>
+            </div>
           ) : (
             <p className={estilos.vacio}>No quedan ejercicios pendientes. ¡Enorme!</p>
           )}
@@ -169,15 +215,21 @@ export function Inicio() {
           <dl className={estilos.semana}>
             <div>
               <dt>Resueltos</dt>
-              <dd>{semana.resueltos}</dd>
+              <dd>
+                <SlidingNumber number={semana.resueltos} />
+              </dd>
             </div>
             <div>
               <dt>Repasos</dt>
-              <dd>{semana.repasos}</dd>
+              <dd>
+                <SlidingNumber number={semana.repasos} />
+              </dd>
             </div>
             <div>
               <dt>Minutos</dt>
-              <dd>{semana.minutos}</dd>
+              <dd>
+                <SlidingNumber number={semana.minutos} />
+              </dd>
             </div>
             <div>
               <dt>Preparación</dt>
@@ -193,5 +245,6 @@ export function Inicio() {
         </div>
       </div>
     </section>
+    </div>
   );
 }

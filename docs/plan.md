@@ -12,7 +12,7 @@ Después de la fase 7 se agregó:
 Pendiente o ideas (cuando Angel lo pida):
 - Sincronización online y offline con Supabase (log de eventos como fuente de verdad) y versión web en Vercel. Planificar con Fable.
 - Tailwind 4 instalado (2026-11-14) conviviendo con el CSS actual, sin reinicio global: se usa solo en componentes nuevos, dentro de un elemento con la clase `tw` (ver `client/src/styles/tailwind.css`). Los estilos existentes no se migran.
-- Diseño, en curso: sumar componentes de Magic UI, Aceternity UI, RareUI, Motion Primitives y Animate UI sobre el diseño actual, empezando por Inicio. Se copian a `client/src/components/ui/` y se pasan de TypeScript a JavaScript.
+- Diseño, en curso: sumar componentes de Magic UI, Aceternity UI, RareUI, Motion Primitives y Animate UI sobre el diseño actual. Se copian a `client/src/components/ui/` (ver su README) y se pasan de TypeScript a JavaScript. Hecho: Inicio (Spotlight, Particles, AuroraText, TextEffect, AnimatedGroup, MagicCard, SlidingNumber, BorderBeam y LiquidButton). Falta: las demás pantallas, después de que Angel apruebe Inicio.
 - Referencia de HTML y CSS (unas 40 entradas) para las 24 preguntas de entrevista de esos temas.
 - TypeScript, Electron, insignias y niveles.
 

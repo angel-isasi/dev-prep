@@ -1,4 +1,18 @@
+/* Contenedor de toda la página: el foco de luz y las partículas se dibujan detrás */
+.escena {
+  position: relative;
+  min-height: 100%;
+  isolation: isolate;
+}
+
+.particulas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
 .pagina {
+  position: relative;
   max-width: 1040px;
   margin: 0 auto;
   padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
@@ -102,21 +116,42 @@
   }
 }
 
+/* Cada celda de la rejilla (la envuelve AnimatedGroup) y la tarjeta MagicCard que contiene.
+   El borde y el fondo los pinta MagicCard: aquí solo forma y tamaño. */
+.celda {
+  min-width: 0;
+}
+
 .tarjeta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espacio-2);
-  padding: var(--espacio-4) var(--espacio-5);
-  border: 1px solid var(--borde);
+  height: 100%;
   border-radius: var(--radio-grande);
-  background: var(--superficie);
   box-shadow: var(--brillo-borde);
 }
 
+.contenido {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  height: 100%;
+  padding: var(--espacio-4) var(--espacio-5);
+}
+
 .racha {
-  background:
-    radial-gradient(260px 140px at 0% 0%, var(--aviso-suave), transparent 70%),
-    var(--superficie);
+  position: relative;
+  background: radial-gradient(260px 140px at 0% 0%, var(--aviso-suave), transparent 70%);
+}
+
+/* Chispas de la racha: detrás del texto */
+.chispas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.racha > * {
+  position: relative;
+  z-index: 1;
 }
 
 .numero,
@@ -223,25 +258,36 @@
   font-size: 12px;
 }
 
+/* "Para hoy": tarjeta con el haz de luz (BorderBeam) recorriendo su borde */
 .siguiente {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-4);
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-grande);
+  background: radial-gradient(400px 120px at 0% 0%, var(--acento-suave), transparent 70%), var(--superficie);
+}
+
+.siguienteTexto {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-1);
-  padding: var(--espacio-4);
-  border: 1px solid var(--borde-fuerte);
-  border-radius: var(--radio);
-  background: var(--superficie);
+  min-width: 0;
+}
+
+.siguienteTitulo {
   color: var(--texto);
-  transition: border-color var(--transicion), background var(--transicion);
+  font-family: var(--fuente-titulos);
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
 }
 
-.siguiente:hover {
-  border-color: var(--acento);
-  background: var(--acento-suave);
-}
-
-.siguiente strong {
-  font-size: 16px;
+.siguienteTitulo:hover {
+  color: var(--acento);
 }
 
 .vacio {
@@ -286,6 +332,7 @@
 }
 
 .semana dd {
+  display: flex;
   margin: 0;
   font-size: 24px;
   font-weight: 650;
@@ -323,84 +370,4 @@
   flex-direction: column;
   gap: var(--espacio-1);
   min-width: 0;
-}
-
-/* Saludo con un brillo suave que pasa una vez */
-.saludo {
-  background: linear-gradient(
-    100deg,
-    var(--texto) 0%,
-    var(--texto) 40%,
-    var(--acento) 50%,
-    var(--texto) 60%,
-    var(--texto) 100%
-  );
-  background-size: 250% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: brillo-saludo 2.4s ease-out 0.3s 1 forwards;
-}
-
-@keyframes brillo-saludo {
-  to {
-    background-position: -50% 0;
-  }
-}
-
-/* "Haz de luz" que recorre el borde de la tarjeta "Para hoy" */
-@property --angulo-haz {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.haz {
-  position: relative;
-  border-color: transparent;
-  background:
-    linear-gradient(var(--fondo-solido), var(--fondo-solido)) padding-box,
-    conic-gradient(
-        from var(--angulo-haz),
-        var(--borde-fuerte) 0deg,
-        var(--borde-fuerte) 280deg,
-        var(--acento) 320deg,
-        var(--exito) 345deg,
-        var(--borde-fuerte) 360deg
-      )
-      border-box;
-  animation: girar-haz 4s linear infinite;
-}
-
-.haz:hover {
-  background:
-    linear-gradient(var(--acento-suave), var(--acento-suave)) padding-box,
-    linear-gradient(var(--fondo-solido), var(--fondo-solido)) padding-box,
-    conic-gradient(
-        from var(--angulo-haz),
-        var(--borde-fuerte) 0deg,
-        var(--borde-fuerte) 280deg,
-        var(--acento) 320deg,
-        var(--exito) 345deg,
-        var(--borde-fuerte) 360deg
-      )
-      border-box;
-}
-
-@keyframes girar-haz {
-  to {
-    --angulo-haz: 360deg;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .haz,
-  .saludo {
-    animation: none;
-  }
-  .saludo {
-    color: var(--texto);
-    background: none;
-  }
 }

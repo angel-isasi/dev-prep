@@ -41,6 +41,7 @@
     "motion": "^14.14.0",
     "react-markdown": "^10.1.0",
     "react-router": "^8.5.1",
+    "react-use-measure": "^2.1.7",
     "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.1",
     "tailwind-merge": "^3.7.0",

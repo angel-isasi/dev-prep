@@ -9,7 +9,9 @@
 
 @layer theme, base, components, utilities;
 @import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+/* Solo se buscan clases en el código de la app (no en content/ ni workspace/, que traen ejercicios). */
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
+@source "../";
 
 /* El modo oscuro de la app se marca con data-tema en <html>, no con la clase "dark". */
 @custom-variant dark (&:where([data-tema="oscuro"], [data-tema="oscuro"] *));
@@ -48,6 +50,16 @@
 
   --radius-md: var(--radio);
   --radius-xl: var(--radio-grande);
+
+  /* AuroraText (Magic UI) */
+  --animate-aurora: aurora 8s ease-in-out infinite alternate;
+  @keyframes aurora {
+    0% { background-position: 0% 50%; transform: rotate(-5deg) scale(0.9); }
+    25% { background-position: 50% 100%; transform: rotate(5deg) scale(1.1); }
+    50% { background-position: 100% 50%; transform: rotate(-3deg) scale(0.95); }
+    75% { background-position: 50% 0%; transform: rotate(3deg) scale(1.05); }
+    100% { background-position: 0% 50%; transform: rotate(-5deg) scale(0.9); }
+  }
 }
 
 /* Reinicio mínimo, solo dentro de .tw. Con :where() no gana peso frente a otras reglas. */
