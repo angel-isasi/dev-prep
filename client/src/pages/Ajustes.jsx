@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
 import { Esqueleto } from "../components/Esqueleto.jsx";
+import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
 import estilos from "./Ajustes.module.css";
 
 export function Ajustes() {
@@ -38,8 +39,11 @@ export function Ajustes() {
 
   return (
     <section className={estilos.pagina}>
-      <h1>Ajustes</h1>
+      <CabeceraPagina etiqueta="Tu configuración" titulo="Ajustes">
+        Lo que pongas aquí define tu meta diaria, la deuda y la cuenta regresiva de Inicio.
+      </CabeceraPagina>
       <form className={estilos.formulario} onSubmit={guardar}>
+        <h2 className={estilos.seccion}>Sobre ti</h2>
         <label>
           <span>Tu nombre</span>
           <input value={form.nombre ?? ""} maxLength={60} onChange={(e) => cambiar("nombre", e.target.value)} />
@@ -57,6 +61,7 @@ export function Ajustes() {
           />
         </label>
 
+        <h2 className={estilos.seccion}>Tu ritmo</h2>
         <div className={estilos.fila}>
           <label>
             <span>Meta diaria</span>

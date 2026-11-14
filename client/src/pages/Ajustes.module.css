@@ -1,12 +1,7 @@
 .pagina {
-  max-width: 760px;
+  max-width: 880px;
   margin: 0 auto;
   padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
-}
-
-.pagina h1 {
-  font-size: 28px;
-  margin-bottom: var(--espacio-5);
 }
 
 .mensaje {
@@ -18,10 +13,13 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio-5);
-  padding: var(--espacio-5);
+  padding: var(--espacio-6);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
-  background: var(--superficie);
+  background:
+    radial-gradient(500px 180px at 0% 0%, var(--acento-suave), transparent 70%),
+    linear-gradient(var(--superficie), var(--superficie)),
+    var(--fondo-solido);
   box-shadow: var(--brillo-borde);
 }
 
@@ -32,8 +30,23 @@
 }
 
 .formulario label > span {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
+}
+
+.seccion {
+  margin-bottom: calc(var(--espacio-2) * -1);
+  color: var(--texto-suave);
+  font-family: var(--fuente);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.seccion:not(:first-child) {
+  padding-top: var(--espacio-5);
+  border-top: 1px solid var(--borde);
 }
 
 .formulario small {
@@ -44,13 +57,21 @@
 .formulario input,
 .formulario textarea {
   margin-top: var(--espacio-1);
-  padding: 9px 12px;
+  padding: 11px 14px;
   border: 1px solid var(--borde-fuerte);
   border-radius: var(--radio);
-  background: var(--superficie);
+  background: var(--codigo-fondo);
   color: var(--texto);
   font: inherit;
-  font-size: 14px;
+  font-size: 15px;
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+  outline: none;
+  border-color: var(--acento);
+  box-shadow: 0 0 0 4px var(--acento-suave);
 }
 
 .formulario textarea {
@@ -83,4 +104,9 @@
 .error {
   color: var(--error);
   font-size: 14px;
+}
+
+/* Los tres campos de la fila quedan alineados abajo aunque su ayuda ocupe dos líneas */
+.fila input {
+  margin-top: auto;
 }

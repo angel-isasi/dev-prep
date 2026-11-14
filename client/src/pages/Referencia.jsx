@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router";
 import { api } from "../lib/api.js";
 import { Markdown } from "../components/Markdown.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
+import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
+import { Buscador } from "../components/Buscador.jsx";
 import estilos from "./Referencia.module.css";
 
 const normalizar = (texto) =>
@@ -79,21 +81,18 @@ export function Referencia() {
 
   return (
     <section className={estilos.pagina}>
-      <header className={estilos.cabecera}>
-        <h1>Referencia</h1>
-        <p>Tu MDN sin internet: qué hace cada método, qué devuelve, un ejemplo y el error típico.</p>
-      </header>
+      <CabeceraPagina etiqueta={`${datos.entradas.length} entradas`} titulo="Referencia">
+        Tu MDN sin internet: qué hace cada método, qué devuelve, un ejemplo y el error típico.
+      </CabeceraPagina>
 
-      <div className={estilos.buscador}>
-        <input
-          type="search"
-          autoFocus
-          aria-label="Buscar en la referencia"
-          placeholder="Busca: slice, quitar duplicados, useEffect, promesas en paralelo…"
-          value={texto}
-          onChange={(e) => cambiar("q", e.target.value)}
-        />
-      </div>
+      <Buscador
+        valor={texto}
+        alCambiar={(v) => cambiar("q", v)}
+        autoFocus
+        ancho="100%"
+        etiqueta="Buscar en la referencia"
+        placeholder="Busca: slice, quitar duplicados, useEffect, promesas en paralelo…"
+      />
 
       <div className={estilos.categorias}>
         <button type="button" data-activa={!categoria} onClick={() => cambiar("cat", "")}>
@@ -128,7 +127,7 @@ export function Referencia() {
 /** Una entrada de la referencia. memo: al escribir en el buscador no se vuelven a dibujar las que no cambian. */
 const Entrada = memo(function Entrada({ e }) {
   return (
-    <article className={estilos.entrada}>
+    <article className={estilos.entrada} data-categoria={e.categoria}>
       <header>
         <h2>{e.nombre}</h2>
         <span className={estilos.categoria}>{e.categoria}</span>
