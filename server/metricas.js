@@ -102,28 +102,40 @@ export function preparacion(ejercicios, registros, hoy) {
   };
 }
 
+/** Días que hacen falta de historia para juzgar si vas atrasado. Antes de eso: "empezando". */
+export const DIAS_PARA_RITMO = 3;
+
 /**
  * ¿Llegas a tu fecha meta al ritmo actual? Compara lo que necesitas por día
- * con tu promedio de los últimos 7 días.
+ * con tu promedio de los últimos 7 días. Si empezaste hace menos de 7 días, el promedio
+ * se saca solo con los días que llevas (no se divide entre días en que aún no usabas la app),
+ * y los primeros días no hay veredicto: el estado es "empezando".
  */
 export function ritmo({ fechaMeta, hoy, totalEjercicios, resueltos, dias }) {
   const diasRestantes = diasEntre(hoy, fechaMeta);
   const pendientes = Math.max(0, totalEjercicios - resueltos);
-  let ultimos7 = 0;
-  for (let i = 0; i < 7; i++) ultimos7 += dias[sumarDias(hoy, -i)]?.resueltos ?? 0;
-  const promedio = ultimos7 / 7;
+
+  const conActividad = Object.keys(dias).filter((f) => hechoDe(dias[f]) > 0 || dias[f]?.segundos > 0).sort();
+  const primerDia = conActividad[0] && conActividad[0] <= hoy ? conActividad[0] : hoy;
+  const diasHistoria = Math.min(7, diasEntre(primerDia, hoy) + 1);
+
+  let suma = 0;
+  for (let i = 0; i < diasHistoria; i++) suma += dias[sumarDias(hoy, -i)]?.resueltos ?? 0;
+  const promedio = suma / diasHistoria;
   const necesarioPorDia = diasRestantes > 0 ? pendientes / diasRestantes : pendientes;
 
   let estado;
   if (pendientes === 0) estado = "terminado";
   else if (diasRestantes <= 0) estado = "vencido";
-  else estado = promedio >= necesarioPorDia ? "al-dia" : "atrasado";
+  else if (promedio >= necesarioPorDia) estado = "al-dia";
+  else estado = diasHistoria < DIAS_PARA_RITMO ? "empezando" : "atrasado";
 
   return {
     diasRestantes,
     pendientes,
     necesarioPorDia: Math.round(necesarioPorDia * 10) / 10,
     promedioSemana: Math.round(promedio * 10) / 10,
+    diasHistoria,
     estado,
   };
 }

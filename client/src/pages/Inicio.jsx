@@ -31,11 +31,17 @@ import SplitFlapText from "../components/reactbits/SplitFlapText.jsx";
 import estilos from "./Inicio.module.css";
 
 const RITMO = {
+  empezando: { texto: "Recién empiezas", tipo: "neutro" },
   "al-dia": { texto: "Vas al día", tipo: "exito" },
   atrasado: { texto: "Vas atrasado", tipo: "error" },
   vencido: { texto: "La fecha ya pasó", tipo: "error" },
   terminado: { texto: "¡Terminaste todo!", tipo: "exito" },
 };
+
+function fechaCorta(fecha) {
+  const [a, m, d] = fecha.split("-").map(Number);
+  return new Date(a, m - 1, d).toLocaleDateString("es-PE", { day: "numeric", month: "short", year: "numeric" });
+}
 
 function fechaLarga(fecha) {
   const [a, m, d] = fecha.split("-").map(Number);
@@ -219,7 +225,7 @@ export function Inicio() {
 
         <MagicCard className={estilos.tarjeta}>
           <div className={estilos.contenido}>
-          <span className={estilos.etiqueta}>Fecha meta</span>
+          <span className={estilos.etiqueta}>Faltan para tu meta</span>
           <div className={estilos.tablero}>
             <SplitFlapText
               text={String(Math.max(0, ritmo.diasRestantes))}
@@ -241,7 +247,9 @@ export function Inicio() {
             {ritmoInfo.texto}
           </span>
           <span className={estilos.detalle}>
-            Necesitas {ritmo.necesarioPorDia}/día · llevas {ritmo.promedioSemana}/día
+            {ritmo.estado === "empezando"
+              ? `Meta: ${fechaCorta(config.fechaMeta)}. Necesitas ${ritmo.necesarioPorDia} ejercicios al día`
+              : `Meta: ${fechaCorta(config.fechaMeta)}. Necesitas ${ritmo.necesarioPorDia}/día y llevas ${ritmo.promedioSemana}/día`}
           </span>
           </div>
         </MagicCard>

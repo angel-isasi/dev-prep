@@ -226,6 +226,11 @@
   color: var(--exito);
 }
 
+.chip[data-tipo="neutro"] {
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
 .chip[data-tipo="error"] {
   background: var(--error-suave);
   color: var(--error);

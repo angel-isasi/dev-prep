@@ -69,8 +69,9 @@ describe("preparacion", () => {
 });
 
 describe("ritmo", () => {
-  test("al día si tu promedio alcanza lo que necesitas", () => {
-    const dias = { "2026-11-13": { resueltos: 7 } };
+  test("al día si tu promedio de 7 días alcanza lo que necesitas", () => {
+    const dias = {};
+    for (let d = 7; d <= 13; d++) dias[`2026-11-${String(d).padStart(2, "0")}`] = { resueltos: 1 };
     const r = ritmo({ fechaMeta: "2026-12-13", hoy: "2026-11-13", totalEjercicios: 30, resueltos: 0, dias });
     expect(r.diasRestantes).toBe(30);
     expect(r.necesarioPorDia).toBe(1);
@@ -78,9 +79,30 @@ describe("ritmo", () => {
     expect(r.estado).toBe("al-dia");
   });
 
-  test("atrasado si vas más lento", () => {
-    const r = ritmo({ fechaMeta: "2026-11-23", hoy: "2026-11-13", totalEjercicios: 50, resueltos: 0, dias: {} });
+  test("atrasado si vas más lento y ya llevas varios días", () => {
+    const dias = { "2026-11-05": { segundos: 600 } };
+    const r = ritmo({ fechaMeta: "2026-11-23", hoy: "2026-11-13", totalEjercicios: 50, resueltos: 0, dias });
+    expect(r.diasHistoria).toBe(7);
     expect(r.estado).toBe("atrasado");
+  });
+
+  test("los primeros días no hay veredicto: empezando", () => {
+    const dias = { "2026-11-13": { segundos: 600 } };
+    const r = ritmo({ fechaMeta: "2027-03-01", hoy: "2026-11-14", totalEjercicios: 257, resueltos: 0, dias });
+    expect(r.diasHistoria).toBe(2);
+    expect(r.estado).toBe("empezando");
+  });
+
+  test("el promedio se saca solo con los días que llevas", () => {
+    const dias = { "2026-11-12": { resueltos: 2 }, "2026-11-13": { resueltos: 2 } };
+    const r = ritmo({ fechaMeta: "2027-03-01", hoy: "2026-11-13", totalEjercicios: 257, resueltos: 4, dias });
+    expect(r.promedioSemana).toBe(2);
+  });
+
+  test("sin ninguna actividad, cuenta desde hoy", () => {
+    const r = ritmo({ fechaMeta: "2027-03-01", hoy: "2026-11-13", totalEjercicios: 257, resueltos: 0, dias: {} });
+    expect(r.diasHistoria).toBe(1);
+    expect(r.estado).toBe("empezando");
   });
 });
 
