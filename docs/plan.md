@@ -12,9 +12,29 @@ Después de la fase 7 se agregó:
 Pendiente o ideas (cuando Angel lo pida):
 - Sincronización online y offline con Supabase (log de eventos como fuente de verdad) y versión web en Vercel. Planificar con Fable.
 - Tailwind 4 instalado (2026-11-14) conviviendo con el CSS actual, sin reinicio global: se usa solo en componentes nuevos, dentro de un elemento con la clase `tw` (ver `client/src/styles/tailwind.css`). Los estilos existentes no se migran.
-- Diseño: Inicio terminado y aprobado (2026-11-14) con React Bits, Magic UI, Motion Primitives, Animate UI y RareUI (ver los README de `client/src/components/ui/` y `client/src/components/reactbits/`). Siguiente: aplicar el mismo estilo, con letras nítidas y contraste alto, a Practicar, Ejercicio, Aprender, Entrevistas, Progreso, Referencia y Ajustes, una pantalla a la vez.
+- Diseño: el estilo de Inicio (React Bits, Magic UI, Motion Primitives, Animate UI y RareUI) ya está en todas las pantallas (2026-11-14). Piezas comunes: `CabeceraPagina`, `Buscador`, `BotonAzar` y los colores por área (`[data-area]` en `client/src/styles/base.css`).
+- Rendimiento (2026-11-14): caché de datos por pantalla, Referencia por tandas, grano estático y sin desenfoques sobre capas animadas.
 - Referencia de HTML y CSS (unas 40 entradas) para las 24 preguntas de entrevista de esos temas.
-- TypeScript, Electron, insignias y niveles.
+- Electron, insignias y niveles.
+- "Explica tu proyecto": preguntas de entrevista sobre el propio dev-prep (Angel lo dejó aparte por ahora).
+
+## Ampliación del stack (aprobada por Angel el 2026-11-14)
+
+Meta: seguir el stack que piden las ofertas junior (React, TypeScript, Node, SQL, Git) y poder explicar en entrevista los proyectos propios. Orden:
+
+1. **30 retos más de algoritmos** (alg-reto-031 a 060): 6 básicos, 20 intermedios y 4 difíciles. Patrones nuevos: prefijos, intervalos, pila monotónica, backtracking, programación dinámica, BFS, grafos. Sin tests de rendimiento ni casos borde extra por ahora (Angel lo pidió: primero aprender).
+2. **TypeScript** (área nueva en Aprender y Practicar):
+   - Tipos de ejercicio nuevos `ts` y `tsx` (archivos `inicio.ts`, `solucion.ts`, `tests.test.ts`). Vitest ya corre TypeScript sin configurar nada.
+   - Revisión de tipos: un test "Tus tipos compilan" usa el compilador de TypeScript (dependencia `typescript`) sobre tu archivo y el de tests, en modo estricto. Así un error de tipos falla un test, con el mensaje de `tsc` traducido. Los ejercicios de tipos usan `// @ts-expect-error` y `expectTypeOf` en los tests.
+   - `tsconfig.json` en workspace/ para que VS Code marque los errores mientras escribes.
+   - Contenido: unos 8 temas en Aprender (tipos básicos, objetos e interfaces, uniones y narrowing, funciones, genéricos, utility types, clases y módulos, React con TypeScript) y unos 30 ejercicios en Practicar (Práctica y Retos).
+3. **Node.js y SQL** (área nueva):
+   - Ejercicios en JavaScript que corren en Node: módulos, `fs`, eventos, asincronía, y APIs con Express (rutas, validación, errores, middlewares). Los tests levantan tu servidor en un puerto libre y le hacen peticiones con `fetch`, como se prueba una API en el trabajo.
+   - SQL con `node:sqlite` (viene con Node 24): base en memoria en cada test, consultas reales sin instalar nada.
+   - Contenido: unos 8 temas en Aprender y unos 30 ejercicios.
+4. **AWS, Docker y Kubernetes**: por ahora solo conceptos, como preguntas de entrevista. La práctica real llega con la versión online (deploy).
+
+Costo estimado: unos 10 KB por ejercicio con su explicación completa. El contenido se reparte entre subagentes en paralelo, cada uno valida lo suyo con `npm run validar`.
 
 ## Contexto
 

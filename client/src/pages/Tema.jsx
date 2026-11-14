@@ -9,6 +9,8 @@ import { IconoFlechaIzq } from "../components/Iconos.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Tema.module.css";
 
+const NOMBRE_AREA = { javascript: "JavaScript", react: "React", typescript: "TypeScript", node: "Node.js y SQL" };
+
 export function Tema() {
   const { id } = useParams();
   const [tema, setTema] = useState(() => api.tema.guardado(id));
@@ -42,7 +44,7 @@ export function Tema() {
         </span>
         <div>
           <span className={estilos.numero}>
-            {tema.area === "react" ? "React" : "JavaScript"} · Tema {String(tema.orden).padStart(2, "0")}
+            {NOMBRE_AREA[tema.area] ?? "JavaScript"} · Tema {String(tema.orden).padStart(2, "0")}
           </span>
           <h1>{tema.titulo}</h1>
           <p>{tema.descripcion}</p>

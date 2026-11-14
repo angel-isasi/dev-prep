@@ -78,7 +78,7 @@ export async function crearCorredor({ workspace, alEmpezar, alResultado }) {
   async function iniciarVitest() {
     const instancia = await crearVitest({
       raiz: workspace.raiz,
-      include: ["*/tests.test.{js,jsx}"],
+      include: ["*/tests.test.{js,jsx,ts,tsx}"],
       watch: true,
 
       alEmpezar(archivos) {

@@ -3,6 +3,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createVitest } from "vitest/node";
+import { agregarCasoTipos, esTypeScript } from "./tipos.js";
 
 const SETUP = path.join(path.dirname(fileURLToPath(import.meta.url)), "vitest-setup.js");
 
@@ -73,8 +74,12 @@ export async function crearVitest({ raiz, include, watch, alEmpezar, alTerminar,
     onTestRunStart(especificaciones) {
       alEmpezar?.(especificaciones.map((e) => path.normalize(e.moduleId)));
     },
-    onTestRunEnd(modulos) {
-      alTerminar(modulos.map(normalizarModulo));
+    // En los ejercicios de TypeScript se suma el caso "Tus tipos compilan" (ver tipos.js).
+    async onTestRunEnd(modulos) {
+      const resultados = await Promise.all(
+        modulos.map(normalizarModulo).map((r) => (esTypeScript(r.archivo) ? agregarCasoTipos(r) : r)),
+      );
+      alTerminar(resultados);
     },
     onUserConsoleLog(log) {
       const entidad = log.taskId ? ctx?.state.getReportedEntityById(log.taskId) : undefined;

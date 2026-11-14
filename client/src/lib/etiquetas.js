@@ -8,6 +8,11 @@ const COLECCIONES = {
   "react/ejercicios": "React · Práctica",
   "react/mixtos": "JS + React",
   "react/retos": "React · Retos",
+  "typescript/practica": "TS · Práctica",
+  "typescript/retos": "TS · Retos",
+  "node/practica": "Node · Fundamentos",
+  "node/apis": "Node · APIs",
+  "node/sql": "SQL",
 };
 
 const TEMAS = {
@@ -31,6 +36,22 @@ const TEMAS = {
   "react-efectos": "React: efectos y datos",
   "react-hooks": "React: hooks avanzados",
   "react-patrones": "React: patrones y rendimiento",
+  "ts-basicos": "TS: tipos básicos",
+  "ts-objetos": "TS: objetos e interfaces",
+  "ts-uniones": "TS: uniones y narrowing",
+  "ts-funciones": "TS: funciones",
+  "ts-genericos": "TS: genéricos",
+  "ts-utility": "TS: utility types",
+  "ts-clases": "TS: clases y módulos",
+  "ts-react": "TS: React con TypeScript",
+  "node-modulos": "Node: módulos",
+  "node-archivos": "Node: archivos",
+  "node-async": "Node: asincronía y eventos",
+  "node-express": "Node: APIs con Express",
+  "node-middlewares": "Node: middlewares y errores",
+  "sql-consultas": "SQL: consultas",
+  "sql-joins": "SQL: JOIN y agrupación",
+  "sql-escritura": "SQL: insertar y modificar",
 };
 
 const capitalizar = (texto) => texto.charAt(0).toUpperCase() + texto.slice(1).replaceAll("-", " ");

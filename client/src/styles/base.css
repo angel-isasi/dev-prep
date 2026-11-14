@@ -221,6 +221,24 @@ option {
   --color-area-suave: rgb(97 218 251 / 0.1);
 }
 
+[data-area="typescript"] {
+  --color-area: #5b9df0;
+  --color-area-suave: rgb(91 157 240 / 0.11);
+}
+
+[data-area="node"] {
+  --color-area: #9bd16a;
+  --color-area-suave: rgb(155 209 106 / 0.1);
+}
+
+:root[data-tema="claro"] [data-area="typescript"] {
+  --color-area: #2f6fc4;
+}
+
+:root[data-tema="claro"] [data-area="node"] {
+  --color-area: #4d8a1f;
+}
+
 :root[data-tema="claro"] [data-area="javascript"] {
   --color-area: #b08900;
 }

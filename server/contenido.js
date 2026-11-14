@@ -5,7 +5,8 @@ import { readdir, readFile, access } from "node:fs/promises";
 import path from "node:path";
 
 /** Extensión de los archivos según el tipo de ejercicio. */
-export const EXTENSION = { funcion: "js", componente: "jsx" };
+// "funcion-ts" y "componente-ts" son los ejercicios de TypeScript.
+export const EXTENSION = { funcion: "js", componente: "jsx", "funcion-ts": "ts", "componente-ts": "tsx" };
 
 export const NIVELES = { 1: "básico", 2: "intermedio", 3: "difícil" };
 
@@ -18,6 +19,11 @@ const ORDEN_COLECCIONES = [
   "react/ejercicios",
   "react/mixtos",
   "react/retos",
+  "typescript/practica",
+  "typescript/retos",
+  "node/practica",
+  "node/apis",
+  "node/sql",
 ];
 const posicion = (coleccion) => {
   const i = ORDEN_COLECCIONES.indexOf(coleccion);
@@ -79,7 +85,7 @@ export async function escanearContenido(contenidoDir) {
       const meta = JSON.parse(await readFile(path.join(carpeta, "meta.json"), "utf8"));
       const ext = EXTENSION[meta.tipo];
       if (!meta.id || !meta.titulo || !ext) {
-        throw new Error("meta.json necesita id, titulo y tipo (funcion o componente)");
+        throw new Error("meta.json necesita id, titulo y tipo (funcion, componente, funcion-ts o componente-ts)");
       }
       ejercicios.push({
         id: meta.id,

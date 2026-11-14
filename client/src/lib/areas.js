@@ -58,6 +58,45 @@ export const AREAS = [
       },
     ],
   },
+  {
+    id: "typescript",
+    titulo: "TypeScript",
+    descripcion: "JavaScript con tipos: lo piden casi todas las ofertas. Tus tipos también se revisan.",
+    colecciones: [
+      {
+        id: "typescript/practica",
+        nombre: "Práctica",
+        descripcion: "Tipos básicos, interfaces, uniones, narrowing, genéricos y utility types.",
+      },
+      {
+        id: "typescript/retos",
+        nombre: "Retos con tipos",
+        descripcion: "Funciones genéricas, tipos que modelan datos reales y componentes de React tipados.",
+      },
+    ],
+  },
+  {
+    id: "node",
+    titulo: "Node.js y SQL",
+    descripcion: "El lado del servidor: módulos, archivos, APIs con Express y consultas SQL reales.",
+    colecciones: [
+      {
+        id: "node/practica",
+        nombre: "Fundamentos de Node",
+        descripcion: "Módulos, archivos, eventos, asincronía y utilidades de Node.",
+      },
+      {
+        id: "node/apis",
+        nombre: "APIs con Express",
+        descripcion: "Rutas, parámetros, validación, errores y middlewares, probados con peticiones reales.",
+      },
+      {
+        id: "node/sql",
+        nombre: "SQL",
+        descripcion: "SELECT, WHERE, JOIN, GROUP BY e INSERT con SQLite, sin instalar nada.",
+      },
+    ],
+  },
 ];
 
 /** Busca una colección por id: { area, coleccion }. */

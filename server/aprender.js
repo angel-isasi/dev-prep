@@ -5,7 +5,7 @@ import path from "node:path";
 /** Secciones obligatorias de cada teoria.md, en orden. */
 export const SECCIONES_TEORIA = ["En una frase", "Lo esencial", "Errores típicos", "Chuleta", "En la entrevista"];
 /** Áreas de Aprender, en el orden en que se muestran. */
-export const AREAS = ["javascript", "react"];
+export const AREAS = ["javascript", "react", "typescript", "node"];
 const CAMPOS_REFERENCIA = ["id", "nombre", "firma", "descripcion", "ejemplo", "devuelve", "errorTipico"];
 
 /**

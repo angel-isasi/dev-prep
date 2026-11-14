@@ -52,7 +52,7 @@ for (const ej of ejercicios) problemas.get(ej.id).push(...(await revisarEjercici
 // 2. Las soluciones oficiales pasan
 const oficiales = await correr(
   ejercicios.map((ej) => ej.carpeta),
-  ["content/**/tests.test.{js,jsx}"],
+  ["content/**/tests.test.{js,jsx,ts,tsx}"],
 );
 for (const ej of ejercicios) {
   const r = oficiales.get(clave(path.join(ej.carpeta, ej.archivos.tests)));
@@ -74,7 +74,7 @@ for (const ej of ejercicios) {
   await cp(path.join(ej.carpeta, ej.archivos.tests), path.join(destino, ej.archivos.tests));
 }
 try {
-  const inicios = await correr([TMP], [`${TMP_NOMBRE}/**/tests.test.{js,jsx}`]);
+  const inicios = await correr([TMP], [`${TMP_NOMBRE}/**/tests.test.{js,jsx,ts,tsx}`]);
   for (const ej of ejercicios) {
     const r = inicios.get(clave(path.join(TMP, ej.id, ej.archivos.tests)));
     const lista = problemas.get(ej.id);

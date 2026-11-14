@@ -1,12 +1,32 @@
 // Tu carpeta de trabajo: workspace/<id>/ con tu solucion.js, los tests y el enunciado.
 // Los originales de content/ nunca se tocan.
-import { access, copyFile, mkdir, readdir, readFile, rm } from "node:fs/promises";
+import { access, copyFile, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { existsSync } from "node:fs";
 import { sello } from "./fechas.js";
 
 const existe = (ruta) => access(ruta).then(() => true, () => false);
 const RESPALDOS_POR_EJERCICIO = 10;
+
+// workspace/tsconfig.json: con esto VS Code marca los errores de tipos mientras escribes,
+// con las mismas reglas que usa la app al revisar tus tipos (server/tipos.js).
+const TSCONFIG = JSON.stringify(
+  {
+    compilerOptions: {
+      strict: true,
+      noEmit: true,
+      target: "es2022",
+      module: "esnext",
+      moduleResolution: "bundler",
+      jsx: "react-jsx",
+      lib: ["es2023", "dom", "dom.iterable"],
+      skipLibCheck: true,
+    },
+    include: ["*/solucion.ts", "*/solucion.tsx", "*/tests.test.ts", "*/tests.test.tsx"],
+  },
+  null,
+  2,
+);
 
 /** @param {{ workspaceDir: string }} opciones */
 export function crearWorkspace({ workspaceDir }) {
@@ -15,10 +35,10 @@ export function crearWorkspace({ workspaceDir }) {
   const carpetaDe = (ej) => path.join(workspaceDir, ej.id);
   const archivoDe = (ej) => path.join(carpetaDe(ej), ej.archivos.solucion);
   const carpetaDeId = (id) => path.join(workspaceDir, id);
-  /** Tu archivo de un ejercicio solo con su id (solucion.js o solucion.jsx). */
+  /** Tu archivo de un ejercicio solo con su id (solucion.js, .jsx, .ts o .tsx). */
   const archivoDeId = (id) => {
     const carpeta = carpetaDeId(id);
-    for (const ext of ["js", "jsx"]) {
+    for (const ext of ["js", "jsx", "ts", "tsx"]) {
       const ruta = path.join(carpeta, `solucion.${ext}`);
       if (existsSync(ruta)) return ruta;
     }
@@ -53,6 +73,10 @@ export function crearWorkspace({ workspaceDir }) {
      */
     async preparar(ej) {
       await mkdir(carpetaDe(ej), { recursive: true });
+      if (ej.ext === "ts" || ej.ext === "tsx") {
+        const ruta = path.join(workspaceDir, "tsconfig.json");
+        if ((await readFile(ruta, "utf8").catch(() => null)) !== TSCONFIG) await writeFile(ruta, TSCONFIG);
+      }
       const creado = !(await existe(archivoDe(ej)));
       if (creado) await copyFile(path.join(ej.carpeta, ej.archivos.inicio), archivoDe(ej));
       await copiarApoyo(ej);
