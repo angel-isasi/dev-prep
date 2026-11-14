@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-037",
+  "titulo": "Longest Consecutive Sequence",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "set", "hash", "leetcode"]
+}

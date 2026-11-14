@@ -1,0 +1,5 @@
+[
+  "Mientras recorres la cadena por primera vez, todavía **no sabes** si un carácter se va a repetir más adelante: en `\"abcabd\"`, la `a` parece única hasta que llegas a la posición 3. ¿Qué tendrías que saber **antes** de decidir?",
+  "Haz **dos pasadas**. En la primera, cuenta cuántas veces aparece cada carácter con un `Map` (o un objeto): `conteo.set(c, (conteo.get(c) || 0) + 1)`. En la segunda, recorre la cadena otra vez **por índice** y devuelve el primero cuyo conteo sea 1.",
+  "Esqueleto:\n\n```js\nconst conteo = new Map();\nfor (const c of s) {\n  /* suma 1 al conteo de c */\n}\nfor (let i = 0; i < s.length; i++) {\n  if (/* s[i] aparece una sola vez */) return i;\n}\nreturn /* ¿qué devuelves si no hubo ninguno? */;\n```"
+]

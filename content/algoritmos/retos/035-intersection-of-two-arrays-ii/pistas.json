@@ -1,0 +1,5 @@
+[
+  "Piensa en `nums1` como una **bolsa de fichas**: cada número es una ficha y las repetidas son fichas distintas. Recorres `nums2` y, por cada número, preguntas \"¿me queda una ficha de este número en la bolsa?\". Si sí, la sacas y la pones en el resultado. ¿Qué necesitas saber de la bolsa para responder rápido?",
+  "Cuenta cuántas veces aparece cada número de `nums1` con un `Map` (`numero -> cantidad`). Luego recorre `nums2`: si el conteo de ese número es mayor que 0, agrégalo al resultado y **resta 1** al conteo. Así nunca agregas más copias de las que había. `includes` o un `Set` no sirven, porque no llevan la cuenta.",
+  "Esqueleto:\n\n```js\nconst conteo = new Map();\nfor (const num of nums1) {\n  /* suma 1 al conteo de num */\n}\nconst resultado = [];\nfor (const num of nums2) {\n  if (/* quedan copias de num */) {\n    resultado.push(num);\n    /* gasta una copia */\n  }\n}\nreturn resultado;\n```"
+]

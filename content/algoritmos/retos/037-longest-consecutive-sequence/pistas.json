@@ -1,0 +1,5 @@
+[
+  "Si pudieras preguntar al instante \"¿está el número 5?\", podrías contar una secuencia avanzando `x`, `x + 1`, `x + 2`... mientras existan. Pero si cuentas desde **todos** los números, repites trabajo: en `1, 2, 3, 4` contarías desde el 1, desde el 2, desde el 3... ¿Desde qué números vale la pena empezar a contar?",
+  "Mete todos los números en un `Set` (preguntar con `has` es O(1) y de paso se van los repetidos). Solo empieza a contar desde `x` si `x - 1` **no** está en el `Set`: eso significa que `x` es el **inicio** de una secuencia. Desde ahí avanza mientras `actual + 1` esté, y guarda el largo máximo.",
+  "Esqueleto:\n\n```js\nconst numeros = new Set(nums);\nlet mejor = 0;\nfor (const x of numeros) {\n  if (/* x es el inicio de una secuencia */) {\n    let actual = x;\n    let largo = 1;\n    while (/* existe el siguiente */) {\n      actual++;\n      largo++;\n    }\n    mejor = Math.max(mejor, largo);\n  }\n}\nreturn mejor;\n```"
+]

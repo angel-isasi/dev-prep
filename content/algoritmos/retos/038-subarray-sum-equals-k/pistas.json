@@ -1,0 +1,5 @@
+[
+  "Llama `suma` a lo que llevas acumulado desde el inicio del arreglo hasta la posición actual (la **suma de prefijo**). La suma de un tramo que termina aquí es `suma` actual menos la suma de prefijo de algún punto anterior. Si quieres que ese tramo valga `k`, ¿qué valor tuvo que tener la suma de prefijo en ese punto anterior?",
+  "Tuvo que valer `suma - k`. Entonces, mientras recorres, guarda en un `Map` **cuántas veces** apareció cada suma de prefijo (`suma -> veces`). En cada paso, suma a tu respuesta `veces de (suma - k)`, y recién después registra la suma actual. Empieza el `Map` con `0 -> 1`: representa el prefijo vacío, para contar los tramos que empiezan en la posición 0.",
+  "Esqueleto:\n\n```js\nconst vecesPrefijo = new Map([[0, 1]]);\nlet suma = 0;\nlet total = 0;\nfor (const num of nums) {\n  suma += num;\n  total += /* veces que vi la suma `suma - k` (o 0) */;\n  vecesPrefijo.set(suma, /* una vez más que antes */);\n}\nreturn total;\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-036",
+  "titulo": "Pascal's Triangle",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["arrays", "matrices", "programacion-dinamica", "leetcode"]
+}

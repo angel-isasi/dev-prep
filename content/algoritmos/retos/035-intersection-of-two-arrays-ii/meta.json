@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-035",
+  "titulo": "Intersection of Two Arrays II",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["arrays", "hash", "conteo", "map", "leetcode"]
+}

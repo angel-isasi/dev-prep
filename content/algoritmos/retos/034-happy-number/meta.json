@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-034",
+  "titulo": "Happy Number",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["matematica", "set", "hash", "ciclos", "leetcode"]
+}

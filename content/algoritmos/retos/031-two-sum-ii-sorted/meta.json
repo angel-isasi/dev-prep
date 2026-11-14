@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-031",
+  "titulo": "Two Sum II (array ordenado)",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["arrays", "dos-punteros", "leetcode"]
+}

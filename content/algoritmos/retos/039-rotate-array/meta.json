@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-039",
+  "titulo": "Rotate Array",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "dos-punteros", "in-place", "leetcode"]
+}

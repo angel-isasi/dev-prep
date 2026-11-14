@@ -1,0 +1,5 @@
+[
+  "Mira los dos **extremos** del arreglo: el número más chico y el más grande. Si su suma se pasa del objetivo, ¿el número más grande puede formar pareja con alguien? Y si la suma se queda corta, ¿qué pasa con el más chico?",
+  "Usa **dos punteros**: `izq` empieza en 0 y `der` en el último índice. Suma `nums[izq] + nums[der]`. Si es igual al objetivo, ya está. Si es menor, necesitas una suma más grande: avanza `izq`. Si es mayor, necesitas una más chica: retrocede `der`. Repite mientras `izq < der`.",
+  "Esqueleto:\n\n```js\nlet izq = 0;\nlet der = nums.length - 1;\nwhile (izq < der) {\n  const suma = /* suma de los dos punteros */;\n  if (suma === objetivo) return [/* ... */];\n  if (suma < objetivo) {\n    /* ¿qué puntero mueves? */\n  } else {\n    /* ¿y aquí? */\n  }\n}\nreturn [];\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-040",
+  "titulo": "Spiral Matrix",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "matrices", "simulacion", "leetcode"]
+}

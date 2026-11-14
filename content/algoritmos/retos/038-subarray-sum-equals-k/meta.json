@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-038",
+  "titulo": "Subarray Sum Equals K",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "sumas-de-prefijos", "hash", "map", "leetcode"]
+}

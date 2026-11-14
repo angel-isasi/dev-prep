@@ -1,0 +1,5 @@
+[
+  "Recorre las dos cadenas a la vez, posición por posición: en cada `i` se forma una pareja `s[i] -> t[i]`. La pregunta es si esa pareja **contradice** alguna que ya armaste antes. Piensa en las dos formas de contradecir: que `s[i]` ya tuviera otro destino, o que `t[i]` ya fuera el destino de otro carácter.",
+  "Usa **dos `Map`**: `deSaT` (qué carácter de `t` le toca a cada carácter de `s`) y `deTaS` (al revés). En cada posición, si `deSaT` ya tiene `s[i]` y no apunta a `t[i]`, es `false`. Lo mismo con `deTaS` y `t[i]`. Si no hay conflicto, guarda la pareja en los dos. Con un solo `Map` falla `\"badc\"` y `\"baba\"`.",
+  "Esqueleto:\n\n```js\nconst deSaT = new Map();\nconst deTaS = new Map();\nfor (let i = 0; i < s.length; i++) {\n  const a = s[i];\n  const b = t[i];\n  if (deSaT.has(a) && /* a ya apunta a otro */) return false;\n  if (deTaS.has(b) && /* b ya viene de otro */) return false;\n  /* guarda la pareja en los dos Map */\n}\nreturn true;\n```"
+]

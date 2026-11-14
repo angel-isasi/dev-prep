@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-033",
+  "titulo": "Isomorphic Strings",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["strings", "hash", "map", "leetcode"]
+}

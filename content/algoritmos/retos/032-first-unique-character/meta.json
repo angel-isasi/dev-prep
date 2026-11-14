@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-032",
+  "titulo": "First Unique Character in a String",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 1,
+  "tags": ["strings", "hash", "conteo", "map", "leetcode"]
+}

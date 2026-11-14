@@ -1,0 +1,5 @@
+[
+  "No necesitas una fórmula: cada fila se arma **solo con la fila anterior**. Mira la fila `[1, 3, 3, 1]` y la siguiente `[1, 4, 6, 4, 1]`: ¿de qué dos números de arriba sale el 4? ¿Y el 6? ¿Qué relación hay entre la posición `j` de abajo y las posiciones de arriba?",
+  "El número en la posición `j` de una fila es `anterior[j - 1] + anterior[j]`, donde `anterior` es la fila de arriba. Construye cada fila empezando con `[1]`, agrega con un bucle los números del medio (`j` de 1 a `i - 1`) y, si no es la primera fila, termina con otro `1`. Guarda cada fila en el resultado para usarla en la siguiente vuelta.",
+  "Esqueleto:\n\n```js\nconst triangulo = [];\nfor (let i = 0; i < numFilas; i++) {\n  const fila = [1];\n  const anterior = triangulo[i - 1];\n  for (let j = 1; j < i; j++) {\n    fila.push(/* los dos de arriba */);\n  }\n  if (/* no es la primera fila */) fila.push(1);\n  triangulo.push(fila);\n}\nreturn triangulo;\n```"
+]

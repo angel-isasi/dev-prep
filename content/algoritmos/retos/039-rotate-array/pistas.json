@@ -1,0 +1,5 @@
+[
+  "Antes de todo, ¿qué pasa si `k` es más grande que el largo? Rotar `n` veces deja el arreglo igual, así que solo importa el **resto** `k % n`. Después mira el resultado de `[1, 2, 3, 4, 5, 6, 7]` rotado 3: `[5, 6, 7, 1, 2, 3, 4]`. Son dos bloques, `[5, 6, 7]` y `[1, 2, 3, 4]`, que cambiaron de lugar. ¿Qué pasa si **volteas** todo el arreglo original?",
+  "Voltear todo da `[7, 6, 5, 4, 3, 2, 1]`: los bloques ya están en su lugar, pero cada uno al revés. Escribe una función `invertir(nums, i, j)` que voltee el tramo entre `i` y `j` intercambiando los extremos con dos punteros. Luego: voltea todo, voltea los primeros `k` y voltea el resto. Tres llamadas y listo, sin arreglo extra.",
+  "Esqueleto:\n\n```js\nfunction invertir(nums, i, j) {\n  while (i < j) {\n    /* intercambia nums[i] y nums[j] */\n    i++;\n    j--;\n  }\n}\n\nexport function rotar(nums, k) {\n  const n = nums.length;\n  k = /* reduce k */;\n  invertir(nums, /* todo */);\n  invertir(nums, /* los primeros k */);\n  invertir(nums, /* el resto */);\n}\n```"
+]

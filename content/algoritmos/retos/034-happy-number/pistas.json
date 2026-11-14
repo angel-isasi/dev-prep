@@ -1,0 +1,5 @@
+[
+  "Separa el problema en dos partes. Primero, una función que reciba un número y devuelva la suma de los cuadrados de sus dígitos. Segundo, el bucle que la aplica una y otra vez. La pregunta difícil es la segunda: **¿cómo sabes cuándo parar** si el número no es feliz? Escribe a mano la secuencia del 2 y mira qué pasa.",
+  "Para sacar los dígitos usa `n % 10` (el último dígito) y `Math.floor(n / 10)` (el número sin su último dígito), hasta que `n` sea 0. Para detectar el ciclo, guarda en un `Set` cada número que ya viste: si un número **se repite**, entraste en un ciclo y nunca llegarás a 1.",
+  "Esqueleto:\n\n```js\nfunction sumaCuadrados(n) {\n  let suma = 0;\n  while (n > 0) {\n    const digito = /* último dígito */;\n    suma += /* su cuadrado */;\n    n = /* quita el último dígito */;\n  }\n  return suma;\n}\n\nexport function esFeliz(n) {\n  const vistos = new Set();\n  while (n !== 1 && /* n no se ha visto antes */) {\n    /* guarda n */\n    n = sumaCuadrados(n);\n  }\n  return /* ¿llegaste a 1? */;\n}\n```"
+]
