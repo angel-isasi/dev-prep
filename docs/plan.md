@@ -2,7 +2,18 @@
 
 ## Estado (2026-11-13)
 
-Fases 1 a 7 terminadas. Contenido validado: 257 ejercicios (17 guiados, 50 de JavaScript, 30 retos de JS, 30 de algoritmos, 50 de React, 50 mixtos y 30 retos de React), 10 temas de Aprender, 146 entradas de Referencia y 100 preguntas de entrevista. Pendiente para más adelante: TypeScript, Electron, insignias y niveles.
+Fases 1 a 7 terminadas. Contenido validado: 257 ejercicios (17 guiados, 50 de JavaScript, 30 retos de JS, 30 de algoritmos, 50 de React, 50 mixtos y 30 retos de React), 18 temas de Aprender (10 de JavaScript y 8 de React, en pestañas separadas), 146 entradas de Referencia y 100 preguntas de entrevista.
+
+Después de la fase 7 se agregó:
+- Practicar organizado por áreas (JavaScript, Algoritmos, React) y colecciones, con Siguiente, Uno al azar, repasos y práctica mezclada.
+- Diseño: esqueletos de carga, fuente Bricolage Grotesque para títulos, Radix (selectores, diálogos, tooltips), Motion (transiciones, panel de tests animado, confeti al resolver, anillos de progreso) y efectos tipo Magic UI hechos con CSS.
+- Acceso directo en el escritorio (npm run acceso-directo, scripts/abrir.ps1): abre sin ventana, reinicia la versión vieja; botón "Cerrar dev-prep" en la app.
+
+Pendiente o ideas (cuando Angel lo pida):
+- Sincronización online y offline con Supabase (log de eventos como fuente de verdad) y versión web en Vercel. Planificar con Fable.
+- Migrar estilos a Tailwind: solo cuando Angel lo indique.
+- Referencia de HTML y CSS (unas 40 entradas) para las 24 preguntas de entrevista de esos temas.
+- TypeScript, Electron, insignias y niveles.
 
 ## Contexto
 
