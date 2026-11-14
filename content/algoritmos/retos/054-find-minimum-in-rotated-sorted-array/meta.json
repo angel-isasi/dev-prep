@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-054",
+  "titulo": "Find Minimum in Rotated Sorted Array",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["busqueda-binaria", "arrays", "leetcode"]
+}

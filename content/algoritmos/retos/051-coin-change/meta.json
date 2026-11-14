@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-051",
+  "titulo": "Coin Change",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["programacion-dinamica", "recursion", "arrays", "leetcode"]
+}

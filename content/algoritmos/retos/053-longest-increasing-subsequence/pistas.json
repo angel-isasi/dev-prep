@@ -1,0 +1,5 @@
+[
+  "En vez de preguntarte por la mejor subsecuencia de todo el arreglo, pregúntate algo más chico: **¿cuál es la subsecuencia creciente más larga que termina justo en `nums[i]`?** Si ya conoces esa respuesta para todas las posiciones anteriores, ¿cómo calculas la de `i`?",
+  "Usa **programación dinámica** con un arreglo `terminaEn`, lleno de 1 (cada número solo ya es una subsecuencia de largo 1). Para cada `i`, recorre todos los `j < i`: si `nums[j] < nums[i]`, puedes poner `nums[i]` al final de la subsecuencia que termina en `j`, así que `terminaEn[j] + 1` es un candidato. La respuesta es el **máximo de toda la tabla**, no la última casilla.",
+  "Esqueleto:\n\n```js\nif (nums.length === 0) return 0;\nconst terminaEn = new Array(nums.length).fill(1);\nfor (let i = 1; i < nums.length; i++) {\n  for (let j = 0; j < i; j++) {\n    if (/* nums[i] puede ir después de nums[j] */) {\n      terminaEn[i] = Math.max(terminaEn[i], /* ... */);\n    }\n  }\n}\nreturn /* el mayor valor de terminaEn */;\n```"
+]

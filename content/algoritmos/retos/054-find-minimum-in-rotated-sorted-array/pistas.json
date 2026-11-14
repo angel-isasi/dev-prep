@@ -1,0 +1,5 @@
+[
+  "Dibuja `[4, 5, 6, 7, 0, 1, 2]` como una montaña: sube, cae de golpe y vuelve a subir. El mínimo está justo después de la caída. Si miras un elemento del medio y lo comparas con el **último**, ¿puedes saber si la caída está a la izquierda o a la derecha del medio?",
+  "Usa **búsqueda binaria** con `izq` y `der`. Compara `nums[medio]` con `nums[der]`: si `nums[medio] > nums[der]`, la caída (y el mínimo) está a la derecha, así que `izq = medio + 1`. Si no, de `medio` a `der` todo sube, y el mínimo es `medio` o algo a su izquierda: `der = medio` (no `medio - 1`, porque `medio` podría ser el mínimo). Repite mientras `izq < der`.",
+  "Esqueleto:\n\n```js\nlet izq = 0;\nlet der = nums.length - 1;\nwhile (izq < der) {\n  const medio = Math.floor((izq + der) / 2);\n  if (/* la caída está a la derecha de medio */) {\n    izq = /* ... */;\n  } else {\n    der = /* ... */;\n  }\n}\nreturn nums[izq];\n```"
+]

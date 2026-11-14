@@ -1,0 +1,5 @@
+[
+  "Olvídate del total y piensa en **una sola columna**. ¿Hasta qué altura sube el agua encima de ella? Depende de la pared más alta a su izquierda y la pared más alta a su derecha: el agua se escapa por la **más baja** de las dos. Si el nivel del agua queda por encima de la columna, la diferencia es el agua de esa columna.",
+  "El agua sobre la columna `i` es `Math.min(maxIzquierda, maxDerecha) - alturas[i]` (si da negativo, 0). Para no recalcular los máximos por cada columna, usa **dos punteros** `izq` y `der` desde los extremos, con `maxIzq` y `maxDer`. Mueve siempre el lado **más bajo**: si `alturas[izq] < alturas[der]`, a la derecha hay una pared más alta, así que el agua de `izq` la decide `maxIzq`. Actualiza `maxIzq`, suma `maxIzq - alturas[izq]` y avanza `izq`. Si no, lo mismo por la derecha.",
+  "Esqueleto:\n\n```js\nlet izq = 0;\nlet der = alturas.length - 1;\nlet maxIzq = 0;\nlet maxDer = 0;\nlet agua = 0;\nwhile (izq < der) {\n  if (alturas[izq] < alturas[der]) {\n    maxIzq = /* ... */;\n    agua += /* ... */;\n    izq++;\n  } else {\n    /* lo mismo por la derecha */\n  }\n}\nreturn agua;\n```"
+]

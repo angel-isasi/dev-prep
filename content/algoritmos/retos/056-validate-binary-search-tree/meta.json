@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-056",
+  "titulo": "Validate Binary Search Tree",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arboles", "recursion", "dfs", "leetcode"]
+}

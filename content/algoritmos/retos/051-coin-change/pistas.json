@@ -1,0 +1,5 @@
+[
+  "Piensa en la **última moneda** que usas. Si para formar 11 la última fue un 5, antes tuviste que formar 6 con la menor cantidad posible. Entonces la respuesta para 11 depende de las respuestas para montos más chicos (11 - 1, 11 - 2, 11 - 5). ¿Qué pasa si guardas esas respuestas en vez de recalcularlas?",
+  "Usa **programación dinámica** con un arreglo `minimo` de largo `monto + 1`, lleno de `Infinity` (\"todavía no se puede\"). `minimo[0] = 0`. Para cada monto `m` de 1 a `monto`, prueba cada moneda que quepa: `minimo[m - moneda] + 1` es un candidato. Quédate con el menor. Al final, si `minimo[monto]` sigue en `Infinity`, devuelve `-1`.",
+  "Esqueleto:\n\n```js\nconst minimo = new Array(monto + 1).fill(Infinity);\nminimo[0] = 0;\nfor (let m = 1; m <= monto; m++) {\n  for (const moneda of monedas) {\n    if (/* la moneda no cabe en m */) continue;\n    minimo[m] = Math.min(minimo[m], /* monedas para lo que falta, más esta */);\n  }\n}\nreturn /* -1 si sigue en Infinity, si no minimo[monto] */;\n```"
+]

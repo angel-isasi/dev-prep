@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-059",
+  "titulo": "Course Schedule",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 3,
+  "tags": ["grafos", "orden-topologico", "bfs", "colas", "leetcode"]
+}

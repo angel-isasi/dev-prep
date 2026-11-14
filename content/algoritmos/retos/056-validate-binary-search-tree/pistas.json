@@ -1,0 +1,5 @@
+[
+  "Comparar cada nodo solo con sus hijos directos no alcanza: en el árbol `5 -> derecha 6 -> izquierda 3`, el 6 y el 3 están bien entre ellos, pero el 3 está a la derecha del 5. Pregúntate: **¿entre qué valores tiene que estar cada nodo?** ¿De quién hereda esos límites?",
+  "Usa **recursión** pasando un **rango** `(min, max)`. La raíz puede ser cualquier valor: `(-Infinity, Infinity)`. Al bajar a la izquierda, el techo pasa a ser el valor del nodo actual: `(min, nodo.val)`. Al bajar a la derecha, el piso pasa a ser el valor del nodo: `(nodo.val, max)`. Si un nodo cae fuera de su rango (o es igual a un límite), el árbol no es válido. Un nodo `null` es válido.",
+  "Esqueleto:\n\n```js\nfunction valido(nodo, min, max) {\n  if (!nodo) return true;\n  if (/* nodo.val está fuera del rango o es igual a un límite */) return false;\n  return valido(nodo.left, /* ... */, /* ... */) && valido(nodo.right, /* ... */, /* ... */);\n}\nreturn valido(raiz, -Infinity, Infinity);\n```"
+]

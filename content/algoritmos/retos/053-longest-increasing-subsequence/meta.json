@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-053",
+  "titulo": "Longest Increasing Subsequence",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["programacion-dinamica", "arrays", "leetcode"]
+}

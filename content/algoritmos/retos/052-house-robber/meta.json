@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-052",
+  "titulo": "House Robber",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["programacion-dinamica", "arrays", "leetcode"]
+}

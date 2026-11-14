@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-055",
+  "titulo": "Binary Tree Level Order Traversal",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arboles", "bfs", "colas", "leetcode"]
+}

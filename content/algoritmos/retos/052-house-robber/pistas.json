@@ -1,0 +1,5 @@
+[
+  "Ponte frente a la casa `i`. Solo tienes dos opciones: **robarla** (y entonces no robaste la `i - 1`) o **saltarla**. Si ya supieras el mejor total hasta la casa `i - 1` y hasta la casa `i - 2`, ¿cómo decidirías?",
+  "Es **programación dinámica**: `mejor(i) = Math.max(mejor(i - 1), mejor(i - 2) + casas[i])`. La primera opción es saltar la casa; la segunda, robarla sumando lo mejor de dos casas atrás. Como solo usas los dos últimos valores, basta con dos variables (`anteAnterior` y `anterior`), empezando en 0.",
+  "Esqueleto:\n\n```js\nlet anteAnterior = 0;\nlet anterior = 0;\nfor (const dinero of casas) {\n  const actual = Math.max(/* saltar esta casa */, /* robar esta casa */);\n  anteAnterior = /* ... */;\n  anterior = /* ... */;\n}\nreturn anterior;\n```"
+]

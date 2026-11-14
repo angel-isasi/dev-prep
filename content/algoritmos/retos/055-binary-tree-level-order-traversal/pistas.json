@@ -1,0 +1,5 @@
+[
+  "La recursión normal baja por una rama hasta el fondo antes de ver la otra, y aquí necesitas lo contrario: terminar **todo un nivel** antes de bajar. Piensa en una fila de banco: el primero que llega es el primero que atienden. Si al atender un nodo pones a sus hijos al final de la fila, ¿en qué orden salen los nodos?",
+  "Usa una **cola** (un arreglo con `push` para entrar al final y `shift` para salir del inicio), empezando con la raíz. Para separar los niveles: al empezar cada vuelta del `while`, guarda `tamano = cola.length`. Esos son exactamente los nodos del nivel actual. Saca `tamano` nodos, guarda sus valores en un arreglo `nivel` y mete sus hijos (si existen) al final de la cola.",
+  "Esqueleto:\n\n```js\nif (!raiz) return [];\nconst niveles = [];\nconst cola = [raiz];\nwhile (cola.length > 0) {\n  const tamano = cola.length;\n  const nivel = [];\n  for (let i = 0; i < tamano; i++) {\n    const nodo = cola.shift();\n    nivel.push(/* ... */);\n    /* meter los hijos que existan */\n  }\n  niveles.push(nivel);\n}\nreturn niveles;\n```"
+]
