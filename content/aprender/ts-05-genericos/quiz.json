@@ -1,0 +1,58 @@
+[
+  {
+    "pregunta": "```ts\nfunction primero<T>(lista: T[]): T | undefined {\n  return lista[0];\n}\nconst r = primero([\"a\", \"b\"]);\n```\n\n¿Qué tipo tiene `r`?",
+    "opciones": ["any", "T", "string | undefined", "string[]"],
+    "correcta": 2,
+    "explicacion": "TypeScript infiere `T = string` a partir del argumento, así que el retorno `T | undefined` queda como `string | undefined` (undefined porque el array podría estar vacío). `T` no aparece en el resultado: se reemplaza por el tipo real."
+  },
+  {
+    "pregunta": "¿Cuál es la principal ventaja de `function f<T>(x: T): T` frente a `function f(x: any): any`?",
+    "opciones": [
+      "Es más rápida al ejecutar",
+      "Conserva el tipo: si entra un number, TS sabe que sale un number",
+      "Valida el tipo en tiempo de ejecución",
+      "Acepta más tipos de argumentos"
+    ],
+    "correcta": 1,
+    "explicacion": "Los genéricos conectan la entrada con la salida, así que el tipo no se pierde. Con `any` el resultado es `any` y tsc deja de revisar. Ninguno de los dos cambia la velocidad ni valida en tiempo de ejecución (los tipos desaparecen), y los dos aceptan cualquier argumento."
+  },
+  {
+    "pregunta": "```ts\nfunction medir<T>(x: T): number {\n  return x.length;\n}\n```\n\n¿Cómo arreglas el error?",
+    "opciones": [
+      "Cambiando a `function medir<T extends { length: number }>(x: T)`",
+      "Llamándola como `medir<string>(\"hola\")`",
+      "Cambiando el retorno a `T`",
+      "No tiene error"
+    ],
+    "correcta": 0,
+    "explicacion": "Dentro de la función, `T` puede ser cualquier tipo (incluso `number`, que no tiene length), así que tsc da error. La restricción `extends { length: number }` garantiza que exista. Pasar el tipo al llamar no cambia lo que la función sabe por dentro."
+  },
+  {
+    "pregunta": "```ts\ninterface Libro { titulo: string; paginas: number }\nfunction leer<T, K extends keyof T>(obj: T, clave: K): T[K] {\n  return obj[clave];\n}\nconst libro: Libro = { titulo: \"Ficciones\", paginas: 200 };\nconst x = leer(libro, \"paginas\");\n```\n\n¿Qué tipo tiene `x`?",
+    "opciones": ["string | number", "number", "\"paginas\"", "any"],
+    "correcta": 1,
+    "explicacion": "`K` se infiere como el literal `\"paginas\"`, y `T[K]` es el tipo de esa propiedad en `Libro`: `number`. Por eso este patrón es tan útil: el tipo del resultado depende de la clave que pases. `string | number` sería `Libro[keyof Libro]`, la unión de todos los valores."
+  },
+  {
+    "pregunta": "Con la misma función `leer` de antes, ¿qué pasa con `leer(libro, \"autor\")`?",
+    "opciones": [
+      "Devuelve undefined",
+      "Error de tsc: \"autor\" no es una clave de Libro",
+      "Compila y el tipo es any",
+      "Error solo al ejecutar"
+    ],
+    "correcta": 1,
+    "explicacion": "`K extends keyof T` solo acepta `\"titulo\" | \"paginas\"`. Como \"autor\" no está, tsc marca el error antes de ejecutar. En JavaScript puro devolvería undefined sin avisar, que es justo lo que se quiere evitar."
+  },
+  {
+    "pregunta": "```ts\ninterface Respuesta<T> {\n  ok: boolean;\n  datos: T;\n}\n```\n\n¿Cuál de estos valores es un `Respuesta<number[]>` válido?",
+    "opciones": [
+      "`{ ok: true, datos: [1, 2, 3] }`",
+      "`{ ok: true, datos: 3 }`",
+      "`{ ok: true }`",
+      "`{ ok: \"si\", datos: [1] }`"
+    ],
+    "correcta": 0,
+    "explicacion": "Con `T = number[]`, `datos` debe ser un array de números. `3` es un number pero no un array, en la tercera falta `datos` y en la cuarta `ok` es un string en vez de boolean."
+  }
+]

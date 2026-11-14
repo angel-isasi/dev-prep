@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "```ts\nclass Cuenta {\n  private saldo = 0;\n}\nconst c = new Cuenta();\nconsole.log(c.saldo);\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Imprime 0 sin problemas",
+      "Error de tsc: saldo es privada y solo se usa dentro de la clase",
+      "Imprime undefined",
+      "Error al ejecutar en el navegador"
+    ],
+    "correcta": 1,
+    "explicacion": "`private` impide usar la propiedad fuera de la clase, y tsc lo marca al compilar. Ojo: si ignoraras el error y ejecutaras el JavaScript, sí imprimiría 0, porque `private` desaparece al compilar. Para privacidad en ejecución existe `#saldo`."
+  },
+  {
+    "pregunta": "```ts\nclass Empleado {\n  protected sueldo = 1000;\n}\nclass Jefe extends Empleado {\n  bono() { return this.sueldo * 0.2; }\n}\nconst j = new Jefe();\nj.bono();\nj.sueldo;\n```\n\n¿Qué líneas dan error?",
+    "opciones": [
+      "Ninguna",
+      "`this.sueldo` dentro de Jefe",
+      "Solo `j.sueldo`",
+      "`j.bono()` y `j.sueldo`"
+    ],
+    "correcta": 2,
+    "explicacion": "`protected` se puede usar dentro de la clase y de sus hijas, así que `this.sueldo` en `Jefe` es válido y `bono()` es público. Desde fuera (`j.sueldo`) no se puede: ahí está el error."
+  },
+  {
+    "pregunta": "¿Qué hace este constructor?\n\n```ts\nclass Producto {\n  constructor(public nombre: string, private precio: number) {}\n}\n```",
+    "opciones": [
+      "Nada: los parámetros no se guardan porque el cuerpo está vacío",
+      "Declara las propiedades `nombre` (pública) y `precio` (privada) y las asigna",
+      "Da error: falta `this.nombre = nombre`",
+      "Solo guarda `nombre`, porque `precio` es privado"
+    ],
+    "correcta": 1,
+    "explicacion": "Poner un modificador (`public`, `private`, `protected` o `readonly`) en un parámetro del constructor es un atajo de TypeScript: declara la propiedad y la asigna automáticamente. Sin el modificador, sí sería solo un parámetro y no se guardaría."
+  },
+  {
+    "pregunta": "```ts\ninterface Pagable {\n  pagar(monto: number): boolean;\n}\nclass Yape implements Pagable {\n  pagar(monto: number): string {\n    return \"ok\";\n  }\n}\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Compila: implements solo revisa el nombre del método",
+      "Error: el método pagar devuelve string pero la interfaz pide boolean",
+      "Compila, y Yape agrega un segundo método pagar",
+      "Error: una clase no puede implementar una interface"
+    ],
+    "correcta": 1,
+    "explicacion": "`implements` revisa que la clase cumpla la interfaz con los tipos correctos, incluido el retorno. `string` no se puede asignar a `boolean`, así que tsc da error. Implementar interfaces es justamente para lo que existe `implements`."
+  },
+  {
+    "pregunta": "```ts\nabstract class Animal {\n  abstract sonido(): string;\n}\nconst a = new Animal();\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Crea un Animal cuyo sonido es undefined",
+      "Error: no se puede crear una instancia de una clase abstracta",
+      "Error: falta implementar sonido en Animal",
+      "Compila, pero falla al llamar a sonido()"
+    ],
+    "correcta": 1,
+    "explicacion": "Una clase abstracta solo sirve de base: hay que crear una hija (`class Perro extends Animal`) que implemente `sonido`, y hacer `new` de la hija. Declarar métodos abstractos dentro de la clase abstracta sí está permitido."
+  },
+  {
+    "pregunta": "¿Qué pasa con esta línea al compilar a JavaScript?\n\n```ts\nimport type { Usuario } from \"./tipos\";\n```",
+    "opciones": [
+      "Se convierte en `import { Usuario } from \"./tipos\"`",
+      "Se borra completa, porque solo trae tipos",
+      "Carga el archivo tipos.js pero no usa nada",
+      "Da error si tipos.ts también exporta funciones"
+    ],
+    "correcta": 1,
+    "explicacion": "Los tipos no existen en ejecución, así que una importación solo de tipos se elimina al compilar. Por eso tampoco puedes usar `Usuario` como valor (por ejemplo con `new`). Que el archivo también exporte funciones no importa: solo traes lo que pides."
+  }
+]

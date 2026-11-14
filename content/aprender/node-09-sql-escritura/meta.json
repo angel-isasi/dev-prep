@@ -1,0 +1,8 @@
+{
+  "id": "node-sql-escritura",
+  "titulo": "SQL: escribir datos y transacciones",
+  "area": "node",
+  "orden": 9,
+  "descripcion": "INSERT, UPDATE y DELETE con parámetros, el peligro de olvidar el WHERE, transacciones con BEGIN, COMMIT y ROLLBACK, y cómo una API de Express lee y guarda datos en la base.",
+  "ejercicios": ["sql-008", "sql-009", "sql-010", "node-api-010"]
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "¿En qué orden se imprime?\n\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nPromise.resolve().then(() => console.log(\"C\"));\nconsole.log(\"D\");\n```",
+    "opciones": [
+      "A, B, C, D",
+      "A, D, B, C",
+      "A, D, C, B",
+      "A, C, D, B"
+    ],
+    "correcta": 2,
+    "explicacion": "Primero corre todo el código sincrónico (A y D). Luego las microtareas, que incluyen los `.then` de promesas (C). Al final las tareas como los timers (B), aunque el tiempo sea 0. Un `setTimeout(fn, 0)` nunca se adelanta a una promesa ya resuelta."
+  },
+  {
+    "pregunta": "Cada lectura tarda 1 segundo. ¿Cuánto tarda en total este código?\n\n```js\nconst [a, b, c] = await Promise.all([leer(\"a\"), leer(\"b\"), leer(\"c\")]);\n```",
+    "opciones": [
+      "Unos 3 segundos, porque son tres lecturas",
+      "Unos 1 segundo, porque arrancan las tres juntas",
+      "0 segundos, porque `Promise.all` no espera",
+      "Depende del orden del array"
+    ],
+    "correcta": 1,
+    "explicacion": "Las tres llamadas a `leer` se hacen al armar el array, así que las tres lecturas avanzan a la vez y `Promise.all` espera a la más lenta: más o menos 1 segundo. Con tres `await` seguidos, uno tras otro, sí serían unos 3 segundos."
+  },
+  {
+    "pregunta": "Una de las promesas se rechaza. ¿Qué devuelve `allSettled`?\n\n```js\nconst r = await Promise.allSettled([\n  Promise.resolve(10),\n  Promise.reject(new Error(\"sin conexión\")),\n]);\n```",
+    "opciones": [
+      "Lanza el error \"sin conexión\"",
+      "`[10]`",
+      "`[{ status: \"fulfilled\", value: 10 }, { status: \"rejected\", reason: Error }]`",
+      "`[10, undefined]`"
+    ],
+    "correcta": 2,
+    "explicacion": "`allSettled` nunca se rechaza: espera a todas y describe cada resultado con `status`. Las que salieron bien traen `value` y las que fallaron traen `reason`. Quien lanza el error en este caso es `Promise.all`, no `allSettled`."
+  },
+  {
+    "pregunta": "¿Qué problema tiene este código?\n\n```js\nasync function procesarTodo(archivos) {\n  archivos.forEach(async (a) => {\n    await procesar(a);\n  });\n  console.log(\"Todos procesados\");\n}\n```",
+    "opciones": [
+      "Ninguno, `forEach` espera cada `await`",
+      "\"Todos procesados\" se imprime antes de que terminen, porque `forEach` no espera promesas",
+      "Da error de sintaxis: no se puede usar `async` en un callback",
+      "Procesa solo el primer archivo"
+    ],
+    "correcta": 1,
+    "explicacion": "`forEach` llama al callback y sigue sin esperar la promesa que devuelve. Por eso el mensaje sale antes de terminar. Se arregla con `for (const a of archivos) await procesar(a);` (en serie) o con `await Promise.all(archivos.map(procesar));` (en paralelo)."
+  },
+  {
+    "pregunta": "¿Qué se imprime?\n\n```js\nconst e = new EventEmitter();\ne.once(\"saludo\", (n) => console.log(\"Hola\", n));\ne.emit(\"saludo\", \"Ana\");\ne.emit(\"saludo\", \"Luis\");\n```",
+    "opciones": [
+      "Hola Ana",
+      "Hola Ana y luego Hola Luis",
+      "Hola Luis",
+      "Nada, falta llamar a `start()`"
+    ],
+    "correcta": 0,
+    "explicacion": "`once` registra un oyente que se quita solo después de la primera vez. El segundo `emit` no encuentra oyentes y no imprime nada. Con `on` en vez de `once` se imprimirían los dos saludos. Un EventEmitter no necesita arrancarse."
+  },
+  {
+    "pregunta": "Tu servidor de Node tiene una ruta que hace un bucle sincrónico de 5 segundos. ¿Qué les pasa a los demás usuarios durante ese tiempo?",
+    "opciones": [
+      "Nada, Node abre un hilo nuevo para cada usuario",
+      "Tienen que esperar: el único hilo está ocupado y el event loop no puede atender otras peticiones",
+      "Reciben automáticamente un error 500",
+      "Se atienden normal porque el bucle corre en segundo plano"
+    ],
+    "correcta": 1,
+    "explicacion": "Tu JavaScript corre en un solo hilo. Mientras un cálculo sincrónico lo ocupa, el event loop no puede ejecutar ningún otro callback, así que todo el servidor se congela. Node solo aprovecha la espera de E/S (disco, red), no el cálculo pesado."
+  }
+]

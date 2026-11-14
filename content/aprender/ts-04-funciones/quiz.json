@@ -1,0 +1,58 @@
+[
+  {
+    "pregunta": "```ts\nfunction area(base: number, altura: number): number {\n  return (base * altura) / 2;\n}\narea(10);\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Devuelve NaN",
+      "Devuelve 0",
+      "Error de tsc: Expected 2 arguments, but got 1",
+      "Devuelve 5, porque altura vale 1 por defecto"
+    ],
+    "correcta": 2,
+    "explicacion": "En TypeScript, llamar con menos argumentos de los obligatorios es un error de compilación. En JavaScript puro devolvería NaN (porque `altura` sería undefined), pero tsc lo detecta antes. No hay valores por defecto si no los declaras."
+  },
+  {
+    "pregunta": "¿Cuál de estas firmas es **inválida**?",
+    "opciones": [
+      "`function f(a: number, b?: number)`",
+      "`function f(a?: number, b: number)`",
+      "`function f(a: number, b = 5)`",
+      "`function f(...nums: number[])`"
+    ],
+    "correcta": 1,
+    "explicacion": "Un parámetro obligatorio no puede ir después de uno opcional: tsc da \"A required parameter cannot follow an optional parameter\". Las demás son válidas: opcional al final, valor por defecto y parámetro rest."
+  },
+  {
+    "pregunta": "```ts\ntype Filtro = (n: number) => boolean;\nconst esPar: Filtro = (n) => n % 2 === 0;\n```\n\n¿Qué tipo tiene `n` dentro de `esPar`?",
+    "opciones": ["any", "unknown", "number", "Error: falta anotarlo"],
+    "correcta": 2,
+    "explicacion": "Como la variable tiene el tipo `Filtro`, TypeScript infiere los parámetros de la flecha a partir de ese tipo: `n` es `number`. Esto se llama tipado contextual, y es la razón por la que en `arr.map((x) => ...)` no tienes que anotar `x`."
+  },
+  {
+    "pregunta": "```ts\nfunction esTexto(x: unknown): boolean {\n  return typeof x === \"string\";\n}\nconst v: unknown = \"hola\";\nif (esTexto(v)) {\n  v.toUpperCase();\n}\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Compila: TypeScript lee el cuerpo de esTexto",
+      "Error: dentro del if `v` sigue siendo unknown",
+      "Compila, pero falla al ejecutar",
+      "Error: unknown no se puede pasar a una función"
+    ],
+    "correcta": 1,
+    "explicacion": "TypeScript no mira dentro de la función para acotar: solo ve que devuelve `boolean`. Para que funcione como type guard, el retorno debe ser `x is string`. Con eso, dentro del if `v` pasa a ser string."
+  },
+  {
+    "pregunta": "```ts\nfunction alTerminar(cb: () => void) {\n  cb();\n}\nalTerminar(() => 42);\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Error: 42 no es void",
+      "Compila: en un tipo de callback, void significa que el valor devuelto se ignora",
+      "Compila y alTerminar devuelve 42",
+      "Error: cb debe devolver undefined"
+    ],
+    "correcta": 1,
+    "explicacion": "Un tipo de función `() => void` acepta funciones que devuelvan cualquier cosa; quien la llama simplemente no usa el resultado. Por eso `forEach((n) => lista.push(n))` compila. `alTerminar` no devuelve el 42: llama a `cb` y descarta lo que devuelve."
+  },
+  {
+    "pregunta": "```ts\nconst valores = [3, null, 7, null];\nconst nums = valores.filter((x): x is number => x !== null);\n```\n\n¿Qué tipo tiene `nums`?",
+    "opciones": ["(number | null)[]", "number[]", "boolean[]", "never[]"],
+    "correcta": 1,
+    "explicacion": "Como el callback es un type guard (`x is number`), `filter` sabe que solo quedan números y devuelve `number[]`. Desde TypeScript 5.5, en casos simples como `x !== null` lo deduce aunque no lo escribas; con comprobaciones más complejas (o versiones anteriores) sin el `x is number` el resultado seguiría siendo `(number | null)[]`."
+  }
+]

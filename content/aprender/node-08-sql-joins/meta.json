@@ -1,0 +1,8 @@
+{
+  "id": "node-sql-joins",
+  "titulo": "SQL: JOIN y agrupación",
+  "area": "node",
+  "orden": 8,
+  "descripcion": "Cómo se relacionan las tablas con claves foráneas, la diferencia entre INNER JOIN y LEFT JOIN, y cómo resumir por grupos con GROUP BY y filtrar grupos con HAVING.",
+  "ejercicios": ["sql-005", "sql-006", "sql-007"]
+}

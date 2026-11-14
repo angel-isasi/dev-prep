@@ -1,0 +1,8 @@
+{
+  "id": "sql-001",
+  "titulo": "Tu primer SELECT",
+  "tipo": "funcion",
+  "tema": "sql-consultas",
+  "nivel": 1,
+  "tags": ["sql", "sqlite", "select", "order-by"]
+}

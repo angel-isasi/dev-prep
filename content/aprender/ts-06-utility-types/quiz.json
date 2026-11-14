@@ -1,0 +1,63 @@
+[
+  {
+    "pregunta": "```ts\ninterface Producto { id: number; nombre: string; precio: number }\ntype Nuevo = Omit<Producto, \"id\">;\n```\n\n¿Cuál es un `Nuevo` válido?",
+    "opciones": [
+      "`{ id: 1, nombre: \"Té\", precio: 4 }`",
+      "`{ nombre: \"Té\", precio: 4 }`",
+      "`{ nombre: \"Té\" }`",
+      "`{ id: 1 }`"
+    ],
+    "correcta": 1,
+    "explicacion": "`Omit<Producto, \"id\">` tiene `nombre` y `precio`, los dos obligatorios. Con `id` sería una propiedad desconocida (error en un literal), y a las otras dos les faltan campos obligatorios."
+  },
+  {
+    "pregunta": "Tienes una función `actualizar(u: Usuario, cambios: ???)` que recibe solo los campos que cambian. ¿Qué tipo pones en `cambios`?",
+    "opciones": ["`Required<Usuario>`", "`Pick<Usuario, string>`", "`Partial<Usuario>`", "`keyof Usuario`"],
+    "correcta": 2,
+    "explicacion": "`Partial<Usuario>` vuelve opcionales todas las propiedades, así puedes pasar `{ email: \"...\" }` sin el resto. `Required` obliga a pasar todo, `Pick` necesita claves concretas (no `string`) y `keyof Usuario` es solo la unión de nombres de claves."
+  },
+  {
+    "pregunta": "```ts\nfunction crear() {\n  return { id: 1, activo: true };\n}\n```\n\n¿Cómo obtienes el tipo `{ id: number; activo: boolean }`?",
+    "opciones": [
+      "`ReturnType<crear>`",
+      "`typeof crear`",
+      "`ReturnType<typeof crear>`",
+      "`Parameters<typeof crear>`"
+    ],
+    "correcta": 2,
+    "explicacion": "`ReturnType` recibe un **tipo de función**, y `typeof crear` lo obtiene a partir de la función. `ReturnType<crear>` da error porque `crear` es un valor. `typeof crear` solo es `() => { id: number; activo: boolean }`, y `Parameters` daría la tupla vacía `[]`."
+  },
+  {
+    "pregunta": "```ts\nconst niveles = [\"basico\", \"intermedio\", \"dificil\"] as const;\ntype Nivel = (typeof niveles)[number];\n```\n\n¿Qué es `Nivel`?",
+    "opciones": [
+      "`string`",
+      "`\"basico\" | \"intermedio\" | \"dificil\"`",
+      "`number`",
+      "`readonly string[]`"
+    ],
+    "correcta": 1,
+    "explicacion": "Gracias a `as const`, el array tiene tipo `readonly [\"basico\", \"intermedio\", \"dificil\"]`, y `[number]` pide el tipo de cualquier posición: la unión de los tres literales. Sin `as const`, el array sería `string[]` y `Nivel` quedaría como `string`."
+  },
+  {
+    "pregunta": "```ts\nconst config = { tema: \"oscuro\", fuente: 14 };\ntype C = keyof typeof config;\n```\n\n¿Qué es `C`?",
+    "opciones": [
+      "`{ tema: string; fuente: number }`",
+      "`\"oscuro\" | 14`",
+      "`\"tema\" | \"fuente\"`",
+      "`string`"
+    ],
+    "correcta": 2,
+    "explicacion": "`typeof config` da el tipo del objeto, `{ tema: string; fuente: number }` (la primera opción), y `keyof` sobre eso da la unión de sus claves: `\"tema\" | \"fuente\"`. Los valores no forman parte de keyof."
+  },
+  {
+    "pregunta": "¿Cuál de estas líneas **no** da error aunque la clave no exista en `Usuario` (que tiene id, nombre y email)?",
+    "opciones": [
+      "`type A = Pick<Usuario, \"correo\">;`",
+      "`type B = Omit<Usuario, \"correo\">;`",
+      "`const c: keyof Usuario = \"correo\";`",
+      "Todas dan error"
+    ],
+    "correcta": 1,
+    "explicacion": "`Omit` acepta cualquier clave (está definido con `K extends keyof any`), así que un error de tipeo pasa en silencio y no quita nada. `Pick` sí exige claves reales, y \"correo\" no cabe en `keyof Usuario`."
+  }
+]

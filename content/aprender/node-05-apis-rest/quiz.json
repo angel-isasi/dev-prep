@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "¿Cuál de estas rutas sigue mejor el estilo REST para borrar el producto 7?",
+    "opciones": [
+      "`GET /borrarProducto?id=7`",
+      "`POST /productos/7/borrar`",
+      "`DELETE /productos/7`",
+      "`DELETE /borrar-productos/7`"
+    ],
+    "correcta": 2,
+    "explicacion": "En REST la URL nombra el recurso con un sustantivo (`/productos/7`) y la acción la dice el método (`DELETE`). Poner verbos en la URL es redundante, y usar `GET` para borrar es peligroso porque un `GET` nunca debería cambiar datos."
+  },
+  {
+    "pregunta": "Tu API acaba de crear una tarea nueva con `POST /tareas`. ¿Qué responde?",
+    "opciones": [
+      "`200` y `{ \"ok\": true }`",
+      "`201` y la tarea creada, con su `id`",
+      "`204` sin cuerpo",
+      "`200` y la lista completa de tareas"
+    ],
+    "correcta": 1,
+    "explicacion": "`201 Created` indica que se creó un recurso, y devolverlo con su `id` le ahorra al frontend otra petición para saber cuál fue. `204` es para respuestas sin cuerpo, como un borrado. Un `200` funcionaría, pero no es el código preciso para crear."
+  },
+  {
+    "pregunta": "¿Qué pasa con esta API cuando le llega un POST con JSON?\n\n```js\nconst app = express();\napp.post(\"/tareas\", (req, res) => {\n  const { titulo } = req.body;\n  res.status(201).json({ titulo });\n});\n```",
+    "opciones": [
+      "Funciona: Express lee el JSON solo",
+      "Da error porque `req.body` es `undefined`: falta `app.use(express.json())`",
+      "Responde `400` automáticamente",
+      "Devuelve `{ titulo: \"[object Object]\" }`"
+    ],
+    "correcta": 1,
+    "explicacion": "Express no convierte el cuerpo por su cuenta. Sin el middleware `express.json()`, `req.body` es `undefined` y desestructurarlo lanza un `TypeError`, que Express convierte en un `500`. Express no valida nada por ti ni responde 400 solo."
+  },
+  {
+    "pregunta": "¿Qué le falta a este `fetch` para que la API reciba bien los datos?\n\n```js\nawait fetch(`${url}/tareas`, {\n  method: \"POST\",\n  body: { titulo: \"Repasar REST\" },\n});\n```",
+    "opciones": [
+      "Nada, está completo",
+      "Convertir el cuerpo con `JSON.stringify(...)` y agregar el header `\"Content-Type\": \"application/json\"`",
+      "Cambiar `POST` por `PUT`",
+      "Agregar `await` antes de `body`"
+    ],
+    "correcta": 1,
+    "explicacion": "El cuerpo de una petición viaja como texto: un objeto se enviaría como `\"[object Object]\"`. Hay que usar `JSON.stringify` y avisar con el header `Content-Type` que es JSON, para que `express.json()` lo lea. `POST` es el método correcto para crear."
+  },
+  {
+    "pregunta": "Llega `POST /productos` con `{ \"nombre\": \"\", \"precio\": -5 }`. ¿Qué debería hacer tu API?",
+    "opciones": [
+      "Guardarlo y responder `201`, el frontend ya valida",
+      "Responder `400` con un mensaje de qué está mal, sin guardar nada",
+      "Responder `404`, porque el producto no existe",
+      "Guardarlo con valores por defecto y responder `200`"
+    ],
+    "correcta": 1,
+    "explicacion": "El servidor nunca debe confiar en lo que llega: cualquiera puede llamar a la API sin pasar por tu formulario. Ante datos inválidos se responde `400` explicando el problema y no se guarda nada. `404` es para un recurso que no existe, no para datos mal enviados."
+  },
+  {
+    "pregunta": "¿Qué pasa en este test si la API responde `204` al borrar?\n\n```js\nconst r = await fetch(`${url}/tareas/1`, { method: \"DELETE\" });\nconst datos = await r.json();\n```",
+    "opciones": [
+      "`datos` es `null`",
+      "`datos` es `{}`",
+      "Lanza `SyntaxError: Unexpected end of JSON input`, porque un 204 no tiene cuerpo",
+      "`datos` es la tarea borrada"
+    ],
+    "correcta": 2,
+    "explicacion": "`204 No Content` significa justamente que no hay cuerpo. `r.json()` intenta interpretar un texto vacío como JSON y falla. Con un 204 solo revisas `r.status`."
+  }
+]

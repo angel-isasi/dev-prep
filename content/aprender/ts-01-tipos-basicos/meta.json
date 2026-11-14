@@ -1,0 +1,8 @@
+{
+  "id": "ts-tipos-basicos",
+  "titulo": "Tipos básicos",
+  "area": "typescript",
+  "orden": 1,
+  "descripcion": "Qué es TypeScript y por qué atrapa errores antes de ejecutar: anotaciones, inferencia, tipos primitivos, arrays, tuplas y any vs unknown.",
+  "ejercicios": ["ts-pr-001", "ts-pr-002", "ts-pr-003"]
+}

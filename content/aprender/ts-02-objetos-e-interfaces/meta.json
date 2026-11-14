@@ -1,0 +1,8 @@
+{
+  "id": "ts-objetos-e-interfaces",
+  "titulo": "Objetos, interfaces y type",
+  "area": "typescript",
+  "orden": 2,
+  "descripcion": "Describir la forma de un objeto con interface o type: propiedades opcionales, readonly, objetos anidados, firmas de índice y Record.",
+  "ejercicios": ["ts-pr-004", "ts-pr-005", "ts-pr-006"]
+}

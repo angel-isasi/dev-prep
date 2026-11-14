@@ -1,0 +1,8 @@
+{
+  "id": "node-sql-consultas",
+  "titulo": "SQL: consultas",
+  "area": "node",
+  "orden": 7,
+  "descripcion": "Qué es una base de datos relacional (tablas, filas, columnas, clave primaria), SELECT con WHERE, ORDER BY, LIMIT y agregaciones, y cómo consultar desde Node con node:sqlite y parámetros ? contra la inyección SQL.",
+  "ejercicios": ["sql-001", "sql-002", "sql-003", "sql-004"]
+}

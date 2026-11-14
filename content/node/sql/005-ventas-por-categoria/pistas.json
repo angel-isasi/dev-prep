@@ -1,0 +1,5 @@
+[
+  "Quieres **una fila por categoría**, no una por venta. Hay una cláusula que junta en un grupo todas las filas con el mismo valor en una columna, y luego `COUNT` y `SUM` se calculan dentro de cada grupo. Para los filtros, pregúntate: ¿esta condición mira una venta suelta (la fecha) o el resultado de un grupo (el total)?",
+  "Usa `GROUP BY categoria`. Para filtrar por el total del grupo usa `HAVING SUM(monto) >= ?`, que va **después** de `GROUP BY`. Para filtrar por fecha usa `WHERE fecha >= ?`, que va **antes** de `GROUP BY`. El orden de las cláusulas es: `SELECT`, `FROM`, `WHERE`, `GROUP BY`, `HAVING`, `ORDER BY`.",
+  "Esqueleto:\n\n```js\nexport function categoriasQueSuperan(db, minimo) {\n  return db\n    .prepare(\n      `SELECT categoria, /* suma con alias total */\n       FROM ventas\n       GROUP BY /* ... */\n       HAVING /* condición sobre la suma */\n       ORDER BY total DESC`,\n    )\n    .all(minimo);\n}\n```\n\n`ventasPorCategoria` es lo mismo sin `HAVING` y con `COUNT(*) AS ventas`; `ventasDesde` agrega un `WHERE` antes del `GROUP BY`."
+]

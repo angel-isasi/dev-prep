@@ -1,0 +1,8 @@
+{
+  "id": "sql-007",
+  "titulo": "Clientes sin pedidos",
+  "tipo": "funcion",
+  "tema": "sql-joins",
+  "nivel": 2,
+  "tags": ["sql", "sqlite", "left-join", "is-null", "group-by"]
+}

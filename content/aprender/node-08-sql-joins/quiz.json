@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "Con las tablas del tema (Ana con 2 pedidos, Luis con 1, Rosa sin pedidos), ¿cuántas filas devuelve esta consulta?\n\n```sql\nSELECT c.nombre, p.total\nFROM clientes c\nINNER JOIN pedidos p ON p.cliente_id = c.id;\n```",
+    "opciones": [
+      "3 filas: Ana, Ana y Luis",
+      "4 filas: Ana, Ana, Luis y Rosa con NULL",
+      "3 filas: Ana, Luis y Rosa",
+      "9 filas"
+    ],
+    "correcta": 0,
+    "explicacion": "`INNER JOIN` solo devuelve las combinaciones que cumplen el `ON`. Ana aparece dos veces (una por pedido), Luis una vez, y Rosa no aparece porque no tiene pedidos. Rosa con `NULL` sería el resultado de un `LEFT JOIN`, y 9 filas saldrían si faltara el `ON`."
+  },
+  {
+    "pregunta": "Quieres listar **todos** los clientes con su cantidad de pedidos, incluidos los que tienen 0. ¿Qué consulta es correcta?",
+    "opciones": [
+      "`SELECT c.nombre, COUNT(*) AS n FROM clientes c INNER JOIN pedidos p ON p.cliente_id = c.id GROUP BY c.id;`",
+      "`SELECT c.nombre, COUNT(*) AS n FROM clientes c LEFT JOIN pedidos p ON p.cliente_id = c.id GROUP BY c.id;`",
+      "`SELECT c.nombre, COUNT(p.id) AS n FROM clientes c LEFT JOIN pedidos p ON p.cliente_id = c.id GROUP BY c.id;`",
+      "`SELECT c.nombre, COUNT(p.id) AS n FROM clientes c, pedidos p GROUP BY c.id;`"
+    ],
+    "correcta": 2,
+    "explicacion": "Se necesita `LEFT JOIN` para que aparezcan los clientes sin pedidos. Pero con `COUNT(*)` esos clientes contarían 1, porque tienen una fila (con los datos del pedido en `NULL`). `COUNT(p.id)` ignora los `NULL` y da 0. La primera opción esconde a quienes tienen 0, y la última no tiene condición de unión."
+  },
+  {
+    "pregunta": "¿Qué pasa con esta consulta?\n\n```sql\nSELECT cliente_id, SUM(total) AS gastado\nFROM pedidos\nWHERE SUM(total) > 100\nGROUP BY cliente_id;\n```",
+    "opciones": [
+      "Devuelve los clientes que gastaron más de 100",
+      "Da error: las agregaciones no se pueden usar en `WHERE`, la condición va en `HAVING`",
+      "Devuelve todos los clientes porque `WHERE` se ignora",
+      "Devuelve solo los pedidos mayores de 100"
+    ],
+    "correcta": 1,
+    "explicacion": "`WHERE` se aplica a cada fila antes de agrupar, cuando todavía no existe ninguna suma, por eso SQL da error. Para filtrar por el resultado de una agregación se usa `HAVING SUM(total) > 100` después del `GROUP BY`."
+  },
+  {
+    "pregunta": "¿Cuál consulta devuelve los clientes que **nunca** hicieron un pedido?",
+    "opciones": [
+      "`SELECT c.nombre FROM clientes c INNER JOIN pedidos p ON p.cliente_id = c.id WHERE p.id IS NULL;`",
+      "`SELECT c.nombre FROM clientes c LEFT JOIN pedidos p ON p.cliente_id = c.id WHERE p.id IS NULL;`",
+      "`SELECT c.nombre FROM clientes c LEFT JOIN pedidos p ON p.cliente_id = c.id WHERE p.id = NULL;`",
+      "`SELECT nombre FROM clientes WHERE pedidos = 0;`"
+    ],
+    "correcta": 1,
+    "explicacion": "El `LEFT JOIN` conserva a todos los clientes y pone `NULL` en las columnas de pedidos cuando no hay pareja; luego `WHERE p.id IS NULL` deja solo esos. Con `INNER JOIN` nunca habría filas con `p.id` nulo, `= NULL` nunca es verdadero, y la tabla `clientes` no tiene una columna `pedidos`."
+  },
+  {
+    "pregunta": "La tabla `pedidos` tiene `cliente_id INTEGER REFERENCES clientes(id)` y no existe el cliente 99. ¿Qué pasa al ejecutar esto con `node:sqlite`?\n\n```sql\nINSERT INTO pedidos (cliente_id, total) VALUES (99, 10);\n```",
+    "opciones": [
+      "Se inserta y luego se crea el cliente 99 vacío",
+      "Se inserta sin problemas",
+      "Falla con `FOREIGN KEY constraint failed`",
+      "Se inserta con `cliente_id` en `NULL`"
+    ],
+    "correcta": 2,
+    "explicacion": "La clave foránea obliga a que `cliente_id` apunte a un cliente que exista. Como el 99 no existe, la base rechaza la inserción. Así se evitan pedidos huérfanos. En `node:sqlite` esta revisión viene activada por defecto."
+  },
+  {
+    "pregunta": "¿Por qué da error esta consulta?\n\n```sql\nSELECT id, nombre, total\nFROM clientes\nJOIN pedidos ON pedidos.cliente_id = clientes.id;\n```",
+    "opciones": [
+      "Porque `JOIN` sin `INNER` no existe",
+      "Porque `id` existe en las dos tablas y SQL no sabe cuál quieres (columna ambigua)",
+      "Porque falta un `GROUP BY`",
+      "Porque no se puede mostrar `total` sin `SUM`"
+    ],
+    "correcta": 1,
+    "explicacion": "Tanto `clientes` como `pedidos` tienen una columna `id`, así que SQL responde `ambiguous column name: id`. Se arregla indicando la tabla: `clientes.id` o, con alias, `c.id`. `JOIN` a secas es un `INNER JOIN`, y sin agrupar puedes mostrar `total` fila por fila."
+  }
+]

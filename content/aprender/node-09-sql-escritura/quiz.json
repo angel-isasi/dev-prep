@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "La tabla `productos` tiene 50 filas. ¿Qué hace esta línea?\n\n```js\ndb.prepare(\"UPDATE productos SET precio = ?\").run(0);\n```",
+    "opciones": [
+      "Da error porque falta el `WHERE`",
+      "Pone precio 0 al primer producto",
+      "Pone precio 0 a los 50 productos y devuelve `{ changes: 50, ... }`",
+      "No hace nada hasta que llames a `COMMIT`"
+    ],
+    "correcta": 2,
+    "explicacion": "Sin `WHERE`, `UPDATE` afecta a todas las filas, y SQL no lo considera un error ni pide confirmación. `changes` te dice cuántas filas cambió. Solo hace falta `COMMIT` si antes abriste una transacción con `BEGIN`."
+  },
+  {
+    "pregunta": "Tu API recibe `DELETE /productos/99` y no existe el producto 99. ¿Qué devuelve `run` y qué debería responder la API?\n\n```js\nconst r = db.prepare(\"DELETE FROM productos WHERE id = ?\").run(99);\n```",
+    "opciones": [
+      "Lanza un error y la API responde 500",
+      "`r.changes` es 0, y la API debería responder 404",
+      "`r.changes` es 1, y la API debería responder 204",
+      "`r` es `undefined`, y la API debería responder 400"
+    ],
+    "correcta": 1,
+    "explicacion": "Un `DELETE` que no encuentra filas no es un error para SQL: simplemente no borra nada y devuelve `changes: 0`. La API debe revisar ese número para responder `404`; si fue 1, responde `204`."
+  },
+  {
+    "pregunta": "Después de insertar un producto nuevo, ¿cómo sabes qué `id` le asignó la base?\n\n```js\nconst r = db.prepare(\"INSERT INTO productos (nombre, precio) VALUES (?, ?)\").run(\"Chicha\", 4);\n```",
+    "opciones": [
+      "Con `r.id`",
+      "Con `r.lastInsertRowid`",
+      "Con `r.changes`",
+      "Haciendo `SELECT MAX(id) FROM productos`, es la única forma"
+    ],
+    "correcta": 1,
+    "explicacion": "`run` devuelve `{ changes, lastInsertRowid }`: `lastInsertRowid` es el id de la fila que acabas de insertar, y `changes` es cuántas filas se afectaron (1). `MAX(id)` puede fallar si otra operación inserta al mismo tiempo, y `r.id` no existe."
+  },
+  {
+    "pregunta": "Dentro de una transacción, el `UPDATE` del stock funcionó pero el `INSERT` de la venta falló. Si el código hace `ROLLBACK`, ¿cómo quedan los datos?\n\n```js\ndb.exec(\"BEGIN\");\ntry {\n  db.prepare(\"UPDATE productos SET stock = stock - 1 WHERE id = ?\").run(1);\n  db.prepare(\"INSERT INTO ventas (producto_id) VALUES (?)\").run(1); // falla\n  db.exec(\"COMMIT\");\n} catch (e) {\n  db.exec(\"ROLLBACK\");\n}\n```",
+    "opciones": [
+      "El stock bajó en 1 y no hay venta registrada",
+      "El stock queda como estaba y no hay venta registrada",
+      "El stock bajó y la venta se registra igual",
+      "La tabla `productos` se borra entera"
+    ],
+    "correcta": 1,
+    "explicacion": "`ROLLBACK` deshace todo lo hecho desde el `BEGIN`, incluido el `UPDATE` que sí había funcionado. Esa es la idea de una transacción: todo o nada. Sin la transacción, el stock habría bajado sin venta registrada."
+  },
+  {
+    "pregunta": "¿Cuál es la forma más segura de descontar 1 al stock del producto `id`?",
+    "opciones": [
+      "`` db.prepare(`UPDATE productos SET stock = stock - 1 WHERE id = ${id}`).run() ``",
+      "`db.prepare(\"UPDATE productos SET stock = stock - 1 WHERE id = ?\").run(id)`",
+      "`db.prepare(\"UPDATE productos SET stock = stock - 1\").run(id)`",
+      "Leer el stock con un `SELECT`, restarle 1 en JavaScript y luego hacer `SELECT` otra vez"
+    ],
+    "correcta": 1,
+    "explicacion": "El parámetro `?` evita la inyección SQL y `stock - 1` usa el valor actual dentro de la misma sentencia. La primera opción concatena el id en el texto SQL; la tercera no tiene `WHERE` (descontaría a todos) y además `node:sqlite` lanza `column index out of range`, porque le pasas un valor sin ningún `?` donde ponerlo; la última nunca escribe nada."
+  },
+  {
+    "pregunta": "¿Por qué se recomienda que `crearApp(db)` reciba la base de datos como parámetro?",
+    "opciones": [
+      "Porque Express no puede importar `node:sqlite`",
+      "Para que los tests le pasen una base en memoria con datos conocidos, sin tocar la base real",
+      "Porque así la base se vuelve asincrónica",
+      "Porque una app de Express solo puede tener un parámetro"
+    ],
+    "correcta": 1,
+    "explicacion": "Pasar la base como parámetro separa la app de una base concreta: en producción le pasas la base del archivo, y en los tests una `new DatabaseSync(\":memory:\")` creada con datos de prueba. Así cada test empieza limpio y no ensucia datos reales."
+  }
+]

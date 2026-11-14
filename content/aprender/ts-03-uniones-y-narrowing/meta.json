@@ -1,0 +1,8 @@
+{
+  "id": "ts-uniones-y-narrowing",
+  "titulo": "Uniones y narrowing",
+  "area": "typescript",
+  "orden": 3,
+  "descripcion": "Valores que pueden ser de varios tipos: uniones, literales, cómo TypeScript los acota con typeof, in, igualdad e instanceof, uniones discriminadas y never.",
+  "ejercicios": ["ts-pr-007", "ts-pr-008", "ts-pr-009", "ts-pr-010"]
+}

@@ -1,0 +1,5 @@
+[
+  "Cada pedido tiene `cliente_id`, y ese número es el `id` de una fila de `clientes`. Necesitas \"pegar\" a cada pedido la fila del cliente que le corresponde, y lo mismo con el producto. Esa unión de tablas por una columna en común se hace en el `FROM`.",
+  "Usa `FROM pedidos pe JOIN clientes c ON c.id = pe.cliente_id` y otro `JOIN productos pr ON pr.id = pe.producto_id`. Como varias tablas tienen `id` y `nombre`, escribe siempre `alias.columna` (`pe.id`, `c.nombre`) y renombra con `AS` lo que el test espera: `c.nombre AS cliente`. El total se calcula en el `SELECT`: `pe.cantidad * pr.precio AS total`.",
+  "Esqueleto:\n\n```js\nexport function pedidosConCliente(db) {\n  return db\n    .prepare(\n      `SELECT pe.id, pe.fecha, /* nombre del cliente */ AS cliente, /* nombre del producto */ AS producto,\n              pe.cantidad, /* cálculo */ AS total\n       FROM pedidos pe\n       JOIN clientes c ON /* ... */\n       JOIN productos pr ON /* ... */\n       ORDER BY pe.id`,\n    )\n    .all();\n}\n```\n\nPara `pedidosDeCiudad`, agrega `WHERE c.ciudad = ?` antes del `ORDER BY`."
+]

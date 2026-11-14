@@ -1,0 +1,8 @@
+{
+  "id": "sql-003",
+  "titulo": "Los N más caros",
+  "tipo": "funcion",
+  "tema": "sql-consultas",
+  "nivel": 1,
+  "tags": ["sql", "sqlite", "order-by", "limit", "paginacion"]
+}

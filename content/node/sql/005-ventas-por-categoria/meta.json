@@ -1,0 +1,8 @@
+{
+  "id": "sql-005",
+  "titulo": "Ventas por categoría",
+  "tipo": "funcion",
+  "tema": "sql-joins",
+  "nivel": 2,
+  "tags": ["sql", "sqlite", "group-by", "having", "agregacion"]
+}

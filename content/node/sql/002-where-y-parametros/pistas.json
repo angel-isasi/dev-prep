@@ -1,0 +1,5 @@
+[
+  "Las cuatro funciones son un `SELECT ... FROM ... ORDER BY ...` como en el ejercicio anterior, con una parte nueva en medio: `WHERE condición`. Solo las filas que cumplen la condición pasan al resultado. Piensa qué condición necesita cada una: igualdad, rango, \"contiene\" y \"una u otra\".",
+  "Pon un `?` donde iría cada valor y pásalos en orden a `.all(valor1, valor2)`. Para el rango usa `precio >= ? AND precio <= ?`. Para \"contiene\" usa `nombre LIKE ?` y pasa el valor ya envuelto en `%`: `` `%${texto}%` ``. Para dos ciudades usa `ciudad = ? OR ciudad = ?`.",
+  "Esqueleto de una de ellas:\n\n```js\nexport function productosEnRango(db, minimo, maximo) {\n  return db\n    .prepare(\"SELECT nombre, precio FROM productos WHERE /* condición con dos ? */ ORDER BY precio\")\n    .all(/* valores en el mismo orden que los ? */);\n}\n```\n\nLas otras tres siguen el mismo molde: cambia las columnas, la condición y los valores."
+]

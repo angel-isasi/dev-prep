@@ -1,0 +1,8 @@
+{
+  "id": "ts-genericos",
+  "titulo": "Genéricos",
+  "area": "typescript",
+  "orden": 5,
+  "descripcion": "Funciones y tipos que trabajan con cualquier tipo sin perder información: <T>, restricciones con extends, keyof en restricciones y tipos genéricos.",
+  "ejercicios": ["ts-pr-013", "ts-pr-014", "ts-pr-015"]
+}

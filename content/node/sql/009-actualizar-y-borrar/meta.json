@@ -1,0 +1,8 @@
+{
+  "id": "sql-009",
+  "titulo": "Actualizar y borrar",
+  "tipo": "funcion",
+  "tema": "sql-escritura",
+  "nivel": 2,
+  "tags": ["sql", "sqlite", "update", "delete", "changes"]
+}

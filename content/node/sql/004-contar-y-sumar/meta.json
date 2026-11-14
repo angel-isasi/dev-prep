@@ -1,0 +1,8 @@
+{
+  "id": "sql-004",
+  "titulo": "Contar, sumar y promediar",
+  "tipo": "funcion",
+  "tema": "sql-consultas",
+  "nivel": 2,
+  "tags": ["sql", "sqlite", "count", "sum", "avg", "agregacion"]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "node-http-y-express",
+  "titulo": "HTTP y Express",
+  "area": "node",
+  "orden": 4,
+  "descripcion": "Cómo funciona HTTP (petición, respuesta, métodos, códigos de estado, headers y JSON) y cómo Express te ayuda a crear rutas que leen req.params y req.query.",
+  "ejercicios": ["node-api-001", "node-api-002", "node-api-003"]
+}

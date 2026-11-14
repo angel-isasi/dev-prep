@@ -1,0 +1,8 @@
+{
+  "id": "node-archivos",
+  "titulo": "Leer y escribir archivos",
+  "area": "node",
+  "orden": 2,
+  "descripcion": "fs/promises frente a fs sincrónico, rutas seguras con path, guardar y leer JSON en archivos y cómo manejar el error ENOENT cuando un archivo no existe.",
+  "ejercicios": ["node-pr-002", "node-pr-004", "node-pr-005", "node-pr-006"]
+}

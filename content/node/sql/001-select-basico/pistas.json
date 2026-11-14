@@ -1,0 +1,5 @@
+[
+  "Cada función es **una sola consulta SQL**. Piensa la pregunta en castellano y tradúcela: \"de la tabla productos, dame nombre y precio, ordenados por precio\". Las palabras clave son `SELECT` (qué columnas), `FROM` (qué tabla) y `ORDER BY` (en qué orden).",
+  "La forma es `SELECT columna1, columna2 FROM tabla ORDER BY columna`. Escribe las columnas separadas por coma, sin `*`. Para ejecutarla desde JavaScript usa `db.prepare(sql).all()`, que devuelve el arreglo de filas, y **retórnalo** con `return`.",
+  "Esqueleto:\n\n```js\nexport function listarProductos(db) {\n  return db.prepare(\"SELECT /* dos columnas */ FROM /* tabla */ ORDER BY /* columna */\").all();\n}\n\nexport function listarClientes(db) {\n  return db.prepare(\"SELECT /* dos columnas */ FROM /* tabla */ ORDER BY /* columna */\").all();\n}\n```"
+]

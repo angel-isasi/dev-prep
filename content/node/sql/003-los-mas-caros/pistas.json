@@ -1,0 +1,5 @@
+[
+  "Los dos problemas son iguales en el fondo: **ordenar** y luego quedarte con un **pedazo** del resultado. En `masCaros` el pedazo son las primeras `n` filas; en la paginación es un pedazo que empieza más adelante.",
+  "`ORDER BY precio DESC` ordena de mayor a menor, y puedes poner un segundo criterio separado por coma para los empates: `ORDER BY precio DESC, nombre ASC`. `LIMIT ?` corta el resultado en esa cantidad de filas y `OFFSET ?` salta filas al inicio. Para la página `p` con `t` productos por página, saltas `(p - 1) * t`.",
+  "Esqueleto:\n\n```js\nexport function masCaros(db, n) {\n  return db\n    .prepare(\"SELECT nombre, precio FROM productos ORDER BY /* dos criterios */ LIMIT ?\")\n    .all(/* ... */);\n}\n\nexport function paginaDeProductos(db, pagina, porPagina) {\n  const saltar = /* cuántas filas saltar */;\n  return db\n    .prepare(\"SELECT id, nombre FROM productos ORDER BY id LIMIT ? OFFSET ?\")\n    .all(/* primero el LIMIT, luego el OFFSET */);\n}\n```"
+]

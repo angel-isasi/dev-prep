@@ -1,0 +1,8 @@
+{
+  "id": "node-middlewares-y-errores",
+  "titulo": "Middlewares, errores y autenticación",
+  "area": "node",
+  "orden": 6,
+  "descripcion": "Qué es un middleware y next(), por qué importa su orden, cómo centralizar el manejo de errores, autenticación con token (y qué es un JWT) y CORS en una frase.",
+  "ejercicios": ["node-api-006", "node-api-007", "node-api-008"]
+}

@@ -1,0 +1,63 @@
+[
+  {
+    "pregunta": "```ts\nfunction f(id: string | number) {\n  return id.toFixed(2);\n}\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Compila: TypeScript elige number",
+      "Error: toFixed no existe en el tipo string",
+      "Compila, pero falla si le pasas un string",
+      "Error: las uniones no se pueden usar como parámetro"
+    ],
+    "correcta": 1,
+    "explicacion": "Con una unión solo puedes usar lo que tienen en común todos sus tipos. `toFixed` solo existe en `number`, así que tsc da error hasta que acotes con `typeof id === \"number\"`. TypeScript no elige un tipo por ti."
+  },
+  {
+    "pregunta": "```ts\nfunction g(x: string | null) {\n  if (typeof x === \"object\") {\n    // ...\n  }\n}\n```\n\n¿Qué tipo tiene `x` dentro del if?",
+    "opciones": ["string", "null", "never", "string | null"],
+    "correcta": 1,
+    "explicacion": "`typeof null` devuelve \"object\" (una rareza histórica de JavaScript). Un string nunca da \"object\", así que dentro del if TypeScript acota `x` a `null`. Por eso, para descartar null, se compara directo: `x !== null`."
+  },
+  {
+    "pregunta": "```ts\ntype Respuesta =\n  | { estado: \"ok\"; datos: string[] }\n  | { estado: \"error\"; mensaje: string };\n\nfunction f(r: Respuesta) {\n  if (r.estado === \"error\") {\n    return r.datos;\n  }\n}\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Compila y devuelve undefined",
+      "Error: la propiedad `datos` no existe en `{ estado: \"error\"; mensaje: string }`",
+      "Compila, porque `datos` existe en la unión",
+      "Error: no se puede comparar `estado` con un texto"
+    ],
+    "correcta": 1,
+    "explicacion": "Al comparar el discriminante `estado` con \"error\", TypeScript sabe que `r` es el objeto de error, que no tiene `datos`. Ese es justamente el beneficio de las uniones discriminadas: no puedes leer datos en el caso equivocado."
+  },
+  {
+    "pregunta": "¿Qué comprobación usas para distinguir entre `{ nadar(): void }` y `{ volar(): void }`?",
+    "opciones": [
+      "`typeof animal === \"Pez\"`",
+      "`animal instanceof Pez` (siendo Pez un type)",
+      "`\"nadar\" in animal`",
+      "`animal.nadar !== undefined` sin más, porque TypeScript lo permite siempre"
+    ],
+    "correcta": 2,
+    "explicacion": "`in` revisa si el objeto tiene esa propiedad y TypeScript acota el tipo. `typeof` solo devuelve nombres de primitivos como \"object\", nunca el nombre de tu tipo. `instanceof` necesita una clase real, no un `type` (los types desaparecen al compilar). Leer `animal.nadar` sin acotar da error porque no existe en el otro tipo."
+  },
+  {
+    "pregunta": "Tienes `const imposible: never = figura;` en el `default` de un switch. Agregas un nuevo tipo `\"triangulo\"` a la unión `Figura` sin agregar su `case`. ¿Qué pasa?",
+    "opciones": [
+      "Nada, el default lo maneja",
+      "tsc marca error en esa línea: el triángulo no se puede asignar a never",
+      "Falla solo al ejecutar con un triángulo",
+      "TypeScript agrega el case automáticamente"
+    ],
+    "correcta": 1,
+    "explicacion": "En el default solo debería llegar `never` (ningún valor). Si queda un caso sin manejar, ese caso llega al default y no cabe en `never`, así que tsc da error al compilar. Es la comprobación de exhaustividad: te avisa antes de ejecutar."
+  },
+  {
+    "pregunta": "```ts\ntype Talla = \"S\" | \"M\" | \"L\";\nlet elegida = \"M\";\nconst t: Talla = elegida;\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Compila bien",
+      "Error: `string` no se puede asignar a `Talla`",
+      "Error: \"M\" no está en Talla",
+      "Compila, pero t queda como string"
+    ],
+    "correcta": 1,
+    "explicacion": "Con `let`, TypeScript infiere `string` (podría cambiar a cualquier texto), no el literal \"M\". Un string cualquiera no cabe en la unión `Talla`. Se arregla con `let elegida: Talla = \"M\"` o usando `const`."
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "id": "node-que-es-node",
+  "titulo": "Qué es Node y sus módulos",
+  "area": "node",
+  "orden": 1,
+  "descripcion": "JavaScript fuera del navegador: qué es Node, para qué lo usa un frontend, módulos ESM y CommonJS, módulos internos con node:, npm, package.json y process.env.",
+  "ejercicios": ["node-pr-001", "node-pr-003", "node-pr-010"]
+}

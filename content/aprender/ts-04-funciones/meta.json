@@ -1,0 +1,8 @@
+{
+  "id": "ts-funciones",
+  "titulo": "Funciones tipadas",
+  "area": "typescript",
+  "orden": 4,
+  "descripcion": "Tipar parámetros y retorno, opcionales y valores por defecto, tipos de función y callbacks, void y type guards con x is T.",
+  "ejercicios": ["ts-pr-011", "ts-pr-012", "ts-reto-006"]
+}

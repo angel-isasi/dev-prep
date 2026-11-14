@@ -1,0 +1,8 @@
+{
+  "id": "sql-008",
+  "titulo": "Insertar y devolver el id",
+  "tipo": "funcion",
+  "tema": "sql-escritura",
+  "nivel": 2,
+  "tags": ["sql", "sqlite", "insert", "validacion", "lastInsertRowid"]
+}

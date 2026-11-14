@@ -1,0 +1,8 @@
+{
+  "id": "node-asincronia-y-eventos",
+  "titulo": "Asincronía y eventos en Node",
+  "area": "node",
+  "orden": 3,
+  "descripcion": "El event loop explicado simple, promesas y async/await en Node, Promise.all y allSettled, timers y cómo emitir y escuchar eventos con EventEmitter.",
+  "ejercicios": ["node-pr-007", "node-pr-008", "node-pr-009"]
+}

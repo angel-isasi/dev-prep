@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "Ejecutas `node app.js` y el archivo tiene esta línea. ¿Qué pasa?\n\n```js\nconst titulo = document.querySelector(\"h1\");\n```",
+    "opciones": [
+      "Devuelve `null` porque no hay ningún `<h1>`",
+      "Lanza `ReferenceError: document is not defined`",
+      "Node abre el navegador para buscar el `<h1>`",
+      "Funciona igual que en Chrome"
+    ],
+    "correcta": 1,
+    "explicacion": "Node ejecuta JavaScript fuera del navegador: no hay página, así que `document` ni siquiera existe como variable. Por eso no devuelve `null` (eso pasaría en un navegador sin `<h1>`), sino que lanza un `ReferenceError`. Node nunca abre un navegador por su cuenta."
+  },
+  {
+    "pregunta": "Tu `package.json` tiene `\"type\": \"module\"`. ¿Cuál de estos imports funciona en Node?",
+    "opciones": [
+      "`const { conIgv } = require(\"./precios.js\");`",
+      "`import { conIgv } from \"./precios\";`",
+      "`import { conIgv } from \"./precios.js\";`",
+      "`import { conIgv } from precios.js;`"
+    ],
+    "correcta": 2,
+    "explicacion": "Con `\"type\": \"module\"` los archivos son ESM, así que se usa `import`, y en Node los imports relativos llevan la extensión completa. `require` no existe en ESM. Omitir `.js` funciona en Vite pero no en Node. Y la ruta siempre va entre comillas."
+  },
+  {
+    "pregunta": "¿Qué imprime este código si arrancas con `PUERTO=4000`?\n\n```js\nconsole.log(process.env.PUERTO + 1);\n```",
+    "opciones": [
+      "`4001`",
+      "`\"40001\"` (se imprime 40001)",
+      "`NaN`",
+      "`undefined`"
+    ],
+    "correcta": 1,
+    "explicacion": "Los valores de `process.env` siempre son texto. `\"4000\" + 1` concatena y da `\"40001\"`. Para sumar hay que convertir: `Number(process.env.PUERTO) + 1`. Daría `NaN` solo si la variable no existiera y la convirtieras a número."
+  },
+  {
+    "pregunta": "Vas a usar Vitest solo para correr tus tests mientras desarrollas. ¿Cómo lo instalas?",
+    "opciones": [
+      "`npm install vitest` para que quede en `dependencies`",
+      "`npm install -D vitest` para que quede en `devDependencies`",
+      "Copiando la carpeta de Vitest dentro de `node_modules` a mano",
+      "`import vitest from \"node:vitest\"`, porque viene con Node"
+    ],
+    "correcta": 1,
+    "explicacion": "Las herramientas que solo se usan al desarrollar (tests, linters, Vite) van en `devDependencies` con `-D`. Funcionaría también sin `-D`, pero queda mal clasificado. `node:` es solo para los módulos que trae Node, y Vitest viene de npm."
+  },
+  {
+    "pregunta": "¿Por qué se recomienda escribir `import path from \"node:path\"` en vez de `\"path\"`?",
+    "opciones": [
+      "Porque sin `node:` el import falla siempre",
+      "Porque deja claro que es un módulo interno de Node y no un paquete de npm con ese nombre",
+      "Porque `node:` lo descarga de internet en la versión más nueva",
+      "Porque `node:` hace que el módulo sea más rápido"
+    ],
+    "correcta": 1,
+    "explicacion": "Las dos formas funcionan, pero el prefijo `node:` indica sin ambigüedad que es un módulo que viene con Node, y evita confundirlo con un paquete de npm que se llame igual. No descarga nada ni cambia la velocidad."
+  },
+  {
+    "pregunta": "¿Cuál de estas cosas NO deberías subir a tu repositorio de Git?",
+    "opciones": [
+      "`package.json`",
+      "`package-lock.json`",
+      "La carpeta `node_modules/`",
+      "El archivo `server.js`"
+    ],
+    "correcta": 2,
+    "explicacion": "`node_modules/` es pesada y se regenera con `npm install`, así que va en `.gitignore`. `package.json` describe el proyecto y `package-lock.json` fija las versiones exactas, por eso ambos sí se suben."
+  }
+]

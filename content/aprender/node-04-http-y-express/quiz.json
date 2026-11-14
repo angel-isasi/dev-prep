@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "Llamas `GET /productos/2`. ¿Qué devuelve esta ruta?\n\n```js\nconst productos = [{ id: 1 }, { id: 2 }];\n\napp.get(\"/productos/:id\", (req, res) => {\n  const p = productos.find((x) => x.id === req.params.id);\n  if (!p) return res.status(404).json({ error: \"No existe\" });\n  res.json(p);\n});\n```",
+    "opciones": [
+      "200 con `{ id: 2 }`",
+      "404 con `{ error: \"No existe\" }`",
+      "500, porque `find` falla",
+      "200 con `undefined`"
+    ],
+    "correcta": 1,
+    "explicacion": "`req.params.id` siempre es texto: `\"2\"`. Y `2 === \"2\"` es `false` porque `===` no convierte tipos, así que `find` no encuentra nada y responde 404. Se arregla con `Number(req.params.id)`."
+  },
+  {
+    "pregunta": "Para la URL `/productos?categoria=bebidas&max=5`, ¿qué tiene `req.query`?",
+    "opciones": [
+      "`{ categoria: \"bebidas\", max: 5 }`",
+      "`{ categoria: \"bebidas\", max: \"5\" }`",
+      "`\"categoria=bebidas&max=5\"`",
+      "`{}` porque la ruta no declaró esos parámetros"
+    ],
+    "correcta": 1,
+    "explicacion": "Express convierte la query en un objeto, pero los valores llegan como texto, así que `max` es `\"5\"` y hay que hacer `Number(max)` para compararlo. A diferencia de `:id`, la query no se declara en la ruta: siempre se puede leer."
+  },
+  {
+    "pregunta": "Tu API responde `404 Not Found`. ¿Qué hace este código en el frontend?\n\n```js\ntry {\n  const r = await fetch(\"/api/usuarios/99\");\n  console.log(\"status\", r.status);\n} catch (e) {\n  console.log(\"error\");\n}\n```",
+    "opciones": [
+      "Imprime `error`, porque 404 es un error",
+      "Imprime `status 404`",
+      "No imprime nada",
+      "Imprime `error` y luego `status 404`"
+    ],
+    "correcta": 1,
+    "explicacion": "`fetch` solo se rechaza cuando no hay respuesta (servidor apagado, sin red). Un 404 o un 500 son respuestas válidas, así que la promesa se resuelve y se imprime `status 404`. Por eso hay que revisar `r.ok` o `r.status` a mano."
+  },
+  {
+    "pregunta": "Un usuario envía un formulario con el email vacío y tu API lo rechaza. ¿Qué código de estado corresponde?",
+    "opciones": [
+      "`200 OK` con un mensaje de error en el cuerpo",
+      "`400 Bad Request`",
+      "`404 Not Found`",
+      "`500 Internal Server Error`"
+    ],
+    "correcta": 1,
+    "explicacion": "Los datos inválidos son un error del cliente, y el código para eso es `400`. `404` es para algo que no existe, `500` es cuando falla el servidor, y responder `200` con un error confunde al frontend porque `r.ok` sería `true`."
+  },
+  {
+    "pregunta": "¿Qué error da esta ruta cuando el producto no existe?\n\n```js\napp.get(\"/productos/:id\", (req, res) => {\n  const p = buscar(Number(req.params.id));\n  if (!p) res.status(404).json({ error: \"No existe\" });\n  res.json(p);\n});\n```",
+    "opciones": [
+      "Ninguno, Express ignora la segunda respuesta",
+      "\"Cannot set headers after they are sent to the client\", porque intenta responder dos veces",
+      "Devuelve 200 con `null`",
+      "Un error de sintaxis"
+    ],
+    "correcta": 1,
+    "explicacion": "Sin `return`, después de enviar el 404 la función sigue y ejecuta `res.json(p)`, una segunda respuesta. Una petición solo puede tener una respuesta, así que Express lanza ese error. Se arregla con `return res.status(404).json(...)`."
+  },
+  {
+    "pregunta": "¿Por qué se recomienda exportar `crearApp()` que devuelve la app, en vez de llamar a `app.listen(3000)` dentro del mismo archivo?",
+    "opciones": [
+      "Porque Express no permite llamar a `listen` en el archivo donde se crean las rutas",
+      "Para que los tests puedan crear la app y levantarla en un puerto libre, sin chocar con el puerto 3000",
+      "Porque `listen` hace que la app sea más lenta",
+      "Porque así no hace falta instalar Express"
+    ],
+    "correcta": 1,
+    "explicacion": "Separar la creación de la app del arranque permite reutilizarla: el servidor real la arranca en su puerto, y los tests la levantan con `listen(0)` (un puerto libre que elige el sistema) para hacerle peticiones con `fetch`. Express sí permite llamar a `listen` donde quieras."
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "id": "ts-utility-types",
+  "titulo": "Utility types y keyof",
+  "area": "typescript",
+  "orden": 6,
+  "descripcion": "Crear tipos a partir de otros sin repetirlos: Partial, Required, Pick, Omit, Record, ReturnType, Parameters, keyof, typeof y as const.",
+  "ejercicios": ["ts-pr-016", "ts-pr-017", "ts-pr-018"]
+}

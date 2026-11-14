@@ -1,0 +1,8 @@
+{
+  "id": "sql-006",
+  "titulo": "Pedidos con su cliente",
+  "tipo": "funcion",
+  "tema": "sql-joins",
+  "nivel": 2,
+  "tags": ["sql", "sqlite", "join", "inner-join", "alias"]
+}

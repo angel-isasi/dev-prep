@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "Todas las peticiones a tu servidor se quedan cargando y nunca responden. ¿Cuál es el problema?\n\n```js\napp.use((req, res, next) => {\n  console.log(req.method, req.url);\n});\napp.get(\"/productos\", (req, res) => res.json([]));\n```",
+    "opciones": [
+      "Falta `return` antes de `console.log`",
+      "El middleware no llama a `next()`, así que la petición nunca llega a la ruta",
+      "`app.use` solo funciona con `express.json()`",
+      "Las rutas deben registrarse antes que los middlewares"
+    ],
+    "correcta": 1,
+    "explicacion": "Un middleware debe responder o llamar a `next()`. Este no hace ninguna de las dos cosas, así que la fila se detiene y el cliente se queda esperando. Agregando `next()` al final la petición sigue hasta la ruta."
+  },
+  {
+    "pregunta": "¿Qué recibe la ruta en `req.body` al hacer un POST con JSON a `/notas`?\n\n```js\napp.post(\"/notas\", (req, res) => res.json({ body: req.body ?? null }));\napp.use(express.json());\n```",
+    "opciones": [
+      "El objeto enviado, porque `express.json()` aplica a todo",
+      "`null`, porque `express.json()` se registró después de la ruta",
+      "Un error de sintaxis",
+      "El texto del JSON sin convertir"
+    ],
+    "correcta": 1,
+    "explicacion": "Express ejecuta los middlewares en el orden en que se registran. La ruta `/notas` responde antes de que la petición llegue a `express.json()`, así que `req.body` sigue `undefined` y se envía `null`. Por eso `express.json()` va al principio."
+  },
+  {
+    "pregunta": "¿Cómo reconoce Express que una función es el manejador de errores?",
+    "opciones": [
+      "Porque se llama `errorHandler`",
+      "Porque tiene exactamente cuatro parámetros: `(err, req, res, next)`",
+      "Porque se registra con `app.error(...)`",
+      "Porque devuelve un status 500"
+    ],
+    "correcta": 1,
+    "explicacion": "Express mira cuántos parámetros declara la función: con cuatro, la trata como manejador de errores y solo la llama cuando hay un error. El nombre no importa y no existe `app.error`. Además debe registrarse al final, después de las rutas."
+  },
+  {
+    "pregunta": "Un usuario con un token válido, pero con rol `\"cliente\"`, intenta borrar otro usuario, cosa que solo puede hacer un admin. ¿Qué código responde la API?",
+    "opciones": [
+      "`400 Bad Request`",
+      "`401 Unauthorized`",
+      "`403 Forbidden`",
+      "`404 Not Found`"
+    ],
+    "correcta": 2,
+    "explicacion": "`401` es cuando el servidor no sabe quién eres (falta el token o es inválido). Aquí el token es válido: sabe quién eres, pero no tienes permiso, y eso es `403`. `400` es para datos mal enviados."
+  },
+  {
+    "pregunta": "¿Qué es cierto sobre un JWT?",
+    "opciones": [
+      "Sus datos van cifrados, así que puedes guardar la contraseña dentro",
+      "Cualquiera puede leer sus datos, pero la firma impide modificarlos sin que el servidor lo note",
+      "El servidor tiene que guardar cada JWT en la base de datos para validarlo",
+      "Es lo mismo que una cookie"
+    ],
+    "correcta": 1,
+    "explicacion": "Los datos de un JWT están en Base64, que se decodifica sin clave: no son secretos. Lo que lo hace seguro es la firma, calculada con una clave que solo tiene el servidor; si alguien cambia los datos, la firma no coincide. Por eso el servidor no necesita guardarlos. Una cookie es un lugar donde guardar datos en el navegador, no un formato de token."
+  },
+  {
+    "pregunta": "¿Dónde manda normalmente el frontend el token en cada petición?",
+    "opciones": [
+      "En la URL: `/api/perfil?token=...`",
+      "En el header `Authorization: Bearer <token>`",
+      "En el cuerpo de un `GET`",
+      "En `process.env.TOKEN`"
+    ],
+    "correcta": 1,
+    "explicacion": "La convención es el header `Authorization` con el esquema `Bearer`. Ponerlo en la URL lo deja en historiales y registros del servidor, y un `GET` no lleva cuerpo. `process.env` es configuración del servidor, no algo que el frontend pueda enviar."
+  }
+]

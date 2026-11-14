@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "Con la tabla `productos` del tema (Inca Kola 5.0, Papas Lays 3.5, Chicha 4.0, Galletas 2.0), ¿qué devuelve esta consulta?\n\n```sql\nSELECT nombre FROM productos\nWHERE precio >= 3.5\nORDER BY precio DESC\nLIMIT 2;\n```",
+    "opciones": [
+      "Inca Kola, Chicha",
+      "Inca Kola, Chicha, Papas Lays",
+      "Papas Lays, Chicha",
+      "Galletas, Papas Lays"
+    ],
+    "correcta": 0,
+    "explicacion": "Primero `WHERE` deja los de precio 3.5 o más: Inca Kola (5.0), Chicha (4.0) y Papas Lays (3.5). Luego `ORDER BY precio DESC` los ordena de mayor a menor y `LIMIT 2` se queda con los dos primeros: Inca Kola y Chicha."
+  },
+  {
+    "pregunta": "¿Por qué esta consulta es peligrosa?\n\n```js\nconst sql = `SELECT * FROM usuarios WHERE email = '${req.query.email}'`;\ndb.prepare(sql).all();\n```",
+    "opciones": [
+      "No es peligrosa, solo es más lenta",
+      "Porque el usuario puede escribir SQL dentro del email y cambiar la consulta (inyección SQL)",
+      "Porque `prepare` no acepta template strings",
+      "Porque `req.query.email` siempre es `undefined`"
+    ],
+    "correcta": 1,
+    "explicacion": "Si alguien envía `x' OR '1'='1`, la consulta queda `WHERE email = 'x' OR '1'='1'` y devuelve todos los usuarios. Con `db.prepare(\"SELECT * FROM usuarios WHERE email = ?\").all(req.query.email)` el valor viaja aparte y nunca se interpreta como SQL."
+  },
+  {
+    "pregunta": "Quieres los productos sin categoría. ¿Qué consulta funciona?",
+    "opciones": [
+      "`SELECT * FROM productos WHERE categoria = NULL;`",
+      "`SELECT * FROM productos WHERE categoria IS NULL;`",
+      "`SELECT * FROM productos WHERE categoria = '';`",
+      "`SELECT * FROM productos WHERE NOT categoria;`"
+    ],
+    "correcta": 1,
+    "explicacion": "`NULL` significa \"valor desconocido\" y ninguna comparación con `=` da verdadero contra él, así que `= NULL` devuelve siempre 0 filas. Para eso existe `IS NULL`. Un texto vacío `''` no es lo mismo que `NULL`."
+  },
+  {
+    "pregunta": "¿Qué devuelve este código si no existe un producto con id 99?\n\n```js\nconst p = db.prepare(\"SELECT * FROM productos WHERE id = ?\").get(99);\n```",
+    "opciones": [
+      "`[]`",
+      "`null`",
+      "`undefined`",
+      "Lanza un error"
+    ],
+    "correcta": 2,
+    "explicacion": "`get` devuelve la primera fila como objeto, o `undefined` si la consulta no encontró ninguna. No lanza error: no encontrar filas es un resultado válido. Quien devuelve `[]` cuando no hay filas es `all`."
+  },
+  {
+    "pregunta": "La tabla `clientes` tiene 10 filas, y 3 de ellas tienen `telefono` en `NULL`. ¿Qué devuelve esta consulta?\n\n```sql\nSELECT COUNT(*) AS filas, COUNT(telefono) AS con_telefono FROM clientes;\n```",
+    "opciones": [
+      "`{ filas: 10, con_telefono: 10 }`",
+      "`{ filas: 10, con_telefono: 7 }`",
+      "`{ filas: 7, con_telefono: 7 }`",
+      "`{ filas: 10, con_telefono: 3 }`"
+    ],
+    "correcta": 1,
+    "explicacion": "`COUNT(*)` cuenta todas las filas (10). `COUNT(columna)` ignora las filas donde esa columna es `NULL`, así que cuenta 7. Y gracias a los `AS`, en JavaScript las propiedades se llaman `filas` y `con_telefono`."
+  },
+  {
+    "pregunta": "¿Cuál es la diferencia entre `.all()` y `.get()` en `node:sqlite`?",
+    "opciones": [
+      "`all` devuelve un array con todas las filas; `get` devuelve solo la primera fila como objeto (o `undefined`)",
+      "`all` ejecuta INSERT y `get` ejecuta SELECT",
+      "`get` es asincrónico y `all` es sincrónico",
+      "Son iguales, `get` es un alias de `all`"
+    ],
+    "correcta": 0,
+    "explicacion": "Las dos ejecutan una consulta que devuelve filas. `all` las devuelve todas en un array (vacío si no hay); `get` devuelve una sola fila, ideal para buscar por id. Para INSERT, UPDATE y DELETE se usa `run`. `DatabaseSync` es sincrónico en todos sus métodos."
+  }
+]

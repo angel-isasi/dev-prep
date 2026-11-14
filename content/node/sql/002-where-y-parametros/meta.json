@@ -1,0 +1,8 @@
+{
+  "id": "sql-002",
+  "titulo": "Filtrar con WHERE",
+  "tipo": "funcion",
+  "tema": "sql-consultas",
+  "nivel": 1,
+  "tags": ["sql", "sqlite", "where", "parametros", "like", "inyeccion-sql"]
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "```ts\ninterface Usuario {\n  nombre: string;\n  email: string;\n}\nconst u: Usuario = { nombre: \"Ana\" };\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Compila: `email` queda como undefined",
+      "Error: falta la propiedad `email`",
+      "Error: `nombre` debería ser opcional",
+      "Compila, pero con una advertencia"
+    ],
+    "correcta": 1,
+    "explicacion": "Todas las propiedades de una interface son obligatorias salvo que lleven `?`. Como falta `email`, tsc marca \"Property 'email' is missing\". Para permitirlo tendrías que declarar `email?: string`."
+  },
+  {
+    "pregunta": "¿Cuál de estas declaraciones solo se puede escribir con `type` y no con `interface`?",
+    "opciones": [
+      "Un objeto con `nombre: string`",
+      "Un objeto que extiende a otro",
+      "`\"pendiente\" | \"pagado\" | \"anulado\"`",
+      "Un objeto con una propiedad opcional"
+    ],
+    "correcta": 2,
+    "explicacion": "Las uniones de literales solo se pueden nombrar con `type`. Objetos, propiedades opcionales y herencia (`extends`) se pueden hacer con `interface` sin problema."
+  },
+  {
+    "pregunta": "```ts\ninterface Perfil {\n  nombre: string;\n  telefono?: string;\n}\nfunction f(p: Perfil) {\n  return p.telefono.toUpperCase();\n}\n```\n\n¿Qué dice tsc?",
+    "opciones": [
+      "Nada, compila bien",
+      "Error: 'p.telefono' is possibly 'undefined'",
+      "Error: toUpperCase no existe en string",
+      "Error: las propiedades opcionales no se pueden leer"
+    ],
+    "correcta": 1,
+    "explicacion": "Una propiedad opcional tiene tipo `string | undefined`, así que llamar a un método sin comprobar puede fallar. Se lee sin problema, pero hay que protegerla: `p.telefono?.toUpperCase()` o un `if (p.telefono)`."
+  },
+  {
+    "pregunta": "```ts\ninterface Item {\n  readonly id: number;\n  nombre: string;\n}\nconst it: Item = { id: 1, nombre: \"Lápiz\" };\nit.nombre = \"Borrador\";\nit.id = 2;\n```\n\n¿Qué líneas dan error?",
+    "opciones": [
+      "Ninguna",
+      "Solo `it.nombre = \"Borrador\"`",
+      "Las dos asignaciones",
+      "Solo `it.id = 2`"
+    ],
+    "correcta": 3,
+    "explicacion": "`readonly` impide reasignar `id` después de crear el objeto. `nombre` no es readonly, así que se puede cambiar aunque `it` sea `const` (const protege la variable, no el contenido del objeto)."
+  },
+  {
+    "pregunta": "Quieres guardar cuántas veces aparece cada palabra: `{ hola: 2, mundo: 1 }`, sin saber de antemano qué palabras habrá. ¿Qué tipo usas?",
+    "opciones": [
+      "`Record<string, number>`",
+      "`{ palabra: string; veces: number }`",
+      "`number[]`",
+      "`[string, number]`"
+    ],
+    "correcta": 0,
+    "explicacion": "Es un diccionario: claves desconocidas de tipo string y valores number. `Record<string, number>` (o `{ [palabra: string]: number }`) lo describe. La segunda opción es un solo objeto con dos propiedades fijas, y las otras son arrays."
+  },
+  {
+    "pregunta": "```ts\ntype Dia = \"lun\" | \"mar\";\nconst horas: Record<Dia, number> = { lun: 8 };\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Compila: `mar` queda en 0",
+      "Error: falta la propiedad `mar`",
+      "Error: Record solo acepta string como clave",
+      "Compila: Record vuelve opcionales todas las claves"
+    ],
+    "correcta": 1,
+    "explicacion": "Con un conjunto fijo de claves, `Record` exige que estén **todas**. Falta `mar`, así que tsc da error. Record sí acepta uniones de literales como clave, y no rellena valores por defecto."
+  }
+]

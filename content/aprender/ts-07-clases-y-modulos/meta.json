@@ -1,0 +1,8 @@
+{
+  "id": "ts-clases-y-modulos",
+  "titulo": "Clases y módulos",
+  "area": "typescript",
+  "orden": 7,
+  "descripcion": "Clases con public, private, protected y readonly, implements, clases abstractas, y cómo exportar e importar tipos entre archivos con import type.",
+  "ejercicios": ["ts-pr-019", "ts-pr-020", "ts-reto-002"]
+}

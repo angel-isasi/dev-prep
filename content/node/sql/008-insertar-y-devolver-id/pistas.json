@@ -1,0 +1,5 @@
+[
+  "Separa el trabajo en dos partes: primero **JavaScript** decide si los datos son válidos (y lanza el error si no), y recién después **SQL** guarda. Para saber si el email ya existe necesitas preguntarle a la base antes de insertar.",
+  "Limpia cada texto con `.trim()`. Valida con `if (!nombre) throw new Error(\"...\")` y `email.includes(\"@\")`. Para el email repetido usa `db.prepare(\"SELECT id FROM clientes WHERE email = ?\").get(email)`: devuelve la fila o `undefined`. Para guardar usa `INSERT INTO clientes (nombre, email, ciudad) VALUES (?, ?, ?)` con `.run(...)`, y devuelve `lastInsertRowid` del resultado.",
+  "Esqueleto:\n\n```js\nexport function crearCliente(db, datos) {\n  const nombre = (datos.nombre ?? \"\").trim();\n  // ... lo mismo para email y ciudad\n\n  if (/* nombre vacío */) throw new Error(\"El nombre es obligatorio\");\n  // ... las otras dos validaciones\n\n  const existente = db.prepare(/* buscar por email */).get(email);\n  if (existente) throw new Error(\"El email ya está registrado\");\n\n  const resultado = db.prepare(/* INSERT con tres ? */).run(/* ... */);\n  return /* el id nuevo */;\n}\n```"
+]

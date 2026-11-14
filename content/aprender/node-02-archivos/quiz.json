@@ -1,0 +1,68 @@
+[
+  {
+    "pregunta": "¿Qué imprime este código?\n\n```js\nimport { readFile } from \"node:fs/promises\";\n\nconst texto = readFile(\"nota.txt\", \"utf8\");\nconsole.log(texto);\n```",
+    "opciones": [
+      "El contenido de `nota.txt`",
+      "`Promise { <pending> }`",
+      "`undefined`",
+      "Un `Buffer` con los bytes del archivo"
+    ],
+    "correcta": 1,
+    "explicacion": "`readFile` de `fs/promises` devuelve una promesa, y sin `await` lo que guardas es la promesa todavía pendiente, no el texto. Con `await readFile(...)` sí tendrías el contenido. El `Buffer` aparecería si olvidaras `\"utf8\"` pero sí pusieras `await`."
+  },
+  {
+    "pregunta": "`usuarios.json` tiene `[{\"nombre\":\"Ana\"}]`. ¿Qué queda en el archivo después de esto?\n\n```js\nawait writeFile(\"usuarios.json\", JSON.stringify([{ nombre: \"Luis\" }]));\n```",
+    "opciones": [
+      "`[{\"nombre\":\"Ana\"},{\"nombre\":\"Luis\"}]`",
+      "`[{\"nombre\":\"Luis\"}]`",
+      "`[{\"nombre\":\"Ana\"}][{\"nombre\":\"Luis\"}]`",
+      "Da error porque el archivo ya existe"
+    ],
+    "correcta": 1,
+    "explicacion": "`writeFile` reemplaza todo el contenido del archivo (y lo crea si no existe). No fusiona arrays ni agrega al final; para agregar texto al final existe `appendFile`, que daría la tercera opción. Si quieres sumar un usuario, lees, haces `push` y vuelves a escribir."
+  },
+  {
+    "pregunta": "¿Cuál es la forma más segura de armar la ruta a `datos/productos.json`?",
+    "opciones": [
+      "`\"datos\" + \"/\" + \"productos.json\"`",
+      "`\"datos\\\\productos.json\"` escrito a mano",
+      "`path.join(\"datos\", \"productos.json\")`",
+      "`\"datos\".concat(\"productos.json\")`"
+    ],
+    "correcta": 2,
+    "explicacion": "`path.join` pone el separador correcto del sistema (`\\` en Windows, `/` en Linux) y limpia barras duplicadas. Escribir el separador a mano ata el código a un sistema, y `concat` sin separador daría `datosproductos.json`."
+  },
+  {
+    "pregunta": "¿Qué problema tiene esta función?\n\n```js\nasync function leerConfig(ruta) {\n  try {\n    return JSON.parse(await readFile(ruta, \"utf8\"));\n  } catch {\n    return {};\n  }\n}\n```",
+    "opciones": [
+      "Ninguno, es la forma recomendada",
+      "Si el JSON está mal escrito también devuelve `{}` y esconde el error",
+      "`JSON.parse` no puede ir dentro de un `try`",
+      "Si el archivo no existe, lanza un error igual"
+    ],
+    "correcta": 1,
+    "explicacion": "El `catch` atrapa cualquier error: que el archivo no exista, pero también un JSON roto o falta de permisos. Lo correcto es revisar `error.code === \"ENOENT\"` para devolver `{}` y relanzar lo demás con `throw error`, así no escondes problemas reales."
+  },
+  {
+    "pregunta": "En un servidor de Express, cada petición a `/catalogo` hace `readFileSync(\"catalogo.json\", \"utf8\")`. ¿Cuál es el problema?",
+    "opciones": [
+      "`readFileSync` no existe en Node moderno",
+      "Mientras se lee el archivo, el servidor no puede atender ninguna otra petición",
+      "Devuelve una promesa que nadie espera",
+      "No hay problema, es más rápido que la versión con promesas"
+    ],
+    "correcta": 1,
+    "explicacion": "Las funciones `Sync` bloquean: Node no hace nada más hasta que terminan. En un servidor eso congela a todos los usuarios mientras se lee el disco. `readFileSync` sí existe y no devuelve una promesa; está bien para scripts o para leer configuración una sola vez al arrancar."
+  },
+  {
+    "pregunta": "Llamas `readFile(\"no-existe.txt\", \"utf8\")` y el archivo no está. ¿Qué pasa?",
+    "opciones": [
+      "Devuelve un texto vacío `\"\"`",
+      "Devuelve `null`",
+      "La promesa se rechaza con un error cuyo `code` es `\"ENOENT\"`",
+      "Crea el archivo vacío y devuelve `\"\"`"
+    ],
+    "correcta": 2,
+    "explicacion": "Leer un archivo que no existe es un error: la promesa se rechaza y, si usas `await`, se lanza una excepción con `code: \"ENOENT\"`. Node no inventa un valor vacío ni crea el archivo al leer; eso solo lo hacen funciones de escritura como `writeFile`."
+  }
+]

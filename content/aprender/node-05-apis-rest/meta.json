@@ -1,0 +1,8 @@
+{
+  "id": "node-apis-rest",
+  "titulo": "APIs REST",
+  "area": "node",
+  "orden": 5,
+  "descripcion": "Qué es REST, un CRUD completo con los métodos HTTP, los códigos 200, 201, 204, 400 y 404, cómo validar lo que llega en el cuerpo y cómo probar una API con fetch.",
+  "ejercicios": ["node-api-004", "node-api-005", "node-api-009"]
+}

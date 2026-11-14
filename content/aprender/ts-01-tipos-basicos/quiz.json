@@ -1,0 +1,63 @@
+[
+  {
+    "pregunta": "¿Qué pasa con este código?\n\n```ts\nfunction doble(n: number) {\n  return n * 2;\n}\ndoble(\"5\");\n```",
+    "opciones": [
+      "Devuelve 10, porque JavaScript convierte el texto",
+      "Devuelve \"55\"",
+      "tsc marca un error: un string no se puede asignar a un parámetro number",
+      "Funciona, pero VS Code muestra una advertencia amarilla"
+    ],
+    "correcta": 2,
+    "explicacion": "El parámetro está anotado como `number`, y `\"5\"` es un `string`. `tsc` da el error TS2345 antes de ejecutar. En JavaScript puro sí daría 10 (por la conversión), pero justamente eso es lo que TypeScript quiere evitar. No es una advertencia: es un error."
+  },
+  {
+    "pregunta": "¿Qué tipo infiere TypeScript para `edad`?\n\n```ts\nlet edad = 20;\n```",
+    "opciones": ["any", "number", "20", "unknown"],
+    "correcta": 1,
+    "explicacion": "Con `let`, la variable puede cambiar, así que TypeScript infiere el tipo general `number`. Si fuera `const edad = 20`, el tipo sería el literal `20`, porque nunca cambiará. Nunca infiere `any` ni `unknown` a partir de un número."
+  },
+  {
+    "pregunta": "¿Cuál de estas líneas da error en modo estricto?",
+    "opciones": [
+      "`const fila: [string, number] = [\"Ana\", 17];`",
+      "`const notas: number[] = [];`",
+      "`let apodo: string | null = null;`",
+      "`let nombre: string = null;`"
+    ],
+    "correcta": 3,
+    "explicacion": "En modo estricto `null` no cabe en `string`: tienes que declararlo con `string | null`, como en la tercera opción. La tupla respeta el orden (string, number) y un array vacío puede ser `number[]`."
+  },
+  {
+    "pregunta": "```ts\nconst dato: unknown = JSON.parse(texto);\n```\n\n¿Qué puedes hacer con `dato`?",
+    "opciones": [
+      "Usar `dato.nombre` directamente",
+      "Usarlo después de comprobar su tipo, por ejemplo con `typeof dato === \"string\"`",
+      "Nada, `unknown` no se puede usar nunca",
+      "Lo mismo que con `any`"
+    ],
+    "correcta": 1,
+    "explicacion": "`unknown` obliga a comprobar antes de usar: dentro de un `if (typeof dato === \"string\")` TypeScript ya lo trata como string. Acceder a `dato.nombre` sin comprobar es error. Esa es la diferencia con `any`, que deja hacer cualquier cosa sin revisar."
+  },
+  {
+    "pregunta": "Escribes `const usuario: { edad: number } = await respuesta.json();` y la API manda `{ \"edad\": \"20\" }`. ¿Qué pasa?",
+    "opciones": [
+      "tsc lo detecta al compilar",
+      "TypeScript lanza un error en el navegador al recibir los datos",
+      "Nada lo detecta: los tipos se borran al compilar y `usuario.edad` será el texto \"20\"",
+      "TypeScript convierte \"20\" en 20 automáticamente"
+    ],
+    "correcta": 2,
+    "explicacion": "Los tipos solo existen al compilar; en el navegador corre JavaScript sin tipos. `tsc` no puede saber qué mandará la API, así que confía en tu anotación. TypeScript tampoco convierte valores. Para datos externos hay que validar con código."
+  },
+  {
+    "pregunta": "¿Qué es `[string, number]`?",
+    "opciones": [
+      "Un array que puede tener strings y numbers en cualquier orden y cantidad",
+      "Una tupla: un array de 2 elementos, el primero string y el segundo number",
+      "Un objeto con dos propiedades",
+      "Un error de sintaxis"
+    ],
+    "correcta": 1,
+    "explicacion": "Es una tupla: largo fijo y un tipo por posición. Un array con ambos tipos mezclados en cualquier orden sería `(string | number)[]`. `useState` devuelve una tupla parecida: `[valor, setValor]`."
+  }
+]
