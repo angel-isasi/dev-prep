@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { api } from "../lib/api.js";
 import { useEvento } from "../hooks/useEvento.js";
-import { nombreTema } from "../lib/etiquetas.js";
-import { Insignia } from "../components/Insignia.jsx";
 import { NumeroAnimado } from "../components/NumeroAnimado.jsx";
 import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
 import "../components/reactbits/DotGrid.css";
@@ -14,15 +12,13 @@ import { Esqueleto } from "../components/Esqueleto.jsx";
 import { useColorTema, usePorTema } from "../hooks/useColorTema.js";
 import { AnimatedGroup } from "../components/ui/animated-group.jsx";
 import { AuroraText } from "../components/ui/aurora-text.jsx";
-import { BorderBeam } from "../components/ui/border-beam.jsx";
-import { LiquidButton } from "../components/ui/liquid-button.jsx";
 import { MagicCard } from "../components/ui/magic-card.jsx";
 import { Particles } from "../components/ui/particles.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { AnimatedShinyText } from "../components/ui/animated-shiny-text.jsx";
-import { CardBody, CardContainer, CardItem } from "../components/ui/card-3d.jsx";
 import { ShineBorder } from "../components/ui/shine-border.jsx";
 import { GraficoSemana } from "../components/GraficoSemana.jsx";
+import { MazoHoy } from "../components/MazoHoy.jsx";
 import { Llama } from "../components/Llama.jsx";
 import { ejercicioAlAzar } from "../lib/areas.js";
 import DecryptedText from "../components/reactbits/DecryptedText.jsx";
@@ -83,9 +79,15 @@ export function Inicio() {
   if (!datos) return <Esqueleto variante="tarjetas" />;
 
   const { config, meta, ayer, racha, preparacion, ritmo, semana, totales, repasos, continuar, siguiente, frase } = datos;
-  const sugeridos = datos.sugeridos ?? [];
-  const ritmoInfo = RITMO[ritmo.estado];
   const proximo = continuar ?? siguiente;
+  const sugeridos = datos.sugeridos ?? [];
+  // El mazo de "Para hoy": primero los repasos, luego lo que dejaste a medias (o el siguiente) y las sugerencias.
+  const cartas = [
+    ...repasos.map((r) => ({ ...r, tipo: "repaso" })),
+    ...(proximo && !repasos.some((r) => r.id === proximo.id) ? [{ ...proximo, tipo: continuar ? "continuar" : "siguiente" }] : []),
+    ...sugeridos.map((s) => ({ ...s, tipo: "sugerido" })),
+  ];
+  const ritmoInfo = RITMO[ritmo.estado];
   const pctMeta = meta.objetivo ? Math.min(100, (meta.hecho / meta.objetivo) * 100) : 100;
 
   return (
@@ -270,81 +272,14 @@ export function Inicio() {
 
       <div className={estilos.columnas}>
         <div className={estilos.bloque}>
-          <h2>Para hoy</h2>
-          {proximo ? (
-            <CardContainer intensidad={28}>
-              <CardBody className={estilos.siguiente}>
-                <BorderBeam size={90} duration={7} />
-                <div className={estilos.siguienteTexto}>
-                  <CardItem as="span" translateZ={20} className={estilos.etiqueta}>
-                    {continuar ? "Continuar" : "Siguiente ejercicio"}
-                  </CardItem>
-                  <CardItem translateZ={45}>
-                    <Link to={`/practicar/${proximo.id}`} className={estilos.siguienteTitulo}>
-                      {proximo.titulo}
-                    </Link>
-                  </CardItem>
-                  <CardItem as="span" translateZ={30} className={estilos.detalle}>
-                    {nombreTema(proximo.tema)} · <Insignia nivel={proximo.nivel} />
-                  </CardItem>
-                </div>
-                <CardItem translateZ={60}>
-                  <LiquidButton onClick={() => navegar(`/practicar/${proximo.id}`)}>
-                    {continuar ? "Continuar" : "Empezar"} →
-                  </LiquidButton>
-                </CardItem>
-              </CardBody>
-            </CardContainer>
-          ) : (
-            <p className={estilos.vacio}>No quedan ejercicios pendientes. ¡Enorme!</p>
-          )}
-
-          {sugeridos.length > 0 && (
-            <>
-              <div className={estilos.subtitulo}>
-                <h3>También puedes</h3>
-                <button type="button" className={estilos.azar} onClick={unoAlAzar}>
-                  <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="4" />
-                    <circle cx="8.5" cy="8.5" r="1.2" fill="currentColor" />
-                    <circle cx="15.5" cy="15.5" r="1.2" fill="currentColor" />
-                    <circle cx="12" cy="12" r="1.2" fill="currentColor" />
-                  </svg>
-                  Uno al azar
-                </button>
-              </div>
-              <AnimatedGroup as="ul" asChild="li" preset="blur-slide" stagger={0.07} className={estilos.sugeridos}>
-                {sugeridos.map((s) => (
-                  <Link key={s.id} to={`/practicar/${s.id}`} className={estilos.sugerido}>
-                    <span className={estilos.sugeridoTexto}>
-                      <strong>{s.titulo}</strong>
-                      <span className={estilos.detalle}>{nombreTema(s.tema)}</span>
-                    </span>
-                    <Insignia nivel={s.nivel} />
-                    <span className={estilos.flecha} aria-hidden>
-                      →
-                    </span>
-                  </Link>
-                ))}
-              </AnimatedGroup>
-            </>
-          )}
-
-          <h3>Repasos de hoy {repasos.length > 0 && <span className={estilos.contador}>{repasos.length}</span>}</h3>
-          {repasos.length === 0 ? (
-            <p className={estilos.vacio}>Nada para repasar hoy.</p>
-          ) : (
-            <ul className={estilos.lista}>
-              {repasos.map((r) => (
-                <li key={r.id}>
-                  <Link to={`/practicar/${r.id}`}>
-                    {r.titulo}
-                    <span className={estilos.detalle}>{nombreTema(r.tema)}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
+          <h2>
+            Para hoy
+            <span className={estilos.cuenta}>
+              {cartas.length} {cartas.length === 1 ? "carta" : "cartas"}
+              {repasos.length > 0 && ` · ${repasos.length} de repaso`}
+            </span>
+          </h2>
+          <MazoHoy cartas={cartas} alAzar={unoAlAzar} />
         </div>
 
         <div className={estilos.bloque}>

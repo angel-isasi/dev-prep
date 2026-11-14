@@ -15,7 +15,7 @@
 
 .pagina {
   position: relative;
-  max-width: 1040px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
 }
@@ -165,7 +165,6 @@
   z-index: 1;
 }
 
-.numero,
 .numeroGrande {
   font-family: var(--fuente-titulos);
   font-size: 34px;
@@ -179,35 +178,9 @@
   color: var(--aviso);
 }
 
-.numero small {
-  margin-left: 2px;
-  color: var(--texto-tenue);
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0;
-}
-
 .detalle {
   color: var(--texto-suave);
   font-size: 14px;
-}
-
-.barra {
-  height: 5px;
-  border-radius: 999px;
-  background: var(--superficie-2);
-  overflow: hidden;
-}
-
-.barra > div {
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(90deg, var(--acento), color-mix(in srgb, var(--acento) 50%, var(--exito)));
-  transition: width 400ms ease;
-}
-
-.barra > div[data-ok="true"] {
-  background: var(--exito);
 }
 
 .chip {
@@ -271,75 +244,7 @@
   color: var(--texto);
 }
 
-.contador {
-  padding: 0 7px;
-  border-radius: 999px;
-  background: var(--error-suave);
-  color: var(--error);
-  font-size: 12px;
-}
-
 /* "Para hoy": tarjeta con el haz de luz (BorderBeam) recorriendo su borde */
-.siguiente {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espacio-4);
-  padding: var(--espacio-4);
-  border: 1px solid var(--borde-fuerte);
-  border-radius: var(--radio-grande);
-  background: radial-gradient(400px 120px at 0% 0%, var(--acento-suave), transparent 70%), var(--superficie);
-}
-
-.siguienteTexto {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espacio-1);
-  min-width: 0;
-}
-
-.siguienteTitulo {
-  color: var(--texto);
-  font-family: var(--fuente-titulos);
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-}
-
-.siguienteTitulo:hover {
-  color: var(--acento);
-}
-
-.vacio {
-  margin: 0;
-  color: var(--texto-tenue);
-  font-size: 14px;
-}
-
-.lista {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.lista a {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--espacio-3);
-  padding: var(--espacio-2) 0;
-  color: var(--texto);
-  font-size: 14px;
-}
-
-.lista li + li {
-  border-top: 1px solid var(--borde);
-}
-
-.lista a:hover {
-  color: var(--acento);
-}
-
 .semana {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -493,97 +398,30 @@
 }
 
 /* "También puedes": título a la izquierda, "Uno al azar" a la derecha */
-.subtitulo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: var(--espacio-5) 0 var(--espacio-2);
-}
-
-.subtitulo h3 {
-  margin: 0;
-}
-
-.azar {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  border: 1px solid var(--borde-fuerte);
-  border-radius: 999px;
-  background: none;
-  color: var(--texto-suave);
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color var(--transicion), border-color var(--transicion), background var(--transicion);
-}
-
-.azar:hover {
-  border-color: var(--acento);
-  background: var(--acento-suave);
-  color: var(--acento);
-}
-
-.azar:hover svg {
-  animation: dado 0.5s ease;
-}
-
 @keyframes dado {
   50% {
     transform: rotate(-20deg) scale(1.1);
   }
 }
 
-.sugeridos {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.sugeridos li + li {
-  border-top: 1px solid var(--borde);
-}
-
-.sugerido {
-  display: flex;
-  align-items: center;
-  gap: var(--espacio-3);
-  padding: 10px var(--espacio-2);
-  margin: 0 calc(var(--espacio-2) * -1);
-  border-radius: var(--radio);
-  color: var(--texto);
-  transition: background var(--transicion);
-}
-
-.sugerido:hover {
-  background: var(--superficie-2);
-}
-
-.sugeridoTexto {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.sugeridoTexto strong {
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.flecha {
-  color: var(--texto-tenue);
-  transition: transform var(--transicion), color var(--transicion);
-}
-
-.sugerido:hover .flecha {
-  color: var(--acento);
-  transform: translateX(3px);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .azar:hover svg {
     animation: none;
   }
+}
+
+/* "4 cartas · 1 de repaso" junto al título Para hoy */
+.bloque h2 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+.cuenta {
+  color: var(--texto-tenue);
+  font-family: var(--fuente-codigo);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
 }
