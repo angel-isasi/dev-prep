@@ -1,0 +1,5 @@
+[
+  "Las rutas ya están: lo que falta va **antes** de ellas. Piensa en una función que se ejecute para **todas** las peticiones (de cualquier ruta y método), haga su trabajo y luego **deje pasar** la petición hacia las rutas.",
+  "Usa `app.use((req, res, next) => { ... })` sin ruta para que aplique a todo. Dentro: `registro.push({ metodo: req.method, ruta: req.path })` y `res.set(\"X-Api-Version\", \"1\")`. Al final de cada middleware, llama a `next()`. Puedes hacer los dos trabajos en un solo middleware o en dos.",
+  "Esqueleto:\n\n```js\napp.use((req, res, next) => {\n  registro.push({ metodo: /* ... */, ruta: /* ... */ });\n  next();\n});\n\napp.use((req, res, next) => {\n  res.set(/* nombre del header */, /* valor */);\n  /* ¿qué falta aquí? */\n});\n\n// ...las rutas de siempre debajo\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Antes de las rutas, Express tiene que **aprender a leer JSON** del cuerpo; si no, `req.body` es `undefined`. Después piensa el `POST` en tres fases: leer los datos, validarlos (y cortar con 400 si algo falla) y recién entonces guardar y responder.",
+  "Activa `app.use(express.json())`. En el handler usa `const { nombre, email } = req.body ?? {}` para sobrevivir a una petición sin cuerpo. Valida con `typeof`, `trim()` e `includes(\"@\")`. Para responder usa `res.status(201).location(...).json(nuevo)`. Arma `nuevo` a mano con `id`, `nombre` y `email`, sin copiar todo `req.body`.",
+  "Esqueleto:\n\n```js\nlet siguienteId = 2;\napp.use(express.json());\n\napp.get(\"/usuarios\", (req, res) => res.json(usuarios));\n\napp.post(\"/usuarios\", (req, res) => {\n  const { nombre, email } = req.body ?? {};\n  if (/* nombre no es texto o queda vacío */) {\n    return res.status(400).json({ error: \"El nombre es obligatorio\" });\n  }\n  if (/* email no es texto o no tiene @ */) {\n    return /* ... */;\n  }\n  const nuevo = { id: siguienteId++, /* ... */ };\n  usuarios.push(nuevo);\n  res.status(201).location(/* ruta del nuevo */).json(nuevo);\n});\n```"
+]

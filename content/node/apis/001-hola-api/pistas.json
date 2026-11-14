@@ -1,0 +1,5 @@
+[
+  "Dentro de `crearApp` ya tienes `const app = express()`. Lo único que falta es **registrar rutas** en esa app antes del `return`: una para `GET /hola` y otra para `GET /estado`.",
+  "Para registrar un `GET` se usa `app.get(ruta, (req, res) => { ... })`. Dentro del handler, `res.json(objeto)` envía el objeto como JSON con código 200. No necesitas `JSON.stringify` ni poner el header a mano.",
+  "Esqueleto:\n\n```js\napp.get(\"/hola\", (req, res) => {\n  res.json(/* el objeto con mensaje */);\n});\n\napp.get(/* la otra ruta */, (req, res) => {\n  res.json(/* { ok, version } */);\n});\n```"
+]

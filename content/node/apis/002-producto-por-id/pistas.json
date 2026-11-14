@@ -1,0 +1,5 @@
+[
+  "Necesitas dos rutas. La segunda tiene un **hueco** en el camino para el id. ¿Cómo le dices a Express que esa parte de la URL es variable, y dónde te deja su valor?",
+  "Escribe la ruta como `\"/productos/:id\"` y lee el valor con `req.params.id`. Ese valor es **texto**: conviértelo con `Number(...)` antes de comparar con `===`. Busca con `PRODUCTOS.find(...)` y, si no hay producto, responde con `res.status(404).json(...)`.",
+  "Esqueleto:\n\n```js\napp.get(\"/productos\", (req, res) => {\n  res.json(/* ... */);\n});\n\napp.get(\"/productos/:id\", (req, res) => {\n  const id = /* convierte req.params.id */;\n  const producto = PRODUCTOS.find(/* ... */);\n  if (!producto) {\n    return res.status(/* código */).json({ error: /* mensaje */ });\n  }\n  res.json(producto);\n});\n```"
+]

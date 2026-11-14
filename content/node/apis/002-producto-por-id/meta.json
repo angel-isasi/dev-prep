@@ -1,0 +1,8 @@
+{
+  "id": "node-api-002",
+  "titulo": "Producto por id",
+  "tipo": "funcion",
+  "tema": "node-express",
+  "nivel": 1,
+  "tags": ["node", "express", "rutas", "parametros", "404"]
+}

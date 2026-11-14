@@ -1,0 +1,5 @@
+[
+  "Hay tres partes: **leer** `page` y `limit` con sus valores por defecto, **validar** que sean enteros positivos (y recortar el límite) y **calcular**: desde qué posición cortar, cuántas páginas hay y qué artículos tocan.",
+  "Para el valor por defecto sirve `req.query.page || 1` antes de convertir con `Number`. Valida con `Number.isInteger(n) && n >= 1`. El tope es `Math.min(limite, 50)`. El número de páginas es `Math.ceil(total / limite)` y los datos salen de `ARTICULOS.slice(inicio, inicio + limite)`, con `inicio = (pagina - 1) * limite`.",
+  "Esqueleto:\n\n```js\napp.get(\"/articulos\", (req, res) => {\n  const pagina = Number(req.query.page || 1);\n  const limitePedido = Number(/* limit o 10 */);\n  if (/* alguno no es entero >= 1 */) {\n    return res.status(400).json({ error: \"page y limit deben ser enteros positivos\" });\n  }\n  const limite = /* tope de 50 */;\n  const total = ARTICULOS.length;\n  const paginas = /* redondeo hacia arriba */;\n  const inicio = /* ... */;\n  const datos = ARTICULOS.slice(/* ... */);\n  res.json({ datos, pagina, limite, total, paginas });\n});\n```"
+]

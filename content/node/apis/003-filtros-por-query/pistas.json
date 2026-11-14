@@ -1,0 +1,5 @@
+[
+  "Los filtros llegan en `req.query` como **texto**. Piensa en dos fases: primero **validar** (si `max` vino y no es número, respondes 400 y terminas) y después **filtrar** la lista, aplicando cada filtro solo si vino.",
+  "Convierte con `Number(max)` y revisa con `Number.isNaN(...)`. Para filtrar, empieza con `let resultado = PRODUCTOS` y ve reemplazándolo con `resultado.filter(...)` por cada filtro presente. Un `if (max)` deja fuera `undefined` y `\"\"` a la vez.",
+  "Esqueleto:\n\n```js\nconst { categoria, max } = req.query;\n\nlet precioMaximo = null;\nif (max) {\n  precioMaximo = /* convierte */;\n  if (/* no es número */) {\n    return res.status(400).json({ error: \"max debe ser un número\" });\n  }\n}\n\nlet resultado = PRODUCTOS;\nif (categoria) resultado = resultado.filter(/* ... */);\nif (precioMaximo !== null) resultado = resultado.filter(/* ... */);\nres.json(resultado);\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "node-api-007",
+  "titulo": "Manejo de errores",
+  "tipo": "funcion",
+  "tema": "node-middlewares",
+  "nivel": 2,
+  "tags": ["node", "express", "errores", "middleware", "async", "500"]
+}
