@@ -5,6 +5,13 @@
   isolation: isolate;
 }
 
+/* Cuadrícula animada: visible arriba y se desvanece hacia abajo y a los lados */
+.cuadricula {
+  z-index: -1;
+  height: 520px !important;
+  mask-image: radial-gradient(700px 360px at 50% 0%, #000 20%, transparent 75%);
+}
+
 .particulas {
   position: absolute;
   inset: 0;
@@ -38,7 +45,7 @@
 }
 
 .cabecera h1 {
-  font-size: 32px;
+  font-size: 42px;
   letter-spacing: -0.03em;
 }
 
@@ -86,6 +93,10 @@
 }
 
 .aviso {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
   margin: 0 0 var(--espacio-5);
   padding: var(--espacio-3) var(--espacio-4);
   border-radius: var(--radio);
@@ -199,6 +210,9 @@
 }
 
 .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   align-self: flex-start;
   padding: 1px 9px;
   border-radius: 999px;
@@ -370,4 +384,56 @@
   flex-direction: column;
   gap: var(--espacio-1);
   min-width: 0;
+}
+
+/* Punto rojo que late en el aviso de deuda */
+.alerta {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--error);
+  animation: latido-rojo 1.4s ease-out infinite;
+}
+
+@keyframes latido-rojo {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--error) 70%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 9px transparent;
+  }
+}
+
+/* Punto que late en "Vas atrasado" */
+.ping {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.ping::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: currentColor;
+  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alerta,
+  .ping::after {
+    animation: none;
+  }
 }

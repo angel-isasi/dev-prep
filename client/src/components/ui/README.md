@@ -14,6 +14,11 @@ porque así funcionan offline y se pueden ajustar: es lo que recomiendan las pro
 | `animated-group.jsx` | Motion Primitives | motion-primitives.com/docs/animated-group |
 | `sliding-number.jsx` | Animate UI | animate-ui.com/docs/primitives/texts/sliding-number |
 | `liquid-button.jsx` | RareUI | github.com/Codewithswappy/RareUI |
+| `animated-grid-pattern.jsx` | Magic UI | magicui.design/docs/components/animated-grid-pattern |
+| `shine-border.jsx` | Magic UI | magicui.design/docs/components/shine-border |
+| `animated-shiny-text.jsx` | Magic UI | magicui.design/docs/components/animated-shiny-text |
+| `meteors.jsx` | Magic UI | magicui.design/docs/components/meteors |
+| `card-3d.jsx` | Aceternity UI | ui.aceternity.com/components/3d-card-effect |
 
 Cambios frente al original, en todos:
 - De TypeScript a JavaScript (sin tipos), con comentarios en español.

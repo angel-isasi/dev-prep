@@ -17,6 +17,12 @@ import { Particles } from "../components/ui/particles.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { Spotlight } from "../components/ui/spotlight.jsx";
 import { TextEffect } from "../components/ui/text-effect.jsx";
+import { AnimatedGridPattern } from "../components/ui/animated-grid-pattern.jsx";
+import { AnimatedShinyText } from "../components/ui/animated-shiny-text.jsx";
+import { CardBody, CardContainer, CardItem } from "../components/ui/card-3d.jsx";
+import { Meteors } from "../components/ui/meteors.jsx";
+import { ShineBorder } from "../components/ui/shine-border.jsx";
+import { GraficoSemana } from "../components/GraficoSemana.jsx";
 import estilos from "./Inicio.module.css";
 
 const RITMO = {
@@ -57,6 +63,7 @@ export function Inicio() {
   return (
     <div className={estilos.escena}>
       {/* Fondo de Inicio: foco de luz (Aceternity) y partículas que siguen al mouse (Magic UI) */}
+      <AnimatedGridPattern className={estilos.cuadricula} numSquares={28} maxOpacity={0.35} duration={3.5} />
       <Spotlight />
       <Particles className={estilos.particulas} quantity={45} color={colorAcento} staticity={40} />
 
@@ -84,16 +91,19 @@ export function Inicio() {
         </blockquote>
       ) : (
         <Link to="/ajustes" className={estilos.objetivoVacio}>
-          Escribe tu objetivo personal en Ajustes: tenerlo a la vista ayuda más de lo que crees →
+          <AnimatedShinyText>Escribe tu objetivo personal en Ajustes: tenerlo a la vista ayuda más de lo que crees →</AnimatedShinyText>
         </Link>
       )}
 
       {meta.cumplio ? (
         <p className={estilos.aviso} data-tipo="exito">
+          <ShineBorder shineColor={["var(--exito)", "var(--acento)"]} duration={10} />
           Meta de hoy cumplida. Si te quedan ganas, un repaso más nunca sobra.
         </p>
       ) : ayer && !ayer.cumplio ? (
         <p className={estilos.aviso} data-tipo="error">
+          <ShineBorder shineColor={["var(--error)", "var(--aviso)"]} duration={8} borderWidth={1.5} />
+          <span className={estilos.alerta} aria-hidden />
           Ayer no cumpliste tu meta ({ayer.hecho} de {config.metaDiaria}). Hoy te toca {meta.objetivo}
           {meta.deuda > 0 && `, incluida una deuda de ${meta.deuda}`}.
         </p>
@@ -154,6 +164,7 @@ export function Inicio() {
         </MagicCard>
 
         <MagicCard className={estilos.tarjeta}>
+          <Meteors number={7} />
           <div className={estilos.contenido}>
           <span className={estilos.etiqueta}>Fecha meta</span>
           <strong className={estilos.numero}>
@@ -161,6 +172,7 @@ export function Inicio() {
             <small> días</small>
           </strong>
           <span className={estilos.chip} data-tipo={ritmoInfo.tipo}>
+            {ritmoInfo.tipo === "error" && <span className={estilos.ping} aria-hidden />}
             {ritmoInfo.texto}
           </span>
           <span className={estilos.detalle}>
@@ -174,21 +186,29 @@ export function Inicio() {
         <div className={estilos.bloque}>
           <h2>Para hoy</h2>
           {proximo ? (
-            <div className={estilos.siguiente}>
-              <BorderBeam size={90} duration={7} />
-              <div className={estilos.siguienteTexto}>
-                <span className={estilos.etiqueta}>{continuar ? "Continuar" : "Siguiente ejercicio"}</span>
-                <Link to={`/practicar/${proximo.id}`} className={estilos.siguienteTitulo}>
-                  {proximo.titulo}
-                </Link>
-                <span className={estilos.detalle}>
-                  {nombreTema(proximo.tema)} · <Insignia nivel={proximo.nivel} />
-                </span>
-              </div>
-              <LiquidButton onClick={() => navegar(`/practicar/${proximo.id}`)}>
-                {continuar ? "Continuar" : "Empezar"} →
-              </LiquidButton>
-            </div>
+            <CardContainer intensidad={28}>
+              <CardBody className={estilos.siguiente}>
+                <BorderBeam size={90} duration={7} />
+                <div className={estilos.siguienteTexto}>
+                  <CardItem as="span" translateZ={20} className={estilos.etiqueta}>
+                    {continuar ? "Continuar" : "Siguiente ejercicio"}
+                  </CardItem>
+                  <CardItem translateZ={45}>
+                    <Link to={`/practicar/${proximo.id}`} className={estilos.siguienteTitulo}>
+                      {proximo.titulo}
+                    </Link>
+                  </CardItem>
+                  <CardItem as="span" translateZ={30} className={estilos.detalle}>
+                    {nombreTema(proximo.tema)} · <Insignia nivel={proximo.nivel} />
+                  </CardItem>
+                </div>
+                <CardItem translateZ={60}>
+                  <LiquidButton onClick={() => navegar(`/practicar/${proximo.id}`)}>
+                    {continuar ? "Continuar" : "Empezar"} →
+                  </LiquidButton>
+                </CardItem>
+              </CardBody>
+            </CardContainer>
           ) : (
             <p className={estilos.vacio}>No quedan ejercicios pendientes. ¡Enorme!</p>
           )}
@@ -212,6 +232,7 @@ export function Inicio() {
 
         <div className={estilos.bloque}>
           <h2>Esta semana</h2>
+          {semana.dias && <GraficoSemana dias={semana.dias} meta={config.metaDiaria} hoy={datos.hoy} />}
           <dl className={estilos.semana}>
             <div>
               <dt>Resueltos</dt>

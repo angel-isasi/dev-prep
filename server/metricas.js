@@ -149,12 +149,19 @@ export function semana(dias, hoy, preparacionHoy) {
     .sort();
   const antes = anteriores.length ? dias[anteriores.at(-1)].preparacion : 0;
 
+  // Los 7 días de lunes a domingo, para el gráfico de barras de Inicio (los que aún no llegan, futuro: true).
+  const porDia = Array.from({ length: 7 }, (_, i) => {
+    const fecha = sumarDias(lunes, i);
+    return { fecha, hecho: hechoDe(dias[fecha]), minutos: Math.round((dias[fecha]?.segundos ?? 0) / 60), futuro: fecha > hoy };
+  });
+
   return {
     desde: lunes,
     resueltos,
     repasos,
     minutos: Math.round(segundos / 60),
     subioPreparacion: Math.round((preparacionHoy - antes) * 10) / 10,
+    dias: porDia,
   };
 }
 

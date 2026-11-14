@@ -98,6 +98,15 @@ describe("semana y calendario", () => {
       repasos: 1,
       minutos: 10,
       subioPreparacion: 5.5,
+      dias: [
+        { fecha: "2026-11-09", hecho: 2, minutos: 10, futuro: false },
+        { fecha: "2026-11-10", hecho: 0, minutos: 0, futuro: false },
+        { fecha: "2026-11-11", hecho: 0, minutos: 0, futuro: false },
+        { fecha: "2026-11-12", hecho: 0, minutos: 0, futuro: false },
+        { fecha: "2026-11-13", hecho: 2, minutos: 0, futuro: false },
+        { fecha: "2026-11-14", hecho: 0, minutos: 0, futuro: true },
+        { fecha: "2026-11-15", hecho: 0, minutos: 0, futuro: true },
+      ],
     });
   });
 

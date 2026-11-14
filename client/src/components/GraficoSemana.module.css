@@ -1,0 +1,115 @@
+.grafico {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  margin-bottom: var(--espacio-5);
+}
+
+.zona {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--espacio-2);
+  height: 96px;
+  align-items: end;
+}
+
+/* Cada columna es un "riel" tenue a toda altura; la barra crece dentro */
+.columna {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  justify-self: center;
+  width: 100%;
+  max-width: 28px;
+  height: 100%;
+  border-radius: 6px 6px 3px 3px;
+  background: linear-gradient(180deg, transparent, var(--superficie-2));
+}
+
+.barra {
+  width: 100%;
+  border-radius: 6px 6px 3px 3px;
+  background: linear-gradient(180deg, var(--borde-fuerte), var(--superficie-2));
+}
+
+.barra[data-cumplio="true"] {
+  background: linear-gradient(180deg, var(--exito), color-mix(in srgb, var(--exito) 35%, transparent));
+  box-shadow: 0 0 18px color-mix(in srgb, var(--exito) 35%, transparent);
+}
+
+.barra[data-hoy="true"] {
+  background: linear-gradient(180deg, var(--acento), color-mix(in srgb, var(--acento) 30%, transparent));
+  box-shadow: 0 0 18px var(--acento-suave);
+}
+
+/* Días que aún no llegan: solo el contorno, a toda altura */
+.barra[data-futuro="true"] {
+  background: none;
+  border: 1px dashed var(--borde-fuerte);
+  border-radius: inherit;
+  box-shadow: none;
+}
+
+/* Hoy, sin nada hecho: un punto que late para que se note qué día falta */
+.punto {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: var(--acento);
+  animation: latido 1.6s ease-out infinite;
+}
+
+@keyframes latido {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--acento) 60%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+
+.meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  border-top: 1px dashed color-mix(in srgb, var(--aviso) 60%, transparent);
+  pointer-events: none;
+}
+
+.meta span {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  color: var(--aviso);
+  font-family: var(--fuente-codigo);
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+.letras {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--espacio-2);
+  color: var(--texto-tenue);
+  font-family: var(--fuente-codigo);
+  font-size: 11px;
+  text-align: center;
+}
+
+.letras span[data-hoy="true"] {
+  color: var(--acento);
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .punto {
+    animation: none;
+  }
+}
