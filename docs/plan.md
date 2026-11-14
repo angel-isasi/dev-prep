@@ -36,6 +36,8 @@ Meta: seguir el stack que piden las ofertas junior (React, TypeScript, Node, SQL
 
 Costo estimado: unos 10 KB por ejercicio con su explicación completa. El contenido se reparte entre subagentes en paralelo, cada uno valida lo suyo con `npm run validar`.
 
+**Hecho el 2026-11-14:** 30 retos de algoritmos (031 a 060), 30 ejercicios de TypeScript (20 de práctica y 10 retos, 4 de ellos componentes .tsx), 30 de Node (10 fundamentos, 10 APIs con Express, 10 de SQL), 8 temas de TypeScript y 9 de Node y SQL en Aprender, y 30 preguntas de entrevista (TypeScript, Node y SQL, nube y DevOps). Total validado: 347 ejercicios y 35 temas. Guía para crear más: `docs/guia-contenido-ts-node.md`.
+
 ## Contexto
 
 Angel quiere un "LeetCode personal" offline en Windows para llegar a su primer trabajo frontend junior en 2027: programa en VS Code, los tests corren solos al guardar y la app muestra el resultado en vivo, con progreso y presión diaria. El repo `D:\angel-isasi-dev\dev-prep` empezó solo con la especificación del proyecto (sin Git).

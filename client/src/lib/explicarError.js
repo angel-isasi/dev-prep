@@ -2,6 +2,11 @@
 // Devuelve null si no reconoce el error.
 
 const REGLAS = [
+  // Va antes que la de sintaxis: también dice "Unexpected token", pero el problema no es tu archivo.
+  {
+    patron: /Unexpected token '<'.*is not valid JSON|"<!DOCTYPE.*is not valid JSON/i,
+    pista: "La respuesta de tu API no es JSON sino una página HTML. Casi siempre es porque la ruta no existe (Express responde su página de error 404): revisa el método (`get`, `post`...) y la ruta exacta. También pasa si respondes con `res.send` un texto en vez de `res.json`.",
+  },
   {
     patron: /Failed to parse source|SyntaxError|Unexpected token|Unterminated|Expected .* but found/i,
     pista: "Tu archivo tiene un error de sintaxis y no se pudo leer. Revisa llaves `{}`, paréntesis `()` y comillas cerca de la línea que indica el mensaje.",

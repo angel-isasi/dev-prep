@@ -13,6 +13,9 @@ const TSC = path.join(RAIZ, "node_modules", "typescript", "bin", "tsc");
 
 // Las mismas opciones que workspace/tsconfig.json (lo que ves en VS Code).
 const OPCIONES = [
+  // workspace/tsconfig.json (para VS Code) tiene estas mismas reglas; sin esta opción,
+  // TypeScript 7 se niega a revisar archivos sueltos si encuentra un tsconfig.
+  "--ignoreConfig",
   "--noEmit",
   "--strict",
   "--target", "es2022",
