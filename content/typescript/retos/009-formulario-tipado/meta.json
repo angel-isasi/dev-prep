@@ -1,0 +1,8 @@
+{
+  "id": "ts-reto-009",
+  "titulo": "Formulario de registro tipado",
+  "tipo": "componente-ts",
+  "tema": "ts-react",
+  "nivel": 2,
+  "tags": ["typescript", "react", "formularios", "useState", "eventos", "validacion"]
+}

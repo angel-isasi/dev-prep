@@ -1,0 +1,8 @@
+{
+  "id": "ts-reto-008",
+  "titulo": "Lista genérica",
+  "tipo": "componente-ts",
+  "tema": "ts-react",
+  "nivel": 2,
+  "tags": ["typescript", "react", "genericos", "render-props", "listas", "key"]
+}

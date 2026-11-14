@@ -1,0 +1,8 @@
+{
+  "id": "ts-reto-005",
+  "titulo": "Store con suscriptores",
+  "tipo": "funcion-ts",
+  "tema": "ts-genericos",
+  "nivel": 3,
+  "tags": ["typescript", "genericos", "partial", "closures", "inmutabilidad", "patron-observer"]
+}

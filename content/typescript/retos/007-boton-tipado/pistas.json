@@ -1,0 +1,5 @@
+[
+  "Empieza por los tipos, no por el JSX. ¿Qué valores puede tener `variante`? Si son solo tres textos concretos, `string` es demasiado amplio. ¿Y cuáles de las cuatro props son obligatorias y cuáles opcionales?",
+  "Una **unión de literales** se escribe `\"a\" | \"b\" | \"c\"`. Las props opcionales llevan `?` (`variante?: Variante`). Para `children` usa `ReactNode`, que acepta texto, elementos y listas. En la función, desestructura con valores por defecto: `{ variante = \"primario\", ... }: BotonProps`. Arma la clase con un template literal.",
+  "Esqueleto:\n\n```tsx\nexport type Variante = /* las 3 opciones con | */;\n\nexport type BotonProps = {\n  variante?: Variante;\n  children: /* tipo de React */;\n  onClick?: /* función sin parámetros */;\n  deshabilitado?: boolean;\n};\n\nexport function Boton({ variante = \"primario\", children, onClick, deshabilitado = false }: BotonProps) {\n  return (\n    <button type=\"button\" className={/* \"boton boton--\" + variante */} onClick={onClick} disabled={/* ? */}>\n      {children}\n    </button>\n  );\n}\n```"
+]

@@ -1,0 +1,63 @@
+[
+  {
+    "pregunta": "```tsx\ntype Props = { nombre: string; edad: number };\nfunction Perfil({ nombre, edad }: Props) {\n  return <p>{nombre} ({edad})</p>;\n}\n\n<Perfil nombre=\"Ana\" />\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Se ve \"Ana (undefined)\"",
+      "Error de tsc: falta la prop `edad`",
+      "Se ve \"Ana ()\"",
+      "Error solo en la consola del navegador"
+    ],
+    "correcta": 1,
+    "explicacion": "`edad` es obligatoria en `Props`, así que tsc marca el error en el lugar donde usas el componente, antes de ejecutar. Sin TypeScript se vería \"Ana ()\" porque React no pinta undefined. Para hacerla opcional: `edad?: number`."
+  },
+  {
+    "pregunta": "¿Qué tipo es el más adecuado para `children` en un componente `Caja` que puede recibir texto, JSX o nada?",
+    "opciones": ["`React.JSX.Element`", "`string`", "`React.ReactNode`", "`HTMLElement`"],
+    "correcta": 2,
+    "explicacion": "`ReactNode` acepta todo lo que React puede pintar: elementos JSX, textos, números, null, undefined y arrays. `React.JSX.Element` solo acepta un elemento JSX (no un texto suelto), `string` no acepta JSX y `HTMLElement` es un nodo del DOM, no algo que React renderice como hijo."
+  },
+  {
+    "pregunta": "```tsx\nconst [tareas, setTareas] = useState([]);\nsetTareas([\"Estudiar\"]);\n```\n\n¿Qué pasa?",
+    "opciones": [
+      "Funciona: tareas queda como string[]",
+      "Error: TypeScript infirió `never[]` y no deja agregar strings",
+      "Error: useState no acepta arrays",
+      "Funciona, pero tareas es any[]"
+    ],
+    "correcta": 1,
+    "explicacion": "Con un array vacío y sin tipo explícito, TypeScript infiere `never[]` (un array donde no cabe nada). Por eso hay que escribir `useState<string[]>([])`. TypeScript no adivina el tipo por cómo usarás el setter después."
+  },
+  {
+    "pregunta": "¿Cuál es el tipo correcto del parámetro de este manejador?\n\n```tsx\nfunction alCambiar(e: ???) {\n  setTexto(e.target.value);\n}\n<input onChange={alCambiar} />\n```",
+    "opciones": [
+      "`Event`",
+      "`MouseEvent<HTMLInputElement>`",
+      "`ChangeEvent<HTMLInputElement>`",
+      "`FormEvent<HTMLFormElement>`"
+    ],
+    "correcta": 2,
+    "explicacion": "`onChange` de un input recibe un `ChangeEvent<HTMLInputElement>`, y con eso `e.target.value` es un string. `Event` es el evento nativo del DOM (no el de React), `MouseEvent` es para clics y `FormEvent<HTMLFormElement>` es para el submit de un formulario."
+  },
+  {
+    "pregunta": "```tsx\nconst inputRef = useRef<HTMLInputElement>(null);\nfunction enfocar() {\n  inputRef.current.focus();\n}\n```\n\n¿Qué dice tsc?",
+    "opciones": [
+      "Nada, compila",
+      "Error: \"inputRef.current\" es posiblemente \"null\"",
+      "Error: useRef no acepta tipos",
+      "Error: focus no existe en HTMLInputElement"
+    ],
+    "correcta": 1,
+    "explicacion": "La ref empieza en `null` y solo apunta al input cuando el componente se monta, así que `current` es `HTMLInputElement | null`. Hay que protegerla: `inputRef.current?.focus()`. `focus` sí existe en un input."
+  },
+  {
+    "pregunta": "```tsx\nfunction useContador() {\n  const [n, setN] = useState(0);\n  const sumar = () => setN((x) => x + 1);\n  return [n, sumar];\n}\nconst [valor, incrementar] = useContador();\n```\n\n¿Qué tipo tiene `valor`?",
+    "opciones": [
+      "`number`",
+      "`number | (() => void)`",
+      "`[number, () => void]`",
+      "`any`"
+    ],
+    "correcta": 1,
+    "explicacion": "Sin `as const`, TypeScript infiere el retorno como un array común `(number | (() => void))[]`, así que cada posición puede ser cualquiera de los dos tipos. Con `return [n, sumar] as const;` se vuelve una tupla y `valor` sería `number`."
+  }
+]

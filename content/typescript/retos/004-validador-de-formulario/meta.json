@@ -1,0 +1,8 @@
+{
+  "id": "ts-reto-004",
+  "titulo": "Validador de formulario",
+  "tipo": "funcion-ts",
+  "tema": "ts-genericos",
+  "nivel": 3,
+  "tags": ["typescript", "genericos", "tipos-mapeados", "keyof", "utility-types", "formularios"]
+}

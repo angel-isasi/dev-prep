@@ -1,0 +1,8 @@
+{
+  "id": "ts-reto-003",
+  "titulo": "Máquina de estados de un pedido",
+  "tipo": "funcion-ts",
+  "tema": "ts-uniones",
+  "nivel": 2,
+  "tags": ["typescript", "uniones-discriminadas", "narrowing", "never", "maquina-de-estados"]
+}

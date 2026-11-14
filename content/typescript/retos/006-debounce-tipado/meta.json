@@ -1,0 +1,8 @@
+{
+  "id": "ts-reto-006",
+  "titulo": "debounce tipado",
+  "tipo": "funcion-ts",
+  "tema": "ts-funciones",
+  "nivel": 2,
+  "tags": ["typescript", "genericos", "parameters", "closures", "setTimeout", "debounce"]
+}

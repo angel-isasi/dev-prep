@@ -1,0 +1,8 @@
+{
+  "id": "ts-react-con-typescript",
+  "titulo": "React con TypeScript",
+  "area": "typescript",
+  "orden": 8,
+  "descripcion": "Tipar props, children, eventos, useState, useRef, componentes genéricos y hooks propios para que el editor te avise antes de romper la interfaz.",
+  "ejercicios": ["ts-reto-007", "ts-reto-008", "ts-reto-009", "ts-reto-010"]
+}

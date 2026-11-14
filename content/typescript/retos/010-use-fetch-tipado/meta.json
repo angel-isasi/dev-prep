@@ -1,0 +1,8 @@
+{
+  "id": "ts-reto-010",
+  "titulo": "Hook useFetch tipado",
+  "tipo": "componente-ts",
+  "tema": "ts-react",
+  "nivel": 3,
+  "tags": ["typescript", "react", "hooks-personalizados", "genericos", "uniones-discriminadas", "fetch"]
+}

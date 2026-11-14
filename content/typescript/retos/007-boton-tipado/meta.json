@@ -1,0 +1,8 @@
+{
+  "id": "ts-reto-007",
+  "titulo": "Botón con props tipadas",
+  "tipo": "componente-ts",
+  "tema": "ts-react",
+  "nivel": 1,
+  "tags": ["typescript", "react", "props", "union-de-literales", "children"]
+}

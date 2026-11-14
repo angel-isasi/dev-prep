@@ -1,0 +1,8 @@
+{
+  "id": "ts-reto-001",
+  "titulo": "Cliente de API tipado",
+  "tipo": "funcion-ts",
+  "tema": "ts-funciones",
+  "nivel": 2,
+  "tags": ["typescript", "unknown", "type-guard", "fetch", "async-await", "validacion"]
+}
