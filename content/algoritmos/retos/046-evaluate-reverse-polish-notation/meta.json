@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-046",
+  "titulo": "Evaluate Reverse Polish Notation",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["pila", "strings", "matematica", "leetcode"]
+}

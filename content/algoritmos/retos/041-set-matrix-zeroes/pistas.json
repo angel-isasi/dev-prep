@@ -1,0 +1,5 @@
+[
+  "Si pones ceros **mientras recorres**, después no sabrás si un cero estaba desde el principio o lo pusiste tú, y terminarás borrando filas de más. ¿Qué pasaría si primero solo **miraras** la matriz y anotaras algo, y recién después la modificaras?",
+  "Haz dos pasadas. En la primera, guarda en un `Set` los números de fila que tienen algún cero y en otro `Set` los números de columna. En la segunda, recorre todas las celdas y pon `0` en las que tengan su fila **o** su columna en esos `Set` (`has`). Al final devuelve la misma `matriz`.",
+  "Esqueleto:\n\n```js\nconst filasConCero = new Set();\nconst columnasConCero = new Set();\nfor (let f = 0; f < matriz.length; f++) {\n  for (let c = 0; c < matriz[f].length; c++) {\n    if (/* la celda es cero */) {\n      // anota la fila y la columna\n    }\n  }\n}\nfor (let f = 0; f < matriz.length; f++) {\n  for (let c = 0; c < matriz[f].length; c++) {\n    if (/* su fila o su columna están anotadas */) matriz[f][c] = 0;\n  }\n}\nreturn matriz;\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "Arma la permutación **lugar por lugar**. Para el primer lugar puedes poner cualquiera de los números; para el segundo, cualquiera **menos el que ya pusiste**; y así hasta llenar todos. ¿Cómo recorrerías todas esas elecciones, y cómo sabrías qué números ya usaste?",
+  "Usa **backtracking** con un arreglo `camino` y un arreglo `usado` de `true`/`false` (uno por posición de `nums`). En cada llamada, recorre todos los índices con un `for`; si `nums[i]` no está usado: márcalo y agrégalo (elegir), llama a la función (explorar), y luego quítalo y desmárcalo (deshacer). Cuando `camino` tiene todos los números, guarda una **copia**.",
+  "Esqueleto:\n\n```js\nconst resultado = [];\nconst camino = [];\nconst usado = new Array(nums.length).fill(false);\nfunction explorar() {\n  if (camino.length === nums.length) {\n    resultado.push([...camino]);\n    return;\n  }\n  for (let i = 0; i < nums.length; i++) {\n    if (/* ya lo usé */) continue;\n    // elegir: marcar y agregar\n    explorar();\n    // deshacer: quitar y desmarcar\n  }\n}\nexplorar();\nreturn resultado;\n```"
+]

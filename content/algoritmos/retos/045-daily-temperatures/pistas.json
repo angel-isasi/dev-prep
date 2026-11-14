@@ -1,0 +1,5 @@
+[
+  "Dale la vuelta: en vez de que cada día busque hacia adelante a alguien más cálido, deja que cada día nuevo **responda** a los días anteriores que todavía estaban esperando. Cuando llega un día caluroso, ¿a qué días anteriores les acaba de dar su respuesta?",
+  "Usa una **pila** con los **índices** de los días que aún esperan. Para cada día `i`: mientras la pila no esté vacía y `temperaturas[i]` sea **mayor** que la temperatura del índice de arriba, saca ese índice (`pop`) y su respuesta es `i - indice`. Después mete `i` en la pila. Los que nunca salen se quedan con 0, así que empieza con `new Array(n).fill(0)`.",
+  "Esqueleto:\n\n```js\nconst respuesta = new Array(temperaturas.length).fill(0);\nconst pila = []; // índices\nfor (let i = 0; i < temperaturas.length; i++) {\n  while (pila.length > 0 && /* hoy es más cálido que el de arriba */) {\n    const dia = pila.pop();\n    respuesta[dia] = /* cuántos días esperó */;\n  }\n  pila.push(i);\n}\nreturn respuesta;\n```"
+]

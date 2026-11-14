@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-043",
+  "titulo": "Insert Interval",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "intervalos", "una-pasada", "leetcode"]
+}

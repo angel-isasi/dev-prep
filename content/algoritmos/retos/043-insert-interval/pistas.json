@@ -1,0 +1,5 @@
+[
+  "Como la lista ya está ordenada, cada intervalo cae en uno de **tres grupos** respecto a `nuevo`: los que terminan antes de que `nuevo` empiece, los que se superponen con `nuevo`, y los que empiezan después de que `nuevo` termina. Y aparecen justo en ese orden. ¿Qué harías con cada grupo?",
+  "Recorre con un índice `i` y tres `while` seguidos. 1) Mientras `intervalos[i][1] < inicio`, cópialo al resultado. 2) Mientras `intervalos[i][0] <= fin`, se superpone: estira `inicio` con `Math.min` y `fin` con `Math.max`. Al salir, agrega `[inicio, fin]`. 3) Copia el resto. Guarda `inicio` y `fin` en variables con `let [inicio, fin] = nuevo` para no tocar `nuevo`.",
+  "Esqueleto:\n\n```js\nconst resultado = [];\nlet [inicio, fin] = nuevo;\nlet i = 0;\nwhile (i < intervalos.length && /* termina antes de que empiece el nuevo */) {\n  resultado.push([...intervalos[i]]);\n  i++;\n}\nwhile (i < intervalos.length && /* empieza antes o justo cuando termina el nuevo */) {\n  inicio = /* el menor inicio */;\n  fin = /* el mayor fin */;\n  i++;\n}\nresultado.push([inicio, fin]);\n// copia los que quedan\nreturn resultado;\n```"
+]

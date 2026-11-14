@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-044",
+  "titulo": "Non-overlapping Intervals",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "intervalos", "greedy", "ordenamiento", "leetcode"]
+}

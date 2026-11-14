@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-042",
+  "titulo": "Sort Colors",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "dos-punteros", "in-place", "ordenamiento", "leetcode"]
+}

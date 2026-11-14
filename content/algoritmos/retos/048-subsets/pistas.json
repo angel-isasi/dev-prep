@@ -1,0 +1,5 @@
+[
+  "Para armar un subconjunto, recorre los elementos uno por uno y, para cada uno, decide: **¿entra o no entra?** Con `[1, 2]` hay 2 × 2 = 4 formas de decidir, y cada forma es un subconjunto distinto. ¿Cómo recorrerías todas esas decisiones?",
+  "Usa **backtracking** con una función `explorar(i)` que decida sobre `nums[i]`. Primero la opción \"entra\": `push`, llamada con `i + 1` y `pop` (elegir, explorar, deshacer). Luego la opción \"no entra\": solo la llamada con `i + 1`. Cuando `i === nums.length` ya decidiste todo: guarda una **copia** del subconjunto con `[...camino]`.",
+  "Esqueleto:\n\n```js\nconst resultado = [];\nconst camino = [];\nfunction explorar(i) {\n  if (i === nums.length) {\n    resultado.push(/* una copia de camino */);\n    return;\n  }\n  // tomar nums[i]: elegir, explorar, deshacer\n\n  // no tomarlo: solo explorar\n}\nexplorar(0);\nreturn resultado;\n```"
+]

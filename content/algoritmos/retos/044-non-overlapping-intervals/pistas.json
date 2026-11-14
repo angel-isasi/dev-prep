@@ -1,0 +1,5 @@
+[
+  "Dale la vuelta a la pregunta: quitar la **menor** cantidad es lo mismo que **conservar la mayor** cantidad de intervalos que no choquen. Si tuvieras que elegir reuniones para una sola sala, ¿cuál elegirías primero para dejar el mayor espacio libre a las demás: la que empieza antes o la que **termina antes**?",
+  "Ordena una copia por **fin** con `sort((a, b) => a[1] - b[1])`. Recorre guardando `finUltimo`, el fin del último intervalo que conservaste (empieza en `-Infinity`). Si el inicio del actual es `>=` que `finUltimo`, no choca: lo conservas y actualizas `finUltimo`. Si no, lo cuentas como quitado.",
+  "Esqueleto:\n\n```js\nconst ordenados = [...intervalos].sort((a, b) => /* por fin */);\nlet quitados = 0;\nlet finUltimo = -Infinity;\nfor (const [inicio, fin] of ordenados) {\n  if (/* no choca con el último conservado */) {\n    finUltimo = /* ... */;\n  } else {\n    quitados++;\n  }\n}\nreturn quitados;\n```"
+]

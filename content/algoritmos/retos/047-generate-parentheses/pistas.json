@@ -1,0 +1,5 @@
+[
+  "Construye cada combinación **carácter por carácter**. En cada paso solo tienes dos opciones: poner `(` o poner `)`. Pero no siempre puedes poner cualquiera. ¿Cuándo está permitido abrir? ¿Y cuándo está permitido cerrar sin romper la combinación?",
+  "Usa **backtracking** con una función recursiva que lleve cuántos `(` y cuántos `)` usaste. Puedes **abrir** si `abiertos < n`. Puedes **cerrar** si `cerrados < abiertos` (hay algo abierto sin cerrar). Cuando el largo llega a `2 * n`, guarda la combinación. Cada opción sigue el patrón: elegir (agregar el carácter), explorar (llamar a la función) y deshacer (quitarlo).",
+  "Esqueleto:\n\n```js\nconst resultado = [];\nconst camino = [];\nfunction explorar(abiertos, cerrados) {\n  if (camino.length === 2 * n) {\n    resultado.push(camino.join(\"\"));\n    return;\n  }\n  if (/* puedo abrir */) {\n    camino.push(\"(\");\n    explorar(/* ... */);\n    camino.pop();\n  }\n  if (/* puedo cerrar */) {\n    // lo mismo con \")\"\n  }\n}\nexplorar(0, 0);\nreturn resultado;\n```"
+]

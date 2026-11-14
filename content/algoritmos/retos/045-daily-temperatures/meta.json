@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-045",
+  "titulo": "Daily Temperatures",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["arrays", "pila", "pila-monotonica", "leetcode"]
+}

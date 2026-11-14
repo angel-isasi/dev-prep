@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-047",
+  "titulo": "Generate Parentheses",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["backtracking", "recursion", "strings", "leetcode"]
+}

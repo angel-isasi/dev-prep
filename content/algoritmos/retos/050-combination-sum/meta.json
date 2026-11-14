@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-050",
+  "titulo": "Combination Sum",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["backtracking", "recursion", "arrays", "leetcode"]
+}

@@ -1,0 +1,5 @@
+[
+  "Solo hay tres valores. Piensa el arreglo como **zonas**: al inicio una zona de 0, al final una zona de 2, en medio los 1, y una parte que todavía no revisas. Cada vez que miras un número, ¿a qué zona lo mandarías?",
+  "Usa tres punteros: `bajo` (dónde va el próximo 0), `medio` (el número que estás revisando) y `alto` (dónde va el próximo 2). Mientras `medio <= alto`: si es 0, intercámbialo con `bajo` y avanza los dos; si es 1, solo avanza `medio`; si es 2, intercámbialo con `alto` y retrocede `alto`, **sin avanzar `medio`** (lo que llegó desde el final aún no lo revisaste). Para intercambiar: `[a[i], a[j]] = [a[j], a[i]]`.",
+  "Esqueleto:\n\n```js\nlet bajo = 0;\nlet medio = 0;\nlet alto = nums.length - 1;\nwhile (medio <= alto) {\n  if (nums[medio] === 0) {\n    // intercambia nums[bajo] y nums[medio], y avanza ambos\n  } else if (nums[medio] === 1) {\n    // solo avanza medio\n  } else {\n    // intercambia nums[medio] y nums[alto], y retrocede alto\n  }\n}\nreturn nums;\n```"
+]

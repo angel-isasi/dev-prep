@@ -1,0 +1,5 @@
+[
+  "Recorre los tokens de izquierda a derecha. Los números se van **guardando** hasta que aparece un operador, y ese operador siempre usa **los dos últimos** números que guardaste. ¿Qué estructura te da siempre lo último que guardaste?",
+  "Usa una **pila** (un arreglo con `push` y `pop`). Si el token es un número, conviértelo con `Number(token)` y haz `push`. Si es un operador, saca dos con `pop`: el **primero que sacas es el de la derecha** (`b`) y el segundo el de la izquierda (`a`). Calcula `a op b` y mete el resultado. Para la división usa `Math.trunc(a / b)`. Ojo: `\"-3\"` es un número, no el operador `\"-\"`.",
+  "Esqueleto:\n\n```js\nconst pila = [];\nfor (const token of tokens) {\n  if (/* token es \"+\", \"-\", \"*\" o \"/\" */) {\n    const b = pila.pop();\n    const a = pila.pop();\n    let resultado;\n    // calcula según el operador (división con Math.trunc)\n    pila.push(resultado);\n  } else {\n    pila.push(/* el token convertido a número */);\n  }\n}\nreturn pila.pop();\n```"
+]

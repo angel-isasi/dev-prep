@@ -1,0 +1,8 @@
+{
+  "id": "alg-reto-041",
+  "titulo": "Set Matrix Zeroes",
+  "tipo": "funcion",
+  "tema": "algoritmos",
+  "nivel": 2,
+  "tags": ["matrices", "arrays", "set", "in-place", "leetcode"]
+}
