@@ -1,0 +1,5 @@
+[
+  "No puedes escribir `figura.radio` directamente: si la figura es un rectángulo, esa propiedad no existe y TypeScript te lo marca. Primero pregunta **qué tipo de figura es** mirando la propiedad que todas comparten.",
+  "Haz un `switch (figura.tipo)` con un `case` por figura. Dentro de cada `case`, TypeScript angosta `figura` a esa variante y ya puedes usar sus propiedades. Conviene una función auxiliar que calcule el área sin redondear, para que `areaTotal` sume con `reduce` (empezando en `0`) y redondee una sola vez con `Math.round(n * 100) / 100`.",
+  "Esqueleto:\n\n```ts\nfunction areaExacta(figura: Figura): number {\n  switch (figura.tipo) {\n    case \"circulo\":\n      return /* PI por radio por radio */;\n    case \"rectangulo\":\n      return /* ... */;\n    case \"triangulo\":\n      return /* ... */;\n  }\n}\n\nexport function area(figura: Figura): number {\n  return Math.round(areaExacta(figura) * 100) / 100;\n}\n\nexport function areaTotal(figuras: Figura[]): number {\n  const total = figuras.reduce((suma, f) => /* ... */, 0);\n  return /* redondeado */;\n}\n```"
+]

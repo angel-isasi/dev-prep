@@ -1,0 +1,5 @@
+[
+  "Resuelve primero el caso especial: ¿qué pasa si `notas.length` es 0? Dividir entre 0 da `NaN`, que no le sirve a nadie. Para todo lo demás, el promedio es la suma entre la cantidad.",
+  "Los tipos: un array de números se escribe `number[]` y un valor que puede faltar se escribe como **unión** con `null`: `number | null`. Para sumar sin bucle usa `notas.reduce((acc, nota) => acc + nota, 0)`.",
+  "Esqueleto:\n\n```ts\nexport function promedio(notas: /* array de números */): /* número o null */ {\n  if (/* no hay notas */) return /* ... */;\n  const suma = notas.reduce(/* ... */, 0);\n  return /* suma entre cantidad */;\n}\n```"
+]

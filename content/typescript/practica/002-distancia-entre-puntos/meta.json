@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-002",
+  "titulo": "Distancia entre dos puntos",
+  "tipo": "funcion-ts",
+  "tema": "ts-basicos",
+  "nivel": 1,
+  "tags": ["typescript", "tuplas", "alias-de-tipo", "math"]
+}

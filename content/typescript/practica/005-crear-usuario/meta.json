@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-005",
+  "titulo": "Crear un usuario",
+  "tipo": "funcion-ts",
+  "tema": "ts-objetos",
+  "nivel": 2,
+  "tags": ["typescript", "interfaces", "propiedades-opcionales", "readonly", "formularios"]
+}

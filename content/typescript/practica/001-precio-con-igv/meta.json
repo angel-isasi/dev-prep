@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-001",
+  "titulo": "Precio con IGV",
+  "tipo": "funcion-ts",
+  "tema": "ts-basicos",
+  "nivel": 1,
+  "tags": ["typescript", "anotaciones", "parametros-opcionales", "valor-por-defecto", "tipo-de-retorno"]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-008",
+  "titulo": "Formatear cualquier valor",
+  "tipo": "funcion-ts",
+  "tema": "ts-uniones",
+  "nivel": 2,
+  "tags": ["typescript", "uniones", "narrowing", "typeof", "null"]
+}

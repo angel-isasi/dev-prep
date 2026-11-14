@@ -1,0 +1,5 @@
+[
+  "Con una unión, TypeScript solo te deja usar lo que es común a todos los tipos: no puedes llamar `valor.toFixed` porque `valor` podría ser un texto. Tienes que **preguntar** primero qué es, y dentro de esa pregunta el tipo se angosta. Cuidado con preguntar `if (!valor)`: `0`, `false` y `\"\"` también son falsy.",
+  "`null` se detecta con `valor === null` (ojo: `typeof null` da `\"object\"`). Los demás con `typeof valor === \"boolean\"` y `typeof valor === \"number\"`. Cuando ya descartaste todo lo demás, lo que queda es un `string` y puedes usar `trim()`. Para los decimales: `valor.toFixed(2)`.",
+  "Esqueleto:\n\n```ts\nexport type ValorCelda = string | number | boolean | null;\n\nexport function formatearValor(valor: ValorCelda): string {\n  if (valor === null) return /* ... */;\n  if (typeof valor === \"boolean\") return /* Sí o No */;\n  if (typeof valor === \"number\") return /* 2 decimales */;\n  const limpio = valor.trim();\n  return /* limpio o \"Sin dato\" */;\n}\n```"
+]

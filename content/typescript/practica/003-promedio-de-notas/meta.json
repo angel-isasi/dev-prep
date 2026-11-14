@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-003",
+  "titulo": "Promedio de notas",
+  "tipo": "funcion-ts",
+  "tema": "ts-basicos",
+  "nivel": 1,
+  "tags": ["typescript", "arrays-tipados", "null", "union", "reduce"]
+}

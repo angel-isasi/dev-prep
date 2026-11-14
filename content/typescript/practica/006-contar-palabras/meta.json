@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-006",
+  "titulo": "Contar palabras",
+  "tipo": "funcion-ts",
+  "tema": "ts-objetos",
+  "nivel": 2,
+  "tags": ["typescript", "record", "firma-de-indice", "strings", "objetos"]
+}

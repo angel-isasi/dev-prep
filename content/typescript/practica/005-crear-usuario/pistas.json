@@ -1,0 +1,5 @@
+[
+  "Hay dos modificadores nuevos: uno para decir \"esta propiedad puede no venir\" y otro para decir \"esta propiedad no se puede reasignar\". En la función, arma primero el objeto con lo obligatorio y deja el teléfono para el final, porque solo se agrega si vino.",
+  "Una propiedad opcional lleva `?` después del nombre: `telefono?: string;`. Una de solo lectura lleva `readonly` delante: `readonly id: number;`. Como `datos.telefono` puede ser `undefined`, usa `datos.telefono?.trim()` y agrégalo solo si el resultado no está vacío (un `if (telefono)` descarta `undefined` y `\"\"`).",
+  "Esqueleto:\n\n```ts\nexport interface Usuario {\n  readonly id: number;\n  /* nombre, email, telefono opcional, activo */\n}\n\nexport function crearUsuario(id: number, datos: DatosUsuario): Usuario {\n  const usuario: Usuario = {\n    id,\n    nombre: /* limpio */,\n    email: /* limpio y en minúsculas */,\n    activo: true,\n  };\n  const telefono = datos.telefono?.trim();\n  if (/* hay teléfono */) {\n    usuario.telefono = telefono;\n  }\n  return usuario;\n}\n```"
+]

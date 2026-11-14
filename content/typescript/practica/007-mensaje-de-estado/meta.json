@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-007",
+  "titulo": "Mensaje según el estado del pedido",
+  "tipo": "funcion-ts",
+  "tema": "ts-uniones",
+  "nivel": 1,
+  "tags": ["typescript", "union-de-literales", "tipos-literales", "record", "pedidos"]
+}

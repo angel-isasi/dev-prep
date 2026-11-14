@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-010",
+  "titulo": "Reducer del carrito",
+  "tipo": "funcion-ts",
+  "tema": "ts-uniones",
+  "nivel": 2,
+  "tags": ["typescript", "uniones-discriminadas", "never", "exhaustividad", "reducer", "inmutabilidad", "carrito"]
+}

@@ -1,0 +1,5 @@
+[
+  "Con `type EstadoPedido = string` cualquier texto pasa, incluso con errores de tipeo. Lo que quieres es un tipo que acepte **solo** esos 5 textos exactos. En TypeScript, un texto entre comillas también puede ser un tipo (un tipo literal), y varios se combinan con `|`.",
+  "La unión se escribe `\"pendiente\" | \"pagado\" | ...`. Para los mensajes puedes usar un `switch` o, más corto, un objeto `Record<EstadoPedido, string>` con un mensaje por estado y leerlo con `MENSAJES[estado]`. Para `puedeCancelarse` basta una comparación con `||`.",
+  "Esqueleto:\n\n```ts\nexport type EstadoPedido = \"pendiente\" | /* los otros 4 */;\n\nconst MENSAJES: Record<EstadoPedido, string> = {\n  pendiente: \"Esperando el pago\",\n  // uno por cada estado\n};\n\nexport function mensajeDeEstado(estado: EstadoPedido): string {\n  return /* busca en MENSAJES */;\n}\n\nexport function puedeCancelarse(estado: EstadoPedido): boolean {\n  return /* pendiente o pagado */;\n}\n```"
+]

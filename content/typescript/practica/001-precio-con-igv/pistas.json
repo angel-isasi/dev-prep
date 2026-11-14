@@ -1,0 +1,5 @@
+[
+  "Mira la **firma** de la función: cada parámetro necesita su tipo después de dos puntos, y el tipo de retorno va después del paréntesis de cierre. Para el cálculo: el precio con IGV es el precio multiplicado por `1 + tasa`.",
+  "Un parámetro con **valor por defecto** se escribe `tasa: number = 0.18`: TypeScript lo trata como opcional para quien llama. Para redondear a 2 decimales usa `Math.round(valor * 100) / 100` (devuelve un `number`; evita `toFixed`, que devuelve un `string`).",
+  "Esqueleto:\n\n```ts\nexport function precioConIgv(precio: /* tipo */, tasa: /* tipo */ = /* valor por defecto */): /* tipo de retorno */ {\n  const total = /* precio con impuesto */;\n  return Math.round(/* ... */) / 100;\n}\n```"
+]

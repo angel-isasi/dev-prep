@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-004",
+  "titulo": "Total del carrito",
+  "tipo": "funcion-ts",
+  "tema": "ts-objetos",
+  "nivel": 1,
+  "tags": ["typescript", "interfaces", "objetos", "reduce", "carrito"]
+}

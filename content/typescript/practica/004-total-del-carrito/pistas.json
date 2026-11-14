@@ -1,0 +1,5 @@
+[
+  "Empieza por las interfaces: dentro de las llaves va una propiedad por línea, con su nombre y su tipo. `ItemCarrito` no repite los campos del producto: tiene una propiedad `producto` cuyo tipo es la otra interface.",
+  "Una propiedad se escribe `nombre: tipo;`, por ejemplo `precio: number;`. Para el total recorre los ítems con `reduce`, empezando en `0`, y suma `item.producto.precio * item.cantidad`. Redondea al final con `Math.round(total * 100) / 100`.",
+  "Esqueleto:\n\n```ts\nexport interface Producto {\n  id: /* tipo */;\n  nombre: /* tipo */;\n  precio: /* tipo */;\n}\n\nexport interface ItemCarrito {\n  producto: /* la otra interface */;\n  cantidad: /* tipo */;\n}\n\nexport function totalCarrito(items: ItemCarrito[]): number {\n  const total = items.reduce((suma, item) => /* ... */, 0);\n  return /* redondeado a 2 decimales */;\n}\n```"
+]

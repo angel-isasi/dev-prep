@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-009",
+  "titulo": "Área de figuras",
+  "tipo": "funcion-ts",
+  "tema": "ts-uniones",
+  "nivel": 2,
+  "tags": ["typescript", "uniones-discriminadas", "narrowing", "switch", "reduce"]
+}

@@ -1,0 +1,5 @@
+[
+  "Empieza por el tipo: un `number[]` acepta cualquier cantidad de números, pero un punto tiene **exactamente dos**, la x y la y. TypeScript tiene un tipo para arrays de largo fijo con un tipo por posición: la **tupla**.",
+  "La tupla se escribe con corchetes y un tipo por posición: `[number, number]`. Para sacar las coordenadas usa desestructuración: `const [x1, y1] = a;`. Para la distancia usa `Math.sqrt(dx * dx + dy * dy)`.",
+  "Esqueleto:\n\n```ts\nexport type Punto = /* tupla de dos números */;\n\nexport function distancia(a: Punto, b: Punto): number {\n  const [x1, y1] = a;\n  const [x2, y2] = b;\n  return Math.sqrt(/* dx al cuadrado + dy al cuadrado */);\n}\n\nexport function puntoMedio(a: Punto, b: Punto): Punto {\n  // desestructura igual y devuelve [promedio de x, promedio de y]\n}\n```"
+]
