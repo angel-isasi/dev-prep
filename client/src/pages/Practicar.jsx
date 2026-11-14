@@ -3,7 +3,20 @@ import { Link, useNavigate } from "react-router";
 import { api } from "../lib/api.js";
 import { AREAS, ejercicioAlAzar, siguienteEjercicio } from "../lib/areas.js";
 import { Esqueleto } from "../components/Esqueleto.jsx";
+import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
+import { Buscador } from "../components/Buscador.jsx";
+import { BotonAzar } from "../components/BotonAzar.jsx";
+import { AnimatedGroup } from "../components/ui/animated-group.jsx";
+import { MagicCard } from "../components/ui/magic-card.jsx";
+import { ShineBorder } from "../components/ui/shine-border.jsx";
+import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import estilos from "./Practicar.module.css";
+
+const NIVELES = [
+  { n: 1, nombre: "básicos" },
+  { n: 2, nombre: "intermedios" },
+  { n: 3, nombre: "difíciles" },
+];
 
 /** Entrada de Practicar: áreas (JavaScript, Algoritmos, React) con sus colecciones. */
 export function Practicar() {
@@ -33,41 +46,41 @@ export function Practicar() {
 
   return (
     <section className={estilos.pagina}>
-      <header className={estilos.cabecera}>
-        <div>
-          <h1>Practicar</h1>
-          <p className={estilos.subtitulo}>
-            {ejercicios.length} ejercicios · {resueltos(ejercicios)} resueltos. Elige un área y una colección.
-          </p>
-        </div>
-        <form onSubmit={buscar} className={estilos.buscar}>
-          <input
-            type="search"
-            aria-label="Buscar en todos los ejercicios"
-            placeholder="Buscar en todo: closure, useEffect, two sum…"
-            value={busqueda}
-            onChange={(e) => setBusqueda(e.target.value)}
+      <CabeceraPagina
+        etiqueta={`${ejercicios.length} ejercicios · ${resueltos(ejercicios)} resueltos`}
+        titulo="Practicar"
+        acciones={
+          <Buscador
+            valor={busqueda}
+            alCambiar={setBusqueda}
+            onSubmit={buscar}
+            etiqueta="Buscar en todos los ejercicios"
+            placeholder="Buscar: closure, useEffect, two sum…"
           />
-        </form>
-      </header>
+        }
+      >
+        Elige un área y una colección. Cada ejercicio se abre en VS Code y los tests corren solos al guardar.
+      </CabeceraPagina>
 
       {repasos.length > 0 && (
         <div className={estilos.repasos}>
-          <div>
-            <strong>
-              {repasos.length} {repasos.length === 1 ? "ejercicio para repasar" : "ejercicios para repasar"}
-            </strong>
+          <ShineBorder shineColor={["var(--aviso)", "var(--error)"]} duration={12} />
+          <span className={estilos.repasosNumero}>
+            <SlidingNumber number={repasos.length} />
+          </span>
+          <div className={estilos.repasosTexto}>
+            <strong>{repasos.length === 1 ? "ejercicio para repasar" : "ejercicios para repasar"}</strong>
             <span>Resolverlos de nuevo es lo que hace que no se te olviden.</span>
           </div>
           <div className={estilos.repasosAcciones}>
-            <button type="button" className="boton boton-primario" onClick={() => ir(repasos[0])}>
-              Repasar: {repasos[0].titulo}
-            </button>
             {repasos.length > 1 && (
-              <Link to="/practicar/lista?estado=repasar" className="boton">
+              <Link to="/practicar/lista?estado=repasar" className="boton boton-fantasma">
                 Ver todos
               </Link>
             )}
+            <button type="button" className="boton boton-primario" onClick={() => ir(repasos[0])}>
+              Repasar: {repasos[0].titulo} →
+            </button>
           </div>
         </div>
       )}
@@ -75,68 +88,91 @@ export function Practicar() {
       {AREAS.map((area) => {
         const lista = deArea(area);
         if (lista.length === 0) return null;
+        const hechosArea = resueltos(lista);
         return (
           <section key={area.id} className={estilos.area} data-area={area.id}>
             <header className={estilos.areaCabecera}>
               <div>
-                <h2>{area.titulo}</h2>
+                <h2>
+                  <span className={estilos.punto} aria-hidden />
+                  {area.titulo}
+                </h2>
                 <p>{area.descripcion}</p>
               </div>
               <div className={estilos.areaDatos}>
-                <span>
-                  {resueltos(lista)}/{lista.length}
+                <span className={estilos.areaCuenta}>
+                  <strong>{hechosArea}</strong>/{lista.length} resueltos
                 </span>
-                <button type="button" className="boton boton-fantasma" onClick={() => ir(ejercicioAlAzar(lista))}>
-                  Uno al azar
-                </button>
+                <BotonAzar onClick={() => ir(ejercicioAlAzar(lista))} />
               </div>
             </header>
 
-            <div className={estilos.colecciones}>
-              {area.colecciones.map((c) => {
-                const ejs = deColeccion(c.id);
-                if (ejs.length === 0) return null;
-                const hechos = resueltos(ejs);
-                const siguiente = siguienteEjercicio(ejs);
-                const niveles = [1, 2, 3].map((n) => ejs.filter((e) => e.nivel === n).length);
-                return (
-                  <article key={c.id} className={estilos.coleccion}>
-                    <Link to={`/practicar/lista?coleccion=${encodeURIComponent(c.id)}`} className={estilos.enlace}>
-                      <h3>{c.nombre}</h3>
-                      <p>{c.descripcion}</p>
-                      <div className={estilos.niveles}>
-                        <span data-nivel="1">{niveles[0]} básicos</span>
-                        <span data-nivel="2">{niveles[1]} intermedios</span>
-                        <span data-nivel="3">{niveles[2]} difíciles</span>
-                      </div>
-                      <div className={estilos.avance}>
-                        <div className={estilos.barra}>
-                          <div style={{ width: `${(hechos / ejs.length) * 100}%` }} />
-                        </div>
-                        <span>
-                          {hechos}/{ejs.length}
-                        </span>
-                      </div>
-                    </Link>
-                    <button
-                      type="button"
-                      className={estilos.siguiente}
-                      disabled={!siguiente}
-                      onClick={() => ir(siguiente)}
+            <AnimatedGroup preset="slide" stagger={0.06} className={estilos.colecciones} itemClassName={estilos.celda}>
+              {area.colecciones
+                .map((c) => ({ c, ejs: deColeccion(c.id) }))
+                .filter(({ ejs }) => ejs.length > 0)
+                .map(({ c, ejs }) => {
+                  const hechos = resueltos(ejs);
+                  const siguiente = siguienteEjercicio(ejs);
+                  const niveles = NIVELES.map(({ n, nombre }) => ({ n, nombre, total: ejs.filter((e) => e.nivel === n).length }));
+                  const pct = (hechos / ejs.length) * 100;
+                  return (
+                    <MagicCard
+                      key={c.id}
+                      className={estilos.coleccion}
+                      gradientFrom="var(--color-area)"
+                      gradientTo="var(--acento)"
+                      gradientColor="var(--color-area-suave)"
                     >
-                      {siguiente ? (
-                        <>
-                          <span>{siguiente.estado === "en-progreso" ? "Continuar" : "Siguiente"}</span>
-                          {siguiente.titulo} →
-                        </>
-                      ) : (
-                        "¡Colección completa!"
-                      )}
-                    </button>
-                  </article>
-                );
-              })}
-            </div>
+                      <div className={estilos.interior}>
+                        <Link to={`/practicar/lista?coleccion=${encodeURIComponent(c.id)}`} className={estilos.enlace}>
+                          <div className={estilos.coleccionCabeza}>
+                            <h3>{c.nombre}</h3>
+                            <span className={estilos.cuenta}>
+                              <strong>{hechos}</strong>
+                              <small>/{ejs.length}</small>
+                            </span>
+                          </div>
+                          <p>{c.descripcion}</p>
+
+                          {/* Barra de niveles: cada tramo mide lo que pesa ese nivel en la colección */}
+                          <div className={estilos.niveles} aria-label="Ejercicios por nivel">
+                            <div className={estilos.tramos}>
+                              {niveles
+                                .filter((x) => x.total > 0)
+                                .map((x) => (
+                                  <span key={x.n} data-nivel={x.n} style={{ flexGrow: x.total }} />
+                                ))}
+                            </div>
+                            <div className={estilos.leyenda}>
+                              {niveles.map((x) => (
+                                <span key={x.n} data-nivel={x.n} data-vacio={x.total === 0}>
+                                  {x.total} {x.nombre}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className={estilos.avance} aria-label={`${Math.round(pct)}% resuelto`}>
+                            <div style={{ width: `${pct}%` }} />
+                          </div>
+                        </Link>
+                        <button type="button" className={estilos.siguiente} disabled={!siguiente} onClick={() => ir(siguiente)}>
+                          {siguiente ? (
+                            <>
+                              <span>{siguiente.estado === "en-progreso" ? "Continuar" : "Siguiente"}</span>
+                              <strong>{siguiente.titulo}</strong>
+                              <i aria-hidden>→</i>
+                            </>
+                          ) : (
+                            "¡Colección completa!"
+                          )}
+                        </button>
+                      </div>
+                    </MagicCard>
+                  );
+                })}
+            </AnimatedGroup>
           </section>
         );
       })}
@@ -144,13 +180,9 @@ export function Practicar() {
       <div className={estilos.mezcla}>
         <div>
           <strong>Práctica mezclada</strong>
-          <span>
-            En la entrevista no sabes qué te van a pedir. Te toca un ejercicio sin resolver al azar, de cualquier área.
-          </span>
+          <span>En la entrevista no sabes qué te van a pedir. Te toca un ejercicio sin resolver al azar, de cualquier área.</span>
         </div>
-        <button type="button" className="boton" onClick={() => ir(ejercicioAlAzar(ejercicios))}>
-          Sorpréndeme
-        </button>
+        <BotonAzar onClick={() => ir(ejercicioAlAzar(ejercicios))}>Sorpréndeme</BotonAzar>
       </div>
     </section>
   );

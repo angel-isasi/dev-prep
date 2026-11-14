@@ -1,0 +1,42 @@
+.azar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 999px;
+  background: none;
+  color: var(--texto-suave);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--transicion), border-color var(--transicion), background var(--transicion);
+}
+
+.azar:hover:not(:disabled) {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
+.azar:hover:not(:disabled) svg {
+  animation: dado 0.5s ease;
+}
+
+.azar:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@keyframes dado {
+  50% {
+    transform: rotate(-20deg) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .azar:hover svg {
+    animation: none;
+  }
+}
