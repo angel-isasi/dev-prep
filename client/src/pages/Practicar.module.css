@@ -56,33 +56,8 @@
   gap: var(--espacio-2);
 }
 
-/* Cada área tiene su color: amarillo JavaScript, verde Algoritmos, celeste React */
 .area {
-  --color-area: #f0d25a;
-  --color-area-suave: rgb(240 210 90 / 0.1);
   margin-top: var(--espacio-7);
-}
-
-.area[data-area="algoritmos"] {
-  --color-area: var(--exito);
-  --color-area-suave: var(--exito-suave);
-}
-
-.area[data-area="react"] {
-  --color-area: #61dafb;
-  --color-area-suave: rgb(97 218 251 / 0.1);
-}
-
-:root[data-tema="claro"] .area {
-  --color-area: #b08900;
-}
-
-:root[data-tema="claro"] .area[data-area="algoritmos"] {
-  --color-area: var(--exito);
-}
-
-:root[data-tema="claro"] .area[data-area="react"] {
-  --color-area: #0e7490;
 }
 
 .areaCabecera {

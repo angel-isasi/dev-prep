@@ -5,10 +5,13 @@ import { useEvento } from "../hooks/useEvento.js";
 import { filtrarEjercicios } from "../lib/filtrarEjercicios.js";
 import { nombreColeccion, nombreTema } from "../lib/etiquetas.js";
 import { buscarColeccion, ejercicioAlAzar, siguienteEjercicio } from "../lib/areas.js";
-import { Insignia } from "../components/Insignia.jsx";
 import { Selector } from "../components/Selector.jsx";
 import { IconoFlechaIzq } from "../components/Iconos.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
+import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
+import { Buscador } from "../components/Buscador.jsx";
+import { BotonAzar } from "../components/BotonAzar.jsx";
+import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import estilos from "./ListaEjercicios.module.css";
 
 const ESTADOS = [
@@ -17,6 +20,12 @@ const ESTADOS = [
   ["resuelto", "Resuelto"],
   ["repasar", "Para repasar"],
 ];
+
+const TEXTO_ESTADO = Object.fromEntries(ESTADOS);
+const NIVEL = { 1: "Básico", 2: "Intermedio", 3: "Difícil" };
+
+/** Número del ejercicio a partir de su id: "js-gu-012" -> "012". */
+const numero = (id) => id.match(/(\d+)$/)?.[1] ?? "";
 
 /** Agrupa por tema, respetando el orden en que aparecen. */
 function agruparPorTema(lista) {
@@ -84,52 +93,54 @@ export function ListaEjercicios() {
   const titulo = encontrada ? encontrada.coleccion.nombre : "Todos los ejercicios";
   const subtitulo = encontrada ? encontrada.area.titulo : "Búsqueda en todas las colecciones";
 
+  const pct = (resueltos / Math.max(deColeccion.length, 1)) * 100;
+  const irA = (ej) => ej && navigate(`/practicar/${ej.id}`);
+
   return (
-    <section className={estilos.pagina}>
+    <section className={estilos.pagina} data-area={encontrada?.area.id ?? "todas"}>
       <Link to="/practicar" className={estilos.volver}>
         <IconoFlechaIzq /> Practicar
       </Link>
 
-      <header className={estilos.cabecera}>
-        <div>
-          <span className={estilos.area}>{subtitulo}</span>
-          <h1>{titulo}</h1>
-          {encontrada && <p className={estilos.descripcion}>{encontrada.coleccion.descripcion}</p>}
-          <p className={estilos.subtitulo}>
-            {deColeccion.length} ejercicios · {resueltos} resueltos
-          </p>
-        </div>
-        <div className={estilos.acciones}>
-          {siguiente && (
-            <button type="button" className="boton boton-primario" onClick={() => navigate(`/practicar/${siguiente.id}`)}>
-              {siguiente.estado === "en-progreso" ? "Continuar" : "Siguiente"}: {siguiente.titulo}
-            </button>
-          )}
-          <button
-            type="button"
-            className="boton"
-            onClick={() => {
-              const azar = ejercicioAlAzar(deColeccion);
-              if (azar) navigate(`/practicar/${azar.id}`);
-            }}
-          >
-            Uno al azar
-          </button>
-        </div>
-      </header>
+      <CabeceraPagina
+        etiqueta={subtitulo}
+        titulo={titulo}
+        acciones={
+          <>
+            <BotonAzar onClick={() => irA(ejercicioAlAzar(deColeccion))} />
+            {siguiente && (
+              <button type="button" className="boton boton-primario" onClick={() => irA(siguiente)}>
+                {siguiente.estado === "en-progreso" ? "Continuar" : "Siguiente"}: {siguiente.titulo} →
+              </button>
+            )}
+          </>
+        }
+      >
+        {encontrada?.coleccion.descripcion}
+      </CabeceraPagina>
 
-      <div className={estilos.barraProgreso}>
-        <div style={{ width: `${(resueltos / Math.max(deColeccion.length, 1)) * 100}%` }} />
+      {/* Avance de la colección: número grande y barra del color del área */}
+      <div className={estilos.avance}>
+        <strong className={estilos.avanceNumero}>
+          <SlidingNumber number={resueltos} />
+          <small>/{deColeccion.length}</small>
+        </strong>
+        <div className={estilos.avanceTexto}>
+          <span>resueltos</span>
+          <div className={estilos.barraProgreso}>
+            <div style={{ width: `${pct}%` }} />
+          </div>
+        </div>
+        <span className={estilos.avancePct}>{Math.round(pct)}%</span>
       </div>
 
       <div className={estilos.filtros}>
-        <input
-          type="search"
-          className={estilos.buscador}
+        <Buscador
+          valor={filtros.texto}
+          alCambiar={(v) => cambiarFiltro("texto", v)}
+          etiqueta="Buscar ejercicios"
           placeholder="Buscar por título o tag…"
-          aria-label="Buscar ejercicios"
-          value={filtros.texto}
-          onChange={(e) => cambiarFiltro("texto", e.target.value)}
+          ancho="300px"
         />
         <Selector
           etiqueta="Tema"
@@ -174,20 +185,32 @@ export function ListaEjercicios() {
                 {lista.filter((e) => e.estado === "resuelto").length}/{lista.length}
               </span>
             </h2>
-            <ul className={estilos.lista}>
+            {/* Cada ejercicio es una ficha: número, nivel en rayitas, título y estado */}
+            <ul className={estilos.fichas}>
               {lista.map((e) => (
                 <li key={e.id}>
-                  <Link to={`/practicar/${e.id}`} className={estilos.fila}>
-                    <span className={estilos.punto} data-estado={e.estado} aria-hidden />
-                    <span className={estilos.titulo}>
-                      {e.titulo}
-                      {!encontrada && <span className={estilos.coleccion}>{nombreColeccion(e.coleccion)}</span>}
-                    </span>
-                    <Insignia nivel={e.nivel} />
-                    <span className={estilos.resultado}>
-                      {e.ultimoResultado ? `${e.ultimoResultado.pasan}/${e.ultimoResultado.total}` : ""}
-                    </span>
-                    <Insignia estado={e.estado} />
+                  <Link to={`/practicar/${e.id}`} className={estilos.ficha} data-estado={e.estado}>
+                    <div className={estilos.fichaArriba}>
+                      <span className={estilos.numero}>{numero(e.id)}</span>
+                      <span className={estilos.nivel} data-nivel={e.nivel} title={NIVEL[e.nivel]} aria-label={`Nivel ${NIVEL[e.nivel]}`}>
+                        <i />
+                        <i />
+                        <i />
+                      </span>
+                    </div>
+                    <strong className={estilos.titulo}>{e.titulo}</strong>
+                    {!encontrada && <span className={estilos.coleccion}>{nombreColeccion(e.coleccion)}</span>}
+                    <div className={estilos.fichaAbajo}>
+                      <span className={estilos.estado}>
+                        <span className={estilos.punto} aria-hidden />
+                        {TEXTO_ESTADO[e.estado] ?? e.estado}
+                      </span>
+                      {e.ultimoResultado && (
+                        <span className={estilos.tests} title="Tests que pasan en tu último intento">
+                          {e.ultimoResultado.pasan}/{e.ultimoResultado.total}
+                        </span>
+                      )}
+                    </div>
                   </Link>
                 </li>
               ))}

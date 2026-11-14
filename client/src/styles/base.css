@@ -198,3 +198,33 @@ option {
 :root[data-tema="claro"] .hljs-name {
   color: #be123c;
 }
+
+/* Color de cada área de Practicar: amarillo JavaScript, verde Algoritmos, celeste React.
+   Se usa con data-area="..." en el contenedor y var(--color-area) dentro. */
+[data-area] {
+  --color-area: var(--acento);
+  --color-area-suave: var(--acento-suave);
+}
+
+[data-area="javascript"] {
+  --color-area: #f0d25a;
+  --color-area-suave: rgb(240 210 90 / 0.1);
+}
+
+[data-area="algoritmos"] {
+  --color-area: var(--exito);
+  --color-area-suave: var(--exito-suave);
+}
+
+[data-area="react"] {
+  --color-area: #61dafb;
+  --color-area-suave: rgb(97 218 251 / 0.1);
+}
+
+:root[data-tema="claro"] [data-area="javascript"] {
+  --color-area: #b08900;
+}
+
+:root[data-tema="claro"] [data-area="react"] {
+  --color-area: #0e7490;
+}
