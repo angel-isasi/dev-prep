@@ -32,9 +32,9 @@
   --borde: rgb(255 255 255 / 0.07);
   --borde-fuerte: rgb(255 255 255 / 0.13);
   --brillo-borde: inset 0 1px 0 rgb(255 255 255 / 0.04);
-  --texto: #ededf0;
-  --texto-suave: #a3a3ad;
-  --texto-tenue: #66666f;
+  --texto: #f2f2f5;
+  --texto-suave: #b9b9c3;
+  --texto-tenue: #85858f;
   --acento: #b3a8ff;
   --acento-suave: rgb(179 168 255 / 0.12);
   --sobre-acento: #0b0a12;
@@ -64,9 +64,9 @@
   --borde: rgb(0 0 0 / 0.08);
   --borde-fuerte: rgb(0 0 0 / 0.14);
   --brillo-borde: 0 1px 2px rgb(0 0 0 / 0.03);
-  --texto: #16161a;
-  --texto-suave: #55555f;
-  --texto-tenue: #8d8d97;
+  --texto: #121216;
+  --texto-suave: #4a4a54;
+  --texto-tenue: #72727c;
   --acento: #6a5ad9;
   --acento-suave: rgb(106 90 217 / 0.09);
   --sobre-acento: #ffffff;
