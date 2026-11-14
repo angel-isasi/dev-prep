@@ -39,6 +39,8 @@
 }
 
 .enlace {
+  position: relative;
+  z-index: 0;
   display: flex;
   align-items: center;
   gap: var(--espacio-3);
@@ -54,14 +56,34 @@
   color: var(--texto);
 }
 
-.activo {
-  background: var(--acento-suave);
+/* El fondo del activo lo pinta el indicador que se desliza */
+.activo,
+.activo:hover {
+  background: none;
   color: var(--acento);
+  font-weight: 600;
 }
 
-.activo:hover {
+.indicador {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: var(--radio);
   background: var(--acento-suave);
-  color: var(--acento);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--acento) 18%, transparent);
+}
+
+/* Rayita de luz a la izquierda del activo */
+.indicador::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 22%;
+  bottom: 22%;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--acento);
+  box-shadow: 0 0 10px var(--acento);
 }
 
 .pie {
@@ -109,7 +131,7 @@
   background: radial-gradient(120px 60px at 0% 0%, var(--aviso-suave), transparent 80%);
 }
 
-.racha[data-activa="true"] svg {
+.racha[data-activa="true"] strong {
   color: var(--aviso);
 }
 

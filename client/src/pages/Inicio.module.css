@@ -484,3 +484,106 @@
   color: var(--texto-tenue);
   font-size: 14px;
 }
+
+/* Llama junto a la etiqueta "Racha" */
+.etiquetaRacha {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* "También puedes": título a la izquierda, "Uno al azar" a la derecha */
+.subtitulo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: var(--espacio-5) 0 var(--espacio-2);
+}
+
+.subtitulo h3 {
+  margin: 0;
+}
+
+.azar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 999px;
+  background: none;
+  color: var(--texto-suave);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--transicion), border-color var(--transicion), background var(--transicion);
+}
+
+.azar:hover {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
+.azar:hover svg {
+  animation: dado 0.5s ease;
+}
+
+@keyframes dado {
+  50% {
+    transform: rotate(-20deg) scale(1.1);
+  }
+}
+
+.sugeridos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sugeridos li + li {
+  border-top: 1px solid var(--borde);
+}
+
+.sugerido {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: 10px var(--espacio-2);
+  margin: 0 calc(var(--espacio-2) * -1);
+  border-radius: var(--radio);
+  color: var(--texto);
+  transition: background var(--transicion);
+}
+
+.sugerido:hover {
+  background: var(--superficie-2);
+}
+
+.sugeridoTexto {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sugeridoTexto strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.flecha {
+  color: var(--texto-tenue);
+  transition: transform var(--transicion), color var(--transicion);
+}
+
+.sugerido:hover .flecha {
+  color: var(--acento);
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .azar:hover svg {
+    animation: none;
+  }
+}

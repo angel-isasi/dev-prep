@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
+import { motion } from "motion/react";
+import { Llama } from "./Llama.jsx";
 import { api } from "../lib/api.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { Confirmar } from "./Confirmar.jsx";
@@ -7,7 +9,6 @@ import { useTema } from "../hooks/useTema.js";
 import {
   IconoAjustes,
   IconoApagar,
-  IconoFuego,
   IconoInicio,
   IconoAprender,
   IconoReferencia,
@@ -27,6 +28,17 @@ const SECCIONES = [
   { a: "/progreso", texto: "Progreso", Icono: IconoProgreso },
   { a: "/referencia", texto: "Referencia", Icono: IconoReferencia },
 ];
+
+// Fondo del enlace activo. Todos comparten layoutId: al cambiar de sección, Motion
+// lo desliza desde el enlace anterior hasta el nuevo en lugar de saltar.
+const Indicador = () => (
+  <motion.span
+    layoutId="indicador-seccion"
+    className={estilos.indicador}
+    transition={{ type: "spring", stiffness: 420, damping: 34 }}
+    aria-hidden
+  />
+);
 
 export function BarraLateral() {
   const { tema, alternar } = useTema();
@@ -64,8 +76,13 @@ export function BarraLateral() {
             end={exacto}
             className={({ isActive }) => `${estilos.enlace} ${isActive ? estilos.activo : ""}`}
           >
-            <Icono />
-            {texto}
+            {({ isActive }) => (
+              <>
+                {isActive && <Indicador />}
+                <Icono />
+                {texto}
+              </>
+            )}
           </NavLink>
         ))}
       </nav>
@@ -73,14 +90,19 @@ export function BarraLateral() {
       <div className={estilos.pie}>
         {racha && (
           <div className={estilos.racha} data-activa={racha.dias > 0} title={racha.cumplio ? "Meta de hoy cumplida" : "Aún no cumples la meta de hoy"}>
-            <IconoFuego />
+            <Llama encendida={racha.dias > 0} tamano={20} />
             <strong>{racha.dias}</strong>
             {racha.dias === 1 ? "día de racha" : "días de racha"}
           </div>
         )}
         <NavLink to="/ajustes" className={({ isActive }) => `${estilos.enlace} ${isActive ? estilos.activo : ""}`}>
-          <IconoAjustes />
-          Ajustes
+          {({ isActive }) => (
+            <>
+              {isActive && <Indicador />}
+              <IconoAjustes />
+              Ajustes
+            </>
+          )}
         </NavLink>
         <Confirmar
           titulo="¿Cerrar dev-prep?"

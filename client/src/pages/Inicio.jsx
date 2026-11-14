@@ -23,6 +23,8 @@ import { AnimatedShinyText } from "../components/ui/animated-shiny-text.jsx";
 import { CardBody, CardContainer, CardItem } from "../components/ui/card-3d.jsx";
 import { ShineBorder } from "../components/ui/shine-border.jsx";
 import { GraficoSemana } from "../components/GraficoSemana.jsx";
+import { Llama } from "../components/Llama.jsx";
+import { ejercicioAlAzar } from "../lib/areas.js";
 import DecryptedText from "../components/reactbits/DecryptedText.jsx";
 import DotGrid from "../components/reactbits/DotGrid.jsx";
 import ElectricBorder from "../components/reactbits/ElectricBorder.jsx";
@@ -63,6 +65,13 @@ export function Inicio() {
   });
 
   const cargar = () => api.inicio().then(setDatos, (e) => setError(e.message));
+
+  // Pide la lista completa solo al hacer clic, y salta a un pendiente cualquiera.
+  async function unoAlAzar() {
+    const lista = await api.ejercicios().catch(() => []);
+    const ej = ejercicioAlAzar(lista);
+    if (ej) navegar(`/practicar/${ej.id}`);
+  }
   useEffect(() => {
     cargar();
   }, []);
@@ -74,6 +83,7 @@ export function Inicio() {
   if (!datos) return <Esqueleto variante="tarjetas" />;
 
   const { config, meta, ayer, racha, preparacion, ritmo, semana, totales, repasos, continuar, siguiente, frase } = datos;
+  const sugeridos = datos.sugeridos ?? [];
   const ritmoInfo = RITMO[ritmo.estado];
   const proximo = continuar ?? siguiente;
   const pctMeta = meta.objetivo ? Math.min(100, (meta.hecho / meta.objetivo) * 100) : 100;
@@ -164,7 +174,10 @@ export function Inicio() {
           {/* Chispas que suben: más chispas cuanto más larga la racha */}
           <Particles className={estilos.chispas} quantity={Math.min(14 + racha * 3, 50)} color={colorAviso} vy={-0.35} size={0.6} staticity={80} />
           <div className={`${estilos.contenido} ${estilos.racha}`}>
-          <span className={estilos.etiqueta}>Racha</span>
+          <span className={`${estilos.etiqueta} ${estilos.etiquetaRacha}`}>
+            <Llama encendida={racha > 0} tamano={18} />
+            Racha
+          </span>
           <strong className={estilos.numeroGrande}>
             <SlidingNumber number={racha} />
           </strong>
@@ -284,6 +297,37 @@ export function Inicio() {
             </CardContainer>
           ) : (
             <p className={estilos.vacio}>No quedan ejercicios pendientes. ¡Enorme!</p>
+          )}
+
+          {sugeridos.length > 0 && (
+            <>
+              <div className={estilos.subtitulo}>
+                <h3>También puedes</h3>
+                <button type="button" className={estilos.azar} onClick={unoAlAzar}>
+                  <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="4" />
+                    <circle cx="8.5" cy="8.5" r="1.2" fill="currentColor" />
+                    <circle cx="15.5" cy="15.5" r="1.2" fill="currentColor" />
+                    <circle cx="12" cy="12" r="1.2" fill="currentColor" />
+                  </svg>
+                  Uno al azar
+                </button>
+              </div>
+              <AnimatedGroup as="ul" asChild="li" preset="blur-slide" stagger={0.07} className={estilos.sugeridos}>
+                {sugeridos.map((s) => (
+                  <Link key={s.id} to={`/practicar/${s.id}`} className={estilos.sugerido}>
+                    <span className={estilos.sugeridoTexto}>
+                      <strong>{s.titulo}</strong>
+                      <span className={estilos.detalle}>{nombreTema(s.tema)}</span>
+                    </span>
+                    <Insignia nivel={s.nivel} />
+                    <span className={estilos.flecha} aria-hidden>
+                      →
+                    </span>
+                  </Link>
+                ))}
+              </AnimatedGroup>
+            </>
           )}
 
           <h3>Repasos de hoy {repasos.length > 0 && <span className={estilos.contador}>{repasos.length}</span>}</h3>

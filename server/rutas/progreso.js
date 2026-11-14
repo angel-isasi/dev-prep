@@ -38,7 +38,18 @@ export function rutasProgreso({ indice, progreso }) {
       .filter((ej) => g.registros[ej.id]?.estado === "en-progreso")
       .sort((a, b) => (g.registros[b.id].ultimaActividad ?? "").localeCompare(g.registros[a.id].ultimaActividad ?? ""));
     // "Siguiente": el primer pendiente, en el orden del contenido.
-    const siguiente = indice.ejercicios.find((ej) => !g.registros[ej.id] || g.registros[ej.id].estado === "pendiente");
+    const pendientes = indice.ejercicios.filter((ej) => !g.registros[ej.id] || g.registros[ej.id].estado === "pendiente");
+    const siguiente = pendientes[0];
+    // "Sugeridos": hasta 3 pendientes más, cada uno de un tema distinto, para variar.
+    const principal = enProgreso[0] ?? siguiente;
+    const temasVistos = new Set(principal ? [principal.tema] : []);
+    const sugeridos = [];
+    for (const ej of pendientes) {
+      if (sugeridos.length === 3) break;
+      if (ej.id === principal?.id || temasVistos.has(ej.tema)) continue;
+      temasVistos.add(ej.tema);
+      sugeridos.push(ej);
+    }
 
     res.json({
       config: g.config,
@@ -53,6 +64,7 @@ export function rutasProgreso({ indice, progreso }) {
       repasos: repasosDeHoy(indice.ejercicios, g.registros, g.hoy).map(resumenCorto),
       continuar: enProgreso[0] ? resumenCorto(enProgreso[0]) : null,
       siguiente: siguiente ? resumenCorto(siguiente) : null,
+      sugeridos: sugeridos.map(resumenCorto),
       frase: fraseDelDia(g.hoy),
     });
   });
