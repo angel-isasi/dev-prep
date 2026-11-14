@@ -10,7 +10,7 @@ export function Layout() {
   const { pathname } = useLocation();
   const reducido = useReducedMotion();
   const acento = useColorTema("--acento");
-  const grano = usePorTema({ oscuro: 0.06, claro: 0.035 });
+  const grano = usePorTema({ oscuro: 0.035, claro: 0.02 });
 
   return (
     // Chispas en cada clic, en toda la app (React Bits)

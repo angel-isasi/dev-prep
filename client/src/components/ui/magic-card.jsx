@@ -59,7 +59,7 @@ export function MagicCard({
       {...props}
     >
       {/* Capa de superficie de la app, para que se vea igual que las demás tarjetas */}
-      <div className="absolute inset-px z-0 rounded-[inherit] bg-card" />
+      <div className="absolute inset-px z-0 rounded-[inherit] bg-[linear-gradient(var(--superficie),var(--superficie)),var(--fondo-solido)]" />
       <motion.div
         className="pointer-events-none absolute inset-px z-10 rounded-[inherit] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{ background: brillo }}

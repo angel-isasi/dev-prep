@@ -52,8 +52,8 @@ export function Inicio() {
   const colorExito = useColorTema("--exito");
   const colorTexto = useColorTema("--texto");
   const tema = usePorTema({
-    oscuro: { punto: "#24222e", vidrio: "#23212d", ficha: "#17161d" },
-    claro: { punto: "#d6d3e1", vidrio: "#ebe9f1", ficha: "#ffffff" },
+    oscuro: { punto: "#1b1a22", vidrio: "#23212d", ficha: "#17161d" },
+    claro: { punto: "#e3e1ea", vidrio: "#ebe9f1", ficha: "#ffffff" },
   });
 
   const cargar = () => api.inicio().then(setDatos, (e) => setError(e.message));
@@ -81,11 +81,12 @@ export function Inicio() {
         gap={22}
         baseColor={tema.punto}
         activeColor={colorAcento}
-        proximity={130}
-        shockRadius={260}
-        shockStrength={4}
-        glow={0.4}
-        fade={0.35}
+        proximity={110}
+        shockRadius={220}
+        shockStrength={3}
+        glow={0.15}
+        fade={0.6}
+        opacity={0.7}
       />
 
     <section className={estilos.pagina}>
@@ -134,13 +135,15 @@ export function Inicio() {
           className={estilos.electrico}
           color={colorError}
           borderRadius={8}
-          thickness={1.2}
-          strands={2}
-          chaos={0.45}
-          glow={0.5}
-          intensity={0.7}
-          arcs={1}
-          cursorRadius={110}
+          thickness={0.9}
+          strands={1}
+          chaos={0.18}
+          speed={0.6}
+          glow={0.15}
+          intensity={0.45}
+          flicker={0.15}
+          arcs={0}
+          cursorRadius={70}
         >
           <p className={estilos.aviso} data-tipo="error">
             <span className={estilos.alerta} aria-hidden />
