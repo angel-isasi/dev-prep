@@ -6,6 +6,7 @@ import "@fontsource-variable/bricolage-grotesque";
 import "@fontsource-variable/jetbrains-mono";
 import "./styles/tokens.css";
 import "./styles/base.css";
+import "./styles/tailwind.css";
 import { App } from "./App.jsx";
 import { ProveedorAyuda } from "./components/Ayuda.jsx";
 

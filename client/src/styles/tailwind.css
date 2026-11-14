@@ -1,0 +1,59 @@
+/* Tailwind convive con el CSS de siempre (tokens.css, base.css y los .module.css).
+   Se usa solo en los componentes nuevos que vienen de librerías como Magic UI o Aceternity.
+
+   Dos decisiones para que no cambie nada de lo que ya existe:
+   1. No se carga el "preflight" (el reinicio global de Tailwind), porque borraría
+      márgenes, viñetas y tamaños de títulos en toda la app.
+   2. Ese reinicio se aplica solo dentro de un elemento con la clase "tw",
+      que es la raíz de cada componente nuevo. */
+
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* El modo oscuro de la app se marca con data-tema en <html>, no con la clase "dark". */
+@custom-variant dark (&:where([data-tema="oscuro"], [data-tema="oscuro"] *));
+
+/* Los colores de Tailwind apuntan a las variables de tokens.css.
+   Así una clase como bg-background o text-primary sigue el tema claro u oscuro sola.
+   Se usan los nombres de shadcn/ui porque los componentes de esas librerías ya los traen. */
+@theme inline {
+  --font-sans: var(--fuente);
+  --font-display: var(--fuente-titulos);
+  --font-mono: var(--fuente-codigo);
+
+  --color-background: var(--fondo);
+  --color-foreground: var(--texto);
+  --color-card: var(--superficie);
+  --color-card-foreground: var(--texto);
+  --color-popover: var(--fondo-solido);
+  --color-popover-foreground: var(--texto);
+  --color-primary: var(--acento);
+  --color-primary-foreground: var(--sobre-acento);
+  --color-secondary: var(--superficie-2);
+  --color-secondary-foreground: var(--texto);
+  --color-muted: var(--superficie-2);
+  --color-muted-foreground: var(--texto-suave);
+  --color-accent: var(--acento-suave);
+  --color-accent-foreground: var(--acento);
+  --color-destructive: var(--error);
+  --color-border: var(--borde);
+  --color-input: var(--borde-fuerte);
+  --color-ring: var(--acento);
+
+  --color-exito: var(--exito);
+  --color-error: var(--error);
+  --color-aviso: var(--aviso);
+  --color-tenue: var(--texto-tenue);
+
+  --radius-md: var(--radio);
+  --radius-xl: var(--radio-grande);
+}
+
+/* Reinicio mínimo, solo dentro de .tw. Con :where() no gana peso frente a otras reglas. */
+@layer base {
+  :where(.tw, .tw *, .tw ::before, .tw ::after) {
+    box-sizing: border-box;
+    border: 0 solid var(--borde);
+  }
+}
