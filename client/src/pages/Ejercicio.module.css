@@ -31,9 +31,32 @@
   color: var(--texto);
 }
 
+.etiqueta {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin: 0 0 var(--espacio-2);
+  color: var(--texto-suave);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.numero {
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: var(--color-area-suave);
+  color: var(--color-area);
+  font-family: var(--fuente-codigo);
+  letter-spacing: 0;
+}
+
 .cabecera h1 {
-  font-size: 28px;
-  letter-spacing: -0.02em;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
 }
 
 .meta {
@@ -96,8 +119,11 @@
   margin-top: var(--espacio-5);
 }
 
+/* Enunciado en una tarjeta de fondo sólido: se lee mejor sobre el grano */
 .enunciado {
-  padding-top: var(--espacio-5);
+  margin-top: var(--espacio-4);
+  padding: var(--espacio-5) var(--espacio-6);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
 }
 
 .enlaceAviso {
@@ -128,6 +154,7 @@
 }
 
 .repaso {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;

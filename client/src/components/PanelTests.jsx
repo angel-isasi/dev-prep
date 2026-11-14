@@ -3,6 +3,8 @@ import { useAhora } from "../hooks/useAhora.js";
 import { explicarError } from "../lib/explicarError.js";
 import { CasoTest } from "./CasoTest.jsx";
 import { TextoConCodigo } from "./TextoConCodigo.jsx";
+import { BorderBeam } from "./ui/border-beam.jsx";
+import { SlidingNumber } from "./ui/sliding-number.jsx";
 import estilos from "./PanelTests.module.css";
 
 function haceCuanto(desde, ahora) {
@@ -56,27 +58,38 @@ export function PanelTests({ resultado, corriendo, preparado, ultimaCorrida }) {
   };
 
   return (
-    <aside className={estilos.panel} aria-live="polite">
+    <aside className={estilos.panel} data-ok={todoBien} aria-live="polite">
+      {/* Cuando todo pasa, un haz verde recorre el borde del panel */}
+      {todoBien && <BorderBeam colorFrom="var(--exito)" colorTo="var(--acento)" size={120} duration={5} />}
       <div className={estilos.cabecera}>
         <h2 className={estilos.titulo}>Tests en vivo</h2>
         <motion.span
           key={`${pasan}/${total}`}
           className={estilos.contador}
           data-ok={todoBien}
-          initial={{ scale: 1.3, opacity: 0.4 }}
+          initial={{ scale: 1.15, opacity: 0.5 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: "spring", stiffness: 380, damping: 16 }}
         >
-          {pasan}/{total}
+          <SlidingNumber number={pasan} />
+          <small>/{total}</small>
         </motion.span>
       </div>
-      <div className={estilos.barra}>
-        <motion.div
-          data-ok={todoBien}
-          initial={false}
-          animate={{ width: `${porcentaje}%` }}
-          transition={{ type: "spring", stiffness: 120, damping: 20 }}
-        />
+      {/* Un tramo por test: verde si pasa, rojo si falla */}
+      <div className={estilos.tramos} aria-label={`${Math.round(porcentaje)}% de tests pasan`}>
+        {total > 0 ? (
+          casos.map((caso, i) => (
+            <motion.span
+              key={caso.nombre}
+              data-ok={caso.ok}
+              initial={{ scaleY: 0.3, opacity: 0 }}
+              animate={{ scaleY: 1, opacity: 1 }}
+              transition={{ delay: i * 0.04, type: "spring", stiffness: 300, damping: 20 }}
+            />
+          ))
+        ) : (
+          <span />
+        )}
       </div>
       <p className={estilos.estado}>
         {corriendo ? (

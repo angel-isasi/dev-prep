@@ -37,3 +37,6 @@ const capitalizar = (texto) => texto.charAt(0).toUpperCase() + texto.slice(1).re
 
 export const nombreColeccion = (c) => COLECCIONES[c] ?? capitalizar(c);
 export const nombreTema = (t) => TEMAS[t] ?? capitalizar(t);
+
+/** Número del ejercicio a partir de su id: "js-gu-012" -> "012". */
+export const numeroEjercicio = (id) => id.match(/(\d+)$/)?.[1] ?? "";

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { api } from "../lib/api.js";
 import { useEvento } from "../hooks/useEvento.js";
-import { nombreColeccion, nombreTema } from "../lib/etiquetas.js";
+import { nombreColeccion, nombreTema, numeroEjercicio } from "../lib/etiquetas.js";
 import { Insignia } from "../components/Insignia.jsx";
 import { Markdown } from "../components/Markdown.jsx";
 import { PanelTests } from "../components/PanelTests.jsx";
@@ -16,6 +16,7 @@ import { Confirmar } from "../components/Confirmar.jsx";
 import { celebrar } from "../lib/celebrar.js";
 import { Ayuda } from "../components/Ayuda.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
+import { buscarColeccion } from "../lib/areas.js";
 import estilos from "./Ejercicio.module.css";
 
 function fechaCorta(fecha) {
@@ -174,18 +175,19 @@ export function Ejercicio() {
   ];
 
   return (
-    <div className={estilos.pagina}>
+    <div className={estilos.pagina} data-area={buscarColeccion(ejercicio.coleccion)?.area.id ?? "todas"}>
       <div className={estilos.principal}>
         <Link to={`/practicar/lista?coleccion=${encodeURIComponent(ejercicio.coleccion)}`} className={estilos.volver}>
           <IconoFlechaIzq /> {nombreColeccion(ejercicio.coleccion)}
         </Link>
 
         <header className={estilos.cabecera}>
+          <p className={estilos.etiqueta}>
+            <span className={estilos.numero}>#{numeroEjercicio(ejercicio.id)}</span>
+            {buscarColeccion(ejercicio.coleccion)?.area.titulo ?? nombreColeccion(ejercicio.coleccion)} · {nombreTema(ejercicio.tema)}
+          </p>
           <h1>{ejercicio.titulo}</h1>
           <div className={estilos.meta}>
-            <span>{nombreColeccion(ejercicio.coleccion)}</span>
-            <span aria-hidden>·</span>
-            <span>{nombreTema(ejercicio.tema)}</span>
             <Insignia nivel={ejercicio.nivel} />
             <Insignia estado={ejercicio.estado} />
             {progreso?.intentos > 0 && (
@@ -277,7 +279,7 @@ export function Ejercicio() {
         </div>
 
         {pestana === "enunciado" && (
-          <article className={estilos.enunciado}>
+          <article className={`tarjeta ${estilos.enunciado}`}>
             <Markdown>{ejercicio.enunciado}</Markdown>
           </article>
         )}

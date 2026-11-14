@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router";
 import { api } from "../lib/api.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { filtrarEjercicios } from "../lib/filtrarEjercicios.js";
-import { nombreColeccion, nombreTema } from "../lib/etiquetas.js";
+import { nombreColeccion, nombreTema, numeroEjercicio } from "../lib/etiquetas.js";
 import { buscarColeccion, ejercicioAlAzar, siguienteEjercicio } from "../lib/areas.js";
 import { Selector } from "../components/Selector.jsx";
 import { IconoFlechaIzq } from "../components/Iconos.jsx";
@@ -24,8 +24,6 @@ const ESTADOS = [
 const TEXTO_ESTADO = Object.fromEntries(ESTADOS);
 const NIVEL = { 1: "Básico", 2: "Intermedio", 3: "Difícil" };
 
-/** Número del ejercicio a partir de su id: "js-gu-012" -> "012". */
-const numero = (id) => id.match(/(\d+)$/)?.[1] ?? "";
 
 /** Agrupa por tema, respetando el orden en que aparecen. */
 function agruparPorTema(lista) {
@@ -191,7 +189,7 @@ export function ListaEjercicios() {
                 <li key={e.id}>
                   <Link to={`/practicar/${e.id}`} className={estilos.ficha} data-estado={e.estado}>
                     <div className={estilos.fichaArriba}>
-                      <span className={estilos.numero}>{numero(e.id)}</span>
+                      <span className={estilos.numero}>{numeroEjercicio(e.id)}</span>
                       <span className={estilos.nivel} data-nivel={e.nivel} title={NIVEL[e.nivel]} aria-label={`Nivel ${NIVEL[e.nivel]}`}>
                         <i />
                         <i />

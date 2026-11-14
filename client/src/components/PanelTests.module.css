@@ -1,54 +1,76 @@
 .panel {
+  position: relative;
   padding: var(--espacio-5);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
-  background: var(--superficie);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
   box-shadow: var(--brillo-borde);
-  backdrop-filter: blur(12px);
+  transition: border-color 300ms ease, box-shadow 300ms ease;
+}
+
+.panel[data-ok="true"] {
+  border-color: color-mix(in srgb, var(--exito) 35%, transparent);
+  box-shadow: 0 0 40px -12px var(--exito), var(--brillo-borde);
 }
 
 .cabecera {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
 }
 
 .titulo {
-  font-size: 13px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
   color: var(--texto-suave);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
 }
 
 .contador {
-  font-family: var(--fuente-codigo);
-  font-size: 26px;
-  font-weight: 700;
+  display: flex;
+  align-items: baseline;
   color: var(--error);
+  font-family: var(--fuente-titulos);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.contador small {
+  color: var(--texto-tenue);
+  font-size: 22px;
+  font-weight: 500;
 }
 
 .contador[data-ok="true"] {
   color: var(--exito);
 }
 
-.barra {
-  height: 6px;
-  margin: var(--espacio-2) 0 var(--espacio-2);
+/* Tramos: uno por test */
+.tramos {
+  display: flex;
+  gap: 4px;
+  height: 8px;
+  margin: var(--espacio-3) 0 var(--espacio-3);
+}
+
+.tramos span {
+  flex: 1;
   border-radius: 999px;
-  background: var(--error-suave);
-  overflow: hidden;
+  background: var(--superficie-2);
+  transform-origin: bottom;
 }
 
-.barra > div {
-  height: 100%;
-  border-radius: inherit;
-  background: var(--aviso);
-  transition: width 300ms ease;
-}
-
-.barra > div[data-ok="true"] {
+.tramos span[data-ok="true"] {
   background: var(--exito);
+  box-shadow: 0 0 10px -2px var(--exito);
+}
+
+.tramos span[data-ok="false"] {
+  background: var(--error);
+  opacity: 0.75;
 }
 
 .estado {
