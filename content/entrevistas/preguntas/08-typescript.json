@@ -1,0 +1,135 @@
+{
+  "categoria": "TypeScript",
+  "preguntas": [
+    {
+      "id": "ent-101",
+      "pregunta": "¿Qué es TypeScript y por qué lo usarías?",
+      "preguntaEn": "What is TypeScript and why would you use it?",
+      "respuesta": "Es JavaScript con tipos. Todo código JavaScript válido también es TypeScript, y al final se compila a JavaScript normal. Lo uso porque el editor me avisa de errores antes de ejecutar, como pasar un texto donde va un número o escribir mal una propiedad. Además el autocompletado mejora mucho y, cuando trabajo en equipo, los tipos sirven de documentación: sé qué recibe y qué devuelve cada función sin abrirla.",
+      "respuestaEn": "It is JavaScript with types. Any valid JavaScript is also TypeScript, and in the end it compiles to plain JavaScript. I use it because the editor warns me about mistakes before the code runs, like passing a string where a number is expected or misspelling a property. Autocomplete gets much better too, and on a team the types work as documentation: I know what each function takes and returns without opening it.",
+      "claves": [
+        "Es un superconjunto de JavaScript: agrega tipos y se compila a JavaScript que corre en el navegador o en Node.",
+        "Detecta errores al compilar, no en ejecución: te ahorra el bug que llegaría a producción por un `undefined` inesperado.",
+        "Inferencia: no hace falta anotar todo; `const total = 0` ya es `number`. Se anotan sobre todo parámetros y datos externos.",
+        "Su costo es honesto: un paso de compilación y una curva de aprendizaje; en un script pequeño puede no valer la pena, en un proyecto de equipo casi siempre sí."
+      ]
+    },
+    {
+      "id": "ent-102",
+      "pregunta": "¿Diferencia entre `interface` y `type`?",
+      "preguntaEn": "What is the difference between interface and type?",
+      "respuesta": "Las dos sirven para describir la forma de un objeto y en la mayoría de casos son intercambiables. `interface` se extiende con `extends` y se puede reabrir para agregarle campos. `type` es más flexible: puede ser una unión, una tupla o un nombre para un tipo primitivo. Mi regla es usar `interface` para objetos y props, y `type` cuando necesito uniones; lo importante es ser consistente en el proyecto.",
+      "respuestaEn": "\"Both describe the shape of an object, and in most cases they are interchangeable. `interface` is extended with `extends` and can be reopened to add fields. `type` is more flexible: it can be a union, a tuple or a name for a primitive type. My rule is `interface` for objects and props, and `type` when I need unions; what matters is being consistent across the project.\"\n\n```ts\ninterface Usuario {\n  id: number;\n  nombre: string;\n}\ninterface Admin extends Usuario {\n  permisos: string[];\n}\n\ntype Estado = \"cargando\" | \"error\" | \"listo\"; // esto solo se puede con type\ntype Punto = [number, number];\n```",
+      "claves": [
+        "Solo `type` puede representar uniones (`'a' | 'b'`), tuplas y alias de primitivos.",
+        "Solo `interface` permite fusión de declaraciones: dos `interface Ventana` con el mismo nombre se combinan; sirve para extender tipos de librerías.",
+        "Para extender: `interface B extends A {}`, o con `type`, una intersección: `type B = A & { extra: string }`.",
+        "En una entrevista no hay una opción “correcta”: muestra que conoces la diferencia y que eliges por consistencia."
+      ]
+    },
+    {
+      "id": "ent-103",
+      "pregunta": "¿Diferencia entre `any` y `unknown`?",
+      "preguntaEn": "What is the difference between any and unknown?",
+      "respuesta": "`any` apaga el chequeo de tipos: puedo hacer lo que sea con ese valor y TypeScript no me avisa nada, así que pierdo la razón de usarlo. `unknown` también acepta cualquier valor, pero no me deja usarlo hasta que compruebe qué es. Por eso, para datos que no controlo, como la respuesta de una API o un `JSON.parse`, uso `unknown` y valido antes de usarlo.",
+      "respuestaEn": "\"`any` turns type checking off: I can do anything with that value and TypeScript says nothing, so I lose the reason for using it. `unknown` also accepts any value, but it will not let me use it until I check what it is. So for data I do not control, like an API response or a `JSON.parse` result, I use `unknown` and validate before using it.\"\n\n```ts\nfunction longitud(valor: unknown): number {\n  // valor.length; // error: todavía no sé qué es\n  if (typeof valor === \"string\") return valor.length; // aquí ya es string\n  if (Array.isArray(valor)) return valor.length;\n  return 0;\n}\n```",
+      "claves": [
+        "`any` es contagioso: lo que sale de un `any` también es `any`, y el error aparece recién en ejecución.",
+        "`unknown` obliga a hacer narrowing (`typeof`, `instanceof`, `Array.isArray`) antes de usar el valor.",
+        "En un `catch (error)` el error es `unknown` en modo estricto: se revisa con `error instanceof Error` antes de leer `error.message`.",
+        "`never` es el extremo opuesto: el tipo de algo que no puede ocurrir, por ejemplo lo que devuelve una función que siempre lanza un error."
+      ]
+    },
+    {
+      "id": "ent-104",
+      "pregunta": "¿Qué son los tipos unión y qué es el narrowing?",
+      "preguntaEn": "What are union types and what is narrowing?",
+      "respuesta": "Una unión dice que un valor puede ser de un tipo u otro, por ejemplo `string | number`. Como TypeScript no sabe cuál es, solo me deja usar lo que tienen en común. El narrowing es comprobar el tipo con un `if`, por ejemplo con `typeof`, y dentro de ese bloque TypeScript ya sabe exactamente qué es y me deja usar sus métodos.",
+      "respuestaEn": "\"A union says a value can be one type or another, for example `string | number`. Since TypeScript does not know which one it is, it only lets me use what they have in common. Narrowing means checking the type with an `if`, for example with `typeof`, and inside that block TypeScript knows exactly what it is and lets me use its methods.\"\n\n```ts\nfunction formatearId(id: string | number): string {\n  if (typeof id === \"number\") {\n    return id.toFixed(0); // aquí id es number\n  }\n  return id.toUpperCase(); // aquí id es string\n}\n```",
+      "claves": [
+        "Formas de hacer narrowing: `typeof` para primitivos, `instanceof` para clases, `in` para propiedades (`'email' in usuario`) y comparar con un valor literal.",
+        "Los tipos literales hacen uniones muy útiles: `type Talla = 'S' | 'M' | 'L'`, y el editor autocompleta solo esos valores.",
+        "Un type guard propio, `function esAdmin(u: Usuario): u is Admin { ... }`, permite reutilizar la comprobación.",
+        "Trampa: `typeof null` es `'object'`, así que con objetos que pueden ser `null` también hay que comprobar `valor !== null`."
+      ]
+    },
+    {
+      "id": "ent-105",
+      "pregunta": "¿Qué son los genéricos?",
+      "preguntaEn": "What are generics?",
+      "respuesta": "Son como parámetros, pero para tipos. Me permiten escribir una función o un tipo que funciona con cualquier tipo sin perder información. Por ejemplo, una función que devuelve el primer elemento de un arreglo: si le paso números, TypeScript sabe que devuelve un número; si le paso usuarios, sabe que devuelve un usuario. Con `any` perdería esa información.",
+      "respuestaEn": "\"They are like parameters, but for types. They let me write a function or a type that works with any type without losing information. For example, a function that returns the first item of an array: if I pass numbers, TypeScript knows it returns a number; if I pass users, it knows it returns a user. With `any` I would lose that information.\"\n\n```ts\nfunction primero<T>(lista: T[]): T | undefined {\n  return lista[0];\n}\nconst n = primero([1, 2, 3]);           // number | undefined\nconst u = primero([{ nombre: \"Ana\" }]); // { nombre: string } | undefined\n```",
+      "claves": [
+        "La `T` casi siempre se infiere de los argumentos: no hace falta escribir `primero<number>(...)`.",
+        "Ya los usas sin notarlo: `Array<string>`, `Promise<Usuario>` y `useState<string>('')` son genéricos.",
+        "Restricciones con `extends`: `function porId<T extends { id: number }>(lista: T[], id: number)` exige que `T` tenga `id`.",
+        "Caso típico: una respuesta de API reutilizable, `type Respuesta<T> = { datos: T; error: string | null }`."
+      ]
+    },
+    {
+      "id": "ent-106",
+      "pregunta": "¿Qué utility types conoces y para qué los usas?",
+      "preguntaEn": "Which utility types do you know and what do you use them for?",
+      "respuesta": "Son tipos que vienen con TypeScript para transformar otros tipos sin reescribirlos. `Partial` vuelve opcionales todas las propiedades, útil para un formulario de edición. `Pick` y `Omit` eligen o quitan campos, por ejemplo un usuario sin la contraseña. `Record` sirve para objetos tipo diccionario y `Readonly` evita que se modifiquen.",
+      "respuestaEn": "\"They are types built into TypeScript that transform other types without rewriting them. `Partial` makes every property optional, which is handy for an edit form. `Pick` and `Omit` keep or remove fields, for example a user without the password. `Record` is for dictionary-like objects and `Readonly` prevents changes.\"\n\n```ts\ninterface Producto { id: number; nombre: string; precio: number; stock: number }\n\ntype CambiosProducto = Partial<Producto>;          // todo opcional\ntype ProductoNuevo = Omit<Producto, \"id\">;         // el id lo pone el servidor\ntype Resumen = Pick<Producto, \"nombre\" | \"precio\">;\nconst stockPorTienda: Record<string, number> = { lima: 10, cusco: 4 };\n```",
+      "claves": [
+        "`Partial<T>` y `Required<T>` cambian lo opcional; `Readonly<T>` impide reasignar propiedades.",
+        "`Pick<T, K>` elige claves y `Omit<T, K>` las quita: un solo tipo base genera las variantes y no se desincronizan.",
+        "`Record<K, V>` tipa diccionarios; `ReturnType<typeof fn>` obtiene el tipo que devuelve una función.",
+        "Idea clave: derivar tipos de uno base en lugar de copiarlos; si el tipo base cambia, todo se actualiza solo."
+      ]
+    },
+    {
+      "id": "ent-107",
+      "pregunta": "¿Qué es una unión discriminada?",
+      "preguntaEn": "What is a discriminated union?",
+      "respuesta": "Es una unión de objetos que comparten una propiedad con un valor literal distinto en cada uno, por ejemplo `estado`. Al revisar esa propiedad, TypeScript sabe cuál de los objetos es y qué otros campos tiene. La uso para modelar los estados de una petición: si el estado es `error` tengo el mensaje, si es `listo` tengo los datos, y no puedo leer datos que todavía no existen.",
+      "respuestaEn": "\"It is a union of objects that share a property with a different literal value in each one, for example `estado`. By checking that property, TypeScript knows which object it is and what other fields it has. I use it to model request states: if the state is `error` I have the message, if it is `listo` I have the data, and I cannot read data that does not exist yet.\"\n\n```ts\ntype Peticion =\n  | { estado: \"cargando\" }\n  | { estado: \"error\"; mensaje: string }\n  | { estado: \"listo\"; datos: string[] };\n\nfunction mostrar(p: Peticion): string {\n  switch (p.estado) {\n    case \"cargando\": return \"Cargando...\";\n    case \"error\": return p.mensaje;          // aquí existe mensaje\n    case \"listo\": return p.datos.join(\", \"); // aquí existe datos\n  }\n}\n```",
+      "claves": [
+        "La propiedad común (el discriminante) debe tener un tipo literal: `'error'`, no `string`.",
+        "Evita estados imposibles: con tres booleanos (`cargando`, `error`, `listo`) podrías tener dos en `true` a la vez; con una unión, no.",
+        "Chequeo exhaustivo: en el `default` escribes `const _x: never = p`; si alguien agrega un estado nuevo y no lo maneja, TypeScript marca error.",
+        "Es el mismo patrón de las acciones de un reducer: `{ type: 'agregar'; producto } | { type: 'quitar'; id }`."
+      ]
+    },
+    {
+      "id": "ent-108",
+      "pregunta": "¿Cómo tipas las props de un componente de React?",
+      "preguntaEn": "How do you type the props of a React component?",
+      "respuesta": "Defino un tipo con las props y lo pongo en el parámetro del componente, normalmente desestructurando. Las props opcionales llevan signo de interrogación y les doy un valor por defecto. Para los hijos uso `React.ReactNode` y para los eventos uso los tipos de React, como el del `onChange` de un input. También tipo el estado cuando no se puede inferir, como un `useState` que empieza en `null`.",
+      "respuestaEn": "\"I define a type with the props and put it on the component's parameter, usually destructuring. Optional props get a question mark and a default value. For children I use `React.ReactNode`, and for events I use React's types, like the one for an input's `onChange`. I also type state when it cannot be inferred, like a `useState` that starts as `null`.\"\n\n```tsx\ntype BotonProps = {\n  texto: string;\n  variante?: \"primario\" | \"secundario\";\n  onClick: () => void;\n};\n\nfunction Boton({ texto, variante = \"primario\", onClick }: BotonProps) {\n  return <button className={variante} onClick={onClick}>{texto}</button>;\n}\n\nconst [usuario, setUsuario] = useState<Usuario | null>(null);\n```",
+      "claves": [
+        "Props opcionales con `?` y valor por defecto en la desestructuración; uniones literales para variantes (`'primario' | 'secundario'`).",
+        "Hijos: `children: React.ReactNode`; eventos: `React.ChangeEvent<HTMLInputElement>` o `React.MouseEvent<HTMLButtonElement>`.",
+        "Para heredar las props nativas de un botón: `type Props = React.ComponentProps<'button'> & { variante: string }`.",
+        "`React.FC` ya no es necesario ni recomendado: basta con tipar el parámetro de la función."
+      ]
+    },
+    {
+      "id": "ent-109",
+      "pregunta": "¿Qué pasa con los tipos al compilar? ¿Te protegen en ejecución?",
+      "preguntaEn": "What happens to types when the code compiles? Do they protect you at runtime?",
+      "respuesta": "Se borran. TypeScript revisa los tipos y luego genera JavaScript normal sin ninguna anotación, así que en ejecución no existen. Eso significa que si una API me devuelve algo distinto de lo que declaré, TypeScript no me salva: el error aparece igual. Por eso los datos que vienen de afuera los valido en ejecución, a mano o con una librería como Zod.",
+      "respuestaEn": "\"They are erased. TypeScript checks the types and then emits plain JavaScript with no annotations, so at runtime they do not exist. That means if an API returns something different from what I declared, TypeScript does not save me: the error still happens. That is why I validate external data at runtime, by hand or with a library like Zod.\"\n\n```ts\n// Esto compila, pero es una promesa que yo hago, no una garantía:\nconst usuario = (await respuesta.json()) as Usuario;\n\n// En ejecución hay que comprobarlo de verdad:\nif (typeof usuario.nombre !== \"string\") throw new Error(\"Respuesta inválida\");\n```",
+      "claves": [
+        "Borrado de tipos: interfaces, tipos y anotaciones desaparecen del JavaScript generado; no puedes hacer `x instanceof MiInterface`.",
+        "`as` es una aserción: le dices a TypeScript “confía en mí”; no convierte ni valida nada.",
+        "Los datos externos (APIs, formularios, `localStorage`, `JSON.parse`) se validan en ejecución; Zod genera el tipo y la validación a la vez.",
+        "Vite y esbuild solo quitan los tipos sin revisarlos; la revisión real la hacen el editor y `tsc --noEmit`."
+      ]
+    },
+    {
+      "id": "ent-110",
+      "pregunta": "¿Cómo migrarías un proyecto de JavaScript a TypeScript?",
+      "preguntaEn": "How would you migrate a JavaScript project to TypeScript?",
+      "respuesta": "Poco a poco, no todo de golpe. Primero agrego TypeScript y un `tsconfig` con `allowJs`, para que los archivos `.js` y `.ts` convivan. Luego cambio archivo por archivo, empezando por los que no dependen de otros, como las utilidades y los tipos de los datos de la API. Al inicio uso una configuración menos estricta y voy activando `strict` cuando la base ya está tipada. Así el proyecto sigue funcionando en cada paso.",
+      "respuestaEn": "\"Gradually, not all at once. First I add TypeScript and a `tsconfig` with `allowJs`, so `.js` and `.ts` files can live together. Then I convert file by file, starting with the ones that do not depend on others, like utilities and the types for API data. At first I use a looser configuration and turn on `strict` once the base is typed. That way the project keeps working at every step.\"\n\n```json\n{\n  \"compilerOptions\": {\n    \"allowJs\": true,\n    \"checkJs\": false,\n    \"strict\": false,\n    \"noEmit\": true\n  }\n}\n```",
+      "claves": [
+        "Incremental: `allowJs` permite mezclar `.js` y `.ts`; cada archivo migrado es un commit pequeño que no rompe nada.",
+        "Orden útil: primero utilidades y modelos de datos (las hojas del árbol de dependencias), al final los componentes grandes.",
+        "Para librerías sin tipos se instalan los paquetes `@types/...`; si no existen, se declara un módulo mínimo.",
+        "Trampa: llenar todo de `any` para que compile; mejor `unknown` o un `any` puntual con un comentario, y activar `strict` al final."
+      ]
+    }
+  ]
+}

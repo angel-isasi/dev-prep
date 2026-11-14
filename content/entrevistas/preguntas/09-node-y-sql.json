@@ -1,0 +1,135 @@
+{
+  "categoria": "Node.js y SQL",
+  "preguntas": [
+    {
+      "id": "ent-111",
+      "pregunta": "¿Qué es Node.js y cómo atiende muchas peticiones con un solo hilo?",
+      "preguntaEn": "What is Node.js and how does it handle many requests with a single thread?",
+      "respuesta": "Node es un entorno para ejecutar JavaScript fuera del navegador, con el motor V8 de Chrome. Sirve para hacer servidores, APIs y herramientas como Vite. Mi código corre en un solo hilo, pero las operaciones lentas, como leer un archivo o consultar la base de datos, no lo bloquean: Node las delega y sigue atendiendo otras peticiones. Cuando terminan, el event loop ejecuta su callback. Por eso es muy bueno con muchas operaciones de entrada y salida, y no tanto con cálculos pesados.",
+      "respuestaEn": "\"Node is a runtime for running JavaScript outside the browser, built on Chrome's V8 engine. It is used for servers, APIs and tools like Vite. My code runs on a single thread, but slow operations, like reading a file or querying the database, do not block it: Node hands them off and keeps serving other requests. When they finish, the event loop runs their callback. That is why it is great for lots of I/O and not so great for heavy computation.\"\n\n```js\nimport { readFile } from \"node:fs/promises\";\n\n// No bloquea: mientras lee el archivo, Node atiende otras peticiones\nconst contenido = await readFile(\"datos.json\", \"utf8\");\n```",
+      "claves": [
+        "Node no es un lenguaje ni un framework: es un entorno de ejecución (runtime) con V8 más APIs del sistema como `fs`, `http` y `process`.",
+        "Entrada y salida no bloqueante: la librería libuv hace el trabajo lento en segundo plano y el event loop recibe los resultados.",
+        "Trampa: un cálculo pesado síncrono, o un `readFileSync` en cada petición, bloquea el único hilo y congela a todos los usuarios; para eso existen los worker threads.",
+        "No hay `window` ni `document`; en su lugar hay `process`, `fs` y otros módulos del sistema, y npm como gestor de paquetes."
+      ]
+    },
+    {
+      "id": "ent-112",
+      "pregunta": "¿Qué es una API REST?",
+      "preguntaEn": "What is a REST API?",
+      "respuesta": "Es una forma de diseñar una API sobre HTTP donde todo gira alrededor de recursos, como usuarios o productos, que se identifican con URLs. La acción la indica el método HTTP: GET para leer, POST para crear, PUT o PATCH para actualizar y DELETE para borrar. Normalmente intercambia JSON y no guarda estado entre peticiones: cada petición trae todo lo necesario, por ejemplo el token del usuario.",
+      "respuestaEn": "\"It is a way of designing an API over HTTP where everything revolves around resources, like users or products, identified by URLs. The HTTP method says what to do: GET to read, POST to create, PUT or PATCH to update and DELETE to remove. It usually exchanges JSON and keeps no state between requests: each request carries everything it needs, such as the user's token.\"\n\n```text\nGET    /api/productos      lista de productos\nGET    /api/productos/12   un producto\nPOST   /api/productos      crea uno (datos en el cuerpo)\nPATCH  /api/productos/12   actualiza algunos campos\nDELETE /api/productos/12   lo borra\n```",
+      "claves": [
+        "URLs con sustantivos en plural (`/productos/12`), no con verbos (`/obtenerProducto`): el verbo ya lo da el método HTTP.",
+        "Sin estado (stateless): el servidor no recuerda peticiones anteriores; la autenticación viaja en cada una, por ejemplo en un header.",
+        "Filtros y paginación van en la query: `/productos?categoria=libros&pagina=2`.",
+        "Alternativas que conviene poder nombrar: GraphQL, donde el cliente pide exactamente los campos que necesita, y RPC."
+      ]
+    },
+    {
+      "id": "ent-113",
+      "pregunta": "¿Qué métodos y códigos de estado HTTP usas más?",
+      "preguntaEn": "Which HTTP methods and status codes do you use most?",
+      "respuesta": "Métodos: GET para leer, POST para crear, PUT para reemplazar, PATCH para cambiar algunos campos y DELETE para borrar. Los códigos 200 son éxito: 200 OK, y 201 cuando se creó algo. Los 400 son errores del cliente: 400 datos inválidos, 401 no autenticado, 403 sin permiso y 404 no encontrado. Los 500 son errores del servidor. Me sirve mucho al depurar: si veo un 4xx reviso lo que envié; si es un 5xx, el problema está en el backend.",
+      "respuestaEn": "Methods: GET to read, POST to create, PUT to replace, PATCH to change some fields and DELETE to remove. 2xx codes mean success: 200 OK, and 201 when something was created. 4xx are client errors: 400 invalid data, 401 not authenticated, 403 forbidden and 404 not found. 5xx are server errors. This helps a lot when debugging: with a 4xx I check what I sent; with a 5xx the problem is in the backend.",
+      "claves": [
+        "Familias: 2xx éxito, 3xx redirección, 4xx error del cliente y 5xx error del servidor.",
+        "401 es “no sé quién eres” (falta el token o venció); 403 es “sé quién eres, pero no tienes permiso”.",
+        "GET, PUT y DELETE son idempotentes: repetirlos deja el mismo resultado; POST no, por eso un doble clic puede crear dos pedidos.",
+        "Otros útiles: 204 sin contenido (al borrar), 409 conflicto (correo ya registrado), 422 validación fallida y 429 demasiadas peticiones."
+      ]
+    },
+    {
+      "id": "ent-114",
+      "pregunta": "¿Qué es un middleware en Express?",
+      "preguntaEn": "What is middleware in Express?",
+      "respuesta": "Es una función que se ejecuta en medio, entre que llega la petición y se envía la respuesta. Recibe la petición, la respuesta y `next`. Puede revisar o modificar la petición, responder directamente o llamar a `next` para pasar al siguiente. Se usa para cosas comunes a muchas rutas: leer el JSON del cuerpo, registrar logs, revisar si el usuario inició sesión o habilitar CORS.",
+      "respuestaEn": "\"It is a function that runs in the middle, between the request arriving and the response being sent. It receives the request, the response and `next`. It can inspect or modify the request, respond directly, or call `next` to move on. It is used for things many routes share: parsing the JSON body, logging, checking that the user is logged in, or enabling CORS.\"\n\n```js\nconst app = express();\napp.use(express.json()); // middleware: convierte el cuerpo en req.body\n\nfunction requiereLogin(req, res, next) {\n  if (!req.headers.authorization) {\n    return res.status(401).json({ error: \"Falta el token\" });\n  }\n  next(); // sigue hacia la ruta\n}\n\napp.get(\"/api/perfil\", requiereLogin, (req, res) => res.json({ ok: true }));\n```",
+      "claves": [
+        "Firma `(req, res, next)`; se ejecutan en el orden en que se registran con `app.use` o en la ruta.",
+        "Si no llamas a `next()` ni respondes, la petición se queda colgada hasta que vence el tiempo de espera.",
+        "Pueden ser globales (`app.use(cors())`) o solo para ciertas rutas (`app.get('/admin', esAdmin, manejador)`).",
+        "El middleware de errores tiene cuatro parámetros, `(err, req, res, next)`, y se registra al final."
+      ]
+    },
+    {
+      "id": "ent-115",
+      "pregunta": "¿Cómo manejas los errores en una API?",
+      "preguntaEn": "How do you handle errors in an API?",
+      "respuesta": "Primero valido la entrada: si faltan datos o vienen mal, respondo 400 con un mensaje claro y no sigo. Para los errores inesperados tengo un middleware de errores al final que los atrapa, los registra en el log con todo el detalle y al cliente le responde un 500 con un mensaje genérico, sin mostrar el stack ni datos internos. Así el frontend siempre recibe el mismo formato de error y sabe qué mostrar.",
+      "respuestaEn": "\"First I validate the input: if data is missing or malformed, I respond with a 400 and a clear message and stop there. For unexpected errors I have an error middleware at the end that catches them, logs the full details, and sends the client a 500 with a generic message, without the stack trace or internal data. That way the frontend always gets the same error format and knows what to show.\"\n\n```js\napp.post(\"/api/pedidos\", async (req, res, next) => {\n  try {\n    if (!req.body.productoId) {\n      return res.status(400).json({ error: \"productoId es obligatorio\" });\n    }\n    const pedido = await crearPedido(req.body);\n    res.status(201).json(pedido);\n  } catch (error) {\n    next(error); // lo manda al middleware de errores\n  }\n});\n\napp.use((err, req, res, next) => {\n  console.error(err);\n  res.status(500).json({ error: \"Error interno, intenta más tarde\" });\n});\n```",
+      "claves": [
+        "Código de estado correcto: 400 o 422 para datos inválidos, 404 si no existe y 500 solo para fallos del servidor.",
+        "Formato consistente, por ejemplo `{ error: 'mensaje' }`, para que el frontend lo maneje en un solo lugar.",
+        "No filtrar detalles internos al cliente, como el stack o las consultas SQL: eso se queda en los logs.",
+        "En Express 4 un error dentro de una función `async` no llega solo al middleware: hay que hacer `try/catch` y `next(error)`; Express 5 ya lo pasa automáticamente."
+      ]
+    },
+    {
+      "id": "ent-116",
+      "pregunta": "¿Cómo funciona la autenticación con tokens (JWT)?",
+      "preguntaEn": "How does token-based authentication (JWT) work?",
+      "respuesta": "El usuario envía su correo y contraseña, el servidor los verifica y le devuelve un token firmado. Desde ahí, el frontend manda ese token en cada petición, normalmente en el header `Authorization`. El servidor revisa la firma y, si es válida, sabe quién es sin guardar una sesión. Un JWT tiene tres partes: cabecera, datos y firma. Los datos se pueden leer porque no están cifrados, así que nunca pongo ahí información sensible.",
+      "respuestaEn": "\"The user sends their email and password, the server verifies them and returns a signed token. From then on, the frontend sends that token with every request, usually in the `Authorization` header. The server checks the signature and, if it is valid, knows who the user is without storing a session. A JWT has three parts: header, payload and signature. The payload can be read because it is not encrypted, so I never put sensitive data in it.\"\n\n```js\n// Frontend: enviar el token en cada petición\nconst respuesta = await fetch(\"/api/perfil\", {\n  headers: { Authorization: `Bearer ${token}` },\n});\n```",
+      "claves": [
+        "La firma garantiza que nadie modificó el token, pero el contenido solo está en Base64: cualquiera lo puede leer.",
+        "Las contraseñas nunca se guardan en texto plano: se guarda un hash lento, como bcrypt o argon2.",
+        "Dónde guardarlo: `localStorage` es vulnerable a XSS; una cookie `httpOnly` y `Secure` no se puede leer desde JavaScript.",
+        "Los tokens deben vencer pronto (`exp`) y se renuevan con un refresh token; un JWT no se puede revocar fácilmente antes de que venza."
+      ]
+    },
+    {
+      "id": "ent-117",
+      "pregunta": "¿Diferencia entre SQL y NoSQL? ¿Cuándo usarías cada uno?",
+      "preguntaEn": "What is the difference between SQL and NoSQL, and when would you use each?",
+      "respuesta": "Una base SQL, como PostgreSQL o MySQL, guarda los datos en tablas con columnas definidas y relaciones entre ellas, y asegura la consistencia con transacciones. Una NoSQL, como MongoDB, guarda por ejemplo documentos parecidos a JSON con una estructura flexible. Usaría SQL cuando los datos están muy relacionados, como usuarios, pedidos y productos. NoSQL, cuando la estructura cambia mucho o hay grandes volúmenes de datos poco relacionados, como logs o eventos.",
+      "respuestaEn": "A SQL database, like PostgreSQL or MySQL, stores data in tables with defined columns and relationships between them, and guarantees consistency with transactions. A NoSQL database, like MongoDB, stores for example JSON-like documents with a flexible structure. I would use SQL when the data is highly related, like users, orders and products. NoSQL when the structure changes a lot or there are large volumes of loosely related data, like logs or events.",
+      "claves": [
+        "SQL: esquema fijo, relaciones con claves foráneas, JOIN y transacciones ACID.",
+        "NoSQL no es un solo tipo: documentos (MongoDB), clave-valor (Redis), columnas (Cassandra) y grafos (Neo4j).",
+        "En una base de documentos se suelen anidar o duplicar datos para leerlos rápido, a cambio de tener que mantener las copias al día.",
+        "Respuesta madura: para la mayoría de apps la opción por defecto es una base relacional como PostgreSQL; NoSQL se elige por una necesidad concreta."
+      ]
+    },
+    {
+      "id": "ent-118",
+      "pregunta": "¿Qué es un JOIN? ¿Diferencia entre INNER JOIN y LEFT JOIN?",
+      "preguntaEn": "What is a JOIN, and what is the difference between INNER JOIN and LEFT JOIN?",
+      "respuesta": "Un JOIN combina filas de dos tablas usando una columna que las relaciona, por ejemplo el id del cliente que está en la tabla de pedidos. INNER JOIN devuelve solo las filas que tienen pareja en las dos tablas: los clientes que tienen pedidos. LEFT JOIN devuelve todas las filas de la tabla de la izquierda y, si no tienen pareja, las columnas de la otra quedan en NULL: todos los clientes, aunque no hayan comprado nada.",
+      "respuestaEn": "\"A JOIN combines rows from two tables using a column that relates them, for example the customer id stored in the orders table. INNER JOIN returns only rows that have a match in both tables: customers who have orders. LEFT JOIN returns every row from the left table and, when there is no match, the other table's columns are NULL: all customers, even those who never bought anything.\"\n\n```sql\n-- Todos los clientes con su cantidad de pedidos, incluidos los que tienen 0\nSELECT c.nombre, COUNT(p.id) AS pedidos\nFROM clientes c\nLEFT JOIN pedidos p ON p.cliente_id = c.id\nGROUP BY c.id, c.nombre;\n```",
+      "claves": [
+        "La condición va en `ON`: `pedidos.cliente_id = clientes.id`, una clave foránea con una clave primaria.",
+        "INNER JOIN es la intersección; LEFT JOIN conserva todo lo de la izquierda; RIGHT JOIN es lo mismo al revés y casi no se usa.",
+        "Para encontrar lo que no tiene pareja: `LEFT JOIN` más `WHERE p.id IS NULL` (clientes sin pedidos).",
+        "Trampa: con LEFT JOIN, `COUNT(*)` cuenta 1 para un cliente sin pedidos; `COUNT(p.id)` cuenta 0 porque ignora los NULL."
+      ]
+    },
+    {
+      "id": "ent-119",
+      "pregunta": "¿Qué es la inyección SQL y cómo la evitas?",
+      "preguntaEn": "What is SQL injection and how do you prevent it?",
+      "respuesta": "Pasa cuando armo una consulta pegando el texto del usuario directamente en el SQL. Si alguien escribe algo como `' OR '1'='1` en el login, cambia el sentido de la consulta y puede entrar sin contraseña o incluso borrar datos. Se evita con consultas parametrizadas: escribo la consulta con marcadores y paso los valores aparte, así la base de datos siempre los trata como datos y nunca como código. Los ORM, como Prisma, lo hacen por mí.",
+      "respuestaEn": "\"It happens when I build a query by pasting user text directly into the SQL. If someone types something like `' OR '1'='1` into the login form, it changes the meaning of the query and they can get in without a password or even delete data. It is prevented with parameterized queries: I write the query with placeholders and pass the values separately, so the database always treats them as data, never as code. ORMs like Prisma do this for me.\"\n\n```js\n// Mal: el texto del usuario se vuelve parte del SQL\ndb.query(`SELECT * FROM usuarios WHERE email = '${email}'`);\n\n// Bien: consulta parametrizada\ndb.query(\"SELECT * FROM usuarios WHERE email = $1\", [email]);\n```",
+      "claves": [
+        "Causa: concatenar o interpolar entrada del usuario en el SQL. Solución: parámetros (`$1`, `?`), un ORM o un query builder.",
+        "Escapar comillas a mano no basta; validar la entrada ayuda, pero no reemplaza a los parámetros.",
+        "Trampa: los ORM también tienen métodos de SQL crudo, como `$queryRawUnsafe` en Prisma, que vuelven a abrir la puerta si se interpola texto.",
+        "Defensa extra: que el usuario de base de datos de la app tenga los permisos mínimos, por ejemplo que no pueda borrar tablas."
+      ]
+    },
+    {
+      "id": "ent-120",
+      "pregunta": "¿Qué es una transacción en una base de datos?",
+      "preguntaEn": "What is a database transaction?",
+      "respuesta": "Es un grupo de operaciones que se ejecutan como una sola: o se hacen todas o no se hace ninguna. El ejemplo clásico es una transferencia: restar de una cuenta y sumar a otra. Si falla la segunda, la primera se deshace con un rollback y el dinero no desaparece. En una tienda la usaría para crear un pedido y descontar el stock al mismo tiempo.",
+      "respuestaEn": "\"It is a group of operations that run as one: either all of them happen or none do. The classic example is a transfer: subtract from one account and add to another. If the second step fails, the first one is undone with a rollback and the money does not vanish. In a store I would use one to create an order and reduce the stock at the same time.\"\n\n```sql\nBEGIN;\nUPDATE cuentas SET saldo = saldo - 100 WHERE id = 1;\nUPDATE cuentas SET saldo = saldo + 100 WHERE id = 2;\nCOMMIT; -- si algo falla antes, se hace ROLLBACK y nada cambia\n```",
+      "claves": [
+        "Se abre con `BEGIN`, se confirma con `COMMIT` y se cancela con `ROLLBACK`.",
+        "ACID: Atomicidad (todo o nada), Consistencia (se cumplen las reglas), Aislamiento (las transacciones no se pisan) y Durabilidad (lo confirmado no se pierde).",
+        "Sin transacción, si el servidor se cae entre los dos pasos, los datos quedan a medias.",
+        "Deben ser cortas: mientras están abiertas pueden bloquear filas que otras peticiones necesitan."
+      ]
+    }
+  ]
+}

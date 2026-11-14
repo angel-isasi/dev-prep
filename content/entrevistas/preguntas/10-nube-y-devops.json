@@ -1,0 +1,135 @@
+{
+  "categoria": "Nube y DevOps (conceptos)",
+  "preguntas": [
+    {
+      "id": "ent-121",
+      "pregunta": "¿Qué es la nube y por qué la usan las empresas?",
+      "preguntaEn": "What is the cloud and why do companies use it?",
+      "respuesta": "La nube es usar servidores, almacenamiento y bases de datos de un proveedor, como AWS, Azure o Google Cloud, a través de internet, en lugar de comprar y mantener máquinas propias. Las empresas la usan porque pagan solo por lo que consumen, pueden crecer en minutos cuando llegan más usuarios y no se preocupan por el hardware. Como frontend, la toco sobre todo al desplegar: mi app vive en la nube aunque yo no administre los servidores.",
+      "respuestaEn": "The cloud means using a provider's servers, storage and databases, like AWS, Azure or Google Cloud, over the internet instead of buying and maintaining your own machines. Companies use it because they pay only for what they use, can grow in minutes when more users arrive, and do not have to worry about hardware. As a frontend developer, I mostly touch it when deploying: my app lives in the cloud even though I do not manage the servers.",
+      "claves": [
+        "Ventajas clave: pago por uso, escalar rápido (subir o bajar recursos según la demanda) y no mantener hardware propio.",
+        "Modelos: IaaS (te dan la máquina, como EC2), PaaS (te dan la plataforma, como Vercel o Heroku) y SaaS (el software listo, como Gmail).",
+        "Los proveedores grandes tienen regiones en distintas partes del mundo para estar cerca del usuario y tener respaldo si una falla.",
+        "No es gratis ni mágica: una mala configuración puede costar caro, por eso existen las alertas de presupuesto."
+      ]
+    },
+    {
+      "id": "ent-122",
+      "pregunta": "¿Qué es AWS y qué servicios conoces?",
+      "preguntaEn": "What is AWS and which services do you know?",
+      "respuesta": "AWS es la nube de Amazon, la más usada. No la he administrado en producción, pero conozco los servicios principales y para qué sirven desde el lado del frontend. S3 guarda archivos: ahí puedo subir el build de una app de React o las fotos que suben los usuarios. CloudFront es su CDN: entrega esos archivos rápido desde servidores cercanos al usuario. EC2 son máquinas virtuales donde puede correr un backend. Y Lambda ejecuta funciones sin administrar servidores, por ejemplo una que procesa un formulario de contacto.",
+      "respuestaEn": "AWS is Amazon's cloud, the most widely used one. I have not managed it in production, but I know the main services and what they are for from the frontend side. S3 stores files: I can upload a React app's build there, or the photos users upload. CloudFront is its CDN: it delivers those files quickly from servers close to the user. EC2 provides virtual machines where a backend can run. And Lambda runs functions without managing servers, for example one that processes a contact form.",
+      "claves": [
+        "S3: almacenamiento de archivos (objetos) en “buckets”; puede servir un sitio estático como la carpeta `dist` de Vite.",
+        "CloudFront: CDN que cachea y entrega el contenido desde ubicaciones cercanas al usuario, con HTTPS.",
+        "EC2: una máquina virtual que alquilas por hora y en la que tú instalas y mantienes todo. Lambda: subes una función y AWS la ejecuta cuando llega un evento.",
+        "Otros que suenan en entrevistas: RDS (bases SQL administradas), DynamoDB (NoSQL), API Gateway (expone funciones Lambda como API) e IAM (usuarios y permisos)."
+      ]
+    },
+    {
+      "id": "ent-123",
+      "pregunta": "¿Qué es serverless?",
+      "preguntaEn": "What is serverless?",
+      "respuesta": "Serverless no significa que no haya servidores, sino que yo no los administro. Escribo una función, la subo y el proveedor la ejecuta solo cuando llega una petición, escala solo y cobra por cada ejecución. Por ejemplo, en Vercel, Netlify o AWS Lambda puedo crear una función que reciba un formulario de contacto y envíe un correo, sin montar un backend completo. La desventaja es el arranque en frío: la primera llamada después de un rato sin uso puede tardar un poco más.",
+      "respuestaEn": "\"Serverless does not mean there are no servers; it means I do not manage them. I write a function, upload it, and the provider runs it only when a request arrives, scales it automatically and charges per execution. For example, on Vercel, Netlify or AWS Lambda I can create a function that receives a contact form and sends an email, without building a full backend. The downside is the cold start: the first call after a while without traffic can take a bit longer.\"\n\n```js\n// AWS Lambda: solo se ejecuta cuando llega una petición\nexport const handler = async (event) => {\n  const datos = JSON.parse(event.body);\n  return { statusCode: 200, body: JSON.stringify({ recibido: datos.email }) };\n};\n```",
+      "claves": [
+        "Ventajas: no administras servidores, escala automáticamente (de cero a miles de llamadas) y pagas solo cuando se ejecuta.",
+        "Desventajas: arranque en frío (cold start), un tiempo máximo por ejecución y dificultad para mantener conexiones abiertas.",
+        "Las funciones no guardan estado entre llamadas: lo que deba persistir va a una base de datos o a S3, no a una variable.",
+        "Ejemplos: AWS Lambda, las funciones de Vercel y Netlify, y Cloudflare Workers."
+      ]
+    },
+    {
+      "id": "ent-124",
+      "pregunta": "¿Qué es Docker? ¿Diferencia entre un contenedor y una máquina virtual?",
+      "preguntaEn": "What is Docker, and what is the difference between a container and a virtual machine?",
+      "respuesta": "Docker empaqueta una aplicación con todo lo que necesita, como la versión de Node y las dependencias, en una imagen. Esa imagen corre igual en mi laptop, en la de un compañero y en el servidor, y así se acaba el “en mi máquina sí funciona”. Un contenedor es esa imagen en ejecución. A diferencia de una máquina virtual, no trae un sistema operativo completo: comparte el núcleo del sistema anfitrión, por eso arranca en segundos y pesa mucho menos. No lo he usado en producción, pero sé leer un Dockerfile sencillo y entiendo para qué sirve.",
+      "respuestaEn": "\"Docker packages an application with everything it needs, like the Node version and the dependencies, into an image. That image runs the same on my laptop, on a teammate's and on the server, which ends the 'it works on my machine' problem. A container is that image running. Unlike a virtual machine, it does not include a full operating system: it shares the host's kernel, so it starts in seconds and is much lighter. I have not used it in production, but I can read a simple Dockerfile and I understand what it is for.\"\n\n```dockerfile\nFROM node:22-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nCMD [\"node\", \"server.js\"]\n```",
+      "claves": [
+        "Imagen: la plantilla de solo lectura, definida en un `Dockerfile`; contenedor: una instancia en ejecución de esa imagen.",
+        "Contenedor contra VM: el contenedor comparte el kernel del anfitrión y aísla procesos; la VM virtualiza el hardware y trae su propio sistema operativo.",
+        "Por eso los contenedores pesan megas y arrancan en segundos; las VM pesan gigas y tardan más, aunque aíslan más.",
+        "`docker compose` levanta varios contenedores juntos, por ejemplo la API y PostgreSQL, con un solo comando."
+      ]
+    },
+    {
+      "id": "ent-125",
+      "pregunta": "¿Qué es Kubernetes?",
+      "preguntaEn": "What is Kubernetes?",
+      "respuesta": "En una frase: es un sistema que administra muchos contenedores repartidos en varios servidores. Si Docker empaqueta la app, Kubernetes decide dónde corre cada contenedor, levanta más copias cuando hay mucho tráfico y reemplaza las que se caen. No lo he usado y, como frontend junior, no espero administrarlo, pero sé para qué existe y que normalmente está a cargo del equipo de infraestructura.",
+      "respuestaEn": "In one sentence: it is a system that manages many containers spread across several servers. If Docker packages the app, Kubernetes decides where each container runs, starts more copies when traffic is high and replaces the ones that crash. I have not used it and, as a junior frontend developer, I do not expect to manage it, but I know what it is for and that it is usually owned by the infrastructure team.",
+      "claves": [
+        "Es un orquestador de contenedores: despliega, escala y reinicia contenedores automáticamente.",
+        "Vocabulario mínimo: pod (uno o más contenedores que van juntos), nodo (una máquina del clúster) y deployment (cuántas copias quieres de algo).",
+        "Versiones administradas en la nube: EKS en AWS, GKE en Google Cloud y AKS en Azure.",
+        "Decir que no lo has usado y explicar bien para qué sirve vale más que inventar experiencia; para muchas apps es más de lo que se necesita."
+      ]
+    },
+    {
+      "id": "ent-126",
+      "pregunta": "¿Qué es CI/CD?",
+      "preguntaEn": "What is CI/CD?",
+      "respuesta": "CI es integración continua: cada vez que subo cambios, un servicio como GitHub Actions instala las dependencias y corre el linter, los tests y el build automáticamente. Si algo falla, me entero antes de juntar mi código con el de los demás. CD es despliegue continuo: si todo pasa, la app se publica sola. En un proyecto de frontend, por ejemplo, cada pull request genera una vista previa y al juntar en `main` se despliega a producción.",
+      "respuestaEn": "\"CI is continuous integration: every time I push changes, a service like GitHub Actions installs dependencies and runs the linter, the tests and the build automatically. If something fails, I find out before merging my code with everyone else's. CD is continuous deployment: if everything passes, the app is published automatically. In a frontend project, for example, every pull request gets a preview and merging into `main` deploys to production.\"\n\n```yaml\n# .github/workflows/ci.yml\nname: CI\non: [push, pull_request]\njobs:\n  pruebas:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 22\n      - run: npm ci\n      - run: npm test\n      - run: npm run build\n```",
+      "claves": [
+        "CI: integrar cambios seguido y verificarlos automáticamente (lint, tests y build) en cada push o pull request.",
+        "CD puede ser entrega continua (queda listo para publicar con un clic) o despliegue continuo (se publica solo si todo pasa).",
+        "Herramientas: GitHub Actions, GitLab CI y Jenkins; Vercel y Netlify traen su propio despliegue conectado al repositorio.",
+        "El beneficio real es la confianza: ningún cambio llega a producción sin pasar los tests, y se despliega seguido, en pasos pequeños."
+      ]
+    },
+    {
+      "id": "ent-127",
+      "pregunta": "¿Cómo desplegarías una app de React?",
+      "preguntaEn": "How would you deploy a React app?",
+      "respuesta": "Una app de React con Vite, al hacer el build, se convierte en archivos estáticos: HTML, JavaScript y CSS en la carpeta `dist`. Lo más simple es conectar el repositorio a Vercel o Netlify: detectan Vite, corren el build y cada push a `main` se publica solo, con HTTPS y una vista previa por cada pull request. En AWS subiría `dist` a un bucket de S3 y pondría CloudFront delante como CDN. Para proyectos personales uso Vercel; el camino de S3 con CloudFront no lo he hecho en producción, pero sé cómo funciona.",
+      "respuestaEn": "A Vite React app becomes static files when built: HTML, JavaScript and CSS in the `dist` folder. The simplest option is connecting the repository to Vercel or Netlify: they detect Vite, run the build, and every push to `main` is published automatically, with HTTPS and a preview for each pull request. On AWS I would upload `dist` to an S3 bucket and put CloudFront in front as the CDN. For personal projects I use Vercel; I have not done the S3 and CloudFront setup in production, but I know how it works.",
+      "claves": [
+        "`npm run build` genera archivos estáticos: una SPA no necesita un servidor Node, solo un hosting de archivos o un CDN.",
+        "Trampa de las SPA: al recargar `/perfil`, el servidor busca ese archivo y responde 404; hay que redirigir todas las rutas a `index.html` (rewrite).",
+        "Las variables `VITE_` se insertan durante el build: si cambias una, hay que construir y desplegar de nuevo.",
+        "Con S3 y CloudFront, al desplegar se invalida la caché o se confía en los nombres con hash para que los usuarios reciban la versión nueva."
+      ]
+    },
+    {
+      "id": "ent-128",
+      "pregunta": "¿Qué son las variables de entorno y cómo manejas los secretos?",
+      "preguntaEn": "What are environment variables and how do you handle secrets?",
+      "respuesta": "Son valores de configuración que viven fuera del código, como la URL de la API o una clave, y que cambian según el entorno: desarrollo, pruebas o producción. En local las pongo en un archivo `.env` que está en el `.gitignore`, y en producción se configuran en el panel de Vercel o del servicio de la nube. Algo clave en frontend: todo lo que llega al navegador es público. Una clave secreta nunca va en el código del frontend; la uso desde el backend o desde una función serverless.",
+      "respuestaEn": "\"They are configuration values that live outside the code, like the API URL or a key, and change per environment: development, testing or production. Locally I put them in a `.env` file listed in `.gitignore`, and in production they are set in the Vercel dashboard or the cloud provider's console. One key point for frontend: everything that reaches the browser is public. A secret key never goes in frontend code; I use it from the backend or from a serverless function.\"\n\n```bash\n# .env (no se sube a Git)\nVITE_API_URL=https://api.ejemplo.com   # pública: termina dentro del bundle\nPAGOS_CLAVE_SECRETA=cambia-esto        # secreta: solo la lee el servidor\n```",
+      "claves": [
+        "En Vite solo las variables con prefijo `VITE_` llegan al frontend y se leen con `import.meta.env`; en Node se leen con `process.env`.",
+        "Todo lo que está en el bundle se puede ver en DevTools: guardarlo en una variable `VITE_` no lo vuelve secreto.",
+        "`.env` va en `.gitignore`; se sube un `.env.example` con los nombres de las variables, sin valores reales.",
+        "Si un secreto se sube por error a Git, borrarlo en otro commit no basta: queda en el historial y hay que cambiar la clave (rotarla)."
+      ]
+    },
+    {
+      "id": "ent-129",
+      "pregunta": "¿Qué es un CDN y por qué hace más rápida una web?",
+      "preguntaEn": "What is a CDN and why does it make a website faster?",
+      "respuesta": "Un CDN es una red de servidores repartidos por el mundo que guardan copias de los archivos de mi web, como el JavaScript, el CSS y las imágenes. Cuando alguien en Lima abre la página, recibe los archivos desde el servidor más cercano y no desde uno en Estados Unidos, así que carga más rápido. Además le quita carga al servidor principal y ayuda a soportar picos de tráfico. Vercel, Netlify y CloudFront funcionan así.",
+      "respuestaEn": "A CDN is a network of servers spread around the world that keep copies of my site's files, like the JavaScript, CSS and images. When someone in Lima opens the page, they get the files from the nearest server instead of one in the United States, so it loads faster. It also takes load off the main server and helps handle traffic spikes. Vercel, Netlify and CloudFront work this way.",
+      "claves": [
+        "Menos distancia es menos latencia: el usuario recibe los archivos desde un servidor cercano, en el borde (edge).",
+        "Cachea sobre todo contenido estático; el header `Cache-Control` le indica cuánto tiempo guardar cada archivo.",
+        "Los nombres con hash que genera Vite (`index-a1b2c3.js`) permiten cachear por mucho tiempo: cada versión nueva tiene otro nombre.",
+        "Ejemplos: Cloudflare, CloudFront de AWS y la red de Vercel o Netlify; también ayudan a absorber ataques DDoS."
+      ]
+    },
+    {
+      "id": "ent-130",
+      "pregunta": "¿Qué significa escalar una aplicación? ¿Horizontal o vertical?",
+      "preguntaEn": "What does it mean to scale an application? Horizontal or vertical?",
+      "respuesta": "Escalar es preparar la app para atender a más usuarios. Escalar vertical es darle más potencia a la misma máquina, más CPU o más memoria: es simple, pero tiene un límite y, si esa máquina se cae, se cae todo. Escalar horizontal es agregar más máquinas iguales y repartir las peticiones con un balanceador de carga; es lo que la nube hace de forma automática. No lo he configurado yo, pero entiendo por qué, para escalar horizontal, el servidor no debe guardar estado en su memoria.",
+      "respuestaEn": "Scaling means getting the app ready to serve more users. Vertical scaling gives the same machine more power, more CPU or more memory: it is simple, but it has a limit and, if that machine goes down, everything goes down. Horizontal scaling adds more identical machines and spreads requests with a load balancer; that is what the cloud does automatically. I have not configured it myself, but I understand why, to scale horizontally, the server must not keep state in its own memory.",
+      "claves": [
+        "Vertical: una máquina más grande (scale up). Horizontal: más máquinas (scale out) detrás de un balanceador de carga.",
+        "Para escalar horizontal, la app debe ser sin estado: las sesiones van en una base de datos o en Redis, no en la memoria de un servidor.",
+        "La nube lo automatiza con autoescalado: agrega instancias cuando sube el tráfico y las quita cuando baja.",
+        "El frontend también ayuda: un CDN y una buena caché reducen las peticiones que llegan al servidor."
+      ]
+    }
+  ]
+}
