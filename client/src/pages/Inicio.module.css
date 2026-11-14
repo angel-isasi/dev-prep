@@ -5,18 +5,13 @@
   isolation: isolate;
 }
 
-/* Cuadrícula animada: visible arriba y se desvanece hacia abajo y a los lados */
-.cuadricula {
-  z-index: -1;
-  height: 520px !important;
-  mask-image: radial-gradient(700px 360px at 50% 0%, #000 20%, transparent 75%);
-}
-
-.particulas {
-  position: absolute;
+/* Rejilla de puntos (React Bits) detrás de todo Inicio */
+.puntos {
+  position: absolute !important;
   inset: 0;
   z-index: -1;
 }
+
 
 .pagina {
   position: relative;
@@ -436,4 +431,43 @@
   .ping::after {
     animation: none;
   }
+}
+
+/* Aviso de deuda dentro del borde eléctrico: el margen lo lleva el envoltorio */
+.electrico {
+  margin-bottom: var(--espacio-5);
+}
+
+.electrico .aviso {
+  margin: 0;
+}
+
+/* Letras aún "cifradas" de la frase del día */
+.cifrado {
+  color: var(--acento);
+  opacity: 0.7;
+  font-family: var(--fuente-codigo);
+  font-style: normal;
+  font-size: 0.92em;
+}
+
+/* Tanque de la meta de hoy: con borde fino para que se vea aunque esté vacío */
+.tanque {
+  flex: none;
+  box-shadow:
+    inset 0 0 0 1px var(--borde-fuerte),
+    0 0 18px var(--acento-suave);
+}
+
+/* Días restantes en el tablero de fichas */
+.tablero {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--espacio-2);
+  margin: 2px 0;
+}
+
+.tablero small {
+  color: var(--texto-tenue);
+  font-size: 14px;
 }

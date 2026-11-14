@@ -9,12 +9,10 @@ porque así funcionan offline y se pueden ajustar: es lo que recomiendan las pro
 | `border-beam.jsx` | Magic UI | magicui.design/docs/components/border-beam |
 | `aurora-text.jsx` | Magic UI | magicui.design/docs/components/aurora-text |
 | `particles.jsx` | Magic UI | magicui.design/docs/components/particles |
-| `spotlight.jsx` | Aceternity UI | ui.aceternity.com/components/spotlight-new |
 | `text-effect.jsx` | Motion Primitives | motion-primitives.com/docs/text-effect |
 | `animated-group.jsx` | Motion Primitives | motion-primitives.com/docs/animated-group |
 | `sliding-number.jsx` | Animate UI | animate-ui.com/docs/primitives/texts/sliding-number |
 | `liquid-button.jsx` | RareUI | github.com/Codewithswappy/RareUI |
-| `animated-grid-pattern.jsx` | Magic UI | magicui.design/docs/components/animated-grid-pattern |
 | `shine-border.jsx` | Magic UI | magicui.design/docs/components/shine-border |
 | `animated-shiny-text.jsx` | Magic UI | magicui.design/docs/components/animated-shiny-text |
 | `meteors.jsx` | Magic UI | magicui.design/docs/components/meteors |

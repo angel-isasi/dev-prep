@@ -1,26 +1,36 @@
 import { Outlet, useLocation } from "react-router";
 import { motion, useReducedMotion } from "motion/react";
 import { BarraLateral } from "./BarraLateral.jsx";
+import ClickSpark from "./reactbits/ClickSpark.jsx";
+import Noise from "./reactbits/Noise.jsx";
+import { useColorTema, usePorTema } from "../hooks/useColorTema.js";
 import estilos from "./Layout.module.css";
 
 export function Layout() {
   const { pathname } = useLocation();
   const reducido = useReducedMotion();
+  const acento = useColorTema("--acento");
+  const grano = usePorTema({ oscuro: 0.06, claro: 0.035 });
 
   return (
-    <div className={estilos.layout}>
-      <BarraLateral />
-      <main className={estilos.principal}>
-        {/* Cada página entra con un pequeño fundido hacia arriba */}
-        <motion.div
-          key={pathname}
-          initial={reducido ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
-        >
-          <Outlet />
-        </motion.div>
-      </main>
-    </div>
+    // Chispas en cada clic, en toda la app (React Bits)
+    <ClickSpark sparkColor={acento} sparkCount={9} sparkSize={11} sparkRadius={24} duration={450} glow={0.35}>
+      <div className={estilos.layout}>
+        <BarraLateral />
+        <main className={estilos.principal}>
+          {/* Cada página entra con un pequeño fundido hacia arriba */}
+          <motion.div
+            key={pathname}
+            initial={reducido ? false : { opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
+          >
+            <Outlet />
+          </motion.div>
+        </main>
+      </div>
+      {/* Grano de película muy suave encima de todo (React Bits) */}
+      <Noise fixed opacity={grano} size={1} fps={18} contrast={0.5} zIndex={50} />
+    </ClickSpark>
   );
 }

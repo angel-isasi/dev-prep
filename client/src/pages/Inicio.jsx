@@ -6,8 +6,12 @@ import { nombreTema } from "../lib/etiquetas.js";
 import { Insignia } from "../components/Insignia.jsx";
 import { NumeroAnimado } from "../components/NumeroAnimado.jsx";
 import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
+import "../components/reactbits/DotGrid.css";
+import "../components/reactbits/ElectricBorder.css";
+import "../components/reactbits/SloshGauge.css";
+import "../components/reactbits/SplitFlapText.css";
 import { Esqueleto } from "../components/Esqueleto.jsx";
-import { useColorTema } from "../hooks/useColorTema.js";
+import { useColorTema, usePorTema } from "../hooks/useColorTema.js";
 import { AnimatedGroup } from "../components/ui/animated-group.jsx";
 import { AuroraText } from "../components/ui/aurora-text.jsx";
 import { BorderBeam } from "../components/ui/border-beam.jsx";
@@ -15,14 +19,15 @@ import { LiquidButton } from "../components/ui/liquid-button.jsx";
 import { MagicCard } from "../components/ui/magic-card.jsx";
 import { Particles } from "../components/ui/particles.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
-import { Spotlight } from "../components/ui/spotlight.jsx";
-import { TextEffect } from "../components/ui/text-effect.jsx";
-import { AnimatedGridPattern } from "../components/ui/animated-grid-pattern.jsx";
 import { AnimatedShinyText } from "../components/ui/animated-shiny-text.jsx";
 import { CardBody, CardContainer, CardItem } from "../components/ui/card-3d.jsx";
-import { Meteors } from "../components/ui/meteors.jsx";
 import { ShineBorder } from "../components/ui/shine-border.jsx";
 import { GraficoSemana } from "../components/GraficoSemana.jsx";
+import DecryptedText from "../components/reactbits/DecryptedText.jsx";
+import DotGrid from "../components/reactbits/DotGrid.jsx";
+import ElectricBorder from "../components/reactbits/ElectricBorder.jsx";
+import SloshGauge from "../components/reactbits/SloshGauge.jsx";
+import SplitFlapText from "../components/reactbits/SplitFlapText.jsx";
 import estilos from "./Inicio.module.css";
 
 const RITMO = {
@@ -43,6 +48,13 @@ export function Inicio() {
   const navegar = useNavigate();
   const colorAcento = useColorTema("--acento");
   const colorAviso = useColorTema("--aviso");
+  const colorError = useColorTema("--error");
+  const colorExito = useColorTema("--exito");
+  const colorTexto = useColorTema("--texto");
+  const tema = usePorTema({
+    oscuro: { punto: "#24222e", vidrio: "#23212d", ficha: "#17161d" },
+    claro: { punto: "#d6d3e1", vidrio: "#ebe9f1", ficha: "#ffffff" },
+  });
 
   const cargar = () => api.inicio().then(setDatos, (e) => setError(e.message));
   useEffect(() => {
@@ -62,10 +74,19 @@ export function Inicio() {
 
   return (
     <div className={estilos.escena}>
-      {/* Fondo de Inicio: foco de luz (Aceternity) y partículas que siguen al mouse (Magic UI) */}
-      <AnimatedGridPattern className={estilos.cuadricula} numSquares={28} maxOpacity={0.35} duration={3.5} />
-      <Spotlight />
-      <Particles className={estilos.particulas} quantity={45} color={colorAcento} staticity={40} />
+      {/* Fondo de Inicio: rejilla de puntos que el mouse empuja; un clic manda una onda (React Bits) */}
+      <DotGrid
+        className={estilos.puntos}
+        dotSize={3}
+        gap={22}
+        baseColor={tema.punto}
+        activeColor={colorAcento}
+        proximity={130}
+        shockRadius={260}
+        shockStrength={4}
+        glow={0.4}
+        fade={0.35}
+      />
 
     <section className={estilos.pagina}>
       <header className={estilos.cabecera}>
@@ -79,9 +100,17 @@ export function Inicio() {
             <AuroraText>Hola</AuroraText>
           )}
         </h1>
-        <TextEffect as="p" preset="fade-in-blur" per="word" delay={0.25} speedReveal={1.2} className={estilos.frase}>
-          {frase}
-        </TextEffect>
+        <p className={estilos.frase}>
+          <DecryptedText
+            text={frase}
+            animateOn="view"
+            sequential
+            revealDirection="start"
+            speed={22}
+            characters="abcdefghijklmnopqrstuvwxyz{}[]()<>=/;:.$_"
+            encryptedClassName={estilos.cifrado}
+          />
+        </p>
       </header>
 
       {config.objetivo ? (
@@ -101,12 +130,24 @@ export function Inicio() {
           Meta de hoy cumplida. Si te quedan ganas, un repaso más nunca sobra.
         </p>
       ) : ayer && !ayer.cumplio ? (
-        <p className={estilos.aviso} data-tipo="error">
-          <ShineBorder shineColor={["var(--error)", "var(--aviso)"]} duration={8} borderWidth={1.5} />
-          <span className={estilos.alerta} aria-hidden />
-          Ayer no cumpliste tu meta ({ayer.hecho} de {config.metaDiaria}). Hoy te toca {meta.objetivo}
-          {meta.deuda > 0 && `, incluida una deuda de ${meta.deuda}`}.
-        </p>
+        <ElectricBorder
+          className={estilos.electrico}
+          color={colorError}
+          borderRadius={8}
+          thickness={1.2}
+          strands={2}
+          chaos={0.45}
+          glow={0.5}
+          intensity={0.7}
+          arcs={1}
+          cursorRadius={110}
+        >
+          <p className={estilos.aviso} data-tipo="error">
+            <span className={estilos.alerta} aria-hidden />
+            Ayer no cumpliste tu meta ({ayer.hecho} de {config.metaDiaria}). Hoy te toca {meta.objetivo}
+            {meta.deuda > 0 && `, incluida una deuda de ${meta.deuda}`}.
+          </p>
+        </ElectricBorder>
       ) : null}
 
       <AnimatedGroup preset="blur-slide" stagger={0.08} className={estilos.tarjetas} itemClassName={estilos.celda}>
@@ -127,14 +168,24 @@ export function Inicio() {
 
         <MagicCard className={estilos.tarjeta}>
           <div className={`${estilos.contenido} ${estilos.conAnillo}`}>
-          <AnilloProgreso valor={pctMeta / 100} completo={meta.cumplio} tamano={70} grosor={7}>
-            <strong className={estilos.numeroAnillo}>
-              <NumeroAnimado valor={meta.hecho} />
-              <small>/{meta.objetivo}</small>
-            </strong>
-          </AnilloProgreso>
+          <SloshGauge
+            className={estilos.tanque}
+            value={pctMeta}
+            showValue={false}
+            liquidColor={meta.cumplio ? colorExito : colorAcento}
+            glassColor={tema.vidrio}
+            width={40}
+            height={84}
+            radius={12}
+            ticks={meta.objetivo > 1 ? meta.objetivo - 1 : 0}
+            ariaLabel={`Meta de hoy: ${meta.hecho} de ${meta.objetivo}`}
+          />
           <div className={estilos.textoAnillo}>
             <span className={estilos.etiqueta}>Meta de hoy</span>
+            <strong className={estilos.numeroAnillo}>
+              <NumeroAnimado valor={meta.hecho} />
+              <small> / {meta.objetivo}</small>
+            </strong>
             <span className={estilos.detalle}>
               {meta.cumplio
                 ? "¡Cumplida!"
@@ -164,13 +215,24 @@ export function Inicio() {
         </MagicCard>
 
         <MagicCard className={estilos.tarjeta}>
-          <Meteors number={7} />
           <div className={estilos.contenido}>
           <span className={estilos.etiqueta}>Fecha meta</span>
-          <strong className={estilos.numero}>
-            <SlidingNumber number={Math.max(0, ritmo.diasRestantes)} />
-            <small> días</small>
-          </strong>
+          <div className={estilos.tablero}>
+            <SplitFlapText
+              text={String(Math.max(0, ritmo.diasRestantes))}
+              loop={false}
+              padTo={String(Math.max(0, ritmo.diasRestantes)).length}
+              charset="numeric"
+              fontSize={30}
+              tileColor={tema.ficha}
+              textColor={colorTexto}
+              tileRadius={5}
+              gap={3}
+              flipsPerChar={10}
+              glare={0.25}
+            />
+            <small>días</small>
+          </div>
           <span className={estilos.chip} data-tipo={ritmoInfo.tipo}>
             {ritmoInfo.tipo === "error" && <span className={estilos.ping} aria-hidden />}
             {ritmoInfo.texto}
