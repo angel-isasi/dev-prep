@@ -10,7 +10,7 @@ export function Layout() {
   const { pathname } = useLocation();
   const reducido = useReducedMotion();
   const acento = useColorTema("--acento");
-  const grano = usePorTema({ oscuro: 0.035, claro: 0.02 });
+  const grano = usePorTema({ oscuro: 0.05, claro: 0.03 });
 
   return (
     // Chispas en cada clic, en toda la app (React Bits)
@@ -29,8 +29,9 @@ export function Layout() {
           </motion.div>
         </main>
       </div>
-      {/* Grano de película muy suave encima de todo (React Bits) */}
-      <Noise fixed opacity={grano} size={1} fps={18} contrast={0.5} zIndex={50} />
+      {/* Grano de película muy suave (React Bits). Va DETRÁS del contenido (z-index -1):
+          da textura al fondo sin ensuciar los textos ni las tarjetas. */}
+      <Noise fixed opacity={grano} size={1} fps={18} contrast={0.5} zIndex={-1} />
     </ClickSpark>
   );
 }
