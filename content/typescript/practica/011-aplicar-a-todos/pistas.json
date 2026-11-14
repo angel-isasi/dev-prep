@@ -1,0 +1,5 @@
+[
+  "Empieza por el tipo. Una función tiene una \"forma\": qué recibe y qué devuelve. ¿Cómo escribirías esa forma para algo que recibe un precio y devuelve otro precio? Después, `conDescuento` no calcula nada directamente: **devuelve** una función.",
+  "Un tipo de función se escribe con la sintaxis de flecha: `(parametro: Tipo) => TipoDeRetorno`. Para `aplicarATodos` usa `map`, que ya crea un arreglo nuevo. Para `conDescuento`, devuelve una función flecha que use el `porcentaje` que recibiste (closure).",
+  "Esqueleto:\n\n```ts\nexport type Transformacion = (precio: /* tipo */) => /* tipo */;\n\nexport function aplicarATodos(precios: number[], transformar: Transformacion): number[] {\n  return precios.map(/* aplica transformar a cada precio */);\n}\n\nexport function conDescuento(porcentaje: number): Transformacion {\n  return (precio) => /* precio menos el porcentaje */;\n}\n```"
+]

@@ -1,0 +1,5 @@
+[
+  "La lógica es corta: el primer elemento está en la posición 0 y el último en la posición `length - 1`. Lo que se practica aquí es el **tipo**: ¿cómo dices \"devuelvo un elemento del mismo tipo que los de la lista\" sin saber cuál es ese tipo?",
+  "Declara un parámetro de tipo después del nombre: `function primero<T>(lista: T[]): T | undefined`. TypeScript deduce `T` solo cuando llamas a la función. Para el último, `lista.at(-1)` cuenta desde el final y ya devuelve `T | undefined`.",
+  "Esqueleto:\n\n```ts\nexport function primero<T>(lista: T[]): T | undefined {\n  return /* el elemento de la posición 0 */;\n}\n\nexport function ultimo<T>(lista: T[]): T | undefined {\n  return /* el elemento contando desde el final */;\n}\n```"
+]

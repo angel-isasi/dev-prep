@@ -1,0 +1,5 @@
+[
+  "Piensa en un control de seguridad: el dato llega como `unknown` y tienes que ir descartando. Primero, ¿es un objeto de verdad (cuidado con `null`)? Después, ¿tiene cada propiedad y con el tipo correcto? Y el tipo de retorno no es solo `boolean`: es una promesa para TypeScript.",
+  "Herramientas: `typeof dato === \"object\" && dato !== null` para descartar lo que no es objeto; el operador `in` (`\"id\" in dato`) para saber si la propiedad existe, y luego `typeof dato.id === \"number\"`. El retorno se escribe `dato is Usuario`. En `nombresDeUsuarios`, `filter` acepta un type guard y devuelve `Usuario[]`.",
+  "Esqueleto:\n\n```ts\nexport function esUsuario(dato: unknown): dato is Usuario {\n  if (typeof dato !== \"object\" || dato === null) return false;\n  return (\n    \"id\" in dato && typeof dato.id === /* ... */ &&\n    /* lo mismo con nombre */ &&\n    /* lo mismo con email */\n  );\n}\n\nexport function nombresDeUsuarios(datos: unknown[]): string[] {\n  return datos.filter(/* el type guard */).map(/* el nombre */);\n}\n```"
+]

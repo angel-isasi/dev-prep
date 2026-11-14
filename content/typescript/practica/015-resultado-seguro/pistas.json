@@ -1,0 +1,5 @@
+[
+  "El tipo que te dan en el inicio (`ok: boolean` con `valor?` y `error?` opcionales) permite combinaciones absurdas, como `{ ok: true }` sin valor. Piensa en **dos formas separadas**, una para el éxito y otra para el error, unidas con `|`. ¿Qué propiedad las distingue?",
+  "Escribe `ok: true` y `ok: false` como **tipos literales** (no `boolean`): así `if (r.ok)` le dice a TypeScript en qué caso estás. En `parsearJSON`, envuelve `JSON.parse` en `try/catch`. En `valorO`, usa un genérico `<T>` en los dos parámetros y en el retorno.",
+  "Esqueleto:\n\n```ts\nexport type Resultado<T> = { ok: true; valor: T } | { ok: /* ... */; error: string };\n\nexport function dividir(a: number, b: number): Resultado<number> {\n  if (/* divisor inválido */) return { ok: false, error: /* mensaje */ };\n  return { ok: true, valor: /* ... */ };\n}\n\nexport function parsearJSON(texto: string): Resultado<unknown> {\n  try {\n    return /* éxito con JSON.parse(texto) */;\n  } catch {\n    return /* error */;\n  }\n}\n\nexport function valorO<T>(resultado: Resultado<T>, porDefecto: T): T {\n  if (resultado.ok) return /* ... */;\n  return /* ... */;\n}\n```"
+]

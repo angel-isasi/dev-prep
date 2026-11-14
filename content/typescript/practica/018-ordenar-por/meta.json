@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-018",
+  "titulo": "Ordenar por cualquier campo",
+  "tipo": "funcion-ts",
+  "tema": "ts-utility",
+  "nivel": 2,
+  "tags": ["typescript", "keyof", "indexed-access", "genericos", "sort"]
+}

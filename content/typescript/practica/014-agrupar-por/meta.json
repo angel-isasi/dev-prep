@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-014",
+  "titulo": "Agrupar por una propiedad",
+  "tipo": "funcion-ts",
+  "tema": "ts-genericos",
+  "nivel": 2,
+  "tags": ["typescript", "genericos", "keyof", "restricciones", "record"]
+}

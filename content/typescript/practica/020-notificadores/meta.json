@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-020",
+  "titulo": "Notificadores",
+  "tipo": "funcion-ts",
+  "tema": "ts-clases",
+  "nivel": 2,
+  "tags": ["typescript", "clases", "interfaces", "implements", "polimorfismo"]
+}

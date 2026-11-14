@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-016",
+  "titulo": "Actualizar un usuario",
+  "tipo": "funcion-ts",
+  "tema": "ts-utility",
+  "nivel": 1,
+  "tags": ["typescript", "utility-types", "partial", "inmutabilidad", "spread"]
+}

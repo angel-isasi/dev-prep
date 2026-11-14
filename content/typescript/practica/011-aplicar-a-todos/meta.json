@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-011",
+  "titulo": "Aplicar una función a todos",
+  "tipo": "funcion-ts",
+  "tema": "ts-funciones",
+  "nivel": 2,
+  "tags": ["typescript", "funciones", "callbacks", "tipos-de-funcion"]
+}

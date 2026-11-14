@@ -1,0 +1,5 @@
+[
+  "Son dos problemas parecidos vistos al revés: en uno **quitas** una propiedad y en el otro te **quedas** solo con dos. TypeScript tiene un utility type para cada caso, y en JavaScript tienes que crear objetos nuevos (no borrar del original).",
+  "`Omit<Usuario, \"password\">` quita propiedades del tipo; `Pick<Usuario, \"id\" | \"nombre\">` se queda solo con esas. Para el valor sin `password`, la desestructuración con resto (`const { password, ...resto } = usuario`) separa esa propiedad y junta las demás en un objeto nuevo.",
+  "Esqueleto:\n\n```ts\nexport type UsuarioPublico = Omit<Usuario, /* ... */>;\nexport type ResumenUsuario = Pick<Usuario, /* ... */>;\n\nexport function datosPublicos(usuario: Usuario): UsuarioPublico {\n  const { /* saca password */, ...publico } = usuario;\n  return publico;\n}\n\nexport function resumen(usuario: Usuario): ResumenUsuario {\n  return { /* solo id y nombre */ };\n}\n```"
+]

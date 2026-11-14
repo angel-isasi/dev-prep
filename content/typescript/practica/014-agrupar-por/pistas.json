@@ -1,0 +1,5 @@
+[
+  "Hay dos partes: la lógica (recorrer la lista e ir metiendo cada elemento en su grupo) y los tipos (que la clave tenga que ser una propiedad real del elemento). Para la lógica, piensa en un objeto vacío que se va llenando: ¿qué haces la primera vez que aparece un valor?",
+  "`keyof T` es la unión de los nombres de las propiedades de `T`. Con `K extends keyof T` limitas `K` a esos nombres. Dentro del bucle, `elemento[clave]` es el valor de la propiedad; conviértelo con `String(...)` para usarlo como clave. Antes de hacer `push`, crea el arreglo si el grupo no existe.",
+  "Esqueleto:\n\n```ts\nexport function agruparPor<T, K extends keyof T>(lista: T[], clave: K): Record<string, T[]> {\n  const grupos: Record<string, T[]> = {};\n  for (const elemento of lista) {\n    const grupo = String(/* el valor de la propiedad */);\n    if (/* el grupo no existe */) {\n      grupos[grupo] = [];\n    }\n    /* agrega el elemento a su grupo */\n  }\n  return grupos;\n}\n```"
+]

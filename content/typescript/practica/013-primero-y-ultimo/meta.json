@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-013",
+  "titulo": "Primero y último",
+  "tipo": "funcion-ts",
+  "tema": "ts-genericos",
+  "nivel": 1,
+  "tags": ["typescript", "genericos", "undefined", "arrays"]
+}

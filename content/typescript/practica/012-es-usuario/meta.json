@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-012",
+  "titulo": "¿Es un usuario?",
+  "tipo": "funcion-ts",
+  "tema": "ts-funciones",
+  "nivel": 2,
+  "tags": ["typescript", "unknown", "type-guard", "narrowing", "api"]
+}

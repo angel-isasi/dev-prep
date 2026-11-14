@@ -1,0 +1,5 @@
+[
+  "Dos preguntas: ¿cómo dices en TypeScript \"un Usuario, pero con todas sus propiedades opcionales\" sin volver a escribir la interfaz? Y ¿cómo creas un objeto nuevo que copia otro y sobrescribe algunas propiedades?",
+  "TypeScript trae utility types listos: `Partial<T>` vuelve opcionales todas las propiedades de `T`. Para el objeto nuevo usa el operador spread `{ ...a, ...b }`: las propiedades que van después ganan. Piensa en qué poner al final para que el `id` no se pueda cambiar.",
+  "Esqueleto:\n\n```ts\nexport function actualizarUsuario(usuario: Usuario, cambios: /* utility type */): Usuario {\n  return { ...usuario, /* los cambios */, id: /* el id original */ };\n}\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-019",
+  "titulo": "Cuenta bancaria",
+  "tipo": "funcion-ts",
+  "tema": "ts-clases",
+  "nivel": 2,
+  "tags": ["typescript", "clases", "private", "readonly", "errores", "encapsulamiento"]
+}

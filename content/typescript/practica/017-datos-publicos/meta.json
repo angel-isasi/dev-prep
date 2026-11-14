@@ -1,0 +1,8 @@
+{
+  "id": "ts-pr-017",
+  "titulo": "Datos públicos del usuario",
+  "tipo": "funcion-ts",
+  "tema": "ts-utility",
+  "nivel": 2,
+  "tags": ["typescript", "utility-types", "omit", "pick", "desestructuracion"]
+}
