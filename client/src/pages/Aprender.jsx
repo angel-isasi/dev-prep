@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { api } from "../lib/api.js";
-import { Pestanas } from "../components/Pestanas.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
+import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
+import { AnimatedGroup } from "../components/ui/animated-group.jsx";
+import { MagicCard } from "../components/ui/magic-card.jsx";
 import estilos from "./Aprender.module.css";
 
 const AREAS = [
@@ -26,55 +28,87 @@ export function Aprender() {
   const delArea = temas.filter((t) => t.area === area);
   const info = AREAS.find((a) => a.id === area) ?? AREAS[0];
 
-  return (
-    <section className={estilos.pagina}>
-      <header className={estilos.cabecera}>
-        <div>
-          <h1>Aprender</h1>
-          <p>Teoría de una pantalla, ejercicios guiados y un quiz para comprobar que lo entendiste.</p>
-        </div>
-        <Link to="/referencia" className="boton">
-          Abrir la Referencia
-        </Link>
-      </header>
+  const completos = delArea.filter(esCompleto).length;
 
-      <Pestanas
-        pestanas={AREAS.map((a) => ({
-          id: a.id,
-          texto: a.texto,
-          extra: String(temas.filter((t) => t.area === a.id).length),
-        }))}
-        activa={area}
-        alCambiar={(id) => setParams({ area: id }, { replace: true })}
-      />
-      <p className={estilos.intro}>{info.intro}</p>
+  return (
+    <section className={estilos.pagina} data-area={area}>
+      <CabeceraPagina
+        etiqueta={`${completos} de ${delArea.length} temas completos`}
+        titulo="Aprender"
+        acciones={
+          <Link to="/referencia" className="boton">
+            Abrir la Referencia
+          </Link>
+        }
+      >
+        Teoría de una pantalla, ejercicios guiados y un quiz para comprobar que lo entendiste.
+      </CabeceraPagina>
+
+      {/* Selector de área: JavaScript (amarillo) o React (celeste) */}
+      <div className={estilos.areas} role="tablist" aria-label="Área">
+        {AREAS.map((a) => (
+          <button
+            key={a.id}
+            type="button"
+            role="tab"
+            data-area={a.id}
+            aria-selected={a.id === area}
+            className={estilos.areaBoton}
+            onClick={() => setParams({ area: a.id }, { replace: true })}
+          >
+            <span className={estilos.areaPunto} aria-hidden />
+            {a.texto}
+            <small>{temas.filter((t) => t.area === a.id).length} temas</small>
+          </button>
+        ))}
+        <p className={estilos.intro}>{info.intro}</p>
+      </div>
 
       {delArea.length === 0 ? (
         <p className={estilos.mensaje}>Todavía no hay temas en esta área.</p>
       ) : (
-        <ol className={estilos.temas}>
+        <AnimatedGroup key={area} preset="slide" stagger={0.04} as="ol" asChild="li" className={estilos.temas} itemClassName={estilos.celda}>
           {delArea.map((t) => {
-            const completo = t.resueltos === t.totalEjercicios && t.quiz && t.quiz.mejor === t.quiz.total;
+            const completo = esCompleto(t);
             return (
-              <li key={t.id}>
-                <Link to={`/aprender/${t.id}`} className={estilos.tema} data-completo={!!completo}>
-                  <span className={estilos.numero}>{String(t.orden).padStart(2, "0")}</span>
-                  <div className={estilos.texto}>
-                    <strong>{t.titulo}</strong>
-                    <span>{t.descripcion}</span>
+              <MagicCard
+                key={t.id}
+                className={estilos.tarjeta}
+                gradientFrom={completo ? "var(--exito)" : "var(--color-area)"}
+                gradientTo="var(--acento)"
+                gradientColor="var(--color-area-suave)"
+              >
+                <Link to={`/aprender/${t.id}`} className={estilos.tema} data-completo={completo}>
+                  <div className={estilos.temaArriba}>
+                    <span className={estilos.numero}>{String(t.orden).padStart(2, "0")}</span>
+                    {completo && <span className={estilos.completo}>✓ Completo</span>}
                   </div>
+                  <strong className={estilos.titulo}>{t.titulo}</strong>
+                  <span className={estilos.descripcion}>{t.descripcion}</span>
                   <div className={estilos.avance}>
-                    <span>
-                      {t.resueltos}/{t.totalEjercicios} ejercicios
+                    {/* Un punto por ejercicio guiado: lleno si lo resolviste */}
+                    <span className={estilos.puntos} aria-label={`${t.resueltos} de ${t.totalEjercicios} ejercicios`}>
+                      {Array.from({ length: t.totalEjercicios }, (_, i) => (
+                        <i key={i} data-lleno={i < t.resueltos} />
+                      ))}
+                      <small>
+                        {t.resueltos}/{t.totalEjercicios}
+                      </small>
                     </span>
-                    <span>{t.quiz ? `quiz ${t.quiz.mejor}/${t.quiz.total}` : "quiz pendiente"}</span>
+                    <span className={estilos.quiz} data-hecho={!!t.quiz}>
+                      {t.quiz ? `Quiz ${t.quiz.mejor}/${t.quiz.total}` : "Quiz pendiente"}
+                    </span>
                   </div>
                 </Link>
-              </li>
+              </MagicCard>
             );
           })}
-        </ol>
+        </AnimatedGroup>
       )}
     </section>
   );
+}
+
+function esCompleto(t) {
+  return t.resueltos === t.totalEjercicios && !!t.quiz && t.quiz.mejor === t.quiz.total;
 }

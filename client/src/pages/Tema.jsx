@@ -32,16 +32,21 @@ export function Tema() {
   const mejor = tema.resultadoQuiz?.mejor ?? tema.quiz?.mejor;
 
   return (
-    <article className={estilos.pagina}>
+    <article className={estilos.pagina} data-area={tema.area}>
       <Link to={`/aprender?area=${tema.area}`} className={estilos.volver}>
         <IconoFlechaIzq /> Aprender
       </Link>
       <header className={estilos.cabecera}>
-        <span className={estilos.numero}>
-          {tema.area === "react" ? "React" : "JavaScript"} · Tema {String(tema.orden).padStart(2, "0")}
+        <span className={estilos.numeroGrande} aria-hidden>
+          {String(tema.orden).padStart(2, "0")}
         </span>
-        <h1>{tema.titulo}</h1>
-        <p>{tema.descripcion}</p>
+        <div>
+          <span className={estilos.numero}>
+            {tema.area === "react" ? "React" : "JavaScript"} · Tema {String(tema.orden).padStart(2, "0")}
+          </span>
+          <h1>{tema.titulo}</h1>
+          <p>{tema.descripcion}</p>
+        </div>
       </header>
 
       <Pestanas
@@ -57,7 +62,9 @@ export function Tema() {
       <div className={estilos.contenido}>
         {pestana === "teoria" && (
           <>
-            <Markdown>{tema.teoria}</Markdown>
+            <div className={`tarjeta ${estilos.teoria}`}>
+              <Markdown>{tema.teoria}</Markdown>
+            </div>
             <div className={estilos.seguir}>
               <button type="button" className="boton boton-primario" onClick={() => setPestana("ejercicios")}>
                 Practicar con los ejercicios →
@@ -71,9 +78,10 @@ export function Tema() {
             <p className={estilos.intro}>
               Hazlos en orden: van de más fácil a más difícil. Cuando los termines, comprueba lo aprendido con el quiz.
             </p>
-            <ol>
-              {tema.ejercicios.map((ej) => (
-                <li key={ej.id}>
+            <ol className={estilos.pasos}>
+              {tema.ejercicios.map((ej, i) => (
+                <li key={ej.id} data-estado={ej.estado}>
+                  <span className={estilos.paso}>{ej.estado === "resuelto" ? "✓" : i + 1}</span>
                   <Link to={`/practicar/${ej.id}`} className={estilos.ejercicio}>
                     <span>{ej.titulo}</span>
                     <Insignia nivel={ej.nivel} />
@@ -89,8 +97,20 @@ export function Tema() {
       </div>
 
       <nav className={estilos.navegacion}>
-        {tema.anterior ? <Link to={`/aprender/${tema.anterior.id}`}>← {tema.anterior.titulo}</Link> : <span />}
-        {tema.siguiente && <Link to={`/aprender/${tema.siguiente.id}`}>{tema.siguiente.titulo} →</Link>}
+        {tema.anterior ? (
+          <Link to={`/aprender/${tema.anterior.id}`} className={estilos.vecino}>
+            <small>← Anterior</small>
+            {tema.anterior.titulo}
+          </Link>
+        ) : (
+          <span />
+        )}
+        {tema.siguiente && (
+          <Link to={`/aprender/${tema.siguiente.id}`} className={estilos.vecino} data-lado="siguiente">
+            <small>Siguiente →</small>
+            {tema.siguiente.titulo}
+          </Link>
+        )}
       </nav>
     </article>
   );
