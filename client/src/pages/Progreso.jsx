@@ -2,13 +2,23 @@ import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
 import { nombreTema } from "../lib/etiquetas.js";
 import { Esqueleto } from "../components/Esqueleto.jsx";
+import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
+import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
+import { NumeroAnimado } from "../components/NumeroAnimado.jsx";
+import { Llama } from "../components/Llama.jsx";
+import { AnimatedGroup } from "../components/ui/animated-group.jsx";
+import { MagicCard } from "../components/ui/magic-card.jsx";
+import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import estilos from "./Progreso.module.css";
 
 const DIAS = ["L", "", "M", "", "V", "", "D"];
 
 function textoCelda(c) {
   const [a, m, d] = c.fecha.split("-").map(Number);
-  const fecha = new Date(a, m - 1, d).toLocaleDateString("es-PE", { day: "numeric", month: "short" });
+  const fecha = new Date(a, m - 1, d).toLocaleDateString("es-PE", {
+    day: "numeric",
+    month: "short",
+  });
   if (!c.hecho && !c.minutos) return `${fecha}: sin actividad`;
   return `${fecha}: ${c.hecho} hecho(s), ${c.minutos} min`;
 }
@@ -16,7 +26,8 @@ function textoCelda(c) {
 /** Agrupa las celdas en columnas de 7 días (una columna por semana). */
 function porSemanas(celdas) {
   const semanas = [];
-  for (let i = 0; i < celdas.length; i += 7) semanas.push(celdas.slice(i, i + 7));
+  for (let i = 0; i < celdas.length; i += 7)
+    semanas.push(celdas.slice(i, i + 7));
   return semanas;
 }
 
@@ -28,7 +39,8 @@ export function Progreso() {
     api.progreso().then(setDatos, (e) => setError(e.message));
   }, []);
 
-  if (error) return <p className={estilos.mensaje}>No se pudo cargar: {error}</p>;
+  if (error)
+    return <p className={estilos.mensaje}>No se pudo cargar: {error}</p>;
   if (!datos) return <Esqueleto variante="tarjetas" />;
 
   const { preparacion, racha, semana, ritmo, totales, calendario } = datos;
@@ -36,98 +48,164 @@ export function Progreso() {
 
   return (
     <section className={estilos.pagina}>
-      <header className={estilos.cabecera}>
-        <h1>Progreso</h1>
-        <p>Lo que dominas de verdad, no solo lo que viste.</p>
-      </header>
+      <CabeceraPagina
+        etiqueta={`${totales.resueltos} de ${totales.total} ejercicios dominados`}
+        titulo="Progreso"
+      >
+        Lo que dominas de verdad, no solo lo que viste.
+      </CabeceraPagina>
 
       <div className={estilos.resumen}>
+        {/* Preparación: anillo grande */}
         <div className={estilos.preparacion}>
-          <span className={estilos.etiqueta}>Preparación para entrevista</span>
-          <strong>
-            {preparacion.total}
-            <small>%</small>
-          </strong>
-          <div className={estilos.barra}>
-            <div style={{ width: `${preparacion.total}%` }} />
+          <AnilloProgreso
+            valor={preparacion.total / 100}
+            tamano={168}
+            grosor={12}
+          >
+            <strong className={estilos.porcentaje}>
+              <NumeroAnimado
+                valor={preparacion.total}
+                decimales={preparacion.total % 1 ? 1 : 0}
+              />
+              <small>%</small>
+            </strong>
+          </AnilloProgreso>
+          <div>
+            <span className={estilos.etiqueta}>
+              Preparación para entrevista
+            </span>
+            <p className={estilos.nota}>
+              Cuenta solo lo resuelto sin ver la solución. Usar las 3 pistas
+              vale menos, y un repaso vencido le resta. Los temas que más
+              preguntan en entrevistas pesan más.
+            </p>
           </div>
-          <p className={estilos.nota}>
-            Cuenta solo lo resuelto sin ver la solución. Usar las 3 pistas vale menos, y un repaso vencido le resta.
-            Los temas que más preguntan en entrevistas pesan más.
-          </p>
         </div>
-        <dl className={estilos.datos}>
-          <div>
-            <dt>Racha</dt>
-            <dd>{racha} días</dd>
-          </div>
-          <div>
-            <dt>Resueltos</dt>
-            <dd>
-              {totales.resueltos}/{totales.total}
-            </dd>
-          </div>
-          <div>
-            <dt>Esta semana</dt>
-            <dd>
-              {semana.resueltos + semana.repasos} hechos · {semana.minutos} min
-            </dd>
-          </div>
-          <div>
-            <dt>Ritmo</dt>
-            <dd>
-              {ritmo.promedioSemana}/día (necesitas {ritmo.necesarioPorDia})
-            </dd>
-          </div>
-        </dl>
+
+        <AnimatedGroup
+          preset="slide"
+          stagger={0.06}
+          className={estilos.datos}
+          itemClassName={estilos.celdaDato}
+        >
+          <MagicCard
+            className={estilos.dato}
+            gradientFrom="var(--aviso)"
+            gradientTo="var(--error)"
+            gradientColor="var(--aviso-suave)"
+          >
+            <div className={estilos.datoInterior}>
+              <span className={estilos.etiqueta}>
+                <Llama encendida={racha > 0} tamano={16} /> Racha
+              </span>
+              <strong className={estilos.numero} data-tipo="aviso">
+                <SlidingNumber number={racha} />
+              </strong>
+              <span className={estilos.detalle}>
+                {racha === 1 ? "día seguido" : "días seguidos"}
+              </span>
+            </div>
+          </MagicCard>
+          <MagicCard className={estilos.dato}>
+            <div className={estilos.datoInterior}>
+              <span className={estilos.etiqueta}>Resueltos</span>
+              <strong className={estilos.numero}>
+                <SlidingNumber number={totales.resueltos} />
+                <small>/{totales.total}</small>
+              </strong>
+              <span className={estilos.detalle}>sin ver la solución</span>
+            </div>
+          </MagicCard>
+          <MagicCard className={estilos.dato}>
+            <div className={estilos.datoInterior}>
+              <span className={estilos.etiqueta}>Esta semana</span>
+              <strong className={estilos.numero}>
+                <SlidingNumber number={semana.resueltos + semana.repasos} />
+              </strong>
+              <span className={estilos.detalle}>
+                hechos · {semana.minutos} min
+              </span>
+            </div>
+          </MagicCard>
+          <MagicCard className={estilos.dato}>
+            <div className={estilos.datoInterior}>
+              <span className={estilos.etiqueta}>Ritmo</span>
+              <strong
+                className={estilos.numero}
+                data-tipo={
+                  ritmo.promedioSemana >= ritmo.necesarioPorDia
+                    ? "exito"
+                    : "error"
+                }
+              >
+                {ritmo.promedioSemana}
+                <small>/día</small>
+              </strong>
+              <span className={estilos.detalle}>
+                necesitas {ritmo.necesarioPorDia} al día
+              </span>
+            </div>
+          </MagicCard>
+        </AnimatedGroup>
       </div>
 
-      <div className={estilos.bloque}>
-        <div className={estilos.bloqueCabecera}>
-          <h2>Actividad</h2>
-          <span>{activos} días activos en las últimas 20 semanas</span>
-        </div>
-        <div className={estilos.calendario}>
-          <div className={estilos.diasSemana}>
-            {DIAS.map((d, i) => (
-              <span key={i}>{d}</span>
-            ))}
+      <div className={estilos.columnas}>
+        <div className={estilos.bloque}>
+          <div className={estilos.bloqueCabecera}>
+            <h2>Actividad</h2>
+            <span>{activos} días activos en las últimas 20 semanas</span>
           </div>
-          {porSemanas(calendario).map((sem, i) => (
-            <div key={i} className={estilos.columna}>
-              {sem.map((c) => (
-                <span key={c.fecha} className={estilos.celda} data-nivel={c.nivel} title={textoCelda(c)} />
+          <div className={estilos.calendario}>
+            <div className={estilos.diasSemana}>
+              {DIAS.map((d, i) => (
+                <span key={i}>{d}</span>
               ))}
             </div>
-          ))}
-        </div>
-        <div className={estilos.leyenda}>
-          Menos
-          {[0, 1, 2, 3, 4].map((n) => (
-            <span key={n} className={estilos.celda} data-nivel={n} />
-          ))}
-          Más
-        </div>
-      </div>
-
-      <div className={estilos.bloque}>
-        <div className={estilos.bloqueCabecera}>
-          <h2>Por tema</h2>
-          <span>Dominio de cada tema</span>
-        </div>
-        <ul className={estilos.temas}>
-          {preparacion.porTema.map((t) => (
-            <li key={t.tema}>
-              <span className={estilos.tema}>{nombreTema(t.tema)}</span>
-              <div className={estilos.barra}>
-                <div style={{ width: `${t.porcentaje}%` }} />
+            {porSemanas(calendario).map((sem, i) => (
+              <div key={i} className={estilos.columna}>
+                {sem.map((c) => (
+                  <span
+                    key={c.fecha}
+                    className={estilos.celda}
+                    data-nivel={c.nivel}
+                    title={textoCelda(c)}
+                  />
+                ))}
               </div>
-              <span className={estilos.cifra}>
-                {t.resueltos}/{t.total}
-              </span>
-            </li>
-          ))}
-        </ul>
+            ))}
+          </div>
+          <div className={estilos.leyenda}>
+            Menos
+            {[0, 1, 2, 3, 4].map((n) => (
+              <span key={n} className={estilos.celda} data-nivel={n} />
+            ))}
+            Más
+          </div>
+        </div>
+
+        <div className={estilos.bloque}>
+          <div className={estilos.bloqueCabecera}>
+            <h2>Por tema</h2>
+            <span>Dominio de cada tema</span>
+          </div>
+          <ul className={estilos.temas}>
+            {preparacion.porTema.map((t) => (
+              <li
+                key={t.tema}
+                data-completo={t.total > 0 && t.resueltos === t.total}
+              >
+                <span className={estilos.tema}>{nombreTema(t.tema)}</span>
+                <div className={estilos.barra}>
+                  <div style={{ width: `${t.porcentaje}%` }} />
+                </div>
+                <span className={estilos.cifra}>
+                  {t.resueltos}/{t.total}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
