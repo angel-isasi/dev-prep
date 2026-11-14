@@ -11,7 +11,7 @@ const AREAS = [
 ];
 
 export function Aprender() {
-  const [temas, setTemas] = useState(null);
+  const [temas, setTemas] = useState(api.temas.guardado);
   const [error, setError] = useState(null);
   const [params, setParams] = useSearchParams();
   const area = params.get("area") ?? "javascript";

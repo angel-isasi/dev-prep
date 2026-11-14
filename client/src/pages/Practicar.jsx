@@ -7,7 +7,7 @@ import estilos from "./Practicar.module.css";
 
 /** Entrada de Practicar: áreas (JavaScript, Algoritmos, React) con sus colecciones. */
 export function Practicar() {
-  const [ejercicios, setEjercicios] = useState(null);
+  const [ejercicios, setEjercicios] = useState(api.ejercicios.guardado);
   const [error, setError] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const navigate = useNavigate();

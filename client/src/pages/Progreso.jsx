@@ -21,7 +21,7 @@ function porSemanas(celdas) {
 }
 
 export function Progreso() {
-  const [datos, setDatos] = useState(null);
+  const [datos, setDatos] = useState(api.progreso.guardado);
   const [error, setError] = useState(null);
 
   useEffect(() => {

@@ -11,7 +11,7 @@ import estilos from "./Tema.module.css";
 
 export function Tema() {
   const { id } = useParams();
-  const [tema, setTema] = useState(null);
+  const [tema, setTema] = useState(() => api.tema.guardado(id));
   const [error, setError] = useState(null);
   const [pestana, setPestana] = useState("teoria");
 

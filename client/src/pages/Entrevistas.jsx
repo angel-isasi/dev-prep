@@ -9,7 +9,7 @@ import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Entrevistas.module.css";
 
 export function Entrevistas() {
-  const [resumen, setResumen] = useState(null);
+  const [resumen, setResumen] = useState(api.entrevistas.guardado);
   const [pestana, setPestana] = useState("tarjetas");
   const [sesion, setSesion] = useState(null); // { titulo, tarjetas, indice, notas }
 

@@ -75,7 +75,13 @@ export function Particles({
       circulos.forEach(dibujar);
     };
 
+    // Se pausa cuando no está en pantalla o la pestaña está oculta (no gasta CPU de fondo).
+    let enVista = true;
     const animar = () => {
+      if (!enVista || document.hidden) {
+        raf = 0;
+        return;
+      }
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       circulos.forEach((c, i) => {
@@ -112,6 +118,16 @@ export function Particles({
       espera = setTimeout(iniciar, 200);
     };
 
+    const reanudar = () => {
+      if (!reducido && !raf && enVista && !document.hidden) animar();
+    };
+    const observador = new IntersectionObserver(([e]) => {
+      enVista = e.isIntersecting;
+      reanudar();
+    });
+    observador.observe(contenedor);
+    document.addEventListener("visibilitychange", reanudar);
+
     iniciar();
     if (!reducido) {
       animar();
@@ -120,6 +136,8 @@ export function Particles({
     window.addEventListener("resize", alRedimensionar);
     return () => {
       cancelAnimationFrame(raf);
+      observador.disconnect();
+      document.removeEventListener("visibilitychange", reanudar);
       clearTimeout(espera);
       window.removeEventListener("mousemove", alMover);
       window.removeEventListener("resize", alRedimensionar);

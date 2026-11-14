@@ -30,7 +30,7 @@ function agruparPorTema(lista) {
 
 /** Los ejercicios de una colección (o de todas), agrupados por tema y con filtros. */
 export function ListaEjercicios() {
-  const [ejercicios, setEjercicios] = useState(null);
+  const [ejercicios, setEjercicios] = useState(api.ejercicios.guardado);
   const [error, setError] = useState(null);
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();

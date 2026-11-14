@@ -30,8 +30,9 @@ export function Layout() {
         </main>
       </div>
       {/* Grano de película muy suave (React Bits). Va DETRÁS del contenido (z-index -1):
-          da textura al fondo sin ensuciar los textos ni las tarjetas. */}
-      <Noise fixed opacity={grano} size={1} fps={18} contrast={0.5} zIndex={-1} />
+          da textura al fondo sin ensuciar los textos ni las tarjetas. Es estático (fps 0):
+          animado obligaba a repintar toda la pantalla 18 veces por segundo y trababa la app. */}
+      <Noise fixed opacity={grano} size={1} fps={0} contrast={0.5} zIndex={-1} />
     </ClickSpark>
   );
 }

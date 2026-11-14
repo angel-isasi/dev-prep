@@ -5,7 +5,6 @@
   padding: var(--espacio-5) var(--espacio-3);
   background: var(--barra-fondo);
   border-right: 1px solid var(--borde);
-  backdrop-filter: blur(12px);
 }
 
 .marca {

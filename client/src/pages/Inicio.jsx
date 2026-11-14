@@ -47,7 +47,7 @@ function fechaLarga(fecha) {
 }
 
 export function Inicio() {
-  const [datos, setDatos] = useState(null);
+  const [datos, setDatos] = useState(api.inicio.guardado);
   const [error, setError] = useState(null);
   const navegar = useNavigate();
   const colorAcento = useColorTema("--acento");
@@ -171,7 +171,7 @@ export function Inicio() {
         </ElectricBorder>
       ) : null}
 
-      <AnimatedGroup preset="blur-slide" stagger={0.08} className={estilos.tarjetas} itemClassName={estilos.celda}>
+      <AnimatedGroup preset="slide" stagger={0.08} className={estilos.tarjetas} itemClassName={estilos.celda}>
         <MagicCard className={estilos.tarjeta} gradientFrom="var(--aviso)" gradientTo="var(--error)" gradientColor="var(--aviso-suave)">
           {/* Chispas que suben: más chispas cuanto más larga la racha */}
           <Particles className={estilos.chispas} quantity={Math.min(14 + racha * 3, 50)} color={colorAviso} vy={-0.35} size={0.6} staticity={80} />
