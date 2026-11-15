@@ -1,5 +1,7 @@
+/* Texto de lectura larga (teoría, enunciados, explicaciones): letra cómoda y código legible */
 .markdown {
-  line-height: 1.7;
+  font-size: 16.5px;
+  line-height: 1.75;
 }
 
 .markdown > :first-child {
@@ -7,13 +9,22 @@
 }
 
 .markdown h2 {
-  font-size: 17px;
-  margin: var(--espacio-6) 0 var(--espacio-3);
+  margin: var(--espacio-7) 0 var(--espacio-4);
+  font-size: 26px;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
 }
 
 .markdown h3 {
-  font-size: 15px;
+  margin: var(--espacio-6) 0 var(--espacio-3);
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.markdown h4 {
   margin: var(--espacio-5) 0 var(--espacio-2);
+  font-size: 17px;
 }
 
 .markdown p,
@@ -31,7 +42,7 @@
   border-radius: 5px;
   background: var(--superficie-2);
   border: 1px solid var(--borde);
-  font-size: 0.85em;
+  font-size: 0.88em;
 }
 
 .markdown pre {
@@ -41,19 +52,20 @@
   background: var(--codigo-fondo);
   border: 1px solid var(--borde);
   overflow-x: auto;
-  line-height: 1.55;
+  font-size: 14.5px;
+  line-height: 1.65;
 }
 
 .markdown table {
   width: 100%;
   margin: 0 0 var(--espacio-4);
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 15.5px;
 }
 
 .markdown th,
 .markdown td {
-  padding: 8px 12px;
+  padding: 10px 14px;
   border: 1px solid var(--borde);
   text-align: left;
   vertical-align: top;
@@ -74,4 +86,9 @@
 
 .markdown blockquote p:last-child {
   margin-bottom: 0;
+}
+
+/* El code dentro del bloque no se achica otra vez (base.css le pone 0.875em a todo code) */
+.markdown pre code {
+  font-size: inherit;
 }
