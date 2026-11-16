@@ -19,7 +19,7 @@ import { controlDeOrigen } from "./origenes.js";
 export function crearApp(deps) {
   const app = express();
   app.disable("x-powered-by");
-  app.use(express.json());
+  app.use(express.json({ limit: "5mb" })); // el documento de progreso que envía la web puede pesar más de 100 KB
   app.use("/api", controlDeOrigen);
 
   // La versión web pregunta aquí si dev-prep está abierto en esta laptop.

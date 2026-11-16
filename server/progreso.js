@@ -16,17 +16,9 @@ import {
   calificarPregunta,
   registrarQuiz,
   programarRepaso,
+  validarConfig,
 } from "./progreso-reglas.js";
 import { diasCombinados, documentoParaSubir, fusionarDocumento } from "./combinar.js";
-
-/** Campos de configuración que se pueden cambiar desde Ajustes, con su validación. */
-const CAMPOS_CONFIG = {
-  metaDiaria: (v) => Number.isInteger(v) && v >= 0 && v <= 20,
-  topeDeuda: (v) => Number.isInteger(v) && v >= 0 && v <= 50,
-  fechaMeta: (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v),
-  objetivo: (v) => typeof v === "string" && v.length <= 500,
-  nombre: (v) => typeof v === "string" && v.length <= 60,
-};
 
 const RESPALDOS_DIARIOS = 7;
 
@@ -179,14 +171,8 @@ export async function crearProgreso({ datosDir }) {
 
     /** Cambia solo los campos válidos; devuelve la config resultante. */
     async cambiarConfig(cambios) {
-      let cambio = false;
-      for (const [campo, valor] of Object.entries(cambios ?? {})) {
-        if (CAMPOS_CONFIG[campo]?.(valor)) {
-          datos.config[campo] = valor;
-          cambio = true;
-        }
-      }
-      if (cambio) datos.config.actualizadoEn = ahoraIso();
+      const validos = validarConfig(cambios);
+      if (Object.keys(validos).length) datos.config = { ...datos.config, ...validos, actualizadoEn: ahoraIso() };
       await guardar();
       return datos.config;
     },

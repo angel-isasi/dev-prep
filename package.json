@@ -24,7 +24,9 @@
     "aws:crear": "node scripts/aws-sync.js crear",
     "aws:borrar": "node scripts/aws-sync.js borrar",
     "aws:estado": "node scripts/aws-sync.js estado",
-    "aws:rotar": "node scripts/aws-sync.js rotar"
+    "aws:rotar": "node scripts/aws-sync.js rotar",
+    "validar:ingles": "node scripts/validar-ingles.js",
+    "validar:predice": "node scripts/validar-predice.js"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.2",

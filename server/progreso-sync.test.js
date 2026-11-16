@@ -49,3 +49,30 @@ describe("mezclar lo que llega de la nube", () => {
     expect(avisos).toBe(1);
   });
 });
+
+describe("intercambio directo con la web abierta en la laptop", async () => {
+  const { crearSync } = await import("./sync.js");
+  const { crearMisRespuestas } = await import("./mis-respuestas.js");
+
+  test("mezcla el documento de la web y le devuelve el de la laptop, sin AWS", async () => {
+    const { progreso, datosDir } = await progresoNuevo();
+    const misRespuestas = await crearMisRespuestas({ datosDir });
+    const sync = await crearSync({ datosDir, progreso, misRespuestas, fetch: () => Promise.reject(new Error("sin internet")) });
+    await progreso.calificarPregunta("p1", "sabia");
+    const web = { version: 1, dias: { "2026-11-15": { lecciones: 1 } }, items: { "quiz:x:0": { caja: 2, en: "2026-11-15T10:00:00-05:00" } } };
+    const respuesta = await sync.intercambioLocal("celular-abc123", web);
+    expect(respuesta.dispositivo).toBe("laptop");
+    expect(respuesta.doc.preguntas.p1).toBeTruthy();
+    expect(respuesta.doc.diasRemotos).toBeUndefined();
+    expect(progreso.dias()["2026-11-15"].lecciones).toBe(1);
+    expect(progreso.datos().items["quiz:x:0"].caja).toBe(2);
+  });
+
+  test("rechaza ids raros y el propio id de la laptop", async () => {
+    const { progreso, datosDir } = await progresoNuevo();
+    const misRespuestas = await crearMisRespuestas({ datosDir });
+    const sync = await crearSync({ datosDir, progreso, misRespuestas });
+    await expect(sync.intercambioLocal("laptop", {})).rejects.toThrow();
+    await expect(sync.intercambioLocal("../x", {})).rejects.toThrow();
+  });
+});

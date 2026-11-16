@@ -4,7 +4,7 @@
 //   1. Tiene todos sus archivos, 3 pistas y las 7 secciones de la explicación.
 //   2. La solución oficial pasa TODOS sus tests (y hay al menos 3).
 //   3. El archivo de inicio NO pasa todos los tests (si no, el ejercicio no enseña nada).
-import { cp, mkdir, rm } from "node:fs/promises";
+import { cp, mkdir, readFile, rm } from "node:fs/promises";
 import path from "node:path";
 import { config } from "../server/config.js";
 import { escanearContenido, revisarEjercicio } from "../server/contenido.js";
@@ -48,6 +48,14 @@ const problemas = new Map(ejercicios.map((ej) => [ej.id, []]));
 
 // 1. Estructura
 for (const ej of ejercicios) problemas.get(ej.id).push(...(await revisarEjercicio(ej)));
+
+// 1b. Ejercicios de depurar: el inicio es la solución con el error, así que difieren en 1 o 2 líneas
+for (const ej of ejercicios.filter((e) => e.coleccion.endsWith("/depurar"))) {
+  const lineas = async (archivo) => (await readFile(path.join(ej.carpeta, archivo), "utf8")).replace(/\r/g, "").trimEnd().split("\n");
+  const [a, b] = [await lineas(ej.archivos.inicio), await lineas(ej.archivos.solucion)];
+  const distintas = Math.max(a.length, b.length) - Math.min(a.length, b.length) + a.filter((l, i) => i < b.length && l !== b[i]).length;
+  if (distintas < 1 || distintas > 2) problemas.get(ej.id).push(`inicio y solución difieren en ${distintas} línea(s): deben ser 1 o 2`);
+}
 
 // 2. Las soluciones oficiales pasan
 const oficiales = await correr(

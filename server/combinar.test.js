@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { diasCombinados, documentoParaSubir, fechaDe, fusionarDocumento, masReciente } from "./combinar.js";
+import { diasCombinados, documentoParaSubir, fechaDe, fusionarDocumento, masReciente, vivos } from "./combinar.js";
 
 const laptop = () => ({
   version: 1,
@@ -127,5 +127,48 @@ describe("documentoParaSubir", () => {
     expect(subir.diasRemotos).toBeUndefined();
     expect(subir.leccionEnCurso).toBeUndefined();
     expect(subir.dias).toEqual(celular().dias);
+  });
+});
+
+describe("registros sueltos (postulaciones, ajustes...)", () => {
+  const conPost = (post, extra = {}) => ({ version: 1, ...extra, postulaciones: post });
+
+  test("llegan los del otro dispositivo y gana el más reciente", () => {
+    const propio = conPost({ a: { empresa: "Acme", etapa: "enviada", en: "2026-11-10T10:00:00-05:00" } });
+    const remoto = conPost({
+      a: { empresa: "Acme", etapa: "entrevista", en: "2026-11-12T10:00:00-05:00" },
+      b: { empresa: "Beta", etapa: "por-postular", en: "2026-11-11T10:00:00-05:00" },
+    });
+    const r = fusionarDocumento(propio, remoto, "celular");
+    expect(r.postulaciones.a.etapa).toBe("entrevista");
+    expect(r.postulaciones.b.empresa).toBe("Beta");
+  });
+
+  test("lo borrado no resucita desde el dispositivo que todavía lo tiene", () => {
+    const propio = conPost({ a: { borrado: true, en: "2026-11-13T10:00:00-05:00" } });
+    const remoto = conPost({ a: { empresa: "Acme", en: "2026-11-10T10:00:00-05:00" } });
+    const r = fusionarDocumento(propio, remoto, "celular");
+    expect(vivos(r.postulaciones)).toEqual({});
+    expect(vivos(fusionarDocumento(remoto, propio, "laptop").postulaciones)).toEqual({});
+  });
+
+  test("los ajustes se mezclan uno por uno (un cambio viejo no pisa otro nuevo)", () => {
+    const propio = { version: 1, ajustes: { juego: { tope: 120, en: "2026-11-14T10:00:00-05:00" }, avisos: { hora: "20:00", en: "2026-11-10T10:00:00-05:00" } } };
+    const remoto = { version: 1, ajustes: { juego: { tope: 90, en: "2026-11-11T10:00:00-05:00" }, avisos: { hora: "19:00", en: "2026-11-15T10:00:00-05:00" } } };
+    const r = fusionarDocumento(propio, remoto, "celular");
+    expect(r.ajustes.juego.tope).toBe(120);
+    expect(r.ajustes.avisos.hora).toBe("19:00");
+  });
+
+  test("un documento viejo sin estas colecciones no borra las propias", () => {
+    const propio = conPost({ a: { empresa: "Acme", en: "2026-11-10T10:00:00-05:00" } });
+    const r = fusionarDocumento(propio, { version: 1 }, "celular");
+    expect(r.postulaciones.a.empresa).toBe("Acme");
+  });
+
+  test("los contadores nuevos de los días se suman entre dispositivos", () => {
+    const propio = { version: 1, dias: { "2026-11-15": { juego: 1800, limpios: 1 } } };
+    const r = fusionarDocumento(propio, { version: 1, dias: { "2026-11-15": { juego: 600, ingles: 2 } } }, "celular");
+    expect(diasCombinados(r)["2026-11-15"]).toEqual({ juego: 2400, limpios: 1, ingles: 2 });
   });
 });

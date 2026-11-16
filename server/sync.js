@@ -31,18 +31,22 @@ export async function crearSync({ datosDir, progreso, misRespuestas, fetch: pedi
   /** Lo que sube la laptop: su progreso más sus textos personales (pitch y STAR). */
   const miDocumento = () => ({ ...progreso.documento(), misRespuestas: misRespuestas.leer() });
 
+  /** Mezcla lo que llega de otro dispositivo, incluidos el pitch y las historias STAR si son más nuevos. */
+  async function recibir(otros) {
+    if (otros.length) await progreso.fusionar(otros);
+    for (const { doc } of otros) {
+      const suyas = doc?.misRespuestas;
+      if (suyas && (fechaDe(suyas) ?? 0) > (fechaDe(misRespuestas.leer()) ?? 0)) await misRespuestas.guardar(suyas);
+    }
+  }
+
   async function bajarYMezclar() {
     const r = await conLimite(configuracion.url, { headers: cabeceras });
     if (!r.ok) throw new Error(`AWS respondió ${r.status}`);
     const { documentos = [] } = await r.json();
     estado.dispositivos = documentos.map((d) => ({ dispositivo: d.dispositivo, actualizado: d.actualizado }));
     const otros = documentos.filter((d) => d.dispositivo !== dispositivo);
-    if (otros.length) await progreso.fusionar(otros);
-    // Pitch y STAR: si los editaste en el celular más recientemente, pasan a la laptop.
-    for (const { doc } of otros) {
-      const suyas = doc?.misRespuestas;
-      if (suyas && (fechaDe(suyas) ?? 0) > (fechaDe(misRespuestas.leer()) ?? 0)) await misRespuestas.guardar(suyas);
-    }
+    await recibir(otros);
   }
 
   async function subir() {
@@ -82,6 +86,15 @@ export async function crearSync({ datosDir, progreso, misRespuestas, fetch: pedi
   return {
     estado: () => ({ ...estado, dispositivo }),
     sincronizar,
+    /**
+     * Intercambio directo con la versión web abierta en esta misma laptop (sin AWS ni internet):
+     * mezcla su documento y le devuelve el de la laptop para que ella mezcle también.
+     */
+    async intercambioLocal(otroDispositivo, doc) {
+      if (!/^[a-z0-9-]{3,40}$/.test(otroDispositivo ?? "") || otroDispositivo === dispositivo) throw new Error("Dispositivo inválido");
+      await recibir([{ dispositivo: otroDispositivo, doc }]);
+      return { dispositivo, doc: miDocumento() };
+    },
     /** Datos para vincular el celular (van en el QR). */
     vinculo: () => (activa ? { url: configuracion.url, token: configuracion.token } : null),
   };

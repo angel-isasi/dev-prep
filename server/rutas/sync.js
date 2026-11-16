@@ -10,6 +10,15 @@ export function rutasSync({ sync }) {
 
   router.get("/sync", (req, res) => res.json(sync.estado()));
 
+  // La versión web abierta en esta laptop intercambia su progreso directamente (sin pasar por AWS).
+  router.post("/sync/local", async (req, res) => {
+    try {
+      res.json(await sync.intercambioLocal(req.body?.dispositivo, req.body?.doc));
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  });
+
   // "Sincronizar ahora"
   router.post("/sync", async (req, res) => res.json(await sync.sincronizar()));
 

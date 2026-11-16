@@ -204,3 +204,18 @@ export function registrarQuiz(previo, aciertos, total, ahora) {
 
 /** ¿Le toca repaso a la tarjeta hoy? (las nunca vistas no cuentan como repaso) */
 export const preguntaPendiente = (registro, hoy) => !!registro && registro.proximo <= hoy;
+
+/** Campos de configuración que se pueden cambiar desde Ajustes (laptop y celular), con su validación. */
+export const CAMPOS_CONFIG = {
+  metaDiaria: (v) => Number.isInteger(v) && v >= 0 && v <= 20,
+  topeDeuda: (v) => Number.isInteger(v) && v >= 0 && v <= 50,
+  fechaMeta: (v) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v),
+  objetivo: (v) => typeof v === "string" && v.length <= 500,
+  nombre: (v) => typeof v === "string" && v.length <= 60,
+  metaIngles: (v) => Number.isInteger(v) && v >= 0 && v <= 120,
+};
+
+/** Solo los cambios válidos (los demás se ignoran). */
+export function validarConfig(cambios) {
+  return Object.fromEntries(Object.entries(cambios ?? {}).filter(([campo, valor]) => CAMPOS_CONFIG[campo]?.(valor)));
+}

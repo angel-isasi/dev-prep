@@ -5,9 +5,9 @@
 // Además de lo de la laptop (preguntas, quizzes, días), guarda "lecturas": los ejercicios
 // que estudiaste en el celular (pistas vistas, si viste la solución y tu autoevaluación).
 // En el celular un ejercicio nunca queda "resuelto": eso solo lo dan los tests de la laptop.
-import { calificarPregunta, preguntaPendiente, progresoVacio, registrarQuiz, sumarAlDia, sumarDias } from "../../../server/progreso-reglas.js";
+import { calificarPregunta, preguntaPendiente, progresoVacio, registrarQuiz, sumarAlDia, sumarDias, validarConfig } from "../../../server/progreso-reglas.js";
 import { ahoraIso, fechaLocal } from "../../../server/fechas.js";
-import { diasCombinados, documentoParaSubir, fusionarDocumento } from "../../../server/combinar.js";
+import { diasCombinados, documentoParaSubir, fusionarDocumento, vivos } from "../../../server/combinar.js";
 
 export const CLAVE = "devprep-movil-v1";
 const CLAVE_DANADO = "devprep-movil-danado";
@@ -49,7 +49,12 @@ export function crearProgresoMovil(almacenamiento, reloj = {}) {
   }
 
   let datos = cargar();
-  const guardar = () => almacenamiento.setItem(CLAVE, JSON.stringify(datos));
+  // Avisos de "el progreso cambió": la sincronización los usa para subir tus cambios pronto.
+  const oyentes = new Set();
+  const guardar = ({ avisar = true } = {}) => {
+    almacenamiento.setItem(CLAVE, JSON.stringify(datos));
+    if (avisar) for (const oyente of oyentes) oyente();
+  };
 
   /** Una lectura (ejercicio estudiado en el celular). */
   const lecturaVacia = () => ({ pistasVistas: 0, vioSolucion: false, explicacion: "" });
@@ -57,6 +62,41 @@ export function crearProgresoMovil(almacenamiento, reloj = {}) {
   return {
     datos: () => datos,
     hoy,
+    /** @param {() => void} oyente @returns {() => void} para dejar de escuchar */
+    alCambiar(oyente) {
+      oyentes.add(oyente);
+      return () => oyentes.delete(oyente);
+    },
+
+    // --- Registros sueltos: postulaciones, simulacros, exámenes, ajustes... (ver REGISTROS en combinar.js) ---
+    /** Los registros de una colección, sin los borrados. */
+    registros: (coleccion) => vivos(datos[coleccion]),
+    guardarRegistro(coleccion, id, valor) {
+      datos[coleccion] = { ...(datos[coleccion] ?? {}), [id]: { ...valor, en: ahora() } };
+      guardar();
+      return datos[coleccion][id];
+    },
+    /** Deja una lápida para que el borrado llegue a los otros dispositivos. */
+    borrarRegistro(coleccion, id) {
+      datos[coleccion] = { ...(datos[coleccion] ?? {}), [id]: { borrado: true, en: ahora() } };
+      guardar();
+    },
+    /** Un ajuste (juego, avisos, horario...) o el valor por defecto. */
+    ajuste: (clave, porDefecto = null) => {
+      const r = vivos(datos.ajustes)[clave];
+      if (!r) return porDefecto;
+      const { en: _en, ...valor } = r;
+      return porDefecto && typeof porDefecto === "object" ? { ...porDefecto, ...valor } : valor;
+    },
+    cambiarAjuste(clave, valor) {
+      datos.ajustes = { ...(datos.ajustes ?? {}), [clave]: { ...valor, en: ahora() } };
+      guardar();
+    },
+    /** Suma a un contador del día de hoy (los días se suman entre dispositivos). */
+    sumarDia(campo, cantidad = 1) {
+      datos.dias = sumarAlDia(datos.dias, hoy(), campo, cantidad);
+      guardar();
+    },
 
     // --- Ejercicios estudiados en el celular ---
     deLectura: (id) => datos.lecturas[id] ?? null,
@@ -152,7 +192,8 @@ export function crearProgresoMovil(almacenamiento, reloj = {}) {
 
     // --- Ajustes y respuestas personales ---
     cambiarConfig(cambios) {
-      datos.config = { ...datos.config, ...cambios, actualizadoEn: ahora() };
+      const validos = validarConfig(cambios);
+      if (Object.keys(validos).length) datos.config = { ...datos.config, ...validos, actualizadoEn: ahora() };
       guardar();
       return datos.config;
     },
@@ -175,8 +216,10 @@ export function crearProgresoMovil(almacenamiento, reloj = {}) {
     documento: () => documentoParaSubir(datos),
     /** Mezcla los documentos de otros dispositivos con el tuyo. */
     fusionar(documentos) {
+      const antes = JSON.stringify(datos);
       for (const { dispositivo, doc } of documentos) datos = fusionarDocumento(datos, doc, dispositivo);
-      guardar();
+      // Lo que llega de otros dispositivos no se vuelve a subir: no avisa a la sincronización.
+      if (JSON.stringify(datos) !== antes) guardar({ avisar: false });
     },
     /** Días del celular y de la laptop sumados. */
     dias: () => diasCombinados(datos),

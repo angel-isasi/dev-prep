@@ -56,7 +56,7 @@ export const SECCIONES_EXPLICACION = [
  */
 
 /** Carpetas de content/ que no son ejercicios (tienen su propio formato). */
-const NO_EJERCICIOS = new Set(["aprender", "referencia", "entrevistas"]);
+const NO_EJERCICIOS = new Set(["aprender", "referencia", "entrevistas", "ingles", "predice", "glosario", "revision", "pruebas", "proyectos"]);
 
 /** Busca recursivamente todas las carpetas que tienen meta.json. */
 async function buscarCarpetas(dir, raiz = dir) {

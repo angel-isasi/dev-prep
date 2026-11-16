@@ -98,3 +98,41 @@ describe("racha del celular", () => {
     expect(rachaMovil(dias, "2026-11-16")).toBe(0); // ayer (15) no estudió
   });
 });
+
+describe("registros sueltos, ajustes y avisos de cambio", () => {
+  const nuevo = () => crearProgresoMovil(almacenFalso(), { hoy: () => "2026-11-15", ahora: () => "2026-11-15T10:00:00-05:00" });
+
+  test("guardar, leer y borrar un registro (el borrado deja lápida)", () => {
+    const p = nuevo();
+    p.guardarRegistro("postulaciones", "a", { empresa: "Acme" });
+    expect(p.registros("postulaciones").a.empresa).toBe("Acme");
+    p.borrarRegistro("postulaciones", "a");
+    expect(p.registros("postulaciones")).toEqual({});
+    expect(p.datos().postulaciones.a.borrado).toBe(true);
+  });
+
+  test("los ajustes completan los valores por defecto", () => {
+    const p = nuevo();
+    expect(p.ajuste("juego", { tope: 120, procesos: ["dota2.exe"] })).toEqual({ tope: 120, procesos: ["dota2.exe"] });
+    p.cambiarAjuste("juego", { tope: 90 });
+    expect(p.ajuste("juego", { tope: 120, procesos: ["dota2.exe"] })).toEqual({ tope: 90, procesos: ["dota2.exe"] });
+  });
+
+  test("avisa al cambiar algo tuyo, pero no al mezclar lo que llega de otro dispositivo", () => {
+    const p = nuevo();
+    let avisos = 0;
+    p.alCambiar(() => avisos++);
+    p.sumarDia("ingles", 2);
+    expect(avisos).toBe(1);
+    expect(p.datos().dias["2026-11-15"].ingles).toBe(2);
+    p.fusionar([{ dispositivo: "laptop", doc: { version: 1, preguntas: { x: { caja: 1, en: "2026-11-15T09:00:00-05:00" } } } }]);
+    expect(avisos).toBe(1);
+  });
+
+  test("la configuración ignora campos inválidos", () => {
+    const p = nuevo();
+    p.cambiarConfig({ metaDiaria: 3, metaDiariaRara: "x", nombre: 5 });
+    expect(p.datos().config.metaDiaria).toBe(3);
+    expect(p.datos().config.metaDiariaRara).toBeUndefined();
+  });
+});

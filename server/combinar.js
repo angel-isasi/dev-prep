@@ -34,6 +34,30 @@ function mezclarMapa(propio = {}, remoto = {}, elegir = masReciente) {
   return resultado;
 }
 
+/**
+ * Colecciones de registros sueltos (postulaciones, simulacros, ajustes...): un mapa id -> registro
+ * con su fecha `en`. Gana el más reciente. Borrar deja una lápida { borrado: true, en } para que
+ * lo borrado no "resucite" al mezclar con un dispositivo que todavía lo tiene.
+ */
+export const REGISTROS = [
+  "ajustes",
+  "postulaciones",
+  "preguntasPropias",
+  "portafolio",
+  "simulacros",
+  "examenes",
+  "diario",
+  "logrosVistos",
+  "inmersion",
+  "misPalabras",
+];
+
+/** Mezcla dos colecciones de registros (ver REGISTROS). */
+export const mezclarRegistros = (propio, remoto) => mezclarMapa(propio, remoto, masReciente);
+
+/** Los registros de una colección sin los borrados. */
+export const vivos = (coleccion) => Object.fromEntries(Object.entries(coleccion ?? {}).filter(([, r]) => r && !r.borrado));
+
 /** Ejercicios: el más reciente, pero un "resuelto" (tests en la laptop) nunca se pierde. */
 function elegirEjercicio(a, b) {
   const elegido = masReciente(a, b);
@@ -67,6 +91,9 @@ export function fusionarDocumento(propio, remoto, dispositivo) {
     quizzes: mezclarMapa(propio.quizzes, r.quizzes, elegirQuiz),
     ejercicios: mezclarMapa(propio.ejercicios, r.ejercicios, elegirEjercicio),
     reportados: { ...(r.reportados ?? {}), ...(propio.reportados ?? {}) },
+    ...Object.fromEntries(
+      REGISTROS.filter((c) => propio[c] || r[c]).map((c) => [c, mezclarRegistros(propio[c], r[c])]),
+    ),
     // Días: lo del otro dispositivo se guarda aparte y se suma al mostrar (ver diasCombinados).
     diasRemotos: { ...(propio.diasRemotos ?? {}), [dispositivo]: r.dias ?? {} },
   };
