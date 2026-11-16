@@ -179,3 +179,56 @@
   color: var(--texto-tenue);
   font-size: 13px;
 }
+
+/* Tu día en números */
+.dia {
+  background:
+    radial-gradient(520px 200px at 0% 100%, var(--exito-suave), transparent 70%),
+    linear-gradient(var(--superficie), var(--superficie)),
+    var(--fondo-solido);
+}
+
+.cifrasDia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--espacio-4);
+}
+
+.cifraDia {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 400ms ease var(--retraso),
+    transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--retraso);
+}
+
+.cifraDia[data-visible="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+.cifraDia strong {
+  font-family: var(--fuente-titulos);
+  font-size: 36px;
+  line-height: 1.1;
+}
+
+.cifraDia[data-tipo="racha"] strong {
+  color: var(--aviso);
+}
+
+.cifraDia span {
+  color: var(--texto-tenue);
+  font-size: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cifraDia {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

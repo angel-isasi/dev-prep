@@ -588,6 +588,32 @@ const apiWeb = {
     return resultado;
   },
 
+  /** Git práctico: los escenarios que resolviste (los prepara y revisa el motor de la laptop). */
+  gitResueltos: async () => progreso.registros("git"),
+  marcarGit: async (id) => {
+    if (!progreso.registros("git")[id]) progreso.guardarRegistro("git", id, { fecha: progreso.hoy() });
+  },
+
+  /** "Tu día en números": lo que hiciste hoy, para verlo al cerrar el día. */
+  async diaEnNumeros() {
+    const hoy = progreso.hoy();
+    const d = progreso.dias()[hoy] ?? {};
+    const { ejercicios } = await indice();
+    const g = general(ejercicios);
+    const minutos = (s) => Math.round((s ?? 0) / 60);
+    const cifras = [
+      { id: "resueltos", texto: d.resueltos === 1 ? "ejercicio resuelto" : "ejercicios resueltos", valor: d.resueltos ?? 0 },
+      { id: "repasos", texto: d.repasos === 1 ? "repaso" : "repasos", valor: d.repasos ?? 0 },
+      { id: "preguntas", texto: "tarjetas de entrevista", valor: d.preguntas ?? 0 },
+      { id: "lecciones", texto: d.lecciones === 1 ? "lección" : "lecciones", valor: d.lecciones ?? 0 },
+      { id: "ingles", texto: "min de inglés", valor: minutos(d.inglesSegundos) + (d.inmersion ?? 0) },
+      { id: "estudio", texto: "min de estudio", valor: minutos((d.segundos ?? 0) + (d.leccionesSegundos ?? 0) + (d.inglesSegundos ?? 0)) },
+      { id: "simulacros", texto: d.simulacros === 1 ? "simulacro" : "simulacros", valor: d.simulacros ?? 0 },
+    ].filter((c) => c.valor > 0 || ["resueltos", "estudio"].includes(c.id));
+    const algo = cifras.some((c) => c.valor > 0);
+    return { fecha: hoy, cifras, algo, cumplioMeta: g.dias.hoy.cumplioMeta, racha: g.dias.racha ?? 0, juego: minutos(d.juego) };
+  },
+
   // --- Cuánto avancé, reto de la semana y plan de la semana (reglas en server/avance.js) ---
   async avance() {
     const { ejercicios } = await indice();

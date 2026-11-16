@@ -14,7 +14,7 @@ import { avanceUnidad, terminada } from "./leccion/motor.js";
 import { TiempoLibre } from "../components/TiempoLibre.jsx";
 import { TarjetaNivel } from "../components/Logros.jsx";
 import { PlanDeHoy, ResumenMes } from "../components/Rutina.jsx";
-import { PlanSemana, RetoSemana } from "../components/Avance.jsx";
+import { DiaEnNumeros, PlanSemana, RetoSemana } from "../components/Avance.jsx";
 import estilos from "./HoyMovil.module.css";
 
 const AREAS = ["javascript", "react", "typescript", "node"];
@@ -82,6 +82,9 @@ export function HoyMovil() {
 
       <div style={{ marginBottom: "var(--espacio-4)" }}>
         <PlanDeHoy />
+      </div>
+      <div style={{ marginBottom: "var(--espacio-4)" }}>
+        <DiaEnNumeros />
       </div>
       {lecciones && <TarjetaLeccion datos={lecciones} />}
       {hoy.juego && <div style={{ marginBottom: "var(--espacio-4)" }}><TiempoLibre juego={hoy.juego} meta={hoy.meta} salvados={hoy.salvados} jefe={hoy.jefe} /></div>}

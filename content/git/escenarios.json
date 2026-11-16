@@ -1,0 +1,854 @@
+{
+  "escenarios": [
+    {
+      "id": "git-01",
+      "titulo": "Tu primer commit",
+      "nivel": 1,
+      "situacion": "Empezaste un proyecto: ya tienes `index.html` y `app.js`, y el repositorio está creado, pero todavía no guardaste nada en el historial.",
+      "tarea": "Guarda los dos archivos en un commit con un mensaje que diga qué hiciste.",
+      "comandos": [
+        "git status",
+        "git add",
+        "git commit -m \"...\"",
+        "git log --oneline"
+      ],
+      "pistas": [
+        "Primero mira qué ve Git con `git status`: los archivos aparecen en rojo como \"untracked\" (sin seguimiento).",
+        "Un commit tiene dos pasos: elegir qué entra (`git add`) y guardarlo (`git commit`). `git add .` agrega todo lo de la carpeta.",
+        "`git add .` y luego `git commit -m \"Agrega la página inicial\"`. Revisa con `git log --oneline`."
+      ],
+      "explicacion": "Git guarda tu trabajo en dos pasos. `git add` pone los cambios en el **área de preparación** (staging): es como elegir qué fotos van al álbum. `git commit` toma esa selección y la guarda en el historial con un mensaje. Por eso puedes hacer commits pequeños aunque hayas cambiado muchas cosas: agregas solo lo que va junto.\n\nUn buen mensaje dice **qué** cambia en presente o imperativo: \"Agrega la página inicial\", no \"cambios\" ni \"asdf\". En el trabajo, tus compañeros leen el historial para entender por qué cambió algo.",
+      "preparar": [
+        {
+          "op": "archivo",
+          "ruta": "index.html",
+          "contenido": "<!doctype html>\n<html lang=\"es\">\n  <head><title>Mi tienda</title></head>\n  <body>\n    <h1>Mi tienda</h1>\n    <script src=\"app.js\"></script>\n  </body>\n</html>\n"
+        },
+        {
+          "op": "archivo",
+          "ruta": "app.js",
+          "contenido": "console.log(\"Hola desde mi tienda\");\n"
+        }
+      ],
+      "verificar": [
+        {
+          "tipo": "commits",
+          "min": 1,
+          "texto": "Hay al menos un commit"
+        },
+        {
+          "tipo": "en-commit",
+          "ruta": "index.html",
+          "texto": "index.html está guardado en Git"
+        },
+        {
+          "tipo": "en-commit",
+          "ruta": "app.js",
+          "texto": "app.js está guardado en Git"
+        },
+        {
+          "tipo": "limpio",
+          "texto": "No quedan cambios sin guardar (git status limpio)"
+        }
+      ],
+      "solucion": [
+        {
+          "op": "commit",
+          "mensaje": "Agrega la página inicial"
+        }
+      ]
+    },
+    {
+      "id": "git-02",
+      "titulo": "Trabaja en una rama",
+      "nivel": 1,
+      "situacion": "El proyecto ya tiene historial en `main`. Te piden agregar un buscador, y en el equipo nadie trabaja directo en `main`.",
+      "tarea": "Crea la rama `feature/buscador`, haz en ella un commit que agregue el archivo `buscador.js` (con cualquier código) y vuelve a `main`. En `main` no debe estar `buscador.js` todavía.",
+      "comandos": [
+        "git switch -c <rama>",
+        "git branch",
+        "git add",
+        "git commit",
+        "git switch main"
+      ],
+      "pistas": [
+        "Una rama es una línea de trabajo aparte. Mira las que hay con `git branch`.",
+        "`git switch -c feature/buscador` crea la rama y te cambia a ella en un solo paso.",
+        "Crea `buscador.js`, haz `git add buscador.js` y `git commit -m \"Agrega el buscador\"`, y después `git switch main`. Al volver, el archivo desaparece de la carpeta: está guardado en la otra rama."
+      ],
+      "explicacion": "Las ramas permiten trabajar en algo sin tocar lo que ya funciona. En casi todas las empresas el flujo es: creas una rama desde `main`, haces tus commits ahí, la subes y abres un pull request para que alguien la revise antes de unirla.\n\nAl cambiar de rama, Git cambia los archivos de tu carpeta para que coincidan con esa rama. Por eso `buscador.js` \"desaparece\" en `main`: no se borró, vive en `feature/buscador`. Los nombres con prefijo (`feature/`, `fix/`) son una convención común para saber de qué es cada rama.",
+      "preparar": [
+        {
+          "op": "archivo",
+          "ruta": "index.html",
+          "contenido": "<h1>Catálogo</h1>\n<ul id=\"lista\"></ul>\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Agrega el catálogo"
+        }
+      ],
+      "verificar": [
+        {
+          "tipo": "rama-existe",
+          "rama": "feature/buscador",
+          "texto": "Existe la rama feature/buscador"
+        },
+        {
+          "tipo": "commits",
+          "rama": "feature/buscador",
+          "min": 2,
+          "texto": "La rama tiene tu commit nuevo"
+        },
+        {
+          "tipo": "rama-actual",
+          "rama": "main",
+          "texto": "Volviste a main"
+        },
+        {
+          "tipo": "commits",
+          "rama": "main",
+          "exactos": 1,
+          "texto": "main sigue igual (tu cambio está solo en la rama)"
+        },
+        {
+          "tipo": "limpio",
+          "texto": "No quedan cambios sin guardar"
+        }
+      ],
+      "solucion": [
+        {
+          "op": "rama",
+          "nombre": "feature/buscador"
+        },
+        {
+          "op": "archivo",
+          "ruta": "buscador.js",
+          "contenido": "export const buscar = (lista, texto) => lista.filter((x) => x.includes(texto));\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Agrega el buscador"
+        },
+        {
+          "op": "cambiar",
+          "rama": "main"
+        }
+      ]
+    },
+    {
+      "id": "git-03",
+      "titulo": "Deshaz un cambio que no guardaste",
+      "nivel": 1,
+      "situacion": "Estabas probando cosas en `precios.js` y lo rompiste: ahora todos los precios salen en 0. No hiciste commit de ese cambio y quieres volver a como estaba en el último commit.",
+      "tarea": "Descarta los cambios de `precios.js` para que quede igual que en el último commit, sin crear commits nuevos.",
+      "comandos": [
+        "git status",
+        "git diff",
+        "git restore <archivo>"
+      ],
+      "pistas": [
+        "`git diff` te muestra exactamente qué cambiaste respecto del último commit.",
+        "Hay un comando para devolver un archivo a como estaba en el último commit. Te lo sugiere el propio `git status`.",
+        "`git restore precios.js`. Ojo: lo que descartas así no se puede recuperar."
+      ],
+      "explicacion": "`git restore <archivo>` reemplaza el archivo de tu carpeta por la versión del último commit. Es el \"deshacer\" de los cambios que todavía no guardaste. Úsalo con cuidado: esos cambios no estaban en Git, así que se pierden de verdad.\n\nAntes de descartar, mira qué vas a perder con `git diff`. Si hubieras hecho `git add` del cambio, primero tendrías que sacarlo de staging con `git restore --staged precios.js`.",
+      "preparar": [
+        {
+          "op": "archivo",
+          "ruta": "precios.js",
+          "contenido": "export const conIgv = (precio) => Math.round(precio * 1.18 * 100) / 100;\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Agrega el cálculo con IGV"
+        },
+        {
+          "op": "archivo",
+          "ruta": "precios.js",
+          "contenido": "export const conIgv = (precio) => 0; // probando\n"
+        }
+      ],
+      "verificar": [
+        {
+          "tipo": "archivo-contiene",
+          "ruta": "precios.js",
+          "busca": "precio * 1.18",
+          "texto": "precios.js volvió a la versión del commit"
+        },
+        {
+          "tipo": "commits",
+          "exactos": 1,
+          "texto": "No creaste commits nuevos"
+        },
+        {
+          "tipo": "limpio",
+          "texto": "No quedan cambios sin guardar"
+        }
+      ],
+      "solucion": [
+        {
+          "op": "git",
+          "args": [
+            "restore",
+            "precios.js"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "git-04",
+      "titulo": "Corrige tu último commit",
+      "nivel": 2,
+      "situacion": "Acabas de hacer un commit con el mensaje \"Agrega el fromulario\" (con una falta) y además te olvidaste de incluir `validar.js`, que ya está en tu carpeta. Todavía no lo subiste a ningún lado.",
+      "tarea": "Arregla ese mismo commit: que incluya `validar.js` y que su mensaje sea \"Agrega el formulario\". No debe quedar un commit extra.",
+      "comandos": [
+        "git add",
+        "git commit --amend -m \"...\"",
+        "git log --oneline"
+      ],
+      "pistas": [
+        "No hace falta un commit nuevo: Git puede reemplazar el último.",
+        "Primero agrega el archivo que faltaba con `git add validar.js`. Después usa `git commit --amend`.",
+        "`git add validar.js` y luego `git commit --amend -m \"Agrega el formulario\"`. Revisa con `git log --oneline` que siga habiendo 2 commits."
+      ],
+      "explicacion": "`git commit --amend` reemplaza el último commit por uno nuevo con lo que tengas en staging y el mensaje que le des. Es perfecto para olvidos y faltas de ortografía.\n\nLa regla de oro: **solo corrige commits que no subiste**. Si ya hiciste push y otra persona bajó ese commit, cambiarlo reescribe la historia y le complica la vida. Para algo ya publicado, mejor un commit nuevo que corrija.",
+      "preparar": [
+        {
+          "op": "archivo",
+          "ruta": "README.md",
+          "contenido": "# Registro\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Crea el proyecto"
+        },
+        {
+          "op": "archivo",
+          "ruta": "formulario.html",
+          "contenido": "<form id=\"registro\">\n  <input name=\"correo\" type=\"email\" />\n  <button>Enviar</button>\n</form>\n"
+        },
+        {
+          "op": "add",
+          "rutas": [
+            "formulario.html"
+          ]
+        },
+        {
+          "op": "git",
+          "args": [
+            "commit",
+            "-q",
+            "-m",
+            "Agrega el fromulario"
+          ]
+        },
+        {
+          "op": "archivo",
+          "ruta": "validar.js",
+          "contenido": "export const correoValido = (correo) => /^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(correo);\n"
+        }
+      ],
+      "verificar": [
+        {
+          "tipo": "ultimo-mensaje",
+          "patron": "^Agrega el formulario$",
+          "texto": "El último commit dice \"Agrega el formulario\""
+        },
+        {
+          "tipo": "en-commit",
+          "ruta": "validar.js",
+          "texto": "validar.js está en el commit"
+        },
+        {
+          "tipo": "commits",
+          "exactos": 2,
+          "texto": "Sigue habiendo 2 commits (corregiste, no agregaste otro)"
+        },
+        {
+          "tipo": "limpio",
+          "texto": "No quedan cambios sin guardar"
+        }
+      ],
+      "solucion": [
+        {
+          "op": "git",
+          "args": [
+            "add",
+            "validar.js"
+          ]
+        },
+        {
+          "op": "git",
+          "args": [
+            "commit",
+            "-q",
+            "--amend",
+            "-m",
+            "Agrega el formulario"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "git-05",
+      "titulo": "Resuelve un conflicto de merge",
+      "nivel": 2,
+      "situacion": "En `main` alguien cambió el título de la página a \"Tienda Ica\". En tu rama `feature/titulo` tú lo cambiaste a \"Tienda online\". Ahora tienes que unir tu rama a `main` y los dos cambios chocan en la misma línea.",
+      "tarea": "Estando en `main`, une `feature/titulo`. Resuelve el conflicto dejando el título \"Tienda Ica online\" y termina el merge con su commit.",
+      "comandos": [
+        "git switch main",
+        "git merge feature/titulo",
+        "git status",
+        "git add",
+        "git commit"
+      ],
+      "pistas": [
+        "Haz el merge desde `main`: `git merge feature/titulo`. Git avisará CONFLICT y te dirá en qué archivo.",
+        "Abre `index.html`: verás las marcas `<<<<<<<`, `=======` y `>>>>>>>` con las dos versiones. Borra las marcas y deja la línea como debe quedar.",
+        "Deja `<h1>Tienda Ica online</h1>` sin marcas, guarda, y luego `git add index.html` y `git commit` (sin mensaje, Git ya trae uno; o con `-m \"Une feature/titulo\"`)."
+      ],
+      "explicacion": "Un conflicto pasa cuando dos ramas cambian **la misma parte** de un archivo y Git no puede decidir cuál vale. Te marca las dos versiones:\n\n```\n<<<<<<< HEAD\n<h1>Tienda Ica</h1>\n=======\n<h1>Tienda online</h1>\n>>>>>>> feature/titulo\n```\n\nArriba está lo de tu rama actual (`HEAD`, aquí `main`) y abajo lo que llega. Tú decides el resultado (puede ser una, la otra o una mezcla), borras las marcas, haces `git add` y `git commit` para cerrar el merge. VS Code también muestra botones \"Accept Current / Incoming / Both\". Si te enredas, `git merge --abort` cancela todo y vuelves a empezar.",
+      "preparar": [
+        {
+          "op": "archivo",
+          "ruta": "index.html",
+          "contenido": "<h1>Tienda</h1>\n<p>Bienvenido</p>\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Crea la página"
+        },
+        {
+          "op": "rama",
+          "nombre": "feature/titulo"
+        },
+        {
+          "op": "archivo",
+          "ruta": "index.html",
+          "contenido": "<h1>Tienda online</h1>\n<p>Bienvenido</p>\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Cambia el título a Tienda online"
+        },
+        {
+          "op": "cambiar",
+          "rama": "main"
+        },
+        {
+          "op": "archivo",
+          "ruta": "index.html",
+          "contenido": "<h1>Tienda Ica</h1>\n<p>Bienvenido</p>\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Cambia el título a Tienda Ica"
+        }
+      ],
+      "verificar": [
+        {
+          "tipo": "rama-actual",
+          "rama": "main",
+          "texto": "Estás en main"
+        },
+        {
+          "tipo": "sin-merge-pendiente",
+          "texto": "Terminaste el merge (no quedó a medias)"
+        },
+        {
+          "tipo": "merge",
+          "texto": "El último commit es el merge de las dos ramas"
+        },
+        {
+          "tipo": "sin-marcadores",
+          "texto": "No quedan marcas de conflicto (<<<<<<<, =======, >>>>>>>)"
+        },
+        {
+          "tipo": "archivo-contiene",
+          "ruta": "index.html",
+          "busca": "<h1>Tienda Ica online</h1>",
+          "texto": "El título quedó \"Tienda Ica online\""
+        },
+        {
+          "tipo": "limpio",
+          "texto": "No quedan cambios sin guardar"
+        }
+      ],
+      "solucion": [
+        {
+          "op": "git",
+          "args": [
+            "merge",
+            "feature/titulo"
+          ]
+        },
+        {
+          "op": "archivo",
+          "ruta": "index.html",
+          "contenido": "<h1>Tienda Ica online</h1>\n<p>Bienvenido</p>\n"
+        },
+        {
+          "op": "git",
+          "args": [
+            "add",
+            "index.html"
+          ]
+        },
+        {
+          "op": "git",
+          "args": [
+            "commit",
+            "-q",
+            "--no-edit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "git-06",
+      "titulo": "Trae los cambios de tu compañera",
+      "nivel": 2,
+      "situacion": "Tu repositorio está conectado a un remoto (`origin`, como si fuera GitHub). Tu compañera Lucía subió un commit a `main` con el pie de página. Tú todavía no lo tienes.",
+      "tarea": "Actualiza tu `main` con lo que hay en el remoto, para que tengas el trabajo de Lucía.",
+      "comandos": [
+        "git fetch",
+        "git status",
+        "git log --oneline --all",
+        "git pull"
+      ],
+      "pistas": [
+        "Tu copia local no se entera sola de lo que hay en el remoto. `git fetch` baja la información sin tocar tus archivos.",
+        "Después del fetch, `git status` te dice que tu rama está \"behind\" (atrás). Para traer y unir en un paso existe `git pull`.",
+        "`git pull` (o `git pull origin main`). Luego revisa que exista `footer.html` y mira el historial con `git log --oneline`."
+      ],
+      "explicacion": "`git pull` es en realidad dos comandos: `git fetch` (baja los commits nuevos del remoto) y `git merge` (los une a tu rama). Hazlo **antes** de empezar a trabajar cada día y antes de subir tus cambios: así trabajas sobre lo último y evitas conflictos grandes.\n\n`git fetch` solo, en cambio, es seguro siempre: no toca tus archivos y te deja ver qué hay nuevo con `git log --oneline main..origin/main` antes de decidir.",
+      "preparar": [
+        {
+          "op": "archivo",
+          "ruta": "index.html",
+          "contenido": "<h1>Portal de la facultad</h1>\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Crea el portal"
+        },
+        {
+          "op": "remoto"
+        },
+        {
+          "op": "companero",
+          "pasos": [
+            {
+              "op": "archivo",
+              "ruta": "footer.html",
+              "contenido": "<footer>Facultad de Ingeniería de Sistemas</footer>\n"
+            },
+            {
+              "op": "commit",
+              "mensaje": "Agrega el pie de página"
+            }
+          ]
+        }
+      ],
+      "verificar": [
+        {
+          "tipo": "rama-actual",
+          "rama": "main",
+          "texto": "Estás en main"
+        },
+        {
+          "tipo": "contiene-a",
+          "rama": "main",
+          "otra": "main",
+          "remoto": true,
+          "texto": "Tu main tiene el commit de Lucía"
+        },
+        {
+          "tipo": "en-commit",
+          "ruta": "footer.html",
+          "texto": "footer.html está en tu repositorio"
+        },
+        {
+          "tipo": "limpio",
+          "texto": "No quedan cambios sin guardar"
+        }
+      ],
+      "solucion": [
+        {
+          "op": "git",
+          "args": [
+            "pull",
+            "-q",
+            "--no-rebase"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "git-07",
+      "titulo": "Sube tu rama al remoto",
+      "nivel": 2,
+      "situacion": "Terminaste el modo oscuro en tu rama `feature/modo-oscuro` (ya tiene su commit). Para abrir un pull request, la rama tiene que estar en el remoto, y todavía solo existe en tu laptop.",
+      "tarea": "Sube la rama `feature/modo-oscuro` a `origin` y déjala conectada (con upstream) para que los próximos `git push` no necesiten más datos.",
+      "comandos": [
+        "git branch -vv",
+        "git push -u origin <rama>",
+        "git status"
+      ],
+      "pistas": [
+        "`git branch -vv` muestra cada rama y si está conectada a una del remoto (entre corchetes).",
+        "La primera vez que subes una rama le dices a dónde va: `origin` y el nombre de la rama. La opción `-u` deja esa conexión guardada.",
+        "Estando en la rama: `git push -u origin feature/modo-oscuro`. Después `git status` dirá \"up to date with origin/feature/modo-oscuro\"."
+      ],
+      "explicacion": "Tus commits viven en tu laptop hasta que haces `git push`. La primera vez que subes una rama nueva usas `git push -u origin nombre-de-rama`: `-u` (de *upstream*) guarda la relación entre tu rama y la del remoto, y desde ahí basta con `git push` y `git pull`.\n\nEn GitHub, después de subir la rama aparece el botón para abrir un **pull request**: la forma en que el equipo revisa tu código antes de unirlo a `main`.",
+      "preparar": [
+        {
+          "op": "archivo",
+          "ruta": "estilos.css",
+          "contenido": "body { background: white; color: black; }\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Agrega los estilos"
+        },
+        {
+          "op": "remoto"
+        },
+        {
+          "op": "rama",
+          "nombre": "feature/modo-oscuro"
+        },
+        {
+          "op": "archivo",
+          "ruta": "estilos.css",
+          "contenido": "body { background: white; color: black; }\n\n@media (prefers-color-scheme: dark) {\n  body { background: #111; color: #eee; }\n}\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Agrega el modo oscuro"
+        }
+      ],
+      "verificar": [
+        {
+          "tipo": "remoto-tiene-rama",
+          "rama": "feature/modo-oscuro",
+          "texto": "La rama está en el remoto"
+        },
+        {
+          "tipo": "sincronizado",
+          "rama": "feature/modo-oscuro",
+          "texto": "El remoto tiene tu último commit de la rama"
+        },
+        {
+          "tipo": "upstream",
+          "rama": "feature/modo-oscuro",
+          "texto": "La rama quedó conectada a origin (upstream)"
+        }
+      ],
+      "solucion": [
+        {
+          "op": "git",
+          "args": [
+            "push",
+            "-q",
+            "-u",
+            "origin",
+            "feature/modo-oscuro"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "git-08",
+      "titulo": "Que Git ignore lo que no va",
+      "nivel": 1,
+      "situacion": "En tu proyecto hay una carpeta `node_modules/` (miles de archivos que se instalan con npm) y un archivo `.env` con una clave secreta. Ninguno de los dos debe subirse nunca al repositorio.",
+      "tarea": "Crea un `.gitignore` que ignore `node_modules/` y `.env`, y haz un commit con el `.gitignore` y el resto del proyecto (sin esos dos).",
+      "comandos": [
+        "git status",
+        ".gitignore",
+        "git check-ignore -v <ruta>",
+        "git add .",
+        "git commit"
+      ],
+      "pistas": [
+        "Un archivo llamado `.gitignore` en la raíz lista, una por línea, las rutas que Git no debe mirar.",
+        "Escribe `node_modules/` y `.env` en `.gitignore`. Después `git status` ya no debería mostrarlos.",
+        "Crea `.gitignore` con esas dos líneas, revisa con `git status`, y luego `git add .` y `git commit -m \"Agrega el gitignore\"`."
+      ],
+      "explicacion": "`.gitignore` evita que subas cosas que no deben estar en el repositorio: dependencias que cualquiera puede reinstalar con `npm install` (`node_modules/`), archivos generados (`dist/`) y, sobre todo, **secretos** (`.env`). Subir una clave a GitHub es un incidente de seguridad: aunque luego borres el archivo, queda en el historial.\n\nOjo: `.gitignore` solo afecta a archivos que Git todavía no sigue. Si un archivo ya estaba en un commit, hay que sacarlo con `git rm --cached archivo` además de ignorarlo.",
+      "preparar": [
+        {
+          "op": "archivo",
+          "ruta": "package.json",
+          "contenido": "{\n  \"name\": \"mi-app\",\n  \"version\": \"1.0.0\"\n}\n"
+        },
+        {
+          "op": "archivo",
+          "ruta": "src/main.js",
+          "contenido": "console.log(\"mi app\");\n"
+        },
+        {
+          "op": "archivo",
+          "ruta": ".env",
+          "contenido": "API_KEY=clave-secreta-de-prueba\n"
+        },
+        {
+          "op": "archivo",
+          "ruta": "node_modules/libreria/index.js",
+          "contenido": "module.exports = {};\n"
+        }
+      ],
+      "verificar": [
+        {
+          "tipo": "en-commit",
+          "ruta": ".gitignore",
+          "texto": ".gitignore está en el commit"
+        },
+        {
+          "tipo": "ignorado",
+          "ruta": ".env",
+          "texto": ".env está ignorado"
+        },
+        {
+          "tipo": "ignorado",
+          "ruta": "node_modules/libreria/index.js",
+          "texto": "node_modules/ está ignorado"
+        },
+        {
+          "tipo": "no-rastreado",
+          "ruta": ".env",
+          "texto": ".env no está en el repositorio"
+        },
+        {
+          "tipo": "en-commit",
+          "ruta": "src/main.js",
+          "texto": "El código del proyecto sí está guardado"
+        },
+        {
+          "tipo": "limpio",
+          "texto": "No quedan cambios sin guardar"
+        }
+      ],
+      "solucion": [
+        {
+          "op": "archivo",
+          "ruta": ".gitignore",
+          "contenido": "node_modules/\n.env\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Agrega el gitignore y el proyecto"
+        }
+      ]
+    },
+    {
+      "id": "git-09",
+      "titulo": "Revierte un commit que ya se subió",
+      "nivel": 3,
+      "situacion": "Ayer se subió a `main` un commit \"Cambia el envío gratis a S/ 50\" que estaba mal: el envío gratis era desde S/ 100. Ese commit ya está en el remoto y tus compañeros ya lo bajaron, así que no puedes borrarlo ni reescribir la historia.",
+      "tarea": "Deshaz ese commit con un commit nuevo que revierta su cambio, y súbelo al remoto.",
+      "comandos": [
+        "git log --oneline",
+        "git revert <commit>",
+        "git push"
+      ],
+      "pistas": [
+        "Busca el commit en `git log --oneline`: cada uno tiene un código corto al inicio (su hash).",
+        "`git revert <hash>` crea un commit nuevo que hace lo contrario del que le indiques, sin borrar nada del historial.",
+        "`git revert <hash del commit malo>` (Git abre un mensaje por defecto; con `--no-edit` lo acepta directo) y después `git push`."
+      ],
+      "explicacion": "Hay dos formas de \"deshacer\" un commit y elegir bien es una pregunta típica de entrevista:\n\n- `git revert <hash>` crea un **commit nuevo** que deshace el cambio. El historial queda completo y nadie del equipo tiene problemas. Es lo correcto para algo **ya publicado**.\n- `git reset` mueve la rama hacia atrás como si el commit no hubiera existido. Sirve solo para commits **locales**: si ya los subiste, obligarías a todos a arreglar sus copias.\n\nRegla práctica: lo que está en el remoto se revierte, no se resetea.",
+      "preparar": [
+        {
+          "op": "archivo",
+          "ruta": "envio.js",
+          "contenido": "export const ENVIO_GRATIS_DESDE = 100;\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Agrega el envío gratis desde S/ 100"
+        },
+        {
+          "op": "archivo",
+          "ruta": "carrito.js",
+          "contenido": "import { ENVIO_GRATIS_DESDE } from \"./envio.js\";\nexport const costoEnvio = (total) => (total >= ENVIO_GRATIS_DESDE ? 0 : 12);\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Agrega el costo de envío al carrito"
+        },
+        {
+          "op": "archivo",
+          "ruta": "envio.js",
+          "contenido": "export const ENVIO_GRATIS_DESDE = 50;\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Cambia el envío gratis a S/ 50"
+        },
+        {
+          "op": "archivo",
+          "ruta": "README.md",
+          "contenido": "# Tienda\n\nCarrito con envío gratis.\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Agrega el README"
+        },
+        {
+          "op": "remoto"
+        }
+      ],
+      "verificar": [
+        {
+          "tipo": "archivo-contiene",
+          "ruta": "envio.js",
+          "busca": "= 100",
+          "texto": "El envío gratis volvió a S/ 100"
+        },
+        {
+          "tipo": "algun-mensaje",
+          "patron": "^Revert ",
+          "texto": "Hay un commit de revert (no reescribiste la historia)"
+        },
+        {
+          "tipo": "commits",
+          "min": 5,
+          "texto": "El commit original sigue en el historial"
+        },
+        {
+          "tipo": "en-commit",
+          "ruta": "README.md",
+          "texto": "Los commits posteriores siguen intactos"
+        },
+        {
+          "tipo": "sincronizado",
+          "rama": "main",
+          "texto": "Subiste el revert al remoto"
+        }
+      ],
+      "solucion": [
+        {
+          "op": "git",
+          "args": [
+            "revert",
+            "--no-edit",
+            "HEAD~1"
+          ]
+        },
+        {
+          "op": "git",
+          "args": [
+            "push",
+            "-q"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "git-10",
+      "titulo": "Guarda tu trabajo a medias con stash",
+      "nivel": 3,
+      "situacion": "Estás a la mitad de un cambio en `perfil.js` (sin commit, todavía no funciona) y te avisan que hay un error urgente en `main`: el saludo dice \"Hloa\". Tienes que corregirlo ya, pero no quieres hacer commit de tu trabajo a medias.",
+      "tarea": "Guarda tu cambio a medias con stash, corrige \"Hloa\" por \"Hola\" en `saludo.js` con un commit, y recupera tu trabajo a medias para seguir con él. Al final, el stash debe quedar vacío y tu cambio de `perfil.js` debe estar de vuelta (sin commit).",
+      "comandos": [
+        "git stash",
+        "git stash list",
+        "git commit",
+        "git stash pop"
+      ],
+      "pistas": [
+        "`git stash` guarda tus cambios sin commit en un cajón aparte y deja tu carpeta limpia.",
+        "Con la carpeta limpia, corrige `saludo.js` y haz su commit. Después saca lo guardado del cajón.",
+        "`git stash`, corrige y `git commit -am \"Corrige el saludo\"`, y al final `git stash pop`. Revisa con `git stash list` que no quede nada."
+      ],
+      "explicacion": "`git stash` es un cajón temporal: guarda tus cambios sin commit y te deja la carpeta limpia para hacer otra cosa (cambiar de rama, corregir algo urgente, hacer pull). `git stash pop` los saca del cajón y los vuelve a aplicar.\n\nEs más limpio que hacer un commit \"wip\" que después hay que deshacer. Si guardas varios, `git stash list` los muestra; no los acumules por semanas, porque se olvida qué era cada uno.",
+      "preparar": [
+        {
+          "op": "archivo",
+          "ruta": "saludo.js",
+          "contenido": "export const saludo = (nombre) => `Hloa, ${nombre}`;\n"
+        },
+        {
+          "op": "archivo",
+          "ruta": "perfil.js",
+          "contenido": "export function perfil(usuario) {\n  return usuario.nombre;\n}\n"
+        },
+        {
+          "op": "commit",
+          "mensaje": "Agrega saludo y perfil"
+        },
+        {
+          "op": "archivo",
+          "ruta": "perfil.js",
+          "contenido": "export function perfil(usuario) {\n  // TODO: mostrar también la foto\n  return `${usuario.nombre} (${usuario.ciudad})`;\n}\n"
+        }
+      ],
+      "verificar": [
+        {
+          "tipo": "ultimo-mensaje",
+          "patron": ".",
+          "texto": "Hiciste el commit de la corrección"
+        },
+        {
+          "tipo": "commits",
+          "exactos": 2,
+          "texto": "Solo hay un commit nuevo (la corrección)"
+        },
+        {
+          "tipo": "archivo-contiene",
+          "ruta": "saludo.js",
+          "busca": "Hola,",
+          "texto": "El saludo dice \"Hola\""
+        },
+        {
+          "tipo": "commit-sin",
+          "ruta": "perfil.js",
+          "busca": "usuario.ciudad",
+          "texto": "Tu trabajo a medias NO entró en el commit"
+        },
+        {
+          "tipo": "archivo-contiene",
+          "ruta": "perfil.js",
+          "busca": "usuario.ciudad",
+          "texto": "Tu trabajo a medias volvió a perfil.js"
+        },
+        {
+          "tipo": "stash-vacio",
+          "texto": "El stash quedó vacío"
+        }
+      ],
+      "solucion": [
+        {
+          "op": "git",
+          "args": [
+            "stash"
+          ]
+        },
+        {
+          "op": "archivo",
+          "ruta": "saludo.js",
+          "contenido": "export const saludo = (nombre) => `Hola, ${nombre}`;\n"
+        },
+        {
+          "op": "git",
+          "args": [
+            "commit",
+            "-q",
+            "-am",
+            "Corrige el saludo"
+          ]
+        },
+        {
+          "op": "git",
+          "args": [
+            "stash",
+            "pop"
+          ]
+        }
+      ]
+    }
+  ]
+}

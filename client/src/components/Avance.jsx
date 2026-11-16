@@ -2,11 +2,13 @@
 // - CuantoAvance: cómo resuelves ahora contra hace 1 y 3 meses.
 // - RetoSemana: un reto con tiempo cada semana y tu marca personal.
 // - PlanSemana: los objetivos de la semana armados con tus puntos débiles.
+// - DiaEnNumeros: lo que hiciste hoy.
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { api } from "../lib/api.js";
 import { mmss } from "./Cronometro.jsx";
 import { useAhora } from "../hooks/useAhora.js";
+import { SlidingNumber } from "./ui/sliding-number.jsx";
 import estilos from "./Avance.module.css";
 
 const valor = (n, sufijo = "") => (n == null ? "–" : `${n}${sufijo}`);
@@ -152,6 +154,51 @@ export function PlanSemana() {
           </li>
         ))}
       </ol>
+    </div>
+  );
+}
+
+/**
+ * Tu día en números: lo que hiciste hoy, con cifras que suben al aparecer.
+ * Se muestra cuando ya hiciste algo hoy (para cerrar el día viendo que avanzaste).
+ */
+export function DiaEnNumeros() {
+  const [dia, setDia] = useState(null);
+  const [mostrar, setMostrar] = useState(false);
+  useEffect(() => {
+    api.diaEnNumeros?.().then(setDia, (e) => console.error("Tu día en números:", e));
+  }, []);
+  // Los números arrancan en 0 y suben cuando la tarjeta ya está en pantalla
+  useEffect(() => {
+    if (!dia?.algo) return;
+    const t = setTimeout(() => setMostrar(true), 250);
+    return () => clearTimeout(t);
+  }, [dia]);
+  if (!dia?.algo) return null;
+  return (
+    <div className={`${estilos.tarjeta} ${estilos.dia}`}>
+      <div className={estilos.cabecera}>
+        <span className={estilos.etiqueta}>Tu día en números</span>
+        <small>{dia.cumplioMeta ? "Meta cumplida. Así se ve un buen día." : "Vas sumando. Cada número cuenta para tu racha."}</small>
+      </div>
+      <div className={estilos.cifrasDia}>
+        {dia.cifras.map((c, i) => (
+          <div key={c.id} className={estilos.cifraDia} style={{ "--retraso": `${i * 70}ms` }} data-visible={mostrar}>
+            <strong>
+              <SlidingNumber number={mostrar ? c.valor : 0} />
+            </strong>
+            <span>{c.texto}</span>
+          </div>
+        ))}
+        {dia.racha > 0 && (
+          <div className={estilos.cifraDia} style={{ "--retraso": `${dia.cifras.length * 70}ms` }} data-visible={mostrar} data-tipo="racha">
+            <strong>
+              <SlidingNumber number={mostrar ? dia.racha : 0} />
+            </strong>
+            <span>{dia.racha === 1 ? "día de racha" : "días de racha"}</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -331,3 +331,33 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Shadowing */
+.pasosShadowing {
+  margin: 0 0 var(--espacio-3);
+  padding-left: 20px;
+  color: var(--texto-suave);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.shadowing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  padding: var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background:
+    radial-gradient(420px 180px at 0% 0%, var(--acento-suave), transparent 70%),
+    linear-gradient(var(--superficie), var(--superficie)),
+    var(--fondo-solido);
+}
+
+.fraseShadowing {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: 24px;
+  line-height: 1.35;
+}

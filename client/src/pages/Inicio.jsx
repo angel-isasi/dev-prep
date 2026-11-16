@@ -29,6 +29,7 @@ import SplitFlapText from "../components/reactbits/SplitFlapText.jsx";
 import { TiempoLibre } from "../components/TiempoLibre.jsx";
 import { TarjetaNivel } from "../components/Logros.jsx";
 import { PlanDeHoy, ResumenMes } from "../components/Rutina.jsx";
+import { DiaEnNumeros } from "../components/Avance.jsx";
 import estilos from "./Inicio.module.css";
 
 const RITMO = {
@@ -276,6 +277,11 @@ export function Inicio() {
       {api.planDeHoy && (
         <div className={estilos.tiempoLibre}>
           <PlanDeHoy />
+        </div>
+      )}
+      {api.diaEnNumeros && (
+        <div className={estilos.tiempoLibre}>
+          <DiaEnNumeros />
         </div>
       )}
       {datos.juego && (

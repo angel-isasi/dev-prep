@@ -54,6 +54,7 @@ export const REGISTROS = [
   "explicaciones",
   "retosSemana",
   "ofertasAnalizadas",
+  "git",
 ];
 
 /** Mezcla dos colecciones de registros (ver REGISTROS). */

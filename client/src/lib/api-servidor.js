@@ -77,6 +77,11 @@ export function crearApi(base = "") {
     verificarProyecto: (id, etapa) =>
       pedir(`/api/proyectos/${encodeURIComponent(id)}/verificar`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ etapa }) }),
     portafolio: () => pedir("/api/portafolio"),
+    // Git práctico: repositorios de verdad en Documentos/dev-prep-git
+    escenariosGit: () => pedir("/api/git"),
+    prepararGit: (id) => post(`/api/git/${encodeURIComponent(id)}/preparar`),
+    abrirGit: (id) => post(`/api/git/${encodeURIComponent(id)}/abrir`),
+    verificarGit: (id) => post(`/api/git/${encodeURIComponent(id)}/verificar`),
     exportarPortafolio: (ejercicio) => post(`/api/portafolio/${encodeURIComponent(ejercicio)}/exportar`),
   };
 }

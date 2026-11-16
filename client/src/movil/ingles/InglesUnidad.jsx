@@ -5,6 +5,7 @@ import { api } from "../../lib/api.js";
 import { hablar, hablarVarias, hayVoz } from "../../lib/voz.js";
 import { Markdown } from "../../components/Markdown.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
+import { Grabadora } from "../../components/Grabadora.jsx";
 import estilos from "./Ingles.module.css";
 
 export function InglesUnidad() {
@@ -38,7 +39,11 @@ export function InglesUnidad() {
       {unidad.descripcion && <p className={estilos.ayuda}>{unidad.descripcion}</p>}
 
       <div className={estilos.acciones}>
-        <Link to={`/leccion?ambito=ingles&unidad=${encodeURIComponent(unidad.id)}`} className="boton boton-primario" onClick={() => api.elegirUnidadIngles(unidad.id)}>
+        <Link
+          to={`/leccion?ambito=ingles&unidad=${encodeURIComponent(unidad.id)}`}
+          className="boton boton-primario"
+          onClick={() => api.elegirUnidadIngles(unidad.id)}
+        >
           Practicar esta unidad
         </Link>
       </div>
@@ -53,7 +58,12 @@ export function InglesUnidad() {
           {unidad.palabras.map((p) => (
             <li key={p.id}>
               {voz && (
-                <button type="button" className={estilos.audio} onClick={() => hablar(p.ejemplo?.en ? `${p.en}. ${p.ejemplo.en}` : p.en)} aria-label={`Escuchar ${p.en}`}>
+                <button
+                  type="button"
+                  className={estilos.audio}
+                  onClick={() => hablar(p.ejemplo?.en ? `${p.en}. ${p.ejemplo.en}` : p.en)}
+                  aria-label={`Escuchar ${p.en}`}
+                >
                   🔊
                 </button>
               )}
@@ -88,6 +98,8 @@ export function InglesUnidad() {
         </ul>
       </section>
 
+      {voz && unidad.frases?.length > 0 && <Shadowing frases={unidad.frases} />}
+
       {unidad.dialogos.length > 0 && (
         <section className={estilos.bloque}>
           <h2>Diálogos</h2>
@@ -117,5 +129,51 @@ export function InglesUnidad() {
         </section>
       )}
     </article>
+  );
+}
+
+/**
+ * Shadowing: escuchas una frase y la repites ENCIMA del audio, imitando el ritmo y la entonación.
+ * Después te grabas sola la frase y comparas. Es de las técnicas que más mejoran la pronunciación.
+ */
+function Shadowing({ frases }) {
+  const [indice, setIndice] = useState(0);
+  const [lento, setLento] = useState(true);
+  const frase = frases[indice];
+  return (
+    <section className={estilos.bloque}>
+      <h2>Shadowing: repite encima del audio</h2>
+      <ol className={estilos.pasosShadowing}>
+        <li>Escucha la frase una vez, leyendo el texto.</li>
+        <li>
+          Dale play otra vez y habla <strong>al mismo tiempo</strong> que la voz, como su sombra: copia el ritmo y la entonación.
+        </li>
+        <li>Grábate diciéndola sola y escúchate. Repite hasta que suene parecido.</li>
+      </ol>
+      <div className={estilos.shadowing}>
+        <span className={estilos.pron}>
+          Frase {indice + 1} de {frases.length}
+        </span>
+        <p className={estilos.fraseShadowing}>{frase.en}</p>
+        <small className={estilos.es}>{frase.es}</small>
+        <div className={estilos.acciones}>
+          <button type="button" className="boton boton-primario" onClick={() => hablar(frase.en, { lento })}>
+            🔊 Escuchar
+          </button>
+          <label className={estilos.velocidad}>
+            <input type="checkbox" checked={lento} onChange={(e) => setLento(e.target.checked)} /> Más lento
+          </label>
+        </div>
+        <Grabadora key={frase.id} clave={`shadowing:${frase.id}`} maxSegundos={20} texto="Grabarme diciéndola" />
+        <div className={estilos.acciones}>
+          <button type="button" className="boton boton-fantasma" disabled={indice === 0} onClick={() => setIndice((i) => i - 1)}>
+            ← Anterior
+          </button>
+          <button type="button" className="boton" disabled={indice + 1 >= frases.length} onClick={() => setIndice((i) => i + 1)}>
+            Siguiente →
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }

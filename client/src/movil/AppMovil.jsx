@@ -32,6 +32,7 @@ import { InglesMovil } from "./ingles/InglesMovil.jsx";
 import { InglesUnidad } from "./ingles/InglesUnidad.jsx";
 import { CasoRevision, ListaRevision } from "./practica/Revision.jsx";
 import { Glosario } from "./practica/Glosario.jsx";
+import { GitPractico } from "./practica/GitPractico.jsx";
 import { PaginaLogros } from "../components/Logros.jsx";
 import { SeccionRutina } from "../components/SeccionRutina.jsx";
 import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
@@ -64,6 +65,7 @@ export function App() {
       <Route path="revision" element={<ListaRevision />} />
       <Route path="revision/:id" element={<CasoRevision />} />
       <Route path="glosario" element={<Glosario />} />
+      <Route path="git" element={<GitPractico />} />
       <Route path="logros" element={<PaginaLogros />} />
       <Route path="diario" element={<PaginaDiario />} />
       <Route path="enfoque" element={<Enfoque />} />
@@ -115,6 +117,7 @@ export function App() {
       <Route path="revision" element={<ListaRevision />} />
       <Route path="revision/:id" element={<CasoRevision />} />
       <Route path="glosario" element={<Glosario />} />
+      <Route path="git" element={<GitPractico />} />
       <Route path="logros" element={<PaginaLogros />} />
       <Route path="diario" element={<PaginaDiario />} />
       <Route path="enfoque" element={<Enfoque />} />
