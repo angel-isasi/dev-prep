@@ -11,6 +11,7 @@ import { AnimatedGroup } from "../components/ui/animated-group.jsx";
 import { MagicCard } from "../components/ui/magic-card.jsx";
 import { ShineBorder } from "../components/ui/shine-border.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
+import { RetoSemana } from "../components/Avance.jsx";
 import estilos from "./Practicar.module.css";
 import practica from "../movil/practica/Practica.module.css";
 
@@ -111,6 +112,11 @@ export function Practicar() {
           ))}
         </div>
       )}
+
+      {/* Un reto con tiempo cada semana (versión web) */}
+      <div className={estilos.retoSemana}>
+        <RetoSemana />
+      </div>
 
       {AREAS.map((area) => {
         const lista = deArea(area);

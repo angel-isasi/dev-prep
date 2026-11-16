@@ -27,6 +27,11 @@ export const AREAS = [
         nombre: "Depurar código roto",
         descripcion: "Código que parece bien pero falla: encuentra el error con el síntoma y arréglalo.",
       },
+      {
+        id: "javascript/testing",
+        nombre: "Escribe tú los tests",
+        descripcion: "La función ya funciona: escribe los tests que atrapen sus versiones con errores escondidos.",
+      },
     ],
   },
   {
@@ -65,6 +70,11 @@ export const AREAS = [
         id: "react/depurar",
         nombre: "Depurar componentes",
         descripcion: "Estado mutado, efectos sin limpieza, keys mal puestas: los bugs que llegan a revisión.",
+      },
+      {
+        id: "react/apis",
+        nombre: "Consumir APIs",
+        descripcion: "APIs que tardan, fallan o vienen vacías: carga, error, reintento, cancelar y paginar.",
       },
     ],
   },

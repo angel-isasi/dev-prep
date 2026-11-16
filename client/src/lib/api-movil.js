@@ -16,6 +16,7 @@ import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
 import { analizarOferta } from "../../../server/ofertas.js";
 import { diaSemana, lunesDe } from "../../../server/metricas.js";
 import { avanceUnidad } from "../movil/leccion/motor.js";
+import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaSemana } from "../../../server/avance.js";
 import { crearApi } from "./api-servidor.js";
 import { BASE_LOCAL, conectada } from "./conexion-local.js";
 
@@ -25,6 +26,13 @@ export const progreso = crearProgresoMovil(localStorage);
 navigator.storage?.persist?.().catch(() => {});
 
 const SECCION_MODELO = "Cómo explicarlo en la entrevista";
+
+/** Huella corta de un texto (para no guardar dos veces la misma oferta). */
+function huella(texto) {
+  let h = 2166136261;
+  for (const c of String(texto).replace(/\s+/g, " ").trim().slice(0, 400)) h = Math.imul(h ^ c.codePointAt(0), 16777619);
+  return (h >>> 0).toString(36);
+}
 
 // --- Lectura de los JSON (cada archivo se pide una sola vez) ---
 const archivos = new Map();
@@ -571,7 +579,69 @@ const apiWeb = {
   async analizarOferta(texto) {
     const [{ unidades }, ingles] = await Promise.all([apiWeb.mapa(), itemsIngles()]);
     const estado = await estadoLogros();
-    return analizarOferta(texto, unidades, { inglesDominadas: estado.inglesDominadas, inglesTotal: ingles.unidades.length });
+    const resultado = analizarOferta(texto, unidades, { inglesDominadas: estado.inglesDominadas, inglesTotal: ingles.unidades.length });
+    // Se guardan solo las tecnologías (no el texto) para el plan de la semana: "lo que más piden"
+    if (resultado.tecnologias.length) {
+      const id = `of-${huella(texto)}`;
+      progreso.guardarRegistro("ofertasAnalizadas", id, { tecnologias: resultado.tecnologias.map(({ nombre, estado }) => ({ nombre, estado })), fecha: progreso.hoy() });
+    }
+    return resultado;
+  },
+
+  // --- Cuánto avancé, reto de la semana y plan de la semana (reglas en server/avance.js) ---
+  async avance() {
+    const { ejercicios } = await indice();
+    const dias = progreso.dias();
+    const primerDia = Object.keys(dias).sort()[0] ?? null;
+    return compararAvance({ ejercicios, registros: progreso.datos().ejercicios ?? {}, hoy: progreso.hoy(), primerDia });
+  },
+  async retoSemana() {
+    const { ejercicios } = await indice();
+    const lunes = lunesDe(progreso.hoy());
+    const historial = progreso.registros("retosSemana");
+    const registros = progreso.datos().ejercicios ?? {};
+    const guardado = historial[lunes];
+    // El reto queda fijo desde que lo empiezas (aunque cambie tu progreso en otros ejercicios)
+    const elegido = ejercicios.find((e) => e.id === guardado?.id) ?? retoDeLaSemana(ejercicios, registros, lunes);
+    if (!elegido) return null;
+    const resultado = resultadoReto(guardado, registros[elegido.id], elegido.nivel);
+    if (resultado.estado === "resuelto" && guardado && guardado.puntos !== resultado.puntos) {
+      progreso.guardarRegistro("retosSemana", lunes, { ...guardado, puntos: resultado.puntos, segundos: resultado.segundos, pistas: resultado.pistas });
+    }
+    const otros = Object.fromEntries(Object.entries(historial).filter(([s]) => s !== lunes));
+    return {
+      semana: lunes,
+      reto: { id: elegido.id, titulo: elegido.titulo, nivel: elegido.nivel, coleccion: elegido.coleccion, tema: elegido.tema },
+      empezado: !!guardado?.inicio,
+      inicio: guardado?.inicio ?? null,
+      resultado,
+      marca: marcaPersonal(otros),
+    };
+  },
+  async empezarRetoSemana() {
+    const reto = await apiWeb.retoSemana();
+    if (!reto || reto.empezado) return reto;
+    const registro = (progreso.datos().ejercicios ?? {})[reto.reto.id];
+    progreso.guardarRegistro("retosSemana", reto.semana, { id: reto.reto.id, inicio: new Date().toISOString(), pistasAlEmpezar: registro?.pistasVistas ?? 0 });
+    cache.clear();
+    return apiWeb.retoSemana();
+  },
+  async planSemana() {
+    const [{ debiles }, errores, reto, { preguntas }] = await Promise.all([apiWeb.mapa(), apiWeb.erroresFrecuentes(), apiWeb.retoSemana(), json("entrevistas.json")]);
+    const hoy = progreso.hoy();
+    const d = progreso.datos();
+    const ofertas = Object.values(progreso.registros("ofertasAnalizadas"));
+    return {
+      semana: lunesDe(hoy),
+      objetivos: planDeLaSemana({
+        debiles,
+        errores,
+        ofertas,
+        reto: reto && reto.resultado.estado !== "resuelto" ? reto.reto : null,
+        tarjetasPendientes: preguntas.filter((p) => preguntaPendiente(d.preguntas?.[p.id], hoy)).length,
+        meta: d.config?.metaDiaria ?? 2,
+      }),
+    };
   },
   /** Datos de tu CV más las habilidades que de verdad dominas (temas en verde de tu mapa). */
   async cv() {

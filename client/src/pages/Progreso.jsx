@@ -13,6 +13,7 @@ import { MapaDominio } from "../components/MapaDominio.jsx";
 import { EstudioJuego } from "../components/EstudioJuego.jsx";
 import { SemaforoPostular } from "../components/Logros.jsx";
 import { RetoMes, ResumenMes } from "../components/Rutina.jsx";
+import { CuantoAvance, PlanSemana } from "../components/Avance.jsx";
 import estilos from "./Progreso.module.css";
 
 const DIAS = ["L", "", "M", "", "V", "", "D"];
@@ -189,6 +190,12 @@ export function Progreso() {
         </div>
 
         <EstudioJuego dias={datos.estudioJuego} proyeccion={datos.proyeccion} fechaMeta={datos.config?.fechaMeta} />
+        {api.planSemana && (
+          <div className={estilos.avance}>
+            <PlanSemana />
+            <CuantoAvance />
+          </div>
+        )}
         {api.semaforo && <SemaforoPostular />}
         {api.retoMes && (
           <div style={{ marginTop: "var(--espacio-5)", display: "grid", gap: "var(--espacio-3)" }}>

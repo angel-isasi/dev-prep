@@ -11,6 +11,7 @@ import { rutasAprender } from "./rutas/aprender.js";
 import { rutasSync } from "./rutas/sync.js";
 import { rutasProyectos } from "./rutas/proyectos.js";
 import { controlDeOrigen } from "./origenes.js";
+import { rutasApiPractica } from "./api-practica.js";
 
 /**
  * @param {object} deps
@@ -27,6 +28,8 @@ export function crearApp(deps) {
   app.get("/api/hola", (req, res) => res.json({ app: "dev-prep" }));
 
   app.use("/api/ejercicios", rutasEjercicios(deps));
+  // API falsa que tarda y falla a propósito, para practicar (y para tus proyectos con Vite)
+  app.use("/api/practica", rutasApiPractica());
   if (deps.progreso) app.use("/api", rutasProgreso(deps));
   if (deps.entrevistas) app.use("/api", rutasEntrevistas(deps));
   if (deps.aprender) app.use("/api", rutasAprender(deps));

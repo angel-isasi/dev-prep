@@ -21,7 +21,7 @@ export function controlDeOrigen(req, res, next) {
     res.set("Vary", "Origin");
   }
   if (req.method === "OPTIONS") {
-    res.set("Access-Control-Allow-Methods", "GET, POST, PUT");
+    res.set("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
     res.set("Access-Control-Allow-Headers", "Content-Type");
     // Chrome pide permiso explícito para que una web pública hable con tu laptop
     if (req.headers["access-control-request-private-network"]) res.set("Access-Control-Allow-Private-Network", "true");

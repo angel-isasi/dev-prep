@@ -14,6 +14,7 @@ import { avanceUnidad, terminada } from "./leccion/motor.js";
 import { TiempoLibre } from "../components/TiempoLibre.jsx";
 import { TarjetaNivel } from "../components/Logros.jsx";
 import { PlanDeHoy, ResumenMes } from "../components/Rutina.jsx";
+import { PlanSemana, RetoSemana } from "../components/Avance.jsx";
 import estilos from "./HoyMovil.module.css";
 
 const AREAS = ["javascript", "react", "typescript", "node"];
@@ -89,6 +90,10 @@ export function HoyMovil() {
       </div>
       <div style={{ marginBottom: "var(--espacio-4)" }}>
         <ResumenMes />
+      </div>
+      <div style={{ display: "grid", gap: "var(--espacio-4)", marginBottom: "var(--espacio-4)" }}>
+        <PlanSemana />
+        <RetoSemana />
       </div>
 
       {hoy.config.objetivo && (

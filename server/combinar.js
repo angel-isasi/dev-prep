@@ -52,6 +52,8 @@ export const REGISTROS = [
   "misPalabras",
   "revisiones",
   "explicaciones",
+  "retosSemana",
+  "ofertasAnalizadas",
 ];
 
 /** Mezcla dos colecciones de registros (ver REGISTROS). */

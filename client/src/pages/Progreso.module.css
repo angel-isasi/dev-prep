@@ -291,3 +291,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Plan de la semana y Cuánto avancé (versión web) */
+.avance {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  align-items: start;
+  gap: var(--espacio-3);
+}

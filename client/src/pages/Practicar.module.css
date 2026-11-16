@@ -377,3 +377,7 @@
     align-items: flex-start;
   }
 }
+
+.retoSemana:not(:empty) {
+  margin-bottom: var(--espacio-6);
+}

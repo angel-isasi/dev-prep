@@ -22,6 +22,7 @@ export const TEMA_A_UNIDAD = {
   clases: "this",
   asincronia: "promesas-y-async",
   dom: "dom-y-eventos",
+  testing: "funciones", // "Escribe tú los tests": se prueban funciones, cuentan para esa unidad
   algoritmos: "algoritmos",
   // React
   "react-componentes": "react-jsx-y-componentes",
