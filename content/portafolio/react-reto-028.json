@@ -1,0 +1,12 @@
+{
+  "ejercicio": "react-reto-028",
+  "titulo": "Tres en raya",
+  "descripcion": "El clásico tres en raya para dos jugadores: X y O se turnan, el juego detecta cuándo alguien gana o si hay empate, bloquea las casillas ocupadas y se puede reiniciar. Demuestra cómo un solo estado (las 9 casillas) basta para derivar el turno, el ganador y el empate.",
+  "aprendido": [
+    "Un solo estado, las casillas, y todo lo demás derivado",
+    "Detectar al ganador recorriendo las 8 líneas posibles",
+    "Copiar el arreglo antes de cambiarlo para no mutar el estado",
+    "aria-live para anunciar el turno y el resultado"
+  ],
+  "demo": "import { TresEnRaya } from \"./TresEnRaya.jsx\";\n\nexport default function App() {\n  return (\n    <main style={{ maxWidth: 360, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Tres en raya</h1>\n      <p>Juega con alguien al lado: empieza X.</p>\n      <TresEnRaya />\n    </main>\n  );\n}\n"
+}

@@ -1,0 +1,282 @@
+/* Estilos base del Tablero de estudio: modo oscuro, limpio y sin distracciones. */
+:root {
+  color-scheme: dark;
+  --bg: #0f1115;
+  --panel: #171a21;
+  --border: #262b36;
+  --text: #e6e8ee;
+  --muted: #9aa3b2;
+  --accent: #7c9cff;
+  --ok: #4ade80;
+  --danger: #f87171;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+  display: grid;
+  gap: 20px;
+}
+
+.app__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.app__subtitle {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.panel__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: var(--accent);
+  color: #0b1020;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+input[type="text"],
+input[type="search"],
+select {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.task-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.field {
+  display: grid;
+  gap: 4px;
+  flex: 1 1 200px;
+}
+
+.field label {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.form-error,
+.alert {
+  color: var(--danger);
+  margin: 0;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--danger);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.alert p {
+  margin: 0;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.task__main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.task--done .task__title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.task__topic {
+  font-size: 0.8rem;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.task__actions,
+.task__edit {
+  display: flex;
+  gap: 6px;
+}
+
+.task__edit {
+  flex: 1;
+}
+
+.task__edit input {
+  flex: 1;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+}
+
+.btn-danger:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.segmented {
+  display: flex;
+  gap: 4px;
+}
+
+.segmented button {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+
+.segmented button[aria-pressed="true"] {
+  background: var(--accent);
+  color: #0b1020;
+}
+
+.summary,
+.info,
+.empty {
+  color: var(--muted);
+  margin: 0;
+}
+
+.streak {
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--ok);
+  color: var(--ok);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Etapa 9: accesibilidad y pulido */
+.app__main {
+  display: grid;
+  gap: 20px;
+}
+
+/* Contorno visible solo al navegar con teclado (no al hacer clic con el mouse) */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* El título se enfoca por código después de borrar. No es un control: sin contorno, pero el lector igual lo lee */
+h2[tabindex="-1"]:focus {
+  outline: none;
+}
+
+[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+/* Visible solo para lectores de pantalla: ocupa 1 px y no se ve, pero se lee */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

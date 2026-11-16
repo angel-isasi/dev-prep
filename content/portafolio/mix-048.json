@@ -1,0 +1,13 @@
+{
+  "ejercicio": "mix-048",
+  "titulo": "Tabla de pedidos con búsqueda, orden y páginas",
+  "descripcion": "Tabla de pedidos como la de un panel de administración: buscas por cliente, ordenas por nombre o por total con un clic en la columna (otro clic invierte el orden) y avanzas por páginas. Demuestra cómo encadenar filtrar, ordenar y paginar a partir de un estado mínimo, con useMemo para no recalcular de más.",
+  "aprendido": [
+    "Encadenar filtrar, ordenar y paginar sobre los mismos datos",
+    "useMemo para recalcular solo cuando cambian sus dependencias",
+    "toSorted y localeCompare para ordenar bien en español",
+    "Volver a la página 1 al cambiar la búsqueda",
+    "Deshabilitar Anterior y Siguiente en los extremos"
+  ],
+  "demo": "import { TablaPedidos } from \"./TablaPedidos.jsx\";\n\nconst pedidos = [\n  { id: 101, cliente: \"Rosa Quispe\", total: 45.5 },\n  { id: 102, cliente: \"Carlos Mendoza\", total: 120 },\n  { id: 103, cliente: \"Lucía Huamán\", total: 32.9 },\n  { id: 104, cliente: \"Jorge Ramírez\", total: 89.9 },\n  { id: 105, cliente: \"Ana Torres\", total: 15 },\n  { id: 106, cliente: \"Miguel Flores\", total: 210.4 },\n  { id: 107, cliente: \"Patricia Vargas\", total: 67.8 },\n  { id: 108, cliente: \"Luis Chávez\", total: 54 },\n  { id: 109, cliente: \"Carmen Rojas\", total: 98.5 },\n  { id: 110, cliente: \"Diego Castillo\", total: 23.4 },\n];\n\nexport default function App() {\n  return (\n    <main style={{ maxWidth: 560, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Pedidos de hoy</h1>\n      <p>Totales en soles. Haz clic en una columna para ordenar.</p>\n      <TablaPedidos pedidos={pedidos} porPagina={4} />\n    </main>\n  );\n}\n"
+}

@@ -1,0 +1,8 @@
+[
+  { "criterio": "Funciona", "puntos": 30, "descripcion": "Crear, mover, editar, borrar con confirmación, filtrar y contar funcionan y pasan los tests." },
+  { "criterio": "Casos borde", "puntos": 15, "descripcion": "Títulos vacíos, con espacios o repetidos (sin importar mayúsculas ni tildes), cancelar la edición con Escape, columnas vacías y filtro sin coincidencias." },
+  { "criterio": "Estado", "puntos": 15, "descripcion": "Un reducer sin mutaciones como única fuente de verdad; columnas, contadores y lista filtrada derivados, no guardados en otro estado." },
+  { "criterio": "Accesibilidad y foco", "puntos": 20, "descripcion": "Diálogo con role=dialog, aria-modal, nombre y descripción, foco atrapado, Escape y foco devuelto; botones con nombres que dicen la tarea; anuncios con role=status; foco con sentido después de mover y borrar." },
+  { "criterio": "Componentes bien divididos", "puntos": 10, "descripcion": "Columna, tarjeta, formulario, buscador y diálogo separados, con un hook que encapsula el estado." },
+  { "criterio": "Código legible, estilos y README", "puntos": 10, "descripcion": "Nombres claros, estilos ordenados con foco visible y un README con decisiones y mejoras." }
+]

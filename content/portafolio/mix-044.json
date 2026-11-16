@@ -1,0 +1,13 @@
+{
+  "ejercicio": "mix-044",
+  "titulo": "Lista de tareas con filtros",
+  "descripcion": "Lista de tareas para organizar la semana de estudio: agregas tareas, las marcas como hechas, filtras entre todas, pendientes y hechas, ves cuántas quedan y borras las terminadas. Demuestra actualizaciones inmutables, filtros como funciones y estado derivado.",
+  "aprendido": [
+    "Agregar, marcar y borrar sin mutar el arreglo",
+    "Filtros guardados como funciones en un objeto",
+    "useRef para generar ids sin provocar renders",
+    "Leer un formulario no controlado con FormData",
+    "Contadores derivados en cada render"
+  ],
+  "demo": "import { TareasConFiltro } from \"./TareasConFiltro.jsx\";\n\nexport default function App() {\n  return (\n    <main style={{ maxWidth: 480, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Mi semana de estudio</h1>\n      <p>Agrega lo que tienes que hacer, por ejemplo: \"Repasar closures\" o \"Practicar un reto de React\".</p>\n      <TareasConFiltro />\n    </main>\n  );\n}\n"
+}

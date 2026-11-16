@@ -1,0 +1,12 @@
+{
+  "ejercicio": "react-reto-019",
+  "titulo": "Autocompletar distritos con teclado",
+  "descripcion": "Campo de autocompletar para elegir un distrito de Lima: mientras escribes aparecen sugerencias, puedes moverte entre ellas con las flechas, elegir con Enter o con un clic, y limpiar con Escape. Demuestra estado derivado, manejo fino del teclado y el patrón combobox de accesibilidad.",
+  "aprendido": [
+    "Las sugerencias se derivan del texto, no se guardan en el estado",
+    "Moverse con ArrowUp y ArrowDown sin salirse de la lista",
+    "preventDefault para que el cursor no salte en el input",
+    "Roles combobox, listbox y option con aria-selected"
+  ],
+  "demo": "import { useState } from \"react\";\nimport { Autocompletar } from \"./Autocompletar.jsx\";\n\nconst distritos = [\n  \"Barranco\",\n  \"Breña\",\n  \"Chorrillos\",\n  \"Jesús María\",\n  \"La Molina\",\n  \"La Victoria\",\n  \"Lince\",\n  \"Los Olivos\",\n  \"Magdalena del Mar\",\n  \"Miraflores\",\n  \"Pueblo Libre\",\n  \"San Borja\",\n  \"San Isidro\",\n  \"San Juan de Lurigancho\",\n  \"San Miguel\",\n  \"Santiago de Surco\",\n  \"Surquillo\",\n];\n\nexport default function App() {\n  const [distrito, setDistrito] = useState(\"\");\n\n  return (\n    <main style={{ maxWidth: 420, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Dirección de entrega</h1>\n      <p>Escribe tu distrito (por ejemplo, \"san\") y usa las flechas.</p>\n      <Autocompletar opciones={distritos} onElegir={setDistrito} />\n      {distrito && <p>Entregaremos en {distrito}.</p>}\n    </main>\n  );\n}\n"
+}

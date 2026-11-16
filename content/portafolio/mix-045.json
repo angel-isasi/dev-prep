@@ -1,0 +1,12 @@
+{
+  "ejercicio": "mix-045",
+  "titulo": "Quiz con puntaje",
+  "descripcion": "Quiz de preguntas de opción múltiple que avanza solo al responder, muestra en qué pregunta vas y al final te da el puntaje con la opción de jugar de nuevo. Demuestra cómo guardar el mínimo estado posible (solo las respuestas) y derivar de ahí la pregunta actual, si terminó y cuántas acertaste.",
+  "aprendido": [
+    "Estado mínimo: solo el arreglo de respuestas",
+    "Pregunta actual, fin del juego y puntaje derivados",
+    "Agregar al arreglo sin mutarlo con el operador spread",
+    "Reiniciar el juego volviendo al estado inicial"
+  ],
+  "demo": "import { Quiz } from \"./Quiz.jsx\";\n\nconst preguntas = [\n  {\n    texto: \"¿Cuál es la capital del Perú?\",\n    opciones: [\"Cusco\", \"Lima\", \"Arequipa\"],\n    correcta: \"Lima\",\n  },\n  {\n    texto: \"¿Qué devuelve typeof null en JavaScript?\",\n    opciones: [\"null\", \"undefined\", \"object\"],\n    correcta: \"object\",\n  },\n  {\n    texto: \"¿Qué hook usas para guardar estado en React?\",\n    opciones: [\"useState\", \"useEffect\", \"useRef\"],\n    correcta: \"useState\",\n  },\n  {\n    texto: \"¿Qué método de array devuelve un arreglo nuevo con los elementos que cumplen una condición?\",\n    opciones: [\"map\", \"filter\", \"forEach\"],\n    correcta: \"filter\",\n  },\n];\n\nexport default function App() {\n  return (\n    <main style={{ maxWidth: 480, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Quiz rápido</h1>\n      <Quiz preguntas={preguntas} />\n    </main>\n  );\n}\n"
+}

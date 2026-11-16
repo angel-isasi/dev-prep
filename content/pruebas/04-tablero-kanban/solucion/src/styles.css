@@ -1,0 +1,247 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #1f2430;
+  background: #f4f5f8;
+  --accent: #3554d1;
+  --border: #d9dde7;
+  --muted: #5b6475;
+  --danger: #b3261e;
+  --todo: #8a94a6;
+  --doing: #e0a526;
+  --done: #2e9e5b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  padding: 0.4rem 0.8rem;
+  border: 0;
+  border-radius: 6px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost {
+  background: none;
+  color: var(--muted);
+  padding: 0.4rem 0.5rem;
+}
+
+.btn-ghost--danger:hover,
+.btn-ghost--danger:focus-visible {
+  color: var(--danger);
+}
+
+.btn-danger {
+  background: var(--danger);
+}
+
+/* El foco siempre se ve al navegar con teclado */
+:focus-visible {
+  outline: 3px solid #f2b705;
+  outline-offset: 2px;
+}
+
+/* Los títulos de columna se enfocan por código (después de borrar): sin contorno, no son controles */
+h2[tabindex="-1"]:focus {
+  outline: none;
+}
+
+input[type="text"],
+input[type="search"] {
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: white;
+}
+
+[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.form-error {
+  margin: 0.35rem 0 0;
+  color: var(--danger);
+  font-size: 0.9rem;
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.app__header h1 {
+  margin: 0;
+}
+
+.app__subtitle {
+  margin: 0.25rem 0 1.5rem;
+  color: var(--muted);
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1.5rem;
+}
+
+.new-task label,
+.search label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.new-task__row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .toolbar,
+  .board {
+    grid-template-columns: 1fr;
+  }
+}
+
+.column {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--todo);
+  border-radius: 10px;
+  background: #eceef3;
+}
+
+.column--doing {
+  border-top-color: var(--doing);
+}
+
+.column--done {
+  border-top-color: var(--done);
+}
+
+.column__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+}
+
+.column__header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.column__count,
+.column__empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.column__list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: white;
+}
+
+.card__title {
+  margin: 0 0 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.card__edit {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgb(15 20 30 / 55%);
+}
+
+.dialog {
+  width: min(420px, 100%);
+  padding: 1.25rem;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 25%);
+}
+
+.dialog h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+}
+
+.dialog p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
+.dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+/* Visible solo para lectores de pantalla: ocupa 1 px y no se ve, pero se lee */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

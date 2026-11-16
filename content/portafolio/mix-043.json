@@ -1,0 +1,13 @@
+{
+  "ejercicio": "mix-043",
+  "titulo": "Formulario de pedido con validación",
+  "descripcion": "Formulario para pedir una pizza a domicilio: pide nombre, celular y tamaño, valida los datos antes de enviar (el celular debe tener 9 dígitos y empezar con 9, como en Perú), muestra los errores junto a cada campo y, si todo está bien, confirma el pedido. Demuestra formularios controlados, validación separada en una función pura y mensajes de error accesibles.",
+  "aprendido": [
+    "Inputs controlados con un solo manejador usando el atributo name",
+    "Validación en una función pura, fácil de probar sin React",
+    "Mensajes de error accesibles con role=\"alert\" y aria-invalid",
+    "Expresiones regulares para validar un celular peruano",
+    "Mostrar una confirmación distinta cuando el envío es válido"
+  ],
+  "demo": "import { FormularioPedido } from \"./FormularioPedido.jsx\";\n\nexport default function App() {\n  return (\n    <main style={{ maxWidth: 420, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Pizzería Don Lucho</h1>\n      <p>Haz tu pedido y te llamamos para confirmar.</p>\n      <FormularioPedido />\n    </main>\n  );\n}\n"
+}

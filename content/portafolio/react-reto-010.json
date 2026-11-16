@@ -1,0 +1,13 @@
+{
+  "ejercicio": "react-reto-010",
+  "titulo": "Modal que se cierra con Escape y clic afuera",
+  "descripcion": "Ventana modal reutilizable que se abre con un botón y se cierra de tres formas: con el botón Cerrar, con la tecla Escape o haciendo clic en el fondo oscuro. Demuestra efectos con limpieza (el listener de teclado solo existe mientras el modal está abierto), stopPropagation y un componente controlado por su padre.",
+  "aprendido": [
+    "useEffect que agrega y quita un listener de teclado",
+    "La función de limpieza evita listeners duplicados o colgados",
+    "stopPropagation para que un clic dentro del modal no lo cierre",
+    "Componente controlado: el padre decide si está abierto",
+    "role=\"dialog\" y aria-modal para lectores de pantalla"
+  ],
+  "demo": "import { useState } from \"react\";\nimport { Modal } from \"./Modal.jsx\";\n\nexport default function App() {\n  const [abierto, setAbierto] = useState(false);\n  const cerrar = () => setAbierto(false);\n\n  return (\n    <main style={{ maxWidth: 520, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Mis pedidos</h1>\n      <p>Pedido #1024: 2 pizzas familiares, S/ 79.80</p>\n      <button onClick={() => setAbierto(true)}>Ver detalle</button>\n\n      <Modal abierto={abierto} titulo=\"Detalle del pedido #1024\" onCerrar={cerrar}>\n        <ul>\n          <li>Pizza Americana familiar: S/ 39.90</li>\n          <li>Pizza Hawaiana familiar: S/ 39.90</li>\n        </ul>\n        <p>Entrega en Miraflores, hoy entre 7 y 8 p. m.</p>\n      </Modal>\n    </main>\n  );\n}\n"
+}

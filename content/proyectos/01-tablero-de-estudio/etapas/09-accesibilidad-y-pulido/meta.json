@@ -1,0 +1,4 @@
+{
+  "titulo": "Accesibilidad y pulido",
+  "objetivo": "Que el tablero se use bien con teclado y lector de pantalla: landmarks y regiones con nombre, errores unidos a su campo, foco bien manejado al crear, editar y borrar, y anuncios con aria-live."
+}

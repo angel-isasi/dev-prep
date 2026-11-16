@@ -1,0 +1,12 @@
+{
+  "ejercicio": "react-reto-023",
+  "titulo": "Formulario de varios pasos (wizard)",
+  "descripcion": "Formulario de inscripción dividido en pasos: primero el nombre, luego la escuela y al final una pantalla de confirmación, con botones Atrás y Siguiente. Los datos no se pierden al ir y volver porque viven en un solo estado del wizard y no dentro de cada paso. Demuestra estado compartido entre pasos, renderizado condicional y un callback al finalizar.",
+  "aprendido": [
+    "Los datos de todos los pasos viven en un solo estado",
+    "Renderizado condicional según el paso actual",
+    "Ir y volver entre pasos sin perder lo escrito",
+    "Entregar el resultado al padre con onFinalizar"
+  ],
+  "demo": "import { useState } from \"react\";\nimport { Wizard } from \"./Wizard.jsx\";\n\nexport default function App() {\n  const [inscrito, setInscrito] = useState(null);\n\n  return (\n    <main style={{ maxWidth: 420, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Inscripción al taller de React</h1>\n      {inscrito ? (\n        <p>\n          ¡Listo, {inscrito.nombre}! Quedaste inscrito desde {inscrito.escuela}.\n        </p>\n      ) : (\n        <Wizard onFinalizar={setInscrito} />\n      )}\n    </main>\n  );\n}\n"
+}

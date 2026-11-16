@@ -1,0 +1,13 @@
+{
+  "ejercicio": "mix-041",
+  "titulo": "Buscador de pizzas con espera y estados",
+  "descripcion": "Buscador que consulta una función asíncrona mientras escribes: espera 300 ms a que dejes de teclear (debounce), muestra los estados inicial, buscando, sin resultados y error, e ignora las respuestas viejas si escribiste otra cosa. En la demo la búsqueda se simula con una promesa; escribe \"error\" para ver el mensaje de fallo. Demuestra useEffect con limpieza y manejo real de datos asíncronos.",
+  "aprendido": [
+    "Debounce con setTimeout y clearTimeout dentro de useEffect",
+    "Ignorar respuestas viejas con una bandera en la limpieza",
+    "Un solo objeto de estado para la fase y los resultados",
+    "Mostrar cargando, vacío y error de forma clara",
+    "Recibir la función de búsqueda por props para poder probarla"
+  ],
+  "demo": "import { BuscadorPizzas } from \"./BuscadorPizzas.jsx\";\n\nconst PIZZAS = [\n  \"Americana\",\n  \"Hawaiana\",\n  \"Pepperoni\",\n  \"Margarita\",\n  \"Vegetariana\",\n  \"Lomo saltado\",\n  \"Ají de gallina\",\n  \"Chorizo y pimiento\",\n  \"Cuatro quesos\",\n];\n\n// Simula una petición al servidor: tarda 600 ms y falla si buscas \"error\".\nfunction buscar(consulta) {\n  return new Promise((resolve, reject) => {\n    setTimeout(() => {\n      const texto = consulta.toLowerCase();\n      if (texto === \"error\") reject(new Error(\"Sin conexión\"));\n      else resolve(PIZZAS.filter((pizza) => pizza.toLowerCase().includes(texto)));\n    }, 600);\n  });\n}\n\nexport default function App() {\n  return (\n    <main style={{ maxWidth: 420, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Carta de pizzas</h1>\n      <BuscadorPizzas buscar={buscar} />\n    </main>\n  );\n}\n"
+}

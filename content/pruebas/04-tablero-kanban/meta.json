@@ -1,0 +1,8 @@
+{
+  "id": "prueba-04",
+  "titulo": "Tablero kanban con diálogo de confirmación accesible",
+  "horas": 4,
+  "nivel": 3,
+  "descripcion": "Para Kallpa Studio, una agencia web de Arequipa: tablero con columnas Por hacer, En curso y Hecho, crear, mover con botones, editar, borrar con un diálogo accesible propio, filtro por texto y contador por columna.",
+  "tecnologias": ["React", "useReducer", "Accesibilidad", "Manejo del foco", "Testing Library"]
+}

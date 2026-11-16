@@ -1,0 +1,12 @@
+{
+  "ejercicio": "react-reto-012",
+  "titulo": "Carrito de compras con useReducer",
+  "descripcion": "Carrito de una bodega online: agregas productos, sube la cantidad si ya estaban, puedes quitarlos de uno en uno y el total en soles se actualiza solo. Toda la lógica vive en un reducer puro, separado de la interfaz. Demuestra useReducer, actualizaciones inmutables y estado derivado.",
+  "aprendido": [
+    "useReducer para centralizar las acciones del carrito",
+    "Un reducer puro que siempre devuelve un arreglo nuevo",
+    "Actualizar con map y filter sin mutar el estado",
+    "El total se calcula con reduce, no se guarda en el estado"
+  ],
+  "demo": "import { Carrito } from \"./Carrito.jsx\";\n\nconst productos = [\n  { id: 1, nombre: \"Inca Kola 1.5 L\", precio: 7.5 },\n  { id: 2, nombre: \"Pan francés (bolsa)\", precio: 3.2 },\n  { id: 3, nombre: \"Leche Gloria\", precio: 4.6 },\n  { id: 4, nombre: \"Arroz Costeño 1 kg\", precio: 5.9 },\n];\n\nexport default function App() {\n  return (\n    <main style={{ maxWidth: 520, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Bodega Doña Rosa</h1>\n      <Carrito productos={productos} />\n    </main>\n  );\n}\n"
+}

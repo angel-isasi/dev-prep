@@ -1,0 +1,13 @@
+{
+  "ejercicio": "react-reto-017",
+  "titulo": "Calificación con estrellas",
+  "descripcion": "Componente para calificar con estrellas, como en una app de delivery: al pasar el mouse se iluminan las estrellas hasta esa posición y al hacer clic queda elegida la nota. Avisa al padre con un callback. Demuestra dos estados que se combinan (elegido y hover), listas generadas con Array.from y accesibilidad con radiogroup.",
+  "aprendido": [
+    "Dos estados distintos: el valor elegido y el de hover",
+    "Derivar lo que se ve con hover || valor",
+    "Generar las estrellas con Array.from",
+    "Avisar al padre con un callback opcional (onCambio?.())",
+    "role=\"radiogroup\" y aria-checked para que sea accesible"
+  ],
+  "demo": "import { useState } from \"react\";\nimport { Estrellas } from \"./Estrellas.jsx\";\n\nconst mensajes = [\"\", \"Muy malo\", \"Malo\", \"Regular\", \"Bueno\", \"Excelente\"];\n\nexport default function App() {\n  const [nota, setNota] = useState(0);\n\n  return (\n    <main style={{ maxWidth: 420, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>¿Qué tal tu pedido?</h1>\n      <p>Califica tu experiencia con Pollería El Rancho.</p>\n      <Estrellas total={5} onCambio={setNota} />\n      <p>{nota ? `Tu nota: ${nota} de 5, ${mensajes[nota]}` : \"Aún no calificas\"}</p>\n    </main>\n  );\n}\n"
+}

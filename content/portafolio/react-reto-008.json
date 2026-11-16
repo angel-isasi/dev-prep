@@ -1,0 +1,12 @@
+{
+  "ejercicio": "react-reto-008",
+  "titulo": "Pestañas accesibles",
+  "descripcion": "Componente de pestañas (tabs) para la ficha de un producto: muestra un panel a la vez y se puede usar con el mouse o con las flechas del teclado. Sigue el patrón de accesibilidad de WAI-ARIA, así un lector de pantalla entiende qué pestaña está activa. Demuestra estado mínimo, roles ARIA y manejo de teclado.",
+  "aprendido": [
+    "Guardar solo el índice activo y derivar todo lo demás",
+    "Roles tablist, tab y tabpanel con aria-selected y aria-controls",
+    "Navegación con flechas usando el operador módulo para dar la vuelta",
+    "useId para generar ids únicos sin chocar con otros componentes"
+  ],
+  "demo": "import { Pestanas } from \"./Pestanas.jsx\";\n\nconst pestanas = [\n  {\n    titulo: \"Descripción\",\n    contenido: <p>Polo de algodón pima peruano, suave y fresco, ideal para el verano limeño.</p>,\n  },\n  {\n    titulo: \"Tallas\",\n    contenido: (\n      <ul>\n        <li>S: 50 cm de ancho</li>\n        <li>M: 53 cm de ancho</li>\n        <li>L: 56 cm de ancho</li>\n      </ul>\n    ),\n  },\n  {\n    titulo: \"Envío\",\n    contenido: <p>Envío gratis en Lima Metropolitana por compras desde S/ 99. A provincias, de 3 a 5 días.</p>,\n  },\n];\n\nexport default function App() {\n  return (\n    <main style={{ maxWidth: 520, margin: \"2rem auto\", fontFamily: \"system-ui, sans-serif\" }}>\n      <h1>Polo pima clásico</h1>\n      <p>S/ 59.90</p>\n      <Pestanas pestanas={pestanas} />\n    </main>\n  );\n}\n"
+}
