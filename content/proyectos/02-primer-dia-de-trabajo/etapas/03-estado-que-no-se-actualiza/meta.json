@@ -1,0 +1,4 @@
+{
+  "titulo": "TICKET-103: el pedido no cambia de estado al hacer clic",
+  "objetivo": "Encontrar, siguiendo las props por varios archivos, un bug de React por mutar el estado, y arreglarlo con una actualización inmutable."
+}

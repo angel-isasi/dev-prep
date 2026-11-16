@@ -1,0 +1,4 @@
+{
+  "titulo": "TICKET-102: mostrar si el pedido es de mesa, delivery o para llevar",
+  "objetivo": "Hacer un cambio de UI pedido por negocio usando un dato que ya llega de la API, y agregar el estado vacío de la lista."
+}

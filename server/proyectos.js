@@ -81,7 +81,9 @@ export async function correrTestsDe(raiz, carpeta) {
     await vitest.close();
   }
   const pasan = resultados.reduce((s, r) => s + (r.pasan ?? 0), 0);
-  const total = resultados.reduce((s, r) => s + (r.total ?? 0), 0);
+  // Un archivo que no pudo correr (por ejemplo, importa algo que todavía no creaste) trae 0 tests:
+  // cuenta como un test que falla, para que la etapa no aparezca en verde sin haber hecho nada.
+  const total = resultados.reduce((s, r) => s + Math.max(r.total ?? 0, r.error ? 1 : 0), 0);
   return { pasan, total, archivos: resultados.map((r) => ({ archivo: path.relative(carpeta, r.archivo).replaceAll("\\", "/"), pasan: r.pasan, total: r.total, error: r.error, casos: r.casos })) };
 }
 

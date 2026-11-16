@@ -1,0 +1,4 @@
+{
+  "titulo": "TICKET-105: el panel dice que no hay pedidos cuando se cae el internet",
+  "objetivo": "Agregar estados de carga y de error con reintento a una llamada a la API que hoy los ignora, siguiendo el patrón que ya usa otra parte del proyecto."
+}

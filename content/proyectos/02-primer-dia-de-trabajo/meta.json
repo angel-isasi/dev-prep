@@ -1,0 +1,6 @@
+{
+  "id": "proyecto-primer-dia",
+  "titulo": "Primer día de trabajo: MesaYa",
+  "descripcion": "Recibes el código de otro equipo: MesaYa, el panel de pedidos de un restaurante en Miraflores, que ya existe y funciona a medias. Resuelves 6 tickets como los de Jira (un bug en utils, un cambio de UI, un estado mutado, un buscador reutilizando lo que ya hay, carga y error de la API y un refactor pedido en revisión de código) sin romper los tests que el equipo ya tenía.",
+  "tecnologias": ["React", "Leer código ajeno", "Debugging", "Hooks", "API REST simulada", "Refactorización", "Vitest", "Testing Library"]
+}

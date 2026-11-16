@@ -1,0 +1,4 @@
+{
+  "titulo": "TICKET-106: refactor pedido en revisión de código, useRequest",
+  "objetivo": "Extraer la lógica de carga repetida en App y MenuPanel a un hook propio, sin cambiar el comportamiento: todos los tests anteriores tienen que seguir pasando."
+}

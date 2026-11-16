@@ -1,0 +1,4 @@
+{
+  "titulo": "TICKET-104: buscador de pedidos para la hora punta",
+  "objetivo": "Agregar una feature pequeña descubriendo y reutilizando el componente y el hook que el proyecto ya tiene, en vez de escribirlos de nuevo."
+}

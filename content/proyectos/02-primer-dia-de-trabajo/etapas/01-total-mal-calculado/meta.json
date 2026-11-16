@@ -1,0 +1,4 @@
+{
+  "titulo": "TICKET-101: el total de los pedidos no suma bien",
+  "objetivo": "Encontrar y arreglar un bug en una función de utils, sin romper el test del equipo que ya existía, y cubrir el caso que se le escapó."
+}
