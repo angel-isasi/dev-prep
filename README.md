@@ -12,9 +12,13 @@ Programas en VS Code, guardas con `Ctrl + S` y la app muestra al instante qué t
 
 ![Tests en vivo: guardas en VS Code y la app muestra qué casos pasan, con lo esperado y lo recibido](docs/capturas/tests-en-vivo.png)
 
-| Inicio | Practicar | Celular |
+| Inicio | Lecciones | Inglés |
 |---|---|---|
-| ![Inicio con racha, meta del día, preparación y cuenta regresiva](docs/capturas/inicio.png) | ![Practicar organizado por áreas y colecciones](docs/capturas/practicar.png) | ![Versión celular con el plan de hoy y lecciones](docs/capturas/movil.png) |
+| ![Inicio con objetivo, racha, meta del día, preparación, cuenta regresiva y plan de hoy](docs/capturas/inicio.png) | ![Camino de lecciones por unidades](docs/capturas/lecciones.png) | ![Inglés con rutina diaria, inmersión y prueba de nivel](docs/capturas/ingles.png) |
+
+| Conseguir trabajo | Celular |
+|---|---|
+| ![Ofertas reales ordenadas por cuánto te convienen, con sus razones](docs/capturas/trabajo.png) | ![Versión celular con el plan de hoy y la lección de la unidad](docs/capturas/movil.png) |
 
 ## In English
 
