@@ -60,6 +60,7 @@ const app = crearApp({
   aprender,
   referencia,
   vscode,
+  config,
   clienteDir: config.clienteDir,
   alApagar: () => apagar(),
 });

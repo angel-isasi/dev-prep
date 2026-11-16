@@ -12,6 +12,10 @@ export function InglesUnidad() {
   const [unidad, setUnidad] = useState(null);
   const [error, setError] = useState(null);
   const [traducir, setTraducir] = useState(false);
+  const [mias, setMias] = useState({});
+  useEffect(() => {
+    api.misPalabras().then(setMias);
+  }, []);
   const voz = hayVoz();
 
   useEffect(() => {
@@ -53,6 +57,17 @@ export function InglesUnidad() {
                   🔊
                 </button>
               )}
+              <button
+                type="button"
+                className={estilos.audio}
+                aria-label={mias[p.id] ? "Quitar de mis palabras" : "Agregar a mis palabras"}
+                onClick={async () => {
+                  await api.alternarMiPalabra(p.id);
+                  setMias(await api.misPalabras());
+                }}
+              >
+                {mias[p.id] ? "★" : "☆"}
+              </button>
               <div>
                 <strong>{p.en}</strong> <span className={estilos.pron}>{p.pron}</span>
                 {p.formas && (

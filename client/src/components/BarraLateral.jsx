@@ -15,6 +15,7 @@ import {
   IconoReferencia,
   IconoEntrevistas,
   IconoIngles,
+  IconoTrabajo,
   IconoLuna,
   IconoPracticar,
   IconoProgreso,
@@ -33,6 +34,7 @@ const SECCIONES = [
   ...(ES_MOVIL
     ? [
         { a: "/ingles", texto: "Inglés", Icono: IconoIngles },
+        { a: "/trabajo", texto: "Trabajo", Icono: IconoTrabajo },
         { a: "/camino", texto: "Lecciones", Icono: IconoProgreso },
         { a: "/chuletas", texto: "Chuletas", Icono: IconoAprender },
       ]

@@ -13,6 +13,7 @@ import { crearProgresoMovil, rachaMovil } from "./progreso-movil.js";
 import { mapaDominio, unidadesDebiles } from "../../../server/dominio.js";
 import { erroresFrecuentes } from "../../../server/errores.js";
 import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
+import { analizarOferta } from "../../../server/ofertas.js";
 import { diaSemana, lunesDe } from "../../../server/metricas.js";
 import { avanceUnidad } from "../movil/leccion/motor.js";
 import { crearApi } from "./api-servidor.js";
@@ -423,6 +424,17 @@ const apiWeb = {
       .map(([semana, e]) => ({ semana, ...e }))
       .sort((a, b) => a.semana.localeCompare(b.semana)),
 
+  /** Simulacro terminado: queda en tu historial y cuenta para niveles, insignias y tiempo libre. */
+  guardarSimulacro: async (simulacro) => {
+    progreso.guardarRegistro("simulacros", `sim-${Date.now().toString(36)}`, { ...simulacro, fecha: progreso.hoy() });
+    progreso.sumarDia("simulacros");
+    cache.clear();
+  },
+  simulacros: async () =>
+    Object.entries(progreso.registros("simulacros"))
+      .map(([id, s]) => ({ id, ...s }))
+      .sort((a, b) => (b.fecha ?? "").localeCompare(a.fecha ?? "")),
+
   /** Sesión de enfoque de 25 minutos completa. */
   completarEnfoque: async () => {
     progreso.sumarDia("enfoques");
@@ -516,6 +528,70 @@ const apiWeb = {
     cache.clear();
   },
 
+  // --- Conseguir trabajo: postulaciones, preguntas reales, oferta, CV ---
+  postulaciones: async () =>
+    Object.entries(progreso.registros("postulaciones"))
+      .map(([id, p]) => ({ id, ...p }))
+      .sort((a, b) => (b.fecha ?? "").localeCompare(a.fecha ?? "")),
+  guardarPostulacion: async ({ id, ...datos }) => {
+    const clave = id ?? `post-${Date.now().toString(36)}`;
+    progreso.guardarRegistro("postulaciones", clave, { ...datos, fecha: datos.fecha ?? progreso.hoy() });
+    cache.clear();
+    return clave;
+  },
+  borrarPostulacion: async (id) => {
+    progreso.borrarRegistro("postulaciones", id);
+    cache.clear();
+  },
+  /** Preguntas que te hicieron de verdad en una entrevista: entran a tu repaso como tarjetas. */
+  preguntasPropias: async () => {
+    const d = progreso.datos();
+    const hoy = progreso.hoy();
+    return Object.entries(progreso.registros("preguntasPropias")).map(([id, p]) => ({
+      id,
+      categoria: "Me preguntaron",
+      personal: false,
+      claves: [],
+      ...p,
+      pendiente: preguntaPendiente(d.preguntas[id], hoy) || !d.preguntas[id],
+    }));
+  },
+  guardarPreguntaPropia: async ({ id, pregunta, respuesta = "", empresa = "" }) => {
+    const clave = id ?? `propia-${Date.now().toString(36)}`;
+    progreso.guardarRegistro("preguntasPropias", clave, {
+      pregunta: String(pregunta).slice(0, 500),
+      respuesta: String(respuesta).slice(0, 3000) || "Todavía no escribiste tu respuesta: investígala y escríbela aquí.",
+      empresa: String(empresa).slice(0, 80),
+    });
+    return clave;
+  },
+  borrarPreguntaPropia: async (id) => progreso.borrarRegistro("preguntasPropias", id),
+  calificarPropia: async (id, nota) => progreso.calificarPregunta(id, nota),
+  /** Pegas una oferta: qué tecnologías pide y cuánto las dominas. */
+  async analizarOferta(texto) {
+    const [{ unidades }, ingles] = await Promise.all([apiWeb.mapa(), itemsIngles()]);
+    const estado = await estadoLogros();
+    return analizarOferta(texto, unidades, { inglesDominadas: estado.inglesDominadas, inglesTotal: ingles.unidades.length });
+  },
+  /** Datos de tu CV más las habilidades que de verdad dominas (temas en verde de tu mapa). */
+  async cv() {
+    const { unidades } = await apiWeb.mapa();
+    const config = progreso.datos().config;
+    const verdes = unidades.filter((u) => u.estado === "verde");
+    const NOMBRES = { javascript: "JavaScript", react: "React", typescript: "TypeScript", node: "Node.js y Express", algoritmos: "Algoritmos y estructuras de datos" };
+    const habilidades = Object.entries(NOMBRES)
+      .map(([area, nombre]) => ({ nombre, temas: verdes.filter((u) => u.area === area).map((u) => u.titulo) }))
+      .filter((h) => h.temas.length);
+    return {
+      datos: progreso.ajuste("cv", { nombre: config.nombre ?? "", titular: "Desarrollador Frontend Junior", ciudad: "Lima, Perú", correo: "", telefono: "", github: "", linkedin: "", sobreMi: "", estudios: "", proyectos: [], idiomas: "Español (nativo), Inglés" }),
+      habilidades,
+    };
+  },
+  guardarCv: async (datos) => progreso.cambiarAjuste("cv", datos),
+  /** Marca un proyecto de portafolio como publicado (con su enlace de GitHub o demo). */
+  marcarPortafolio: async (ejercicio, datos) => progreso.guardarRegistro("portafolio", ejercicio, { exportado: true, ...datos }),
+  portafolioPublicado: async () => progreso.registros("portafolio"),
+
   // --- Inglés ---
   /** Teoría, palabras y diálogos de cada unidad. */
   inglesUnidades: conCache("inglesUnidades", async () => (await json("ingles.json")).unidades),
@@ -548,6 +624,12 @@ const apiWeb = {
       semana,
       nivelHecho: !!ajuste.nivelHecho,
     };
+  },
+  /** Mis palabras: las que marcaste con estrella para repasarlas aparte. */
+  misPalabras: async () => progreso.registros("misPalabras"),
+  alternarMiPalabra: async (id) => {
+    if (progreso.registros("misPalabras")[id]) progreso.borrarRegistro("misPalabras", id);
+    else progreso.guardarRegistro("misPalabras", id, { fecha: progreso.hoy() });
   },
   elegirUnidadIngles: async (id) => progreso.cambiarAjuste("ingles", { ...progreso.ajuste("ingles", {}), unidad: id }),
   /** Después de la prueba de nivel: empiezas en la primera unidad donde fallaste. */

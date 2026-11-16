@@ -1,4 +1,9 @@
 import { useState } from "react";
+import { Grabadora } from "./Grabadora.jsx";
+import { hablar, hayVoz } from "../lib/voz.js";
+
+// El idioma que elegiste la última vez (para practicar las entrevistas en inglés)
+const CLAVE_IDIOMA = "devprep-tarjetas-en";
 import { motion } from "motion/react";
 import { Markdown } from "./Markdown.jsx";
 import estilos from "./Tarjeta.module.css";
@@ -13,9 +18,19 @@ const NOTAS = [
  * Una tarjeta de entrevista: piensas tu respuesta, la revelas y te calificas.
  * @param {{ pregunta: object, alCalificar: (nota: string) => void, posicion?: string }} props
  */
-export function Tarjeta({ pregunta, alCalificar, posicion }) {
+/**
+ * @param {{ pregunta: object, alCalificar: Function, posicion?: string, grabar?: boolean, enIngles?: boolean }} props
+ *   grabar: muestra la grabadora para responder en voz alta y escucharte (simulacro, inglés).
+ */
+export function Tarjeta({ pregunta, alCalificar, posicion, grabar = false, enIngles }) {
   const [revelada, setRevelada] = useState(false);
-  const [ingles, setIngles] = useState(false);
+  const [ingles, setInglesEstado] = useState(() => enIngles ?? localStorage.getItem(CLAVE_IDIOMA) === "1");
+  const setIngles = (cambiar) =>
+    setInglesEstado((v) => {
+      const nuevo = typeof cambiar === "function" ? cambiar(v) : cambiar;
+      localStorage.setItem(CLAVE_IDIOMA, nuevo ? "1" : "0");
+      return nuevo;
+    });
 
   return (
     <motion.article
@@ -28,6 +43,11 @@ export function Tarjeta({ pregunta, alCalificar, posicion }) {
         <span className={estilos.categoria}>{pregunta.categoria}</span>
         <div className={estilos.herramientas}>
           {posicion && <span className={estilos.posicion}>{posicion}</span>}
+          {ingles && pregunta.preguntaEn && hayVoz() && (
+            <button type="button" className={estilos.idioma} onClick={() => hablar(pregunta.preguntaEn)} aria-label="Escuchar la pregunta en inglés">
+              🔊
+            </button>
+          )}
           <button type="button" className={estilos.idioma} onClick={() => setIngles((v) => !v)}>
             {ingles ? "ES" : "EN"}
           </button>
@@ -44,6 +64,7 @@ export function Tarjeta({ pregunta, alCalificar, posicion }) {
             Responde <strong>en voz alta</strong>, como si estuvieras frente al entrevistador. Cuando termines,
             revela la respuesta modelo y sé honesto contigo.
           </p>
+          {grabar && <Grabadora clave={`tarjeta:${pregunta.id}`} texto={ingles ? "Record my answer" : "Grabar mi respuesta"} />}
           <button type="button" className="boton boton-primario" onClick={() => setRevelada(true)}>
             Revelar respuesta
           </button>

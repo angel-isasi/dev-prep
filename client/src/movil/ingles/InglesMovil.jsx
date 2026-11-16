@@ -124,6 +124,10 @@ export function InglesMovil() {
           Mis errores
           <small>lo que fallaste</small>
         </Link>
+        <Link to={leccion("mispalabras")} className="boton">
+          Mis palabras
+          <small>las que marcaste con ★</small>
+        </Link>
       </div>
 
       {hayVoz() ? (

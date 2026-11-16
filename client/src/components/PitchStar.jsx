@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
 import { Markdown } from "./Markdown.jsx";
+import { Grabadora } from "./Grabadora.jsx";
 import estilos from "./PitchStar.module.css";
 
 const PALABRAS_POR_MINUTO = 140;
@@ -91,6 +92,7 @@ export function PitchStar({ guias }) {
           {palabras > 0 && segundos < 45 && " · se queda corto"}
           {segundos > 75 && " · demasiado largo, recórtalo"}
         </p>
+        <Grabadora clave="pitch" maxSegundos={90} texto="Grabarme diciendo mi pitch" />
         <details className={estilos.guia}>
           <summary>Cómo armar tu pitch</summary>
           <Markdown>{guias.pitch}</Markdown>

@@ -69,5 +69,13 @@ export function crearApi(base = "") {
     // Sincronización con el celular (AWS)
     sync: () => pedir("/api/sync"),
     sincronizar: () => post("/api/sync"),
+    // Conseguir trabajo: pruebas técnicas, proyecto guiado y portafolio (necesitan el disco de la laptop)
+    proyectos: () => pedir("/api/proyectos"),
+    abrirProyecto: (id, etapa) =>
+      pedir(`/api/proyectos/${encodeURIComponent(id)}/abrir`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ etapa }) }),
+    verificarProyecto: (id, etapa) =>
+      pedir(`/api/proyectos/${encodeURIComponent(id)}/verificar`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ etapa }) }),
+    portafolio: () => pedir("/api/portafolio"),
+    exportarPortafolio: (ejercicio) => post(`/api/portafolio/${encodeURIComponent(ejercicio)}/exportar`),
   };
 }

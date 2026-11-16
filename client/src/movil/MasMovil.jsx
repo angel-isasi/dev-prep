@@ -5,6 +5,7 @@ import { IconoAjustes, IconoChuleta, IconoEntrevistas, IconoProgreso, IconoRefer
 import estilos from "./MasMovil.module.css";
 
 const OPCIONES = [
+  { a: "/trabajo", titulo: "Conseguir trabajo", texto: "Postulaciones, ¿estoy listo?, CV, portafolio y pruebas técnicas", Icono: IconoEntrevistas },
   { a: "/entrevistas", titulo: "Entrevistas", texto: "Tarjetas, simulacro, tu pitch y tus historias STAR", Icono: IconoEntrevistas },
   { a: "/camino", titulo: "Lecciones", texto: "Tu camino de unidades de programación", Icono: IconoProgreso },
   { a: "/logros", titulo: "Insignias", texto: "Tu nivel y lo que ya ganaste", Icono: IconoProgreso },

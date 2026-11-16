@@ -14,7 +14,7 @@ const SECCIONES = [
   { a: "/practicar", texto: "Practicar", Icono: IconoPracticar },
   { a: "/ingles", texto: "Inglés", Icono: IconoIngles },
   // "Más" agrupa Entrevistas, Lecciones, Referencia, Chuletas y Ajustes
-  { a: "/mas", texto: "Más", Icono: IconoMas, tambien: ["/entrevistas", "/camino", "/referencia", "/chuletas", "/ajustes"] },
+  { a: "/mas", texto: "Más", Icono: IconoMas, tambien: ["/entrevistas", "/camino", "/referencia", "/chuletas", "/ajustes", "/trabajo", "/logros", "/diario", "/glosario"] },
 ];
 
 export function LayoutMovil() {

@@ -46,9 +46,13 @@ export function LeccionMovil() {
     api.lecciones(ambito).then(async (d) => {
       setUnidades(d.unidades);
       if (params.get("modo") === "debiles" && api.mapa) d = { ...d, unidades: (await api.mapa()).debiles };
+      if (params.get("modo") === "mispalabras") {
+        const mias = new Set(Object.keys(await api.misPalabras()));
+        d = { ...d, items: d.items.filter((it) => mias.has(it.clave.replace(/^enr?:/, "")) && /^enr?:/.test(it.clave)) };
+      }
       if (params.get("retomar") && d.enCurso && !terminada(d.enCurso)) return setSesion(d.enCurso);
       const unidad = params.get("unidad") ?? d.unidadActual;
-      const modo = params.get("modo") ?? "normal";
+      const modo = params.get("modo") === "mispalabras" ? "todos" : (params.get("modo") ?? "normal");
       const pasos = armarLeccion({ ...d, unidad, modo, conVoz: hayVoz(), azar: semilla(`${d.hoy}-${unidad}-${modo}-${Date.now()}`) });
       if (pasos.length === 0)
         return setError(

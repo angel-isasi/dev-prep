@@ -35,6 +35,7 @@ import { Glosario } from "./practica/Glosario.jsx";
 import { PaginaLogros } from "../components/Logros.jsx";
 import { SeccionRutina } from "../components/SeccionRutina.jsx";
 import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
+import { Trabajo } from "./trabajo/Trabajo.jsx";
 import { Enfoque, PaginaDiario } from "../components/Rutina.jsx";
 import { Inicio } from "../pages/Inicio.jsx";
 import { Progreso } from "../pages/Progreso.jsx";
@@ -66,6 +67,7 @@ export function App() {
       <Route path="logros" element={<PaginaLogros />} />
       <Route path="diario" element={<PaginaDiario />} />
       <Route path="enfoque" element={<Enfoque />} />
+      <Route path="trabajo" element={<Trabajo />} />
       <Route path="camino" element={<CaminoMovil />} />
       <Route path="leccion" element={<LeccionMovil />} />
       <Route path="vincular" element={<VincularMovil />} />
@@ -116,6 +118,7 @@ export function App() {
       <Route path="logros" element={<PaginaLogros />} />
       <Route path="diario" element={<PaginaDiario />} />
       <Route path="enfoque" element={<Enfoque />} />
+      <Route path="trabajo" element={<Trabajo />} />
           <Route path="camino" element={<CaminoMovil />} />
           <Route path="leccion" element={<LeccionMovil />} />
           <Route path="mas" element={grande ? <Navigate to="/" replace /> : <MasMovil />} />

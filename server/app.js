@@ -9,6 +9,7 @@ import { rutasProgreso } from "./rutas/progreso.js";
 import { rutasEntrevistas } from "./rutas/entrevistas.js";
 import { rutasAprender } from "./rutas/aprender.js";
 import { rutasSync } from "./rutas/sync.js";
+import { rutasProyectos } from "./rutas/proyectos.js";
 import { controlDeOrigen } from "./origenes.js";
 
 /**
@@ -31,6 +32,7 @@ export function crearApp(deps) {
   if (deps.aprender) app.use("/api", rutasAprender(deps));
   if (deps.eventos) app.get("/api/eventos", deps.eventos.manejador);
   if (deps.sync) app.use("/api", rutasSync(deps));
+  if (deps.config && deps.progreso) app.use("/api", rutasProyectos(deps));
 
   // Botón "Cerrar dev-prep": responde y luego apaga el servidor.
   if (deps.alApagar) {

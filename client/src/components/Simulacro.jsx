@@ -7,6 +7,15 @@ import estilos from "./Simulacro.module.css";
 
 const DURACION = 30 * 60; // 30 minutos
 
+/** Lo que mira un entrevistador además de la respuesta correcta. */
+const COMUNICACION = [
+  { id: "aclarar", texto: "Aclaré el problema antes de empezar (preguntas, supuestos)" },
+  { id: "ejemplos", texto: "Usé ejemplos concretos" },
+  { id: "plan", texto: "Expliqué mi plan antes de escribir código" },
+  { id: "voz-alta", texto: "Pensé en voz alta todo el tiempo" },
+  { id: "probar", texto: "Probé mi solución con un caso y un caso borde" },
+];
+
 const alAzar = (lista, n) => [...lista].sort(() => Math.random() - 0.5).slice(0, n);
 
 /**
@@ -20,6 +29,9 @@ export function Simulacro() {
   const [inicio, setInicio] = useState(0);
   const [resultados, setResultados] = useState([]);
   const [fin, setFin] = useState(0);
+  const [ingles, setIngles] = useState(false);
+  const [checks, setChecks] = useState([]);
+  const [guardado, setGuardado] = useState(false);
 
   async function empezar() {
     const [tarjetas, ejercicios] = await Promise.all([api.tarjetas({}), api.ejerciciosEntrevista()]);
@@ -42,6 +54,8 @@ export function Simulacro() {
     setPasos(lista);
     setPaso(0);
     setResultados([]);
+    setChecks([]);
+    setGuardado(false);
     setInicio(Date.now());
     setEstado("curso");
   }
@@ -72,9 +86,13 @@ export function Simulacro() {
         </p>
         <ul>
           <li>Ponte en un lugar tranquilo, como si fuera la entrevista de verdad.</li>
+          <li>Graba tus respuestas y escúchate: es la forma más rápida de mejorar cómo suenas.</li>
           <li>En el ejercicio, piensa en voz alta: entender, ejemplos, plan, código, probar.</li>
           <li>Al final verás cuánto tiempo usaste y cómo te fue.</li>
         </ul>
+        <label className={estilos.nota}>
+          <input type="checkbox" checked={ingles} onChange={(e) => setIngles(e.target.checked)} /> Hacerlo en inglés (las preguntas y tus respuestas)
+        </label>
         <button type="button" className="boton boton-primario" onClick={empezar}>
           Empezar simulacro
         </button>
@@ -104,9 +122,43 @@ export function Simulacro() {
           Las preguntas que no sabías ya quedaron en tu repaso de tarjetas. Si no llegaste con el ejercicio, vuelve a
           él en Practicar.
         </p>
-        <button type="button" className="boton boton-primario" onClick={() => setEstado("inicio")}>
-          Hacer otro
-        </button>
+        <h3>¿Cómo te comunicaste?</h3>
+        <ul className={estilos.resumen}>
+          {COMUNICACION.map((c) => (
+            <li key={c.id}>
+              <label>
+                <input
+                  type="checkbox"
+                  disabled={guardado}
+                  checked={checks.includes(c.id)}
+                  onChange={(e) => setChecks((v) => (e.target.checked ? [...v, c.id] : v.filter((x) => x !== c.id)))}
+                />{" "}
+                {c.texto}
+              </label>
+            </li>
+          ))}
+        </ul>
+        {!guardado ? (
+          <button
+            type="button"
+            className="boton boton-primario"
+            onClick={async () => {
+              await api.guardarSimulacro?.({
+                segundos: usados,
+                ingles,
+                pasos: pasos.map((p, i) => ({ tipo: p.tipo, id: p.tipo === "ejercicio" ? p.ej.id : p.p.id, resultado: resultados[i] })),
+                comunicacion: checks,
+              });
+              setGuardado(true);
+            }}
+          >
+            Guardar simulacro
+          </button>
+        ) : (
+          <button type="button" className="boton boton-primario" onClick={() => setEstado("inicio")}>
+            Hacer otro
+          </button>
+        )}
       </div>
     );
   }
@@ -122,7 +174,7 @@ export function Simulacro() {
       </div>
 
       {actual.tipo === "pregunta" ? (
-        <Tarjeta key={actual.p.id} pregunta={actual.p} alCalificar={calificar} />
+        <Tarjeta key={actual.p.id} pregunta={actual.p} alCalificar={calificar} grabar enIngles={ingles} />
       ) : (
         <div className={estilos.panel}>
           <span className={estilos.etiqueta}>Ejercicio en vivo</span>

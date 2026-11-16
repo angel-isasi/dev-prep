@@ -140,6 +140,14 @@ export function armarLeccion({ items, registros, reportados = {}, preguntas = []
     return elegidos;
   }
 
+  if (modo === "todos") {
+    // Un mazo ya elegido (por ejemplo "Mis palabras"): lo que toca repasar, lo nuevo y luego el resto
+    tomar(disponibles.filter((it) => vencido(registros[it.clave], hoy)), tamano);
+    tomar(barajar(disponibles.filter((it) => !registros[it.clave]), azar), tamano);
+    tomar(barajar(disponibles, azar), tamano);
+    return ordenar(elegidos, azar);
+  }
+
   if (modo === "predice") {
     // Lee y predice: lo que toca repasar y luego lo nuevo, de cualquier tema
     const pred = disponibles.filter((it) => it.subtipo === "predice");
