@@ -2,7 +2,7 @@
 // del "#", así no viajan a ningún servidor) y hace la primera sincronización.
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { sincronizar, vincular } from "../lib/sync-movil.js";
+import { leerVinculo, sincronizar, vincular } from "../lib/sync-movil.js";
 import { marcarMiLaptop, probar } from "../lib/conexion-local.js";
 import estilos from "./MasMovil.module.css";
 
@@ -17,6 +17,12 @@ export function VincularMovil() {
     // Borra el token de la barra de direcciones y del historial.
     history.replaceState(null, "", "/vincular");
     if (!url?.startsWith("https://") || !token) {
+      // Sin datos en el enlace, pero si este navegador ya quedó vinculado (por ejemplo, la página se
+      // recargó justo después de vincular), no es un error.
+      if (leerVinculo()) {
+        sincronizar().finally(() => setEstado("listo"));
+        return;
+      }
       setEstado("error");
       setDetalle("El enlace no trae los datos del vínculo. Vuelve a escanear el QR en Ajustes de la laptop.");
       return;
