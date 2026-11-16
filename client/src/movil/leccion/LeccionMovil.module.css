@@ -292,3 +292,10 @@
     font-size: 28px;
   }
 }
+
+.nivel {
+  max-width: 34ch;
+  margin: 0 auto;
+  color: var(--texto-suave);
+  text-align: center;
+}

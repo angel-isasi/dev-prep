@@ -5,11 +5,13 @@
 import { seccionMarkdown } from "../../../server/markdown.js";
 import { detalleTema, resumenTema } from "../../../server/vistas-aprender.js";
 import { ejerciciosEntrevista, resumenEntrevistas, tarjetas } from "../../../server/vistas-entrevistas.js";
-import { preguntaPendiente } from "../../../server/progreso-reglas.js";
+import { preguntaPendiente, sumarDias } from "../../../server/progreso-reglas.js";
 import { fraseDelDia } from "../../../server/frases.js";
 import { estadoGeneral, vistaInicio, vistaProgreso } from "../../../server/vistas-progreso.js";
 import { preparacion } from "../../../server/metricas.js";
 import { crearProgresoMovil, rachaMovil } from "./progreso-movil.js";
+import { mapaDominio, unidadesDebiles } from "../../../server/dominio.js";
+import { erroresFrecuentes } from "../../../server/errores.js";
 import { crearApi } from "./api-servidor.js";
 import { BASE_LOCAL, conectada } from "./conexion-local.js";
 
@@ -215,21 +217,26 @@ const apiWeb = {
 
   // --- Lecciones estilo Duolingo (solo celular) ---
   /** Ítems generados (items.json) y preguntas de entrevista, con el progreso actual. */
-  async lecciones() {
-    const [datosItems, entrevistas] = await Promise.all([json("items.json"), json("entrevistas.json")]);
+  /** @param {"programacion"|"ingles"} [ambito] las lecciones de inglés usan sus propios ítems y su unidad actual */
+  async lecciones(ambito = "programacion") {
+    const ingles = ambito === "ingles";
+    const [datosItems, entrevistas] = await Promise.all([json(ingles ? "items-ingles.json" : "items.json"), ingles ? null : json("entrevistas.json")]);
     const d = progreso.datos();
     const unidades = datosItems.unidades;
-    const actual = unidades.find((u) => u.id === d.unidadActual) ?? unidades[0];
+    const elegida = ingles ? progreso.ajuste("ingles", {}).unidad : d.unidadActual;
+    const actual = unidades.find((u) => u.id === elegida) ?? unidades[0];
+    const enCurso = d.leccionEnCurso && (d.leccionEnCurso.ambito ?? "programacion") === ambito ? d.leccionEnCurso : null;
     return {
+      ambito,
       unidades,
       items: datosItems.items,
-      preguntas: entrevistas.preguntas,
+      preguntas: entrevistas?.preguntas ?? [],
       registros: d.items,
       registrosPreguntas: d.preguntas,
       reportados: d.reportados,
       unidadActual: actual?.id ?? null,
       lecciones: d.lecciones,
-      enCurso: d.leccionEnCurso,
+      enCurso,
       hoy: progreso.hoy(),
     };
   },
@@ -249,8 +256,8 @@ const apiWeb = {
     };
   },
   calificarItem: async (clave, nota) => progreso.calificarItem(clave, nota),
-  completarLeccion: async (xp) => {
-    const r = progreso.completarLeccion(xp);
+  completarLeccion: async (xp, { ambito = "programacion", segundos = 0 } = {}) => {
+    const r = progreso.completarLeccion(xp, { campo: ambito === "ingles" ? "ingles" : "lecciones", segundos });
     cache.clear(); // Hoy y las demás pantallas deben ver la lección nueva
     return r;
   },
@@ -258,6 +265,84 @@ const apiWeb = {
   quitarReporte: async (clave) => progreso.quitarReporte(clave),
   reportados: async () => progreso.datos().reportados,
   elegirUnidad: async (id) => progreso.elegirUnidad(id),
+
+  // --- Aprender mejor ---
+  /** Mapa de lo que dominas por unidad y tus unidades más flojas. */
+  async mapa() {
+    const [{ ejercicios }, datosItems, ap] = await Promise.all([indice(), json("items.json"), aprender()]);
+    const d = progreso.datos();
+    const unidades = mapaDominio({
+      unidades: datosItems.unidades,
+      ejercicios,
+      temas: ap.temas,
+      registros: d.ejercicios ?? {},
+      quizzes: d.quizzes ?? {},
+      items: datosItems.items,
+      registrosItems: d.items ?? {},
+      hoy: progreso.hoy(),
+    });
+    return { unidades, debiles: unidadesDebiles(unidades) };
+  },
+  /** Tus errores más comunes al correr los tests (los cuenta la laptop y llegan al sincronizar). */
+  erroresFrecuentes: async () => erroresFrecuentes(progreso.dias()).slice(0, 5),
+  glosario: () => json("glosario.json"),
+  revision: () => json("revision.json"),
+  revisionesHechas: async () => progreso.registros("revisiones"),
+  /** Guarda tu mejor resultado en un caso de revisión de código. */
+  guardarRevision: async (id, resultado) => {
+    const previo = progreso.registros("revisiones")[id];
+    if (!previo || resultado.puntaje >= (previo.puntaje ?? 0)) progreso.guardarRegistro("revisiones", id, { ...resultado, fecha: progreso.hoy() });
+  },
+  /** "Explícalo en 30 segundos": tu autoevaluación al comparar con la explicación modelo. */
+  calificarExplicacion: async (id, nota, segundos) => progreso.guardarRegistro("explicaciones", id, { nota, segundos, fecha: progreso.hoy() }),
+
+  // --- Inglés ---
+  /** Teoría, palabras y diálogos de cada unidad. */
+  inglesUnidades: conCache("inglesUnidades", async () => (await json("ingles.json")).unidades),
+  async inglesUnidad(id) {
+    const unidad = (await json("ingles.json")).unidades.find((u) => u.id === id);
+    if (!unidad) throw new Error("No existe esa unidad de inglés.");
+    return unidad;
+  },
+  /** Lo de hoy en inglés: minutos (lecciones + inmersión) contra tu meta, racha y la semana. */
+  async inglesHoy() {
+    const dias = progreso.dias();
+    const hoy = progreso.hoy();
+    const minutos = (f) => Math.round(((dias[f]?.inglesSegundos ?? 0) / 60 + (dias[f]?.inmersion ?? 0)) * 10) / 10;
+    const practico = (f) => (dias[f]?.ingles ?? 0) + (dias[f]?.inmersion ?? 0) > 0;
+    let f = practico(hoy) ? hoy : sumarDias(hoy, -1);
+    let racha = 0;
+    while (practico(f)) {
+      racha++;
+      f = sumarDias(f, -1);
+    }
+    const semana = Array.from({ length: 7 }, (_, i) => sumarDias(hoy, i - 6)).map((fecha) => ({ fecha, minutos: minutos(fecha) }));
+    const ajuste = progreso.ajuste("ingles", {});
+    return {
+      hoy,
+      meta: progreso.datos().config.metaIngles ?? 15,
+      minutosHoy: minutos(hoy),
+      leccionesHoy: dias[hoy]?.ingles ?? 0,
+      inmersionHoy: dias[hoy]?.inmersion ?? 0,
+      racha,
+      semana,
+      nivelHecho: !!ajuste.nivelHecho,
+    };
+  },
+  elegirUnidadIngles: async (id) => progreso.cambiarAjuste("ingles", { ...progreso.ajuste("ingles", {}), unidad: id }),
+  /** Después de la prueba de nivel: empiezas en la primera unidad donde fallaste. */
+  guardarNivelIngles: async (empiezaEn) => {
+    progreso.cambiarAjuste("ingles", { ...progreso.ajuste("ingles", {}), unidad: empiezaEn, nivelHecho: true });
+    cache.clear();
+  },
+  /** Minutos de inglés real que escuchaste o leíste fuera de la app (series, videos, podcasts). */
+  registrarInmersion: async (minutos, que = "") => {
+    const m = Math.max(1, Math.min(240, Math.round(minutos)));
+    progreso.sumarDia("inmersion", m);
+    progreso.guardarRegistro("inmersion", `${progreso.hoy()}-${Date.now().toString(36)}`, { fecha: progreso.hoy(), minutos: m, que: String(que).slice(0, 80) });
+    cache.clear();
+  },
+  guardarMetaIngles: async (minutos) => progreso.cambiarConfig({ metaIngles: minutos }),
   guardarLeccionEnCurso: async (sesion) => progreso.guardarLeccionEnCurso(sesion),
 
   /** Respaldo manual del progreso del celular (Ajustes). */

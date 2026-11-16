@@ -1,0 +1,32 @@
+{
+  "id": "rev-018",
+  "titulo": "Cronómetro con setInterval",
+  "unidad": "react-efectos-y-datos",
+  "nivel": 2,
+  "contexto": "Un cronómetro para la sección de práctica con tiempo. El reporte dice que se queda en 1 segundo y que Pausar no lo detiene.",
+  "lenguaje": "jsx",
+  "codigo": "import { useState, useEffect } from 'react';\n\nexport function Cronometro() {\n  const [segundos, setSegundos] = useState(0);\n  const [activo, setActivo] = useState(false);\n\n  useEffect(() => {\n    if (activo) {\n      setInterval(() => {\n        setSegundos(segundos + 1);\n      }, 1000);\n    }\n  }, [activo]);\n\n  function reiniciar() {\n    setActivo(false);\n    setSegundos(0);\n  }\n\n  return (\n    <div>\n      <p>{segundos / 60} min {segundos % 60} s</p>\n      <button onClick={() => setActivo(!activo)}>\n        {activo ? 'Pausar' : 'Iniciar'}\n      </button>\n      <button onClick={reiniciar}>Reiniciar</button>\n    </div>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 9,
+      "tipo": "error",
+      "titulo": "El intervalo nunca se limpia",
+      "detalle": "El efecto crea el intervalo pero no devuelve una función de limpieza. Al pausar, activo cambia pero el intervalo anterior sigue corriendo, y cada vez que vuelves a iniciar se suma otro. También sigue vivo si el componente se desmonta.",
+      "arreglo": "const id = setInterval(() => { /* ... */ }, 1000);\nreturn () => clearInterval(id);"
+    },
+    {
+      "linea": 10,
+      "tipo": "error",
+      "titulo": "Closure con un valor viejo",
+      "detalle": "La función del intervalo se creó cuando segundos valía 0 y siempre ve ese 0, así que cada segundo hace setSegundos(0 + 1): el cronómetro se queda en 1. Usa la forma con función, que recibe el valor actual.",
+      "arreglo": "setSegundos((s) => s + 1);"
+    },
+    {
+      "linea": 22,
+      "tipo": "error",
+      "titulo": "Minutos con decimales",
+      "detalle": "segundos / 60 no redondea: a los 90 segundos muestra '1.5 min 30 s'. Los minutos completos se obtienen con Math.floor.",
+      "arreglo": "<p>{Math.floor(segundos / 60)} min {segundos % 60} s</p>"
+    }
+  ]
+}

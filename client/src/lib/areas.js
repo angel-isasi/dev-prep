@@ -22,6 +22,11 @@ export const AREAS = [
         nombre: "Retos de entrevista",
         descripcion: "Debounce, memoize, deep clone, tu propio Promise.all, LRU cache y más.",
       },
+      {
+        id: "javascript/depurar",
+        nombre: "Depurar código roto",
+        descripcion: "Código que parece bien pero falla: encuentra el error con el síntoma y arréglalo.",
+      },
     ],
   },
   {
@@ -55,6 +60,11 @@ export const AREAS = [
         id: "react/retos",
         nombre: "Retos de entrevista",
         descripcion: "Los que piden en vivo: buscador, modal, carrito, formulario, tres en raya.",
+      },
+      {
+        id: "react/depurar",
+        nombre: "Depurar componentes",
+        descripcion: "Estado mutado, efectos sin limpieza, keys mal puestas: los bugs que llegan a revisión.",
       },
     ],
   },

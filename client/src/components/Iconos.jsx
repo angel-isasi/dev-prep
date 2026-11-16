@@ -23,6 +23,9 @@ export const IconoPracticar = () => (
 export const IconoEntrevistas = () => (
   <svg {...base}><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z" /></svg>
 );
+export const IconoIngles = () => (
+  <svg {...base}><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3a14 14 0 010 18" /><path d="M12 3a14 14 0 000 18" /></svg>
+);
 export const IconoProgreso = () => (
   <svg {...base}><path d="M4 20V10" /><path d="M10 20V4" /><path d="M16 20v-7" /><path d="M22 20H2" /></svg>
 );

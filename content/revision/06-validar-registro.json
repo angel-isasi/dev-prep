@@ -1,0 +1,32 @@
+{
+  "id": "rev-006",
+  "titulo": "Validación del formulario de registro",
+  "unidad": "condicionales-y-bucles",
+  "nivel": 1,
+  "contexto": "La función valida los datos del formulario de registro antes de enviarlos al servidor y devuelve un objeto con los errores por campo.",
+  "lenguaje": "js",
+  "codigo": "export function validarRegistro(datos) {\n  const errores = {};\n\n  if (datos.nombre.length < 2) {\n    errores.nombre = 'El nombre es muy corto';\n  }\n\n  if (!datos.email.includes('@')) {\n    errores.email = 'Email inválido';\n  }\n\n  if (datos.password.length < 8) {\n    errores.password = 'Mínimo 8 caracteres';\n  }\n\n  if (datos.password !== datos.confirmacion) {\n    errores.confirmacion = 'Las contraseñas no coinciden';\n  }\n\n  const edad = parseInt(datos.edad, 10);\n  if (edad < 18) {\n    errores.edad = 'Debes ser mayor de edad';\n  }\n\n  console.log('Validando', datos);\n\n  return errores;\n}",
+  "hallazgos": [
+    {
+      "linea": 4,
+      "tipo": "caso-borde",
+      "titulo": "Un nombre de puros espacios pasa",
+      "detalle": "'   ' tiene 3 caracteres, así que pasa la validación y se guarda un nombre vacío. Quita los espacios de los extremos antes de medir.",
+      "arreglo": "if (datos.nombre.trim().length < 2) {"
+    },
+    {
+      "linea": 21,
+      "tipo": "caso-borde",
+      "titulo": "Edad vacía o no numérica pasa",
+      "detalle": "Si el campo llega vacío o con letras, parseInt devuelve NaN, y NaN < 18 es false: no se marca ningún error y el registro sigue sin edad. Comprueba también que sea un número válido.",
+      "arreglo": "if (Number.isNaN(edad) || edad < 18) {"
+    },
+    {
+      "linea": 25,
+      "tipo": "seguridad",
+      "titulo": "Imprime la contraseña en la consola",
+      "detalle": "datos incluye password y confirmacion. Cualquiera con acceso a la consola o a un servicio de logs vería las contraseñas en texto plano. Es código de depuración que no debe llegar a producción.",
+      "arreglo": "// eliminar la línea"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "rev-017",
+  "titulo": "Formulario de login",
+  "unidad": "react-formularios",
+  "nivel": 2,
+  "contexto": "El formulario de inicio de sesión de la app. Al probarlo, la página se recarga al pulsar Entrar y los datos se pierden.",
+  "lenguaje": "jsx",
+  "codigo": "import { useState } from 'react';\n\nexport function Login({ onLogin }) {\n  const [email, setEmail] = useState('');\n  const [password, setPassword] = useState('');\n  const [error, setError] = useState('');\n\n  async function enviar() {\n    const res = await fetch('/api/login', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify({ email, password }),\n    });\n    if (!res.ok) {\n      setError('Credenciales incorrectas');\n      return;\n    }\n    const { token } = await res.json();\n    onLogin(token);\n  }\n\n  return (\n    <form onSubmit={enviar}>\n      <label>Email <input type=\"email\" value={email} onChange={(e) => setEmail(e.target.value)} /></label>\n      <label>Contraseña <input type=\"password\" value={password} onChange={(e) => setPassword(e.target.value)} /></label>\n      {error && <p className=\"error\">{error}</p>}\n      <button>Entrar</button>\n    </form>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 8,
+      "tipo": "error",
+      "titulo": "Falta preventDefault",
+      "detalle": "Al enviar un form, el navegador recarga la página por defecto. La recarga corta el fetch y borra el estado, que es el síntoma que se ve al probarlo.",
+      "arreglo": "async function enviar(e) {\n  e.preventDefault();"
+    },
+    {
+      "linea": 9,
+      "tipo": "caso-borde",
+      "titulo": "Un fallo de red no se maneja",
+      "detalle": "Si no hay conexión, fetch rechaza la promesa, nadie la captura y el usuario no ve ningún mensaje. Envuelve la petición en try/catch y muestra un error distinto al de credenciales.",
+      "arreglo": "try {\n  const res = await fetch('/api/login', { /* ... */ });\n  // ...\n} catch {\n  setError('No pudimos conectar. Revisa tu internet.');\n}"
+    },
+    {
+      "linea": 26,
+      "tipo": "accesibilidad",
+      "titulo": "El error no se anuncia",
+      "detalle": "El mensaje aparece en pantalla, pero un lector de pantalla no lo lee porque el foco sigue en el botón. Con role=\"alert\" se anuncia en cuanto aparece.",
+      "arreglo": "{error && <p className=\"error\" role=\"alert\">{error}</p>}"
+    },
+    {
+      "linea": 27,
+      "tipo": "caso-borde",
+      "titulo": "Se puede enviar varias veces",
+      "detalle": "Mientras espera la respuesta, el botón sigue activo y un doble clic manda dos logins. Guarda un estado enviando y desactiva el botón.",
+      "arreglo": "<button disabled={enviando}>{enviando ? 'Entrando...' : 'Entrar'}</button>"
+    }
+  ]
+}

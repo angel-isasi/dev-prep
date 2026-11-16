@@ -1,0 +1,155 @@
+{
+  "categoria": "Herramientas y trabajo",
+  "terminos": [
+    {
+      "id": "glo-git",
+      "termino": "Git",
+      "en": "Git",
+      "pron": "guit",
+      "definicion": "Un sistema de control de versiones que guarda el historial de cambios de un proyecto y permite que varias personas trabajen en él a la vez.",
+      "ejemplo": "git status && git add . && git commit -m 'Agrega el filtro por categoría'",
+      "entrevista": "Git es la herramienta local; GitHub o GitLab son servicios donde se alojan los repositorios y se hacen los pull requests.",
+      "unidad": null
+    },
+    {
+      "id": "glo-commit",
+      "termino": "Commit",
+      "en": "commit",
+      "pron": "comít",
+      "definicion": "Una foto guardada de los cambios del proyecto en un momento, con un mensaje que explica qué se hizo.",
+      "ejemplo": "git commit -m 'Corrige el total del carrito cuando está vacío'",
+      "entrevista": "Hago commits pequeños y con mensajes claros, para que revisarlos o revertirlos sea fácil.",
+      "unidad": null
+    },
+    {
+      "id": "glo-branch",
+      "termino": "Branch",
+      "en": "Git branch",
+      "pron": "branch",
+      "definicion": "Una línea de trabajo paralela dentro del repositorio donde puedes hacer cambios sin afectar la rama principal.",
+      "ejemplo": "git switch -c feature/login",
+      "entrevista": "Trabajo cada tarea en su propia rama y la integro a main con un pull request.",
+      "unidad": null
+    },
+    {
+      "id": "glo-merge-conflict",
+      "termino": "Merge conflict",
+      "en": "merge conflict",
+      "pron": "merch cónflikt",
+      "definicion": "Lo que pasa cuando dos ramas cambiaron las mismas líneas de un archivo y Git no sabe con cuál quedarse.",
+      "ejemplo": "<<<<<<< HEAD\nconst limite = 10;\n=======\nconst limite = 20;\n>>>>>>> feature/paginacion",
+      "entrevista": "Lo resuelvo leyendo ambos cambios, hablando con quien hizo el otro si hace falta, y corriendo los tests antes de terminar el merge.",
+      "unidad": null
+    },
+    {
+      "id": "glo-pull-request",
+      "termino": "Pull request",
+      "en": "pull request",
+      "pron": "pul ricuést",
+      "definicion": "Una solicitud para integrar los cambios de una rama en otra, donde el equipo revisa el código antes de aceptarlo.",
+      "ejemplo": "gh pr create --title 'Agrega paginación a la tabla de usuarios'",
+      "entrevista": "Un buen PR es pequeño, explica qué cambia y por qué, y dice cómo probarlo, con capturas si toca la interfaz.",
+      "unidad": null
+    },
+    {
+      "id": "glo-code-review",
+      "termino": "Code review",
+      "en": "code review",
+      "pron": "cóud riviú",
+      "definicion": "La revisión que hace otra persona del código antes de integrarlo, para encontrar errores y mejorar la calidad.",
+      "ejemplo": "// comentario: aquí falta manejar el caso en que la API devuelve una lista vacía",
+      "entrevista": "Recibo los comentarios como aprendizaje, no como algo personal, y cuando reviso comento el código, no a la persona.",
+      "unidad": null
+    },
+    {
+      "id": "glo-bundler",
+      "termino": "Bundler",
+      "en": "bundler",
+      "pron": "bándler",
+      "definicion": "Una herramienta que junta todos los archivos y dependencias de la app en unos pocos archivos optimizados para el navegador, como Vite o webpack.",
+      "ejemplo": "npm run build // Vite genera la carpeta dist lista para publicar",
+      "entrevista": "Además de juntar, minifica, transforma JSX y TypeScript y permite cargar partes de la app bajo demanda.",
+      "unidad": null
+    },
+    {
+      "id": "glo-tree-shaking",
+      "termino": "Tree shaking",
+      "en": "tree shaking",
+      "pron": "tri shéikin",
+      "definicion": "La eliminación automática del código que se importa pero nunca se usa, para que el archivo final pese menos.",
+      "ejemplo": "import { debounce } from 'lodash-es'; // solo se incluye debounce",
+      "entrevista": "Funciona con import y export estáticos; con require o importando toda una librería no puede quitar nada.",
+      "unidad": null
+    },
+    {
+      "id": "glo-code-splitting",
+      "termino": "Code splitting",
+      "en": "code splitting",
+      "pron": "cóud splítin",
+      "definicion": "Dividir el JavaScript de la app en varios archivos que se descargan solo cuando se necesitan, por ejemplo uno por ruta.",
+      "ejemplo": "const Admin = React.lazy(() => import('./Admin'));",
+      "entrevista": "Reduce el tiempo de la primera carga, porque el usuario no descarga pantallas que quizá nunca visite.",
+      "unidad": null
+    },
+    {
+      "id": "glo-linter",
+      "termino": "Linter",
+      "en": "linter",
+      "pron": "línter",
+      "definicion": "Una herramienta que analiza el código sin ejecutarlo y avisa de errores probables y malas prácticas, como ESLint.",
+      "ejemplo": "npx eslint src --fix",
+      "entrevista": "El linter detecta problemas como una dependencia faltante en useEffect; Prettier, en cambio, solo da formato.",
+      "unidad": null
+    },
+    {
+      "id": "glo-ci-cd",
+      "termino": "CI/CD",
+      "en": "continuous integration and continuous delivery",
+      "pron": "si ái si di",
+      "definicion": "La automatización que, con cada cambio subido, corre los tests y el build (CI) y luego publica la app si todo pasa (CD).",
+      "ejemplo": "// GitHub Actions: en cada push corre npm test y npm run build",
+      "entrevista": "Evita el clásico en mi máquina funciona: si el pipeline falla, el PR no se integra.",
+      "unidad": null
+    },
+    {
+      "id": "glo-test-unitario",
+      "termino": "Test unitario",
+      "en": "unit test",
+      "pron": "iúnit test",
+      "definicion": "Una prueba automática que verifica que una pieza pequeña de código, como una función, hace lo esperado de forma aislada.",
+      "ejemplo": "test('suma dos números', () => { expect(sumar(2, 3)).toBe(5); });",
+      "entrevista": "Pruebo los casos normales y los bordes: lista vacía, null, cero y valores negativos.",
+      "unidad": null
+    },
+    {
+      "id": "glo-test-integracion",
+      "termino": "Test de integración",
+      "en": "integration test",
+      "pron": "intégréishon test",
+      "definicion": "Una prueba que verifica que varias piezas funcionan bien juntas, como un formulario que valida, llama a la API y muestra el resultado.",
+      "ejemplo": "render(<Login />); await user.type(screen.getByLabelText('Email'), 'ana@mail.com');",
+      "entrevista": "Con Testing Library pruebo lo que ve y hace el usuario, no los detalles internos del componente.",
+      "unidad": null
+    },
+    {
+      "id": "glo-mock",
+      "termino": "Mock",
+      "en": "mock",
+      "pron": "mok",
+      "definicion": "Una versión falsa de una función o servicio, como una API, que se usa en los tests para controlar lo que devuelve.",
+      "ejemplo": "vi.spyOn(global, 'fetch').mockResolvedValue({ ok: true, json: async () => [] });",
+      "entrevista": "Simulo la red para que los tests sean rápidos y no dependan de un servidor, pero sin simular tanto que ya no pruebo nada real.",
+      "unidad": null
+    },
+    {
+      "id": "glo-scrum",
+      "termino": "Scrum",
+      "en": "Scrum",
+      "pron": "scram",
+      "definicion": "Una forma ágil de organizar el trabajo en ciclos cortos llamados sprints, con reuniones diarias breves y una revisión al final de cada ciclo.",
+      "ejemplo": "// daily: qué hice ayer, qué haré hoy y qué me está bloqueando",
+      "entrevista": "Si me bloqueo, lo digo en la daily en vez de quedarme días atascado en silencio.",
+      "unidad": null
+    }
+  ]
+}

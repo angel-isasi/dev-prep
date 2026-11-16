@@ -1,0 +1,46 @@
+{
+  "id": "rev-011",
+  "titulo": "Funciones del catálogo de productos",
+  "unidad": "metodos-de-array",
+  "nivel": 2,
+  "contexto": "Utilidades que usa la página del catálogo para limpiar, ordenar, filtrar y aplicar ofertas a la lista de productos que llega de la API.",
+  "lenguaje": "js",
+  "codigo": "export function productosUnicos(productos) {\n  const resultado = [];\n  for (const p of productos) {\n    if (!resultado.includes(p)) {\n      resultado.push(p);\n    }\n  }\n  return resultado;\n}\n\nexport function ordenarPorPrecio(productos) {\n  return [...productos].sort((a, b) => a.precio > b.precio);\n}\n\nexport function aplicarDescuento(productos, porcentaje) {\n  return productos.map((p) => {\n    p.precio = p.precio * (1 - porcentaje / 100);\n    return p;\n  });\n}\n\nexport function buscarPorNombre(productos, texto) {\n  return productos.filter((p) => p.nombre.includes(texto));\n}\n\nexport function precioPromedio(productos) {\n  const total = productos.reduce((acc, p) => acc + p.precio, 0);\n  return total / productos.length;\n}",
+  "hallazgos": [
+    {
+      "linea": 4,
+      "tipo": "error",
+      "titulo": "includes compara objetos por referencia",
+      "detalle": "Los productos que llegan de la API son objetos distintos aunque tengan el mismo id, así que includes nunca los ve como repetidos y no elimina nada. Además, includes dentro del for recorre el resultado en cada vuelta. Usa un Set con los ids.",
+      "arreglo": "const vistos = new Set();\nreturn productos.filter((p) => !vistos.has(p.id) && vistos.add(p.id));"
+    },
+    {
+      "linea": 12,
+      "tipo": "error",
+      "titulo": "El comparador devuelve un booleano",
+      "detalle": "sort espera un número negativo, cero o positivo. true y false se convierten a 1 y 0, nunca a negativo, así que el resultado no es fiable: según los datos, la lista queda mal ordenada o sin ordenar.",
+      "arreglo": "return [...productos].sort((a, b) => a.precio - b.precio);"
+    },
+    {
+      "linea": 17,
+      "tipo": "error",
+      "titulo": "map que modifica los originales",
+      "detalle": "Aunque map devuelve un arreglo nuevo, los objetos de adentro son los mismos y se les cambia el precio. Si aplicas el descuento dos veces, o en otra pantalla se usa la lista original, los precios ya vienen rebajados.",
+      "arreglo": "return productos.map((p) => ({ ...p, precio: p.precio * (1 - porcentaje / 100) }));"
+    },
+    {
+      "linea": 23,
+      "tipo": "caso-borde",
+      "titulo": "Búsqueda sensible a mayúsculas",
+      "detalle": "Buscar 'laptop' no encuentra 'Laptop Lenovo'. Normaliza los dos lados a minúsculas, y si tus datos tienen tildes, quítalas también con normalize.",
+      "arreglo": "const q = texto.toLowerCase();\nreturn productos.filter((p) => p.nombre.toLowerCase().includes(q));"
+    },
+    {
+      "linea": 28,
+      "tipo": "caso-borde",
+      "titulo": "Promedio de una lista vacía",
+      "detalle": "Con un filtro que no deja productos, 0 / 0 da NaN y la pantalla muestra 'S/ NaN'.",
+      "arreglo": "return productos.length === 0 ? 0 : total / productos.length;"
+    }
+  ]
+}

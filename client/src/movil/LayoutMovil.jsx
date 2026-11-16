@@ -5,16 +5,16 @@
 import { NavLink, Outlet, useLocation } from "react-router";
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect } from "react";
-import { IconoAprender, IconoEntrevistas, IconoInicio, IconoMas, IconoPracticar } from "../components/Iconos.jsx";
+import { IconoAprender, IconoIngles, IconoInicio, IconoMas, IconoPracticar } from "../components/Iconos.jsx";
 import estilos from "./LayoutMovil.module.css";
 
 const SECCIONES = [
   { a: "/", texto: "Hoy", Icono: IconoInicio, exacto: true },
   { a: "/aprender", texto: "Aprender", Icono: IconoAprender },
   { a: "/practicar", texto: "Practicar", Icono: IconoPracticar },
-  { a: "/entrevistas", texto: "Entrevistas", Icono: IconoEntrevistas },
-  // "Más" agrupa Referencia, Chuletas y Ajustes
-  { a: "/mas", texto: "Más", Icono: IconoMas, tambien: ["/referencia", "/chuletas", "/ajustes"] },
+  { a: "/ingles", texto: "Inglés", Icono: IconoIngles },
+  // "Más" agrupa Entrevistas, Lecciones, Referencia, Chuletas y Ajustes
+  { a: "/mas", texto: "Más", Icono: IconoMas, tambien: ["/entrevistas", "/camino", "/referencia", "/chuletas", "/ajustes"] },
 ];
 
 export function LayoutMovil() {

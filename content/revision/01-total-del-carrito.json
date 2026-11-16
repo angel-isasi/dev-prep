@@ -1,0 +1,39 @@
+{
+  "id": "rev-001",
+  "titulo": "Total del carrito con cupón",
+  "unidad": "condicionales-y-bucles",
+  "nivel": 1,
+  "contexto": "Un compañero escribió la función que calcula el total a pagar en el checkout y te pide revisarla antes de integrarla.",
+  "lenguaje": "js",
+  "codigo": "export function calcularTotal(items, cupon) {\n  let total = 0;\n  for (let i = 0; i <= items.length; i++) {\n    total += items[i].precio * items[i].cantidad;\n  }\n\n  if (cupon) {\n    if (cupon.tipo === 'porcentaje') {\n      total = total - total * cupon.valor / 100;\n    }\n    if (cupon.tipo === 'monto') {\n      total = total - cupon.valor;\n    }\n  }\n\n  const impuesto = total * 0.18;\n  total = total + impuesto;\n\n  return total.toFixed(2);\n}",
+  "hallazgos": [
+    {
+      "linea": 3,
+      "tipo": "error",
+      "titulo": "El bucle se pasa una vuelta",
+      "detalle": "Con <= el bucle llega a i === items.length, una posición que no existe. items[i] es undefined y leer .precio lanza un TypeError: la función nunca devuelve un total, ni siquiera con el carrito vacío.",
+      "arreglo": "for (let i = 0; i < items.length; i++) {"
+    },
+    {
+      "linea": 12,
+      "tipo": "caso-borde",
+      "titulo": "El total puede quedar negativo",
+      "detalle": "Si el cupón de monto vale más que la compra (un cupón de S/ 50 en una compra de S/ 30), el total queda en negativo y se cobraría un monto absurdo.",
+      "arreglo": "total = Math.max(0, total - cupon.valor);"
+    },
+    {
+      "linea": 16,
+      "tipo": "legibilidad",
+      "titulo": "Número mágico",
+      "detalle": "0.18 no dice qué es. Si el impuesto cambia o se usa en otro archivo, hay que buscarlo a mano. Una constante con nombre explica la intención y centraliza el valor.",
+      "arreglo": "const IGV = 0.18;\nconst impuesto = total * IGV;"
+    },
+    {
+      "linea": 19,
+      "tipo": "error",
+      "titulo": "Devuelve un string, no un número",
+      "detalle": "toFixed devuelve texto. Quien use el resultado para sumar, por ejemplo calcularTotal(a) + envio, obtendrá una concatenación como '118.0010'. Redondea manteniendo el tipo number y deja el formato para la vista.",
+      "arreglo": "return Math.round(total * 100) / 100;"
+    }
+  ]
+}

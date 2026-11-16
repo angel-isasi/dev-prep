@@ -1,0 +1,39 @@
+{
+  "id": "rev-015",
+  "titulo": "Perfil de usuario con useEffect",
+  "unidad": "react-efectos-y-datos",
+  "nivel": 2,
+  "contexto": "La página de perfil carga los datos del usuario según el userId de la URL. QA reporta que al pasar de un perfil a otro se queda mostrando el anterior.",
+  "lenguaje": "jsx",
+  "codigo": "import { useState, useEffect } from 'react';\n\nexport function Perfil({ userId }) {\n  const [usuario, setUsuario] = useState(null);\n  const [cargando, setCargando] = useState(true);\n\n  useEffect(() => {\n    fetch(`/api/users/${userId}`)\n      .then((res) => res.json())\n      .then((data) => {\n        setUsuario(data);\n        setCargando(false);\n      });\n  }, []);\n\n  if (cargando) return <p>Cargando...</p>;\n\n  return (\n    <section>\n      <img src={usuario.avatar} />\n      <h2>{usuario.nombre}</h2>\n      <p>{usuario.bio}</p>\n    </section>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 11,
+      "tipo": "caso-borde",
+      "titulo": "Una respuesta vieja puede pisar a la nueva",
+      "detalle": "Si userId cambia rápido, las dos peticiones compiten y la que llega última gana, aunque sea la del perfil anterior. Ignora la respuesta si el efecto ya se limpió.",
+      "arreglo": "let ignorar = false;\n// ...\n.then((data) => { if (!ignorar) { setUsuario(data); setCargando(false); } });\nreturn () => { ignorar = true; };"
+    },
+    {
+      "linea": 13,
+      "tipo": "caso-borde",
+      "titulo": "Sin manejo de errores",
+      "detalle": "No se revisa res.ok ni hay catch. Si la API falla o el usuario no existe, cargando nunca pasa a false y la pantalla se queda en 'Cargando...' para siempre. Agrega un estado de error.",
+      "arreglo": ".catch(() => { setError('No se pudo cargar el perfil'); setCargando(false); });"
+    },
+    {
+      "linea": 14,
+      "tipo": "error",
+      "titulo": "Falta userId en las dependencias",
+      "detalle": "Con [] el efecto corre solo al montar. Cuando el usuario navega a otro perfil, el componente se reutiliza con otro userId pero no vuelve a pedir los datos: es justo el bug que reportó QA. Además, al cambiar de perfil debería volver a mostrar el estado de carga.",
+      "arreglo": "}, [userId]);"
+    },
+    {
+      "linea": 20,
+      "tipo": "accesibilidad",
+      "titulo": "Imagen sin texto alternativo",
+      "detalle": "Sin alt, el lector de pantalla lee el nombre del archivo o la URL. Describe la imagen.",
+      "arreglo": "<img src={usuario.avatar} alt={`Foto de ${usuario.nombre}`} />"
+    }
+  ]
+}

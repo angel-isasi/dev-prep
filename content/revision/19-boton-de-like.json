@@ -1,0 +1,32 @@
+{
+  "id": "rev-019",
+  "titulo": "Botón de like",
+  "unidad": "react-estado-y-eventos",
+  "nivel": 2,
+  "contexto": "El botón de like de las publicaciones actualiza la interfaz al instante y luego avisa al servidor (actualización optimista).",
+  "lenguaje": "jsx",
+  "codigo": "import { useState } from 'react';\n\nexport function BotonLike({ postId, likesIniciales }) {\n  const [likes, setLikes] = useState(likesIniciales);\n  const [dioLike, setDioLike] = useState(false);\n\n  async function alternarLike() {\n    setDioLike(!dioLike);\n    setLikes(dioLike ? likes - 1 : likes + 1);\n\n    await fetch(`/api/posts/${postId}/like`, {\n      method: dioLike ? 'DELETE' : 'POST',\n    });\n  }\n\n  return (\n    <div className=\"like\">\n      <span onClick={alternarLike}>{dioLike ? '❤️' : '🤍'}</span>\n      <span>{likes} {likes === 1 ? 'like' : 'likes'}</span>\n    </div>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 7,
+      "tipo": "caso-borde",
+      "titulo": "Clics rápidos mandan peticiones cruzadas",
+      "detalle": "Si el usuario hace doble clic, salen un POST y un DELETE casi a la vez y pueden llegar al servidor en cualquier orden: la interfaz muestra un estado y el servidor guarda otro. Bloquea el botón mientras la petición está en curso.",
+      "arreglo": "async function alternarLike() {\n  if (enviando) return;\n  setEnviando(true);"
+    },
+    {
+      "linea": 11,
+      "tipo": "caso-borde",
+      "titulo": "No revierte si el servidor falla",
+      "detalle": "La interfaz ya cambió antes de la petición. Si fetch falla o responde con error, el like se ve en pantalla pero no se guardó, y al recargar desaparece. En una actualización optimista hay que deshacer el cambio cuando falla.",
+      "arreglo": "try {\n  const res = await fetch(/* ... */);\n  if (!res.ok) throw new Error();\n} catch {\n  setDioLike(dioLike);\n  setLikes(likes);\n}"
+    },
+    {
+      "linea": 18,
+      "tipo": "accesibilidad",
+      "titulo": "Un span con un emoji como botón",
+      "detalle": "No se puede usar con teclado y el lector de pantalla lee 'corazón rojo' sin decir que es un botón ni si está activo. Usa un button con aria-label y aria-pressed.",
+      "arreglo": "<button type=\"button\" onClick={alternarLike} aria-pressed={dioLike} aria-label=\"Me gusta\">\n  {dioLike ? '❤️' : '🤍'}\n</button>"
+    }
+  ]
+}

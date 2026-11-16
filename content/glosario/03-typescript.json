@@ -1,0 +1,155 @@
+{
+  "categoria": "TypeScript",
+  "terminos": [
+    {
+      "id": "glo-tipado-estatico",
+      "termino": "Tipado estático",
+      "en": "static typing",
+      "pron": "státik táipin",
+      "definicion": "Revisar los tipos de los datos al escribir o compilar el código, antes de ejecutarlo, en lugar de descubrir los errores cuando la app ya está corriendo.",
+      "ejemplo": "let edad: number = 25; edad = 'veinte'; // error al compilar",
+      "entrevista": "TypeScript atrapa errores antes y mejora el autocompletado, pero los tipos desaparecen al compilar: los datos de una API igual hay que validarlos.",
+      "unidad": "ts-tipos-basicos"
+    },
+    {
+      "id": "glo-inferencia-tipos",
+      "termino": "Inferencia de tipos",
+      "en": "type inference",
+      "pron": "táip ínferens",
+      "definicion": "La capacidad de TypeScript de deducir el tipo de una variable a partir de su valor, sin que lo escribas.",
+      "ejemplo": "const total = 10; // TypeScript sabe que es number",
+      "entrevista": "No anoto lo que se infiere solo; sí tipo los parámetros de las funciones y lo que viene de fuera.",
+      "unidad": "ts-tipos-basicos"
+    },
+    {
+      "id": "glo-interface",
+      "termino": "Interface",
+      "en": "interface",
+      "pron": "ínterfeis",
+      "definicion": "Una forma de describir la estructura de un objeto: qué propiedades tiene y de qué tipo es cada una.",
+      "ejemplo": "interface User { id: number; name: string; email?: string; }",
+      "entrevista": "Una interface se puede extender con extends y ampliar volviéndola a declarar; para la forma de objetos la uso igual que type.",
+      "unidad": "ts-objetos-e-interfaces"
+    },
+    {
+      "id": "glo-type-alias",
+      "termino": "Type alias",
+      "en": "type alias",
+      "pron": "táip éilias",
+      "definicion": "Un nombre que le das a cualquier tipo, incluidos uniones, tuplas y funciones, usando la palabra type.",
+      "ejemplo": "type Estado = 'cargando' | 'listo' | 'error';",
+      "entrevista": "Uso type cuando necesito uniones o tipos compuestos, cosa que una interface no puede expresar.",
+      "unidad": "ts-objetos-e-interfaces"
+    },
+    {
+      "id": "glo-union-type",
+      "termino": "Union type",
+      "en": "union type",
+      "pron": "iúnion táip",
+      "definicion": "Un tipo que acepta uno entre varios tipos posibles, escrito con una barra vertical.",
+      "ejemplo": "function formatear(id: string | number) { return String(id); }",
+      "entrevista": "Antes de usar un valor de unión hago narrowing para que TypeScript sepa cuál de los tipos tengo.",
+      "unidad": "ts-uniones-y-narrowing"
+    },
+    {
+      "id": "glo-intersection-type",
+      "termino": "Intersection type",
+      "en": "intersection type",
+      "pron": "intersékshon táip",
+      "definicion": "Un tipo que combina varios tipos en uno solo que tiene todas sus propiedades, escrito con &.",
+      "ejemplo": "type Admin = User & { permisos: string[] };",
+      "entrevista": "La unión es uno u otro; la intersección es uno y otro a la vez.",
+      "unidad": "ts-objetos-e-interfaces"
+    },
+    {
+      "id": "glo-literal-type",
+      "termino": "Literal type",
+      "en": "literal type",
+      "pron": "líteral táip",
+      "definicion": "Un tipo que solo admite un valor exacto, como un string o número concreto.",
+      "ejemplo": "type Talla = 's' | 'm' | 'l';",
+      "entrevista": "Junto con las uniones reemplaza muchos enums y da autocompletado de las opciones válidas.",
+      "unidad": "ts-uniones-y-narrowing"
+    },
+    {
+      "id": "glo-narrowing",
+      "termino": "Narrowing",
+      "en": "narrowing",
+      "pron": "nárouin",
+      "definicion": "Reducir un tipo amplio a uno más específico mediante comprobaciones como typeof, in o una comparación.",
+      "ejemplo": "if (typeof id === 'string') { id.toUpperCase(); }",
+      "entrevista": "Con uniones discriminadas, un campo como type o status permite hacer narrowing en un switch de forma segura.",
+      "unidad": "ts-uniones-y-narrowing"
+    },
+    {
+      "id": "glo-type-guard",
+      "termino": "Type guard",
+      "en": "type guard",
+      "pron": "táip gard",
+      "definicion": "Una comprobación, o una función que devuelve algo como value is Tipo, que le asegura a TypeScript de qué tipo es un valor dentro de un bloque.",
+      "ejemplo": "function esUser(x: unknown): x is User { return typeof x === 'object' && x !== null && 'id' in x; }",
+      "entrevista": "Es la forma segura de pasar de unknown, por ejemplo una respuesta de API, a un tipo concreto.",
+      "unidad": "ts-uniones-y-narrowing"
+    },
+    {
+      "id": "glo-generico",
+      "termino": "Genérico",
+      "en": "generic",
+      "pron": "yenérik",
+      "definicion": "Un tipo con un parámetro, como una variable de tipo, que permite que una función o componente funcione con muchos tipos sin perder la información de cuál es.",
+      "ejemplo": "function primero<T>(lista: T[]): T | undefined { return lista[0]; }",
+      "entrevista": "useState<User | null>(null) es un genérico que uso todos los días en React.",
+      "unidad": "ts-genericos"
+    },
+    {
+      "id": "glo-any",
+      "termino": "any",
+      "en": "any",
+      "pron": "éni",
+      "definicion": "Un tipo que apaga la revisión de TypeScript para ese valor, permitiendo hacer cualquier cosa con él.",
+      "ejemplo": "let dato: any = 5; dato.loQueSea(); // no avisa, falla al ejecutar",
+      "entrevista": "Lo evito porque se contagia a todo lo que toca; si no sé el tipo, uso unknown.",
+      "unidad": "ts-tipos-basicos"
+    },
+    {
+      "id": "glo-unknown",
+      "termino": "unknown",
+      "en": "unknown",
+      "pron": "announ",
+      "definicion": "Un tipo para valores de los que no sabes nada, que obliga a comprobar qué son antes de usarlos.",
+      "ejemplo": "const data: unknown = await res.json(); if (Array.isArray(data)) { data.length; }",
+      "entrevista": "Es la alternativa segura a any: el error de un catch también es unknown.",
+      "unidad": "ts-tipos-basicos"
+    },
+    {
+      "id": "glo-never",
+      "termino": "never",
+      "en": "never",
+      "pron": "néver",
+      "definicion": "El tipo de algo que nunca puede ocurrir, como una función que siempre lanza un error o un caso imposible de un switch.",
+      "ejemplo": "default: { const imposible: never = estado; throw new Error(imposible); }",
+      "entrevista": "Lo uso para que TypeScript me avise si agrego una opción nueva a una unión y olvido manejarla.",
+      "unidad": "ts-uniones-y-narrowing"
+    },
+    {
+      "id": "glo-utility-types",
+      "termino": "Utility types",
+      "en": "utility types",
+      "pron": "iutíliti táips",
+      "definicion": "Tipos que trae TypeScript para transformar otros tipos, como Partial, Pick, Omit, Required y Record.",
+      "ejemplo": "type UserUpdate = Partial<Omit<User, 'id'>>;",
+      "entrevista": "Me evitan duplicar tipos: el formulario de edición se deriva del tipo User en vez de reescribirlo.",
+      "unidad": "ts-utility-types"
+    },
+    {
+      "id": "glo-keyof",
+      "termino": "keyof",
+      "en": "keyof",
+      "pron": "kí of",
+      "definicion": "Un operador que obtiene la unión de los nombres de las propiedades de un tipo.",
+      "ejemplo": "function leer<T, K extends keyof T>(obj: T, key: K): T[K] { return obj[key]; }",
+      "entrevista": "Con genéricos permite funciones como ordenar por campo que solo aceptan campos que existen.",
+      "unidad": "ts-utility-types"
+    }
+  ]
+}

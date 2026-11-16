@@ -9,6 +9,7 @@ import { Llama } from "../components/Llama.jsx";
 import { AnimatedGroup } from "../components/ui/animated-group.jsx";
 import { MagicCard } from "../components/ui/magic-card.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
+import { MapaDominio } from "../components/MapaDominio.jsx";
 import estilos from "./Progreso.module.css";
 
 const DIAS = ["L", "", "M", "", "V", "", "D"];
@@ -184,6 +185,10 @@ export function Progreso() {
           </div>
         </div>
 
+        {/* En la versión web, el mapa de dominio reemplaza las barras por tema */}
+        {api.mapa ? (
+          <MapaDominio />
+        ) : (
         <div className={estilos.bloque}>
           <div className={estilos.bloqueCabecera}>
             <h2>Por tema</h2>
@@ -206,6 +211,7 @@ export function Progreso() {
             ))}
           </ul>
         </div>
+        )}
       </div>
     </section>
   );

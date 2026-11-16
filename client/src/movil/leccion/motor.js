@@ -5,13 +5,16 @@
 // actual, ordenados de reconocer a producir. Lo que fallas vuelve al final de la misma lección.
 // La nota de cada ítem alimenta el repaso espaciado (cajas de Leitner, server/progreso-reglas.js).
 
-export const TAMANO = { normal: 10, rapida: 5, errores: 10, quiz: 5 };
+export const TAMANO = { normal: 10, rapida: 5, errores: 10, quiz: 5, escuchar: 10, nivel: 40, predice: 10, debiles: 10 };
 export const MAX_NUEVOS = 4;
 export const MAX_ENTREVISTA = 2;
 export const XP = { primera: 10, reintento: 5, leccion: 20 };
 
 // De reconocer a producir: emparejar y opción múltiple primero, tarjetas al final.
-const ORDEN_TIPO = { emparejar: 0, opcion: 1, hueco: 2, ordenar: 3, tarjeta: 4, entrevista: 5 };
+const ORDEN_TIPO = { emparejar: 0, opcion: 1, hueco: 2, armar: 3, ordenar: 3, tarjeta: 4, entrevista: 5 };
+
+/** Ítems que solo se pueden hacer escuchando (se omiten si el dispositivo no tiene voz en inglés). */
+const DE_ESCUCHAR = new Set(["escuchar", "dictado"]);
 
 const vencido = (r, hoy) => !!r && !!r.proximo && r.proximo <= hoy;
 
@@ -67,13 +70,15 @@ export function barajar(lista, azar = Math.random) {
  * @param {object} [p.registrosPreguntas]  progreso de entrevista (datos.preguntas)
  * @param {string} p.hoy
  * @param {string} p.unidad           unidad actual
- * @param {"normal"|"rapida"|"errores"|"quiz"} [p.modo]
+ * @param {"normal"|"rapida"|"errores"|"quiz"|"escuchar"|"nivel"} [p.modo]
+ * @param {object[]} [p.unidades]     en orden (para la prueba de nivel)
+ * @param {boolean} [p.conVoz]        si es false, no salen los ítems que solo se hacen escuchando
  * @param {() => number} [p.azar]
  * @returns {{ clave: string, tipo: string, item?: object, pregunta?: object }[]}
  */
-export function armarLeccion({ items, registros, reportados = {}, preguntas = [], registrosPreguntas = {}, hoy, unidad, modo = "normal", azar = Math.random }) {
+export function armarLeccion({ items, registros, reportados = {}, preguntas = [], registrosPreguntas = {}, hoy, unidad, modo = "normal", unidades = [], conVoz = true, azar = Math.random }) {
   const tamano = TAMANO[modo] ?? TAMANO.normal;
-  const disponibles = items.filter((it) => !reportados[it.clave]);
+  const disponibles = items.filter((it) => !reportados[it.clave] && (conVoz || !DE_ESCUCHAR.has(it.subtipo)));
   const paso = (it) => ({ clave: it.clave, tipo: it.tipo, item: it });
   const elegidos = [];
   const ya = new Set();
@@ -96,7 +101,48 @@ export function armarLeccion({ items, registros, reportados = {}, preguntas = []
     return ordenar(elegidos, azar);
   }
 
+  if (modo === "nivel") {
+    // Prueba de nivel: 2 preguntas por unidad, en orden (gramática y vocabulario), sin repetir lo fallado.
+    for (const u of unidades) {
+      const deU = disponibles.filter((it) => it.unidad === u.id);
+      const gramatica = deU.find((it) => it.subtipo === "gramatica") ?? deU.find((it) => it.subtipo === "inversa");
+      const palabra = deU.find((it) => it.subtipo === "palabra" && it !== gramatica);
+      for (const it of [gramatica, palabra]) if (it && elegidos.length < tamano) elegidos.push(paso(it));
+    }
+    return elegidos;
+  }
+
   const deUnidad = disponibles.filter((it) => it.unidad === unidad);
+
+  if (modo === "escuchar") {
+    // Solo escuchar y dictado: lo que toca repasar, luego lo nuevo de tu unidad, luego lo de antes.
+    const oir = disponibles.filter((it) => DE_ESCUCHAR.has(it.subtipo));
+    tomar(oir.filter((it) => vencido(registros[it.clave], hoy)), tamano);
+    tomar(barajar(oir.filter((it) => it.unidad === unidad && !registros[it.clave]), azar), tamano);
+    const posUnidad = new Map(unidades.map((u, i) => [u.id, i]));
+    const hasta = posUnidad.get(unidad) ?? Infinity;
+    tomar(barajar(oir.filter((it) => (posUnidad.get(it.unidad) ?? 0) <= hasta), azar), tamano);
+    return ordenar(elegidos, azar);
+  }
+
+  if (modo === "predice") {
+    // Lee y predice: lo que toca repasar y luego lo nuevo, de cualquier tema
+    const pred = disponibles.filter((it) => it.subtipo === "predice");
+    tomar(pred.filter((it) => vencido(registros[it.clave], hoy)), tamano);
+    tomar(barajar(pred.filter((it) => !registros[it.clave]), azar), tamano);
+    tomar(barajar(pred, azar), tamano);
+    return elegidos;
+  }
+
+  if (modo === "debiles") {
+    // Entrenamiento de hoy: ítems de tus unidades más flojas (las recibe en "unidades", de la más floja a la menos)
+    for (const u of unidades) {
+      const deU = disponibles.filter((it) => it.unidad === u.id && (registros[it.clave]?.caja ?? 0) < 3);
+      tomar(intercalarPorTipo(barajar(deU, azar)), Math.ceil(tamano / Math.max(1, Math.min(unidades.length, 3))));
+      if (elegidos.length >= tamano) break;
+    }
+    return ordenar(elegidos, azar);
+  }
 
   if (modo === "quiz") {
     tomar(barajar(deUnidad.filter((it) => it.subtipo === "quiz"), azar), tamano);
@@ -142,8 +188,11 @@ function ordenar(pasos, azar) {
 // --- Sesión: avanza paso a paso y reprograma lo fallado ---
 
 /** Estado inicial de una lección. Se puede guardar como JSON para retomarla. */
-export function crearSesion(pasos, { unidad, modo = "normal", hoy } = {}) {
+export function crearSesion(pasos, { unidad, modo = "normal", hoy, ambito = "programacion", inicio = Date.now() } = {}) {
   return {
+    ambito,
+    inicio, // para medir cuánto duró (minutos de inglés)
+    unaVez: modo === "nivel", // en la prueba de nivel lo fallado no vuelve
     pasos,
     cola: pasos.map((_, i) => i), // índices de pasos pendientes, en orden
     posicion: 0,
@@ -181,7 +230,7 @@ export function responder(sesion, { correcto, nota: notaTarjeta }) {
   } else if (correcto) {
     nota = yaFallado ? "dude" : "sabia";
     xp = yaFallado ? XP.reintento : XP.primera;
-  } else if (yaFallado) {
+  } else if (yaFallado || sesion.unaVez) {
     nota = "no";
   } else {
     // Primer error: vuelve al final de esta misma lección.
@@ -209,6 +258,22 @@ const normalizar = (texto) => String(texto).trim().replace(/\s+/g, " ");
 export function ordenCorrecto(item, elegidas) {
   if (elegidas.length !== item.lineas.length) return false;
   return elegidas.every((linea, i) => normalizar(linea) === normalizar(item.lineas[i]));
+}
+
+/**
+ * Resultado de la prueba de nivel: la primera unidad en la que fallaste algo es donde empiezas.
+ * @returns {{ porUnidad: Record<string, { aciertos: number, total: number }>, empiezaEn: string|null }}
+ */
+export function resultadoNivel(sesion, unidades) {
+  const porUnidad = {};
+  for (const p of sesion.pasos) {
+    const r = (porUnidad[p.item.unidad] ??= { aciertos: 0, total: 0 });
+    r.total++;
+    if (sesion.notas[p.clave] === "sabia") r.aciertos++;
+  }
+  const primeraFallada = unidades.find((u) => porUnidad[u.id] && porUnidad[u.id].aciertos < porUnidad[u.id].total);
+  const ultima = unidades.findLast?.((u) => porUnidad[u.id]) ?? null;
+  return { porUnidad, empiezaEn: primeraFallada?.id ?? ultima?.id ?? unidades[0]?.id ?? null };
 }
 
 /** Avance de una unidad: cuántos ítems tiene, cuántos viste y cuántos dominas (caja 3 o más). */

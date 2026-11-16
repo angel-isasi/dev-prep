@@ -1,0 +1,39 @@
+{
+  "id": "rev-025",
+  "titulo": "Comentarios con formato HTML",
+  "unidad": "react-efectos-y-datos",
+  "nivel": 3,
+  "contexto": "La sección de comentarios de un blog. Los usuarios pueden escribir su comentario y dejar el enlace a su web personal. Se quiso permitir negritas, por eso se usa HTML.",
+  "lenguaje": "jsx",
+  "codigo": "import { useState, useEffect } from 'react';\n\nexport function Comentarios({ postId }) {\n  const [comentarios, setComentarios] = useState([]);\n\n  useEffect(() => {\n    fetch(`/api/posts/${postId}/comentarios`)\n      .then((res) => res.json())\n      .then(setComentarios);\n  }, [postId]);\n\n  return (\n    <section>\n      <h3>Comentarios ({comentarios.length})</h3>\n      {comentarios.map((c) => (\n        <article key={c.id}>\n          <a href={c.autorWeb}>{c.autor}</a>\n          <div dangerouslySetInnerHTML={{ __html: c.texto }} />\n          <time>{new Date(c.fecha).toLocaleDateString()}</time>\n        </article>\n      ))}\n    </section>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 9,
+      "tipo": "caso-borde",
+      "titulo": "Guarda cualquier respuesta como lista",
+      "detalle": "Si la API responde un error como { message: 'Not found' }, ese objeto se guarda en el estado y comentarios.map lanza TypeError, que tumba toda la página. Revisa res.ok y que llegue un arreglo, y captura los errores.",
+      "arreglo": ".then((res) => { if (!res.ok) throw new Error(res.status); return res.json(); })\n.then((data) => setComentarios(Array.isArray(data) ? data : []))\n.catch(() => setError('No se pudieron cargar los comentarios'));"
+    },
+    {
+      "linea": 17,
+      "tipo": "seguridad",
+      "titulo": "Enlace con URL del usuario sin validar",
+      "detalle": "Si alguien pone 'javascript:alert(document.cookie)' como su web, al hacer clic se ejecuta ese código. Acepta solo URLs http o https.",
+      "arreglo": "const web = /^https?:\\/\\//.test(c.autorWeb) ? c.autorWeb : undefined;\n<a href={web} rel=\"noopener noreferrer nofollow\">{c.autor}</a>"
+    },
+    {
+      "linea": 18,
+      "tipo": "seguridad",
+      "titulo": "XSS con dangerouslySetInnerHTML",
+      "detalle": "React escapa el texto por defecto, y esta propiedad desactiva esa protección. Un comentario con <img src=x onerror=...> roba la sesión de cada lector. Si de verdad necesitas HTML, límpialo antes con una librería como DOMPurify; si solo quieres negritas, usa Markdown.",
+      "arreglo": "<div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(c.texto) }} />"
+    },
+    {
+      "linea": 19,
+      "tipo": "accesibilidad",
+      "titulo": "time sin el atributo dateTime",
+      "detalle": "La etiqueta time sirve para que navegadores, buscadores y lectores de pantalla entiendan la fecha, pero necesita la fecha en formato máquina en dateTime.",
+      "arreglo": "<time dateTime={c.fecha}>{new Date(c.fecha).toLocaleDateString('es-PE')}</time>"
+    }
+  ]
+}

@@ -8,11 +8,12 @@ import { generarHuecos } from "./huecos.js";
 import { generarOrdenar } from "./ordenar.js";
 import { generarTarjeta } from "./tarjetas.js";
 import { crearUnidades, unidadDeEjercicio } from "./unidades.js";
+import { generarBug, generarGlosario, generarPredice } from "./aprender-mejor.js";
 
 /** Colecciones cuya solución no viaja al celular (regla acordada: los retos son para la laptop). */
 export const COLECCIONES_SIN_SOLUCION = ["javascript/retos", "react/retos", "typescript/retos"];
 
-const ORDEN_TIPOS = ["opcion/quiz", "opcion/metodo", "opcion/devuelve", "opcion/ts", "emparejar", "hueco", "ordenar", "tarjeta"];
+const ORDEN_TIPOS = ["opcion/quiz", "opcion/termino", "opcion/metodo", "opcion/devuelve", "opcion/predice", "opcion/ts", "opcion/bug", "emparejar", "hueco", "ordenar", "tarjeta"];
 export const tipoDe = (item) => (item.subtipo ? `${item.tipo}/${item.subtipo}` : item.tipo);
 
 /**
@@ -22,11 +23,14 @@ export const tipoDe = (item) => (item.subtipo ? `${item.tipo}/${item.subtipo}` :
  * @param {{ entradas: object[] }} p.referencia        de cargarReferencia (server/aprender.js)
  * @param {(ej: object, archivo: string) => Promise<string|null>|string|null} p.leerArchivo
  *        lee un archivo de la carpeta de un ejercicio (null si no existe)
+ * @param {object[]} [p.predice]      preguntas de content/predice
+ * @param {object[]} [p.glosario]     categorías de content/glosario
  * @returns {Promise<{ version: 1, unidades: object[], items: object[], resumen: object }>}
  */
-export async function generarItems({ indice, temas, referencia, leerArchivo }) {
+export async function generarItems({ indice, temas, referencia, leerArchivo, predice = [], glosario = [] }) {
   const unidades = crearUnidades(temas);
-  const items = [...generarQuiz(temas), ...generarReferencia(referencia.entradas ?? [])];
+  const ids = new Set(unidades.map((u) => u.id));
+  const items = [...generarQuiz(temas), ...generarReferencia(referencia.entradas ?? []), ...generarPredice(predice, ids), ...generarGlosario(glosario, ids)];
   const sinUnidad = [];
 
   const leer = async (ej, archivo) => {
@@ -49,6 +53,14 @@ export async function generarItems({ indice, temas, referencia, leerArchivo }) {
     const explicacion = (await leer(ej, "explicacion.md")) ?? "";
     const ideaClave = seccionMarkdown(explicacion, "Idea clave");
     const base = { ej, unidad, solucion, lenguaje: ej.ext, ideaClave };
+
+    // Depurar: solo "¿en qué línea está el error?" (la solución sin el error no enseña a buscarlo)
+    if (ej.coleccion.endsWith("/depurar")) {
+      const inicio = await leer(ej, ej.archivos.inicio);
+      const bug = inicio && generarBug({ ...base, inicio });
+      if (bug) items.push(bug);
+      continue;
+    }
 
     if (ej.ext === "ts" || ej.ext === "tsx") {
       const tests = await leer(ej, ej.archivos.tests);

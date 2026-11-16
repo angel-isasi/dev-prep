@@ -1,0 +1,32 @@
+{
+  "id": "rev-007",
+  "titulo": "Paginación de resultados",
+  "unidad": "arrays",
+  "nivel": 2,
+  "contexto": "Estas dos funciones manejan la paginación de una tabla de productos. La interfaz muestra las páginas empezando en 1.",
+  "lenguaje": "js",
+  "codigo": "export function paginar(items, pagina, porPagina = 10) {\n  const totalPaginas = Math.round(items.length / porPagina);\n  const inicio = pagina * porPagina;\n  const fin = inicio + porPagina;\n\n  return {\n    datos: items.slice(inicio, fin),\n    pagina,\n    totalPaginas,\n    hayAnterior: pagina > 1,\n    haySiguiente: pagina < totalPaginas,\n  };\n}\n\nexport function rangoTexto(pagina, porPagina, total) {\n  const desde = (pagina - 1) * porPagina + 1;\n  const hasta = Math.min(pagina * porPagina, total);\n  return `Mostrando ${desde} a ${hasta} de ${total}`;\n}",
+  "hallazgos": [
+    {
+      "linea": 2,
+      "tipo": "error",
+      "titulo": "Math.round pierde la última página",
+      "detalle": "Con 21 productos y 10 por página, 21 / 10 = 2.1 y Math.round da 2: el producto 21 nunca se puede ver. Siempre que sobre algo hace falta una página más, y eso es Math.ceil.",
+      "arreglo": "const totalPaginas = Math.ceil(items.length / porPagina);"
+    },
+    {
+      "linea": 3,
+      "tipo": "error",
+      "titulo": "Mezcla páginas desde 0 y desde 1",
+      "detalle": "El resto del código trata la primera página como 1 (hayAnterior usa pagina > 1 y rangoTexto resta 1), pero aquí la página 1 empieza en el índice 10: los primeros 10 productos nunca se muestran.",
+      "arreglo": "const inicio = (pagina - 1) * porPagina;"
+    },
+    {
+      "linea": 16,
+      "tipo": "caso-borde",
+      "titulo": "Texto incorrecto sin resultados",
+      "detalle": "Si no hay productos, total es 0 y el texto dice 'Mostrando 1 a 0 de 0'. Con una lista vacía debería mostrar otro mensaje.",
+      "arreglo": "if (total === 0) return 'Sin resultados';\nconst desde = (pagina - 1) * porPagina + 1;"
+    }
+  ]
+}

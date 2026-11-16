@@ -1,0 +1,305 @@
+{
+  "categoria": "JavaScript",
+  "terminos": [
+    {
+      "id": "glo-closure",
+      "termino": "Closure",
+      "en": "closure",
+      "pron": "klóuyer",
+      "definicion": "Una función que recuerda las variables del lugar donde se creó, aunque se ejecute después y en otro sitio.",
+      "ejemplo": "const contador = () => { let n = 0; return () => ++n; };",
+      "entrevista": "Lo uso para datos privados y para fábricas de funciones, como un contador o un debounce.",
+      "unidad": "closures-y-scope"
+    },
+    {
+      "id": "glo-hoisting",
+      "termino": "Hoisting",
+      "en": "hoisting",
+      "pron": "jóistin",
+      "definicion": "El comportamiento por el que JavaScript registra las declaraciones de variables y funciones antes de ejecutar el código, como si las subiera al inicio de su ámbito.",
+      "ejemplo": "saludar(); function saludar() { console.log('hola'); }",
+      "entrevista": "Las funciones declaradas se pueden llamar antes, var queda en undefined y let o const lanzan error si las usas antes de declararlas.",
+      "unidad": "closures-y-scope"
+    },
+    {
+      "id": "glo-scope",
+      "termino": "Scope",
+      "en": "scope",
+      "pron": "scóup",
+      "definicion": "El alcance: la zona del código donde una variable existe y se puede usar.",
+      "ejemplo": "if (true) { let x = 1; } console.log(typeof x); // 'undefined'",
+      "entrevista": "Distingo scope global, de función y de bloque: let y const respetan el bloque, var solo la función.",
+      "unidad": "closures-y-scope"
+    },
+    {
+      "id": "glo-tdz",
+      "termino": "Temporal Dead Zone",
+      "en": "temporal dead zone",
+      "pron": "témporal ded zóun",
+      "definicion": "El tramo entre el inicio de un bloque y la declaración de una variable let o const, donde usarla lanza un ReferenceError.",
+      "ejemplo": "console.log(a); let a = 5; // ReferenceError",
+      "entrevista": "Explica por qué let y const sí tienen hoisting pero no se pueden leer antes de declararse.",
+      "unidad": "closures-y-scope"
+    },
+    {
+      "id": "glo-event-loop",
+      "termino": "Event loop",
+      "en": "event loop",
+      "pron": "ivént lup",
+      "definicion": "El mecanismo que, cuando la pila de llamadas queda vacía, toma la siguiente tarea pendiente de las colas y la ejecuta.",
+      "ejemplo": "setTimeout(() => console.log('B'), 0); console.log('A'); // A, B",
+      "entrevista": "Primero corre todo el código síncrono, luego las microtareas (promesas) y después las macrotareas (setTimeout).",
+      "unidad": "promesas-y-async"
+    },
+    {
+      "id": "glo-callback",
+      "termino": "Callback",
+      "en": "callback",
+      "pron": "cólbak",
+      "definicion": "Una función que pasas como argumento a otra para que la llame cuando termine algo.",
+      "ejemplo": "boton.addEventListener('click', () => console.log('clic'));",
+      "entrevista": "Muchos callbacks anidados forman el callback hell, y por eso hoy se prefieren promesas y async/await.",
+      "unidad": "funciones"
+    },
+    {
+      "id": "glo-promesa",
+      "termino": "Promesa",
+      "en": "promise",
+      "pron": "prómis",
+      "definicion": "Un objeto que representa un valor que llegará en el futuro y que puede quedar cumplido o rechazado.",
+      "ejemplo": "fetch('/api/users').then(res => res.json()).catch(console.error);",
+      "entrevista": "Conozco Promise.all para correr tareas en paralelo y sé que falla entero si una sola se rechaza; para eso existe Promise.allSettled.",
+      "unidad": "promesas-y-async"
+    },
+    {
+      "id": "glo-async-await",
+      "termino": "async/await",
+      "en": "async await",
+      "pron": "éisink euéit",
+      "definicion": "Una forma de escribir código con promesas que se lee como código síncrono: await pausa la función async hasta que la promesa se resuelve.",
+      "ejemplo": "async function cargar() { const res = await fetch('/api'); return res.json(); }",
+      "entrevista": "Siempre envuelvo los await en try/catch y evito poner await dentro de un bucle cuando las tareas pueden ir en paralelo.",
+      "unidad": "promesas-y-async"
+    },
+    {
+      "id": "glo-microtarea",
+      "termino": "Microtarea",
+      "en": "microtask",
+      "pron": "máicrotask",
+      "definicion": "Una tarea de alta prioridad, como el then de una promesa, que se ejecuta apenas termina el código síncrono y antes de cualquier setTimeout.",
+      "ejemplo": "setTimeout(() => console.log(2)); Promise.resolve().then(() => console.log(1)); // 1, 2",
+      "entrevista": "Saber que las microtareas van antes que las macrotareas resuelve la mayoría de preguntas de orden de ejecución.",
+      "unidad": "promesas-y-async"
+    },
+    {
+      "id": "glo-this",
+      "termino": "this",
+      "en": "this",
+      "pron": "dis",
+      "definicion": "Una palabra clave que apunta al objeto que está ejecutando la función, y su valor depende de cómo se llama la función, no de dónde se escribió.",
+      "ejemplo": "const user = { name: 'Ana', hi() { return this.name; } }; user.hi(); // 'Ana'",
+      "entrevista": "Las arrow functions no tienen this propio: toman el del lugar donde se crearon, por eso sirven en callbacks dentro de métodos.",
+      "unidad": "this"
+    },
+    {
+      "id": "glo-prototipo",
+      "termino": "Prototipo",
+      "en": "prototype",
+      "pron": "prótotaip",
+      "definicion": "El objeto del que otro objeto hereda propiedades y métodos; si algo no está en el objeto, JavaScript lo busca en su cadena de prototipos.",
+      "ejemplo": "[1, 2].map === Array.prototype.map; // true",
+      "entrevista": "Las clases de JavaScript son una sintaxis más cómoda sobre la herencia por prototipos.",
+      "unidad": "objetos"
+    },
+    {
+      "id": "glo-clase",
+      "termino": "Clase",
+      "en": "class",
+      "pron": "clas",
+      "definicion": "Una plantilla para crear objetos con las mismas propiedades y métodos, usando constructor, métodos y herencia con extends.",
+      "ejemplo": "class Perro extends Animal { ladrar() { return 'guau'; } }",
+      "entrevista": "Si heredo con extends, llamo a super() en el constructor antes de usar this.",
+      "unidad": "this"
+    },
+    {
+      "id": "glo-inmutabilidad",
+      "termino": "Inmutabilidad",
+      "en": "immutability",
+      "pron": "imiutabíliti",
+      "definicion": "La práctica de no modificar un dato existente y, en su lugar, crear una copia nueva con los cambios.",
+      "ejemplo": "const nuevos = [...items, nuevo]; // en vez de items.push(nuevo)",
+      "entrevista": "En React es clave: el estado se compara por referencia, así que si lo mutas la vista no se actualiza.",
+      "unidad": "arrays"
+    },
+    {
+      "id": "glo-funcion-pura",
+      "termino": "Función pura",
+      "en": "pure function",
+      "pron": "piúr fánkshon",
+      "definicion": "Una función que con la misma entrada siempre devuelve la misma salida y no cambia nada fuera de ella.",
+      "ejemplo": "const sumar = (a, b) => a + b;",
+      "entrevista": "Las funciones puras son fáciles de testear, y React espera que los componentes se comporten así al renderizar.",
+      "unidad": "funciones"
+    },
+    {
+      "id": "glo-efecto-secundario",
+      "termino": "Efecto secundario",
+      "en": "side effect",
+      "pron": "sáid ifékt",
+      "definicion": "Cualquier cosa que una función hace además de devolver un valor, como modificar una variable externa, pedir datos o escribir en el DOM.",
+      "ejemplo": "function guardar(user) { localStorage.setItem('user', JSON.stringify(user)); }",
+      "entrevista": "No se pueden evitar, pero se aíslan: en React van dentro de useEffect o de manejadores de eventos, no en el render.",
+      "unidad": "funciones"
+    },
+    {
+      "id": "glo-higher-order-function",
+      "termino": "Higher-order function",
+      "en": "higher-order function",
+      "pron": "jáier órder fánkshon",
+      "definicion": "Una función que recibe otra función como argumento o que devuelve una función.",
+      "ejemplo": "const pares = nums.filter(n => n % 2 === 0);",
+      "entrevista": "map, filter y reduce son los ejemplos que todos usamos a diario.",
+      "unidad": "metodos-de-array"
+    },
+    {
+      "id": "glo-arrow-function",
+      "termino": "Arrow function",
+      "en": "arrow function",
+      "pron": "árou fánkshon",
+      "definicion": "Una sintaxis corta para funciones que además no tiene this ni arguments propios.",
+      "ejemplo": "const doble = n => n * 2;",
+      "entrevista": "Si uso llaves debo escribir return; sin llaves el retorno es implícito, y para devolver un objeto lo envuelvo en paréntesis.",
+      "unidad": "funciones"
+    },
+    {
+      "id": "glo-coercion",
+      "termino": "Coerción de tipos",
+      "en": "type coercion",
+      "pron": "táip couérshon",
+      "definicion": "La conversión automática que hace JavaScript de un tipo a otro cuando operas valores distintos.",
+      "ejemplo": "'5' - 2; // 3, pero '5' + 2; // '52'",
+      "entrevista": "Por la coerción uso === y convierto los tipos a propósito con Number() o String().",
+      "unidad": "variables-y-tipos"
+    },
+    {
+      "id": "glo-igualdad-estricta",
+      "termino": "Igualdad estricta",
+      "en": "strict equality",
+      "pron": "strikt icuáliti",
+      "definicion": "La comparación con ===, que exige mismo tipo y mismo valor sin convertir nada.",
+      "ejemplo": "0 == ''; // true, 0 === ''; // false",
+      "entrevista": "Los objetos y arreglos se comparan por referencia: dos arreglos iguales en contenido no son ===.",
+      "unidad": "variables-y-tipos"
+    },
+    {
+      "id": "glo-truthy-falsy",
+      "termino": "Truthy y falsy",
+      "en": "truthy and falsy",
+      "pron": "trúzi and fólsi",
+      "definicion": "La forma en que un valor se comporta en un if: los falsy son false, 0, '', null, undefined y NaN, y todo lo demás es truthy.",
+      "ejemplo": "if ([]) console.log('un arreglo vacío es truthy');",
+      "entrevista": "En JSX cuidado con {items.length && <Lista />}: si length es 0, React pinta un 0 en pantalla.",
+      "unidad": "condicionales-y-bucles"
+    },
+    {
+      "id": "glo-desestructuracion",
+      "termino": "Desestructuración",
+      "en": "destructuring",
+      "pron": "distrákcherin",
+      "definicion": "Una sintaxis para sacar valores de un objeto o arreglo y guardarlos en variables en una sola línea.",
+      "ejemplo": "const { name, age = 18 } = user; const [first] = list;",
+      "entrevista": "La uso en las props de React y con valores por defecto para evitar undefined.",
+      "unidad": "objetos"
+    },
+    {
+      "id": "glo-spread",
+      "termino": "Spread operator",
+      "en": "spread operator",
+      "pron": "spred óporeitor",
+      "definicion": "Los tres puntos que expanden los elementos de un arreglo o las propiedades de un objeto dentro de otro.",
+      "ejemplo": "const actualizado = { ...user, age: 30 };",
+      "entrevista": "Hace una copia superficial: los objetos anidados se siguen compartiendo.",
+      "unidad": "objetos"
+    },
+    {
+      "id": "glo-rest-parameters",
+      "termino": "Rest parameters",
+      "en": "rest parameters",
+      "pron": "rest parámeters",
+      "definicion": "Los tres puntos en los parámetros de una función, que juntan los argumentos sobrantes en un arreglo.",
+      "ejemplo": "const sumar = (...nums) => nums.reduce((a, b) => a + b, 0);",
+      "entrevista": "Mismo símbolo que spread, pero al revés: rest junta, spread expande.",
+      "unidad": "funciones"
+    },
+    {
+      "id": "glo-optional-chaining",
+      "termino": "Optional chaining",
+      "en": "optional chaining",
+      "pron": "ópshonal chéinin",
+      "definicion": "El operador ?. que lee una propiedad solo si lo anterior existe y, si no, devuelve undefined en vez de lanzar un error.",
+      "ejemplo": "const ciudad = user?.address?.city;",
+      "entrevista": "Evita el típico Cannot read properties of undefined cuando una API no trae un campo.",
+      "unidad": "objetos"
+    },
+    {
+      "id": "glo-nullish-coalescing",
+      "termino": "Nullish coalescing",
+      "en": "nullish coalescing",
+      "pron": "nálish couolésin",
+      "definicion": "El operador ?? que usa el valor de la derecha solo cuando el de la izquierda es null o undefined.",
+      "ejemplo": "const cantidad = input ?? 1; // si input es 0, queda 0",
+      "entrevista": "A diferencia de ||, no reemplaza el 0 ni el string vacío, que muchas veces son valores válidos.",
+      "unidad": "variables-y-tipos"
+    },
+    {
+      "id": "glo-copia-superficial",
+      "termino": "Copia superficial",
+      "en": "shallow copy",
+      "pron": "shálou cópi",
+      "definicion": "Una copia que duplica solo el primer nivel de un objeto o arreglo, mientras los objetos anidados siguen siendo los mismos.",
+      "ejemplo": "const copia = { ...user }; copia.address.city = 'Lima'; // cambia también user",
+      "entrevista": "Para una copia profunda uso structuredClone, que sí duplica los niveles anidados.",
+      "unidad": "objetos"
+    },
+    {
+      "id": "glo-debounce",
+      "termino": "Debounce",
+      "en": "debounce",
+      "pron": "dibáuns",
+      "definicion": "Una técnica que espera a que pase un tiempo sin nuevas llamadas antes de ejecutar la función, y reinicia la espera con cada llamada.",
+      "ejemplo": "input.addEventListener('input', debounce(buscar, 300));",
+      "entrevista": "Lo uso en buscadores para no pedir a la API en cada tecla, solo cuando el usuario deja de escribir.",
+      "unidad": "closures-y-scope"
+    },
+    {
+      "id": "glo-throttle",
+      "termino": "Throttle",
+      "en": "throttle",
+      "pron": "zrótel",
+      "definicion": "Una técnica que deja ejecutar una función como máximo una vez cada cierto tiempo, aunque se llame muchas veces.",
+      "ejemplo": "window.addEventListener('scroll', throttle(actualizarBarra, 100));",
+      "entrevista": "Debounce espera a que paren las llamadas; throttle ejecuta a ritmo fijo mientras siguen, ideal para scroll o resize.",
+      "unidad": "closures-y-scope"
+    },
+    {
+      "id": "glo-memoizacion",
+      "termino": "Memoización",
+      "en": "memoization",
+      "pron": "memoaiséishon",
+      "definicion": "Guardar el resultado de una función para una entrada dada y devolverlo directamente si la vuelven a llamar con la misma entrada.",
+      "ejemplo": "const cache = new Map(); if (cache.has(n)) return cache.get(n);",
+      "entrevista": "Cambia memoria por velocidad; solo vale la pena si el cálculo es costoso y se repite.",
+      "unidad": "closures-y-scope"
+    },
+    {
+      "id": "glo-modulos-es",
+      "termino": "Módulos ES",
+      "en": "ES modules",
+      "pron": "í es módiuls",
+      "definicion": "El sistema estándar para dividir el código en archivos que exportan e importan funciones y valores con export e import.",
+      "ejemplo": "export const sumar = (a, b) => a + b; import { sumar } from './math.js';",
+      "entrevista": "Gracias a que los imports son estáticos, el bundler puede hacer tree shaking y quitar lo que no se usa.",
+      "unidad": "node-que-es-node"
+    }
+  ]
+}

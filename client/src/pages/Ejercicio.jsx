@@ -292,6 +292,7 @@ export function Ejercicio() {
         {pestana === "explicar" && (
           <SeccionExplicar
             key={ejercicio.id}
+            id={ejercicio.id}
             resuelto={resuelto}
             textoGuardado={progreso?.explicacion ?? ""}
             modelo={ejercicio.modelo}

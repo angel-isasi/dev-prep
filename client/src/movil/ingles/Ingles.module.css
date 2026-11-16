@@ -1,0 +1,333 @@
+.pagina {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
+}
+
+.mensaje {
+  padding: var(--espacio-5);
+  color: var(--texto-suave);
+}
+
+.etiqueta {
+  margin: 0 0 4px;
+  color: var(--texto-suave);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.titulo {
+  margin: 0 0 var(--espacio-2);
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.ayuda {
+  color: var(--texto-suave);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.exito {
+  color: var(--exito);
+  font-weight: 600;
+}
+
+.volver {
+  display: inline-block;
+  margin-bottom: var(--espacio-3);
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+/* Meta de hoy y racha */
+.resumen {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-3);
+}
+
+.meta,
+.racha {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background:
+    radial-gradient(240px 120px at 0% 50%, var(--color-area-suave), transparent 70%),
+    var(--superficie);
+}
+
+.meta > div:last-child,
+.racha > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta small,
+.racha small {
+  color: var(--texto-suave);
+  font-size: 12px;
+}
+
+.minutos {
+  font-family: var(--fuente-titulos);
+  font-size: 28px;
+}
+
+.racha strong {
+  font-family: var(--fuente-titulos);
+  font-size: 26px;
+}
+
+/* Barras de los últimos 7 días */
+.semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  height: 70px;
+  margin-bottom: var(--espacio-4);
+}
+
+.semana > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+}
+
+.semana span {
+  width: 100%;
+  min-height: 3px;
+  border-radius: 6px;
+  background: var(--borde-fuerte);
+}
+
+.semana span[data-cumplio="true"] {
+  background: var(--color-area);
+}
+
+.semana small {
+  color: var(--texto-tenue);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+/* Prueba de nivel */
+.nivel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-4);
+  padding: var(--espacio-4);
+  border: 1px solid var(--color-area);
+  border-radius: var(--radio-grande);
+  background: var(--color-area-suave);
+}
+
+.nivel p {
+  margin: 4px 0 0;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+/* Botones de lecciones */
+.acciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--espacio-2);
+  margin: var(--espacio-3) 0;
+}
+
+.acciones > a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  min-height: 56px;
+  text-align: left;
+}
+
+.acciones small {
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.principal {
+  grid-column: 1 / -1;
+}
+
+.velocidad {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--espacio-3);
+  color: var(--texto-suave);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Bloques: inmersión, camino, palabras */
+.bloque {
+  margin-top: var(--espacio-5);
+}
+
+.bloque h2 {
+  margin-bottom: var(--espacio-2);
+  font-size: 22px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 8px 16px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 999px;
+  background: var(--superficie);
+  color: var(--texto);
+  cursor: pointer;
+}
+
+.chip[data-elegido="true"] {
+  border-color: var(--color-area);
+  background: var(--color-area-suave);
+}
+
+.inmersion {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--espacio-2);
+}
+
+.inmersion input {
+  flex: 1 1 220px;
+  padding: 10px 12px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 10px;
+  background: var(--fondo-solido);
+  color: var(--texto);
+}
+
+.recomendados {
+  margin-top: var(--espacio-3);
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.recomendados summary {
+  cursor: pointer;
+  color: var(--texto);
+}
+
+.recomendados ul {
+  margin: 4px 0 var(--espacio-2);
+}
+
+/* Unidad: teoría, palabras, diálogos */
+.teoria {
+  margin: var(--espacio-4) 0;
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.palabras {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.palabras li {
+  display: flex;
+  gap: var(--espacio-2);
+  align-items: flex-start;
+  padding: 10px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  background: var(--superficie);
+}
+
+.palabras li > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.palabras small {
+  color: var(--texto-suave);
+  font-size: 13px;
+}
+
+.palabras em {
+  color: var(--texto-tenue);
+}
+
+.pron {
+  color: var(--color-area);
+  font-size: 14px;
+}
+
+.es {
+  color: var(--texto-suave);
+}
+
+.audio {
+  flex: none;
+  min-width: 40px;
+  min-height: 40px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 10px;
+  background: var(--fondo-solido);
+  cursor: pointer;
+}
+
+.dialogo {
+  margin-bottom: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.dialogoCabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.linea {
+  display: flex;
+  flex-direction: column;
+  margin: 6px 0;
+}
+
+.linea small {
+  color: var(--texto-tenue);
+}
+
+@media (max-width: 480px) {
+  .resumen {
+    grid-template-columns: 1fr;
+  }
+}

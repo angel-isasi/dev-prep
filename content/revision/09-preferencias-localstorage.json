@@ -1,0 +1,46 @@
+{
+  "id": "rev-009",
+  "titulo": "Preferencias guardadas en localStorage",
+  "unidad": "objetos",
+  "nivel": 2,
+  "contexto": "Este módulo guarda las preferencias del usuario (tema, idioma, notificaciones) en el navegador. También se agregó una función para la sesión.",
+  "lenguaje": "js",
+  "codigo": "const CLAVE = 'preferencias';\n\nconst porDefecto = {\n  tema: 'claro',\n  idioma: 'es',\n  notificaciones: true,\n};\n\nexport function leerPreferencias() {\n  const guardado = localStorage.getItem(CLAVE);\n  if (!guardado) return porDefecto;\n  return JSON.parse(guardado);\n}\n\nexport function guardarPreferencia(clave, valor) {\n  const prefs = leerPreferencias();\n  prefs[clave] = valor;\n  localStorage.setItem(CLAVE, prefs);\n}\n\nexport function usarModoOscuro() {\n  const prefs = leerPreferencias();\n  return prefs.tema === 'oscuro' || window.matchMedia('(prefers-color-scheme: dark)').matches;\n}\n\nexport function guardarToken(token) {\n  localStorage.setItem('token', token);\n}",
+  "hallazgos": [
+    {
+      "linea": 11,
+      "tipo": "error",
+      "titulo": "Devuelve el objeto por defecto compartido",
+      "detalle": "La primera vez se devuelve el mismo objeto porDefecto, y guardarPreferencia lo modifica en la línea 17. Desde ese momento los valores por defecto quedan cambiados para toda la app. Devuelve una copia.",
+      "arreglo": "if (!guardado) return { ...porDefecto };"
+    },
+    {
+      "linea": 12,
+      "tipo": "caso-borde",
+      "titulo": "JSON.parse sin protección",
+      "detalle": "Si el valor guardado está corrupto (por ejemplo, el '[object Object]' que produce el bug de la línea 18), JSON.parse lanza un error y la app no arranca. Además, si agregas una preferencia nueva, los usuarios antiguos no la tendrán. Captura el error y mezcla con los valores por defecto.",
+      "arreglo": "try {\n  return { ...porDefecto, ...JSON.parse(guardado) };\n} catch {\n  return { ...porDefecto };\n}"
+    },
+    {
+      "linea": 18,
+      "tipo": "error",
+      "titulo": "Guarda un objeto sin convertirlo a texto",
+      "detalle": "localStorage solo guarda strings. Al pasarle un objeto lo convierte con toString y guarda '[object Object]': las preferencias se pierden en la siguiente lectura.",
+      "arreglo": "localStorage.setItem(CLAVE, JSON.stringify(prefs));"
+    },
+    {
+      "linea": 23,
+      "tipo": "error",
+      "titulo": "Ignora la elección del usuario",
+      "detalle": "Si el sistema está en modo oscuro, la función devuelve true aunque el usuario haya elegido 'claro' a propósito. La preferencia del sistema solo debería usarse cuando el usuario no eligió nada.",
+      "arreglo": "if (prefs.tema) return prefs.tema === 'oscuro';\nreturn window.matchMedia('(prefers-color-scheme: dark)').matches;"
+    },
+    {
+      "linea": 27,
+      "tipo": "seguridad",
+      "titulo": "Token de sesión en localStorage",
+      "detalle": "Cualquier script que corra en la página, incluido uno inyectado por XSS o una librería comprometida, puede leer localStorage y robar la sesión. Lo más seguro es que el servidor use una cookie HttpOnly, que JavaScript no puede leer.",
+      "arreglo": "// el servidor responde con Set-Cookie: session=...; HttpOnly; Secure; SameSite=Lax"
+    }
+  ]
+}

@@ -19,6 +19,7 @@ import {
   validarConfig,
 } from "./progreso-reglas.js";
 import { diasCombinados, documentoParaSubir, fusionarDocumento } from "./combinar.js";
+import { categoriasDeResultado } from "./errores.js";
 
 const RESPALDOS_DIARIOS = 7;
 
@@ -218,6 +219,12 @@ export async function crearProgreso({ datosDir }) {
       }
       datos.ejercicios[id] = registro;
       if (resueltoAhora) datos.dias = sumarAlDia(datos.dias, fechaLocal(), "resueltos");
+      // Resuelto sin pistas ni solución: cuenta como "limpio" (bono de concentración)
+      if (resueltoAhora && !registro.pistasVistas && !registro.vioSolucion) datos.dias = sumarAlDia(datos.dias, fechaLocal(), "limpios");
+      // Tus errores frecuentes: una vez por categoría y por guardado que falla
+      if (esIntento && resultado.pasan !== resultado.total) {
+        for (const categoria of categoriasDeResultado(resultado)) datos.dias = sumarAlDia(datos.dias, fechaLocal(), `err:${categoria}`);
+      }
       if (repasoCompletado) datos.dias = sumarAlDia(datos.dias, fechaLocal(), "repasos");
       await registrarEvento("corrida", id, { pasan: resultado.pasan, total: resultado.total, intento: esIntento });
       if (resueltoAhora) await registrarEvento("resuelto", id);

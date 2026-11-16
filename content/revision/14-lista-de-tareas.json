@@ -1,0 +1,39 @@
+{
+  "id": "rev-014",
+  "titulo": "Lista de tareas",
+  "unidad": "react-listas-y-condicionales",
+  "nivel": 1,
+  "contexto": "La clásica lista de tareas de una prueba técnica. El candidato la entregó y tú haces la revisión.",
+  "lenguaje": "jsx",
+  "codigo": "import { useState } from 'react';\n\nexport function ListaTareas() {\n  const [tareas, setTareas] = useState([]);\n  const [texto, setTexto] = useState('');\n\n  function agregar() {\n    setTareas([...tareas, { id: Date.now(), texto, hecha: false }]);\n    setTexto('');\n  }\n\n  function alternar(id) {\n    setTareas(tareas.map((t) => {\n      if (t.id === id) t.hecha = !t.hecha;\n      return t;\n    }));\n  }\n\n  return (\n    <div>\n      <input value={texto} onChange={(e) => setTexto(e.target.value)} />\n      <button onClick={agregar}>Agregar</button>\n      <ul>\n        {tareas.map((t) => (\n          <li key={t.id}>\n            <label>\n              <input type=\"checkbox\" checked={t.hecha} onChange={() => alternar(t.id)} />\n              {t.texto}\n            </label>\n          </li>\n        ))}\n      </ul>\n      {tareas.length && <p>{tareas.length} tareas</p>}\n    </div>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 8,
+      "tipo": "caso-borde",
+      "titulo": "Permite tareas vacías",
+      "detalle": "Pulsar Agregar con el campo vacío o con espacios crea una tarea en blanco. Valida antes de agregar.",
+      "arreglo": "const limpio = texto.trim();\nif (!limpio) return;\nsetTareas([...tareas, { id: Date.now(), texto: limpio, hecha: false }]);"
+    },
+    {
+      "linea": 14,
+      "tipo": "error",
+      "titulo": "Muta el objeto de la tarea",
+      "detalle": "map crea un arreglo nuevo, pero t.hecha = !t.hecha modifica el objeto que ya estaba en el estado. Un componente hijo con React.memo o un efecto que dependa de la tarea no verían el cambio. Devuelve un objeto nuevo.",
+      "arreglo": "setTareas(tareas.map((t) => (t.id === id ? { ...t, hecha: !t.hecha } : t)));"
+    },
+    {
+      "linea": 21,
+      "tipo": "accesibilidad",
+      "titulo": "Campo sin etiqueta",
+      "detalle": "El input no tiene label ni aria-label: un lector de pantalla solo anuncia 'campo de texto' y el usuario no sabe qué escribir.",
+      "arreglo": "<label htmlFor=\"nueva\">Nueva tarea</label>\n<input id=\"nueva\" value={texto} onChange={(e) => setTexto(e.target.value)} />"
+    },
+    {
+      "linea": 33,
+      "tipo": "error",
+      "titulo": "Muestra un 0 cuando no hay tareas",
+      "detalle": "Con la lista vacía, tareas.length es 0, y 0 && ... devuelve 0, que React sí pinta. El usuario ve un '0' suelto en la pantalla. Usa una condición booleana.",
+      "arreglo": "{tareas.length > 0 && <p>{tareas.length} tareas</p>}"
+    }
+  ]
+}

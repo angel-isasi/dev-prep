@@ -1,10 +1,12 @@
 // "Más": lo que no entra en la barra de abajo.
 import { Link } from "react-router";
 import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
-import { IconoAjustes, IconoChuleta, IconoReferencia } from "../components/Iconos.jsx";
+import { IconoAjustes, IconoChuleta, IconoEntrevistas, IconoProgreso, IconoReferencia } from "../components/Iconos.jsx";
 import estilos from "./MasMovil.module.css";
 
 const OPCIONES = [
+  { a: "/entrevistas", titulo: "Entrevistas", texto: "Tarjetas, simulacro, tu pitch y tus historias STAR", Icono: IconoEntrevistas },
+  { a: "/camino", titulo: "Lecciones", texto: "Tu camino de unidades de programación", Icono: IconoProgreso },
   { a: "/chuletas", titulo: "Chuletas", texto: "Lo esencial de cada tema en una pantalla", Icono: IconoChuleta },
   { a: "/referencia", titulo: "Referencia", texto: "Tu MDN sin internet: métodos, ejemplos y errores típicos", Icono: IconoReferencia },
   { a: "/ajustes", titulo: "Ajustes", texto: "Tu nombre, tema claro u oscuro y respaldo del progreso", Icono: IconoAjustes },

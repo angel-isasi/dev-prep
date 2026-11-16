@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { armarLeccion, avanceUnidad, intercalarPorTipo, crearSesion, ordenCorrecto, pasoActual, responder, resumen, semilla, terminada, XP } from "./motor.js";
+import { armarLeccion, avanceUnidad, intercalarPorTipo, crearSesion, ordenCorrecto, pasoActual, responder, resumen, semilla, terminada, XP, resultadoNivel } from "./motor.js";
 
 const HOY = "2026-11-15";
 const it = (clave, unidad, tipo = "opcion", extra = {}) => ({ clave, unidad, tipo, ...extra });
@@ -166,5 +166,37 @@ describe("variedad", () => {
     const tipos = new Set(pasos.map((p) => p.item.subtipo ?? p.tipo));
     expect(tipos.has("quiz")).toBe(true);
     expect(tipos.has("tarjeta")).toBe(true);
+  });
+});
+
+describe("inglés: escuchar, armar y prueba de nivel", () => {
+  const u = (id, n) => [
+    { clave: `gra:${id}`, tipo: "opcion", subtipo: "gramatica", unidad: id },
+    { clave: `en:${id}`, tipo: "opcion", subtipo: "palabra", unidad: id },
+    { clave: `esc:${id}`, tipo: "opcion", subtipo: "escuchar", unidad: id, n },
+    { clave: `arm:${id}`, tipo: "armar", subtipo: "traducir", unidad: id },
+  ];
+  const unidades = [{ id: "u1" }, { id: "u2" }, { id: "u3" }];
+  const items = [...u("u1"), ...u("u2"), ...u("u3")];
+
+  test("sin voz en inglés no salen los ítems de escuchar", () => {
+    const pasos = armarLeccion({ items, registros: {}, hoy: "2026-11-16", unidad: "u1", conVoz: false, azar: semilla("x") });
+    expect(pasos.some((p) => p.item.subtipo === "escuchar")).toBe(false);
+  });
+
+  test("modo escuchar solo trae ítems de escuchar o dictado", () => {
+    const pasos = armarLeccion({ items, registros: {}, hoy: "2026-11-16", unidad: "u2", unidades, modo: "escuchar", azar: semilla("x") });
+    expect(pasos.length).toBeGreaterThan(0);
+    expect(pasos.every((p) => p.item.subtipo === "escuchar")).toBe(true);
+    expect(pasos.some((p) => p.item.unidad === "u3")).toBe(false); // no adelanta unidades
+  });
+
+  test("prueba de nivel: 2 por unidad en orden, lo fallado no vuelve y empiezas donde fallaste", () => {
+    const pasos = armarLeccion({ items, registros: {}, hoy: "2026-11-16", unidades, modo: "nivel" });
+    expect(pasos.map((p) => p.clave)).toEqual(["gra:u1", "en:u1", "gra:u2", "en:u2", "gra:u3", "en:u3"]);
+    let s = crearSesion(pasos, { modo: "nivel" });
+    for (const correcto of [true, true, true, false, true, true]) s = responder(s, { correcto }).sesion;
+    expect(terminada(s)).toBe(true);
+    expect(resultadoNivel(s, unidades).empiezaEn).toBe("u2");
   });
 });

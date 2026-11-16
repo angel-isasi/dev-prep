@@ -1,0 +1,122 @@
+[
+  {
+    "id": "pred-041",
+    "unidad": "promesas-y-async",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "console.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nPromise.resolve().then(() => console.log(\"C\"));\nconsole.log(\"D\");",
+    "opciones": ["A C D B", "A B C D", "A D B C", "A D C B"],
+    "correcta": 3,
+    "explicacion": "Primero corre todo el código síncrono, de arriba abajo: A y D. Los callbacks pendientes van a dos colas distintas: el .then de una promesa va a la cola de microtareas y el setTimeout a la de macrotareas (tareas). Cuando la pila queda vacía, el event loop vacía todas las microtareas antes de pasar a la siguiente macrotarea, por eso C sale antes que B. La trampa es pensar que setTimeout con 0 se ejecuta \"ya\", antes de la promesa: el 0 solo significa \"lo antes posible después de lo pendiente\".",
+    "verificar": true
+  },
+  {
+    "id": "pred-042",
+    "unidad": "promesas-y-async",
+    "nivel": 3,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "async function tarea() {\n  console.log(1);\n  await null;\n  console.log(2);\n}\nconsole.log(3);\ntarea();\nconsole.log(4);",
+    "opciones": ["3 1 4 2", "3 1 2 4", "3 4 1 2", "1 2 3 4"],
+    "correcta": 0,
+    "explicacion": "Primero se imprime 3. Al llamar tarea(), su cuerpo empieza a ejecutarse de forma síncrona hasta el primer await, así que imprime 1 enseguida. El await pausa la función y deja el resto (console.log(2)) como una microtarea; el control vuelve a quien la llamó, que imprime 4. Con la pila vacía, se ejecuta la microtarea y sale 2. La trampa es pensar que una función async corre entera \"en segundo plano\" (3 4 1 2): todo lo que está antes del primer await es síncrono.",
+    "verificar": true
+  },
+  {
+    "id": "pred-043",
+    "unidad": "promesas-y-async",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "const p = new Promise((resolve) => {\n  console.log(\"dentro\");\n  resolve(\"listo\");\n  console.log(\"después de resolve\");\n});\np.then((v) => console.log(v));\nconsole.log(\"fuera\");",
+    "opciones": ["dentro listo después de resolve fuera", "fuera dentro después de resolve listo", "dentro después de resolve fuera listo", "dentro fuera listo"],
+    "correcta": 2,
+    "explicacion": "La función que le pasas a new Promise (el executor) se ejecuta de inmediato y de forma síncrona, por eso \"dentro\" sale primero. resolve no detiene la función, solo marca la promesa como cumplida, así que \"después de resolve\" también se imprime. El .then se agenda como microtarea y espera a que termine el código síncrono, que imprime \"fuera\". Recién después sale \"listo\". La trampa es pensar que resolve funciona como un return y corta el executor.",
+    "verificar": true
+  },
+  {
+    "id": "pred-044",
+    "unidad": "promesas-y-async",
+    "nivel": 1,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "async function obtener() {\n  return 42;\n}\nconst r = obtener();\nconsole.log(typeof r, r instanceof Promise);\nr.then((v) => console.log(v));",
+    "opciones": ["number true 42", "number false 42", "object true undefined", "object true 42"],
+    "correcta": 3,
+    "explicacion": "Una función async siempre devuelve una promesa, aunque tú devuelvas un número. return 42 equivale a devolver Promise.resolve(42). Por eso r es un objeto Promise (typeof da \"object\") y para leer el 42 necesitas .then o await. La trampa es esperar \"number\", como si la función async devolviera el valor directamente. Es el error típico de hacer const datos = obtenerDatos() sin await y luego leer datos.nombre.",
+    "verificar": true
+  },
+  {
+    "id": "pred-045",
+    "unidad": "promesas-y-async",
+    "nivel": 3,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "const lenta = new Promise((res) => setTimeout(() => res(\"lenta\"), 50));\nconst falla = Promise.reject(new Error(\"falló\"));\nPromise.all([lenta, falla])\n  .then((r) => console.log(r.length))\n  .catch((e) => console.log(e.message));",
+    "opciones": ["lenta", "2", "falló", "lenta falló"],
+    "correcta": 2,
+    "explicacion": "Promise.all se rechaza en cuanto una de las promesas falla, sin esperar a las demás. falla ya está rechazada, así que Promise.all se rechaza enseguida y salta directo al .catch con ese error: imprime \"falló\". El .then nunca corre, y aunque lenta se cumple 50 ms después, ese resultado se ignora. La trampa es pensar que Promise.all devuelve las que sí funcionaron: para eso existe Promise.allSettled, que espera a todas y te dice cuál se cumplió y cuál falló.",
+    "verificar": true
+  },
+  {
+    "id": "pred-046",
+    "unidad": "promesas-y-async",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "Promise.allSettled([\n  Promise.resolve(1),\n  Promise.reject(new Error(\"x\")),\n  3,\n]).then((res) => {\n  console.log(res.map((r) => r.status).join(\",\"));\n});",
+    "opciones": ["rejected", "fulfilled,rejected,fulfilled", "fulfilled,rejected", "1,x,3"],
+    "correcta": 1,
+    "explicacion": "Promise.allSettled nunca se rechaza: espera a que todas terminen y devuelve un arreglo de objetos con status \"fulfilled\" (y value) o \"rejected\" (y reason). Un valor que no es promesa, como el 3, se trata como una promesa ya cumplida, así que también es \"fulfilled\". El resultado tiene 3 elementos en el mismo orden. La trampa es pensar que se comporta como Promise.all y se corta en el primer rechazo, o que ignora el valor 3 por no ser promesa.",
+    "verificar": true
+  },
+  {
+    "id": "pred-047",
+    "unidad": "promesas-y-async",
+    "nivel": 3,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "const esperar = (ms) => new Promise((r) => setTimeout(r, ms));\nasync function procesar() {\n  const ids = [1, 2, 3];\n  ids.forEach(async (id) => {\n    await esperar(10);\n    console.log(id);\n  });\n  console.log(\"fin\");\n}\nprocesar();",
+    "opciones": ["fin 1 2 3", "1 2 3 fin", "fin", "3 2 1 fin"],
+    "correcta": 0,
+    "explicacion": "forEach no sabe nada de promesas: llama al callback async tres veces, cada llamada devuelve una promesa y forEach la ignora sin esperarla. Así que el código sigue de largo e imprime \"fin\" primero. 10 ms después terminan las esperas y salen 1, 2 y 3. La trampa es pensar que el await dentro del callback hace esperar a procesar: ese await solo pausa al callback. Para procesar en orden usa for...of con await, y para hacerlo en paralelo y esperar a todos, await Promise.all(ids.map(...)).",
+    "verificar": true
+  },
+  {
+    "id": "pred-048",
+    "unidad": "promesas-y-async",
+    "nivel": 3,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "setTimeout(() => console.log(\"t1\"), 0);\nsetTimeout(() => {\n  console.log(\"t2\");\n  Promise.resolve().then(() => console.log(\"p2\"));\n}, 0);\nsetTimeout(() => console.log(\"t3\"), 0);\nPromise.resolve().then(() => console.log(\"p1\"));",
+    "opciones": ["t1 t2 p2 t3 p1", "p1 t1 t2 t3 p2", "p1 t1 t2 p2 t3", "t1 p1 t2 p2 t3"],
+    "correcta": 2,
+    "explicacion": "El código síncrono solo agenda cosas: tres timers en la cola de macrotareas y p1 en la de microtareas. Al terminar, se vacían las microtareas: sale p1. Luego el event loop toma un timer a la vez y, después de cada uno, vuelve a vaciar las microtareas. t1 no agenda nada. t2 imprime y agenda p2, que se ejecuta antes de pasar a t3. La trampa es pensar que los tres timers corren seguidos y p2 queda al final: las microtareas siempre se atienden entre una macrotarea y la siguiente.",
+    "verificar": true
+  },
+  {
+    "id": "pred-049",
+    "unidad": "promesas-y-async",
+    "nivel": 3,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "async function falla() {\n  throw new Error(\"ups\");\n}\nasync function sinAwait() {\n  try {\n    return falla();\n  } catch (e) {\n    return \"atrapado\";\n  }\n}\nsinAwait()\n  .then((v) => console.log(v))\n  .catch((e) => console.log(\"afuera:\", e.message));",
+    "opciones": ["afuera: ups", "atrapado", "ups", "undefined"],
+    "correcta": 0,
+    "explicacion": "falla() no lanza el error de forma síncrona: como es async, devuelve una promesa rechazada. return falla() sale del try devolviendo esa promesa, y el try/catch ya terminó cuando la promesa se rechaza, así que el catch interno nunca se entera. El rechazo llega a quien llamó a sinAwait y lo atrapa el .catch de afuera. La trampa tentadora es esperar \"atrapado\": para que el try/catch lo capture hay que escribir return await falla().",
+    "verificar": true
+  },
+  {
+    "id": "pred-050",
+    "unidad": "promesas-y-async",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "Promise.resolve(1)\n  .then((x) => x + 1)\n  .then((x) => {\n    x * 10;\n  })\n  .then((x) => console.log(x));",
+    "opciones": ["NaN", "20", "2", "undefined"],
+    "correcta": 3,
+    "explicacion": "Cada .then recibe lo que devolvió el anterior. El primero devuelve 1 + 1 = 2. El segundo calcula 2 * 10 pero, como la flecha tiene llaves y no tiene return, devuelve undefined. El tercero recibe ese undefined y lo imprime. La trampa es esperar 20: es el mismo error de olvidar el return en un map, pero en una cadena de promesas rompe todos los pasos siguientes.",
+    "verificar": true
+  }
+]

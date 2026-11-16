@@ -1,0 +1,39 @@
+{
+  "id": "rev-005",
+  "titulo": "Lista de comentarios con innerHTML",
+  "unidad": "dom-y-eventos",
+  "nivel": 2,
+  "contexto": "Una sección de comentarios de un blog hecha con JavaScript puro. Los usuarios escriben su nombre y su comentario en un formulario.",
+  "lenguaje": "js",
+  "codigo": "const contenedor = document.getElementById('comentarios');\nconst form = document.getElementById('form-comentario');\nconst comentarios = [];\n\nfunction render() {\n  let html = '';\n  for (const c of comentarios) {\n    html += `<div class=\"comentario\">\n      <p><strong>${c.autor}</strong>: ${c.texto}</p>\n      <span onclick=\"borrar(${c.id})\">Borrar</span>\n    </div>`;\n  }\n  contenedor.innerHTML = html;\n}\n\nform.addEventListener('submit', (e) => {\n  e.preventDefault();\n  const datos = new FormData(form);\n  comentarios.push({\n    id: comentarios.length,\n    autor: datos.get('autor'),\n    texto: datos.get('texto'),\n  });\n  form.reset();\n  render();\n});\n\nfunction borrar(id) {\n  comentarios.splice(id, 1);\n  render();\n}",
+  "hallazgos": [
+    {
+      "linea": 9,
+      "tipo": "seguridad",
+      "titulo": "XSS: texto del usuario insertado como HTML",
+      "detalle": "Si alguien comenta <img src=x onerror=\"alert(document.cookie)\">, ese código se ejecuta en el navegador de cada visitante. Nunca metas texto del usuario en innerHTML: crea los elementos y usa textContent.",
+      "arreglo": "const p = document.createElement('p');\np.textContent = `${c.autor}: ${c.texto}`;"
+    },
+    {
+      "linea": 10,
+      "tipo": "accesibilidad",
+      "titulo": "Un span como botón",
+      "detalle": "Un span no recibe foco con Tab ni se activa con Enter, y el lector de pantalla no lo anuncia como botón. Usa un button. De paso, el onclick en línea obliga a que borrar sea global; un addEventListener es más limpio.",
+      "arreglo": "<button type=\"button\" data-id=\"${c.id}\">Borrar</button>"
+    },
+    {
+      "linea": 20,
+      "tipo": "error",
+      "titulo": "El id se repite después de borrar",
+      "detalle": "Si hay 3 comentarios (ids 0, 1, 2) y borras uno, el siguiente recibe id 2 otra vez. Dos comentarios con el mismo id hacen que borrar elimine el equivocado. Usa un id que no dependa del tamaño del arreglo.",
+      "arreglo": "let siguienteId = 0; // arriba, junto a comentarios\nid: siguienteId++,"
+    },
+    {
+      "linea": 29,
+      "tipo": "error",
+      "titulo": "Usa el id como si fuera la posición",
+      "detalle": "splice recibe un índice, no un id. Apenas se borra el primer comentario, los índices se corren y al borrar el de id 1 se elimina otro. Busca el elemento por su id.",
+      "arreglo": "const i = comentarios.findIndex((c) => c.id === id);\nif (i !== -1) comentarios.splice(i, 1);"
+    }
+  ]
+}

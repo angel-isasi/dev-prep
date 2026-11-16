@@ -1,0 +1,255 @@
+{
+  "categoria": "Web y navegador",
+  "terminos": [
+    {
+      "id": "glo-dom",
+      "termino": "DOM",
+      "en": "Document Object Model",
+      "pron": "dom (dókiument óbyekt módel)",
+      "definicion": "La representación en forma de árbol de objetos que el navegador crea a partir del HTML y que JavaScript puede leer y modificar.",
+      "ejemplo": "document.querySelector('#titulo').textContent = 'Hola';",
+      "entrevista": "Tocar el DOM es costoso, así que agrupo los cambios, por ejemplo armando un fragmento antes de insertarlo.",
+      "unidad": "dom-y-eventos"
+    },
+    {
+      "id": "glo-event-bubbling",
+      "termino": "Event bubbling",
+      "en": "event bubbling",
+      "pron": "ivént báblin",
+      "definicion": "El recorrido de un evento que empieza en el elemento donde ocurrió y sube por todos sus padres hasta el documento.",
+      "ejemplo": "boton.addEventListener('click', e => e.stopPropagation());",
+      "entrevista": "Antes de subir existe la fase de captura, que baja desde el documento; casi siempre se trabaja en la de burbuja.",
+      "unidad": "dom-y-eventos"
+    },
+    {
+      "id": "glo-event-delegation",
+      "termino": "Event delegation",
+      "en": "event delegation",
+      "pron": "ivént delegéishon",
+      "definicion": "Poner un solo listener en un elemento padre y usar event.target para saber qué hijo se clicó, aprovechando el bubbling.",
+      "ejemplo": "lista.addEventListener('click', e => { if (e.target.matches('li')) marcar(e.target); });",
+      "entrevista": "Ahorra listeners y funciona con elementos que se agregan después; uso closest() por si el clic cae en un hijo del li.",
+      "unidad": "dom-y-eventos"
+    },
+    {
+      "id": "glo-spa",
+      "termino": "SPA",
+      "en": "single page application",
+      "pron": "es pi éi (síngol péich aplikéishon)",
+      "definicion": "Una aplicación web que carga una sola página y luego cambia el contenido con JavaScript, sin recargar el navegador al navegar.",
+      "ejemplo": "// React Router cambia la URL y el componente sin pedir un HTML nuevo al servidor",
+      "entrevista": "Da una experiencia fluida, pero la primera carga puede ser lenta y el SEO es más difícil sin SSR.",
+      "unidad": null
+    },
+    {
+      "id": "glo-ssr",
+      "termino": "SSR",
+      "en": "server-side rendering",
+      "pron": "es es ar (sérver sáid rénderin)",
+      "definicion": "Generar el HTML de la página en el servidor para cada petición, de modo que el usuario ve contenido antes de que cargue el JavaScript.",
+      "ejemplo": "// Next.js renderiza la página en el servidor y la envía ya con datos",
+      "entrevista": "Mejora el SEO y la primera carga; el contraste es CSR, donde el navegador arma todo, y SSG, donde el HTML se genera al compilar.",
+      "unidad": null
+    },
+    {
+      "id": "glo-hidratacion",
+      "termino": "Hidratación",
+      "en": "hydration",
+      "pron": "jaidréishon",
+      "definicion": "El paso en el que React toma el HTML que llegó del servidor y le conecta los eventos y el estado para volverlo interactivo.",
+      "ejemplo": "hydrateRoot(document.getElementById('root'), <App />);",
+      "entrevista": "Si el HTML del servidor y el del cliente no coinciden, por ejemplo por usar Date.now() al renderizar, aparece un error de hydration mismatch.",
+      "unidad": null
+    },
+    {
+      "id": "glo-fetch-api",
+      "termino": "Fetch API",
+      "en": "fetch API",
+      "pron": "fech éi pi ái",
+      "definicion": "La función del navegador para hacer peticiones HTTP que devuelve una promesa con la respuesta.",
+      "ejemplo": "const res = await fetch('/api/users'); if (!res.ok) throw new Error(res.status);",
+      "entrevista": "fetch no rechaza la promesa con un 404 o un 500, solo con errores de red, así que siempre reviso res.ok.",
+      "unidad": "promesas-y-async"
+    },
+    {
+      "id": "glo-json",
+      "termino": "JSON",
+      "en": "JavaScript Object Notation",
+      "pron": "yéison",
+      "definicion": "Un formato de texto para intercambiar datos, con pares clave valor parecidos a los objetos de JavaScript.",
+      "ejemplo": "const texto = JSON.stringify({ id: 1 }); const obj = JSON.parse(texto);",
+      "entrevista": "Las claves van con comillas dobles y no admite funciones, undefined ni fechas como tal; JSON.parse lanza error si el texto está mal, así que va en try/catch.",
+      "unidad": "node-apis-rest"
+    },
+    {
+      "id": "glo-cors",
+      "termino": "CORS",
+      "en": "Cross-Origin Resource Sharing",
+      "pron": "cors",
+      "definicion": "La regla del navegador que bloquea las peticiones a otro dominio salvo que ese servidor responda con cabeceras que lo permitan.",
+      "ejemplo": "Access-Control-Allow-Origin: https://miapp.com",
+      "entrevista": "Se arregla en el servidor, no en el frontend; desde Postman no aparece porque la restricción la aplica el navegador.",
+      "unidad": "node-http-y-express"
+    },
+    {
+      "id": "glo-localstorage",
+      "termino": "localStorage",
+      "en": "local storage",
+      "pron": "lóukal stórich",
+      "definicion": "Un almacenamiento del navegador que guarda pares clave valor como texto y que se mantiene aunque cierres la pestaña.",
+      "ejemplo": "localStorage.setItem('tema', 'oscuro'); localStorage.getItem('tema');",
+      "entrevista": "Solo guarda strings, así que uso JSON.stringify, y no guardo tokens sensibles porque cualquier script de la página puede leerlo.",
+      "unidad": "dom-y-eventos"
+    },
+    {
+      "id": "glo-cookie",
+      "termino": "Cookie",
+      "en": "cookie",
+      "pron": "cúki",
+      "definicion": "Un dato pequeño que el servidor guarda en el navegador y que este envía automáticamente en cada petición a ese dominio.",
+      "ejemplo": "Set-Cookie: session=abc123; HttpOnly; Secure; SameSite=Lax",
+      "entrevista": "Con HttpOnly JavaScript no puede leerla, por eso es más segura que localStorage para la sesión.",
+      "unidad": null
+    },
+    {
+      "id": "glo-html-semantico",
+      "termino": "HTML semántico",
+      "en": "semantic HTML",
+      "pron": "simántik éich ti em el",
+      "definicion": "Usar la etiqueta que describe el significado del contenido, como header, nav, main, button o article, en vez de div para todo.",
+      "ejemplo": "<button onClick={abrir}>Abrir</button> // y no <div onClick={abrir}>",
+      "entrevista": "Da accesibilidad y SEO casi gratis: un button ya se enfoca con Tab y se activa con Enter.",
+      "unidad": null
+    },
+    {
+      "id": "glo-accesibilidad",
+      "termino": "Accesibilidad",
+      "en": "accessibility (a11y)",
+      "pron": "aksesibíliti",
+      "definicion": "Diseñar y programar para que cualquier persona, incluso con discapacidad visual, motriz o auditiva, pueda usar la web.",
+      "ejemplo": "<img src=\"logo.png\" alt=\"Logo de la empresa\" />",
+      "entrevista": "Reviso cuatro cosas: que todo funcione con teclado, buen contraste, textos alternativos y labels en los formularios.",
+      "unidad": null
+    },
+    {
+      "id": "glo-aria",
+      "termino": "ARIA",
+      "en": "Accessible Rich Internet Applications",
+      "pron": "ária",
+      "definicion": "Atributos que añaden información para los lectores de pantalla cuando el HTML por sí solo no basta, como aria-label o aria-expanded.",
+      "ejemplo": "<button aria-label=\"Cerrar\" aria-expanded={abierto}>×</button>",
+      "entrevista": "La primera regla de ARIA es no usarlo si existe una etiqueta HTML nativa que ya hace lo mismo.",
+      "unidad": null
+    },
+    {
+      "id": "glo-responsive-design",
+      "termino": "Responsive design",
+      "en": "responsive design",
+      "pron": "rispónsiv disáin",
+      "definicion": "Diseñar una página para que se adapte bien a cualquier tamaño de pantalla, del celular al monitor grande.",
+      "ejemplo": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />",
+      "entrevista": "Trabajo mobile first: escribo los estilos para celular y agrego media queries para pantallas más grandes.",
+      "unidad": null
+    },
+    {
+      "id": "glo-media-query",
+      "termino": "Media query",
+      "en": "media query",
+      "pron": "mídia cuíri",
+      "definicion": "Una regla de CSS que aplica estilos solo cuando se cumple una condición, como un ancho mínimo de pantalla.",
+      "ejemplo": "@media (min-width: 768px) { .grid { grid-template-columns: 1fr 1fr; } }",
+      "entrevista": "También sirven para preferencias del usuario, como prefers-color-scheme para el modo oscuro.",
+      "unidad": null
+    },
+    {
+      "id": "glo-flexbox",
+      "termino": "Flexbox",
+      "en": "flexbox",
+      "pron": "fléksboks",
+      "definicion": "Un sistema de CSS para alinear y repartir elementos en una sola dirección, en fila o en columna.",
+      "ejemplo": ".barra { display: flex; justify-content: space-between; align-items: center; }",
+      "entrevista": "justify-content alinea en el eje principal y align-items en el eje cruzado; es la pregunta clásica.",
+      "unidad": null
+    },
+    {
+      "id": "glo-css-grid",
+      "termino": "CSS Grid",
+      "en": "CSS grid",
+      "pron": "si es es grid",
+      "definicion": "Un sistema de CSS para crear layouts en dos dimensiones, con filas y columnas a la vez.",
+      "ejemplo": ".galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }",
+      "entrevista": "Uso Grid para la estructura de la página y Flexbox para alinear cosas dentro de un componente.",
+      "unidad": null
+    },
+    {
+      "id": "glo-box-model",
+      "termino": "Box model",
+      "en": "box model",
+      "pron": "boks módel",
+      "definicion": "El modelo en el que cada elemento es una caja formada por contenido, padding, borde y margen.",
+      "ejemplo": "* { box-sizing: border-box; }",
+      "entrevista": "Con border-box el width incluye padding y borde, lo que hace los tamaños mucho más predecibles.",
+      "unidad": null
+    },
+    {
+      "id": "glo-especificidad",
+      "termino": "Especificidad",
+      "en": "specificity",
+      "pron": "spesifísiti",
+      "definicion": "La regla que decide qué estilo gana cuando varios selectores apuntan al mismo elemento: estilos en línea, luego ids, luego clases y al final etiquetas.",
+      "ejemplo": "#menu .item { color: red; } /* gana a */ .item { color: blue; }",
+      "entrevista": "Evito !important y los ids para estilos; con clases simples la especificidad no se vuelve una guerra.",
+      "unidad": null
+    },
+    {
+      "id": "glo-css-in-js",
+      "termino": "CSS-in-JS",
+      "en": "CSS in JS",
+      "pron": "si es es in yéi es",
+      "definicion": "Escribir los estilos dentro de los archivos de JavaScript, junto al componente, con librerías como styled-components o Emotion.",
+      "ejemplo": "const Boton = styled.button` padding: 8px; color: ${p => p.color}; `;",
+      "entrevista": "Permite estilos según props y sin choques de nombres, pero suma peso en tiempo de ejecución; CSS Modules y Tailwind son alternativas comunes.",
+      "unidad": null
+    },
+    {
+      "id": "glo-lazy-loading",
+      "termino": "Lazy loading",
+      "en": "lazy loading",
+      "pron": "léisi lóudin",
+      "definicion": "Cargar un recurso, como una imagen o un componente, solo cuando se va a necesitar y no al inicio.",
+      "ejemplo": "<img src=\"foto.jpg\" loading=\"lazy\" alt=\"Foto\" />",
+      "entrevista": "En React lo combino con React.lazy y Suspense para que una ruta pesada no se descargue hasta que la visiten.",
+      "unidad": null
+    },
+    {
+      "id": "glo-xss",
+      "termino": "XSS",
+      "en": "cross-site scripting",
+      "pron": "eks es es (cros sáit scríptin)",
+      "definicion": "Un ataque en el que alguien logra que tu página ejecute un script suyo, normalmente al insertar texto del usuario como HTML.",
+      "ejemplo": "div.innerHTML = comentario; // peligroso, mejor div.textContent = comentario",
+      "entrevista": "React escapa el texto por defecto; el riesgo aparece con dangerouslySetInnerHTML o innerHTML sin sanitizar.",
+      "unidad": "dom-y-eventos"
+    },
+    {
+      "id": "glo-core-web-vitals",
+      "termino": "Core Web Vitals",
+      "en": "core web vitals",
+      "pron": "cor ueb váitals",
+      "definicion": "Las métricas de Google que miden la experiencia real de carga, respuesta y estabilidad visual: LCP, INP y CLS.",
+      "ejemplo": "// CLS sube si una imagen sin width y height empuja el texto al cargar",
+      "entrevista": "Las mido con Lighthouse en las DevTools y suelo mejorar LCP optimizando imágenes y CLS reservando el espacio de los elementos.",
+      "unidad": null
+    },
+    {
+      "id": "glo-pwa",
+      "termino": "PWA",
+      "en": "progressive web app",
+      "pron": "pi dábliu éi (progrésiv ueb ap)",
+      "definicion": "Una web que se puede instalar como app y funcionar sin conexión gracias a un manifest y un service worker que guarda archivos en caché.",
+      "ejemplo": "navigator.serviceWorker.register('/sw.js');",
+      "entrevista": "El service worker actúa como intermediario entre la app y la red, por eso puede responder desde la caché sin internet.",
+      "unidad": null
+    }
+  ]
+}

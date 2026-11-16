@@ -28,6 +28,10 @@ import { SeccionWeb } from "./SeccionWeb.jsx";
 import { VincularMovil } from "./VincularMovil.jsx";
 import { LeccionMovil } from "./leccion/LeccionMovil.jsx";
 import { CaminoMovil } from "./leccion/CaminoMovil.jsx";
+import { InglesMovil } from "./ingles/InglesMovil.jsx";
+import { InglesUnidad } from "./ingles/InglesUnidad.jsx";
+import { CasoRevision, ListaRevision } from "./practica/Revision.jsx";
+import { Glosario } from "./practica/Glosario.jsx";
 import { Inicio } from "../pages/Inicio.jsx";
 import { Progreso } from "../pages/Progreso.jsx";
 import { Ajustes } from "../pages/Ajustes.jsx";
@@ -50,6 +54,11 @@ export function App() {
   const soloWeb = (
     <>
       <Route path="chuletas" element={<ChuletasMovil />} />
+      <Route path="ingles" element={<InglesMovil />} />
+      <Route path="ingles/unidad/:id" element={<InglesUnidad />} />
+      <Route path="revision" element={<ListaRevision />} />
+      <Route path="revision/:id" element={<CasoRevision />} />
+      <Route path="glosario" element={<Glosario />} />
       <Route path="camino" element={<CaminoMovil />} />
       <Route path="leccion" element={<LeccionMovil />} />
       <Route path="vincular" element={<VincularMovil />} />
@@ -90,6 +99,11 @@ export function App() {
           <Route path="progreso" element={grande ? <Progreso /> : <Navigate to="/" replace />} />
           <Route path="ajustes" element={grande ? <Ajustes seccionExtra={<SeccionWeb />} /> : <AjustesMovil />} />
           <Route path="chuletas" element={<ChuletasMovil />} />
+          <Route path="ingles" element={<InglesMovil />} />
+          <Route path="ingles/unidad/:id" element={<InglesUnidad />} />
+      <Route path="revision" element={<ListaRevision />} />
+      <Route path="revision/:id" element={<CasoRevision />} />
+      <Route path="glosario" element={<Glosario />} />
           <Route path="camino" element={<CaminoMovil />} />
           <Route path="leccion" element={<LeccionMovil />} />
           <Route path="mas" element={grande ? <Navigate to="/" replace /> : <MasMovil />} />

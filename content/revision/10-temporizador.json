@@ -1,0 +1,39 @@
+{
+  "id": "rev-010",
+  "titulo": "Temporizador de cuenta regresiva",
+  "unidad": "this",
+  "nivel": 2,
+  "contexto": "Una clase para la cuenta regresiva de un examen en línea. Se crea con los segundos disponibles y el elemento donde se muestra el tiempo.",
+  "lenguaje": "js",
+  "codigo": "export class Temporizador {\n  constructor(segundos, elemento) {\n    this.segundos = segundos;\n    this.elemento = elemento;\n    this.intervalo = null;\n  }\n\n  iniciar() {\n    this.intervalo = setInterval(function () {\n      this.segundos--;\n      this.pintar();\n      if (this.segundos === 0) {\n        clearInterval(this.intervalo);\n      }\n    }, 1000);\n  }\n\n  pausar() {\n    clearInterval(this.intervalo);\n  }\n\n  pintar() {\n    const min = Math.floor(this.segundos / 60);\n    const seg = this.segundos % 60;\n    this.elemento.textContent = `${min}:${seg}`;\n  }\n}",
+  "hallazgos": [
+    {
+      "linea": 8,
+      "tipo": "caso-borde",
+      "titulo": "Iniciar dos veces crea dos intervalos",
+      "detalle": "Si el usuario pulsa Iniciar dos veces, se crean dos intervalos, el tiempo baja al doble de velocidad y this.intervalo solo guarda el último, así que pausar ya no puede detener el primero. Evita iniciar si ya está corriendo.",
+      "arreglo": "iniciar() {\n  if (this.intervalo) return;"
+    },
+    {
+      "linea": 9,
+      "tipo": "error",
+      "titulo": "function pierde el this",
+      "detalle": "setInterval llama a la función normal sin objeto, así que dentro this no es el temporizador (en el navegador es window). this.segundos queda en NaN y this.pintar() lanza TypeError: this.pintar is not a function en el primer segundo. Una arrow function toma el this de iniciar.",
+      "arreglo": "this.intervalo = setInterval(() => {"
+    },
+    {
+      "linea": 12,
+      "tipo": "caso-borde",
+      "titulo": "Nunca se detiene si empieza en 0",
+      "detalle": "Si se crea con 0 segundos (o con un valor no entero), segundos pasa a -1 y nunca vuelve a ser exactamente 0: el intervalo sigue para siempre y muestra tiempos negativos. Usa <= 0 y deja intervalo en null al terminar.",
+      "arreglo": "if (this.segundos <= 0) {\n  clearInterval(this.intervalo);\n  this.intervalo = null;"
+    },
+    {
+      "linea": 25,
+      "tipo": "error",
+      "titulo": "Los segundos no tienen dos dígitos",
+      "detalle": "Con 65 segundos muestra '1:5' en vez de '1:05', lo que se lee como un minuto y medio. Rellena con un cero a la izquierda.",
+      "arreglo": "this.elemento.textContent = `${min}:${String(seg).padStart(2, '0')}`;"
+    }
+  ]
+}

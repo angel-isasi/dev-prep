@@ -1,0 +1,122 @@
+[
+  {
+    "id": "pred-051",
+    "unidad": "react-estado-y-eventos",
+    "nivel": 2,
+    "pregunta": "El botón empieza mostrando 0. Después de un clic, ¿qué número muestra?",
+    "lenguaje": "jsx",
+    "codigo": "function Contador() {\n  const [n, setN] = useState(0);\n  const sumarTres = () => {\n    setN(n + 1);\n    setN(n + 1);\n    setN(n + 1);\n  };\n  return <button onClick={sumarTres}>{n}</button>;\n}",
+    "opciones": ["3", "1", "0", "2"],
+    "correcta": 1,
+    "explicacion": "Dentro de un render, n es una constante: en el render en que hiciste clic vale 0, y setN no la cambia en el momento, solo pide un render nuevo. Las tres líneas hacen setN(0 + 1), es decir, piden lo mismo tres veces. React las agrupa y el siguiente render tiene n = 1. La trampa es esperar 3, como si cada setN actualizara n al instante. Si quieres sumar tres de verdad, usa la forma con función: setN((prev) => prev + 1), que recibe siempre el valor más reciente.",
+    "verificar": false
+  },
+  {
+    "id": "pred-052",
+    "unidad": "react-estado-y-eventos",
+    "nivel": 3,
+    "pregunta": "El botón empieza mostrando 0. Después de un clic, ¿qué número muestra?",
+    "lenguaje": "jsx",
+    "codigo": "function Contador() {\n  const [n, setN] = useState(0);\n  const manejar = () => {\n    setN(n + 5);\n    setN((prev) => prev + 1);\n  };\n  return <button onClick={manejar}>{n}</button>;\n}",
+    "opciones": ["1", "5", "6", "0"],
+    "correcta": 2,
+    "explicacion": "React guarda las actualizaciones en una cola y las aplica en orden en el siguiente render. La primera, setN(n + 5), es un valor fijo: con n = 0 deja el estado en 5. La segunda es una función, y React le pasa el resultado de lo anterior en la cola: 5 + 1 = 6. La trampa más tentadora es 1, pensando que la función parte del n original 0. La función siempre recibe el valor más reciente de la cola, no el del render actual.",
+    "verificar": false
+  },
+  {
+    "id": "pred-053",
+    "unidad": "react-estado-y-eventos",
+    "nivel": 2,
+    "pregunta": "Haces clic una vez. ¿Qué imprime la consola y qué muestra el botón después?",
+    "lenguaje": "jsx",
+    "codigo": "function Saludo() {\n  const [nombre, setNombre] = useState(\"Ana\");\n  const cambiar = () => {\n    setNombre(\"Luis\");\n    console.log(nombre);\n  };\n  return <button onClick={cambiar}>{nombre}</button>;\n}",
+    "opciones": ["La consola imprime Luis y el botón muestra Luis", "La consola imprime Ana y el botón muestra Ana", "La consola imprime undefined y el botón muestra Luis", "La consola imprime Ana y el botón muestra Luis"],
+    "correcta": 3,
+    "explicacion": "setNombre no cambia la variable nombre en el render actual: agenda un render nuevo con el valor \"Luis\". La función cambiar pertenece al render donde nombre vale \"Ana\", así que el console.log imprime \"Ana\". Después React vuelve a renderizar y el botón muestra \"Luis\". La trampa es pensar que el estado se actualiza al instante. Si necesitas el valor nuevo justo después, guárdalo en una variable (const nuevo = \"Luis\") y úsalo directamente, o reacciona al cambio en un useEffect.",
+    "verificar": false
+  },
+  {
+    "id": "pred-054",
+    "unidad": "react-efectos-y-datos",
+    "nivel": 2,
+    "pregunta": "Sin StrictMode, ¿qué se imprime en la consola cuando el componente se monta?",
+    "lenguaje": "jsx",
+    "codigo": "function App() {\n  const [cuenta, setCuenta] = useState(0);\n  console.log(\"render\", cuenta);\n  useEffect(() => {\n    setCuenta(1);\n  }, []);\n  return <p>{cuenta}</p>;\n}",
+    "opciones": ["render 0", "render 0, luego render 1", "render 1", "render 0, render 1, render 1... sin parar"],
+    "correcta": 1,
+    "explicacion": "El primer render imprime \"render 0\" y pinta la pantalla. Después React ejecuta el efecto, que cambia el estado a 1 y provoca un segundo render: \"render 1\". Como el arreglo de dependencias está vacío, el efecto no vuelve a ejecutarse, así que no hay bucle. La trampa es pensar que el efecto corre antes del primer render (y responder solo \"render 1\"): los efectos siempre corren después de pintar. Con StrictMode en desarrollo verías logs duplicados, porque React monta dos veces a propósito para detectar efectos sin limpieza.",
+    "verificar": false
+  },
+  {
+    "id": "pred-055",
+    "unidad": "react-efectos-y-datos",
+    "nivel": 3,
+    "pregunta": "¿Qué número muestra el párrafo después de 5 segundos?",
+    "lenguaje": "jsx",
+    "codigo": "function Reloj() {\n  const [seg, setSeg] = useState(0);\n  useEffect(() => {\n    const id = setInterval(() => {\n      setSeg(seg + 1);\n    }, 1000);\n    return () => clearInterval(id);\n  }, []);\n  return <p>{seg}</p>;\n}",
+    "opciones": ["5", "0", "10", "1"],
+    "correcta": 3,
+    "explicacion": "El efecto corre una sola vez (dependencias []), así que el callback del intervalo es un closure del primer render, donde seg vale 0. Cada segundo ejecuta setSeg(0 + 1): el primer tic pasa de 0 a 1 y los siguientes vuelven a pedir 1, que no cambia nada. Se queda en 1. Es el clásico \"closure viejo\" (stale closure). La trampa es esperar 5. Se arregla con setSeg((s) => s + 1), que no depende del seg capturado, o agregando seg a las dependencias (aunque eso recrea el intervalo en cada cambio).",
+    "verificar": false
+  },
+  {
+    "id": "pred-056",
+    "unidad": "react-efectos-y-datos",
+    "nivel": 2,
+    "pregunta": "¿Cuántas peticiones a /api/perfil hace este componente?",
+    "lenguaje": "jsx",
+    "codigo": "function Perfil() {\n  const [datos, setDatos] = useState(null);\n  useEffect(() => {\n    fetch(\"/api/perfil\")\n      .then((r) => r.json())\n      .then((d) => setDatos(d));\n  });\n  return <p>{datos?.nombre}</p>;\n}",
+    "opciones": ["Una sola, al montar", "Dos, una por cada render", "Peticiones sin parar", "Ninguna hasta que el usuario haga algo"],
+    "correcta": 2,
+    "explicacion": "Sin arreglo de dependencias, el efecto corre después de cada render. La primera petición llega y setDatos recibe un objeto nuevo (r.json() siempre crea uno nuevo, aunque los datos sean iguales). Como es otra referencia, React vuelve a renderizar, el efecto corre otra vez, hace otra petición, y así sin fin. La trampa es pensar que el efecto corre solo al montar: eso pasa únicamente si le pasas []. Si dependiera de un id, irían [id].",
+    "verificar": false
+  },
+  {
+    "id": "pred-057",
+    "unidad": "react-estado-y-eventos",
+    "nivel": 3,
+    "pregunta": "Con React 18 (createRoot) y sin StrictMode, después de un clic, ¿cuántas veces más se imprime \"render\"?",
+    "lenguaje": "jsx",
+    "codigo": "function Panel() {\n  const [a, setA] = useState(0);\n  const [b, setB] = useState(0);\n  console.log(\"render\");\n  const click = () => {\n    setTimeout(() => {\n      setA(1);\n      setB(1);\n    }, 0);\n  };\n  return <button onClick={click}>{a + b}</button>;\n}",
+    "opciones": ["Dos veces, una por cada setState", "Una vez", "Ninguna", "Tres veces"],
+    "correcta": 1,
+    "explicacion": "Desde React 18 existe el batching automático: todas las actualizaciones de estado que ocurren en el mismo momento se agrupan en un solo render, estén en un evento, un setTimeout, una promesa o un fetch. setA y setB se juntan y hay un único render, que muestra 2. La trampa es responder dos veces: eso pasaba en React 17, donde el agrupamiento solo funcionaba dentro de los manejadores de eventos de React y no dentro de un setTimeout.",
+    "verificar": false
+  },
+  {
+    "id": "pred-058",
+    "unidad": "react-listas-y-condicionales",
+    "nivel": 3,
+    "pregunta": "Escribes \"hola\" en el input que está junto a Ana y luego haces clic en Agregar. ¿Junto a qué nombre queda escrito \"hola\"?",
+    "lenguaje": "jsx",
+    "codigo": "function Lista() {\n  const [items, setItems] = useState([\"Ana\", \"Luis\"]);\n  const agregar = () => setItems([\"Zoe\", ...items]);\n  return (\n    <>\n      <button onClick={agregar}>Agregar</button>\n      {items.map((nombre, i) => (\n        <label key={i}>\n          {nombre} <input />\n        </label>\n      ))}\n    </>\n  );\n}",
+    "opciones": ["Junto a Ana", "Junto a Luis", "Junto a Zoe", "Se borra de todos los inputs"],
+    "correcta": 2,
+    "explicacion": "React usa la key para saber qué elemento es cuál entre un render y otro. Con el índice como key, la primera fila siempre tiene key 0. Antes era Ana y ahora es Zoe, pero React cree que es la misma fila: conserva su input (que es estado del DOM, con \"hola\" dentro) y solo cambia el texto del nombre. Así \"hola\" queda junto a Zoe, y Ana aparece en la fila de key 1 con un input vacío. La trampa es esperar que el texto siga a Ana. Con key={nombre} (o un id único) cada input viaja con su fila.",
+    "verificar": false
+  },
+  {
+    "id": "pred-059",
+    "unidad": "react-listas-y-condicionales",
+    "nivel": 2,
+    "pregunta": "Se renderiza <Carrito items={[]} />. ¿Qué aparece dentro del div?",
+    "lenguaje": "jsx",
+    "codigo": "function Carrito({ items }) {\n  return (\n    <div>\n      {items.length && <p>Tienes {items.length} productos</p>}\n    </div>\n  );\n}",
+    "opciones": ["Nada, el div queda vacío", "El texto false", "Tienes 0 productos", "El número 0"],
+    "correcta": 3,
+    "explicacion": "&& devuelve el primer valor falsy que encuentra, o el último si todos son truthy. items.length es 0, que es falsy, así que la expresión entera vale 0 (no false). React no pinta false, null ni undefined, pero sí pinta los números, así que en pantalla aparece un 0 suelto. La trampa es pensar que el div queda vacío, como pasaría con false. Se arregla convirtiendo a booleano: items.length > 0 && ..., o usando un ternario.",
+    "verificar": false
+  },
+  {
+    "id": "pred-060",
+    "unidad": "react-hooks-avanzados",
+    "nivel": 2,
+    "pregunta": "Haces clic 3 veces en el botón. ¿Qué texto muestra?",
+    "lenguaje": "jsx",
+    "codigo": "function Clics() {\n  const clics = useRef(0);\n  return (\n    <button onClick={() => { clics.current++; }}>\n      Clics: {clics.current}\n    </button>\n  );\n}",
+    "opciones": ["Clics: 3", "Clics: 0", "Clics: 1", "Un error, porque current no se puede modificar"],
+    "correcta": 1,
+    "explicacion": "Un ref guarda un valor que persiste entre renders, pero cambiar ref.current no provoca un render nuevo. Por dentro clics.current sí llega a 3, pero como nada pide volver a renderizar, la pantalla sigue con lo que pintó el primer render: \"Clics: 0\". La trampa es tratar al ref como un estado. Usa useState para lo que se ve en pantalla y useRef para lo que necesitas recordar sin redibujar, como el id de un intervalo o un elemento del DOM.",
+    "verificar": false
+  }
+]

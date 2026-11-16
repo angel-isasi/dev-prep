@@ -164,10 +164,14 @@ export function crearProgresoMovil(almacenamiento, reloj = {}) {
       guardar();
       return datos.items[clave];
     },
-    /** Lección terminada: suma XP y cuenta para la racha del día. */
-    completarLeccion(xp) {
+    /**
+     * Lección terminada: suma XP y la cuenta en el día. Las de programación cuentan para la meta
+     * ("lecciones"); las de inglés tienen su propio contador ("ingles") y suman sus segundos.
+     */
+    completarLeccion(xp, { campo = "lecciones", segundos = 0 } = {}) {
       datos.lecciones = { xp: (datos.lecciones?.xp ?? 0) + xp, completadas: (datos.lecciones?.completadas ?? 0) + 1, ultima: hoy() };
-      datos.dias = sumarAlDia(datos.dias, hoy(), "lecciones");
+      datos.dias = sumarAlDia(datos.dias, hoy(), campo);
+      if (segundos > 0) datos.dias = sumarAlDia(datos.dias, hoy(), `${campo}Segundos`, Math.round(Math.min(segundos, 3600)));
       datos.leccionEnCurso = null;
       guardar();
       return datos.lecciones;

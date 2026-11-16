@@ -1,0 +1,46 @@
+{
+  "id": "rev-004",
+  "titulo": "Cliente de la API de usuarios",
+  "unidad": "promesas-y-async",
+  "nivel": 2,
+  "contexto": "Es el módulo que centraliza las llamadas a la API de usuarios. Lo importan varias pantallas del panel de administración.",
+  "lenguaje": "js",
+  "codigo": "const API_URL = 'https://api.ejemplo.com';\n\nexport async function obtenerUsuarios() {\n  try {\n    const res = await fetch(API_URL + '/users');\n    const data = res.json();\n    return data.filter((u) => u.activo);\n  } catch (error) {\n    console.log(error);\n  }\n}\n\nexport async function obtenerDetalles(ids) {\n  const detalles = [];\n  for (const id of ids) {\n    const res = await fetch(`${API_URL}/users/${id}`);\n    detalles.push(await res.json());\n  }\n  return detalles;\n}\n\nexport async function guardarUsuario(usuario) {\n  const res = await fetch(API_URL + '/users', {\n    method: 'POST',\n    body: JSON.stringify(usuario),\n  });\n  return res.json();\n}",
+  "hallazgos": [
+    {
+      "linea": 5,
+      "tipo": "caso-borde",
+      "titulo": "No revisa res.ok",
+      "detalle": "fetch solo rechaza la promesa por errores de red. Con un 401 o un 500 el código sigue como si todo estuviera bien e intenta leer el cuerpo del error como si fueran usuarios.",
+      "arreglo": "if (!res.ok) throw new Error(`Error ${res.status} al cargar usuarios`);"
+    },
+    {
+      "linea": 6,
+      "tipo": "error",
+      "titulo": "Falta await en res.json()",
+      "detalle": "res.json() devuelve una promesa. Sin await, data es una Promise y data.filter lanza TypeError: data.filter is not a function. La función nunca devuelve usuarios.",
+      "arreglo": "const data = await res.json();"
+    },
+    {
+      "linea": 9,
+      "tipo": "error",
+      "titulo": "Se traga el error",
+      "detalle": "El catch solo imprime y la función devuelve undefined. Quien la llama no se entera del fallo y probablemente rompa más adelante con un undefined.map. Si no vas a recuperarte del error aquí, vuelve a lanzarlo para que la pantalla muestre un mensaje.",
+      "arreglo": "console.error(error);\nthrow error;"
+    },
+    {
+      "linea": 16,
+      "tipo": "rendimiento",
+      "titulo": "Peticiones en fila en vez de en paralelo",
+      "detalle": "El await dentro del for espera a que termine cada petición antes de lanzar la siguiente. Con 20 ids y 200 ms por petición son 4 segundos. Son independientes, así que pueden ir todas a la vez.",
+      "arreglo": "const respuestas = await Promise.all(ids.map((id) => fetch(`${API_URL}/users/${id}`)));\nreturn Promise.all(respuestas.map((r) => r.json()));"
+    },
+    {
+      "linea": 24,
+      "tipo": "error",
+      "titulo": "Falta el header Content-Type",
+      "detalle": "Sin 'Content-Type: application/json' el servidor recibe el cuerpo como texto plano y un backend con express.json() deja req.body vacío: el usuario se guarda sin datos o la API responde 400.",
+      "arreglo": "method: 'POST',\nheaders: { 'Content-Type': 'application/json' },"
+    }
+  ]
+}

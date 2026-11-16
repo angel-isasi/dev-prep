@@ -1,0 +1,225 @@
+{
+  "categoria": "React",
+  "terminos": [
+    {
+      "id": "glo-componente",
+      "termino": "Componente",
+      "en": "component",
+      "pron": "compóunent",
+      "definicion": "Una función que recibe datos (props) y devuelve la parte de la interfaz que debe verse en pantalla.",
+      "ejemplo": "function Saludo({ name }) { return <h1>Hola, {name}</h1>; }",
+      "entrevista": "Intento que cada componente haga una sola cosa, y si crece mucho lo divido en componentes más pequeños.",
+      "unidad": "react-jsx-y-componentes"
+    },
+    {
+      "id": "glo-jsx",
+      "termino": "JSX",
+      "en": "JSX",
+      "pron": "yéi es éks",
+      "definicion": "Una sintaxis parecida a HTML dentro de JavaScript que el compilador convierte en llamadas que crean elementos de React.",
+      "ejemplo": "const el = <button className=\"btn\" onClick={guardar}>Guardar</button>;",
+      "entrevista": "Por ser JavaScript se escribe className en vez de class, y dentro de llaves solo van expresiones, no if ni for.",
+      "unidad": "react-jsx-y-componentes"
+    },
+    {
+      "id": "glo-props",
+      "termino": "Props",
+      "en": "props",
+      "pron": "props",
+      "definicion": "Los datos que un componente padre le pasa a un componente hijo, y que el hijo solo puede leer, no modificar.",
+      "ejemplo": "<Tarjeta titulo=\"Perfil\" onCerrar={cerrar} />",
+      "entrevista": "Los datos bajan por props y los cambios suben con funciones callback que el padre le pasa al hijo.",
+      "unidad": "react-props-y-children"
+    },
+    {
+      "id": "glo-estado",
+      "termino": "Estado",
+      "en": "state",
+      "pron": "stéit",
+      "definicion": "Los datos propios de un componente que pueden cambiar con el tiempo y que, al cambiar, hacen que React vuelva a dibujarlo.",
+      "ejemplo": "const [abierto, setAbierto] = useState(false);",
+      "entrevista": "Guardo en el estado solo lo mínimo y calculo lo demás durante el render, para no tener datos duplicados que se desincronicen.",
+      "unidad": "react-estado-y-eventos"
+    },
+    {
+      "id": "glo-hook",
+      "termino": "Hook",
+      "en": "hook",
+      "pron": "juk",
+      "definicion": "Una función especial de React, cuyo nombre empieza con use, que permite a un componente de función usar estado, efectos y otras capacidades.",
+      "ejemplo": "const [count, setCount] = useState(0);",
+      "entrevista": "Sus reglas: llamarlos siempre en el nivel superior del componente, nunca dentro de un if o un bucle, porque React los identifica por su orden.",
+      "unidad": "react-estado-y-eventos"
+    },
+    {
+      "id": "glo-usestate",
+      "termino": "useState",
+      "en": "use state",
+      "pron": "iús stéit",
+      "definicion": "El hook que crea una variable de estado y devuelve su valor actual y la función para cambiarla.",
+      "ejemplo": "setCount(prev => prev + 1);",
+      "entrevista": "Cuando el nuevo valor depende del anterior uso la forma con función, porque las actualizaciones se agrupan y el valor de la variable puede estar viejo.",
+      "unidad": "react-estado-y-eventos"
+    },
+    {
+      "id": "glo-useeffect",
+      "termino": "useEffect",
+      "en": "use effect",
+      "pron": "iús ifékt",
+      "definicion": "El hook para ejecutar efectos secundarios, como pedir datos o suscribirse a eventos, después de que el componente se pinta.",
+      "ejemplo": "useEffect(() => { document.title = titulo; }, [titulo]);",
+      "entrevista": "Si un valor se puede calcular a partir de props o estado, no necesito un efecto: lo calculo en el render.",
+      "unidad": "react-efectos-y-datos"
+    },
+    {
+      "id": "glo-arreglo-dependencias",
+      "termino": "Arreglo de dependencias",
+      "en": "dependency array",
+      "pron": "dipéndensi arréi",
+      "definicion": "La lista de valores que se pasa a useEffect, useMemo o useCallback para que se vuelvan a ejecutar solo cuando alguno de esos valores cambia.",
+      "ejemplo": "useEffect(() => { cargar(userId); }, [userId]);",
+      "entrevista": "Sin arreglo corre en cada render, con [] solo al montar, y si olvido una dependencia el efecto trabaja con valores viejos.",
+      "unidad": "react-efectos-y-datos"
+    },
+    {
+      "id": "glo-funcion-limpieza",
+      "termino": "Función de limpieza",
+      "en": "cleanup function",
+      "pron": "clínap fánkshon",
+      "definicion": "La función que devuelve un useEffect y que React ejecuta antes de repetir el efecto o cuando el componente se desmonta.",
+      "ejemplo": "useEffect(() => { const id = setInterval(tick, 1000); return () => clearInterval(id); }, []);",
+      "entrevista": "Sirve para quitar listeners, timers y suscripciones; sin ella aparecen fugas de memoria y eventos duplicados.",
+      "unidad": "react-efectos-y-datos"
+    },
+    {
+      "id": "glo-virtual-dom",
+      "termino": "Virtual DOM",
+      "en": "virtual DOM",
+      "pron": "vírchual dom",
+      "definicion": "Una representación en memoria de la interfaz que React usa para calcular qué cambió antes de tocar el DOM real.",
+      "ejemplo": "// React compara el árbol anterior con el nuevo y solo actualiza el texto que cambió",
+      "entrevista": "La ventaja no es que sea mágico, sino que React agrupa y minimiza las escrituras al DOM, que son lo costoso.",
+      "unidad": "react-jsx-y-componentes"
+    },
+    {
+      "id": "glo-reconciliacion",
+      "termino": "Reconciliación",
+      "en": "reconciliation",
+      "pron": "recónsiliéishon",
+      "definicion": "El proceso con el que React compara el árbol de elementos nuevo con el anterior para decidir qué partes del DOM actualizar.",
+      "ejemplo": "// si cambia el tipo de elemento (div por section), React desmonta y vuelve a montar todo ese subárbol",
+      "entrevista": "En las listas React se apoya en las key para saber qué elemento es cuál entre un render y otro.",
+      "unidad": "react-listas-y-condicionales"
+    },
+    {
+      "id": "glo-key",
+      "termino": "Key",
+      "en": "key",
+      "pron": "ki",
+      "definicion": "Un identificador único y estable que se le da a cada elemento de una lista para que React sepa cuál es cuál entre renders.",
+      "ejemplo": "{users.map(u => <li key={u.id}>{u.name}</li>)}",
+      "entrevista": "No uso el índice como key si la lista se reordena, filtra o recibe elementos nuevos, porque se mezclan los estados de los elementos.",
+      "unidad": "react-listas-y-condicionales"
+    },
+    {
+      "id": "glo-props-drilling",
+      "termino": "Props drilling",
+      "en": "prop drilling",
+      "pron": "prop drílin",
+      "definicion": "Pasar una prop por varios componentes intermedios que no la usan, solo para que llegue a uno que está más abajo.",
+      "ejemplo": "<App user={user}> → <Layout user={user}> → <Header user={user}> → <Avatar user={user}>",
+      "entrevista": "Lo resuelvo con Context, con composición pasando children, o con una librería de estado si la app es grande.",
+      "unidad": "react-props-y-children"
+    },
+    {
+      "id": "glo-context",
+      "termino": "Context",
+      "en": "context",
+      "pron": "cóntekst",
+      "definicion": "Un mecanismo de React para compartir un valor con todos los componentes de un árbol sin pasarlo por props en cada nivel.",
+      "ejemplo": "const tema = useContext(TemaContext);",
+      "entrevista": "Lo uso para datos globales que cambian poco, como el tema o el usuario; cada cambio vuelve a renderizar a todos los que lo consumen.",
+      "unidad": "react-hooks-avanzados"
+    },
+    {
+      "id": "glo-lifting-state-up",
+      "termino": "Lifting state up",
+      "en": "lifting state up",
+      "pron": "líftin stéit ap",
+      "definicion": "Mover un estado al componente padre común más cercano cuando dos componentes hermanos necesitan compartirlo.",
+      "ejemplo": "// el padre guarda filtro y se lo pasa al buscador y a la lista",
+      "entrevista": "Es lo primero que intento antes de pensar en Context o en una librería de estado.",
+      "unidad": "react-estado-y-eventos"
+    },
+    {
+      "id": "glo-componente-controlado",
+      "termino": "Componente controlado",
+      "en": "controlled component",
+      "pron": "contróuld compóunent",
+      "definicion": "Un campo de formulario cuyo valor vive en el estado de React y se actualiza con onChange.",
+      "ejemplo": "<input value={email} onChange={e => setEmail(e.target.value)} />",
+      "entrevista": "Así puedo validar en vivo y limpiar el formulario; en uno no controlado leo el valor con una ref al enviar.",
+      "unidad": "react-formularios"
+    },
+    {
+      "id": "glo-react-memo",
+      "termino": "React.memo",
+      "en": "React memo",
+      "pron": "riáct mémo",
+      "definicion": "Una función que envuelve un componente para que no se vuelva a renderizar si sus props no cambiaron.",
+      "ejemplo": "const Fila = React.memo(function Fila({ item }) { return <li>{item.name}</li>; });",
+      "entrevista": "Solo funciona si las props son estables: si le paso un objeto o una función nueva en cada render, no sirve de nada.",
+      "unidad": "react-hooks-avanzados"
+    },
+    {
+      "id": "glo-usememo",
+      "termino": "useMemo",
+      "en": "use memo",
+      "pron": "iús mémo",
+      "definicion": "El hook que guarda el resultado de un cálculo y solo lo repite cuando cambian sus dependencias.",
+      "ejemplo": "const visibles = useMemo(() => items.filter(i => i.activo), [items]);",
+      "entrevista": "No lo pongo en todo: lo uso para cálculos costosos o para mantener la misma referencia de un objeto que va a un componente memorizado.",
+      "unidad": "react-hooks-avanzados"
+    },
+    {
+      "id": "glo-usecallback",
+      "termino": "useCallback",
+      "en": "use callback",
+      "pron": "iús cólbak",
+      "definicion": "El hook que guarda una función para que mantenga la misma referencia entre renders mientras no cambien sus dependencias.",
+      "ejemplo": "const onBorrar = useCallback(id => borrar(id), [borrar]);",
+      "entrevista": "Es útil cuando paso la función a un hijo con React.memo o cuando es dependencia de un useEffect.",
+      "unidad": "react-hooks-avanzados"
+    },
+    {
+      "id": "glo-useref",
+      "termino": "useRef",
+      "en": "use ref",
+      "pron": "iús ref",
+      "definicion": "El hook que guarda un valor que sobrevive entre renders sin provocar un nuevo render al cambiar, y que también sirve para apuntar a un elemento del DOM.",
+      "ejemplo": "const inputRef = useRef(null); inputRef.current.focus();",
+      "entrevista": "Lo uso para enfocar un input o guardar el id de un timer; si el valor debe verse en pantalla, va en el estado.",
+      "unidad": "react-hooks-avanzados"
+    },
+    {
+      "id": "glo-custom-hook",
+      "termino": "Custom hook",
+      "en": "custom hook",
+      "pron": "cástom juk",
+      "definicion": "Una función propia cuyo nombre empieza con use y que agrupa lógica con hooks para reutilizarla en varios componentes.",
+      "ejemplo": "function useFetch(url) { const [data, setData] = useState(null); /* ... */ return data; }",
+      "entrevista": "Comparte la lógica, no el estado: cada componente que lo usa tiene su propia copia.",
+      "unidad": "react-hooks-propios-y-patrones"
+    },
+    {
+      "id": "glo-re-render",
+      "termino": "Re-render",
+      "en": "re-render",
+      "pron": "ri rénder",
+      "definicion": "Cuando React vuelve a ejecutar un componente para calcular su nueva interfaz, porque cambió su estado, sus props o un contexto que usa.",
+      "ejemplo": "// cuando el padre se renderiza, sus hijos también, aunque sus props no hayan cambiado",
+      "entrevista": "Renderizar no siempre significa tocar el DOM; React solo aplica las diferencias, así que primero mido antes de optimizar.",
+      "unidad": "react-estado-y-eventos"
+    }
+  ]
+}

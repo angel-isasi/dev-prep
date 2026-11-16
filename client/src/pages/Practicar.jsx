@@ -12,6 +12,15 @@ import { MagicCard } from "../components/ui/magic-card.jsx";
 import { ShineBorder } from "../components/ui/shine-border.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import estilos from "./Practicar.module.css";
+import practica from "../movil/practica/Practica.module.css";
+
+/** "Aprender mejor" (solo en la versión web): sesiones cortas que no son ejercicios de VS Code. */
+const HERRAMIENTAS = [
+  { a: "/leccion?modo=predice", titulo: "Lee y predice", texto: "¿Qué imprime este código? 10 trampas clásicas de entrevista" },
+  { a: "/revision", titulo: "Revisión de código", texto: "Marca los problemas en el código de un compañero" },
+  { a: "/glosario", titulo: "Glosario", texto: "120 términos con una frase lista para decir" },
+  { a: "/practicar/lista?coleccion=javascript%2Fdepurar", titulo: "Depurar código roto", texto: "Encuentra el error a partir del síntoma" },
+];
 
 const NIVELES = [
   { n: 1, nombre: "básicos" },
@@ -88,6 +97,17 @@ export function Practicar() {
               Repasar: {repasos[0].titulo} →
             </button>
           </div>
+        </div>
+      )}
+
+      {ES_MOVIL && (
+        <div className={practica.herramientas}>
+          {HERRAMIENTAS.map((h) => (
+            <Link key={h.a} to={h.a} className={practica.herramienta}>
+              <strong>{h.titulo} →</strong>
+              <small>{h.texto}</small>
+            </Link>
+          ))}
         </div>
       )}
 

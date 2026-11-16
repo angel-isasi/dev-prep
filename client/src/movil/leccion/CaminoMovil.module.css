@@ -146,3 +146,7 @@
     padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
   }
 }
+
+.incrustado {
+  padding: 0;
+}

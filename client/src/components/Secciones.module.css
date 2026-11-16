@@ -85,3 +85,13 @@
   border-color: color-mix(in srgb, var(--acento) 35%, transparent);
   background: var(--acento-suave);
 }
+
+.reloj {
+  font-family: var(--fuente-titulos);
+  font-size: 28px;
+  font-variant-numeric: tabular-nums;
+}
+
+.reloj[data-poco="true"] {
+  color: var(--error);
+}

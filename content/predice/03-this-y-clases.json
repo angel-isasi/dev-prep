@@ -1,0 +1,98 @@
+[
+  {
+    "id": "pred-021",
+    "unidad": "this",
+    "nivel": 1,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "const perro = {\n  nombre: \"Rex\",\n  ladrar() {\n    return this.nombre + \" dice guau\";\n  },\n};\nconsole.log(perro.ladrar());",
+    "opciones": ["TypeError", "undefined dice guau", "Rex dice guau", "perro dice guau"],
+    "correcta": 2,
+    "explicacion": "Cuando llamas a una función como método, con la forma objeto.metodo(), this es el objeto que está antes del punto. Aquí es perro, así que this.nombre vale \"Rex\". La regla práctica: mira lo que está a la izquierda del punto en el momento de la llamada. La trampa es pensar que this apunta a la función o que hay que escribir perro.nombre dentro del método.",
+    "verificar": true
+  },
+  {
+    "id": "pred-022",
+    "unidad": "this",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "class Contador {\n  constructor() {\n    this.valor = 0;\n  }\n  sumar() {\n    this.valor++;\n    return this.valor;\n  }\n}\nconst c = new Contador();\nconsole.log(c.sumar());\nconst sumar = c.sumar;\nconsole.log(sumar());",
+    "opciones": ["1 2", "1 TypeError", "1 NaN", "1 1"],
+    "correcta": 1,
+    "explicacion": "c.sumar() tiene a c antes del punto, así que this es c y da 1. Pero const sumar = c.sumar copia solo la función, sin el objeto. Al llamar sumar() no hay nada antes del punto y, como el código de una clase siempre corre en modo estricto, this es undefined. Leer undefined.valor lanza TypeError. La trampa es esperar 2, creyendo que la función \"recuerda\" a su objeto: this se decide en cada llamada, no al crear el método. Es el mismo problema de pasar un método como callback (onClick={this.metodo}) sin bind.",
+    "verificar": true
+  },
+  {
+    "id": "pred-023",
+    "unidad": "this",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "class Equipo {\n  constructor() {\n    this.nombre = \"Front\";\n    this.miembros = [\"Ana\", \"Luis\"];\n  }\n  listar() {\n    return this.miembros.map((m) => m + \"@\" + this.nombre).join(\",\");\n  }\n}\nconsole.log(new Equipo().listar());",
+    "opciones": ["Ana@Front,Luis@Front", "Ana@undefined,Luis@undefined", "TypeError", "Ana@,Luis@"],
+    "correcta": 0,
+    "explicacion": "Las funciones flecha no tienen su propio this: usan el this del lugar donde fueron escritas. La flecha está dentro de listar, y listar se llamó como método del equipo, así que dentro de la flecha this sigue siendo el equipo y this.nombre vale \"Front\". La trampa es pensar que el callback de map pierde el this: eso pasaría con function (m) { ... }, que tendría this undefined y lanzaría TypeError.",
+    "verificar": true
+  },
+  {
+    "id": "pred-024",
+    "unidad": "this",
+    "nivel": 3,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "class Boton {\n  constructor(texto) {\n    this.texto = texto;\n  }\n  click() {\n    return \"Clic en \" + this.texto;\n  }\n}\nconst b = new Boton(\"Guardar\");\nconst conBind = b.click.bind(b);\nconst otro = { texto: \"Cancelar\", click: conBind };\nconsole.log(otro.click());",
+    "opciones": ["Clic en Cancelar", "Clic en undefined", "Clic en Guardar", "TypeError"],
+    "correcta": 2,
+    "explicacion": "bind crea una función nueva con this fijado para siempre, en este caso a b. Después da igual cómo la llames: aunque esté guardada en otro y la llames como otro.click(), this sigue siendo b y el texto es \"Guardar\". La trampa es aplicar la regla de \"lo que está antes del punto\": esa regla vale para funciones normales, pero una función ya enlazada con bind la ignora (solo new puede saltarse un bind).",
+    "verificar": true
+  },
+  {
+    "id": "pred-025",
+    "unidad": "this",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "function presentar(saludo, signo) {\n  return saludo + \", soy \" + this.nombre + signo;\n}\nconst ana = { nombre: \"Ana\" };\nconsole.log(presentar.call(ana, \"Hola\", \"!\"));\nconsole.log(presentar.apply(ana, [\"Hey\", \"?\"]));",
+    "opciones": ["Hola, soy Ana! Hey, soy Ana?", "Hola, soy undefined! Hey, soy undefined?", "Hola, soy Ana! Hey,?, soy Anaundefined", "TypeError"],
+    "correcta": 0,
+    "explicacion": "call y apply ejecutan la función de inmediato y usan su primer argumento como this, en los dos casos ana. La diferencia está en cómo reciben el resto: call los recibe sueltos (\"Hola\", \"!\") y apply en un arreglo ([\"Hey\", \"?\"]), que reparte entre saludo y signo. La trampa tentadora es pensar que apply pasa el arreglo entero como primer parámetro, lo que daría \"Hey,?, soy Anaundefined\". Una forma de recordarlo: apply empieza con a, como arreglo.",
+    "verificar": true
+  },
+  {
+    "id": "pred-026",
+    "unidad": "objetos",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "class Rectangulo {\n  constructor(ancho, alto) {\n    this.ancho = ancho;\n    this.alto = alto;\n  }\n  get area() {\n    return this.ancho * this.alto;\n  }\n}\nconst r = new Rectangulo(2, 3);\nr.ancho = 10;\nconsole.log(r.area);\nconsole.log(typeof r.area);",
+    "opciones": ["undefined undefined", "6 number", "30 function", "30 number"],
+    "correcta": 3,
+    "explicacion": "Un getter (get area) se usa como una propiedad, sin paréntesis, pero por dentro es una función que se ejecuta cada vez que lo lees. Como se calcula en el momento, usa el ancho actual, 10, y da 10 * 3 = 30. Y typeof r.area mira el valor que devuelve, un número. La trampa es pensar que area se calculó una sola vez en el constructor (6), o que typeof ve la función que hay detrás.",
+    "verificar": true
+  },
+  {
+    "id": "pred-027",
+    "unidad": "this",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "class Animal {\n  constructor(nombre) {\n    this.nombre = nombre;\n  }\n  hablar() {\n    return this.nombre + \" hace un sonido\";\n  }\n}\nclass Gato extends Animal {\n  hablar() {\n    return super.hablar() + \" y maúlla\";\n  }\n}\nconst g = new Gato(\"Michi\");\nconsole.log(g.hablar());\nconsole.log(g instanceof Animal);",
+    "opciones": ["Michi y maúlla true", "Michi hace un sonido y maúlla true", "undefined hace un sonido y maúlla true", "Michi hace un sonido y maúlla false"],
+    "correcta": 1,
+    "explicacion": "Gato no define constructor, así que usa automáticamente el de Animal, que guarda nombre. Gato.hablar reemplaza al método del padre, pero super.hablar() llama a la versión de Animal con el mismo this (el gato), por eso arma \"Michi hace un sonido\" y le suma \" y maúlla\". Un Gato también es un Animal por la herencia, así que instanceof da true. La trampa es pensar que, sin constructor propio, el nombre queda undefined.",
+    "verificar": true
+  },
+  {
+    "id": "pred-028",
+    "unidad": "this",
+    "nivel": 3,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "class Temporizador {\n  segundos = 0;\n  tickFlecha = () => {\n    this.segundos++;\n  };\n  tickNormal() {\n    this.segundos++;\n  }\n}\nconst t = new Temporizador();\nconst { tickFlecha, tickNormal } = t;\ntickFlecha();\ntickFlecha();\nconsole.log(t.segundos);\ntickNormal();\nconsole.log(t.segundos);",
+    "opciones": ["2 3", "2 TypeError", "TypeError", "0 TypeError"],
+    "correcta": 1,
+    "explicacion": "tickFlecha es un campo de clase con una función flecha: se crea al construir el objeto y su this queda fijado a ese objeto, aunque la saques con desestructuración. Por eso las dos llamadas suben segundos a 2. tickNormal es un método común: al extraerlo y llamarlo solo, this es undefined (las clases siempre son estrictas) y this.segundos lanza TypeError. La trampa es esperar 2 3, como si los dos tipos de método se comportaran igual. Por eso en componentes de clase de React se usaba la flecha para los manejadores de eventos.",
+    "verificar": true
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "id": "rev-008",
+  "titulo": "Estadísticas de notas",
+  "unidad": "metodos-de-array",
+  "nivel": 2,
+  "contexto": "Una plataforma educativa muestra a cada profesor un resumen de las notas de su curso, en escala de 0 a 20.",
+  "lenguaje": "js",
+  "codigo": "export function estadisticas(notas) {\n  const ordenadas = notas.sort();\n  const suma = notas.reduce((acc, n) => acc + n, 0);\n  const promedio = suma / notas.length;\n\n  const mitad = Math.floor(ordenadas.length / 2);\n  const mediana = ordenadas.length % 2 === 0\n    ? (ordenadas[mitad - 1] + ordenadas[mitad]) / 2\n    : ordenadas[mitad];\n\n  const aprobados = notas.filter((n) => n >= 11).length;\n  const x = Math.max(...notas);\n\n  return {\n    promedio,\n    mediana,\n    aprobados,\n    maxima: x,\n    minima: ordenadas[0],\n  };\n}",
+  "hallazgos": [
+    {
+      "linea": 2,
+      "tipo": "error",
+      "titulo": "sort sin comparador ordena como texto",
+      "detalle": "Sin comparador, sort convierte los números a string: [5, 10, 20] queda [10, 20, 5]. La mediana y la mínima salen mal. Además, sort modifica el arreglo que te pasaron, y el profesor vería sus notas reordenadas en otra parte de la pantalla.",
+      "arreglo": "const ordenadas = [...notas].sort((a, b) => a - b);"
+    },
+    {
+      "linea": 4,
+      "tipo": "caso-borde",
+      "titulo": "Curso sin notas",
+      "detalle": "Con un arreglo vacío, 0 / 0 da NaN, la mediana es undefined y Math.max() devuelve -Infinity. La pantalla mostraría 'NaN' e '-Infinity'. Maneja ese caso al inicio.",
+      "arreglo": "if (notas.length === 0) return null;"
+    },
+    {
+      "linea": 12,
+      "tipo": "legibilidad",
+      "titulo": "Nombre de variable sin significado",
+      "detalle": "x obliga a leer la línea y la del return para entender que es la nota máxima. Un nombre claro se lee solo.",
+      "arreglo": "const maxima = Math.max(...notas);"
+    }
+  ]
+}

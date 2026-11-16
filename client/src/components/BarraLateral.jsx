@@ -14,6 +14,7 @@ import {
   IconoAprender,
   IconoReferencia,
   IconoEntrevistas,
+  IconoIngles,
   IconoLuna,
   IconoPracticar,
   IconoProgreso,
@@ -31,6 +32,7 @@ const SECCIONES = [
   // Solo en la versión publicada: las lecciones estilo Duolingo y las chuletas
   ...(ES_MOVIL
     ? [
+        { a: "/ingles", texto: "Inglés", Icono: IconoIngles },
         { a: "/camino", texto: "Lecciones", Icono: IconoProgreso },
         { a: "/chuletas", texto: "Chuletas", Icono: IconoAprender },
       ]

@@ -1,0 +1,46 @@
+{
+  "id": "rev-020",
+  "titulo": "Modal en React",
+  "unidad": "react-efectos-y-datos",
+  "nivel": 3,
+  "contexto": "Un componente Modal reutilizable. El padre lo usa así: <Modal abierto={abierto} titulo=\"Editar\" onCerrar={() => setAbierto(false)}>. Reportan que a veces se cierra solo al hacer clic en un campo.",
+  "lenguaje": "jsx",
+  "codigo": "import { useEffect } from 'react';\n\nexport function Modal({ abierto, titulo, children, onCerrar }) {\n  useEffect(() => {\n    function alPresionar(e) {\n      if (e.key === 'Escape') onCerrar();\n    }\n    document.addEventListener('keydown', alPresionar);\n  }, [onCerrar]);\n\n  if (!abierto) return null;\n\n  return (\n    <div className=\"fondo\" onClick={onCerrar}>\n      <div className=\"modal\">\n        <h2>{titulo}</h2>\n        {children}\n        <span className=\"cerrar\" onClick={onCerrar}>X</span>\n      </div>\n    </div>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 6,
+      "tipo": "caso-borde",
+      "titulo": "Escape funciona aunque el modal esté cerrado",
+      "detalle": "El listener se registra siempre, incluso con abierto en false, así que cada Escape en cualquier parte de la página llama a onCerrar. Comprueba abierto y agrégalo a las dependencias.",
+      "arreglo": "if (abierto && e.key === 'Escape') onCerrar();\n// y en las dependencias: [abierto, onCerrar]"
+    },
+    {
+      "linea": 8,
+      "tipo": "error",
+      "titulo": "El listener nunca se quita",
+      "detalle": "El efecto no devuelve limpieza. Como el padre pasa una función nueva en cada render, onCerrar cambia siempre y el efecto agrega otro listener cada vez: se acumulan decenas y siguen vivos tras desmontar.",
+      "arreglo": "document.addEventListener('keydown', alPresionar);\nreturn () => document.removeEventListener('keydown', alPresionar);"
+    },
+    {
+      "linea": 14,
+      "tipo": "error",
+      "titulo": "Un clic dentro del modal lo cierra",
+      "detalle": "Los clics dentro del modal suben por bubbling hasta el fondo y disparan onCerrar: es el bug reportado. Cierra solo si el clic fue en el propio fondo.",
+      "arreglo": "<div className=\"fondo\" onClick={(e) => { if (e.target === e.currentTarget) onCerrar(); }}>"
+    },
+    {
+      "linea": 15,
+      "tipo": "accesibilidad",
+      "titulo": "No se identifica como diálogo",
+      "detalle": "Sin role=\"dialog\", aria-modal y un nombre accesible, el lector de pantalla no anuncia que se abrió un diálogo ni su título.",
+      "arreglo": "<div className=\"modal\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"modal-titulo\">\n// y en el título: <h2 id=\"modal-titulo\">"
+    },
+    {
+      "linea": 18,
+      "tipo": "accesibilidad",
+      "titulo": "Botón de cerrar hecho con span",
+      "detalle": "No recibe foco con Tab, no se activa con Enter y el lector solo lee 'X'. Usa un button con aria-label.",
+      "arreglo": "<button type=\"button\" className=\"cerrar\" onClick={onCerrar} aria-label=\"Cerrar\">×</button>"
+    }
+  ]
+}

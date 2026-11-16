@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import { Markdown } from "../../components/Markdown.jsx";
 import { Tarjeta } from "../../components/Tarjeta.jsx";
 import { api } from "../../lib/api.js";
+import { hablar, hablarVarias, hayVoz } from "../../lib/voz.js";
 import { barajar, semilla } from "./motor.js";
 import estilos from "./Items.module.css";
 
@@ -18,6 +19,13 @@ const TITULOS = {
   emparejar: "Une cada par",
   tarjeta: "¿Cómo lo resolverías?",
   entrevista: "Pregunta de entrevista",
+  palabra: "¿Qué significa?",
+  inversa: "¿Cómo se dice?",
+  gramatica: "Elige la correcta",
+  escuchar: "Escucha",
+  traducir: "Traduce",
+  dictado: "Escucha y arma",
+  dialogo: "Escucha el diálogo",
 };
 
 export const tituloDe = (paso) => TITULOS[paso.item?.subtipo ?? paso.tipo] ?? "Responde";
@@ -33,6 +41,56 @@ function Codigo({ codigo }) {
   return (
     <div className={estilos.codigo}>
       <Markdown>{"```" + (codigo.lenguaje ?? "js") + "\n" + texto + "\n```"}</Markdown>
+    </div>
+  );
+}
+
+/** Botón de audio en inglés (la voz del dispositivo). Con `auto`, se oye apenas aparece. */
+export function BotonAudio({ texto, auto = false, grande = false, etiqueta = "Escuchar" }) {
+  useEffect(() => {
+    if (auto && texto) {
+      const t = setTimeout(() => hablar(texto), 250);
+      return () => clearTimeout(t);
+    }
+  }, [auto, texto]);
+  if (!texto || !hayVoz()) return null;
+  return (
+    <div className={estilos.audios} data-grande={grande}>
+      <button type="button" className={estilos.audio} onClick={() => hablar(texto)} aria-label={etiqueta}>
+        <span aria-hidden>🔊</span> {grande ? etiqueta : null}
+      </button>
+      <button type="button" className={estilos.audio} data-lento onClick={() => hablar(texto, { lento: true })} aria-label="Escuchar lento">
+        <span aria-hidden>🐢</span>
+      </button>
+    </div>
+  );
+}
+
+/** Diálogo: cada línea con su botón de audio, y "Escuchar todo". La traducción aparece al responder. */
+function Dialogo({ dialogo, traducir }) {
+  if (!dialogo) return null;
+  return (
+    <div className={estilos.dialogo}>
+      {dialogo.situacion && <p className={estilos.ayuda}>{dialogo.situacion}</p>}
+      {hayVoz() && (
+        <button type="button" className="boton" onClick={() => hablarVarias(dialogo.lineas.map((l) => l.en))}>
+          🔊 Escuchar todo
+        </button>
+      )}
+      {dialogo.lineas.map((l, i) => (
+        <div key={i} className={estilos.lineaDialogo}>
+          <strong>{l.quien}</strong>
+          <span>
+            {l.en}
+            {traducir && <small>{l.es}</small>}
+          </span>
+          {hayVoz() && (
+            <button type="button" className={estilos.audio} onClick={() => hablar(l.en)} aria-label="Escuchar esta línea">
+              🔊
+            </button>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
@@ -56,6 +114,8 @@ export function ItemOpcion({ item, elegida, alElegir, bloqueado, correcta }) {
           <Markdown>{item.pregunta}</Markdown>
         </div>
       )}
+      {item.audio && <BotonAudio texto={item.audio} auto grande={item.soloAudio} />}
+      <Dialogo dialogo={item.dialogo} traducir={bloqueado} />
       <Codigo codigo={item.codigo} />
       <div className={estilos.opciones} data-dos={item.opciones.length === 2}>
         {orden.map((i) => {
@@ -111,7 +171,7 @@ export function ItemEmparejar({ item, alCompletar }) {
 
   return (
     <div className={estilos.item}>
-      <p className={estilos.ayuda}>Toca un método y luego lo que hace.</p>
+      <p className={estilos.ayuda}>{item.fuente?.tipo === "ingles" ? "Toca una palabra y luego su significado." : "Toca un método y luego lo que hace."}</p>
       <div className={estilos.pares}>
         <div className={estilos.columna}>
           {izquierda.map((i) => (
@@ -141,6 +201,44 @@ export function ItemEmparejar({ item, alCompletar }) {
             </button>
           ))}
         </div>
+      </div>
+    </div>
+  );
+}
+
+/** Armar una frase en inglés tocando palabras (traducir o dictado). Tocar una elegida la devuelve. */
+export function ItemArmar({ item, elegidas, alCambiar, bloqueado }) {
+  const usadas = new Set(elegidas);
+  return (
+    <div className={estilos.item}>
+      <div className={estilos.pregunta}>
+        <Markdown>{item.pregunta}</Markdown>
+      </div>
+      {item.audio && <BotonAudio texto={item.audio} auto grande />}
+      {item.soloAudio && !hayVoz() && (
+        <p className={estilos.ayuda}>Este dispositivo no tiene voz en inglés. Arma la frase: *{item.respuesta.join(" ")}* aparece al comprobar.</p>
+      )}
+      <div className={estilos.fraseArmada}>
+        {elegidas.length === 0 && <span className={estilos.vacia}>Toca las palabras en orden</span>}
+        {elegidas.map((i, pos) => (
+          <button key={`${i}-${pos}`} type="button" className={estilos.palabraFicha} disabled={bloqueado} onClick={() => alCambiar(elegidas.filter((_, p) => p !== pos))}>
+            {item.fichas[i]}
+          </button>
+        ))}
+      </div>
+      <div className={estilos.bancoPalabras}>
+        {item.fichas.map((ficha, i) => (
+          <button
+            key={i}
+            type="button"
+            className={estilos.palabraFicha}
+            data-usada={usadas.has(i)}
+            disabled={bloqueado || usadas.has(i)}
+            onClick={() => alCambiar([...elegidas, i])}
+          >
+            {ficha}
+          </button>
+        ))}
       </div>
     </div>
   );

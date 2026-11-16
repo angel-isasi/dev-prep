@@ -1,0 +1,39 @@
+{
+  "id": "rev-023",
+  "titulo": "Contexto para el modo oscuro",
+  "unidad": "react-hooks-avanzados",
+  "nivel": 3,
+  "contexto": "Un Context que maneja el tema claro u oscuro de toda la app y lo recuerda en localStorage. Envuelve a toda la aplicación en main.jsx.",
+  "lenguaje": "jsx",
+  "codigo": "import { createContext, useContext, useState } from 'react';\n\nconst TemaContext = createContext();\n\nexport function TemaProvider({ children }) {\n  const [tema, setTema] = useState(localStorage.getItem('tema'));\n\n  function alternar() {\n    const nuevo = tema === 'oscuro' ? 'claro' : 'oscuro';\n    setTema(nuevo);\n    localStorage.setItem('tema', nuevo);\n  }\n\n  return (\n    <TemaContext.Provider value={{ tema, alternar }}>\n      <div className={tema}>{children}</div>\n    </TemaContext.Provider>\n  );\n}\n\nexport function useTema() {\n  return useContext(TemaContext);\n}\n\nexport function BotonTema() {\n  const { tema, alternar } = useTema();\n  return <button onClick={alternar}>{tema === 'oscuro' ? '☀️' : '🌙'}</button>;\n}",
+  "hallazgos": [
+    {
+      "linea": 6,
+      "tipo": "caso-borde",
+      "titulo": "Sin valor por defecto en la primera visita",
+      "detalle": "La primera vez getItem devuelve null, así que el div no tiene clase y la app queda sin tema. Además, localStorage se lee en cada render aunque solo se use el primer valor. Usa un valor por defecto y la inicialización con función.",
+      "arreglo": "const [tema, setTema] = useState(() => localStorage.getItem('tema') ?? 'claro');"
+    },
+    {
+      "linea": 15,
+      "tipo": "rendimiento",
+      "titulo": "value es un objeto nuevo en cada render",
+      "detalle": "{ tema, alternar } se crea de nuevo cada vez que TemaProvider se renderiza, y alternar también. Todos los componentes que usan el contexto se vuelven a renderizar aunque el tema no haya cambiado. Memoriza el valor.",
+      "arreglo": "const alternar = useCallback(() => setTema((t) => (t === 'oscuro' ? 'claro' : 'oscuro')), []);\nconst value = useMemo(() => ({ tema, alternar }), [tema, alternar]);"
+    },
+    {
+      "linea": 22,
+      "tipo": "caso-borde",
+      "titulo": "Error confuso fuera del Provider",
+      "detalle": "Si alguien usa useTema fuera de TemaProvider, el contexto vale undefined y la desestructuración falla con 'Cannot destructure property tema of undefined'. Lanza un error que diga qué pasó.",
+      "arreglo": "const ctx = useContext(TemaContext);\nif (!ctx) throw new Error('useTema debe usarse dentro de TemaProvider');\nreturn ctx;"
+    },
+    {
+      "linea": 27,
+      "tipo": "accesibilidad",
+      "titulo": "Botón que solo tiene un emoji",
+      "detalle": "El lector de pantalla lee 'sol' o 'luna creciente', sin decir qué hace el botón. Agrega un aria-label que describa la acción.",
+      "arreglo": "<button onClick={alternar} aria-label={tema === 'oscuro' ? 'Activar modo claro' : 'Activar modo oscuro'}>"
+    }
+  ]
+}

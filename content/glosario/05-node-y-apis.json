@@ -1,0 +1,135 @@
+{
+  "categoria": "Node y APIs",
+  "terminos": [
+    {
+      "id": "glo-nodejs",
+      "termino": "Node.js",
+      "en": "Node.js",
+      "pron": "nóud yéi es",
+      "definicion": "Un entorno que ejecuta JavaScript fuera del navegador, en el servidor o en tu computadora, usando el motor V8 de Chrome.",
+      "ejemplo": "node server.js",
+      "entrevista": "Es de un solo hilo pero maneja muchas conexiones porque no bloquea: delega la entrada y salida y sigue atendiendo con el event loop.",
+      "unidad": "node-que-es-node"
+    },
+    {
+      "id": "glo-npm",
+      "termino": "npm",
+      "en": "Node Package Manager",
+      "pron": "en pi em",
+      "definicion": "El gestor de paquetes de Node que instala librerías y ejecuta los scripts definidos en package.json.",
+      "ejemplo": "npm install axios && npm run dev",
+      "entrevista": "Distingo dependencies de devDependencies y subo el package-lock.json para que todos instalen las mismas versiones.",
+      "unidad": "node-que-es-node"
+    },
+    {
+      "id": "glo-api",
+      "termino": "API",
+      "en": "application programming interface",
+      "pron": "éi pi ái",
+      "definicion": "Un conjunto de reglas que define cómo un programa puede pedirle datos o acciones a otro, por ejemplo el frontend a un servidor.",
+      "ejemplo": "GET https://api.ejemplo.com/users/42",
+      "entrevista": "Como frontend consumo APIs: leo su documentación, manejo los estados de carga y error, y no confío ciegamente en la forma de los datos.",
+      "unidad": "node-apis-rest"
+    },
+    {
+      "id": "glo-rest",
+      "termino": "REST",
+      "en": "representational state transfer",
+      "pron": "rest",
+      "definicion": "Un estilo para diseñar APIs en el que cada recurso tiene una URL y se opera con los métodos HTTP, sin que el servidor guarde estado entre peticiones.",
+      "ejemplo": "GET /users, POST /users, PUT /users/42, DELETE /users/42",
+      "entrevista": "Las URL son sustantivos en plural y la acción la da el método: /users con POST, no /crearUsuario.",
+      "unidad": "node-apis-rest"
+    },
+    {
+      "id": "glo-endpoint",
+      "termino": "Endpoint",
+      "en": "endpoint",
+      "pron": "éndpoint",
+      "definicion": "Una dirección concreta de una API, la combinación de método y ruta, que responde a una operación.",
+      "ejemplo": "app.get('/api/products/:id', obtenerProducto);",
+      "entrevista": "Documento cada endpoint con qué recibe, qué devuelve y qué códigos de error puede dar.",
+      "unidad": "node-http-y-express"
+    },
+    {
+      "id": "glo-metodo-http",
+      "termino": "Método HTTP",
+      "en": "HTTP method",
+      "pron": "éich ti ti pi mézod",
+      "definicion": "El verbo de una petición que indica qué quieres hacer: GET leer, POST crear, PUT o PATCH actualizar y DELETE borrar.",
+      "ejemplo": "fetch('/api/tasks', { method: 'POST', body: JSON.stringify(tarea) });",
+      "entrevista": "PUT reemplaza el recurso entero y PATCH cambia solo algunos campos; GET nunca debería modificar datos.",
+      "unidad": "node-http-y-express"
+    },
+    {
+      "id": "glo-status-code",
+      "termino": "Status code",
+      "en": "status code",
+      "pron": "stéitus cóud",
+      "definicion": "El número de tres cifras con el que el servidor indica cómo le fue a la petición: 2xx éxito, 3xx redirección, 4xx error del cliente y 5xx error del servidor.",
+      "ejemplo": "res.status(404).json({ error: 'Producto no encontrado' });",
+      "entrevista": "Conozco los clave: 200, 201 creado, 204 sin contenido, 400, 401 no autenticado, 403 sin permiso, 404 y 500.",
+      "unidad": "node-http-y-express"
+    },
+    {
+      "id": "glo-middleware",
+      "termino": "Middleware",
+      "en": "middleware",
+      "pron": "mídelwer",
+      "definicion": "Una función que se ejecuta entre que llega la petición y se envía la respuesta, y que puede modificarlas, cortarlas o pasar al siguiente con next().",
+      "ejemplo": "app.use((req, res, next) => { console.log(req.method, req.url); next(); });",
+      "entrevista": "Se usa para autenticación, logs, parsear JSON y manejar errores; si olvidas next() o responder, la petición se queda colgada.",
+      "unidad": "node-middlewares-y-errores"
+    },
+    {
+      "id": "glo-variable-entorno",
+      "termino": "Variable de entorno",
+      "en": "environment variable",
+      "pron": "inváironment vériabol",
+      "definicion": "Un valor de configuración que se define fuera del código, como una clave o una URL, y que cambia según el entorno donde corre la app.",
+      "ejemplo": "const apiUrl = import.meta.env.VITE_API_URL;",
+      "entrevista": "El archivo .env no se sube a Git, y en el frontend recuerdo que todo lo que llega al navegador es público, así que ahí no van secretos.",
+      "unidad": "node-que-es-node"
+    },
+    {
+      "id": "glo-autenticacion",
+      "termino": "Autenticación",
+      "en": "authentication",
+      "pron": "ozentikéishon",
+      "definicion": "Comprobar quién es el usuario, normalmente con correo y contraseña o con un proveedor como Google.",
+      "ejemplo": "POST /api/login { email, password } → 200 con un token",
+      "entrevista": "Un 401 significa que no sé quién eres; si sé quién eres pero no tienes permiso, es un 403.",
+      "unidad": "node-middlewares-y-errores"
+    },
+    {
+      "id": "glo-autorizacion",
+      "termino": "Autorización",
+      "en": "authorization",
+      "pron": "ozoraiséishon",
+      "definicion": "Decidir qué puede hacer un usuario ya identificado, por ejemplo si puede borrar un recurso o entrar al panel de administración.",
+      "ejemplo": "if (req.user.role !== 'admin') return res.status(403).end();",
+      "entrevista": "Ocultar un botón en el frontend no es seguridad: el permiso siempre se valida en el servidor.",
+      "unidad": "node-middlewares-y-errores"
+    },
+    {
+      "id": "glo-jwt",
+      "termino": "JWT",
+      "en": "JSON Web Token",
+      "pron": "yei dábliu ti (yot)",
+      "definicion": "Un token firmado por el servidor que contiene datos del usuario y que el cliente envía en cada petición para demostrar que inició sesión.",
+      "ejemplo": "fetch('/api/me', { headers: { Authorization: `Bearer ${token}` } });",
+      "entrevista": "Su contenido no está cifrado, solo firmado: cualquiera puede leerlo, así que no lleva contraseñas, y debe tener una expiración corta.",
+      "unidad": "node-middlewares-y-errores"
+    },
+    {
+      "id": "glo-sql",
+      "termino": "SQL",
+      "en": "Structured Query Language",
+      "pron": "es kiu el (síquel)",
+      "definicion": "El lenguaje para consultar y modificar datos en bases de datos relacionales, organizadas en tablas con filas y columnas.",
+      "ejemplo": "SELECT name, email FROM users WHERE active = 1 ORDER BY name;",
+      "entrevista": "Uso consultas con parámetros en vez de concatenar texto, para evitar la inyección SQL.",
+      "unidad": "node-sql-consultas"
+    }
+  ]
+}

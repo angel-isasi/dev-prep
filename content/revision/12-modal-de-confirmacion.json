@@ -1,0 +1,32 @@
+{
+  "id": "rev-012",
+  "titulo": "Modal de confirmación sin framework",
+  "unidad": "dom-y-eventos",
+  "nivel": 3,
+  "contexto": "Una función que abre un modal para confirmar acciones como 'Eliminar el producto X'. Se llama muchas veces mientras el usuario usa la app.",
+  "lenguaje": "js",
+  "codigo": "export function abrirModal(mensaje, onConfirmar) {\n  const fondo = document.createElement('div');\n  fondo.className = 'modal-fondo';\n  fondo.innerHTML = `\n    <div class=\"modal\">\n      <p>${mensaje}</p>\n      <button id=\"aceptar\">Aceptar</button>\n      <button id=\"cancelar\">Cancelar</button>\n    </div>\n  `;\n  document.body.appendChild(fondo);\n\n  function cerrar() {\n    fondo.remove();\n  }\n\n  document.addEventListener('keydown', (e) => {\n    if (e.key === 'Escape') cerrar();\n  });\n\n  fondo.querySelector('#aceptar').addEventListener('click', () => {\n    onConfirmar();\n    cerrar();\n  });\n  fondo.querySelector('#cancelar').addEventListener('click', cerrar);\n}",
+  "hallazgos": [
+    {
+      "linea": 5,
+      "tipo": "accesibilidad",
+      "titulo": "El modal no se anuncia ni recibe el foco",
+      "detalle": "Sin role=\"dialog\" y aria-modal, el lector de pantalla no sabe que se abrió un diálogo, y el foco se queda detrás, en la página. Agrega los atributos y mueve el foco al botón Cancelar al abrir.",
+      "arreglo": "<div class=\"modal\" role=\"dialog\" aria-modal=\"true\" aria-labelledby=\"modal-texto\">\n// y después de insertarlo: fondo.querySelector('#cancelar').focus();"
+    },
+    {
+      "linea": 6,
+      "tipo": "seguridad",
+      "titulo": "El mensaje se inserta como HTML",
+      "detalle": "El mensaje suele llevar datos que escribió alguien, como el nombre del producto. Un nombre con <img onerror=...> ejecutaría código. Asigna el texto con textContent después de crear el modal.",
+      "arreglo": "<p id=\"modal-texto\"></p>\n// luego: fondo.querySelector('#modal-texto').textContent = mensaje;"
+    },
+    {
+      "linea": 17,
+      "tipo": "error",
+      "titulo": "El listener de teclado nunca se quita",
+      "detalle": "Cada vez que se abre el modal se agrega otro listener a document y ninguno se elimina al cerrar. Después de abrirlo 50 veces hay 50 funciones escuchando cada tecla, y cada una mantiene vivo su modal en memoria. Quítalo dentro de cerrar.",
+      "arreglo": "function alTeclear(e) { if (e.key === 'Escape') cerrar(); }\ndocument.addEventListener('keydown', alTeclear);\n// en cerrar(): document.removeEventListener('keydown', alTeclear);"
+    }
+  ]
+}

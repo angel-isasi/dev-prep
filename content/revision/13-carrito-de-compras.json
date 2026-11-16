@@ -1,0 +1,39 @@
+{
+  "id": "rev-013",
+  "titulo": "Carrito de compras",
+  "unidad": "react-estado-y-eventos",
+  "nivel": 2,
+  "contexto": "Un compañero te pide revisar su componente del carrito antes de subirlo. Dice que a veces no se actualiza la lista.",
+  "lenguaje": "jsx",
+  "codigo": "import { useState } from 'react';\n\nexport function Carrito() {\n  const [items, setItems] = useState([]);\n  const [total, setTotal] = useState(0);\n\n  function agregar(producto) {\n    items.push({ ...producto, cantidad: 1 });\n    setItems(items);\n    setTotal(total + producto.precio);\n  }\n\n  function quitar(id) {\n    setItems(items.filter((item) => item.id !== id));\n  }\n\n  return (\n    <div>\n      <h2>Tu carrito</h2>\n      <ul>\n        {items.map((item) => (\n          <li key={item.id}>\n            {item.nombre} x {item.cantidad}\n            <button onClick={() => quitar(item.id)}>Quitar</button>\n          </li>\n        ))}\n      </ul>\n      <p>Total: S/ {total}</p>\n      <BotonAgregar onAgregar={agregar} />\n    </div>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 5,
+      "tipo": "error",
+      "titulo": "El total es estado duplicado",
+      "detalle": "total se puede calcular a partir de items, pero se guarda aparte y se desincroniza: quitar un producto no lo descuenta. Elimina ese estado y calcúlalo en cada render.",
+      "arreglo": "const total = items.reduce((suma, i) => suma + i.precio * i.cantidad, 0);"
+    },
+    {
+      "linea": 8,
+      "tipo": "error",
+      "titulo": "Muta el estado con push",
+      "detalle": "push cambia el arreglo del estado y luego setItems(items) le pasa la misma referencia: React compara, ve el mismo arreglo y no vuelve a renderizar. Por eso la lista a veces no se actualiza. Además, agregar dos veces el mismo producto crea dos filas con la misma key.",
+      "arreglo": "setItems((prev) => {\n  const existe = prev.find((i) => i.id === producto.id);\n  if (existe) return prev.map((i) => i.id === producto.id ? { ...i, cantidad: i.cantidad + 1 } : i);\n  return [...prev, { ...producto, cantidad: 1 }];\n});"
+    },
+    {
+      "linea": 28,
+      "tipo": "caso-borde",
+      "titulo": "Decimales sin formato",
+      "detalle": "Con precios como 0.1 y 0.2 el total se muestra como 0.30000000000000004. El monto de dinero siempre se formatea al mostrarlo.",
+      "arreglo": "<p>Total: S/ {total.toFixed(2)}</p>"
+    },
+    {
+      "linea": 29,
+      "tipo": "error",
+      "titulo": "BotonAgregar no está importado",
+      "detalle": "El componente se usa pero no existe ni en el archivo ni en los imports. Al renderizar, React lanza ReferenceError: BotonAgregar is not defined.",
+      "arreglo": "import { BotonAgregar } from './BotonAgregar';"
+    }
+  ]
+}

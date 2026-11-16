@@ -1,0 +1,39 @@
+{
+  "id": "rev-016",
+  "titulo": "Buscador con filtro",
+  "unidad": "react-estado-y-eventos",
+  "nivel": 2,
+  "contexto": "El buscador recibe la lista de productos desde el padre, que la trae de la API. Al abrir la página la lista sale vacía hasta que el usuario escribe algo.",
+  "lenguaje": "jsx",
+  "codigo": "import { useState, useEffect } from 'react';\n\nexport function Buscador({ productos }) {\n  const [query, setQuery] = useState('');\n  const [filtrados, setFiltrados] = useState(productos);\n\n  useEffect(() => {\n    setFiltrados(\n      productos.filter((p) => p.nombre.toLowerCase().includes(query))\n    );\n  }, [query]);\n\n  return (\n    <div>\n      <label htmlFor=\"buscar\">Buscar</label>\n      <input\n        id=\"buscar\"\n        value={query}\n        onChange={(e) => setQuery(e.target.value)}\n      />\n      <ul>\n        {filtrados.map((p) => (\n          <li key={p.id}>{p.nombre}</li>\n        ))}\n      </ul>\n    </div>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 5,
+      "tipo": "rendimiento",
+      "titulo": "Estado derivado guardado aparte",
+      "detalle": "filtrados se puede calcular con productos y query. Guardarlo en un estado y sincronizarlo con un efecto provoca un render extra en cada tecla y abre la puerta a que se desincronicen. Calcúlalo durante el render, con useMemo si la lista es grande.",
+      "arreglo": "const filtrados = productos.filter((p) => p.nombre.toLowerCase().includes(query.toLowerCase()));"
+    },
+    {
+      "linea": 9,
+      "tipo": "caso-borde",
+      "titulo": "Solo se pasa a minúsculas un lado",
+      "detalle": "El nombre se compara en minúsculas, pero query no. Buscar 'Polo' no encuentra 'Polo azul', porque busca 'Polo' dentro de 'polo azul'.",
+      "arreglo": "productos.filter((p) => p.nombre.toLowerCase().includes(query.toLowerCase()))"
+    },
+    {
+      "linea": 11,
+      "tipo": "error",
+      "titulo": "Falta productos en las dependencias",
+      "detalle": "useState(productos) solo usa el valor del primer render, que suele ser [] mientras la API responde. Como el efecto no depende de productos, cuando llegan los datos la lista no se actualiza hasta que el usuario escribe: es el bug que se ve al abrir la página.",
+      "arreglo": "}, [query, productos]);"
+    },
+    {
+      "linea": 22,
+      "tipo": "caso-borde",
+      "titulo": "Sin mensaje cuando no hay resultados",
+      "detalle": "Si la búsqueda no encuentra nada, la lista queda vacía sin explicación y el usuario no sabe si está cargando o si no hay coincidencias.",
+      "arreglo": "{filtrados.length === 0 && <p>No hay productos que coincidan con '{query}'.</p>}"
+    }
+  ]
+}

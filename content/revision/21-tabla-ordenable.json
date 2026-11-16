@@ -1,0 +1,39 @@
+{
+  "id": "rev-021",
+  "titulo": "Tabla de usuarios ordenable",
+  "unidad": "react-listas-y-condicionales",
+  "nivel": 2,
+  "contexto": "Una tabla del panel de administración que se ordena al hacer clic en el encabezado. Los usuarios llegan por props desde el componente padre.",
+  "lenguaje": "jsx",
+  "codigo": "import { useState } from 'react';\n\nconst columnas = [\n  { campo: 'nombre', titulo: 'Nombre' },\n  { campo: 'edad', titulo: 'Edad' },\n  { campo: 'email', titulo: 'Email' },\n];\n\nexport function TablaUsuarios({ usuarios }) {\n  const [orden, setOrden] = useState('nombre');\n\n  const ordenados = usuarios.sort((a, b) =>\n    a[orden] > b[orden] ? 1 : -1\n  );\n\n  return (\n    <table>\n      <thead>\n        <tr>\n          {columnas.map((c) => (\n            <th key={c.campo} onClick={() => setOrden(c.campo)}>{c.titulo}</th>\n          ))}\n        </tr>\n      </thead>\n      <tbody>\n        {ordenados.map((u, index) => (\n          <tr key={index}>\n            <td>{u.nombre}</td>\n            <td>{u.edad}</td>\n            <td>{u.email}</td>\n          </tr>\n        ))}\n      </tbody>\n    </table>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 12,
+      "tipo": "error",
+      "titulo": "sort modifica las props",
+      "detalle": "sort ordena el mismo arreglo que pertenece al padre. Las props son de solo lectura: mutarlas reordena los datos del padre sin que React lo sepa y provoca bugs difíciles de rastrear. Ordena una copia.",
+      "arreglo": "const ordenados = [...usuarios].sort(/* ... */);"
+    },
+    {
+      "linea": 13,
+      "tipo": "caso-borde",
+      "titulo": "Comparador frágil para textos",
+      "detalle": "Nunca devuelve 0 para valores iguales y con > los textos se comparan por código de carácter: 'álvaro' y 'Zoe' quedan después de las minúsculas y en orden raro. Para strings usa localeCompare y para números la resta.",
+      "arreglo": "typeof a[orden] === 'number' ? a[orden] - b[orden] : a[orden].localeCompare(b[orden], 'es')"
+    },
+    {
+      "linea": 21,
+      "tipo": "accesibilidad",
+      "titulo": "Encabezado clicable sin botón",
+      "detalle": "Un th con onClick no se puede usar con teclado y no indica que ordena. Pon un button dentro del th y aria-sort en la columna activa.",
+      "arreglo": "<th key={c.campo} aria-sort={orden === c.campo ? 'ascending' : 'none'}>\n  <button type=\"button\" onClick={() => setOrden(c.campo)}>{c.titulo}</button>\n</th>"
+    },
+    {
+      "linea": 27,
+      "tipo": "error",
+      "titulo": "key con el índice en una lista que se reordena",
+      "detalle": "Al cambiar el orden, la fila 0 pasa a ser otro usuario pero conserva la misma key, así que React reutiliza la fila equivocada: si tuviera un checkbox o un input, el estado quedaría pegado a la posición y no al usuario. Usa un id estable.",
+      "arreglo": "<tr key={u.id}>"
+    }
+  ]
+}

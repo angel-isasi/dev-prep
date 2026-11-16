@@ -1,0 +1,39 @@
+{
+  "id": "rev-024",
+  "titulo": "Formulario de contacto",
+  "unidad": "react-formularios",
+  "nivel": 2,
+  "contexto": "El formulario de contacto de una landing page. Al escribir en un campo, los demás se borran y aparece un aviso en la consola.",
+  "lenguaje": "jsx",
+  "codigo": "import { useState } from 'react';\n\nexport function Contacto() {\n  const [form, setForm] = useState({ nombre: '', email: '', mensaje: '' });\n  const [enviado, setEnviado] = useState(false);\n\n  function cambiar(e) {\n    setForm({ [e.target.name]: e.target.value });\n  }\n\n  async function enviar(e) {\n    e.preventDefault();\n    await fetch('/api/contacto', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify(form),\n    });\n    setEnviado(true);\n  }\n\n  if (enviado) return <p>¡Gracias! Te responderemos pronto.</p>;\n\n  return (\n    <form onSubmit={enviar}>\n      <label htmlFor=\"nombre\">Nombre</label>\n      <input id=\"nombre\" name=\"nombre\" value={form.nombre} onChange={cambiar} required />\n      <label htmlFor=\"email\">Email</label>\n      <input id=\"email\" name=\"email\" value={form.email} onChange={cambiar} required />\n      <label htmlFor=\"msj\">Mensaje</label>\n      <textarea id=\"mensaje\" name=\"mensaje\" value={form.mensaje} onChange={cambiar} required />\n      <button type=\"submit\">Enviar</button>\n    </form>\n  );\n}",
+  "hallazgos": [
+    {
+      "linea": 8,
+      "tipo": "error",
+      "titulo": "Reemplaza el objeto entero",
+      "detalle": "A diferencia de las clases, el setState de un hook no mezcla objetos: reemplaza. Al escribir en el nombre, form queda { nombre: 'A' } y email y mensaje pasan a undefined. Por eso se borran los demás campos y React avisa que un input pasó de controlado a no controlado.",
+      "arreglo": "setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));"
+    },
+    {
+      "linea": 13,
+      "tipo": "caso-borde",
+      "titulo": "Da las gracias aunque falle",
+      "detalle": "No se revisa la respuesta ni hay try/catch. Si el servidor responde 500 o no hay internet, el usuario ve '¡Gracias!' y su mensaje se perdió sin que lo sepa.",
+      "arreglo": "const res = await fetch('/api/contacto', { /* ... */ });\nif (!res.ok) { setError('No se pudo enviar, inténtalo de nuevo.'); return; }"
+    },
+    {
+      "linea": 28,
+      "tipo": "caso-borde",
+      "titulo": "El email acepta cualquier texto",
+      "detalle": "Sin type=\"email\", el navegador no valida el formato y en el celular no aparece el teclado con @. Se pueden enviar correos como 'hola'.",
+      "arreglo": "<input id=\"email\" name=\"email\" type=\"email\" value={form.email} onChange={cambiar} required />"
+    },
+    {
+      "linea": 29,
+      "tipo": "accesibilidad",
+      "titulo": "La etiqueta no apunta al campo",
+      "detalle": "htmlFor=\"msj\" no coincide con id=\"mensaje\", así que la etiqueta no está asociada: el lector de pantalla no anuncia 'Mensaje' y hacer clic en el texto no enfoca el textarea.",
+      "arreglo": "<label htmlFor=\"mensaje\">Mensaje</label>"
+    }
+  ]
+}

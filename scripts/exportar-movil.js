@@ -18,6 +18,9 @@ import { crearIndice } from "../server/contenido.js";
 import { cargarReferencia, cargarTemas } from "../server/aprender.js";
 import { cargarEntrevistas } from "../server/entrevistas.js";
 import { COLECCIONES_SIN_SOLUCION, generarItems } from "./items/index.js";
+import { cargarIngles } from "../server/ingles.js";
+import { generarItemsIngles, unidadesParaLeer } from "./items/ingles.js";
+import { cargarGlosario, cargarPredice, cargarRevision } from "../server/aprender-mejor.js";
 
 const SALIDA = path.join(config.raiz, "client", "public-movil", "datos");
 
@@ -85,6 +88,8 @@ async function main() {
     });
     const conSolucion = !COLECCIONES_SIN_SOLUCION.includes(ej.coleccion);
     const detalle = {
+      // En los de depurar, el código con el error es parte del enunciado
+      ...(ej.coleccion.endsWith("/depurar") ? { inicio: await leer(ej, ej.archivos.inicio) } : {}),
       enunciado: await leer(ej, "enunciado.md"),
       pistas,
       solucion: conSolucion
@@ -121,11 +126,19 @@ async function main() {
     guias: entrevistas.guias,
   });
 
-  // 5. Ítems de lección (estilo Duolingo), generados del contenido de arriba
+  // 5. Aprender mejor: glosario y revisión de código (Lee y predice va dentro de los ítems)
+  const predice = await cargarPredice(config.contenidoDir);
+  const glosario = await cargarGlosario(config.contenidoDir);
+  total += await escribir("glosario.json", glosario);
+  total += await escribir("revision.json", await cargarRevision(config.contenidoDir));
+
+  // 5b. Ítems de lección (estilo Duolingo), generados del contenido de arriba
   const generados = await generarItems({
     indice,
     temas: aprender.temas,
     referencia,
+    predice,
+    glosario,
     leerArchivo: (ej, archivo) => leer(ej, archivo).catch(() => null),
   });
   const bytesItems = await escribir("items.json", {
@@ -136,7 +149,16 @@ async function main() {
   total += bytesItems;
   imprimirResumenItems(generados, bytesItems);
 
-  // 6. Versión
+  // 6. Inglés: lo que se lee (teoría, palabras, diálogos) y sus ítems de lección, en archivos aparte
+  const ingles = await cargarIngles(config.contenidoDir);
+  for (const error of ingles.errores) console.warn(`  aviso: ${error}`);
+  total += await escribir("ingles.json", { unidades: unidadesParaLeer(ingles.unidades) });
+  const itemsIngles = generarItemsIngles(ingles.unidades);
+  const bytesIngles = await escribir("items-ingles.json", { version: 1, ...itemsIngles });
+  total += bytesIngles;
+  console.log(`Inglés: ${ingles.unidades.length} unidades y ${itemsIngles.items.length} ítems (${kb(bytesIngles)})`);
+
+  // 7. Versión
   const version = huella.digest("hex").slice(0, 8);
   await mkdir(SALIDA, { recursive: true });
   await writeFile(path.join(SALIDA, "version.json"), JSON.stringify({

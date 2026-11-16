@@ -1,0 +1,39 @@
+{
+  "id": "rev-022",
+  "titulo": "Custom hook useFetch",
+  "unidad": "react-hooks-propios-y-patrones",
+  "nivel": 3,
+  "contexto": "Un hook propio que usa todo el equipo para pedir datos. Se usa así: useFetch('/api/productos', { headers: { Accept: 'application/json' } }). En la pestaña Network aparecen peticiones sin parar.",
+  "lenguaje": "jsx",
+  "codigo": "import { useState, useEffect } from 'react';\n\nexport function useFetch(url, opciones) {\n  const [data, setData] = useState(null);\n  const [error, setError] = useState(null);\n  const [cargando, setCargando] = useState(false);\n\n  useEffect(() => {\n    setCargando(true);\n    fetch(url, opciones)\n      .then((res) => res.json())\n      .then((json) => setData(json))\n      .catch((err) => setError(err))\n      .finally(() => setCargando(false));\n  }, [url, opciones]);\n\n  return { data, error, cargando };\n}",
+  "hallazgos": [
+    {
+      "linea": 9,
+      "tipo": "caso-borde",
+      "titulo": "El error anterior no se limpia",
+      "detalle": "Si una petición falla y luego la siguiente funciona, error sigue con el valor viejo y la pantalla muestra a la vez datos y mensaje de error. Reinicia el error al empezar una nueva petición.",
+      "arreglo": "setCargando(true);\nsetError(null);"
+    },
+    {
+      "linea": 10,
+      "tipo": "caso-borde",
+      "titulo": "No cancela la petición anterior",
+      "detalle": "Si la url cambia antes de que termine la petición, la respuesta vieja puede llegar después y pisar los datos nuevos, y si el componente se desmonta se intenta actualizar un estado que ya no existe. Usa un AbortController y abórtalo en la limpieza.",
+      "arreglo": "const controller = new AbortController();\nfetch(url, { ...opciones, signal: controller.signal })\n// ...\nreturn () => controller.abort();"
+    },
+    {
+      "linea": 11,
+      "tipo": "caso-borde",
+      "titulo": "Un 404 o un 500 se toma como éxito",
+      "detalle": "fetch no rechaza con errores HTTP. Sin revisar res.ok, el cuerpo del error termina en data y la pantalla intenta pintarlo como si fueran productos.",
+      "arreglo": ".then((res) => {\n  if (!res.ok) throw new Error(`HTTP ${res.status}`);\n  return res.json();\n})"
+    },
+    {
+      "linea": 15,
+      "tipo": "error",
+      "titulo": "opciones provoca un bucle infinito",
+      "detalle": "Quien usa el hook pasa un objeto literal, que es nuevo en cada render. React compara dependencias por referencia, ve un objeto distinto, vuelve a ejecutar el efecto, el setState provoca otro render y así sin fin: son las peticiones sin parar de la pestaña Network. Pide a quien lo usa que memorice opciones con useMemo o depende solo de valores primitivos.",
+      "arreglo": "}, [url]); // y documentar que opciones debe ser estable (useMemo en quien lo llama)"
+    }
+  ]
+}

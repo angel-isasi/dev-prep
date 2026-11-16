@@ -226,6 +226,15 @@ option {
   --color-area-suave: rgb(91 157 240 / 0.11);
 }
 
+[data-area="ingles"] {
+  --color-area: #ff8a6b;
+  --color-area-suave: rgb(255 138 107 / 0.1);
+}
+
+:root[data-tema="claro"] [data-area="ingles"] {
+  --color-area: #c2410c;
+}
+
 [data-area="node"] {
   --color-area: #9bd16a;
   --color-area-suave: rgb(155 209 106 / 0.1);

@@ -1,0 +1,32 @@
+{
+  "id": "rev-003",
+  "titulo": "Utilidades de pedidos",
+  "unidad": "metodos-de-array",
+  "nivel": 2,
+  "contexto": "Este archivo de utilidades alimenta el panel de pedidos de una tienda. Lo usan varias pantallas a la vez.",
+  "lenguaje": "js",
+  "codigo": "export function agruparPedidos(pedidos) {\n  const grupos = {};\n\n  pedidos.forEach((pedido) => {\n    if (!grupos[pedido.estado]) {\n      grupos[pedido.estado] = [];\n    }\n    grupos[pedido.estado].push(pedido);\n  });\n\n  return grupos;\n}\n\nexport function ultimosPedidos(pedidos, cantidad) {\n  const ordenados = pedidos.sort((a, b) => b.fecha - a.fecha);\n  return ordenados.slice(0, cantidad);\n}\n\nexport function totalPorCliente(pedidos, clienteId) {\n  const delCliente = pedidos.filter((p) => p.clienteId === clienteId);\n  return delCliente.map((p) => p.total).reduce((a, b) => a + b);\n}\n\nexport function formatearFecha(fecha) {\n  const d = new Date(fecha);\n  return d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();\n}",
+  "hallazgos": [
+    {
+      "linea": 15,
+      "tipo": "error",
+      "titulo": "sort modifica el arreglo original",
+      "detalle": "sort ordena en el mismo arreglo que recibe. Como otras pantallas usan la misma lista de pedidos, de pronto aparecen reordenadas. Además, si la fecha llega como string ISO desde la API, la resta da NaN y el orden queda al azar.",
+      "arreglo": "const ordenados = [...pedidos].sort((a, b) => new Date(b.fecha) - new Date(a.fecha));"
+    },
+    {
+      "linea": 21,
+      "tipo": "caso-borde",
+      "titulo": "reduce sin valor inicial",
+      "detalle": "Si el cliente no tiene pedidos, filter devuelve [] y reduce sin valor inicial lanza TypeError: Reduce of empty array with no initial value. Debería devolver 0.",
+      "arreglo": "return delCliente.reduce((suma, p) => suma + p.total, 0);"
+    },
+    {
+      "linea": 26,
+      "tipo": "error",
+      "titulo": "getMonth empieza en 0",
+      "detalle": "getMonth devuelve 0 para enero y 11 para diciembre, así que todas las fechas salen con un mes menos: el 15 de marzo se muestra como 15/2. Para fechas de cara al usuario es mejor toLocaleDateString.",
+      "arreglo": "return d.toLocaleDateString('es-PE');"
+    }
+  ]
+}

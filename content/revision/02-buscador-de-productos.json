@@ -1,0 +1,39 @@
+{
+  "id": "rev-002",
+  "titulo": "Buscador de productos en vivo",
+  "unidad": "dom-y-eventos",
+  "nivel": 2,
+  "contexto": "Es el buscador de la tienda: muestra resultados mientras el usuario escribe. Está en JavaScript sin framework.",
+  "lenguaje": "js",
+  "codigo": "const input = document.querySelector('#buscar');\nconst lista = document.querySelector('#resultados');\n\ninput.addEventListener('input', async (e) => {\n  const texto = e.target.value;\n  const res = await fetch('/api/productos?q=' + texto);\n  const productos = await res.json();\n\n  lista.innerHTML = '';\n  productos.forEach((p) => {\n    const li = document.createElement('li');\n    li.textContent = p.nombre + ' - S/ ' + p.precio;\n    lista.appendChild(li);\n  });\n\n  if (productos.length === 0) {\n    lista.innerHTML = '<li>Sin resultados</li>';\n  }\n});",
+  "hallazgos": [
+    {
+      "linea": 4,
+      "tipo": "rendimiento",
+      "titulo": "Una petición por cada tecla",
+      "detalle": "Escribir 'zapatillas' lanza 10 peticiones a la API. Con un debounce de unos 300 ms solo se busca cuando el usuario deja de escribir.",
+      "arreglo": "input.addEventListener('input', debounce(async (e) => { /* ... */ }, 300));"
+    },
+    {
+      "linea": 6,
+      "tipo": "error",
+      "titulo": "El texto no se codifica en la URL",
+      "detalle": "Si el usuario escribe 'polo & short' o '50%', el & corta el parámetro y el % rompe la URL. Todo texto del usuario que va en una query string debe pasar por encodeURIComponent.",
+      "arreglo": "const res = await fetch('/api/productos?q=' + encodeURIComponent(texto));"
+    },
+    {
+      "linea": 6,
+      "tipo": "caso-borde",
+      "titulo": "Respuestas fuera de orden",
+      "detalle": "Las peticiones no terminan en el orden en que salen. Si la de 'za' llega después que la de 'zapa', la lista muestra resultados de una búsqueda vieja. Hay que cancelar la petición anterior con un AbortController.",
+      "arreglo": "controller?.abort();\ncontroller = new AbortController();\nconst res = await fetch(url, { signal: controller.signal });"
+    },
+    {
+      "linea": 7,
+      "tipo": "caso-borde",
+      "titulo": "Sin manejo de errores",
+      "detalle": "fetch no falla con un 404 o un 500, así que res.json() intentará leer una página de error, y un fallo de red deja una promesa rechazada sin capturar. El usuario no ve nada. Revisa res.ok y envuelve todo en try/catch para mostrar un mensaje.",
+      "arreglo": "if (!res.ok) throw new Error('Error ' + res.status);\nconst productos = await res.json();"
+    }
+  ]
+}

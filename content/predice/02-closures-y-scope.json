@@ -1,0 +1,110 @@
+[
+  {
+    "id": "pred-012",
+    "unidad": "closures-y-scope",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "for (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 0);\n}",
+    "opciones": ["0 1 2", "0 0 0", "3 3 3", "2 2 2"],
+    "correcta": 2,
+    "explicacion": "var no crea una variable nueva en cada vuelta: hay una sola i para todo el bucle. Los setTimeout se ejecutan después, cuando el bucle ya terminó y i vale 3 (el valor que hizo fallar la condición i < 3). Las tres funciones leen la misma i, así que imprimen 3 3 3. La trampa es esperar 0 1 2: eso pasa si cambias var por let, porque let crea una i distinta en cada vuelta y cada función recuerda la suya.",
+    "verificar": true
+  },
+  {
+    "id": "pred-013",
+    "unidad": "closures-y-scope",
+    "nivel": 1,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "function crearContador() {\n  let cuenta = 0;\n  return () => ++cuenta;\n}\nconst a = crearContador();\nconst b = crearContador();\na();\na();\nconsole.log(a(), b());",
+    "opciones": ["3 1", "3 3", "1 1", "2 1"],
+    "correcta": 0,
+    "explicacion": "Cada llamada a crearContador crea su propia variable cuenta, y la función que devuelve la recuerda (eso es un closure). a y b tienen contadores separados. a se llamó dos veces antes del console.log, así que la tercera llamada da 3. b se llama por primera vez y da 1. La trampa es pensar que comparten la misma cuenta y responder 3 3, o 4: cada ejecución de la función externa crea un \"cajón\" nuevo.",
+    "verificar": true
+  },
+  {
+    "id": "pred-014",
+    "unidad": "closures-y-scope",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "const fns = [];\nfor (var i = 0; i < 3; i++) {\n  fns.push(() => i * 10);\n}\nconsole.log(fns[0](), fns[2]());",
+    "opciones": ["0 20", "0 0", "20 20", "30 30"],
+    "correcta": 3,
+    "explicacion": "Las funciones guardadas no copian el valor de i, guardan una referencia a la variable. Con var hay una sola i, y cuando por fin llamas a las funciones el bucle ya terminó con i en 3. Por eso las dos dan 3 * 10 = 30. La trampa es pensar que cada función \"congeló\" el i de su vuelta (0 y 20). Con let en el bucle sí tendrías 0 20.",
+    "verificar": true
+  },
+  {
+    "id": "pred-015",
+    "unidad": "funciones",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "console.log(sumar(2, 3));\nfunction sumar(a, b) {\n  return a + b;\n}\nconsole.log(typeof restar);\nvar restar = function (a, b) {\n  return a - b;\n};",
+    "opciones": ["5 function", "5 undefined", "ReferenceError", "TypeError"],
+    "correcta": 1,
+    "explicacion": "Una declaración de función (function sumar...) se eleva completa: nombre y cuerpo. Por eso se puede llamar antes de su línea y da 5. En cambio restar es una variable var a la que se le asigna una función: solo se eleva la declaración de la variable, que vale undefined hasta llegar a la asignación. typeof undefined da \"undefined\". La trampa es pensar que toda función se eleva igual y responder \"function\".",
+    "verificar": true
+  },
+  {
+    "id": "pred-016",
+    "unidad": "funciones",
+    "nivel": 3,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "console.log(typeof saludar);\nsaludar();\nvar saludar = () => console.log(\"hola\");",
+    "opciones": ["function hola", "undefined TypeError", "ReferenceError", "undefined hola"],
+    "correcta": 1,
+    "explicacion": "saludar es una variable var: se eleva, pero vale undefined hasta la última línea. El primer console.log imprime \"undefined\". Luego saludar() intenta llamar a undefined como si fuera función, y eso lanza TypeError (\"saludar is not a function\"), así que \"hola\" nunca se imprime. La trampa es esperar ReferenceError: ese error es para variables que no existen o que están en la zona muerta de let/const. Aquí la variable existe, pero su valor no es una función.",
+    "verificar": true
+  },
+  {
+    "id": "pred-017",
+    "unidad": "closures-y-scope",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "let nombre = \"global\";\nfunction mostrar() {\n  console.log(nombre);\n}\nfunction ejecutar() {\n  let nombre = \"local\";\n  mostrar();\n}\nejecutar();",
+    "opciones": ["local", "ReferenceError", "undefined", "global"],
+    "correcta": 3,
+    "explicacion": "JavaScript usa scope léxico: una función ve las variables del lugar donde fue escrita, no del lugar desde donde la llamas. mostrar está escrita afuera, junto al nombre = \"global\", así que imprime \"global\". El nombre = \"local\" vive solo dentro de ejecutar y mostrar no tiene acceso a él. La trampa es pensar que, como mostrar se llamó desde ejecutar, ve sus variables (eso se llama scope dinámico y JavaScript no lo usa).",
+    "verificar": true
+  },
+  {
+    "id": "pred-018",
+    "unidad": "funciones",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "function saludar(nombre = \"invitado\", saludo = \"Hola\") {\n  return saludo + \" \" + nombre;\n}\nconsole.log(saludar(undefined, \"Buenas\"));\nconsole.log(saludar(null));",
+    "opciones": ["Buenas invitado Hola null", "Buenas invitado Hola invitado", "Hola invitado Hola null", "Buenas undefined Hola null"],
+    "correcta": 0,
+    "explicacion": "Un valor por defecto solo se usa cuando el argumento falta o es undefined. En la primera llamada nombre es undefined, así que toma \"invitado\", y saludo recibe \"Buenas\": \"Buenas invitado\". En la segunda, nombre recibe null, que es un valor real, y el defecto no se aplica: \"Hola null\". La trampa es pensar que null también activa el valor por defecto: no lo hace (a diferencia del operador ??, que sí trata igual a null y undefined).",
+    "verificar": true
+  },
+  {
+    "id": "pred-019",
+    "unidad": "closures-y-scope",
+    "nivel": 2,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "let mensaje = \"hola\";\nconst decir = () => console.log(mensaje);\nmensaje = \"adiós\";\ndecir();",
+    "opciones": ["hola", "undefined", "adiós", "hola adiós"],
+    "correcta": 2,
+    "explicacion": "Un closure no guarda una copia del valor en el momento en que se crea la función, guarda acceso a la variable. Cuando decir() se ejecuta, lee mensaje en ese instante, y ya vale \"adiós\". La trampa es pensar que la función \"fotografió\" el valor \"hola\" al crearse. Esto mismo explica el clásico bug de var en bucles con setTimeout.",
+    "verificar": true
+  },
+  {
+    "id": "pred-020",
+    "unidad": "closures-y-scope",
+    "nivel": 3,
+    "pregunta": "¿Qué imprime este código?",
+    "lenguaje": "js",
+    "codigo": "function una(fn) {\n  let hecho = false;\n  let resultado;\n  return (...args) => {\n    if (!hecho) {\n      hecho = true;\n      resultado = fn(...args);\n    }\n    return resultado;\n  };\n}\nconst iniciar = una((x) => x * 2);\nconsole.log(iniciar(5), iniciar(10));",
+    "opciones": ["20 20", "10 20", "10 undefined", "10 10"],
+    "correcta": 3,
+    "explicacion": "una crea un closure con dos variables privadas: hecho y resultado. La primera llamada, iniciar(5), ejecuta fn y guarda 10 en resultado. La segunda llamada encuentra hecho en true, no vuelve a ejecutar fn y devuelve el resultado guardado, otra vez 10. La trampa es esperar 20, pensando que el argumento nuevo se usa, o undefined, pensando que la segunda llamada no devuelve nada. Este patrón \"once\" se pide en entrevistas junto con debounce y memoize.",
+    "verificar": true
+  }
+]
