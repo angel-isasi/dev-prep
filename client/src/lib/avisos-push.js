@@ -46,7 +46,17 @@ export async function activarAvisos() {
   const permiso = await Notification.requestPermission();
   if (permiso !== "granted") throw new Error("No diste permiso para los avisos.");
   const registro = await navigator.serviceWorker.ready;
-  const sub = (await registro.pushManager.getSubscription()) ?? (await registro.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: aBytes(clave) }));
+  let sub;
+  try {
+    sub = (await registro.pushManager.getSubscription()) ?? (await registro.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: aBytes(clave) }));
+  } catch (error) {
+    // "push service error": el navegador no logra conectarse al servicio de avisos de Google (red, VPN,
+    // antivirus o firewall que bloquea mtalk.google.com). No depende de dev-prep.
+    if (error.name === "AbortError") {
+      throw new Error("Chrome no pudo conectarse al servicio de avisos de Google. Revisa en chrome://gcm-internals que diga CONNECTED; si no, suele ser una VPN, el antivirus o el firewall. En el celular sí debería funcionar.");
+    }
+    throw error;
+  }
   await pedirLambda("/push/suscribir", { dispositivo: miDispositivo(), suscripcion: sub.toJSON() });
 }
 
