@@ -71,3 +71,79 @@
 .texto {
   line-height: 1;
 }
+
+/* La marca solo se ve en pantalla grande (en el celular no hay espacio en la barra de abajo) */
+.marca {
+  display: none;
+}
+
+/* Pantalla grande (laptop): barra lateral a la izquierda, como la app de escritorio */
+@media (min-width: 900px) {
+  .layout {
+    display: grid;
+    grid-template-columns: var(--ancho-barra) minmax(0, 1fr);
+  }
+
+  .principal {
+    grid-column: 2;
+    padding-bottom: var(--espacio-6);
+  }
+
+  .nav {
+    position: sticky;
+    top: 0;
+    inset: auto;
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    height: 100dvh;
+    padding: var(--espacio-5) var(--espacio-3);
+    border-top: none;
+    border-right: 1px solid var(--borde);
+    background: var(--barra-fondo);
+  }
+
+  .marca {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-3);
+    margin-bottom: var(--espacio-4);
+    padding: 0 var(--espacio-3);
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .logo {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radio);
+    background: linear-gradient(135deg, var(--acento), color-mix(in srgb, var(--acento) 55%, #5fd3be));
+    color: var(--sobre-acento);
+    font-family: var(--fuente-codigo);
+    font-size: 11px;
+  }
+
+  .enlace {
+    flex-direction: row;
+    gap: var(--espacio-3);
+    min-height: 40px;
+    padding: 9px var(--espacio-3);
+    border-radius: var(--radio);
+    color: var(--texto-suave);
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .activo {
+    color: var(--texto);
+  }
+
+  .icono svg {
+    width: 18px;
+    height: 18px;
+  }
+}

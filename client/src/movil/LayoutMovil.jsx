@@ -2,8 +2,18 @@
 // Sin efectos de canvas de pantalla completa (en el celular gastan batería y traban).
 import { NavLink, Outlet, useLocation } from "react-router";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect } from "react";
-import { IconoAprender, IconoEntrevistas, IconoInicio, IconoMas, IconoPracticar } from "../components/Iconos.jsx";
+import { useEffect, useState } from "react";
+import {
+  IconoAjustes,
+  IconoAprender,
+  IconoChuleta,
+  IconoEntrevistas,
+  IconoInicio,
+  IconoMas,
+  IconoPracticar,
+  IconoProgreso,
+  IconoReferencia,
+} from "../components/Iconos.jsx";
 import { AvisoPWA } from "./AvisoPWA.jsx";
 import { iniciarSincronizacion } from "../lib/sync-movil.js";
 import estilos from "./LayoutMovil.module.css";
@@ -13,11 +23,30 @@ const SECCIONES = [
   { a: "/aprender", texto: "Aprender", Icono: IconoAprender },
   { a: "/practicar", texto: "Practicar", Icono: IconoPracticar },
   { a: "/entrevistas", texto: "Entrevistas", Icono: IconoEntrevistas },
-  // "Más" agrupa Referencia, Chuletas y Ajustes
-  { a: "/mas", texto: "Más", Icono: IconoMas, tambien: ["/referencia", "/chuletas", "/ajustes"] },
+  // En el celular, "Más" agrupa Referencia, Chuletas y Ajustes. En pantalla grande hay espacio
+  // para mostrarlas directamente en la barra lateral (y "Más" se oculta).
+  { a: "/mas", texto: "Más", Icono: IconoMas, tambien: ["/referencia", "/chuletas", "/ajustes"], solo: "celular" },
+  { a: "/camino", texto: "Camino", Icono: IconoProgreso, solo: "grande" },
+  { a: "/chuletas", texto: "Chuletas", Icono: IconoChuleta, solo: "grande" },
+  { a: "/referencia", texto: "Referencia", Icono: IconoReferencia, solo: "grande" },
+  { a: "/ajustes", texto: "Ajustes", Icono: IconoAjustes, solo: "grande" },
 ];
 
+/** ¿Pantalla grande (laptop)? Cambia en vivo si giras el celular o achicas la ventana. */
+const GRANDE = "(min-width: 900px)";
+function usePantallaGrande() {
+  const [grande, setGrande] = useState(() => window.matchMedia(GRANDE).matches);
+  useEffect(() => {
+    const consulta = window.matchMedia(GRANDE);
+    const alCambiar = () => setGrande(consulta.matches);
+    consulta.addEventListener("change", alCambiar);
+    return () => consulta.removeEventListener("change", alCambiar);
+  }, []);
+  return grande;
+}
+
 export function LayoutMovil() {
+  const grande = usePantallaGrande();
   const { pathname } = useLocation();
   const reducido = useReducedMotion();
 
@@ -45,7 +74,13 @@ export function LayoutMovil() {
       <AvisoPWA />
 
       <nav className={estilos.nav} aria-label="Secciones">
-        {SECCIONES.map(({ a, texto, Icono, exacto, tambien }) => {
+        <div className={estilos.marca}>
+          <span className={estilos.logo} aria-hidden>
+            {"</>"}
+          </span>
+          dev-prep
+        </div>
+        {SECCIONES.filter(({ solo }) => !solo || solo === (grande ? "grande" : "celular")).map(({ a, texto, Icono, exacto, tambien }) => {
           const extra = tambien?.some((r) => pathname.startsWith(r));
           return (
             <NavLink

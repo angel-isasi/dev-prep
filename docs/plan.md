@@ -18,6 +18,13 @@ Pendiente o ideas (cuando Angel lo pida):
 - Electron, insignias y niveles.
 - "Explica tu proyecto": preguntas de entrevista sobre el propio dev-prep (Angel lo dejó aparte por ahora).
 
+## Versión publicada: decisiones de Angel (2026-11-15)
+
+- **Una sola app para todas las pantallas:** dev-prep.angel-isasi.com se ve como app en el celular (navegación abajo) y con barra lateral en pantallas de 900 px o más. Lecciones y quizzes funcionan en las dos.
+- **Dónde se guarda el avance:** en el almacenamiento del navegador de cada dispositivo (en la laptop, en su disco): sobrevive a apagar o suspender. Con internet se sube solo a AWS y se une con los demás dispositivos. Borrar los datos de navegación borra la copia local; si estaba sincronizada, se recupera al volver a vincular con el QR.
+- **Privacidad:** el progreso de Angel no está en la página. Un visitante solo tendría su propio progreso vacío en su navegador, y la nube rechaza a cualquiera sin el token secreto (que solo viaja en el QR). Lo único visible para un extraño es el contenido de estudio; la página no se indexa (noindex y robots.txt). No hace falta un sistema de usuarios. Opcional, si algún día quiere bloquear del todo la entrada: Cloudflare Access con código por correo (gratis), con el costo de complicar el uso sin internet.
+- **APK:** descartado por ahora (la PWA instalada ya es app real); queda documentado como paso opcional.
+
 ## Ampliación del stack (aprobada por Angel el 2026-11-14)
 
 Meta: seguir el stack que piden las ofertas junior (React, TypeScript, Node, SQL, Git) y poder explicar en entrevista los proyectos propios. Orden:

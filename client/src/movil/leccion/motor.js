@@ -30,6 +30,23 @@ export function semilla(texto) {
   };
 }
 
+/**
+ * Variedad: reparte los ítems turnándose entre tipos (quiz, ¿qué devuelve?, emparejar, hueco...),
+ * así una lección no sale con seis preguntas del mismo tipo seguidas.
+ */
+export function intercalarPorTipo(lista) {
+  const grupos = new Map();
+  for (const it of lista) {
+    const tipo = it.subtipo ?? it.tipo;
+    if (!grupos.has(tipo)) grupos.set(tipo, []);
+    grupos.get(tipo).push(it);
+  }
+  const colas = [...grupos.values()];
+  const resultado = [];
+  while (colas.some((c) => c.length)) for (const c of colas) if (c.length) resultado.push(c.shift());
+  return resultado;
+}
+
 /** Baraja una copia del arreglo con un generador dado. */
 export function barajar(lista, azar = Math.random) {
   const copia = [...lista];
@@ -104,7 +121,7 @@ export function armarLeccion({ items, registros, reportados = {}, preguntas = []
   tomar(repasos, espacio - lugarNuevos);
 
   // 3. Nuevos de la unidad actual (variados: barajados), hasta MAX_NUEVOS
-  const nuevos = barajar(deUnidad.filter((it) => !registros[it.clave]), azar);
+  const nuevos = intercalarPorTipo(barajar(deUnidad.filter((it) => !registros[it.clave]), azar));
   tomar(nuevos, Math.min(MAX_NUEVOS, espacio - elegidos.length));
 
   // 4. Si sobra lugar: lo menos dominado de la unidad, luego más nuevos

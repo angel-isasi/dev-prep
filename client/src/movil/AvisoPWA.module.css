@@ -42,3 +42,13 @@
   background: none;
   color: var(--texto-suave);
 }
+
+/* En pantalla grande no hay barra abajo: el aviso va en la esquina */
+@media (min-width: 900px) {
+  .aviso {
+    right: var(--espacio-5);
+    bottom: var(--espacio-5);
+    left: auto;
+    max-width: 440px;
+  }
+}

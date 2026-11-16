@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { armarLeccion, avanceUnidad, crearSesion, ordenCorrecto, pasoActual, responder, resumen, semilla, terminada, XP } from "./motor.js";
+import { armarLeccion, avanceUnidad, intercalarPorTipo, crearSesion, ordenCorrecto, pasoActual, responder, resumen, semilla, terminada, XP } from "./motor.js";
 
 const HOY = "2026-11-15";
 const it = (clave, unidad, tipo = "opcion", extra = {}) => ({ clave, unidad, tipo, ...extra });
@@ -21,7 +21,7 @@ describe("armarLeccion", () => {
     expect(claves).toContain("o0");
     expect(claves).toContain("o1");
     expect(claves).not.toContain("o2"); // aún no le toca
-    expect(claves.filter((c) => c.startsWith("o"))).toHaveLength(2);
+    expect(claves.filter((c) => /^o[0-9]$/.test(c))).toHaveLength(2);
   });
 
   test("no más de 4 nuevos si hay repasos de sobra para llenar", () => {
@@ -152,5 +152,19 @@ describe("avance de una unidad", () => {
     const registros = { a0: { caja: 3 }, a1: { caja: 4 }, a2: { caja: 3 }, a3: { caja: 5 }, a4: { caja: 1 } };
     expect(avanceUnidad(items, registros, "arrays")).toMatchObject({ total: 5, vistos: 5, dominados: 4, dominada: true });
     expect(avanceUnidad(items, {}, "arrays")).toMatchObject({ vistos: 0, dominada: false });
+  });
+});
+
+describe("variedad", () => {
+  test("intercala los tipos: no salen todos los de un tipo seguidos", () => {
+    const lista = [it("d1", "u", "opcion", { subtipo: "devuelve" }), it("d2", "u", "opcion", { subtipo: "devuelve" }), it("d3", "u", "opcion", { subtipo: "devuelve" }), it("q1", "u", "opcion", { subtipo: "quiz" }), it("h1", "u", "hueco")];
+    expect(intercalarPorTipo(lista).map((x) => x.clave)).toEqual(["d1", "q1", "h1", "d2", "d3"]);
+  });
+  test("una lección con muchos ítems de un tipo igual trae de los otros", () => {
+    const muchos = [...Array.from({ length: 20 }, (_, i) => it(`d${i}`, "u", "opcion", { subtipo: "devuelve" })), it("q1", "u", "opcion", { subtipo: "quiz" }), it("q2", "u", "opcion", { subtipo: "quiz" }), it("t1", "u", "tarjeta")];
+    const pasos = armarLeccion({ items: muchos, registros: {}, hoy: HOY, unidad: "u", modo: "rapida", azar: semilla("v") });
+    const tipos = new Set(pasos.map((p) => p.item.subtipo ?? p.tipo));
+    expect(tipos.has("quiz")).toBe(true);
+    expect(tipos.has("tarjeta")).toBe(true);
   });
 });

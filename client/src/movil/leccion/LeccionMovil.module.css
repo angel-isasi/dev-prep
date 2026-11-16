@@ -273,3 +273,22 @@
   color: var(--texto-suave);
   text-align: center;
 }
+
+/* Pantalla grande (laptop): la lección en una columna centrada, como en Duolingo web */
+@media (min-width: 900px) {
+  .barra,
+  .contenido {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .pie,
+  .hoja {
+    padding-inline: max(var(--espacio-4), calc((100vw - 720px) / 2));
+  }
+
+  .titulo {
+    font-size: 28px;
+  }
+}
