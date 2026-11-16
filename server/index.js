@@ -7,6 +7,7 @@ import { crearCorredor } from "./corredor.js";
 import { crearProgreso } from "./progreso.js";
 import { cargarEntrevistas } from "./entrevistas.js";
 import { crearMisRespuestas } from "./mis-respuestas.js";
+import { crearSync } from "./sync.js";
 import { cargarReferencia, cargarTemas } from "./aprender.js";
 import { exec } from "node:child_process";
 import { abrirEnVSCode } from "./vscode.js";
@@ -20,6 +21,8 @@ const eventos = crearEventos();
 const progreso = await crearProgreso({ datosDir: config.datosDir });
 const entrevistas = await cargarEntrevistas(config.contenidoDir);
 const misRespuestas = await crearMisRespuestas({ datosDir: config.datosDir });
+// Sincronización con el celular por AWS (solo si existe data/sync.json; si no, no hace nada).
+const sync = await crearSync({ datosDir: config.datosDir, progreso, misRespuestas });
 const aprender = await cargarTemas(config.contenidoDir);
 const referencia = await cargarReferencia(config.contenidoDir);
 for (const error of [...aprender.errores, ...referencia.errores]) console.warn(`[contenido] ${error}`);
@@ -43,6 +46,7 @@ const app = crearApp({
   progreso,
   entrevistas,
   misRespuestas,
+  sync,
   aprender,
   referencia,
   vscode,

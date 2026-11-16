@@ -60,4 +60,7 @@ export const api = {
     }),
   referencia: get("/api/referencia"),
   apagar: () => post("/api/apagar"),
+  // Sincronización con el celular (AWS)
+  sync: () => pedir("/api/sync"),
+  sincronizar: () => post("/api/sync"),
 };

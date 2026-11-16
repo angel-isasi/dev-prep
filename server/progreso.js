@@ -15,7 +15,9 @@ import {
   iniciarRepaso,
   calificarPregunta,
   registrarQuiz,
+  programarRepaso,
 } from "./progreso-reglas.js";
+import { diasCombinados, documentoParaSubir, fusionarDocumento } from "./combinar.js";
 
 /** Campos de configuración que se pueden cambiar desde Ajustes, con su validación. */
 const CAMPOS_CONFIG = {
@@ -53,7 +55,11 @@ export async function crearProgreso({ datosDir }) {
   let cola = Promise.resolve();
 
   /** Escritura atómica: primero a un .tmp y luego renombrar (si se corta la luz, no queda a medias). */
+  // Avisos de "el progreso cambió" (los usa la sincronización para subir los cambios).
+  const oyentes = new Set();
+
   function guardar() {
+    for (const oyente of oyentes) oyente();
     cola = cola
       .then(async () => {
         const tmp = `${archivo}.tmp`;
@@ -124,6 +130,24 @@ export async function crearProgreso({ datosDir }) {
 
     config: () => datos.config,
 
+    // --- Sincronización con otros dispositivos ---
+    /** Días de todos los dispositivos sumados (racha, meta, semana, calendario). */
+    dias: () => diasCombinados(datos),
+    /** Lo que esta laptop sube a la nube. */
+    documento: () => documentoParaSubir(datos),
+    /** Mezcla los documentos de otros dispositivos con el tuyo (sin perder nada). */
+    async fusionar(documentos) {
+      for (const { dispositivo, doc } of documentos) datos = fusionarDocumento(datos, doc, dispositivo);
+      datos.ejercicios ??= {};
+      datos.preguntas ??= {};
+      datos.quizzes ??= {};
+      await guardar();
+    },
+    alCambiar(oyente) {
+      oyentes.add(oyente);
+      return () => oyentes.delete(oyente);
+    },
+
     dePregunta: (id) => datos.preguntas[id],
 
     /** Resultado de un quiz de Aprender: se guarda el mejor y el último. */
@@ -137,7 +161,8 @@ export async function crearProgreso({ datosDir }) {
 
     /** Autoevaluación de una tarjeta de entrevista. */
     async calificarPregunta(id, nota) {
-      datos.preguntas[id] = calificarPregunta(datos.preguntas[id], nota, fechaLocal());
+      // "en": fecha y hora, para saber cuál es más reciente al mezclar con el celular.
+      datos.preguntas[id] = { ...calificarPregunta(datos.preguntas[id], nota, fechaLocal()), en: ahoraIso() };
       datos.dias = sumarAlDia(datos.dias, fechaLocal(), "preguntas");
       await registrarEvento("pregunta", id, { nota });
       await guardar();
@@ -146,9 +171,14 @@ export async function crearProgreso({ datosDir }) {
 
     /** Cambia solo los campos válidos; devuelve la config resultante. */
     async cambiarConfig(cambios) {
+      let cambio = false;
       for (const [campo, valor] of Object.entries(cambios ?? {})) {
-        if (CAMPOS_CONFIG[campo]?.(valor)) datos.config[campo] = valor;
+        if (CAMPOS_CONFIG[campo]?.(valor)) {
+          datos.config[campo] = valor;
+          cambio = true;
+        }
       }
+      if (cambio) datos.config.actualizadoEn = ahoraIso();
       await guardar();
       return datos.config;
     },
@@ -186,7 +216,12 @@ export async function crearProgreso({ datosDir }) {
       const ahora = ahoraIso();
       const aplicado = aplicarResultado(deEjercicio(id), resultado, { esIntento, ahora });
       const { resueltoAhora, repasoCompletado } = aplicado;
-      const registro = esIntento ? conTiempo(aplicado.registro, ahora) : aplicado.registro;
+      let registro = esIntento ? conTiempo(aplicado.registro, ahora) : aplicado.registro;
+      // Regla acordada: si ya lo estudiaste en el celular (viste la solución allí), resolverlo cuenta,
+      // pero te lo vuelvo a pedir mañana para comprobar que lo retuviste.
+      if (resueltoAhora && datos.lecturas?.[id]?.vioSolucion) {
+        registro = { ...registro, repaso: programarRepaso(1, fechaLocal()), estudiadoEnCelular: true };
+      }
       datos.ejercicios[id] = registro;
       if (resueltoAhora) datos.dias = sumarAlDia(datos.dias, fechaLocal(), "resueltos");
       if (repasoCompletado) datos.dias = sumarAlDia(datos.dias, fechaLocal(), "repasos");

@@ -1,0 +1,111 @@
+// Mezcla del progreso entre dispositivos (laptop y celular), como funciones puras.
+// La usan el servidor de la laptop (server/sync.js) y el celular (client/src/lib/sync-movil.js).
+//
+// Idea: cada dispositivo guarda primero en sí mismo y sube SU documento a la nube. Al bajar los
+// documentos de los otros, los mezcla con el suyo registro por registro:
+// - Tarjetas, ítems de lección, lecturas, ejercicios: gana el registro más reciente.
+// - Quizzes: el mejor resultado.
+// - Días (racha, meta): cada dispositivo cuenta lo suyo y se SUMAN (nunca se pisan).
+// Mezclar dos veces lo mismo da el mismo resultado, así que repetir una sincronización no daña nada.
+
+/** Fecha y hora de un registro, para saber cuál es más reciente (ms desde 1970, o null). */
+export function fechaDe(registro) {
+  const texto = registro?.en ?? registro?.ultimaActividad ?? registro?.resueltoEn ?? registro?.actualizadoEn ?? null;
+  const ms = texto ? Date.parse(texto) : NaN;
+  return Number.isNaN(ms) ? null : ms;
+}
+
+/** El más reciente de dos registros del mismo elemento. Sin fechas, el que tiene más uso. */
+export function masReciente(a, b) {
+  if (!a) return b;
+  if (!b) return a;
+  const fa = fechaDe(a);
+  const fb = fechaDe(b);
+  if (fa !== null && fb !== null) return fb > fa ? b : a;
+  if (fa === null && fb !== null) return b;
+  if (fb === null && fa !== null) return a;
+  return (b.vistas ?? b.intentos ?? 0) > (a.vistas ?? a.intentos ?? 0) ? b : a;
+}
+
+/** Mezcla dos mapas id -> registro eligiendo con `elegir`. */
+function mezclarMapa(propio = {}, remoto = {}, elegir = masReciente) {
+  const resultado = { ...propio };
+  for (const [id, registro] of Object.entries(remoto)) resultado[id] = elegir(propio[id], registro);
+  return resultado;
+}
+
+/** Ejercicios: el más reciente, pero un "resuelto" (tests en la laptop) nunca se pierde. */
+function elegirEjercicio(a, b) {
+  const elegido = masReciente(a, b);
+  const otro = elegido === a ? b : a;
+  if (otro?.estado === "resuelto" && elegido?.estado !== "resuelto" && elegido?.estado !== "repasar") return otro;
+  return elegido;
+}
+
+/** Quizzes: el mejor resultado; el "último" sale del más reciente. */
+function elegirQuiz(a, b) {
+  if (!a) return b;
+  if (!b) return a;
+  const reciente = masReciente(a, b);
+  return { ...reciente, mejor: Math.max(a.mejor ?? 0, b.mejor ?? 0) };
+}
+
+/**
+ * Mezcla en `propio` el documento de otro dispositivo. Devuelve un documento nuevo.
+ * @param {object} propio     tu progreso
+ * @param {object} remoto     el documento que subió el otro dispositivo
+ * @param {string} dispositivo  id del otro dispositivo
+ */
+export function fusionarDocumento(propio, remoto, dispositivo) {
+  if (!remoto || typeof remoto !== "object") return propio;
+  const r = remoto;
+  const resultado = {
+    ...propio,
+    preguntas: mezclarMapa(propio.preguntas, r.preguntas),
+    items: mezclarMapa(propio.items, r.items),
+    lecturas: mezclarMapa(propio.lecturas, r.lecturas),
+    quizzes: mezclarMapa(propio.quizzes, r.quizzes, elegirQuiz),
+    ejercicios: mezclarMapa(propio.ejercicios, r.ejercicios, elegirEjercicio),
+    reportados: { ...(r.reportados ?? {}), ...(propio.reportados ?? {}) },
+    // Días: lo del otro dispositivo se guarda aparte y se suma al mostrar (ver diasCombinados).
+    diasRemotos: { ...(propio.diasRemotos ?? {}), [dispositivo]: r.dias ?? {} },
+  };
+
+  // Configuración y textos personales: gana lo editado más recientemente.
+  if (r.config && (fechaDe(r.config) ?? 0) > (fechaDe(propio.config) ?? 0)) {
+    const { tema: _tema, ...compartida } = r.config; // el tema claro/oscuro es de cada dispositivo
+    resultado.config = { ...propio.config, ...compartida };
+  }
+  if (r.misRespuestas && (fechaDe(r.misRespuestas) ?? 0) > (fechaDe(propio.misRespuestas) ?? 0)) {
+    resultado.misRespuestas = r.misRespuestas;
+  }
+  // Lecciones (solo en el celular): el contador más avanzado.
+  if (r.lecciones && (r.lecciones.completadas ?? 0) > (propio.lecciones?.completadas ?? 0)) {
+    resultado.lecciones = r.lecciones;
+  }
+  return resultado;
+}
+
+/** Días de todos los dispositivos sumados (para racha, meta y semana). */
+export function diasCombinados(doc) {
+  const total = {};
+  const sumar = (dias) => {
+    for (const [fecha, dia] of Object.entries(dias ?? {})) {
+      const acumulado = (total[fecha] ??= {});
+      for (const [campo, valor] of Object.entries(dia ?? {})) {
+        if (typeof valor !== "number") continue;
+        // La foto del % de preparación no se suma: se toma la mayor.
+        acumulado[campo] = campo === "preparacion" ? Math.max(acumulado[campo] ?? 0, valor) : (acumulado[campo] ?? 0) + valor;
+      }
+    }
+  };
+  sumar(doc.dias);
+  for (const dias of Object.values(doc.diasRemotos ?? {})) sumar(dias);
+  return total;
+}
+
+/** Lo que un dispositivo sube a la nube: su progreso sin lo que bajó de otros ni lo pasajero. */
+export function documentoParaSubir(doc) {
+  const { diasRemotos: _r, leccionEnCurso: _l, ...propio } = doc;
+  return propio;
+}

@@ -2,6 +2,7 @@
 // data/mis-respuestas.json, separados de las estadísticas.
 import { readFile, rename, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
+import { ahoraIso } from "./fechas.js";
 
 const VACIO = { pitch: "", historias: [], respuestas: {} };
 const MAX_TEXTO = 5000;
@@ -11,6 +12,8 @@ const texto = (v) => (typeof v === "string" ? v.slice(0, MAX_TEXTO) : "");
 /** Deja solo campos conocidos y textos de largo razonable. */
 function sanear(datos) {
   return {
+    // Cuándo se editó por última vez (para elegir la versión más nueva entre laptop y celular).
+    actualizadoEn: typeof datos?.actualizadoEn === "string" ? datos.actualizadoEn.slice(0, 40) : null,
     pitch: texto(datos?.pitch),
     historias: (Array.isArray(datos?.historias) ? datos.historias : []).slice(0, 30).map((h, i) => ({
       id: typeof h?.id === "string" ? h.id.slice(0, 40) : `h${i}`,
@@ -40,7 +43,7 @@ export async function crearMisRespuestas({ datosDir }) {
   return {
     leer: () => datos,
     async guardar(nuevos) {
-      datos = sanear({ ...datos, ...nuevos });
+      datos = sanear({ ...datos, ...nuevos, actualizadoEn: nuevos?.actualizadoEn ?? ahoraIso() });
       const tmp = `${archivo}.tmp`;
       await writeFile(tmp, JSON.stringify(datos, null, 2));
       await rename(tmp, archivo);

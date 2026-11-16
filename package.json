@@ -18,7 +18,10 @@
     "exportar:movil": "node scripts/exportar-movil.js",
     "build:movil": "node scripts/exportar-movil.js && vite build --mode movil",
     "dev:movil": "node scripts/exportar-movil.js && vite --mode movil",
-    "preview:movil": "vite preview --mode movil --port 4173"
+    "preview:movil": "vite preview --mode movil --port 4173",
+    "aws:crear": "node scripts/aws-sync.js crear",
+    "aws:borrar": "node scripts/aws-sync.js borrar",
+    "aws:estado": "node scripts/aws-sync.js estado"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.2",
@@ -28,6 +31,7 @@
     "@types/react-dom": "^19.3.0",
     "express": "^5.3.0",
     "jsdom": "^31.0.1",
+    "qrcode": "^1.5.4",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "typescript": "^7.0.2",

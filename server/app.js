@@ -8,6 +8,7 @@ import { rutasEjercicios } from "./rutas/ejercicios.js";
 import { rutasProgreso } from "./rutas/progreso.js";
 import { rutasEntrevistas } from "./rutas/entrevistas.js";
 import { rutasAprender } from "./rutas/aprender.js";
+import { rutasSync } from "./rutas/sync.js";
 
 /**
  * @param {object} deps
@@ -24,6 +25,7 @@ export function crearApp(deps) {
   if (deps.entrevistas) app.use("/api", rutasEntrevistas(deps));
   if (deps.aprender) app.use("/api", rutasAprender(deps));
   if (deps.eventos) app.get("/api/eventos", deps.eventos.manejador);
+  if (deps.sync) app.use("/api", rutasSync(deps));
 
   // Botón "Cerrar dev-prep": responde y luego apaga el servidor.
   if (deps.alApagar) {

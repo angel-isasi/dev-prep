@@ -22,9 +22,10 @@ export function rutasProgreso({ indice, progreso }) {
       registros,
       prep,
       resueltos,
-      dias: resumenDias(datos.dias, config, hoy),
-      ritmo: ritmo({ fechaMeta: config.fechaMeta, hoy, totalEjercicios: indice.ejercicios.length, resueltos, dias: datos.dias }),
-      semana: semana(datos.dias, hoy, prep.total),
+      // Días de la laptop y del celular sumados (si están sincronizados).
+      dias: resumenDias(progreso.dias(), config, hoy),
+      ritmo: ritmo({ fechaMeta: config.fechaMeta, hoy, totalEjercicios: indice.ejercicios.length, resueltos, dias: progreso.dias() }),
+      semana: semana(progreso.dias(), hoy, prep.total),
     };
   }
 
@@ -79,7 +80,7 @@ export function rutasProgreso({ indice, progreso }) {
       ritmo: g.ritmo,
       semana: g.semana,
       totales: { resueltos: g.resueltos, total: indice.ejercicios.length },
-      calendario: calendario(progreso.datos().dias, g.hoy),
+      calendario: calendario(progreso.dias(), g.hoy),
     });
   });
 

@@ -1,8 +1,9 @@
 // Métricas de la pantalla Inicio y Progreso, como funciones puras.
-// "Hecho" en un día = ejercicios resueltos + repasos completados.
+// "Hecho" en un día = ejercicios resueltos + repasos completados + (si estudiaste en el celular)
+// una lección completa, que cuenta 1 como máximo: la meta sigue pidiendo práctica real en la laptop.
 import { estadoVisible, sumarDias } from "./progreso-reglas.js";
 
-const hechoDe = (dia) => (dia?.resueltos ?? 0) + (dia?.repasos ?? 0);
+export const hechoDe = (dia) => (dia?.resueltos ?? 0) + (dia?.repasos ?? 0) + Math.min(dia?.lecciones ?? 0, 1);
 
 /** Días entre dos fechas "AAAA-MM-DD" (b - a). */
 export function diasEntre(a, b) {

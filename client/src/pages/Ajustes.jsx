@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
 import { Esqueleto } from "../components/Esqueleto.jsx";
+import { SeccionSync } from "../components/SeccionSync.jsx";
 import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
 import estilos from "./Ajustes.module.css";
 
@@ -100,6 +101,8 @@ export function Ajustes() {
           {estado === "error" && <span className={estilos.error}>No se pudo guardar</span>}
         </div>
       </form>
+
+      <SeccionSync />
     </section>
   );
 }
