@@ -32,7 +32,7 @@ export function ListaRevision() {
         {casos.map((c) => {
           const hecha = hechas[c.id];
           return (
-            <Link key={c.id} to={`/revision/${c.id}`} className={`aparecer ${estilos.fila}`}>
+            <Link key={c.id} to={`/revision/${c.id}`} className={`aparecer brillo ${estilos.fila}`}>
               <span className={estilos.chip}>{LENGUAJES[c.lenguaje] ?? c.lenguaje}</span>
               <span className={estilos.filaTitulo}>
                 {c.titulo}

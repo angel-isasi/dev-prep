@@ -9,9 +9,20 @@ import { celebrar } from "../../lib/celebrar.js";
 import { Markdown } from "../../components/Markdown.jsx";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
+import { TerminalAnimada } from "../../components/ui/terminal-animada.jsx";
 import estilos from "./GitPractico.module.css";
 
 const NIVEL = { 1: "básico", 2: "intermedio", 3: "difícil" };
+
+/** Lo que escribe la terminal de la portada: un flujo de trabajo típico con ramas. */
+const DEMO = [
+  { cmd: "git switch -c feature/buscador" },
+  { out: "Switched to a new branch 'feature/buscador'" },
+  { cmd: 'git commit -am "Agrega el buscador"' },
+  { out: "[feature/buscador 3f2a9c1] Agrega el buscador" },
+  { cmd: "git push -u origin feature/buscador" },
+  { out: "✓ Rama subida: ya puedes abrir tu pull request" },
+];
 
 export function GitPractico() {
   const [escenarios, setEscenarios] = useState(null);
@@ -33,11 +44,17 @@ export function GitPractico() {
       quedó bien.
     </CabeceraPagina>
   );
+  const portada = (
+    <div className={estilos.portada}>
+      {cabecera}
+      <TerminalAnimada lineas={DEMO} titulo="tu-proyecto — git" />
+    </div>
+  );
 
   if (!api.escenariosGit) {
     return (
       <section className={estilos.pagina}>
-        {cabecera}
+        {portada}
         <p className={estilos.ayuda}>
           Esto crea repositorios en tu laptop y los abre en VS Code, así que funciona con dev-prep abierto en tu laptop. Ábrela ahí (la web
           se conecta sola) o ve a <Link to="/ajustes">Ajustes</Link> → "Conectar con dev-prep de esta laptop".
@@ -68,11 +85,11 @@ export function GitPractico() {
 
   return (
     <section className={estilos.pagina}>
-      {cabecera}
+      {portada}
       <ol className={estilos.lista}>
         {escenarios.map((e, i) => (
           <li key={e.id}>
-            <button type="button" className={estilos.ficha} data-resuelto={!!resueltos[e.id]} onClick={() => setAbierto(e.id)}>
+            <button type="button" className={`brillo ${estilos.ficha}`} data-resuelto={!!resueltos[e.id]} onClick={() => setAbierto(e.id)}>
               <span className={estilos.numero}>{resueltos[e.id] ? "✓" : String(i + 1).padStart(2, "0")}</span>
               <span className={estilos.fichaTexto}>
                 <strong>{e.titulo}</strong>

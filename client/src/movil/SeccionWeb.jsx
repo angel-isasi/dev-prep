@@ -7,7 +7,7 @@ import estilos from "../components/SeccionSync.module.css";
 import { SeccionRutina } from "../components/SeccionRutina.jsx";
 import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
 import { SeccionLaptop } from "./SeccionLaptop.jsx";
-import { Confirmar } from "../components/Confirmar.jsx";
+import { HoldButton } from "../components/ui/hold-button.jsx";
 
 const fecha = (iso) => new Date(iso).toLocaleString("es-PE", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 
@@ -102,22 +102,24 @@ export function SeccionWeb() {
             Restaurar respaldo
           </button>
           <input ref={archivo} type="file" accept="application/json,.json" hidden onChange={restaurar} />
-          <Confirmar
+        </div>
+        <p className={estilos.ayuda}>
+          <strong>Empezar de cero:</strong> borra tu progreso en TODOS tus dispositivos (ejercicios, racha, repasos, tarjetas, lecciones,
+          inglés, exámenes, simulacros, logros, postulaciones y diario). Se quedan tus ajustes, tu pitch, tus historias STAR y tu CV.
+          Descarga un respaldo antes si quieres guardarlo. No se puede deshacer.
+        </p>
+        <div className={estilos.acciones}>
+          <HoldButton
             peligro
-            titulo="¿Empezar de cero?"
-            descripcion="Se borra tu progreso en TODOS tus dispositivos: ejercicios, racha, repasos, tarjetas, lecciones, inglés, exámenes, simulacros, logros, postulaciones y diario. Se quedan tus ajustes, tu pitch, tus historias STAR y tu CV. Descarga un respaldo antes si quieres guardarlo. No se puede deshacer."
-            textoConfirmar="Sí, empezar de cero"
-            disparador={
-              <button type="button" className="boton boton-fantasma">
-                Empezar de cero
-              </button>
-            }
-            alConfirmar={async () => {
+            textoListo="Empezando de cero…"
+            alCompletar={async () => {
               await api.empezarDeCero();
               await sincronizar().catch(() => {});
               location.assign("/");
             }}
-          />
+          >
+            Mantén presionado para empezar de cero
+          </HoldButton>
         </div>
         {aviso && <p className={estilos.ayuda}>{aviso}</p>}
       </section>

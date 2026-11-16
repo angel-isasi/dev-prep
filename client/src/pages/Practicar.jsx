@@ -106,7 +106,7 @@ export function Practicar() {
       {ES_MOVIL && (
         <div className={practica.herramientas}>
           {HERRAMIENTAS.map((h) => (
-            <Link key={h.a} to={h.a} className={practica.herramienta}>
+            <Link key={h.a} to={h.a} className={`brillo ${practica.herramienta}`}>
               <strong>{h.titulo} →</strong>
               <small>{h.texto}</small>
             </Link>

@@ -84,7 +84,7 @@ export function RetoSemana() {
   const nivel = { 1: "básico", 2: "intermedio", 3: "difícil" }[reto.reto.nivel] ?? "";
 
   return (
-    <div className={`${estilos.tarjeta} ${estilos.reto}`} data-estado={resultado.estado}>
+    <div className={`textura ${estilos.tarjeta} ${estilos.reto}`} data-estado={resultado.estado}>
       <div className={estilos.cabecera}>
         <span className={estilos.etiqueta}>Reto de la semana</span>
         {marca.mejor && <small>Tu marca: {marca.mejor.puntos} puntos</small>}

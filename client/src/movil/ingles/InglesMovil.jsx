@@ -139,7 +139,7 @@ export function InglesMovil() {
               <strong>Rutina de hoy</strong>
               <small>10 ejercicios: palabras, frases, escuchar y gramática</small>
             </Link>
-            <Link to={leccion("rapida")} className="boton">
+            <Link to={leccion("rapida")} className="boton brillo">
               <span className={estilos.iconoFicha} aria-hidden>
                 ⚡
               </span>
@@ -147,7 +147,7 @@ export function InglesMovil() {
               <small>5 ejercicios</small>
             </Link>
             {hayVoz() && (
-              <Link to={leccion("escuchar")} className="boton">
+              <Link to={leccion("escuchar")} className="boton brillo">
                 <span className={estilos.iconoFicha} aria-hidden>
                   ♪
                 </span>
@@ -155,14 +155,14 @@ export function InglesMovil() {
                 <small>oído y dictado</small>
               </Link>
             )}
-            <Link to={leccion("errores")} className="boton">
+            <Link to={leccion("errores")} className="boton brillo">
               <span className={estilos.iconoFicha} aria-hidden>
                 ↺
               </span>
               <strong>Mis errores</strong>
               <small>lo que fallaste</small>
             </Link>
-            <Link to={leccion("mispalabras")} className="boton">
+            <Link to={leccion("mispalabras")} className="boton brillo">
               <span className={estilos.iconoFicha} aria-hidden>
                 ★
               </span>
@@ -191,7 +191,7 @@ export function InglesMovil() {
           )}
         </div>
 
-        <aside className={`${estilos.bloque} ${estilos.columnaLateral}`}>
+        <aside className={`textura ${estilos.bloque} ${estilos.columnaLateral}`}>
           <h2>Inmersión: inglés real</h2>
           <p className={estilos.ayuda}>
             La app te da la base; el oído se entrena escuchando mucho inglés de verdad. Anota lo que viste o escuchaste hoy en inglés y

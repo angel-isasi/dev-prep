@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
-import { Pestanas } from "../components/Pestanas.jsx";
+import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
 import { Markdown } from "../components/Markdown.jsx";
 import { Tarjeta } from "../components/Tarjeta.jsx";
 import { Simulacro } from "../components/Simulacro.jsx";
@@ -60,7 +60,7 @@ export function Entrevistas() {
 
       <Pestanas pestanas={pestanas} activa={pestana} alCambiar={(p) => (setPestana(p), setSesion(null))} />
 
-      <div className={estilos.contenido}>
+      <ContenidoPestanas activa={pestana} orden={pestanas.map((p) => p.id)} className={estilos.contenido}>
         {pestana === "tarjetas" &&
           (sesion ? (
             <SesionTarjetas sesion={sesion} alCalificar={calificar} alTerminar={terminar} />
@@ -83,7 +83,7 @@ export function Entrevistas() {
             <Markdown>{resumen.guias.vozAlta}</Markdown>
           </article>
         )}
-      </div>
+      </ContenidoPestanas>
     </section>
   );
 }
@@ -106,14 +106,21 @@ function ElegirMazo({ resumen, alEmpezar }) {
           </span>
           <span className={estilos.mazoTexto}>
             <strong>Repaso de hoy</strong>
-            <span>{hoy ? (hoy === 1 ? "tarjeta te toca hoy" : "tarjetas te tocan hoy") : "Nada pendiente. Practica una categoría nueva."}</span>
+            <span>
+              {hoy ? (hoy === 1 ? "tarjeta te toca hoy" : "tarjetas te tocan hoy") : "Nada pendiente. Practica una categoría nueva."}
+            </span>
           </span>
           {hoy > 0 && <span className={estilos.ir}>Empezar →</span>}
         </button>
         <button
           type="button"
           className={estilos.mazo}
-          onClick={() => alEmpezar("Repaso rápido de HTML y CSS", { categorias: resumen.categorias.filter((c) => /html|css/i.test(c.nombre)).map((c) => c.nombre), cantidad: 10 })}
+          onClick={() =>
+            alEmpezar("Repaso rápido de HTML y CSS", {
+              categorias: resumen.categorias.filter((c) => /html|css/i.test(c.nombre)).map((c) => c.nombre),
+              cantidad: 10,
+            })
+          }
         >
           <span className={estilos.mazoIcono} aria-hidden>
             {"</>"}
@@ -139,7 +146,12 @@ function ElegirMazo({ resumen, alEmpezar }) {
         {resumen.categorias.map((c) => (
           <MagicCard key={c.nombre} className={estilos.tarjetaCategoria}>
             <button type="button" className={estilos.categoria} onClick={() => alEmpezar(c.nombre, { categoria: c.nombre })}>
-              <AnilloProgreso valor={c.total ? c.dominadas / c.total : 0} tamano={54} grosor={5} completo={c.total > 0 && c.dominadas === c.total}>
+              <AnilloProgreso
+                valor={c.total ? c.dominadas / c.total : 0}
+                tamano={54}
+                grosor={5}
+                completo={c.total > 0 && c.dominadas === c.total}
+              >
                 <span className={estilos.anilloTexto}>{c.dominadas}</span>
               </AnilloProgreso>
               <span className={estilos.mazoTexto}>

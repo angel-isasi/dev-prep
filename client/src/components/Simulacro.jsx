@@ -195,7 +195,7 @@ function Portada({ proceso, ingles, setIngles, cargando, alEmpezar }) {
   const etapas = proceso?.etapas ?? [];
   return (
     <div className={estilos.portada}>
-      <div className={`${estilos.panel} ${estilos.completo}`}>
+      <div className={`textura ${estilos.panel} ${estilos.completo}`}>
         <span className={estilos.etiqueta}>Proceso completo · {minutosProceso(proceso)} minutos</span>
         <h2>Como una entrevista de verdad, de principio a fin</h2>
         <p>
@@ -214,7 +214,7 @@ function Portada({ proceso, ingles, setIngles, cargando, alEmpezar }) {
       <h3 className={estilos.subtitulo}>O practica una etapa suelta</h3>
       <div className={estilos.gridEtapas}>
         {etapas.map((e, i) => (
-          <button key={e.id} type="button" className={estilos.etapa} disabled={cargando} onClick={() => alEmpezar([e.id])}>
+          <button key={e.id} type="button" className={`brillo ${estilos.etapa}`} disabled={cargando} onClick={() => alEmpezar([e.id])}>
             <span className={estilos.etapaNumero} aria-hidden>
               {ICONOS[e.id] ?? i + 1}
             </span>

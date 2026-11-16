@@ -1,0 +1,80 @@
+.terminal {
+  width: 100%;
+  max-width: 520px;
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--codigo-fondo);
+  box-shadow: var(--sombra);
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--borde);
+  color: var(--texto-tenue);
+  font-family: var(--fuente-codigo);
+  font-size: 12px;
+}
+
+.barra i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--error);
+  opacity: 0.8;
+}
+
+.barra i:nth-child(2) {
+  background: var(--aviso);
+}
+
+.barra i:nth-child(3) {
+  background: var(--exito);
+}
+
+.barra span {
+  margin-left: auto;
+}
+
+.cuerpo {
+  min-height: 168px;
+  margin: 0;
+  padding: 14px 16px;
+  color: var(--texto);
+  font-family: var(--fuente-codigo);
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.prompt {
+  color: var(--exito);
+  font-weight: 700;
+}
+
+.salida {
+  color: var(--texto-suave);
+}
+
+.cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.05em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--acento);
+}
+
+/* Al terminar, el cursor parpadea unas veces y se queda quieto (sin animación infinita) */
+.cursor[data-final] {
+  animation: parpadeo 1s steps(1) 5;
+}
+
+@keyframes parpadeo {
+  50% {
+    opacity: 0;
+  }
+}

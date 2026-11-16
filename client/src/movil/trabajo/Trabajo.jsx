@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../../lib/api.js";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
-import { Pestanas } from "../../components/Pestanas.jsx";
+import { ContenidoPestanas, Pestanas } from "../../components/Pestanas.jsx";
 import { Tarjeta } from "../../components/Tarjeta.jsx";
 import { Cv } from "./Cv.jsx";
 import { Portafolio, PruebasYProyecto } from "./Proyectos.jsx";
@@ -44,14 +44,14 @@ export function Trabajo() {
         Tus postulaciones, qué te falta para una oferta, tu CV, tu portafolio y pruebas técnicas como las de las empresas.
       </CabeceraPagina>
       <Pestanas pestanas={pestanas} activa={pestana} alCambiar={setPestana} />
-      <div className={estilos.contenido}>
+      <ContenidoPestanas activa={pestana} orden={pestanas.map((p) => p.id)} className={estilos.contenido}>
         {pestana === "ofertas" && <OfertasParaTi />}
         {pestana === "postulaciones" && <Postulaciones />}
         {pestana === "oferta" && <Oferta />}
         {pestana === "cv" && <Cv />}
         {pestana === "portafolio" && <Portafolio />}
         {pestana === "pruebas" && <PruebasYProyecto />}
-      </div>
+      </ContenidoPestanas>
     </section>
   );
 }
@@ -124,7 +124,11 @@ function Postulaciones() {
             </label>
             <label>
               Puesto
-              <input value={editando.puesto} onChange={(e) => setEditando({ ...editando, puesto: e.target.value })} placeholder="Frontend Developer Jr" />
+              <input
+                value={editando.puesto}
+                onChange={(e) => setEditando({ ...editando, puesto: e.target.value })}
+                placeholder="Frontend Developer Jr"
+              />
             </label>
             <label>
               Enlace de la oferta
@@ -142,11 +146,19 @@ function Postulaciones() {
             </label>
             <label>
               Próximo paso
-              <input value={editando.proximo} onChange={(e) => setEditando({ ...editando, proximo: e.target.value })} placeholder="Mandar la prueba técnica" />
+              <input
+                value={editando.proximo}
+                onChange={(e) => setEditando({ ...editando, proximo: e.target.value })}
+                placeholder="Mandar la prueba técnica"
+              />
             </label>
             <label>
               Para cuándo
-              <input type="date" value={editando.proximoFecha} onChange={(e) => setEditando({ ...editando, proximoFecha: e.target.value })} />
+              <input
+                type="date"
+                value={editando.proximoFecha}
+                onChange={(e) => setEditando({ ...editando, proximoFecha: e.target.value })}
+              />
             </label>
           </div>
           <label className={estilos.ancho}>
@@ -155,7 +167,9 @@ function Postulaciones() {
           </label>
           <details className={estilos.ayuda}>
             <summary>Antes de la entrevista: investiga la empresa y lleva preguntas</summary>
-            <p>Qué hace, a quién le vende, qué stack usa (mira su web y sus ofertas), y una noticia reciente. Tres preguntas para hacerles:</p>
+            <p>
+              Qué hace, a quién le vende, qué stack usa (mira su web y sus ofertas), y una noticia reciente. Tres preguntas para hacerles:
+            </p>
             <ul>
               {PREGUNTAS_PARA_ELLOS.map((p) => (
                 <li key={p}>{p}</li>
@@ -173,7 +187,9 @@ function Postulaciones() {
         </form>
       )}
 
-      {lista.length === 0 && !editando && <p className={estilos.ayuda}>Todavía no hay postulaciones. Cuando postules, anótala aquí para no perder el hilo.</p>}
+      {lista.length === 0 && !editando && (
+        <p className={estilos.ayuda}>Todavía no hay postulaciones. Cuando postules, anótala aquí para no perder el hilo.</p>
+      )}
       <ListaAnimada className={estilos.lista}>
         {lista.map((p) => (
           <li key={p.id} className={estilos.item} data-etapa={p.etapa}>
@@ -218,7 +234,9 @@ function Postulaciones() {
           </button>
         )}
       </div>
-      <p className={estilos.ayuda}>Las preguntas reales de tus entrevistas valen oro: anótalas apenas salgas y entran a tu repaso como tarjetas.</p>
+      <p className={estilos.ayuda}>
+        Las preguntas reales de tus entrevistas valen oro: anótalas apenas salgas y entran a tu repaso como tarjetas.
+      </p>
       <form
         className={estilos.fila}
         onSubmit={async (e) => {
@@ -229,7 +247,12 @@ function Postulaciones() {
           cargar();
         }}
       >
-        <input className={estilos.crece} value={nueva.pregunta} onChange={(e) => setNueva({ ...nueva, pregunta: e.target.value })} placeholder="¿Qué diferencia hay entre..." />
+        <input
+          className={estilos.crece}
+          value={nueva.pregunta}
+          onChange={(e) => setNueva({ ...nueva, pregunta: e.target.value })}
+          placeholder="¿Qué diferencia hay entre..."
+        />
         <input value={nueva.empresa} onChange={(e) => setNueva({ ...nueva, empresa: e.target.value })} placeholder="Empresa" />
         <button type="submit" className="boton">
           Agregar
@@ -288,16 +311,34 @@ function PreguntaPropia({ pregunta, alCambiar }) {
   );
 }
 
-const ESTADOS_OFERTA = { dominas: "Lo dominas", "en-progreso": "En progreso", "por-empezar": "Está en dev-prep: por empezar", "no-esta": "No está en dev-prep" };
+const ESTADOS_OFERTA = {
+  dominas: "Lo dominas",
+  "en-progreso": "En progreso",
+  "por-empezar": "Está en dev-prep: por empezar",
+  "no-esta": "No está en dev-prep",
+};
 
 function Oferta() {
   const [texto, setTexto] = useState("");
   const [r, setR] = useState(null);
   return (
     <>
-      <p className={estilos.ayuda}>Pega el texto de una oferta. Detecto las tecnologías que pide y las cruzo con lo que de verdad dominas (tu mapa).</p>
-      <textarea className={estilos.oferta} rows={8} value={texto} onChange={(e) => setTexto(e.target.value)} placeholder="Buscamos Frontend Developer Jr con React, TypeScript..." />
-      <button type="button" className="boton boton-primario" disabled={!texto.trim()} onClick={async () => setR(await api.analizarOferta(texto))}>
+      <p className={estilos.ayuda}>
+        Pega el texto de una oferta. Detecto las tecnologías que pide y las cruzo con lo que de verdad dominas (tu mapa).
+      </p>
+      <textarea
+        className={estilos.oferta}
+        rows={8}
+        value={texto}
+        onChange={(e) => setTexto(e.target.value)}
+        placeholder="Buscamos Frontend Developer Jr con React, TypeScript..."
+      />
+      <button
+        type="button"
+        className="boton boton-primario"
+        disabled={!texto.trim()}
+        onClick={async () => setR(await api.analizarOferta(texto))}
+      >
         Analizar
       </button>
       {r && (
@@ -317,7 +358,8 @@ function Oferta() {
             ))}
           </ul>
           <p className={estilos.ayuda}>
-            Consejo: si dominas la mayoría y lo demás está en progreso, postula igual. Las ofertas junior piden más de lo que de verdad exigen.
+            Consejo: si dominas la mayoría y lo demás está en progreso, postula igual. Las ofertas junior piden más de lo que de verdad
+            exigen.
           </p>
         </div>
       )}

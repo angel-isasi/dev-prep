@@ -115,7 +115,7 @@ function Oferta({ oferta: o, alGuardar }) {
   const [guardada, setGuardada] = useState(o.guardada);
   const tono = o.puntaje >= 65 ? "alto" : o.puntaje >= 45 ? "medio" : "bajo";
   return (
-    <article className={`aparecer ${estilos.oferta}`}>
+    <article className={`aparecer brillo ${estilos.oferta}`}>
       <div className={estilos.puntaje} data-tono={tono} title="Cuánto te conviene, de 0 a 100">
         {o.puntaje}
       </div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { api } from "../lib/api.js";
 import { Markdown } from "../components/Markdown.jsx";
-import { Pestanas } from "../components/Pestanas.jsx";
+import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
 import { Insignia } from "../components/Insignia.jsx";
 import { Quiz } from "../components/Quiz.jsx";
 import { PreguntaAncla } from "../components/PreguntaAncla.jsx";
@@ -62,7 +62,7 @@ export function Tema() {
         alCambiar={setPestana}
       />
 
-      <div className={estilos.contenido}>
+      <ContenidoPestanas activa={pestana} orden={["teoria", "ejercicios", "quiz"]} className={estilos.contenido}>
         {pestana === "teoria" && (
           <>
             <div className={`tarjeta ${estilos.teoria}`}>
@@ -93,7 +93,7 @@ export function Tema() {
         )}
 
         {pestana === "quiz" && <Quiz key={tema.id} preguntas={tema.quiz} alTerminar={terminarQuiz} mejor={mejor} />}
-      </div>
+      </ContenidoPestanas>
 
       <nav className={estilos.navegacion}>
         {tema.anterior ? (

@@ -1,0 +1,55 @@
+.boton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  height: 40px;
+  padding: 0 var(--espacio-4);
+  overflow: hidden;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  transition:
+    border-color var(--transicion),
+    background var(--transicion);
+}
+
+.boton[data-peligro="true"] {
+  border-color: color-mix(in srgb, var(--error) 45%, transparent);
+  color: var(--error);
+}
+
+.relleno {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: color-mix(in srgb, var(--acento) 30%, transparent);
+}
+
+.boton[data-peligro="true"] .relleno {
+  background: color-mix(in srgb, var(--error) 28%, transparent);
+}
+
+.texto {
+  position: relative;
+}
+
+.boton[data-completo="true"] {
+  border-color: var(--exito);
+  background: var(--exito-suave);
+  color: var(--exito);
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

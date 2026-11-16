@@ -205,7 +205,7 @@ export function Enfoque() {
           </div>
           {mensaje && <p className={estilos.mensaje}>{mensaje}</p>}
         </div>
-        <aside className={estilos.consejos}>
+        <aside className={`textura ${estilos.consejos}`}>
           <strong>Para que funcione</strong>
           <ol>
             <li>Elige UNA cosa antes de empezar: un ejercicio, una lección o un tema.</li>

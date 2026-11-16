@@ -6,6 +6,7 @@ import ClickSpark from "./reactbits/ClickSpark.jsx";
 import Noise from "./reactbits/Noise.jsx";
 import { useColorTema, usePorTema } from "../hooks/useColorTema.js";
 import { useScrollSuave } from "../hooks/useScrollSuave.js";
+import { useBrillo } from "../hooks/useBrillo.js";
 import estilos from "./Layout.module.css";
 
 export function Layout() {
@@ -15,6 +16,7 @@ export function Layout() {
   const grano = usePorTema({ oscuro: 0.05, claro: 0.03 });
   const principal = useRef(null);
   useScrollSuave(principal);
+  useBrillo();
 
   return (
     // Chispas en cada clic, en toda la app (React Bits)

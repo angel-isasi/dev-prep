@@ -1,4 +1,5 @@
 import { AuroraText } from "./ui/aurora-text.jsx";
+import { TextEffect } from "./ui/text-effect.jsx";
 import estilos from "./CabeceraPagina.module.css";
 
 /**
@@ -12,7 +13,14 @@ export function CabeceraPagina({ etiqueta, titulo, resaltado, children, acciones
       <div className={estilos.texto}>
         {etiqueta && <p className={estilos.etiqueta}>{etiqueta}</p>}
         <h1 className={estilos.titulo}>
-          {titulo}
+          {/* Motion Primitives: cada palabra sube y se aclara al entrar a la pantalla */}
+          {typeof titulo === "string" ? (
+            <TextEffect key={titulo} preset="slide" per="word" as="span">
+              {titulo}
+            </TextEffect>
+          ) : (
+            titulo
+          )}
           {resaltado && (
             <>
               {" "}
