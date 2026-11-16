@@ -76,7 +76,9 @@ export function fusionarDocumento(propio, remoto, dispositivo) {
     const { tema: _tema, ...compartida } = r.config; // el tema claro/oscuro es de cada dispositivo
     resultado.config = { ...propio.config, ...compartida };
   }
-  if (r.misRespuestas && (fechaDe(r.misRespuestas) ?? 0) > (fechaDe(propio.misRespuestas) ?? 0)) {
+  // Si este dispositivo nunca escribió su pitch o sus historias, recibe los del otro aunque no tengan fecha.
+  const sinRespuestas = !propio.misRespuestas || (!propio.misRespuestas.pitch && !propio.misRespuestas.historias?.length);
+  if (r.misRespuestas && (sinRespuestas || (fechaDe(r.misRespuestas) ?? 0) > (fechaDe(propio.misRespuestas) ?? 0))) {
     resultado.misRespuestas = r.misRespuestas;
   }
   // Lecciones (solo en el celular): el contador más avanzado.

@@ -6,6 +6,7 @@ import { api } from "../lib/api.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { Confirmar } from "./Confirmar.jsx";
 import { useTema } from "../hooks/useTema.js";
+import { ES_MOVIL } from "../lib/modo.js";
 import {
   IconoAjustes,
   IconoApagar,
@@ -27,6 +28,13 @@ const SECCIONES = [
   { a: "/entrevistas", texto: "Entrevistas", Icono: IconoEntrevistas },
   { a: "/progreso", texto: "Progreso", Icono: IconoProgreso },
   { a: "/referencia", texto: "Referencia", Icono: IconoReferencia },
+  // Solo en la versión publicada: las lecciones estilo Duolingo y las chuletas
+  ...(ES_MOVIL
+    ? [
+        { a: "/camino", texto: "Lecciones", Icono: IconoProgreso },
+        { a: "/chuletas", texto: "Chuletas", Icono: IconoAprender },
+      ]
+    : []),
 ];
 
 // Fondo del enlace activo. Todos comparten layoutId: al cambiar de sección, Motion
@@ -51,7 +59,11 @@ export function BarraLateral() {
   }
 
   // La racha siempre a la vista; se actualiza cuando resuelves o repasas algo.
-  const cargarRacha = () => api.inicio().then((d) => setRacha({ dias: d.racha, cumplio: d.meta.cumplio }), () => {});
+  const cargarRacha = () =>
+    api.inicio().then(
+      (d) => setRacha({ dias: d.racha, cumplio: d.meta.cumplio }),
+      () => {},
+    );
   useEffect(() => {
     cargarRacha();
   }, []);
@@ -74,7 +86,9 @@ export function BarraLateral() {
             key={a}
             to={a}
             end={exacto}
-            className={({ isActive }) => `${estilos.enlace} ${isActive ? estilos.activo : ""}`}
+            className={({ isActive }) =>
+              `${estilos.enlace} ${isActive ? estilos.activo : ""}`
+            }
           >
             {({ isActive }) => (
               <>
@@ -89,13 +103,26 @@ export function BarraLateral() {
 
       <div className={estilos.pie}>
         {racha && (
-          <div className={estilos.racha} data-activa={racha.dias > 0} title={racha.cumplio ? "Meta de hoy cumplida" : "Aún no cumples la meta de hoy"}>
+          <div
+            className={estilos.racha}
+            data-activa={racha.dias > 0}
+            title={
+              racha.cumplio
+                ? "Meta de hoy cumplida"
+                : "Aún no cumples la meta de hoy"
+            }
+          >
             <Llama encendida={racha.dias > 0} tamano={20} />
             <strong>{racha.dias}</strong>
             {racha.dias === 1 ? "día de racha" : "días de racha"}
           </div>
         )}
-        <NavLink to="/ajustes" className={({ isActive }) => `${estilos.enlace} ${isActive ? estilos.activo : ""}`}>
+        <NavLink
+          to="/ajustes"
+          className={({ isActive }) =>
+            `${estilos.enlace} ${isActive ? estilos.activo : ""}`
+          }
+        >
           {({ isActive }) => (
             <>
               {isActive && <Indicador />}
@@ -104,18 +131,21 @@ export function BarraLateral() {
             </>
           )}
         </NavLink>
-        <Confirmar
-          titulo="¿Cerrar dev-prep?"
-          descripcion="Se apaga el servidor de la app. Tu progreso ya está guardado. Para volver a abrirla, usa el acceso directo del escritorio."
-          textoConfirmar="Cerrar dev-prep"
-          alConfirmar={cerrarApp}
-          disparador={
-            <button type="button" className={estilos.tema}>
-              <IconoApagar />
-              Cerrar dev-prep
-            </button>
-          }
-        />
+        {/* En la versión publicada no hay servidor que apagar */}
+        {!ES_MOVIL && (
+          <Confirmar
+            titulo="¿Cerrar dev-prep?"
+            descripcion="Se apaga el servidor de la app. Tu progreso ya está guardado. Para volver a abrirla, usa el acceso directo del escritorio."
+            textoConfirmar="Cerrar dev-prep"
+            alConfirmar={cerrarApp}
+            disparador={
+              <button type="button" className={estilos.tema}>
+                <IconoApagar />
+                Cerrar dev-prep
+              </button>
+            }
+          />
+        )}
         <button type="button" className={estilos.tema} onClick={alternar}>
           {tema === "oscuro" ? <IconoSol /> : <IconoLuna />}
           {tema === "oscuro" ? "Modo claro" : "Modo oscuro"}
@@ -124,7 +154,9 @@ export function BarraLateral() {
       {cerrada && (
         <div className={estilos.cerrada} role="status">
           <strong>dev-prep está cerrado</strong>
-          <span>Tu progreso quedó guardado. Ya puedes cerrar esta pestaña.</span>
+          <span>
+            Tu progreso quedó guardado. Ya puedes cerrar esta pestaña.
+          </span>
         </div>
       )}
     </aside>

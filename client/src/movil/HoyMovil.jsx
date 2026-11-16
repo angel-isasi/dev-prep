@@ -27,14 +27,14 @@ function numeroDelDia(fecha, total) {
 }
 
 export function HoyMovil() {
-  const [hoy, setHoy] = useState(api.inicio.guardado);
+  const [hoy, setHoy] = useState(api.hoy.guardado);
   const [temas, setTemas] = useState(api.temas.guardado);
   const [chuletas, setChuletas] = useState(api.chuletas.guardado);
   const [error, setError] = useState(null);
   const [lecciones, setLecciones] = useState(null);
 
   useEffect(() => {
-    api.inicio().then(setHoy, (e) => setError(e.message));
+    api.hoy().then(setHoy, (e) => setError(e.message));
     api.lecciones().then(setLecciones, () => {});
     api.temas().then(setTemas, () => {});
     api.chuletas().then(setChuletas, () => {});

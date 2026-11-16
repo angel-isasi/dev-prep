@@ -54,6 +54,10 @@ export async function crearProgreso({ datosDir }) {
   // Las escrituras van en fila: nunca dos a la vez sobre el mismo archivo.
   let cola = Promise.resolve();
 
+  // Configuración de antes de la sincronización: sin fecha de edición. Se le pone la de hoy, para que
+  // al mezclar mande sobre la configuración por defecto de un celular recién vinculado.
+  datos.config.actualizadoEn ??= ahoraIso();
+
   /** Escritura atómica: primero a un .tmp y luego renombrar (si se corta la luz, no queda a medias). */
   // Avisos de "el progreso cambió" (los usa la sincronización para subir los cambios).
   const oyentes = new Set();

@@ -5,7 +5,7 @@ import { SeccionSync } from "../components/SeccionSync.jsx";
 import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
 import estilos from "./Ajustes.module.css";
 
-export function Ajustes() {
+export function Ajustes({ seccionExtra }) {
   const [form, setForm] = useState(null);
   const [estado, setEstado] = useState("listo"); // listo | guardando | guardado | error
 
@@ -102,7 +102,7 @@ export function Ajustes() {
         </div>
       </form>
 
-      <SeccionSync />
+      {seccionExtra ?? <SeccionSync />}
     </section>
   );
 }

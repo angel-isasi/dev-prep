@@ -162,6 +162,14 @@ export function crearProgresoMovil(almacenamiento, reloj = {}) {
       return valor;
     },
 
+    /** Foto del % de preparación de hoy (el resumen de la semana la usa). */
+    anotarPreparacion(porcentaje) {
+      const h = hoy();
+      if (datos.dias[h]?.preparacion === porcentaje) return;
+      datos.dias = { ...datos.dias, [h]: { ...(datos.dias[h] ?? {}), preparacion: porcentaje } };
+      guardar();
+    },
+
     // --- Sincronización (AWS) ---
     /** Lo que este celular sube a la nube. */
     documento: () => documentoParaSubir(datos),

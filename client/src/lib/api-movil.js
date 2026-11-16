@@ -7,6 +7,8 @@ import { detalleTema, resumenTema } from "../../../server/vistas-aprender.js";
 import { ejerciciosEntrevista, resumenEntrevistas, tarjetas } from "../../../server/vistas-entrevistas.js";
 import { preguntaPendiente } from "../../../server/progreso-reglas.js";
 import { fraseDelDia } from "../../../server/frases.js";
+import { estadoGeneral, vistaInicio, vistaProgreso } from "../../../server/vistas-progreso.js";
+import { preparacion } from "../../../server/metricas.js";
 import { crearProgresoMovil, rachaMovil } from "./progreso-movil.js";
 
 export const progreso = crearProgresoMovil(localStorage);
@@ -76,6 +78,15 @@ const miProgreso = () => ({ registros: progreso.datos().ejercicios ?? {}, quizze
 const estadoMovil = (id) => (progreso.datos().ejercicios?.[id]?.estado === "resuelto" ? "resuelto" : progreso.estadoLectura(id));
 const resumenEj = (e) => ({ ...e, estado: estadoMovil(e.id), ultimoResultado: null });
 
+/** Lo que comparten Inicio y Progreso, igual que en el servidor de la laptop. */
+function general(ejercicios) {
+  const hoy = progreso.hoy();
+  const datos = progreso.datos();
+  const prep = preparacion(ejercicios, datos.ejercicios ?? {}, hoy);
+  progreso.anotarPreparacion(prep.total);
+  return estadoGeneral({ ejercicios, datos, dias: progreso.dias(), hoy, prep });
+}
+
 export const api = {
   // --- Ejercicios ---
   ejercicios: conCache("ejercicios", async () => (await indice()).ejercicios.map(resumenEj)),
@@ -126,8 +137,18 @@ export const api = {
   repasar: soloLaptop,
   apagar: soloLaptop,
 
-  // --- Hoy (pantalla de inicio del celular) ---
+  // --- Inicio y Progreso: lo mismo que calcula la laptop (con lo sincronizado de todos los dispositivos) ---
   inicio: conCache("inicio", async () => {
+    const { ejercicios } = await indice();
+    return vistaInicio(general(ejercicios), ejercicios);
+  }),
+  progreso: conCache("progreso", async () => {
+    const { ejercicios } = await indice();
+    return vistaProgreso(general(ejercicios), ejercicios, progreso.dias());
+  }),
+
+  // --- Hoy (pantalla de inicio del celular) ---
+  hoy: conCache("hoy", async () => {
     const hoy = progreso.hoy();
     const datos = progreso.datos();
     const { ejercicios } = await indice();
@@ -147,7 +168,6 @@ export const api = {
     };
   }),
 
-  progreso: soloLaptop,
 
   // --- Ajustes ---
   config: async () => progreso.datos().config,

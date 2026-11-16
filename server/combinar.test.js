@@ -102,6 +102,24 @@ describe("fusionarDocumento", () => {
   });
 });
 
+describe("textos personales y configuración", () => {
+  test("un dispositivo sin pitch recibe el del otro aunque no tenga fecha", () => {
+    const conPitch = { ...laptop(), misRespuestas: { pitch: "Hola, soy Angel", historias: [] } };
+    const r = fusionarDocumento(celular(), conPitch, "laptop");
+    expect(r.misRespuestas.pitch).toBe("Hola, soy Angel");
+  });
+  test("un pitch propio no se pisa con uno más viejo", () => {
+    const propio = { ...celular(), misRespuestas: { pitch: "nuevo", historias: [], actualizadoEn: "2026-11-15T20:00:00-05:00" } };
+    const viejo = { ...laptop(), misRespuestas: { pitch: "viejo", historias: [], actualizadoEn: "2026-11-10T20:00:00-05:00" } };
+    expect(fusionarDocumento(propio, viejo, "laptop").misRespuestas.pitch).toBe("nuevo");
+  });
+  test("la config con fecha de la laptop manda sobre la config por defecto (sin fecha) de un celular nuevo", () => {
+    const nuevo = { version: 1, config: { metaDiaria: 2, nombre: "" } };
+    expect(fusionarDocumento(nuevo, laptop(), "laptop").config.nombre).toBe("Angel");
+    expect(fusionarDocumento(laptop(), nuevo, "celular").config.nombre).toBe("Angel");
+  });
+});
+
 describe("documentoParaSubir", () => {
   test("no sube lo que bajó de otros ni la lección a medias", () => {
     const doc = { ...celular(), diasRemotos: { laptop: {} }, leccionEnCurso: { pasos: [] } };
