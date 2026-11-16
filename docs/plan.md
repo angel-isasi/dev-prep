@@ -10,7 +10,7 @@ Después de la fase 7 se agregó:
 - Acceso directo en el escritorio (npm run acceso-directo, scripts/abrir.ps1): abre sin ventana, reinicia la versión vieja; botón "Cerrar dev-prep" en la app.
 
 Pendiente o ideas (cuando Angel lo pida):
-- Sincronización online y offline con Supabase (log de eventos como fuente de verdad) y versión web en Vercel. Planificar con Fable.
+- Versión celular (2026-11-15): PWA offline en `client/src/movil/` y build `npm run build:movil` (exportador `scripts/exportar-movil.js`, datos en `client/public-movil/datos/`). Siguen: publicarla en dev-prep.angel-isasi.com, lecciones estilo Duolingo y progreso sincronizado con AWS (Lambda + DynamoDB).
 - Tailwind 4 instalado (2026-11-14) conviviendo con el CSS actual, sin reinicio global: se usa solo en componentes nuevos, dentro de un elemento con la clase `tw` (ver `client/src/styles/tailwind.css`). Los estilos existentes no se migran.
 - Diseño: el estilo de Inicio (React Bits, Magic UI, Motion Primitives, Animate UI y RareUI) ya está en todas las pantallas (2026-11-14). Piezas comunes: `CabeceraPagina`, `Buscador`, `BotonAzar` y los colores por área (`[data-area]` en `client/src/styles/base.css`).
 - Rendimiento (2026-11-14): caché de datos por pantalla, Referencia por tandas, grano estático y sin desenfoques sobre capas animadas.
