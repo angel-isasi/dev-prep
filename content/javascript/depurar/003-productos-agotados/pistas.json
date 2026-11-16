@@ -1,0 +1,5 @@
+[
+  "El número sale mal solo cuando hay **celdas vacías** (`\"\"`). Mira la única comparación del código: ¿qué pasa cuando `stock` es `\"\"`?",
+  "Prueba en la consola `\"\" == 0`: da `true`. El operador `==` convierte los dos lados a número antes de comparar, y `Number(\"\")` es `0`. Así, cada celda vacía se cuenta como un producto agotado.",
+  "Usa la comparación que **no convierte tipos**: solo es verdadera si los dos lados son del mismo tipo y del mismo valor.\n\n```js\nif (stock /* ¿== o ===? */ 0) agotados++;\n```"
+]

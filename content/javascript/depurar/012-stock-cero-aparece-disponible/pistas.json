@@ -1,0 +1,5 @@
+[
+  "El nombre y la categoría funcionan como pide el comentario. Mira la línea del `stock`: ¿qué hace `||` cuando el lado izquierdo vale `0`?",
+  "`a || b` devuelve `b` cuando `a` es **falsy**, y `0` es falsy (igual que `\"\"`, `null`, `undefined`, `NaN` y `false`). Para los textos eso es justo lo que se quiere (un nombre vacío no sirve), pero para el stock un `0` es un dato válido y `||` lo cambia por `10`.",
+  "Usa el operador que solo reemplaza cuando el valor es `null` o `undefined` (\"no llegó\"), y deja pasar el `0`:\n\n```js\nstock: datos.stock /* ¿|| o ??? */ 10,\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-010",
+  "titulo": "Las reservas se guardan un mes después",
+  "tipo": "funcion",
+  "tema": "variables",
+  "nivel": 2,
+  "tags": ["depurar", "fechas", "Date", "off-by-one"]
+}

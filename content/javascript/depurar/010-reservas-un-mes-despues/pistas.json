@@ -1,0 +1,5 @@
+[
+  "El día y el año salen bien; lo que se corre es **el mes**, siempre uno hacia adelante. El `split` y el `map(Number)` están bien (`\"03\"` se convierte en `3`). Mira cómo se usa `mes` al crear el `Date`.",
+  "En `new Date(anio, mes, dia)` los meses **empiezan en 0**: `0` es enero, `2` es marzo y `11` es diciembre. Al pasarle `3` (lo que escribió el usuario para marzo), JavaScript crea abril. Y si el día no existe en ese mes (31 de febrero), lo desborda al mes siguiente: por eso el 31/01 termina en marzo.",
+  "Convierte el mes \"humano\" (1 a 12) al mes de `Date` (0 a 11) antes de crear la fecha:\n\n```js\nreturn new Date(anio, /* mes convertido */, dia);\n```"
+]

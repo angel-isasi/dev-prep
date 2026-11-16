@@ -1,0 +1,5 @@
+[
+  "Se borran **sin que nadie haga clic**, apenas se pinta la lista. Eso significa que `onQuitar` se está llamando mientras React dibuja el componente. Mira qué le pasas a `onClick`.",
+  "`onClick={onQuitar(fav.id)}` **llama** a `onQuitar` en ese momento, al pintar, y le pasa a `onClick` lo que devuelva (`undefined`). Así, todos se quitan al abrir la página y los botones quedan sin manejador. `onClick` necesita recibir **una función** para llamarla después, en el clic.",
+  "Envuelve la llamada en una función flecha: así le pasas a `onClick` una función que, cuando la llamen, recién llamará a `onQuitar` con el id:\n\n```jsx\n<button onClick={/* una función que llame a onQuitar(fav.id) */}>Quitar</button>\n```"
+]

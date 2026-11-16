@@ -1,0 +1,5 @@
+[
+  "`sumarDos` llama dos veces a `sumarUno`, y `sumarUno` funciona sola. Entonces el problema es qué pasa cuando hay **dos actualizaciones seguidas en el mismo clic**. Mira qué valor usa `sumarUno` para calcular el nuevo total.",
+  "`total` es el valor **de este render**, una constante que no cambia hasta el próximo. `setTotal` no modifica `total` al instante: agenda el cambio. Las dos llamadas leen el mismo `total` (por ejemplo, 0) y las dos piden \"pon 1\". El resultado es 1, no 2.",
+  "Pásale a `setTotal` una **función** que reciba el valor más reciente (incluyendo los cambios pendientes) y devuelva el nuevo:\n\n```jsx\nsetTotal((anterior) => /* el nuevo valor a partir de anterior */);\n```"
+]

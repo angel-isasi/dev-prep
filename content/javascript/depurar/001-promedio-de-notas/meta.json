@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-001",
+  "titulo": "El promedio sale NaN",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 1,
+  "tags": ["depurar", "arrays", "bucles", "off-by-one"]
+}

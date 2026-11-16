@@ -1,0 +1,5 @@
+[
+  "La comparación de emails está bien (prueba en la consola que `\"ANA@correo.com\".toLowerCase() === \"ana@correo.com\"`). Mira **qué devuelve la función al final** y cuándo cambia esa variable.",
+  "El `return usuario` está dentro de la flecha que recibe `forEach`. Ese `return` termina **esa flecha**, no `buscarPorEmail`. Además, `forEach` ignora lo que devuelve su callback. Como `encontrado` nunca cambia, la función siempre devuelve `null`.",
+  "En vez de devolver desde la flecha, guarda el usuario en la variable que la función sí devuelve:\n\n```js\nif (usuario.email.toLowerCase() === buscado) /* guárdalo en encontrado */;\n```"
+]

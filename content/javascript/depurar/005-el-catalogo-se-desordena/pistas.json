@@ -1,0 +1,5 @@
+[
+  "El orden por precio sale bien; lo que se rompe es **el arreglo original**. Pregúntate: ¿`sort` devuelve una lista nueva, o cambia la que recibe?",
+  "`sort` **ordena el mismo arreglo en el lugar** y devuelve ese mismo arreglo (la misma referencia). Como `productos` es el catálogo de la página, al ordenarlo también se ordena la lista de Destacados.",
+  "Ordena una **copia**, no el original. Con el operador spread haces una copia en una línea:\n\n```js\nreturn [/* copia de productos */].sort((a, b) => a.precio - b.precio);\n```"
+]

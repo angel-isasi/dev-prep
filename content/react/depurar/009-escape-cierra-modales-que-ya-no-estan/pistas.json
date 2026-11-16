@@ -1,0 +1,5 @@
+[
+  "El efecto sí tiene una limpieza (`return () => ...`), y esa limpieza sí se ejecuta al desmontar. Aun así, el listener sigue vivo. Mira con atención **qué función** le pasas a `addEventListener` y **cuál** a `removeEventListener`.",
+  "Son **dos flechas distintas**, aunque se escriban igual. `removeEventListener` solo quita un listener si le pasas **exactamente la misma función** (la misma referencia) que usaste al agregarlo. Como le pasas una flecha nueva, no encuentra nada que quitar y no avisa. Cada vez que el efecto corre, se suma un listener que nunca se va.",
+  "Usa una sola función, con nombre, en los dos lugares. Ya la tienes: `alPresionar`. Pásala directo, sin envolverla en otra flecha:\n\n```jsx\nwindow.addEventListener(\"keydown\", /* la función */);\nreturn () => window.removeEventListener(\"keydown\", /* la misma función */);\n```"
+]

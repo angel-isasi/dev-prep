@@ -1,0 +1,5 @@
+[
+  "Marcar funciona y borrar funciona; lo que falla es que, **después de borrar**, la marca queda en otra tarea. La casilla es estado de cada `Pendiente`. Mira cómo React sabe qué `Pendiente` es cuál: la prop `key`.",
+  "La `key` es la **posición** (`i`). Al borrar \"Comprar pan\", \"Pagar la luz\" pasa de la posición 1 a la 0. React ve las keys 0 y 1 y cree que se borró el **último** componente (el de key 2), así que reutiliza los dos primeros con su estado: el `hecho = true` que estaba en la key 1 ahora se muestra junto a \"Llamar a mamá\".",
+  "La `key` tiene que identificar **al dato**, no a su lugar en la lista, para que el estado viaje con su tarea. Usa algo que no cambie al borrar:\n\n```jsx\n{lista.map((p) => (\n  <Pendiente key={/* ¿qué identifica a cada tarea? */} texto={p.texto} onBorrar={() => borrar(p.id)} />\n))}\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-003",
+  "titulo": "Más productos agotados de los que hay",
+  "tipo": "funcion",
+  "tema": "variables",
+  "nivel": 1,
+  "tags": ["depurar", "comparacion", "coercion", "igualdad-estricta"]
+}

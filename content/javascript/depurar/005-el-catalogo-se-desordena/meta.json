@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-005",
+  "titulo": "El catálogo pierde su orden original",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 2,
+  "tags": ["depurar", "arrays", "sort", "inmutabilidad", "referencias"]
+}

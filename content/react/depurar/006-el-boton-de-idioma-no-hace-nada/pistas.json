@@ -1,0 +1,5 @@
+[
+  "`IdiomaProvider`, `BotonIdioma` y `Bienvenida` están bien escritos por separado. El problema está en **cómo se arman** en `App`. Mira dónde queda cada componente respecto al Provider.",
+  "`useContext` busca el Provider más cercano **hacia arriba** en el árbol. `BotonIdioma` está **fuera** de `IdiomaProvider`, así que no encuentra ninguno y recibe el **valor por defecto** de `createContext`: `{ idioma: \"es\", cambiar: () => {} }`. Su `cambiar` es una función vacía: por eso no hace nada y no da error.",
+  "Todos los componentes que usan el contexto tienen que estar **dentro** del Provider. Mueve el botón adentro:\n\n```jsx\n<IdiomaProvider>\n  {/* ¿quién más va aquí? */}\n  <Bienvenida />\n</IdiomaProvider>\n```"
+]

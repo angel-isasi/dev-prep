@@ -1,0 +1,8 @@
+{
+  "id": "react-dep-001",
+  "titulo": "Un 0 suelto en el carrito vacío",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 1,
+  "tags": ["depurar", "react", "renderizado-condicional", "jsx", "falsy"]
+}

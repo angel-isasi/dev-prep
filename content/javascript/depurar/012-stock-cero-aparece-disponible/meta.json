@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-012",
+  "titulo": "Un producto agotado aparece con stock 10",
+  "tipo": "funcion",
+  "tema": "objetos",
+  "nivel": 2,
+  "tags": ["depurar", "objetos", "valores-por-defecto", "nullish", "falsy"]
+}

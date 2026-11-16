@@ -1,0 +1,5 @@
+[
+  "El 0 aparece justo donde iría el párrafo del resumen. Mira la condición que decide si se pinta: `{cantidad && ...}`. ¿Qué devuelve esa expresión cuando `cantidad` vale `0`?",
+  "`a && b` devuelve `a` si `a` es falsy, **no `false`**. Con `cantidad = 0`, la expresión vale `0`. React no pinta `false`, `null` ni `undefined`, pero **un número sí lo pinta**, aunque sea `0`.",
+  "Haz que la condición sea un booleano de verdad, comparando la cantidad:\n\n```jsx\n{/* condición que da true o false */ && <p>Productos en tu carrito: {cantidad}</p>}\n```"
+]

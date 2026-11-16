@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-008",
+  "titulo": "Agregar un combo rompe el carrito",
+  "tipo": "funcion",
+  "tema": "clases",
+  "nivel": 2,
+  "tags": ["depurar", "clases", "this", "funciones-flecha", "callbacks"]
+}

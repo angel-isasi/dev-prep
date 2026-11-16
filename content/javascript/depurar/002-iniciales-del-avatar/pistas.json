@@ -1,0 +1,5 @@
+[
+  "La cadena `trim`, `split` y `filter` está bien: si pones un `console.log` después del `filter`, verás `[\"Ana\", \"Torres\"]`. Mira qué devuelve el `map`.",
+  "El `map` devuelve `[undefined, undefined]`. La flecha tiene **llaves**, y una flecha con llaves es un bloque de código normal: si no escribes `return`, devuelve `undefined`. Luego `join` convierte cada `undefined` en texto vacío, por eso el resultado es `\"\"`.",
+  "Agrega la palabra que falta dentro del bloque de la flecha:\n\n```js\n.map((parte) => {\n  /* ¿qué falta aquí? */ parte[0].toUpperCase();\n})\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-007",
+  "titulo": "Todos los botones dicen lo mismo",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 2,
+  "tags": ["depurar", "closures", "var", "let", "scope", "bucles"]
+}

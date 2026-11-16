@@ -1,0 +1,5 @@
+[
+  "Las funciones se crean dentro del bucle, pero se **llaman después**, cuando el bucle ya terminó. ¿Qué valor tiene `i` en ese momento? Mira cómo está declarada.",
+  "Con `var` hay **una sola** variable `i` para toda la función. Las tres flechas la recuerdan (closure) y, cuando por fin las llamas, `i` ya vale `3`: `opciones[3]` es `undefined` y `3 + 1` es `4`.",
+  "Necesitas una `i` distinta por vuelta. Hay una palabra para declarar variables que crea una copia nueva en cada vuelta del `for`:\n\n```js\nfor (/* ¿var o let? */ i = 0; i < opciones.length; i++) {\n```"
+]

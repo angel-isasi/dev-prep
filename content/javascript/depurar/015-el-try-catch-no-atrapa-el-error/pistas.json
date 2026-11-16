@@ -1,0 +1,5 @@
+[
+  "El `catch` funciona cuando `guardar` lanza un error **al instante** (el tercer test pasa). Falla cuando el error llega **después**, como pasa con una petición de red. Mira qué hace exactamente la línea del `return`.",
+  "`return guardar(datos)` devuelve **la promesa sin esperarla**. El bloque `try` termina en ese mismo momento, y cuando la promesa se rechaza un rato después, ya no hay ningún `try` activo: el rechazo pasa de largo y sale de `guardarSeguro`. Un `try/catch` solo atrapa los rechazos de las promesas que **esperas con `await`** dentro de él.",
+  "Espera la promesa dentro del `try`, así su rechazo se convierte en un error que el `catch` sí puede atrapar:\n\n```js\ntry {\n  return /* ¿qué falta? */ guardar(datos);\n} catch (error) {\n```"
+]

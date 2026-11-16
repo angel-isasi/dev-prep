@@ -1,0 +1,5 @@
+[
+  "`obtenerUsuario` funciona bien (la API responde). Pon un `console.log(usuarios)` después de la primera línea: ¿qué hay en ese arreglo, usuarios o algo más?",
+  "Ese arreglo tiene **promesas**, no usuarios: `obtenerUsuario` devuelve una promesa y `map` la guarda tal cual. Una promesa no tiene propiedad `nombre`, por eso `usuario.nombre` da `undefined`. Y `await` no se puede usar directo sobre un arreglo de promesas: hay que convertirlo en **una sola** promesa.",
+  "`Promise.all` recibe un arreglo de promesas y devuelve una promesa que se cumple con el arreglo de resultados, en el mismo orden. Espérala con `await`:\n\n```js\nconst usuarios = await /* ¿qué va aquí? */(ids.map((id) => obtenerUsuario(id)));\n```"
+]

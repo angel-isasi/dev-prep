@@ -1,0 +1,8 @@
+{
+  "id": "react-dep-004",
+  "titulo": "Las etiquetas elegidas no aparecen",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["depurar", "react", "useState", "inmutabilidad", "arrays", "referencias"]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-009",
+  "titulo": "La lista de participantes sale undefined",
+  "tipo": "funcion",
+  "tema": "asincronia",
+  "nivel": 2,
+  "tags": ["depurar", "asincronia", "promesas", "Promise.all", "await", "map"]
+}

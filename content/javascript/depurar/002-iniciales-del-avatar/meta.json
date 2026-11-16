@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-002",
+  "titulo": "El avatar sale sin iniciales",
+  "tipo": "funcion",
+  "tema": "strings",
+  "nivel": 1,
+  "tags": ["depurar", "strings", "map", "funciones-flecha", "return"]
+}

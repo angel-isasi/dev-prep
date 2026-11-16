@@ -1,0 +1,5 @@
+[
+  "El primer alumno se carga bien, así que `cargarAlumno` y el `then` funcionan. Lo que no pasa es **volver a cargar** cuando cambia el `id`. Mira el segundo argumento de `useEffect`: decide cuándo se vuelve a ejecutar el efecto.",
+  "Con `[]`, el efecto corre **solo una vez**, al montar el componente. Cuando el padre pasa otro `id`, el componente se vuelve a pintar, pero el efecto no se ejecuta: nadie pide los datos del alumno nuevo. El efecto usa `id`, pero React no sabe que debe estar pendiente de él.",
+  "En el arreglo de dependencias van **todos los valores de afuera** que el efecto usa (props, estado o funciones). Aquí son dos:\n\n```jsx\nuseEffect(() => {\n  setAlumno(null);\n  cargarAlumno(id).then(setAlumno);\n}, [/* ¿qué usa el efecto? */]);\n```"
+]

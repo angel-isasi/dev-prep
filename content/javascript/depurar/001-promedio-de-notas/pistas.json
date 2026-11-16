@@ -1,0 +1,5 @@
+[
+  "El caso del arreglo vacío funciona, así que el problema aparece cuando **sí hay notas**. Mira el bucle `for`: ¿por qué índices pasa `i`?",
+  "Con `[14, 16, 18]` el bucle pasa por `i = 0, 1, 2` **y también por `i = 3`**. `notas[3]` no existe: vale `undefined`, y `número + undefined` da `NaN`. Desde ahí, toda la suma es `NaN`.",
+  "Los índices de un arreglo van de `0` a `length - 1`. Cambia la condición del bucle para que se detenga antes de llegar a `length`:\n\n```js\nfor (let i = 0; i /* ¿< o <=? */ notas.length; i++) {\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "react-dep-008",
+  "titulo": "El perfil no cambia de alumno",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["depurar", "react", "useEffect", "dependencias", "fetch"]
+}

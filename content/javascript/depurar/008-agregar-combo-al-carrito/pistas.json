@@ -1,0 +1,5 @@
+[
+  "`agregar` funciona solo, así que el problema está en `agregarVarios`. El error dice que algo es `undefined` al leer `agregar`: ¿qué hay antes de `.agregar` en esa línea?",
+  "`this` vale `undefined` dentro de la `function (item) { ... }`. Una función normal recibe su propio `this` según **cómo la llaman**, y `forEach` la llama sin ningún objeto delante. Dentro de una clase (siempre en modo estricto), eso deja `this` en `undefined`.",
+  "Las funciones flecha **no tienen `this` propio**: usan el de la función donde están escritas, que aquí es el método `agregarVarios` (o sea, el carrito). Cambia la función normal por una flecha:\n\n```js\nitems.forEach((item) /* ¿qué va aquí? */ {\n  this.agregar(item);\n});\n```"
+]

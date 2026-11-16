@@ -1,0 +1,5 @@
+[
+  "El código sí hace una copia con `{ ...usuario }`, y el resultado tiene la ciudad nueva. El problema es que **el original también cambia**. Compara en la consola `copia.direccion === usuario.direccion`.",
+  "Da `true`: el spread hace una copia **superficial**. Copia las propiedades del primer nivel, pero `direccion` es un objeto, y lo que se copia es la **referencia** a ese objeto. Las dos variables comparten la misma dirección, así que cambiar `copia.direccion.ciudad` cambia también la del original.",
+  "Además de copiar el usuario, copia la dirección y ponla en la copia, todo en la misma línea:\n\n```js\nconst copia = { ...usuario, direccion: /* copia de usuario.direccion */ };\n```"
+]

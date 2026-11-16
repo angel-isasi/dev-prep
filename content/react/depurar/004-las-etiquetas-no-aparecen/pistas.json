@@ -1,0 +1,5 @@
+[
+  "Los datos **sí se guardan** (por eso aparecen de golpe después), pero React no vuelve a pintar al hacer clic. Mira `elegir`: ¿qué arreglo le pasas a `setElegidas`?",
+  "`push` modifica el **mismo** arreglo que ya está en el estado, y luego le pasas a `setElegidas` ese mismo arreglo. React compara el valor nuevo con el anterior usando `Object.is`: como es la misma referencia, cree que nada cambió y **no vuelve a pintar**.",
+  "En vez de modificar el arreglo del estado, crea uno **nuevo** con la etiqueta al final y pásale ese a `setElegidas`:\n\n```jsx\nconst nuevas = [/* lo que ya había */, etiqueta];\nsetElegidas(nuevas);\n```"
+]

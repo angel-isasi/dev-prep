@@ -1,0 +1,8 @@
+{
+  "id": "react-dep-006",
+  "titulo": "El botón de idioma no hace nada",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 2,
+  "tags": ["depurar", "react", "context", "useContext", "provider"]
+}

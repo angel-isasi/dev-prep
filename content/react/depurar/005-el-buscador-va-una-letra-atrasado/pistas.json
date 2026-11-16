@@ -1,0 +1,5 @@
+[
+  "El input muestra bien lo que escribes; lo que llega atrasado es **lo que recibe `onBuscar`**. Mira `alEscribir`: ¿qué valor le pasas a `onBuscar`, y cuándo se actualizó?",
+  "`setTexto` no cambia `texto` en ese instante: agenda el cambio para el próximo render. En la línea siguiente, `texto` **todavía vale lo de antes** de esta tecla. Por eso `onBuscar` siempre recibe el texto anterior, y al borrar todo recibe la última letra.",
+  "El valor nuevo ya lo tienes en el evento, sin esperar al estado. Pásale ese a `onBuscar`:\n\n```jsx\nsetTexto(e.target.value);\nonBuscar(/* el valor que acaba de escribir */);\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-006",
+  "titulo": "El ranking pone el 9 por encima del 100",
+  "tipo": "funcion",
+  "tema": "arrays",
+  "nivel": 2,
+  "tags": ["depurar", "arrays", "sort", "comparador", "numeros"]
+}

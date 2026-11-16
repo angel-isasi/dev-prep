@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-011",
+  "titulo": "La caja dice que falta dinero con el pago exacto",
+  "tipo": "funcion",
+  "tema": "variables",
+  "nivel": 2,
+  "tags": ["depurar", "numeros", "decimales", "punto-flotante", "reduce"]
+}

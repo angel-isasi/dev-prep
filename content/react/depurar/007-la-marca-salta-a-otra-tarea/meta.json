@@ -1,0 +1,8 @@
+{
+  "id": "react-dep-007",
+  "titulo": "La marca de hecho salta a otra tarea",
+  "tipo": "componente",
+  "tema": "react-listas",
+  "nivel": 2,
+  "tags": ["depurar", "react", "listas", "key", "estado-local"]
+}

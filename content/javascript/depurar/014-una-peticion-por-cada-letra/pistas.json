@@ -1,0 +1,5 @@
+[
+  "El `clearTimeout` está ahí para cancelar la espera anterior, pero no está cancelando nada. Pregúntate: cuando se ejecuta `clearTimeout(temporizador)`, ¿qué valor tiene `temporizador`?",
+  "Siempre vale `undefined`. `let temporizador` está **dentro** de la función que se devuelve, así que cada llamada crea su propia variable nueva y vacía. El id del `setTimeout` anterior quedó guardado en la variable de la llamada anterior, que esta llamada no ve.",
+  "La variable tiene que vivir **una sola vez**, fuera de la función que se devuelve, para que todas las llamadas la compartan (por closure). Mueve la declaración una línea más arriba:\n\n```js\nexport function debounce(fn, ms) {\n  /* aquí va la declaración */\n  return function (...args) {\n    clearTimeout(temporizador);\n```"
+]

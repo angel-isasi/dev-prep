@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-014",
+  "titulo": "El buscador manda una petición por cada letra",
+  "tipo": "funcion",
+  "tema": "closures",
+  "nivel": 3,
+  "tags": ["depurar", "closures", "debounce", "setTimeout", "scope"]
+}

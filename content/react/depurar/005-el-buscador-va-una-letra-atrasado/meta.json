@@ -1,0 +1,8 @@
+{
+  "id": "react-dep-005",
+  "titulo": "El buscador va una letra atrasado",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["depurar", "react", "input-controlado", "useState", "onChange", "eventos"]
+}

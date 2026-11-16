@@ -1,0 +1,5 @@
+[
+  "Con puntajes de dos cifras funciona; falla cuando se mezclan números con **distinta cantidad de cifras**. Prueba en la consola `[80, 100, 9].sort()` y mira el orden que da.",
+  "Sin argumentos, `sort` convierte cada elemento a **texto** y los ordena como en un diccionario: `\"100\"` va antes que `\"80\"` porque `\"1\"` es menor que `\"8\"`, y `\"9\"` queda al final. El `reverse` solo invierte ese orden equivocado.",
+  "Pásale a `sort` una función comparadora numérica. Si devuelve un número negativo, `a` va primero; si es positivo, va `b`. Para ordenar de mayor a menor (y ya no necesitar `reverse`):\n\n```js\nreturn [...puntajes].sort((a, b) => /* ¿a - b o b - a? */).slice(0, n);\n```"
+]

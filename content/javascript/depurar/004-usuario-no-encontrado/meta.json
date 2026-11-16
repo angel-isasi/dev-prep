@@ -1,0 +1,8 @@
+{
+  "id": "js-dep-004",
+  "titulo": "Usuario no encontrado aunque existe",
+  "tipo": "funcion",
+  "tema": "funciones",
+  "nivel": 2,
+  "tags": ["depurar", "funciones", "forEach", "return", "callbacks"]
+}

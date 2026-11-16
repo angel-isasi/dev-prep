@@ -1,0 +1,5 @@
+[
+  "Falla solo con **algunos** montos exactos y con montos grandes casi nunca. Escribe en la consola `1.1 + 2.2` y mira el resultado con atención.",
+  "`1.1 + 2.2` da `3.3000000000000003`. Los números de JavaScript se guardan en binario, y decimales como 0.1 no tienen una representación exacta: al sumarlos queda un error diminuto. Como `3.3 >= 3.3000000000000003` es `false`, la caja cree que falta dinero.",
+  "Para dinero, compara en **céntimos enteros**: multiplica por 100 y redondea los dos lados, así desaparece el error de los decimales:\n\n```js\nreturn Math.round(pagado * 100) >= /* lo mismo con total */;\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "react-dep-003",
+  "titulo": "El botón +2 solo suma 1",
+  "tipo": "componente",
+  "tema": "react-estado",
+  "nivel": 2,
+  "tags": ["depurar", "react", "useState", "actualizacion-funcional", "batching"]
+}

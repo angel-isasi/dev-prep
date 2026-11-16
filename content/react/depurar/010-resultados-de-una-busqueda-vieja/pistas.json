@@ -1,0 +1,5 @@
+[
+  "Pasa cuando hay **dos búsquedas en vuelo** y la vieja responde después que la nueva. Gana la última respuesta en llegar, no la última consulta. El código ya tiene una variable pensada para eso: `vigente`. ¿Dónde se usa?",
+  "`vigente` se pone en `false` en la limpieza, que React ejecuta cuando la `consulta` cambia (antes de correr el efecto nuevo). Así, la búsqueda vieja \"sabe\" que ya no es vigente. Pero el `then` **nunca la revisa**: hace `setResultados(datos)` siempre, aunque esa respuesta sea de una consulta anterior.",
+  "Haz que el `then` solo guarde los datos si su búsqueda sigue vigente. Cada ejecución del efecto tiene su propia `vigente` (closure), así que la respuesta vieja verá `false`:\n\n```jsx\nbuscar(consulta).then((datos) => /* solo si sigue vigente */ setResultados(datos));\n```"
+]

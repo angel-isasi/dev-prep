@@ -1,0 +1,8 @@
+{
+  "id": "react-dep-009",
+  "titulo": "Escape cierra modales que ya no están",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 3,
+  "tags": ["depurar", "react", "useEffect", "limpieza", "addEventListener", "referencias"]
+}
