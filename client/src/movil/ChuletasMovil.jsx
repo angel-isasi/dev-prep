@@ -57,8 +57,13 @@ export function ChuletasMovil() {
         {delArea.map((c) => {
           const abiertaEsta = abierta === c.id;
           return (
-            <article key={c.id} className={estilos.chuleta} data-area={c.area} data-abierta={abiertaEsta}>
-              <button type="button" className={estilos.cabeza} onClick={() => setAbierta(abiertaEsta ? null : c.id)} aria-expanded={abiertaEsta}>
+            <article key={c.id} className={`aparecer ${estilos.chuleta}`} data-area={c.area} data-abierta={abiertaEsta}>
+              <button
+                type="button"
+                className={estilos.cabeza}
+                onClick={() => setAbierta(abiertaEsta ? null : c.id)}
+                aria-expanded={abiertaEsta}
+              >
                 <span className={estilos.numero}>{String(c.orden).padStart(2, "0")}</span>
                 <strong>{c.titulo}</strong>
                 <i aria-hidden>{abiertaEsta ? "−" : "+"}</i>

@@ -71,7 +71,7 @@
 /* Pantalla grande (laptop): columna centrada y cómoda de leer */
 @media (min-width: 900px) {
   .pagina {
-    max-width: 880px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
   }

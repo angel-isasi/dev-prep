@@ -25,13 +25,14 @@ export function ListaRevision() {
   return (
     <section className={estilos.pagina}>
       <CabeceraPagina etiqueta="Aprender mejor" titulo="Revisión de código">
-        Un compañero te pide revisar su código. Marca las líneas con problemas (errores, casos borde, nombres, accesibilidad) y compara con lo que vería un senior.
+        Un compañero te pide revisar su código. Marca las líneas con problemas (errores, casos borde, nombres, accesibilidad) y compara con
+        lo que vería un senior.
       </CabeceraPagina>
       <div className={estilos.lista}>
         {casos.map((c) => {
           const hecha = hechas[c.id];
           return (
-            <Link key={c.id} to={`/revision/${c.id}`} className={estilos.fila}>
+            <Link key={c.id} to={`/revision/${c.id}`} className={`aparecer ${estilos.fila}`}>
               <span className={estilos.chip}>{LENGUAJES[c.lenguaje] ?? c.lenguaje}</span>
               <span className={estilos.filaTitulo}>
                 {c.titulo}
@@ -102,7 +103,15 @@ export function CasoRevision() {
                 ? "falsa"
                 : "";
           return (
-            <button key={n} type="button" role="listitem" className={estilos.lineaCodigo} data-estado={estado} onClick={() => alternar(n)} disabled={!!resultado}>
+            <button
+              key={n}
+              type="button"
+              role="listitem"
+              className={estilos.lineaCodigo}
+              data-estado={estado}
+              onClick={() => alternar(n)}
+              disabled={!!resultado}
+            >
               <span className={estilos.numero}>{n}</span>
               <code>{texto || " "}</code>
             </button>
@@ -121,7 +130,8 @@ export function CasoRevision() {
               {resultado.encontrados} de {resultado.total}
             </strong>{" "}
             problemas encontrados
-            {resultado.falsasAlarmas > 0 && ` · ${resultado.falsasAlarmas} ${resultado.falsasAlarmas === 1 ? "falsa alarma" : "falsas alarmas"}`}
+            {resultado.falsasAlarmas > 0 &&
+              ` · ${resultado.falsasAlarmas} ${resultado.falsasAlarmas === 1 ? "falsa alarma" : "falsas alarmas"}`}
           </div>
           <ol className={estilos.hallazgos}>
             {caso.hallazgos.map((h) => (

@@ -124,8 +124,21 @@
 /* Pantalla grande (laptop): columna centrada y cómoda de leer */
 @media (min-width: 900px) {
   .pagina {
-    max-width: 880px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+    padding: var(--espacio-7) var(--espacio-6);
+  }
+}
+
+/* Dos columnas: al abrir una chuleta solo se mueve su columna */
+@media (min-width: 1100px) {
+  .lista {
+    display: block;
+    columns: 2;
+    column-gap: var(--espacio-3);
+  }
+  .chuleta {
+    break-inside: avoid;
+    margin-bottom: var(--espacio-3);
   }
 }

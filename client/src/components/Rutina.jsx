@@ -11,6 +11,7 @@ import { sonidos } from "../lib/sonidos.js";
 import { useAhora } from "../hooks/useAhora.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { CabeceraPagina } from "./CabeceraPagina.jsx";
+import { AnilloProgreso } from "./AnilloProgreso.jsx";
 import estilos from "./Rutina.module.css";
 
 export function PlanDeHoy() {
@@ -89,31 +90,46 @@ export function PaginaDiario() {
       <CabeceraPagina etiqueta="Una línea al día" titulo="Tu diario">
         Escribir lo que aprendiste lo fija en la memoria, y lo que te trabó te dice qué repasar mañana.
       </CabeceraPagina>
-      <form onSubmit={guardar} className={estilos.formulario}>
-        <label>
-          ¿Qué aprendiste hoy?
-          <input value={aprendi} onChange={(e) => setAprendi(e.target.value)} maxLength={280} placeholder="Por ejemplo: que map devuelve un arreglo nuevo" />
-        </label>
-        <label>
-          ¿Qué te trabó?
-          <input value={trabe} onChange={(e) => setTrabe(e.target.value)} maxLength={280} placeholder="Por ejemplo: el orden de las promesas" />
-        </label>
-        <div>
-          <button type="submit" className="boton boton-primario" disabled={!aprendi.trim() && !trabe.trim()}>
-            Guardar
-          </button>
-          {guardado && <span className={estilos.listo}> Guardado</span>}
-        </div>
-      </form>
-      <ol className={estilos.entradas}>
-        {entradas.map((e) => (
-          <li key={e.fecha}>
-            <small>{new Date(`${e.fecha}T12:00:00`).toLocaleDateString("es-PE", { weekday: "long", day: "numeric", month: "long" })}</small>
-            {e.aprendi && <p>✓ {e.aprendi}</p>}
-            {e.trabe && <p>⚠ {e.trabe}</p>}
-          </li>
-        ))}
-      </ol>
+      <div className={estilos.diario}>
+        <form onSubmit={guardar} className={estilos.formulario}>
+          <label>
+            ¿Qué aprendiste hoy?
+            <input
+              value={aprendi}
+              onChange={(e) => setAprendi(e.target.value)}
+              maxLength={280}
+              placeholder="Por ejemplo: que map devuelve un arreglo nuevo"
+            />
+          </label>
+          <label>
+            ¿Qué te trabó?
+            <input
+              value={trabe}
+              onChange={(e) => setTrabe(e.target.value)}
+              maxLength={280}
+              placeholder="Por ejemplo: el orden de las promesas"
+            />
+          </label>
+          <div>
+            <button type="submit" className="boton boton-primario" disabled={!aprendi.trim() && !trabe.trim()}>
+              Guardar
+            </button>
+            {guardado && <span className={estilos.listo}> Guardado</span>}
+          </div>
+        </form>
+        <ol className={estilos.entradas}>
+          {entradas.map((e) => (
+            <li key={e.fecha} className="aparecer">
+              <small>
+                {new Date(`${e.fecha}T12:00:00`).toLocaleDateString("es-PE", { weekday: "long", day: "numeric", month: "long" })}
+              </small>
+              {e.aprendi && <p>✓ {e.aprendi}</p>}
+              {e.trabe && <p>⚠ {e.trabe}</p>}
+            </li>
+          ))}
+          {entradas.length === 0 && <li className={estilos.vacio}>Aquí aparecerán tus días. La primera línea es la más difícil.</li>}
+        </ol>
+      </div>
     </section>
   );
 }
@@ -155,30 +171,50 @@ export function Enfoque() {
       <CabeceraPagina etiqueta="Pomodoro" titulo="Modo enfoque">
         25 minutos de una sola cosa, sin celular ni juego. Cada sesión completa suma 5 minutos de tiempo libre (hasta 4 al día).
       </CabeceraPagina>
-      <div className={estilos.reloj}>
-        <strong>
-          {restante === null ? `${MINUTOS}:00` : `${Math.floor(restante / 60)}:${String(restante % 60).padStart(2, "0")}`}
-        </strong>
-        {inicio ? (
-          <button type="button" className="boton" onClick={() => terminar("Sesión cancelada.")}>
-            Cancelar
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="boton boton-primario"
-            onClick={() => {
-              const t = Date.now();
-              localStorage.setItem(CLAVE_ENFOQUE, String(t));
-              setInicio(t);
-              setMensaje(null);
-            }}
-          >
-            Empezar 25 minutos
-          </button>
-        )}
+      <div className={estilos.enfoque}>
+        <div>
+          <div className={estilos.reloj}>
+            <AnilloProgreso
+              valor={restante === null ? 0 : 1 - restante / (MINUTOS * 60)}
+              tamano={300}
+              grosor={14}
+              completo={restante === 0}
+            >
+              <strong>
+                {restante === null ? `${MINUTOS}:00` : `${Math.floor(restante / 60)}:${String(restante % 60).padStart(2, "0")}`}
+              </strong>
+            </AnilloProgreso>
+            {inicio ? (
+              <button type="button" className="boton" onClick={() => terminar("Sesión cancelada.")}>
+                Cancelar
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="boton boton-primario"
+                onClick={() => {
+                  const t = Date.now();
+                  localStorage.setItem(CLAVE_ENFOQUE, String(t));
+                  setInicio(t);
+                  setMensaje(null);
+                }}
+              >
+                Empezar 25 minutos
+              </button>
+            )}
+          </div>
+          {mensaje && <p className={estilos.mensaje}>{mensaje}</p>}
+        </div>
+        <aside className={estilos.consejos}>
+          <strong>Para que funcione</strong>
+          <ol>
+            <li>Elige UNA cosa antes de empezar: un ejercicio, una lección o un tema.</li>
+            <li>Celular boca abajo y lejos. WhatsApp cerrado en la laptop.</li>
+            <li>Si se te cruza otra idea, anótala en un papel y vuelve a lo tuyo.</li>
+            <li>Al terminar, descansa 5 minutos de verdad: lejos de la pantalla.</li>
+          </ol>
+        </aside>
       </div>
-      {mensaje && <p className={estilos.mensaje}>{mensaje}</p>}
     </section>
   );
 }

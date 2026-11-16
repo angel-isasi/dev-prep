@@ -34,7 +34,67 @@
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--espacio-3);
+  flex: 1;
+  min-height: 0;
+  margin: 0 calc(var(--espacio-1) * -1);
+  padding: 0 var(--espacio-1);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+}
+
+.enlaces {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: hidden;
+}
+
+/* Título de cada grupo: pequeño y tenue, para ordenar sin recargar */
+.tituloGrupo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 4px;
+  padding: 2px var(--espacio-3);
+  border: none;
+  background: none;
+  color: var(--texto-tenue);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+button.tituloGrupo {
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color var(--transicion);
+}
+
+button.tituloGrupo:hover:not(:disabled) {
+  color: var(--texto-suave);
+}
+
+button.tituloGrupo:disabled {
+  cursor: default;
+}
+
+.chevron {
+  display: grid;
+  transition: transform 200ms ease;
+}
+
+.chevron[data-abierto="true"] {
+  transform: rotate(90deg);
 }
 
 .enlace {
@@ -43,7 +103,8 @@
   display: flex;
   align-items: center;
   gap: var(--espacio-3);
-  padding: 9px var(--espacio-3);
+  padding: 7px var(--espacio-3);
+  font-size: 14.5px;
   border-radius: var(--radio);
   color: var(--texto-suave);
   font-weight: 500;

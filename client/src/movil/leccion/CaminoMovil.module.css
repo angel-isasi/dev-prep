@@ -141,9 +141,32 @@
 /* Pantalla grande (laptop): columna centrada y cómoda de leer */
 @media (min-width: 900px) {
   .pagina {
-    max-width: 880px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+    padding: var(--espacio-7) var(--espacio-6);
+  }
+  .fila[data-lado="izq"] .nodo {
+    margin-left: 18%;
+  }
+  .fila[data-lado="der"] .nodo {
+    margin-right: 18%;
+  }
+  .nodo {
+    width: 180px;
+  }
+  .nodo > div:first-child {
+    transform: scale(1.12);
+  }
+  .nodo:hover > div:first-child {
+    transform: scale(1.18) translateY(-2px);
+  }
+  .nombre {
+    margin-top: 6px;
+    font-size: 15px;
+  }
+  .panel {
+    max-width: 640px;
+    margin-inline: auto;
   }
 }
 

@@ -1,5 +1,5 @@
 .pagina {
-  max-width: 860px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
 }
@@ -295,4 +295,47 @@
 .herramienta small {
   color: var(--texto-suave);
   font-size: 13px;
+}
+
+@media (min-width: 900px) {
+  .pagina {
+    padding: var(--espacio-7) var(--espacio-6);
+  }
+  /* Revisión de código: tarjetas en vez de filas */
+  .lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--espacio-3);
+  }
+  .fila {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
+    gap: var(--espacio-3);
+    min-height: 140px;
+    padding: var(--espacio-4) var(--espacio-5);
+    border-radius: var(--radio-grande);
+    transition:
+      transform var(--transicion),
+      border-color var(--transicion);
+  }
+  .fila:hover {
+    transform: translateY(-3px);
+    border-color: var(--acento);
+  }
+  .filaTitulo {
+    flex: 1;
+    font-size: 16px;
+  }
+  .resultado {
+    align-self: flex-end;
+  }
+}
+
+/* 6 herramientas: 3 por fila en pantalla grande (sin una sola suelta abajo) */
+@media (min-width: 1100px) {
+  .herramientas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }

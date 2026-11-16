@@ -61,7 +61,13 @@ export function OfertasParaTi() {
             ["junior", "Para junior"],
             ["peru", "Perú o Latinoamérica"],
           ].map(([id, texto]) => (
-            <button key={id} type="button" className="boton" data-activo={filtro === id} onClick={() => (setFiltro(id), setMostrar(POR_PAGINA))}>
+            <button
+              key={id}
+              type="button"
+              className="boton"
+              data-activo={filtro === id}
+              onClick={() => (setFiltro(id), setMostrar(POR_PAGINA))}
+            >
               {texto}
             </button>
           ))}
@@ -109,7 +115,7 @@ function Oferta({ oferta: o, alGuardar }) {
   const [guardada, setGuardada] = useState(o.guardada);
   const tono = o.puntaje >= 65 ? "alto" : o.puntaje >= 45 ? "medio" : "bajo";
   return (
-    <article className={estilos.oferta}>
+    <article className={`aparecer ${estilos.oferta}`}>
       <div className={estilos.puntaje} data-tono={tono} title="Cuánto te conviene, de 0 a 100">
         {o.puntaje}
       </div>

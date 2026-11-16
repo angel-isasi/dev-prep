@@ -38,7 +38,7 @@ export function InglesUnidad() {
       <h1 className={estilos.titulo}>{unidad.titulo}</h1>
       {unidad.descripcion && <p className={estilos.ayuda}>{unidad.descripcion}</p>}
 
-      <div className={estilos.acciones}>
+      <div className={estilos.accionesFila}>
         <Link
           to={`/leccion?ambito=ingles&unidad=${encodeURIComponent(unidad.id)}`}
           className="boton boton-primario"
@@ -156,7 +156,7 @@ function Shadowing({ frases }) {
         </span>
         <p className={estilos.fraseShadowing}>{frase.en}</p>
         <small className={estilos.es}>{frase.es}</small>
-        <div className={estilos.acciones}>
+        <div className={estilos.accionesFila}>
           <button type="button" className="boton boton-primario" onClick={() => hablar(frase.en, { lento })}>
             🔊 Escuchar
           </button>
@@ -165,7 +165,7 @@ function Shadowing({ frases }) {
           </label>
         </div>
         <Grabadora key={frase.id} clave={`shadowing:${frase.id}`} maxSegundos={20} texto="Grabarme diciéndola" />
-        <div className={estilos.acciones}>
+        <div className={estilos.accionesFila}>
           <button type="button" className="boton boton-fantasma" disabled={indice === 0} onClick={() => setIndice((i) => i - 1)}>
             ← Anterior
           </button>

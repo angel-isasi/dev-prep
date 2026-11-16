@@ -1,5 +1,5 @@
 .pagina {
-  max-width: 980px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
 }
@@ -243,5 +243,11 @@
 
   .noImprimir {
     display: none;
+  }
+}
+
+@media (min-width: 900px) {
+  .pagina {
+    padding: var(--espacio-7) var(--espacio-6);
   }
 }

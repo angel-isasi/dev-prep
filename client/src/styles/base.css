@@ -86,11 +86,23 @@ option {
   transition:
     background var(--transicion),
     border-color var(--transicion),
-    opacity var(--transicion);
+    opacity var(--transicion),
+    transform 120ms ease;
 }
 
 .boton:hover:not(:disabled) {
   background: var(--superficie-2);
+}
+
+/* Un botón con subtítulo (<small>) crece lo que necesite en vez de desbordarse */
+.boton:has(> small) {
+  height: auto;
+  min-height: 36px;
+  padding-block: var(--espacio-2);
+}
+
+.boton:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
 .boton:disabled {
@@ -292,5 +304,29 @@ option {
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
+  }
+}
+
+/* ---------- Aparecer al entrar en pantalla ----------
+   Las tarjetas de las listas largas suben y se aclaran cuando entran al hacer scroll. Lo hace el
+   navegador con animation-timeline (sin JavaScript ni bucles). Sin soporte, simplemente se ven. */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .aparecer {
+    animation: aparecer linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aparecer {
+    animation: none;
   }
 }
