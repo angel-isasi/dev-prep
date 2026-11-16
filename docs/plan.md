@@ -1,22 +1,21 @@
 # Plan v1: dev-prep, app de práctica offline (propuesta para iterar)
 
-## Estado (2026-11-13)
+## Estado (2026-11-16): construcción cerrada
 
-Fases 1 a 7 terminadas. Contenido validado: 257 ejercicios (17 guiados, 50 de JavaScript, 30 retos de JS, 30 de algoritmos, 50 de React, 50 mixtos y 30 retos de React), 18 temas de Aprender (10 de JavaScript y 8 de React, en pestañas separadas), 146 entradas de Referencia y 100 preguntas de entrevista.
+Terminados el plan v1 (fases 1 a 7), la versión web y celular (plan v2), el plan v3 y el plan v4. La app está en uso diario.
 
-Después de la fase 7 se agregó:
-- Practicar organizado por áreas (JavaScript, Algoritmos, React) y colecciones, con Siguiente, Uno al azar, repasos y práctica mezclada.
-- Diseño: esqueletos de carga, fuente Bricolage Grotesque para títulos, Radix (selectores, diálogos, tooltips), Motion (transiciones, panel de tests animado, confeti al resolver, anillos de progreso) y efectos tipo Magic UI hechos con CSS.
-- Acceso directo en el escritorio (npm run acceso-directo, scripts/abrir.ps1): abre sin ventana, reinicia la versión vieja; botón "Cerrar dev-prep" en la app.
+Contenido validado: 390 ejercicios (122 de JavaScript, 60 de algoritmos, 148 de React, 30 de TypeScript y 30 de Node y SQL), 35 temas de Aprender, 146 entradas de Referencia, 152 preguntas de entrevista, inglés en 3 etapas (básico, intermedio y de trabajo), 10 escenarios de Git práctico, 4 pruebas técnicas, 2 proyectos guiados y 12 fichas de portafolio.
 
-Pendiente o ideas (cuando Angel lo pida):
-- Versión celular (2026-11-15): PWA offline en `client/src/movil/` y build `npm run build:movil` (exportador `scripts/exportar-movil.js`, datos en `client/public-movil/datos/`). Siguen: publicarla en dev-prep.angel-isasi.com, lecciones estilo Duolingo y progreso sincronizado con AWS (Lambda + DynamoDB).
-- Tailwind 4 instalado (2026-11-14) conviviendo con el CSS actual, sin reinicio global: se usa solo en componentes nuevos, dentro de un elemento con la clase `tw` (ver `client/src/styles/tailwind.css`). Los estilos existentes no se migran.
-- Diseño: el estilo de Inicio (React Bits, Magic UI, Motion Primitives, Animate UI y RareUI) ya está en todas las pantallas (2026-11-14). Piezas comunes: `CabeceraPagina`, `Buscador`, `BotonAzar` y los colores por área (`[data-area]` en `client/src/styles/base.css`).
-- Rendimiento (2026-11-14): caché de datos por pantalla, Referencia por tandas, grano estático y sin desenfoques sobre capas animadas.
-- Referencia de HTML y CSS (unas 40 entradas) para las 24 preguntas de entrevista de esos temas.
-- Electron, insignias y niveles.
-- "Explica tu proyecto": preguntas de entrevista sobre el propio dev-prep (Angel lo dejó aparte por ahora).
+Partes de la app:
+- **Motor local** (`server/`, Express en `127.0.0.1:4321`): lee el contenido, guarda el progreso en `data/`, abre VS Code, corre Vitest en modo watch y avisa por SSE. Arranca oculto con Windows (`npm run arranque:activar`).
+- **Versión web** (dev-prep.angel-isasi.com, Vercel): PWA offline con todo el contenido; en la laptop se conecta con el motor y tiene VS Code y tests en vivo.
+- **Nube** (AWS, `aws/`): una Lambda con URL propia y una tabla DynamoDB unen el progreso de la laptop y el celular, mandan los avisos diarios y buscan ofertas nuevas a las 11:00.
+
+Seguridad (auditoría del 2026-11-16): el motor solo acepta peticiones de localhost y de la versión web (cabeceras Origin y Host), no se deja meter en marcos, el navegador nunca envía rutas de disco, la nube exige un token de 256 bits que solo viaja en el QR, el enlace de vincular solo acepta una Lambda de AWS, los avisos solo abren páginas de dev-prep y los enlaces externos solo pueden ser http o https. El sitio publicado tiene CSP estricta con huella verificada en el build.
+
+Ideas para más adelante (no son necesarias para usarla):
+- Electron: ya no hace falta para el uso diario (acceso directo, arranque automático y PWA instalable). Lo difícil sería empaquetar Vitest.
+- Funciones con IA (conversación en inglés, convocatorias de prácticas día por día): necesitan una clave de API propia.
 
 ## Versión publicada: decisiones de Angel (2026-11-15)
 
@@ -368,4 +367,4 @@ Ideas elegidas por Angel después del plan v3. Todas con sus reglas en módulos 
 - **Inglés**: shadowing en cada unidad y 2 unidades nuevas (sonidos difíciles y falsos amigos).
 - **Trabajo**: ofertas para ti (`server/ofertas-auto.js`, APIs públicas, sin scraping ni IA) y el proyecto guiado "Primer día de trabajo" con tickets.
 
-Quedan para más adelante: avisar al celular cuando aparezca una oferta muy buena (necesita actualizar la Lambda de AWS) y las ideas que necesitan una clave de IA (convocatorias de prácticas día por día, conversación en inglés).
+Después se agregó el aviso al celular de ofertas nuevas para junior en Perú o remotas para Latinoamérica (la Lambda las busca a las 11:00). Quedan para más adelante solo las ideas que necesitan una clave de IA.

@@ -1,14 +1,18 @@
 # dev-prep
 
-App local y 100% offline para practicar JavaScript y React rumbo a un puesto frontend junior.
+App para prepararme como desarrollador frontend junior: un "LeetCode personal" en español que funciona sin internet, en la laptop y en el celular.
 
-Programas en VS Code, guardas con `Ctrl + S` y la app muestra al instante qué tests pasan y cuáles no, con lo que se esperaba y lo que devolvió tu código. Tu progreso se guarda en tu laptop.
+Programas en VS Code, guardas con `Ctrl + S` y la app muestra al instante qué tests pasan y cuáles no, con lo que se esperaba y lo que devolvió tu código. En el celular estudias con lecciones cortas, y el progreso de los dos se une solo cuando hay internet.
+
+**Stack:** React 19, Vite, Express 5, Vitest, PWA con service worker, AWS Lambda y DynamoDB (CloudFormation), Vercel.
+
+**En números:** 390 ejercicios con tests (JavaScript, algoritmos, React, TypeScript, Node y SQL), 35 temas de teoría, 152 preguntas de entrevista, inglés en 3 etapas y 334 tests de la propia app.
 
 ## Qué tiene
 
 - **Inicio**: tu objetivo, la racha, la meta del día (con la deuda de los días que fallaste), tu porcentaje de preparación y la cuenta regresiva a tu fecha meta, con aviso de si vas atrasado.
-- **Aprender**: 10 temas de JavaScript, cada uno con teoría de una pantalla, ejercicios guiados y un quiz.
-- **Practicar**: ejercicios de JavaScript, algoritmos y React, con filtros por tema, nivel y estado.
+- **Aprender**: 35 temas (JavaScript, React, TypeScript, Node y SQL), cada uno con teoría de una pantalla, ejercicios guiados y un quiz.
+- **Practicar**: 390 ejercicios de JavaScript, algoritmos, React, TypeScript, Node y SQL, con filtros por tema, nivel y estado. Los de TypeScript además revisan tus tipos con `tsc` en modo estricto.
   - **Tests en vivo**: guardas en VS Code y la app muestra al instante qué pasa y qué falla, con lo esperado y lo recibido, más tu `console.log`.
   - **Errores explicados** en español y **aviso de bucle infinito**.
   - **Pistas progresivas** (3 por ejercicio) y **solución con explicación completa**, bloqueada hasta que la pidas (con penalidad si no lo resolviste).
@@ -89,9 +93,12 @@ Si quieres empezar de cero, **Reiniciar** vuelve al archivo inicial y guarda tu 
 | `data/progreso.json` | Tu progreso (con una copia diaria en `data/respaldos/`) |
 | `data/mis-respuestas.json` | Tu pitch y tus historias STAR |
 | `data/eventos.jsonl` | Historial de lo que haces, para estadísticas futuras |
+| `data/sync.json` | La dirección y el token secreto de la sincronización con AWS |
 | `Documentos/dev-prep-git/` | Los repositorios de Git práctico (puedes borrarlos: se vuelven a crear) |
+| `Documentos/portafolio/` | Los mini proyectos que exportas para GitHub |
+| Navegador (versión web) | Tu progreso en ese dispositivo, en su almacenamiento local |
 
-Ninguna de las dos carpetas se sube a Git.
+`workspace/` y `data/` nunca se suben a Git.
 
 ## Comandos
 
@@ -105,13 +112,22 @@ Ninguna de las dos carpetas se sube a Git.
 | `npm test` | Tests de la propia app |
 | `npm run validar` | Revisa que cada ejercicio esté completo, que su solución pase y que el archivo inicial falle |
 | `npm run validar:aprender` | Revisa los temas de Aprender y las entradas de la Referencia |
+| `npm run validar:ingles`, `validar:predice`, `validar:proyectos` | Revisan el inglés, los "¿qué imprime?" y los proyectos guiados |
+| `npm run build:movil` | Compila la versión web y celular en `client/dist-movil` y verifica su CSP |
+| `npm run aws:crear` | Crea o actualiza la sincronización en AWS (Lambda, URL y tabla) |
+| `npm run aws:estado` | Muestra si la sincronización responde |
+| `npm run aws:rotar` | Cambia el token secreto (luego vuelve a vincular el celular) |
+| `npm run aws:borrar` | Borra todo lo de AWS, datos incluidos |
 
 ## Cómo está hecha
 
 - **Interfaz**: React 19 + Vite, React Router, CSS Modules con variables para el tema.
 - **Servidor**: Express 5. Lee los ejercicios de `content/`, guarda el progreso en JSON y abre VS Code.
 - **Tests en vivo**: Vitest usado desde Node en modo watch, con un reporter propio que envía los resultados al navegador por **Server-Sent Events**.
-- **Seguridad**: el servidor solo escucha en `127.0.0.1` y el navegador nunca envía rutas de archivos, solo el id del ejercicio.
+- **Versión web y celular**: el mismo código de React compilado en modo `movil` (Vite cambia la capa de datos por una que lee JSON exportados y guarda en el navegador). Es una PWA: funciona sin internet y se instala desde Chrome.
+- **Sincronización**: cada dispositivo guarda primero en sí mismo y sube su documento a una Lambda de AWS. Al bajar los de los otros, los mezcla registro por registro (`server/combinar.js`): gana lo más reciente y los días se suman, así que repetir una sincronización no daña nada.
+- **Avisos**: Web Push hecho solo con `node:crypto` (firma VAPID y cifrado aes128gcm, `server/webpush.js`), enviado por la Lambda cada 30 minutos si toca.
+- **Seguridad**: el servidor solo escucha en `127.0.0.1`, revisa las cabeceras `Origin` y `Host` (contra webs ajenas y DNS rebinding) y el navegador nunca envía rutas de archivos, solo el id del ejercicio. La nube exige un token de 256 bits que solo viaja en el QR, y el sitio publicado tiene una CSP estricta.
 
 ```
 VS Code ──guardas──► workspace/<id>/solucion.js
@@ -129,7 +145,8 @@ Navegador ◄──SSE──── Express ◄── reporter ◄── Vitest
 | `client/` | Interfaz en React |
 | `server/` | Servidor Express, corredor de tests y progreso |
 | `content/` | Ejercicios: enunciado, archivo inicial, tests, pistas, solución y explicación |
-| `scripts/` | Validador de contenido y modo desarrollo |
+| `scripts/` | Validadores de contenido, generadores de lecciones, exportador para la web y scripts de AWS |
+| `aws/` | Plantilla de CloudFormation y código de la Lambda |
 | `docs/` | Plan del proyecto y tareas |
 
 ### Formato de un ejercicio
