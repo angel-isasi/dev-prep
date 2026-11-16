@@ -1,0 +1,44 @@
+/* Aviso flotante justo encima de la navegación inferior */
+.aviso {
+  position: fixed;
+  right: var(--espacio-3);
+  bottom: calc(80px + env(safe-area-inset-bottom));
+  left: var(--espacio-3);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  padding: var(--espacio-3) var(--espacio-3) var(--espacio-3) var(--espacio-4);
+  border: 1px solid color-mix(in srgb, var(--acento) 40%, transparent);
+  border-radius: var(--radio-grande);
+  background: var(--fondo-solido);
+  box-shadow: var(--sombra);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.aviso span {
+  flex: 1;
+}
+
+.principal,
+.secundario {
+  min-height: 38px;
+  padding: 0 var(--espacio-3);
+  border-radius: var(--radio);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.principal {
+  border: none;
+  background: var(--boton-principal);
+  color: var(--sobre-boton-principal);
+}
+
+.secundario {
+  border: 1px solid var(--borde-fuerte);
+  background: none;
+  color: var(--texto-suave);
+}

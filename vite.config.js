@@ -12,6 +12,7 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { VitePWA } from "vite-plugin-pwa";
 
 const RAIZ = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(RAIZ, "client", "src");
@@ -51,12 +52,62 @@ function guardaNavegador() {
   };
 }
 
+/** Lo que solo lleva el index.html del celular: ícono de Apple y "no indexar". */
+function htmlMovil() {
+  return {
+    name: "devprep-html-movil",
+    transformIndexHtml: () => [
+      { tag: "link", attrs: { rel: "apple-touch-icon", href: "/apple-touch-icon-180x180.png" }, injectTo: "head" },
+      { tag: "meta", attrs: { name: "robots", content: "noindex, nofollow" }, injectTo: "head" },
+    ],
+  };
+}
+
+/**
+ * App instalable que funciona sin internet (PWA). El service worker guarda la app y TODO el
+ * contenido la primera vez que la abres; después abre aunque no haya señal.
+ * "prompt": nunca se recarga sola (te podría cortar un quiz); avisa "Hay contenido nuevo".
+ */
+const pwa = () =>
+  VitePWA({
+    registerType: "prompt",
+    injectRegister: false,
+    includeAssets: ["favicon.ico", "favicon.svg", "apple-touch-icon-180x180.png"],
+    manifest: {
+      name: "dev-prep",
+      short_name: "dev-prep",
+      description: "Aprende JavaScript, React, TypeScript, Node y SQL sin internet.",
+      lang: "es",
+      start_url: "/",
+      scope: "/",
+      display: "standalone",
+      orientation: "portrait",
+      background_color: "#07070a",
+      theme_color: "#07070a",
+      icons: [
+        { src: "pwa-64x64.png", sizes: "64x64", type: "image/png" },
+        { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
+        { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },
+        { src: "maskable-icon-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+      ],
+    },
+    workbox: {
+      // Todo lo necesario para usarla sin internet: la app, los datos y las fuentes en alfabeto latino.
+      globPatterns: ["**/*.{js,css,html,svg,png,ico,json}", "**/*-latin-wght-normal-*.woff2"],
+      globIgnores: ["**/marco.html"],
+      navigateFallback: "/index.html",
+      navigateFallbackDenylist: [/^\/datos\//, /^\/\.well-known\//],
+      maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
+      cleanupOutdatedCaches: true,
+    },
+  });
+
 export default defineConfig(({ mode }) => {
   const movil = mode === "movil";
   return {
     root: "client",
     publicDir: movil ? "public-movil" : "public",
-    plugins: [...(movil ? [guardaNavegador(), reemplazosMovil()] : []), react(), tailwindcss()],
+    plugins: [...(movil ? [guardaNavegador(), reemplazosMovil(), htmlMovil(), pwa()] : []), react(), tailwindcss()],
     // La app se carga desde tu disco, no por internet: un archivo de ~1 MB no es problema.
     build: { outDir: movil ? "dist-movil" : "dist", emptyOutDir: true, chunkSizeWarningLimit: 1500 },
     server: {

@@ -4,6 +4,7 @@ import { NavLink, Outlet, useLocation } from "react-router";
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect } from "react";
 import { IconoAprender, IconoEntrevistas, IconoInicio, IconoMas, IconoPracticar } from "../components/Iconos.jsx";
+import { AvisoPWA } from "./AvisoPWA.jsx";
 import estilos from "./LayoutMovil.module.css";
 
 const SECCIONES = [
@@ -36,6 +37,8 @@ export function LayoutMovil() {
           <Outlet />
         </motion.div>
       </main>
+
+      <AvisoPWA />
 
       <nav className={estilos.nav} aria-label="Secciones">
         {SECCIONES.map(({ a, texto, Icono, exacto, tambien }) => {
