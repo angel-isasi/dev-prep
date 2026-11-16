@@ -146,3 +146,11 @@ describe("buscarOfertas", () => {
     expect(r.fuentes.some((f) => f.id === "getonbrd")).toBe(false);
   });
 });
+
+describe("ofertas para avisar", () => {
+  test("solo las de puntaje alto que no se avisaron antes", async () => {
+    const { ofertasParaAvisar } = await import("./ofertas-auto.js");
+    const lista = [{ id: "a", puntaje: 80 }, { id: "b", puntaje: 59 }, { id: "c", puntaje: 65 }];
+    expect(ofertasParaAvisar(lista, ["c"]).map((o) => o.id)).toEqual(["a"]);
+  });
+});

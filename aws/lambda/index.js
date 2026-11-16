@@ -9,10 +9,12 @@
 //   POST /avisar           manda un aviso ya armado (lo usa la laptop, por ejemplo al acabarse el tiempo de juego)
 // Sin token:
 //   evento programado (EventBridge, cada 30 min): decide si toca avisar (server/avisos.js) y envía.
+//   A las 11:00 (hora de Lima) además busca ofertas de trabajo nuevas (server/ofertas-auto.js).
 import { DeleteItemCommand, DynamoDBClient, GetItemCommand, PutItemCommand, ScanCommand } from "@aws-sdk/client-dynamodb";
 import { gunzipSync, gzipSync } from "node:zlib";
 import { createHash, timingSafeEqual } from "node:crypto";
-import { decidirAvisos } from "../../server/avisos.js";
+import { decidirAvisos, HORA_OFERTAS, horaLocal } from "../../server/avisos.js";
+import { buscarOfertas, ofertasParaAvisar, ordenarOfertas } from "../../server/ofertas-auto.js";
 import { enviarAviso } from "../../server/webpush.js";
 
 const db = new DynamoDBClient({});
@@ -42,8 +44,14 @@ async function leerTodo() {
   } while (desde);
   const documentos = items
     .filter((i) => i.doc?.B && !i.dispositivo.S.includes("#"))
-    .map((i) => ({ dispositivo: i.dispositivo.S, actualizado: i.actualizado?.S, doc: JSON.parse(gunzipSync(Buffer.from(i.doc.B)).toString()) }));
-  const suscripciones = items.filter((i) => i.dispositivo.S.startsWith("push#") && i.suscripcion?.S).map((i) => ({ clave: i.dispositivo.S, suscripcion: JSON.parse(i.suscripcion.S) }));
+    .map((i) => ({
+      dispositivo: i.dispositivo.S,
+      actualizado: i.actualizado?.S,
+      doc: JSON.parse(gunzipSync(Buffer.from(i.doc.B)).toString()),
+    }));
+  const suscripciones = items
+    .filter((i) => i.dispositivo.S.startsWith("push#") && i.suscripcion?.S)
+    .map((i) => ({ clave: i.dispositivo.S, suscripcion: JSON.parse(i.suscripcion.S) }));
   return { documentos, suscripciones };
 }
 
@@ -62,6 +70,36 @@ async function enviarATodos(suscripciones, datos) {
   return enviados;
 }
 
+/**
+ * Una vez al día, a las 11:00: busca ofertas en las bolsas de trabajo y devuelve las buenas que
+ * todavía no te avisó. Recuerda los ids ya vistos en "estado#ofertas" para no repetirlas.
+ */
+async function ofertasDeHoy() {
+  const { fecha, hora } = horaLocal(new Date());
+  if (hora !== HORA_OFERTAS) return [];
+  const r = await db.send(new GetItemCommand({ TableName: TABLA, Key: { dispositivo: { S: "estado#ofertas" } } }));
+  const estado = r.Item?.estado?.S ? JSON.parse(r.Item.estado.S) : { ids: [] };
+  if (estado.fecha === fecha) return [];
+  try {
+    const pedir = (url, opciones = {}) =>
+      fetch(url, { ...opciones, headers: { ...opciones.headers, "User-Agent": "dev-prep (app personal de estudio)" } });
+    const { ofertas } = await buscarOfertas(pedir, { espera: 6000 });
+    const ordenadas = ordenarOfertas(ofertas, { hoy: fecha }, { limite: 300 });
+    const nuevas = ofertasParaAvisar(ordenadas, estado.ids ?? []);
+    const ids = [...new Set([...nuevas.map((o) => o.id), ...(estado.ids ?? [])])].slice(0, 600);
+    await db.send(
+      new PutItemCommand({
+        TableName: TABLA,
+        Item: { dispositivo: { S: "estado#ofertas" }, estado: { S: JSON.stringify({ fecha, ids }) } },
+      }),
+    );
+    return nuevas;
+  } catch (error) {
+    console.error("No se pudieron buscar ofertas:", error.message);
+    return [];
+  }
+}
+
 /** Cada 30 minutos: ¿toca avisar? */
 async function revisarAvisos() {
   if (!VAPID.publica) return { avisos: 0 };
@@ -69,9 +107,12 @@ async function revisarAvisos() {
   if (!suscripciones.length || !documentos.length) return { avisos: 0 };
   const r = await db.send(new GetItemCommand({ TableName: TABLA, Key: { dispositivo: { S: "estado#avisos" } } }));
   const estado = r.Item?.estado?.S ? JSON.parse(r.Item.estado.S) : {};
-  const { avisos, estado: nuevo } = decidirAvisos(documentos, new Date(), estado);
+  const ofertasNuevas = await ofertasDeHoy();
+  const { avisos, estado: nuevo } = decidirAvisos(documentos, new Date(), estado, { ofertasNuevas });
   for (const a of avisos) await enviarATodos(suscripciones, { titulo: a.titulo, cuerpo: a.cuerpo, url: a.url, tipo: a.tipo });
-  await db.send(new PutItemCommand({ TableName: TABLA, Item: { dispositivo: { S: "estado#avisos" }, estado: { S: JSON.stringify(nuevo) } } }));
+  await db.send(
+    new PutItemCommand({ TableName: TABLA, Item: { dispositivo: { S: "estado#avisos" }, estado: { S: JSON.stringify(nuevo) } } }),
+  );
   return { avisos: avisos.length };
 }
 
@@ -95,15 +136,33 @@ export const handler = async (event) => {
       const comprimido = gzipSync(JSON.stringify(cuerpo.doc ?? {}));
       if (comprimido.length > MAX) return resp(413, { error: "El documento es demasiado grande" });
       const actualizado = new Date().toISOString();
-      await db.send(new PutItemCommand({ TableName: TABLA, Item: { dispositivo: { S: dispositivo }, actualizado: { S: actualizado }, doc: { B: comprimido } } }));
+      await db.send(
+        new PutItemCommand({
+          TableName: TABLA,
+          Item: { dispositivo: { S: dispositivo }, actualizado: { S: actualizado }, doc: { B: comprimido } },
+        }),
+      );
       return resp(200, { actualizado });
     }
     if (metodo === "POST" && ruta === "/push/suscribir") {
       const { dispositivo, suscripcion } = cuerpoDe(event);
-      if (!/^[a-z0-9-]{3,40}$/.test(String(dispositivo ?? "")) || !suscripcion?.endpoint?.startsWith("https://") || !suscripcion.keys?.p256dh) {
+      if (
+        !/^[a-z0-9-]{3,40}$/.test(String(dispositivo ?? "")) ||
+        !suscripcion?.endpoint?.startsWith("https://") ||
+        !suscripcion.keys?.p256dh
+      ) {
         return resp(400, { error: "Suscripción inválida" });
       }
-      await db.send(new PutItemCommand({ TableName: TABLA, Item: { dispositivo: { S: `push#${dispositivo}` }, suscripcion: { S: JSON.stringify(suscripcion) }, actualizado: { S: new Date().toISOString() } } }));
+      await db.send(
+        new PutItemCommand({
+          TableName: TABLA,
+          Item: {
+            dispositivo: { S: `push#${dispositivo}` },
+            suscripcion: { S: JSON.stringify(suscripcion) },
+            actualizado: { S: new Date().toISOString() },
+          },
+        }),
+      );
       return resp(200, { ok: true });
     }
     if (metodo === "POST" && ruta === "/push/quitar") {
@@ -114,7 +173,10 @@ export const handler = async (event) => {
     if (metodo === "POST" && (ruta === "/push/probar" || ruta === "/avisar")) {
       const { suscripciones } = await leerTodo();
       const c = ruta === "/avisar" ? cuerpoDe(event) : {};
-      const datos = ruta === "/avisar" ? { titulo: String(c.titulo ?? "dev-prep").slice(0, 80), cuerpo: String(c.cuerpo ?? "").slice(0, 200), url: c.url ?? "/" } : { titulo: "Avisos activados", cuerpo: "Así te avisará dev-prep. ¡A practicar!", url: "/" };
+      const datos =
+        ruta === "/avisar"
+          ? { titulo: String(c.titulo ?? "dev-prep").slice(0, 80), cuerpo: String(c.cuerpo ?? "").slice(0, 200), url: c.url ?? "/" }
+          : { titulo: "Avisos activados", cuerpo: "Así te avisará dev-prep. ¡A practicar!", url: "/" };
       return resp(200, { enviados: await enviarATodos(suscripciones, datos) });
     }
     return resp(405, { error: "Método no permitido" });

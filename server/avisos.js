@@ -5,17 +5,27 @@
 // - Última llamada: a las 21:00, si tu racha está en riesgo.
 // - Sábado: el examen semanal está listo (si no lo hiciste).
 // - Domingo a las 20:00: el resumen de tu semana.
+// - A las 11:00: ofertas de trabajo nuevas que te convienen (las busca la Lambda; ver ofertas-auto.js).
 import { diasCombinados, fusionarDocumento, vivos } from "./combinar.js";
 import { DIAS_SEMANA, diaSemana, enPausa, hechoDe, lunesDe, resumenDias } from "./metricas.js";
 import { sumarDias } from "./progreso-reglas.js";
 
 export const MAX_AVISOS_DIA = 2;
+export const HORA_OFERTAS = 11;
 export const ZONA_POR_DEFECTO = "America/Lima";
 
 /** Fecha y hora local en una zona horaria: { fecha: "AAAA-MM-DD", hora: 0-23, minuto }. */
 export function horaLocal(fecha, zona = ZONA_POR_DEFECTO) {
   const partes = Object.fromEntries(
-    new Intl.DateTimeFormat("en-CA", { timeZone: zona, year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: zona,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hourCycle: "h23",
+    })
       .formatToParts(fecha)
       .map((p) => [p.type, p.value]),
   );
@@ -57,9 +67,10 @@ export function horaHabitual(doc, hoy) {
  * @param {object[]} documentos   { dispositivo, doc } de todos los dispositivos
  * @param {Date} ahora
  * @param {{ fecha?: string, enviados?: string[] }} estado  avisos ya enviados hoy (de la tabla)
+ * @param {{ ofertasNuevas?: object[] }} extra  ofertas buenas que todavía no te avisé (las busca la Lambda a las 11:00)
  * @returns {{ avisos: { tipo: string, titulo: string, cuerpo: string, url: string }[], estado: object }}
  */
-export function decidirAvisos(documentos, ahora, estado = {}) {
+export function decidirAvisos(documentos, ahora, estado = {}, { ofertasNuevas = [] } = {}) {
   const doc = documentoUnido(documentos);
   const ajustes = vivos(doc.ajustes);
   const zona = ajustes.avisos?.zona ?? ZONA_POR_DEFECTO;
@@ -95,13 +106,20 @@ export function decidirAvisos(documentos, ahora, estado = {}) {
     candidatos.push({
       tipo: "ultima-llamada",
       titulo: "Última llamada para tu racha",
-      cuerpo: resumen.hoy.salvable ? "Ya hiciste algo hoy: si lo dejas aquí, la racha se salva. Una cosa más y cumples." : `Te ${falta === 1 ? "falta 1" : `faltan ${falta}`} para tu meta. 10 minutos salvan el día.`,
+      cuerpo: resumen.hoy.salvable
+        ? "Ya hiciste algo hoy: si lo dejas aquí, la racha se salva. Una cosa más y cumples."
+        : `Te ${falta === 1 ? "falta 1" : `faltan ${falta}`} para tu meta. 10 minutos salvan el día.`,
       url: "/leccion?modo=rapida",
     });
   }
   const examenHecho = !!vivos(doc.examenes)[lunesDe(hoy)];
   if (diaSemana(hoy) === 5 && hora === horaRecordatorio && !examenHecho) {
-    candidatos.push({ tipo: "examen", titulo: "Tu examen semanal está listo", cuerpo: "20 preguntas de lo que viste esta semana. ¿Cuánto sacas?", url: "/leccion?modo=examen" });
+    candidatos.push({
+      tipo: "examen",
+      titulo: "Tu examen semanal está listo",
+      cuerpo: "20 preguntas de lo que viste esta semana. ¿Cuánto sacas?",
+      url: "/leccion?modo=examen",
+    });
   }
   if (diaSemana(hoy) === 6 && hora === 20) {
     const semana = Array.from({ length: 7 }, (_, i) => dias[sumarDias(lunesDe(hoy), i)] ?? {});
@@ -111,6 +129,17 @@ export function decidirAvisos(documentos, ahora, estado = {}) {
       titulo: "Tu semana en dev-prep",
       cuerpo: `${suma("resueltos")} ejercicios, ${suma("lecciones") + suma("ingles")} lecciones y ${Math.round(suma("inglesSegundos") / 60 + suma("inmersion"))} min de inglés. Racha: ${resumen.racha}.`,
       url: "/progreso",
+    });
+  }
+
+  if (hora === HORA_OFERTAS && ofertasNuevas.length) {
+    const [mejor] = ofertasNuevas;
+    const n = ofertasNuevas.length;
+    candidatos.push({
+      tipo: "ofertas",
+      titulo: n === 1 ? "Una oferta nueva para ti" : `${n} ofertas nuevas para ti`,
+      cuerpo: `${mejor.titulo}${mejor.empresa ? ` en ${mejor.empresa}` : ""} (${mejor.puntaje}/100). Mira por qué te conviene.`,
+      url: "/trabajo",
     });
   }
 

@@ -282,3 +282,14 @@ export function ordenarOfertas(ofertas, perfil, { limite = 40 } = {}) {
     .sort((a, b) => b.puntaje - a.puntaje || (b.fecha ?? "").localeCompare(a.fecha ?? ""))
     .slice(0, limite);
 }
+
+/** Puntaje mínimo para avisarte de una oferta al celular. */
+export const PUNTAJE_PARA_AVISAR = 60;
+
+/**
+ * Las ofertas que valen un aviso: buenas (puntaje alto) y que no te avisé antes.
+ * @param {object[]} ordenadas  las de ordenarOfertas
+ * @param {string[]} yaAvisadas  ids de ofertas que ya viste en un aviso
+ */
+export const ofertasParaAvisar = (ordenadas, yaAvisadas = []) =>
+  ordenadas.filter((o) => o.puntaje >= PUNTAJE_PARA_AVISAR && !yaAvisadas.includes(o.id));

@@ -44,3 +44,21 @@ describe("avisos", () => {
     expect(r.avisos.find((a) => a.tipo === "resumen").cuerpo).toMatch(/^4 ejercicios/);
   });
 });
+
+describe("aviso de ofertas", () => {
+  const oferta = (id, puntaje) => ({ id, titulo: "Frontend Junior", empresa: "Acme", puntaje });
+
+  test("a las 11:00 avisa de las ofertas nuevas, con la mejor en el texto", () => {
+    const r = decidirAvisos([doc()], enLima("2026-11-18", 11), {}, { ofertasNuevas: [oferta("a", 72), oferta("b", 61)] });
+    expect(r.avisos.map((a) => a.tipo)).toEqual(["ofertas"]);
+    expect(r.avisos[0].titulo).toBe("2 ofertas nuevas para ti");
+    expect(r.avisos[0].cuerpo).toContain("Frontend Junior en Acme (72/100)");
+  });
+
+  test("a otra hora, sin ofertas o en una pausa, no avisa", () => {
+    expect(decidirAvisos([doc()], enLima("2026-11-18", 15), {}, { ofertasNuevas: [oferta("a", 72)] }).avisos).toEqual([]);
+    expect(decidirAvisos([doc()], enLima("2026-11-18", 11), {}, { ofertasNuevas: [] }).avisos).toEqual([]);
+    const pausa = { pausas: { lista: [{ desde: "2026-11-17", hasta: "2026-11-20" }], en: "2026-11-15T10:00:00-05:00" } };
+    expect(decidirAvisos([doc({ ajustes: pausa })], enLima("2026-11-18", 11), {}, { ofertasNuevas: [oferta("a", 72)] }).avisos).toEqual([]);
+  });
+});
