@@ -1,0 +1,8 @@
+{
+  "id": "prueba-03",
+  "titulo": "Carrito de compras con cupones y localStorage",
+  "horas": 3,
+  "nivel": 2,
+  "descripcion": "Para Café Altura, una tostaduría de Chanchamayo: carrito con cantidades y límites, subtotal, envío, cupones con reglas, total y persistencia en localStorage.",
+  "tecnologias": ["React", "useReducer", "localStorage", "Testing Library"]
+}

@@ -1,0 +1,4 @@
+{
+  "titulo": "Lista de tareas con componentes",
+  "objetivo": "Mostrar las tareas de src/data.js dividiendo la pantalla en componentes con props."
+}

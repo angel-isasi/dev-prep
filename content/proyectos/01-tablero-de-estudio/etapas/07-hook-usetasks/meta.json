@@ -1,0 +1,4 @@
+{
+  "titulo": "Un hook propio: useTasks",
+  "objetivo": "Sacar la lógica de datos de App a un hook propio que carga, crea, marca, renombra y borra tareas."
+}

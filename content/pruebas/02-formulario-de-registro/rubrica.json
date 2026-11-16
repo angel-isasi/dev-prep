@@ -1,0 +1,8 @@
+[
+  { "criterio": "Funciona", "puntos": 30, "descripcion": "Validación, botón deshabilitado, envío con Enviando..., éxito y error del servidor funcionan y pasan los tests." },
+  { "criterio": "Accesibilidad", "puntos": 20, "descripcion": "Labels unidos a cada campo, aria-invalid y aria-describedby correctos, ayuda de la contraseña asociada y error del servidor con role=alert." },
+  { "criterio": "Casos borde", "puntos": 15, "descripcion": "Correo con espacios, confirmación que se revalida al cambiar la contraseña, doble envío bloqueado y datos conservados tras un error." },
+  { "criterio": "Estado y validación", "puntos": 15, "descripcion": "Errores derivados de los valores, reglas en funciones puras y un solo estado de envío claro." },
+  { "criterio": "Componentes bien divididos", "puntos": 10, "descripcion": "Un campo reutilizable y el formulario separado de la pantalla de éxito." },
+  { "criterio": "Código legible y README", "puntos": 10, "descripcion": "Nombres claros, sin duplicar lógica, y un README con decisiones y mejoras." }
+]

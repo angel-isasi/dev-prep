@@ -1,0 +1,4 @@
+{
+  "titulo": "Cargar desde la API con carga y error",
+  "objetivo": "Traer las tareas de la API con useEffect, mostrando estados de carga, error con reintento y lista vacía."
+}

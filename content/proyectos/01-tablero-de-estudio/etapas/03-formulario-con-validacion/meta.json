@@ -1,0 +1,4 @@
+{
+  "titulo": "Formulario para crear con validación",
+  "objetivo": "Crear tareas con un formulario controlado que valida el título y muestra errores claros."
+}

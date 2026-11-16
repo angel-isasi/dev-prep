@@ -1,0 +1,8 @@
+[
+  { "criterio": "Funciona", "puntos": 30, "descripcion": "Agregar, cambiar cantidades, quitar, resumen, cupones y persistencia funcionan y pasan los tests." },
+  { "criterio": "Casos borde", "puntos": 15, "descripcion": "Límites de 1 y 10 unidades, cupón con mínimo que deja de aplicar, código con espacios y localStorage corrupto o desactualizado." },
+  { "criterio": "Estado y cálculos", "puntos": 20, "descripcion": "Reducer sin mutaciones, totales derivados en funciones puras y dinero en céntimos sin errores de decimales." },
+  { "criterio": "Componentes bien divididos", "puntos": 15, "descripcion": "Productos, línea del carrito, cupón y resumen separados, con un hook que encapsula el estado y la persistencia." },
+  { "criterio": "Accesibilidad", "puntos": 10, "descripcion": "Botones con nombres accesibles que incluyen el producto, errores con role=alert, labels y resumen con dl." },
+  { "criterio": "Código legible, estilos y README", "puntos": 10, "descripcion": "Nombres claros, estilos ordenados y un README con decisiones y mejoras." }
+]

@@ -1,0 +1,8 @@
+{
+  "id": "prueba-01",
+  "titulo": "Catálogo de productos con búsqueda y filtros",
+  "horas": 3,
+  "nivel": 2,
+  "descripcion": "Para Qhatu, un marketplace de bodegas de Lima: consume una API, maneja carga y error con reintento, y permite buscar, filtrar por categoría y ordenar por precio.",
+  "tecnologias": ["React", "useEffect", "Promesas", "Testing Library"]
+}

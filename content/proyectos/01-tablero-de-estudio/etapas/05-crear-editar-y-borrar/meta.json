@@ -1,0 +1,4 @@
+{
+  "titulo": "Crear, editar y borrar contra la API",
+  "objetivo": "Conectar todas las acciones a la API (POST, PATCH, DELETE) y avisar cuando una falla sin perder datos."
+}

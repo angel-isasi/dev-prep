@@ -1,0 +1,6 @@
+{
+  "id": "proyecto-tablero",
+  "titulo": "Tablero de estudio",
+  "descripcion": "Una app React para organizar tus tareas de aprendizaje: lista, formulario con validación, API con estados de carga y error, CRUD completo, filtros y búsqueda, un hook propio, preferencias en localStorage, racha diaria y accesibilidad. Se construye en 9 etapas, cada una con sus tests.",
+  "tecnologias": ["React", "Hooks", "useEffect", "API REST simulada", "localStorage", "Vitest", "Testing Library", "Accesibilidad"]
+}

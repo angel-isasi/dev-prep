@@ -1,0 +1,9 @@
+[
+  { "criterio": "Funciona", "puntos": 30, "descripcion": "Carga, error con reintento, búsqueda, filtro y orden funcionan y pasan los tests de aceptación." },
+  { "criterio": "Casos borde", "puntos": 15, "descripcion": "Búsqueda sin tildes ni mayúsculas, sin resultados con Limpiar filtros, filtros combinados y la petición que llega tarde no actualiza un componente desmontado." },
+  { "criterio": "Estado y datos", "puntos": 15, "descripcion": "La lista visible es estado derivado (no se duplica en useState) y no se muta el arreglo original al ordenar." },
+  { "criterio": "Componentes bien divididos", "puntos": 15, "descripcion": "La petición vive en un hook, el filtrado en funciones puras y la interfaz en componentes pequeños con props claras." },
+  { "criterio": "Accesibilidad", "puntos": 10, "descripcion": "Controles con label, error con role=alert, lista con nombre accesible y botones reales." },
+  { "criterio": "Código legible y estilos", "puntos": 10, "descripcion": "Nombres claros, sin código muerto, estilos simples y ordenados." },
+  { "criterio": "README", "puntos": 5, "descripcion": "Explica cómo correrlo, las decisiones tomadas y qué mejoraría con más tiempo." }
+]

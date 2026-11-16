@@ -1,0 +1,8 @@
+{
+  "id": "prueba-02",
+  "titulo": "Formulario de registro con validación en vivo",
+  "horas": 2,
+  "nivel": 2,
+  "descripcion": "Para Wayra Pagos, una billetera digital de Arequipa: registro con validación al salir de cada campo, mensajes accesibles, botón deshabilitado hasta que todo sea válido y envío con estados.",
+  "tecnologias": ["React", "Formularios controlados", "Accesibilidad", "Testing Library"]
+}

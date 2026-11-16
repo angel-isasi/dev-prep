@@ -1,0 +1,4 @@
+{
+  "titulo": "Estado: marcar como hecha",
+  "objetivo": "Guardar las tareas en el estado de App y cambiarlas sin mutar, con un resumen derivado."
+}

@@ -1,0 +1,16 @@
+/* Estilos base. Puedes cambiarlos o agregar los tuyos: se valora que sea limpio, no que sea lujoso. */
+:root {
+  font-family: system-ui, sans-serif;
+  color: #1f2933;
+  background: #f7f7f5;
+}
+
+body {
+  margin: 0;
+}
+
+.catalog {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}

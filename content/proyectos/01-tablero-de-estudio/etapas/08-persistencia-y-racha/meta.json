@@ -1,0 +1,4 @@
+{
+  "titulo": "Persistencia, preferencias y racha",
+  "objetivo": "Recordar el filtro elegido con un hook useLocalStorage y llevar una racha de días seguidos completando tareas."
+}
