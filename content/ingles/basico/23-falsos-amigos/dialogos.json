@@ -1,0 +1,37 @@
+[
+  { "id": "en-basico-23-d01", "titulo": "La daily del lunes", "situacion": "Carlos vuelve de un congreso y le cuenta a Sarah en qué está trabajando.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Good morning, Carlos. How was the conference?", "es": "Buenos días, Carlos. ¿Qué tal el congreso?" },
+      { "quien": "Carlos", "en": "Great! I attended three talks about React.", "es": "¡Genial! Asistí a tres charlas sobre React." },
+      { "quien": "Sarah", "en": "Nice. And what are you working on today?", "es": "Bien. ¿Y en qué trabajas hoy?" },
+      { "quien": "Carlos", "en": "Actually, I'm still fixing the login bug.", "es": "En realidad, todavía estoy arreglando el bug del inicio de sesión." },
+      { "quien": "Sarah", "en": "Do you need any assistance?", "es": "¿Necesitas ayuda?" },
+      { "quien": "Carlos", "en": "Yes. I realized the problem is in the API.", "es": "Sí. Me di cuenta de que el problema está en la API." },
+      { "quien": "Sarah", "en": "OK, let's discuss it after the meeting.", "es": "Ok, conversemos sobre eso después de la reunión." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué hizo Carlos en el congreso?", "opciones": ["Dio una charla", "Asistió a tres charlas", "Ayudó a organizarlo"], "correcta": 1,
+        "explicacion": "Carlos dice \"I attended three talks\": attend es asistir. No dice que haya ayudado (assist)." },
+      { "pregunta": "¿Qué descubrió Carlos sobre el bug?", "opciones": ["Que el problema está en la API", "Que ya está resuelto", "Que necesita otra laptop"], "correcta": 0,
+        "explicacion": "Dice \"I realized the problem is in the API\": realize es darse cuenta." },
+      { "pregunta": "¿Qué propone Sarah?", "opciones": ["Pelear con el equipo de la API", "Conversar sobre el problema después de la reunión", "Cancelar la reunión"], "correcta": 1,
+        "explicacion": "\"Let's discuss it after the meeting\": discuss es conversar sobre un tema, no pelear." }
+    ] },
+  { "id": "en-basico-23-d02", "titulo": "Un mensaje por el chat", "situacion": "Ana le escribe a Tom por el chat del equipo temprano en la mañana.",
+    "lineas": [
+      { "quien": "Ana", "en": "Hi Tom! I have a cold, so I'm working from home.", "es": "¡Hola, Tom! Estoy resfriada, así que trabajo desde casa." },
+      { "quien": "Tom", "en": "Oh no! I hope you feel better soon.", "es": "¡Oh, no! Espero que te mejores pronto." },
+      { "quien": "Ana", "en": "Thanks. Can you resume the code review without me?", "es": "Gracias. ¿Puedes continuar la revisión de código sin mí?" },
+      { "quien": "Tom", "en": "Sure. Where are the new designs?", "es": "Claro. ¿Dónde están los diseños nuevos?" },
+      { "quien": "Ana", "en": "They're in the Sprint 5 folder.", "es": "Están en la carpeta del Sprint 5." },
+      { "quien": "Tom", "en": "Got it. Let me know if you need anything.", "es": "Entendido. Avísame si necesitas algo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Ana trabaja desde casa?", "opciones": ["Está resfriada", "Está estreñida", "Tiene una cita médica"], "correcta": 0,
+        "explicacion": "Ana escribe \"I have a cold\": está resfriada. Si hubiera escrito constipated, significaría estreñida." },
+      { "pregunta": "¿Qué le pide Ana a Tom?", "opciones": ["Que resuma la revisión de código", "Que continúe la revisión de código sin ella", "Que cancele la revisión de código"], "correcta": 1,
+        "explicacion": "\"Can you resume the code review without me?\": resume es continuar, no resumir." },
+      { "pregunta": "¿Dónde están los diseños nuevos?", "opciones": ["En la carpeta del Sprint 5", "En el correo de Tom", "En el tablero de tickets"], "correcta": 0,
+        "explicacion": "Ana dice \"They're in the Sprint 5 folder\": folder es carpeta." }
+    ] }
+]

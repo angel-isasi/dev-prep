@@ -1,0 +1,37 @@
+[
+  { "id": "en-basico-22-d01", "titulo": "¿Tree o three?", "situacion": "En la daily, Luis cuenta qué hizo ayer y Sarah no le entiende un número.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Luis, what did you do yesterday?", "es": "Luis, ¿qué hiciste ayer?" },
+      { "quien": "Luis", "en": "I fixed tree bugs in the cart.", "es": "Arreglé tres bugs en el carrito (pero dice tree, árbol)." },
+      { "quien": "Sarah", "en": "Sorry, tree or three?", "es": "Perdón, ¿tree o three?" },
+      { "quien": "Luis", "en": "Three, the number. I fixed three bugs.", "es": "Three, el número. Arreglé tres bugs." },
+      { "quien": "Sarah", "en": "Great! And what's the plan for today?", "es": "¡Genial! ¿Y cuál es el plan para hoy?" },
+      { "quien": "Luis", "en": "Today I want to fix the width of the cards.", "es": "Hoy quiero arreglar el ancho de las tarjetas." },
+      { "quien": "Sarah", "en": "OK. I can check the cache with you later.", "es": "Ok. Puedo revisar la caché contigo después." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuántos bugs arregló Luis ayer?", "opciones": ["Uno", "Tres", "Ninguno"], "correcta": 1,
+        "explicacion": "Luis aclara: \"I fixed three bugs\". Primero dijo tree (árbol) porque no puso la lengua entre los dientes." },
+      { "pregunta": "¿Por qué Sarah pregunta \"tree or three\"?", "opciones": ["Porque Luis pronunció three como tree", "Porque había ruido en la llamada", "Porque Luis habló de un árbol de componentes"], "correcta": 0,
+        "explicacion": "Luis dijo \"tree bugs\" y Sarah no sabía si era árbol o tres. Con la th bien hecha no habría duda." },
+      { "pregunta": "¿Qué va a arreglar Luis hoy?", "opciones": ["La altura del header", "El ancho de las tarjetas", "El formulario de registro"], "correcta": 1,
+        "explicacion": "Dice \"Today I want to fix the width of the cards\": width es ancho." }
+    ] },
+  { "id": "en-basico-22-d02", "titulo": "¿Live o leave?", "situacion": "Ana y Tom hablan por el chat de voz del equipo al final de la tarde.",
+    "lineas": [
+      { "quien": "Tom", "en": "Ana, are you coming to the team dinner?", "es": "Ana, ¿vienes a la cena del equipo?" },
+      { "quien": "Ana", "en": "Sorry, I live at five today.", "es": "Perdón, hoy salgo a las cinco (pero dice live, vivir)." },
+      { "quien": "Tom", "en": "You live at five?", "es": "¿Vives a las cinco?" },
+      { "quien": "Ana", "en": "No, I leave, with a long i. I go home at five.", "es": "No, salgo, con i larga. Me voy a casa a las cinco." },
+      { "quien": "Tom", "en": "Ah, OK! Did you pull my changes?", "es": "¡Ah, ok! ¿Jalaste mis cambios?" },
+      { "quien": "Ana", "en": "Yes, I pulled them, and all the tests passed.", "es": "Sí, los jalé y todos los tests pasaron." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿A qué hora se va Ana hoy?", "opciones": ["A las cuatro", "A las cinco", "A las seis"], "correcta": 1,
+        "explicacion": "Ana dice \"I go home at five\": se va a casa a las cinco." },
+      { "pregunta": "¿Qué entendió Tom al principio?", "opciones": ["Que Ana vive a las cinco", "Que Ana llega a las cinco", "Que Ana cena a las cinco"], "correcta": 0,
+        "explicacion": "Ana dijo live (vivir) con i corta en vez de leave (salir) con i larga, por eso Tom pregunta \"You live at five?\"." },
+      { "pregunta": "¿Qué pasó con los cambios de Tom?", "opciones": ["Ana los borró", "Ana los jaló y los tests pasaron", "Ana todavía no los revisa"], "correcta": 1,
+        "explicacion": "Ana responde \"I pulled them, and all the tests passed\"." }
+    ] }
+]
