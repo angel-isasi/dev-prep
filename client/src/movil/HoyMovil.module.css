@@ -250,3 +250,61 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+
+/* Lección del día */
+.leccion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-4);
+  padding: var(--espacio-4);
+  border: 1px solid color-mix(in srgb, var(--color-area) 40%, transparent);
+  border-radius: var(--radio-grande);
+  background:
+    radial-gradient(300px 140px at 100% 0%, var(--color-area-suave), transparent 70%),
+    linear-gradient(var(--superficie), var(--superficie)),
+    var(--fondo-solido);
+  box-shadow: var(--brillo-borde);
+}
+
+.leccionCabeza {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+.leccionCabeza small {
+  color: var(--texto-suave);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.leccionCabeza strong {
+  font-family: var(--fuente-titulos);
+  font-size: 20px;
+}
+
+.leccionPct {
+  font-family: var(--fuente-titulos);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.empezar {
+  justify-content: center;
+  min-height: 52px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.leccionEnlaces {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+  font-size: 14px;
+  font-weight: 600;
+}

@@ -1,0 +1,267 @@
+// Un componente por tipo de ítem de lección. Todos se responden tocando (nada de escribir).
+// Cada uno avisa su respuesta al padre (LeccionMovil), que corrige con motor.js.
+import { useEffect, useMemo, useState } from "react";
+import { motion } from "motion/react";
+import { Markdown } from "../../components/Markdown.jsx";
+import { Tarjeta } from "../../components/Tarjeta.jsx";
+import { api } from "../../lib/api.js";
+import { barajar, semilla } from "./motor.js";
+import estilos from "./Items.module.css";
+
+const TITULOS = {
+  quiz: "Responde",
+  metodo: "¿Qué usarías?",
+  devuelve: "¿Qué devuelve?",
+  ts: "¿TypeScript lo acepta?",
+  hueco: "Completa el hueco",
+  ordenar: "Ordena las líneas",
+  emparejar: "Une cada par",
+  tarjeta: "¿Cómo lo resolverías?",
+  entrevista: "Pregunta de entrevista",
+};
+
+export const tituloDe = (paso) => TITULOS[paso.item?.subtipo ?? paso.tipo] ?? "Responde";
+
+/** Código con una línea marcada (la que se pregunta). */
+function Codigo({ codigo }) {
+  if (!codigo) return null;
+  const lineas = codigo.texto.split("\n");
+  const texto =
+    codigo.marcar != null && lineas[codigo.marcar] !== undefined
+      ? lineas.map((l, i) => (i === codigo.marcar ? `${l}   // ← esta` : l)).join("\n")
+      : codigo.texto;
+  return (
+    <div className={estilos.codigo}>
+      <Markdown>{"```" + (codigo.lenguaje ?? "js") + "\n" + texto + "\n```"}</Markdown>
+    </div>
+  );
+}
+
+/** Opciones barajadas de forma estable (misma clave, mismo orden aunque retomes la lección). */
+export function useOpciones(item) {
+  return useMemo(() => {
+    const indices = item.opciones.map((_, i) => i);
+    // "Compila / Da error" se queda en su orden; lo demás se baraja.
+    return item.subtipo === "ts" ? indices : barajar(indices, semilla(item.clave));
+  }, [item]);
+}
+
+/** Opción múltiple (quiz, ¿qué método?, ¿qué devuelve?, TypeScript) y completar el hueco. */
+export function ItemOpcion({ item, elegida, alElegir, bloqueado, correcta }) {
+  const orden = useOpciones(item);
+  return (
+    <div className={estilos.item}>
+      {item.pregunta && (
+        <div className={estilos.pregunta}>
+          <Markdown>{item.pregunta}</Markdown>
+        </div>
+      )}
+      <Codigo codigo={item.codigo} />
+      <div className={estilos.opciones} data-dos={item.opciones.length === 2}>
+        {orden.map((i) => {
+          const estado = bloqueado ? (i === correcta ? "correcta" : i === elegida ? "incorrecta" : "") : i === elegida ? "elegida" : "";
+          return (
+            <motion.button
+              key={i}
+              type="button"
+              className={estilos.opcion}
+              data-estado={estado}
+              disabled={bloqueado}
+              onClick={() => alElegir(i)}
+              whileTap={{ scale: 0.97 }}
+            >
+              <Markdown>{item.opciones[i]}</Markdown>
+            </motion.button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/** Emparejar: tocas uno de la izquierda y luego su pareja de la derecha. */
+export function ItemEmparejar({ item, alCompletar }) {
+  const izquierda = useMemo(() => barajar(item.pares.map((_, i) => i), semilla(item.clave + "i")), [item]);
+  const derecha = useMemo(() => barajar(item.pares.map((_, i) => i), semilla(item.clave + "d")), [item]);
+  const [elegido, setElegido] = useState(null);
+  const [hechos, setHechos] = useState([]);
+  const [error, setError] = useState(null);
+  const [errores, setErrores] = useState(0);
+
+  useEffect(() => {
+    if (hechos.length === item.pares.length) {
+      const t = setTimeout(() => alCompletar(errores), 350);
+      return () => clearTimeout(t);
+    }
+  }, [hechos, item.pares.length, errores, alCompletar]);
+
+  function tocarDerecha(i) {
+    if (elegido === null || hechos.includes(i)) return;
+    if (i === elegido) {
+      setHechos((h) => [...h, i]);
+      navigator.vibrate?.(15);
+    } else {
+      setErrores((e) => e + 1);
+      setError(i);
+      navigator.vibrate?.([30, 40, 30]);
+      setTimeout(() => setError(null), 450);
+    }
+    setElegido(null);
+  }
+
+  return (
+    <div className={estilos.item}>
+      <p className={estilos.ayuda}>Toca un método y luego lo que hace.</p>
+      <div className={estilos.pares}>
+        <div className={estilos.columna}>
+          {izquierda.map((i) => (
+            <button
+              key={i}
+              type="button"
+              className={estilos.ficha}
+              data-estado={hechos.includes(i) ? "hecho" : elegido === i ? "elegida" : ""}
+              disabled={hechos.includes(i)}
+              onClick={() => setElegido(i)}
+            >
+              <Markdown>{item.pares[i].izq}</Markdown>
+            </button>
+          ))}
+        </div>
+        <div className={estilos.columna}>
+          {derecha.map((i) => (
+            <button
+              key={i}
+              type="button"
+              className={estilos.ficha}
+              data-estado={hechos.includes(i) ? "hecho" : error === i ? "error" : ""}
+              disabled={hechos.includes(i)}
+              onClick={() => tocarDerecha(i)}
+            >
+              <Markdown>{item.pares[i].der}</Markdown>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Ordenar líneas: tocas las líneas del banco en orden; tocar una línea elegida la devuelve. */
+export function ItemOrdenar({ item, elegidas, alCambiar, bloqueado }) {
+  const banco = useMemo(() => barajar(item.lineas.map((_, i) => i), semilla(item.clave)), [item]);
+  const usadas = new Set(elegidas);
+  return (
+    <div className={estilos.item}>
+      {item.pregunta && (
+        <div className={estilos.pregunta}>
+          <Markdown>{item.pregunta}</Markdown>
+        </div>
+      )}
+      <div className={estilos.respuestaOrden}>
+        {elegidas.length === 0 && <span className={estilos.vacia}>Toca las líneas en orden</span>}
+        {elegidas.map((i, pos) => (
+          <button
+            key={`${i}-${pos}`}
+            type="button"
+            className={estilos.linea}
+            disabled={bloqueado}
+            onClick={() => alCambiar(elegidas.filter((_, p) => p !== pos))}
+          >
+            <code>{item.lineas[i]}</code>
+          </button>
+        ))}
+      </div>
+      <div className={estilos.banco}>
+        {banco.map((i) =>
+          usadas.has(i) ? null : (
+            <button key={i} type="button" className={estilos.linea} disabled={bloqueado} onClick={() => alCambiar([...elegidas, i])}>
+              <code>{item.lineas[i].trim()}</code>
+            </button>
+          ),
+        )}
+      </div>
+    </div>
+  );
+}
+
+const NOTAS = [
+  { valor: "no", texto: "No", detalle: "No me salía", tipo: "error" },
+  { valor: "dude", texto: "Dudé", detalle: "A medias", tipo: "aviso" },
+  { valor: "sabia", texto: "Sí", detalle: "Lo tenía", tipo: "exito" },
+];
+
+/** Tarjeta de ejercicio: piensas la idea, la revelas y te calificas. */
+export function ItemTarjeta({ item, alCalificar }) {
+  const [tarjeta, setTarjeta] = useState(null);
+  const [revelada, setRevelada] = useState(false);
+  const [completo, setCompleto] = useState(false);
+
+  useEffect(() => {
+    setRevelada(false);
+    setCompleto(false);
+    api.tarjetaEjercicio(item.ejercicio).then(setTarjeta, () => setTarjeta(null));
+  }, [item.ejercicio]);
+
+  if (!tarjeta) return <div className={estilos.item}>Cargando…</div>;
+
+  return (
+    <div className={estilos.item}>
+      <div className={estilos.tarjetaEj}>
+        <strong className={estilos.tarjetaTitulo}>{tarjeta.titulo}</strong>
+        <div className={estilos.enunciado} data-completo={completo}>
+          <Markdown>{tarjeta.enunciado}</Markdown>
+        </div>
+        {!completo && (
+          <button type="button" className={estilos.verMas} onClick={() => setCompleto(true)}>
+            Ver el enunciado completo
+          </button>
+        )}
+      </div>
+
+      {!revelada ? (
+        <>
+          <p className={estilos.ayuda}>Piensa la idea para resolverlo (no hace falta escribir código). Luego revela.</p>
+          <button type="button" className={`boton boton-primario ${estilos.ancho}`} onClick={() => setRevelada(true)}>
+            Revelar la idea y la solución
+          </button>
+        </>
+      ) : (
+        <motion.div className={estilos.reverso} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+          {tarjeta.idea && (
+            <div className={estilos.bloque}>
+              <span>Idea clave</span>
+              <Markdown>{tarjeta.idea}</Markdown>
+            </div>
+          )}
+          <div className={estilos.codigo}>
+            <Markdown>{"```" + tarjeta.lenguaje + "\n" + tarjeta.codigo + "\n```"}</Markdown>
+          </div>
+          {tarjeta.modelo && (
+            <div className={estilos.bloque}>
+              <span>Cómo explicarlo en la entrevista</span>
+              <Markdown>{tarjeta.modelo}</Markdown>
+            </div>
+          )}
+          <strong className={estilos.preguntaNota}>¿Se te ocurrió esa idea?</strong>
+          <div className={estilos.notas}>
+            {NOTAS.map((n) => (
+              <button key={n.valor} type="button" className={estilos.nota} data-tipo={n.tipo} onClick={() => alCalificar(n.valor)}>
+                {n.texto}
+                <small>{n.detalle}</small>
+              </button>
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </div>
+  );
+}
+
+/** Tarjeta de entrevista: la misma de la pantalla Entrevistas. */
+export function ItemEntrevista({ pregunta, alCalificar }) {
+  return (
+    <div className={estilos.item}>
+      <Tarjeta key={pregunta.id} pregunta={pregunta} alCalificar={alCalificar} />
+    </div>
+  );
+}

@@ -7,13 +7,24 @@
 // En el celular un ejercicio nunca queda "resuelto": eso solo lo dan los tests de la laptop.
 import { calificarPregunta, preguntaPendiente, progresoVacio, registrarQuiz, sumarAlDia, sumarDias } from "../../../server/progreso-reglas.js";
 import { ahoraIso, fechaLocal } from "../../../server/fechas.js";
+import { diasCombinados, documentoParaSubir, fusionarDocumento } from "../../../server/combinar.js";
 
 export const CLAVE = "devprep-movil-v1";
 const CLAVE_DANADO = "devprep-movil-danado";
 
 /** Estado vacío del celular: el de la laptop más lo propio del celular. */
 export function progresoMovilVacio() {
-  return { ...progresoVacio(), lecturas: {}, misRespuestas: null };
+  return {
+    ...progresoVacio(),
+    lecturas: {},
+    misRespuestas: null,
+    // Lecciones estilo Duolingo
+    items: {}, // clave del ítem -> registro de repaso (mismas cajas que las tarjetas)
+    reportados: {}, // clave -> fecha: preguntas que reportaste como mal hechas (no vuelven a salir)
+    lecciones: { xp: 0, completadas: 0 },
+    unidadActual: null,
+    leccionEnCurso: null, // para retomar si cierras la app a media lección
+  };
 }
 
 /**
@@ -106,17 +117,61 @@ export function crearProgresoMovil(almacenamiento, reloj = {}) {
       return datos.quizzes[id];
     },
 
+    // --- Lecciones ---
+    /** Nota de un ítem de lección: agenda su repaso como una tarjeta. */
+    calificarItem(clave, nota) {
+      datos.items[clave] = { ...calificarPregunta(datos.items[clave], nota, hoy()), en: ahora() };
+      guardar();
+      return datos.items[clave];
+    },
+    /** Lección terminada: suma XP y cuenta para la racha del día. */
+    completarLeccion(xp) {
+      datos.lecciones = { xp: (datos.lecciones?.xp ?? 0) + xp, completadas: (datos.lecciones?.completadas ?? 0) + 1, ultima: hoy() };
+      datos.dias = sumarAlDia(datos.dias, hoy(), "lecciones");
+      datos.leccionEnCurso = null;
+      guardar();
+      return datos.lecciones;
+    },
+    reportar(clave) {
+      datos.reportados = { ...datos.reportados, [clave]: hoy() };
+      guardar();
+    },
+    quitarReporte(clave) {
+      const { [clave]: _, ...resto } = datos.reportados;
+      datos.reportados = resto;
+      guardar();
+    },
+    elegirUnidad(id) {
+      datos.unidadActual = id;
+      guardar();
+    },
+    guardarLeccionEnCurso(sesion) {
+      datos.leccionEnCurso = sesion;
+      guardar();
+    },
+
     // --- Ajustes y respuestas personales ---
     cambiarConfig(cambios) {
-      datos.config = { ...datos.config, ...cambios };
+      datos.config = { ...datos.config, ...cambios, actualizadoEn: ahora() };
       guardar();
       return datos.config;
     },
     guardarMisRespuestas(valor) {
-      datos.misRespuestas = valor;
+      datos.misRespuestas = { ...valor, actualizadoEn: ahora() };
       guardar();
       return valor;
     },
+
+    // --- Sincronización (AWS) ---
+    /** Lo que este celular sube a la nube. */
+    documento: () => documentoParaSubir(datos),
+    /** Mezcla los documentos de otros dispositivos con el tuyo. */
+    fusionar(documentos) {
+      for (const { dispositivo, doc } of documentos) datos = fusionarDocumento(datos, doc, dispositivo);
+      guardar();
+    },
+    /** Días del celular y de la laptop sumados. */
+    dias: () => diasCombinados(datos),
 
     // --- Respaldo manual ---
     exportar: () => JSON.stringify(datos),

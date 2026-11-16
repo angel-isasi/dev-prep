@@ -7,6 +7,9 @@ import { EjercicioMovil } from "./EjercicioMovil.jsx";
 import { ChuletasMovil } from "./ChuletasMovil.jsx";
 import { MasMovil } from "./MasMovil.jsx";
 import { AjustesMovil } from "./AjustesMovil.jsx";
+import { LeccionMovil } from "./leccion/LeccionMovil.jsx";
+import { CaminoMovil } from "./leccion/CaminoMovil.jsx";
+import { VincularMovil } from "./VincularMovil.jsx";
 import { Practicar } from "../pages/Practicar.jsx";
 import { ListaEjercicios } from "../pages/ListaEjercicios.jsx";
 import { Aprender } from "../pages/Aprender.jsx";
@@ -30,6 +33,9 @@ export function App() {
         <Route path="chuletas" element={<ChuletasMovil />} />
         <Route path="mas" element={<MasMovil />} />
         <Route path="ajustes" element={<AjustesMovil />} />
+        <Route path="leccion" element={<LeccionMovil />} />
+        <Route path="camino" element={<CaminoMovil />} />
+        <Route path="vincular" element={<VincularMovil />} />
         {/* Progreso de la laptop: en el celular, el resumen está en Hoy */}
         <Route path="progreso" element={<Navigate to="/" replace />} />
         <Route path="*" element={<Proximamente titulo="Página no encontrada" texto="Esta ruta no existe." />} />

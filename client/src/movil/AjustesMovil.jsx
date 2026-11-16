@@ -2,6 +2,7 @@
 // Tu progreso vive en este celular: el respaldo sirve para no perderlo si borras los datos.
 import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api.js";
+import { desvincular, leerVinculo, sincronizar } from "../lib/sync-movil.js";
 import { useTema } from "../hooks/useTema.js";
 import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
@@ -27,12 +28,15 @@ export function AjustesMovil() {
   const [version, setVersion] = useState(null);
   const [persistente, setPersistente] = useState(null);
   const [aviso, setAviso] = useState(null);
+  const [reportados, setReportados] = useState({});
+  const [vinculo, setVinculo] = useState(leerVinculo);
   const archivo = useRef(null);
 
   useEffect(() => {
     api.config().then((c) => setForm({ nombre: c.nombre ?? "", objetivo: c.objetivo ?? "" }));
     api.version().then(setVersion, () => {});
     navigator.storage?.persisted?.().then(setPersistente, () => {});
+    api.reportados().then(setReportados, () => {});
   }, []);
 
   if (!form) return <Esqueleto variante="texto" />;
@@ -113,6 +117,63 @@ export function AjustesMovil() {
           <input ref={archivo} type="file" accept="application/json,.json" hidden onChange={importar} />
         </div>
       </div>
+
+      <div className={estilos.bloque}>
+        <h2>Sincronización con la laptop</h2>
+        {vinculo ? (
+          <>
+            <p className={estilos.ayuda}>
+              Vinculado. Última vez: {vinculo.ultima ? fechaYHora(vinculo.ultima) : "todavía no"}
+              {vinculo.error ? ` · ${vinculo.error}` : ""}
+            </p>
+            <div className={estilos.fila}>
+              <button type="button" className="boton" onClick={async () => setVinculo(await sincronizar())}>
+                Sincronizar ahora
+              </button>
+              <button
+                type="button"
+                className="boton boton-fantasma"
+                onClick={() => {
+                  desvincular();
+                  setVinculo(null);
+                }}
+              >
+                Desvincular
+              </button>
+            </div>
+          </>
+        ) : (
+          <p className={estilos.ayuda}>
+            Para unir tu progreso con el de la laptop: en la laptop ve a Ajustes, toca "Vincular el celular (QR)" y escanéalo
+            con la cámara.
+          </p>
+        )}
+      </div>
+
+      {Object.keys(reportados).length > 0 && (
+        <div className={estilos.bloque}>
+          <h2>Preguntas reportadas</h2>
+          <p className={estilos.ayuda}>Las marcaste como mal hechas y no salen en las lecciones. Si fue un error, restáuralas.</p>
+          <ul className={estilos.reportados}>
+            {Object.entries(reportados).map(([clave, fecha]) => (
+              <li key={clave}>
+                <code>{clave}</code>
+                <small>{fecha}</small>
+                <button
+                  type="button"
+                  className="boton boton-fantasma"
+                  onClick={async () => {
+                    await api.quitarReporte(clave);
+                    setReportados(await api.reportados());
+                  }}
+                >
+                  Restaurar
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <div className={estilos.bloque}>
         <h2>Contenido</h2>

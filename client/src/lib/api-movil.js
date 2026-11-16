@@ -64,12 +64,17 @@ const conCache = (nombre, fn) => {
   return llamar;
 };
 
+/** Tras mezclar lo que llegó de la laptop, las pantallas deben volver a leer. */
+export const limpiarCache = () => cache.clear();
+
 const soloLaptop = () => Promise.reject(new Error("Esto se hace en la laptop, con VS Code y los tests."));
 
 /** Lo que las vistas de Aprender necesitan de tu progreso (en el celular no hay ejercicios resueltos). */
-const miProgreso = () => ({ registros: {}, quizzes: progreso.datos().quizzes, hoy: progreso.hoy() });
+const miProgreso = () => ({ registros: progreso.datos().ejercicios ?? {}, quizzes: progreso.datos().quizzes, hoy: progreso.hoy() });
 
-const resumenEj = (e) => ({ ...e, estado: progreso.estadoLectura(e.id), ultimoResultado: null });
+/** Estado en el celular: "resuelto" si lo resolviste en la laptop (llega con la sincronización); si no, lo estudiado. */
+const estadoMovil = (id) => (progreso.datos().ejercicios?.[id]?.estado === "resuelto" ? "resuelto" : progreso.estadoLectura(id));
+const resumenEj = (e) => ({ ...e, estado: estadoMovil(e.id), ultimoResultado: null });
 
 export const api = {
   // --- Ejercicios ---
@@ -134,8 +139,8 @@ export const api = {
       hoy,
       frase: fraseDelDia(hoy),
       config: datos.config,
-      racha: rachaMovil(datos.dias, hoy),
-      estudiadoHoy: datos.dias[hoy] ?? null,
+      racha: rachaMovil(progreso.dias(), hoy),
+      estudiadoHoy: progreso.dias()[hoy] ?? null,
       tarjetasParaHoy: preguntas.filter((p) => preguntaPendiente(datos.preguntas[p.id], hoy)).length,
       ejerciciosParaRepasar,
       quizzesHechos: Object.keys(datos.quizzes).length,
@@ -184,6 +189,53 @@ export const api = {
       entrevista: seccionMarkdown(t.teoria, "En la entrevista"),
     })),
   ),
+
+  // --- Lecciones estilo Duolingo (solo celular) ---
+  /** Ítems generados (items.json) y preguntas de entrevista, con el progreso actual. */
+  async lecciones() {
+    const [datosItems, entrevistas] = await Promise.all([json("items.json"), json("entrevistas.json")]);
+    const d = progreso.datos();
+    const unidades = datosItems.unidades;
+    const actual = unidades.find((u) => u.id === d.unidadActual) ?? unidades[0];
+    return {
+      unidades,
+      items: datosItems.items,
+      preguntas: entrevistas.preguntas,
+      registros: d.items,
+      registrosPreguntas: d.preguntas,
+      reportados: d.reportados,
+      unidadActual: actual?.id ?? null,
+      lecciones: d.lecciones,
+      enCurso: d.leccionEnCurso,
+      hoy: progreso.hoy(),
+    };
+  },
+  /** Tarjeta de un ejercicio: enunciado al frente; idea clave, solución y cómo explicarlo atrás. */
+  async tarjetaEjercicio(id) {
+    const d = await detalle(id);
+    if (!d.solucion) return null;
+    return {
+      id,
+      titulo: d.ej.titulo,
+      coleccion: d.ej.coleccion,
+      enunciado: d.enunciado,
+      idea: seccionMarkdown(d.solucion.explicacion, "Idea clave"),
+      codigo: d.solucion.codigo,
+      lenguaje: d.solucion.lenguaje,
+      modelo: seccionMarkdown(d.solucion.explicacion, SECCION_MODELO),
+    };
+  },
+  calificarItem: async (clave, nota) => progreso.calificarItem(clave, nota),
+  completarLeccion: async (xp) => {
+    const r = progreso.completarLeccion(xp);
+    cache.clear(); // Hoy y las demás pantallas deben ver la lección nueva
+    return r;
+  },
+  reportar: async (clave) => progreso.reportar(clave),
+  quitarReporte: async (clave) => progreso.quitarReporte(clave),
+  reportados: async () => progreso.datos().reportados,
+  elegirUnidad: async (id) => progreso.elegirUnidad(id),
+  guardarLeccionEnCurso: async (sesion) => progreso.guardarLeccionEnCurso(sesion),
 
   /** Respaldo manual del progreso del celular (Ajustes). */
   exportarProgreso: () => progreso.exportar(),

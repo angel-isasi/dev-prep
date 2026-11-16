@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useEffect } from "react";
 import { IconoAprender, IconoEntrevistas, IconoInicio, IconoMas, IconoPracticar } from "../components/Iconos.jsx";
 import { AvisoPWA } from "./AvisoPWA.jsx";
+import { iniciarSincronizacion } from "../lib/sync-movil.js";
 import estilos from "./LayoutMovil.module.css";
 
 const SECCIONES = [
@@ -19,6 +20,9 @@ const SECCIONES = [
 export function LayoutMovil() {
   const { pathname } = useLocation();
   const reducido = useReducedMotion();
+
+  // Une el progreso con la laptop cuando hay internet (si el celular está vinculado).
+  useEffect(() => iniciarSincronizacion(), []);
 
   // Al cambiar de pantalla, vuelve arriba (en el celular se usa el scroll de la página).
   useEffect(() => {

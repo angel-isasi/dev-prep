@@ -9,6 +9,8 @@ import { Llama } from "../components/Llama.jsx";
 import { AuroraText } from "../components/ui/aurora-text.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { nombreColeccion } from "../lib/etiquetas.js";
+import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
+import { avanceUnidad, terminada } from "./leccion/motor.js";
 import estilos from "./HoyMovil.module.css";
 
 const AREAS = ["javascript", "react", "typescript", "node"];
@@ -29,9 +31,11 @@ export function HoyMovil() {
   const [temas, setTemas] = useState(api.temas.guardado);
   const [chuletas, setChuletas] = useState(api.chuletas.guardado);
   const [error, setError] = useState(null);
+  const [lecciones, setLecciones] = useState(null);
 
   useEffect(() => {
     api.inicio().then(setHoy, (e) => setError(e.message));
+    api.lecciones().then(setLecciones, () => {});
     api.temas().then(setTemas, () => {});
     api.chuletas().then(setChuletas, () => {});
   }, []);
@@ -71,6 +75,8 @@ export function HoyMovil() {
           <span>{hoy.racha === 1 ? "día seguido estudiando" : "días seguidos estudiando"}</span>
         </div>
       </div>
+
+      {lecciones && <TarjetaLeccion datos={lecciones} />}
 
       {hoy.config.objetivo && (
         <blockquote className={estilos.objetivo}>
@@ -142,5 +148,42 @@ export function HoyMovil() {
         </>
       )}
     </section>
+  );
+}
+
+/** La lección del día: la unidad actual, su avance y los botones para empezar. */
+function TarjetaLeccion({ datos }) {
+  const unidad = datos.unidades.find((u) => u.id === datos.unidadActual) ?? datos.unidades[0];
+  if (!unidad) return null;
+  const av = avanceUnidad(datos.items, datos.registros, unidad.id);
+  const enCurso = datos.enCurso && !terminada(datos.enCurso);
+  const errores = datos.items.filter((it) => datos.registros[it.clave]?.caja === 1 && !datos.reportados[it.clave]).length;
+
+  return (
+    <div className={estilos.leccion} data-area={unidad.area}>
+      <div className={estilos.leccionCabeza}>
+        <AnilloProgreso valor={av.porcentaje} tamano={64} grosor={6} completo={av.dominada}>
+          <span className={estilos.leccionPct}>{Math.round(av.porcentaje * 100)}%</span>
+        </AnilloProgreso>
+        <div className={estilos.texto}>
+          <small>Tu unidad · {datos.lecciones?.xp ?? 0} XP</small>
+          <strong>{unidad.titulo}</strong>
+        </div>
+      </div>
+      {enCurso ? (
+        <Link to="/leccion?retomar=1" className={`boton boton-primario ${estilos.empezar}`}>
+          Continuar la lección
+        </Link>
+      ) : (
+        <Link to="/leccion" className={`boton boton-primario ${estilos.empezar}`}>
+          Empezar lección
+        </Link>
+      )}
+      <div className={estilos.leccionEnlaces}>
+        <Link to="/leccion?modo=rapida">Rápida (5)</Link>
+        {errores > 0 && <Link to="/leccion?modo=errores">Repasar errores ({errores})</Link>}
+        <Link to="/camino">Ver el camino</Link>
+      </div>
+    </div>
   );
 }

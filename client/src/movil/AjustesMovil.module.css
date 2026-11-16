@@ -88,3 +88,30 @@
   background: var(--error-suave);
   color: var(--error);
 }
+
+.reportados {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reportados li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-2);
+  font-size: 13px;
+}
+
+.reportados code {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.reportados small {
+  color: var(--texto-tenue);
+}
