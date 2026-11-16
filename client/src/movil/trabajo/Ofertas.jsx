@@ -6,6 +6,9 @@ import { api } from "../../lib/api.js";
 import { ListaAnimada } from "../../components/ListaAnimada.jsx";
 import estilos from "./Ofertas.module.css";
 
+/** Cuántas ofertas se muestran de entrada y cuántas más con cada "Ver más". */
+const POR_PAGINA = 20;
+
 const hace = (iso) => {
   if (!iso) return "";
   const dias = Math.floor((Date.now() - Date.parse(iso)) / 86_400_000);
@@ -18,6 +21,7 @@ export function OfertasParaTi() {
   const [error, setError] = useState(null);
   const [cargando, setCargando] = useState(false);
   const [filtro, setFiltro] = useState("todas"); // todas | junior | peru
+  const [mostrar, setMostrar] = useState(POR_PAGINA);
 
   async function cargar(nuevo = false) {
     setCargando(true);
@@ -57,7 +61,7 @@ export function OfertasParaTi() {
             ["junior", "Para junior"],
             ["peru", "Perú o Latinoamérica"],
           ].map(([id, texto]) => (
-            <button key={id} type="button" className="boton" data-activo={filtro === id} onClick={() => setFiltro(id)}>
+            <button key={id} type="button" className="boton" data-activo={filtro === id} onClick={() => (setFiltro(id), setMostrar(POR_PAGINA))}>
               {texto}
             </button>
           ))}
@@ -85,12 +89,17 @@ export function OfertasParaTi() {
       )}
 
       <ListaAnimada className={estilos.lista}>
-        {visibles.map((o) => (
+        {visibles.slice(0, mostrar).map((o) => (
           <li key={o.id}>
             <Oferta oferta={o} alGuardar={() => cargar()} />
           </li>
         ))}
       </ListaAnimada>
+      {visibles.length > mostrar && (
+        <button type="button" className={`boton ${estilos.verMas}`} onClick={() => setMostrar((n) => n + POR_PAGINA)}>
+          Ver más ({visibles.length - mostrar} {visibles.length - mostrar === 1 ? "oferta" : "ofertas"} con menor puntaje)
+        </button>
+      )}
     </div>
   );
 }

@@ -167,3 +167,7 @@
     padding: var(--espacio-4);
   }
 }
+
+.verMas {
+  align-self: center;
+}

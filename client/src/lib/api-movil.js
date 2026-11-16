@@ -615,7 +615,7 @@ const apiWeb = {
     const perfil = { mapa: unidades, ingles: { inglesDominadas: estado.inglesDominadas, inglesTotal: ingles.unidades.length }, hoy: progreso.hoy() };
     const yaGuardadas = new Set(Object.values(progreso.registros("postulaciones")).map((p) => p.enlace).filter(Boolean));
     return {
-      ofertas: ordenarOfertas(busqueda.ofertas ?? [], perfil).map(({ texto: _t, ...o }) => ({ ...o, guardada: yaGuardadas.has(o.url) })),
+      ofertas: ordenarOfertas(busqueda.ofertas ?? [], perfil, { limite: 300 }).map(({ texto: _t, ...o }) => ({ ...o, guardada: yaGuardadas.has(o.url) })),
       fuentes: busqueda.fuentes ?? [],
       buscadoEn: busqueda.buscadoEn,
       sinConexion: !!busqueda.sinConexion,
