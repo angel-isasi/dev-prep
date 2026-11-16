@@ -28,7 +28,8 @@ export function rutasSync({ sync }) {
   router.get("/sync/vincular-web", (req, res) => {
     const vinculo = sync.vinculo();
     if (!vinculo) return res.status(404).json({ error: "La sincronización no está creada. Usa npm run aws:crear." });
-    res.set("cache-control", "no-store").redirect(enlaceDe(vinculo));
+    // "&local=1": esa web queda recordando que está en esta laptop y se conecta con dev-prep
+    res.set("cache-control", "no-store").redirect(`${enlaceDe(vinculo)}&local=1`);
   });
 
   return router;

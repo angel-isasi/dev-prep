@@ -9,6 +9,7 @@ import { rutasProgreso } from "./rutas/progreso.js";
 import { rutasEntrevistas } from "./rutas/entrevistas.js";
 import { rutasAprender } from "./rutas/aprender.js";
 import { rutasSync } from "./rutas/sync.js";
+import { controlDeOrigen } from "./origenes.js";
 
 /**
  * @param {object} deps
@@ -19,6 +20,10 @@ export function crearApp(deps) {
   const app = express();
   app.disable("x-powered-by");
   app.use(express.json());
+  app.use("/api", controlDeOrigen);
+
+  // La versión web pregunta aquí si dev-prep está abierto en esta laptop.
+  app.get("/api/hola", (req, res) => res.json({ app: "dev-prep" }));
 
   app.use("/api/ejercicios", rutasEjercicios(deps));
   if (deps.progreso) app.use("/api", rutasProgreso(deps));

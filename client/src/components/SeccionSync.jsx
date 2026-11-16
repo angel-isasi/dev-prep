@@ -53,13 +53,13 @@ export function SeccionSync() {
             <button type="button" className="boton" onClick={() => setVerQr((v) => !v)}>
               {verQr ? "Ocultar el QR" : "Vincular el celular (QR)"}
             </button>
-            <a className="boton" href="/api/sync/vincular-web" target="_blank" rel="noreferrer">
+            <a className="boton" href={api.url("/api/sync/vincular-web")} target="_blank" rel="noreferrer">
               Vincular la versión web
             </a>
           </div>
           {verQr && (
             <div className={estilos.qr}>
-              <img src="/api/sync/qr" alt="Código QR para vincular el celular" width="220" height="220" />
+              <img src={api.url("/api/sync/qr")} alt="Código QR para vincular el celular" width="220" height="220" />
               <p>
                 Escanéalo con la cámara del celular y ábrelo en Chrome: la app del celular queda vinculada. El QR lleva tu clave
                 secreta: no lo compartas.

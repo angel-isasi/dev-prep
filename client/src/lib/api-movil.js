@@ -10,6 +10,8 @@ import { fraseDelDia } from "../../../server/frases.js";
 import { estadoGeneral, vistaInicio, vistaProgreso } from "../../../server/vistas-progreso.js";
 import { preparacion } from "../../../server/metricas.js";
 import { crearProgresoMovil, rachaMovil } from "./progreso-movil.js";
+import { crearApi } from "./api-servidor.js";
+import { BASE_LOCAL, conectada } from "./conexion-local.js";
 
 export const progreso = crearProgresoMovil(localStorage);
 
@@ -87,7 +89,8 @@ function general(ejercicios) {
   return estadoGeneral({ ejercicios, datos, dias: progreso.dias(), hoy, prep });
 }
 
-export const api = {
+const apiWeb = {
+  url: (ruta) => ruta,
   // --- Ejercicios ---
   ejercicios: conCache("ejercicios", async () => (await indice()).ejercicios.map(resumenEj)),
 
@@ -264,3 +267,11 @@ export const api = {
     cache.clear();
   },
 };
+
+// En tu laptop con dev-prep abierto, la web usa ese servidor para todo lo que la app local sabe
+// hacer (VS Code, tests, progreso de la laptop). Lo que solo existe en la web (lecciones,
+// chuletas, respaldo) sigue saliendo de aquí.
+const apiLocal = crearApi(BASE_LOCAL);
+export const api = new Proxy(apiWeb, {
+  get: (web, clave) => (conectada() && clave in apiLocal ? apiLocal : web)[clave],
+});

@@ -6,9 +6,15 @@
 //   Solo cambia lo que no puede funcionar sin la laptop: no hay VS Code ni tests.
 // - Pantalla chica: navegación abajo, Hoy y Ajustes del celular.
 // - En las dos: los ejercicios se abren en modo estudio, y hay lecciones y chuletas.
+// - En tu laptop con dev-prep abierto: exactamente la app local (VS Code, tests en vivo, resuelto),
+//   más lecciones y chuletas. Ver lib/conexion-local.js.
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router";
 import { usePantallaGrande } from "../hooks/usePantallaGrande.js";
+import { useConexionLocal } from "../hooks/useConexionLocal.js";
+import { RutasLaptop } from "../RutasLaptop.jsx";
+import { SeccionSync } from "../components/SeccionSync.jsx";
+import { SeccionLaptop } from "./SeccionLaptop.jsx";
 import { iniciarSincronizacion } from "../lib/sync-movil.js";
 import { Layout } from "../components/Layout.jsx";
 import { LayoutMovil } from "./LayoutMovil.jsx";
@@ -35,13 +41,43 @@ import { Proximamente } from "../pages/Proximamente.jsx";
 
 export function App() {
   const grande = usePantallaGrande();
+  const enMiLaptop = useConexionLocal(grande);
 
   // Une el progreso con la laptop cuando hay internet (si este dispositivo está vinculado).
   useEffect(() => iniciarSincronizacion(), []);
 
+  // Lo que la web tiene además de la app local
+  const soloWeb = (
+    <>
+      <Route path="chuletas" element={<ChuletasMovil />} />
+      <Route path="camino" element={<CaminoMovil />} />
+      <Route path="leccion" element={<LeccionMovil />} />
+      <Route path="vincular" element={<VincularMovil />} />
+    </>
+  );
+
+  if (enMiLaptop) {
+    return (
+      <>
+        <RutasLaptop
+          key="laptop"
+          ajustesExtra={
+            <>
+              <SeccionSync />
+              <SeccionLaptop />
+            </>
+          }
+        >
+          {soloWeb}
+        </RutasLaptop>
+        <AvisoPWA />
+      </>
+    );
+  }
+
   return (
     <>
-      <Routes>
+      <Routes key="web">
         <Route element={grande ? <Layout /> : <LayoutMovil />}>
           <Route index element={grande ? <Inicio /> : <HoyMovil />} />
           <Route path="aprender" element={<Aprender />} />

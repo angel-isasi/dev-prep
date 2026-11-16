@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { sincronizar, vincular } from "../lib/sync-movil.js";
+import { marcarMiLaptop, probar } from "../lib/conexion-local.js";
 import estilos from "./MasMovil.module.css";
 
 export function VincularMovil() {
@@ -21,6 +22,11 @@ export function VincularMovil() {
       return;
     }
     vincular(url, token);
+    // Viene del botón "Vincular la versión web" de la app local: este navegador está en tu laptop.
+    if (params.get("local") === "1") {
+      marcarMiLaptop(true);
+      probar();
+    }
     sincronizar().then((v) => {
       if (v?.error) {
         setEstado("error");
