@@ -1,73 +1,85 @@
 # dev-prep
 
-App para prepararme como desarrollador frontend junior: un "LeetCode personal" en español que funciona sin internet, en la laptop y en el celular.
+A personal "LeetCode" I built to prepare for my first frontend developer job. It works offline on my laptop and on my phone, and I use it every day.
 
-Programas en VS Code, guardas con `Ctrl + S` y la app muestra al instante qué tests pasan y cuáles no, con lo que se esperaba y lo que devolvió tu código. En el celular estudias con lecciones cortas, y el progreso de los dos se une solo cuando hay internet.
+I write code in VS Code; every time I save with `Ctrl + S`, the tests re-run and the app shows each case live, with the expected and the received value. On the phone I study with short lessons, and the progress of both devices is merged automatically whenever there is internet.
 
-**Stack:** React 19, Vite, Express 5, Vitest, PWA con service worker, AWS Lambda y DynamoDB (CloudFormation), Vercel.
+**Stack:** React 19, Vite, Express 5, Vitest, installable PWA with a service worker, AWS Lambda and DynamoDB (CloudFormation), Vercel.
 
-**En números:** 390 ejercicios con tests (JavaScript, algoritmos, React, TypeScript, Node y SQL), 35 temas de teoría, 152 preguntas de entrevista, inglés en 3 etapas y 334 tests de la propia app.
+**In numbers:** 390 exercises with tests (JavaScript, algorithms, React, TypeScript, Node and SQL), 35 theory topics, 152 interview questions, English lessons in 3 levels and 334 tests for the app itself.
 
-**Versión web:** [dev-prep.angel-isasi.com](https://dev-prep.angel-isasi.com) (el progreso de cada visitante queda solo en su navegador).
+**Live web version:** [dev-prep.angel-isasi.com](https://dev-prep.angel-isasi.com) (each visitor's progress stays only in their own browser).
 
-![Tests en vivo: guardas en VS Code y la app muestra qué casos pasan, con lo esperado y lo recibido](docs/capturas/tests-en-vivo.png)
+> The app content and interface are in Spanish: I am from Peru and built it for my own study.
 
-| Inicio | Lecciones | Inglés |
+![Live tests: you save in VS Code and the app shows which cases pass, with the expected and the received value](docs/capturas/tests-en-vivo.png?v=2)
+
+| Home | Lessons | English |
 |---|---|---|
-| ![Inicio con objetivo, racha, meta del día, preparación, cuenta regresiva y plan de hoy](docs/capturas/inicio.png) | ![Camino de lecciones por unidades](docs/capturas/lecciones.png) | ![Inglés con rutina diaria, inmersión y prueba de nivel](docs/capturas/ingles.png) |
+| ![Home with goal, streak, daily target, readiness, countdown and today's plan](docs/capturas/inicio.png?v=2) | ![Lesson path by units](docs/capturas/lecciones.png?v=2) | ![English with daily routine, immersion log and placement test](docs/capturas/ingles.png?v=2) |
 
-| Conseguir trabajo | Celular |
+| Getting a job | Phone |
 |---|---|
-| ![Ofertas reales ordenadas por cuánto te convienen, con sus razones](docs/capturas/trabajo.png) | ![Versión celular con el plan de hoy y la lección de la unidad](docs/capturas/movil.png) |
+| ![Real job offers ranked by how well they fit, with the reasons](docs/capturas/trabajo.png?v=2) | ![Phone version with today's plan and the current unit](docs/capturas/movil.png?v=2) |
 
-## In English
+## Features
 
-dev-prep is a personal, offline-first practice app I use every day to prepare for my first frontend developer job. You write code in VS Code; every time you save, a Vitest watcher re-runs the exercise tests and the app shows each case live (expected vs. received) through Server-Sent Events. It includes 390 exercises (JavaScript, algorithms, React, TypeScript, Node and SQL), spaced repetition, interview simulations, English lessons and progress tracking with daily goals and streaks.
+- **Home:** my written goal, streak, daily target (with "debt" from missed days), interview readiness percentage and a countdown to my target date that tells me if I am behind.
+- **Learn:** 35 topics (JavaScript, React, TypeScript, Node and SQL), each with one screen of theory, guided exercises and a quiz.
+- **Practice:** 390 exercises with filters by topic, level and status.
+  - **Live tests:** save in VS Code and see what passes and what fails, plus your `console.log` output.
+  - **Errors explained** in plain language and **infinite loop detection** (the run is stopped after 20 seconds).
+  - **TypeScript exercises** also type-check your code with `tsc` in strict mode.
+  - **Three progressive hints** and a **locked official solution** with a full explanation (viewing it counts as not solved).
+  - **"Explain it in your own words"**, compared with a model answer.
+  - **Spaced repetition:** solved exercises come back after 1, 3, 7, 14 and 30 days.
+  - **Interview mode** with a 20-minute timer.
+- **Lessons:** Duolingo-style path by units with 9 item types generated from the content.
+- **Interviews:** 152 flashcards (Spanish and English) with "what the interviewer wants to hear", a staged mock interview (HR, technical with follow-up questions, project presentation and closing), my 1-minute pitch and STAR stories.
+- **English:** 3 levels (A1 to B2) with audio, sentence building, dictation, dialogues, grammar, shadowing, a placement test and an immersion log.
+- **Practice like at work:** write your own tests and catch hidden bugs (mutation testing), React challenges against an API that is slow or fails on purpose, Git practice with real repositories (conflicts, undo, pull) checked automatically, and a weekly challenge with a personal record.
+- **Getting a job:** real offers from public job board APIs (Get on Board, Remotive, RemoteOK, Arbeitnow) ranked by fit without AI, application tracker, "am I ready for this offer?", CV to PDF, portfolio export to a ready-to-publish Vite project, take-home tests with a rubric and guided projects.
+- **Motivation:** levels and badges, weekly plan based on weak topics, "how much I improved" against 1 and 3 months ago, and earned game time (unlocked only after the daily goal; the laptop detects the game by itself).
+- **Notifications:** push to the phone at my usual study time if I did not study, last call for the streak and new junior offers in Peru or remote for Latin America (max 2 a day).
+- **Reference:** an offline mini MDN with search.
+- Dark and light mode.
 
-- **Stack:** React 19, Vite, Express 5, Vitest, installable PWA with a service worker, AWS Lambda + DynamoDB (CloudFormation), Vercel.
-- **Sync:** each device stores its progress locally and uploads its own document; documents are merged record by record (latest wins, daily counters are summed), so syncing twice is harmless.
-- **Push notifications:** Web Push implemented from scratch with `node:crypto` (VAPID signing and aes128gcm encryption).
-- **Security:** the local server only listens on 127.0.0.1 and checks `Origin` and `Host` (DNS rebinding); the cloud requires a 256-bit token shared only through a QR code; the published site has a strict CSP verified at build time.
+## How it works
 
-## Qué tiene
+```
+VS Code ──save──► workspace/<id>/solucion.js
+                        │ (Vitest watches the folder)
+                        ▼
+Browser ◄──SSE──── Express ◄── reporter ◄── Vitest
+   │                  │
+   └── fetch /api ───►├─► content/  (exercises)
+                      ├─► data/     (progress)
+                      └─► code      (opens VS Code)
+```
 
-- **Inicio**: tu objetivo, la racha, la meta del día (con la deuda de los días que fallaste), tu porcentaje de preparación y la cuenta regresiva a tu fecha meta, con aviso de si vas atrasado.
-- **Aprender**: 35 temas (JavaScript, React, TypeScript, Node y SQL), cada uno con teoría de una pantalla, ejercicios guiados y un quiz.
-- **Practicar**: 390 ejercicios de JavaScript, algoritmos, React, TypeScript, Node y SQL, con filtros por tema, nivel y estado. Los de TypeScript además revisan tus tipos con `tsc` en modo estricto.
-  - **Tests en vivo**: guardas en VS Code y la app muestra al instante qué pasa y qué falla, con lo esperado y lo recibido, más tu `console.log`.
-  - **Errores explicados** en español y **aviso de bucle infinito**.
-  - **Pistas progresivas** (3 por ejercicio) y **solución con explicación completa**, bloqueada hasta que la pidas (con penalidad si no lo resolviste).
-  - **Explícalo con tus palabras** y compáralo con la respuesta modelo.
-  - **Repaso espaciado**: lo que resolviste vuelve en 1, 3, 7, 14 y 30 días.
-  - **Modo entrevista**: cronómetro de 20 minutos.
-- **Entrevistas**: más de 150 preguntas en tarjetas (español e inglés) con lo que el entrevistador quiere escuchar, simulacro por etapas, tu pitch de 1 minuto y tus historias STAR.
-- **Progreso**: calendario de actividad, avance por tema y resumen semanal.
-- **Referencia**: un mini MDN offline con buscador (arrays, strings, objetos, promesas, DOM, React...).
-- Modo oscuro y modo claro.
+- **Local engine** (`server/`): Express 5 on `127.0.0.1:4321`. Reads the exercises from `content/`, saves progress as JSON with atomic writes, opens VS Code and runs Vitest in watch mode through its Node API. A custom reporter sends the results to the browser with **Server-Sent Events**.
+- **Web and phone version:** the same React code built in a `movil` mode, where Vite swaps the data layer for one that reads exported JSON and stores progress in the browser. It is a PWA: it works offline and installs from Chrome. On my laptop it connects to the local engine and gets VS Code and live tests too.
+- **Sync** (`server/combinar.js`): each device saves locally first and uploads its own document to an AWS Lambda. When it downloads the others, it merges them record by record: the latest record wins and daily counters are summed, so syncing twice never breaks anything.
+- **Push notifications** (`server/webpush.js`): Web Push implemented with only `node:crypto` (VAPID ES256 signature and aes128gcm encryption, RFC 8291), sent by the Lambda every 30 minutes when needed.
+- **Infrastructure** (`aws/`): one CloudFormation template with a Lambda Function URL, a DynamoDB table and an EventBridge schedule, all inside the AWS free tier.
 
-### En la versión web (dev-prep.angel-isasi.com)
+### Security
 
-Todo lo anterior más lo que sigue. En tu laptop, con dev-prep abierto (arranca solo y oculto), la web tiene además VS Code, tests en vivo y todo lo de la app local.
+- The local server only listens on `127.0.0.1` and checks the `Origin` and `Host` headers, so other websites cannot use it (including DNS rebinding attacks). It also sends anti-framing headers.
+- The browser never sends file paths, only an exercise id; disk paths always come from the index.
+- The cloud requires a 256-bit token that only travels inside the pairing QR code (after the `#`, so it never reaches a server) and is compared in constant time. The pairing link only accepts an AWS Lambda URL.
+- The published site has a strict Content Security Policy whose inline script hash is verified at build time.
+- Secrets live in `data/sync.json`, which is never committed.
 
-- **Inglés**: sección propia con 3 etapas (base A1 a A2, intermedio B1 y de trabajo B1 a B2). Lecciones con audio, armar frases, dictado, diálogos, gramática, prueba de nivel, "Mis palabras", registro de inglés real (inmersión) y meta diaria en minutos.
-- **Aprender mejor**: ejercicios de depurar código roto, Lee y predice (¿qué imprime?), revisión de código, glosario para entrevistas, explícalo en 60 segundos, mapa de lo que dominas y tus errores más frecuentes con un entrenamiento de tus puntos débiles.
-- **Motivación**: tiempo libre ganado para jugar (se desbloquea al cumplir tu meta, con deuda si te pasas; el motor de la laptop mide el juego solo), niveles e insignias, sonidos suaves, plan de hoy, día salvado, mi horario y semanas de exámenes, examen semanal, modo enfoque, reto y resumen del mes, diario de una línea y semáforo para postular.
-- **Avisos**: notificaciones al celular y a la laptop a tu hora habitual si no estudiaste, última llamada para tu racha, examen del sábado y resumen del domingo (máximo 2 al día). Atajos al mantener presionado el ícono de la app.
-- **Conseguir trabajo**: ofertas para ti (ofertas reales de Get on Board, Remotive, RemoteOK y Arbeitnow ordenadas por cuánto te convienen, sin IA), postulaciones con las preguntas reales que te hicieron, ¿estoy listo para esta oferta?, CV en PDF, portafolio exportable a un proyecto Vite listo para GitHub, pruebas técnicas para casa con rúbrica y proyectos guiados por etapas (uno desde cero y otro de "primer día de trabajo" con tickets sobre código ajeno). Grabadora de voz para el simulacro, el pitch y las tarjetas (los audios quedan solo en tu dispositivo).
-- **Simulacro por etapas**: recursos humanos, entrevista técnica con repreguntas sobre tu ejercicio, presentación de tu proyecto ("Defiende tu proyecto", preguntas sobre el propio dev-prep) y cierre con tus preguntas; completo o por etapa, con reflexión y plan de refuerzo.
-- **Practicar más**: "Escribe tú los tests" (tus tests deben atrapar versiones con errores escondidos), "Consumir APIs" (retos de React con una API que tarda o falla), Git práctico (10 situaciones reales con un repositorio de verdad que el motor prepara y revisa) y el reto de la semana con tu marca personal.
-- **Progreso**: plan de la semana armado con tus puntos débiles, "cuánto avancé" (ahora contra hace 1 y 3 meses), tu día en números y la pregunta ancla al terminar de leer una teoría.
-- **API de práctica**: `http://localhost:4321/api/practica` sirve productos y tareas que tardan, fallan o vienen vacíos a propósito (`?retraso=2000`, `?fallo=0.5`, `?estado=500`, `?vacio=1`). Sirve para los retos y para tus proyectos con Vite.
+## Requirements
 
-## Requisitos
+- Windows 10 or 11
+- [Node.js](https://nodejs.org) 22 or newer (LTS)
+- [VS Code](https://code.visualstudio.com), installed with **"Add to PATH"** checked (for the "Open in VS Code" button)
 
-- Windows 10 u 11
-- [Node.js](https://nodejs.org) 22 o superior (versión LTS)
-- [VS Code](https://code.visualstudio.com), instalado con la opción **"Agregar a PATH"** marcada (para que funcione el botón "Abrir en VS Code")
+Only the first install needs internet. After that everything works offline.
 
-Solo la primera instalación necesita internet. Después todo funciona sin conexión.
-
-## Instalación
+## Install
 
 ```
 git clone https://github.com/Angel-Isasi/dev-prep.git
@@ -75,122 +87,83 @@ cd dev-prep
 npm install
 ```
 
-## Uso diario
+## Daily use
 
-**Acceso directo (recomendado).** Créalo una sola vez con:
+- **Desktop shortcut (recommended):** run `npm run acceso-directo` once. Double-click **dev-prep** on the desktop and the app opens in the browser in a few seconds, with no console window.
+- **Web version only:** run `npm run arranque:activar` once. The engine starts hidden with Windows (about 100 MB of memory), and dev-prep.angel-isasi.com on this laptop gets VS Code and live tests. `npm run arranque:quitar` undoes it.
+- **With a console (to see errors):** double-click `iniciar.bat`.
 
-```
-npm run acceso-directo
-```
+### Practicing an exercise
 
-Aparece **dev-prep** en tu escritorio. Con doble clic la app abre en el navegador en unos segundos, sin ventana negra. Si ya estaba abierta una versión anterior, la cierra y arranca la más reciente. Para cerrarla, usa **Cerrar dev-prep** en la barra lateral de la app.
+1. Go to **Practicar** and pick an exercise.
+2. Click **Empezar en VS Code**: your copy is created in `workspace/<id>/solucion.js` and VS Code opens it.
+3. Write code and save. The **Tests en vivo** panel updates by itself.
+4. When all tests pass, the exercise is marked as solved.
 
-Puedes anclarlo a Inicio o a la barra de tareas: clic derecho sobre el acceso directo.
+**Reiniciar** goes back to the starting file and keeps your version in `workspace/.respaldos/`.
 
-**Solo la versión web (sin abrir nada).** Activa el arranque automático una vez:
+## Where things are stored
 
-```
-npm run arranque:activar
-```
-
-Al prender la laptop, dev-prep queda corriendo oculto (unos 100 MB de memoria, casi nada de procesador) y no abre ninguna ventana. Abres https://dev-prep.angel-isasi.com y, en Ajustes, tocas **Conectar con dev-prep de esta laptop** una sola vez: la web tiene VS Code, los tests en vivo y todo lo de la app local. Para quitarlo: `npm run arranque:quitar`.
-
-**Con ventana (para ver errores).** Doble clic en `iniciar.bat`: muestra la consola del servidor. Ciérrala o presiona `Ctrl + C` para apagar la app.
-
-### Cómo se practica un ejercicio
-
-1. Entra a **Practicar** y elige un ejercicio.
-2. Pulsa **Empezar en VS Code**: se crea tu copia en `workspace/<id>/solucion.js` y VS Code la abre.
-3. Programa y guarda (`Ctrl + S`). El panel **Tests en vivo** se actualiza solo.
-4. Cuando todos los tests pasan, el ejercicio queda como **resuelto**.
-
-Si quieres empezar de cero, **Reiniciar** vuelve al archivo inicial y guarda tu versión en `workspace/.respaldos/`.
-
-## Dónde se guardan tus cosas
-
-| Carpeta | Qué contiene |
+| Location | Contents |
 |---|---|
-| `workspace/` | Tu código de cada ejercicio |
-| `data/progreso.json` | Tu progreso (con una copia diaria en `data/respaldos/`) |
-| `data/mis-respuestas.json` | Tu pitch y tus historias STAR |
-| `data/eventos.jsonl` | Historial de lo que haces, para estadísticas futuras |
-| `data/sync.json` | La dirección y el token secreto de la sincronización con AWS |
-| `Documentos/dev-prep-git/` | Los repositorios de Git práctico (puedes borrarlos: se vuelven a crear) |
-| `Documentos/portafolio/` | Los mini proyectos que exportas para GitHub |
-| Navegador (versión web) | Tu progreso en ese dispositivo, en su almacenamiento local |
+| `workspace/` | Your code for each exercise |
+| `data/progreso.json` | Your progress (with a daily copy in `data/respaldos/`) |
+| `data/mis-respuestas.json` | Your pitch and STAR stories |
+| `data/sync.json` | The URL and secret token for the AWS sync |
+| `Documents/dev-prep-git/` | Git practice repositories (safe to delete, they are recreated) |
+| `Documents/portafolio/` | Projects exported for GitHub |
+| Browser (web version) | Progress on that device, in its local storage |
 
-`workspace/` y `data/` nunca se suben a Git.
+`workspace/` and `data/` are never committed.
 
-## Comandos
+## Commands
 
-| Comando | Para qué sirve |
+| Command | Purpose |
 |---|---|
-| `npm start` | Arranca la app (igual que `iniciar.bat`, sin abrir el navegador) |
-| `npm run acceso-directo` | Crea el acceso directo **dev-prep** en el escritorio |
-| `npm run arranque:activar` | dev-prep arranca oculto al iniciar Windows, para usar solo la versión web (`arranque:quitar` lo deshace) |
-| `npm run dev` | Modo desarrollo: recarga la interfaz al cambiar el código (abre `http://localhost:5173`) |
-| `npm run build` | Compila la interfaz en `client/dist` |
-| `npm test` | Tests de la propia app |
-| `npm run validar` | Revisa que cada ejercicio esté completo, que su solución pase y que el archivo inicial falle |
-| `npm run validar:aprender` | Revisa los temas de Aprender y las entradas de la Referencia |
-| `npm run validar:ingles`, `validar:predice`, `validar:proyectos` | Revisan el inglés, los "¿qué imprime?" y los proyectos guiados |
-| `npm run build:movil` | Compila la versión web y celular en `client/dist-movil` y verifica su CSP |
-| `npm run aws:crear` | Crea o actualiza la sincronización en AWS (Lambda, URL y tabla) |
-| `npm run aws:estado` | Muestra si la sincronización responde |
-| `npm run aws:rotar` | Cambia el token secreto (luego vuelve a vincular el celular) |
-| `npm run aws:borrar` | Borra todo lo de AWS, datos incluidos |
+| `npm start` | Starts the app without opening the browser |
+| `npm run dev` | Development mode with hot reload (`http://localhost:5173`) |
+| `npm run build` | Builds the local interface into `client/dist` |
+| `npm run build:movil` | Builds the web and phone version into `client/dist-movil` and verifies its CSP |
+| `npm test` | Tests for the app itself |
+| `npm run validar` | Checks every exercise: complete files, the solution passes and the starting file fails |
+| `npm run validar:aprender`, `validar:ingles`, `validar:predice`, `validar:proyectos` | Check the theory, English, "what does it print?" and project content |
+| `npm run aws:crear` | Creates or updates the AWS sync (Lambda, URL and table) |
+| `npm run aws:estado` | Shows whether the sync responds |
+| `npm run aws:rotar` | Rotates the secret token (then pair the phone again) |
+| `npm run aws:borrar` | Deletes everything in AWS, data included |
 
-## Cómo está hecha
+## Project structure
 
-- **Interfaz**: React 19 + Vite, React Router, CSS Modules con variables para el tema.
-- **Servidor**: Express 5. Lee los ejercicios de `content/`, guarda el progreso en JSON y abre VS Code.
-- **Tests en vivo**: Vitest usado desde Node en modo watch, con un reporter propio que envía los resultados al navegador por **Server-Sent Events**.
-- **Versión web y celular**: el mismo código de React compilado en modo `movil` (Vite cambia la capa de datos por una que lee JSON exportados y guarda en el navegador). Es una PWA: funciona sin internet y se instala desde Chrome.
-- **Sincronización**: cada dispositivo guarda primero en sí mismo y sube su documento a una Lambda de AWS. Al bajar los de los otros, los mezcla registro por registro (`server/combinar.js`): gana lo más reciente y los días se suman, así que repetir una sincronización no daña nada.
-- **Avisos**: Web Push hecho solo con `node:crypto` (firma VAPID y cifrado aes128gcm, `server/webpush.js`), enviado por la Lambda cada 30 minutos si toca.
-- **Seguridad**: el servidor solo escucha en `127.0.0.1`, revisa las cabeceras `Origin` y `Host` (contra webs ajenas y DNS rebinding) y el navegador nunca envía rutas de archivos, solo el id del ejercicio. La nube exige un token de 256 bits que solo viaja en el QR, y el sitio publicado tiene una CSP estricta.
-
-```
-VS Code ──guardas──► workspace/<id>/solucion.js
-                           │ (Vitest vigila la carpeta)
-                           ▼
-Navegador ◄──SSE──── Express ◄── reporter ◄── Vitest
-    │                   │
-    └── fetch /api ────►├─► content/  (ejercicios)
-                        ├─► data/     (progreso)
-                        └─► code      (abre VS Code)
-```
-
-| Carpeta | Qué contiene |
+| Folder | Contents |
 |---|---|
-| `client/` | Interfaz en React |
-| `server/` | Servidor Express, corredor de tests y progreso |
-| `content/` | Ejercicios: enunciado, archivo inicial, tests, pistas, solución y explicación |
-| `scripts/` | Validadores de contenido, generadores de lecciones, exportador para la web y scripts de AWS |
-| `aws/` | Plantilla de CloudFormation y código de la Lambda |
-| `docs/` | Plan del proyecto y tareas |
+| `client/` | React interface (local, web and phone) |
+| `server/` | Express server, test runner, progress rules and pure modules shared with the web |
+| `content/` | Exercises, theory, interview questions, English and projects |
+| `scripts/` | Content validators, lesson generators, web exporter and AWS scripts |
+| `aws/` | CloudFormation template and Lambda code |
+| `docs/` | Project plan and content guides |
 
-### Formato de un ejercicio
+### Exercise format
 
-Cada ejercicio es una carpeta en `content/`. Para agregar uno no hay que tocar el código de la app:
+Each exercise is a folder in `content/`, so new ones can be added without touching the app code:
 
 ```
 content/javascript/ejercicios/009-frecuencia-de-palabras/
-  meta.json        id, título, tipo (funcion o componente), tema, nivel y tags
-  enunciado.md     descripción, reglas y ejemplos
-  inicio.js        el archivo con el que empiezas
-  tests.test.js    tests con Vitest (importan ./solucion.js)
-  pistas.json      3 pistas, de la más suave a la casi respuesta
-  solucion.js      solución oficial
-  explicacion.md   idea clave, paso a paso, por qué funciona, errores comunes,
-                   otra forma, cómo explicarlo en una entrevista y conceptos
+  meta.json        id, title, type (function or component), topic, level and tags
+  enunciado.md     description, rules and examples
+  inicio.js        the starting file
+  tests.test.js    Vitest tests (they import ./solucion.js)
+  pistas.json      3 hints, from gentle to almost the answer
+  solucion.js      official solution
+  explicacion.md   key idea, step by step, why it works, common mistakes,
+                   another approach, how to explain it in an interview, concepts
 ```
 
-Los componentes de React usan `.jsx` en vez de `.js`. Después de agregar o cambiar un ejercicio, corre `npm run validar`.
+React components use `.jsx`, and TypeScript exercises use `.ts` or `.tsx`. After adding or changing an exercise, run `npm run validar`.
 
-## Problemas comunes
+## Troubleshooting
 
-- **"No se encontró Node.js"**: instala Node.js LTS y vuelve a abrir `iniciar.bat`.
-- **"No se encontró el comando code"**: reinstala VS Code marcando "Agregar a PATH" y reinicia la PC.
-- **"El puerto 4321 está ocupado"**: ya hay una ventana de dev-prep abierta; usa esa o ciérrala.
-- **Los tests de React tardan la primera vez**: es normal, el primer arranque del entorno de React puede tomar varios segundos.
+- **"No se encontró Node.js":** install Node.js LTS and open `iniciar.bat` again.
+- **"No se encontró el comando code":** reinstall VS Code with "Add to PATH" checked and restart the PC.
+- **"El puerto 4321 está ocupado":** dev-prep is already running; use that window or close it.
+- **React tests are slow the first time:** normal, the React test environment can take a few seconds to warm up.
