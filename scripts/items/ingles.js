@@ -1,5 +1,5 @@
 // Ítems de lección de la sección Inglés, generados del contenido de content/ingles (docs/guia-ingles.md).
-// Van en su propio archivo (items-ingles.json) para no cargar las lecciones de programación con ellos.
+// Van en su propio archivo (items-ingles-<etapa>.json) para no cargar las lecciones de programación con ellos.
 //
 // Tipos que salen de cada unidad:
 // - opcion/palabra     "¿Qué significa work?" (con audio)          clave en:<id>

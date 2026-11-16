@@ -26,7 +26,8 @@
     "aws:estado": "node scripts/aws-sync.js estado",
     "aws:rotar": "node scripts/aws-sync.js rotar",
     "validar:ingles": "node scripts/validar-ingles.js",
-    "validar:predice": "node scripts/validar-predice.js"
+    "validar:predice": "node scripts/validar-predice.js",
+    "validar:proyectos": "node scripts/validar-proyectos.js"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.2",

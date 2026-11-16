@@ -8,6 +8,7 @@ import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import { IconoDescargar, IconoLuna, IconoSol } from "../components/Iconos.jsx";
 import estilos from "./AjustesMovil.module.css";
+import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
 import { SeccionRutina } from "../components/SeccionRutina.jsx";
 
 function fechaYHora(iso) {
@@ -102,6 +103,7 @@ export function AjustesMovil() {
         </button>
       </div>
 
+      <SeccionAvisos />
       <SeccionRutina />
 
       <div className={estilos.bloque}>

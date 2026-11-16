@@ -20,3 +20,13 @@ if (faltan.length) {
   process.exit(1);
 }
 console.log(`CSP verificada (${huellas.length} script en línea permitido).`);
+
+// El service worker importa push-sw.js: si faltara, Vercel devolvería index.html y el service worker
+// entero fallaría al instalarse (la app dejaría de funcionar sin internet).
+const sw = await readFile(path.join(RAIZ, "client", "dist-movil", "sw.js"), "utf8");
+const pushSw = await readFile(path.join(RAIZ, "client", "dist-movil", "push-sw.js"), "utf8").catch(() => null);
+if (sw.includes("push-sw.js") && (!pushSw || !pushSw.includes("showNotification"))) {
+  console.error("Falta client/dist-movil/push-sw.js (lo importa el service worker).");
+  process.exit(1);
+}
+console.log("Service worker de avisos verificado.");

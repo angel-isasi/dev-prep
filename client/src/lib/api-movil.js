@@ -86,6 +86,12 @@ const estadoMovil = (id) => (progreso.datos().ejercicios?.[id]?.estado === "resu
 const resumenEj = (e) => ({ ...e, estado: estadoMovil(e.id), ultimoResultado: null });
 
 /** Lo que comparten Inicio y Progreso, igual que en el servidor de la laptop. */
+/** Ítems de inglés de las tres etapas juntos (un archivo por etapa; si alguno no existe, se omite). */
+async function itemsIngles() {
+  const partes = await Promise.all(["basico", "intermedio", "trabajo"].map((e) => json(`items-ingles-${e}.json`).catch(() => ({ unidades: [], items: [] }))));
+  return { unidades: partes.flatMap((p) => p.unidades), items: partes.flatMap((p) => p.items) };
+}
+
 /** ¿Hubo alguna semana con la meta cumplida de lunes a viernes? */
 function huboSemanaPerfecta(estados) {
   for (const [fecha, estado] of Object.entries(estados ?? {})) {
@@ -98,7 +104,7 @@ function huboSemanaPerfecta(estados) {
 
 /** Todo lo que miden los niveles, las insignias y el semáforo para postular. */
 async function estadoLogros() {
-  const [{ ejercicios }, datosItems, ap, itemsIngles] = await Promise.all([indice(), json("items.json"), aprender(), json("items-ingles.json")]);
+  const [{ ejercicios }, datosItems, ap, ingles] = await Promise.all([indice(), json("items.json"), aprender(), itemsIngles()]);
   const d = progreso.datos();
   const dias = progreso.dias();
   const registros = d.ejercicios ?? {};
@@ -122,7 +128,7 @@ async function estadoLogros() {
     pitch: !!mis.pitch?.trim(),
     historias: (mis.historias ?? []).filter((h) => h.situacion?.trim() || h.accion?.trim()).length,
     postulaciones: Object.values(progreso.registros("postulaciones")).filter((p) => p.etapa && p.etapa !== "por-postular").length,
-    inglesDominadas: itemsIngles.unidades.filter((u) => avanceUnidad(itemsIngles.items, d.items ?? {}, u.id).dominada).length,
+    inglesDominadas: ingles.unidades.filter((u) => avanceUnidad(ingles.items, d.items ?? {}, u.id).dominada).length,
     inglesLecciones: suma("ingles"),
     predice: Object.entries(d.items ?? {}).filter(([clave, r]) => clave.startsWith("pred:") && (r.caja ?? 0) >= 3).length,
     revisionesPerfectas: Object.values(progreso.registros("revisiones")).filter((r) => r.total && r.encontrados === r.total && !r.falsasAlarmas).length,
@@ -277,7 +283,7 @@ const apiWeb = {
   /** @param {"programacion"|"ingles"} [ambito] las lecciones de inglés usan sus propios ítems y su unidad actual */
   async lecciones(ambito = "programacion") {
     const ingles = ambito === "ingles";
-    const [datosItems, entrevistas] = await Promise.all([json(ingles ? "items-ingles.json" : "items.json"), ingles ? null : json("entrevistas.json")]);
+    const [datosItems, entrevistas] = await Promise.all([ingles ? itemsIngles() : json("items.json"), ingles ? null : json("entrevistas.json")]);
     const d = progreso.datos();
     const unidades = datosItems.unidades;
     const elegida = ingles ? progreso.ajuste("ingles", {}).unidad : d.unidadActual;
@@ -500,6 +506,10 @@ const apiWeb = {
   guardarPausas: async (lista) => {
     progreso.cambiarAjuste("pausas", { lista });
     cache.clear();
+  },
+  /** Avisos: hora fija del recordatorio (null = tu hora habitual) y zona horaria de este dispositivo. */
+  guardarAvisos: async ({ hora }) => {
+    progreso.cambiarAjuste("avisos", { ...progreso.ajuste("avisos", {}), hora, zona: Intl.DateTimeFormat().resolvedOptions().timeZone });
   },
   guardarJuego: async (juego) => {
     progreso.cambiarAjuste("juego", juego);

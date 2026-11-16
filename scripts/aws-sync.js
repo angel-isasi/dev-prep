@@ -3,12 +3,17 @@
 //   npm run aws:borrar   borra todo (la tabla con tus datos incluida)
 //   npm run aws:estado   muestra la URL y si responde
 //   npm run aws:rotar    cambia el token secreto (si se filtró el QR): luego vuelve a vincular el celular
-// El token secreto se genera la primera vez y se guarda en data/sync.json (no va al repo).
+// El token secreto y las claves de los avisos se generan la primera vez y se guardan en
+// data/sync.json (no va al repo). El código de la Lambda (aws/lambda/index.js) se empaqueta con
+// Vite en un solo archivo y se sube después de desplegar la plantilla.
 import { execFileSync } from "node:child_process";
 import { randomBytes } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { build } from "vite";
 import { config } from "../server/config.js";
+import { generarClavesVapid } from "../server/webpush.js";
+import { crearZip } from "./zip.js";
 
 const PILA = "devprep-sync";
 const REGION = "us-east-1";
@@ -26,10 +31,25 @@ async function guardarSync(datos) {
   await writeFile(ARCHIVO, JSON.stringify(datos, null, 2));
 }
 
+/** Empaqueta aws/lambda/index.js y lo sube como código de la función. */
+async function subirCodigo() {
+  console.log("Empaquetando el código de la Lambda…");
+  await build({ configFile: path.join(config.raiz, "aws", "lambda", "vite.config.js") });
+  const codigo = await readFile(path.join(config.raiz, "aws", "lambda", "dist", "index.mjs"));
+  const zip = path.join(config.raiz, "aws", "lambda", "dist", "funcion.zip");
+  await writeFile(zip, crearZip([{ nombre: "index.mjs", contenido: codigo }]));
+  aws("lambda", "wait", "function-updated", "--function-name", "devprep-sincronizar");
+  aws("lambda", "update-function-code", "--function-name", "devprep-sincronizar", "--zip-file", `fileb://${zip}`, "--query", "LastUpdateStatus", "--output", "text");
+  aws("lambda", "wait", "function-updated", "--function-name", "devprep-sincronizar");
+  console.log("Código subido.");
+}
+
 async function crear() {
   const sync = await leerSync();
   sync.token ??= randomBytes(32).toString("hex");
   sync.dispositivo ??= "laptop";
+  // Claves de los avisos (Web Push): la pública va a los navegadores; la privada solo a la Lambda
+  if (!sync.vapid) sync.vapid = generarClavesVapid();
   await guardarSync(sync);
   // Si un intento anterior falló al crearse, la pila queda en ROLLBACK_COMPLETE y hay que borrarla antes.
   const previo = (() => {
@@ -45,7 +65,8 @@ async function crear() {
     aws("cloudformation", "wait", "stack-delete-complete", "--stack-name", PILA);
   }
   console.log("Creando o actualizando la pila en AWS (tarda 1 o 2 minutos)…");
-  aws("cloudformation", "deploy", "--template-file", PLANTILLA, "--stack-name", PILA, "--capabilities", "CAPABILITY_IAM", "--parameter-overrides", `Token=${sync.token}`, "--no-fail-on-empty-changeset");
+  aws("cloudformation", "deploy", "--template-file", PLANTILLA, "--stack-name", PILA, "--capabilities", "CAPABILITY_IAM", "--parameter-overrides", `Token=${sync.token}`, `VapidPublica=${sync.vapid.publica}`, `VapidPrivada=${sync.vapid.privada}`, "--no-fail-on-empty-changeset");
+  await subirCodigo();
   const salidas = JSON.parse(aws("cloudformation", "describe-stacks", "--stack-name", PILA, "--query", "Stacks[0].Outputs", "--output", "json"));
   sync.url = salidas.find((o) => o.OutputKey === "Url").OutputValue;
   await guardarSync(sync);

@@ -90,8 +90,17 @@ const pwa = () =>
         { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },
         { src: "maskable-icon-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
       ],
+      // Atajos al mantener presionado el ícono de la app (Android)
+      shortcuts: [
+        { name: "Empezar lección", short_name: "Lección", url: "/leccion", icons: [{ src: "/pwa-192x192.png", sizes: "192x192" }] },
+        { name: "Lección rápida", short_name: "Rápida", url: "/leccion?modo=rapida", icons: [{ src: "/pwa-192x192.png", sizes: "192x192" }] },
+        { name: "Inglés rápido", short_name: "Inglés", url: "/leccion?ambito=ingles&modo=rapida", icons: [{ src: "/pwa-192x192.png", sizes: "192x192" }] },
+        { name: "Repasar mis errores", short_name: "Errores", url: "/leccion?modo=errores", icons: [{ src: "/pwa-192x192.png", sizes: "192x192" }] },
+      ],
     },
     workbox: {
+      // Avisos (Web Push): el service worker carga public-movil/push-sw.js
+      importScripts: ["/push-sw.js"],
       // Todo lo necesario para usarla sin internet: la app, los datos y las fuentes en alfabeto latino.
       globPatterns: ["**/*.{js,css,html,svg,png,ico,json}", "**/*-latin-wght-normal-*.woff2"],
       globIgnores: ["**/marco.html"],

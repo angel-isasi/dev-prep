@@ -60,7 +60,8 @@ export function sincronizar() {
     try {
       const r = await fetch(v.url, { headers: cabeceras, signal: AbortSignal.timeout(LIMITE_MS) });
       if (!r.ok) throw new Error(r.status === 401 ? "El vínculo ya no es válido: vuelve a escanear el QR" : `La nube respondió ${r.status}`);
-      const { documentos = [] } = await r.json();
+      const { documentos = [], vapidPublica = null } = await r.json();
+      if (vapidPublica) anotar({ vapidPublica });
       const otros = documentos.filter((d) => d.dispositivo !== v.dispositivo);
       if (otros.length) {
         progreso.fusionar(otros);

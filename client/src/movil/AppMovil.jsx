@@ -34,6 +34,7 @@ import { CasoRevision, ListaRevision } from "./practica/Revision.jsx";
 import { Glosario } from "./practica/Glosario.jsx";
 import { PaginaLogros } from "../components/Logros.jsx";
 import { SeccionRutina } from "../components/SeccionRutina.jsx";
+import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
 import { Enfoque, PaginaDiario } from "../components/Rutina.jsx";
 import { Inicio } from "../pages/Inicio.jsx";
 import { Progreso } from "../pages/Progreso.jsx";
@@ -80,6 +81,7 @@ export function App() {
             <>
               <SeccionSync />
               <SeccionLaptop />
+              <SeccionAvisos />
               <SeccionRutina />
             </>
           }

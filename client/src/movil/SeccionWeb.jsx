@@ -5,6 +5,7 @@ import { api } from "../lib/api.js";
 import { desvincular, leerVinculo, sincronizar } from "../lib/sync-movil.js";
 import estilos from "../components/SeccionSync.module.css";
 import { SeccionRutina } from "../components/SeccionRutina.jsx";
+import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
 import { SeccionLaptop } from "./SeccionLaptop.jsx";
 
 const fecha = (iso) => new Date(iso).toLocaleString("es-PE", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
@@ -50,6 +51,7 @@ export function SeccionWeb() {
   return (
     <>
       <SeccionLaptop />
+      <SeccionAvisos />
       <SeccionRutina />
 
       <section className={estilos.seccion}>

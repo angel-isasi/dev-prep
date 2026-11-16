@@ -77,6 +77,8 @@ const servidor = app.listen(config.puerto, config.host, () => {
       estado: () => estado().juego,
       procesos: () => vivos(progreso.datos().ajustes).juego?.procesos ?? PROCESOS_POR_DEFECTO,
       emitir: eventos.emitir,
+      // También al celular (Windows silencia las notificaciones al jugar a pantalla completa)
+      avisar: (texto) => sync.avisar({ titulo: "Tiempo de juego", cuerpo: texto, url: "/" }),
     });
   }
 });

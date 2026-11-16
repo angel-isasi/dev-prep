@@ -154,7 +154,13 @@ async function main() {
   for (const error of ingles.errores) console.warn(`  aviso: ${error}`);
   total += await escribir("ingles.json", { unidades: unidadesParaLeer(ingles.unidades) });
   const itemsIngles = generarItemsIngles(ingles.unidades);
-  const bytesIngles = await escribir("items-ingles.json", { version: 1, ...itemsIngles });
+  // Un archivo por etapa (básico, intermedio, trabajo): así ninguno pasa el límite del service worker
+  let bytesIngles = 0;
+  for (const etapa of ["basico", "intermedio", "trabajo"]) {
+    const unidades = itemsIngles.unidades.filter((u) => u.etapa === etapa);
+    const ids = new Set(unidades.map((u) => u.id));
+    bytesIngles += await escribir(`items-ingles-${etapa}.json`, { version: 1, unidades, items: itemsIngles.items.filter((it) => ids.has(it.unidad)) });
+  }
   total += bytesIngles;
   console.log(`Inglés: ${ingles.unidades.length} unidades y ${itemsIngles.items.length} ítems (${kb(bytesIngles)})`);
 

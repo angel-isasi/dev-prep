@@ -1,8 +1,9 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: >
-  dev-prep: guarda el progreso de cada dispositivo (laptop y celular) para unirlo.
-  Una Lambda con URL propia (sin API Gateway) y una tabla DynamoDB. Todo dentro del
-  nivel gratuito permanente de AWS. Se crea con "npm run aws:crear" y se borra con "npm run aws:borrar".
+  dev-prep: guarda el progreso de cada dispositivo (laptop y celular) para unirlo y manda los
+  avisos diarios. Una Lambda con URL propia (sin API Gateway), una tabla DynamoDB y una regla
+  que la despierta cada 30 minutos. Todo dentro del nivel gratuito permanente de AWS.
+  Se crea con "npm run aws:crear" y se borra con "npm run aws:borrar".
 
 Parameters:
   Token:
@@ -10,6 +11,15 @@ Parameters:
     NoEcho: true
     MinLength: 32
     Description: Token secreto que deben enviar la laptop y el celular (lo genera scripts/aws-sync.js).
+  VapidPublica:
+    Type: String
+    Default: ""
+    Description: Clave pública de los avisos (la genera scripts/aws-sync.js).
+  VapidPrivada:
+    Type: String
+    NoEcho: true
+    Default: ""
+    Description: Clave privada de los avisos (la genera scripts/aws-sync.js; nunca va al repo).
 
 Resources:
   # Un registro por dispositivo: { dispositivo, actualizado, doc (JSON comprimido con gzip) }
@@ -43,7 +53,7 @@ Resources:
             Version: "2012-10-17"
             Statement:
               - Effect: Allow
-                Action: [dynamodb:PutItem, dynamodb:Scan]
+                Action: [dynamodb:PutItem, dynamodb:Scan, dynamodb:GetItem, dynamodb:DeleteItem]
                 Resource: !GetAtt Tabla.Arn
               - Effect: Allow
                 Action: [logs:CreateLogStream, logs:PutLogEvents]
@@ -63,49 +73,14 @@ Resources:
         Variables:
           TABLA: !Ref Tabla
           TOKEN: !Ref Token
+          VAPID_PUBLICA: !Ref VapidPublica
+          VAPID_PRIVADA: !Ref VapidPrivada
+      # El código real (aws/lambda/index.js empaquetado) lo sube scripts/aws-sync.js después de
+      # desplegar. Esto es solo el punto de partida: si alguien lo ve, responde "no disponible".
       Code:
         ZipFile: |
-          // GET: devuelve los documentos de todos los dispositivos. PUT: guarda el de un dispositivo.
-          const { DynamoDBClient, PutItemCommand, ScanCommand } = require("@aws-sdk/client-dynamodb");
-          const zlib = require("zlib");
-          const crypto = require("crypto");
-          const db = new DynamoDBClient({});
-          const MAX = 300 * 1024;
-          const resp = (statusCode, body) => ({ statusCode, headers: { "content-type": "application/json" }, body: JSON.stringify(body) });
-          const hash = (t) => crypto.createHash("sha256").update(t).digest();
-          function autorizado(h) {
-            const t = String(h.authorization || "").replace(/^Bearer /, "");
-            return t.length > 0 && crypto.timingSafeEqual(hash(t), hash(process.env.TOKEN));
-          }
-          exports.handler = async (event) => {
-            const metodo = event.requestContext && event.requestContext.http && event.requestContext.http.method;
-            if (!autorizado(event.headers || {})) return resp(401, { error: "No autorizado" });
-            if (metodo === "GET") {
-              const r = await db.send(new ScanCommand({ TableName: process.env.TABLA }));
-              const documentos = (r.Items || []).map((i) => ({
-                dispositivo: i.dispositivo.S,
-                actualizado: i.actualizado.S,
-                doc: JSON.parse(zlib.gunzipSync(Buffer.from(i.doc.B)).toString()),
-              }));
-              return resp(200, { documentos });
-            }
-            if (metodo === "PUT") {
-              const texto = event.isBase64Encoded ? Buffer.from(event.body || "", "base64").toString() : event.body || "{}";
-              let cuerpo;
-              try { cuerpo = JSON.parse(texto); } catch (e) { return resp(400, { error: "JSON inválido" }); }
-              const dispositivo = String(cuerpo.dispositivo || "");
-              if (!/^[a-z0-9-]{3,40}$/.test(dispositivo)) return resp(400, { error: "Dispositivo inválido" });
-              const comprimido = zlib.gzipSync(JSON.stringify(cuerpo.doc || {}));
-              if (comprimido.length > MAX) return resp(413, { error: "El documento es demasiado grande" });
-              const actualizado = new Date().toISOString();
-              await db.send(new PutItemCommand({
-                TableName: process.env.TABLA,
-                Item: { dispositivo: { S: dispositivo }, actualizado: { S: actualizado }, doc: { B: comprimido } },
-              }));
-              return resp(200, { actualizado });
-            }
-            return resp(405, { error: "Método no permitido" });
-          };
+          exports.handler = async () => ({ statusCode: 503, body: JSON.stringify({ error: "Actualizando, vuelve en un minuto" }) });
+
 
   Url:
     Type: AWS::Lambda::Url
@@ -117,7 +92,7 @@ Resources:
           - https://dev-prep.angel-isasi.com
           - http://localhost:4173
           - http://localhost:5174
-        AllowMethods: [GET, PUT]
+        AllowMethods: [GET, PUT, POST]
         AllowHeaders: [authorization, content-type]
         MaxAge: 86400
 
@@ -136,6 +111,24 @@ Resources:
       Action: lambda:InvokeFunction
       Principal: "*"
       InvokedViaFunctionUrl: true
+
+  # Cada 30 minutos la Lambda revisa si toca mandar un aviso (server/avisos.js)
+  Reloj:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: devprep-avisos
+      ScheduleExpression: rate(30 minutes)
+      State: ENABLED
+      Targets:
+        - { Arn: !GetAtt Funcion.Arn, Id: avisos }
+
+  PermisoReloj:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref Funcion
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !GetAtt Reloj.Arn
 
 Outputs:
   Url:

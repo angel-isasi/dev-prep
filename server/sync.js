@@ -95,6 +95,16 @@ export async function crearSync({ datosDir, progreso, misRespuestas, fetch: pedi
       await recibir([{ dispositivo: otroDispositivo, doc }]);
       return { dispositivo, doc: miDocumento() };
     },
+    /** Manda un aviso a tus dispositivos (por ejemplo, al acabarse el tiempo de juego). Si falla, no pasa nada. */
+    async avisar(datos) {
+      if (!activa) return false;
+      try {
+        const r = await conLimite(`${configuracion.url.replace(/\/$/, "")}/avisar`, { method: "POST", headers: cabeceras, body: JSON.stringify(datos) });
+        return r.ok;
+      } catch {
+        return false;
+      }
+    },
     /** Datos para vincular el celular (van en el QR). */
     vinculo: () => (activa ? { url: configuracion.url, token: configuracion.token } : null),
   };
