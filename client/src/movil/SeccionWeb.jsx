@@ -103,7 +103,7 @@ export function SeccionWeb() {
         {version && (
           <p className={estilos.ayuda}>
             {version.ejercicios} ejercicios, {version.temas} temas, {version.entradas} entradas de Referencia y {version.preguntas}{" "}
-            preguntas. Actualizado el {fecha(version.generado)}.
+            preguntas. Versión {version.huella}.
           </p>
         )}
         <div className={estilos.acciones}>

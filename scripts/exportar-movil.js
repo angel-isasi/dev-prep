@@ -9,6 +9,7 @@
 //   items.json              ítems de lección generados del contenido (ver docs/guia-items-movil.md)
 //   version.json            fecha y totales, para mostrar "Contenido del ..." en Ajustes
 // En el celular, los retos de entrevista se exportan SIN solución: se resuelven en la laptop.
+import { createHash } from "node:crypto";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -28,10 +29,15 @@ export const archivoColeccion = (coleccion) => coleccion.replaceAll("/", "__");
 
 const leer = (ej, archivo) => readFile(path.join(ej.carpeta, archivo), "utf8");
 
+// Huella de todo lo exportado: si el contenido no cambia, version.json tampoco, y el celular
+// no muestra "Hay contenido nuevo" por un push que solo tocó la laptop o la documentación.
+const huella = createHash("sha256");
+
 async function escribir(relativa, datos) {
   const ruta = path.join(SALIDA, relativa);
   await mkdir(path.dirname(ruta), { recursive: true });
   const texto = JSON.stringify(datos);
+  huella.update(relativa).update(texto);
   await writeFile(ruta, texto);
   return texto.length;
 }
@@ -131,13 +137,15 @@ async function main() {
   imprimirResumenItems(generados, bytesItems);
 
   // 6. Versión
-  await escribir("version.json", {
-    generado: new Date().toISOString(),
+  const version = huella.digest("hex").slice(0, 8);
+  await mkdir(SALIDA, { recursive: true });
+  await writeFile(path.join(SALIDA, "version.json"), JSON.stringify({
+    huella: version,
     ejercicios: resumen.length,
     temas: temas.length,
     entradas: referencia.entradas.length,
     preguntas: entrevistas.preguntas.length,
-  });
+  }));
 
   console.log(
     `Exportado para el celular: ${resumen.length} ejercicios en ${porColeccion.size} colecciones, ` +

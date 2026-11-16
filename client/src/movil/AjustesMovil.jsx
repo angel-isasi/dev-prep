@@ -180,7 +180,7 @@ export function AjustesMovil() {
         {version && (
           <p className={estilos.ayuda}>
             {version.ejercicios} ejercicios, {version.temas} temas, {version.entradas} entradas de Referencia y{" "}
-            {version.preguntas} preguntas. Actualizado el {fechaYHora(version.generado)}.
+            {version.preguntas} preguntas. Versión {version.huella}.
           </p>
         )}
         <button type="button" className={`boton ${estilos.ancho}`} onClick={forzarActualizacion}>
