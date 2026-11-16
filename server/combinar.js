@@ -79,6 +79,44 @@ function elegirQuiz(a, b) {
   return { ...reciente, mejor: Math.max(a.mejor ?? 0, b.mejor ?? 0) };
 }
 
+// ---------------------------------------------------------------------------
+// Empezar de cero: una marca de reinicio que viaja en `ajustes.reinicio` ({ id, en }).
+// Cada documento lleva la `epoca` (el id del último reinicio que aplicó). Al mezclar:
+// - si TU documento es de una época anterior, se vacía (conservando ajustes, config y tus textos);
+// - si el documento del OTRO dispositivo es de una época anterior, su progreso se ignora.
+// Así lo viejo no vuelve aunque un celular sin internet todavía lo tenga guardado.
+// ---------------------------------------------------------------------------
+
+/** El reinicio más reciente que conocen estos documentos (o null). */
+export function reinicioVigente(...docs) {
+  return docs.map((d) => vivos(d?.ajustes).reinicio).reduce((a, b) => masReciente(a, b) ?? null, null);
+}
+
+/** El progreso vacío de un documento: se quedan solo los ajustes, la configuración y tus textos. */
+export function vaciarProgreso(doc, epoca) {
+  const { version, config, ajustes, misRespuestas, reportados } = doc ?? {};
+  return {
+    version: version ?? 1,
+    config: config ?? {},
+    ajustes: ajustes ?? {},
+    misRespuestas: misRespuestas ?? { pitch: "", historias: [], respuestas: {} },
+    reportados: reportados ?? {},
+    ejercicios: {},
+    preguntas: {},
+    quizzes: {},
+    dias: {},
+    items: {},
+    lecturas: {},
+    epoca,
+  };
+}
+
+/** Aplica el reinicio vigente a tu documento si todavía no lo aplicó. */
+export function aplicarReinicio(doc, reinicio = reinicioVigente(doc)) {
+  if (!reinicio?.id || doc?.epoca === reinicio.id) return doc;
+  return vaciarProgreso(doc, reinicio.id);
+}
+
 /**
  * Mezcla en `propio` el documento de otro dispositivo. Devuelve un documento nuevo.
  * @param {object} propio     tu progreso
@@ -87,7 +125,10 @@ function elegirQuiz(a, b) {
  */
 export function fusionarDocumento(propio, remoto, dispositivo) {
   if (!remoto || typeof remoto !== "object") return propio;
-  const r = remoto;
+  const reinicio = reinicioVigente(propio, remoto);
+  propio = aplicarReinicio(propio, reinicio);
+  // Un documento de antes del reinicio solo aporta sus ajustes y textos, no su progreso viejo
+  const r = reinicio?.id && remoto.epoca !== reinicio.id ? vaciarProgreso(remoto, remoto.epoca) : remoto;
   const resultado = {
     ...propio,
     preguntas: mezclarMapa(propio.preguntas, r.preguntas),

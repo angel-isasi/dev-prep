@@ -7,6 +7,7 @@ import estilos from "../components/SeccionSync.module.css";
 import { SeccionRutina } from "../components/SeccionRutina.jsx";
 import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
 import { SeccionLaptop } from "./SeccionLaptop.jsx";
+import { Confirmar } from "../components/Confirmar.jsx";
 
 const fecha = (iso) => new Date(iso).toLocaleString("es-PE", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 
@@ -90,8 +91,8 @@ export function SeccionWeb() {
       <section className={estilos.seccion}>
         <h2>Tu progreso en este navegador</h2>
         <p className={estilos.ayuda}>
-          Se guarda en este navegador y no se pierde al apagar la computadora. Si borras los datos de navegación, lo recuperas
-          sincronizando o con un respaldo.
+          Se guarda en este navegador y no se pierde al apagar la computadora. Si borras los datos de navegación, lo recuperas sincronizando
+          o con un respaldo.
         </p>
         <div className={estilos.acciones}>
           <button type="button" className="boton" onClick={descargar}>
@@ -101,6 +102,22 @@ export function SeccionWeb() {
             Restaurar respaldo
           </button>
           <input ref={archivo} type="file" accept="application/json,.json" hidden onChange={restaurar} />
+          <Confirmar
+            peligro
+            titulo="¿Empezar de cero?"
+            descripcion="Se borra tu progreso en TODOS tus dispositivos: ejercicios, racha, repasos, tarjetas, lecciones, inglés, exámenes, simulacros, logros, postulaciones y diario. Se quedan tus ajustes, tu pitch, tus historias STAR y tu CV. Descarga un respaldo antes si quieres guardarlo. No se puede deshacer."
+            textoConfirmar="Sí, empezar de cero"
+            disparador={
+              <button type="button" className="boton boton-fantasma">
+                Empezar de cero
+              </button>
+            }
+            alConfirmar={async () => {
+              await api.empezarDeCero();
+              await sincronizar().catch(() => {});
+              location.assign("/");
+            }}
+          />
         </div>
         {aviso && <p className={estilos.ayuda}>{aviso}</p>}
       </section>

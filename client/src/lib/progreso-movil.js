@@ -7,7 +7,7 @@
 // En el celular un ejercicio nunca queda "resuelto": eso solo lo dan los tests de la laptop.
 import { calificarPregunta, preguntaPendiente, progresoVacio, registrarQuiz, sumarAlDia, sumarDias, validarConfig } from "../../../server/progreso-reglas.js";
 import { ahoraIso, fechaLocal } from "../../../server/fechas.js";
-import { diasCombinados, documentoParaSubir, fusionarDocumento, vivos } from "../../../server/combinar.js";
+import { diasCombinados, documentoParaSubir, fusionarDocumento, vaciarProgreso, vivos } from "../../../server/combinar.js";
 
 export const CLAVE = "devprep-movil-v1";
 const CLAVE_DANADO = "devprep-movil-danado";
@@ -222,11 +222,23 @@ export function crearProgresoMovil(almacenamiento, reloj = {}) {
     fusionar(documentos) {
       const antes = JSON.stringify(datos);
       for (const { dispositivo, doc } of documentos) datos = fusionarDocumento(datos, doc, dispositivo);
+      datos = { ...progresoMovilVacio(), ...datos }; // si hubo un "empezar de cero", vuelven los campos vacíos
       // Lo que llega de otros dispositivos no se vuelve a subir: no avisa a la sincronización.
       if (JSON.stringify(datos) !== antes) guardar({ avisar: false });
     },
     /** Días del celular y de la laptop sumados. */
     dias: () => diasCombinados(datos),
+
+    /**
+     * Empezar de cero: deja una marca de reinicio en tus ajustes (viaja a todos tus dispositivos)
+     * y vacía el progreso de este navegador. Se quedan tus ajustes, tu pitch, tus historias y tu CV.
+     */
+    empezarDeCero() {
+      const id = `r-${Date.now().toString(36)}`;
+      datos.ajustes = { ...(datos.ajustes ?? {}), reinicio: { id, en: ahora() } };
+      datos = { ...progresoMovilVacio(), ...vaciarProgreso(datos, id) };
+      guardar();
+    },
 
     // --- Respaldo manual ---
     exportar: () => JSON.stringify(datos),

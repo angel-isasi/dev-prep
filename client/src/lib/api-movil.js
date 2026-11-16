@@ -791,6 +791,11 @@ const apiWeb = {
 
   /** Respaldo manual del progreso del celular (Ajustes). */
   exportarProgreso: () => progreso.exportar(),
+  /** Borra tu progreso en todos tus dispositivos (ver empezarDeCero en progreso-movil.js). */
+  empezarDeCero: async () => {
+    progreso.empezarDeCero();
+    cache.clear();
+  },
   importarProgreso: async (texto) => {
     progreso.importar(texto);
     cache.clear();

@@ -137,6 +137,7 @@ export async function crearProgreso({ datosDir }) {
     async fusionar(documentos) {
       const antes = JSON.stringify(datos);
       for (const { dispositivo, doc } of documentos) datos = fusionarDocumento(datos, doc, dispositivo);
+      datos = { ...progresoVacio(), ...datos }; // si hubo un "empezar de cero", vuelven los campos vacíos
       datos.ejercicios ??= {};
       datos.preguntas ??= {};
       datos.quizzes ??= {};
