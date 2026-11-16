@@ -242,11 +242,16 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
   else if (anios > 0 && anios <= 2) sumar(5, `Pide poca experiencia (${anios} ${anios === 1 ? "año" : "años"})`);
 
   // Lugar
+  let lugarOk = false;
   if (SOLO_LEJOS.test(todo) || /^(usa|us|united states|uk|europe|germany|deutschland)/i.test(oferta.ubicacion ?? ""))
     sumar(-20, "Solo para personas en otro país");
-  else if (PERU.test(`${oferta.ubicacion} ${todo}`)) sumar(15, "Es en Perú o acepta Perú");
-  else if (oferta.remoto && LUGAR_BUENO.test(`${oferta.ubicacion} remote`)) sumar(10, "Remoto y abierto a Latinoamérica");
-  else if (!oferta.remoto) sumar(-25, "Presencial en otro país");
+  else if (PERU.test(`${oferta.ubicacion} ${todo}`)) {
+    sumar(15, "Es en Perú o acepta Perú");
+    lugarOk = true;
+  } else if (oferta.remoto && LUGAR_BUENO.test(`${oferta.ubicacion} remote`)) {
+    sumar(10, "Remoto y abierto a Latinoamérica");
+    lugarOk = true;
+  } else if (!oferta.remoto) sumar(-25, "Presencial en otro país");
 
   // Tecnologías contra lo que dominas (el mismo diccionario de "¿Estoy listo para esta oferta?")
   const { tecnologias } = analizarOferta(todo, mapa, ingles);
@@ -271,7 +276,9 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
   else if (dias != null && dias > 45) sumar(-25, "Tiene más de mes y medio publicada: puede que ya esté cerrada");
   else if (dias != null && dias > 30) sumar(-10, "Tiene más de un mes publicada");
 
-  return { puntaje: Math.max(1, Math.min(100, Math.round(puntaje))), razones, tecnologias, relevante: true };
+  // Para el aviso al celular: lo que importa sin depender de tu mapa (la Lambda no lo tiene)
+  const paraAvisar = junior && !senior && lugarOk && dias != null && dias <= 7;
+  return { puntaje: Math.max(1, Math.min(100, Math.round(puntaje))), razones, tecnologias, relevante: true, paraAvisar };
 }
 
 /** Las ofertas que valen la pena, de la que más te conviene a la que menos. */
@@ -283,13 +290,10 @@ export function ordenarOfertas(ofertas, perfil, { limite = 40 } = {}) {
     .slice(0, limite);
 }
 
-/** Puntaje mínimo para avisarte de una oferta al celular. */
-export const PUNTAJE_PARA_AVISAR = 60;
-
 /**
- * Las ofertas que valen un aviso: buenas (puntaje alto) y que no te avisé antes.
+ * Las ofertas que valen un aviso al celular y que no te avisé antes: de frontend o full stack,
+ * para junior, en Perú o remotas para Latinoamérica, y publicadas en los últimos 7 días.
  * @param {object[]} ordenadas  las de ordenarOfertas
  * @param {string[]} yaAvisadas  ids de ofertas que ya viste en un aviso
  */
-export const ofertasParaAvisar = (ordenadas, yaAvisadas = []) =>
-  ordenadas.filter((o) => o.puntaje >= PUNTAJE_PARA_AVISAR && !yaAvisadas.includes(o.id));
+export const ofertasParaAvisar = (ordenadas, yaAvisadas = []) => ordenadas.filter((o) => o.paraAvisar && !yaAvisadas.includes(o.id));

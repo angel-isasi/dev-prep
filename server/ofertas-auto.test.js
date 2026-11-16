@@ -148,9 +148,23 @@ describe("buscarOfertas", () => {
 });
 
 describe("ofertas para avisar", () => {
-  test("solo las de puntaje alto que no se avisaron antes", async () => {
+  test("una oferta junior, en Perú y de esta semana sí; una senior o vieja, no", () => {
+    const buena = puntuarOferta(
+      { ...base, titulo: "Frontend Junior", ubicacion: "Lima, Perú", remoto: false, texto: "", fecha: "2026-11-14T00:00:00Z" },
+      perfil,
+    );
+    const senior = puntuarOferta({ ...base, titulo: "Senior Frontend", texto: "", fecha: "2026-11-14T00:00:00Z" }, perfil);
+    const vieja = puntuarOferta({ ...base, titulo: "Frontend Junior", texto: "", fecha: "2026-10-01T00:00:00Z" }, perfil);
+    expect([buena.paraAvisar, senior.paraAvisar, vieja.paraAvisar]).toEqual([true, false, false]);
+  });
+
+  test("solo las marcadas para avisar que no se avisaron antes", async () => {
     const { ofertasParaAvisar } = await import("./ofertas-auto.js");
-    const lista = [{ id: "a", puntaje: 80 }, { id: "b", puntaje: 59 }, { id: "c", puntaje: 65 }];
+    const lista = [
+      { id: "a", paraAvisar: true },
+      { id: "b", paraAvisar: false },
+      { id: "c", paraAvisar: true },
+    ];
     expect(ofertasParaAvisar(lista, ["c"]).map((o) => o.id)).toEqual(["a"]);
   });
 });
