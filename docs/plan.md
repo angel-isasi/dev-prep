@@ -368,3 +368,9 @@ Ideas elegidas por Angel después del plan v3. Todas con sus reglas en módulos 
 - **Trabajo**: ofertas para ti (`server/ofertas-auto.js`, APIs públicas, sin scraping ni IA) y el proyecto guiado "Primer día de trabajo" con tickets.
 
 Después se agregó el aviso al celular de ofertas nuevas para junior en Perú o remotas para Latinoamérica (la Lambda las busca a las 11:00). Quedan para más adelante solo las ideas que necesitan una clave de IA.
+
+**Ofertas más seguras y útiles (2026-11-16):** 14 mejoras a "Conseguir trabajo".
+- Seguridad: confianza por bolsa (`CONFIANZA`) y detector de señales de estafa (`senalesDeAlerta`) en `server/ofertas-auto.js`; checklist y enlaces para verificar la empresa.
+- Fuentes: se suman We Work Remotely (RSS, piden citar la fuente) y Himalayas (API, piden postular con su enlace; solo motor y Lambda por CORS). De Arbeitnow, solo las remotas; si una oferta se repite, gana la bolsa más confiable.
+- Por oferta: filtro "Solo para mí", guardar y ocultar (colección `ofertasMarcadas`, se sincroniza), "Nuevas desde tu última visita", qué te falta con enlace a la lección, palabras clave para el CV (`palabrasParaCv` en `server/ofertas.js`) y mensaje para postular.
+- Postulaciones (`server/postulaciones.js`): fecha de envío, seguimiento a los 7 días (aviso a las 12:00 los días 7, 14 y 21), etapa "Sin respuesta", números por semana y por fuente, y meta semanal opcional.

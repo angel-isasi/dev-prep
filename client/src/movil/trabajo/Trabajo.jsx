@@ -1,7 +1,9 @@
 // "Conseguir trabajo": todo lo que va más allá de practicar. Pestañas: postulaciones (con las preguntas
 // reales que te hicieron), ¿estoy listo para esta oferta?, tu CV, portafolio, y pruebas técnicas y proyecto.
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 import { api } from "../../lib/api.js";
+import { ETAPAS, mensajeSeguimiento } from "../../../../server/postulaciones.js";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
 import { ContenidoPestanas, Pestanas } from "../../components/Pestanas.jsx";
 import { Tarjeta } from "../../components/Tarjeta.jsx";
@@ -11,16 +13,10 @@ import { ListaAnimada } from "../../components/ListaAnimada.jsx";
 import { OfertasParaTi } from "./Ofertas.jsx";
 import estilos from "./Trabajo.module.css";
 
-const ETAPAS = [
-  ["por-postular", "Por postular"],
-  ["enviada", "Enviada"],
-  ["prueba", "Prueba técnica"],
-  ["entrevista", "Entrevista"],
-  ["oferta", "Oferta"],
-  ["rechazo", "No siguió"],
-];
 const nombreEtapa = Object.fromEntries(ETAPAS);
-const vacia = { empresa: "", puesto: "", enlace: "", etapa: "por-postular", notas: "", proximo: "", proximoFecha: "" };
+const vacia = { empresa: "", puesto: "", enlace: "", fuente: "", etapa: "por-postular", notas: "", proximo: "", proximoFecha: "" };
+/** Sugerencias para el campo "Dónde la viste" (puedes escribir otra). */
+const FUENTES = ["LinkedIn", "Get on Board", "Computrabajo", "Bumeran", "Remotive", "We Work Remotely", "Himalayas", "RemoteOK", "Arbeitnow", "Referido", "Web de la empresa"];
 
 const PREGUNTAS_PARA_ELLOS = [
   "¿Cómo es un día normal de alguien junior en el equipo?",
@@ -29,7 +25,9 @@ const PREGUNTAS_PARA_ELLOS = [
 ];
 
 export function Trabajo() {
-  const [pestana, setPestana] = useState("ofertas");
+  // ?pestana=postulaciones: el aviso de seguimiento abre directo en tus postulaciones
+  const [params] = useSearchParams();
+  const [pestana, setPestana] = useState(() => (params.get("pestana") === "postulaciones" ? "postulaciones" : "ofertas"));
   const pestanas = [
     { id: "ofertas", texto: "Ofertas para ti" },
     { id: "postulaciones", texto: "Postulaciones" },
@@ -62,10 +60,12 @@ function Postulaciones() {
   const [preguntas, setPreguntas] = useState([]);
   const [nueva, setNueva] = useState({ pregunta: "", empresa: "" });
   const [repaso, setRepaso] = useState(null);
+  const [resumen, setResumen] = useState(null);
 
   const cargar = () => {
     api.postulaciones().then(setLista);
     api.preguntasPropias().then(setPreguntas);
+    api.resumenPostulaciones?.().then(setResumen);
   };
   useEffect(() => {
     cargar();
@@ -115,6 +115,9 @@ function Postulaciones() {
         </button>
       </div>
 
+      {resumen && <Seguimientos pendientes={resumen.pendientes} alCambiar={cargar} />}
+      {resumen && <MetaSemanal meta={resumen.meta} alCambiar={cargar} />}
+
       {editando && (
         <form className={estilos.panel} onSubmit={guardar}>
           <div className={estilos.campos}>
@@ -133,6 +136,20 @@ function Postulaciones() {
             <label>
               Enlace de la oferta
               <input value={editando.enlace} onChange={(e) => setEditando({ ...editando, enlace: e.target.value })} />
+            </label>
+            <label>
+              Dónde la viste
+              <input
+                list="fuentes-postulacion"
+                value={editando.fuente ?? ""}
+                onChange={(e) => setEditando({ ...editando, fuente: e.target.value })}
+                placeholder="LinkedIn"
+              />
+              <datalist id="fuentes-postulacion">
+                {FUENTES.map((f) => (
+                  <option key={f} value={f} />
+                ))}
+              </datalist>
             </label>
             <label>
               Etapa
@@ -196,7 +213,9 @@ function Postulaciones() {
             <div>
               <strong>{p.empresa}</strong> {p.puesto && <span className={estilos.tenue}>· {p.puesto}</span>}
               <small>
-                {nombreEtapa[p.etapa]}
+                {nombreEtapa[p.etapa] ?? p.etapa}
+                {p.fuente && ` · ${p.fuente}`}
+                {p.enviadaEl && p.etapa !== "por-postular" && ` · Enviada el ${p.enviadaEl}`}
                 {p.proximo && ` · Próximo: ${p.proximo}${p.proximoFecha ? ` (${p.proximoFecha})` : ""}`}
               </small>
             </div>
@@ -225,6 +244,8 @@ function Postulaciones() {
           </li>
         ))}
       </ListaAnimada>
+
+      {resumen?.numeros.total > 0 && <Numeros numeros={resumen.numeros} />}
 
       <div className={estilos.fila}>
         <h2>Me preguntaron esto</h2>
@@ -264,6 +285,166 @@ function Postulaciones() {
         ))}
       </ul>
     </>
+  );
+}
+
+/** Postulaciones con 7 días o más sin respuesta: escribe un seguimiento o márcala como sin respuesta. */
+function Seguimientos({ pendientes, alCambiar }) {
+  const [copiado, setCopiado] = useState(null);
+  if (!pendientes.length) return null;
+  return (
+    <div className={estilos.panel} data-estado="aviso">
+      <strong>
+        {pendientes.length === 1 ? "1 postulación espera tu seguimiento" : `${pendientes.length} postulaciones esperan tu seguimiento`}
+      </strong>
+      <p className={estilos.tenue}>
+        Una semana sin respuesta es normal. Un mensaje corto y amable muestra interés; si después de otra semana sigue sin respuesta, márcala y
+        sigue postulando.
+      </p>
+      <ul className={estilos.lista}>
+        {pendientes.map((p) => (
+          <li key={p.id} className={estilos.item} data-etapa="enviada">
+            <div>
+              <strong>{p.empresa}</strong>
+              <small>
+                {p.puesto && `${p.puesto} · `}
+                {p.seguimientos > 0
+                  ? `Le escribiste hace ${p.dias} días y sigue sin respuesta`
+                  : `Enviada hace ${p.dias} días, sin respuesta`}
+              </small>
+            </div>
+            <div className={estilos.acciones}>
+              {p.seguimientos === 0 && (
+                <>
+                  <button
+                    type="button"
+                    className="boton"
+                    onClick={async () => {
+                      await navigator.clipboard?.writeText(mensajeSeguimiento(p, "es"));
+                      setCopiado(`${p.id}-es`);
+                    }}
+                  >
+                    {copiado === `${p.id}-es` ? "✓ Copiado" : "Copiar seguimiento"}
+                  </button>
+                  <button
+                    type="button"
+                    className="boton boton-fantasma"
+                    onClick={async () => {
+                      await navigator.clipboard?.writeText(mensajeSeguimiento(p, "en"));
+                      setCopiado(`${p.id}-en`);
+                    }}
+                  >
+                    {copiado === `${p.id}-en` ? "✓ Copied" : "In English"}
+                  </button>
+                  <button
+                    type="button"
+                    className="boton"
+                    onClick={async () => {
+                      await api.marcarSeguimiento(p.id);
+                      alCambiar();
+                    }}
+                  >
+                    Ya le escribí
+                  </button>
+                </>
+              )}
+              <button
+                type="button"
+                className={p.seguimientos > 0 ? "boton boton-primario" : "boton boton-fantasma"}
+                onClick={async () => {
+                  await api.marcarSinRespuesta(p.id);
+                  alCambiar();
+                }}
+              >
+                Sin respuesta
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/** Meta de postulaciones por semana (0 = apagada). Actívala cuando empieces a postular de verdad. */
+function MetaSemanal({ meta, alCambiar }) {
+  const [valor, setValor] = useState(meta.meta);
+  useEffect(() => setValor(meta.meta), [meta.meta]);
+  const guardar = async () => {
+    await api.cambiarMetaPostulaciones(valor);
+    alCambiar();
+  };
+  return (
+    <div className={estilos.panel} data-estado={meta.cumplida ? "dominas" : undefined}>
+      <div className={estilos.fila}>
+        <strong>
+          {meta.meta > 0
+            ? meta.cumplida
+              ? `✓ Meta de la semana cumplida: ${meta.hechas} de ${meta.meta} postulaciones`
+              : `Esta semana: ${meta.hechas} de ${meta.meta} postulaciones (te ${meta.faltan === 1 ? "falta 1" : `faltan ${meta.faltan}`})`
+            : "Meta semanal de postulaciones: apagada"}
+        </strong>
+        <label className={estilos.metaCampo}>
+          Por semana
+          <input type="number" min={0} max={20} value={valor} onChange={(e) => setValor(e.target.value)} onBlur={guardar} />
+        </label>
+      </div>
+      {meta.meta > 0 ? (
+        <div className={estilos.barraMeta} role="progressbar" aria-valuemin={0} aria-valuemax={meta.meta} aria-valuenow={meta.hechas}>
+          <span style={{ width: `${Math.min(100, (meta.hechas / meta.meta) * 100)}%` }} />
+        </div>
+      ) : (
+        <small className={estilos.tenue}>
+          Actívala cuando empieces a postular de verdad (por ejemplo, 3 por semana). Cuenta las que pasas de "Por postular" a "Enviada".
+        </small>
+      )}
+    </div>
+  );
+}
+
+/** Tus números: postulaciones por semana, cuántas respondieron y qué fuente te responde más. */
+function Numeros({ numeros }) {
+  const maximo = Math.max(1, ...numeros.porSemana.map((s) => s.cantidad));
+  return (
+    <div className={estilos.panel}>
+      <strong>Tus números</strong>
+      <p className={estilos.tenue}>
+        Enviaste {numeros.total} {numeros.total === 1 ? "postulación" : "postulaciones"} y {numeros.respondieron} te{" "}
+        {numeros.respondieron === 1 ? "respondió" : "respondieron"} ({numeros.tasa}%). {numeros.esperando > 0 && `${numeros.esperando} siguen esperando. `}
+        Que muchas no respondan es normal al buscar el primer trabajo: no te desanimes y fíjate qué fuente te responde más.
+      </p>
+      <div className={estilos.semanas} aria-label="Postulaciones por semana, las últimas 8">
+        {numeros.porSemana.map((s) => (
+          <div key={s.semana} title={`Semana del ${s.semana}: ${s.cantidad}`}>
+            <span style={{ height: `${(s.cantidad / maximo) * 100}%` }} />
+            <small>{s.cantidad}</small>
+          </div>
+        ))}
+      </div>
+      <small className={estilos.tenue}>Por semana, las últimas 8 (la de la derecha es esta).</small>
+      {numeros.porFuente.length > 0 && (
+        <table className={estilos.tabla}>
+          <thead>
+            <tr>
+              <th>Fuente</th>
+              <th>Enviadas</th>
+              <th>Respondieron</th>
+            </tr>
+          </thead>
+          <tbody>
+            {numeros.porFuente.map((f) => (
+              <tr key={f.fuente}>
+                <td>{f.fuente}</td>
+                <td>{f.enviadas}</td>
+                <td>
+                  {f.respondieron} ({Math.round((f.respondieron / f.enviadas) * 100)}%)
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
   );
 }
 

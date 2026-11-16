@@ -38,9 +38,14 @@ I write code in VS Code; every time I save with `Ctrl + S`, the tests re-run and
 - **Interviews:** 152 flashcards (Spanish and English) with "what the interviewer wants to hear", a staged mock interview (HR, technical with follow-up questions, project presentation and closing), my 1-minute pitch and STAR stories.
 - **English:** 3 levels (A1 to B2) with audio, sentence building, dictation, dialogues, grammar, shadowing, a placement test and an immersion log.
 - **Practice like at work:** write your own tests and catch hidden bugs (mutation testing), React challenges against an API that is slow or fails on purpose, Git practice with real repositories (conflicts, undo, pull) checked automatically, and a weekly challenge with a personal record.
-- **Getting a job:** real offers from public job board APIs (Get on Board, Remotive, RemoteOK, Arbeitnow) ranked by fit without AI, application tracker, "am I ready for this offer?", CV to PDF, portfolio export to a ready-to-publish Vite project, take-home tests with a rubric and guided projects.
+- **Getting a job:** real offers from public job board APIs and feeds (Get on Board, Remotive, We Work Remotely, Himalayas, RemoteOK, Arbeitnow) ranked by fit without AI.
+  - **Safety first:** a trust label for each job board and a scam detector (payments, WhatsApp-only contact, personal emails, "simple tasks", unrealistic salaries) that flags the offer and pushes it down, plus a "verify the company" checklist.
+  - **For each offer:** what I am missing with a link to practice it, keywords to add to my CV (only the ones I really know) and an application message in Spanish or English.
+  - **My list:** "only for me" filter (junior, Peru or remote for Latin America, my stack), save or hide offers, and "new since your last visit".
+  - **Application tracker** with 7-day follow-up reminders, response stats by source and an optional weekly goal.
+  - Also: "am I ready for this offer?", CV to PDF, portfolio export to a ready-to-publish Vite project, take-home tests with a rubric and guided projects.
 - **Motivation:** levels and badges, weekly plan based on weak topics, "how much I improved" against 1 and 3 months ago, and earned game time (unlocked only after the daily goal; the laptop detects the game by itself).
-- **Notifications:** push to the phone at my usual study time if I did not study, last call for the streak and new junior offers in Peru or remote for Latin America (max 2 a day).
+- **Notifications:** push to the phone at my usual study time if I did not study, last call for the streak, new junior offers in Peru or remote for Latin America and follow-ups for applications with no answer after 7 days (max 2 a day).
 - **Reference:** an offline mini MDN with search.
 - Dark and light mode.
 

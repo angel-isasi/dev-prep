@@ -6,11 +6,14 @@
 // - Sábado: el examen semanal está listo (si no lo hiciste).
 // - Domingo a las 20:00: el resumen de tu semana.
 // - A las 11:00: ofertas de trabajo nuevas que te convienen (las busca la Lambda; ver ofertas-auto.js).
+// - A las 12:00: una postulación cumple 7, 14 o 21 días sin respuesta (ver postulaciones.js).
 import { diasCombinados, fusionarDocumento, vivos } from "./combinar.js";
 import { DIAS_SEMANA, diaSemana, enPausa, hechoDe, lunesDe, resumenDias } from "./metricas.js";
+import { seguimientosParaAvisar } from "./postulaciones.js";
 import { sumarDias } from "./progreso-reglas.js";
 
 export const MAX_AVISOS_DIA = 2;
+export const HORA_SEGUIMIENTO = 12;
 
 /** La ruta que abre un aviso: solo rutas internas de dev-prep ("/algo"); cualquier otra cosa abre el inicio. */
 export const rutaDeAviso = (url) => (typeof url === "string" && /^\/(?![/\\])/.test(url) ? url.slice(0, 200) : "/");
@@ -144,6 +147,19 @@ export function decidirAvisos(documentos, ahora, estado = {}, { ofertasNuevas = 
       cuerpo: `${mejor.titulo}${mejor.empresa ? ` en ${mejor.empresa}` : ""} (${mejor.puntaje}/100). Mira por qué te conviene.`,
       url: "/trabajo",
     });
+  }
+
+  if (hora === HORA_SEGUIMIENTO) {
+    const pendientes = seguimientosParaAvisar(Object.values(vivos(doc.postulaciones)), hoy);
+    if (pendientes.length) {
+      const [p] = pendientes;
+      candidatos.push({
+        tipo: "seguimiento",
+        titulo: pendientes.length === 1 ? "Toca hacer seguimiento" : `${pendientes.length} postulaciones esperan seguimiento`,
+        cuerpo: `Postulaste a ${p.empresa || "una empresa"} hace ${p.dias} días y no hay respuesta. Escribe un mensaje corto o márcala como sin respuesta.`,
+        url: "/trabajo?pestana=postulaciones",
+      });
+    }
   }
 
   const avisos = [];

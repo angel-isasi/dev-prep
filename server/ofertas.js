@@ -43,15 +43,37 @@ export const TECNOLOGIAS = [
 export function analizarOferta(texto, mapa, ingles = {}) {
   const porId = new Map(mapa.map((u) => [u.id, u]));
   const tecnologias = TECNOLOGIAS.filter((t) => t.patron.test(texto)).map((t) => {
-    if (!t.unidades.length) return { nombre: t.nombre, estado: "no-esta", valor: null };
+    if (!t.unidades.length) return { nombre: t.nombre, estado: "no-esta", valor: null, ruta: null };
     let valor;
-    if (t.unidades[0] === "ingles") valor = ingles.inglesTotal ? (ingles.inglesDominadas ?? 0) / ingles.inglesTotal : 0;
-    else {
+    let ruta;
+    if (t.unidades[0] === "ingles") {
+      valor = ingles.inglesTotal ? (ingles.inglesDominadas ?? 0) / ingles.inglesTotal : 0;
+      ruta = "/ingles";
+    } else {
       // Las unidades que todavía no empezaste cuentan como 0
       valor = t.unidades.reduce((s, id) => s + (porId.get(id)?.valor ?? 0), 0) / t.unidades.length;
+      // "Practicar lo que falta": la lección de la unidad más floja de esa tecnología
+      const floja = [...t.unidades].sort((a, b) => (porId.get(a)?.valor ?? 0) - (porId.get(b)?.valor ?? 0))[0];
+      ruta = `/leccion?unidad=${encodeURIComponent(floja)}`;
     }
     const estado = valor >= 0.7 ? "dominas" : valor > 0.05 ? "en-progreso" : "por-empezar";
-    return { nombre: t.nombre, estado, valor: Math.round(valor * 100) / 100 };
+    return { nombre: t.nombre, estado, valor: Math.round(valor * 100) / 100, ruta };
   });
   return { tecnologias, resumen: { dominas: tecnologias.filter((t) => t.estado === "dominas").length, total: tecnologias.length } };
+}
+
+/**
+ * Palabras clave para tu CV: las tecnologías que pide la oferta y que no aparecen en tu CV.
+ * Las separa en dos, para que no pongas en tu CV algo que no sabes:
+ *   agregar: las dominas o estás aprendiendo (ponlas)  ·  aprender: todavía no (no las pongas)
+ * @param {{ nombre: string, estado: string }[]} tecnologias  las de analizarOferta
+ * @param {string} textoCv  todo el texto de tu CV (titular, perfil, habilidades, proyectos)
+ */
+export function palabrasParaCv(tecnologias, textoCv = "") {
+  const porNombre = new Map(TECNOLOGIAS.map((t) => [t.nombre, t]));
+  const faltan = tecnologias.filter((t) => t.nombre !== "Inglés" && !porNombre.get(t.nombre)?.patron.test(textoCv));
+  return {
+    agregar: faltan.filter((t) => t.estado === "dominas" || t.estado === "en-progreso").map((t) => t.nombre),
+    aprender: faltan.filter((t) => t.estado === "por-empezar" || t.estado === "no-esta").map((t) => t.nombre),
+  };
 }

@@ -1,11 +1,15 @@
 // Ofertas automáticas: busca ofertas en bolsas de trabajo con API pública y las ordena según
 // cuánto te convienen, sin IA (reglas claras que puedes leer aquí abajo).
 //
-// Fuentes (todas ofrecen su API para que otros programas lean sus ofertas; no es scraping):
+// Fuentes (todas ofrecen su API o su RSS para que otros programas lean sus ofertas; no es scraping):
 //   - Get on Board (getonbrd.com): Latinoamérica, mucho trabajo tech, en español.
-//   - Remotive (remotive.com), RemoteOK (remoteok.com) y Arbeitnow (arbeitnow.com): remotas.
+//   - Remotive, We Work Remotely (RSS: piden citar la fuente), Himalayas (piden postular con su
+//     enlace), RemoteOK y Arbeitnow (solo sus ofertas remotas): remotas.
 // LinkedIn, Computrabajo y Bumeran no tienen API pública y prohíben el scraping: para esas,
 // pega la oferta en "¿Estoy listo para esta oferta?".
+//
+// Seguridad: cada fuente tiene un nivel de confianza (CONFIANZA) y cada oferta pasa por un detector
+// de señales de estafa (senalesDeAlerta) que la marca y la baja en el orden.
 //
 // Funciones puras salvo buscarOfertas, que recibe `fetch` por parámetro (así sirve en la laptop,
 // en el navegador y en los tests).
@@ -88,9 +92,12 @@ export function normalizarRemotive(json) {
   }));
 }
 
-/** Arbeitnow: { data: [{ slug, title, company_name, url, remote, location, created_at, description, tags }] } */
+/**
+ * Arbeitnow: { data: [{ slug, title, company_name, url, remote, location, created_at, description, tags }] }
+ * Solo las remotas: casi todo lo demás es presencial en Alemania y no te sirve.
+ */
 export function normalizarArbeitnow(json) {
-  return (json?.data ?? []).map((j) => ({
+  return (json?.data ?? []).filter((j) => j?.remote).map((j) => ({
     id: `arbeitnow:${j.slug}`,
     fuente: "Arbeitnow",
     titulo: j.title ?? "",
@@ -126,7 +133,116 @@ export function normalizarRemoteOK(json) {
     }));
 }
 
-/** Las fuentes, con su URL de búsqueda, su normalizador y si el navegador puede leerlas directo (CORS). */
+const LATAM =
+  /^(peru|argentina|bolivia|brazil|chile|colombia|costa rica|cuba|dominican republic|ecuador|el salvador|guatemala|honduras|mexico|nicaragua|panama|paraguay|uruguay|venezuela)$/i;
+
+/**
+ * Himalayas: { jobs: [{ title, companyName, applicationLink, guid, locationRestrictions, seniority, minSalary, maxSalary, currency, pubDate, description, categories }] }
+ * locationRestrictions vacío = desde cualquier país. Piden postular con su applicationLink.
+ */
+export function normalizarHimalayas(json) {
+  return (json?.jobs ?? [])
+    .filter((j) => j && j.title)
+    .map((j) => {
+      const paises = (j.locationRestrictions ?? []).filter((p) => typeof p === "string");
+      const latam = paises.filter((p) => LATAM.test(p));
+      const ubicacion = !paises.length
+        ? "Worldwide"
+        : paises.some((p) => /^peru$/i.test(p))
+          ? "Peru"
+          : latam.length
+            ? `LATAM (${latam.slice(0, 3).join(", ")})`
+            : paises.slice(0, 3).join(", ") + (paises.length > 3 ? ` y ${paises.length - 3} más` : "");
+      const slug = String(j.guid ?? j.applicationLink ?? j.title).split("/").filter(Boolean).slice(-2).join("/");
+      return {
+        id: `himalayas:${slug}`,
+        fuente: "Himalayas",
+        titulo: j.title,
+        empresa: j.companyName ?? "",
+        url: urlSegura(j.applicationLink, urlSegura(j.guid, "https://himalayas.app/jobs")),
+        remoto: true,
+        ubicacion,
+        // Solo para ciertos países y ninguno es de Latinoamérica
+        soloOtrosPaises: paises.length > 0 && latam.length === 0,
+        seniority: (j.seniority ?? []).join(", ") || null,
+        salario: j.minSalary || j.maxSalary ? { min: j.minSalary ?? null, max: j.maxSalary ?? null, moneda: j.currency ?? "USD" } : null,
+        fecha: fechaIso(j.pubDate),
+        texto: textoPlano(`${(j.categories ?? []).join(", ").replace(/-/g, " ")}\n${j.description ?? ""}`),
+        idioma: "en",
+      };
+    });
+}
+
+const ENTIDADES_XML = { "&lt;": "<", "&gt;": ">", "&quot;": '"', "&apos;": "'", "&#39;": "'" };
+/** Texto de una etiqueta RSS: quita CDATA y decodifica las entidades XML (la descripción trae HTML escapado). */
+function desXml(texto = "") {
+  return String(texto)
+    .replace(/^\s*<!\[CDATA\[([\s\S]*?)\]\]>\s*$/, "$1")
+    .replace(/&(lt|gt|quot|apos|#39);/g, (e) => ENTIDADES_XML[e])
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&amp;/g, "&")
+    .trim();
+}
+const etiqueta = (item, nombre) => desXml(new RegExp(`<${nombre}>([\\s\\S]*?)</${nombre}>`).exec(item)?.[1] ?? "");
+
+/** We Work Remotely (RSS): <item><title>Empresa: Puesto</title><region>, <country>, <pubDate>, <link>, <description> */
+export function normalizarWeWorkRemotely(xml) {
+  const items = String(xml ?? "").match(/<item>[\s\S]*?<\/item>/g) ?? [];
+  return items
+    .map((item) => {
+      const completo = etiqueta(item, "title");
+      const corte = completo.indexOf(": ");
+      const link = etiqueta(item, "link");
+      return {
+        id: `wwr:${link.split("/").filter(Boolean).pop() ?? completo}`,
+        fuente: "We Work Remotely",
+        titulo: corte > 0 ? completo.slice(corte + 2) : completo,
+        empresa: corte > 0 ? completo.slice(0, corte) : "",
+        url: urlSegura(link, "https://weworkremotely.com"),
+        remoto: true,
+        ubicacion: [etiqueta(item, "region"), etiqueta(item, "country")].filter(Boolean).join(", "),
+        seniority: null,
+        salario: null,
+        fecha: fechaIso(etiqueta(item, "pubDate") || null),
+        texto: textoPlano(`${etiqueta(item, "skills")}\n${etiqueta(item, "description")}`),
+        idioma: "en",
+      };
+    })
+    .filter((o) => o.titulo);
+}
+
+/**
+ * Cuánto fiarte de cada fuente (no reemplaza verificar la empresa):
+ *   alta: modera cada aviso antes de publicarlo · media: bolsa conocida, verifica igual · baja: se han colado estafas.
+ */
+export const CONFIANZA = {
+  "Get on Board": { nivel: "alta", texto: "Revisada", detalle: "Get on Board modera cada aviso antes de publicarlo." },
+  Remotive: {
+    nivel: "media",
+    texto: "Bolsa conocida",
+    detalle: "Remotive revisa a las empresas, pero nunca te escribe directo: si alguien dice ser de Remotive, es estafa.",
+  },
+  "We Work Remotely": {
+    nivel: "media",
+    texto: "Bolsa conocida",
+    detalle: "We Work Remotely cobra a las empresas por publicar, y eso filtra muchas estafas. Igual verifica la empresa.",
+  },
+  Himalayas: { nivel: "media", texto: "Bolsa conocida", detalle: "Himalayas es una bolsa remota conocida. Postula siempre desde su enlace." },
+  Arbeitnow: { nivel: "media", texto: "Bolsa conocida", detalle: "Arbeitnow es una bolsa conocida de Alemania. Verifica la empresa." },
+  RemoteOK: {
+    nivel: "baja",
+    texto: "Verifica la empresa",
+    detalle: "En RemoteOK se han colado avisos falsos, incluso marcados como verificados. Busca la empresa antes de postular.",
+  },
+};
+const ORDEN_CONFIANZA = { alta: 0, media: 1, baja: 2 };
+export const confianzaDe = (fuente) =>
+  CONFIANZA[fuente] ?? { nivel: "media", texto: "Verifica la empresa", detalle: "Verifica la empresa antes de postular." };
+
+/**
+ * Las fuentes, con su URL de búsqueda, su normalizador y si el navegador puede leerlas directo (CORS).
+ * Van de la más confiable a la menos: al quitar repetidas gana la primera.
+ */
 export const FUENTES = [
   {
     id: "getonbrd",
@@ -146,7 +262,6 @@ export const FUENTES = [
     urls: ["https://remotive.com/api/remote-jobs?category=software-dev&limit=150"],
     normalizar: normalizarRemotive,
   },
-  { id: "remoteok", nombre: "RemoteOK", navegador: true, urls: ["https://remoteok.com/api"], normalizar: normalizarRemoteOK },
   {
     id: "arbeitnow",
     nombre: "Arbeitnow",
@@ -154,6 +269,31 @@ export const FUENTES = [
     urls: ["https://www.arbeitnow.com/api/job-board-api"],
     normalizar: normalizarArbeitnow,
   },
+  {
+    id: "weworkremotely",
+    nombre: "We Work Remotely",
+    navegador: true,
+    formato: "xml",
+    urls: [
+      "https://weworkremotely.com/categories/remote-front-end-programming-jobs.rss",
+      "https://weworkremotely.com/categories/remote-full-stack-programming-jobs.rss",
+    ],
+    normalizar: normalizarWeWorkRemotely,
+  },
+  {
+    // Sin CORS: solo desde el motor de la laptop y la Lambda
+    id: "himalayas",
+    nombre: "Himalayas",
+    navegador: false,
+    urls: [
+      "https://himalayas.app/jobs/api/search?q=frontend&seniority=Entry-level&limit=20",
+      "https://himalayas.app/jobs/api/search?q=react&seniority=Entry-level&limit=20",
+      "https://himalayas.app/jobs/api/search?q=javascript&seniority=Entry-level&limit=20",
+    ],
+    normalizar: normalizarHimalayas,
+  },
+  // Al final: si la misma oferta está en dos bolsas, se queda la de la más confiable (ver sinRepetir)
+  { id: "remoteok", nombre: "RemoteOK", navegador: true, urls: ["https://remoteok.com/api"], normalizar: normalizarRemoteOK },
 ];
 
 /**
@@ -169,9 +309,13 @@ export async function buscarOfertas(pedir, { soloNavegador = false, espera = 15_
       const listas = await Promise.all(
         f.urls.map(async (url) => {
           try {
-            const r = await pedir(url, { signal: AbortSignal.timeout(espera), headers: { Accept: "application/json" } });
+            const xml = f.formato === "xml";
+            const r = await pedir(url, {
+              signal: AbortSignal.timeout(espera),
+              headers: { Accept: xml ? "application/rss+xml, application/xml" : "application/json" },
+            });
             if (!r.ok) return null;
-            return f.normalizar(await r.json());
+            return f.normalizar(xml ? await r.text() : await r.json());
           } catch {
             return null;
           }
@@ -187,11 +331,27 @@ export async function buscarOfertas(pedir, { soloNavegador = false, espera = 15_
   return { ofertas: sinRepetir(resultados.flatMap((r) => r.ofertas)), fuentes: resultados.map((r) => r.fuente) };
 }
 
-const clave = (o) => `${o.titulo}|${o.empresa}`.toLowerCase().replace(/[^a-z0-9|]/g, "");
+// Misma oferta en dos fuentes: igual puesto y empresa, sin contar guiones ni "Inc", "LLC", "S.A.C."...
+const SUFIJOS = /\b(inc|llc|ltd|limited|corp|corporation|co|gmbh|sa|sac|saa|srl|sas|spa|ag|bv|plc)\b\.?/g;
+const clave = (o) =>
+  `${o.titulo}|${String(o.empresa ?? "")
+    .toLowerCase()
+    .replace(/[.,]/g, "")
+    .replace(SUFIJOS, "")}`
+    .toLowerCase()
+    .replace(/[^a-z0-9|]/g, "");
 export function sinRepetir(ofertas) {
-  const vistas = new Map();
-  for (const o of ofertas) if (!vistas.has(o.id) && ![...vistas.values()].some((v) => clave(v) === clave(o))) vistas.set(o.id, o);
-  return [...vistas.values()];
+  const ids = new Set();
+  const claves = new Set();
+  const unicas = [];
+  for (const o of ofertas) {
+    const k = clave(o);
+    if (ids.has(o.id) || claves.has(k)) continue;
+    ids.add(o.id);
+    claves.add(k);
+    unicas.push(o);
+  }
+  return unicas;
 }
 
 // ---------------------------------------------------------------------------
@@ -210,8 +370,76 @@ const SENIOR = /\b(senior|sr\.?|lead|l[ií]der|staff|principal|architect|arquite
 const LUGAR_BUENO =
   /\b(per[uú]|lima|latam|latin america|latinoam[eé]rica|south america|sudam[eé]rica|americas|worldwide|anywhere|global|remote)\b/i;
 const SOLO_LEJOS =
-  /\b(usa only|us only|united states only|eu only|europe only|uk only|must be located in (the )?(us|usa|europe|uk)|us citizens?|green card)\b/i;
+  /\b(usa only|us only|united states only|eu only|europe only|uk only|must be located in (the )?(us|usa|europe|uk)|us citizens?|green card|u\.?s\.?[\s-]based|usa[\s-]based)\b/i;
 const ANIOS = /(\d{1,2})\s*\+?\s*(a[nñ]os|years?)(\s+de)?\s+(experiencia|of experience|experience)/i;
+
+// ---------------------------------------------------------------------------
+// Señales de estafa: frases típicas de avisos falsos. Una sola no prueba nada, pero pide cuidado.
+// ---------------------------------------------------------------------------
+
+const ALERTAS = [
+  {
+    // "escríbenos por WhatsApp al +51...", "add us on Telegram @reclutador"
+    patron:
+      /\b(contact|message|text|write|send|apply|reach|add|escr[ií]be(nos)?|env[ií]a|post[uú]la|cont[aá]cta(nos)?|mensaje)\b[^.\n]{0,40}\b(whats\s?app|telegram|signal)\b|\b(whats\s?app|telegram)\b[^.\n]{0,25}(\+?\d[\d\s-]{6,}|@\w{3,})/i,
+    texto: "Pide contacto por WhatsApp o Telegram: las empresas serias usan su correo o su web",
+  },
+  {
+    // Solo cuando te lo piden a ti ("you must purchase", "pay for your equipment"): "reimbursement" a secas
+    // aparece en beneficios reales (seguro, equipo de oficina) y no cuenta.
+    patron:
+      /\b(you|candidates?|applicants?)\b[^.\n]{0,25}\b(need to|must|have to|will have to|are required to|required to)\b[^.\n]{0,15}\b(pay|purchase|buy)\b|\bpay for (your )?(own )?(equipment|laptop|software|training|starter kit|certificat\w*)|\b(purchase|buy)\b[^.\n]{0,40}\b(equipment|laptop|software|starter kit)\b[^.\n]{0,60}\b(reimburs\w*|paid back|pay you back)|\b(registration|training|application|onboarding|processing) fee|\b(debes|deber[aá]s|tienes que|tendr[aá]s que|necesitas)\s+(pagar|comprar|abonar|depositar)|\b(pagar|pago|dep[oó]sito|comprar|abonar)\b[^.\n]{0,40}\b(curso|capacitaci[oó]n|kit|inscripci[oó]n|certificad\w*|materiales)\b/i,
+    texto: "Habla de que pagues algo (equipo, curso o inscripción): nunca pagues por un trabajo",
+  },
+  {
+    patron:
+      /\b(forex|binary options|trading signals?|pig butcher\w*|guaranteed (profits?|returns|income)|high returns|ganancias garantizadas)\b/i,
+    texto: "Promete ganancias o habla de trading: así se disfrazan estafas de inversión",
+  },
+  {
+    patron:
+      /\b(how to work online|data entry|typing jobs?|like and follow|simple (online )?tasks|tareas simples|dar me gusta|earn \$?\d[\d,]* (per|a|an|each) (day|hour))\b/i,
+    texto: "Suena a 'tareas simples por internet', una estafa muy común",
+  },
+  {
+    patron: /\b(no interview|sin entrevista|hired immediately|immediate hire|contrataci[oó]n inmediata)\b/i,
+    texto: "Promete contratarte sin entrevista o al instante",
+  },
+  {
+    patron: /[a-z0-9._%+-]+@(gmail|hotmail|outlook|yahoo|live|proton(mail)?)\.(com|me|es|pe)\b/i,
+    texto: "Pide postular a un correo personal (Gmail, Hotmail...), no a uno de la empresa",
+  },
+  {
+    patron:
+      /\b(bank account|bank details|cuenta bancaria|datos bancarios|social security|ssn|passport|pasaporte|dni)\b[^.\n]{0,50}\b(before|antes|send|env[ií]a|upload|sube|share|comparte)\b|\b(send|env[ií]a|upload|sube|share|comparte)\b[^.\n]{0,30}\b(bank account|bank details|cuenta bancaria|datos bancarios|passport|pasaporte|dni)\b/i,
+    texto: "Pide tus datos bancarios o documentos antes de un contrato",
+  },
+];
+
+/**
+ * ¿Sueldo demasiado alto para un junior? Las bolsas mezclan anual (Himalayas, RemoteOK) y mensual
+ * (Get on Board). Anual: más de 150 000 USD (en EE. UU. 90 000 para un junior es normal). Mensual: más de 6000 USD.
+ */
+function sueldoIrreal(salario) {
+  const min = Number(salario?.min);
+  if (!min || (salario.moneda && salario.moneda !== "USD")) return false;
+  return min > 20_000 ? min > 150_000 : min > 6000;
+}
+
+/**
+ * Señales de estafa en una oferta. Sin IA: frases conocidas de avisos falsos.
+ * @returns {string[]}  una frase por señal (vacío = no se vio nada raro)
+ */
+export function senalesDeAlerta(oferta) {
+  const titulo = oferta.titulo ?? "";
+  const todo = `${titulo}\n${oferta.texto ?? ""}`;
+  const alertas = ALERTAS.filter((a) => a.patron.test(todo)).map((a) => a.texto);
+  if (/\b(crypto|cripto|forex|trading)\b/i.test(titulo) && JUNIOR.test(titulo))
+    alertas.push("Puesto junior de cripto o trading: hay estafas que se disfrazan así. Investiga bien a la empresa");
+  if (sueldoIrreal(oferta.salario) && (JUNIOR.test(titulo) || /junior|entry|trainee/i.test(oferta.seniority ?? "")))
+    alertas.push("Sueldo muy por encima de lo normal para un junior: desconfía");
+  return alertas;
+}
 
 /**
  * @param {object} oferta  una oferta normalizada
@@ -237,8 +465,21 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
     (!OTRO_ROL.test(titulo) &&
       FRONTEND.test(oferta.texto ?? "") &&
       /\b(software|web)\b.*\b(develop|engineer)|desarrollador|developer|programador/i.test(titulo));
+  const confianza = confianzaDe(oferta.fuente);
   if (!relevante)
-    return { puntaje: 0, razones: [{ texto: "No es un puesto de desarrollo web", tipo: "en-contra" }], tecnologias: [], relevante: false };
+    return {
+      puntaje: 0,
+      razones: [{ texto: "No es un puesto de desarrollo web", tipo: "en-contra" }],
+      tecnologias: [],
+      relevante: false,
+      alertas: [],
+      confianza,
+    };
+
+  // Señales de estafa primero: si hay, son lo más importante que tienes que leer
+  const alertas = senalesDeAlerta(oferta);
+  for (const a of alertas.slice(0, 2)) sumar(-25, `Posible estafa: ${a}`);
+
   if (esFrontend) sumar(15, "Es un puesto de frontend");
   else if (esFull) sumar(6, "Es full stack: incluye frontend");
 
@@ -254,7 +495,11 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
 
   // Lugar
   let lugarOk = false;
-  if (SOLO_LEJOS.test(todo) || /^(usa|us|united states|uk|europe|germany|deutschland)/i.test(oferta.ubicacion ?? ""))
+  if (
+    oferta.soloOtrosPaises ||
+    SOLO_LEJOS.test(todo) ||
+    /^(usa|us|united states|uk|europe|germany|deutschland)/i.test(oferta.ubicacion ?? "")
+  )
     sumar(-20, "Solo para personas en otro país");
   else if (PERU.test(`${oferta.ubicacion} ${todo}`)) {
     sumar(15, "Es en Perú o acepta Perú");
@@ -288,17 +533,51 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
   else if (dias != null && dias > 30) sumar(-10, "Tiene más de un mes publicada");
 
   // Para el aviso al celular: lo que importa sin depender de tu mapa (la Lambda no lo tiene)
-  const paraAvisar = junior && !senior && lugarOk && dias != null && dias <= 7;
-  return { puntaje: Math.max(1, Math.min(100, Math.round(puntaje))), razones, tecnologias, relevante: true, paraAvisar };
+  const paraAvisar = junior && !senior && lugarOk && dias != null && dias <= 7 && alertas.length === 0;
+  // "Solo para mí": junior o práctica, en Perú o remota para Latinoamérica, y de frontend o con React/JavaScript
+  const usaTuStack = esFrontend || tecnologias.some((t) => t.nombre === "React" || t.nombre === "JavaScript");
+  const paraMi = junior && !senior && lugarOk && usaTuStack && alertas.length === 0;
+  return {
+    puntaje: Math.max(1, Math.min(100, Math.round(puntaje))),
+    razones,
+    tecnologias,
+    relevante: true,
+    paraAvisar,
+    alertas,
+    confianza,
+    junior: junior && !senior,
+    lugarOk,
+    paraMi,
+  };
 }
 
-/** Las ofertas que valen la pena, de la que más te conviene a la que menos. */
+/**
+ * Las ofertas que valen la pena, de la que más te conviene a la que menos. En un empate gana la
+ * fuente más confiable (Get on Board primero) y después la más nueva.
+ */
 export function ordenarOfertas(ofertas, perfil, { limite = 40 } = {}) {
   return ofertas
     .map((o) => ({ ...o, ...puntuarOferta(o, perfil) }))
     .filter((o) => o.relevante)
-    .sort((a, b) => b.puntaje - a.puntaje || (b.fecha ?? "").localeCompare(a.fecha ?? ""))
+    .sort(
+      (a, b) =>
+        b.puntaje - a.puntaje ||
+        ORDEN_CONFIANZA[a.confianza.nivel] - ORDEN_CONFIANZA[b.confianza.nivel] ||
+        (b.fecha ?? "").localeCompare(a.fecha ?? ""),
+    )
     .slice(0, limite);
+}
+
+/**
+ * "Nuevas desde tu última visita": los ids que no estaban en tu visita anterior.
+ * Sin visita anterior (la primera vez) no marca ninguna, para no decirte que todo es nuevo.
+ * @param {string[]} ids        los de ahora
+ * @param {string[]|null} antes los que viste la vez pasada
+ */
+export function nuevasDesde(ids, antes) {
+  if (!antes) return [];
+  const vistas = new Set(antes);
+  return ids.filter((id) => !vistas.has(id));
 }
 
 /**

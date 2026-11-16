@@ -171,3 +171,197 @@
 .verMas {
   align-self: center;
 }
+
+details.ayuda summary {
+  cursor: pointer;
+  color: var(--texto-tenue);
+}
+
+details.ayuda[open] summary {
+  margin-bottom: 4px;
+}
+
+.seguridad {
+  margin: 0;
+  max-width: 80ch;
+  padding: var(--espacio-2) var(--espacio-3);
+  border-left: 3px solid var(--aviso);
+  border-radius: 6px;
+  background: var(--aviso-suave);
+  color: var(--texto-suave);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.avisoNuevas {
+  align-self: flex-start;
+  padding: 6px 14px;
+  border: 1px solid var(--acento);
+  border-radius: 999px;
+  background: var(--acento-suave);
+  color: var(--texto);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.oferta[data-alerta="true"] {
+  border-color: var(--error);
+}
+
+.fuera {
+  grid-template-columns: 1fr;
+  opacity: 0.85;
+}
+
+.insignias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.insignias span {
+  padding: 1px 9px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  color: var(--texto-tenue);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.insignias [data-tipo="nueva"] {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+  color: var(--acento);
+  font-weight: 600;
+}
+
+.insignias [data-nivel="alta"] {
+  border-color: var(--exito);
+  color: var(--exito);
+}
+
+.insignias [data-nivel="baja"] {
+  border-color: var(--aviso);
+  color: var(--aviso);
+}
+
+.insignias [data-tipo="alerta"] {
+  border-color: var(--error);
+  background: var(--error-suave);
+  color: var(--error);
+  font-weight: 600;
+}
+
+.acciones [data-activo="true"] {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+  color: var(--texto);
+}
+
+.detalle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  margin-top: var(--espacio-2);
+  padding-top: var(--espacio-3);
+  border-top: 1px solid var(--borde);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.detalle section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.detalle h4 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.detalle p {
+  margin: 0;
+}
+
+.detalle section > a {
+  align-self: flex-start;
+}
+
+.cajaAlerta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--espacio-3);
+  border: 1px solid var(--error);
+  border-radius: var(--radio-grande);
+  background: var(--error-suave);
+}
+
+.cajaAlerta strong {
+  color: var(--error);
+}
+
+.cajaAlerta ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.tenue {
+  color: var(--texto-tenue);
+}
+
+.faltan,
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.faltan li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+}
+
+.faltan [data-estado="en-progreso"] strong {
+  color: var(--aviso);
+}
+
+.checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checklist input {
+  margin-top: 4px;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+}
+
+.mensaje {
+  width: 100%;
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background: var(--superficie-2);
+  color: var(--texto);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.55;
+  resize: vertical;
+}

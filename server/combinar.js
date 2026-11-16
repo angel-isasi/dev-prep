@@ -54,6 +54,7 @@ export const REGISTROS = [
   "explicaciones",
   "retosSemana",
   "ofertasAnalizadas",
+  "ofertasMarcadas",
   "git",
 ];
 

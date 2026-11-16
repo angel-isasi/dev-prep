@@ -13,11 +13,12 @@ import { crearProgresoMovil, rachaMovil } from "./progreso-movil.js";
 import { mapaDominio, unidadesDebiles } from "../../../server/dominio.js";
 import { erroresFrecuentes } from "../../../server/errores.js";
 import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
-import { analizarOferta } from "../../../server/ofertas.js";
+import { analizarOferta, palabrasParaCv } from "../../../server/ofertas.js";
 import { diaSemana, lunesDe } from "../../../server/metricas.js";
 import { avanceUnidad } from "../movil/leccion/motor.js";
 import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaSemana } from "../../../server/avance.js";
-import { buscarOfertas, ordenarOfertas } from "../../../server/ofertas-auto.js";
+import { buscarOfertas, nuevasDesde, ordenarOfertas } from "../../../server/ofertas-auto.js";
+import { conFechaDeEnvio, metaSemanal, numerosPostulaciones, seguimientosPendientes } from "../../../server/postulaciones.js";
 import { crearApi } from "./api-servidor.js";
 import { BASE_LOCAL, conectada } from "./conexion-local.js";
 
@@ -27,6 +28,10 @@ export const progreso = crearProgresoMovil(localStorage);
 navigator.storage?.persist?.().catch(() => {});
 
 const SECCION_MODELO = "Cómo explicarlo en la entrevista";
+
+/** Ofertas que viste la última vez (por dispositivo) y las de la visita anterior a esta. */
+const CLAVE_VISTAS = "devprep-ofertas-vistas";
+let vistasAlAbrir;
 
 /** Huella corta de un texto (para no guardar dos veces la misma oferta). */
 function huella(texto) {
@@ -544,9 +549,36 @@ const apiWeb = {
       .sort((a, b) => (b.fecha ?? "").localeCompare(a.fecha ?? "")),
   guardarPostulacion: async ({ id, ...datos }) => {
     const clave = id ?? `post-${Date.now().toString(36)}`;
-    progreso.guardarRegistro("postulaciones", clave, { ...datos, fecha: datos.fecha ?? progreso.hoy() });
+    const { en: _en, ...resto } = datos;
+    progreso.guardarRegistro("postulaciones", clave, conFechaDeEnvio({ ...resto, fecha: datos.fecha ?? progreso.hoy() }, progreso.hoy()));
     cache.clear();
     return clave;
+  },
+  /** Seguimiento, tus números y la meta semanal de postulaciones (ver server/postulaciones.js). */
+  async resumenPostulaciones() {
+    const lista = Object.values(progreso.registros("postulaciones"));
+    const hoy = progreso.hoy();
+    const meta = Number(progreso.ajuste("metaPostulaciones", { valor: 0 }).valor) || 0;
+    return {
+      pendientes: seguimientosPendientes(
+        Object.entries(progreso.registros("postulaciones")).map(([id, p]) => ({ id, ...p })),
+        hoy,
+      ),
+      numeros: numerosPostulaciones(lista, hoy),
+      meta: metaSemanal(lista, hoy, meta),
+    };
+  },
+  cambiarMetaPostulaciones: async (valor) => progreso.cambiarAjuste("metaPostulaciones", { valor: Math.max(0, Math.min(20, Number(valor) || 0)) }),
+  /** "Ya le escribí": el contador de 7 días vuelve a empezar desde hoy. */
+  marcarSeguimiento: async (id) => {
+    const { en: _en, ...p } = progreso.registros("postulaciones")[id] ?? {};
+    if (!p.empresa) return;
+    progreso.guardarRegistro("postulaciones", id, { ...p, seguimientoEl: progreso.hoy(), seguimientos: (p.seguimientos ?? 0) + 1 });
+  },
+  marcarSinRespuesta: async (id) => {
+    const { en: _en, ...p } = progreso.registros("postulaciones")[id] ?? {};
+    if (!p.empresa) return;
+    progreso.guardarRegistro("postulaciones", id, { ...p, etapa: "sin-respuesta" });
   },
   borrarPostulacion: async (id) => {
     progreso.borrarRegistro("postulaciones", id);
@@ -610,17 +642,59 @@ const apiWeb = {
         busqueda = { ...guardada, sinConexion: true };
       }
     }
-    const [{ unidades }, ingles] = await Promise.all([apiWeb.mapa(), itemsIngles()]);
+    const [{ unidades }, ingles, { datos: cv, habilidades }] = await Promise.all([apiWeb.mapa(), itemsIngles(), apiWeb.cv()]);
     const estado = await estadoLogros();
     const perfil = { mapa: unidades, ingles: { inglesDominadas: estado.inglesDominadas, inglesTotal: ingles.unidades.length }, hoy: progreso.hoy() };
     const yaGuardadas = new Set(Object.values(progreso.registros("postulaciones")).map((p) => p.enlace).filter(Boolean));
+    const ordenadas = ordenarOfertas(busqueda.ofertas ?? [], perfil, { limite: 300 });
+
+    // "Nuevas desde tu última visita": se compara con lo que había la vez anterior que abriste la app
+    // (se lee una vez por visita, así guardar u ocultar no borra las marcas de "Nueva").
+    const ids = ordenadas.map((o) => o.id);
+    const vistas = JSON.parse(localStorage.getItem(CLAVE_VISTAS) ?? "null");
+    if (vistasAlAbrir === undefined) vistasAlAbrir = vistas;
+    const nuevas = new Set(nuevasDesde(ids, vistasAlAbrir));
+    localStorage.setItem(CLAVE_VISTAS, JSON.stringify([...new Set([...ids, ...(vistas ?? [])])].slice(0, 2000)));
+
+    // Palabras clave para tu CV: lo que pide la oferta y no aparece en tu CV
+    const textoCv = [
+      cv.titular,
+      cv.sobreMi,
+      ...habilidades.map((h) => `${h.nombre} ${h.temas.join(" ")}`),
+      ...(cv.proyectos ?? []).map((p) => `${p.titulo} ${p.descripcion}`),
+    ].join("\n");
+
+    const marcas = progreso.registros("ofertasMarcadas");
+    const enLista = new Set(ids);
     return {
-      ofertas: ordenarOfertas(busqueda.ofertas ?? [], perfil, { limite: 300 }).map(({ texto: _t, ...o }) => ({ ...o, guardada: yaGuardadas.has(o.url) })),
+      ofertas: ordenadas.map(({ texto: _t, ...o }) => ({
+        ...o,
+        guardada: yaGuardadas.has(o.url),
+        marca: marcas[o.id]?.estado ?? null,
+        nueva: nuevas.has(o.id),
+        paraCv: palabrasParaCv(o.tecnologias, textoCv),
+      })),
+      // Guardadas que ya no salen en la búsqueda (cerraron o salieron del top): se ven con lo que se guardó
+      guardadasFuera: Object.entries(marcas)
+        .filter(([id, m]) => m.estado === "guardada" && !enLista.has(id))
+        .map(([id, m]) => ({ id, ...m })),
+      cv,
       fuentes: busqueda.fuentes ?? [],
       buscadoEn: busqueda.buscadoEn,
       sinConexion: !!busqueda.sinConexion,
       conLaptop: conectada(),
     };
+  },
+  /** Guardar para revisar después u ocultar una oferta (null = quitar la marca). Se sincroniza. */
+  marcarOferta: async (o, estado) => {
+    if (!estado) return progreso.borrarRegistro("ofertasMarcadas", o.id);
+    progreso.guardarRegistro(
+      "ofertasMarcadas",
+      o.id,
+      estado === "guardada"
+        ? { estado, titulo: o.titulo, empresa: o.empresa, url: o.url, fuente: o.fuente, puntaje: o.puntaje, fecha: o.fecha ?? null }
+        : { estado },
+    );
   },
   /** Pasa una oferta a tus postulaciones, en "Por postular". */
   guardarOfertaComoPostulacion: async (o) =>
@@ -628,6 +702,7 @@ const apiWeb = {
       empresa: o.empresa || o.fuente,
       puesto: o.titulo,
       enlace: o.url,
+      fuente: o.fuente,
       etapa: "por-postular",
       notas: `De ${o.fuente}. Puntaje ${o.puntaje}/100: ${o.razones.map((r) => r.texto).join("; ")}.`,
       proximo: "Revisar requisitos y postular",

@@ -63,6 +63,28 @@ describe("aviso de ofertas", () => {
   });
 });
 
+describe("aviso de seguimiento de postulaciones", () => {
+  const postulaciones = {
+    a: { empresa: "Acme", etapa: "enviada", enviadaEl: "2026-11-11", en: "2026-11-11T10:00:00-05:00" },
+    b: { empresa: "Beta", etapa: "entrevista", enviadaEl: "2026-11-11", en: "2026-11-12T10:00:00-05:00" },
+  };
+
+  test("a las 12:00, cuando una postulación cumple 7 días sin respuesta, y abre tus postulaciones", () => {
+    const r = decidirAvisos([doc({ postulaciones })], enLima("2026-11-18", 12));
+    expect(r.avisos.map((a) => a.tipo)).toEqual(["seguimiento"]);
+    expect(r.avisos[0].titulo).toBe("Toca hacer seguimiento");
+    expect(r.avisos[0].cuerpo).toContain("Postulaste a Acme hace 7 días");
+    expect(rutaDeAviso(r.avisos[0].url)).toBe("/trabajo?pestana=postulaciones");
+  });
+
+  test("no a otra hora, ni al día siguiente, ni si la borraste", () => {
+    expect(decidirAvisos([doc({ postulaciones })], enLima("2026-11-18", 15)).avisos).toEqual([]);
+    expect(decidirAvisos([doc({ postulaciones })], enLima("2026-11-19", 12)).avisos).toEqual([]);
+    const borrada = { ...postulaciones, a: { borrado: true, en: "2026-11-17T10:00:00-05:00" } };
+    expect(decidirAvisos([doc({ postulaciones: borrada })], enLima("2026-11-18", 12)).avisos).toEqual([]);
+  });
+});
+
 test("un aviso solo puede abrir rutas de dev-prep", () => {
   expect(rutaDeAviso("/leccion?modo=rapida")).toBe("/leccion?modo=rapida");
   expect(rutaDeAviso("https://otra-pagina.com")).toBe("/");

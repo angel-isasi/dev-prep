@@ -132,6 +132,89 @@
   border-left-color: var(--error);
 }
 
+.item[data-etapa="sin-respuesta"] {
+  border-left-color: var(--borde-fuerte);
+  opacity: 0.8;
+}
+
+.panel[data-estado="aviso"] {
+  border-color: var(--aviso);
+}
+
+.metaCampo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.metaCampo input {
+  width: 72px;
+}
+
+.barraMeta {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--superficie-2);
+}
+
+.barraMeta span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--acento);
+  transition: width var(--transicion);
+}
+
+.semanas {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  align-items: end;
+  gap: 6px;
+  height: 90px;
+}
+
+.semanas div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+}
+
+.semanas span {
+  width: 100%;
+  min-height: 2px;
+  border-radius: 6px 6px 2px 2px;
+  background: var(--acento);
+}
+
+.semanas small {
+  color: var(--texto-tenue);
+  font-size: 12px;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabla th,
+.tabla td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--borde);
+  text-align: left;
+}
+
+.tabla th {
+  color: var(--texto-tenue);
+  font-weight: 500;
+}
+
 .acciones {
   display: flex;
   flex-wrap: wrap;
