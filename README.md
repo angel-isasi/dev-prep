@@ -20,6 +20,16 @@ Programas en VS Code, guardas con `Ctrl + S` y la app muestra al instante qué t
 - **Referencia**: un mini MDN offline con buscador (arrays, strings, objetos, promesas, DOM, React...).
 - Modo oscuro y modo claro.
 
+### En la versión web (dev-prep.angel-isasi.com)
+
+Todo lo anterior más lo que sigue. En tu laptop, con dev-prep abierto (arranca solo y oculto), la web tiene además VS Code, tests en vivo y todo lo de la app local.
+
+- **Inglés**: sección propia con 3 etapas (base A1 a A2, intermedio B1 y de trabajo B1 a B2). Lecciones con audio, armar frases, dictado, diálogos, gramática, prueba de nivel, "Mis palabras", registro de inglés real (inmersión) y meta diaria en minutos.
+- **Aprender mejor**: ejercicios de depurar código roto, Lee y predice (¿qué imprime?), revisión de código, glosario para entrevistas, explícalo en 60 segundos, mapa de lo que dominas y tus errores más frecuentes con un entrenamiento de tus puntos débiles.
+- **Motivación**: tiempo libre ganado para jugar (se desbloquea al cumplir tu meta, con deuda si te pasas; el motor de la laptop mide el juego solo), niveles e insignias, sonidos suaves, plan de hoy, día salvado, mi horario y semanas de exámenes, examen semanal, modo enfoque, reto y resumen del mes, diario de una línea y semáforo para postular.
+- **Avisos**: notificaciones al celular y a la laptop a tu hora habitual si no estudiaste, última llamada para tu racha, examen del sábado y resumen del domingo (máximo 2 al día). Atajos al mantener presionado el ícono de la app.
+- **Conseguir trabajo**: postulaciones con las preguntas reales que te hicieron, ¿estoy listo para esta oferta?, CV en PDF, portafolio exportable a un proyecto Vite listo para GitHub, pruebas técnicas para casa con rúbrica y un proyecto guiado por etapas. Grabadora de voz para el simulacro, el pitch y las tarjetas (los audios quedan solo en tu dispositivo).
+
 ## Requisitos
 
 - Windows 10 u 11

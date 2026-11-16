@@ -345,3 +345,14 @@ Angel usará la app sin internet: es su **única fuente de consulta** (sin MDN, 
 **Mensajes de error explicados:** cuando un test falla por un error conocido ("X is not a function", "Cannot read properties of undefined"), la app muestra en español qué significa y qué revisar.
 
 **Control automático:** `npm run validar` también rechaza un ejercicio si a su `explicacion.md` le falta alguna de las 7 secciones o si no tiene 3 pistas. La fase 2 (primera tanda de 50) ya se hace con este estándar; es más lenta por ejercicio, pero no se importa nada a medias.
+
+## Plan v3 (2026-11-16): aprender mejor, motivación, avisos, inglés y trabajo
+
+Unas 40 funciones en 5 bloques, todas en la versión web y con sus reglas en módulos puros de `server/` probados con tests:
+
+- **Base**: registros que se mezclan entre dispositivos con borrados que no resucitan (`server/combinar.js`), ajustes por separado, intercambio directo web y laptop sin AWS, y sincronización sin bucles.
+- **Aprender mejor**: depurar (`content/*/depurar`), Lee y predice (`content/predice`, validado ejecutando cada fragmento), glosario, revisión de código, mapa de dominio (`server/dominio.js`) y errores frecuentes (`server/errores.js`).
+- **Motivación**: tiempo libre ganado (`server/juego.js` y el vigilante `server/juego-vigilante.js`), niveles e insignias (`server/logros.js`), día salvado, horario y pausas (`server/metricas.js`), plan de hoy, examen semanal, enfoque, reto y resumen del mes, diario.
+- **Avisos**: Web Push sin librerías (`server/webpush.js`, probado con el ejemplo del RFC 8291), reglas de cuándo avisar (`server/avisos.js`) y Lambda empaquetada (`aws/lambda`).
+- **Inglés**: `content/ingles/{basico,intermedio,trabajo}` (formato en `docs/guia-ingles.md`), ítems en `scripts/items/ingles.js`.
+- **Trabajo**: postulaciones, ofertas (`server/ofertas.js`), CV, portafolio (`server/portafolio.js`), pruebas técnicas y proyecto guiado (`server/proyectos.js`, formato en `docs/guia-proyectos.md`).
