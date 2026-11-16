@@ -14,7 +14,11 @@
     "validar": "node scripts/validar-contenido.js",
     "test": "vitest run --config vitest.config.js",
     "validar:aprender": "node scripts/validar-aprender.js",
-    "acceso-directo": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/crear-acceso-directo.ps1"
+    "acceso-directo": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/crear-acceso-directo.ps1",
+    "exportar:movil": "node scripts/exportar-movil.js",
+    "build:movil": "node scripts/exportar-movil.js && vite build --mode movil",
+    "dev:movil": "node scripts/exportar-movil.js && vite --mode movil",
+    "preview:movil": "vite preview --mode movil --port 4173"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.2",
