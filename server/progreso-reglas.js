@@ -197,5 +197,10 @@ export function calificarPregunta(registro, nota, hoy) {
   return { ...programarRepaso(caja, hoy), ultima: nota, vistas: (registro?.vistas ?? 0) + 1 };
 }
 
+/** Resultado de un quiz de Aprender: guarda el mejor y el último. */
+export function registrarQuiz(previo, aciertos, total, ahora) {
+  return { mejor: Math.max(previo?.mejor ?? 0, aciertos), total, ultimo: aciertos, en: ahora };
+}
+
 /** ¿Le toca repaso a la tarjeta hoy? (las nunca vistas no cuentan como repaso) */
 export const preguntaPendiente = (registro, hoy) => !!registro && registro.proximo <= hoy;

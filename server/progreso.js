@@ -14,6 +14,7 @@ import {
   verSolucion,
   iniciarRepaso,
   calificarPregunta,
+  registrarQuiz,
 } from "./progreso-reglas.js";
 
 /** Campos de configuración que se pueden cambiar desde Ajustes, con su validación. */
@@ -128,7 +129,7 @@ export async function crearProgreso({ datosDir }) {
     /** Resultado de un quiz de Aprender: se guarda el mejor y el último. */
     async guardarQuiz(id, aciertos, total) {
       const previo = datos.quizzes[id];
-      datos.quizzes[id] = { mejor: Math.max(previo?.mejor ?? 0, aciertos), total, ultimo: aciertos, en: ahoraIso() };
+      datos.quizzes[id] = registrarQuiz(previo, aciertos, total, ahoraIso());
       await registrarEvento("quiz", id, { aciertos, total });
       await guardar();
       return datos.quizzes[id];
