@@ -32,11 +32,11 @@ export function VincularMovil() {
   return (
     <section className={estilos.pagina}>
       <h1 style={{ fontSize: 30, marginBottom: 16 }}>
-        {estado === "vinculando" ? "Vinculando…" : estado === "listo" ? "¡Celular vinculado!" : "No se pudo vincular"}
+        {estado === "vinculando" ? "Vinculando…" : estado === "listo" ? "¡Vinculado!" : "No se pudo vincular"}
       </h1>
       <p style={{ color: "var(--texto-suave)", marginBottom: 24 }}>
         {estado === "listo"
-          ? "Tu progreso del celular y de la laptop se une solo cada vez que tengas internet."
+          ? "Tu progreso de este dispositivo y de la laptop se une solo cada vez que tengas internet."
           : estado === "error"
             ? detalle
             : "Guardando el vínculo y haciendo la primera sincronización."}
