@@ -27,6 +27,17 @@ export function textoPlano(html = "", max = 4000) {
     .slice(0, max);
 }
 
+/** Solo enlaces http(s): una bolsa de trabajo comprometida no podría colar "javascript:" u otro esquema. */
+export function urlSegura(valor, respaldo) {
+  try {
+    const url = new URL(String(valor));
+    if (url.protocol === "https:" || url.protocol === "http:") return url.href;
+  } catch {
+    // no es una URL
+  }
+  return respaldo;
+}
+
 const fechaIso = (valor) => {
   if (valor == null) return null;
   const d = typeof valor === "number" ? new Date(valor < 1e12 ? valor * 1000 : valor) : new Date(valor);
@@ -43,7 +54,7 @@ export function normalizarGetOnBoard(json) {
       fuente: "Get on Board",
       titulo: a.title ?? "",
       empresa: a.company?.data?.attributes?.name ?? "",
-      url: d.links?.public_url ?? `https://www.getonbrd.com/jobs/${d.id}`,
+      url: urlSegura(d.links?.public_url, `https://www.getonbrd.com/jobs/${encodeURIComponent(d.id)}`),
       remoto: !!a.remote || /remote/.test(a.remote_modality ?? ""),
       // countries y location_cities a veces vienen como lista y a veces como objeto: solo se toman los textos
       ubicacion: [a.countries, a.location_cities]
@@ -66,7 +77,7 @@ export function normalizarRemotive(json) {
     fuente: "Remotive",
     titulo: j.title ?? "",
     empresa: j.company_name ?? "",
-    url: j.url,
+    url: urlSegura(j.url, "https://remotive.com/remote-jobs"),
     remoto: true,
     ubicacion: j.candidate_required_location ?? "",
     seniority: null,
@@ -84,7 +95,7 @@ export function normalizarArbeitnow(json) {
     fuente: "Arbeitnow",
     titulo: j.title ?? "",
     empresa: j.company_name ?? "",
-    url: j.url,
+    url: urlSegura(j.url, "https://www.arbeitnow.com"),
     remoto: !!j.remote,
     ubicacion: j.location ?? "",
     seniority: null,
@@ -104,7 +115,7 @@ export function normalizarRemoteOK(json) {
       fuente: "RemoteOK",
       titulo: j.position,
       empresa: j.company ?? "",
-      url: j.url ?? `https://remoteok.com/remote-jobs/${j.id}`,
+      url: urlSegura(j.url, `https://remoteok.com/remote-jobs/${encodeURIComponent(j.id)}`),
       remoto: true,
       ubicacion: j.location ?? "",
       seniority: null,

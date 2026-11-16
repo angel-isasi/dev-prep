@@ -11,6 +11,9 @@ import { DIAS_SEMANA, diaSemana, enPausa, hechoDe, lunesDe, resumenDias } from "
 import { sumarDias } from "./progreso-reglas.js";
 
 export const MAX_AVISOS_DIA = 2;
+
+/** La ruta que abre un aviso: solo rutas internas de dev-prep ("/algo"); cualquier otra cosa abre el inicio. */
+export const rutaDeAviso = (url) => (typeof url === "string" && /^\/(?![/\\])/.test(url) ? url.slice(0, 200) : "/");
 export const HORA_OFERTAS = 11;
 export const ZONA_POR_DEFECTO = "America/Lima";
 

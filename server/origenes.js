@@ -12,8 +12,17 @@ const LOCAL = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 /** @param {string | undefined} origen cabecera Origin (no viene en GET de la misma página) */
 export const origenPermitido = (origen) => !origen || LOCAL.test(origen) || ORIGENES_WEB.includes(origen);
 
+// Nombre con el que llega la petición (cabecera Host). Solo se acepta localhost o 127.0.0.1:
+// así se bloquea el "DNS rebinding" (una web ajena que hace que su dominio apunte a tu laptop
+// para leer tus datos: su Host seguiría siendo su dominio).
+const HOST_LOCAL = /^(localhost|127\.0\.0\.1)(:\d+)?$/;
+
+/** @param {string | undefined} host cabecera Host */
+export const hostPermitido = (host) => HOST_LOCAL.test(host ?? "");
+
 /** Middleware para /api: corta orígenes ajenos y agrega CORS para la versión web. */
 export function controlDeOrigen(req, res, next) {
+  if (!hostPermitido(req.headers.host)) return res.status(403).json({ error: "Host no permitido" });
   const origen = req.headers.origin;
   if (!origenPermitido(origen)) return res.status(403).json({ error: "Origen no permitido" });
   if (origen) {

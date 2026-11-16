@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { decidirAvisos, horaHabitual, horaLocal } from "./avisos.js";
+import { decidirAvisos, horaHabitual, horaLocal, rutaDeAviso } from "./avisos.js";
 
 // Lima es UTC-5: las 19:00 de Lima del miércoles 18 son las 00:00 UTC del jueves 19.
 const enLima = (fecha, hora) => new Date(`${fecha}T${String(hora).padStart(2, "0")}:05:00-05:00`);
@@ -61,4 +61,13 @@ describe("aviso de ofertas", () => {
     const pausa = { pausas: { lista: [{ desde: "2026-11-17", hasta: "2026-11-20" }], en: "2026-11-15T10:00:00-05:00" } };
     expect(decidirAvisos([doc({ ajustes: pausa })], enLima("2026-11-18", 11), {}, { ofertasNuevas: [oferta("a", 72)] }).avisos).toEqual([]);
   });
+});
+
+test("un aviso solo puede abrir rutas de dev-prep", () => {
+  expect(rutaDeAviso("/leccion?modo=rapida")).toBe("/leccion?modo=rapida");
+  expect(rutaDeAviso("https://otra-pagina.com")).toBe("/");
+  expect(rutaDeAviso("//otra-pagina.com")).toBe("/");
+  expect(rutaDeAviso("/\\otra-pagina.com")).toBe("/");
+  expect(rutaDeAviso("javascript:alert(1)")).toBe("/");
+  expect(rutaDeAviso(undefined)).toBe("/");
 });

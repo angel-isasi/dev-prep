@@ -21,7 +21,10 @@ self.addEventListener("push", (evento) => {
 
 self.addEventListener("notificationclick", (evento) => {
   evento.notification.close();
-  const url = new URL(evento.notification.data?.url || "/", self.location.origin).href;
+  // Solo abre páginas de dev-prep: si un aviso trae otra dirección, abre el inicio.
+  let url = new URL(evento.notification.data?.url || "/", self.location.origin);
+  if (url.origin !== self.location.origin) url = new URL("/", self.location.origin);
+  url = url.href;
   evento.waitUntil(
     self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((ventanas) => {
       for (const v of ventanas) {

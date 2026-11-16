@@ -13,7 +13,7 @@
 import { DeleteItemCommand, DynamoDBClient, GetItemCommand, PutItemCommand, ScanCommand } from "@aws-sdk/client-dynamodb";
 import { gunzipSync, gzipSync } from "node:zlib";
 import { createHash, timingSafeEqual } from "node:crypto";
-import { decidirAvisos, HORA_OFERTAS, horaLocal } from "../../server/avisos.js";
+import { decidirAvisos, HORA_OFERTAS, horaLocal, rutaDeAviso } from "../../server/avisos.js";
 import { buscarOfertas, ofertasParaAvisar, ordenarOfertas } from "../../server/ofertas-auto.js";
 import { enviarAviso } from "../../server/webpush.js";
 
@@ -175,7 +175,7 @@ export const handler = async (event) => {
       const c = ruta === "/avisar" ? cuerpoDe(event) : {};
       const datos =
         ruta === "/avisar"
-          ? { titulo: String(c.titulo ?? "dev-prep").slice(0, 80), cuerpo: String(c.cuerpo ?? "").slice(0, 200), url: c.url ?? "/" }
+          ? { titulo: String(c.titulo ?? "dev-prep").slice(0, 80), cuerpo: String(c.cuerpo ?? "").slice(0, 200), url: rutaDeAviso(c.url) }
           : { titulo: "Avisos activados", cuerpo: "Así te avisará dev-prep. ¡A practicar!", url: "/" };
       return resp(200, { enviados: await enviarATodos(suscripciones, datos) });
     }

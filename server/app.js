@@ -23,6 +23,17 @@ import { rutasOfertasAuto } from "./rutas/ofertas-auto.js";
 export function crearApp(deps) {
   const app = express();
   app.disable("x-powered-by");
+  // Cabeceras de seguridad: ninguna página puede meter la app en un marco invisible (clickjacking)
+  // ni hacer que el navegador adivine el tipo de un archivo.
+  app.use((req, res, next) => {
+    res.set({
+      "X-Frame-Options": "DENY",
+      "Content-Security-Policy": "frame-ancestors 'none'; object-src 'none'; base-uri 'self'",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+    });
+    next();
+  });
   app.use(express.json({ limit: "5mb" })); // el documento de progreso que envía la web puede pesar más de 100 KB
   app.use("/api", controlDeOrigen);
 

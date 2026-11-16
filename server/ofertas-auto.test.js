@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import {
+  urlSegura,
   buscarOfertas,
   normalizarGetOnBoard,
   normalizarRemoteOK,
@@ -167,4 +168,12 @@ describe("ofertas para avisar", () => {
     ];
     expect(ofertasParaAvisar(lista, ["c"]).map((o) => o.id)).toEqual(["a"]);
   });
+});
+
+test("los enlaces de las ofertas solo pueden ser http o https", () => {
+  expect(urlSegura("https://remotive.com/job/1", "x")).toBe("https://remotive.com/job/1");
+  expect(urlSegura("javascript:alert(1)", "https://remotive.com")).toBe("https://remotive.com");
+  expect(urlSegura("data:text/html,hola", "r")).toBe("r");
+  expect(urlSegura(undefined, "r")).toBe("r");
+  expect(normalizarRemotive({ jobs: [{ id: 1, title: "Frontend", url: "javascript:alert(1)" }] })[0].url).toBe("https://remotive.com/remote-jobs");
 });
