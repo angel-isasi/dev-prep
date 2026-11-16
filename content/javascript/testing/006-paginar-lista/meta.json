@@ -1,0 +1,8 @@
+{
+  "id": "js-test-006",
+  "titulo": "Tests para paginar una lista",
+  "tipo": "funcion",
+  "tema": "testing",
+  "nivel": 2,
+  "tags": ["testing", "partición de equivalencia", "valores límite", "arrays", "vitest"]
+}

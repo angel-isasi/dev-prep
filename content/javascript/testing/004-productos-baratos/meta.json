@@ -1,0 +1,8 @@
+{
+  "id": "js-test-004",
+  "titulo": "Tests para filtrar y ordenar productos",
+  "tipo": "funcion",
+  "tema": "testing",
+  "nivel": 2,
+  "tags": ["testing", "toEqual", "inmutabilidad", "arrays", "vitest"]
+}

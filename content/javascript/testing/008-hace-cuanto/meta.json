@@ -1,0 +1,8 @@
+{
+  "id": "js-test-008",
+  "titulo": "Tests para el \"hace cuánto\" de una fecha",
+  "tipo": "funcion",
+  "tema": "testing",
+  "nivel": 2,
+  "tags": ["testing", "fechas", "inyección de dependencias", "valores límite", "vitest"]
+}

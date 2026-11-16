@@ -1,0 +1,8 @@
+{
+  "id": "js-test-007",
+  "titulo": "Tests para contar palabras",
+  "tipo": "funcion",
+  "tema": "testing",
+  "nivel": 2,
+  "tags": ["testing", "partición de equivalencia", "objetos", "strings", "vitest"]
+}

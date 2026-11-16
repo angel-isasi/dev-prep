@@ -1,0 +1,8 @@
+{
+  "id": "js-test-005",
+  "titulo": "Tests para el total del carrito",
+  "tipo": "funcion",
+  "tema": "testing",
+  "nivel": 2,
+  "tags": ["testing", "valores límite", "reglas de negocio", "vitest"]
+}

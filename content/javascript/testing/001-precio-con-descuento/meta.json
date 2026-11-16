@@ -1,0 +1,8 @@
+{
+  "id": "js-test-001",
+  "titulo": "Tests para el precio con descuento",
+  "tipo": "funcion",
+  "tema": "testing",
+  "nivel": 1,
+  "tags": ["testing", "casos borde", "vitest"]
+}

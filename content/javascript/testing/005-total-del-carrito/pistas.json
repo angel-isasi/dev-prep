@@ -1,0 +1,5 @@
+[
+  "Repasa las 4 reglas y escribe al menos un test por cada una. El ejemplo usa cantidad 1, así que no revisa si la función multiplica por la cantidad.",
+  "Casos que te faltan: una cantidad mayor que 1, un subtotal de `100` justos (el límite del envío gratis), un carrito que pasa de `100` pero con el cupón baja de `100` (por ejemplo `105`, que queda en `94.5`), el cupón en minúsculas, un cupón inventado y el carrito vacío.",
+  "Una suite que atrapa todo:\n\n```js\ntest(\"multiplica por la cantidad\", () => {\n  expect(totalCarrito([{ precio: 20, cantidad: 3 }])).toBe(75);\n});\ntest(\"100 justos: envío gratis\", () => {\n  expect(totalCarrito([{ precio: 50, cantidad: 2 }])).toBe(100);\n});\ntest(\"el envío se decide después del cupón\", () => {\n  expect(totalCarrito([{ precio: 105, cantidad: 1 }], \"DESC10\")).toBe(109.5);\n});\ntest(\"cupón en minúsculas\", () => {\n  expect(totalCarrito([{ precio: 50, cantidad: 1 }], \"desc10\")).toBe(60);\n});\ntest(\"cupón inventado\", () => {\n  expect(totalCarrito([{ precio: 50, cantidad: 1 }], \"GRATIS\")).toBe(65);\n});\ntest(\"carrito vacío\", () => {\n  expect(totalCarrito([])).toBe(0);\n});\n```"
+]

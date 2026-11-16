@@ -1,0 +1,5 @@
+[
+  "Lee las reglas de la función una por una: cada regla es al menos un test. ¿Qué pasa en `0`, en `100` y fuera del rango?",
+  "Te faltan casos borde: un descuento que deje decimales largos (`19.99` con `15` %), el `0 %`, el `100 %`, uno mayor que `100` y uno negativo. Para los errores usa `expect(() => ...).toThrow()`.",
+  "Una suite que atrapa todo:\n\n```js\ntest(\"redondea a 2 decimales\", () => {\n  expect(precioConDescuento(19.99, 15)).toBe(16.99);\n});\ntest(\"con 100 % el precio es 0\", () => {\n  expect(precioConDescuento(50, 100)).toBe(0);\n});\ntest(\"más de 100 % lanza error\", () => {\n  expect(() => precioConDescuento(50, 120)).toThrow();\n});\n// y uno con porcentaje negativo\n```"
+]

@@ -1,0 +1,8 @@
+{
+  "id": "js-test-009",
+  "titulo": "Tests para reintentar una petición",
+  "tipo": "funcion",
+  "tema": "testing",
+  "nivel": 3,
+  "tags": ["testing", "async", "promesas", "dobles de prueba", "vitest"]
+}

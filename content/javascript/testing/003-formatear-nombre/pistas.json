@@ -1,0 +1,5 @@
+[
+  "Son cuatro reglas: espacios de los bordes, espacios repetidos, mayúscula y minúscula, y texto vacío. Escribe un test por regla, con un texto donde solo esa regla esté en juego.",
+  "Casos que te faltan: espacios solo en los bordes (`\"  Ana Pérez  \"`), espacios solo en el medio (`\"Ana     Pérez\"`), todo en mayúsculas (`\"JUAN CARLOS\"`), una inicial con tilde o ñ en minúscula (`\"ángel ñuñez\"`) y un texto de solo espacios. Ojo: si la inicial con tilde ya viene en mayúscula, no revisa nada.",
+  "Una suite que atrapa todo:\n\n```js\ntest(\"quita espacios de los bordes\", () => {\n  expect(formatearNombre(\"  Ana Pérez  \")).toBe(\"Ana Pérez\");\n});\ntest(\"junta espacios repetidos\", () => {\n  expect(formatearNombre(\"Ana     Pérez\")).toBe(\"Ana Pérez\");\n});\ntest(\"minúscula el resto\", () => {\n  expect(formatearNombre(\"JUAN CARLOS\")).toBe(\"Juan Carlos\");\n});\ntest(\"inicial con tilde\", () => {\n  expect(formatearNombre(\"ángel ñuñez\")).toBe(\"Ángel Ñuñez\");\n});\ntest(\"solo espacios\", () => {\n  expect(formatearNombre(\"   \")).toBe(\"\");\n});\n```"
+]

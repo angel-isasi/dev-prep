@@ -1,0 +1,8 @@
+{
+  "id": "js-test-003",
+  "titulo": "Tests para formatear un nombre",
+  "tipo": "funcion",
+  "tema": "testing",
+  "nivel": 1,
+  "tags": ["testing", "strings", "casos borde", "vitest"]
+}

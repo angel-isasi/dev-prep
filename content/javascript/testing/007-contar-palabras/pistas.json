@@ -1,0 +1,5 @@
+[
+  "Haz una lista de los tipos de texto que puede recibir: con mayúsculas, con signos, con tildes o ñ, con saltos de línea, vacío. Un test por tipo, y que en cada uno solo aparezca ese tipo de \"problema\".",
+  "Casos que te faltan: `\"Hola hola HOLA\"` (debe dar `{ hola: 3 }`), `\"¿hola? hola, hola.\"` (también `{ hola: 3 }`), `\"año está\"`, un texto con `\\n` o `\\t` entre palabras y el texto vacío `\"\"`, que debe dar `{}`.",
+  "Una suite que atrapa todo:\n\n```js\ntest(\"mayúsculas\", () => {\n  expect(contarPalabras(\"Hola hola HOLA\")).toEqual({ hola: 3 });\n});\ntest(\"signos\", () => {\n  expect(contarPalabras(\"¿hola? hola, hola.\")).toEqual({ hola: 3 });\n});\ntest(\"tildes y ñ\", () => {\n  expect(contarPalabras(\"año está\")).toEqual({ año: 1, está: 1 });\n});\ntest(\"saltos de línea\", () => {\n  expect(contarPalabras(\"uno\\ndos\\ttres\")).toEqual({ uno: 1, dos: 1, tres: 1 });\n});\ntest(\"vacío\", () => {\n  expect(contarPalabras(\"\")).toEqual({});\n});\n```"
+]

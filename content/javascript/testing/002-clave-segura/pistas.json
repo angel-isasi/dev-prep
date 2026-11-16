@@ -1,0 +1,5 @@
+[
+  "Hay tres reglas: largo, número y mayúscula. Pruébalas por separado: en cada test, rompe solo una regla y cumple las otras dos. Así, si el test falla, sabes exactamente qué regla está mal.",
+  "Para el largo, los valores que importan son los bordes: `7` (no entra), `8` (entra), `20` (entra) y `21` (no entra). Usa `\"A1\" + \"x\".repeat(18)` para armar 20 caracteres que ya tienen número y mayúscula. Para las otras reglas: `\"Abcdefgh\"` no tiene número y `\"abcdefg1\"` no tiene mayúscula.",
+  "Una suite que atrapa todo:\n\n```js\ntest(\"acepta 8 caracteres\", () => {\n  expect(esClaveSegura(\"Abcdefg1\")).toBe(true);\n});\ntest(\"rechaza 7 caracteres\", () => {\n  expect(esClaveSegura(\"Abcdef1\")).toBe(false);\n});\ntest(\"acepta 20 caracteres\", () => {\n  expect(esClaveSegura(\"A1\" + \"x\".repeat(18))).toBe(true);\n});\ntest(\"rechaza 21 caracteres\", () => {\n  expect(esClaveSegura(\"A1\" + \"x\".repeat(19))).toBe(false);\n});\n// y uno sin número y otro sin mayúscula, ambos con largo válido\n```"
+]
