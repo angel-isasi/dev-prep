@@ -8,6 +8,7 @@ import { Tarjeta } from "../../components/Tarjeta.jsx";
 import { Cv } from "./Cv.jsx";
 import { Portafolio, PruebasYProyecto } from "./Proyectos.jsx";
 import { ListaAnimada } from "../../components/ListaAnimada.jsx";
+import { OfertasParaTi } from "./Ofertas.jsx";
 import estilos from "./Trabajo.module.css";
 
 const ETAPAS = [
@@ -28,8 +29,9 @@ const PREGUNTAS_PARA_ELLOS = [
 ];
 
 export function Trabajo() {
-  const [pestana, setPestana] = useState("postulaciones");
+  const [pestana, setPestana] = useState("ofertas");
   const pestanas = [
+    { id: "ofertas", texto: "Ofertas para ti" },
     { id: "postulaciones", texto: "Postulaciones" },
     { id: "oferta", texto: "¿Estoy listo?" },
     { id: "cv", texto: "Mi CV" },
@@ -43,6 +45,7 @@ export function Trabajo() {
       </CabeceraPagina>
       <Pestanas pestanas={pestanas} activa={pestana} alCambiar={setPestana} />
       <div className={estilos.contenido}>
+        {pestana === "ofertas" && <OfertasParaTi />}
         {pestana === "postulaciones" && <Postulaciones />}
         {pestana === "oferta" && <Oferta />}
         {pestana === "cv" && <Cv />}

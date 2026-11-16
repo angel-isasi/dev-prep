@@ -79,6 +79,8 @@ export function crearApi(base = "") {
     portafolio: () => pedir("/api/portafolio"),
     // Git práctico: repositorios de verdad en Documentos/dev-prep-git
     escenariosGit: () => pedir("/api/git"),
+    // Ofertas de las 4 bolsas de trabajo (el motor puede leer Get on Board; el navegador, no)
+    buscarOfertasMotor: (nuevo) => pedir(`/api/ofertas/buscar${nuevo ? "?nuevo=1" : ""}`),
     prepararGit: (id) => post(`/api/git/${encodeURIComponent(id)}/preparar`),
     abrirGit: (id) => post(`/api/git/${encodeURIComponent(id)}/abrir`),
     verificarGit: (id) => post(`/api/git/${encodeURIComponent(id)}/verificar`),

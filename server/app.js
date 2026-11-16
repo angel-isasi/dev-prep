@@ -13,6 +13,7 @@ import { rutasProyectos } from "./rutas/proyectos.js";
 import { controlDeOrigen } from "./origenes.js";
 import { rutasApiPractica } from "./api-practica.js";
 import { rutasGit } from "./rutas/git.js";
+import { rutasOfertasAuto } from "./rutas/ofertas-auto.js";
 
 /**
  * @param {object} deps
@@ -38,6 +39,7 @@ export function crearApp(deps) {
   if (deps.sync) app.use("/api", rutasSync(deps));
   if (deps.config && deps.progreso) app.use("/api", rutasProyectos(deps));
   if (deps.config && deps.vscode) app.use("/api", rutasGit(deps));
+  if (deps.config) app.use("/api", rutasOfertasAuto());
 
   // Botón "Cerrar dev-prep": responde y luego apaga el servidor.
   if (deps.alApagar) {

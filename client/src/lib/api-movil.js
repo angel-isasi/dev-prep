@@ -17,6 +17,7 @@ import { analizarOferta } from "../../../server/ofertas.js";
 import { diaSemana, lunesDe } from "../../../server/metricas.js";
 import { avanceUnidad } from "../movil/leccion/motor.js";
 import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaSemana } from "../../../server/avance.js";
+import { buscarOfertas, ordenarOfertas } from "../../../server/ofertas-auto.js";
 import { crearApi } from "./api-servidor.js";
 import { BASE_LOCAL, conectada } from "./conexion-local.js";
 
@@ -587,6 +588,51 @@ const apiWeb = {
     }
     return resultado;
   },
+
+  /**
+   * Ofertas para ti: busca en las bolsas de trabajo y las ordena según tu perfil (sin IA).
+   * Con la laptop conectada usa las 4 fuentes; sin ella, las 3 que el navegador puede leer.
+   * La última búsqueda queda en este dispositivo para verla sin internet.
+   */
+  async ofertasParaTi({ nuevo = false } = {}) {
+    const CLAVE = "devprep-ofertas";
+    const guardada = JSON.parse(localStorage.getItem(CLAVE) ?? "null");
+    const fresca = guardada && Date.now() - Date.parse(guardada.buscadoEn) < 3 * 60 * 60 * 1000;
+    let busqueda = !nuevo && fresca ? guardada : null;
+    if (!busqueda) {
+      try {
+        busqueda = conectada()
+          ? await apiLocal.buscarOfertasMotor(nuevo)
+          : { ...(await buscarOfertas(fetch, { soloNavegador: true })), buscadoEn: new Date().toISOString() };
+        localStorage.setItem(CLAVE, JSON.stringify(busqueda));
+      } catch (error) {
+        if (!guardada) throw error;
+        busqueda = { ...guardada, sinConexion: true };
+      }
+    }
+    const [{ unidades }, ingles] = await Promise.all([apiWeb.mapa(), itemsIngles()]);
+    const estado = await estadoLogros();
+    const perfil = { mapa: unidades, ingles: { inglesDominadas: estado.inglesDominadas, inglesTotal: ingles.unidades.length }, hoy: progreso.hoy() };
+    const yaGuardadas = new Set(Object.values(progreso.registros("postulaciones")).map((p) => p.enlace).filter(Boolean));
+    return {
+      ofertas: ordenarOfertas(busqueda.ofertas ?? [], perfil).map(({ texto: _t, ...o }) => ({ ...o, guardada: yaGuardadas.has(o.url) })),
+      fuentes: busqueda.fuentes ?? [],
+      buscadoEn: busqueda.buscadoEn,
+      sinConexion: !!busqueda.sinConexion,
+      conLaptop: conectada(),
+    };
+  },
+  /** Pasa una oferta a tus postulaciones, en "Por postular". */
+  guardarOfertaComoPostulacion: async (o) =>
+    apiWeb.guardarPostulacion({
+      empresa: o.empresa || o.fuente,
+      puesto: o.titulo,
+      enlace: o.url,
+      etapa: "por-postular",
+      notas: `De ${o.fuente}. Puntaje ${o.puntaje}/100: ${o.razones.map((r) => r.texto).join("; ")}.`,
+      proximo: "Revisar requisitos y postular",
+      proximoFecha: "",
+    }),
 
   /** Git práctico: los escenarios que resolviste (los prepara y revisa el motor de la laptop). */
   gitResueltos: async () => progreso.registros("git"),
