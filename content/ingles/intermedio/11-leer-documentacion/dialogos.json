@@ -1,0 +1,61 @@
+[
+  { "id": "en-intermedio-11-d01", "titulo": "Leyendo la documentación de React", "situacion": "Ana y Luis leen juntos la página de useEffect porque una API se llama demasiadas veces.",
+    "lineas": [
+      { "quien": "Ana", "en": "Luis, can we read the useEffect docs together? I'm confused.", "es": "Luis, ¿leemos juntos la documentación de useEffect? Estoy confundida." },
+      { "quien": "Luis", "en": "Sure. Look, the first argument is a function, and it's required.", "es": "Claro. Mira, el primer argumento es una función, y es obligatorio." },
+      { "quien": "Ana", "en": "And the second one? The dependency array?", "es": "¿Y el segundo? ¿El arreglo de dependencias?" },
+      { "quien": "Luis", "en": "That one's optional. If you omit it, the effect runs after every render.", "es": "Ese es opcional. Si lo omites, el efecto se ejecuta después de cada render." },
+      { "quien": "Ana", "en": "Oh, that's why my API was called so many times.", "es": "Ah, por eso mi API se llamaba tantas veces." },
+      { "quien": "Luis", "en": "Exactly. And there's a note here about cleanup functions.", "es": "Exacto. Y aquí hay una nota sobre las funciones de limpieza." },
+      { "quien": "Ana", "en": "What does the Caveats section say?", "es": "¿Qué dice la sección de salvedades?" },
+      { "quien": "Luis", "en": "In development, React runs your effect twice to help you find bugs.", "es": "En desarrollo, React ejecuta tu efecto dos veces para ayudarte a encontrar errores." },
+      { "quien": "Ana", "en": "That explains the double logs! Thanks.", "es": "¡Eso explica los logs repetidos! Gracias." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿El arreglo de dependencias es obligatorio?", "opciones": ["Sí", "No, es opcional", "Solo en producción"],
+        "correcta": 1, "explicacion": "Luis dice \"That one's optional\"." },
+      { "pregunta": "¿Qué pasa si se omite el arreglo de dependencias?", "opciones": ["El efecto no se ejecuta nunca", "El efecto se ejecuta después de cada render", "React lanza un error"],
+        "correcta": 1, "explicacion": "Luis dice \"If you omit it, the effect runs after every render\"." },
+      { "pregunta": "¿Qué explica la sección Caveats?", "opciones": ["Que en desarrollo el efecto se ejecuta dos veces", "Que useEffect está obsoleto", "Que hay que instalar un polyfill"],
+        "correcta": 0, "explicacion": "Luis dice \"In development, React runs your effect twice\"." }
+    ] },
+  { "id": "en-intermedio-11-d02", "titulo": "Un método obsoleto", "situacion": "Carlos ve un método tachado en VS Code y lo revisa con Tom en MDN.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Tom, VS Code shows a line through this method. What does it mean?", "es": "Tom, VS Code muestra una línea encima de este método. ¿Qué significa?" },
+      { "quien": "Tom", "en": "It means it's deprecated. Let's check MDN.", "es": "Significa que está obsoleto. Revisemos MDN." },
+      { "quien": "Carlos", "en": "It says: Deprecated. Use the newer method instead.", "es": "Dice: Obsoleto. Usa el método más nuevo en su lugar." },
+      { "quien": "Tom", "en": "Right. It still works, but it may be removed in the future.", "es": "Así es. Todavía funciona, pero puede que lo eliminen en el futuro." },
+      { "quien": "Carlos", "en": "Is the new one compatible with all browsers?", "es": "¿El nuevo es compatible con todos los navegadores?" },
+      { "quien": "Tom", "en": "Scroll down to the compatibility table. Yes, except very old ones.", "es": "Baja a la tabla de compatibilidad. Sí, menos los muy viejos." },
+      { "quien": "Carlos", "en": "Do we need a polyfill for those?", "es": "¿Necesitamos un polyfill para esos?" },
+      { "quien": "Tom", "en": "No, we don't support them. Just replace it and add a short comment.", "es": "No, no les damos soporte. Solo reemplázalo y agrega un comentario corto." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué significa la línea sobre el método?", "opciones": ["Que tiene un error de sintaxis", "Que está obsoleto", "Que es experimental"],
+        "correcta": 1, "explicacion": "Tom dice \"It means it's deprecated\"." },
+      { "pregunta": "¿Dónde revisan la información?", "opciones": ["En MDN", "En el README", "En npm"],
+        "correcta": 0, "explicacion": "Tom dice \"Let's check MDN\"." },
+      { "pregunta": "¿Necesitan un polyfill?", "opciones": ["Sí, para todos los navegadores", "Sí, solo para Safari", "No, porque no dan soporte a navegadores muy viejos"],
+        "correcta": 2, "explicacion": "Tom dice \"No, we don't support them\"." }
+    ] },
+  { "id": "en-intermedio-11-d03", "titulo": "Instalar un paquete de npm", "situacion": "María y Ana leen el README de una librería de fechas antes de instalarla.",
+    "lineas": [
+      { "quien": "María", "en": "Ana, did you install the date library?", "es": "Ana, ¿instalaste la librería de fechas?" },
+      { "quien": "Ana", "en": "Not yet. I'm reading the readme first.", "es": "Todavía no. Primero estoy leyendo el README." },
+      { "quien": "María", "en": "Good. What are the prerequisites?", "es": "Bien. ¿Cuáles son los requisitos previos?" },
+      { "quien": "Ana", "en": "Node 18 or higher. We have Node 20, so it's fine.", "es": "Node 18 o superior. Tenemos Node 20, así que está bien." },
+      { "quien": "María", "en": "Should we install it as a dev dependency?", "es": "¿Lo instalamos como dependencia de desarrollo?" },
+      { "quien": "Ana", "en": "No, it's used in the app, so it's a regular dependency.", "es": "No, se usa en la app, así que es una dependencia normal." },
+      { "quien": "María", "en": "Makes sense. Is there a breaking change in the latest version?", "es": "Tiene sentido. ¿Hay algún cambio que rompa la compatibilidad en la última versión?" },
+      { "quien": "Ana", "en": "Yes. The format function now throws an error if the date is invalid.", "es": "Sí. La función format ahora lanza un error si la fecha no es válida." },
+      { "quien": "María", "en": "Okay, then let's wrap those calls in a try and catch.", "es": "Bueno, entonces pongamos esas llamadas dentro de un try y catch." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué lee Ana antes de instalar?", "opciones": ["El changelog", "El README", "Un tutorial en video"],
+        "correcta": 1, "explicacion": "Ana dice \"I'm reading the readme first\"." },
+      { "pregunta": "¿Qué versión de Node tiene el equipo?", "opciones": ["Node 18", "Node 16", "Node 20"],
+        "correcta": 2, "explicacion": "Ana dice \"We have Node 20\"." },
+      { "pregunta": "¿Qué cambió en la última versión?", "opciones": ["La función format lanza un error con fechas inválidas", "Se eliminó la función format", "Ya no necesita Node"],
+        "correcta": 0, "explicacion": "Ana dice \"The format function now throws an error if the date is invalid\"." }
+    ] }
+]

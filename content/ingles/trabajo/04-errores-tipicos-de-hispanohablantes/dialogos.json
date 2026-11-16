@@ -1,0 +1,62 @@
+[
+  { "id": "en-trabajo-04-d01", "titulo": "Actually o currently", "situacion": "Un reclutador le pregunta a María qué hace ahora. Ella se corrige a tiempo.",
+    "lineas": [
+      { "quien": "Tom", "en": "So, María, what are you doing these days?", "es": "Y María, ¿qué estás haciendo estos días?" },
+      { "quien": "María", "en": "Actually, I'm... sorry, I mean currently, I'm in my last year of college.", "es": "En realidad... perdón, quiero decir actualmente, estoy en mi último año de universidad." },
+      { "quien": "Tom", "en": "No problem. What's your major?", "es": "No hay problema. ¿Qué carrera estudias?" },
+      { "quien": "María", "en": "Systems Engineering, at a university in Lima.", "es": "Ingeniería de Sistemas, en una universidad de Lima." },
+      { "quien": "Tom", "en": "And are you working right now?", "es": "¿Y estás trabajando ahora?" },
+      { "quien": "María", "en": "Yes, part-time. I help a small business with its website.", "es": "Sí, a medio tiempo. Ayudo a un pequeño negocio con su página web." },
+      { "quien": "Tom", "en": "Nice. Why do you want to start your career in frontend?", "es": "Bien. ¿Por qué quieres empezar tu vida profesional en frontend?" },
+      { "quien": "María", "en": "Because I love building things that people can see and use.", "es": "Porque me encanta construir cosas que la gente pueda ver y usar." },
+      { "quien": "Tom", "en": "That's a great answer.", "es": "Esa es una gran respuesta." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué se corrige María?", "opciones": ["Dijo actually cuando quería decir currently", "Dijo mal su nombre", "Se equivocó de universidad"],
+        "correcta": 0, "explicacion": "María dice \"Actually, I'm... sorry, I mean currently\": quería decir actualmente." },
+      { "pregunta": "¿Qué hace María además de estudiar?", "opciones": ["Nada", "Trabaja a medio tiempo con una página web", "Da clases de inglés"],
+        "correcta": 1, "explicacion": "María responde \"Yes, part-time. I help a small business with its website\"." },
+      { "pregunta": "¿Por qué le gusta el frontend?", "opciones": ["Porque paga más", "Porque construye cosas que la gente ve y usa", "Porque es más fácil"],
+        "correcta": 1, "explicacion": "María dice \"I love building things that people can see and use\"." }
+    ] },
+  { "id": "en-trabajo-04-d02", "titulo": "Pedir que te expliquen", "situacion": "En su primera semana, Luis no entiende una tarea y le pregunta a Sarah, su líder.",
+    "lineas": [
+      { "quien": "Luis", "en": "Sarah, can I ask you a question about my ticket?", "es": "Sarah, ¿te puedo hacer una pregunta sobre mi ticket?" },
+      { "quien": "Sarah", "en": "Of course. What's up?", "es": "Por supuesto. ¿Qué pasa?" },
+      { "quien": "Luis", "en": "I don't understand the part about the filters. Could you explain it to me?", "es": "No entiendo la parte de los filtros. ¿Me la podrías explicar?" },
+      { "quien": "Sarah", "en": "Sure. Users should filter the list by date and by status.", "es": "Claro. Los usuarios deben filtrar la lista por fecha y por estado." },
+      { "quien": "Luis", "en": "And should the filters stay after a refresh?", "es": "¿Y los filtros deben mantenerse después de recargar?" },
+      { "quien": "Sarah", "en": "Good question. Yes, save them in the URL.", "es": "Buena pregunta. Sí, guárdalos en la URL." },
+      { "quien": "Luis", "en": "Okay. I agree, that's better for sharing links too.", "es": "Bien. Estoy de acuerdo, así también es mejor para compartir enlaces." },
+      { "quien": "Sarah", "en": "Exactly. Anything else?", "es": "Exacto. ¿Algo más?" },
+      { "quien": "Luis", "en": "No, that's all. Thanks for the advice.", "es": "No, eso es todo. Gracias por el consejo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué no entendía Luis?", "opciones": ["La parte de los filtros", "Cómo usar Git", "El horario del equipo"],
+        "correcta": 0, "explicacion": "Luis dice \"I don't understand the part about the filters\"." },
+      { "pregunta": "¿Dónde deben guardarse los filtros?", "opciones": ["En el local storage", "En la URL", "En la base de datos"],
+        "correcta": 1, "explicacion": "Sarah responde \"save them in the URL\"." },
+      { "pregunta": "¿Qué ventaja ve Luis en esa decisión?", "opciones": ["Es más rápido de programar", "Sirve para compartir enlaces", "Usa menos memoria"],
+        "correcta": 1, "explicacion": "Luis dice \"that's better for sharing links too\"." }
+    ] },
+  { "id": "en-trabajo-04-d03", "titulo": "Un error, sin drama", "situacion": "Carlos rompió algo en producción y lo cuenta en la reunión del equipo.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Before we start, I made a mistake yesterday.", "es": "Antes de empezar, cometí un error ayer." },
+      { "quien": "Ana", "en": "What happened?", "es": "¿Qué pasó?" },
+      { "quien": "Carlos", "en": "I deployed a change that broke the contact form.", "es": "Desplegué un cambio que rompió el formulario de contacto." },
+      { "quien": "Ana", "en": "For how long was it broken?", "es": "¿Por cuánto tiempo estuvo roto?" },
+      { "quien": "Carlos", "en": "About two hours. Eventually, a user reported it.", "es": "Unas dos horas. Al final, un usuario lo reportó." },
+      { "quien": "Ana", "en": "Is it working now?", "es": "¿Ya funciona?" },
+      { "quien": "Carlos", "en": "Yes, I fixed it last night and added a test for it.", "es": "Sí, lo arreglé anoche y le agregué un test." },
+      { "quien": "Ana", "en": "Thanks for telling us. It's very important to share these things.", "es": "Gracias por contarnos. Es muy importante compartir estas cosas." },
+      { "quien": "Carlos", "en": "I'll write a short summary for the whole team.", "es": "Voy a escribir un resumen corto para todo el equipo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué rompió Carlos?", "opciones": ["El formulario de contacto", "La página de inicio", "La base de datos"],
+        "correcta": 0, "explicacion": "Carlos dice \"I deployed a change that broke the contact form\"." },
+      { "pregunta": "¿Cómo se enteraron del problema?", "opciones": ["Por un test", "Un usuario lo reportó", "Ana lo vio"],
+        "correcta": 1, "explicacion": "Carlos dice \"Eventually, a user reported it\"." },
+      { "pregunta": "¿Qué va a escribir Carlos?", "opciones": ["Su currículum", "Un resumen para el equipo", "Una disculpa al usuario"],
+        "correcta": 1, "explicacion": "Carlos dice \"I'll write a short summary for the whole team\". Summary es resumen, no resume." }
+    ] }
+]

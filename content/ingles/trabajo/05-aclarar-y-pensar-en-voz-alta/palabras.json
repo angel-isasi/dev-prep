@@ -1,0 +1,326 @@
+[
+  {
+    "id": "en-trabajo-05-w02",
+    "en": "assume",
+    "es": "asumir / suponer",
+    "pron": "asúm",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Can I assume the input is valid?",
+      "es": "¿Puedo asumir que la entrada es válida?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w03",
+    "en": "assumption",
+    "es": "suposición",
+    "pron": "asámpshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My assumption is that the array is sorted.",
+      "es": "Supongo que el array está ordenado."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w04",
+    "en": "constraint",
+    "es": "restricción / límite",
+    "pron": "konstréint",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Are there any memory constraints?",
+      "es": "¿Hay alguna restricción de memoria?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w07",
+    "en": "case-sensitive",
+    "es": "que distingue mayúsculas y minúsculas",
+    "pron": "kéis sénsitiv",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Is the search case-sensitive?",
+      "es": "¿La búsqueda distingue mayúsculas?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w08",
+    "en": "sorted",
+    "es": "ordenado",
+    "pron": "sórted",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Is the array already sorted?",
+      "es": "¿El array ya está ordenado?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w10",
+    "en": "negative",
+    "es": "negativo",
+    "pron": "négativ",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Can the numbers be negative?",
+      "es": "¿Los números pueden ser negativos?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w11",
+    "en": "think out loud",
+    "es": "pensar en voz alta",
+    "pron": "zínk áut láud",
+    "tipo": "expresion",
+    "formas": {
+      "pasado": "thought out loud",
+      "participio": "thought out loud"
+    },
+    "ejemplo": {
+      "en": "Let me think out loud for a moment.",
+      "es": "Déjame pensar en voz alta un momento."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w12",
+    "en": "brute force",
+    "es": "fuerza bruta (probar todo)",
+    "pron": "brút fórs",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My first idea is a brute-force approach.",
+      "es": "Mi primera idea es una solución por fuerza bruta."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w14",
+    "en": "walk through",
+    "es": "explicar paso a paso",
+    "pron": "uók zrú",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Let me walk you through my solution.",
+      "es": "Déjame explicarte mi solución paso a paso."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w15",
+    "en": "step by step",
+    "es": "paso a paso",
+    "pron": "stép bai stép",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'll solve it step by step.",
+      "es": "Lo voy a resolver paso a paso."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w16",
+    "en": "let me think",
+    "es": "déjame pensar",
+    "pron": "let mi zínk",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Hmm, let me think about that.",
+      "es": "Mmm, déjame pensarlo."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w18",
+    "en": "give me a second",
+    "es": "dame un segundo",
+    "pron": "guív mi a sékond",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Give me a second to check this line.",
+      "es": "Dame un segundo para revisar esta línea."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w19",
+    "en": "get stuck",
+    "es": "atascarse",
+    "pron": "guét sták",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "got stuck",
+      "participio": "gotten stuck"
+    },
+    "ejemplo": {
+      "en": "I got stuck on the last part.",
+      "es": "Me atasqué en la última parte."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w20",
+    "en": "on the right track",
+    "es": "por buen camino",
+    "pron": "on da ráit trák",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Am I on the right track?",
+      "es": "¿Voy por buen camino?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w21",
+    "en": "sanity check",
+    "es": "revisión rápida (de que tiene sentido)",
+    "pron": "sániti chék",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Let me do a quick sanity check.",
+      "es": "Déjame hacer una revisión rápida."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w22",
+    "en": "double-check",
+    "es": "volver a revisar",
+    "pron": "dábol chék",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Let me double-check the loop condition.",
+      "es": "Déjame revisar otra vez la condición del bucle."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w24",
+    "en": "make sense",
+    "es": "tener sentido",
+    "pron": "méik séns",
+    "tipo": "expresion",
+    "formas": {
+      "pasado": "made sense",
+      "participio": "made sense"
+    },
+    "ejemplo": {
+      "en": "Does that make sense?",
+      "es": "¿Tiene sentido?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w26",
+    "en": "dry run",
+    "es": "prueba a mano (sin ejecutar)",
+    "pron": "drái rán",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Let's do a dry run with a small array.",
+      "es": "Hagamos una prueba a mano con un array pequeño."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w27",
+    "en": "pseudocode",
+    "es": "pseudocódigo",
+    "pron": "súdokoud",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'll write some pseudocode first.",
+      "es": "Primero voy a escribir un poco de pseudocódigo."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w28",
+    "en": "test case",
+    "es": "caso de prueba",
+    "pron": "tést kéis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Let me add a test case for an empty string.",
+      "es": "Déjame agregar un caso de prueba para un string vacío."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w29",
+    "en": "corner case",
+    "es": "caso extremo (raro)",
+    "pron": "kórner kéis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A single item is a corner case.",
+      "es": "Un solo elemento es un caso extremo."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w30",
+    "en": "naive",
+    "es": "ingenuo (la solución más simple)",
+    "pron": "naív",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The naive solution uses two loops.",
+      "es": "La solución ingenua usa dos bucles."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w31",
+    "en": "rephrase",
+    "es": "decir con otras palabras",
+    "pron": "rifréiz",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Could you rephrase the question?",
+      "es": "¿Podrías decir la pregunta de otra forma?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w32",
+    "en": "in place",
+    "es": "en el mismo lugar (sin copiar)",
+    "pron": "in pléis",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Should I sort the array in place?",
+      "es": "¿Debo ordenar el mismo array, sin copiarlo?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w33",
+    "en": "follow-up question",
+    "es": "pregunta de seguimiento",
+    "pron": "fálou ap kuéschon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I have a follow-up question about the output.",
+      "es": "Tengo una pregunta más sobre la salida."
+    }
+  },
+  {
+    "id": "en-trabajo-05-w34",
+    "en": "hint",
+    "es": "pista",
+    "pron": "jínt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Could you give me a small hint?",
+      "es": "¿Me podrías dar una pequeña pista?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w35",
+    "en": "expected output",
+    "es": "salida esperada",
+    "pron": "ikspéktid áutput",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What's the expected output for this input?",
+      "es": "¿Cuál es la salida esperada para esta entrada?"
+    }
+  },
+  {
+    "id": "en-trabajo-05-w36",
+    "en": "go back",
+    "es": "volver (a algo anterior)",
+    "pron": "góu bák",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "went back",
+      "participio": "gone back"
+    },
+    "ejemplo": {
+      "en": "Let me go back to the second line.",
+      "es": "Déjame volver a la segunda línea."
+    }
+  }
+]

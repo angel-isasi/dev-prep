@@ -1,0 +1,332 @@
+[
+  {
+    "id": "en-trabajo-07-w01",
+    "en": "iterate over",
+    "es": "recorrer (una lista)",
+    "pron": "ítereit óuver",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I iterate over the array once.",
+      "es": "Recorro el array una vez."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w02",
+    "en": "keep track of",
+    "es": "llevar la cuenta de / guardar",
+    "pron": "kíip trák ov",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I use a variable to keep track of the maximum.",
+      "es": "Uso una variable para guardar el máximo."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w03",
+    "en": "time complexity",
+    "es": "complejidad de tiempo",
+    "pron": "táim kompléksiti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What's the time complexity of your solution?",
+      "es": "¿Cuál es la complejidad de tiempo de tu solución?"
+    }
+  },
+  {
+    "id": "en-trabajo-07-w04",
+    "en": "space complexity",
+    "es": "complejidad de espacio (memoria)",
+    "pron": "spéis kompléksiti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The space complexity is constant.",
+      "es": "La complejidad de espacio es constante."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w05",
+    "en": "Big O",
+    "es": "notación Big O",
+    "pron": "bíg óu",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "In Big O terms, it's O of n.",
+      "es": "En términos de Big O, es O de n."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w06",
+    "en": "linear time",
+    "es": "tiempo lineal, O(n)",
+    "pron": "líniar táim",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This runs in linear time.",
+      "es": "Esto corre en tiempo lineal."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w07",
+    "en": "constant time",
+    "es": "tiempo constante, O(1)",
+    "pron": "kónstant táim",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A lookup in a hash map takes constant time.",
+      "es": "Buscar en un hash map toma tiempo constante."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w08",
+    "en": "quadratic",
+    "es": "cuadrático, O(n²)",
+    "pron": "kuodrátik",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Two nested loops make it quadratic.",
+      "es": "Dos bucles anidados lo vuelven cuadrático."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w12",
+    "en": "naive approach",
+    "es": "solución ingenua (la más simple)",
+    "pron": "naív apróuch",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The naive approach checks every pair.",
+      "es": "La solución ingenua revisa cada par."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w13",
+    "en": "nested loop",
+    "es": "bucle anidado",
+    "pron": "néstid lúup",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We can remove the nested loop.",
+      "es": "Podemos quitar el bucle anidado."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w14",
+    "en": "lookup",
+    "es": "búsqueda (de un valor)",
+    "pron": "lúkap",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Each lookup is O of one.",
+      "es": "Cada búsqueda es O de uno."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w15",
+    "en": "hash map",
+    "es": "hash map, tabla hash",
+    "pron": "jásh máp",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'd store the counts in a hash map.",
+      "es": "Guardaría los conteos en un hash map."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w16",
+    "en": "bottleneck",
+    "es": "cuello de botella",
+    "pron": "bótolnek",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The bottleneck is the sorting step.",
+      "es": "El cuello de botella es el paso de ordenar."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w17",
+    "en": "input size",
+    "es": "tamaño de la entrada",
+    "pron": "ínput sáis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "It depends on the input size.",
+      "es": "Depende del tamaño de la entrada."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w18",
+    "en": "worst case",
+    "es": "peor caso",
+    "pron": "uérst kéis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "In the worst case, we check every element.",
+      "es": "En el peor caso, revisamos cada elemento."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w19",
+    "en": "best case",
+    "es": "mejor caso",
+    "pron": "bést kéis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "In the best case, the first item is the answer.",
+      "es": "En el mejor caso, el primer elemento es la respuesta."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w20",
+    "en": "binary search",
+    "es": "búsqueda binaria",
+    "pron": "báinari sérch",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Since it's sorted, we can use binary search.",
+      "es": "Como está ordenado, podemos usar búsqueda binaria."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w21",
+    "en": "base case",
+    "es": "caso base",
+    "pron": "béis kéis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The base case is an empty array.",
+      "es": "El caso base es un array vacío."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w22",
+    "en": "overhead",
+    "es": "costo extra",
+    "pron": "óuverjed",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Recursion adds some memory overhead.",
+      "es": "La recursión agrega algo de costo extra de memoria."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w25",
+    "en": "under the hood",
+    "es": "por dentro, internamente",
+    "pron": "ánder de júd",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Under the hood, sort uses a loop too.",
+      "es": "Por dentro, sort también usa un bucle."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w26",
+    "en": "early return",
+    "es": "retorno temprano",
+    "pron": "érli ritérn",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I added an early return for empty input.",
+      "es": "Agregué un retorno temprano para la entrada vacía."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w27",
+    "en": "step through",
+    "es": "recorrer paso a paso",
+    "pron": "stép zrú",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Let me step through an example.",
+      "es": "Déjame recorrer un ejemplo paso a paso."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w28",
+    "en": "account for",
+    "es": "tener en cuenta",
+    "pron": "akáunt for",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "We also need to account for negative numbers.",
+      "es": "También hay que tener en cuenta los números negativos."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w29",
+    "en": "single pass",
+    "es": "una sola pasada",
+    "pron": "síngol pás",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We can do it in a single pass.",
+      "es": "Podemos hacerlo en una sola pasada."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w30",
+    "en": "two pointers",
+    "es": "dos punteros (técnica)",
+    "pron": "tú póinters",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'd use two pointers, one at each end.",
+      "es": "Usaría dos punteros, uno en cada extremo."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w31",
+    "en": "logarithmic",
+    "es": "logarítmico, O(log n)",
+    "pron": "logarízmik",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Binary search is logarithmic.",
+      "es": "La búsqueda binaria es logarítmica."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w32",
+    "en": "sliding window",
+    "es": "ventana deslizante (técnica)",
+    "pron": "sláidin uíndou",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A sliding window avoids the nested loop.",
+      "es": "Una ventana deslizante evita el bucle anidado."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w33",
+    "en": "frequency count",
+    "es": "conteo de frecuencias",
+    "pron": "fríkuensi káunt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "First, I build a frequency count of each letter.",
+      "es": "Primero armo un conteo de cuántas veces aparece cada letra."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w34",
+    "en": "memoize",
+    "es": "memorizar resultados (cachear una función)",
+    "pron": "mémoais",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "We can memoize the results to avoid repeated work.",
+      "es": "Podemos guardar los resultados para no repetir trabajo."
+    }
+  },
+  {
+    "id": "en-trabajo-07-w35",
+    "en": "O of n squared",
+    "es": "O de n al cuadrado, O(n²)",
+    "pron": "óu ov én skuérd",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Two nested loops give us O of n squared.",
+      "es": "Dos bucles anidados nos dan O de n al cuadrado."
+    }
+  }
+]

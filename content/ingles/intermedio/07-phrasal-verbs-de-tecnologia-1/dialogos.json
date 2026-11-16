@@ -1,0 +1,60 @@
+[
+  { "id": "en-intermedio-07-d01", "titulo": "El deploy salió mal", "situacion": "Sarah, la líder del equipo, le escribe a Luis porque los usuarios ven errores.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Luis, users are running into errors on the checkout page.", "es": "Luis, los usuarios se están topando con errores en la página de pago." },
+      { "quien": "Luis", "en": "I saw that. I think it's from this morning's deploy.", "es": "Lo vi. Creo que viene del deploy de esta mañana." },
+      { "quien": "Sarah", "en": "Can you roll it back while we figure out what happened?", "es": "¿Puedes revertirlo mientras averiguamos qué pasó?" },
+      { "quien": "Luis", "en": "Sure. I backed up the database before the release, so it's safe.", "es": "Claro. Hice una copia de la base de datos antes del lanzamiento, así que no hay riesgo." },
+      { "quien": "Sarah", "en": "Great. Once it's rolled back, look into the logs.", "es": "Genial. Cuando esté revertido, revisa los logs a fondo." },
+      { "quien": "Luis", "en": "I already looked through them. The payment API is returning a 500.", "es": "Ya los revisé por encima. La API de pagos está devolviendo un 500." },
+      { "quien": "Sarah", "en": "Okay. Find out if they changed something on their side.", "es": "Bueno. Averigua si cambiaron algo de su lado." },
+      { "quien": "Luis", "en": "I'll write to their support team and let you know.", "es": "Le escribo a su equipo de soporte y te aviso." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Dónde ven errores los usuarios?", "opciones": ["En la página de pago", "En la página de inicio de sesión", "En el buscador"],
+        "correcta": 0, "explicacion": "Sarah dice \"errors on the checkout page\": la página de pago." },
+      { "pregunta": "¿Qué hizo Luis antes del lanzamiento?", "opciones": ["Revisó los logs", "Hizo una copia de la base de datos", "Escribió a soporte"],
+        "correcta": 1, "explicacion": "Luis dice \"I backed up the database before the release\"." },
+      { "pregunta": "¿Qué está fallando, según los logs?", "opciones": ["La base de datos", "El formulario de pago", "La API de pagos"],
+        "correcta": 2, "explicacion": "Luis dice \"The payment API is returning a 500\"." }
+    ] },
+  { "id": "en-intermedio-07-d02", "titulo": "Configurar el proyecto el primer día", "situacion": "Ana empieza hoy en la empresa y Tom la ayuda con su laptop.",
+    "lineas": [
+      { "quien": "Tom", "en": "Welcome, Ana! Did you manage to set up the project?", "es": "¡Bienvenida, Ana! ¿Lograste configurar el proyecto?" },
+      { "quien": "Ana", "en": "Almost. I ran into a problem with the environment variables.", "es": "Casi. Me topé con un problema con las variables de entorno." },
+      { "quien": "Tom", "en": "That happens to everyone. Did you fill out the access form?", "es": "Eso le pasa a todo el mundo. ¿Llenaste el formulario de accesos?" },
+      { "quien": "Ana", "en": "Yes, but I can't sign in to the staging server yet.", "es": "Sí, pero todavía no puedo iniciar sesión en el servidor de pruebas." },
+      { "quien": "Tom", "en": "Hold on, let me check your permissions. Okay, try again now.", "es": "Espera, déjame revisar tus permisos. Listo, intenta de nuevo." },
+      { "quien": "Ana", "en": "It works! I'll write down these steps for the next new developer.", "es": "¡Funciona! Voy a anotar estos pasos para el próximo desarrollador nuevo." },
+      { "quien": "Tom", "en": "Good idea. We can go over the codebase together after lunch.", "es": "Buena idea. Podemos repasar el código juntos después del almuerzo." },
+      { "quien": "Ana", "en": "Perfect. I'll carry on with the README until then.", "es": "Perfecto. Sigo con el README hasta entonces." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Con qué tuvo problemas Ana?", "opciones": ["Con las variables de entorno", "Con su contraseña de correo", "Con VS Code"],
+        "correcta": 0, "explicacion": "Ana dice \"I ran into a problem with the environment variables\"." },
+      { "pregunta": "¿Qué va a anotar Ana?", "opciones": ["Las tareas del sprint", "Los pasos para el próximo desarrollador nuevo", "Las contraseñas del servidor"],
+        "correcta": 1, "explicacion": "Ana dice \"I'll write down these steps for the next new developer\"." },
+      { "pregunta": "¿Qué harán después del almuerzo?", "opciones": ["Un deploy", "Una entrevista", "Repasar el código juntos"],
+        "correcta": 2, "explicacion": "Tom dice \"We can go over the codebase together after lunch\"." }
+    ] },
+  { "id": "en-intermedio-07-d03", "titulo": "Una idea para el buscador", "situacion": "María y Carlos hablan de un buscador que va lento.",
+    "lineas": [
+      { "quien": "María", "en": "Carlos, the search is really slow with big lists.", "es": "Carlos, el buscador va muy lento con listas grandes." },
+      { "quien": "Carlos", "en": "I know. I tried a few things, but nothing worked out.", "es": "Lo sé. Probé algunas cosas, pero nada funcionó." },
+      { "quien": "María", "en": "Did you look up debouncing? I came across it in a blog post.", "es": "¿Buscaste sobre debouncing? Me lo encontré en un artículo de un blog." },
+      { "quien": "Carlos", "en": "No, I didn't. What is it?", "es": "No. ¿Qué es?" },
+      { "quien": "María", "en": "You wait until the user stops typing, and then you run the search.", "es": "Esperas a que el usuario deje de escribir y recién ahí haces la búsqueda." },
+      { "quien": "Carlos", "en": "That makes sense. I'll try it out this afternoon.", "es": "Tiene sentido. Lo pruebo esta tarde." },
+      { "quien": "María", "en": "If it doesn't work, don't give up. We can come up with something else.", "es": "Si no funciona, no te rindas. Podemos idear otra cosa." },
+      { "quien": "Carlos", "en": "Thanks. I think we'll end up using it, it sounds simple.", "es": "Gracias. Creo que terminaremos usándolo, suena simple." },
+      { "quien": "María", "en": "Let's move on, then. The standup starts in five minutes.", "es": "Pasemos a otra cosa, entonces. La daily empieza en cinco minutos." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuál es el problema del buscador?", "opciones": ["No muestra resultados", "Va lento con listas grandes", "Se borra lo que escribes"],
+        "correcta": 1, "explicacion": "María dice \"the search is really slow with big lists\"." },
+      { "pregunta": "¿Dónde encontró María la idea?", "opciones": ["En un artículo de un blog", "En un curso", "En la documentación de React"],
+        "correcta": 0, "explicacion": "María dice \"I came across it in a blog post\"." },
+      { "pregunta": "¿En qué consiste el debouncing, según María?", "opciones": ["Buscar en cada letra", "Guardar la búsqueda en la caché", "Esperar a que el usuario deje de escribir"],
+        "correcta": 2, "explicacion": "María dice \"You wait until the user stops typing, and then you run the search\"." }
+    ] }
+]

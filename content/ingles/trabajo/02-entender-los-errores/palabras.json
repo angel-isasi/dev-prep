@@ -1,0 +1,354 @@
+[
+  {
+    "id": "en-trabajo-02-w02",
+    "en": "token",
+    "es": "símbolo (del código) / token",
+    "pron": "tóuken",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "There's an extra token on line ten.",
+      "es": "Hay un símbolo de más en la línea diez."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w03",
+    "en": "not found",
+    "es": "no encontrado",
+    "pron": "nát fáund",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The server returned 404 Not Found.",
+      "es": "El servidor devolvió 404 No encontrado."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w04",
+    "en": "is not defined",
+    "es": "no está definido",
+    "pron": "is nát difáind",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The console says user is not defined.",
+      "es": "La consola dice que user no está definido."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w05",
+    "en": "is not a function",
+    "es": "no es una función",
+    "pron": "is nát a fánkshon",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It says map is not a function.",
+      "es": "Dice que map no es una función."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w06",
+    "en": "stack trace",
+    "es": "traza de la pila (lista de llamadas)",
+    "pron": "sták tréis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Read the stack trace from the top.",
+      "es": "Lee la traza desde arriba."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w07",
+    "en": "call stack",
+    "es": "pila de llamadas",
+    "pron": "kól sták",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The call stack is full.",
+      "es": "La pila de llamadas está llena."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w08",
+    "en": "exceed",
+    "es": "superar (un límite)",
+    "pron": "iksíd",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The file exceeds the size limit.",
+      "es": "El archivo supera el límite de tamaño."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w09",
+    "en": "maximum",
+    "es": "máximo",
+    "pron": "máksimam",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Five is the maximum number of tries.",
+      "es": "Cinco es el número máximo de intentos."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w10",
+    "en": "compile",
+    "es": "compilar",
+    "pron": "kompáil",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The project doesn't compile after the update.",
+      "es": "El proyecto no compila después de la actualización."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w11",
+    "en": "internal server error",
+    "es": "error interno del servidor",
+    "pron": "intérnal sérver érror",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "A 500 means internal server error.",
+      "es": "Un 500 significa error interno del servidor."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w12",
+    "en": "bad request",
+    "es": "petición incorrecta",
+    "pron": "bád rikuést",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "A 400 means bad request.",
+      "es": "Un 400 significa petición incorrecta."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w13",
+    "en": "forbidden",
+    "es": "prohibido",
+    "pron": "forbíden",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "You get 403 Forbidden without permission.",
+      "es": "Sin permiso te sale 403 Prohibido."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w14",
+    "en": "unauthorized",
+    "es": "no autorizado (sin sesión)",
+    "pron": "anózeraizd",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The request is unauthorized because the token expired.",
+      "es": "La petición no está autorizada porque el token venció."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w15",
+    "en": "timeout",
+    "es": "tiempo de espera agotado",
+    "pron": "táimaut",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The request failed with a timeout.",
+      "es": "La petición falló porque se agotó el tiempo."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w16",
+    "en": "policy",
+    "es": "política (regla)",
+    "pron": "pólisi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "It was blocked by CORS policy.",
+      "es": "Lo bloqueó la política de CORS."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w17",
+    "en": "blocked",
+    "es": "bloqueado",
+    "pron": "blákt",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The request is blocked by the browser.",
+      "es": "El navegador bloquea la petición."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w18",
+    "en": "origin",
+    "es": "origen (dominio y puerto)",
+    "pron": "óriyin",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The server doesn't allow our origin.",
+      "es": "El servidor no permite nuestro origen."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w19",
+    "en": "missing",
+    "es": "que falta",
+    "pron": "mísing",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "There's a missing comma in the object.",
+      "es": "Falta una coma en el objeto."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w20",
+    "en": "invalid",
+    "es": "inválido",
+    "pron": "inválid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The date format is invalid.",
+      "es": "El formato de la fecha es inválido."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w21",
+    "en": "expected",
+    "es": "esperado",
+    "pron": "ikspéktid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The expected value was five.",
+      "es": "El valor esperado era cinco."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w23",
+    "en": "exception",
+    "es": "excepción",
+    "pron": "iksépshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The code throws an exception.",
+      "es": "El código lanza una excepción."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w24",
+    "en": "uncaught",
+    "es": "no capturado",
+    "pron": "ankót",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Uncaught means nobody used try and catch.",
+      "es": "Uncaught significa que nadie usó try y catch."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w25",
+    "en": "unhandled",
+    "es": "no manejado",
+    "pron": "anjándold",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "There's an unhandled promise rejection.",
+      "es": "Hay una promesa rechazada sin manejar."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w26",
+    "en": "rejection",
+    "es": "rechazo",
+    "pron": "riyékshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Add a catch to handle the rejection.",
+      "es": "Agrega un catch para manejar el rechazo."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w28",
+    "en": "line number",
+    "es": "número de línea",
+    "pron": "láin námber",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Check the line number in the message.",
+      "es": "Revisa el número de línea en el mensaje."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w30",
+    "en": "re-render",
+    "es": "volver a renderizar",
+    "pron": "ri rénder",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The component re-renders when the state changes.",
+      "es": "El componente se vuelve a renderizar cuando cambia el estado."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w31",
+    "en": "typo",
+    "es": "error de tipeo",
+    "pron": "táipo",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "It was just a typo in the variable name.",
+      "es": "Era solo un error de tipeo en el nombre de la variable."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w32",
+    "en": "misspelled",
+    "es": "mal escrito",
+    "pron": "misspéld",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The file name is misspelled.",
+      "es": "El nombre del archivo está mal escrito."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w33",
+    "en": "outdated",
+    "es": "desactualizado",
+    "pron": "autéirid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Your Node version is outdated.",
+      "es": "Tu versión de Node está desactualizada."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w34",
+    "en": "path",
+    "es": "ruta (de un archivo)",
+    "pron": "páz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The import path is wrong.",
+      "es": "La ruta del import está mal."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w36",
+    "en": "permission denied",
+    "es": "permiso denegado",
+    "pron": "permíshon dináid",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I got permission denied when I ran the script.",
+      "es": "Me salió permiso denegado al correr el script."
+    }
+  },
+  {
+    "id": "en-trabajo-02-w37",
+    "en": "mismatch",
+    "es": "falta de coincidencia",
+    "pron": "mísmach",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "There's a type mismatch in the props.",
+      "es": "Los tipos de las props no coinciden."
+    }
+  }
+]

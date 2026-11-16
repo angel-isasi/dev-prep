@@ -1,0 +1,237 @@
+[
+  {
+    "id": "en-trabajo-03-w02",
+    "en": "be in charge of",
+    "es": "estar a cargo de",
+    "pron": "bi in chárch of",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I was in charge of the login page.",
+      "es": "Estaba a cargo de la página de inicio de sesión."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w03",
+    "en": "be responsible for",
+    "es": "encargarse de / ser responsable de",
+    "pron": "bi rispónsibol for",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I was responsible for the UI.",
+      "es": "Yo me encargaba de la interfaz."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w04",
+    "en": "take part in",
+    "es": "participar en",
+    "pron": "téik párt in",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "took part in",
+      "participio": "taken part in"
+    },
+    "ejemplo": {
+      "en": "I took part in a hackathon in Lima.",
+      "es": "Participé en una hackatón en Lima."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w05",
+    "en": "implement",
+    "es": "implementar",
+    "pron": "ímplement",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I implemented the search filter.",
+      "es": "Implementé el filtro de búsqueda."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w06",
+    "en": "develop",
+    "es": "desarrollar",
+    "pron": "divélop",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "We developed the app in three months.",
+      "es": "Desarrollamos la app en tres meses."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w07",
+    "en": "design",
+    "es": "diseñar / diseño",
+    "pron": "disáin",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I designed the database myself.",
+      "es": "Diseñé la base de datos yo mismo."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w10",
+    "en": "collaborate",
+    "es": "colaborar",
+    "pron": "kolábareit",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I collaborated with two designers.",
+      "es": "Colaboré con dos diseñadores."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w11",
+    "en": "optimize",
+    "es": "optimizar",
+    "pron": "óptimaiz",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I optimized the images to load faster.",
+      "es": "Optimicé las imágenes para que carguen más rápido."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w13",
+    "en": "integrate",
+    "es": "integrar",
+    "pron": "íntegreit",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I integrated a payment API.",
+      "es": "Integré una API de pagos."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w14",
+    "en": "launch",
+    "es": "lanzar (publicar)",
+    "pron": "lónch",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "We launched the first version in June.",
+      "es": "Lanzamos la primera versión en junio."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w15",
+    "en": "reduce",
+    "es": "reducir",
+    "pron": "ridús",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I reduced the load time by half.",
+      "es": "Reduje el tiempo de carga a la mitad."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w16",
+    "en": "increase",
+    "es": "aumentar",
+    "pron": "inkrís",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The new design increased sales.",
+      "es": "El diseño nuevo aumentó las ventas."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w17",
+    "en": "automate",
+    "es": "automatizar",
+    "pron": "ótomeit",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I automated the tests with GitHub Actions.",
+      "es": "Automaticé los tests con GitHub Actions."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w25",
+    "en": "used to",
+    "es": "solía / antes (hacía algo)",
+    "pron": "iústu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I used to write all my code in one file.",
+      "es": "Antes escribía todo mi código en un solo archivo."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w26",
+    "en": "would have",
+    "es": "habría",
+    "pron": "wúdav",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I would have used TypeScript from the start.",
+      "es": "Habría usado TypeScript desde el inicio."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w27",
+    "en": "should have",
+    "es": "debí haber / debería haber",
+    "pron": "shúdav",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I should have asked for help earlier.",
+      "es": "Debí haber pedido ayuda antes."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w28",
+    "en": "could have",
+    "es": "pude haber / podría haber",
+    "pron": "kúdav",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We could have finished a week earlier.",
+      "es": "Pudimos haber terminado una semana antes."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w29",
+    "en": "at the time",
+    "es": "en ese momento",
+    "pron": "at da táim",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "At the time, I didn't know about hooks.",
+      "es": "En ese momento no conocía los hooks."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w32",
+    "en": "as a result",
+    "es": "como resultado",
+    "pron": "as a risált",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "As a result, the page loads in one second.",
+      "es": "Como resultado, la página carga en un segundo."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w34",
+    "en": "on my own",
+    "es": "por mi cuenta / solo",
+    "pron": "on mái óun",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I learned React on my own.",
+      "es": "Aprendí React por mi cuenta."
+    }
+  },
+  {
+    "id": "en-trabajo-03-w35",
+    "en": "over the past year",
+    "es": "durante el último año",
+    "pron": "óuver da pást yíer",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Over the past year, I've built five projects.",
+      "es": "Durante el último año he hecho cinco proyectos."
+    }
+  }
+]

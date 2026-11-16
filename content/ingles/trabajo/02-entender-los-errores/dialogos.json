@@ -1,0 +1,64 @@
+[
+  { "id": "en-trabajo-02-d01", "titulo": "La lista que no aparece", "situacion": "Ana tiene un error en la consola y le pide ayuda a Tom por videollamada.",
+    "lineas": [
+      { "quien": "Ana", "en": "Hey Tom, do you have five minutes? I'm stuck on an error.", "es": "Oye Tom, ¿tienes cinco minutos? Estoy atascada con un error." },
+      { "quien": "Tom", "en": "Sure. What does it say?", "es": "Claro. ¿Qué dice?" },
+      { "quien": "Ana", "en": "It says products.map is not a function.", "es": "Dice que products.map no es una función." },
+      { "quien": "Tom", "en": "Okay. Can you log products before the map?", "es": "Bien. ¿Puedes hacer log de products antes del map?" },
+      { "quien": "Ana", "en": "Let me see. Oh, it's an object with a data property.", "es": "A ver. Ah, es un objeto con una propiedad data." },
+      { "quien": "Tom", "en": "There you go. The array is inside data.", "es": "Ahí está. El array está dentro de data." },
+      { "quien": "Ana", "en": "So I should use products.data.map instead.", "es": "Entonces debería usar products.data.map." },
+      { "quien": "Tom", "en": "Exactly. And maybe add an empty array as a fallback.", "es": "Exacto. Y quizás agrega un array vacío como respaldo." },
+      { "quien": "Ana", "en": "It works now. Thanks a lot!", "es": "Ya funciona. ¡Muchas gracias!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué error tenía Ana?", "opciones": ["products.map is not a function", "products is not defined", "Module not found"],
+        "correcta": 0, "explicacion": "Ana dice \"It says products.map is not a function\"." },
+      { "pregunta": "¿Qué era products en realidad?", "opciones": ["Un string", "Un objeto con una propiedad data", "null"],
+        "correcta": 1, "explicacion": "Al hacer log, Ana ve que \"it's an object with a data property\"." },
+      { "pregunta": "¿Qué recomienda Tom además del arreglo?", "opciones": ["Borrar el componente", "Un array vacío como respaldo", "Cambiar de API"],
+        "correcta": 1, "explicacion": "Tom dice \"maybe add an empty array as a fallback\"." }
+    ] },
+  { "id": "en-trabajo-02-d02", "titulo": "Bloqueado por CORS", "situacion": "Carlos conecta su frontend con una API nueva y le escribe a María, que hizo el backend.",
+    "lineas": [
+      { "quien": "Carlos", "en": "María, my requests to the new API are failing.", "es": "María, mis peticiones a la API nueva están fallando." },
+      { "quien": "María", "en": "What error do you see in the console?", "es": "¿Qué error ves en la consola?" },
+      { "quien": "Carlos", "en": "It says the request was blocked by CORS policy.", "es": "Dice que la política de CORS bloqueó la petición." },
+      { "quien": "María", "en": "Ah, that's on my side. What's your origin?", "es": "Ah, eso es de mi lado. ¿Cuál es tu origen?" },
+      { "quien": "Carlos", "en": "Localhost, port five one seven three.", "es": "Localhost, puerto cinco uno siete tres." },
+      { "quien": "María", "en": "The server only allows the production domain right now.", "es": "Ahora el servidor solo permite el dominio de producción." },
+      { "quien": "Carlos", "en": "So I can't fix it in the frontend?", "es": "¿Entonces no lo puedo arreglar en el frontend?" },
+      { "quien": "María", "en": "No, the server has to send the right headers. I'll add your origin.", "es": "No, el servidor tiene que enviar los headers correctos. Agrego tu origen." },
+      { "quien": "Carlos", "en": "Thanks. Let me know when it's deployed.", "es": "Gracias. Avísame cuando esté desplegado." },
+      { "quien": "María", "en": "Give me ten minutes.", "es": "Dame diez minutos." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué fallaban las peticiones de Carlos?", "opciones": ["La URL estaba mal escrita", "El servidor no permitía su origen", "Su token venció"],
+        "correcta": 1, "explicacion": "María explica que \"The server only allows the production domain right now\"." },
+      { "pregunta": "¿Quién arregla el problema?", "opciones": ["Carlos en el frontend", "María en el servidor", "Nadie, es un error del navegador"],
+        "correcta": 1, "explicacion": "María dice \"the server has to send the right headers. I'll add your origin\"." },
+      { "pregunta": "¿Cuánto tiempo pide María?", "opciones": ["Cinco minutos", "Diez minutos", "Una hora"],
+        "correcta": 1, "explicacion": "María responde \"Give me ten minutes\"." }
+    ] },
+  { "id": "en-trabajo-02-d03", "titulo": "Solo falla en producción", "situacion": "En la daily, Luis cuenta un error que aparece en producción pero no en su laptop.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Luis, any blockers today?", "es": "Luis, ¿algún bloqueo hoy?" },
+      { "quien": "Luis", "en": "Yes. The checkout page returns a 500 in production.", "es": "Sí. La página de pago devuelve un 500 en producción." },
+      { "quien": "Sarah", "en": "Can you reproduce it locally?", "es": "¿Lo puedes reproducir en local?" },
+      { "quien": "Luis", "en": "No, on localhost everything works fine.", "es": "No, en localhost todo funciona bien." },
+      { "quien": "Sarah", "en": "When did it start?", "es": "¿Cuándo empezó?" },
+      { "quien": "Luis", "en": "Right after yesterday's deploy.", "es": "Justo después del deploy de ayer." },
+      { "quien": "Sarah", "en": "Did you check the server logs?", "es": "¿Revisaste los logs del servidor?" },
+      { "quien": "Luis", "en": "Not yet. I don't have access to them.", "es": "Todavía no. No tengo acceso a ellos." },
+      { "quien": "Sarah", "en": "Okay, I'll give you access after this meeting.", "es": "Bien, te doy acceso después de esta reunión." },
+      { "quien": "Luis", "en": "Great. I'm guessing an environment variable is missing.", "es": "Genial. Sospecho que falta una variable de entorno." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Dónde aparece el error?", "opciones": ["Solo en producción", "Solo en localhost", "En los dos"],
+        "correcta": 0, "explicacion": "Luis dice que devuelve un 500 \"in production\" y que \"on localhost everything works fine\"." },
+      { "pregunta": "¿Por qué Luis no revisó los logs?", "opciones": ["Se olvidó", "No tiene acceso", "No sabe cómo"],
+        "correcta": 1, "explicacion": "Luis dice \"I don't have access to them\"." },
+      { "pregunta": "¿Qué sospecha Luis?", "opciones": ["Que falta una variable de entorno", "Que el CSS está roto", "Que el usuario escribió mal"],
+        "correcta": 0, "explicacion": "Luis termina con \"I'm guessing an environment variable is missing\"." }
+    ] }
+]

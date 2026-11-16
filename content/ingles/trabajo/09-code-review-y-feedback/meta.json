@@ -1,0 +1,8 @@
+{
+  "id": "en-trabajo-09",
+  "titulo": "Code review y feedback",
+  "etapa": "trabajo",
+  "orden": 9,
+  "nivel": "B2",
+  "descripcion": "Dar y recibir comentarios de código sin sonar brusco ni defensivo: nit, LGTM, request changes, \"Could we extract this into a function?\", \"Good catch\"."
+}

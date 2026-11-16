@@ -1,0 +1,66 @@
+[
+  { "id": "en-trabajo-03-d01", "titulo": "Cuéntame de un proyecto", "situacion": "Una entrevistadora le pide a Luis que hable de su proyecto más grande.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Can you tell me about a project you've worked on?", "es": "¿Me cuentas de un proyecto en el que hayas trabajado?" },
+      { "quien": "Luis", "en": "Sure. Last semester, I built a booking app for a small gym in Lima.", "es": "Claro. El semestre pasado hice una app de reservas para un gimnasio pequeño en Lima." },
+      { "quien": "Sarah", "en": "Did you build it alone?", "es": "¿La hiciste solo?" },
+      { "quien": "Luis", "en": "No, we were a team of three. I was responsible for the frontend.", "es": "No, éramos un equipo de tres. Yo me encargaba del frontend." },
+      { "quien": "Sarah", "en": "What did you use?", "es": "¿Qué usaste?" },
+      { "quien": "Luis", "en": "I used React, and I used React Query to fetch the classes.", "es": "Usé React, y usé React Query para traer las clases." },
+      { "quien": "Sarah", "en": "Is the gym still using it?", "es": "¿El gimnasio todavía la usa?" },
+      { "quien": "Luis", "en": "Yes. About two hundred people have booked classes with it so far.", "es": "Sí. Unas doscientas personas han reservado clases con ella hasta ahora." },
+      { "quien": "Sarah", "en": "Impressive. Would you change anything?", "es": "Impresionante. ¿Cambiarías algo?" },
+      { "quien": "Luis", "en": "I would have written tests from the beginning. We added them too late.", "es": "Habría escrito tests desde el principio. Los agregamos demasiado tarde." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué hizo Luis en el proyecto?", "opciones": ["El backend", "El frontend", "El diseño gráfico"],
+        "correcta": 1, "explicacion": "Luis dice \"I was responsible for the frontend\"." },
+      { "pregunta": "¿Cuántas personas han usado la app hasta ahora?", "opciones": ["Unas veinte", "Unas doscientas", "Unas dos mil"],
+        "correcta": 1, "explicacion": "Luis dice \"About two hundred people have booked classes with it so far\"." },
+      { "pregunta": "¿Qué haría distinto Luis?", "opciones": ["Usar otro framework", "Escribir tests desde el principio", "Trabajar solo"],
+        "correcta": 1, "explicacion": "Luis responde \"I would have written tests from the beginning\"." }
+    ] },
+  { "id": "en-trabajo-03-d02", "titulo": "¿Cuánto tiempo llevas?", "situacion": "Un reclutador revisa la experiencia de Ana en una llamada corta.",
+    "lineas": [
+      { "quien": "Tom", "en": "How long have you been programming?", "es": "¿Cuánto tiempo llevas programando?" },
+      { "quien": "Ana", "en": "I've been programming for about three years.", "es": "Llevo unos tres años programando." },
+      { "quien": "Tom", "en": "And how long have you used React?", "es": "¿Y desde cuándo usas React?" },
+      { "quien": "Ana", "en": "I've used it since last year, in four projects.", "es": "Lo uso desde el año pasado, en cuatro proyectos." },
+      { "quien": "Tom", "en": "Have you ever worked with TypeScript?", "es": "¿Has trabajado alguna vez con TypeScript?" },
+      { "quien": "Ana", "en": "A little. I'm currently learning it with a course.", "es": "Un poco. Ahora estoy aprendiendo con un curso." },
+      { "quien": "Tom", "en": "What are you working on right now?", "es": "¿En qué estás trabajando ahora?" },
+      { "quien": "Ana", "en": "I've been working on a budget app since September.", "es": "Estoy trabajando en una app de presupuesto desde septiembre." },
+      { "quien": "Tom", "en": "Great. Can you send me the repository?", "es": "Genial. ¿Me puedes enviar el repositorio?" },
+      { "quien": "Ana", "en": "Of course. I'll send it after the call.", "es": "Por supuesto. Te lo envío después de la llamada." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuánto tiempo lleva programando Ana?", "opciones": ["Un año", "Unos tres años", "Seis meses"],
+        "correcta": 1, "explicacion": "Ana dice \"I've been programming for about three years\"." },
+      { "pregunta": "¿Qué tanto sabe Ana de TypeScript?", "opciones": ["Mucho, lo usa en todos sus proyectos", "Poco, lo está aprendiendo", "Nada, no le interesa"],
+        "correcta": 1, "explicacion": "Ana responde \"A little. I'm currently learning it\"." },
+      { "pregunta": "¿Desde cuándo trabaja Ana en su app de presupuesto?", "opciones": ["Desde septiembre", "Desde el año pasado", "Desde ayer"],
+        "correcta": 0, "explicacion": "Ana dice \"since September\"." }
+    ] },
+  { "id": "en-trabajo-03-d03", "titulo": "El problema que resolviste", "situacion": "En una entrevista, Carlos cuenta cómo resolvió un problema de rendimiento.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Tell me about a technical problem you solved.", "es": "Cuéntame de un problema técnico que resolviste." },
+      { "quien": "Carlos", "en": "In my last project, the product page was really slow.", "es": "En mi último proyecto, la página de productos era muy lenta." },
+      { "quien": "Sarah", "en": "How slow?", "es": "¿Qué tan lenta?" },
+      { "quien": "Carlos", "en": "It took about six seconds to load on a phone.", "es": "Tardaba unos seis segundos en cargar en un celular." },
+      { "quien": "Sarah", "en": "What did you do?", "es": "¿Qué hiciste?" },
+      { "quien": "Carlos", "en": "At first, I thought it was the API, but it wasn't.", "es": "Al principio pensé que era la API, pero no era." },
+      { "quien": "Carlos", "en": "I figured out that the images were too big, so I optimized them.", "es": "Descubrí que las imágenes eran demasiado grandes, así que las optimicé." },
+      { "quien": "Sarah", "en": "And the result?", "es": "¿Y el resultado?" },
+      { "quien": "Carlos", "en": "As a result, the page loaded in under two seconds.", "es": "Como resultado, la página cargaba en menos de dos segundos." },
+      { "quien": "Sarah", "en": "Nice. What did you learn from that?", "es": "Bien. ¿Qué aprendiste de eso?" },
+      { "quien": "Carlos", "en": "I should have measured first instead of guessing.", "es": "Debí haber medido primero en vez de adivinar." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuál era la causa real del problema?", "opciones": ["La API", "Las imágenes muy grandes", "El celular del usuario"],
+        "correcta": 1, "explicacion": "Carlos dice \"the images were too big\". Primero pensó que era la API, pero no lo era." },
+      { "pregunta": "¿Cuánto tardaba la página después del arreglo?", "opciones": ["Seis segundos", "Menos de dos segundos", "Diez segundos"],
+        "correcta": 1, "explicacion": "Carlos dice \"the page loaded in under two seconds\"." },
+      { "pregunta": "¿Qué aprendió Carlos?", "opciones": ["A medir antes de adivinar", "A no usar imágenes", "A trabajar solo"],
+        "correcta": 0, "explicacion": "Carlos responde \"I should have measured first instead of guessing\"." }
+    ] }
+]

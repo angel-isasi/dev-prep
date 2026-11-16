@@ -1,0 +1,63 @@
+[
+  { "id": "en-trabajo-01-d01", "titulo": "¿Cash o cache?", "situacion": "En una entrevista técnica, Luis explica por qué su app carga rápido. La entrevistadora no entiende una palabra.",
+    "lineas": [
+      { "quien": "Sarah", "en": "So why does your app load so quickly the second time?", "es": "¿Y por qué tu app carga tan rápido la segunda vez?" },
+      { "quien": "Luis", "en": "Because I save the API responses in the káche.", "es": "Porque guardo las respuestas de la API en la káche." },
+      { "quien": "Sarah", "en": "Sorry, in the... what? Could you say that again?", "es": "Perdón, ¿en la... qué? ¿Puedes repetirlo?" },
+      { "quien": "Luis", "en": "The cache. C-A-C-H-E. I think I pronounced it wrong.", "es": "La caché. C-A-C-H-E. Creo que lo pronuncié mal." },
+      { "quien": "Sarah", "en": "Oh, the cache! It sounds just like cash, like money.", "es": "¡Ah, la caché! Suena igual que cash, como dinero." },
+      { "quien": "Luis", "en": "Got it, thanks. So the cache keeps the data for five minutes.", "es": "Entendido, gracias. Entonces la caché guarda los datos cinco minutos." },
+      { "quien": "Sarah", "en": "And what happens when the data changes on the server?", "es": "¿Y qué pasa cuando los datos cambian en el servidor?" },
+      { "quien": "Luis", "en": "After five minutes, the app asks for fresh data again.", "es": "Después de cinco minutos, la app vuelve a pedir datos nuevos." },
+      { "quien": "Sarah", "en": "That's a good answer. Spelling the word was smart too.", "es": "Buena respuesta. Deletrear la palabra también fue inteligente." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Sarah no entendió a Luis?", "opciones": ["Luis habló muy rápido", "Luis pronunció mal cache", "Había ruido en la llamada"],
+        "correcta": 1, "explicacion": "Luis dijo \"káche\" y luego reconoce: \"I think I pronounced it wrong\"." },
+      { "pregunta": "¿Cuánto tiempo guarda los datos la caché de Luis?", "opciones": ["Un minuto", "Cinco minutos", "Un día"],
+        "correcta": 1, "explicacion": "Luis dice \"the cache keeps the data for five minutes\"." },
+      { "pregunta": "¿Qué hizo bien Luis cuando no lo entendieron?", "opciones": ["Cambió de tema", "Deletreó la palabra", "Escribió en el chat"],
+        "correcta": 1, "explicacion": "Luis deletreó C-A-C-H-E y Sarah le dice \"Spelling the word was smart too\"." }
+    ] },
+  { "id": "en-trabajo-01-d02", "titulo": "Tu stack en voz alta", "situacion": "Un reclutador le pregunta a María qué tecnologías usa y ella corrige su propia pronunciación.",
+    "lineas": [
+      { "quien": "Tom", "en": "Can you tell me about the tools you use every day?", "es": "¿Me cuentas qué herramientas usas todos los días?" },
+      { "quien": "María", "en": "Sure. I mostly write JavaScript and TypeScript.", "es": "Claro. Escribo sobre todo JavaScript y TypeScript." },
+      { "quien": "Tom", "en": "Nice. And for the frontend?", "es": "Bien. ¿Y para el frontend?" },
+      { "quien": "María", "en": "I use React with Vite. It's pronounced veet, like the French word.", "es": "Uso React con Vite. Se pronuncia vit, como la palabra francesa." },
+      { "quien": "Tom", "en": "Good to know. I always say it wrong. What about the backend?", "es": "Bueno saberlo. Yo siempre lo digo mal. ¿Y el backend?" },
+      { "quien": "María", "en": "A little Node.js, and I store the data in a SQL database.", "es": "Un poco de Node.js, y guardo los datos en una base de datos SQL." },
+      { "quien": "Tom", "en": "Do you work with Docker too?", "es": "¿También trabajas con Docker?" },
+      { "quien": "María", "en": "Not yet, but it's next on my list.", "es": "Todavía no, pero es lo siguiente en mi lista." },
+      { "quien": "Tom", "en": "Great. Where can I see your code?", "es": "Genial. ¿Dónde puedo ver tu código?" },
+      { "quien": "María", "en": "Everything is on my GitHub. I'll send you the link.", "es": "Todo está en mi GitHub. Te envío el enlace." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué usa María para el frontend?", "opciones": ["Angular", "React con Vite", "Vue con Docker"],
+        "correcta": 1, "explicacion": "María dice \"I use React with Vite\"." },
+      { "pregunta": "¿Qué tecnología todavía no usa María?", "opciones": ["Docker", "SQL", "TypeScript"],
+        "correcta": 0, "explicacion": "Sobre Docker responde \"Not yet, but it's next on my list\"." },
+      { "pregunta": "¿Qué le va a enviar María a Tom?", "opciones": ["Su CV", "El enlace a su GitHub", "Un video de su app"],
+        "correcta": 1, "explicacion": "María dice \"Everything is on my GitHub. I'll send you the link\"." }
+    ] },
+  { "id": "en-trabajo-01-d03", "titulo": "La cola de tareas", "situacion": "Carlos le explica a Sarah, su nueva líder, un problema con los correos de la app.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Sarah, the emails are arriving very late today.", "es": "Sarah, los correos están llegando muy tarde hoy." },
+      { "quien": "Sarah", "en": "Did you check the queue?", "es": "¿Revisaste la cola?" },
+      { "quien": "Carlos", "en": "The kéue? Oh, you mean the queue, Q-U-E-U-E.", "es": "¿La kéue? Ah, te refieres a la queue, Q-U-E-U-E." },
+      { "quien": "Sarah", "en": "Yes, we say it like the letter Q.", "es": "Sí, la decimos como la letra Q." },
+      { "quien": "Carlos", "en": "Okay. There are almost two thousand emails waiting in the queue.", "es": "Bien. Hay casi dos mil correos esperando en la cola." },
+      { "quien": "Sarah", "en": "That's a lot. Is the worker running?", "es": "Es un montón. ¿El worker está corriendo?" },
+      { "quien": "Carlos", "en": "It's running, but it's synchronous, so it sends one email at a time.", "es": "Está corriendo, pero es síncrono, así que envía un correo a la vez." },
+      { "quien": "Sarah", "en": "Then let's make it asynchronous and send ten at a time.", "es": "Entonces hagámoslo asíncrono y enviemos diez a la vez." },
+      { "quien": "Carlos", "en": "Good idea. I'll start right now and update you in an hour.", "es": "Buena idea. Empiezo ahora mismo y te aviso en una hora." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuál es el problema?", "opciones": ["Los correos llegan tarde", "La base de datos se borró", "La app no abre"],
+        "correcta": 0, "explicacion": "Carlos dice \"the emails are arriving very late today\"." },
+      { "pregunta": "¿Por qué el worker es lento?", "opciones": ["Está apagado", "Envía un correo a la vez", "No tiene internet"],
+        "correcta": 1, "explicacion": "Carlos explica que es síncrono: \"it sends one email at a time\"." },
+      { "pregunta": "¿Qué propone Sarah?", "opciones": ["Borrar la cola", "Hacerlo asíncrono y enviar diez a la vez", "Esperar hasta mañana"],
+        "correcta": 1, "explicacion": "Sarah dice \"let's make it asynchronous and send ten at a time\"." }
+    ] }
+]

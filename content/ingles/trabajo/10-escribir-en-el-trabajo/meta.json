@@ -1,0 +1,8 @@
+{
+  "id": "en-trabajo-10",
+  "titulo": "Escribir en el trabajo",
+  "etapa": "trabajo",
+  "orden": 10,
+  "nivel": "B1",
+  "descripcion": "Commits en imperativo, título y descripción de un pull request, mensajes de Slack claros, pedir ayuda con contexto y el correo de seguimiento después de una entrevista."
+}

@@ -1,0 +1,332 @@
+[
+  {
+    "id": "en-intermedio-10-w01",
+    "en": "could you tell me...?",
+    "es": "¿podrías decirme...?",
+    "pron": "kúyu tél mi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Could you tell me where the config file is?",
+      "es": "¿Podrías decirme dónde está el archivo de configuración?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w02",
+    "en": "do you know if...?",
+    "es": "¿sabes si...?",
+    "pron": "duyu nóu if",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Do you know if the meeting is still on?",
+      "es": "¿Sabes si la reunión sigue en pie?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w03",
+    "en": "i was wondering whether...",
+    "es": "me preguntaba si...",
+    "pron": "ái uoz uánderin uéder",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I was wondering whether you could review my PR.",
+      "es": "Me preguntaba si podrías revisar mi PR."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w05",
+    "en": "do you happen to know...?",
+    "es": "¿por casualidad sabes...?",
+    "pron": "duyu jápen tu nóu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Do you happen to know who wrote this function?",
+      "es": "¿Por casualidad sabes quién escribió esta función?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w06",
+    "en": "is it okay if i...?",
+    "es": "¿está bien si...?",
+    "pron": "ís it okéi if ái",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Is it okay if I leave early today?",
+      "es": "¿Está bien si hoy me voy temprano?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w07",
+    "en": "would it be possible to...?",
+    "es": "¿sería posible...?",
+    "pron": "uúd it bi pósibol tu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Would it be possible to move the meeting?",
+      "es": "¿Sería posible cambiar la hora de la reunión?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w08",
+    "en": "sorry to bother you",
+    "es": "perdona la molestia",
+    "pron": "sóri tu bóder yu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry to bother you, do you have a minute?",
+      "es": "Perdona la molestia, ¿tienes un minuto?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w09",
+    "en": "when you have a minute",
+    "es": "cuando tengas un momento",
+    "pron": "uén yu jáv a mínit",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Can you look at this when you have a minute?",
+      "es": "¿Puedes ver esto cuando tengas un momento?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w10",
+    "en": "no rush",
+    "es": "sin apuro",
+    "pron": "nóu rásh",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "No rush, tomorrow is fine.",
+      "es": "Sin apuro, mañana está bien."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w11",
+    "en": "just to clarify",
+    "es": "solo para aclarar",
+    "pron": "yást tu klérifai",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Just to clarify, the deadline is Friday?",
+      "es": "Solo para aclarar, ¿la fecha límite es el viernes?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w12",
+    "en": "what exactly do you mean by...?",
+    "es": "¿qué quieres decir exactamente con...?",
+    "pron": "uát eksáktli du yu mín bái",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "What exactly do you mean by clean code?",
+      "es": "¿Qué quieres decir exactamente con código limpio?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w13",
+    "en": "could you walk me through...?",
+    "es": "¿me explicarías paso a paso...?",
+    "pron": "kúyu uók mi zrú",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Could you walk me through the deploy process?",
+      "es": "¿Me explicarías paso a paso el proceso de deploy?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w14",
+    "en": "could you give me an example?",
+    "es": "¿me podrías dar un ejemplo?",
+    "pron": "kúyu guív mi an eksámpol",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I don't get it. Could you give me an example?",
+      "es": "No lo entiendo. ¿Me podrías dar un ejemplo?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w15",
+    "en": "i'd appreciate it if...",
+    "es": "te agradecería si...",
+    "pron": "áid aprísieirit if",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'd appreciate it if you could check my code.",
+      "es": "Te agradecería si pudieras revisar mi código."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w16",
+    "en": "i might be wrong, but...",
+    "es": "puede que me equivoque, pero...",
+    "pron": "ái máit bi róng bat",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I might be wrong, but I think it's a cache issue.",
+      "es": "Puede que me equivoque, pero creo que es un problema de caché."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w17",
+    "en": "does that make sense?",
+    "es": "¿tiene sentido? / ¿se entiende?",
+    "pron": "das dát méik séns",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We test first, then we deploy. Does that make sense?",
+      "es": "Primero probamos y luego desplegamos. ¿Se entiende?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w18",
+    "en": "let me make sure i understand",
+    "es": "déjame ver si entendí bien",
+    "pron": "lét mi méik shúr ái anderstánd",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let me make sure I understand the task.",
+      "es": "Déjame ver si entendí bien la tarea."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w19",
+    "en": "could you say that again?",
+    "es": "¿podrías repetirlo?",
+    "pron": "kúyu séi dát aguén",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry, could you say that again?",
+      "es": "Perdón, ¿podrías repetirlo?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w20",
+    "en": "could you speak a little slower?",
+    "es": "¿podrías hablar un poco más despacio?",
+    "pron": "kúyu spík a lírol slóuer",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Could you speak a little slower, please?",
+      "es": "¿Podrías hablar un poco más despacio, por favor?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w21",
+    "en": "i'm not sure i follow",
+    "es": "no estoy seguro de entenderte",
+    "pron": "áim nát shúr ái fólou",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry, I'm not sure I follow.",
+      "es": "Perdón, no estoy seguro de entenderte."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w23",
+    "en": "clarify",
+    "es": "aclarar",
+    "pron": "klérifai",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Could you clarify the requirements?",
+      "es": "¿Podrías aclarar los requisitos?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w24",
+    "en": "bother",
+    "es": "molestar",
+    "pron": "bóder",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I don't want to bother the team lead.",
+      "es": "No quiero molestar al líder del equipo."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w26",
+    "en": "thanks in advance",
+    "es": "gracias de antemano",
+    "pron": "zénks in adváns",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Thanks in advance for your help.",
+      "es": "Gracias de antemano por tu ayuda."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w27",
+    "en": "that would be great",
+    "es": "eso sería genial",
+    "pron": "dát uúd bi gréit",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "If you can review it today, that would be great.",
+      "es": "Si puedes revisarlo hoy, sería genial."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w28",
+    "en": "sure thing",
+    "es": "claro, sin problema",
+    "pron": "shúr zíng",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sure thing, I'll send it now.",
+      "es": "Claro, te lo mando ahora."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w29",
+    "en": "point me in the right direction",
+    "es": "orientarme / darme una pista",
+    "pron": "póint mi in de ráit dirékshon",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Could you point me in the right direction?",
+      "es": "¿Podrías orientarme un poco?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w30",
+    "en": "is there any chance...?",
+    "es": "¿habrá alguna posibilidad de que...?",
+    "pron": "ís der éni cháns",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Is there any chance we could talk today?",
+      "es": "¿Habrá alguna posibilidad de que hablemos hoy?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w31",
+    "en": "could you help me with...?",
+    "es": "¿me ayudas con...?",
+    "pron": "kúyu jélp mi uíz",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Could you help me with this test?",
+      "es": "¿Me ayudas con esta prueba?"
+    }
+  },
+  {
+    "id": "en-intermedio-10-w32",
+    "en": "i didn't catch that",
+    "es": "no te entendí (eso)",
+    "pron": "ái dídent kéch dát",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry, I didn't catch that.",
+      "es": "Perdón, no te entendí."
+    }
+  },
+  {
+    "id": "en-intermedio-10-w33",
+    "en": "by any chance",
+    "es": "por casualidad",
+    "pron": "bái éni cháns",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Do you have the link, by any chance?",
+      "es": "¿Tienes el enlace, por casualidad?"
+    }
+  }
+]

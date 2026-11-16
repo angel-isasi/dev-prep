@@ -1,0 +1,8 @@
+{
+  "id": "en-trabajo-07",
+  "titulo": "Explicar tu solución",
+  "etapa": "trabajo",
+  "orden": 7,
+  "nivel": "B2",
+  "descripcion": "Explicar tu código y su complejidad en una entrevista: iterate over, keep track of, Big O, trade-off, \"This runs in linear time because...\"."
+}

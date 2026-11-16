@@ -1,0 +1,61 @@
+[
+  { "id": "en-intermedio-02-d01", "titulo": "Un problema que resolviste", "situacion": "En una entrevista, Sarah le pide a Carlos que cuente un problema difícil.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Can you tell me about a difficult problem you solved?", "es": "¿Me puedes contar sobre un problema difícil que resolviste?" },
+      { "quien": "Carlos", "en": "Sure. Last year I was working on an online store for a client.", "es": "Claro. El año pasado estaba trabajando en una tienda en línea para un cliente." },
+      { "quien": "Carlos", "en": "One day, while we were preparing a big sale, the checkout page stopped working.", "es": "Un día, mientras preparábamos una gran oferta, la página de pago dejó de funcionar." },
+      { "quien": "Sarah", "en": "What did you do?", "es": "¿Qué hiciste?" },
+      { "quien": "Carlos", "en": "First, I tried to reproduce the error on my laptop. Then I checked the server logs.", "es": "Primero, intenté reproducir el error en mi laptop. Luego revisé los logs del servidor." },
+      { "quien": "Carlos", "en": "After that, I noticed that one payment request was failing every time.", "es": "Después de eso, noté que una petición de pago fallaba siempre." },
+      { "quien": "Sarah", "en": "And what was the cause?", "es": "¿Y cuál era la causa?" },
+      { "quien": "Carlos", "en": "The payment API key wasn't valid anymore. Finally, I updated it, and the page worked again.", "es": "La clave de la API de pagos ya no era válida. Finalmente, la actualicé y la página volvió a funcionar." },
+      { "quien": "Sarah", "en": "Great. What did you learn from it?", "es": "Muy bien. ¿Qué aprendiste de eso?" },
+      { "quien": "Carlos", "en": "I learned to check the logs first and to stay calm under pressure.", "es": "Aprendí a revisar los logs primero y a mantener la calma bajo presión." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué estaban preparando cuando falló la página?", "opciones": ["Una gran oferta", "Una nueva versión del diseño", "Una reunión con el cliente"], "correcta": 0,
+        "explicacion": "Carlos dice \"while we were preparing a big sale\": preparaban una gran oferta." },
+      { "pregunta": "¿Qué hizo Carlos primero?", "opciones": ["Llamó al cliente", "Intentó reproducir el error en su laptop", "Actualizó la clave de la API"], "correcta": 1,
+        "explicacion": "\"First, I tried to reproduce the error on my laptop\". La clave la actualizó al final." },
+      { "pregunta": "¿Cuál era la causa del problema?", "opciones": ["El servidor estaba apagado", "La clave de la API de pagos ya no era válida", "Había demasiados usuarios"], "correcta": 1,
+        "explicacion": "\"The payment API key wasn't valid anymore\"." }
+    ] },
+  { "id": "en-intermedio-02-d02", "titulo": "Una demo con problemas", "situacion": "Tom le pregunta a Ana cómo le fue con una demo para clientes.",
+    "lineas": [
+      { "quien": "Tom", "en": "How was the demo yesterday?", "es": "¿Cómo te fue en la demo de ayer?" },
+      { "quien": "Ana", "en": "It was a bit stressful. I was showing the new dashboard when the Wi-Fi stopped working.", "es": "Fue un poco estresante. Estaba mostrando el nuevo panel cuando dejó de funcionar el wifi." },
+      { "quien": "Tom", "en": "Oh no! What were the clients doing?", "es": "¡Ay no! ¿Y qué hacían los clientes?" },
+      { "quien": "Ana", "en": "They were waiting and checking their phones. I was really nervous.", "es": "Estaban esperando y mirando sus celulares. Yo estaba muy nerviosa." },
+      { "quien": "Tom", "en": "So how did you continue?", "es": "¿Y cómo continuaste?" },
+      { "quien": "Ana", "en": "Meanwhile, Luis was sharing the internet from his phone.", "es": "Mientras tanto, Luis compartía internet desde su celular." },
+      { "quien": "Ana", "en": "Afterward, we finished the demo, and the clients loved it.", "es": "Después, terminamos la demo y a los clientes les encantó." },
+      { "quien": "Tom", "en": "That was lucky. Next time, bring a backup video.", "es": "Qué suerte. La próxima vez, lleva un video de respaldo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué estaba mostrando Ana cuando falló el wifi?", "opciones": ["El nuevo panel", "Un video", "Su portafolio"], "correcta": 0,
+        "explicacion": "\"I was showing the new dashboard\": el nuevo panel." },
+      { "pregunta": "¿Qué hacía Luis mientras tanto?", "opciones": ["Llamaba al soporte técnico", "Compartía internet desde su celular", "Hablaba con los clientes"], "correcta": 1,
+        "explicacion": "\"Meanwhile, Luis was sharing the internet from his phone\"." },
+      { "pregunta": "¿Cómo terminó la demo?", "opciones": ["La cancelaron", "Los clientes se fueron", "A los clientes les encantó"], "correcta": 2,
+        "explicacion": "\"We finished the demo, and the clients loved it\"." }
+    ] },
+  { "id": "en-intermedio-02-d03", "titulo": "Una noche difícil", "situacion": "María ve cansado a Carlos y le pregunta qué pasó.",
+    "lineas": [
+      { "quien": "María", "en": "You look tired. What happened?", "es": "Te ves cansado. ¿Qué pasó?" },
+      { "quien": "Carlos", "en": "I was studying for my exam last night, and suddenly my laptop froze.", "es": "Anoche estaba estudiando para mi examen y de repente mi laptop se congeló." },
+      { "quien": "María", "en": "Did you lose your notes?", "es": "¿Perdiste tus apuntes?" },
+      { "quien": "Carlos", "en": "At first, I thought so. I was panicking.", "es": "Al principio, pensé que sí. Estaba en pánico." },
+      { "quien": "Carlos", "en": "Then I restarted it, and luckily my files were in the cloud.", "es": "Luego la reinicié y, por suerte, mis archivos estaban en la nube." },
+      { "quien": "María", "en": "What a relief! What did you do after that?", "es": "¡Qué alivio! ¿Qué hiciste después?" },
+      { "quien": "Carlos", "en": "I kept reviewing until 2 a.m. Eventually, I fell asleep at my desk.", "es": "Seguí repasando hasta las 2 de la mañana. Al final, me quedé dormido en mi escritorio." },
+      { "quien": "María", "en": "Please get some sleep tonight!", "es": "¡Por favor, duerme esta noche!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué le pasó a Carlos mientras estudiaba?", "opciones": ["Se fue la luz", "Su laptop se congeló", "Perdió su celular"], "correcta": 1,
+        "explicacion": "\"Suddenly my laptop froze\": su laptop se congeló." },
+      { "pregunta": "¿Por qué no perdió sus apuntes?", "opciones": ["Los tenía en papel", "Estaban en la nube", "María se los prestó"], "correcta": 1,
+        "explicacion": "\"Luckily my files were in the cloud\"." },
+      { "pregunta": "¿Hasta qué hora repasó Carlos?", "opciones": ["Hasta la medianoche", "Hasta las 2 de la mañana", "Hasta las 5 de la mañana"], "correcta": 1,
+        "explicacion": "\"I kept reviewing until 2 a.m.\"" }
+    ] }
+]

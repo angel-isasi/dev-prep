@@ -1,0 +1,59 @@
+[
+  { "id": "en-intermedio-04-d01", "titulo": "Una pregunta hipotética", "situacion": "En una entrevista, Sarah le hace a Ana preguntas de situaciones imaginarias.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Here's a hypothetical question. What would you do if you couldn't finish a task on time?", "es": "Aquí va una pregunta hipotética. ¿Qué harías si no pudieras terminar una tarea a tiempo?" },
+      { "quien": "Ana", "en": "First, I'd tell my team lead as soon as possible.", "es": "Primero, se lo diría a mi líder lo antes posible." },
+      { "quien": "Ana", "en": "I wouldn't wait until the deadline, because that would affect the whole team.", "es": "No esperaría hasta la fecha límite, porque eso afectaría a todo el equipo." },
+      { "quien": "Sarah", "en": "And what if your lead was too busy to help?", "es": "¿Y si tu líder estuviera demasiado ocupado para ayudarte?" },
+      { "quien": "Ana", "en": "I'd ask a teammate for advice, and I'd try to split the task into smaller parts.", "es": "Le pediría consejo a un compañero e intentaría dividir la tarea en partes más pequeñas." },
+      { "quien": "Sarah", "en": "Good. If you could change one thing about your last project, what would it be?", "es": "Bien. Si pudieras cambiar una cosa de tu último proyecto, ¿qué sería?" },
+      { "quien": "Ana", "en": "I'd write more tests. We found too many bugs at the end.", "es": "Escribiría más tests. Encontramos demasiados errores al final." },
+      { "quien": "Sarah", "en": "That's an honest answer. I appreciate that.", "es": "Es una respuesta sincera. Lo valoro." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué haría Ana primero si no pudiera terminar a tiempo?", "opciones": ["Trabajar toda la noche", "Avisarle a su líder lo antes posible", "Esperar hasta la fecha límite"], "correcta": 1,
+        "explicacion": "\"First, I'd tell my team lead as soon as possible\". Justamente dice que no esperaría hasta la fecha límite." },
+      { "pregunta": "¿Qué haría si su líder estuviera muy ocupado?", "opciones": ["Pedirle consejo a un compañero y dividir la tarea", "Renunciar al proyecto", "Hablar con el cliente"], "correcta": 0,
+        "explicacion": "\"I'd ask a teammate for advice, and I'd try to split the task into smaller parts\"." },
+      { "pregunta": "¿Qué cambiaría de su último proyecto?", "opciones": ["El diseño", "Escribiría más tests", "Usaría otro lenguaje"], "correcta": 1,
+        "explicacion": "\"I'd write more tests. We found too many bugs at the end\"." }
+    ] },
+  { "id": "en-intermedio-04-d02", "titulo": "Pedir ayuda con cortesía", "situacion": "Luis le pide ayuda a Tom con una página lenta.",
+    "lineas": [
+      { "quien": "Luis", "en": "Hi Tom, would you mind looking at my code for a minute?", "es": "Hola Tom, ¿te molestaría mirar mi código un minuto?" },
+      { "quien": "Tom", "en": "Not at all. What's the problem?", "es": "Para nada. ¿Cuál es el problema?" },
+      { "quien": "Luis", "en": "The page is very slow. Would it be possible to use a different library?", "es": "La página es muy lenta. ¿Sería posible usar otra librería?" },
+      { "quien": "Tom", "en": "We could, but I'd rather not add a new dependency.", "es": "Podríamos, pero preferiría no agregar una dependencia nueva." },
+      { "quien": "Tom", "en": "If I were you, I'd check the images first. They're very large.", "es": "Yo que tú, revisaría primero las imágenes. Son muy pesadas." },
+      { "quien": "Luis", "en": "Good point. Could you show me how to compress them?", "es": "Buen punto. ¿Podrías mostrarme cómo comprimirlas?" },
+      { "quien": "Tom", "en": "Sure. It would be great if you could add the steps to the docs afterward.", "es": "Claro. Sería genial si después pudieras agregar los pasos a la documentación." },
+      { "quien": "Luis", "en": "Of course. Thanks a lot!", "es": "Por supuesto. ¡Muchas gracias!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Tom no quiere usar otra librería?", "opciones": ["Porque es muy cara", "Porque prefiere no agregar una dependencia nueva", "Porque no la conoce"], "correcta": 1,
+        "explicacion": "\"I'd rather not add a new dependency\"." },
+      { "pregunta": "¿Qué revisaría Tom primero?", "opciones": ["Las imágenes", "El servidor", "Los tests"], "correcta": 0,
+        "explicacion": "\"If I were you, I'd check the images first. They're very large\"." },
+      { "pregunta": "¿Qué le pide Tom a Luis al final?", "opciones": ["Que borre las imágenes", "Que agregue los pasos a la documentación", "Que le invite un café"], "correcta": 1,
+        "explicacion": "\"It would be great if you could add the steps to the docs afterward\"." }
+    ] },
+  { "id": "en-intermedio-04-d03", "titulo": "Si pudieras elegir", "situacion": "María y Carlos hablan de dónde les gustaría trabajar.",
+    "lineas": [
+      { "quien": "María", "en": "If you could work anywhere, where would you work?", "es": "Si pudieras trabajar en cualquier lugar, ¿dónde trabajarías?" },
+      { "quien": "Carlos", "en": "I'd work for a startup. I'd learn a lot of things very fast.", "es": "Trabajaría en una startup. Aprendería muchas cosas muy rápido." },
+      { "quien": "María", "en": "Really? I'd rather work at a big company. It would be less risky.", "es": "¿En serio? Yo preferiría trabajar en una empresa grande. Sería menos riesgoso." },
+      { "quien": "Carlos", "en": "That makes sense. Would you relocate to another country?", "es": "Tiene sentido. ¿Te mudarías a otro país?" },
+      { "quien": "María", "en": "Maybe, if they offered me a good salary. And you?", "es": "Tal vez, si me ofrecieran un buen sueldo. ¿Y tú?" },
+      { "quien": "Carlos", "en": "I wish I could, but my family is here. I'd prefer a remote job.", "es": "Ojalá pudiera, pero mi familia está aquí. Preferiría un trabajo remoto." },
+      { "quien": "María", "en": "If you found a remote job at a startup, it would be perfect for you!", "es": "¡Si encontraras un trabajo remoto en una startup, sería perfecto para ti!" },
+      { "quien": "Carlos", "en": "Exactly. That's my dream.", "es": "Exacto. Ese es mi sueño." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Dónde trabajaría Carlos?", "opciones": ["En una empresa grande", "En una startup", "En el gobierno"], "correcta": 1,
+        "explicacion": "\"I'd work for a startup\"." },
+      { "pregunta": "¿Por qué María prefiere una empresa grande?", "opciones": ["Porque pagan más", "Porque sería menos riesgoso", "Porque está cerca de su casa"], "correcta": 1,
+        "explicacion": "\"It would be less risky\": sería menos riesgoso." },
+      { "pregunta": "¿Por qué Carlos prefiere un trabajo remoto?", "opciones": ["Porque su familia está aquí", "Porque no le gusta viajar", "Porque es más barato"], "correcta": 0,
+        "explicacion": "\"I wish I could, but my family is here\"." }
+    ] }
+]

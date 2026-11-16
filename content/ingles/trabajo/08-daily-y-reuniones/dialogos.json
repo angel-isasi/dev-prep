@@ -1,0 +1,63 @@
+[
+  { "id": "en-trabajo-08-d01", "titulo": "La daily del martes", "situacion": "Sarah dirige la daily. Hablan Luis y Ana.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Morning, everyone. Luis, do you want to kick things off?", "es": "Buenos días a todos. Luis, ¿quieres empezar?" },
+      { "quien": "Luis", "en": "Sure. Yesterday I worked on the search filters and opened a pull request.", "es": "Claro. Ayer trabajé en los filtros de búsqueda y abrí un pull request." },
+      { "quien": "Luis", "en": "Today I'm going to fix the comments from the review.", "es": "Hoy voy a corregir los comentarios de la revisión." },
+      { "quien": "Sarah", "en": "Any blockers?", "es": "¿Algún bloqueo?" },
+      { "quien": "Luis", "en": "Yeah, I'm blocked by the new endpoint. It's still returning errors.", "es": "Sí, estoy bloqueado por el endpoint nuevo. Todavía devuelve errores." },
+      { "quien": "Sarah", "en": "Okay, let's sync up with the backend team after this.", "es": "Ok, coordinemos con el equipo de backend después de esto." },
+      { "quien": "Sarah", "en": "Ana, you're next.", "es": "Ana, sigues tú." },
+      { "quien": "Ana", "en": "Yesterday I finished the profile page. Today I'll pick up the next ticket.", "es": "Ayer terminé la página de perfil. Hoy tomo el siguiente ticket." },
+      { "quien": "Ana", "en": "No blockers on my side.", "es": "Sin bloqueos de mi lado." },
+      { "quien": "Sarah", "en": "Great, thanks. Let's wrap up.", "es": "Genial, gracias. Cerremos." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué va a hacer Luis hoy?", "opciones": ["Abrir un pull request", "Corregir los comentarios de la revisión", "Terminar la página de perfil"],
+        "correcta": 1, "explicacion": "Luis dice \"Today I'm going to fix the comments from the review\"." },
+      { "pregunta": "¿Qué bloquea a Luis?", "opciones": ["Un endpoint nuevo que todavía da errores", "Le falta una revisión de Ana", "No tiene acceso al repositorio"],
+        "correcta": 0, "explicacion": "\"I'm blocked by the new endpoint. It's still returning errors\"." },
+      { "pregunta": "¿Qué propone Sarah?", "opciones": ["Cancelar el ticket", "Coordinar con backend después de la daily", "Pasar el ticket al siguiente sprint"],
+        "correcta": 1, "explicacion": "\"Let's sync up with the backend team after this\"." }
+    ] },
+  { "id": "en-trabajo-08-d02", "titulo": "Estimar en la planning", "situacion": "Tom, el líder técnico, y María estiman un ticket nuevo.",
+    "lineas": [
+      { "quien": "Tom", "en": "Next ticket: add dark mode to the settings page. How many points?", "es": "Siguiente ticket: agregar modo oscuro a la página de ajustes. ¿Cuántos puntos?" },
+      { "quien": "María", "en": "I'd say three. It's mostly CSS variables.", "es": "Diría tres. Son sobre todo variables de CSS." },
+      { "quien": "Tom", "en": "Sorry, could you speak up a little? You're breaking up.", "es": "Perdón, ¿podrías hablar un poco más fuerte? Se te corta." },
+      { "quien": "María", "en": "Sure. I said three points. It's mostly CSS variables.", "es": "Claro. Dije tres puntos. Son sobre todo variables de CSS." },
+      { "quien": "Tom", "en": "Hmm, it's bigger than it looks. We also need to save the user's choice.", "es": "Mmm, es más grande de lo que parece. También hay que guardar la elección del usuario." },
+      { "quien": "María", "en": "Oh, I didn't think about that. Then I'd say five.", "es": "Ah, no pensé en eso. Entonces diría cinco." },
+      { "quien": "Tom", "en": "Five sounds right. Can you take it this sprint?", "es": "Cinco suena bien. ¿Puedes tomarlo este sprint?" },
+      { "quien": "María", "en": "Yes. Just to confirm, the design is already in Figma?", "es": "Sí. Solo para confirmar, ¿el diseño ya está en Figma?" },
+      { "quien": "Tom", "en": "Yes, it is. I'll send you the link.", "es": "Sí. Te mando el enlace." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Tom le pide a María que hable más fuerte?", "opciones": ["Porque María habla en español", "Porque la conexión de María se corta", "Porque hay mucho ruido en la oficina"],
+        "correcta": 1, "explicacion": "Tom dice \"You're breaking up\": se le corta el audio a María." },
+      { "pregunta": "¿Por qué cambia la estimación de tres a cinco?", "opciones": ["Porque también hay que guardar la elección del usuario", "Porque no hay diseño", "Porque María no sabe CSS"],
+        "correcta": 0, "explicacion": "Tom explica \"We also need to save the user's choice\"." },
+      { "pregunta": "¿Qué confirma María al final?", "opciones": ["La fecha de entrega", "Que el diseño ya está en Figma", "Que Tom revisará su código"],
+        "correcta": 1, "explicacion": "\"Just to confirm, the design is already in Figma?\"" }
+    ] },
+  { "id": "en-trabajo-08-d03", "titulo": "La retro", "situacion": "Al final del sprint, Carlos dirige la retro con Ana.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Let's start with what went well this sprint.", "es": "Empecemos por lo que salió bien este sprint." },
+      { "quien": "Ana", "en": "What went well was the pairing. I learned a lot from Tom.", "es": "Lo que salió bien fue programar en pareja. Aprendí mucho de Tom." },
+      { "quien": "Carlos", "en": "Nice. And what could be improved?", "es": "Bien. ¿Y qué se puede mejorar?" },
+      { "quien": "Ana", "en": "Our standups keep running over. Sometimes they take thirty minutes.", "es": "Nuestras dailies siempre se alargan. A veces duran treinta minutos." },
+      { "quien": "Carlos", "en": "Can I jump in? I think long technical topics are the problem.", "es": "¿Puedo meterme? Creo que el problema son los temas técnicos largos." },
+      { "quien": "Ana", "en": "Exactly. We could take those offline.", "es": "Exacto. Podríamos hablarlos aparte." },
+      { "quien": "Carlos", "en": "So what you're saying is we timebox the standup to fifteen minutes?", "es": "O sea, ¿lo que dices es que le pongamos un límite de quince minutos a la daily?" },
+      { "quien": "Ana", "en": "Yes, and we discuss the details after.", "es": "Sí, y los detalles los vemos después." },
+      { "quien": "Carlos", "en": "Great. That's our action item for next sprint.", "es": "Genial. Esa es nuestra tarea para el siguiente sprint." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué salió bien según Ana?", "opciones": ["Las estimaciones", "Programar en pareja", "Las dailies"],
+        "correcta": 1, "explicacion": "\"What went well was the pairing\"." },
+      { "pregunta": "¿Cuál es el problema que menciona Ana?", "opciones": ["Las dailies se alargan demasiado", "Faltan tests", "Nadie revisa los pull requests"],
+        "correcta": 0, "explicacion": "\"Our standups keep running over. Sometimes they take thirty minutes\"." },
+      { "pregunta": "¿Qué deciden hacer?", "opciones": ["Cancelar las dailies", "Limitar la daily a quince minutos y ver los detalles aparte", "Hacer la daily por escrito"],
+        "correcta": 1, "explicacion": "Carlos resume \"we timebox the standup to fifteen minutes\" y Ana agrega \"we discuss the details after\"." }
+    ] }
+]

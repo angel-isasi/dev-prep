@@ -1,0 +1,8 @@
+{
+  "id": "en-intermedio-03",
+  "titulo": "Condicionales cero y uno",
+  "etapa": "intermedio",
+  "orden": 3,
+  "nivel": "B1",
+  "descripcion": "Explicar cómo funciona tu código y hablar de lo que va a pasar: If the user clicks, the modal opens. If the tests pass, we'll deploy. Con unless, in case y otherwise."
+}

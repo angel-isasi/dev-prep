@@ -1,0 +1,61 @@
+[
+  { "id": "en-intermedio-10-d01", "titulo": "Pedir ayuda a una senior", "situacion": "Luis, desarrollador junior, le pide ayuda a Sarah con el código de autenticación.",
+    "lineas": [
+      { "quien": "Luis", "en": "Hi Sarah, sorry to bother you. Do you have a minute?", "es": "Hola, Sarah, perdona la molestia. ¿Tienes un minuto?" },
+      { "quien": "Sarah", "en": "Sure thing. What's up?", "es": "Claro. ¿Qué pasa?" },
+      { "quien": "Luis", "en": "I was wondering whether you could help me with the auth middleware.", "es": "Me preguntaba si podrías ayudarme con el middleware de autenticación." },
+      { "quien": "Sarah", "en": "Of course. What exactly is the problem?", "es": "Por supuesto. ¿Cuál es exactamente el problema?" },
+      { "quien": "Luis", "en": "I don't understand where the token is checked.", "es": "No entiendo dónde se revisa el token." },
+      { "quien": "Sarah", "en": "It's in the server folder. Would you mind sharing your screen?", "es": "Está en la carpeta del servidor. ¿Te molestaría compartir tu pantalla?" },
+      { "quien": "Luis", "en": "Here it is. Could you walk me through this file?", "es": "Aquí está. ¿Me explicas este archivo paso a paso?" },
+      { "quien": "Sarah", "en": "Sure. First, the token is read from the header, and then it's validated.", "es": "Claro. Primero se lee el token del encabezado y luego se valida." },
+      { "quien": "Luis", "en": "Got it. Thanks, I really appreciate it.", "es": "Entendido. Gracias, te lo agradezco mucho." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Con qué necesita ayuda Luis?", "opciones": ["Con el middleware de autenticación", "Con un conflicto de merge", "Con el diseño de la página"],
+        "correcta": 0, "explicacion": "Luis dice \"help me with the auth middleware\"." },
+      { "pregunta": "¿Qué le pide Sarah a Luis?", "opciones": ["Que le mande el código por correo", "Que comparta su pantalla", "Que lea la documentación"],
+        "correcta": 1, "explicacion": "Sarah dice \"Would you mind sharing your screen?\"." },
+      { "pregunta": "¿Qué pasa primero con el token?", "opciones": ["Se valida", "Se borra", "Se lee del encabezado"],
+        "correcta": 2, "explicacion": "Sarah dice \"First, the token is read from the header, and then it's validated\"." }
+    ] },
+  { "id": "en-intermedio-10-d02", "titulo": "Aclarar una tarea", "situacion": "Tom le explica a Ana una tarea nueva y ella pide aclaraciones.",
+    "lineas": [
+      { "quien": "Tom", "en": "So, for this sprint, we need the export feature.", "es": "Entonces, para este sprint necesitamos la funcionalidad de exportar." },
+      { "quien": "Ana", "en": "Just to clarify, do you mean exporting to PDF or to Excel?", "es": "Solo para aclarar, ¿te refieres a exportar a PDF o a Excel?" },
+      { "quien": "Tom", "en": "Good question. Excel for now, PDF later.", "es": "Buena pregunta. Excel por ahora, PDF después." },
+      { "quien": "Ana", "en": "Okay. Do you know if there's a design for the button?", "es": "Bueno. ¿Sabes si hay un diseño para el botón?" },
+      { "quien": "Tom", "en": "I'm not sure. María might know.", "es": "No estoy seguro. Puede que María sepa." },
+      { "quien": "Ana", "en": "And what exactly do you mean by the whole table? Even the hidden columns?", "es": "¿Y qué quieres decir exactamente con toda la tabla? ¿Incluso las columnas ocultas?" },
+      { "quien": "Tom", "en": "No, only the visible ones. Does that make sense?", "es": "No, solo las visibles. ¿Se entiende?" },
+      { "quien": "Ana", "en": "Yes. Let me make sure I understand: Excel, visible columns, one button.", "es": "Sí. Déjame ver si entendí bien: Excel, columnas visibles, un botón." },
+      { "quien": "Tom", "en": "Exactly. No rush, it's due next Friday.", "es": "Exacto. Sin apuro, es para el próximo viernes." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿A qué formato van a exportar primero?", "opciones": ["A PDF", "A Excel", "A los dos"],
+        "correcta": 1, "explicacion": "Tom dice \"Excel for now, PDF later\"." },
+      { "pregunta": "¿Quién podría saber del diseño del botón?", "opciones": ["Tom", "Ana", "María"],
+        "correcta": 2, "explicacion": "Tom dice \"María might know\"." },
+      { "pregunta": "¿Qué columnas se exportan?", "opciones": ["Solo las visibles", "Todas, incluso las ocultas", "Solo las ocultas"],
+        "correcta": 0, "explicacion": "Tom dice \"only the visible ones\"." }
+    ] },
+  { "id": "en-intermedio-10-d03", "titulo": "Una llamada con mala conexión", "situacion": "María y Carlos hablan por videollamada y la conexión falla.",
+    "lineas": [
+      { "quien": "María", "en": "Carlos, can you hear me? My internet is a bit slow today.", "es": "Carlos, ¿me escuchas? Mi internet está un poco lento hoy." },
+      { "quien": "Carlos", "en": "Yes, but sorry, I didn't catch the last part.", "es": "Sí, pero perdón, no entendí la última parte." },
+      { "quien": "María", "en": "I said the API is ready. Could you start the integration?", "es": "Dije que la API está lista. ¿Podrías empezar la integración?" },
+      { "quien": "Carlos", "en": "Sure. Could you tell me where the documentation is?", "es": "Claro. ¿Podrías decirme dónde está la documentación?" },
+      { "quien": "María", "en": "It's in the wiki, under Backend. I'll send you the link.", "es": "Está en la wiki, en la sección Backend. Te mando el enlace." },
+      { "quien": "Carlos", "en": "Thanks. Is there any chance we could test it together tomorrow?", "es": "Gracias. ¿Habrá alguna posibilidad de probarla juntos mañana?" },
+      { "quien": "María", "en": "I think so. Is it okay if we meet at ten?", "es": "Creo que sí. ¿Está bien si nos reunimos a las diez?" },
+      { "quien": "Carlos", "en": "Ten is perfect. Thanks in advance!", "es": "A las diez es perfecto. ¡Gracias de antemano!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué está listo, según María?", "opciones": ["El diseño", "La API", "La integración"],
+        "correcta": 1, "explicacion": "María dice \"the API is ready\"." },
+      { "pregunta": "¿Dónde está la documentación?", "opciones": ["En la wiki", "En el README", "En un correo"],
+        "correcta": 0, "explicacion": "María dice \"It's in the wiki, under Backend\"." },
+      { "pregunta": "¿A qué hora se van a reunir mañana?", "opciones": ["A las nueve", "A las once", "A las diez"],
+        "correcta": 2, "explicacion": "María pregunta \"Is it okay if we meet at ten?\" y Carlos acepta." }
+    ] }
+]

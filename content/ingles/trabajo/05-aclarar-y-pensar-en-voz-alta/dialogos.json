@@ -1,0 +1,66 @@
+[
+  { "id": "en-trabajo-05-d01", "titulo": "Antes de programar", "situacion": "La entrevistadora le da un problema a Luis y él aclara las dudas antes de escribir código.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Write a function that returns the most frequent word in a sentence.", "es": "Escribe una función que devuelva la palabra más frecuente de una oración." },
+      { "quien": "Luis", "en": "Okay. Just to clarify, is the input always a string?", "es": "Bien. Solo para aclarar, ¿la entrada siempre es un string?" },
+      { "quien": "Sarah", "en": "Yes, always a string.", "es": "Sí, siempre un string." },
+      { "quien": "Luis", "en": "Is it case-sensitive? Are Hello and hello the same word?", "es": "¿Distingue mayúsculas? ¿Hello y hello son la misma palabra?" },
+      { "quien": "Sarah", "en": "Good question. Treat them as the same word.", "es": "Buena pregunta. Trátalas como la misma palabra." },
+      { "quien": "Luis", "en": "And what should happen if two words have the same count?", "es": "¿Y qué debería pasar si dos palabras aparecen la misma cantidad de veces?" },
+      { "quien": "Sarah", "en": "Return the one that appears first.", "es": "Devuelve la que aparece primero." },
+      { "quien": "Luis", "en": "Got it. Can I assume there's no punctuation?", "es": "Entendido. ¿Puedo asumir que no hay signos de puntuación?" },
+      { "quien": "Sarah", "en": "Yes, you can assume that.", "es": "Sí, puedes asumirlo." },
+      { "quien": "Luis", "en": "Great. Then my plan is to count each word with an object.", "es": "Genial. Entonces mi plan es contar cada palabra con un objeto." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué debe hacer la función?", "opciones": ["Contar las letras", "Devolver la palabra más frecuente", "Ordenar las palabras"],
+        "correcta": 1, "explicacion": "Sarah pide \"returns the most frequent word in a sentence\"." },
+      { "pregunta": "¿Qué pasa si dos palabras empatan?", "opciones": ["Se devuelve la que aparece primero", "Se devuelven las dos", "Se lanza un error"],
+        "correcta": 0, "explicacion": "Sarah responde \"Return the one that appears first\"." },
+      { "pregunta": "¿Cómo planea contar Luis las palabras?", "opciones": ["Con dos bucles anidados", "Con un objeto", "Con una expresión regular"],
+        "correcta": 1, "explicacion": "Luis dice \"my plan is to count each word with an object\"." }
+    ] },
+  { "id": "en-trabajo-05-d02", "titulo": "Primero fuerza bruta", "situacion": "Ana piensa en voz alta mientras resuelve si un array tiene números repetidos.",
+    "lineas": [
+      { "quien": "Ana", "en": "Let me think out loud for a moment.", "es": "Déjame pensar en voz alta un momento." },
+      { "quien": "Tom", "en": "Sure, go ahead.", "es": "Claro, adelante." },
+      { "quien": "Ana", "en": "My first idea is a brute-force approach with two loops.", "es": "Mi primera idea es fuerza bruta con dos bucles." },
+      { "quien": "Ana", "en": "I compare each number with all the others.", "es": "Comparo cada número con todos los demás." },
+      { "quien": "Tom", "en": "Would that work for a million numbers?", "es": "¿Eso funcionaría con un millón de números?" },
+      { "quien": "Ana", "en": "It would work, but it would be really slow.", "es": "Funcionaría, pero sería muy lento." },
+      { "quien": "Tom", "en": "Can you think of something faster?", "es": "¿Se te ocurre algo más rápido?" },
+      { "quien": "Ana", "en": "Hmm, give me a second. I could use a Set to remember what I've seen.", "es": "Mmm, dame un segundo. Podría usar un Set para recordar lo que ya vi." },
+      { "quien": "Tom", "en": "Okay. Why is that better?", "es": "Bien. ¿Por qué es mejor?" },
+      { "quien": "Ana", "en": "Because I only need one loop, and checking a Set is very fast.", "es": "Porque solo necesito un bucle, y revisar un Set es muy rápido." },
+      { "quien": "Tom", "en": "Sounds good. Go ahead and code it.", "es": "Suena bien. Adelante, prográmalo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuál fue la primera idea de Ana?", "opciones": ["Usar un Set", "Fuerza bruta con dos bucles", "Ordenar el array"],
+        "correcta": 1, "explicacion": "Ana dice \"My first idea is a brute-force approach with two loops\"." },
+      { "pregunta": "¿Cuál es el problema de la primera idea?", "opciones": ["No funciona", "Es muy lenta con muchos números", "Usa demasiada memoria"],
+        "correcta": 1, "explicacion": "Ana responde \"It would work, but it would be really slow\"." },
+      { "pregunta": "¿Por qué el Set es mejor?", "opciones": ["Porque solo necesita un bucle", "Porque ordena los números", "Porque es más fácil de leer"],
+        "correcta": 0, "explicacion": "Ana explica \"I only need one loop, and checking a Set is very fast\"." }
+    ] },
+  { "id": "en-trabajo-05-d03", "titulo": "Probar en voz alta", "situacion": "Carlos terminó su código y lo prueba frente al entrevistador.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Okay, I think I'm done. Let me test it with an example.", "es": "Bien, creo que terminé. Déjame probarlo con un ejemplo." },
+      { "quien": "Sarah", "en": "Sure.", "es": "Claro." },
+      { "quien": "Carlos", "en": "If the input is three, one, two, the max starts at three.", "es": "Si la entrada es tres, uno, dos, el máximo empieza en tres." },
+      { "quien": "Carlos", "en": "One isn't bigger, two isn't bigger, so I return three. Correct.", "es": "Uno no es mayor, dos no es mayor, así que devuelvo tres. Correcto." },
+      { "quien": "Sarah", "en": "What about an empty array?", "es": "¿Y un array vacío?" },
+      { "quien": "Carlos", "en": "Hold on. Then the max is undefined. That's a bug.", "es": "Espera. Entonces el máximo es undefined. Eso es un error." },
+      { "quien": "Carlos", "en": "What should happen in that case?", "es": "¿Qué debería pasar en ese caso?" },
+      { "quien": "Sarah", "en": "Let's say it should return null.", "es": "Digamos que debería devolver null." },
+      { "quien": "Carlos", "en": "Okay, I'll add a check at the beginning for that.", "es": "Bien, agrego una validación al inicio para eso." },
+      { "quien": "Sarah", "en": "Good. I like that you found it yourself.", "es": "Bien. Me gusta que lo encontraste tú mismo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué hace la función de Carlos?", "opciones": ["Devuelve el número más grande", "Suma los números", "Ordena el array"],
+        "correcta": 0, "explicacion": "Carlos habla del máximo: \"the max starts at three\" y devuelve el mayor." },
+      { "pregunta": "¿Qué caso falla?", "opciones": ["Un array con negativos", "Un array vacío", "Un array con repetidos"],
+        "correcta": 1, "explicacion": "Con \"an empty array\" el máximo queda undefined, y Carlos dice \"That's a bug\"." },
+      { "pregunta": "¿Qué valora Sarah?", "opciones": ["Que Carlos fue rápido", "Que Carlos encontró el error solo", "Que Carlos no hizo preguntas"],
+        "correcta": 1, "explicacion": "Sarah dice \"I like that you found it yourself\"." }
+    ] }
+]

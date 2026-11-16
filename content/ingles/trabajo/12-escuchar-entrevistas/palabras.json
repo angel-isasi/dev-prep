@@ -1,0 +1,365 @@
+[
+  {
+    "id": "en-trabajo-12-w01",
+    "en": "walk me through",
+    "es": "explícame paso a paso",
+    "pron": "uók mi zrú",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Walk me through your last project.",
+      "es": "Explícame paso a paso tu último proyecto."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w02",
+    "en": "tell me about a time",
+    "es": "cuéntame de una vez en que",
+    "pron": "tél mi abáut a táim",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Tell me about a time you disagreed with a teammate.",
+      "es": "Cuéntame de una vez en que no estuviste de acuerdo con un compañero."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w03",
+    "en": "what's your take on",
+    "es": "qué opinas de",
+    "pron": "uátsior téik on",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "What's your take on TypeScript?",
+      "es": "¿Qué opinas de TypeScript?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w04",
+    "en": "how would you approach",
+    "es": "cómo abordarías",
+    "pron": "jáu uúd iú apróuch",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "How would you approach a slow page?",
+      "es": "¿Cómo abordarías una página lenta?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w05",
+    "en": "take your time",
+    "es": "tómate tu tiempo, sin apuro",
+    "pron": "téikiur táim",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "No rush. Take your time.",
+      "es": "No hay apuro. Tómate tu tiempo."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w06",
+    "en": "fair enough",
+    "es": "me parece razonable, está bien",
+    "pron": "féri náf",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Fair enough. Let's move to the next question.",
+      "es": "Me parece razonable. Pasemos a la siguiente pregunta."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w07",
+    "en": "feel free to",
+    "es": "siéntete libre de, puedes",
+    "pron": "fíil frí tu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Feel free to use any language you like.",
+      "es": "Puedes usar el lenguaje que quieras."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w08",
+    "en": "off the top of your head",
+    "es": "así de memoria, sin pensarlo mucho",
+    "pron": "óf de tóp ov iór jéd",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Off the top of your head, what's a closure?",
+      "es": "Así de memoria, ¿qué es un closure?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w09",
+    "en": "let's dive in",
+    "es": "entremos en materia",
+    "pron": "lets dáiv ín",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Okay, let's dive in with the first problem.",
+      "es": "Bien, entremos en materia con el primer problema."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w10",
+    "en": "bear with me",
+    "es": "dame un momento, ten paciencia",
+    "pron": "bér uíz mi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Bear with me, I'm opening the editor.",
+      "es": "Dame un momento, estoy abriendo el editor."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w11",
+    "en": "that's a great question",
+    "es": "qué buena pregunta",
+    "pron": "dáts a gréit kuéschon",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "That's a great question. Let me think.",
+      "es": "Qué buena pregunta. Déjame pensar."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w12",
+    "en": "can you elaborate",
+    "es": "¿puedes ampliar o dar más detalle?",
+    "pron": "kan iú iláboreit",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Can you elaborate on that?",
+      "es": "¿Puedes darme más detalle sobre eso?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w13",
+    "en": "for instance",
+    "es": "por ejemplo",
+    "pron": "for ínstans",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "For instance, what if the list is empty?",
+      "es": "Por ejemplo, ¿qué pasa si la lista está vacía?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w14",
+    "en": "hypothetically",
+    "es": "hipotéticamente",
+    "pron": "jaipozétikli",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "Hypothetically, what if you had a million users?",
+      "es": "Hipotéticamente, ¿y si tuvieras un millón de usuarios?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w15",
+    "en": "let's say",
+    "es": "digamos que, supongamos que",
+    "pron": "letséi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let's say the API takes five seconds to respond.",
+      "es": "Supongamos que la API tarda cinco segundos en responder."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w16",
+    "en": "out of curiosity",
+    "es": "por curiosidad",
+    "pron": "áut ov kiuriósiti",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Out of curiosity, why did you choose Vue?",
+      "es": "Por curiosidad, ¿por qué elegiste Vue?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w17",
+    "en": "moving on",
+    "es": "pasando a otro tema",
+    "pron": "múvin on",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Great. Moving on, let's talk about testing.",
+      "es": "Genial. Pasando a otro tema, hablemos de testing."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w18",
+    "en": "to be honest",
+    "es": "para ser honesto",
+    "pron": "tu bi ónest",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "To be honest, I haven't used GraphQL yet.",
+      "es": "Para ser honesto, todavía no he usado GraphQL."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w19",
+    "en": "pretty much",
+    "es": "casi, prácticamente",
+    "pron": "príti mách",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "Yes, that's pretty much what I was looking for.",
+      "es": "Sí, eso es prácticamente lo que buscaba."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w20",
+    "en": "kind of",
+    "es": "más o menos, algo así",
+    "pron": "káind ov",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "It's kind of like a cache.",
+      "es": "Es algo así como una caché."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w21",
+    "en": "I see where you're going",
+    "es": "entiendo a dónde vas",
+    "pron": "ái sí uér iúr góuin",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I see where you're going with this.",
+      "es": "Entiendo a dónde vas con esto."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w22",
+    "en": "that said",
+    "es": "dicho eso",
+    "pron": "dát séd",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "Your solution works. That said, can we make it faster?",
+      "es": "Tu solución funciona. Dicho eso, ¿podemos hacerla más rápida?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w23",
+    "en": "at the end of the day",
+    "es": "al final de cuentas",
+    "pron": "at di énd ov de déi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "At the end of the day, the user is what matters.",
+      "es": "Al final de cuentas, lo que importa es el usuario."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w24",
+    "en": "in a nutshell",
+    "es": "en pocas palabras",
+    "pron": "in a nátshel",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "In a nutshell, what does your app do?",
+      "es": "En pocas palabras, ¿qué hace tu app?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w25",
+    "en": "what drew you to",
+    "es": "qué te atrajo de",
+    "pron": "uát drú iú tu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "What drew you to frontend development?",
+      "es": "¿Qué te atrajo del desarrollo frontend?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w26",
+    "en": "where do you see yourself",
+    "es": "dónde te ves (en el futuro)",
+    "pron": "uér du iú sí iorsélf",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Where do you see yourself in five years?",
+      "es": "¿Dónde te ves en cinco años?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w27",
+    "en": "we're almost out of time",
+    "es": "ya casi no nos queda tiempo",
+    "pron": "uír ólmoust áut ov táim",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We're almost out of time, so one last question.",
+      "es": "Ya casi no nos queda tiempo, así que una última pregunta."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w28",
+    "en": "no worries",
+    "es": "no te preocupes, tranquilo",
+    "pron": "nóu uóris",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "No worries, it happens to everyone.",
+      "es": "Tranquilo, le pasa a todo el mundo."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w29",
+    "en": "sounds good",
+    "es": "me parece bien",
+    "pron": "sáunds gúd",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sounds good. Let's start.",
+      "es": "Me parece bien. Empecemos."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w30",
+    "en": "what if",
+    "es": "qué pasa si",
+    "pron": "uát íf",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "What if the input has duplicates?",
+      "es": "¿Qué pasa si la entrada tiene repetidos?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w31",
+    "en": "I'd love to hear",
+    "es": "me encantaría escuchar",
+    "pron": "áid lóv tu jíir",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'd love to hear more about your portfolio.",
+      "es": "Me encantaría escuchar más sobre tu portafolio."
+    }
+  },
+  {
+    "id": "en-trabajo-12-w32",
+    "en": "go about",
+    "es": "hacer, encarar (algo)",
+    "pron": "góu abáut",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "How did you go about learning React?",
+      "es": "¿Cómo hiciste para aprender React?"
+    }
+  },
+  {
+    "id": "en-trabajo-12-w33",
+    "en": "it clicked",
+    "es": "lo entendí de golpe",
+    "pron": "it klíkt",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I read it three times, and then it clicked.",
+      "es": "Lo leí tres veces y de pronto lo entendí."
+    }
+  }
+]

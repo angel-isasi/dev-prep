@@ -1,0 +1,8 @@
+{
+  "id": "en-trabajo-01",
+  "titulo": "Pronunciar los términos técnicos",
+  "etapa": "trabajo",
+  "orden": 1,
+  "nivel": "B1",
+  "descripcion": "Las palabras de programación que un hispanohablante dice mal: queue, data, cache, width, SQL, GitHub, schema, regex, Vite."
+}

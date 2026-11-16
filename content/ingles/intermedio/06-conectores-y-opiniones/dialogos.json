@@ -1,0 +1,59 @@
+[
+  { "id": "en-intermedio-06-d01", "titulo": "¿React o Vue?", "situacion": "Tom y Ana eligen el framework de un proyecto nuevo.",
+    "lineas": [
+      { "quien": "Tom", "en": "We need to choose a framework for the new project. What do you think?", "es": "Tenemos que elegir un framework para el proyecto nuevo. ¿Qué opinas?" },
+      { "quien": "Ana", "en": "In my opinion, we should use React. Most of the team already knows it.", "es": "En mi opinión, deberíamos usar React. La mayoría del equipo ya lo conoce." },
+      { "quien": "Tom", "en": "That's true. However, Vue is easier for new developers.", "es": "Es cierto. Sin embargo, Vue es más fácil para los desarrolladores nuevos." },
+      { "quien": "Ana", "en": "I see your point, but React has a bigger community, so it's easier to find help.", "es": "Entiendo lo que dices, pero React tiene una comunidad más grande, así que es más fácil encontrar ayuda." },
+      { "quien": "Tom", "en": "Fair enough. What about performance?", "es": "Tiene sentido. ¿Y el rendimiento?" },
+      { "quien": "Ana", "en": "As far as I know, both are fast enough for this kind of app.", "es": "Que yo sepa, los dos son lo bastante rápidos para este tipo de app." },
+      { "quien": "Tom", "en": "OK. Although I like Vue, I agree that React makes more sense for us.", "es": "Ok. Aunque me gusta Vue, estoy de acuerdo en que React tiene más sentido para nosotros." },
+      { "quien": "Ana", "en": "Great. So let's start with React and review the decision in a month.", "es": "Genial. Entonces empecemos con React y revisemos la decisión en un mes." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Ana propone React?", "opciones": ["Porque es más nuevo", "Porque la mayoría del equipo ya lo conoce", "Porque es más fácil que Vue"], "correcta": 1,
+        "explicacion": "\"Most of the team already knows it\"." },
+      { "pregunta": "¿Qué ventaja de Vue menciona Tom?", "opciones": ["Es más fácil para desarrolladores nuevos", "Es más rápido", "Tiene más trabajos"], "correcta": 0,
+        "explicacion": "\"However, Vue is easier for new developers\"." },
+      { "pregunta": "¿Qué deciden al final?", "opciones": ["Usar Vue", "Usar React y revisar la decisión en un mes", "Esperar al jefe"], "correcta": 1,
+        "explicacion": "\"Let's start with React and review the decision in a month\"." }
+    ] },
+  { "id": "en-intermedio-06-d02", "titulo": "¿Necesitamos Redux?", "situacion": "Carlos y Sarah discuten cómo manejar el estado de una app pequeña.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Should we add Redux to manage the state?", "es": "¿Deberíamos agregar Redux para manejar el estado?" },
+      { "quien": "Sarah", "en": "Frankly, I think it's overkill. The app only has three pages.", "es": "La verdad, creo que es demasiado. La app solo tiene tres páginas." },
+      { "quien": "Carlos", "en": "But what if the app grows?", "es": "¿Pero y si la app crece?" },
+      { "quien": "Sarah", "en": "That's a reasonable question. On the other hand, adding it now makes the code more complex.", "es": "Es una pregunta razonable. Por otro lado, agregarlo ahora hace el código más complejo." },
+      { "quien": "Carlos", "en": "So what do you suggest?", "es": "¿Entonces qué sugieres?" },
+      { "quien": "Sarah", "en": "For example, we could use React context for now. If the app grows, we can add Redux later.", "es": "Por ejemplo, podríamos usar el context de React por ahora. Si la app crece, agregamos Redux después." },
+      { "quien": "Carlos", "en": "I agree. It's a good middle ground for a small team.", "es": "Estoy de acuerdo. Es un buen punto medio para un equipo pequeño." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Sarah cree que Redux es demasiado?", "opciones": ["Porque es caro", "Porque la app solo tiene tres páginas", "Porque nadie lo conoce"], "correcta": 1,
+        "explicacion": "\"I think it's overkill. The app only has three pages\"." },
+      { "pregunta": "¿Qué propone Sarah usar por ahora?", "opciones": ["React context", "Redux", "Una base de datos"], "correcta": 0,
+        "explicacion": "\"We could use React context for now\"." },
+      { "pregunta": "¿Qué opina Carlos al final?", "opciones": ["No está de acuerdo", "Está de acuerdo: es un buen punto medio", "Quiere preguntarle al jefe"], "correcta": 1,
+        "explicacion": "\"I agree. It's a good middle ground for a small team\"." }
+    ] },
+  { "id": "en-intermedio-06-d03", "titulo": "Defender tu proyecto", "situacion": "En una entrevista, Sarah le pregunta a Luis por una decisión técnica de su proyecto.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Why did you decide to build your app without a database?", "es": "¿Por qué decidiste hacer tu app sin base de datos?" },
+      { "quien": "Luis", "en": "Good question. I wanted the app to work offline, so I saved the data in JSON files.", "es": "Buena pregunta. Quería que la app funcionara sin internet, así que guardé los datos en archivos JSON." },
+      { "quien": "Sarah", "en": "Isn't that hard to scale?", "es": "¿Eso no es difícil de escalar?" },
+      { "quien": "Luis", "en": "Yes, that's a disadvantage. However, it's only for one user, so it isn't a problem.", "es": "Sí, es una desventaja. Sin embargo, es solo para un usuario, así que no es un problema." },
+      { "quien": "Sarah", "en": "Would you change it in the future?", "es": "¿Lo cambiarías en el futuro?" },
+      { "quien": "Luis", "en": "Maybe. If I added more users, I'd move to a real database.", "es": "Tal vez. Si agregara más usuarios, pasaría a una base de datos real." },
+      { "quien": "Luis", "en": "Despite that, JSON was the simplest option for now.", "es": "A pesar de eso, JSON era la opción más simple por ahora." },
+      { "quien": "Sarah", "en": "That makes sense. You clearly thought about the pros and cons.", "es": "Tiene sentido. Se nota que pensaste en los pros y contras." },
+      { "quien": "Luis", "en": "Thanks. To sum up, I chose the simplest solution that solved the problem.", "es": "Gracias. En resumen, elegí la solución más simple que resolvía el problema." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Luis guardó los datos en archivos JSON?", "opciones": ["Porque quería que la app funcionara sin internet", "Porque no sabía usar bases de datos", "Porque se lo pidió un cliente"], "correcta": 0,
+        "explicacion": "\"I wanted the app to work offline, so I saved the data in JSON files\"." },
+      { "pregunta": "¿Cuál es la desventaja que reconoce Luis?", "opciones": ["Es lento", "Es difícil de escalar", "Es caro"], "correcta": 1,
+        "explicacion": "Sarah pregunta \"Isn't that hard to scale?\" y Luis responde \"Yes, that's a disadvantage\"." },
+      { "pregunta": "¿Cuándo cambiaría a una base de datos?", "opciones": ["Nunca", "Si agregara más usuarios", "Mañana mismo"], "correcta": 1,
+        "explicacion": "\"If I added more users, I'd move to a real database\"." }
+    ] }
+]

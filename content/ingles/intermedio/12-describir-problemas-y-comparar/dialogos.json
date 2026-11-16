@@ -1,0 +1,59 @@
+[
+  { "id": "en-intermedio-12-d01", "titulo": "Reportar un error con detalle", "situacion": "Luis le cuenta a Sarah un problema en el panel principal.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Luis, you said the dashboard is broken. What exactly happens?", "es": "Luis, dijiste que el panel no funciona. ¿Qué pasa exactamente?" },
+      { "quien": "Luis", "en": "When I open it with a new account, I only see a blank screen.", "es": "Cuando lo abro con una cuenta nueva, solo veo una pantalla en blanco." },
+      { "quien": "Sarah", "en": "Does it happen consistently or randomly?", "es": "¿Pasa siempre o al azar?" },
+      { "quien": "Luis", "en": "Consistently, but only with new accounts. Old accounts work fine.", "es": "Siempre, pero solo con cuentas nuevas. Las cuentas antiguas funcionan bien." },
+      { "quien": "Sarah", "en": "Is there an error message in the console?", "es": "¿Hay algún mensaje de error en la consola?" },
+      { "quien": "Luis", "en": "Yes, it throws Cannot read properties of undefined.", "es": "Sí, lanza Cannot read properties of undefined." },
+      { "quien": "Sarah", "en": "So the expected result is an empty dashboard, but the actual result is a crash.", "es": "Entonces lo esperado es un panel vacío, pero lo que pasa en realidad es un fallo." },
+      { "quien": "Luis", "en": "Exactly. I think new users have no projects, and we don't check for that.", "es": "Exacto. Creo que los usuarios nuevos no tienen proyectos y no revisamos ese caso." },
+      { "quien": "Sarah", "en": "Good report. Please write the steps to reproduce in the ticket.", "es": "Buen reporte. Por favor, escribe los pasos para reproducirlo en el ticket." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué ve Luis al abrir el panel?", "opciones": ["Una pantalla en blanco", "Una lista vacía", "Un mensaje de bienvenida"],
+        "correcta": 0, "explicacion": "Luis dice \"I only see a blank screen\"." },
+      { "pregunta": "¿Con qué cuentas pasa el error?", "opciones": ["Con todas", "Solo con las cuentas nuevas", "Solo con las cuentas antiguas"],
+        "correcta": 1, "explicacion": "Luis dice \"only with new accounts. Old accounts work fine\"." },
+      { "pregunta": "¿Cuál cree Luis que es la causa?", "opciones": ["El servidor está caído", "Los usuarios nuevos no tienen proyectos y no se revisa ese caso", "El navegador es muy viejo"],
+        "correcta": 1, "explicacion": "Luis dice \"new users have no projects, and we don't check for that\"." }
+    ] },
+  { "id": "en-intermedio-12-d02", "titulo": "Comparar dos soluciones", "situacion": "Ana y Tom eligen cómo manejar el estado del carrito de compras.",
+    "lineas": [
+      { "quien": "Ana", "en": "For the cart, should we use Redux or just Context?", "es": "Para el carrito, ¿usamos Redux o solo Context?" },
+      { "quien": "Tom", "en": "Redux is powerful, but I think it's overkill for us.", "es": "Redux es potente, pero creo que es demasiado para nosotros." },
+      { "quien": "Ana", "en": "Agreed. Context is more straightforward and more lightweight.", "es": "De acuerdo. Context es más sencillo y más liviano." },
+      { "quien": "Tom", "en": "The drawback is that Context can be slower with a lot of updates.", "es": "La desventaja es que Context puede ser más lento con muchas actualizaciones." },
+      { "quien": "Ana", "en": "Slightly slower, but our cart only has a few items.", "es": "Un poco más lento, pero nuestro carrito solo tiene pocos productos." },
+      { "quien": "Tom", "en": "True. And it's easier for new developers to understand.", "es": "Es cierto. Y es más fácil de entender para los desarrolladores nuevos." },
+      { "quien": "Ana", "en": "So Context is the easiest way. Let's write down the trade-off.", "es": "Entonces Context es la forma más fácil. Anotemos el compromiso que asumimos." },
+      { "quien": "Tom", "en": "Yes, in case we need to change it later.", "es": "Sí, por si tenemos que cambiarlo después." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué no usan Redux?", "opciones": ["Porque es demasiado para lo que necesitan", "Porque es muy lento", "Porque nadie lo conoce"],
+        "correcta": 0, "explicacion": "Tom dice \"I think it's overkill for us\"." },
+      { "pregunta": "¿Cuál es la desventaja de Context?", "opciones": ["Es difícil de entender", "Puede ser más lento con muchas actualizaciones", "No funciona con carritos"],
+        "correcta": 1, "explicacion": "Tom dice \"Context can be slower with a lot of updates\"." },
+      { "pregunta": "¿Qué deciden?", "opciones": ["Usar Redux", "No hacer el carrito", "Usar Context y anotar el compromiso"],
+        "correcta": 2, "explicacion": "Ana dice \"So Context is the easiest way. Let's write down the trade-off\"." }
+    ] },
+  { "id": "en-intermedio-12-d03", "titulo": "Una prueba inestable", "situacion": "El pipeline vuelve a fallar y Carlos lo comenta con María.",
+    "lineas": [
+      { "quien": "Carlos", "en": "María, the pipeline failed again. It's the login test.", "es": "María, el pipeline volvió a fallar. Es la prueba del inicio de sesión." },
+      { "quien": "María", "en": "That test is flaky. It fails randomly, maybe once a day.", "es": "Esa prueba es inestable. Falla sin patrón, más o menos una vez al día." },
+      { "quien": "Carlos", "en": "I think it waits for the real API, and sometimes the API hangs.", "es": "Creo que espera a la API real y a veces la API se queda colgada." },
+      { "quien": "María", "en": "That makes sense. We could mock the API instead.", "es": "Tiene sentido. Podríamos simular la API en su lugar." },
+      { "quien": "Carlos", "en": "A mock is faster than the real API, too.", "es": "Además, una simulación es más rápida que la API real." },
+      { "quien": "María", "en": "Much faster. The whole test suite will be significantly shorter.", "es": "Mucho más rápida. Todo el conjunto de pruebas va a durar bastante menos." },
+      { "quien": "Carlos", "en": "Okay, I'll rewrite the test this afternoon.", "es": "Bueno, reescribo la prueba esta tarde." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué prueba falla?", "opciones": ["La del carrito", "La del inicio de sesión", "La del buscador"],
+        "correcta": 1, "explicacion": "Carlos dice \"It's the login test\"." },
+      { "pregunta": "¿Por qué falla, según Carlos?", "opciones": ["Porque a veces la API real se queda colgada", "Porque el código tiene un error de sintaxis", "Porque falta una dependencia"],
+        "correcta": 0, "explicacion": "Carlos dice \"sometimes the API hangs\"." },
+      { "pregunta": "¿Qué proponen hacer?", "opciones": ["Borrar la prueba", "Simular la API en la prueba", "Ejecutar la prueba dos veces"],
+        "correcta": 1, "explicacion": "María dice \"We could mock the API instead\" y Carlos acepta." }
+    ] }
+]

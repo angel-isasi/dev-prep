@@ -1,0 +1,332 @@
+[
+  {
+    "id": "en-intermedio-12-w01",
+    "en": "unexpected",
+    "es": "inesperado",
+    "pron": "anekspékted",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "I get an unexpected error when I save.",
+      "es": "Me sale un error inesperado cuando guardo."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w02",
+    "en": "intermittent",
+    "es": "intermitente (pasa a veces)",
+    "pron": "intermítent",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "It's an intermittent bug, it doesn't happen every time.",
+      "es": "Es un error intermitente, no pasa siempre."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w03",
+    "en": "consistently",
+    "es": "siempre / de forma constante",
+    "pron": "konsístentli",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "The test fails consistently on Safari.",
+      "es": "La prueba falla siempre en Safari."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w04",
+    "en": "randomly",
+    "es": "al azar / sin patrón",
+    "pron": "rándomli",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "The app crashes randomly.",
+      "es": "La app se cae sin ningún patrón."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w05",
+    "en": "it hangs",
+    "es": "se queda colgado",
+    "pron": "it jángs",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "When I click Export, it hangs for a minute.",
+      "es": "Cuando hago clic en Exportar, se queda colgado un minuto."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w06",
+    "en": "it throws an error",
+    "es": "lanza un error",
+    "pron": "it zróus an érror",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "If the list is empty, it throws an error.",
+      "es": "Si la lista está vacía, lanza un error."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w07",
+    "en": "it keeps crashing",
+    "es": "se sigue cayendo",
+    "pron": "it kíps kráshing",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I restarted it, but it keeps crashing.",
+      "es": "Lo reinicié, pero se sigue cayendo."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w08",
+    "en": "blank screen",
+    "es": "pantalla en blanco",
+    "pron": "blánk skrín",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "After the update, I only see a blank screen.",
+      "es": "Después de la actualización, solo veo una pantalla en blanco."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w09",
+    "en": "infinite loop",
+    "es": "bucle infinito",
+    "pron": "ínfinit lúp",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This effect causes an infinite loop.",
+      "es": "Este efecto causa un bucle infinito."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w10",
+    "en": "memory leak",
+    "es": "fuga de memoria",
+    "pron": "mémori lík",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The app gets slower because of a memory leak.",
+      "es": "La app se pone más lenta por una fuga de memoria."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w12",
+    "en": "flaky",
+    "es": "inestable (falla a veces sin razón clara)",
+    "pron": "fléiki",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "That test is flaky.",
+      "es": "Esa prueba es inestable."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w14",
+    "en": "broken",
+    "es": "roto / que no funciona",
+    "pron": "bróuken",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The link in the footer is broken.",
+      "es": "El enlace del pie de página no funciona."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w15",
+    "en": "steps to reproduce",
+    "es": "pasos para reproducir (un error)",
+    "pron": "stéps tu riprodús",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Please add the steps to reproduce.",
+      "es": "Por favor, agrega los pasos para reproducirlo."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w16",
+    "en": "expected result",
+    "es": "resultado esperado",
+    "pron": "ekspékted risált",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The expected result is a list of users.",
+      "es": "El resultado esperado es una lista de usuarios."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w17",
+    "en": "actual result",
+    "es": "resultado real (lo que pasa de verdad)",
+    "pron": "ákchual risált",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The actual result is an empty page.",
+      "es": "Lo que pasa de verdad es que la página sale vacía."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w18",
+    "en": "error message",
+    "es": "mensaje de error",
+    "pron": "érror mésich",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Copy the full error message.",
+      "es": "Copia el mensaje de error completo."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w19",
+    "en": "faster than",
+    "es": "más rápido que",
+    "pron": "fáster dan",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Vite is faster than Webpack.",
+      "es": "Vite es más rápido que Webpack."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w20",
+    "en": "more readable than",
+    "es": "más legible que",
+    "pron": "mór rídabol dan",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "This version is more readable than the old one.",
+      "es": "Esta versión es más legible que la anterior."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w21",
+    "en": "the easiest way",
+    "es": "la forma más fácil",
+    "pron": "di íziest uéi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The easiest way is to use a library.",
+      "es": "La forma más fácil es usar una librería."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w22",
+    "en": "trade-off",
+    "es": "compromiso (ganas algo y pierdes otra cosa)",
+    "pron": "tréidof",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "It's a trade-off between speed and simplicity.",
+      "es": "Es un compromiso entre velocidad y simplicidad."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w24",
+    "en": "readable",
+    "es": "legible / fácil de leer",
+    "pron": "rídabol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Short functions are more readable.",
+      "es": "Las funciones cortas se leen mejor."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w25",
+    "en": "maintainable",
+    "es": "fácil de mantener",
+    "pron": "meintéinabol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "We want maintainable code.",
+      "es": "Queremos código fácil de mantener."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w26",
+    "en": "scalable",
+    "es": "escalable",
+    "pron": "skéilabol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This solution isn't scalable.",
+      "es": "Esta solución no es escalable."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w27",
+    "en": "straightforward",
+    "es": "sencillo / directo",
+    "pron": "streitfóruard",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The fix is pretty straightforward.",
+      "es": "El arreglo es bastante sencillo."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w32",
+    "en": "slightly",
+    "es": "un poco / ligeramente",
+    "pron": "sláitli",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "It's slightly slower, but cleaner.",
+      "es": "Es un poco más lento, pero más limpio."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w33",
+    "en": "significantly",
+    "es": "considerablemente",
+    "pron": "signífikantli",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "The new query is significantly faster.",
+      "es": "La nueva consulta es considerablemente más rápida."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w34",
+    "en": "lightweight",
+    "es": "liviano / ligero",
+    "pron": "láitueit",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "We need a lightweight library.",
+      "es": "Necesitamos una librería liviana."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w35",
+    "en": "worse than",
+    "es": "peor que",
+    "pron": "uérs dan",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The new design is worse than the old one.",
+      "es": "El diseño nuevo es peor que el anterior."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w36",
+    "en": "as fast as",
+    "es": "tan rápido como",
+    "pron": "as fást as",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It isn't as fast as the native method.",
+      "es": "No es tan rápido como el método nativo."
+    }
+  },
+  {
+    "id": "en-intermedio-12-w37",
+    "en": "by far",
+    "es": "por mucho / de lejos",
+    "pron": "bái fár",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It's by far the best option.",
+      "es": "Es de lejos la mejor opción."
+    }
+  }
+]

@@ -1,0 +1,59 @@
+[
+  { "id": "en-intermedio-05-d01", "titulo": "La revisión de código", "situacion": "Tom revisa el pull request de Luis y le da recomendaciones.",
+    "lineas": [
+      { "quien": "Tom", "en": "I've reviewed your pull request. Overall, it looks good.", "es": "Revisé tu pull request. En general, se ve bien." },
+      { "quien": "Luis", "en": "Thanks! Do I have to change anything?", "es": "¡Gracias! ¿Tengo que cambiar algo?" },
+      { "quien": "Tom", "en": "Just a few things. First, you shouldn't hardcode the API URL. Put it in a config file instead.", "es": "Solo algunas cosas. Primero, no deberías dejar fija la URL de la API. Ponla en un archivo de configuración." },
+      { "quien": "Luis", "en": "Got it. Anything else?", "es": "Entendido. ¿Algo más?" },
+      { "quien": "Tom", "en": "This function is very long. You might want to split it into two smaller functions.", "es": "Esta función es muy larga. Quizás te convenga dividirla en dos funciones más pequeñas." },
+      { "quien": "Luis", "en": "Should I do that in this pull request or in a new one?", "es": "¿Debería hacerlo en este pull request o en uno nuevo?" },
+      { "quien": "Tom", "en": "You don't have to do it now. It's just a suggestion. But you must fix the URL before we merge.", "es": "No hace falta que lo hagas ahora. Es solo una sugerencia. Pero tienes que arreglar la URL antes del merge." },
+      { "quien": "Luis", "en": "OK. I'll fix the URL today and create a task for the refactor.", "es": "Ok. Arreglo la URL hoy y creo una tarea para el refactor." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué cambio es obligatorio antes del merge?", "opciones": ["Dividir la función", "Sacar la URL de la API del código", "Agregar más tests"], "correcta": 1,
+        "explicacion": "Tom dice \"you must fix the URL before we merge\": must marca lo obligatorio." },
+      { "pregunta": "¿Qué cambio es opcional?", "opciones": ["Dividir la función larga", "Arreglar la URL", "Crear el pull request"], "correcta": 0,
+        "explicacion": "\"You don't have to do it now. It's just a suggestion\": dividir la función es una sugerencia." },
+      { "pregunta": "¿Qué va a hacer Luis?", "opciones": ["Nada, porque todo está bien", "Arreglar la URL hoy y crear una tarea para el refactor", "Reescribir todo el código"], "correcta": 1,
+        "explicacion": "\"I'll fix the URL today and create a task for the refactor\"." }
+    ] },
+  { "id": "en-intermedio-05-d02", "titulo": "Las reglas del equipo", "situacion": "Sarah le explica a Ana, la nueva practicante, cómo trabaja el equipo.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Welcome to the team! Let me explain a few rules.", "es": "¡Bienvenida al equipo! Déjame explicarte algunas reglas." },
+      { "quien": "Ana", "en": "Sure. What do I need to know?", "es": "Claro. ¿Qué necesito saber?" },
+      { "quien": "Sarah", "en": "Every pull request must have at least one approval before you merge it.", "es": "Todo pull request debe tener al menos una aprobación antes de hacer merge." },
+      { "quien": "Ana", "en": "Am I allowed to deploy to production?", "es": "¿Puedo desplegar a producción?" },
+      { "quien": "Sarah", "en": "Not yet. Interns aren't allowed to deploy during the first month.", "es": "Todavía no. Los practicantes no pueden desplegar durante el primer mes." },
+      { "quien": "Ana", "en": "Do I have to come to the office every day?", "es": "¿Tengo que venir a la oficina todos los días?" },
+      { "quien": "Sarah", "en": "No, you don't have to. You only have to come on Tuesdays and Thursdays.", "es": "No, no hace falta. Solo tienes que venir los martes y jueves." },
+      { "quien": "Ana", "en": "Great. And what should I do if I get stuck?", "es": "Genial. ¿Y qué debería hacer si me trabo?" },
+      { "quien": "Sarah", "en": "You should ask in the team channel. Nobody will think it's a silly question.", "es": "Deberías preguntar en el canal del equipo. Nadie va a pensar que es una pregunta tonta." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué necesita cada pull request antes del merge?", "opciones": ["Al menos una aprobación", "Tres tests", "La firma del cliente"], "correcta": 0,
+        "explicacion": "\"Every pull request must have at least one approval\"." },
+      { "pregunta": "¿Qué días tiene que ir Ana a la oficina?", "opciones": ["Todos los días", "Martes y jueves", "Solo los lunes"], "correcta": 1,
+        "explicacion": "\"You only have to come on Tuesdays and Thursdays\"." },
+      { "pregunta": "¿Qué debería hacer Ana si se traba?", "opciones": ["Esperar al día siguiente", "Preguntar en el canal del equipo", "Llamar a su jefe"], "correcta": 1,
+        "explicacion": "\"You should ask in the team channel\"." }
+    ] },
+  { "id": "en-intermedio-05-d03", "titulo": "Consejos para la entrevista", "situacion": "Carlos le pide consejos a María para su primera entrevista.",
+    "lineas": [
+      { "quien": "Carlos", "en": "I have an interview next week. What should I study?", "es": "Tengo una entrevista la próxima semana. ¿Qué debería estudiar?" },
+      { "quien": "María", "en": "You should review the JavaScript basics first: arrays, objects and promises.", "es": "Primero deberías repasar lo básico de JavaScript: arrays, objetos y promesas." },
+      { "quien": "Carlos", "en": "Do I have to know React really well?", "es": "¿Tengo que saber React muy bien?" },
+      { "quien": "María", "en": "It might help, but it's a junior position. You don't have to be an expert.", "es": "Podría ayudar, pero es un puesto junior. No tienes que ser experto." },
+      { "quien": "Carlos", "en": "OK. What about the English part?", "es": "Ok. ¿Y la parte de inglés?" },
+      { "quien": "María", "en": "You'd better practice your introduction out loud. They might ask you to speak in English.", "es": "Mejor practica tu presentación en voz alta. Quizás te pidan hablar en inglés." },
+      { "quien": "Carlos", "en": "That's good advice. I'll practice every night.", "es": "Buen consejo. Voy a practicar todas las noches." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué debería repasar Carlos primero?", "opciones": ["Lo básico de JavaScript", "React avanzado", "Diseño gráfico"], "correcta": 0,
+        "explicacion": "\"You should review the JavaScript basics first\"." },
+      { "pregunta": "¿Tiene que ser experto en React?", "opciones": ["Sí, es obligatorio", "No, porque es un puesto junior", "No lo dicen"], "correcta": 1,
+        "explicacion": "\"It's a junior position. You don't have to be an expert\"." },
+      { "pregunta": "¿Qué le aconseja María practicar en voz alta?", "opciones": ["Su presentación en inglés", "Los nombres de las librerías", "Las preguntas de SQL"], "correcta": 0,
+        "explicacion": "\"You'd better practice your introduction out loud. They might ask you to speak in English\"." }
+    ] }
+]

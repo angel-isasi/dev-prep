@@ -1,0 +1,314 @@
+[
+  {
+    "id": "en-intermedio-09-w01",
+    "en": "by",
+    "es": "por (quién hace la acción)",
+    "pron": "bái",
+    "tipo": "preposicion",
+    "ejemplo": {
+      "en": "The bug was reported by a user.",
+      "es": "El error lo reportó un usuario."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w02",
+    "en": "approve",
+    "es": "aprobar",
+    "pron": "aprúv",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The pull request was approved this morning.",
+      "es": "El pull request se aprobó esta mañana."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w03",
+    "en": "reject",
+    "es": "rechazar",
+    "pron": "riyékt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "My first design was rejected.",
+      "es": "Mi primer diseño fue rechazado."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w05",
+    "en": "detect",
+    "es": "detectar",
+    "pron": "ditékt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The problem was detected by the tests.",
+      "es": "Las pruebas detectaron el problema."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w06",
+    "en": "affect",
+    "es": "afectar",
+    "pron": "afékt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Thousands of users were affected.",
+      "es": "Miles de usuarios se vieron afectados."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w08",
+    "en": "resolve",
+    "es": "resolver",
+    "pron": "rizólv",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The issue has been resolved.",
+      "es": "El problema se resolvió."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w09",
+    "en": "reproduce",
+    "es": "reproducir",
+    "pron": "riprodús",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The bug can't be reproduced on my laptop.",
+      "es": "El error no se puede reproducir en mi laptop."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w10",
+    "en": "replace",
+    "es": "reemplazar",
+    "pron": "ripléis",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The old button was replaced with a new component.",
+      "es": "El botón viejo se reemplazó por un componente nuevo."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w13",
+    "en": "migrate",
+    "es": "migrar",
+    "pron": "máigreit",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The database was migrated last weekend.",
+      "es": "La base de datos se migró el fin de semana pasado."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w14",
+    "en": "generate",
+    "es": "generar",
+    "pron": "yénereit",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The report is generated every night.",
+      "es": "El reporte se genera cada noche."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w15",
+    "en": "encrypt",
+    "es": "cifrar / encriptar",
+    "pron": "enkrípt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Passwords are encrypted before they're saved.",
+      "es": "Las contraseñas se cifran antes de guardarse."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w16",
+    "en": "track",
+    "es": "registrar / hacer seguimiento",
+    "pron": "trák",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "All the tasks are tracked in Jira.",
+      "es": "Todas las tareas se registran en Jira."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w17",
+    "en": "notify",
+    "es": "notificar / avisar",
+    "pron": "nóurifai",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "You'll be notified by email.",
+      "es": "Te avisarán por correo."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w18",
+    "en": "publish",
+    "es": "publicar",
+    "pron": "páblish",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The package is published on npm.",
+      "es": "El paquete está publicado en npm."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w19",
+    "en": "archive",
+    "es": "archivar",
+    "pron": "árkaiv",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Old projects are archived after a year.",
+      "es": "Los proyectos viejos se archivan después de un año."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w20",
+    "en": "configure",
+    "es": "configurar",
+    "pron": "konfíguiur",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The server is configured with environment variables.",
+      "es": "El servidor se configura con variables de entorno."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w22",
+    "en": "patch",
+    "es": "parche / parchar",
+    "pron": "pách",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A patch was released on Monday.",
+      "es": "El lunes se lanzó un parche."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w23",
+    "en": "hotfix",
+    "es": "arreglo urgente (en producción)",
+    "pron": "játfiks",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A hotfix was deployed an hour later.",
+      "es": "Una hora después se desplegó un arreglo urgente."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w24",
+    "en": "changelog",
+    "es": "registro de cambios",
+    "pron": "chéinchlog",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Every change is listed in the changelog.",
+      "es": "Cada cambio aparece en el registro de cambios."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w25",
+    "en": "release notes",
+    "es": "notas de la versión",
+    "pron": "rilís nóuts",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "New features are described in the release notes.",
+      "es": "Las funcionalidades nuevas se describen en las notas de la versión."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w26",
+    "en": "root cause",
+    "es": "causa raíz",
+    "pron": "rút kóz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The root cause hasn't been found yet.",
+      "es": "Todavía no se encuentra la causa raíz."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w27",
+    "en": "incident",
+    "es": "incidente",
+    "pron": "ínsident",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The incident was reported at 3 a.m.",
+      "es": "El incidente se reportó a las 3 de la mañana."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w29",
+    "en": "ticket",
+    "es": "ticket / tarea registrada",
+    "pron": "tíket",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A ticket was created for the bug.",
+      "es": "Se creó un ticket para el error."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w30",
+    "en": "postmortem",
+    "es": "análisis posterior (de un incidente)",
+    "pron": "poustmórtem",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A postmortem is written after every incident.",
+      "es": "Después de cada incidente se escribe un análisis."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w32",
+    "en": "manually",
+    "es": "manualmente / a mano",
+    "pron": "mániuali",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "The images were uploaded manually.",
+      "es": "Las imágenes se subieron a mano."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w33",
+    "en": "overwrite",
+    "es": "sobrescribir",
+    "pron": "ouverráit",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "overwrote",
+      "participio": "overwritten"
+    },
+    "ejemplo": {
+      "en": "My changes were overwritten by mistake.",
+      "es": "Mis cambios se sobrescribieron por error."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w34",
+    "en": "upgrade",
+    "es": "actualizar (a una versión mayor)",
+    "pron": "apgréid",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The project was upgraded to React 19.",
+      "es": "El proyecto se actualizó a React 19."
+    }
+  },
+  {
+    "id": "en-intermedio-09-w35",
+    "en": "accidentally",
+    "es": "por accidente",
+    "pron": "aksidéntali",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "The branch was accidentally deleted.",
+      "es": "La rama se borró por accidente."
+    }
+  }
+]

@@ -1,0 +1,340 @@
+[
+  {
+    "id": "en-trabajo-04-w01",
+    "en": "actually",
+    "es": "en realidad (no actualmente)",
+    "pron": "ákchuali",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "Actually, I prefer working with React.",
+      "es": "En realidad, prefiero trabajar con React."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w02",
+    "en": "actual",
+    "es": "real (no actual)",
+    "pron": "ákchual",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The actual problem was the cache.",
+      "es": "El problema real era la caché."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w03",
+    "en": "assist",
+    "es": "ayudar (no asistir)",
+    "pron": "asíst",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Can I assist you with the setup?",
+      "es": "¿Te ayudo con la instalación?"
+    }
+  },
+  {
+    "id": "en-trabajo-04-w04",
+    "en": "career",
+    "es": "trayectoria profesional (no carrera universitaria)",
+    "pron": "karíer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I want to start my career in frontend.",
+      "es": "Quiero empezar mi vida profesional en frontend."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w05",
+    "en": "major",
+    "es": "carrera universitaria / especialidad",
+    "pron": "méiyor",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My major is Systems Engineering.",
+      "es": "Mi carrera es Ingeniería de Sistemas."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w06",
+    "en": "college",
+    "es": "universidad / instituto",
+    "pron": "kólich",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I learned C in my first year of college.",
+      "es": "Aprendí C en mi primer año de universidad."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w07",
+    "en": "sensible",
+    "es": "sensato (no sensible)",
+    "pron": "sénsibol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "That's a sensible solution.",
+      "es": "Esa es una solución sensata."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w08",
+    "en": "sensitive",
+    "es": "sensible / delicado",
+    "pron": "sénsitiv",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Passwords are sensitive data.",
+      "es": "Las contraseñas son datos delicados."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w10",
+    "en": "lecture",
+    "es": "clase magistral (no lectura)",
+    "pron": "lékchur",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The lecture was about databases.",
+      "es": "La clase fue sobre bases de datos."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w11",
+    "en": "success",
+    "es": "éxito",
+    "pron": "saksés",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The launch was a success.",
+      "es": "El lanzamiento fue un éxito."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w13",
+    "en": "exit",
+    "es": "salida (no éxito)",
+    "pron": "éksit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Press Escape to exit the menu.",
+      "es": "Presiona Escape para salir del menú."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w14",
+    "en": "pretend",
+    "es": "fingir (no pretender)",
+    "pron": "priténd",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Don't pretend to understand. Just ask.",
+      "es": "No finjas que entiendes. Solo pregunta."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w15",
+    "en": "intend",
+    "es": "tener intención de / pretender",
+    "pron": "inténd",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I intend to learn TypeScript this year.",
+      "es": "Pretendo aprender TypeScript este año."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w18",
+    "en": "relatives",
+    "es": "parientes (no relativos)",
+    "pron": "rélativs",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My relatives live in Cusco.",
+      "es": "Mis parientes viven en Cusco."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w19",
+    "en": "carpet",
+    "es": "alfombra (no carpeta)",
+    "pron": "kárpet",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The office has a gray carpet.",
+      "es": "La oficina tiene una alfombra gris."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w20",
+    "en": "sympathetic",
+    "es": "comprensivo (no simpático)",
+    "pron": "simpazétik",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "My boss was very sympathetic.",
+      "es": "Mi jefe fue muy comprensivo."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w21",
+    "en": "compromise",
+    "es": "acuerdo en el que ambos ceden (no compromiso)",
+    "pron": "kómpromaiz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We found a compromise on the design.",
+      "es": "Llegamos a un acuerdo sobre el diseño."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w22",
+    "en": "commitment",
+    "es": "compromiso",
+    "pron": "komítment",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This job needs a full-time commitment.",
+      "es": "Este trabajo necesita un compromiso a tiempo completo."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w23",
+    "en": "fabric",
+    "es": "tela (no fábrica)",
+    "pron": "fábrik",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This shirt is made of a soft fabric.",
+      "es": "Esta camisa es de una tela suave."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w24",
+    "en": "factory",
+    "es": "fábrica",
+    "pron": "fáktori",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My uncle works in a factory.",
+      "es": "Mi tío trabaja en una fábrica."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w25",
+    "en": "discuss",
+    "es": "conversar sobre (no discutir peleando)",
+    "pron": "diskás",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Let's discuss the design tomorrow.",
+      "es": "Conversemos sobre el diseño mañana."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w26",
+    "en": "argue",
+    "es": "discutir (pelear)",
+    "pron": "árguiu",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "They argue about tabs and spaces.",
+      "es": "Discuten sobre tabs y espacios."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w27",
+    "en": "remind",
+    "es": "recordarle algo a alguien",
+    "pron": "rimáind",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Can you remind me about the meeting?",
+      "es": "¿Me recuerdas lo de la reunión?"
+    }
+  },
+  {
+    "id": "en-trabajo-04-w29",
+    "en": "summary",
+    "es": "resumen",
+    "pron": "sámari",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Here's a short summary of the meeting.",
+      "es": "Aquí va un resumen corto de la reunión."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w30",
+    "en": "make a mistake",
+    "es": "cometer un error",
+    "pron": "méik a mistéik",
+    "tipo": "expresion",
+    "formas": {
+      "pasado": "made a mistake",
+      "participio": "made a mistake"
+    },
+    "ejemplo": {
+      "en": "I made a mistake in the query.",
+      "es": "Cometí un error en la consulta."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w31",
+    "en": "ask a question",
+    "es": "hacer una pregunta",
+    "pron": "ásk a kuéschon",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Can I ask a question about the role?",
+      "es": "¿Puedo hacer una pregunta sobre el puesto?"
+    }
+  },
+  {
+    "id": "en-trabajo-04-w32",
+    "en": "pay attention",
+    "es": "prestar atención",
+    "pron": "péi aténshon",
+    "tipo": "expresion",
+    "formas": {
+      "pasado": "paid attention",
+      "participio": "paid attention"
+    },
+    "ejemplo": {
+      "en": "Pay attention to the error message.",
+      "es": "Presta atención al mensaje de error."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w33",
+    "en": "years old",
+    "es": "años (de edad)",
+    "pron": "yíers óuld",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm twenty-one years old.",
+      "es": "Tengo veintiún años."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w34",
+    "en": "attempt",
+    "es": "intento / intentar",
+    "pron": "atémpt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "It worked on the third attempt.",
+      "es": "Funcionó al tercer intento."
+    }
+  },
+  {
+    "id": "en-trabajo-04-w35",
+    "en": "application",
+    "es": "postulación / aplicación",
+    "pron": "aplikéishon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I sent my application last week.",
+      "es": "Envié mi postulación la semana pasada."
+    }
+  }
+]

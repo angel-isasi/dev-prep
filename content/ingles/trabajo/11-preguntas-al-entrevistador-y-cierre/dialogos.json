@@ -1,0 +1,65 @@
+[
+  { "id": "en-trabajo-11-d01", "titulo": "Tus preguntas sobre el equipo", "situacion": "Al final de la entrevista técnica, Sarah le da la palabra a Luis.",
+    "lineas": [
+      { "quien": "Sarah", "en": "We have about ten minutes left. Do you have any questions for us?", "es": "Nos quedan unos diez minutos. ¿Tienes alguna pregunta para nosotros?" },
+      { "quien": "Luis", "en": "Yes, I have a couple. How big is the team I'd be joining?", "es": "Sí, tengo un par. ¿Qué tan grande es el equipo al que entraría?" },
+      { "quien": "Sarah", "en": "It's six people: four developers, a designer and a product manager.", "es": "Son seis personas: cuatro desarrolladores, una diseñadora y un product manager." },
+      { "quien": "Luis", "en": "Great. And what does your tech stack look like?", "es": "Genial. ¿Y qué tecnologías usan?" },
+      { "quien": "Sarah", "en": "React with TypeScript on the frontend, and Node on the backend.", "es": "React con TypeScript en el frontend y Node en el backend." },
+      { "quien": "Luis", "en": "What does onboarding look like for a junior developer?", "es": "¿Cómo es el onboarding para un desarrollador junior?" },
+      { "quien": "Sarah", "en": "You get a mentor, and in the first two weeks you fix small bugs to learn the codebase.", "es": "Te asignan un mentor y en las dos primeras semanas arreglas bugs pequeños para conocer el código." },
+      { "quien": "Luis", "en": "That sounds great. What does a typical day look like?", "es": "Suena muy bien. ¿Cómo es un día típico?" },
+      { "quien": "Sarah", "en": "Standup at ten, then mostly coding. We try to keep meetings short.", "es": "Daily a las diez y luego sobre todo programar. Tratamos de que las reuniones sean cortas." },
+      { "quien": "Luis", "en": "Perfect. Thanks, that's really helpful.", "es": "Perfecto. Gracias, me ayuda mucho." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuántos desarrolladores hay en el equipo?", "opciones": ["Seis", "Cuatro", "Diez"],
+        "correcta": 1, "explicacion": "El equipo es de seis personas, pero desarrolladores son cuatro: \"four developers, a designer and a product manager\"." },
+      { "pregunta": "¿Qué hace un junior en sus dos primeras semanas?", "opciones": ["Arregla bugs pequeños para conocer el código", "Solo lee documentación", "Diseña una función nueva"],
+        "correcta": 0, "explicacion": "\"In the first two weeks you fix small bugs to learn the codebase\"." },
+      { "pregunta": "¿Cómo describe Sarah un día típico?", "opciones": ["Muchas reuniones largas", "Daily a las diez y luego sobre todo programar", "Trabajo solo, sin reuniones"],
+        "correcta": 1, "explicacion": "\"Standup at ten, then mostly coding\"." }
+    ] },
+  { "id": "en-trabajo-11-d02", "titulo": "Salario y disponibilidad", "situacion": "Ana habla con Tom, el reclutador, en la llamada final.",
+    "lineas": [
+      { "quien": "Tom", "en": "The team really liked you. Can I ask about your salary expectations?", "es": "Al equipo le gustaste mucho. ¿Puedo preguntarte por tus expectativas salariales?" },
+      { "quien": "Ana", "en": "Sure. Could you first tell me the salary range for this position?", "es": "Claro. ¿Primero me podrías decir el rango salarial de este puesto?" },
+      { "quien": "Tom", "en": "Of course. It's between eighteen hundred and twenty-two hundred dollars a month.", "es": "Por supuesto. Es entre mil ochocientos y dos mil doscientos dólares al mes." },
+      { "quien": "Ana", "en": "Thanks. Based on my research, I was looking for something around two thousand.", "es": "Gracias. Según lo que investigué, buscaba algo cerca de dos mil." },
+      { "quien": "Ana", "en": "But I'm open to discussing it.", "es": "Pero estoy abierta a conversarlo." },
+      { "quien": "Tom", "en": "That fits our range. And when would you be available to start?", "es": "Eso entra en nuestro rango. ¿Y cuándo podrías empezar?" },
+      { "quien": "Ana", "en": "I finish my semester in two weeks, so I could start after that.", "es": "Termino mi ciclo en dos semanas, así que podría empezar después." },
+      { "quien": "Tom", "en": "That works for us. Do you have any other questions?", "es": "Eso nos funciona. ¿Tienes alguna otra pregunta?" },
+      { "quien": "Ana", "en": "Just one. When can I expect to hear back?", "es": "Solo una. ¿Cuándo puedo esperar una respuesta?" },
+      { "quien": "Tom", "en": "By Friday at the latest. Thank you for your time, Ana.", "es": "A más tardar el viernes. Gracias por tu tiempo, Ana." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué hace Ana antes de dar su cifra?", "opciones": ["Pide el rango salarial del puesto", "Dice que acepta cualquier salario", "Cambia de tema"],
+        "correcta": 0, "explicacion": "Ana pregunta \"Could you first tell me the salary range for this position?\"" },
+      { "pregunta": "¿Cuándo puede empezar Ana?", "opciones": ["De inmediato", "En dos semanas, cuando termine su ciclo", "En dos meses"],
+        "correcta": 1, "explicacion": "\"I finish my semester in two weeks, so I could start after that\"." },
+      { "pregunta": "¿Cuándo le van a responder?", "opciones": ["El lunes", "A más tardar el viernes", "No lo dicen"],
+        "correcta": 1, "explicacion": "Tom dice \"By Friday at the latest\"." }
+    ] },
+  { "id": "en-trabajo-11-d03", "titulo": "Trabajo remoto desde Perú", "situacion": "María, desde Lima, pregunta por la modalidad a Carlos, el hiring manager de una empresa de Estados Unidos.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Is there anything else you'd like to know?", "es": "¿Hay algo más que quieras saber?" },
+      { "quien": "María", "en": "Yes. Is this role fully remote?", "es": "Sí. ¿Este puesto es totalmente remoto?" },
+      { "quien": "Carlos", "en": "It is. Most of the team is in the US, but we have people in Mexico and Colombia too.", "es": "Sí. Casi todo el equipo está en Estados Unidos, pero también hay gente en México y Colombia." },
+      { "quien": "María", "en": "Great. What are the core hours?", "es": "Genial. ¿Cuál es el horario en que todos deben estar conectados?" },
+      { "quien": "Carlos", "en": "From eleven to four, Eastern Time. Would that work for you?", "es": "De once a cuatro, hora del este. ¿Te funcionaría?" },
+      { "quien": "María", "en": "Yes, Lima is very close to Eastern Time, so that's easy for me.", "es": "Sí, Lima tiene casi la misma hora que el este, así que es fácil para mí." },
+      { "quien": "María", "en": "Do you provide a laptop for remote employees?", "es": "¿Le dan una laptop a los empleados remotos?" },
+      { "quien": "Carlos", "en": "Yes, we ship one to you before your start date.", "es": "Sí, te la enviamos antes de tu fecha de inicio." },
+      { "quien": "María", "en": "Perfect. Thank you for your time. I'm really excited about this opportunity.", "es": "Perfecto. Gracias por tu tiempo. Me entusiasma mucho esta oportunidad." },
+      { "quien": "Carlos", "en": "Thank you, María. The recruiter will contact you about the next steps.", "es": "Gracias, María. El reclutador te contactará para los siguientes pasos." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Dónde está la mayor parte del equipo?", "opciones": ["En Perú", "En Estados Unidos", "En México"],
+        "correcta": 1, "explicacion": "\"Most of the team is in the US\"." },
+      { "pregunta": "¿Por qué el horario no es un problema para María?", "opciones": ["Porque trabaja de noche", "Porque Lima tiene casi la misma hora que el este de Estados Unidos", "Porque no tiene que conectarse"],
+        "correcta": 1, "explicacion": "\"Lima is very close to Eastern Time, so that's easy for me\"." },
+      { "pregunta": "¿Qué pasa después de la entrevista?", "opciones": ["Carlos le manda la oferta hoy", "El reclutador la contactará para los siguientes pasos", "María debe escribir primero"],
+        "correcta": 1, "explicacion": "\"The recruiter will contact you about the next steps\"." }
+    ] }
+]

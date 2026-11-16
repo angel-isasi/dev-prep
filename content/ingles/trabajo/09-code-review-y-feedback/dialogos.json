@@ -1,0 +1,64 @@
+[
+  { "id": "en-trabajo-09-d01", "titulo": "Tu primer PR revisado", "situacion": "Tom revisó el pull request de Luis y lo conversan en una llamada.",
+    "lineas": [
+      { "quien": "Tom", "en": "Hey Luis, I left a few comments on your PR.", "es": "Hola Luis, dejé algunos comentarios en tu PR." },
+      { "quien": "Luis", "en": "Thanks! I saw them. Which ones are blocking?", "es": "¡Gracias! Los vi. ¿Cuáles bloquean?" },
+      { "quien": "Tom", "en": "Only one. The filter breaks when the list is empty.", "es": "Solo uno. El filtro falla cuando la lista está vacía." },
+      { "quien": "Luis", "en": "Good catch. I'll add a test for that case.", "es": "Bien visto. Agrego un test para ese caso." },
+      { "quien": "Tom", "en": "The rest are nits, like the variable names.", "es": "El resto son detalles, como los nombres de las variables." },
+      { "quien": "Luis", "en": "About the names, I'd suggest keeping them consistent with the API.", "es": "Sobre los nombres, sugeriría mantenerlos igual que en la API." },
+      { "quien": "Tom", "en": "Fair point. Keep them, then.", "es": "Buen punto. Entonces déjalos." },
+      { "quien": "Tom", "en": "One more thing: the date logic is duplicated in two places.", "es": "Una cosa más: la lógica de fechas está duplicada en dos lugares." },
+      { "quien": "Luis", "en": "Right. Could we extract it into a helper?", "es": "Cierto. ¿Podríamos sacarla a una función auxiliar?" },
+      { "quien": "Tom", "en": "Yes, please. Ping me when it's ready and I'll approve it.", "es": "Sí, por favor. Avísame cuando esté listo y lo apruebo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuál es el único comentario que bloquea?", "opciones": ["Los nombres de variables", "El filtro falla con una lista vacía", "Falta documentación"],
+        "correcta": 1, "explicacion": "Tom dice \"Only one. The filter breaks when the list is empty\"." },
+      { "pregunta": "¿Por qué Tom acepta dejar los nombres como están?", "opciones": ["Porque Luis explica que coinciden con la API", "Porque no tiene tiempo", "Porque eran nombres perfectos"],
+        "correcta": 0, "explicacion": "Luis da una razón (\"consistent with the API\") y Tom responde \"Fair point\"." },
+      { "pregunta": "¿Qué pasa cuando Luis termine los cambios?", "opciones": ["Tom pedirá más cambios", "Tom aprobará el PR", "Luis hará merge sin revisión"],
+        "correcta": 1, "explicacion": "\"Ping me when it's ready and I'll approve it\"." }
+    ] },
+  { "id": "en-trabajo-09-d02", "titulo": "Sin ponerse a la defensiva", "situacion": "Sarah, la líder técnica, comenta el código de Ana, que es nueva en el equipo.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Ana, I requested changes on your PR. Do you have a minute?", "es": "Ana, pedí cambios en tu PR. ¿Tienes un minuto?" },
+      { "quien": "Ana", "en": "Sure. I'm not sure I follow your second comment.", "es": "Claro. No estoy segura de entender tu segundo comentario." },
+      { "quien": "Sarah", "en": "Your function changes the original array. That's a side effect.", "es": "Tu función cambia el array original. Eso es un efecto secundario." },
+      { "quien": "Sarah", "en": "Other components use that array, so it can cause bugs.", "es": "Otros componentes usan ese array, así que puede causar bugs." },
+      { "quien": "Ana", "en": "Oh, I see. So I should return a new array instead?", "es": "Ah, entiendo. ¿Entonces debería devolver un array nuevo?" },
+      { "quien": "Sarah", "en": "Exactly. You could use map or the spread operator.", "es": "Exacto. Podrías usar map o el operador spread." },
+      { "quien": "Ana", "en": "Got it. And the number sixty on line forty?", "es": "Entendido. ¿Y el número sesenta de la línea cuarenta?" },
+      { "quien": "Sarah", "en": "It's a magic number. Put it in a constant with a clear name.", "es": "Es un número mágico. Ponlo en una constante con un nombre claro." },
+      { "quien": "Ana", "en": "Makes sense. Thanks for the feedback, I'll fix both today.", "es": "Tiene sentido. Gracias por los comentarios, arreglo los dos hoy." },
+      { "quien": "Sarah", "en": "Great. And don't take it personally, the rest looks really good.", "es": "Genial. Y no te lo tomes personal, el resto se ve muy bien." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuál es el problema de la función de Ana?", "opciones": ["Es muy lenta", "Modifica el array original", "No tiene nombre"],
+        "correcta": 1, "explicacion": "\"Your function changes the original array. That's a side effect\"." },
+      { "pregunta": "¿Qué le sugiere Sarah con el número sesenta?", "opciones": ["Borrarlo", "Ponerlo en una constante con un nombre claro", "Cambiarlo por cien"],
+        "correcta": 1, "explicacion": "\"Put it in a constant with a clear name\"." },
+      { "pregunta": "¿Cómo reacciona Ana a las críticas?", "opciones": ["Se pone a la defensiva", "Pide aclaración y acepta los cambios", "Le pide a otra persona que revise"],
+        "correcta": 1, "explicacion": "Ana pregunta lo que no entiende y termina con \"Thanks for the feedback, I'll fix both today\"." }
+    ] },
+  { "id": "en-trabajo-09-d03", "titulo": "Revisar el código de otro", "situacion": "Carlos le pide a María que revise su PR. María es junior y no quiere sonar brusca.",
+    "lineas": [
+      { "quien": "Carlos", "en": "María, could you review my PR when you have time?", "es": "María, ¿podrías revisar mi PR cuando tengas tiempo?" },
+      { "quien": "María", "en": "Sure. I just looked at it. The diff is small, so it was quick.", "es": "Claro. Acabo de verlo. Son pocos cambios, así que fue rápido." },
+      { "quien": "Carlos", "en": "Great. Anything I should change?", "es": "Genial. ¿Algo que deba cambiar?" },
+      { "quien": "María", "en": "Just a couple of suggestions. They're non-blocking.", "es": "Solo un par de sugerencias. No bloquean." },
+      { "quien": "María", "en": "I think there's a leftover console.log in the header.", "es": "Creo que quedó un console.log olvidado en el header." },
+      { "quien": "Carlos", "en": "Oops, good catch. I'll remove it.", "es": "Uy, bien visto. Lo quito." },
+      { "quien": "María", "en": "Also, what do you think about adding a test for the error case?", "es": "Además, ¿qué te parece agregar un test para el caso de error?" },
+      { "quien": "Carlos", "en": "Good idea, but it's out of scope here. I'll add it in a separate PR.", "es": "Buena idea, pero está fuera del alcance aquí. Lo agrego en otro PR." },
+      { "quien": "María", "en": "Sounds good. LGTM, I'll approve it.", "es": "Me parece bien. Se ve bien, lo apruebo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cómo describe María sus comentarios?", "opciones": ["Como bloqueantes", "Como sugerencias que no bloquean", "Como errores graves"],
+        "correcta": 1, "explicacion": "\"Just a couple of suggestions. They're non-blocking\"." },
+      { "pregunta": "¿Qué hará Carlos con el test para el caso de error?", "opciones": ["Lo agrega en este PR", "Lo agrega en otro PR", "No lo va a agregar"],
+        "correcta": 1, "explicacion": "\"I'll add it in a separate PR\"." },
+      { "pregunta": "¿Cómo termina la revisión?", "opciones": ["María pide cambios", "María aprueba el PR", "Carlos cierra el PR"],
+        "correcta": 1, "explicacion": "María dice \"LGTM, I'll approve it\"." }
+    ] }
+]

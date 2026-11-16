@@ -1,0 +1,60 @@
+[
+  { "id": "en-intermedio-09-d01", "titulo": "Reporte de un incidente", "situacion": "Sarah, la gerente, le pregunta a Luis qué pasó con el sitio anoche.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Luis, what happened with the site last night?", "es": "Luis, ¿qué pasó con el sitio anoche?" },
+      { "quien": "Luis", "en": "There was an outage. The site was down for about forty minutes.", "es": "Hubo una caída. El sitio estuvo abajo unos cuarenta minutos." },
+      { "quien": "Sarah", "en": "How many users were affected?", "es": "¿A cuántos usuarios afectó?" },
+      { "quien": "Luis", "en": "Around two thousand. The problem was detected by our monitoring at 2 a.m.", "es": "A unos dos mil. Nuestro monitoreo detectó el problema a las 2 de la mañana." },
+      { "quien": "Sarah", "en": "And was the root cause found?", "es": "¿Y se encontró la causa raíz?" },
+      { "quien": "Luis", "en": "Yes. It was caused by an expired SSL certificate.", "es": "Sí. La causó un certificado SSL vencido." },
+      { "quien": "Sarah", "en": "Okay. Has it been renewed?", "es": "Bueno. ¿Ya se renovó?" },
+      { "quien": "Luis", "en": "It was renewed this morning, and a reminder was added to the calendar.", "es": "Se renovó esta mañana y se agregó un recordatorio al calendario." },
+      { "quien": "Sarah", "en": "Good. Please make sure a postmortem is written by Friday.", "es": "Bien. Por favor, asegúrate de que el análisis del incidente esté escrito para el viernes." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuánto tiempo estuvo caído el sitio?", "opciones": ["Unos cuarenta minutos", "Dos horas", "Toda la noche"],
+        "correcta": 0, "explicacion": "Luis dice \"The site was down for about forty minutes\"." },
+      { "pregunta": "¿Qué causó la caída?", "opciones": ["Un error en el código", "Un certificado SSL vencido", "Demasiados usuarios"],
+        "correcta": 1, "explicacion": "Luis dice \"It was caused by an expired SSL certificate\"." },
+      { "pregunta": "¿Qué pide Sarah para el viernes?", "opciones": ["Un nuevo certificado", "Una reunión con los usuarios", "El análisis escrito del incidente"],
+        "correcta": 2, "explicacion": "Sarah dice \"make sure a postmortem is written by Friday\"." }
+    ] },
+  { "id": "en-intermedio-09-d02", "titulo": "Leer el changelog", "situacion": "El build de Ana falla después de actualizar un paquete y Tom la ayuda.",
+    "lineas": [
+      { "quien": "Ana", "en": "Tom, my build is failing after the update.", "es": "Tom, mi build está fallando después de la actualización." },
+      { "quien": "Tom", "en": "Which package was updated?", "es": "¿Qué paquete se actualizó?" },
+      { "quien": "Ana", "en": "The date library. It was upgraded to version five.", "es": "La librería de fechas. Se actualizó a la versión cinco." },
+      { "quien": "Tom", "en": "Did you read the changelog? A lot of functions were removed.", "es": "¿Leíste el registro de cambios? Se eliminaron muchas funciones." },
+      { "quien": "Ana", "en": "Oh. The format function is used in ten files.", "es": "Ay. La función format se usa en diez archivos." },
+      { "quien": "Tom", "en": "That one wasn't removed, it was renamed. Look, it's in the release notes.", "es": "Esa no se eliminó, se renombró. Mira, está en las notas de la versión." },
+      { "quien": "Ana", "en": "You're right. It's called formatDate now.", "es": "Tienes razón. Ahora se llama formatDate." },
+      { "quien": "Tom", "en": "Exactly. And the old name will be removed completely in the next version.", "es": "Exacto. Y el nombre viejo se eliminará por completo en la próxima versión." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué paquete se actualizó?", "opciones": ["React", "La librería de fechas", "Vite"],
+        "correcta": 1, "explicacion": "Ana dice \"The date library. It was upgraded to version five\"." },
+      { "pregunta": "¿Qué le pasó a la función format?", "opciones": ["Se eliminó", "Se renombró", "Se volvió más lenta"],
+        "correcta": 1, "explicacion": "Tom dice \"That one wasn't removed, it was renamed\"." },
+      { "pregunta": "¿Qué pasará en la próxima versión?", "opciones": ["Se eliminará el nombre viejo", "Volverá la función format", "Se agregarán más funciones"],
+        "correcta": 0, "explicacion": "Tom dice \"the old name will be removed completely in the next version\"." }
+    ] },
+  { "id": "en-intermedio-09-d03", "titulo": "¿Quién borró mi rama?", "situacion": "Carlos no encuentra su rama en el repositorio y le pregunta a María.",
+    "lineas": [
+      { "quien": "Carlos", "en": "María, my branch is gone. Was it deleted?", "es": "María, mi rama desapareció. ¿La borraron?" },
+      { "quien": "María", "en": "Let me check. Yes, it was deleted on Tuesday.", "es": "Déjame ver. Sí, se borró el martes." },
+      { "quien": "Carlos", "en": "By whom? It wasn't merged yet.", "es": "¿Quién la borró? Todavía no estaba fusionada." },
+      { "quien": "María", "en": "It was deleted automatically. Old branches are removed after thirty days.", "es": "Se borró automáticamente. Las ramas viejas se eliminan después de treinta días." },
+      { "quien": "Carlos", "en": "I didn't know that. Can it be restored?", "es": "No lo sabía. ¿Se puede recuperar?" },
+      { "quien": "María", "en": "Yes. Deleted branches are kept on the server for another week.", "es": "Sí. Las ramas borradas se guardan en el servidor una semana más." },
+      { "quien": "Carlos", "en": "Phew. Please restore it, there are two days of work in it.", "es": "Uf. Recupérala, por favor, ahí hay dos días de trabajo." },
+      { "quien": "María", "en": "Done. And next time, push your changes more often.", "es": "Listo. Y la próxima vez, sube tus cambios más seguido." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuándo se borró la rama?", "opciones": ["El lunes", "El martes", "Hoy"],
+        "correcta": 1, "explicacion": "María dice \"it was deleted on Tuesday\"." },
+      { "pregunta": "¿Por qué se borró?", "opciones": ["María la borró por error", "Se borra automáticamente después de treinta días", "Carlos la fusionó"],
+        "correcta": 1, "explicacion": "María dice \"Old branches are removed after thirty days\"." },
+      { "pregunta": "¿Se pudo recuperar la rama?", "opciones": ["Sí", "No", "No se sabe"],
+        "correcta": 0, "explicacion": "María la recupera y dice \"Done\"." }
+    ] }
+]

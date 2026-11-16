@@ -1,0 +1,380 @@
+[
+  {
+    "id": "en-trabajo-11-w01",
+    "en": "ramp up",
+    "es": "ponerse al día, arrancar en un puesto",
+    "pron": "rámp áp",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "How long does it take a new developer to ramp up?",
+      "es": "¿Cuánto tarda un desarrollador nuevo en ponerse al día?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w02",
+    "en": "mentorship",
+    "es": "mentoría",
+    "pron": "méntorship",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Is there any mentorship for junior developers?",
+      "es": "¿Hay mentoría para los desarrolladores junior?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w03",
+    "en": "a typical day",
+    "es": "un día típico",
+    "pron": "a típikal déi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "What does a typical day look like for this role?",
+      "es": "¿Cómo es un día típico en este puesto?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w04",
+    "en": "career growth",
+    "es": "crecimiento profesional",
+    "pron": "karíir gróuz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What opportunities are there for career growth?",
+      "es": "¿Qué oportunidades de crecimiento profesional hay?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w05",
+    "en": "next steps",
+    "es": "siguientes pasos",
+    "pron": "nékst stéps",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What are the next steps in the process?",
+      "es": "¿Cuáles son los siguientes pasos del proceso?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w06",
+    "en": "hiring process",
+    "es": "proceso de selección",
+    "pron": "jáirin próses",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "How many interviews are there in the hiring process?",
+      "es": "¿Cuántas entrevistas tiene el proceso de selección?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w07",
+    "en": "how big is the team?",
+    "es": "¿qué tan grande es el equipo?",
+    "pron": "jáu bíg is de tíim",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "How big is the team I'd be joining?",
+      "es": "¿Qué tan grande es el equipo al que entraría?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w08",
+    "en": "work-life balance",
+    "es": "equilibrio entre trabajo y vida personal",
+    "pron": "uérk láif bálans",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "How does the team handle work-life balance?",
+      "es": "¿Cómo maneja el equipo el equilibrio entre trabajo y vida personal?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w09",
+    "en": "benefits",
+    "es": "beneficios",
+    "pron": "bénefits",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Could you tell me about the benefits?",
+      "es": "¿Me podrías contar sobre los beneficios?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w10",
+    "en": "salary expectations",
+    "es": "expectativas salariales",
+    "pron": "sálari ekspektéishons",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What are your salary expectations?",
+      "es": "¿Cuáles son tus expectativas salariales?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w11",
+    "en": "salary range",
+    "es": "rango salarial",
+    "pron": "sálari réiny",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What's the salary range for this position?",
+      "es": "¿Cuál es el rango salarial de este puesto?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w12",
+    "en": "negotiable",
+    "es": "negociable",
+    "pron": "nigóushiabol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Is the salary negotiable?",
+      "es": "¿El salario es negociable?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w13",
+    "en": "I'm open to discussing it",
+    "es": "estoy abierto a conversarlo",
+    "pron": "áim óupen tu diskásin it",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "That's my range, but I'm open to discussing it.",
+      "es": "Ese es mi rango, pero estoy abierto a conversarlo."
+    }
+  },
+  {
+    "id": "en-trabajo-11-w14",
+    "en": "notice period",
+    "es": "tiempo de preaviso",
+    "pron": "nóutis píriod",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I have a two-week notice period at my current job.",
+      "es": "Tengo dos semanas de preaviso en mi trabajo actual."
+    }
+  },
+  {
+    "id": "en-trabajo-11-w15",
+    "en": "start date",
+    "es": "fecha de inicio",
+    "pron": "stárt déit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Is the start date flexible?",
+      "es": "¿La fecha de inicio es flexible?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w16",
+    "en": "availability",
+    "es": "disponibilidad",
+    "pron": "aveilabíliti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What's your availability next week?",
+      "es": "¿Cuál es tu disponibilidad la próxima semana?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w17",
+    "en": "right away",
+    "es": "de inmediato",
+    "pron": "ráit auéi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I can start right away.",
+      "es": "Puedo empezar de inmediato."
+    }
+  },
+  {
+    "id": "en-trabajo-11-w18",
+    "en": "fully remote",
+    "es": "totalmente remoto",
+    "pron": "fúli rimóut",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Is this role fully remote?",
+      "es": "¿Este puesto es totalmente remoto?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w19",
+    "en": "core hours",
+    "es": "horas en que todos deben estar conectados",
+    "pron": "kór áuers",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Our core hours are ten to three, Eastern Time.",
+      "es": "Todos debemos estar conectados de diez a tres, hora del este."
+    }
+  },
+  {
+    "id": "en-trabajo-11-w20",
+    "en": "time off",
+    "es": "días libres, vacaciones",
+    "pron": "táim óf",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "How much paid time off do you offer?",
+      "es": "¿Cuántos días libres pagados ofrecen?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w21",
+    "en": "company culture",
+    "es": "cultura de la empresa",
+    "pron": "kámpani kálchur",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "How would you describe the company culture?",
+      "es": "¿Cómo describirías la cultura de la empresa?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w22",
+    "en": "learning budget",
+    "es": "presupuesto para aprender (cursos, libros)",
+    "pron": "lérnin báyet",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Do you have a learning budget for courses?",
+      "es": "¿Tienen un presupuesto para cursos?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w23",
+    "en": "performance review",
+    "es": "evaluación de desempeño",
+    "pron": "perfórmans riviú",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "How often do you have performance reviews?",
+      "es": "¿Cada cuánto tienen evaluaciones de desempeño?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w24",
+    "en": "hear back",
+    "es": "recibir respuesta",
+    "pron": "jíir bák",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "When can I expect to hear back?",
+      "es": "¿Cuándo puedo esperar una respuesta?"
+    },
+    "formas": {
+      "pasado": "heard",
+      "participio": "heard"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w25",
+    "en": "job offer",
+    "es": "oferta de trabajo",
+    "pron": "yób ófer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I got my first job offer!",
+      "es": "¡Recibí mi primera oferta de trabajo!"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w26",
+    "en": "recruiter",
+    "es": "reclutador",
+    "pron": "rikrúter",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The recruiter will call you on Monday.",
+      "es": "El reclutador te llamará el lunes."
+    }
+  },
+  {
+    "id": "en-trabajo-11-w27",
+    "en": "hiring manager",
+    "es": "jefe que contrata (tu futuro jefe)",
+    "pron": "jáirin mánayer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The next interview is with the hiring manager.",
+      "es": "La siguiente entrevista es con el jefe del puesto."
+    }
+  },
+  {
+    "id": "en-trabajo-11-w28",
+    "en": "thank you for your time",
+    "es": "gracias por tu tiempo",
+    "pron": "zánk iú for iór táim",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Thank you for your time today, Sarah.",
+      "es": "Gracias por tu tiempo hoy, Sarah."
+    }
+  },
+  {
+    "id": "en-trabajo-11-w29",
+    "en": "that works for me",
+    "es": "me funciona, me parece bien",
+    "pron": "dát uérks for mí",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "A start date in March? That works for me.",
+      "es": "¿Empezar en marzo? Me parece bien."
+    }
+  },
+  {
+    "id": "en-trabajo-11-w30",
+    "en": "candidate",
+    "es": "candidato",
+    "pron": "kándideit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What makes a candidate successful in this role?",
+      "es": "¿Qué hace que un candidato tenga éxito en este puesto?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w31",
+    "en": "probation period",
+    "es": "periodo de prueba",
+    "pron": "probéishon píriod",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Is there a probation period?",
+      "es": "¿Hay un periodo de prueba?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w32",
+    "en": "gross salary",
+    "es": "salario bruto",
+    "pron": "gróus sálari",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Is that the gross salary or after taxes?",
+      "es": "¿Ese es el salario bruto o después de impuestos?"
+    }
+  },
+  {
+    "id": "en-trabajo-11-w33",
+    "en": "take-home pay",
+    "es": "sueldo neto (lo que recibes)",
+    "pron": "téik jóum péi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My take-home pay is lower because of taxes.",
+      "es": "Mi sueldo neto es menor por los impuestos."
+    }
+  },
+  {
+    "id": "en-trabajo-11-w34",
+    "en": "contractor",
+    "es": "contratista, trabajador independiente",
+    "pron": "kóntraktor",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Would I be an employee or a contractor?",
+      "es": "¿Sería empleado o trabajador independiente?"
+    }
+  }
+]

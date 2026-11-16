@@ -1,0 +1,398 @@
+[
+  {
+    "id": "en-intermedio-11-w01",
+    "en": "deprecated",
+    "es": "obsoleto (aún funciona, pero se eliminará)",
+    "pron": "déprekeirid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This method is deprecated and will be removed.",
+      "es": "Este método está obsoleto y se eliminará."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w05",
+    "en": "returns",
+    "es": "devuelve",
+    "pron": "ritérns",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Returns a new array.",
+      "es": "Devuelve un array nuevo."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w06",
+    "en": "throws",
+    "es": "lanza (un error)",
+    "pron": "zróus",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Throws a TypeError if the value is null.",
+      "es": "Lanza un TypeError si el valor es null."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w07",
+    "en": "instance",
+    "es": "instancia",
+    "pron": "ínstans",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Creates a new instance of the class.",
+      "es": "Crea una nueva instancia de la clase."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w08",
+    "en": "usage",
+    "es": "uso / cómo se usa",
+    "pron": "iúsich",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "See the usage section below.",
+      "es": "Mira la sección de uso más abajo."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w09",
+    "en": "note",
+    "es": "nota",
+    "pron": "nóut",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Note: this API only works in the browser.",
+      "es": "Nota: esta API solo funciona en el navegador."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w10",
+    "en": "description",
+    "es": "descripción",
+    "pron": "diskrípshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Read the description of each parameter.",
+      "es": "Lee la descripción de cada parámetro."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w11",
+    "en": "reference",
+    "es": "referencia",
+    "pron": "réferens",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Check the API reference for details.",
+      "es": "Revisa la referencia de la API para ver los detalles."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w12",
+    "en": "overview",
+    "es": "resumen / visión general",
+    "pron": "óuverviu",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Start with the overview page.",
+      "es": "Empieza por la página de resumen."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w13",
+    "en": "getting started",
+    "es": "primeros pasos",
+    "pron": "guérin stárted",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The getting started guide takes ten minutes.",
+      "es": "La guía de primeros pasos toma diez minutos."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w14",
+    "en": "installation",
+    "es": "instalación",
+    "pron": "instaléishon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The installation is quick and simple.",
+      "es": "La instalación es rápida y sencilla."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w15",
+    "en": "prerequisite",
+    "es": "requisito previo",
+    "pron": "prirékuisit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Node 18 is a prerequisite.",
+      "es": "Node 18 es un requisito previo."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w16",
+    "en": "compatibility",
+    "es": "compatibilidad",
+    "pron": "kompatibíliti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Check the browser compatibility table.",
+      "es": "Revisa la tabla de compatibilidad de navegadores."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w17",
+    "en": "fallback",
+    "es": "alternativa / plan B",
+    "pron": "fólbak",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Show a fallback while the component loads.",
+      "es": "Muestra una alternativa mientras carga el componente."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w19",
+    "en": "side effect",
+    "es": "efecto secundario",
+    "pron": "sáid ifékt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Fetching data is a side effect.",
+      "es": "Traer datos es un efecto secundario."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w20",
+    "en": "signature",
+    "es": "firma (de una función)",
+    "pron": "sígnachur",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The signature shows the parameters and the return type.",
+      "es": "La firma muestra los parámetros y el tipo que devuelve."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w21",
+    "en": "attribute",
+    "es": "atributo",
+    "pron": "átribiut",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Add the alt attribute to every image.",
+      "es": "Agrega el atributo alt a cada imagen."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w22",
+    "en": "constructor",
+    "es": "constructor",
+    "pron": "konstráktor",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The constructor receives two arguments.",
+      "es": "El constructor recibe dos argumentos."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w23",
+    "en": "experimental",
+    "es": "experimental",
+    "pron": "eksperiméntal",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This feature is experimental.",
+      "es": "Esta funcionalidad es experimental."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w24",
+    "en": "legacy",
+    "es": "heredado / antiguo (código viejo)",
+    "pron": "légasi",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Class components are now legacy.",
+      "es": "Los componentes de clase ahora son código antiguo."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w25",
+    "en": "breaking change",
+    "es": "cambio que rompe la compatibilidad",
+    "pron": "bréikin chéinch",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Version 5 has a breaking change.",
+      "es": "La versión 5 tiene un cambio que rompe la compatibilidad."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w26",
+    "en": "specify",
+    "es": "especificar",
+    "pron": "spésifai",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Specify the port in the config file.",
+      "es": "Especifica el puerto en el archivo de configuración."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w27",
+    "en": "omit",
+    "es": "omitir",
+    "pron": "oumít",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "If you omit the second argument, it defaults to zero.",
+      "es": "Si omites el segundo argumento, vale cero por defecto."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w28",
+    "en": "invoke",
+    "es": "invocar / llamar (una función)",
+    "pron": "invóuk",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The function is invoked on every render.",
+      "es": "La función se invoca en cada render."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w29",
+    "en": "mutate",
+    "es": "mutar / modificar",
+    "pron": "miutéit",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Don't mutate the state directly.",
+      "es": "No modifiques el estado directamente."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w30",
+    "en": "immutable",
+    "es": "inmutable",
+    "pron": "imiútabol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Strings are immutable in JavaScript.",
+      "es": "Los strings son inmutables en JavaScript."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w31",
+    "en": "caveat",
+    "es": "salvedad / detalle a tener en cuenta",
+    "pron": "kéviat",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Read the caveats before you use this hook.",
+      "es": "Lee las salvedades antes de usar este hook."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w32",
+    "en": "pitfall",
+    "es": "error común / trampa",
+    "pron": "pítfol",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A common pitfall is forgetting the key prop.",
+      "es": "Un error común es olvidar la prop key."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w33",
+    "en": "troubleshooting",
+    "es": "solución de problemas",
+    "pron": "tráboshuting",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Check the troubleshooting section first.",
+      "es": "Revisa primero la sección de solución de problemas."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w34",
+    "en": "flag",
+    "es": "opción (de un comando)",
+    "pron": "flág",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Use the --save-dev flag.",
+      "es": "Usa la opción --save-dev."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w35",
+    "en": "dev dependency",
+    "es": "dependencia de desarrollo",
+    "pron": "dév dipéndensi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Vitest is a dev dependency.",
+      "es": "Vitest es una dependencia de desarrollo."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w36",
+    "en": "readme",
+    "es": "archivo README (instrucciones del proyecto)",
+    "pron": "rídmi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The readme explains how to install it.",
+      "es": "El README explica cómo instalarlo."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w37",
+    "en": "e.g.",
+    "es": "por ejemplo",
+    "pron": "í yí",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Use a modern browser, e.g. Chrome or Firefox.",
+      "es": "Usa un navegador moderno, por ejemplo Chrome o Firefox."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w38",
+    "en": "i.e.",
+    "es": "es decir",
+    "pron": "ái í",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Arrays start at zero, i.e. the first index is 0.",
+      "es": "Los arrays empiezan en cero, es decir, el primer índice es 0."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w39",
+    "en": "see also",
+    "es": "ver también",
+    "pron": "sí ólsou",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "See also: Array.prototype.map().",
+      "es": "Ver también: Array.prototype.map()."
+    }
+  },
+  {
+    "id": "en-intermedio-11-w40",
+    "en": "polyfill",
+    "es": "polyfill (código que agrega soporte a navegadores viejos)",
+    "pron": "pólifil",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Old browsers need a polyfill for this method.",
+      "es": "Los navegadores viejos necesitan un polyfill para este método."
+    }
+  }
+]

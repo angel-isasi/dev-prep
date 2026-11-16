@@ -1,0 +1,66 @@
+[
+  { "id": "en-trabajo-06-d01", "titulo": "Háblame de ti", "situacion": "Primera entrevista de Luis con una empresa de Estados Unidos, por videollamada.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Thanks for joining, Luis. So, tell me about yourself.", "es": "Gracias por conectarte, Luis. Bueno, háblame de ti." },
+      { "quien": "Luis", "en": "Sure. I'm a Systems Engineering student in Lima, in my last year.", "es": "Claro. Soy estudiante de Ingeniería de Sistemas en Lima, en mi último año." },
+      { "quien": "Luis", "en": "I'm focused on frontend, and I'm mostly self-taught in React.", "es": "Me enfoco en el frontend, y en React soy casi todo autodidacta." },
+      { "quien": "Sarah", "en": "What have you built so far?", "es": "¿Qué has construido hasta ahora?" },
+      { "quien": "Luis", "en": "Four side projects. My favorite is an app to practice for interviews.", "es": "Cuatro proyectos personales. Mi favorito es una app para practicar entrevistas." },
+      { "quien": "Sarah", "en": "Interesting. Do people use it?", "es": "Interesante. ¿La usa la gente?" },
+      { "quien": "Luis", "en": "Mainly me. I use it every day, and it works offline.", "es": "Sobre todo yo. La uso todos los días, y funciona sin internet." },
+      { "quien": "Sarah", "en": "And what are you looking for now?", "es": "¿Y qué estás buscando ahora?" },
+      { "quien": "Luis", "en": "My first opportunity as a junior developer, in a team where I can learn a lot.", "es": "Mi primera oportunidad como desarrollador junior, en un equipo donde pueda aprender mucho." },
+      { "quien": "Sarah", "en": "Great, that's a clear answer.", "es": "Genial, es una respuesta clara." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿En qué año de la carrera está Luis?", "opciones": ["Primer año", "Último año", "Ya se graduó"],
+        "correcta": 1, "explicacion": "Luis dice \"in my last year\"." },
+      { "pregunta": "¿Cuál es el proyecto favorito de Luis?", "opciones": ["Una tienda en línea", "Una app para practicar entrevistas", "Un juego"],
+        "correcta": 1, "explicacion": "Luis dice \"My favorite is an app to practice for interviews\"." },
+      { "pregunta": "¿Qué busca Luis?", "opciones": ["Un puesto senior", "Su primera oportunidad como junior", "Un trabajo freelance"],
+        "correcta": 1, "explicacion": "Luis responde \"My first opportunity as a junior developer\"." }
+    ] },
+  { "id": "en-trabajo-06-d02", "titulo": "Un reto técnico", "situacion": "El entrevistador le pide a Ana un ejemplo de un reto, y ella usa el método STAR.",
+    "lineas": [
+      { "quien": "Tom", "en": "Tell me about a technical challenge you faced.", "es": "Cuéntame de un reto técnico que enfrentaste." },
+      { "quien": "Ana", "en": "Last year, I made a website for a bakery in my neighborhood.", "es": "El año pasado hice una web para una panadería de mi barrio." },
+      { "quien": "Ana", "en": "Customers said it was really slow on their phones.", "es": "Los clientes decían que era muy lenta en sus celulares." },
+      { "quien": "Tom", "en": "What was your role?", "es": "¿Cuál era tu rol?" },
+      { "quien": "Ana", "en": "I was the only developer, so I had to fix it myself.", "es": "Era la única desarrolladora, así que tenía que arreglarlo yo." },
+      { "quien": "Tom", "en": "What did you do?", "es": "¿Qué hiciste?" },
+      { "quien": "Ana", "en": "I measured the page first. The photos were huge, so I compressed them.", "es": "Primero medí la página. Las fotos eran enormes, así que las comprimí." },
+      { "quien": "Tom", "en": "And what was the result?", "es": "¿Y cuál fue el resultado?" },
+      { "quien": "Ana", "en": "It loaded three times faster, and online orders went up.", "es": "Cargaba tres veces más rápido, y los pedidos por internet subieron." },
+      { "quien": "Tom", "en": "Nice. What did you learn?", "es": "Bien. ¿Qué aprendiste?" },
+      { "quien": "Ana", "en": "To measure before I change anything.", "es": "A medir antes de cambiar cualquier cosa." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuál era el problema de la web?", "opciones": ["No tenía diseño", "Era muy lenta en celulares", "No aceptaba pagos"],
+        "correcta": 1, "explicacion": "Ana dice \"Customers said it was really slow on their phones\"." },
+      { "pregunta": "¿Qué hizo Ana para resolverlo?", "opciones": ["Cambió de servidor", "Comprimió las fotos", "Quitó las fotos"],
+        "correcta": 1, "explicacion": "Ana dice \"The photos were huge, so I compressed them\"." },
+      { "pregunta": "¿Qué aprendió Ana?", "opciones": ["A medir antes de cambiar algo", "A no trabajar sola", "A usar otro framework"],
+        "correcta": 0, "explicacion": "Ana termina con \"To measure before I change anything\"." }
+    ] },
+  { "id": "en-trabajo-06-d03", "titulo": "Trabajo en equipo", "situacion": "Una reclutadora le pregunta a Carlos cómo trabaja con otras personas.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Can you give me an example of teamwork?", "es": "¿Me das un ejemplo de trabajo en equipo?" },
+      { "quien": "Carlos", "en": "Sure. In a university project, we were a team of four.", "es": "Claro. En un proyecto de la universidad éramos un equipo de cuatro." },
+      { "quien": "Carlos", "en": "Two of us wanted React, and the other two wanted Vue.", "es": "Dos queríamos React, y los otros dos querían Vue." },
+      { "quien": "Sarah", "en": "How did you solve that?", "es": "¿Cómo lo resolvieron?" },
+      { "quien": "Carlos", "en": "I suggested building the same small page with both and comparing.", "es": "Propuse hacer la misma página pequeña con los dos y comparar." },
+      { "quien": "Sarah", "en": "And what did you choose?", "es": "¿Y qué eligieron?" },
+      { "quien": "Carlos", "en": "React, because more of us felt comfortable with it.", "es": "React, porque más de nosotros nos sentíamos cómodos con él." },
+      { "quien": "Sarah", "en": "Was everyone happy with the decision?", "es": "¿Todos quedaron contentos con la decisión?" },
+      { "quien": "Carlos", "en": "Yes, because we decided with data, not with opinions.", "es": "Sí, porque decidimos con datos, no con opiniones." },
+      { "quien": "Sarah", "en": "I like that. It sounds like you're a real team player.", "es": "Me gusta. Parece que trabajas muy bien en equipo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuál era el desacuerdo del equipo?", "opciones": ["El horario de trabajo", "Usar React o Vue", "Quién era el líder"],
+        "correcta": 1, "explicacion": "Carlos dice \"Two of us wanted React, and the other two wanted Vue\"." },
+      { "pregunta": "¿Qué propuso Carlos?", "opciones": ["Votar sin probar", "Hacer la misma página con los dos y comparar", "Dejar que decida el profesor"],
+        "correcta": 1, "explicacion": "Carlos dice \"I suggested building the same small page with both and comparing\"." },
+      { "pregunta": "¿Por qué todos quedaron contentos?", "opciones": ["Porque decidieron con datos", "Porque ganó la mayoría", "Porque el profesor lo aprobó"],
+        "correcta": 0, "explicacion": "Carlos responde \"we decided with data, not with opinions\"." }
+    ] }
+]

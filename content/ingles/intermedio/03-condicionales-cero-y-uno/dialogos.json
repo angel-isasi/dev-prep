@@ -1,0 +1,58 @@
+[
+  { "id": "en-intermedio-03-d01", "titulo": "Explicar tu componente", "situacion": "En una entrevista técnica, Luis explica cómo funciona su buscador.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Can you explain how your search component works?", "es": "¿Puedes explicar cómo funciona tu componente de búsqueda?" },
+      { "quien": "Luis", "en": "Sure. When the user types in the input, the list updates automatically.", "es": "Claro. Cuando el usuario escribe en el campo, la lista se actualiza sola." },
+      { "quien": "Sarah", "en": "What happens if there are no results?", "es": "¿Qué pasa si no hay resultados?" },
+      { "quien": "Luis", "en": "If the list is empty, the component shows a message: No results found.", "es": "Si la lista está vacía, el componente muestra un mensaje: No se encontraron resultados." },
+      { "quien": "Sarah", "en": "And what if the API is slow?", "es": "¿Y si la API es lenta?" },
+      { "quien": "Luis", "en": "If the request takes more than five seconds, we show an error and a retry button.", "es": "Si la petición tarda más de cinco segundos, mostramos un error y un botón para reintentar." },
+      { "quien": "Sarah", "en": "Does it send a request after every key?", "es": "¿Envía una petición después de cada tecla?" },
+      { "quien": "Luis", "en": "No. It doesn't send anything unless the user stops typing for 300 milliseconds.", "es": "No. No envía nada a menos que el usuario deje de escribir por 300 milisegundos." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué muestra el componente si no hay resultados?", "opciones": ["Una lista vacía sin texto", "Un mensaje que dice que no hay resultados", "Un botón para reintentar"], "correcta": 1,
+        "explicacion": "\"If the list is empty, the component shows a message: No results found\"." },
+      { "pregunta": "¿Cuándo aparece el botón para reintentar?", "opciones": ["Si la petición tarda más de cinco segundos", "Cada vez que el usuario escribe", "Si la lista está vacía"], "correcta": 0,
+        "explicacion": "\"If the request takes more than five seconds, we show an error and a retry button\"." },
+      { "pregunta": "¿Cuándo envía la petición el buscador?", "opciones": ["Con cada tecla", "Cuando el usuario deja de escribir 300 milisegundos", "Cada cinco segundos"], "correcta": 1,
+        "explicacion": "\"It doesn't send anything unless the user stops typing for 300 milliseconds\"." }
+    ] },
+  { "id": "en-intermedio-03-d02", "titulo": "Antes del despliegue", "situacion": "Ana y Tom planean el despliegue de la tarde.",
+    "lineas": [
+      { "quien": "Ana", "en": "Are we going to deploy today?", "es": "¿Vamos a desplegar hoy?" },
+      { "quien": "Tom", "en": "If all the tests pass, we'll deploy at four.", "es": "Si todos los tests pasan, desplegaremos a las cuatro." },
+      { "quien": "Ana", "en": "What if a test fails?", "es": "¿Y si falla un test?" },
+      { "quien": "Tom", "en": "In that case, we'll fix it first and deploy tomorrow morning.", "es": "En ese caso, primero lo arreglaremos y desplegaremos mañana en la mañana." },
+      { "quien": "Ana", "en": "OK. I'll stay a little late in case you need help.", "es": "Ok. Me quedaré un poco más por si necesitas ayuda." },
+      { "quien": "Tom", "en": "Thanks. Make sure your branch is up to date. Otherwise, you'll get conflicts.", "es": "Gracias. Asegúrate de que tu rama esté actualizada. Si no, tendrás conflictos." },
+      { "quien": "Ana", "en": "Got it. I'll update it right now.", "es": "Entendido. La actualizo ahora mismo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿A qué hora despliegan si pasan los tests?", "opciones": ["A las cuatro", "Mañana en la mañana", "A las nueve"], "correcta": 0,
+        "explicacion": "\"If all the tests pass, we'll deploy at four\"." },
+      { "pregunta": "¿Qué pasa si falla un test?", "opciones": ["Despliegan igual", "Lo arreglan y despliegan al día siguiente", "Cancelan el proyecto"], "correcta": 1,
+        "explicacion": "\"We'll fix it first and deploy tomorrow morning\"." },
+      { "pregunta": "¿Qué tiene que hacer Ana con su rama?", "opciones": ["Borrarla", "Actualizarla para evitar conflictos", "Desplegarla sola"], "correcta": 1,
+        "explicacion": "Tom dice \"Make sure your branch is up to date. Otherwise, you'll get conflicts\"." }
+    ] },
+  { "id": "en-intermedio-03-d03", "titulo": "Planes para el sábado", "situacion": "Carlos invita a María a su grupo de estudio.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Are you coming to the study group on Saturday?", "es": "¿Vienes al grupo de estudio el sábado?" },
+      { "quien": "María", "en": "If I finish my project on Friday, I'll come.", "es": "Si termino mi proyecto el viernes, voy." },
+      { "quien": "Carlos", "en": "And if you don't finish?", "es": "¿Y si no terminas?" },
+      { "quien": "María", "en": "Then I'll work on it at home, unless my sister needs the laptop.", "es": "Entonces trabajaré en casa, a menos que mi hermana necesite la laptop." },
+      { "quien": "Carlos", "en": "You can use the computers at the library if you need one.", "es": "Puedes usar las computadoras de la biblioteca si necesitas una." },
+      { "quien": "María", "en": "Good idea. If the library is open, I'll go there in the morning.", "es": "Buena idea. Si la biblioteca está abierta, iré en la mañana." },
+      { "quien": "Carlos", "en": "It's open from nine to one, as long as it isn't a holiday.", "es": "Abre de nueve a una, siempre que no sea feriado." },
+      { "quien": "María", "en": "Perfect. I'll send you a message on Saturday.", "es": "Perfecto. Te mando un mensaje el sábado." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué necesita María para ir al grupo de estudio?", "opciones": ["Terminar su proyecto el viernes", "Que su hermana le preste dinero", "Que la biblioteca abra"], "correcta": 0,
+        "explicacion": "\"If I finish my project on Friday, I'll come\"." },
+      { "pregunta": "¿Dónde puede usar una computadora María?", "opciones": ["En la casa de Carlos", "En la biblioteca", "En la oficina"], "correcta": 1,
+        "explicacion": "Carlos dice \"You can use the computers at the library\"." },
+      { "pregunta": "¿Cuál es el horario de la biblioteca?", "opciones": ["De nueve a una, si no es feriado", "Todo el día", "Solo los feriados"], "correcta": 0,
+        "explicacion": "\"It's open from nine to one, as long as it isn't a holiday\"." }
+    ] }
+]

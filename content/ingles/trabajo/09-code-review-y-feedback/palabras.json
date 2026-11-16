@@ -1,0 +1,387 @@
+[
+  {
+    "id": "en-trabajo-09-w01",
+    "en": "nit",
+    "es": "detalle menor (no bloquea)",
+    "pron": "nít",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Just a nit: there's an extra space here.",
+      "es": "Solo un detalle: aquí hay un espacio de más."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w02",
+    "en": "suggestion",
+    "es": "sugerencia",
+    "pron": "sayéschon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This is just a suggestion, not a blocker.",
+      "es": "Es solo una sugerencia, no algo que bloquee."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w03",
+    "en": "LGTM",
+    "es": "se ve bien (aprobado)",
+    "pron": "el yi ti ém",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "LGTM, nice work!",
+      "es": "Se ve bien, ¡buen trabajo!"
+    }
+  },
+  {
+    "id": "en-trabajo-09-w04",
+    "en": "request changes",
+    "es": "pedir cambios",
+    "pron": "rikuést chéinyis",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Tom requested changes on my PR.",
+      "es": "Tom pidió cambios en mi PR."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w05",
+    "en": "good catch",
+    "es": "bien visto",
+    "pron": "gúd kách",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Good catch! I forgot the empty case.",
+      "es": "¡Bien visto! Me olvidé del caso vacío."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w06",
+    "en": "I'd suggest",
+    "es": "yo sugeriría",
+    "pron": "áid sayést",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'd suggest a more descriptive name.",
+      "es": "Sugeriría un nombre más descriptivo."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w07",
+    "en": "could we extract this into a function?",
+    "es": "¿podríamos sacar esto a una función?",
+    "pron": "kud uí ekstrákt dís íntu a fánkshon",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "This logic repeats. Could we extract this into a function?",
+      "es": "Esta lógica se repite. ¿Podríamos sacarla a una función?"
+    }
+  },
+  {
+    "id": "en-trabajo-09-w08",
+    "en": "extract",
+    "es": "extraer, sacar (código a otra parte)",
+    "pron": "ekstrákt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I extracted the validation into a helper.",
+      "es": "Saqué la validación a una función auxiliar."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w09",
+    "en": "naming",
+    "es": "los nombres (de variables y funciones)",
+    "pron": "néimin",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Naming is the hardest part.",
+      "es": "Poner nombres es lo más difícil."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w10",
+    "en": "leftover",
+    "es": "sobrante, que se quedó olvidado",
+    "pron": "léftouver",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "I think this is a leftover console.log.",
+      "es": "Creo que este console.log se quedó olvidado."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w11",
+    "en": "dead code",
+    "es": "código muerto (que nunca se ejecuta)",
+    "pron": "déd kóud",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We can remove this dead code.",
+      "es": "Podemos borrar este código muerto."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w12",
+    "en": "hardcoded",
+    "es": "escrito a mano en el código (fijo)",
+    "pron": "járdkoudid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The URL is hardcoded. Could we move it to a config file?",
+      "es": "La URL está fija en el código. ¿Podríamos pasarla a un archivo de configuración?"
+    }
+  },
+  {
+    "id": "en-trabajo-09-w13",
+    "en": "magic number",
+    "es": "número mágico (sin nombre ni explicación)",
+    "pron": "máyik námber",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What does 86400 mean? It's a magic number.",
+      "es": "¿Qué significa 86400? Es un número mágico."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w14",
+    "en": "duplicated",
+    "es": "duplicado",
+    "pron": "diúplikeitid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This code is duplicated in two components.",
+      "es": "Este código está duplicado en dos componentes."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w15",
+    "en": "out of scope",
+    "es": "fuera del alcance (de esta tarea)",
+    "pron": "áut ov skóup",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "That's a good idea, but it's out of scope for this PR.",
+      "es": "Es buena idea, pero está fuera del alcance de este PR."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w16",
+    "en": "separate PR",
+    "es": "otro PR aparte",
+    "pron": "sépareit pí ár",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'll fix it in a separate PR.",
+      "es": "Lo arreglo en otro PR aparte."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w17",
+    "en": "address",
+    "es": "atender, resolver (un comentario)",
+    "pron": "adrés",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I addressed all your comments.",
+      "es": "Atendí todos tus comentarios."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w18",
+    "en": "push back",
+    "es": "oponerse, defender otra opción",
+    "pron": "púsh bák",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "It's okay to push back if you have a good reason.",
+      "es": "Está bien no estar de acuerdo si tienes una buena razón."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w19",
+    "en": "constructive",
+    "es": "constructivo",
+    "pron": "konstráktiv",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Thanks for the constructive comments.",
+      "es": "Gracias por los comentarios constructivos."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w20",
+    "en": "defensive",
+    "es": "a la defensiva",
+    "pron": "difénsiv",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Try not to get defensive in code reviews.",
+      "es": "Trata de no ponerte a la defensiva en las revisiones."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w21",
+    "en": "fair point",
+    "es": "buen punto, tienes razón",
+    "pron": "fér póint",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Fair point. I'll rename it.",
+      "es": "Buen punto. Le cambio el nombre."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w22",
+    "en": "don't take it personally",
+    "es": "no te lo tomes personal",
+    "pron": "dóunt téik it pérsonali",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It's about the code, so don't take it personally.",
+      "es": "Es sobre el código, así que no te lo tomes personal."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w23",
+    "en": "non-blocking",
+    "es": "que no bloquea (opcional)",
+    "pron": "non blókin",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "These comments are non-blocking.",
+      "es": "Estos comentarios no bloquean."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w24",
+    "en": "reviewer",
+    "es": "revisor",
+    "pron": "riviúer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I added Tom as a reviewer.",
+      "es": "Agregué a Tom como revisor."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w25",
+    "en": "author",
+    "es": "autor",
+    "pron": "ózor",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The author should resolve the comments.",
+      "es": "El autor debería marcar los comentarios como resueltos."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w26",
+    "en": "diff",
+    "es": "las diferencias (cambios de un PR)",
+    "pron": "díf",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The diff is small, only twenty lines.",
+      "es": "Los cambios son pocos, solo veinte líneas."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w27",
+    "en": "inline comment",
+    "es": "comentario en una línea del código",
+    "pron": "ínlain kóment",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I left a few inline comments.",
+      "es": "Dejé algunos comentarios en el código."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w28",
+    "en": "consistent",
+    "es": "coherente, uniforme",
+    "pron": "konsístent",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Let's keep the naming consistent.",
+      "es": "Mantengamos los nombres uniformes."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w29",
+    "en": "readability",
+    "es": "legibilidad",
+    "pron": "ridabíliti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This change improves readability.",
+      "es": "Este cambio mejora la legibilidad."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w30",
+    "en": "test coverage",
+    "es": "cobertura de tests",
+    "pron": "tést kóvery",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Can we add test coverage for this case?",
+      "es": "¿Podemos cubrir este caso con tests?"
+    }
+  },
+  {
+    "id": "en-trabajo-09-w31",
+    "en": "happy to change it",
+    "es": "con gusto lo cambio",
+    "pron": "jápi tu chéiny it",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Happy to change it if you think it's clearer.",
+      "es": "Con gusto lo cambio si crees que queda más claro."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w32",
+    "en": "nice work",
+    "es": "buen trabajo",
+    "pron": "náis uérk",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Nice work on the tests!",
+      "es": "¡Buen trabajo con los tests!"
+    }
+  },
+  {
+    "id": "en-trabajo-09-w33",
+    "en": "blocking comment",
+    "es": "comentario que bloquea el merge",
+    "pron": "blókin kóment",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I only have one blocking comment.",
+      "es": "Solo tengo un comentario que bloquea."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w34",
+    "en": "self-review",
+    "es": "revisar tu propio PR antes de pedir revisión",
+    "pron": "sélf riviú",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Always do a self-review before you ask for feedback.",
+      "es": "Siempre revisa tu propio PR antes de pedir comentarios."
+    }
+  },
+  {
+    "id": "en-trabajo-09-w35",
+    "en": "nitpicky",
+    "es": "quisquilloso, detallista",
+    "pron": "nítpiki",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Sorry if this is nitpicky, but the indentation is off.",
+      "es": "Perdón si soy quisquilloso, pero la sangría está mal."
+    }
+  }
+]

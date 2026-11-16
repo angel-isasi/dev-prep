@@ -1,0 +1,369 @@
+[
+  {
+    "id": "en-trabajo-10-w01",
+    "en": "commit message",
+    "es": "mensaje de commit",
+    "pron": "komít mésech",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Write your commit message in the imperative.",
+      "es": "Escribe tu mensaje de commit en imperativo."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w02",
+    "en": "imperative",
+    "es": "imperativo (forma de orden)",
+    "pron": "impérativ",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "\"Fix bug\" is in the imperative.",
+      "es": "\"Fix bug\" está en imperativo."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w03",
+    "en": "subject line",
+    "es": "línea de asunto / título",
+    "pron": "sábyekt láin",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Keep the subject line short.",
+      "es": "Mantén corto el título."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w04",
+    "en": "PR description",
+    "es": "descripción del PR",
+    "pron": "pí ár diskrípshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Add screenshots to the PR description.",
+      "es": "Agrega capturas a la descripción del PR."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w05",
+    "en": "how to test",
+    "es": "cómo probarlo",
+    "pron": "jáu tu tést",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "How to test: open the settings page and toggle dark mode.",
+      "es": "Cómo probarlo: abre la página de ajustes y activa el modo oscuro."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w07",
+    "en": "expected behavior",
+    "es": "comportamiento esperado",
+    "pron": "ekspéktid bijéivior",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Expected behavior: the modal closes.",
+      "es": "Comportamiento esperado: el modal se cierra."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w08",
+    "en": "actual behavior",
+    "es": "lo que pasa en realidad",
+    "pron": "ákchual bijéivior",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Actual behavior: nothing happens.",
+      "es": "Lo que pasa en realidad: no pasa nada."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w09",
+    "en": "closes",
+    "es": "cierra (un issue al hacer merge)",
+    "pron": "klóusis",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Closes #42.",
+      "es": "Cierra el issue 42."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w10",
+    "en": "context",
+    "es": "contexto",
+    "pron": "kóntekst",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Some context: this page is very slow on mobile.",
+      "es": "Un poco de contexto: esta página es muy lenta en el celular."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w11",
+    "en": "FYI",
+    "es": "para que sepas (para tu información)",
+    "pron": "ef uái ái",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "FYI, the staging server is down.",
+      "es": "Para que sepas, el servidor de pruebas está caído."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w12",
+    "en": "ASAP",
+    "es": "lo antes posible",
+    "pron": "éisap",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Please review it ASAP, it's a hotfix.",
+      "es": "Por favor revísalo lo antes posible, es un arreglo urgente."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w13",
+    "en": "EOD",
+    "es": "al final del día",
+    "pron": "í óu dí",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'll send it by EOD.",
+      "es": "Lo mando antes de que termine el día."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w14",
+    "en": "TL;DR",
+    "es": "en resumen (muy corto)",
+    "pron": "tí el dí ár",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "TL;DR: the bug is fixed.",
+      "es": "En resumen: el bug está arreglado."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w15",
+    "en": "friendly reminder",
+    "es": "recordatorio amable",
+    "pron": "fréndli rimáinder",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Friendly reminder: the demo is at three.",
+      "es": "Recordatorio: la demo es a las tres."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w16",
+    "en": "follow-up email",
+    "es": "correo de seguimiento",
+    "pron": "fólou ap ímeil",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I sent a follow-up email after the interview.",
+      "es": "Mandé un correo de seguimiento después de la entrevista."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w17",
+    "en": "best regards",
+    "es": "saludos cordiales",
+    "pron": "bést rigárds",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Best regards, Luis",
+      "es": "Saludos cordiales, Luis"
+    }
+  },
+  {
+    "id": "en-trabajo-10-w18",
+    "en": "I'm reaching out",
+    "es": "te escribo (para contactarte)",
+    "pron": "áim ríichin áut",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm reaching out about the frontend position.",
+      "es": "Te escribo por el puesto de frontend."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w19",
+    "en": "please let me know",
+    "es": "por favor avísame",
+    "pron": "plíis let mi nóu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Please let me know if you have any questions.",
+      "es": "Por favor avísame si tienes alguna pregunta."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w20",
+    "en": "as discussed",
+    "es": "como hablamos",
+    "pron": "as diskást",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "As discussed, I'll take the search ticket.",
+      "es": "Como hablamos, tomo el ticket de búsqueda."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w21",
+    "en": "attached",
+    "es": "adjunto",
+    "pron": "atácht",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "I've attached my resume.",
+      "es": "Adjunto mi currículum."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w22",
+    "en": "draft",
+    "es": "borrador",
+    "pron": "dráft",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I opened a draft PR to get early feedback.",
+      "es": "Abrí un PR en borrador para recibir comentarios temprano."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w23",
+    "en": "proofread",
+    "es": "revisar (un texto antes de enviarlo)",
+    "pron": "prúfrid",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Always proofread your email before you send it.",
+      "es": "Siempre revisa tu correo antes de enviarlo."
+    },
+    "formas": {
+      "pasado": "proofread",
+      "participio": "proofread"
+    }
+  },
+  {
+    "id": "en-trabajo-10-w24",
+    "en": "concise",
+    "es": "conciso, breve",
+    "pron": "konsáis",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Keep your messages concise.",
+      "es": "Mantén tus mensajes breves."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w25",
+    "en": "here's what I've tried",
+    "es": "esto es lo que ya probé",
+    "pron": "jíers uát áiv tráid",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Here's what I've tried so far.",
+      "es": "Esto es lo que probé hasta ahora."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w26",
+    "en": "any pointers?",
+    "es": "¿alguna pista o consejo?",
+    "pron": "éni póinters",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm stuck on this error. Any pointers?",
+      "es": "Estoy atascado con este error. ¿Alguna pista?"
+    }
+  },
+  {
+    "id": "en-trabajo-10-w27",
+    "en": "I appreciate your time",
+    "es": "agradezco tu tiempo",
+    "pron": "ái aprísieit iór táim",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I appreciate your time and your help.",
+      "es": "Agradezco tu tiempo y tu ayuda."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w28",
+    "en": "bump",
+    "es": "volver a subir (un mensaje sin respuesta)",
+    "pron": "bámp",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Just bumping this in case you missed it.",
+      "es": "Solo lo vuelvo a subir por si no lo viste."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w29",
+    "en": "DM",
+    "es": "mensaje directo / escribir por privado",
+    "pron": "dí ém",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Send me a DM with the details.",
+      "es": "Mándame un mensaje privado con los detalles."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w30",
+    "en": "look forward to hearing from you",
+    "es": "espero tu respuesta",
+    "pron": "lúk fóruard tu jíirin from iú",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Thank you again. I look forward to hearing from you.",
+      "es": "Gracias otra vez. Espero tu respuesta."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w31",
+    "en": "Slack message",
+    "es": "mensaje de Slack",
+    "pron": "slák mésech",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Put your question in one Slack message.",
+      "es": "Pon tu pregunta en un solo mensaje de Slack."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w32",
+    "en": "cc",
+    "es": "poner en copia",
+    "pron": "sí sí",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I'll cc my manager on the email.",
+      "es": "Voy a poner a mi jefe en copia del correo."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w33",
+    "en": "sign-off",
+    "es": "despedida (al final de un correo)",
+    "pron": "sáin of",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "\"Best regards\" is a safe sign-off.",
+      "es": "\"Best regards\" es una despedida segura."
+    }
+  },
+  {
+    "id": "en-trabajo-10-w34",
+    "en": "wording",
+    "es": "redacción, forma de decirlo",
+    "pron": "uérdin",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Can you check the wording of this email?",
+      "es": "¿Puedes revisar la redacción de este correo?"
+    }
+  }
+]

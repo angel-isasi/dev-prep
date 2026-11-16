@@ -1,0 +1,66 @@
+[
+  { "id": "en-trabajo-12-d01", "titulo": "Entrevista técnica: preguntas de JavaScript", "situacion": "Tom, ingeniero senior, entrevista a Luis por videollamada para un puesto de frontend junior.",
+    "lineas": [
+      { "quien": "Tom", "en": "Alright, let's dive in. Off the top of your head, what's a closure?", "es": "Bien, entremos en materia. Así de memoria, ¿qué es un closure?" },
+      { "quien": "Luis", "en": "It's a function that remembers the variables from where it was created.", "es": "Es una función que recuerda las variables del lugar donde se creó." },
+      { "quien": "Tom", "en": "Pretty much. Can you elaborate with an example?", "es": "Prácticamente. ¿Puedes ampliarlo con un ejemplo?" },
+      { "quien": "Luis", "en": "Sure. A counter function that returns another function, and the inner one keeps the count.", "es": "Claro. Una función contador que devuelve otra función, y la de adentro guarda la cuenta." },
+      { "quien": "Tom", "en": "Nice. Moving on. What's your take on using TypeScript for small projects?", "es": "Bien. Pasemos a otro tema. ¿Qué opinas de usar TypeScript en proyectos pequeños?" },
+      { "quien": "Luis", "en": "To be honest, I think it's kind of overkill for a tiny script.", "es": "Para ser honesto, creo que es algo excesivo para un script muy pequeño." },
+      { "quien": "Luis", "en": "But for anything with a team, the types save a lot of time.", "es": "Pero para cualquier cosa con un equipo, los tipos ahorran mucho tiempo." },
+      { "quien": "Tom", "en": "Fair enough. Let's say a page loads very slowly. How would you approach it?", "es": "Me parece razonable. Supongamos que una página carga muy lento. ¿Cómo lo abordarías?" },
+      { "quien": "Luis", "en": "Can I take a second to think?", "es": "¿Puedo tomarme un segundo para pensar?" },
+      { "quien": "Tom", "en": "Of course, take your time.", "es": "Claro, tómate tu tiempo." },
+      { "quien": "Luis", "en": "First I'd open the network tab to see which requests are slow, and then check the image sizes.", "es": "Primero abriría la pestaña de red para ver qué peticiones son lentas, y luego revisaría el tamaño de las imágenes." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué quiso decir Tom con \"Pretty much\" después de la definición de closure?", "opciones": ["Que la respuesta estaba prácticamente bien", "Que la respuesta era muy larga", "Que la respuesta estaba mal"],
+        "correcta": 0, "explicacion": "**Pretty much** es \"prácticamente\": la respuesta es correcta, y por eso pide un ejemplo para profundizar." },
+      { "pregunta": "¿Qué le pidió Tom con \"What's your take on...\"?", "opciones": ["Que instale TypeScript", "Su opinión sobre TypeScript en proyectos pequeños", "Que explique qué es un tipo"],
+        "correcta": 1, "explicacion": "**What's your take on** pide una opinión. Luis da la suya con razones." },
+      { "pregunta": "¿Qué tipo de pregunta hizo Tom con \"Let's say a page loads very slowly\"?", "opciones": ["Una pregunta de opinión", "Un caso hipotético para ver cómo abordarías el problema", "Una pregunta personal"],
+        "correcta": 1, "explicacion": "**Let's say** + **How would you approach** plantean un caso imaginario y piden tu plan." }
+    ] },
+  { "id": "en-trabajo-12-d02", "titulo": "Entrevista de recursos humanos", "situacion": "Sarah, de recursos humanos, hace las preguntas personales a Ana.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Thanks for joining, Ana. To start, what drew you to frontend development?", "es": "Gracias por conectarte, Ana. Para empezar, ¿qué te atrajo del desarrollo frontend?" },
+      { "quien": "Ana", "en": "I love building things people can see and use right away.", "es": "Me encanta construir cosas que la gente puede ver y usar de inmediato." },
+      { "quien": "Sarah", "en": "Great. Tell me about a time you had to learn something new very quickly.", "es": "Genial. Cuéntame de una vez en que tuviste que aprender algo nuevo muy rápido." },
+      { "quien": "Ana", "en": "Last year, my team needed a chart for our university project, and I learned D3 in a week.", "es": "El año pasado, mi equipo necesitaba un gráfico para el proyecto de la universidad, y aprendí D3 en una semana." },
+      { "quien": "Sarah", "en": "Interesting. How did you go about it?", "es": "Interesante. ¿Cómo lo hiciste?" },
+      { "quien": "Ana", "en": "I followed the docs, built a small demo first, and then added it to the project.", "es": "Seguí la documentación, hice primero una demo pequeña y luego la agregué al proyecto." },
+      { "quien": "Sarah", "en": "Out of curiosity, what was the hardest part?", "es": "Por curiosidad, ¿qué fue lo más difícil?" },
+      { "quien": "Ana", "en": "Understanding the scales. I asked a teammate, and it clicked.", "es": "Entender las escalas. Le pregunté a un compañero y lo entendí." },
+      { "quien": "Sarah", "en": "Makes sense. Last one: where do you see yourself in three years?", "es": "Tiene sentido. La última: ¿dónde te ves en tres años?" },
+      { "quien": "Ana", "en": "I'd like to be a solid mid-level developer, and maybe mentor new juniors.", "es": "Me gustaría ser una desarrolladora semi senior sólida, y quizás ser mentora de los nuevos juniors." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué esperaba Sarah con \"Tell me about a time...\"?", "opciones": ["Una opinión general", "Un caso real del pasado", "Una definición"],
+        "correcta": 1, "explicacion": "**Tell me about a time** pide una historia concreta. Ana cuenta lo que pasó con D3 el año pasado." },
+      { "pregunta": "¿Qué preguntó Sarah con \"How did you go about it?\"", "opciones": ["Cómo llegó Ana a la universidad", "Qué pasos siguió Ana para aprender", "Cuánto tiempo le tomó"],
+        "correcta": 1, "explicacion": "**Go about something** es la forma de hacerlo. Ana responde con sus pasos: docs, demo y proyecto." },
+      { "pregunta": "¿Qué significa \"it clicked\" en la respuesta de Ana?", "opciones": ["Que hizo clic en un botón", "Que de pronto lo entendió", "Que se rompió el gráfico"],
+        "correcta": 1, "explicacion": "**It clicked** es \"me hizo clic\": de repente lo entendió." }
+    ] },
+  { "id": "en-trabajo-12-d03", "titulo": "Live coding y cierre", "situacion": "Carlos entrevista a María en una prueba de código en vivo. Ella comparte su pantalla.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Go ahead and share your screen whenever you're ready.", "es": "Adelante, comparte tu pantalla cuando estés lista." },
+      { "quien": "María", "en": "Bear with me, I'm opening the editor. Can you see it now?", "es": "Dame un momento, estoy abriendo el editor. ¿Lo ves ahora?" },
+      { "quien": "Carlos", "en": "Yes. Write a function that removes duplicates from an array. Feel free to use any approach.", "es": "Sí. Escribe una función que quite los repetidos de un array. Puedes usar cualquier enfoque." },
+      { "quien": "María", "en": "Just to check, should I keep the original order?", "es": "Solo para confirmar, ¿debo mantener el orden original?" },
+      { "quien": "Carlos", "en": "That's a great question. Yes, keep the order.", "es": "Qué buena pregunta. Sí, mantén el orden." },
+      { "quien": "María", "en": "Then I'll use a Set. It keeps insertion order, and it's linear.", "es": "Entonces uso un Set. Mantiene el orden de inserción y es lineal." },
+      { "quien": "Carlos", "en": "Nice. That said, what if the array has objects instead of numbers?", "es": "Bien. Dicho eso, ¿qué pasa si el array tiene objetos en vez de números?" },
+      { "quien": "María", "en": "Hmm, I see where you're going. A Set compares references, so I'd need a key, like an id.", "es": "Mmm, entiendo a dónde vas. Un Set compara referencias, así que necesitaría una clave, como un id." },
+      { "quien": "Carlos", "en": "Exactly. We're almost out of time. Do you have any questions for me?", "es": "Exacto. Ya casi no nos queda tiempo. ¿Tienes alguna pregunta para mí?" },
+      { "quien": "María", "en": "Yes, just one. What would success look like in my first three months?", "es": "Sí, solo una. ¿Cómo se vería el éxito en mis primeros tres meses?" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué quiso decir Carlos con \"Feel free to use any approach\"?", "opciones": ["Que María puede resolverlo como quiera", "Que la prueba es gratis", "Que debe usar un Set"],
+        "correcta": 0, "explicacion": "**Feel free to** da permiso: puede elegir cualquier forma de resolverlo." },
+      { "pregunta": "¿Por qué Carlos dijo \"That's a great question\"?", "opciones": ["Porque María preguntó un detalle importante antes de programar", "Porque quería ganar tiempo", "Porque María se equivocó"],
+        "correcta": 0, "explicacion": "Aclarar si hay que mantener el orden antes de programar es justo lo que un buen candidato hace." },
+      { "pregunta": "¿Qué buscaba Carlos con \"what if the array has objects\"?", "opciones": ["Cambiar de ejercicio", "Ver si María conoce el límite de su solución con Set", "Terminar la entrevista"],
+        "correcta": 1, "explicacion": "Es una pregunta de seguimiento: con objetos, un Set compara referencias y la solución deja de funcionar igual." }
+    ] }
+]

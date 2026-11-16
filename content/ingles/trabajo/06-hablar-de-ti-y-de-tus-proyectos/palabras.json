@@ -1,0 +1,299 @@
+[
+  {
+    "id": "en-trabajo-06-w01",
+    "en": "tell me about yourself",
+    "es": "háblame de ti",
+    "pron": "tél mi abáut yorsélf",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "So, tell me about yourself.",
+      "es": "Bueno, háblame de ti."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w04",
+    "en": "challenge",
+    "es": "reto / desafío",
+    "pron": "chálench",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The biggest challenge was the deadline.",
+      "es": "El reto más grande fue la fecha de entrega."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w05",
+    "en": "achievement",
+    "es": "logro",
+    "pron": "achívment",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My biggest achievement is my first real app.",
+      "es": "Mi mayor logro es mi primera app real."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w06",
+    "en": "teamwork",
+    "es": "trabajo en equipo",
+    "pron": "tímuerk",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Good teamwork saved the project.",
+      "es": "El buen trabajo en equipo salvó el proyecto."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w07",
+    "en": "tech stack",
+    "es": "conjunto de tecnologías",
+    "pron": "ték sták",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My tech stack is React, Node and SQL.",
+      "es": "Mis tecnologías son React, Node y SQL."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w08",
+    "en": "computer science",
+    "es": "ciencias de la computación",
+    "pron": "kompiúter sáiens",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "She has a degree in computer science.",
+      "es": "Ella es titulada en ciencias de la computación."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w09",
+    "en": "systems engineering",
+    "es": "ingeniería de sistemas",
+    "pron": "sístems enyiníring",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'm a systems engineering student.",
+      "es": "Soy estudiante de ingeniería de sistemas."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w12",
+    "en": "passionate",
+    "es": "apasionado",
+    "pron": "páshonet",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "I'm passionate about clean interfaces.",
+      "es": "Me apasionan las interfaces limpias."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w13",
+    "en": "motivated",
+    "es": "motivado",
+    "pron": "móutiveitid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "I'm very motivated to learn from a senior team.",
+      "es": "Estoy muy motivado por aprender de un equipo senior."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w14",
+    "en": "eager to learn",
+    "es": "con muchas ganas de aprender",
+    "pron": "íguer tu lérn",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm a junior, but I'm eager to learn.",
+      "es": "Soy junior, pero tengo muchas ganas de aprender."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w15",
+    "en": "strength",
+    "es": "fortaleza",
+    "pron": "strénkz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My main strength is persistence.",
+      "es": "Mi principal fortaleza es la constancia."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w16",
+    "en": "weakness",
+    "es": "debilidad",
+    "pron": "uíknes",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "One weakness is public speaking.",
+      "es": "Una debilidad es hablar en público."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w17",
+    "en": "soft skills",
+    "es": "habilidades blandas",
+    "pron": "sóft skíls",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Soft skills matter as much as code.",
+      "es": "Las habilidades blandas importan tanto como el código."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w18",
+    "en": "problem-solving",
+    "es": "resolución de problemas",
+    "pron": "práblem sólving",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I enjoy problem-solving.",
+      "es": "Disfruto resolver problemas."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w20",
+    "en": "accomplish",
+    "es": "lograr / cumplir",
+    "pron": "akómplish",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "We accomplished our goal in two weeks.",
+      "es": "Cumplimos nuestra meta en dos semanas."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w21",
+    "en": "mentor",
+    "es": "mentor",
+    "pron": "méntor",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'd love to have a mentor in my first job.",
+      "es": "Me encantaría tener un mentor en mi primer trabajo."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w22",
+    "en": "growth",
+    "es": "crecimiento",
+    "pron": "gróuz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'm looking for a place with room for growth.",
+      "es": "Busco un lugar donde pueda crecer."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w23",
+    "en": "fast learner",
+    "es": "alguien que aprende rápido",
+    "pron": "fást lérner",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'm a fast learner.",
+      "es": "Aprendo rápido."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w24",
+    "en": "team player",
+    "es": "buen compañero de equipo",
+    "pron": "tím pléier",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My classmates say I'm a team player.",
+      "es": "Mis compañeros dicen que trabajo bien en equipo."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w25",
+    "en": "detail-oriented",
+    "es": "detallista",
+    "pron": "díteil órientid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "I'm detail-oriented, especially with UI.",
+      "es": "Soy detallista, sobre todo con la interfaz."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w26",
+    "en": "curiosity",
+    "es": "curiosidad",
+    "pron": "kiuriósiti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Curiosity is what got me into coding.",
+      "es": "La curiosidad fue lo que me llevó a programar."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w29",
+    "en": "real-world",
+    "es": "real (del mundo real)",
+    "pron": "ríl uérld",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "I want real-world experience.",
+      "es": "Quiero experiencia real."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w30",
+    "en": "semester",
+    "es": "semestre / ciclo",
+    "pron": "seméster",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'm in my eighth semester.",
+      "es": "Estoy en el octavo ciclo."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w31",
+    "en": "thesis",
+    "es": "tesis",
+    "pron": "zísis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My thesis is about web accessibility.",
+      "es": "Mi tesis es sobre accesibilidad web."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w32",
+    "en": "scholarship",
+    "es": "beca",
+    "pron": "skólarship",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I got a scholarship for my last year.",
+      "es": "Conseguí una beca para mi último año."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w33",
+    "en": "junior developer",
+    "es": "desarrollador junior",
+    "pron": "yúnior divéloper",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'm applying for junior developer roles.",
+      "es": "Estoy postulando a puestos de desarrollador junior."
+    }
+  },
+  {
+    "id": "en-trabajo-06-w36",
+    "en": "pitch",
+    "es": "presentación corta (para convencer)",
+    "pron": "pích",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I practiced my one-minute pitch.",
+      "es": "Practiqué mi presentación de un minuto."
+    }
+  }
+]

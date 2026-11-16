@@ -1,0 +1,380 @@
+[
+  {
+    "id": "en-trabajo-08-w01",
+    "en": "yesterday I worked on",
+    "es": "ayer trabajé en",
+    "pron": "iésterdei ái uérkt on",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Yesterday I worked on the signup page.",
+      "es": "Ayer trabajé en la página de registro."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w02",
+    "en": "today I'm going to",
+    "es": "hoy voy a",
+    "pron": "tudéi áim góuin tu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Today I'm going to write the tests.",
+      "es": "Hoy voy a escribir los tests."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w03",
+    "en": "I'm blocked by",
+    "es": "estoy bloqueado por",
+    "pron": "áim blókt bái",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm blocked by the missing API key.",
+      "es": "Estoy bloqueado porque falta la clave de la API."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w04",
+    "en": "no blockers",
+    "es": "sin bloqueos",
+    "pron": "nóu blókers",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "That's it from me. No blockers.",
+      "es": "Eso es todo de mi parte. Sin bloqueos."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w05",
+    "en": "story points",
+    "es": "puntos de historia (para estimar)",
+    "pron": "stóri póints",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'd give it three story points.",
+      "es": "Le daría tres puntos."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w06",
+    "en": "sprint review",
+    "es": "revisión del sprint",
+    "pron": "sprínt riviú",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We'll show the new form in the sprint review.",
+      "es": "Mostraremos el formulario nuevo en la revisión del sprint."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w07",
+    "en": "sprint goal",
+    "es": "objetivo del sprint",
+    "pron": "sprínt góul",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Our sprint goal is to launch the checkout.",
+      "es": "Nuestro objetivo del sprint es lanzar el pago."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w08",
+    "en": "action item",
+    "es": "tarea pendiente (que sale de una reunión)",
+    "pron": "ákshon áitem",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Let's write down the action items.",
+      "es": "Anotemos las tareas que salieron."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w09",
+    "en": "take it offline",
+    "es": "hablarlo aparte (fuera de la reunión)",
+    "pron": "téik it oflái",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "That's a long topic. Let's take it offline.",
+      "es": "Es un tema largo. Hablémoslo aparte."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w10",
+    "en": "sync up",
+    "es": "coordinar, ponerse al día",
+    "pron": "sínk áp",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Can we sync up after lunch?",
+      "es": "¿Podemos coordinar después del almuerzo?"
+    }
+  },
+  {
+    "id": "en-trabajo-08-w11",
+    "en": "circle back",
+    "es": "retomar (un tema) más tarde",
+    "pron": "sérkol bák",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Let's circle back to this on Friday.",
+      "es": "Retomemos esto el viernes."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w12",
+    "en": "sorry to interrupt",
+    "es": "perdón por interrumpir",
+    "pron": "sóri tu interápt",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry to interrupt, but we're out of time.",
+      "es": "Perdón por interrumpir, pero ya no tenemos tiempo."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w13",
+    "en": "can I jump in?",
+    "es": "¿puedo meterme un momento?",
+    "pron": "kan ái yámp ín",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Can I jump in for a second?",
+      "es": "¿Puedo meterme un segundo?"
+    }
+  },
+  {
+    "id": "en-trabajo-08-w14",
+    "en": "could you repeat that?",
+    "es": "¿podrías repetir eso?",
+    "pron": "kud iú ripít dát",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry, could you repeat that?",
+      "es": "Perdón, ¿podrías repetir eso?"
+    }
+  },
+  {
+    "id": "en-trabajo-08-w15",
+    "en": "speak up",
+    "es": "hablar más fuerte",
+    "pron": "spíik áp",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Could you speak up a little?",
+      "es": "¿Podrías hablar un poco más fuerte?"
+    }
+  },
+  {
+    "id": "en-trabajo-08-w16",
+    "en": "I missed that",
+    "es": "no lo escuché / se me pasó",
+    "pron": "ái míst dát",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry, I missed that. My connection froze.",
+      "es": "Perdón, no lo escuché. Se me congeló la conexión."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w17",
+    "en": "just to confirm",
+    "es": "solo para confirmar",
+    "pron": "yást tu konférm",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Just to confirm, the demo is on Friday?",
+      "es": "Solo para confirmar, ¿la demo es el viernes?"
+    }
+  },
+  {
+    "id": "en-trabajo-08-w18",
+    "en": "so what you're saying is",
+    "es": "o sea, lo que dices es",
+    "pron": "sóu uát iúr séin is",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "So what you're saying is we need more tests?",
+      "es": "O sea, ¿lo que dices es que necesitamos más tests?"
+    }
+  },
+  {
+    "id": "en-trabajo-08-w19",
+    "en": "did I get that right?",
+    "es": "¿lo entendí bien?",
+    "pron": "díd ái guét dát ráit",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I take the form and you take the API. Did I get that right?",
+      "es": "Yo tomo el formulario y tú la API. ¿Lo entendí bien?"
+    }
+  },
+  {
+    "id": "en-trabajo-08-w20",
+    "en": "on the same page",
+    "es": "de acuerdo, entendiendo lo mismo",
+    "pron": "on de séim péidy",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let's make sure we're on the same page.",
+      "es": "Asegurémonos de que entendemos lo mismo."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w21",
+    "en": "ahead of schedule",
+    "es": "adelantado",
+    "pron": "ajéd ov skéyul",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We're a day ahead of schedule.",
+      "es": "Vamos un día adelantados."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w22",
+    "en": "run over",
+    "es": "pasarse del tiempo",
+    "pron": "rán óuver",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Sorry, the last meeting ran over.",
+      "es": "Perdón, la reunión anterior se alargó."
+    },
+    "formas": {
+      "pasado": "ran",
+      "participio": "run"
+    }
+  },
+  {
+    "id": "en-trabajo-08-w23",
+    "en": "timebox",
+    "es": "ponerle un tiempo límite",
+    "pron": "táimboks",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Let's timebox this discussion to five minutes.",
+      "es": "Démosle cinco minutos máximo a esta discusión."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w24",
+    "en": "what went well",
+    "es": "lo que salió bien",
+    "pron": "uát uént uél",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "What went well this sprint?",
+      "es": "¿Qué salió bien este sprint?"
+    }
+  },
+  {
+    "id": "en-trabajo-08-w25",
+    "en": "what could be improved",
+    "es": "lo que se puede mejorar",
+    "pron": "uát kud bi imprúvd",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "What could be improved is our code reviews.",
+      "es": "Lo que se puede mejorar son nuestras revisiones de código."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w26",
+    "en": "scope creep",
+    "es": "el alcance que crece sin control",
+    "pron": "skóup kríip",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This new request is scope creep.",
+      "es": "Este pedido nuevo es alcance que crece sin control."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w27",
+    "en": "carry over",
+    "es": "pasar (una tarea) al siguiente sprint",
+    "pron": "kári óuver",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "We'll carry over this ticket to the next sprint.",
+      "es": "Pasaremos este ticket al siguiente sprint."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w28",
+    "en": "in progress",
+    "es": "en curso",
+    "pron": "ín prógres",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The login ticket is still in progress.",
+      "es": "El ticket del login sigue en curso."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w29",
+    "en": "definition of done",
+    "es": "definición de terminado",
+    "pron": "definíshon ov dán",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Tests are part of our definition of done.",
+      "es": "Los tests son parte de nuestra definición de terminado."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w30",
+    "en": "heads down",
+    "es": "concentrado, sin interrupciones",
+    "pron": "jéds dáun",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'll be heads down on the bug all morning.",
+      "es": "Voy a estar concentrado en el bug toda la mañana."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w31",
+    "en": "let's move on",
+    "es": "pasemos a lo siguiente",
+    "pron": "lets múv on",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Okay, let's move on to the next topic.",
+      "es": "Bien, pasemos al siguiente tema."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w32",
+    "en": "ship",
+    "es": "lanzar, entregar (a producción)",
+    "pron": "shíp",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "We shipped the new dashboard yesterday.",
+      "es": "Lanzamos el dashboard nuevo ayer."
+    }
+  },
+  {
+    "id": "en-trabajo-08-w33",
+    "en": "kick things off",
+    "es": "empezar, arrancar (una reunión)",
+    "pron": "kík zíngs óf",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Luis, do you want to kick things off?",
+      "es": "Luis, ¿quieres empezar?"
+    }
+  },
+  {
+    "id": "en-trabajo-08-w34",
+    "en": "you're breaking up",
+    "es": "se te corta (el audio)",
+    "pron": "iúr bréikin áp",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry, you're breaking up. Can you repeat that?",
+      "es": "Perdón, se te corta. ¿Puedes repetir eso?"
+    }
+  }
+]

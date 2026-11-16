@@ -1,0 +1,67 @@
+[
+  { "id": "en-trabajo-07-d01", "titulo": "Two Sum en la entrevista", "situacion": "Sarah, la entrevistadora, le pide a Luis que explique su solución para encontrar dos números que suman un objetivo.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Okay, can you walk me through your solution?", "es": "Bien, ¿me puedes explicar tu solución paso a paso?" },
+      { "quien": "Luis", "en": "Sure. My first idea was a nested loop that checks every pair.", "es": "Claro. Mi primera idea fue un bucle anidado que revisa cada par." },
+      { "quien": "Sarah", "en": "And what's the time complexity of that?", "es": "¿Y cuál es la complejidad de tiempo de eso?" },
+      { "quien": "Luis", "en": "It's quadratic, so it gets slow when the input size grows.", "es": "Es cuadrática, así que se vuelve lenta cuando crece la entrada." },
+      { "quien": "Sarah", "en": "Right. Can we do better?", "es": "Correcto. ¿Podemos mejorarlo?" },
+      { "quien": "Luis", "en": "Yes. I iterate over the array once and keep track of the numbers in a hash map.", "es": "Sí. Recorro el array una vez y guardo los números en un hash map." },
+      { "quien": "Luis", "en": "For each number, I check if the complement is already in the map.", "es": "Para cada número, reviso si su complemento ya está en el map." },
+      { "quien": "Sarah", "en": "Nice. So what's the complexity now?", "es": "Bien. ¿Y cuál es la complejidad ahora?" },
+      { "quien": "Luis", "en": "This runs in linear time because each lookup is constant time.", "es": "Esto corre en tiempo lineal porque cada búsqueda es de tiempo constante." },
+      { "quien": "Sarah", "en": "Is there a trade-off?", "es": "¿Hay algo que se sacrifique?" },
+      { "quien": "Luis", "en": "Yes, the trade-off is that we use O of n extra space for the map.", "es": "Sí, lo que sacrificamos es que usamos espacio extra O de n para el map." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué quiso decir Sarah con \"Can we do better?\"", "opciones": ["Que la solución estaba mal", "Que buscara una solución más eficiente", "Que escribiera tests"],
+        "correcta": 1, "explicacion": "Después de oír que era cuadrática, \"Can we do better?\" pide una versión más rápida, no dice que esté mal." },
+      { "pregunta": "¿Por qué la segunda solución es lineal?", "opciones": ["Porque ordena el array", "Porque recorre una vez y cada búsqueda en el map es constante", "Porque usa recursión"],
+        "correcta": 1, "explicacion": "Luis dice \"I iterate over the array once\" y \"each lookup is constant time\"." },
+      { "pregunta": "¿Cuál es el costo de la solución con hash map?", "opciones": ["Usa memoria extra", "Es más difícil de leer", "No funciona con negativos"],
+        "correcta": 0, "explicacion": "\"The trade-off is that we use O of n extra space for the map\"." }
+    ] },
+  { "id": "en-trabajo-07-d02", "titulo": "Buscar en un array ordenado", "situacion": "Tom entrevista a Ana y le da un array que ya viene ordenado.",
+    "lineas": [
+      { "quien": "Tom", "en": "The array is sorted. Does that change your approach?", "es": "El array está ordenado. ¿Eso cambia tu enfoque?" },
+      { "quien": "Ana", "en": "Yes, it does. Since it's sorted, I'd use binary search.", "es": "Sí. Como está ordenado, usaría búsqueda binaria." },
+      { "quien": "Tom", "en": "Why is that better than a simple loop?", "es": "¿Por qué es mejor que un bucle simple?" },
+      { "quien": "Ana", "en": "A loop is linear, but binary search cuts the array in half each step.", "es": "Un bucle es lineal, pero la búsqueda binaria parte el array a la mitad en cada paso." },
+      { "quien": "Ana", "en": "So it runs in log n time.", "es": "Entonces corre en tiempo log n." },
+      { "quien": "Tom", "en": "Good. Would you write it with recursion?", "es": "Bien. ¿La escribirías con recursión?" },
+      { "quien": "Ana", "en": "I could, but I'd use a while loop with two pointers.", "es": "Podría, pero usaría un while con dos punteros." },
+      { "quien": "Tom", "en": "Why not recursion?", "es": "¿Por qué no recursión?" },
+      { "quien": "Ana", "en": "Recursion adds some memory overhead, and the loop is just as readable.", "es": "La recursión agrega algo de memoria extra, y el bucle es igual de legible." },
+      { "quien": "Tom", "en": "Fair enough. What about edge cases?", "es": "Me parece bien. ¿Y los casos borde?" },
+      { "quien": "Ana", "en": "I'd add an early return if the array is empty.", "es": "Agregaría un retorno temprano si el array está vacío." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Ana elige búsqueda binaria?", "opciones": ["Porque el array está ordenado", "Porque el array es pequeño", "Porque Tom se lo pidió"],
+        "correcta": 0, "explicacion": "Ana dice \"Since it's sorted, I'd use binary search\"." },
+      { "pregunta": "¿Por qué prefiere un bucle a la recursión?", "opciones": ["La recursión es más lenta en Big O", "La recursión gasta memoria extra y el bucle es igual de claro", "No sabe escribir recursión"],
+        "correcta": 1, "explicacion": "\"Recursion adds some memory overhead, and the loop is just as readable\"." },
+      { "pregunta": "¿Qué caso borde menciona Ana?", "opciones": ["Números negativos", "Un array vacío", "Números repetidos"],
+        "correcta": 1, "explicacion": "\"I'd add an early return if the array is empty\"." }
+    ] },
+  { "id": "en-trabajo-07-d03", "titulo": "Legible o rápido", "situacion": "Después del ejercicio, María le pregunta a Carlos por qué escribió su código así.",
+    "lineas": [
+      { "quien": "María", "en": "Your solution works. Why did you split it into three functions?", "es": "Tu solución funciona. ¿Por qué la dividiste en tres funciones?" },
+      { "quien": "Carlos", "en": "I wanted it to be readable and easy to test.", "es": "Quería que fuera legible y fácil de probar." },
+      { "quien": "María", "en": "Doesn't that make it slower?", "es": "¿Eso no lo vuelve más lento?" },
+      { "quien": "Carlos", "en": "Not really. The time complexity is still O of n.", "es": "No mucho. La complejidad de tiempo sigue siendo O de n." },
+      { "quien": "Carlos", "en": "The function calls add a tiny overhead, but it's not the bottleneck.", "es": "Las llamadas a funciones agregan un costo mínimo, pero no son el cuello de botella." },
+      { "quien": "María", "en": "So where's the bottleneck?", "es": "¿Y dónde está el cuello de botella?" },
+      { "quien": "Carlos", "en": "The sort at the beginning. That part is O of n log n.", "es": "El sort del inicio. Esa parte es O de n log n." },
+      { "quien": "María", "en": "Would this scale to a million records?", "es": "¿Esto escalaría a un millón de registros?" },
+      { "quien": "Carlos", "en": "Yes, it would. For a million records, n log n is still fast.", "es": "Sí. Para un millón de registros, n log n sigue siendo rápido." },
+      { "quien": "María", "en": "Great. I like that you chose maintainable code.", "es": "Genial. Me gusta que hayas elegido código fácil de mantener." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Carlos dividió su código en tres funciones?", "opciones": ["Para que sea más rápido", "Para que sea legible y fácil de probar", "Porque el enunciado lo pedía"],
+        "correcta": 1, "explicacion": "Carlos dice \"I wanted it to be readable and easy to test\"." },
+      { "pregunta": "Según Carlos, ¿cuál es el cuello de botella?", "opciones": ["Las llamadas a funciones", "El sort del inicio", "El bucle final"],
+        "correcta": 1, "explicacion": "\"The sort at the beginning. That part is O of n log n\"." },
+      { "pregunta": "¿Qué valoró María al final?", "opciones": ["Que el código sea fácil de mantener", "Que use poca memoria", "Que sea muy corto"],
+        "correcta": 0, "explicacion": "María dice \"I like that you chose maintainable code\"." }
+    ] }
+]

@@ -1,0 +1,58 @@
+[
+  { "id": "en-intermedio-01-d01", "titulo": "Tu experiencia en la entrevista", "situacion": "Sarah entrevista a Luis para un puesto de frontend junior.",
+    "lineas": [
+      { "quien": "Sarah", "en": "So, Luis, how long have you been interested in web development?", "es": "Entonces, Luis, ¿desde cuándo te interesa el desarrollo web?" },
+      { "quien": "Luis", "en": "I've been interested in it since my second year at university.", "es": "Me interesa desde mi segundo año en la universidad." },
+      { "quien": "Sarah", "en": "Have you ever worked on a real project for a client?", "es": "¿Alguna vez has trabajado en un proyecto real para un cliente?" },
+      { "quien": "Luis", "en": "Not for a company, but I've built a website for a small bakery in Lima.", "es": "No para una empresa, pero hice un sitio web para una pequeña panadería en Lima." },
+      { "quien": "Sarah", "en": "That's great. Which technologies have you used so far?", "es": "Excelente. ¿Qué tecnologías has usado hasta ahora?" },
+      { "quien": "Luis", "en": "I've worked with React for about a year, and I've just started learning TypeScript.", "es": "Trabajo con React desde hace casi un año y acabo de empezar a aprender TypeScript." },
+      { "quien": "Sarah", "en": "Have you used Git on a team?", "es": "¿Has usado Git en equipo?" },
+      { "quien": "Luis", "en": "Yes, I have. I've reviewed my classmates' pull requests several times.", "es": "Sí. He revisado los pull requests de mis compañeros varias veces." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Desde cuándo le interesa a Luis el desarrollo web?", "opciones": ["Desde el colegio", "Desde su segundo año de universidad", "Desde hace un mes"], "correcta": 1,
+        "explicacion": "Luis dice \"since my second year at university\": desde su segundo año en la universidad." },
+      { "pregunta": "¿Para quién hizo Luis un sitio web?", "opciones": ["Para una empresa grande", "Para una panadería pequeña", "Para su universidad"], "correcta": 1,
+        "explicacion": "Dice \"I've built a website for a small bakery in Lima\"." },
+      { "pregunta": "¿Qué acaba de empezar a aprender?", "opciones": ["React", "Git", "TypeScript"], "correcta": 2,
+        "explicacion": "\"I've just started learning TypeScript\": just indica que acaba de empezar. React lo usa desde hace un año." }
+    ] },
+  { "id": "en-intermedio-01-d02", "titulo": "¿Ya está listo?", "situacion": "Tom le pregunta a Ana por su tarea en la reunión diaria.",
+    "lineas": [
+      { "quien": "Tom", "en": "Hey Ana, have you finished the login page yet?", "es": "Oye Ana, ¿ya terminaste la página de inicio de sesión?" },
+      { "quien": "Ana", "en": "Almost. I've already added the form, but I haven't connected it to the API yet.", "es": "Casi. Ya agregué el formulario, pero todavía no lo conecto con la API." },
+      { "quien": "Tom", "en": "OK. Have you talked to Carlos about the endpoint?", "es": "Ok. ¿Hablaste con Carlos sobre el endpoint?" },
+      { "quien": "Ana", "en": "Yes, I've just sent him a message. He's been in meetings since nine.", "es": "Sí, acabo de mandarle un mensaje. Está en reuniones desde las nueve." },
+      { "quien": "Tom", "en": "No problem. Have you written any tests?", "es": "No hay problema. ¿Has escrito algún test?" },
+      { "quien": "Ana", "en": "I've written three so far, and they all pass.", "es": "Hasta ahora escribí tres y todos pasan." },
+      { "quien": "Tom", "en": "Nice work. Let me know when it's ready.", "es": "Buen trabajo. Avísame cuando esté listo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué le falta hacer a Ana?", "opciones": ["Agregar el formulario", "Conectar el formulario con la API", "Escribir los tests"], "correcta": 1,
+        "explicacion": "Ana dice \"I haven't connected it to the API yet\". El formulario ya lo agregó (already)." },
+      { "pregunta": "¿Por qué Carlos no ha respondido?", "opciones": ["Está de vacaciones", "Está en reuniones desde las nueve", "No tiene internet"], "correcta": 1,
+        "explicacion": "\"He's been in meetings since nine\": está en reuniones desde las nueve." },
+      { "pregunta": "¿Cuántos tests ha escrito Ana?", "opciones": ["Ninguno", "Tres", "Nueve"], "correcta": 1,
+        "explicacion": "\"I've written three so far\": hasta ahora escribió tres y todos pasan." }
+    ] },
+  { "id": "en-intermedio-01-d03", "titulo": "Una compañera nueva", "situacion": "María acaba de entrar al equipo y conversa con Tom.",
+    "lineas": [
+      { "quien": "María", "en": "Hi, I'm María. I've just joined the team.", "es": "Hola, soy María. Acabo de unirme al equipo." },
+      { "quien": "Tom", "en": "Welcome! Have you worked at a big company before?", "es": "¡Bienvenida! ¿Has trabajado antes en una empresa grande?" },
+      { "quien": "María", "en": "No, I haven't. I've worked as a freelance developer for two years.", "es": "No. He trabajado como desarrolladora independiente durante dos años." },
+      { "quien": "Tom", "en": "Cool. What kind of projects have you done?", "es": "Genial. ¿Qué tipo de proyectos has hecho?" },
+      { "quien": "María", "en": "Mostly websites for small businesses. I've also contributed to an open source library.", "es": "Sobre todo sitios web para negocios pequeños. También he contribuido a una librería de código abierto." },
+      { "quien": "Tom", "en": "That's impressive. Have you ever used our design system?", "es": "Impresionante. ¿Alguna vez has usado nuestro sistema de diseño?" },
+      { "quien": "María", "en": "Not yet, but I've read some of the documentation.", "es": "Todavía no, pero he leído parte de la documentación." },
+      { "quien": "Tom", "en": "Great. I've worked with it since last year, so you can ask me anything.", "es": "Genial. Lo uso desde el año pasado, así que puedes preguntarme lo que sea." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cómo trabajaba María antes?", "opciones": ["En una empresa grande", "Como independiente durante dos años", "Como profesora"], "correcta": 1,
+        "explicacion": "\"I've worked as a freelance developer for two years\": como desarrolladora independiente." },
+      { "pregunta": "¿María ya usó el sistema de diseño del equipo?", "opciones": ["Sí, muchas veces", "Todavía no, pero leyó parte de la documentación", "No, y no piensa usarlo"], "correcta": 1,
+        "explicacion": "Ella responde \"Not yet, but I've read some of the documentation\"." },
+      { "pregunta": "¿Desde cuándo Tom usa el sistema de diseño?", "opciones": ["Desde el año pasado", "Desde hace una semana", "Desde hoy"], "correcta": 0,
+        "explicacion": "Tom dice \"I've worked with it since last year\"." }
+    ] }
+]

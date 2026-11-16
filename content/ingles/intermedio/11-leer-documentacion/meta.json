@@ -1,0 +1,8 @@
+{
+  "id": "en-intermedio-11",
+  "titulo": "Leer documentación",
+  "etapa": "intermedio",
+  "orden": 11,
+  "nivel": "B1",
+  "descripcion": "Las palabras y frases de la documentación de React, MDN y npm: deprecated, optional, required, default, returns, throws."
+}

@@ -1,0 +1,63 @@
+[
+  { "id": "en-trabajo-10-d01", "titulo": "Un PR sin descripción", "situacion": "Sarah le explica a Luis cómo mejorar su primer pull request.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Hey Luis, I saw your PR. The title is just \"Changes\".", "es": "Hola Luis, vi tu PR. El título solo dice \"Changes\"." },
+      { "quien": "Luis", "en": "Oh, sorry. What should I write?", "es": "Ah, perdón. ¿Qué debería poner?" },
+      { "quien": "Sarah", "en": "Write it like a commit, in the imperative. Something like \"Add password validation\".", "es": "Escríbelo como un commit, en imperativo. Algo como \"Add password validation\"." },
+      { "quien": "Luis", "en": "Got it. And the description is empty too.", "es": "Entendido. Y la descripción también está vacía." },
+      { "quien": "Sarah", "en": "Right. Explain what changed, why, and how to test it.", "es": "Exacto. Explica qué cambió, por qué y cómo probarlo." },
+      { "quien": "Sarah", "en": "Screenshots help a lot for UI changes.", "es": "Las capturas ayudan mucho en cambios visuales." },
+      { "quien": "Luis", "en": "Should I also link the ticket?", "es": "¿También debería enlazar el ticket?" },
+      { "quien": "Sarah", "en": "Yes. Write \"Closes\" and the issue number at the end.", "es": "Sí. Escribe \"Closes\" y el número del issue al final." },
+      { "quien": "Luis", "en": "Thanks! I'll update it and ping you.", "es": "¡Gracias! Lo actualizo y te aviso." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué problema tenía el título del PR de Luis?", "opciones": ["Era muy largo", "Solo decía \"Changes\" y no explicaba nada", "Estaba en español"],
+        "correcta": 1, "explicacion": "Sarah dice \"The title is just 'Changes'\": no dice qué cambia." },
+      { "pregunta": "¿Qué tres cosas debe explicar la descripción?", "opciones": ["Qué cambió, por qué y cómo probarlo", "Quién lo hizo, cuándo y dónde", "El costo, el tiempo y el riesgo"],
+        "correcta": 0, "explicacion": "\"Explain what changed, why, and how to test it\"." },
+      { "pregunta": "¿Para qué escribe \"Closes\" con el número del issue?", "opciones": ["Para cerrar el PR", "Para enlazar y cerrar el ticket", "Para pedir otra revisión"],
+        "correcta": 1, "explicacion": "Luis pregunta si debe enlazar el ticket y Sarah le dice que use \"Closes\" con el número del issue." }
+    ] },
+  { "id": "en-trabajo-10-d02", "titulo": "Pedir ayuda en Slack", "situacion": "Ana está atascada y le escribe a Carlos por Slack. Así se lee el chat.",
+    "lineas": [
+      { "quien": "Ana", "en": "Hi Carlos! Quick question about the users endpoint.", "es": "¡Hola Carlos! Una pregunta rápida sobre el endpoint de usuarios." },
+      { "quien": "Ana", "en": "I'm trying to fetch the list, but I'm getting a 401 error.", "es": "Estoy intentando traer la lista, pero me sale un error 401." },
+      { "quien": "Ana", "en": "Here's what I've tried: I checked the token and logged in again.", "es": "Esto es lo que probé: revisé el token y volví a iniciar sesión." },
+      { "quien": "Ana", "en": "Any pointers? Thanks in advance!", "es": "¿Alguna pista? ¡Gracias de antemano!" },
+      { "quien": "Carlos", "en": "Hey Ana! Are you sending the token in the headers?", "es": "¡Hola Ana! ¿Estás mandando el token en los headers?" },
+      { "quien": "Ana", "en": "I think so. Here's the snippet.", "es": "Creo que sí. Aquí está el fragmento de código." },
+      { "quien": "Carlos", "en": "Found it. It should be \"Bearer\" plus a space before the token.", "es": "Lo encontré. Debe ser \"Bearer\" más un espacio antes del token." },
+      { "quien": "Ana", "en": "That was it! It works now. Thanks so much!", "es": "¡Era eso! Ya funciona. ¡Muchas gracias!" },
+      { "quien": "Carlos", "en": "No problem. Your message had all the context, so it was easy.", "es": "De nada. Tu mensaje tenía todo el contexto, así que fue fácil." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué error tenía Ana?", "opciones": ["Un error 404", "Un error 401", "Un error de sintaxis"],
+        "correcta": 1, "explicacion": "\"I'm getting a 401 error\"." },
+      { "pregunta": "¿Qué había probado Ana antes de preguntar?", "opciones": ["Revisar el token y volver a iniciar sesión", "Reiniciar la laptop", "Borrar la caché"],
+        "correcta": 0, "explicacion": "\"I checked the token and logged in again\"." },
+      { "pregunta": "¿Por qué Carlos pudo ayudarla rápido?", "opciones": ["Porque él escribió ese código", "Porque el mensaje de Ana tenía todo el contexto", "Porque ya conocía el error"],
+        "correcta": 1, "explicacion": "Carlos dice \"Your message had all the context, so it was easy\"." }
+    ] },
+  { "id": "en-trabajo-10-d03", "titulo": "El correo después de la entrevista", "situacion": "María revisa con Tom, su mentor, el correo de seguimiento que va a mandar.",
+    "lineas": [
+      { "quien": "María", "en": "Tom, can you proofread my follow-up email before I send it?", "es": "Tom, ¿puedes revisar mi correo de seguimiento antes de que lo mande?" },
+      { "quien": "Tom", "en": "Sure. When was the interview?", "es": "Claro. ¿Cuándo fue la entrevista?" },
+      { "quien": "María", "en": "This morning. I want to send it today.", "es": "Esta mañana. Quiero mandarlo hoy." },
+      { "quien": "Tom", "en": "Good, within twenty-four hours is perfect. Read it to me.", "es": "Bien, dentro de las veinticuatro horas es perfecto. Léemelo." },
+      { "quien": "María", "en": "\"Hi Sarah, thank you for your time today. I enjoyed learning about your design system.\"", "es": "\"Hola Sarah, gracias por tu tiempo hoy. Me gustó conocer su sistema de diseño.\"" },
+      { "quien": "Tom", "en": "Nice. Mentioning something specific is a great idea.", "es": "Bien. Mencionar algo específico es muy buena idea." },
+      { "quien": "María", "en": "And at the end: \"I wait your answer.\"", "es": "Y al final: \"I wait your answer.\"" },
+      { "quien": "Tom", "en": "Change that to \"I look forward to hearing from you.\" It sounds more natural.", "es": "Cámbialo por \"I look forward to hearing from you.\" Suena más natural." },
+      { "quien": "María", "en": "Perfect. Then \"Best regards\" and my name?", "es": "Perfecto. ¿Después \"Best regards\" y mi nombre?" },
+      { "quien": "Tom", "en": "Exactly. Keep it short and concise. It looks great.", "es": "Exacto. Que sea corto y breve. Se ve muy bien." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuándo recomienda Tom mandar el correo?", "opciones": ["Una semana después", "Dentro de las veinticuatro horas", "Solo si no responden"],
+        "correcta": 1, "explicacion": "\"Within twenty-four hours is perfect\"." },
+      { "pregunta": "¿Qué frase le pide Tom que cambie?", "opciones": ["\"Thank you for your time\"", "\"I wait your answer\"", "\"Best regards\""],
+        "correcta": 1, "explicacion": "Tom propone \"I look forward to hearing from you\" en lugar de \"I wait your answer\"." },
+      { "pregunta": "¿Qué parte del correo le gustó a Tom?", "opciones": ["Que mencione algo específico de la entrevista", "Que sea muy largo", "Que pida el salario"],
+        "correcta": 0, "explicacion": "\"Mentioning something specific is a great idea\"." }
+    ] }
+]

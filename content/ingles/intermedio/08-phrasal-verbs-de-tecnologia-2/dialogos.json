@@ -1,0 +1,61 @@
+[
+  { "id": "en-intermedio-08-d01", "titulo": "Ponerse al día después de vacaciones", "situacion": "Carlos vuelve de vacaciones y le pregunta a Sarah qué pasó.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Hi Sarah! I'm back from vacation. Can we catch up?", "es": "¡Hola, Sarah! Ya volví de vacaciones. ¿Nos ponemos al día?" },
+      { "quien": "Sarah", "en": "Sure. Well, the payment service went down on Tuesday.", "es": "Claro. Bueno, el servicio de pagos se cayó el martes." },
+      { "quien": "Carlos", "en": "Oh no. Did you sort it out?", "es": "Ay, no. ¿Lo resolvieron?" },
+      { "quien": "Sarah", "en": "Yes, Luis dealt with it. A config change broke it.", "es": "Sí, Luis se encargó. Un cambio de configuración lo rompió." },
+      { "quien": "Carlos", "en": "And what about my tickets?", "es": "¿Y qué pasó con mis tickets?" },
+      { "quien": "Sarah", "en": "Ana took over two of them. You can pick up the rest today.", "es": "Ana se hizo cargo de dos. Tú puedes tomar el resto hoy." },
+      { "quien": "Carlos", "en": "Great. Anything else I should know?", "es": "Genial. ¿Algo más que deba saber?" },
+      { "quien": "Sarah", "en": "We fell behind a little, so we're putting off the dark mode feature.", "es": "Nos atrasamos un poco, así que estamos posponiendo el modo oscuro." },
+      { "quien": "Carlos", "en": "Makes sense. I'll bring it up at the next planning.", "es": "Tiene sentido. Lo menciono en la próxima planificación." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué pasó el martes?", "opciones": ["Se cayó el servicio de pagos", "Ana renunció", "Lanzaron el modo oscuro"],
+        "correcta": 0, "explicacion": "Sarah dice \"the payment service went down on Tuesday\"." },
+      { "pregunta": "¿Quién se hizo cargo de dos tickets de Carlos?", "opciones": ["Luis", "Ana", "Sarah"],
+        "correcta": 1, "explicacion": "Sarah dice \"Ana took over two of them\"." },
+      { "pregunta": "¿Qué funcionalidad se pospone?", "opciones": ["Los pagos", "El inicio de sesión", "El modo oscuro"],
+        "correcta": 2, "explicacion": "Sarah dice \"we're putting off the dark mode feature\"." }
+    ] },
+  { "id": "en-intermedio-08-d02", "titulo": "Un error que solo aparece en celular", "situacion": "María y Luis buscan la causa de un error en el inicio de sesión.",
+    "lineas": [
+      { "quien": "María", "en": "Luis, the login error only shows up on mobile.", "es": "Luis, el error del inicio de sesión solo aparece en celular." },
+      { "quien": "Luis", "en": "Let's narrow it down. Does it happen on every browser?", "es": "Acotémoslo. ¿Pasa en todos los navegadores?" },
+      { "quien": "María", "en": "Only on Safari. A blank window pops up, and then the page freezes.", "es": "Solo en Safari. Aparece una ventana en blanco y luego la página se congela." },
+      { "quien": "Luis", "en": "Then we can rule out the server. It's probably the frontend.", "es": "Entonces podemos descartar el servidor. Seguramente es el frontend." },
+      { "quien": "María", "en": "I think it's that old date library. It breaks on Safari.", "es": "Creo que es esa librería vieja de fechas. Falla en Safari." },
+      { "quien": "Luis", "en": "We should get rid of it. Native dates are enough for us.", "es": "Deberíamos deshacernos de ella. Las fechas nativas nos alcanzan." },
+      { "quien": "María", "en": "Agreed. Should I spin up a test environment?", "es": "De acuerdo. ¿Levanto un entorno de prueba?" },
+      { "quien": "Luis", "en": "Yes, and tear it down when you finish. They cost money.", "es": "Sí, y elimínalo cuando termines. Cuestan dinero." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿En qué navegador falla el inicio de sesión?", "opciones": ["En Chrome", "En Safari", "En todos"],
+        "correcta": 1, "explicacion": "María dice \"Only on Safari\"." },
+      { "pregunta": "¿Qué descartan como causa?", "opciones": ["El servidor", "La librería de fechas", "El navegador"],
+        "correcta": 0, "explicacion": "Luis dice \"we can rule out the server\"." },
+      { "pregunta": "¿Por qué hay que eliminar el entorno de prueba al terminar?", "opciones": ["Porque es lento", "Porque cuesta dinero", "Porque tiene errores"],
+        "correcta": 1, "explicacion": "Luis dice \"They cost money\"." }
+    ] },
+  { "id": "en-intermedio-08-d03", "titulo": "Cerrar la reunión", "situacion": "Tom termina una videollamada con el equipo y Ana menciona un problema.",
+    "lineas": [
+      { "quien": "Tom", "en": "Okay, we're almost out of time. Let's wrap up.", "es": "Bueno, ya casi no tenemos tiempo. Cerremos." },
+      { "quien": "Ana", "en": "Before we finish, I want to point out one thing.", "es": "Antes de terminar, quiero hacer notar una cosa." },
+      { "quien": "Tom", "en": "Go ahead.", "es": "Adelante." },
+      { "quien": "Ana", "en": "The home page is slow. The big images slow it down.", "es": "La página de inicio va lenta. Las imágenes grandes la ralentizan." },
+      { "quien": "Tom", "en": "Good point. Can you break it down into tickets?", "es": "Buen punto. ¿Puedes dividirlo en tickets?" },
+      { "quien": "Ana", "en": "Sure. I think lazy loading will speed it up a lot.", "es": "Claro. Creo que la carga diferida la va a acelerar mucho." },
+      { "quien": "Tom", "en": "Great. I'll follow up with the designer about the image sizes.", "es": "Genial. Hablo con la diseñadora sobre el tamaño de las imágenes." },
+      { "quien": "Ana", "en": "Thanks. You can count on me for the fix.", "es": "Gracias. Puedes contar conmigo para el arreglo." },
+      { "quien": "Tom", "en": "Perfect. Bye, everyone, I'm going to hang up.", "es": "Perfecto. Chau a todos, voy a colgar." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué problema menciona Ana?", "opciones": ["La página de inicio va lenta", "El inicio de sesión falla", "Faltan pruebas"],
+        "correcta": 0, "explicacion": "Ana dice \"The home page is slow\"." },
+      { "pregunta": "¿Qué causa la lentitud?", "opciones": ["El servidor", "Las imágenes grandes", "Demasiadas fuentes"],
+        "correcta": 1, "explicacion": "Ana dice \"The big images slow it down\"." },
+      { "pregunta": "¿Con quién va a hablar Tom?", "opciones": ["Con el cliente", "Con Ana", "Con la diseñadora"],
+        "correcta": 2, "explicacion": "Tom dice \"I'll follow up with the designer\"." }
+    ] }
+]
