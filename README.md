@@ -8,6 +8,23 @@ Programas en VS Code, guardas con `Ctrl + S` y la app muestra al instante qué t
 
 **En números:** 390 ejercicios con tests (JavaScript, algoritmos, React, TypeScript, Node y SQL), 35 temas de teoría, 152 preguntas de entrevista, inglés en 3 etapas y 334 tests de la propia app.
 
+**Versión web:** [dev-prep.angel-isasi.com](https://dev-prep.angel-isasi.com) (el progreso de cada visitante queda solo en su navegador).
+
+![Tests en vivo: guardas en VS Code y la app muestra qué casos pasan, con lo esperado y lo recibido](docs/capturas/tests-en-vivo.png)
+
+| Inicio | Practicar | Celular |
+|---|---|---|
+| ![Inicio con racha, meta del día, preparación y cuenta regresiva](docs/capturas/inicio.png) | ![Practicar organizado por áreas y colecciones](docs/capturas/practicar.png) | ![Versión celular con el plan de hoy y lecciones](docs/capturas/movil.png) |
+
+## In English
+
+dev-prep is a personal, offline-first practice app I use every day to prepare for my first frontend developer job. You write code in VS Code; every time you save, a Vitest watcher re-runs the exercise tests and the app shows each case live (expected vs. received) through Server-Sent Events. It includes 390 exercises (JavaScript, algorithms, React, TypeScript, Node and SQL), spaced repetition, interview simulations, English lessons and progress tracking with daily goals and streaks.
+
+- **Stack:** React 19, Vite, Express 5, Vitest, installable PWA with a service worker, AWS Lambda + DynamoDB (CloudFormation), Vercel.
+- **Sync:** each device stores its progress locally and uploads its own document; documents are merged record by record (latest wins, daily counters are summed), so syncing twice is harmless.
+- **Push notifications:** Web Push implemented from scratch with `node:crypto` (VAPID signing and aes128gcm encryption).
+- **Security:** the local server only listens on 127.0.0.1 and checks `Origin` and `Host` (DNS rebinding); the cloud requires a 256-bit token shared only through a QR code; the published site has a strict CSP verified at build time.
+
 ## Qué tiene
 
 - **Inicio**: tu objetivo, la racha, la meta del día (con la deuda de los días que fallaste), tu porcentaje de preparación y la cuenta regresiva a tu fecha meta, con aviso de si vas atrasado.
