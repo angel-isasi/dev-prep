@@ -1,0 +1,1004 @@
+[
+  {
+    "id": "en-basico-19-w01",
+    "en": "screen",
+    "es": "pantalla",
+    "pron": "skrín",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My screen is too dark.",
+      "es": "Mi pantalla está muy oscura."
+    }
+  },
+  {
+    "id": "en-basico-19-w02",
+    "en": "monitor",
+    "es": "monitor",
+    "pron": "mónitor",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I work with two monitors.",
+      "es": "Trabajo con dos monitores."
+    }
+  },
+  {
+    "id": "en-basico-19-w03",
+    "en": "keyboard",
+    "es": "teclado",
+    "pron": "kíbord",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This keyboard doesn't have the letter ñ.",
+      "es": "Este teclado no tiene la letra ñ."
+    }
+  },
+  {
+    "id": "en-basico-19-w04",
+    "en": "mouse",
+    "es": "mouse",
+    "pron": "máus",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My mouse needs a new battery.",
+      "es": "Mi mouse necesita una pila nueva."
+    }
+  },
+  {
+    "id": "en-basico-19-w05",
+    "en": "laptop",
+    "es": "laptop",
+    "pron": "láptop",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The company gave me a new laptop.",
+      "es": "La empresa me dio una laptop nueva."
+    }
+  },
+  {
+    "id": "en-basico-19-w06",
+    "en": "charger",
+    "es": "cargador",
+    "pron": "chárdyer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Can I borrow your charger?",
+      "es": "¿Me prestas tu cargador?"
+    }
+  },
+  {
+    "id": "en-basico-19-w07",
+    "en": "headphones",
+    "es": "audífonos",
+    "pron": "jédfouns",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I wear headphones in the office.",
+      "es": "Uso audífonos en la oficina."
+    }
+  },
+  {
+    "id": "en-basico-19-w08",
+    "en": "headset",
+    "es": "audífonos con micrófono",
+    "pron": "jédset",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I use a headset for calls.",
+      "es": "Uso audífonos con micrófono para las llamadas."
+    }
+  },
+  {
+    "id": "en-basico-19-w09",
+    "en": "microphone",
+    "es": "micrófono",
+    "pron": "máikrofoun",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Your microphone doesn't work.",
+      "es": "Tu micrófono no funciona."
+    }
+  },
+  {
+    "id": "en-basico-19-w10",
+    "en": "webcam",
+    "es": "cámara web",
+    "pron": "uébkam",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My webcam is off.",
+      "es": "Mi cámara está apagada."
+    }
+  },
+  {
+    "id": "en-basico-19-w11",
+    "en": "speaker",
+    "es": "parlante",
+    "pron": "spíker",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The speakers are too loud.",
+      "es": "Los parlantes están muy fuertes."
+    }
+  },
+  {
+    "id": "en-basico-19-w12",
+    "en": "cable",
+    "es": "cable",
+    "pron": "kéibol",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I need a longer cable.",
+      "es": "Necesito un cable más largo."
+    }
+  },
+  {
+    "id": "en-basico-19-w13",
+    "en": "battery",
+    "es": "batería / pila",
+    "pron": "bátery",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My laptop battery is at ten percent.",
+      "es": "La batería de mi laptop está en diez por ciento."
+    }
+  },
+  {
+    "id": "en-basico-19-w14",
+    "en": "plug",
+    "es": "enchufe",
+    "pron": "plág",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This plug doesn't fit here.",
+      "es": "Este enchufe no entra aquí."
+    }
+  },
+  {
+    "id": "en-basico-19-w15",
+    "en": "power outlet",
+    "es": "tomacorriente",
+    "pron": "páuer áutlet",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Is there a power outlet near the table?",
+      "es": "¿Hay un tomacorriente cerca de la mesa?"
+    }
+  },
+  {
+    "id": "en-basico-19-w16",
+    "en": "printer",
+    "es": "impresora",
+    "pron": "prínter",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The printer is out of paper.",
+      "es": "La impresora no tiene papel."
+    }
+  },
+  {
+    "id": "en-basico-19-w17",
+    "en": "hard drive",
+    "es": "disco duro",
+    "pron": "járd dráiv",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My hard drive is almost full.",
+      "es": "Mi disco duro está casi lleno."
+    }
+  },
+  {
+    "id": "en-basico-19-w18",
+    "en": "memory",
+    "es": "memoria",
+    "pron": "mémori",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This laptop has sixteen gigabytes of memory.",
+      "es": "Esta laptop tiene dieciséis gigas de memoria."
+    }
+  },
+  {
+    "id": "en-basico-19-w19",
+    "en": "tablet",
+    "es": "tablet",
+    "pron": "táblet",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I test the app on a tablet.",
+      "es": "Pruebo la app en una tablet."
+    }
+  },
+  {
+    "id": "en-basico-19-w20",
+    "en": "device",
+    "es": "dispositivo",
+    "pron": "diváis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The app works on every device.",
+      "es": "La app funciona en todos los dispositivos."
+    }
+  },
+  {
+    "id": "en-basico-19-w21",
+    "en": "restart",
+    "es": "reiniciar",
+    "pron": "ristárt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Restart your computer and try again.",
+      "es": "Reinicia tu computadora e intenta otra vez."
+    }
+  },
+  {
+    "id": "en-basico-19-w22",
+    "en": "shut down",
+    "es": "apagar (la computadora)",
+    "pron": "shát dáun",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "shut down",
+      "participio": "shut down"
+    },
+    "ejemplo": {
+      "en": "I shut down my laptop at six.",
+      "es": "Apagué mi laptop a las seis."
+    }
+  },
+  {
+    "id": "en-basico-19-w23",
+    "en": "plug in",
+    "es": "enchufar / conectar",
+    "pron": "plág ín",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Plug in your charger, please.",
+      "es": "Enchufa tu cargador, por favor."
+    }
+  },
+  {
+    "id": "en-basico-19-w24",
+    "en": "Wi-Fi",
+    "es": "wifi",
+    "pron": "uái fái",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What's the Wi-Fi password?",
+      "es": "¿Cuál es la contraseña del wifi?"
+    }
+  },
+  {
+    "id": "en-basico-19-w25",
+    "en": "network",
+    "es": "red",
+    "pron": "nétuerk",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Connect to the office network.",
+      "es": "Conéctate a la red de la oficina."
+    }
+  },
+  {
+    "id": "en-basico-19-w26",
+    "en": "connection",
+    "es": "conexión",
+    "pron": "konékshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My internet connection is bad today.",
+      "es": "Mi conexión a internet está mala hoy."
+    }
+  },
+  {
+    "id": "en-basico-19-w27",
+    "en": "router",
+    "es": "router / módem",
+    "pron": "ráuter",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I restarted the router.",
+      "es": "Reinicié el router."
+    }
+  },
+  {
+    "id": "en-basico-19-w28",
+    "en": "online",
+    "es": "en línea / conectado",
+    "pron": "ónlain",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Are you online?",
+      "es": "¿Estás conectado?"
+    }
+  },
+  {
+    "id": "en-basico-19-w29",
+    "en": "offline",
+    "es": "sin conexión",
+    "pron": "óflain",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This app works offline.",
+      "es": "Esta app funciona sin conexión."
+    }
+  },
+  {
+    "id": "en-basico-19-w30",
+    "en": "operating system",
+    "es": "sistema operativo",
+    "pron": "ópereiting sístem",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Which operating system do you use?",
+      "es": "¿Qué sistema operativo usas?"
+    }
+  },
+  {
+    "id": "en-basico-19-w31",
+    "en": "software",
+    "es": "software / programas",
+    "pron": "sóftuer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We need new software for the team.",
+      "es": "Necesitamos un programa nuevo para el equipo."
+    }
+  },
+  {
+    "id": "en-basico-19-w32",
+    "en": "hardware",
+    "es": "hardware / equipo físico",
+    "pron": "járduer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The problem is the hardware, not the code.",
+      "es": "El problema es el equipo, no el código."
+    }
+  },
+  {
+    "id": "en-basico-19-w33",
+    "en": "program",
+    "es": "programa",
+    "pron": "próugram",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Close all the programs before the update.",
+      "es": "Cierra todos los programas antes de la actualización."
+    }
+  },
+  {
+    "id": "en-basico-19-w34",
+    "en": "file",
+    "es": "archivo",
+    "pron": "fáil",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I can't open this file.",
+      "es": "No puedo abrir este archivo."
+    }
+  },
+  {
+    "id": "en-basico-19-w35",
+    "en": "folder",
+    "es": "carpeta",
+    "pron": "fóulder",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The images are in this folder.",
+      "es": "Las imágenes están en esta carpeta."
+    }
+  },
+  {
+    "id": "en-basico-19-w36",
+    "en": "document",
+    "es": "documento",
+    "pron": "dókiument",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'll send you the document today.",
+      "es": "Te mando el documento hoy."
+    }
+  },
+  {
+    "id": "en-basico-19-w37",
+    "en": "download",
+    "es": "descargar / descarga",
+    "pron": "dáunloud",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Download the file from this link.",
+      "es": "Descarga el archivo de este enlace."
+    }
+  },
+  {
+    "id": "en-basico-19-w38",
+    "en": "upload",
+    "es": "subir (un archivo)",
+    "pron": "áploud",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I uploaded the photos to the folder.",
+      "es": "Subí las fotos a la carpeta."
+    }
+  },
+  {
+    "id": "en-basico-19-w39",
+    "en": "save",
+    "es": "guardar",
+    "pron": "séiv",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Save the file before you close it.",
+      "es": "Guarda el archivo antes de cerrarlo."
+    }
+  },
+  {
+    "id": "en-basico-19-w40",
+    "en": "delete",
+    "es": "borrar / eliminar",
+    "pron": "dilít",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I deleted the old files.",
+      "es": "Borré los archivos viejos."
+    }
+  },
+  {
+    "id": "en-basico-19-w41",
+    "en": "copy",
+    "es": "copiar / copia",
+    "pron": "kápi",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Copy the text and send it to me.",
+      "es": "Copia el texto y mándamelo."
+    }
+  },
+  {
+    "id": "en-basico-19-w42",
+    "en": "paste",
+    "es": "pegar (texto)",
+    "pron": "péist",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Paste the link in the chat.",
+      "es": "Pega el enlace en el chat."
+    }
+  },
+  {
+    "id": "en-basico-19-w43",
+    "en": "undo",
+    "es": "deshacer",
+    "pron": "andú",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "undid",
+      "participio": "undone"
+    },
+    "ejemplo": {
+      "en": "Press Control Z to undo.",
+      "es": "Presiona Control Z para deshacer."
+    }
+  },
+  {
+    "id": "en-basico-19-w44",
+    "en": "settings",
+    "es": "configuración",
+    "pron": "sérings",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Go to settings and change the language.",
+      "es": "Ve a la configuración y cambia el idioma."
+    }
+  },
+  {
+    "id": "en-basico-19-w45",
+    "en": "update",
+    "es": "actualizar / actualización",
+    "pron": "ápdeit",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I updated my laptop last night.",
+      "es": "Actualicé mi laptop anoche."
+    }
+  },
+  {
+    "id": "en-basico-19-w46",
+    "en": "install",
+    "es": "instalar",
+    "pron": "instól",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I installed VS Code yesterday.",
+      "es": "Instalé VS Code ayer."
+    }
+  },
+  {
+    "id": "en-basico-19-w47",
+    "en": "uninstall",
+    "es": "desinstalar",
+    "pron": "aninstól",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Uninstall the old version first.",
+      "es": "Desinstala primero la versión antigua."
+    }
+  },
+  {
+    "id": "en-basico-19-w48",
+    "en": "password",
+    "es": "contraseña",
+    "pron": "pásuerd",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I forgot my password.",
+      "es": "Olvidé mi contraseña."
+    }
+  },
+  {
+    "id": "en-basico-19-w49",
+    "en": "account",
+    "es": "cuenta",
+    "pron": "akáunt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Do you have a GitHub account?",
+      "es": "¿Tienes una cuenta de GitHub?"
+    }
+  },
+  {
+    "id": "en-basico-19-w50",
+    "en": "username",
+    "es": "nombre de usuario",
+    "pron": "iúserneim",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My username is my first name.",
+      "es": "Mi nombre de usuario es mi nombre."
+    }
+  },
+  {
+    "id": "en-basico-19-w51",
+    "en": "screenshot",
+    "es": "captura de pantalla",
+    "pron": "skrínshat",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Can you send me a screenshot?",
+      "es": "¿Me puedes mandar una captura de pantalla?"
+    }
+  },
+  {
+    "id": "en-basico-19-w52",
+    "en": "attachment",
+    "es": "archivo adjunto",
+    "pron": "atáchment",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The attachment is too big.",
+      "es": "El archivo adjunto es muy pesado."
+    }
+  },
+  {
+    "id": "en-basico-19-w53",
+    "en": "inbox",
+    "es": "bandeja de entrada",
+    "pron": "ínbaks",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I have fifty emails in my inbox.",
+      "es": "Tengo cincuenta correos en mi bandeja de entrada."
+    }
+  },
+  {
+    "id": "en-basico-19-w55",
+    "en": "forward",
+    "es": "reenviar",
+    "pron": "fóruerd",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Can you forward me that email?",
+      "es": "¿Me puedes reenviar ese correo?"
+    }
+  },
+  {
+    "id": "en-basico-19-w56",
+    "en": "recycle bin",
+    "es": "papelera de reciclaje",
+    "pron": "risáikol bín",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The file is in the recycle bin.",
+      "es": "El archivo está en la papelera de reciclaje."
+    }
+  },
+  {
+    "id": "en-basico-19-w57",
+    "en": "shortcut",
+    "es": "atajo",
+    "pron": "shórtkat",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Control S is the shortcut to save.",
+      "es": "Control S es el atajo para guardar."
+    }
+  },
+  {
+    "id": "en-basico-19-w58",
+    "en": "storage",
+    "es": "almacenamiento",
+    "pron": "stóridy",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My phone doesn't have enough storage.",
+      "es": "Mi celular no tiene suficiente almacenamiento."
+    }
+  },
+  {
+    "id": "en-basico-19-w59",
+    "en": "backup",
+    "es": "copia de seguridad",
+    "pron": "bákap",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I make a backup every Friday.",
+      "es": "Hago una copia de seguridad cada viernes."
+    }
+  },
+  {
+    "id": "en-basico-19-w60",
+    "en": "drag",
+    "es": "arrastrar",
+    "pron": "drág",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Drag the file into the folder.",
+      "es": "Arrastra el archivo a la carpeta."
+    }
+  },
+  {
+    "id": "en-basico-19-w61",
+    "en": "print",
+    "es": "imprimir",
+    "pron": "prínt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I printed the document for the meeting.",
+      "es": "Imprimí el documento para la reunión."
+    }
+  },
+  {
+    "id": "en-basico-19-w62",
+    "en": "crash",
+    "es": "colgarse / caerse (un programa)",
+    "pron": "krásh",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The app crashed again.",
+      "es": "La app se colgó otra vez."
+    }
+  },
+  {
+    "id": "en-basico-19-w63",
+    "en": "freeze",
+    "es": "congelarse (la pantalla)",
+    "pron": "fríis",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "froze",
+      "participio": "frozen"
+    },
+    "ejemplo": {
+      "en": "My screen froze during the call.",
+      "es": "Mi pantalla se congeló durante la llamada."
+    }
+  },
+  {
+    "id": "en-basico-19-w64",
+    "en": "spreadsheet",
+    "es": "hoja de cálculo",
+    "pron": "sprédshiit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The tasks are in a spreadsheet.",
+      "es": "Las tareas están en una hoja de cálculo."
+    }
+  },
+  {
+    "id": "en-basico-19-w65",
+    "en": "presentation",
+    "es": "presentación",
+    "pron": "prezentéishon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'm going to give a short presentation.",
+      "es": "Voy a dar una presentación corta."
+    }
+  },
+  {
+    "id": "en-basico-19-w66",
+    "en": "slide",
+    "es": "diapositiva",
+    "pron": "sláid",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Go back to the last slide, please.",
+      "es": "Regresa a la diapositiva anterior, por favor."
+    }
+  },
+  {
+    "id": "en-basico-19-w67",
+    "en": "IT support",
+    "es": "soporte técnico",
+    "pron": "ái tí sapórt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Call IT support if your laptop doesn't turn on.",
+      "es": "Llama a soporte técnico si tu laptop no prende."
+    }
+  },
+  {
+    "id": "en-basico-19-w68",
+    "en": "setup",
+    "es": "instalación / equipo armado",
+    "pron": "sérap",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I like your home office setup.",
+      "es": "Me gusta cómo armaste tu espacio de trabajo en casa."
+    }
+  },
+  {
+    "id": "en-basico-19-w69",
+    "en": "video call",
+    "es": "videollamada",
+    "pron": "vídiou kól",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The interview is a video call.",
+      "es": "La entrevista es por videollamada."
+    }
+  },
+  {
+    "id": "en-basico-19-w71",
+    "en": "deadline",
+    "es": "fecha límite / plazo",
+    "pron": "dédlain",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The deadline is next Monday.",
+      "es": "El plazo vence el próximo lunes."
+    }
+  },
+  {
+    "id": "en-basico-19-w72",
+    "en": "task",
+    "es": "tarea",
+    "pron": "tásk",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I have three tasks for today.",
+      "es": "Tengo tres tareas para hoy."
+    }
+  },
+  {
+    "id": "en-basico-19-w73",
+    "en": "team",
+    "es": "equipo",
+    "pron": "tím",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Our team has five developers.",
+      "es": "Nuestro equipo tiene cinco desarrolladores."
+    }
+  },
+  {
+    "id": "en-basico-19-w76",
+    "en": "colleague",
+    "es": "colega",
+    "pron": "kálig",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This is my colleague, Sarah.",
+      "es": "Ella es mi colega, Sarah."
+    }
+  },
+  {
+    "id": "en-basico-19-w77",
+    "en": "team lead",
+    "es": "líder de equipo",
+    "pron": "tím líd",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Ask the team lead about the task.",
+      "es": "Pregúntale al líder del equipo por la tarea."
+    }
+  },
+  {
+    "id": "en-basico-19-w78",
+    "en": "remote",
+    "es": "remoto",
+    "pron": "rimóut",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "It's a remote job.",
+      "es": "Es un trabajo remoto."
+    }
+  },
+  {
+    "id": "en-basico-19-w79",
+    "en": "on-site",
+    "es": "presencial",
+    "pron": "án sáit",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The job is on-site in Lima.",
+      "es": "El trabajo es presencial en Lima."
+    }
+  },
+  {
+    "id": "en-basico-19-w80",
+    "en": "hybrid",
+    "es": "híbrido",
+    "pron": "jáibrid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "We have a hybrid schedule.",
+      "es": "Tenemos un horario híbrido."
+    }
+  },
+  {
+    "id": "en-basico-19-w81",
+    "en": "work from home",
+    "es": "trabajar desde casa",
+    "pron": "uérk from jóum",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I work from home on Fridays.",
+      "es": "Los viernes trabajo desde casa."
+    }
+  },
+  {
+    "id": "en-basico-19-w82",
+    "en": "meeting room",
+    "es": "sala de reuniones",
+    "pron": "míring rúm",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The meeting room is on the second floor.",
+      "es": "La sala de reuniones está en el segundo piso."
+    }
+  },
+  {
+    "id": "en-basico-19-w83",
+    "en": "agenda",
+    "es": "temas de la reunión",
+    "pron": "adyénda",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What's on the agenda today?",
+      "es": "¿Qué temas tenemos hoy en la reunión?"
+    }
+  },
+  {
+    "id": "en-basico-19-w86",
+    "en": "reschedule",
+    "es": "reprogramar",
+    "pron": "riskédyul",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Can we reschedule the meeting?",
+      "es": "¿Podemos reprogramar la reunión?"
+    }
+  },
+  {
+    "id": "en-basico-19-w87",
+    "en": "postpone",
+    "es": "posponer",
+    "pron": "poustpóun",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "They postponed the demo to Friday.",
+      "es": "Pospusieron la demo para el viernes."
+    }
+  },
+  {
+    "id": "en-basico-19-w90",
+    "en": "project",
+    "es": "proyecto",
+    "pron": "prádyekt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This is my first real project.",
+      "es": "Este es mi primer proyecto real."
+    }
+  },
+  {
+    "id": "en-basico-19-w91",
+    "en": "report",
+    "es": "informe / reportar",
+    "pron": "ripórt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'll send the report on Friday.",
+      "es": "Mando el informe el viernes."
+    }
+  },
+  {
+    "id": "en-basico-19-w92",
+    "en": "workday",
+    "es": "jornada laboral",
+    "pron": "uérkdei",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My workday starts at nine.",
+      "es": "Mi jornada empieza a las nueve."
+    }
+  },
+  {
+    "id": "en-basico-19-w93",
+    "en": "full-time",
+    "es": "a tiempo completo",
+    "pron": "fúl táim",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "I want a full-time job.",
+      "es": "Quiero un trabajo a tiempo completo."
+    }
+  },
+  {
+    "id": "en-basico-19-w94",
+    "en": "part-time",
+    "es": "a medio tiempo",
+    "pron": "párt táim",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "I have a part-time job.",
+      "es": "Tengo un trabajo de medio tiempo."
+    }
+  },
+  {
+    "id": "en-basico-19-w95",
+    "en": "internship",
+    "es": "prácticas (preprofesionales)",
+    "pron": "íntership",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I want an internship next year.",
+      "es": "Quiero hacer prácticas el próximo año."
+    }
+  },
+  {
+    "id": "en-basico-19-w96",
+    "en": "intern",
+    "es": "practicante",
+    "pron": "íntern",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Luis is a frontend intern.",
+      "es": "Luis es practicante de frontend."
+    }
+  },
+  {
+    "id": "en-basico-19-w97",
+    "en": "hire",
+    "es": "contratar",
+    "pron": "jáier",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "They hired two junior developers.",
+      "es": "Contrataron a dos desarrolladores junior."
+    }
+  },
+  {
+    "id": "en-basico-19-w98",
+    "en": "interview",
+    "es": "entrevista",
+    "pron": "ínterviu",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I have a job interview tomorrow.",
+      "es": "Mañana tengo una entrevista de trabajo."
+    }
+  }
+]

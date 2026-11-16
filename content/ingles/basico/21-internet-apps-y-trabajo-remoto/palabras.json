@@ -1,0 +1,1073 @@
+[
+  {
+    "id": "en-basico-21-w01",
+    "en": "browser",
+    "es": "navegador",
+    "pron": "bráuser",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Which browser do you use?",
+      "es": "¿Qué navegador usas?"
+    }
+  },
+  {
+    "id": "en-basico-21-w02",
+    "en": "tab",
+    "es": "pestaña",
+    "pron": "táb",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I have twenty tabs open.",
+      "es": "Tengo veinte pestañas abiertas."
+    }
+  },
+  {
+    "id": "en-basico-21-w03",
+    "en": "link",
+    "es": "enlace / link",
+    "pron": "línk",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Send me the link, please.",
+      "es": "Mándame el enlace, por favor."
+    }
+  },
+  {
+    "id": "en-basico-21-w04",
+    "en": "web page",
+    "es": "página web",
+    "pron": "uéb péidy",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This web page is very slow.",
+      "es": "Esta página web es muy lenta."
+    }
+  },
+  {
+    "id": "en-basico-21-w05",
+    "en": "website",
+    "es": "sitio web",
+    "pron": "uébsait",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I built a website for my portfolio.",
+      "es": "Hice un sitio web para mi portafolio."
+    }
+  },
+  {
+    "id": "en-basico-21-w06",
+    "en": "homepage",
+    "es": "página de inicio",
+    "pron": "jóumpeidy",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The logo goes back to the homepage.",
+      "es": "El logo te regresa a la página de inicio."
+    }
+  },
+  {
+    "id": "en-basico-21-w07",
+    "en": "URL",
+    "es": "dirección web (URL)",
+    "pron": "iú ar él",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Copy the URL from the address bar.",
+      "es": "Copia la URL de la barra de direcciones."
+    }
+  },
+  {
+    "id": "en-basico-21-w08",
+    "en": "address bar",
+    "es": "barra de direcciones",
+    "pron": "ádres bár",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Type the URL in the address bar.",
+      "es": "Escribe la URL en la barra de direcciones."
+    }
+  },
+  {
+    "id": "en-basico-21-w09",
+    "en": "domain",
+    "es": "dominio",
+    "pron": "doméin",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We bought a new domain for the app.",
+      "es": "Compramos un dominio nuevo para la app."
+    }
+  },
+  {
+    "id": "en-basico-21-w10",
+    "en": "bookmark",
+    "es": "marcador / favorito",
+    "pron": "búkmark",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Save the docs as a bookmark.",
+      "es": "Guarda la documentación en favoritos."
+    }
+  },
+  {
+    "id": "en-basico-21-w11",
+    "en": "cache",
+    "es": "caché",
+    "pron": "kásh",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Clear the cache and try again.",
+      "es": "Borra la caché e intenta otra vez."
+    }
+  },
+  {
+    "id": "en-basico-21-w12",
+    "en": "cookie",
+    "es": "cookie (dato que guarda la web)",
+    "pron": "kúki",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The website saves a cookie with your language.",
+      "es": "El sitio guarda una cookie con tu idioma."
+    }
+  },
+  {
+    "id": "en-basico-21-w13",
+    "en": "load",
+    "es": "cargar (una página)",
+    "pron": "lóud",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The page doesn't load on mobile.",
+      "es": "La página no carga en el celular."
+    }
+  },
+  {
+    "id": "en-basico-21-w14",
+    "en": "refresh",
+    "es": "recargar / actualizar (la página)",
+    "pron": "rifrésh",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Refresh the page to see the changes.",
+      "es": "Recarga la página para ver los cambios."
+    }
+  },
+  {
+    "id": "en-basico-21-w15",
+    "en": "click",
+    "es": "hacer clic",
+    "pron": "klík",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Click the blue button.",
+      "es": "Haz clic en el botón azul."
+    }
+  },
+  {
+    "id": "en-basico-21-w16",
+    "en": "scroll",
+    "es": "desplazarse (con la rueda o el dedo)",
+    "pron": "skróul",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Scroll down to the bottom of the page.",
+      "es": "Baja hasta el final de la página."
+    }
+  },
+  {
+    "id": "en-basico-21-w17",
+    "en": "tap",
+    "es": "tocar (la pantalla)",
+    "pron": "táp",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Tap the icon to open the menu.",
+      "es": "Toca el ícono para abrir el menú."
+    }
+  },
+  {
+    "id": "en-basico-21-w18",
+    "en": "swipe",
+    "es": "deslizar (el dedo)",
+    "pron": "suáip",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Swipe left to see the next photo.",
+      "es": "Desliza a la izquierda para ver la siguiente foto."
+    }
+  },
+  {
+    "id": "en-basico-21-w19",
+    "en": "hover",
+    "es": "pasar el mouse por encima",
+    "pron": "jáver",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The button changes color when you hover over it.",
+      "es": "El botón cambia de color cuando pasas el mouse por encima."
+    }
+  },
+  {
+    "id": "en-basico-21-w20",
+    "en": "button",
+    "es": "botón",
+    "pron": "bátton",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The submit button doesn't work.",
+      "es": "El botón de enviar no funciona."
+    }
+  },
+  {
+    "id": "en-basico-21-w21",
+    "en": "form",
+    "es": "formulario",
+    "pron": "fórm",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Fill out the form and click send.",
+      "es": "Llena el formulario y haz clic en enviar."
+    }
+  },
+  {
+    "id": "en-basico-21-w22",
+    "en": "field",
+    "es": "campo (de un formulario)",
+    "pron": "fíld",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The email field is required.",
+      "es": "El campo de correo es obligatorio."
+    }
+  },
+  {
+    "id": "en-basico-21-w23",
+    "en": "checkbox",
+    "es": "casilla de verificación",
+    "pron": "chékbaks",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Check the checkbox to accept the terms.",
+      "es": "Marca la casilla para aceptar los términos."
+    }
+  },
+  {
+    "id": "en-basico-21-w24",
+    "en": "dropdown",
+    "es": "menú desplegable",
+    "pron": "drápdaun",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Choose your country from the dropdown.",
+      "es": "Elige tu país en el menú desplegable."
+    }
+  },
+  {
+    "id": "en-basico-21-w25",
+    "en": "placeholder",
+    "es": "texto de ejemplo (en un campo)",
+    "pron": "pléisjoulder",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The placeholder says \"Search products\".",
+      "es": "El texto de ejemplo dice \"Buscar productos\"."
+    }
+  },
+  {
+    "id": "en-basico-21-w26",
+    "en": "label",
+    "es": "etiqueta",
+    "pron": "léibol",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Every input needs a label.",
+      "es": "Cada campo necesita una etiqueta."
+    }
+  },
+  {
+    "id": "en-basico-21-w27",
+    "en": "modal",
+    "es": "ventana modal",
+    "pron": "móudol",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The modal doesn't close on mobile.",
+      "es": "La ventana modal no se cierra en el celular."
+    }
+  },
+  {
+    "id": "en-basico-21-w28",
+    "en": "popup",
+    "es": "ventana emergente",
+    "pron": "pápap",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I hate websites with popups.",
+      "es": "Odio los sitios con ventanas emergentes."
+    }
+  },
+  {
+    "id": "en-basico-21-w29",
+    "en": "layout",
+    "es": "diseño / distribución (de la página)",
+    "pron": "léiaut",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The layout breaks on small screens.",
+      "es": "El diseño se rompe en pantallas pequeñas."
+    }
+  },
+  {
+    "id": "en-basico-21-w30",
+    "en": "header",
+    "es": "encabezado / cabecera",
+    "pron": "jéder",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The logo is in the header.",
+      "es": "El logo está en la cabecera."
+    }
+  },
+  {
+    "id": "en-basico-21-w31",
+    "en": "footer",
+    "es": "pie de página",
+    "pron": "fúrer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Put the contact links in the footer.",
+      "es": "Pon los enlaces de contacto en el pie de página."
+    }
+  },
+  {
+    "id": "en-basico-21-w32",
+    "en": "sidebar",
+    "es": "barra lateral",
+    "pron": "sáidbar",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The sidebar has four sections.",
+      "es": "La barra lateral tiene cuatro secciones."
+    }
+  },
+  {
+    "id": "en-basico-21-w33",
+    "en": "navbar",
+    "es": "barra de navegación",
+    "pron": "návbar",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Add a search field to the navbar.",
+      "es": "Agrega un campo de búsqueda a la barra de navegación."
+    }
+  },
+  {
+    "id": "en-basico-21-w34",
+    "en": "font",
+    "es": "fuente / tipo de letra",
+    "pron": "fánt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The font is too small.",
+      "es": "La letra es muy pequeña."
+    }
+  },
+  {
+    "id": "en-basico-21-w35",
+    "en": "image",
+    "es": "imagen",
+    "pron": "ímidy",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The image doesn't load.",
+      "es": "La imagen no carga."
+    }
+  },
+  {
+    "id": "en-basico-21-w36",
+    "en": "icon",
+    "es": "ícono",
+    "pron": "áikan",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Click the gear icon to open settings.",
+      "es": "Haz clic en el ícono del engranaje para abrir la configuración."
+    }
+  },
+  {
+    "id": "en-basico-21-w37",
+    "en": "background",
+    "es": "fondo",
+    "pron": "bákgraund",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The background is dark gray.",
+      "es": "El fondo es gris oscuro."
+    }
+  },
+  {
+    "id": "en-basico-21-w38",
+    "en": "border",
+    "es": "borde",
+    "pron": "bórder",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Add a thin border to the card.",
+      "es": "Agrega un borde delgado a la tarjeta."
+    }
+  },
+  {
+    "id": "en-basico-21-w39",
+    "en": "margin",
+    "es": "margen",
+    "pron": "márdyin",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "There's too much margin between the cards.",
+      "es": "Hay demasiado margen entre las tarjetas."
+    }
+  },
+  {
+    "id": "en-basico-21-w40",
+    "en": "padding",
+    "es": "relleno / espacio interno",
+    "pron": "páding",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The button needs more padding.",
+      "es": "El botón necesita más espacio interno."
+    }
+  },
+  {
+    "id": "en-basico-21-w41",
+    "en": "width",
+    "es": "ancho",
+    "pron": "uíz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The width of the image is 300 pixels.",
+      "es": "El ancho de la imagen es de 300 píxeles."
+    }
+  },
+  {
+    "id": "en-basico-21-w42",
+    "en": "height",
+    "es": "alto / altura",
+    "pron": "jáit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Change the height of the header.",
+      "es": "Cambia la altura de la cabecera."
+    }
+  },
+  {
+    "id": "en-basico-21-w43",
+    "en": "pixel",
+    "es": "píxel",
+    "pron": "píksel",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Move the logo ten pixels to the left.",
+      "es": "Mueve el logo diez píxeles a la izquierda."
+    }
+  },
+  {
+    "id": "en-basico-21-w44",
+    "en": "responsive",
+    "es": "adaptable (a cualquier pantalla)",
+    "pron": "rispánsiv",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The website isn't responsive.",
+      "es": "El sitio no se adapta a todas las pantallas."
+    }
+  },
+  {
+    "id": "en-basico-21-w45",
+    "en": "mobile",
+    "es": "celular / móvil",
+    "pron": "móubol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Most users visit the site on mobile.",
+      "es": "La mayoría de usuarios entra al sitio desde el celular."
+    }
+  },
+  {
+    "id": "en-basico-21-w46",
+    "en": "desktop",
+    "es": "computadora de escritorio / escritorio (de la pantalla)",
+    "pron": "désktap",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "It looks fine on desktop.",
+      "es": "En la computadora se ve bien."
+    }
+  },
+  {
+    "id": "en-basico-21-w47",
+    "en": "dark mode",
+    "es": "modo oscuro",
+    "pron": "dárk móud",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I always use dark mode.",
+      "es": "Siempre uso el modo oscuro."
+    }
+  },
+  {
+    "id": "en-basico-21-w48",
+    "en": "accessibility",
+    "es": "accesibilidad",
+    "pron": "aksesibíliti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Accessibility is important for every user.",
+      "es": "La accesibilidad es importante para todos los usuarios."
+    }
+  },
+  {
+    "id": "en-basico-21-w49",
+    "en": "app",
+    "es": "aplicación / app",
+    "pron": "áp",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I built an app to study English.",
+      "es": "Hice una app para estudiar inglés."
+    }
+  },
+  {
+    "id": "en-basico-21-w50",
+    "en": "user",
+    "es": "usuario",
+    "pron": "iúser",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The app has a thousand users.",
+      "es": "La app tiene mil usuarios."
+    }
+  },
+  {
+    "id": "en-basico-21-w51",
+    "en": "sign up",
+    "es": "registrarse / crear una cuenta",
+    "pron": "sáin áp",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Sign up with your email.",
+      "es": "Regístrate con tu correo."
+    }
+  },
+  {
+    "id": "en-basico-21-w52",
+    "en": "log in",
+    "es": "iniciar sesión / entrar",
+    "pron": "lóg ín",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I can't log in with my new password.",
+      "es": "No puedo entrar con mi contraseña nueva."
+    }
+  },
+  {
+    "id": "en-basico-21-w53",
+    "en": "log out",
+    "es": "cerrar sesión",
+    "pron": "lóg áut",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The app logs you out after one hour.",
+      "es": "La app te cierra la sesión después de una hora."
+    }
+  },
+  {
+    "id": "en-basico-21-w54",
+    "en": "profile",
+    "es": "perfil",
+    "pron": "próufail",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Update your profile picture.",
+      "es": "Actualiza tu foto de perfil."
+    }
+  },
+  {
+    "id": "en-basico-21-w55",
+    "en": "dashboard",
+    "es": "panel (de control)",
+    "pron": "dáshbord",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "After login, the user sees the dashboard.",
+      "es": "Después de entrar, el usuario ve el panel."
+    }
+  },
+  {
+    "id": "en-basico-21-w56",
+    "en": "notification",
+    "es": "notificación",
+    "pron": "noutifikéishon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Turn off the notifications during the meeting.",
+      "es": "Apaga las notificaciones durante la reunión."
+    }
+  },
+  {
+    "id": "en-basico-21-w57",
+    "en": "search",
+    "es": "buscar / búsqueda",
+    "pron": "sérch",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Search the product by name.",
+      "es": "Busca el producto por nombre."
+    }
+  },
+  {
+    "id": "en-basico-21-w58",
+    "en": "filter",
+    "es": "filtrar / filtro",
+    "pron": "fílter",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Filter the list by price.",
+      "es": "Filtra la lista por precio."
+    }
+  },
+  {
+    "id": "en-basico-21-w59",
+    "en": "sort",
+    "es": "ordenar",
+    "pron": "sórt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Sort the users by name.",
+      "es": "Ordena los usuarios por nombre."
+    }
+  },
+  {
+    "id": "en-basico-21-w60",
+    "en": "feedback",
+    "es": "comentarios / opinión",
+    "pron": "fídbak",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Thanks for the feedback on my code.",
+      "es": "Gracias por los comentarios sobre mi código."
+    }
+  },
+  {
+    "id": "en-basico-21-w61",
+    "en": "privacy",
+    "es": "privacidad",
+    "pron": "práivasi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Read the privacy policy.",
+      "es": "Lee la política de privacidad."
+    }
+  },
+  {
+    "id": "en-basico-21-w62",
+    "en": "permission",
+    "es": "permiso",
+    "pron": "permíshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The app asks for permission to use the camera.",
+      "es": "La app pide permiso para usar la cámara."
+    }
+  },
+  {
+    "id": "en-basico-21-w63",
+    "en": "verify",
+    "es": "verificar",
+    "pron": "vérifai",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Verify your email to continue.",
+      "es": "Verifica tu correo para continuar."
+    }
+  },
+  {
+    "id": "en-basico-21-w64",
+    "en": "reset",
+    "es": "restablecer / reiniciar",
+    "pron": "risét",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "reset",
+      "participio": "reset"
+    },
+    "ejemplo": {
+      "en": "I reset my password yesterday.",
+      "es": "Ayer restablecí mi contraseña."
+    }
+  },
+  {
+    "id": "en-basico-21-w65",
+    "en": "onboarding",
+    "es": "incorporación (primeros días o primeros pasos)",
+    "pron": "ánbording",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My onboarding takes two weeks.",
+      "es": "Mi incorporación dura dos semanas."
+    }
+  },
+  {
+    "id": "en-basico-21-w66",
+    "en": "standup",
+    "es": "reunión diaria (daily)",
+    "pron": "stándap",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Our standup is at nine thirty.",
+      "es": "Nuestra daily es a las nueve y media."
+    }
+  },
+  {
+    "id": "en-basico-21-w67",
+    "en": "sprint",
+    "es": "sprint (ciclo de trabajo de una o dos semanas)",
+    "pron": "sprínt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This sprint ends on Friday.",
+      "es": "Este sprint termina el viernes."
+    }
+  },
+  {
+    "id": "en-basico-21-w68",
+    "en": "planning",
+    "es": "planificación",
+    "pron": "pláning",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We choose the tickets in the planning.",
+      "es": "Elegimos los tickets en la planificación."
+    }
+  },
+  {
+    "id": "en-basico-21-w69",
+    "en": "retrospective",
+    "es": "retrospectiva",
+    "pron": "retrospéktiv",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "In the retrospective we talk about problems.",
+      "es": "En la retrospectiva hablamos de los problemas."
+    }
+  },
+  {
+    "id": "en-basico-21-w70",
+    "en": "demo",
+    "es": "demostración / demo",
+    "pron": "démou",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'll show the new form in the demo.",
+      "es": "Voy a mostrar el formulario nuevo en la demo."
+    }
+  },
+  {
+    "id": "en-basico-21-w72",
+    "en": "backlog",
+    "es": "backlog / lista de pendientes",
+    "pron": "báklog",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Put this idea in the backlog.",
+      "es": "Pon esta idea en el backlog."
+    }
+  },
+  {
+    "id": "en-basico-21-w73",
+    "en": "user story",
+    "es": "historia de usuario",
+    "pron": "iúser stóri",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Read the user story before you start.",
+      "es": "Lee la historia de usuario antes de empezar."
+    }
+  },
+  {
+    "id": "en-basico-21-w74",
+    "en": "priority",
+    "es": "prioridad",
+    "pron": "praióriti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This bug is a high priority.",
+      "es": "Este error es de alta prioridad."
+    }
+  },
+  {
+    "id": "en-basico-21-w75",
+    "en": "estimate",
+    "es": "estimar / calcular (el tiempo)",
+    "pron": "éstimeit",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I estimate two days for this ticket.",
+      "es": "Calculo dos días para este ticket."
+    }
+  },
+  {
+    "id": "en-basico-21-w76",
+    "en": "assign",
+    "es": "asignar",
+    "pron": "asáin",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The team lead assigned me a new ticket.",
+      "es": "El líder del equipo me asignó un ticket nuevo."
+    }
+  },
+  {
+    "id": "en-basico-21-w77",
+    "en": "blocker",
+    "es": "bloqueo / algo que no te deja avanzar",
+    "pron": "bláker",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I have a blocker: I don't have access to the API.",
+      "es": "Estoy bloqueado: no tengo acceso a la API."
+    }
+  },
+  {
+    "id": "en-basico-21-w78",
+    "en": "status",
+    "es": "estado (de una tarea)",
+    "pron": "stéitus",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "What's the status of the login ticket?",
+      "es": "¿Cómo va el ticket del login?"
+    }
+  },
+  {
+    "id": "en-basico-21-w79",
+    "en": "progress",
+    "es": "avance / progreso",
+    "pron": "prágres",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I made good progress yesterday.",
+      "es": "Ayer avancé bastante."
+    }
+  },
+  {
+    "id": "en-basico-21-w80",
+    "en": "workload",
+    "es": "carga de trabajo",
+    "pron": "uérkloud",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My workload is heavy this week.",
+      "es": "Esta semana tengo mucha carga de trabajo."
+    }
+  },
+  {
+    "id": "en-basico-21-w81",
+    "en": "on track",
+    "es": "al día / según lo planeado",
+    "pron": "án trák",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We're on track for the release.",
+      "es": "Vamos al día para el lanzamiento."
+    }
+  },
+  {
+    "id": "en-basico-21-w82",
+    "en": "behind schedule",
+    "es": "atrasado",
+    "pron": "bijáind skédyul",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The project is two days behind schedule.",
+      "es": "El proyecto va dos días atrasado."
+    }
+  },
+  {
+    "id": "en-basico-21-w83",
+    "en": "follow up",
+    "es": "hacer seguimiento",
+    "pron": "fálou áp",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I'll follow up with the designer.",
+      "es": "Le hago seguimiento al diseñador."
+    }
+  },
+  {
+    "id": "en-basico-21-w84",
+    "en": "heads-up",
+    "es": "aviso",
+    "pron": "jéds áp",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Thanks for the heads-up.",
+      "es": "Gracias por el aviso."
+    }
+  },
+  {
+    "id": "en-basico-21-w85",
+    "en": "ping",
+    "es": "escribirle (rápido) a alguien",
+    "pron": "píng",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Ping me when you're free.",
+      "es": "Escríbeme cuando estés libre."
+    }
+  },
+  {
+    "id": "en-basico-21-w87",
+    "en": "channel",
+    "es": "canal",
+    "pron": "chánel",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Ask in the frontend channel.",
+      "es": "Pregunta en el canal de frontend."
+    }
+  },
+  {
+    "id": "en-basico-21-w88",
+    "en": "thread",
+    "es": "hilo (de mensajes)",
+    "pron": "zréd",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Please reply in the thread.",
+      "es": "Por favor, responde en el hilo."
+    }
+  },
+  {
+    "id": "en-basico-21-w90",
+    "en": "share my screen",
+    "es": "compartir mi pantalla",
+    "pron": "shér mái skrín",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Wait, I'll share my screen.",
+      "es": "Espera, voy a compartir mi pantalla."
+    }
+  },
+  {
+    "id": "en-basico-21-w91",
+    "en": "mute",
+    "es": "silenciar / silenciado",
+    "pron": "miút",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Mute your microphone, please.",
+      "es": "Silencia tu micrófono, por favor."
+    }
+  },
+  {
+    "id": "en-basico-21-w92",
+    "en": "unmute",
+    "es": "activar el micrófono",
+    "pron": "anmiút",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Unmute yourself to talk.",
+      "es": "Activa tu micrófono para hablar."
+    }
+  },
+  {
+    "id": "en-basico-21-w93",
+    "en": "you're on mute",
+    "es": "estás en silencio",
+    "pron": "iúr án miút",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Carlos, you're on mute.",
+      "es": "Carlos, estás en silencio."
+    }
+  },
+  {
+    "id": "en-basico-21-w94",
+    "en": "can you hear me?",
+    "es": "¿me escuchas?",
+    "pron": "kan iú jíir mi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Hello? Can you hear me?",
+      "es": "¿Aló? ¿Me escuchan?"
+    }
+  },
+  {
+    "id": "en-basico-21-w95",
+    "en": "lag",
+    "es": "retraso (de la conexión)",
+    "pron": "lág",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "There's a lot of lag on this call.",
+      "es": "Hay mucho retraso en esta llamada."
+    }
+  },
+  {
+    "id": "en-basico-21-w96",
+    "en": "go ahead",
+    "es": "adelante / habla tú",
+    "pron": "góu ajéd",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry, go ahead.",
+      "es": "Perdón, habla tú."
+    }
+  },
+  {
+    "id": "en-basico-21-w97",
+    "en": "quick question",
+    "es": "una pregunta rápida",
+    "pron": "kuík kuéschon",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Quick question: where is the API key?",
+      "es": "Una pregunta rápida: ¿dónde está la clave de la API?"
+    }
+  },
+  {
+    "id": "en-basico-21-w98",
+    "en": "time zone",
+    "es": "zona horaria",
+    "pron": "táim zóun",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My manager is in a different time zone.",
+      "es": "Mi jefa está en otra zona horaria."
+    }
+  },
+  {
+    "id": "en-basico-21-w99",
+    "en": "out of office",
+    "es": "fuera de la oficina / de vacaciones",
+    "pron": "áut ov ófis",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Tom is out of office until Monday.",
+      "es": "Tom no está hasta el lunes."
+    }
+  },
+  {
+    "id": "en-basico-21-w100",
+    "en": "pair programming",
+    "es": "programación en pareja",
+    "pron": "pér próugraming",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We do pair programming on Tuesdays.",
+      "es": "Los martes programamos en pareja."
+    }
+  }
+]

@@ -1,0 +1,36 @@
+[
+  { "id": "en-basico-05-d01", "titulo": "Un nuevo compañero", "situacion": "Tom le cuenta a Ana sobre Carlos, el nuevo integrante del equipo.",
+    "lineas": [
+      { "quien": "Ana", "en": "Who is the new guy?", "es": "¿Quién es el chico nuevo?" },
+      { "quien": "Tom", "en": "That's Carlos. He works with the design team.", "es": "Es Carlos. Trabaja con el equipo de diseño." },
+      { "quien": "Ana", "en": "Is he from Lima?", "es": "¿Es de Lima?" },
+      { "quien": "Tom", "en": "No, he lives in Cusco. He works from home.", "es": "No, vive en Cusco. Trabaja desde casa." },
+      { "quien": "Tom", "en": "He speaks English and Portuguese. He's very smart.", "es": "Habla inglés y portugués. Es muy inteligente." },
+      { "quien": "Ana", "en": "Great! I need help with the design.", "es": "¡Genial! Necesito ayuda con el diseño." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Dónde vive Carlos?", "opciones": ["En Lima", "En Cusco", "En Canadá"], "correcta": 1,
+        "explicacion": "Tom dice **he lives in Cusco**: vive en Cusco y trabaja desde casa." },
+      { "pregunta": "¿Con qué equipo trabaja Carlos?", "opciones": ["Con el equipo de diseño", "Con el equipo de ventas", "Con el equipo de pruebas"], "correcta": 0,
+        "explicacion": "Tom dice **He works with the design team**: el equipo de diseño." },
+      { "pregunta": "¿Qué idiomas habla Carlos, según Tom?", "opciones": ["Inglés y portugués", "Solo inglés", "Español y francés"], "correcta": 0,
+        "explicacion": "Tom dice **He speaks English and Portuguese**." }
+    ] },
+  { "id": "en-basico-05-d02", "titulo": "Un día de Luis", "situacion": "Sarah, una profesora de inglés, conversa con Luis sobre su día.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Luis, tell me about your day.", "es": "Luis, cuéntame de tu día." },
+      { "quien": "Luis", "en": "I study at the university in the morning.", "es": "Estudio en la universidad en la mañana." },
+      { "quien": "Sarah", "en": "And in the afternoon?", "es": "¿Y en la tarde?" },
+      { "quien": "Luis", "en": "I work in a store. It closes at eight.", "es": "Trabajo en una tienda. Cierra a las ocho." },
+      { "quien": "Sarah", "en": "Wow, you're very busy!", "es": "¡Wow, estás muy ocupado!" },
+      { "quien": "Luis", "en": "Yes, but I practice English every night. I watch videos and read.", "es": "Sí, pero practico inglés todas las noches. Veo videos y leo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué hace Luis en la mañana?", "opciones": ["Trabaja en una tienda", "Estudia en la universidad", "Practica inglés"], "correcta": 1,
+        "explicacion": "Luis dice **I study at the university in the morning**." },
+      { "pregunta": "¿A qué hora cierra la tienda?", "opciones": ["A las seis", "A las ocho", "A las nueve"], "correcta": 1,
+        "explicacion": "Luis dice **It closes at eight**: cierra a las ocho." },
+      { "pregunta": "¿Cómo practica inglés Luis?", "opciones": ["Con videos y lectura", "Con un profesor particular", "Hablando con amigos"], "correcta": 0,
+        "explicacion": "Luis dice **I watch videos and read**: ve videos y lee." }
+    ] }
+]

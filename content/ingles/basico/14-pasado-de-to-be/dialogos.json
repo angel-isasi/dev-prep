@@ -1,0 +1,36 @@
+[
+  { "id": "en-basico-14-d01", "titulo": "Después de la entrevista", "situacion": "Ana le pregunta a Luis por su entrevista de trabajo.",
+    "lineas": [
+      { "quien": "Ana", "en": "Hi, Luis! How was your interview yesterday?", "es": "¡Hola, Luis! ¿Qué tal tu entrevista de ayer?" },
+      { "quien": "Luis", "en": "It was good, but I was very nervous.", "es": "Estuvo bien, pero estaba muy nervioso." },
+      { "quien": "Ana", "en": "Were the questions difficult?", "es": "¿Las preguntas fueron difíciles?" },
+      { "quien": "Luis", "en": "Not really. They were about JavaScript.", "es": "No mucho. Fueron sobre JavaScript." },
+      { "quien": "Ana", "en": "That's great! Were the interviewers friendly?", "es": "¡Qué bien! ¿Los entrevistadores fueron amables?" },
+      { "quien": "Luis", "en": "Yes, they were very nice. I'm excited!", "es": "Sí, fueron muy amables. ¡Estoy emocionado!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuándo fue la entrevista de Luis?", "opciones": ["Hoy", "Ayer", "La semana pasada"], "correcta": 1,
+        "explicacion": "Ana pregunta \"How was your interview yesterday?\": la entrevista fue ayer." },
+      { "pregunta": "¿Cómo se sentía Luis en la entrevista?", "opciones": ["Nervioso", "Aburrido", "Enojado"], "correcta": 0,
+        "explicacion": "Luis dice \"I was very nervous\": estaba muy nervioso." },
+      { "pregunta": "¿Sobre qué fueron las preguntas?", "opciones": ["Sobre inglés", "Sobre su familia", "Sobre JavaScript"], "correcta": 2,
+        "explicacion": "Luis dice \"They were about JavaScript\"." }
+    ] },
+  { "id": "en-basico-14-d02", "titulo": "El fin de semana", "situacion": "El lunes, Sarah le pregunta a Tom qué hizo el sábado.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Where were you last Saturday?", "es": "¿Dónde estuviste el sábado pasado?" },
+      { "quien": "Tom", "en": "I was at a wedding in Cusco.", "es": "Estuve en una boda en Cusco." },
+      { "quien": "Sarah", "en": "Wow! How was it?", "es": "¡Wow! ¿Qué tal estuvo?" },
+      { "quien": "Tom", "en": "It was amazing. There were a lot of people.", "es": "Estuvo increíble. Había mucha gente." },
+      { "quien": "Sarah", "en": "Was it cold?", "es": "¿Hacía frío?" },
+      { "quien": "Tom", "en": "Yes, it was very cold at night.", "es": "Sí, de noche hacía mucho frío." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Dónde estuvo Tom el sábado?", "opciones": ["En un concierto", "En una boda", "En el trabajo"], "correcta": 1,
+        "explicacion": "Tom dice \"I was at a wedding in Cusco\": estuvo en una boda." },
+      { "pregunta": "¿Qué tal estuvo?", "opciones": ["Increíble", "Aburrido", "Terrible"], "correcta": 0,
+        "explicacion": "Tom responde \"It was amazing\": estuvo increíble." },
+      { "pregunta": "¿Cómo estuvo el clima de noche?", "opciones": ["Hacía calor", "Llovía", "Hacía mucho frío"], "correcta": 2,
+        "explicacion": "Tom dice \"it was very cold at night\": de noche hacía mucho frío." }
+    ] }
+]

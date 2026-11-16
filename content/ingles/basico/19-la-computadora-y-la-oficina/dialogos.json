@@ -1,0 +1,38 @@
+[
+  { "id": "en-basico-19-d01", "titulo": "Problemas con la laptop", "situacion": "Luis empieza en el equipo y le escribe a Sarah antes de la daily.",
+    "lineas": [
+      { "quien": "Luis", "en": "Hi Sarah, my laptop froze again.", "es": "Hola Sarah, mi laptop se congeló otra vez." },
+      { "quien": "Sarah", "en": "Did you restart it?", "es": "¿La reiniciaste?" },
+      { "quien": "Luis", "en": "Yes, but now I can't open my files.", "es": "Sí, pero ahora no puedo abrir mis archivos." },
+      { "quien": "Sarah", "en": "Did you save them in the shared folder?", "es": "¿Los guardaste en la carpeta compartida?" },
+      { "quien": "Luis", "en": "Yes, I uploaded them yesterday.", "es": "Sí, los subí ayer." },
+      { "quien": "Sarah", "en": "Good. Download them on my old laptop for now.", "es": "Bien. Por ahora descárgalos en mi laptop antigua." },
+      { "quien": "Luis", "en": "Thanks! I'll call IT after the meeting.", "es": "¡Gracias! Llamo a soporte después de la reunión." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué le pasó a la laptop de Luis?", "opciones": ["Se le acabó la batería", "Se congeló", "Se le borró el sistema"],
+        "correcta": 1, "explicacion": "Luis dice \"my laptop froze again\": se congeló otra vez." },
+      { "pregunta": "¿Dónde están los archivos de Luis?", "opciones": ["En la carpeta compartida", "En un USB", "En el correo de Sarah"],
+        "correcta": 0, "explicacion": "Sarah pregunta por la carpeta compartida y Luis dice que los subió ayer." },
+      { "pregunta": "¿Cuándo va a llamar Luis a soporte?", "opciones": ["Ahora mismo", "Mañana", "Después de la reunión"],
+        "correcta": 2, "explicacion": "Luis dice \"I'll call IT after the meeting\"." }
+    ] },
+  { "id": "en-basico-19-d02", "titulo": "Cambiar una reunión", "situacion": "Ana, la jefa del equipo, habla con Carlos por chat.",
+    "lineas": [
+      { "quien": "Ana", "en": "Carlos, are you available at three?", "es": "Carlos, ¿estás disponible a las tres?" },
+      { "quien": "Carlos", "en": "Sorry, I have a call with the client.", "es": "Perdón, tengo una llamada con el cliente." },
+      { "quien": "Ana", "en": "Can we reschedule our meeting to four?", "es": "¿Podemos pasar nuestra reunión a las cuatro?" },
+      { "quien": "Carlos", "en": "Yes, four is fine. Is it on-site?", "es": "Sí, a las cuatro está bien. ¿Es presencial?" },
+      { "quien": "Ana", "en": "No, it's a video call. I'll send the link.", "es": "No, es por videollamada. Te mando el enlace." },
+      { "quien": "Carlos", "en": "Great. What's on the agenda?", "es": "Genial. ¿Qué temas vamos a ver?" },
+      { "quien": "Ana", "en": "The deadline for the new project.", "es": "La fecha límite del proyecto nuevo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Carlos no puede a las tres?", "opciones": ["Tiene una llamada con el cliente", "Tiene una entrevista", "Su laptop no funciona"],
+        "correcta": 0, "explicacion": "Carlos dice \"I have a call with the client\"." },
+      { "pregunta": "¿Cómo va a ser la reunión?", "opciones": ["En la sala de reuniones", "Por videollamada", "Por correo"],
+        "correcta": 1, "explicacion": "Ana dice \"it's a video call\" y que va a mandar el enlace." },
+      { "pregunta": "¿De qué van a hablar?", "opciones": ["Del sueldo de Carlos", "De la fecha límite del proyecto nuevo", "De un error en la app"],
+        "correcta": 1, "explicacion": "El tema (agenda) es \"the deadline for the new project\"." }
+    ] }
+]

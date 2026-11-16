@@ -1,0 +1,8 @@
+{
+  "id": "en-basico-20",
+  "titulo": "Programar: palabras básicas",
+  "etapa": "basico",
+  "orden": 20,
+  "nivel": "A2",
+  "descripcion": "Las palabras del código que un junior oye cada día: bug, fix, array, deploy, pull request, endpoint."
+}

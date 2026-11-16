@@ -1,0 +1,38 @@
+[
+  { "id": "en-basico-21-d01", "titulo": "La daily", "situacion": "Ana dirige la daily del equipo y le toca hablar a Luis.",
+    "lineas": [
+      { "quien": "Ana", "en": "Good morning! Luis, can you go first?", "es": "¡Buenos días! Luis, ¿puedes empezar tú?" },
+      { "quien": "Luis", "en": "Sure. Yesterday I finished the signup form.", "es": "Claro. Ayer terminé el formulario de registro." },
+      { "quien": "Ana", "en": "Great. And today?", "es": "Genial. ¿Y hoy?" },
+      { "quien": "Luis", "en": "Today I'm going to fix the layout on mobile.", "es": "Hoy voy a arreglar el diseño en el celular." },
+      { "quien": "Ana", "en": "Do you have any blockers?", "es": "¿Tienes algún bloqueo?" },
+      { "quien": "Luis", "en": "Yes, I don't have access to the API.", "es": "Sí, no tengo acceso a la API." },
+      { "quien": "Ana", "en": "OK, I'll ping Tom after the standup.", "es": "Ok, le escribo a Tom después de la daily." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué terminó Luis ayer?", "opciones": ["El formulario de registro", "La barra de navegación", "La conexión con la API"],
+        "correcta": 0, "explicacion": "Luis dice \"Yesterday I finished the signup form\"." },
+      { "pregunta": "¿Qué va a hacer Luis hoy?", "opciones": ["Una demo", "Arreglar el diseño en el celular", "Revisar un pull request"],
+        "correcta": 1, "explicacion": "Dice \"Today I'm going to fix the layout on mobile\"." },
+      { "pregunta": "¿Cuál es el bloqueo de Luis?", "opciones": ["No tiene laptop", "No tiene acceso a la API", "No entiende el ticket"],
+        "correcta": 1, "explicacion": "Su blocker es \"I don't have access to the API\"." }
+    ] },
+  { "id": "en-basico-21-d02", "titulo": "Reportar un error en una llamada", "situacion": "María encontró un error y llama a Carlos por videollamada.",
+    "lineas": [
+      { "quien": "María", "en": "Carlos, can you hear me?", "es": "Carlos, ¿me escuchas?" },
+      { "quien": "Carlos", "en": "Yes, now I can. You were on mute.", "es": "Sí, ahora sí. Estabas en silencio." },
+      { "quien": "María", "en": "Sorry! The search page doesn't load on Safari.", "es": "¡Perdón! La página de búsqueda no carga en Safari." },
+      { "quien": "Carlos", "en": "Can you share your screen?", "es": "¿Puedes compartir tu pantalla?" },
+      { "quien": "María", "en": "Sure. Look, I click the button and nothing happens.", "es": "Claro. Mira, hago clic en el botón y no pasa nada." },
+      { "quien": "Carlos", "en": "Clear the cache and refresh the page.", "es": "Borra la caché y recarga la página." },
+      { "quien": "María", "en": "It works now. Thanks for the help!", "es": "Ya funciona. ¡Gracias por la ayuda!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Carlos no escuchaba a María al inicio?", "opciones": ["Tenía mala conexión", "María estaba en silencio", "Carlos no tenía audífonos"],
+        "correcta": 1, "explicacion": "Carlos dice \"You were on mute\": María tenía el micrófono silenciado." },
+      { "pregunta": "¿En qué navegador falla la página?", "opciones": ["Chrome", "Firefox", "Safari"],
+        "correcta": 2, "explicacion": "María dice que la página no carga en Safari." },
+      { "pregunta": "¿Qué solucionó el problema?", "opciones": ["Borrar la caché y recargar", "Reiniciar la laptop", "Cambiar de navegador"],
+        "correcta": 0, "explicacion": "Carlos le dice \"Clear the cache and refresh the page\" y después funciona." }
+    ] }
+]

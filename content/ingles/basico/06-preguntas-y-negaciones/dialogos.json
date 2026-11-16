@@ -1,0 +1,39 @@
+[
+  { "id": "en-basico-06-d01", "titulo": "Primer día en la oficina", "situacion": "Sarah conoce a Luis, un desarrollador nuevo.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Hi, Luis. Do you know the team?", "es": "Hola, Luis. ¿Conoces al equipo?" },
+      { "quien": "Luis", "en": "No, I don't. Who is the team lead?", "es": "No. ¿Quién es el líder del equipo?" },
+      { "quien": "Sarah", "en": "Carlos. He doesn't work here on Fridays.", "es": "Carlos. Él no trabaja aquí los viernes." },
+      { "quien": "Luis", "en": "Why not?", "es": "¿Por qué no?" },
+      { "quien": "Sarah", "en": "He works from home on Fridays.", "es": "Los viernes trabaja desde casa." },
+      { "quien": "Luis", "en": "OK. Where do I sit?", "es": "Ok. ¿Dónde me siento?" },
+      { "quien": "Sarah", "en": "Here, with the frontend team.", "es": "Aquí, con el equipo de frontend." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Luis conoce al equipo?", "opciones": ["Sí, a todos", "No, no lo conoce", "Solo conoce a Carlos"], "correcta": 1,
+        "explicacion": "Luis responde \"No, I don't\" cuando Sarah le pregunta si conoce al equipo." },
+      { "pregunta": "¿Qué hace Carlos los viernes?", "opciones": ["Trabaja desde casa", "No trabaja", "Trabaja en la oficina"], "correcta": 0,
+        "explicacion": "Sarah dice \"He works from home on Fridays\": no está en la oficina, pero sí trabaja." },
+      { "pregunta": "¿Dónde se sienta Luis?", "opciones": ["Con el equipo de frontend", "En la oficina de Carlos", "En su casa"], "correcta": 0,
+        "explicacion": "Sarah le responde \"Here, with the frontend team\"." }
+    ] },
+  { "id": "en-basico-06-d02", "titulo": "Una entrevista corta", "situacion": "Una reclutadora le hace preguntas a Ana por videollamada.",
+    "lineas": [
+      { "quien": "Sarah", "en": "How many languages do you speak, Ana?", "es": "¿Cuántos idiomas hablas, Ana?" },
+      { "quien": "Ana", "en": "I speak Spanish and a little English.", "es": "Hablo español y un poco de inglés." },
+      { "quien": "Sarah", "en": "Why do you want this job?", "es": "¿Por qué quieres este trabajo?" },
+      { "quien": "Ana", "en": "Because I like frontend and I want to learn.", "es": "Porque me gusta el frontend y quiero aprender." },
+      { "quien": "Sarah", "en": "Do you know React?", "es": "¿Sabes React?" },
+      { "quien": "Ana", "en": "Yes, I do. I use it in my projects.", "es": "Sí. Lo uso en mis proyectos." },
+      { "quien": "Sarah", "en": "Great. When do you finish university?", "es": "Genial. ¿Cuándo terminas la universidad?" },
+      { "quien": "Ana", "en": "I finish in December.", "es": "Termino en diciembre." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué idiomas habla Ana?", "opciones": ["Solo español", "Español y un poco de inglés", "Inglés y francés"], "correcta": 1,
+        "explicacion": "Ana dice \"I speak Spanish and a little English\"." },
+      { "pregunta": "¿Por qué quiere Ana el trabajo?", "opciones": ["Porque paga bien", "Porque le gusta el frontend y quiere aprender", "Porque vive cerca"], "correcta": 1,
+        "explicacion": "Ana responde con because: \"Because I like frontend and I want to learn\"." },
+      { "pregunta": "¿Cuándo termina Ana la universidad?", "opciones": ["En diciembre", "En marzo", "Ya terminó"], "correcta": 0,
+        "explicacion": "Ana dice \"I finish in December\"." }
+    ] }
+]

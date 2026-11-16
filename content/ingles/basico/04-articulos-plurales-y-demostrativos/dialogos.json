@@ -1,0 +1,34 @@
+[
+  { "id": "en-basico-04-d01", "titulo": "Ordenando el salón", "situacion": "Luis y María ordenan el salón antes de la clase de inglés.",
+    "lineas": [
+      { "quien": "María", "en": "Luis, are these your pencils?", "es": "Luis, ¿estos son tus lápices?" },
+      { "quien": "Luis", "en": "No, they aren't. My pencils are yellow.", "es": "No. Mis lápices son amarillos." },
+      { "quien": "María", "en": "And is that your backpack?", "es": "¿Y esa es tu mochila?" },
+      { "quien": "Luis", "en": "Yes, that's my backpack. Thank you!", "es": "Sí, esa es mi mochila. ¡Gracias!" },
+      { "quien": "María", "en": "Where are the markers for the board?", "es": "¿Dónde están los plumones para la pizarra?" },
+      { "quien": "Luis", "en": "They're in that box, on the desk.", "es": "Están en esa caja, sobre el escritorio." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿De qué color son los lápices de Luis?", "opciones": ["Azules", "Amarillos", "Rojos"], "correcta": 1,
+        "explicacion": "Luis dice **My pencils are yellow**: sus lápices son amarillos." },
+      { "pregunta": "¿Dónde están los plumones?", "opciones": ["En la mochila", "En una caja sobre el escritorio", "En la pizarra"], "correcta": 1,
+        "explicacion": "Luis dice **They're in that box, on the desk**: en esa caja, sobre el escritorio." }
+    ] },
+  { "id": "en-basico-04-d02", "titulo": "La oficina nueva", "situacion": "Sarah le muestra la oficina a Carlos en su primer día de trabajo.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Carlos, this is the office.", "es": "Carlos, esta es la oficina." },
+      { "quien": "Carlos", "en": "Wow, it's big! Who are those people?", "es": "¡Wow, es grande! ¿Quiénes son esas personas?" },
+      { "quien": "Sarah", "en": "They're the designers. They're very friendly.", "es": "Son los diseñadores. Son muy amigables." },
+      { "quien": "Carlos", "en": "And is this my desk?", "es": "¿Y este es mi escritorio?" },
+      { "quien": "Sarah", "en": "Yes, it is. These notebooks and pens are for you.", "es": "Sí. Estos cuadernos y lapiceros son para ti." },
+      { "quien": "Carlos", "en": "Great, thank you!", "es": "¡Genial, gracias!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Quiénes son esas personas?", "opciones": ["Los diseñadores", "Los ingenieros", "Los estudiantes"], "correcta": 0,
+        "explicacion": "Sarah dice **They're the designers**: son los diseñadores." },
+      { "pregunta": "¿Qué cosas son para Carlos?", "opciones": ["Una mochila y un mapa", "Cuadernos y lapiceros", "Unas llaves"], "correcta": 1,
+        "explicacion": "Sarah dice **These notebooks and pens are for you**: cuadernos y lapiceros." },
+      { "pregunta": "¿Cómo es la oficina?", "opciones": ["Pequeña", "Grande", "Vieja"], "correcta": 1,
+        "explicacion": "Carlos dice **it's big**: la oficina es grande." }
+    ] }
+]

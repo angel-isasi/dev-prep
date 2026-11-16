@@ -1,0 +1,34 @@
+[
+  { "id": "en-basico-11-d01", "titulo": "Un nuevo pasatiempo", "situacion": "Ana y Tom hablan de deportes en el descanso.",
+    "lineas": [
+      { "quien": "Tom", "en": "Can you play any sports, Ana?", "es": "¿Sabes jugar algún deporte, Ana?" },
+      { "quien": "Ana", "en": "Yes, I can play volleyball very well.", "es": "Sí, sé jugar vóley muy bien." },
+      { "quien": "Tom", "en": "Cool! Can you swim too?", "es": "¡Genial! ¿También sabes nadar?" },
+      { "quien": "Ana", "en": "No, I can't swim at all.", "es": "No, no sé nadar para nada." },
+      { "quien": "Tom", "en": "I'm a swimming coach. I can teach you.", "es": "Soy entrenador de natación. Puedo enseñarte." },
+      { "quien": "Ana", "en": "Really? That's great, thank you!", "es": "¿En serio? ¡Qué bien, gracias!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué deporte juega bien Ana?", "opciones": ["Tenis", "Vóley", "Fútbol"], "correcta": 1,
+        "explicacion": "Ana dice \"I can play volleyball very well\": sabe jugar vóley muy bien." },
+      { "pregunta": "¿Qué no sabe hacer Ana?", "opciones": ["Nadar", "Jugar vóley", "Bailar"], "correcta": 0,
+        "explicacion": "Ana dice \"I can't swim at all\": no sabe nadar para nada." },
+      { "pregunta": "¿Qué le ofrece Tom?", "opciones": ["Jugar vóley con ella", "Prestarle una pelota", "Enseñarle a nadar"], "correcta": 2,
+        "explicacion": "Tom es entrenador de natación y dice \"I can teach you\": puede enseñarle." }
+    ] },
+  { "id": "en-basico-11-d02", "titulo": "Un pedido en la oficina", "situacion": "Luis necesita ayuda con una caja y se la pide a Sarah.",
+    "lineas": [
+      { "quien": "Luis", "en": "Excuse me, Sarah. Could you help me?", "es": "Disculpa, Sarah. ¿Podrías ayudarme?" },
+      { "quien": "Sarah", "en": "Sure. What's the problem?", "es": "Claro. ¿Cuál es el problema?" },
+      { "quien": "Luis", "en": "Can you carry this box with me? It's heavy.", "es": "¿Puedes cargar esta caja conmigo? Pesa mucho." },
+      { "quien": "Sarah", "en": "Of course. Where does it go?", "es": "Claro. ¿Dónde va?" },
+      { "quien": "Luis", "en": "In the meeting room. Thank you so much!", "es": "En la sala de reuniones. ¡Muchas gracias!" },
+      { "quien": "Sarah", "en": "No problem.", "es": "No hay problema." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué le pide Luis a Sarah?", "opciones": ["Que le preste un lapicero", "Que cargue una caja con él", "Que repita algo"], "correcta": 1,
+        "explicacion": "Luis pregunta \"Can you carry this box with me?\": quiere que lo ayude a cargar una caja." },
+      { "pregunta": "¿A dónde llevan la caja?", "opciones": ["A la sala de reuniones", "A la cocina", "A la calle"], "correcta": 0,
+        "explicacion": "Luis dice \"In the meeting room\": en la sala de reuniones." }
+    ] }
+]

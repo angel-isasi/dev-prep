@@ -1,0 +1,38 @@
+[
+  { "id": "en-basico-18-d01", "titulo": "Elegir un hotel", "situacion": "Ana y Luis buscan hotel para un viaje a la playa.",
+    "lineas": [
+      { "quien": "Ana", "en": "Which hotel do you like more?", "es": "¿Qué hotel te gusta más?" },
+      { "quien": "Luis", "en": "The first one is cheaper, but it's farther from the beach.", "es": "El primero es más barato, pero está más lejos de la playa." },
+      { "quien": "Ana", "en": "And the second one?", "es": "¿Y el segundo?" },
+      { "quien": "Luis", "en": "It's more expensive, but it's newer and quieter.", "es": "Es más caro, pero es más nuevo y más tranquilo." },
+      { "quien": "Ana", "en": "Is it much more expensive?", "es": "¿Es mucho más caro?" },
+      { "quien": "Luis", "en": "Only twenty dollars more per night.", "es": "Solo veinte dólares más por noche." },
+      { "quien": "Ana", "en": "OK, let's choose the quieter one.", "es": "Bueno, elijamos el más tranquilo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué ventaja tiene el primer hotel?", "opciones": ["Está más cerca de la playa", "Es más barato", "Es más nuevo"], "correcta": 1,
+        "explicacion": "Luis dice: *The first one is cheaper*, es más barato. Pero está más lejos de la playa." },
+      { "pregunta": "¿Cuánto más cuesta el segundo hotel?", "opciones": ["Veinte dólares más por noche", "Diez dólares más por noche", "Cien dólares más en total"], "correcta": 0,
+        "explicacion": "*Only twenty dollars more per night*: veinte dólares más por noche." },
+      { "pregunta": "¿Qué hotel eligen?", "opciones": ["El primero", "Ninguno", "El segundo"], "correcta": 2,
+        "explicacion": "Ana dice *let's choose the quieter one*: el más tranquilo, que es el segundo." }
+    ] },
+  { "id": "en-basico-18-d02", "titulo": "¿Qué laptop compro?", "situacion": "María y Tom están en una tienda de computadoras.",
+    "lineas": [
+      { "quien": "María", "en": "I need a new laptop for programming.", "es": "Necesito una laptop nueva para programar." },
+      { "quien": "Tom", "en": "This one is the most powerful in the store.", "es": "Esta es la más potente de la tienda." },
+      { "quien": "María", "en": "Yes, but it's also the heaviest.", "es": "Sí, pero también es la más pesada." },
+      { "quien": "Tom", "en": "What about this one? It's lighter and cheaper.", "es": "¿Y esta? Es más liviana y más barata." },
+      { "quien": "María", "en": "Is it as fast as the first one?", "es": "¿Es tan rápida como la primera?" },
+      { "quien": "Tom", "en": "Not as fast, but it's good enough for you.", "es": "No tan rápida, pero te alcanza de sobra." },
+      { "quien": "María", "en": "Perfect. I'll take it.", "es": "Perfecto. Me la llevo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Para qué necesita María la laptop?", "opciones": ["Para jugar", "Para programar", "Para ver películas"], "correcta": 1,
+        "explicacion": "María dice: *I need a new laptop for programming*, para programar." },
+      { "pregunta": "¿Qué problema tiene la primera laptop?", "opciones": ["Es la más pesada", "Es la más lenta", "Es la más barata"], "correcta": 0,
+        "explicacion": "*It's also the heaviest*: es la más pesada, aunque sea la más potente." },
+      { "pregunta": "¿Cuál compra María?", "opciones": ["La más potente", "Ninguna", "La más liviana y barata"], "correcta": 2,
+        "explicacion": "Tom le muestra una *lighter and cheaper* y María dice *I'll take it*: compra la más liviana y barata." }
+    ] }
+]

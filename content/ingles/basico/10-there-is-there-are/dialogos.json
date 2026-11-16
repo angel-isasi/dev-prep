@@ -1,0 +1,36 @@
+[
+  { "id": "en-basico-10-d01", "titulo": "Buscando departamento", "situacion": "Luis llama a Sarah para preguntar por un departamento en alquiler.",
+    "lineas": [
+      { "quien": "Luis", "en": "Hi! Is the apartment for rent?", "es": "¡Hola! ¿El departamento está en alquiler?" },
+      { "quien": "Sarah", "en": "Yes, it is. There are two bedrooms and one bathroom.", "es": "Sí. Hay dos dormitorios y un baño." },
+      { "quien": "Luis", "en": "Is there a desk in the bedroom? I work from home.", "es": "¿Hay un escritorio en el dormitorio? Trabajo desde casa." },
+      { "quien": "Sarah", "en": "No, there isn't, but there's a big table in the living room.", "es": "No, pero hay una mesa grande en la sala." },
+      { "quien": "Luis", "en": "Are there any windows in the kitchen?", "es": "¿Hay ventanas en la cocina?" },
+      { "quien": "Sarah", "en": "Yes, there are two. The kitchen is very nice.", "es": "Sí, hay dos. La cocina es muy bonita." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuántos dormitorios hay?", "opciones": ["Uno", "Dos", "Tres"], "correcta": 1,
+        "explicacion": "Sarah dice \"There are two bedrooms and one bathroom\"." },
+      { "pregunta": "¿Hay escritorio en el dormitorio?", "opciones": ["Sí, uno grande", "No, pero hay una mesa grande en la sala", "No, pero hay uno en la cocina"], "correcta": 1,
+        "explicacion": "Sarah responde \"No, there isn't, but there's a big table in the living room\"." },
+      { "pregunta": "¿Cuántas ventanas tiene la cocina?", "opciones": ["Ninguna", "Una", "Dos"], "correcta": 2,
+        "explicacion": "Sarah dice \"Yes, there are two\"." }
+    ] },
+  { "id": "en-basico-10-d02", "titulo": "Mi cuarto nuevo", "situacion": "María le muestra su cuarto nuevo a Ana por videollamada.",
+    "lineas": [
+      { "quien": "Ana", "en": "Is that your new room?", "es": "¿Ese es tu cuarto nuevo?" },
+      { "quien": "María", "en": "Yes! There's a bed, a desk and a big closet.", "es": "¡Sí! Hay una cama, un escritorio y un clóset grande." },
+      { "quien": "Ana", "en": "Are there any shelves for your books?", "es": "¿Hay repisas para tus libros?" },
+      { "quien": "María", "en": "No, there aren't. My books are under the bed.", "es": "No. Mis libros están debajo de la cama." },
+      { "quien": "Ana", "en": "Is your room upstairs?", "es": "¿Tu cuarto está arriba?" },
+      { "quien": "María", "en": "Yes, it's upstairs, next to the bathroom.", "es": "Sí, está arriba, al lado del baño." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué hay en el cuarto de María?", "opciones": ["Una cama, un escritorio y un clóset grande", "Solo una cama", "Un sofá y una mesa"], "correcta": 0,
+        "explicacion": "María dice \"There's a bed, a desk and a big closet\"." },
+      { "pregunta": "¿Dónde están los libros de María?", "opciones": ["En las repisas", "Debajo de la cama", "En el clóset"], "correcta": 1,
+        "explicacion": "No hay repisas: María dice \"My books are under the bed\"." },
+      { "pregunta": "¿Dónde está el cuarto?", "opciones": ["Abajo, al lado de la cocina", "Arriba, al lado del baño", "Al lado de la sala"], "correcta": 1,
+        "explicacion": "María dice \"it's upstairs, next to the bathroom\"." }
+    ] }
+]

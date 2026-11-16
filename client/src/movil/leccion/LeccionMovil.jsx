@@ -102,7 +102,7 @@ export function LeccionMovil() {
     // En inglés, oír la respuesta correcta ayuda a fijarla
     if (item.audioRespuesta || (item.tipo === "armar" && item.audio)) hablar(item.audioRespuesta ?? item.audio);
     navigator.vibrate?.(correcto ? 25 : [40, 60, 40]);
-    setRetro({ correcto, permitirEquivalente: item.tipo === "ordenar" && !correcto });
+    setRetro({ correcto, permitirEquivalente: (item.tipo === "ordenar" || item.tipo === "armar") && !correcto });
   }
 
   const alEmparejar = useCallback(
@@ -297,7 +297,7 @@ export function LeccionMovil() {
             <div className={estilos.botonesHoja}>
               {retro.permitirEquivalente && (
                 <button type="button" className="boton" onClick={() => avanzar({ correcto: true })}>
-                  Mi orden también vale
+                  {item.tipo === "armar" ? "Mi frase también es correcta" : "Mi orden también vale"}
                 </button>
               )}
               <button type="button" className={`boton boton-primario ${estilos.grande}`} onClick={() => avanzar({ correcto: retro.correcto })}>

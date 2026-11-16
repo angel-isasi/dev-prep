@@ -1,0 +1,37 @@
+[
+  { "id": "en-basico-02-d01", "titulo": "Antes de la reunión", "situacion": "Tom y Ana conversan cinco minutos antes de una reunión del equipo.",
+    "lineas": [
+      { "quien": "Tom", "en": "Hi, Ana. Are you okay?", "es": "Hola, Ana. ¿Estás bien?" },
+      { "quien": "Ana", "en": "Yes, I'm fine. I'm just a little tired.", "es": "Sí, estoy bien. Solo estoy un poco cansada." },
+      { "quien": "Tom", "en": "Are you ready for the meeting?", "es": "¿Estás lista para la reunión?" },
+      { "quien": "Ana", "en": "Yes, I am. Is Carlos here?", "es": "Sí. ¿Carlos está aquí?" },
+      { "quien": "Tom", "en": "No, he isn't. He's sick today.", "es": "No, no está. Hoy está enfermo." },
+      { "quien": "Ana", "en": "Oh no. And María?", "es": "Qué pena. ¿Y María?" },
+      { "quien": "Tom", "en": "She's here. She's very excited about the project.", "es": "Ella sí está. Está muy emocionada con el proyecto." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cómo está Ana?", "opciones": ["Un poco cansada", "Enferma", "Nerviosa"], "correcta": 0,
+        "explicacion": "Ana dice **I'm just a little tired**: solo está un poco cansada." },
+      { "pregunta": "¿Por qué no está Carlos?", "opciones": ["Está ocupado", "Está enfermo", "Llega tarde"], "correcta": 1,
+        "explicacion": "Tom dice **He's sick today**: hoy está enfermo." },
+      { "pregunta": "¿Cómo está María?", "opciones": ["Preocupada", "Emocionada", "Aburrida"], "correcta": 1,
+        "explicacion": "Tom dice que María está **very excited**, muy emocionada con el proyecto." }
+    ] },
+  { "id": "en-basico-02-d02", "titulo": "Un mensaje en el chat", "situacion": "Luis le escribe a Sarah, su compañera de equipo, por el chat del trabajo.",
+    "lineas": [
+      { "quien": "Luis", "en": "Hi, Sarah. Are you free now?", "es": "Hola, Sarah. ¿Estás libre ahora?" },
+      { "quien": "Sarah", "en": "No, I'm not. I'm very busy today.", "es": "No. Hoy estoy muy ocupada." },
+      { "quien": "Luis", "en": "Is the project ready?", "es": "¿El proyecto está listo?" },
+      { "quien": "Sarah", "en": "No, it isn't. We're late.", "es": "No, no está. Estamos atrasados." },
+      { "quien": "Luis", "en": "Are you worried?", "es": "¿Estás preocupada?" },
+      { "quien": "Sarah", "en": "A little. But the team is great.", "es": "Un poco. Pero el equipo es genial." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Sarah está libre?", "opciones": ["Sí, está libre", "No, está muy ocupada", "No, está enferma"], "correcta": 1,
+        "explicacion": "Sarah responde **I'm very busy today**: hoy está muy ocupada." },
+      { "pregunta": "¿El proyecto está listo?", "opciones": ["Sí, ya está listo", "No, están atrasados", "No lo saben"], "correcta": 1,
+        "explicacion": "Sarah dice **No, it isn't. We're late**: no está listo y van atrasados." },
+      { "pregunta": "¿Qué piensa Sarah del equipo?", "opciones": ["Que es genial", "Que es aburrido", "Que es flojo"], "correcta": 0,
+        "explicacion": "Sarah dice **the team is great**: el equipo es genial." }
+    ] }
+]

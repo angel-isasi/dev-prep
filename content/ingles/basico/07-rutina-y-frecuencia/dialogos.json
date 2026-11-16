@@ -1,0 +1,36 @@
+[
+  { "id": "en-basico-07-d01", "titulo": "Un día normal", "situacion": "Tom le pregunta a María por su rutina.",
+    "lineas": [
+      { "quien": "Tom", "en": "What time do you get up, María?", "es": "¿A qué hora te levantas, María?" },
+      { "quien": "María", "en": "I usually get up at six.", "es": "Normalmente me levanto a las seis." },
+      { "quien": "Tom", "en": "That's early! Do you exercise in the morning?", "es": "¡Qué temprano! ¿Haces ejercicio en la mañana?" },
+      { "quien": "María", "en": "Yes, I run three times a week.", "es": "Sí, corro tres veces por semana." },
+      { "quien": "Tom", "en": "I never exercise in the morning. I'm always tired.", "es": "Yo nunca hago ejercicio en la mañana. Siempre estoy cansado." },
+      { "quien": "María", "en": "Then go to bed early!", "es": "¡Entonces acuéstate temprano!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿A qué hora se levanta María normalmente?", "opciones": ["A las cinco", "A las seis", "A las siete"], "correcta": 1,
+        "explicacion": "María dice \"I usually get up at six\"." },
+      { "pregunta": "¿Cada cuánto corre María?", "opciones": ["Todos los días", "Tres veces por semana", "Nunca"], "correcta": 1,
+        "explicacion": "María dice \"I run three times a week\"." },
+      { "pregunta": "¿Por qué Tom no hace ejercicio en la mañana?", "opciones": ["Porque trabaja temprano", "Porque siempre está cansado", "Porque no le gusta correr"], "correcta": 1,
+        "explicacion": "Tom dice \"I'm always tired\"." }
+    ] },
+  { "id": "en-basico-07-d02", "titulo": "Trabajo remoto", "situacion": "Luis y Sarah hablan de cómo es su semana de trabajo.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Do you work from home every day?", "es": "¿Trabajas desde casa todos los días?" },
+      { "quien": "Luis", "en": "No, I go to the office on Mondays.", "es": "No, voy a la oficina los lunes." },
+      { "quien": "Sarah", "en": "How long is your commute?", "es": "¿Cuánto dura tu viaje a la oficina?" },
+      { "quien": "Luis", "en": "About one hour. I take the bus.", "es": "Como una hora. Tomo el bus." },
+      { "quien": "Sarah", "en": "Do you take a break at noon?", "es": "¿Tomas un descanso al mediodía?" },
+      { "quien": "Luis", "en": "Yes, I always have lunch with my team.", "es": "Sí, siempre almuerzo con mi equipo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué días va Luis a la oficina?", "opciones": ["Los lunes", "Todos los días", "Los viernes"], "correcta": 0,
+        "explicacion": "Luis dice \"I go to the office on Mondays\"." },
+      { "pregunta": "¿Cómo va Luis a la oficina?", "opciones": ["En bus", "En carro", "Caminando"], "correcta": 0,
+        "explicacion": "Luis dice \"I take the bus\"." },
+      { "pregunta": "¿Qué hace Luis al mediodía?", "opciones": ["Toma una siesta", "Almuerza con su equipo", "Sigue trabajando"], "correcta": 1,
+        "explicacion": "Luis dice \"I always have lunch with my team\"." }
+    ] }
+]

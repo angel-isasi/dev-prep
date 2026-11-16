@@ -1,0 +1,37 @@
+[
+  { "id": "en-basico-09-d01", "titulo": "¿Dónde queda el banco?", "situacion": "Una turista le pide indicaciones a Luis en Lima.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Excuse me, how do I get to the bank?", "es": "Disculpa, ¿cómo llego al banco?" },
+      { "quien": "Luis", "en": "Go straight for two blocks.", "es": "Sigue derecho dos cuadras." },
+      { "quien": "Sarah", "en": "And then?", "es": "¿Y luego?" },
+      { "quien": "Luis", "en": "Turn left at the corner. The bank is next to a pharmacy.", "es": "Voltea a la izquierda en la esquina. El banco está al lado de una farmacia." },
+      { "quien": "Sarah", "en": "Is it far from here?", "es": "¿Está lejos de aquí?" },
+      { "quien": "Luis", "en": "No, it's five minutes from here.", "es": "No, está a cinco minutos de aquí." },
+      { "quien": "Sarah", "en": "Thank you very much!", "es": "¡Muchas gracias!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuántas cuadras debe seguir derecho Sarah?", "opciones": ["Una", "Dos", "Cinco"], "correcta": 1,
+        "explicacion": "Luis dice \"Go straight for two blocks\"." },
+      { "pregunta": "¿Al lado de qué está el banco?", "opciones": ["De una farmacia", "De un hospital", "De un parque"], "correcta": 0,
+        "explicacion": "Luis dice \"The bank is next to a pharmacy\"." },
+      { "pregunta": "¿Qué tan lejos está el banco?", "opciones": ["A cinco minutos", "A una hora", "Muy lejos, hay que tomar bus"], "correcta": 0,
+        "explicacion": "Luis responde \"it's five minutes from here\"." }
+    ] },
+  { "id": "en-basico-09-d02", "titulo": "La nueva oficina", "situacion": "Ana le explica a Tom dónde queda la nueva oficina de la empresa.",
+    "lineas": [
+      { "quien": "Tom", "en": "Where is the new office?", "es": "¿Dónde está la nueva oficina?" },
+      { "quien": "Ana", "en": "It's downtown, across from the university.", "es": "Está en el centro, frente a la universidad." },
+      { "quien": "Tom", "en": "Is it near a bus stop?", "es": "¿Está cerca de un paradero?" },
+      { "quien": "Ana", "en": "Yes, the bus stop is in front of the building.", "es": "Sí, el paradero está delante del edificio." },
+      { "quien": "Tom", "en": "Great. When is the first meeting?", "es": "Genial. ¿Cuándo es la primera reunión?" },
+      { "quien": "Ana", "en": "It's on Monday at nine, on the fifth floor.", "es": "Es el lunes a las nueve, en el quinto piso." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Dónde está la nueva oficina?", "opciones": ["En el centro, frente a la universidad", "Al lado del aeropuerto", "Detrás del hospital"], "correcta": 0,
+        "explicacion": "Ana dice \"It's downtown, across from the university\"." },
+      { "pregunta": "¿Dónde está el paradero?", "opciones": ["Delante del edificio", "Detrás del edificio", "Lejos de la oficina"], "correcta": 0,
+        "explicacion": "Ana dice \"the bus stop is in front of the building\"." },
+      { "pregunta": "¿Cuándo es la primera reunión?", "opciones": ["El lunes a las nueve", "El viernes a las cinco", "Hoy en la noche"], "correcta": 0,
+        "explicacion": "Ana responde \"It's on Monday at nine\"." }
+    ] }
+]

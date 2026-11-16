@@ -1,0 +1,37 @@
+[
+  { "id": "en-basico-15-d01", "titulo": "El lunes en la oficina", "situacion": "Tom y María se cuentan su fin de semana.",
+    "lineas": [
+      { "quien": "Tom", "en": "Hi, María! Did you enjoy your weekend?", "es": "¡Hola, María! ¿Disfrutaste tu fin de semana?" },
+      { "quien": "María", "en": "Yes, I did. I visited my parents in Cusco.", "es": "Sí. Visité a mis papás en Cusco." },
+      { "quien": "Tom", "en": "Nice! Did you travel by plane?", "es": "¡Qué bien! ¿Viajaste en avión?" },
+      { "quien": "María", "en": "No, I traveled by bus. It arrived late.", "es": "No, viajé en bus. Llegó tarde." },
+      { "quien": "Tom", "en": "Oh no. I stayed home and watched movies.", "es": "Ay no. Yo me quedé en casa y vi películas." },
+      { "quien": "María", "en": "That sounds relaxing!", "es": "¡Suena relajante!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿A quién visitó María?", "opciones": ["A sus amigos", "A sus papás", "A su jefe"], "correcta": 1,
+        "explicacion": "María dice \"I visited my parents in Cusco\": visitó a sus papás." },
+      { "pregunta": "¿Cómo viajó María?", "opciones": ["En bus", "En avión", "En tren"], "correcta": 0,
+        "explicacion": "María dice \"I traveled by bus\": viajó en bus, no en avión." },
+      { "pregunta": "¿Qué hizo Tom?", "opciones": ["Viajó a Lima", "Se quedó en casa y vio películas", "Trabajó todo el fin de semana"], "correcta": 1,
+        "explicacion": "Tom dice \"I stayed home and watched movies\"." }
+    ] },
+  { "id": "en-basico-15-d02", "titulo": "Un error en el código", "situacion": "Sarah le pregunta a Carlos por un error de la aplicación.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Carlos, did you fix the bug?", "es": "Carlos, ¿arreglaste el error?" },
+      { "quien": "Carlos", "en": "Yes, I fixed it this morning.", "es": "Sí, lo arreglé esta mañana." },
+      { "quien": "Sarah", "en": "Great! Did you test it?", "es": "¡Genial! ¿Lo probaste?" },
+      { "quien": "Carlos", "en": "Yes, I tested it twice. It works now.", "es": "Sí, lo probé dos veces. Ahora funciona." },
+      { "quien": "Sarah", "en": "What happened?", "es": "¿Qué pasó?" },
+      { "quien": "Carlos", "en": "I changed a variable name and didn't update one file.", "es": "Cambié el nombre de una variable y no actualicé un archivo." },
+      { "quien": "Sarah", "en": "Thanks for explaining. Good job!", "es": "Gracias por explicarlo. ¡Buen trabajo!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuándo arregló Carlos el error?", "opciones": ["Esta mañana", "Ayer", "La semana pasada"], "correcta": 0,
+        "explicacion": "Carlos dice \"I fixed it this morning\": lo arregló esta mañana." },
+      { "pregunta": "¿Cuántas veces lo probó?", "opciones": ["Una vez", "Dos veces", "Tres veces"], "correcta": 1,
+        "explicacion": "Carlos dice \"I tested it twice\": twice significa dos veces." },
+      { "pregunta": "¿Qué causó el error?", "opciones": ["Una contraseña equivocada", "Una falla de internet", "Un archivo que no actualizó"], "correcta": 2,
+        "explicacion": "Carlos cambió el nombre de una variable y no actualizó un archivo (\"didn't update one file\")." }
+    ] }
+]

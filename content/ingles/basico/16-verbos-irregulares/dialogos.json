@@ -1,0 +1,40 @@
+[
+  { "id": "en-basico-16-d01", "titulo": "El fin de semana", "situacion": "Ana y Tom se encuentran el lunes en la oficina.",
+    "lineas": [
+      { "quien": "Tom", "en": "How was your weekend?", "es": "¿Qué tal tu fin de semana?" },
+      { "quien": "Ana", "en": "Great! I went to Cusco with my sister.", "es": "¡Genial! Fui a Cusco con mi hermana." },
+      { "quien": "Tom", "en": "Nice! What did you do there?", "es": "¡Qué bien! ¿Qué hicieron allí?" },
+      { "quien": "Ana", "en": "We saw Machu Picchu and ate a lot.", "es": "Vimos Machu Picchu y comimos mucho." },
+      { "quien": "Tom", "en": "Did you take pictures?", "es": "¿Tomaste fotos?" },
+      { "quien": "Ana", "en": "Yes, but I lost my phone on the last day!", "es": "Sí, ¡pero perdí mi celular el último día!" },
+      { "quien": "Tom", "en": "Oh no! Did you find it?", "es": "¡Ay, no! ¿Lo encontraste?" },
+      { "quien": "Ana", "en": "Yes. A man found it and gave it back to me.", "es": "Sí. Un señor lo encontró y me lo devolvió." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Con quién fue Ana a Cusco?", "opciones": ["Con Tom", "Con su hermana", "Sola"], "correcta": 1,
+        "explicacion": "Ana dice: *I went to Cusco with my sister*, fue con su hermana." },
+      { "pregunta": "¿Qué le pasó a Ana el último día?", "opciones": ["Perdió su celular", "Perdió el vuelo", "Se enfermó"], "correcta": 0,
+        "explicacion": "*I lost my phone on the last day*: perdió su celular." },
+      { "pregunta": "¿Recuperó Ana su celular?", "opciones": ["No, nunca lo encontró", "Sí, lo encontró en el hotel", "Sí, un señor se lo devolvió"], "correcta": 2,
+        "explicacion": "*A man found it and gave it back to me*: un señor lo encontró y se lo devolvió." }
+    ] },
+  { "id": "en-basico-16-d02", "titulo": "Una noche difícil", "situacion": "Sarah ve a Luis muy cansado en el trabajo.",
+    "lineas": [
+      { "quien": "Sarah", "en": "You look tired. Did you sleep well?", "es": "Te ves cansado. ¿Dormiste bien?" },
+      { "quien": "Luis", "en": "No, I didn't. I went to bed at three.", "es": "No. Me acosté a las tres." },
+      { "quien": "Sarah", "en": "Why? What happened?", "es": "¿Por qué? ¿Qué pasó?" },
+      { "quien": "Luis", "en": "The app broke last night, and I fixed it.", "es": "La app se malogró anoche y yo la arreglé." },
+      { "quien": "Sarah", "en": "Did you tell the boss?", "es": "¿Le contaste al jefe?" },
+      { "quien": "Luis", "en": "Yes, I sent him an email this morning.", "es": "Sí, le envié un correo esta mañana." },
+      { "quien": "Sarah", "en": "What did he say?", "es": "¿Y qué dijo?" },
+      { "quien": "Luis", "en": "He said thank you and gave me the afternoon off.", "es": "Me dio las gracias y me dio la tarde libre." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿A qué hora se acostó Luis?", "opciones": ["A las diez", "A las tres", "No se acostó"], "correcta": 1,
+        "explicacion": "Luis dice: *I went to bed at three*, se acostó a las tres." },
+      { "pregunta": "¿Qué hizo Luis anoche?", "opciones": ["Arregló la app", "Fue a una fiesta", "Escribió un informe"], "correcta": 0,
+        "explicacion": "*The app broke last night, and I fixed it*: arregló la app que se había malogrado." },
+      { "pregunta": "¿Qué le dio el jefe a Luis?", "opciones": ["Un aumento", "Un día de vacaciones", "La tarde libre"], "correcta": 2,
+        "explicacion": "*He gave me the afternoon off*: le dio la tarde libre." }
+    ] }
+]

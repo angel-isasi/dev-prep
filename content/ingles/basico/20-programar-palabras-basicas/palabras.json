@@ -1,0 +1,1103 @@
+[
+  {
+    "id": "en-basico-20-w01",
+    "en": "code",
+    "es": "código / programar",
+    "pron": "kóud",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I write code every day.",
+      "es": "Escribo código todos los días."
+    }
+  },
+  {
+    "id": "en-basico-20-w02",
+    "en": "bug",
+    "es": "error (en el código)",
+    "pron": "bág",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "There's a bug in the login form.",
+      "es": "Hay un error en el formulario de inicio de sesión."
+    }
+  },
+  {
+    "id": "en-basico-20-w04",
+    "en": "feature",
+    "es": "funcionalidad",
+    "pron": "fíchur",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We're going to add a new feature.",
+      "es": "Vamos a agregar una funcionalidad nueva."
+    }
+  },
+  {
+    "id": "en-basico-20-w05",
+    "en": "function",
+    "es": "función",
+    "pron": "fánkshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This function adds two numbers.",
+      "es": "Esta función suma dos números."
+    }
+  },
+  {
+    "id": "en-basico-20-w06",
+    "en": "variable",
+    "es": "variable",
+    "pron": "vériabol",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Save the result in a variable.",
+      "es": "Guarda el resultado en una variable."
+    }
+  },
+  {
+    "id": "en-basico-20-w07",
+    "en": "value",
+    "es": "valor",
+    "pron": "vályu",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The value of the variable is ten.",
+      "es": "El valor de la variable es diez."
+    }
+  },
+  {
+    "id": "en-basico-20-w08",
+    "en": "array",
+    "es": "array / arreglo",
+    "pron": "aréi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The array has five items.",
+      "es": "El array tiene cinco elementos."
+    }
+  },
+  {
+    "id": "en-basico-20-w09",
+    "en": "object",
+    "es": "objeto",
+    "pron": "ábdyekt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The user is an object with a name and an email.",
+      "es": "El usuario es un objeto con nombre y correo."
+    }
+  },
+  {
+    "id": "en-basico-20-w10",
+    "en": "string",
+    "es": "string / cadena de texto",
+    "pron": "stríng",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The function returns a string.",
+      "es": "La función devuelve un string."
+    }
+  },
+  {
+    "id": "en-basico-20-w11",
+    "en": "boolean",
+    "es": "booleano",
+    "pron": "búlian",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A boolean is true or false.",
+      "es": "Un booleano es verdadero o falso."
+    }
+  },
+  {
+    "id": "en-basico-20-w12",
+    "en": "data type",
+    "es": "tipo de dato",
+    "pron": "déira táip",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "JavaScript has seven primitive data types.",
+      "es": "JavaScript tiene siete tipos de datos primitivos."
+    }
+  },
+  {
+    "id": "en-basico-20-w13",
+    "en": "integer",
+    "es": "número entero",
+    "pron": "íntedyer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The age must be an integer.",
+      "es": "La edad tiene que ser un número entero."
+    }
+  },
+  {
+    "id": "en-basico-20-w14",
+    "en": "null",
+    "es": "nulo (null)",
+    "pron": "nál",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The value is null.",
+      "es": "El valor es null."
+    }
+  },
+  {
+    "id": "en-basico-20-w15",
+    "en": "undefined",
+    "es": "indefinido (undefined)",
+    "pron": "andifáind",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The variable is undefined.",
+      "es": "La variable está undefined."
+    }
+  },
+  {
+    "id": "en-basico-20-w16",
+    "en": "loop",
+    "es": "bucle",
+    "pron": "lúp",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Use a loop to read every item.",
+      "es": "Usa un bucle para leer cada elemento."
+    }
+  },
+  {
+    "id": "en-basico-20-w17",
+    "en": "condition",
+    "es": "condición",
+    "pron": "kondíshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The condition is false, so nothing happens.",
+      "es": "La condición es falsa, así que no pasa nada."
+    }
+  },
+  {
+    "id": "en-basico-20-w19",
+    "en": "parameter",
+    "es": "parámetro",
+    "pron": "parámeter",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This function has two parameters.",
+      "es": "Esta función tiene dos parámetros."
+    }
+  },
+  {
+    "id": "en-basico-20-w20",
+    "en": "argument",
+    "es": "argumento",
+    "pron": "árgiument",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Pass the name as an argument.",
+      "es": "Pasa el nombre como argumento."
+    }
+  },
+  {
+    "id": "en-basico-20-w21",
+    "en": "property",
+    "es": "propiedad",
+    "pron": "práperti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The object has a property called price.",
+      "es": "El objeto tiene una propiedad llamada price."
+    }
+  },
+  {
+    "id": "en-basico-20-w22",
+    "en": "method",
+    "es": "método",
+    "pron": "mézod",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Map is an array method.",
+      "es": "Map es un método de los arrays."
+    }
+  },
+  {
+    "id": "en-basico-20-w23",
+    "en": "index",
+    "es": "índice / posición",
+    "pron": "índeks",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The first index is zero.",
+      "es": "El primer índice es cero."
+    }
+  },
+  {
+    "id": "en-basico-20-w24",
+    "en": "element",
+    "es": "elemento",
+    "pron": "élement",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Select the button element with JavaScript.",
+      "es": "Selecciona el elemento botón con JavaScript."
+    }
+  },
+  {
+    "id": "en-basico-20-w25",
+    "en": "callback",
+    "es": "callback / función de retorno",
+    "pron": "kólbak",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Map takes a callback.",
+      "es": "Map recibe un callback."
+    }
+  },
+  {
+    "id": "en-basico-20-w27",
+    "en": "async",
+    "es": "asíncrono",
+    "pron": "eisínk",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This is an async function.",
+      "es": "Esta es una función asíncrona."
+    }
+  },
+  {
+    "id": "en-basico-20-w28",
+    "en": "operator",
+    "es": "operador",
+    "pron": "ápereiter",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Use the triple equals operator.",
+      "es": "Usa el operador de triple igual."
+    }
+  },
+  {
+    "id": "en-basico-20-w29",
+    "en": "scope",
+    "es": "alcance (scope)",
+    "pron": "skóup",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This variable is outside the scope.",
+      "es": "Esta variable está fuera del alcance."
+    }
+  },
+  {
+    "id": "en-basico-20-w30",
+    "en": "component",
+    "es": "componente",
+    "pron": "kompóunent",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I created a new button component.",
+      "es": "Creé un componente nuevo para el botón."
+    }
+  },
+  {
+    "id": "en-basico-20-w31",
+    "en": "state",
+    "es": "estado",
+    "pron": "stéit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The counter saves the number in state.",
+      "es": "El contador guarda el número en el estado."
+    }
+  },
+  {
+    "id": "en-basico-20-w32",
+    "en": "props",
+    "es": "props / propiedades de un componente",
+    "pron": "práps",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The card gets the title as props.",
+      "es": "La tarjeta recibe el título como props."
+    }
+  },
+  {
+    "id": "en-basico-20-w33",
+    "en": "hook",
+    "es": "hook (función especial de React)",
+    "pron": "júk",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "useState is a React hook.",
+      "es": "useState es un hook de React."
+    }
+  },
+  {
+    "id": "en-basico-20-w34",
+    "en": "event",
+    "es": "evento",
+    "pron": "ivént",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Add a click event to the button.",
+      "es": "Agrega un evento de clic al botón."
+    }
+  },
+  {
+    "id": "en-basico-20-w35",
+    "en": "render",
+    "es": "renderizar / mostrar en pantalla",
+    "pron": "rénder",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The component renders a list of users.",
+      "es": "El componente muestra una lista de usuarios."
+    }
+  },
+  {
+    "id": "en-basico-20-w36",
+    "en": "error",
+    "es": "error",
+    "pron": "érror",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I get an error in the console.",
+      "es": "Me sale un error en la consola."
+    }
+  },
+  {
+    "id": "en-basico-20-w37",
+    "en": "warning",
+    "es": "advertencia",
+    "pron": "uórning",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "It's only a warning, not an error.",
+      "es": "Es solo una advertencia, no un error."
+    }
+  },
+  {
+    "id": "en-basico-20-w39",
+    "en": "debug",
+    "es": "depurar / buscar el error",
+    "pron": "dibág",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I debugged the function for two hours.",
+      "es": "Depuré la función por dos horas."
+    }
+  },
+  {
+    "id": "en-basico-20-w40",
+    "en": "breakpoint",
+    "es": "punto de interrupción",
+    "pron": "bréikpoint",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Put a breakpoint on this line.",
+      "es": "Pon un punto de interrupción en esta línea."
+    }
+  },
+  {
+    "id": "en-basico-20-w41",
+    "en": "console",
+    "es": "consola",
+    "pron": "kánsoul",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Open the console in the browser.",
+      "es": "Abre la consola en el navegador."
+    }
+  },
+  {
+    "id": "en-basico-20-w42",
+    "en": "log",
+    "es": "registro / imprimir en consola",
+    "pron": "lóg",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Check the logs on the server.",
+      "es": "Revisa los registros del servidor."
+    }
+  },
+  {
+    "id": "en-basico-20-w43",
+    "en": "throw",
+    "es": "lanzar (un error)",
+    "pron": "zróu",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "threw",
+      "participio": "thrown"
+    },
+    "ejemplo": {
+      "en": "The function throws an error.",
+      "es": "La función lanza un error."
+    }
+  },
+  {
+    "id": "en-basico-20-w44",
+    "en": "catch",
+    "es": "atrapar / capturar (un error)",
+    "pron": "kách",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "caught",
+      "participio": "caught"
+    },
+    "ejemplo": {
+      "en": "We catch the error and show a message.",
+      "es": "Capturamos el error y mostramos un mensaje."
+    }
+  },
+  {
+    "id": "en-basico-20-w45",
+    "en": "handle",
+    "es": "manejar (un caso o un error)",
+    "pron": "jándol",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "This code doesn't handle empty arrays.",
+      "es": "Este código no maneja arrays vacíos."
+    }
+  },
+  {
+    "id": "en-basico-20-w46",
+    "en": "edge case",
+    "es": "caso límite",
+    "pron": "édy kéis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "An empty string is an edge case.",
+      "es": "Un string vacío es un caso límite."
+    }
+  },
+  {
+    "id": "en-basico-20-w47",
+    "en": "workaround",
+    "es": "solución temporal / parche",
+    "pron": "uérkaraund",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "It's a workaround, not a real fix.",
+      "es": "Es un parche, no una solución de verdad."
+    }
+  },
+  {
+    "id": "en-basico-20-w48",
+    "en": "refactor",
+    "es": "refactorizar / reorganizar el código",
+    "pron": "rifáktor",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I'm going to refactor this component.",
+      "es": "Voy a refactorizar este componente."
+    }
+  },
+  {
+    "id": "en-basico-20-w49",
+    "en": "comment",
+    "es": "comentario",
+    "pron": "káment",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Add a comment above the function.",
+      "es": "Agrega un comentario encima de la función."
+    }
+  },
+  {
+    "id": "en-basico-20-w50",
+    "en": "snippet",
+    "es": "fragmento de código",
+    "pron": "snípit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Paste the snippet in the chat.",
+      "es": "Pega el fragmento de código en el chat."
+    }
+  },
+  {
+    "id": "en-basico-20-w51",
+    "en": "syntax",
+    "es": "sintaxis",
+    "pron": "síntaks",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "There's a syntax error on line ten.",
+      "es": "Hay un error de sintaxis en la línea diez."
+    }
+  },
+  {
+    "id": "en-basico-20-w52",
+    "en": "logic",
+    "es": "lógica",
+    "pron": "ládyik",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The syntax is fine, but the logic is wrong.",
+      "es": "La sintaxis está bien, pero la lógica está mal."
+    }
+  },
+  {
+    "id": "en-basico-20-w53",
+    "en": "bracket",
+    "es": "corchete",
+    "pron": "brákit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "You forgot a closing bracket.",
+      "es": "Te faltó un corchete de cierre."
+    }
+  },
+  {
+    "id": "en-basico-20-w54",
+    "en": "curly braces",
+    "es": "llaves { }",
+    "pron": "kérli bréisis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Objects use curly braces.",
+      "es": "Los objetos usan llaves."
+    }
+  },
+  {
+    "id": "en-basico-20-w55",
+    "en": "parentheses",
+    "es": "paréntesis",
+    "pron": "parénzesis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Call the function with parentheses.",
+      "es": "Llama a la función con paréntesis."
+    }
+  },
+  {
+    "id": "en-basico-20-w56",
+    "en": "semicolon",
+    "es": "punto y coma",
+    "pron": "sémikoulon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We don't use semicolons in this project.",
+      "es": "En este proyecto no usamos punto y coma."
+    }
+  },
+  {
+    "id": "en-basico-20-w57",
+    "en": "input",
+    "es": "entrada (de datos)",
+    "pron": "ínput",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The input is an array of numbers.",
+      "es": "La entrada es un array de números."
+    }
+  },
+  {
+    "id": "en-basico-20-w58",
+    "en": "output",
+    "es": "salida / resultado",
+    "pron": "áutput",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The output should be a string.",
+      "es": "La salida debe ser un string."
+    }
+  },
+  {
+    "id": "en-basico-20-w59",
+    "en": "build",
+    "es": "compilar / construir (la app)",
+    "pron": "bíld",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "built",
+      "participio": "built"
+    },
+    "ejemplo": {
+      "en": "I built the app with React.",
+      "es": "Construí la app con React."
+    }
+  },
+  {
+    "id": "en-basico-20-w60",
+    "en": "deploy",
+    "es": "desplegar / publicar (en un servidor)",
+    "pron": "diplói",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "We deploy every Thursday.",
+      "es": "Desplegamos todos los jueves."
+    }
+  },
+  {
+    "id": "en-basico-20-w61",
+    "en": "release",
+    "es": "lanzamiento / lanzar (una versión)",
+    "pron": "rilís",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The next release is in March.",
+      "es": "El próximo lanzamiento es en marzo."
+    }
+  },
+  {
+    "id": "en-basico-20-w62",
+    "en": "version",
+    "es": "versión",
+    "pron": "vérshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Which version of Node do you have?",
+      "es": "¿Qué versión de Node tienes?"
+    }
+  },
+  {
+    "id": "en-basico-20-w63",
+    "en": "environment",
+    "es": "entorno",
+    "pron": "enváironment",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "It works in my local environment.",
+      "es": "Funciona en mi entorno local."
+    }
+  },
+  {
+    "id": "en-basico-20-w64",
+    "en": "production",
+    "es": "producción (la app real)",
+    "pron": "prodákshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The bug is only in production.",
+      "es": "El error solo está en producción."
+    }
+  },
+  {
+    "id": "en-basico-20-w65",
+    "en": "localhost",
+    "es": "localhost / tu propia máquina",
+    "pron": "lóukaljoust",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The app runs on localhost.",
+      "es": "La app corre en localhost."
+    }
+  },
+  {
+    "id": "en-basico-20-w66",
+    "en": "port",
+    "es": "puerto",
+    "pron": "pórt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The server uses port three thousand.",
+      "es": "El servidor usa el puerto tres mil."
+    }
+  },
+  {
+    "id": "en-basico-20-w67",
+    "en": "terminal",
+    "es": "terminal",
+    "pron": "términal",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Open a terminal in the project folder.",
+      "es": "Abre una terminal en la carpeta del proyecto."
+    }
+  },
+  {
+    "id": "en-basico-20-w68",
+    "en": "command",
+    "es": "comando",
+    "pron": "kománd",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Run this command to install the packages.",
+      "es": "Ejecuta este comando para instalar los paquetes."
+    }
+  },
+  {
+    "id": "en-basico-20-w69",
+    "en": "script",
+    "es": "script",
+    "pron": "skrípt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The test script is in package.json.",
+      "es": "El script de pruebas está en package.json."
+    }
+  },
+  {
+    "id": "en-basico-20-w70",
+    "en": "editor",
+    "es": "editor (de código)",
+    "pron": "éditor",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "VS Code is my favorite editor.",
+      "es": "VS Code es mi editor favorito."
+    }
+  },
+  {
+    "id": "en-basico-20-w71",
+    "en": "extension",
+    "es": "extensión",
+    "pron": "eksténshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Install the Prettier extension.",
+      "es": "Instala la extensión Prettier."
+    }
+  },
+  {
+    "id": "en-basico-20-w72",
+    "en": "branch",
+    "es": "rama (en Git)",
+    "pron": "bránch",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Create a new branch for the feature.",
+      "es": "Crea una rama nueva para la funcionalidad."
+    }
+  },
+  {
+    "id": "en-basico-20-w73",
+    "en": "commit",
+    "es": "commit / guardar cambios en Git",
+    "pron": "komít",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Commit your changes before the merge.",
+      "es": "Haz commit de tus cambios antes del merge."
+    }
+  },
+  {
+    "id": "en-basico-20-w74",
+    "en": "push",
+    "es": "subir cambios (git push)",
+    "pron": "púsh",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I pushed my branch to GitHub.",
+      "es": "Subí mi rama a GitHub."
+    }
+  },
+  {
+    "id": "en-basico-20-w75",
+    "en": "merge",
+    "es": "fusionar / unir ramas",
+    "pron": "mérdy",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Merge your branch into main.",
+      "es": "Une tu rama con main."
+    }
+  },
+  {
+    "id": "en-basico-20-w76",
+    "en": "conflict",
+    "es": "conflicto",
+    "pron": "kánflikt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I have a merge conflict.",
+      "es": "Tengo un conflicto al hacer merge."
+    }
+  },
+  {
+    "id": "en-basico-20-w77",
+    "en": "pull request",
+    "es": "pull request / solicitud de cambios",
+    "pron": "púl rikuést",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Can you review my pull request?",
+      "es": "¿Puedes revisar mi pull request?"
+    }
+  },
+  {
+    "id": "en-basico-20-w78",
+    "en": "review",
+    "es": "revisar / revisión",
+    "pron": "riviú",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Sarah reviewed my code.",
+      "es": "Sarah revisó mi código."
+    }
+  },
+  {
+    "id": "en-basico-20-w79",
+    "en": "repository",
+    "es": "repositorio",
+    "pron": "ripázitori",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Clone the repository first.",
+      "es": "Primero clona el repositorio."
+    }
+  },
+  {
+    "id": "en-basico-20-w80",
+    "en": "clone",
+    "es": "clonar",
+    "pron": "klóun",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I cloned the project from GitHub.",
+      "es": "Cloné el proyecto de GitHub."
+    }
+  },
+  {
+    "id": "en-basico-20-w81",
+    "en": "issue",
+    "es": "incidencia / problema reportado",
+    "pron": "íshu",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I opened an issue on GitHub.",
+      "es": "Abrí una incidencia en GitHub."
+    }
+  },
+  {
+    "id": "en-basico-20-w82",
+    "en": "framework",
+    "es": "framework / marco de trabajo",
+    "pron": "fréimuerk",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Next.js is a React framework.",
+      "es": "Next.js es un framework de React."
+    }
+  },
+  {
+    "id": "en-basico-20-w84",
+    "en": "dependency",
+    "es": "dependencia",
+    "pron": "dipéndensi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This project has too many dependencies.",
+      "es": "Este proyecto tiene demasiadas dependencias."
+    }
+  },
+  {
+    "id": "en-basico-20-w85",
+    "en": "package",
+    "es": "paquete",
+    "pron": "pákidy",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Install the package with npm.",
+      "es": "Instala el paquete con npm."
+    }
+  },
+  {
+    "id": "en-basico-20-w86",
+    "en": "module",
+    "es": "módulo",
+    "pron": "mádyul",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Each file is a module.",
+      "es": "Cada archivo es un módulo."
+    }
+  },
+  {
+    "id": "en-basico-20-w87",
+    "en": "import",
+    "es": "importar",
+    "pron": "impórt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Import the function from utils.",
+      "es": "Importa la función desde utils."
+    }
+  },
+  {
+    "id": "en-basico-20-w88",
+    "en": "export",
+    "es": "exportar",
+    "pron": "ekspórt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Export the component at the end.",
+      "es": "Exporta el componente al final."
+    }
+  },
+  {
+    "id": "en-basico-20-w89",
+    "en": "stack",
+    "es": "stack / tecnologías que usa un equipo",
+    "pron": "sták",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Our stack is React and Node.",
+      "es": "Nuestro stack es React y Node."
+    }
+  },
+  {
+    "id": "en-basico-20-w90",
+    "en": "frontend",
+    "es": "frontend / parte visible de la app",
+    "pron": "frántend",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I want to be a frontend developer.",
+      "es": "Quiero ser desarrollador frontend."
+    }
+  },
+  {
+    "id": "en-basico-20-w91",
+    "en": "backend",
+    "es": "backend / parte del servidor",
+    "pron": "bákend",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The backend is in Node.",
+      "es": "El backend está en Node."
+    }
+  },
+  {
+    "id": "en-basico-20-w92",
+    "en": "server",
+    "es": "servidor",
+    "pron": "sérver",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The server is down.",
+      "es": "El servidor está caído."
+    }
+  },
+  {
+    "id": "en-basico-20-w93",
+    "en": "client",
+    "es": "cliente (programa o persona)",
+    "pron": "kláient",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The client sends a request to the server.",
+      "es": "El cliente manda una petición al servidor."
+    }
+  },
+  {
+    "id": "en-basico-20-w94",
+    "en": "request",
+    "es": "petición / solicitud",
+    "pron": "rikuést",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The request failed with a 404 error.",
+      "es": "La petición falló con un error 404."
+    }
+  },
+  {
+    "id": "en-basico-20-w95",
+    "en": "response",
+    "es": "respuesta (del servidor)",
+    "pron": "rispáns",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The response is a JSON object.",
+      "es": "La respuesta es un objeto JSON."
+    }
+  },
+  {
+    "id": "en-basico-20-w96",
+    "en": "fetch",
+    "es": "traer / pedir datos",
+    "pron": "féch",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The app fetches the products from the API.",
+      "es": "La app trae los productos de la API."
+    }
+  },
+  {
+    "id": "en-basico-20-w97",
+    "en": "endpoint",
+    "es": "endpoint / dirección de la API",
+    "pron": "éndpoint",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This endpoint returns all the users.",
+      "es": "Este endpoint devuelve todos los usuarios."
+    }
+  },
+  {
+    "id": "en-basico-20-w98",
+    "en": "API",
+    "es": "API / interfaz para pedir datos",
+    "pron": "éi pi ái",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We get the data from a public API.",
+      "es": "Sacamos los datos de una API pública."
+    }
+  },
+  {
+    "id": "en-basico-20-w99",
+    "en": "JSON",
+    "es": "JSON (formato de datos)",
+    "pron": "yéison",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The API returns JSON.",
+      "es": "La API devuelve JSON."
+    }
+  },
+  {
+    "id": "en-basico-20-w100",
+    "en": "database",
+    "es": "base de datos",
+    "pron": "déirabeis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We save the orders in a database.",
+      "es": "Guardamos los pedidos en una base de datos."
+    }
+  },
+  {
+    "id": "en-basico-20-w101",
+    "en": "query",
+    "es": "consulta (a la base de datos)",
+    "pron": "kuíri",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "This query is very slow.",
+      "es": "Esta consulta es muy lenta."
+    }
+  },
+  {
+    "id": "en-basico-20-w102",
+    "en": "row",
+    "es": "fila",
+    "pron": "róu",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Each user is a row in the table.",
+      "es": "Cada usuario es una fila de la tabla."
+    }
+  },
+  {
+    "id": "en-basico-20-w103",
+    "en": "column",
+    "es": "columna",
+    "pron": "kálum",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Add a column for the email.",
+      "es": "Agrega una columna para el correo."
+    }
+  },
+  {
+    "id": "en-basico-20-w104",
+    "en": "performance",
+    "es": "rendimiento",
+    "pron": "perfórmans",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The new version has better performance.",
+      "es": "La nueva versión tiene mejor rendimiento."
+    }
+  }
+]

@@ -1,0 +1,36 @@
+[
+  { "id": "en-basico-12-d01", "titulo": "Una llamada", "situacion": "Ana llama a Carlos desde un paradero.",
+    "lineas": [
+      { "quien": "Ana", "en": "Hi, Carlos! What are you doing?", "es": "¡Hola, Carlos! ¿Qué estás haciendo?" },
+      { "quien": "Carlos", "en": "I'm working on a project. And you?", "es": "Estoy trabajando en un proyecto. ¿Y tú?" },
+      { "quien": "Ana", "en": "I'm waiting for the bus. It's raining here.", "es": "Estoy esperando el bus. Aquí está lloviendo." },
+      { "quien": "Carlos", "en": "Really? It's sunny and hot in Lima.", "es": "¿En serio? En Lima hace sol y calor." },
+      { "quien": "Ana", "en": "Lucky you! I'm not wearing a jacket.", "es": "¡Qué suerte! Yo no traigo casaca." },
+      { "quien": "Carlos", "en": "Oh no! Take a taxi, then.", "es": "¡Ay no! Entonces toma un taxi." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué está haciendo Carlos?", "opciones": ["Esperando el bus", "Trabajando en un proyecto", "Comprando una casaca"], "correcta": 1,
+        "explicacion": "Carlos dice \"I'm working on a project\": está trabajando en un proyecto." },
+      { "pregunta": "¿Cómo está el clima donde está Ana?", "opciones": ["Está lloviendo", "Hace sol y calor", "Está nevando"], "correcta": 0,
+        "explicacion": "Ana dice \"It's raining here\". El sol y el calor son de Lima, donde está Carlos." },
+      { "pregunta": "¿Qué problema tiene Ana?", "opciones": ["Perdió el bus", "No tiene dinero", "No lleva casaca"], "correcta": 2,
+        "explicacion": "Ana dice \"I'm not wearing a jacket\": está bajo la lluvia sin casaca." }
+    ] },
+  { "id": "en-basico-12-d02", "titulo": "En la tienda de ropa", "situacion": "Luis busca ropa para el frío y Sarah lo atiende.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Hi! Are you looking for something?", "es": "¡Hola! ¿Buscas algo?" },
+      { "quien": "Luis", "en": "Yes, I need a jacket. It's very cold this week.", "es": "Sí, necesito una casaca. Esta semana hace mucho frío." },
+      { "quien": "Sarah", "en": "What size are you?", "es": "¿Qué talla eres?" },
+      { "quien": "Luis", "en": "Medium, I think.", "es": "Mediana, creo." },
+      { "quien": "Sarah", "en": "Here you go. Try it on.", "es": "Aquí tienes. Pruébatela." },
+      { "quien": "Luis", "en": "It's very comfortable. I'm taking it!", "es": "Es muy cómoda. ¡Me la llevo!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué necesita Luis?", "opciones": ["Una casaca", "Unos zapatos", "Una gorra"], "correcta": 0,
+        "explicacion": "Luis dice \"I need a jacket\": necesita una casaca." },
+      { "pregunta": "¿Por qué la necesita?", "opciones": ["Porque va a una fiesta", "Porque hace mucho frío", "Porque perdió la suya"], "correcta": 1,
+        "explicacion": "Luis explica \"It's very cold this week\": esta semana hace mucho frío." },
+      { "pregunta": "¿Qué talla cree que es Luis?", "opciones": ["Pequeña", "Grande", "Mediana"], "correcta": 2,
+        "explicacion": "Luis responde \"Medium, I think\": cree que es talla mediana." }
+    ] }
+]

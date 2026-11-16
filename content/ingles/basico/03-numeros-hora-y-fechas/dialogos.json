@@ -1,0 +1,36 @@
+[
+  { "id": "en-basico-03-d01", "titulo": "Agendar una entrevista", "situacion": "Sarah, de recursos humanos, llama a Luis para fijar la hora de su entrevista.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Hi, Luis. Are you free on Thursday?", "es": "Hola, Luis. ¿Estás libre el jueves?" },
+      { "quien": "Luis", "en": "Yes, I am. What time?", "es": "Sí. ¿A qué hora?" },
+      { "quien": "Sarah", "en": "Is ten o'clock okay?", "es": "¿Te parece bien a las diez?" },
+      { "quien": "Luis", "en": "Sorry, I'm busy in the morning. Is three p.m. okay?", "es": "Perdón, estoy ocupado en la mañana. ¿Puede ser a las tres de la tarde?" },
+      { "quien": "Sarah", "en": "Yes, perfect. Thursday, May fifth, at three p.m.", "es": "Sí, perfecto. Jueves 5 de mayo, a las tres de la tarde." },
+      { "quien": "Luis", "en": "Great. Thank you, Sarah!", "es": "Genial. ¡Gracias, Sarah!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué día es la entrevista?", "opciones": ["El martes", "El jueves", "El viernes"], "correcta": 1,
+        "explicacion": "Sarah confirma **Thursday, May fifth**: el jueves 5 de mayo." },
+      { "pregunta": "¿A qué hora es la entrevista?", "opciones": ["A las diez de la mañana", "A las tres de la tarde", "A las tres y media"], "correcta": 1,
+        "explicacion": "Quedan en **three p.m.**, las tres de la tarde. Las diez era la primera propuesta." },
+      { "pregunta": "¿Por qué Luis no puede a las diez?", "opciones": ["Está ocupado en la mañana", "Está enfermo", "Llega tarde"], "correcta": 0,
+        "explicacion": "Luis dice **I'm busy in the morning**: está ocupado en la mañana." }
+    ] },
+  { "id": "en-basico-03-d02", "titulo": "Un cumpleaños en la oficina", "situacion": "Tom y Ana conversan en la oficina sobre sus cumpleaños.",
+    "lineas": [
+      { "quien": "Tom", "en": "Ana, when is your birthday?", "es": "Ana, ¿cuándo es tu cumpleaños?" },
+      { "quien": "Ana", "en": "It's on October tenth.", "es": "Es el 10 de octubre." },
+      { "quien": "Tom", "en": "That's next week! How old are you?", "es": "¡Es la próxima semana! ¿Cuántos años tienes?" },
+      { "quien": "Ana", "en": "I'm twenty-four. And you?", "es": "Tengo veinticuatro. ¿Y tú?" },
+      { "quien": "Tom", "en": "I'm thirty. My birthday is in February.", "es": "Tengo treinta. Mi cumpleaños es en febrero." },
+      { "quien": "Ana", "en": "February is summer in Peru!", "es": "¡Febrero es verano en Perú!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuándo es el cumpleaños de Ana?", "opciones": ["El 10 de octubre", "El 12 de octubre", "En febrero"], "correcta": 0,
+        "explicacion": "Ana dice **October tenth**: el 10 de octubre. Febrero es el mes de Tom." },
+      { "pregunta": "¿Cuántos años tiene Tom?", "opciones": ["Veinticuatro", "Treinta", "Trece"], "correcta": 1,
+        "explicacion": "Tom dice **I'm thirty**: tiene treinta. Veinticuatro es la edad de Ana." },
+      { "pregunta": "¿En qué mes es el cumpleaños de Tom?", "opciones": ["Octubre", "Febrero", "Diciembre"], "correcta": 1,
+        "explicacion": "Tom dice **My birthday is in February**." }
+    ] }
+]

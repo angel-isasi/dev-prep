@@ -1,0 +1,618 @@
+[
+  {
+    "id": "en-basico-18-w01",
+    "en": "accurate",
+    "es": "preciso / exacto",
+    "pron": "ákiuret",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The new map is more accurate.",
+      "es": "El nuevo mapa es más preciso."
+    }
+  },
+  {
+    "id": "en-basico-18-w02",
+    "en": "slow",
+    "es": "lento",
+    "pron": "slóu",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "My laptop is slower than yours.",
+      "es": "Mi laptop es más lenta que la tuya."
+    }
+  },
+  {
+    "id": "en-basico-18-w03",
+    "en": "flexible",
+    "es": "flexible",
+    "pron": "fléksibol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Remote work is more flexible.",
+      "es": "El trabajo remoto es más flexible."
+    }
+  },
+  {
+    "id": "en-basico-18-w04",
+    "en": "practical",
+    "es": "práctico",
+    "pron": "práktikal",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This is the most practical solution.",
+      "es": "Esta es la solución más práctica."
+    }
+  },
+  {
+    "id": "en-basico-18-w05",
+    "en": "hard",
+    "es": "difícil / duro",
+    "pron": "járd",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The second test was harder.",
+      "es": "El segundo examen fue más difícil."
+    }
+  },
+  {
+    "id": "en-basico-18-w06",
+    "en": "useless",
+    "es": "inútil",
+    "pron": "iúsles",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This is the most useless meeting of the week.",
+      "es": "Esta es la reunión más inútil de la semana."
+    }
+  },
+  {
+    "id": "en-basico-18-w07",
+    "en": "thick",
+    "es": "grueso / espeso",
+    "pron": "zík",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This book is thicker than the other one.",
+      "es": "Este libro es más grueso que el otro."
+    }
+  },
+  {
+    "id": "en-basico-18-w08",
+    "en": "important",
+    "es": "importante",
+    "pron": "impórtant",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Practice is more important than theory.",
+      "es": "La práctica es más importante que la teoría."
+    }
+  },
+  {
+    "id": "en-basico-18-w09",
+    "en": "useful",
+    "es": "útil",
+    "pron": "iúsful",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This is the most useful app on my phone.",
+      "es": "Esta es la app más útil de mi celular."
+    }
+  },
+  {
+    "id": "en-basico-18-w10",
+    "en": "modern",
+    "es": "moderno",
+    "pron": "módern",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The new office is more modern.",
+      "es": "La nueva oficina es más moderna."
+    }
+  },
+  {
+    "id": "en-basico-18-w11",
+    "en": "simple",
+    "es": "simple / sencillo",
+    "pron": "símpol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Your solution is simpler than mine.",
+      "es": "Tu solución es más sencilla que la mía."
+    }
+  },
+  {
+    "id": "en-basico-18-w12",
+    "en": "complex",
+    "es": "complejo",
+    "pron": "kompléks",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This project is more complex than the last one.",
+      "es": "Este proyecto es más complejo que el anterior."
+    }
+  },
+  {
+    "id": "en-basico-18-w13",
+    "en": "clean",
+    "es": "limpio",
+    "pron": "klíin",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The kitchen is cleaner now.",
+      "es": "La cocina está más limpia ahora."
+    }
+  },
+  {
+    "id": "en-basico-18-w14",
+    "en": "dirty",
+    "es": "sucio",
+    "pron": "dérti",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This is the dirtiest room in the house.",
+      "es": "Este es el cuarto más sucio de la casa."
+    }
+  },
+  {
+    "id": "en-basico-18-w15",
+    "en": "loud",
+    "es": "fuerte (sonido) / ruidoso",
+    "pron": "láud",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The music is louder than yesterday.",
+      "es": "La música está más fuerte que ayer."
+    }
+  },
+  {
+    "id": "en-basico-18-w17",
+    "en": "safe",
+    "es": "seguro",
+    "pron": "séif",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This neighborhood is safer than mine.",
+      "es": "Este barrio es más seguro que el mío."
+    }
+  },
+  {
+    "id": "en-basico-18-w18",
+    "en": "dangerous",
+    "es": "peligroso",
+    "pron": "déinyeros",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Driving at night is more dangerous.",
+      "es": "Manejar de noche es más peligroso."
+    }
+  },
+  {
+    "id": "en-basico-18-w19",
+    "en": "popular",
+    "es": "popular",
+    "pron": "pópiular",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "JavaScript is the most popular language on the web.",
+      "es": "JavaScript es el lenguaje más popular de la web."
+    }
+  },
+  {
+    "id": "en-basico-18-w20",
+    "en": "common",
+    "es": "común",
+    "pron": "kómon",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This error is more common than you think.",
+      "es": "Este error es más común de lo que crees."
+    }
+  },
+  {
+    "id": "en-basico-18-w21",
+    "en": "rare",
+    "es": "raro / poco común",
+    "pron": "rér",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Snow in Lima is very rare.",
+      "es": "La nieve en Lima es muy rara."
+    }
+  },
+  {
+    "id": "en-basico-18-w22",
+    "en": "possible",
+    "es": "posible",
+    "pron": "pósibol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Come as soon as possible.",
+      "es": "Ven lo antes posible."
+    }
+  },
+  {
+    "id": "en-basico-18-w23",
+    "en": "different",
+    "es": "diferente",
+    "pron": "díferent",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "His idea is very different from mine.",
+      "es": "Su idea es muy diferente de la mía."
+    }
+  },
+  {
+    "id": "en-basico-18-w24",
+    "en": "similar",
+    "es": "parecido / similar",
+    "pron": "símilar",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Your code is similar to mine.",
+      "es": "Tu código es parecido al mío."
+    }
+  },
+  {
+    "id": "en-basico-18-w25",
+    "en": "large",
+    "es": "grande (tamaño, cantidad)",
+    "pron": "lárch",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "We need a larger room.",
+      "es": "Necesitamos un cuarto más grande."
+    }
+  },
+  {
+    "id": "en-basico-18-w26",
+    "en": "huge",
+    "es": "enorme",
+    "pron": "jiúch",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Their new office is huge.",
+      "es": "Su nueva oficina es enorme."
+    }
+  },
+  {
+    "id": "en-basico-18-w27",
+    "en": "tiny",
+    "es": "diminuto / muy pequeño",
+    "pron": "táini",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "My apartment is tiny.",
+      "es": "Mi departamento es pequeñísimo."
+    }
+  },
+  {
+    "id": "en-basico-18-w28",
+    "en": "wide",
+    "es": "ancho",
+    "pron": "uáid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This street is wider than that one.",
+      "es": "Esta calle es más ancha que esa."
+    }
+  },
+  {
+    "id": "en-basico-18-w29",
+    "en": "narrow",
+    "es": "angosto / estrecho",
+    "pron": "nárou",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The bridge is narrower than the road.",
+      "es": "El puente es más angosto que la pista."
+    }
+  },
+  {
+    "id": "en-basico-18-w30",
+    "en": "deep",
+    "es": "profundo / hondo",
+    "pron": "díip",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The river is deeper here.",
+      "es": "El río es más hondo aquí."
+    }
+  },
+  {
+    "id": "en-basico-18-w31",
+    "en": "heavy",
+    "es": "pesado",
+    "pron": "jévi",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "My suitcase is heavier than yours.",
+      "es": "Mi maleta pesa más que la tuya."
+    }
+  },
+  {
+    "id": "en-basico-18-w32",
+    "en": "full",
+    "es": "lleno",
+    "pron": "fúl",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The bus was full this morning.",
+      "es": "El bus estaba lleno esta mañana."
+    }
+  },
+  {
+    "id": "en-basico-18-w34",
+    "en": "smooth",
+    "es": "suave / liso / fluido",
+    "pron": "smúudh",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The new version is smoother.",
+      "es": "La nueva versión funciona más fluida."
+    }
+  },
+  {
+    "id": "en-basico-18-w35",
+    "en": "bright",
+    "es": "brillante / luminoso",
+    "pron": "bráit",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This screen is brighter than the old one.",
+      "es": "Esta pantalla es más brillante que la anterior."
+    }
+  },
+  {
+    "id": "en-basico-18-w36",
+    "en": "dark",
+    "es": "oscuro",
+    "pron": "dárk",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Dark mode is easier on the eyes.",
+      "es": "El modo oscuro cansa menos la vista."
+    }
+  },
+  {
+    "id": "en-basico-18-w37",
+    "en": "high",
+    "es": "alto (precios, montañas, niveles)",
+    "pron": "jái",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Prices are higher this year.",
+      "es": "Los precios están más altos este año."
+    }
+  },
+  {
+    "id": "en-basico-18-w38",
+    "en": "low",
+    "es": "bajo (precios, niveles)",
+    "pron": "lóu",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This store has the lowest prices.",
+      "es": "Esta tienda tiene los precios más bajos."
+    }
+  },
+  {
+    "id": "en-basico-18-w39",
+    "en": "far",
+    "es": "lejos / lejano (farther, the farthest)",
+    "pron": "fár",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "My office is farther than yours.",
+      "es": "Mi oficina está más lejos que la tuya."
+    }
+  },
+  {
+    "id": "en-basico-18-w40",
+    "en": "soft",
+    "es": "blando / suave",
+    "pron": "sóft",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This pillow is softer than mine.",
+      "es": "Esta almohada es más suave que la mía."
+    }
+  },
+  {
+    "id": "en-basico-18-w41",
+    "en": "sharp",
+    "es": "afilado / nítido",
+    "pron": "shárp",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The new screen is sharper.",
+      "es": "La nueva pantalla es más nítida."
+    }
+  },
+  {
+    "id": "en-basico-18-w42",
+    "en": "valuable",
+    "es": "valioso",
+    "pron": "váliuabol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Experience is more valuable than a diploma.",
+      "es": "La experiencia vale más que un diploma."
+    }
+  },
+  {
+    "id": "en-basico-18-w43",
+    "en": "convenient",
+    "es": "práctico / conveniente",
+    "pron": "konvínient",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The metro is more convenient than a taxi.",
+      "es": "El metro es más práctico que un taxi."
+    }
+  },
+  {
+    "id": "en-basico-18-w44",
+    "en": "efficient",
+    "es": "eficiente",
+    "pron": "ifíshent",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The new version is more efficient.",
+      "es": "La nueva versión es más eficiente."
+    }
+  },
+  {
+    "id": "en-basico-18-w45",
+    "en": "reliable",
+    "es": "confiable",
+    "pron": "riláiabol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This is the most reliable car on the market.",
+      "es": "Este es el carro más confiable del mercado."
+    }
+  },
+  {
+    "id": "en-basico-18-w46",
+    "en": "powerful",
+    "es": "potente / poderoso",
+    "pron": "páuerful",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The new phone is more powerful.",
+      "es": "El nuevo celular es más potente."
+    }
+  },
+  {
+    "id": "en-basico-18-w48",
+    "en": "famous",
+    "es": "famoso",
+    "pron": "féimos",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Machu Picchu is the most famous place in Peru.",
+      "es": "Machu Picchu es el lugar más famoso del Perú."
+    }
+  },
+  {
+    "id": "en-basico-18-w49",
+    "en": "recent",
+    "es": "reciente",
+    "pron": "rísent",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Download the most recent version.",
+      "es": "Descarga la versión más reciente."
+    }
+  },
+  {
+    "id": "en-basico-18-w50",
+    "en": "clear",
+    "es": "claro",
+    "pron": "klír",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Your explanation is clearer now.",
+      "es": "Tu explicación está más clara ahora."
+    }
+  },
+  {
+    "id": "en-basico-18-w51",
+    "en": "basic",
+    "es": "básico",
+    "pron": "béisik",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This course is more basic than the other one.",
+      "es": "Este curso es más básico que el otro."
+    }
+  },
+  {
+    "id": "en-basico-18-w52",
+    "en": "advanced",
+    "es": "avanzado",
+    "pron": "adwánst",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The second level is more advanced.",
+      "es": "El segundo nivel es más avanzado."
+    }
+  },
+  {
+    "id": "en-basico-18-w53",
+    "en": "main",
+    "es": "principal",
+    "pron": "méin",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This is the main problem.",
+      "es": "Este es el problema principal."
+    }
+  },
+  {
+    "id": "en-basico-18-w54",
+    "en": "special",
+    "es": "especial",
+    "pron": "spéshal",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Today is a special day.",
+      "es": "Hoy es un día especial."
+    }
+  },
+  {
+    "id": "en-basico-18-w55",
+    "en": "normal",
+    "es": "normal",
+    "pron": "nórmal",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "It's normal to make mistakes.",
+      "es": "Es normal cometer errores."
+    }
+  },
+  {
+    "id": "en-basico-18-w56",
+    "en": "strange",
+    "es": "extraño / raro",
+    "pron": "stréinch",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "That was the strangest day of my life.",
+      "es": "Ese fue el día más extraño de mi vida."
+    }
+  },
+  {
+    "id": "en-basico-18-w57",
+    "en": "typical",
+    "es": "típico",
+    "pron": "típikal",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Ceviche is a typical Peruvian dish.",
+      "es": "El ceviche es un plato típico peruano."
+    }
+  },
+  {
+    "id": "en-basico-18-w58",
+    "en": "perfect",
+    "es": "perfecto",
+    "pron": "pérfekt",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Nobody's code is perfect.",
+      "es": "El código de nadie es perfecto."
+    }
+  },
+  {
+    "id": "en-basico-18-w60",
+    "en": "excellent",
+    "es": "excelente",
+    "pron": "ékselent",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "She's an excellent teacher.",
+      "es": "Ella es una profesora excelente."
+    }
+  }
+]

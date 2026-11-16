@@ -1,0 +1,39 @@
+[
+  { "id": "en-basico-13-d01", "titulo": "En el restaurante", "situacion": "María llega a almorzar y Tom, el mesero, la atiende.",
+    "lineas": [
+      { "quien": "Tom", "en": "Hi! Are you ready to order?", "es": "¡Hola! ¿Lista para pedir?" },
+      { "quien": "María", "en": "Yes. What do you recommend?", "es": "Sí. ¿Qué me recomienda?" },
+      { "quien": "Tom", "en": "The chicken with rice is very good today.", "es": "Hoy el pollo con arroz está muy bueno." },
+      { "quien": "María", "en": "Great. I'd like that, please. Is it spicy?", "es": "Perfecto. Quisiera eso, por favor. ¿Es picante?" },
+      { "quien": "Tom", "en": "Just a little. Anything to drink?", "es": "Solo un poco. ¿Algo de tomar?" },
+      { "quien": "María", "en": "A glass of orange juice, please.", "es": "Un vaso de jugo de naranja, por favor." },
+      { "quien": "Tom", "en": "Perfect. For here or to go?", "es": "Perfecto. ¿Para comer aquí o para llevar?" },
+      { "quien": "María", "en": "For here, thanks.", "es": "Para aquí, gracias." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué le recomienda Tom?", "opciones": ["Pescado con papas", "Pollo con arroz", "Sopa de verduras"], "correcta": 1,
+        "explicacion": "Tom dice \"The chicken with rice is very good today\": le recomienda el pollo con arroz." },
+      { "pregunta": "¿Qué pide María para tomar?", "opciones": ["Café", "Agua", "Jugo de naranja"], "correcta": 2,
+        "explicacion": "María pide \"A glass of orange juice\": un vaso de jugo de naranja." },
+      { "pregunta": "¿Dónde va a comer María?", "opciones": ["En el restaurante", "En su casa", "En la oficina"], "correcta": 0,
+        "explicacion": "María responde \"For here\": va a comer ahí mismo, no para llevar." }
+    ] },
+  { "id": "en-basico-13-d02", "titulo": "En el mercado", "situacion": "Ana compra verduras en el puesto de Carlos.",
+    "lineas": [
+      { "quien": "Ana", "en": "Good morning! How much are the potatoes?", "es": "¡Buenos días! ¿A cuánto están las papas?" },
+      { "quien": "Carlos", "en": "They're three soles a kilo.", "es": "Están a tres soles el kilo." },
+      { "quien": "Ana", "en": "Okay. Two kilos, please. Do you have any tomatoes?", "es": "Bueno. Dos kilos, por favor. ¿Tiene tomates?" },
+      { "quien": "Carlos", "en": "Yes, but only a few. They're very fresh.", "es": "Sí, pero solo unos pocos. Están muy frescos." },
+      { "quien": "Ana", "en": "Perfect. How much is it all?", "es": "Perfecto. ¿Cuánto es todo?" },
+      { "quien": "Carlos", "en": "It's ten soles.", "es": "Son diez soles." },
+      { "quien": "Ana", "en": "Here you go. Thank you!", "es": "Aquí tiene. ¡Gracias!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuánto cuesta el kilo de papas?", "opciones": ["Dos soles", "Tres soles", "Diez soles"], "correcta": 1,
+        "explicacion": "Carlos dice \"three soles a kilo\": tres soles el kilo." },
+      { "pregunta": "¿Cómo están los tomates?", "opciones": ["Muy caros", "Muy picantes", "Muy frescos"], "correcta": 2,
+        "explicacion": "Carlos dice \"They're very fresh\": están muy frescos, aunque quedan pocos." },
+      { "pregunta": "¿Cuánto paga Ana en total?", "opciones": ["Diez soles", "Seis soles", "Tres soles"], "correcta": 0,
+        "explicacion": "Al final Carlos dice \"It's ten soles\": son diez soles en total." }
+    ] }
+]

@@ -1,0 +1,36 @@
+[
+  { "id": "en-basico-08-d01", "titulo": "Una foto familiar", "situacion": "Sarah mira una foto en el celular de Carlos.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Who is this tall man?", "es": "¿Quién es este hombre alto?" },
+      { "quien": "Carlos", "en": "That's my brother, Luis. He's a teacher.", "es": "Es mi hermano, Luis. Es profesor." },
+      { "quien": "Sarah", "en": "He looks like you!", "es": "¡Se parece a ti!" },
+      { "quien": "Carlos", "en": "Yes, but he's very serious. I'm funny.", "es": "Sí, pero él es muy serio. Yo soy gracioso." },
+      { "quien": "Sarah", "en": "And who is the woman with curly hair?", "es": "¿Y quién es la mujer de pelo rizado?" },
+      { "quien": "Carlos", "en": "That's his wife, Ana. She's very friendly.", "es": "Es su esposa, Ana. Es muy amable." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Quién es Luis?", "opciones": ["El papá de Carlos", "El hermano de Carlos", "El jefe de Carlos"], "correcta": 1,
+        "explicacion": "Carlos dice \"That's my brother, Luis\"." },
+      { "pregunta": "¿Cómo es Luis?", "opciones": ["Gracioso", "Muy serio", "Tímido"], "correcta": 1,
+        "explicacion": "Carlos dice \"he's very serious\". El gracioso es Carlos." },
+      { "pregunta": "¿Quién es Ana?", "opciones": ["La esposa de Luis", "La hermana de Carlos", "La enamorada de Carlos"], "correcta": 0,
+        "explicacion": "Carlos dice \"That's his wife, Ana\": his se refiere a Luis." }
+    ] },
+  { "id": "en-basico-08-d02", "titulo": "El compañero nuevo", "situacion": "María le cuenta a Tom cómo es su nuevo compañero de trabajo.",
+    "lineas": [
+      { "quien": "Tom", "en": "What is your new coworker like?", "es": "¿Cómo es tu nuevo compañero de trabajo?" },
+      { "quien": "María", "en": "He's very hardworking and polite.", "es": "Es muy trabajador y educado." },
+      { "quien": "Tom", "en": "What does he look like?", "es": "¿Y cómo es físicamente?" },
+      { "quien": "María", "en": "He's short and has a beard.", "es": "Es bajo y tiene barba." },
+      { "quien": "Tom", "en": "Do you get along with him?", "es": "¿Te llevas bien con él?" },
+      { "quien": "María", "en": "Yes, we do. He's patient and he helps me a lot.", "es": "Sí. Es paciente y me ayuda mucho." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cómo es la personalidad del compañero?", "opciones": ["Flojo y serio", "Trabajador y educado", "Tímido y callado"], "correcta": 1,
+        "explicacion": "María dice \"He's very hardworking and polite\"." },
+      { "pregunta": "¿Cómo es físicamente?", "opciones": ["Alto y con pelo rizado", "Bajo y con barba", "Alto y con barba"], "correcta": 1,
+        "explicacion": "María responde \"He's short and has a beard\"." },
+      { "pregunta": "¿María se lleva bien con él?", "opciones": ["Sí, él la ayuda mucho", "No, es muy serio", "Todavía no lo conoce"], "correcta": 0,
+        "explicacion": "María dice \"Yes, we do. He's patient and he helps me a lot\"." }
+    ] }
+]

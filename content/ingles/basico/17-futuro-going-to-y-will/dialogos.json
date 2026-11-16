@@ -1,0 +1,40 @@
+[
+  { "id": "en-basico-17-d01", "titulo": "Planes de vacaciones", "situacion": "Carlos le pregunta a Ana qué hará en sus vacaciones.",
+    "lineas": [
+      { "quien": "Carlos", "en": "What are you going to do on your vacation?", "es": "¿Qué vas a hacer en tus vacaciones?" },
+      { "quien": "Ana", "en": "I'm going to travel to Cusco with my friends.", "es": "Voy a viajar a Cusco con mis amigas." },
+      { "quien": "Carlos", "en": "Nice! When are you leaving?", "es": "¡Qué bien! ¿Cuándo se van?" },
+      { "quien": "Ana", "en": "We're flying on Friday morning.", "es": "Volamos el viernes en la mañana." },
+      { "quien": "Carlos", "en": "Are you going to stay at a hotel?", "es": "¿Se van a quedar en un hotel?" },
+      { "quien": "Ana", "en": "No, we're going to stay at a friend's house.", "es": "No, nos vamos a quedar en la casa de una amiga." },
+      { "quien": "Carlos", "en": "It'll be cold there. Take a jacket!", "es": "Allá va a hacer frío. ¡Lleva una casaca!" },
+      { "quien": "Ana", "en": "Good idea. I'll pack one tonight.", "es": "Buena idea. Esta noche meto una en la maleta." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuándo viaja Ana?", "opciones": ["El sábado", "El viernes en la mañana", "El viernes en la noche"], "correcta": 1,
+        "explicacion": "Ana dice: *We're flying on Friday morning*, el viernes en la mañana." },
+      { "pregunta": "¿Dónde se va a quedar Ana?", "opciones": ["En la casa de una amiga", "En un hotel", "En un hostal"], "correcta": 0,
+        "explicacion": "*We're going to stay at a friend's house*: en la casa de una amiga. Carlos pregunta por un hotel, pero ella dice que no." },
+      { "pregunta": "¿Qué consejo le da Carlos?", "opciones": ["Reservar un hotel", "Cambiar dinero", "Llevar una casaca"], "correcta": 2,
+        "explicacion": "*It'll be cold there. Take a jacket!*: le dice que lleve una casaca porque hará frío." }
+    ] },
+  { "id": "en-basico-17-d02", "titulo": "En el aeropuerto", "situacion": "María llega al mostrador de la aerolínea y Tom la atiende.",
+    "lineas": [
+      { "quien": "Tom", "en": "Good morning. Can I see your passport, please?", "es": "Buenos días. ¿Me muestra su pasaporte, por favor?" },
+      { "quien": "María", "en": "Sure, here you go.", "es": "Claro, aquí tiene." },
+      { "quien": "Tom", "en": "Are you checking any bags today?", "es": "¿Va a despachar alguna maleta hoy?" },
+      { "quien": "María", "en": "No, I only have a carry-on.", "es": "No, solo tengo equipaje de mano." },
+      { "quien": "Tom", "en": "Window or aisle seat?", "es": "¿Ventana o pasillo?" },
+      { "quien": "María", "en": "Aisle, please. Is the flight going to leave on time?", "es": "Pasillo, por favor. ¿El vuelo va a salir a tiempo?" },
+      { "quien": "Tom", "en": "Yes. Here's your boarding pass. You're at gate 12.", "es": "Sí. Aquí tiene su pase de abordar. Su puerta es la 12." },
+      { "quien": "María", "en": "Thank you! I'll go to the gate now.", "es": "¡Gracias! Voy a la puerta ahora." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué equipaje lleva María?", "opciones": ["Dos maletas", "Una mochila y una maleta", "Solo equipaje de mano"], "correcta": 2,
+        "explicacion": "María dice: *I only have a carry-on*, solo equipaje de mano." },
+      { "pregunta": "¿Qué asiento pide María?", "opciones": ["Ventana", "Pasillo", "Primera clase"], "correcta": 1,
+        "explicacion": "Tom pregunta *Window or aisle seat?* y ella responde *Aisle, please*: pasillo." },
+      { "pregunta": "¿Por qué puerta sale el vuelo?", "opciones": ["La 12", "La 2", "La 20"], "correcta": 0,
+        "explicacion": "Tom dice: *You're at gate 12*, la puerta 12." }
+    ] }
+]

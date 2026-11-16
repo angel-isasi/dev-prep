@@ -1,0 +1,673 @@
+[
+  {
+    "id": "en-basico-17-w02",
+    "en": "flight",
+    "es": "vuelo",
+    "pron": "fláit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Our flight leaves at six.",
+      "es": "Nuestro vuelo sale a las seis."
+    }
+  },
+  {
+    "id": "en-basico-17-w03",
+    "en": "plane ticket",
+    "es": "boleto de avión / pasaje",
+    "pron": "pléin tíket",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'll buy the plane tickets online.",
+      "es": "Compraré los pasajes de avión por internet."
+    }
+  },
+  {
+    "id": "en-basico-17-w04",
+    "en": "passenger",
+    "es": "pasajero",
+    "pron": "pásenyer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "All passengers will board at gate 5.",
+      "es": "Todos los pasajeros abordarán por la puerta 5."
+    }
+  },
+  {
+    "id": "en-basico-17-w05",
+    "en": "hostel",
+    "es": "hostal / albergue",
+    "pron": "jóstel",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We're staying at a hostel near the beach.",
+      "es": "Nos vamos a quedar en un hostal cerca de la playa."
+    }
+  },
+  {
+    "id": "en-basico-17-w06",
+    "en": "luggage",
+    "es": "equipaje",
+    "pron": "lágich",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "How much luggage are you going to take?",
+      "es": "¿Cuánto equipaje vas a llevar?"
+    }
+  },
+  {
+    "id": "en-basico-17-w07",
+    "en": "suitcase",
+    "es": "maleta",
+    "pron": "sútkeis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "My suitcase is too heavy.",
+      "es": "Mi maleta pesa demasiado."
+    }
+  },
+  {
+    "id": "en-basico-17-w09",
+    "en": "passport",
+    "es": "pasaporte",
+    "pron": "pásport",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Don't forget your passport!",
+      "es": "¡No olvides tu pasaporte!"
+    }
+  },
+  {
+    "id": "en-basico-17-w10",
+    "en": "visa",
+    "es": "visa",
+    "pron": "víza",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "You'll need a visa for the United States.",
+      "es": "Vas a necesitar visa para Estados Unidos."
+    }
+  },
+  {
+    "id": "en-basico-17-w11",
+    "en": "layover",
+    "es": "escala (en un vuelo)",
+    "pron": "léiover",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We're going to have a layover in Bogotá.",
+      "es": "Vamos a hacer escala en Bogotá."
+    }
+  },
+  {
+    "id": "en-basico-17-w12",
+    "en": "business trip",
+    "es": "viaje de trabajo",
+    "pron": "bísnes tríp",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Luis is going on a business trip next week.",
+      "es": "Luis se va de viaje de trabajo la próxima semana."
+    }
+  },
+  {
+    "id": "en-basico-17-w13",
+    "en": "appointment",
+    "es": "cita (médico, trámite)",
+    "pron": "apóintment",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I have a doctor's appointment at four.",
+      "es": "Tengo cita con el médico a las cuatro."
+    }
+  },
+  {
+    "id": "en-basico-17-w14",
+    "en": "reservation",
+    "es": "reserva",
+    "pron": "reservéishon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'm going to make a reservation for two.",
+      "es": "Voy a hacer una reserva para dos."
+    }
+  },
+  {
+    "id": "en-basico-17-w15",
+    "en": "boarding pass",
+    "es": "pase de abordar",
+    "pron": "bórding pás",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Here's your boarding pass.",
+      "es": "Aquí está su pase de abordar."
+    }
+  },
+  {
+    "id": "en-basico-17-w16",
+    "en": "gate",
+    "es": "puerta de embarque",
+    "pron": "guéit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The flight leaves from gate 12.",
+      "es": "El vuelo sale por la puerta 12."
+    }
+  },
+  {
+    "id": "en-basico-17-w17",
+    "en": "seat",
+    "es": "asiento",
+    "pron": "síit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'll take the window seat.",
+      "es": "Me quedo con el asiento de la ventana."
+    }
+  },
+  {
+    "id": "en-basico-17-w18",
+    "en": "aisle",
+    "es": "pasillo (avión, bus, supermercado)",
+    "pron": "áil",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Can I have an aisle seat?",
+      "es": "¿Me da un asiento de pasillo?"
+    }
+  },
+  {
+    "id": "en-basico-17-w19",
+    "en": "delay",
+    "es": "retraso",
+    "pron": "diléi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "There's a two-hour delay.",
+      "es": "Hay un retraso de dos horas."
+    }
+  },
+  {
+    "id": "en-basico-17-w20",
+    "en": "departure",
+    "es": "salida (de un vuelo, un bus)",
+    "pron": "dipárcher",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Departure is at 7:30.",
+      "es": "La salida es a las 7:30."
+    }
+  },
+  {
+    "id": "en-basico-17-w21",
+    "en": "arrival",
+    "es": "llegada",
+    "pron": "arráival",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Our arrival time is 10 p.m.",
+      "es": "Nuestra hora de llegada es a las 10 de la noche."
+    }
+  },
+  {
+    "id": "en-basico-17-w22",
+    "en": "destination",
+    "es": "destino",
+    "pron": "destinéishon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Cusco is a popular destination.",
+      "es": "Cusco es un destino popular."
+    }
+  },
+  {
+    "id": "en-basico-17-w23",
+    "en": "tourist",
+    "es": "turista",
+    "pron": "túrist",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "There will be a lot of tourists in July.",
+      "es": "Va a haber muchos turistas en julio."
+    }
+  },
+  {
+    "id": "en-basico-17-w24",
+    "en": "tour guide",
+    "es": "guía turístico",
+    "pron": "túr gáid",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The tour guide will meet us at the hotel.",
+      "es": "El guía nos esperará en el hotel."
+    }
+  },
+  {
+    "id": "en-basico-17-w25",
+    "en": "jet lag",
+    "es": "desfase horario (por un vuelo largo)",
+    "pron": "yét lág",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "You'll probably have jet lag after the flight.",
+      "es": "Probablemente tengas desfase horario después del vuelo."
+    }
+  },
+  {
+    "id": "en-basico-17-w27",
+    "en": "beach",
+    "es": "playa",
+    "pron": "bíich",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We're going to spend the day at the beach.",
+      "es": "Vamos a pasar el día en la playa."
+    }
+  },
+  {
+    "id": "en-basico-17-w28",
+    "en": "mountain",
+    "es": "montaña",
+    "pron": "máunten",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "It'll be cold in the mountains.",
+      "es": "Va a hacer frío en las montañas."
+    }
+  },
+  {
+    "id": "en-basico-17-w29",
+    "en": "abroad",
+    "es": "en el extranjero / al extranjero",
+    "pron": "abród",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "I'm going to work abroad one day.",
+      "es": "Algún día voy a trabajar en el extranjero."
+    }
+  },
+  {
+    "id": "en-basico-17-w30",
+    "en": "round trip",
+    "es": "ida y vuelta",
+    "pron": "ráund tríp",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A round trip to Cusco costs 300 soles.",
+      "es": "Un pasaje de ida y vuelta a Cusco cuesta 300 soles."
+    }
+  },
+  {
+    "id": "en-basico-17-w31",
+    "en": "one-way",
+    "es": "de solo ida",
+    "pron": "uán uéi",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "I only need a one-way ticket.",
+      "es": "Solo necesito un boleto de ida."
+    }
+  },
+  {
+    "id": "en-basico-17-w32",
+    "en": "check in",
+    "es": "registrarse (en un hotel o vuelo)",
+    "pron": "chék ín",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We're going to check in at two.",
+      "es": "Vamos a registrarnos a las dos."
+    }
+  },
+  {
+    "id": "en-basico-17-w33",
+    "en": "check out",
+    "es": "dejar el hotel / pagar la cuenta",
+    "pron": "chék áut",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We have to check out before noon.",
+      "es": "Tenemos que dejar el hotel antes del mediodía."
+    }
+  },
+  {
+    "id": "en-basico-17-w34",
+    "en": "pack",
+    "es": "empacar / hacer la maleta",
+    "pron": "pák",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I'm going to pack tonight.",
+      "es": "Voy a hacer la maleta esta noche."
+    }
+  },
+  {
+    "id": "en-basico-17-w35",
+    "en": "unpack",
+    "es": "deshacer la maleta",
+    "pron": "anpák",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I'll unpack tomorrow morning.",
+      "es": "Desharé la maleta mañana en la mañana."
+    }
+  },
+  {
+    "id": "en-basico-17-w36",
+    "en": "land",
+    "es": "aterrizar",
+    "pron": "lánd",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The plane is going to land soon.",
+      "es": "El avión va a aterrizar pronto."
+    }
+  },
+  {
+    "id": "en-basico-17-w37",
+    "en": "take off",
+    "es": "despegar",
+    "pron": "téik óf",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The plane will take off in ten minutes.",
+      "es": "El avión despegará en diez minutos."
+    }
+  },
+  {
+    "id": "en-basico-17-w38",
+    "en": "book a flight",
+    "es": "reservar un vuelo",
+    "pron": "búk a fláit",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'll book a flight for next month.",
+      "es": "Reservaré un vuelo para el próximo mes."
+    }
+  },
+  {
+    "id": "en-basico-17-w39",
+    "en": "miss a flight",
+    "es": "perder un vuelo",
+    "pron": "mís a fláit",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Hurry up or we're going to miss our flight!",
+      "es": "¡Apúrate o vamos a perder el vuelo!"
+    }
+  },
+  {
+    "id": "en-basico-17-w40",
+    "en": "go on a trip",
+    "es": "irse de viaje",
+    "pron": "góu on a tríp",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We're going on a trip in December.",
+      "es": "Nos vamos de viaje en diciembre."
+    }
+  },
+  {
+    "id": "en-basico-17-w41",
+    "en": "go sightseeing",
+    "es": "hacer turismo / pasear por la ciudad",
+    "pron": "góu sáitsiing",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Tomorrow we're going to go sightseeing.",
+      "es": "Mañana vamos a pasear por la ciudad."
+    }
+  },
+  {
+    "id": "en-basico-17-w42",
+    "en": "make plans",
+    "es": "hacer planes",
+    "pron": "méik pláns",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let's make plans for the weekend.",
+      "es": "Hagamos planes para el fin de semana."
+    }
+  },
+  {
+    "id": "en-basico-17-w43",
+    "en": "rent a car",
+    "es": "alquilar un carro",
+    "pron": "rént a kár",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We're going to rent a car in Arequipa.",
+      "es": "Vamos a alquilar un carro en Arequipa."
+    }
+  },
+  {
+    "id": "en-basico-17-w44",
+    "en": "exchange money",
+    "es": "cambiar dinero",
+    "pron": "ikschéinch máni",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'll exchange money at the airport.",
+      "es": "Cambiaré dinero en el aeropuerto."
+    }
+  },
+  {
+    "id": "en-basico-17-w45",
+    "en": "souvenir",
+    "es": "recuerdo (de un viaje)",
+    "pron": "suvenír",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'm going to buy souvenirs for my family.",
+      "es": "Voy a comprar recuerdos para mi familia."
+    }
+  },
+  {
+    "id": "en-basico-17-w46",
+    "en": "currency",
+    "es": "moneda (de un país)",
+    "pron": "kárensi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The local currency is the sol.",
+      "es": "La moneda local es el sol."
+    }
+  },
+  {
+    "id": "en-basico-17-w47",
+    "en": "customs",
+    "es": "aduana",
+    "pron": "kástoms",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We'll go through customs after we land.",
+      "es": "Pasaremos por la aduana después de aterrizar."
+    }
+  },
+  {
+    "id": "en-basico-17-w48",
+    "en": "carry-on",
+    "es": "equipaje de mano",
+    "pron": "kári on",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'm only taking a carry-on.",
+      "es": "Solo llevo equipaje de mano."
+    }
+  },
+  {
+    "id": "en-basico-17-w49",
+    "en": "baggage claim",
+    "es": "recojo de equipaje",
+    "pron": "bágich kléim",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'll wait for you at baggage claim.",
+      "es": "Te espero en el recojo de equipaje."
+    }
+  },
+  {
+    "id": "en-basico-17-w50",
+    "en": "front desk",
+    "es": "recepción (de un hotel)",
+    "pron": "fránt désk",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Leave the key at the front desk.",
+      "es": "Deja la llave en la recepción."
+    }
+  },
+  {
+    "id": "en-basico-17-w51",
+    "en": "guest",
+    "es": "huésped / invitado",
+    "pron": "guést",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The hotel has a pool for guests.",
+      "es": "El hotel tiene piscina para los huéspedes."
+    }
+  },
+  {
+    "id": "en-basico-17-w52",
+    "en": "itinerary",
+    "es": "itinerario",
+    "pron": "aitínereri",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'll send you the itinerary by email.",
+      "es": "Te enviaré el itinerario por correo."
+    }
+  },
+  {
+    "id": "en-basico-17-w53",
+    "en": "be going to",
+    "es": "ir a (plan decidido)",
+    "pron": "bí góing tu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm going to study English every day.",
+      "es": "Voy a estudiar inglés todos los días."
+    }
+  },
+  {
+    "id": "en-basico-17-w54",
+    "en": "will",
+    "es": "auxiliar de futuro (-ré, -rás)",
+    "pron": "uíl",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I will help you.",
+      "es": "Te ayudaré."
+    }
+  },
+  {
+    "id": "en-basico-17-w55",
+    "en": "won't",
+    "es": "no (en futuro, will not)",
+    "pron": "uóunt",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I won't be late.",
+      "es": "No llegaré tarde."
+    }
+  },
+  {
+    "id": "en-basico-17-w56",
+    "en": "probably",
+    "es": "probablemente",
+    "pron": "própabli",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "It will probably rain tomorrow.",
+      "es": "Probablemente llueva mañana."
+    }
+  },
+  {
+    "id": "en-basico-17-w57",
+    "en": "definitely",
+    "es": "definitivamente / seguro",
+    "pron": "défenetli",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "I'll definitely call you.",
+      "es": "Seguro te llamo."
+    }
+  },
+  {
+    "id": "en-basico-17-w58",
+    "en": "maybe",
+    "es": "quizás / tal vez",
+    "pron": "méibi",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "Maybe I'll go with you.",
+      "es": "Quizás vaya contigo."
+    }
+  },
+  {
+    "id": "en-basico-17-w59",
+    "en": "soon",
+    "es": "pronto",
+    "pron": "súun",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "The bus will be here soon.",
+      "es": "El bus llegará pronto."
+    }
+  },
+  {
+    "id": "en-basico-17-w60",
+    "en": "keep a promise",
+    "es": "cumplir una promesa",
+    "pron": "kíip a prómis",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Don't worry, I'll keep my promise.",
+      "es": "No te preocupes, voy a cumplir mi promesa."
+    }
+  },
+  {
+    "id": "en-basico-17-w61",
+    "en": "in advance",
+    "es": "con anticipación",
+    "pron": "in adváns",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Book the hotel in advance.",
+      "es": "Reserva el hotel con anticipación."
+    }
+  },
+  {
+    "id": "en-basico-17-w62",
+    "en": "on time",
+    "es": "a tiempo / puntual",
+    "pron": "on táim",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Is the flight going to leave on time?",
+      "es": "¿El vuelo va a salir a tiempo?"
+    }
+  },
+  {
+    "id": "en-basico-17-w63",
+    "en": "look forward to",
+    "es": "esperar con ganas",
+    "pron": "lúk fóruard tu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm looking forward to the trip.",
+      "es": "Tengo muchas ganas de que llegue el viaje."
+    }
+  },
+  {
+    "id": "en-basico-17-w64",
+    "en": "be back",
+    "es": "estar de vuelta / volver",
+    "pron": "bí bák",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'll be back in five minutes.",
+      "es": "Vuelvo en cinco minutos."
+    }
+  }
+]

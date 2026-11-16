@@ -1,0 +1,37 @@
+[
+  { "id": "en-basico-20-d01", "titulo": "Pedir ayuda con un error", "situacion": "Luis no entiende un error y le escribe a Tom, un desarrollador senior.",
+    "lineas": [
+      { "quien": "Luis", "en": "Tom, can you help me with a bug?", "es": "Tom, ¿me ayudas con un error?" },
+      { "quien": "Tom", "en": "Sure. What's the problem?", "es": "Claro. ¿Cuál es el problema?" },
+      { "quien": "Luis", "en": "The list doesn't render. The array is undefined.", "es": "La lista no se muestra. El array es undefined." },
+      { "quien": "Tom", "en": "Do you fetch the data from the API?", "es": "¿Traes los datos de la API?" },
+      { "quien": "Luis", "en": "Yes, but the response is slow.", "es": "Sí, pero la respuesta es lenta." },
+      { "quien": "Tom", "en": "Then use an empty array as the initial state.", "es": "Entonces usa un array vacío como estado inicial." },
+      { "quien": "Luis", "en": "It works now! Thanks, Tom.", "es": "¡Ya funciona! Gracias, Tom." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué problema tiene Luis?", "opciones": ["La lista no se muestra", "No puede instalar un paquete", "Tiene un conflicto de merge"],
+        "correcta": 0, "explicacion": "Luis dice \"The list doesn't render\": la lista no se muestra." },
+      { "pregunta": "¿Qué le recomienda Tom?", "opciones": ["Borrar el componente", "Usar un array vacío como estado inicial", "Cambiar de API"],
+        "correcta": 1, "explicacion": "Tom dice \"use an empty array as the initial state\"." },
+      { "pregunta": "¿Funcionó el consejo?", "opciones": ["Sí", "No", "No se sabe"],
+        "correcta": 0, "explicacion": "Luis responde \"It works now!\"." }
+    ] },
+  { "id": "en-basico-20-d02", "titulo": "Revisión de un pull request", "situacion": "María revisa el código de Carlos antes del deploy.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Hi María, can you review my pull request?", "es": "Hola María, ¿puedes revisar mi pull request?" },
+      { "quien": "María", "en": "Yes. I saw it. Two tests fail.", "es": "Sí. Lo vi. Fallan dos pruebas." },
+      { "quien": "Carlos", "en": "Oh no. Which tests?", "es": "Ay, no. ¿Qué pruebas?" },
+      { "quien": "María", "en": "The tests for the search filter.", "es": "Las pruebas del filtro de búsqueda." },
+      { "quien": "Carlos", "en": "I'll fix them and push again.", "es": "Las arreglo y vuelvo a subir los cambios." },
+      { "quien": "María", "en": "Great. Then I'll merge it and we can deploy.", "es": "Genial. Después lo uno y podemos desplegar." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué encontró María en el pull request?", "opciones": ["Un error de sintaxis", "Dos pruebas que fallan", "Un conflicto de merge"],
+        "correcta": 1, "explicacion": "María dice \"Two tests fail\"." },
+      { "pregunta": "¿De qué parte son las pruebas que fallan?", "opciones": ["Del formulario de login", "Del filtro de búsqueda", "Del servidor"],
+        "correcta": 1, "explicacion": "Son \"the tests for the search filter\"." },
+      { "pregunta": "¿Qué va a pasar al final?", "opciones": ["María va a hacer merge y desplegar", "Carlos va a borrar la rama", "Van a cancelar el lanzamiento"],
+        "correcta": 0, "explicacion": "María dice que va a hacer merge y que luego pueden desplegar." }
+    ] }
+]
