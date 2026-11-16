@@ -53,6 +53,9 @@ export function SeccionSync() {
             <button type="button" className="boton" onClick={() => setVerQr((v) => !v)}>
               {verQr ? "Ocultar el QR" : "Vincular el celular (QR)"}
             </button>
+            <a className="boton" href="/api/sync/vincular-web" target="_blank" rel="noreferrer">
+              Vincular la versión web
+            </a>
           </div>
           {verQr && (
             <div className={estilos.qr}>

@@ -14,12 +14,21 @@ export function rutasSync({ sync }) {
   router.post("/sync", async (req, res) => res.json(await sync.sincronizar()));
 
   // QR para vincular el celular: lo escaneas con la cámara y queda configurado.
+  const enlaceDe = (vinculo) => `${APP_CELULAR}#u=${encodeURIComponent(vinculo.url)}&t=${encodeURIComponent(vinculo.token)}`;
+
   router.get("/sync/qr", async (req, res) => {
     const vinculo = sync.vinculo();
     if (!vinculo) return res.status(404).json({ error: "La sincronización no está creada. Usa npm run aws:crear." });
-    const enlace = `${APP_CELULAR}#u=${encodeURIComponent(vinculo.url)}&t=${encodeURIComponent(vinculo.token)}`;
+    const enlace = enlaceDe(vinculo);
     const svg = await QRCode.toString(enlace, { type: "svg", margin: 1, errorCorrectionLevel: "M", color: { dark: "#0b0a12", light: "#ffffff" } });
     res.type("image/svg+xml").set("cache-control", "no-store").send(svg);
+  });
+
+  // "Vincular la versión web de esta laptop": abre el mismo enlace del QR en este navegador.
+  router.get("/sync/vincular-web", (req, res) => {
+    const vinculo = sync.vinculo();
+    if (!vinculo) return res.status(404).json({ error: "La sincronización no está creada. Usa npm run aws:crear." });
+    res.set("cache-control", "no-store").redirect(enlaceDe(vinculo));
   });
 
   return router;

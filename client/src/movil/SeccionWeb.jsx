@@ -74,8 +74,8 @@ export function SeccionWeb() {
           </>
         ) : (
           <p className={estilos.ayuda}>
-            Para unir este navegador con tu laptop: en la app de la laptop ve a Ajustes, toca "Vincular el celular (QR)" y abre ese
-            enlace aquí (desde la misma laptop puedes hacer clic derecho en el QR y copiar el enlace, o escanearlo con el celular).
+            Para unir este navegador con tu laptop: abre la app de la laptop (el acceso directo del escritorio), ve a Ajustes y toca
+            "Vincular la versión web". Se abre esta página ya vinculada. En el celular, escanea el QR de "Vincular el celular (QR)".
           </p>
         )}
       </section>
