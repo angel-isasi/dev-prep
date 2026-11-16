@@ -1,0 +1,8 @@
+{
+  "id": "react-api-005",
+  "titulo": "Paginación con Anterior y Siguiente",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "apis", "fetch", "paginacion", "useEffect", "query-params"]
+}

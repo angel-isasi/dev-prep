@@ -1,0 +1,8 @@
+{
+  "id": "react-api-008",
+  "titulo": "Hook useRecurso con caché y reintentos",
+  "tipo": "componente",
+  "tema": "react-hooks",
+  "nivel": 3,
+  "tags": ["react", "apis", "fetch", "hooks-personalizados", "cache", "reintentos", "backoff"]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "react-api-003",
+  "titulo": "Detalle de producto sin condición de carrera",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "apis", "fetch", "useEffect", "condicion-de-carrera", "AbortController", "limpieza"]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "react-api-002",
+  "titulo": "Botón Reintentar después de un error",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 1,
+  "tags": ["react", "apis", "fetch", "useEffect", "reintento", "manejo-de-errores"]
+}

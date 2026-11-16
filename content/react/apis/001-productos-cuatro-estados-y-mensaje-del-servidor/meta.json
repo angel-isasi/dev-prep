@@ -1,0 +1,8 @@
+{
+  "id": "react-api-001",
+  "titulo": "Productos: los cuatro estados y el mensaje del servidor",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 1,
+  "tags": ["react", "apis", "fetch", "useEffect", "manejo-de-errores", "res.ok"]
+}

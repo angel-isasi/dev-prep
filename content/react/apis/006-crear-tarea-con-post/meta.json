@@ -1,0 +1,8 @@
+{
+  "id": "react-api-006",
+  "titulo": "Crear una tarea con POST",
+  "tipo": "componente",
+  "tema": "react-formularios",
+  "nivel": 2,
+  "tags": ["react", "apis", "fetch", "POST", "formularios", "doble-envio", "manejo-de-errores"]
+}

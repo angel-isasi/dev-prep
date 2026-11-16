@@ -1,0 +1,8 @@
+{
+  "id": "react-api-004",
+  "titulo": "Buscador con debounce y cancelación",
+  "tipo": "componente",
+  "tema": "react-efectos",
+  "nivel": 2,
+  "tags": ["react", "apis", "fetch", "debounce", "AbortController", "setTimeout", "buscador"]
+}
