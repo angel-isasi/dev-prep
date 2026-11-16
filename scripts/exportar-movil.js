@@ -6,6 +6,7 @@
 //   aprender.json           temas de Aprender completos (teoría y quiz)
 //   referencia.json         la Referencia offline
 //   entrevistas.json        preguntas de entrevista y guías
+//   items.json              ítems de lección generados del contenido (ver docs/guia-items-movil.md)
 //   version.json            fecha y totales, para mostrar "Contenido del ..." en Ajustes
 // En el celular, los retos de entrevista se exportan SIN solución: se resuelven en la laptop.
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
@@ -15,11 +16,12 @@ import { config } from "../server/config.js";
 import { crearIndice } from "../server/contenido.js";
 import { cargarReferencia, cargarTemas } from "../server/aprender.js";
 import { cargarEntrevistas } from "../server/entrevistas.js";
+import { COLECCIONES_SIN_SOLUCION, generarItems } from "./items/index.js";
 
 const SALIDA = path.join(config.raiz, "client", "public-movil", "datos");
 
-/** Colecciones cuya solución no viaja al celular (regla acordada: los retos son para la laptop). */
-export const COLECCIONES_SIN_SOLUCION = ["javascript/retos", "react/retos", "typescript/retos"];
+// Colecciones cuya solución no viaja al celular: se define junto a los generadores de ítems.
+export { COLECCIONES_SIN_SOLUCION };
 
 /** Nombre de archivo de una colección: "react/retos" -> "react__retos". */
 export const archivoColeccion = (coleccion) => coleccion.replaceAll("/", "__");
@@ -35,6 +37,20 @@ async function escribir(relativa, datos) {
 }
 
 const kb = (bytes) => `${Math.round(bytes / 1024)} KB`;
+
+/** Muestra cuántos ítems salieron por tipo y qué unidades quedaron más flacas. */
+function imprimirResumenItems({ resumen, unidades }, bytes) {
+  const { total, porTipo, porUnidad, sinUnidad } = resumen;
+  console.log(`Ítems de lección: ${total} (${kb(bytes)})`);
+  for (const [tipo, n] of Object.entries(porTipo)) console.log(`  ${tipo.padEnd(16)} ${n}`);
+  const titulo = new Map(unidades.map((u) => [u.id, u.titulo]));
+  const flacas = Object.entries(porUnidad)
+    .sort((a, b) => a[1] - b[1])
+    .slice(0, 5)
+    .map(([id, n]) => `${titulo.get(id) ?? id} (${n})`);
+  console.log(`  Unidades con menos ítems: ${flacas.join(", ")}`);
+  if (sinUnidad.length) console.warn(`  aviso: ejercicios sin unidad: ${sinUnidad.join(", ")}`);
+}
 
 async function main() {
   const inicio = Date.now();
@@ -99,7 +115,22 @@ async function main() {
     guias: entrevistas.guias,
   });
 
-  // 5. Versión
+  // 5. Ítems de lección (estilo Duolingo), generados del contenido de arriba
+  const generados = await generarItems({
+    indice,
+    temas: aprender.temas,
+    referencia,
+    leerArchivo: (ej, archivo) => leer(ej, archivo).catch(() => null),
+  });
+  const bytesItems = await escribir("items.json", {
+    version: generados.version,
+    unidades: generados.unidades,
+    items: generados.items,
+  });
+  total += bytesItems;
+  imprimirResumenItems(generados, bytesItems);
+
+  // 6. Versión
   await escribir("version.json", {
     generado: new Date().toISOString(),
     ejercicios: resumen.length,

@@ -5,7 +5,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   oxc: { jsx: { runtime: "automatic" } },
   test: {
-    include: ["server/**/*.test.js", "client/src/**/*.test.{js,jsx}"],
+    include: ["server/**/*.test.js", "scripts/**/*.test.js", "client/src/**/*.test.{js,jsx}"],
     setupFiles: ["server/vitest-setup.js"],
   },
 });
