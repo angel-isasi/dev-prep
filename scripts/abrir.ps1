@@ -2,6 +2,10 @@
 # 1. Si ya había una versión corriendo, la cierra para arrancar siempre la más reciente.
 # 2. Instala dependencias si faltan y compila la interfaz.
 # 3. Arranca el servidor oculto y abre el navegador cuando está listo.
+#
+# Con -SinNavegador (lo usa el arranque automático de Windows) solo deja el motor corriendo:
+# la versión web (dev-prep.angel-isasi.com) lo usa para VS Code y los tests en vivo.
+param([switch]$SinNavegador)
 
 $ErrorActionPreference = "Stop"
 $raiz = Split-Path -Parent $PSScriptRoot
@@ -53,7 +57,7 @@ Start-Process -FilePath "node" -ArgumentList "server/index.js" -WorkingDirectory
 for ($i = 0; $i -lt 60; $i++) {
   try {
     Invoke-WebRequest -Uri "http://127.0.0.1:$puerto/api/ejercicios" -UseBasicParsing -TimeoutSec 1 | Out-Null
-    Start-Process $url
+    if (-not $SinNavegador) { Start-Process $url }
     exit 0
   } catch {
     Start-Sleep -Milliseconds 500

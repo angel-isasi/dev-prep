@@ -48,6 +48,14 @@ Aparece **dev-prep** en tu escritorio. Con doble clic la app abre en el navegado
 
 Puedes anclarlo a Inicio o a la barra de tareas: clic derecho sobre el acceso directo.
 
+**Solo la versión web (sin abrir nada).** Activa el arranque automático una vez:
+
+```
+npm run arranque:activar
+```
+
+Al prender la laptop, dev-prep queda corriendo oculto (unos 100 MB de memoria, casi nada de procesador) y no abre ninguna ventana. Abres https://dev-prep.angel-isasi.com y, en Ajustes, tocas **Conectar con dev-prep de esta laptop** una sola vez: la web tiene VS Code, los tests en vivo y todo lo de la app local. Para quitarlo: `npm run arranque:quitar`.
+
 **Con ventana (para ver errores).** Doble clic en `iniciar.bat`: muestra la consola del servidor. Ciérrala o presiona `Ctrl + C` para apagar la app.
 
 ### Cómo se practica un ejercicio
@@ -76,6 +84,7 @@ Ninguna de las dos carpetas se sube a Git.
 |---|---|
 | `npm start` | Arranca la app (igual que `iniciar.bat`, sin abrir el navegador) |
 | `npm run acceso-directo` | Crea el acceso directo **dev-prep** en el escritorio |
+| `npm run arranque:activar` | dev-prep arranca oculto al iniciar Windows, para usar solo la versión web (`arranque:quitar` lo deshace) |
 | `npm run dev` | Modo desarrollo: recarga la interfaz al cambiar el código (abre `http://localhost:5173`) |
 | `npm run build` | Compila la interfaz en `client/dist` |
 | `npm test` | Tests de la propia app |
