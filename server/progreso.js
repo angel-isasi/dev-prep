@@ -207,6 +207,18 @@ export async function crearProgreso({ datosDir }) {
      * @param {{ pasan: number, total: number, error: string|null }} resultado
      * @param {{ esIntento: boolean }} info
      */
+    /** Minutos de juego que detectó el vigilante (no dispara la sincronización: se sube cada 5 min). */
+    async sumarJuego(segundos) {
+      datos.dias = sumarAlDia(datos.dias, fechaLocal(), "juego", segundos);
+      await guardar({ avisar: false });
+    },
+
+    /** Suma a un contador del día (por ejemplo "jefes" al vencer al jefe de la semana). */
+    async sumarDia(campo, cantidad = 1) {
+      datos.dias = sumarAlDia(datos.dias, fechaLocal(), campo, cantidad);
+      await guardar();
+    },
+
     async registrarResultado(id, resultado, { esIntento }) {
       const ahora = ahoraIso();
       const aplicado = aplicarResultado(deEjercicio(id), resultado, { esIntento, ahora });

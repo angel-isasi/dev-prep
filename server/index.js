@@ -12,6 +12,10 @@ import { cargarReferencia, cargarTemas } from "./aprender.js";
 import { exec } from "node:child_process";
 import { abrirEnVSCode } from "./vscode.js";
 import { crearApp } from "./app.js";
+import { crearVigilante, PROCESOS_POR_DEFECTO } from "./juego-vigilante.js";
+import { estadoGeneral } from "./vistas-progreso.js";
+import { fechaLocal } from "./fechas.js";
+import { vivos } from "./combinar.js";
 
 const indice = await crearIndice(config.contenidoDir);
 for (const error of indice.errores) console.warn(`[contenido] ${error}`);
@@ -27,12 +31,18 @@ const aprender = await cargarTemas(config.contenidoDir);
 const referencia = await cargarReferencia(config.contenidoDir);
 for (const error of [...aprender.errores, ...referencia.errores]) console.warn(`[contenido] ${error}`);
 
+/** Inicio y Progreso comparten esto (también lo usa el vigilante del juego). */
+const estado = () => estadoGeneral({ ejercicios: indice.ejercicios, datos: progreso.datos(), dias: progreso.dias(), hoy: fechaLocal() });
+
 const corredor = await crearCorredor({
   workspace,
   alEmpezar: (ids) => eventos.emitir("corriendo", { ids }),
   alResultado: async (id, resultado, info) => {
     if (!indice.porId.has(id)) return; // carpeta ajena en workspace/
+    // ¿Era el jefe de la semana? (se calcula antes de registrar, cuando todavía no estaba resuelto)
+    const jefe = estado().jefe;
     const { registro, resueltoAhora, repasoCompletado } = await progreso.registrarResultado(id, resultado, info);
+    if (resueltoAhora && jefe?.id === id) await progreso.sumarDia("jefes");
     eventos.emitir("resultado", { id, resultado, progreso: registro, resueltoAhora, repasoCompletado });
   },
 });
@@ -60,6 +70,15 @@ const servidor = app.listen(config.puerto, config.host, () => {
   console.log("Deja esta ventana abierta mientras practicas. Para cerrar la app: Ctrl + C.");
   // iniciar.bat pide abrir el navegador; con npm start no se abre solo.
   if (process.env.DEVPREP_ABRIR_NAVEGADOR === "1" && process.platform === "win32") exec(`start "" ${url}`);
+  // Tiempo libre: mira cada minuto si el juego está abierto (solo cuando el servidor ya arrancó bien)
+  if (process.env.DEVPREP_VIGILANTE !== "0") {
+    crearVigilante({
+      progreso,
+      estado: () => estado().juego,
+      procesos: () => vivos(progreso.datos().ajustes).juego?.procesos ?? PROCESOS_POR_DEFECTO,
+      emitir: eventos.emitir,
+    });
+  }
 });
 
 servidor.on("error", (error) => {

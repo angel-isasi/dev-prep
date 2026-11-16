@@ -200,3 +200,16 @@ describe("inglés: escuchar, armar y prueba de nivel", () => {
     expect(resultadoNivel(s, unidades).empiezaEn).toBe("u2");
   });
 });
+
+describe("examen semanal", () => {
+  test("toma lo que viste desde el lunes y no repite lo fallado", () => {
+    const items = Array.from({ length: 30 }, (_, i) => ({ clave: `q${i}`, tipo: "opcion", subtipo: "quiz", unidad: "u" }));
+    const registros = Object.fromEntries(items.map((it, i) => [it.clave, { caja: 1, en: i < 22 ? "2026-11-17T10:00:00-05:00" : "2026-11-01T10:00:00-05:00" }]));
+    const pasos = armarLeccion({ items, registros, hoy: "2026-11-21", unidad: "u", modo: "examen", azar: semilla("e") });
+    expect(pasos).toHaveLength(20);
+    expect(pasos.every((p) => Number(p.clave.slice(1)) < 22)).toBe(true);
+    let s = crearSesion(pasos, { modo: "examen" });
+    s = responder(s, { correcto: false }).sesion;
+    expect(s.cola).toHaveLength(20);
+  });
+});

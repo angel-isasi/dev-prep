@@ -1,12 +1,12 @@
 import { describe, test, expect } from "vitest";
-import { resumenDias, preparacion, ritmo, semana, calendario, diasEntre, dominio } from "./metricas.js";
+import { resumenDias, preparacion, ritmo, semana, calendario, diasEntre, dominio, metaDelDia, diaSemana } from "./metricas.js";
 
 const CONFIG = { metaDiaria: 2, topeDeuda: 6 };
 
 describe("resumenDias", () => {
   test("primer día de uso: sin deuda ni racha", () => {
     const r = resumenDias({}, CONFIG, "2026-11-13");
-    expect(r.hoy).toEqual({ hecho: 0, objetivo: 2, deuda: 0, cumplio: false });
+    expect(r.hoy).toMatchObject({ hecho: 0, objetivo: 2, deuda: 0, cumplio: false });
     expect(r.racha).toBe(0);
     expect(r.ayer).toBeNull();
   });
@@ -140,5 +140,60 @@ describe("semana y calendario", () => {
 
   test("diasEntre", () => {
     expect(diasEntre("2026-11-13", "2027-03-01")).toBe(108);
+  });
+});
+
+describe("día salvado, pausas y horario", () => {
+  // 2026-11-16 es lunes
+  test("un día con algo hecho pero sin llegar a la meta no rompe la racha (máximo 2 por semana)", () => {
+    const dias = {
+      "2026-11-16": { resueltos: 2 },
+      "2026-11-17": { resueltos: 1 }, // salvado
+      "2026-11-18": { resueltos: 2 },
+      "2026-11-19": { resueltos: 1 }, // salvado (segundo)
+      "2026-11-20": { resueltos: 2 },
+    };
+    const r = resumenDias(dias, CONFIG, "2026-11-21");
+    expect(r.racha).toBe(5);
+    expect(r.salvados).toEqual({ semana: 2, maximo: 2 });
+    expect(r.hoy.deuda).toBeGreaterThan(0); // la deuda igual suma
+  });
+
+  test("el tercer día flojo de la semana sí rompe la racha", () => {
+    const dias = {
+      "2026-11-16": { resueltos: 1 },
+      "2026-11-17": { resueltos: 1 },
+      "2026-11-18": { resueltos: 1 },
+      "2026-11-19": { resueltos: 2 },
+    };
+    expect(resumenDias(dias, CONFIG, "2026-11-20").racha).toBe(1);
+  });
+
+  test("un día sin nada hecho no se salva", () => {
+    const dias = { "2026-11-16": { resueltos: 2 }, "2026-11-17": { segundos: 30 }, "2026-11-18": { resueltos: 2 } };
+    expect(resumenDias(dias, CONFIG, "2026-11-18").racha).toBe(1);
+  });
+
+  test("hoy se acredita como salvado recién al cerrar el día", () => {
+    const dias = { "2026-11-16": { resueltos: 2 }, "2026-11-17": { resueltos: 1 } };
+    const r = resumenDias(dias, CONFIG, "2026-11-17");
+    expect(r.racha).toBe(1);
+    expect(r.hoy.salvable).toBe(true);
+  });
+
+  test("en una pausa (exámenes) no se suma deuda ni se rompe la racha", () => {
+    const dias = { "2026-11-16": { resueltos: 2 }, "2026-11-20": { resueltos: 2 } };
+    const r = resumenDias(dias, CONFIG, "2026-11-20", { pausas: [{ desde: "2026-11-17", hasta: "2026-11-19" }] });
+    expect(r.racha).toBe(2);
+    expect(r.hoy.deuda).toBe(0);
+  });
+
+  test("con horario, la meta se reparte por día sin cambiar el total de la semana", () => {
+    const horario = { lun: "poco", mar: "normal", mie: "normal", jue: "normal", vie: "poco", sab: "mucho", dom: "libre" };
+    expect(diaSemana("2026-11-16")).toBe(0);
+    const metas = ["2026-11-16", "2026-11-17", "2026-11-18", "2026-11-19", "2026-11-20", "2026-11-21", "2026-11-22"].map((f) => metaDelDia(f, 2, horario));
+    expect(metas).toEqual([1, 3, 3, 3, 1, 4, 0]);
+    const dias = { "2026-11-22": { resueltos: 0 }, "2026-11-21": { resueltos: 4 } };
+    expect(resumenDias(dias, CONFIG, "2026-11-23", { horario }).ayer.estado).not.toBe("fallo");
   });
 });

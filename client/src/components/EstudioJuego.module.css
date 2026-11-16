@@ -1,0 +1,84 @@
+.bloque {
+  margin-top: var(--espacio-5);
+  padding: var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+  margin-bottom: var(--espacio-3);
+}
+
+.cabecera span {
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.barras {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  height: 120px;
+}
+
+.barras > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.barras small {
+  color: var(--texto-tenue);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.par {
+  display: flex;
+  flex: 1;
+  gap: 3px;
+  align-items: flex-end;
+  width: 100%;
+  justify-content: center;
+}
+
+.par span {
+  width: 40%;
+  min-height: 2px;
+  border-radius: 4px 4px 0 0;
+}
+
+.estudio {
+  background: var(--acento);
+}
+
+.juego {
+  background: var(--aviso);
+}
+
+.leyenda {
+  display: flex;
+  gap: var(--espacio-3);
+  margin-top: var(--espacio-2);
+  color: var(--texto-suave);
+  font-size: 13px;
+}
+
+.leyenda i {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.proyeccion {
+  margin: var(--espacio-3) 0 0;
+  color: var(--texto-suave);
+}

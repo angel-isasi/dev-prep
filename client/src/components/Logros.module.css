@@ -1,0 +1,190 @@
+.tarjeta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: var(--espacio-4) var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background:
+    radial-gradient(300px 120px at 0% 0%, var(--acento-suave), transparent 70%),
+    var(--superficie);
+}
+
+.cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+}
+
+.cabecera > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cabecera small {
+  color: var(--texto-suave);
+}
+
+.etiqueta {
+  color: var(--texto-suave);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.titulo {
+  font-family: var(--fuente-titulos);
+  font-size: 24px;
+}
+
+.insignias {
+  color: var(--acento);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.siguiente {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--texto-suave);
+  font-size: 13px;
+}
+
+.requisito {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  gap: var(--espacio-2);
+  align-items: center;
+}
+
+.requisito[data-listo="true"] {
+  color: var(--exito);
+}
+
+.barra {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--borde);
+}
+
+.barra i {
+  display: block;
+  height: 100%;
+  background: var(--acento);
+  transition: width 0.6s ease;
+}
+
+.requisito[data-listo="true"] .barra i {
+  background: var(--exito);
+}
+
+.nuevos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-2) var(--espacio-3);
+  padding: var(--espacio-3);
+  border: 1px solid var(--aviso);
+  border-radius: 12px;
+  background: var(--aviso-suave);
+}
+
+.nuevos span {
+  font-weight: 600;
+}
+
+/* Página de insignias */
+.pagina {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: var(--espacio-2);
+}
+
+.insignia {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: var(--superficie);
+  opacity: 0.55;
+}
+
+.insignia[data-ganada="true"] {
+  border-color: var(--aviso);
+  opacity: 1;
+}
+
+.insignia small {
+  color: var(--texto-suave);
+  font-size: 12px;
+}
+
+.icono {
+  font-size: 30px;
+  filter: grayscale(1);
+}
+
+.insignia[data-ganada="true"] .icono {
+  filter: none;
+}
+
+/* Semáforo para postular */
+.semaforo {
+  display: flex;
+  gap: var(--espacio-4);
+  margin-top: var(--espacio-5);
+  padding: var(--espacio-4) var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.luz {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin-top: 4px;
+  border-radius: 50%;
+}
+
+.semaforo[data-color="verde"] .luz {
+  background: var(--exito);
+  box-shadow: 0 0 18px var(--exito);
+}
+
+.semaforo[data-color="amarillo"] .luz {
+  background: var(--aviso);
+  box-shadow: 0 0 18px var(--aviso);
+}
+
+.semaforo[data-color="rojo"] .luz {
+  background: var(--error);
+  box-shadow: 0 0 18px var(--error);
+}
+
+.semaforo ul {
+  margin: var(--espacio-2) 0 0;
+  padding: 0;
+  color: var(--texto-suave);
+  font-size: 14px;
+  list-style: none;
+}
+
+.semaforo li[data-listo="true"] {
+  color: var(--exito);
+}

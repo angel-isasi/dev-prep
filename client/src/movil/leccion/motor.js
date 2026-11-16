@@ -5,7 +5,7 @@
 // actual, ordenados de reconocer a producir. Lo que fallas vuelve al final de la misma lección.
 // La nota de cada ítem alimenta el repaso espaciado (cajas de Leitner, server/progreso-reglas.js).
 
-export const TAMANO = { normal: 10, rapida: 5, errores: 10, quiz: 5, escuchar: 10, nivel: 40, predice: 10, debiles: 10 };
+export const TAMANO = { normal: 10, rapida: 5, errores: 10, quiz: 5, escuchar: 10, nivel: 40, predice: 10, debiles: 10, examen: 20 };
 export const MAX_NUEVOS = 4;
 export const MAX_ENTREVISTA = 2;
 export const XP = { primera: 10, reintento: 5, leccion: 20 };
@@ -125,6 +125,21 @@ export function armarLeccion({ items, registros, reportados = {}, preguntas = []
     return ordenar(elegidos, azar);
   }
 
+  if (modo === "examen") {
+    // Examen semanal: lo que practicaste desde el lunes (si es poco, los últimos 14 días), sin pistas ni repetir
+    const desde = (dias) => {
+      const [a, m, d] = hoy.split("-").map(Number);
+      const f = new Date(Date.UTC(a, m - 1, d - dias));
+      return f.toISOString().slice(0, 10);
+    };
+    const [a, m, d] = hoy.split("-").map(Number);
+    const lunes = desde((new Date(Date.UTC(a, m - 1, d)).getUTCDay() + 6) % 7);
+    const vistoDesde = (fecha) => disponibles.filter((it) => (registros[it.clave]?.en ?? "").slice(0, 10) >= fecha && it.tipo !== "tarjeta");
+    const semana = vistoDesde(lunes);
+    tomar(intercalarPorTipo(barajar(semana.length >= tamano ? semana : vistoDesde(desde(14)), azar)), tamano);
+    return elegidos;
+  }
+
   if (modo === "predice") {
     // Lee y predice: lo que toca repasar y luego lo nuevo, de cualquier tema
     const pred = disponibles.filter((it) => it.subtipo === "predice");
@@ -192,7 +207,7 @@ export function crearSesion(pasos, { unidad, modo = "normal", hoy, ambito = "pro
   return {
     ambito,
     inicio, // para medir cuánto duró (minutos de inglés)
-    unaVez: modo === "nivel", // en la prueba de nivel lo fallado no vuelve
+    unaVez: modo === "nivel" || modo === "examen", // en la prueba de nivel y en el examen lo fallado no vuelve
     pasos,
     cola: pasos.map((_, i) => i), // índices de pasos pendientes, en orden
     posicion: 0,

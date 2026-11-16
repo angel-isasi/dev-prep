@@ -12,6 +12,9 @@ import { preparacion } from "../../../server/metricas.js";
 import { crearProgresoMovil, rachaMovil } from "./progreso-movil.js";
 import { mapaDominio, unidadesDebiles } from "../../../server/dominio.js";
 import { erroresFrecuentes } from "../../../server/errores.js";
+import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
+import { diaSemana, lunesDe } from "../../../server/metricas.js";
+import { avanceUnidad } from "../movil/leccion/motor.js";
 import { crearApi } from "./api-servidor.js";
 import { BASE_LOCAL, conectada } from "./conexion-local.js";
 
@@ -83,6 +86,56 @@ const estadoMovil = (id) => (progreso.datos().ejercicios?.[id]?.estado === "resu
 const resumenEj = (e) => ({ ...e, estado: estadoMovil(e.id), ultimoResultado: null });
 
 /** Lo que comparten Inicio y Progreso, igual que en el servidor de la laptop. */
+/** ¿Hubo alguna semana con la meta cumplida de lunes a viernes? */
+function huboSemanaPerfecta(estados) {
+  for (const [fecha, estado] of Object.entries(estados ?? {})) {
+    if (estado !== "cumplio" || diaSemana(fecha) !== 0) continue;
+    const lunes = lunesDe(fecha);
+    if ([1, 2, 3, 4].every((i) => estados[sumarDias(lunes, i)] === "cumplio")) return true;
+  }
+  return false;
+}
+
+/** Todo lo que miden los niveles, las insignias y el semáforo para postular. */
+async function estadoLogros() {
+  const [{ ejercicios }, datosItems, ap, itemsIngles] = await Promise.all([indice(), json("items.json"), aprender(), json("items-ingles.json")]);
+  const d = progreso.datos();
+  const dias = progreso.dias();
+  const registros = d.ejercicios ?? {};
+  const resuelto = (e) => registros[e.id]?.estado === "resuelto";
+  const g = general(ejercicios);
+  const mapa = mapaDominio({ unidades: datosItems.unidades, ejercicios, temas: ap.temas, registros, quizzes: d.quizzes ?? {}, items: datosItems.items, registrosItems: d.items ?? {}, hoy: progreso.hoy() });
+  const suma = (campo) => Object.values(dias).reduce((total, dia) => total + (dia?.[campo] ?? 0), 0);
+  const mis = d.misRespuestas ?? {};
+  const examenes = Object.values(progreso.registros("examenes"));
+  return {
+    resueltos: ejercicios.filter(resuelto).length,
+    limpios: suma("limpios"),
+    retos: ejercicios.filter((e) => /\/retos$/.test(e.coleccion) && resuelto(e)).length,
+    depurados: ejercicios.filter((e) => /\/depurar$/.test(e.coleccion) && resuelto(e)).length,
+    preparacion: g.prep.total,
+    verdes: mapa.filter((u) => u.estado === "verde").length,
+    lecciones: suma("lecciones"),
+    racha: g.dias.racha,
+    tarjetasDominadas: Object.values(d.preguntas ?? {}).filter((r) => (r.caja ?? 0) >= 3).length,
+    simulacros: Object.keys(progreso.registros("simulacros")).length,
+    pitch: !!mis.pitch?.trim(),
+    historias: (mis.historias ?? []).filter((h) => h.situacion?.trim() || h.accion?.trim()).length,
+    postulaciones: Object.values(progreso.registros("postulaciones")).filter((p) => p.etapa && p.etapa !== "por-postular").length,
+    inglesDominadas: itemsIngles.unidades.filter((u) => avanceUnidad(itemsIngles.items, d.items ?? {}, u.id).dominada).length,
+    inglesLecciones: suma("ingles"),
+    predice: Object.entries(d.items ?? {}).filter(([clave, r]) => clave.startsWith("pred:") && (r.caja ?? 0) >= 3).length,
+    revisionesPerfectas: Object.values(progreso.registros("revisiones")).filter((r) => r.total && r.encontrados === r.total && !r.falsasAlarmas).length,
+    jefes: suma("jefes"),
+    examenes: examenes.length,
+    mejorExamen: Math.max(0, ...examenes.map((e) => e.nota ?? 0)),
+    semanaPerfecta: huboSemanaPerfecta(g.dias.estados),
+    inmersionMinutos: suma("inmersion"),
+    enfoques: suma("enfoques"),
+    portafolio: Object.values(progreso.registros("portafolio")).filter((p) => p.exportado).length,
+  };
+}
+
 function general(ejercicios) {
   const hoy = progreso.hoy();
   const datos = progreso.datos();
@@ -170,6 +223,10 @@ const apiWeb = {
       tarjetasParaHoy: preguntas.filter((p) => preguntaPendiente(datos.preguntas[p.id], hoy)).length,
       ejerciciosParaRepasar,
       quizzesHechos: Object.keys(datos.quizzes).length,
+      ...(() => {
+        const g = general(ejercicios);
+        return { juego: g.juego, meta: g.dias.hoy, salvados: g.dias.salvados, jefe: g.jefe ? { id: g.jefe.id, titulo: g.jefe.titulo } : null };
+      })(),
     };
   }),
 
@@ -295,6 +352,159 @@ const apiWeb = {
   },
   /** "Explícalo en 30 segundos": tu autoevaluación al comparar con la explicación modelo. */
   calificarExplicacion: async (id, nota, segundos) => progreso.guardarRegistro("explicaciones", id, { nota, segundos, fecha: progreso.hoy() }),
+
+  // --- Niveles, insignias y semáforo para postular ---
+  async logros() {
+    const estado = await estadoLogros();
+    return { ...calcularLogros(estado, progreso.registros("logrosVistos")), estado };
+  },
+  /** Los logros nuevos ya se celebraron: no se vuelven a celebrar en ningún dispositivo. */
+  marcarLogros: async (ids) => {
+    for (const id of ids) progreso.guardarRegistro("logrosVistos", id, { fecha: progreso.hoy() });
+  },
+  async semaforo() {
+    const estado = await estadoLogros();
+    const { nivel } = calcularLogros(estado, progreso.registros("logrosVistos"));
+    return semaforoPostular(estado, nivel.id);
+  },
+
+  // --- Rutina: plan de hoy, examen semanal, enfoque, reto y resumen del mes, diario, horario ---
+  /** Una sola lista de lo que toca hoy, en orden, con lo ya hecho marcado. */
+  async planDeHoy() {
+    const { ejercicios } = await indice();
+    const g = general(ejercicios);
+    const hoy = progreso.hoy();
+    const dia = progreso.dias()[hoy] ?? {};
+    const ingles = await apiWeb.inglesHoy();
+    const { preguntas } = await json("entrevistas.json");
+    const d = progreso.datos();
+    const tarjetas = preguntas.filter((p) => preguntaPendiente(d.preguntas[p.id], hoy)).length;
+    const lunes = lunesDe(hoy);
+    const finDeSemana = diaSemana(hoy) >= 5;
+    const examenHecho = !!progreso.registros("examenes")[lunes];
+    const diarioHecho = !!progreso.registros("diario")[hoy];
+    const siguiente = vistaInicio(g, ejercicios).continuar ?? vistaInicio(g, ejercicios).siguiente;
+    const pasos = [
+      g.dias.hoy.pausa
+        ? null
+        : {
+            id: "meta",
+            texto: `Meta: ${g.dias.hoy.meta} ${g.dias.hoy.meta === 1 ? "ejercicio o repaso" : "ejercicios o repasos"}`,
+            detalle: `${g.dias.hoy.hecho} de ${g.dias.hoy.meta}${siguiente ? ` · sigue con ${siguiente.titulo}` : ""}`,
+            hecho: g.dias.hoy.cumplioMeta,
+            a: siguiente ? `/practicar/${siguiente.id}` : "/practicar",
+          },
+      { id: "ingles", texto: `Inglés: ${ingles.meta} minutos`, detalle: `${Math.floor(ingles.minutosHoy)} de ${ingles.meta} min`, hecho: ingles.minutosHoy >= ingles.meta, a: "/leccion?ambito=ingles" },
+      { id: "leccion", texto: "Una lección de programación", detalle: "10 preguntas, unos 5 minutos", hecho: (dia.lecciones ?? 0) > 0, a: "/leccion" },
+      tarjetas > 0 ? { id: "tarjetas", texto: `${tarjetas} tarjetas de entrevista para repasar`, detalle: "Piensa la respuesta y luego revela", hecho: false, a: "/entrevistas" } : null,
+      finDeSemana ? { id: "examen", texto: "Examen semanal", detalle: "20 preguntas de lo que viste esta semana", hecho: examenHecho, a: "/leccion?modo=examen" } : null,
+      g.dias.hoy.cumplioMeta ? { id: "diario", texto: "Tu diario de una línea", detalle: "¿Qué aprendiste hoy? ¿Qué te trabó?", hecho: diarioHecho, a: "/diario" } : null,
+    ].filter(Boolean);
+    return { pasos, siguiente: pasos.find((p) => !p.hecho) ?? null, pausa: g.dias.hoy.pausa };
+  },
+
+  /** Examen semanal terminado: nota de 0 a 20, una por semana (se queda la mejor). */
+  guardarExamen: async ({ aciertos, total }) => {
+    const lunes = lunesDe(progreso.hoy());
+    const nota = total ? Math.round((aciertos / total) * 20) : 0;
+    const previo = progreso.registros("examenes")[lunes];
+    if (!previo || nota > previo.nota) progreso.guardarRegistro("examenes", lunes, { nota, aciertos, total, fecha: progreso.hoy() });
+    cache.clear();
+    return nota;
+  },
+  examenes: async () =>
+    Object.entries(progreso.registros("examenes"))
+      .map(([semana, e]) => ({ semana, ...e }))
+      .sort((a, b) => a.semana.localeCompare(b.semana)),
+
+  /** Sesión de enfoque de 25 minutos completa. */
+  completarEnfoque: async () => {
+    progreso.sumarDia("enfoques");
+    cache.clear();
+  },
+
+  /** Diario de una línea de un día. */
+  guardarDiario: async (texto) => {
+    progreso.guardarRegistro("diario", progreso.hoy(), { aprendi: String(texto.aprendi ?? "").slice(0, 280), trabe: String(texto.trabe ?? "").slice(0, 280) });
+    cache.clear();
+  },
+  diario: async () =>
+    Object.entries(progreso.registros("diario"))
+      .map(([fecha, e]) => ({ fecha, ...e }))
+      .sort((a, b) => b.fecha.localeCompare(a.fecha)),
+
+  /** Resumen de un mes (por defecto el anterior) comparado con el mes previo. */
+  async resumenMes(mes) {
+    const hoy = progreso.hoy();
+    const anteriorDe = (m) => {
+      const [a, n] = m.split("-").map(Number);
+      return n === 1 ? `${a - 1}-12` : `${a}-${String(n - 1).padStart(2, "0")}`;
+    };
+    const objetivo = mes ?? anteriorDe(hoy.slice(0, 7));
+    const dias = progreso.dias();
+    const cifras = (m) => {
+      const delMes = Object.entries(dias).filter(([f]) => f.startsWith(m)).map(([, d]) => d);
+      const suma = (c) => delMes.reduce((t, d) => t + (d?.[c] ?? 0), 0);
+      return {
+        resueltos: suma("resueltos"),
+        repasos: suma("repasos"),
+        lecciones: suma("lecciones"),
+        ingles: Math.round(suma("inglesSegundos") / 60 + suma("inmersion")),
+        estudio: Math.round((suma("segundos") + suma("leccionesSegundos") + suma("inglesSegundos")) / 60),
+        juego: Math.round(suma("juego") / 60),
+        diasActivos: delMes.filter((d) => (d?.resueltos ?? 0) + (d?.repasos ?? 0) + (d?.lecciones ?? 0) + (d?.ingles ?? 0) + (d?.preguntas ?? 0) > 0).length,
+      };
+    };
+    return { mes: objetivo, cifras: cifras(objetivo), antes: cifras(anteriorDe(objetivo)) };
+  },
+
+  /** Reto del mes: el elegido (con su avance) o 3 propuestas según tu área más floja. */
+  async retoMes() {
+    const mes = progreso.hoy().slice(0, 7);
+    const elegido = progreso.ajuste("retoMes", null);
+    const estado = await estadoLogros();
+    const dias = progreso.dias();
+    const delMes = (campo) => Object.entries(dias).filter(([f]) => f.startsWith(mes)).reduce((t, [, d]) => t + (d?.[campo] ?? 0), 0);
+    const valor = (tipo) => (tipo === "resueltos" ? delMes("resueltos") : tipo === "ingles" ? delMes("ingles") : tipo === "verdes" ? estado.verdes : tipo === "retos" ? estado.retos : delMes("lecciones"));
+    if (elegido?.mes === mes) {
+      const avance = tipo => Math.max(0, valor(tipo) - (elegido.inicio ?? 0));
+      const actual = ["verdes", "retos"].includes(elegido.tipo) ? avance(elegido.tipo) : valor(elegido.tipo);
+      return { elegido: { ...elegido, actual: Math.min(actual, elegido.meta), cumplido: actual >= elegido.meta }, propuestas: [] };
+    }
+    const propuestas = [
+      { tipo: "resueltos", meta: 20, titulo: "Resuelve 20 ejercicios este mes" },
+      { tipo: "verdes", meta: 3, titulo: "Pon 3 temas más en verde en tu mapa" },
+      { tipo: "ingles", meta: 25, titulo: "Completa 25 lecciones de inglés" },
+      { tipo: "retos", meta: 5, titulo: "Resuelve 5 retos de entrevista" },
+    ];
+    return { elegido: null, propuestas: propuestas.slice(0, 3).concat(estado.retos < 10 ? [] : []).slice(0, 3) };
+  },
+  elegirRetoMes: async ({ tipo, meta, titulo }) => {
+    const estado = await estadoLogros();
+    const inicio = tipo === "verdes" ? estado.verdes : tipo === "retos" ? estado.retos : 0;
+    progreso.cambiarAjuste("retoMes", { mes: progreso.hoy().slice(0, 7), tipo, meta, titulo, inicio });
+  },
+
+  /** "Mi semana", pausas, juego y meta de inglés (se mezclan entre dispositivos uno por uno). */
+  rutina: async () => ({
+    horario: progreso.ajuste("horario", { lun: "normal", mar: "normal", mie: "normal", jue: "normal", vie: "normal", sab: "normal", dom: "normal" }),
+    pausas: progreso.ajuste("pausas", { lista: [] }).lista,
+    juego: progreso.ajuste("juego", { tope: 120, procesos: ["dota2.exe"] }),
+    metaIngles: progreso.datos().config.metaIngles ?? 15,
+    metaDiaria: progreso.datos().config.metaDiaria,
+  }),
+  guardarHorario: async (horario) => {
+    progreso.cambiarAjuste("horario", horario);
+    cache.clear();
+  },
+  guardarPausas: async (lista) => {
+    progreso.cambiarAjuste("pausas", { lista });
+    cache.clear();
+  },
+  guardarJuego: async (juego) => {
+    progreso.cambiarAjuste("juego", juego);
+    cache.clear();
+  },
 
   // --- Inglés ---
   /** Teoría, palabras y diálogos de cada unidad. */

@@ -12,38 +12,114 @@ export function diasEntre(a, b) {
   return Math.round((Date.UTC(a2, m2 - 1, d2) - Date.UTC(a1, m1 - 1, d1)) / 86_400_000);
 }
 
+/** Día de la semana de una fecha "AAAA-MM-DD": 0 = lunes ... 6 = domingo. */
+export function diaSemana(fecha) {
+  const [a, m, d] = fecha.split("-").map(Number);
+  return (new Date(Date.UTC(a, m - 1, d)).getUTCDay() + 6) % 7;
+}
+
+/** Lunes de la semana de una fecha. */
+export const lunesDe = (fecha) => sumarDias(fecha, -diaSemana(fecha));
+
+/** "Mi semana": cuánto puedes cada día. Pesos que reparten la meta sin cambiar el total semanal. */
+export const PESOS_HORARIO = { libre: 0, poco: 0.5, normal: 1, mucho: 1.5 };
+export const DIAS_SEMANA = ["lun", "mar", "mie", "jue", "vie", "sab", "dom"];
+
+/**
+ * Meta de un día según tu horario: la meta diaria repartida por pesos (más el sábado, menos el día
+ * de clases largas). Sin horario, es la meta diaria de siempre.
+ */
+export function metaDelDia(fecha, metaDiaria, horario) {
+  if (!horario) return metaDiaria;
+  const pesos = DIAS_SEMANA.map((d) => PESOS_HORARIO[horario[d]] ?? 1);
+  const promedio = pesos.reduce((a, b) => a + b, 0) / 7;
+  if (!promedio) return metaDiaria;
+  return Math.round((metaDiaria * pesos[diaSemana(fecha)]) / promedio);
+}
+
+/** ¿Esa fecha cae en una pausa (semana de exámenes)? */
+export const enPausa = (fecha, pausas = []) => pausas.some((p) => p.desde <= fecha && fecha <= p.hasta);
+
+/** Días "salvados" por semana: hiciste algo aunque no llegaste a la meta, y la racha no se rompe. */
+export const SALVADOS_POR_SEMANA = 2;
+
 /**
  * Meta del día, deuda y racha.
  * - Deuda: lo que no hiciste un día se suma al siguiente, con tope. Cuenta desde tu primer día.
- * - Racha: días seguidos cumpliendo la meta diaria (termina hoy si ya cumpliste, si no, ayer).
+ * - Racha: días seguidos cumpliendo la meta (termina hoy si ya cumpliste, si no, ayer).
+ * - Día salvado: si un día hiciste algo pero no llegaste, la racha no se rompe (máximo 2 por
+ *   semana, de lunes a domingo). La deuda igual suma. Hoy se acredita recién al cerrar el día.
+ * - Pausa (semana de exámenes): ni suma deuda ni rompe la racha.
+ * @param {object} dias
+ * @param {{ metaDiaria: number, topeDeuda: number }} config
+ * @param {string} hoy
+ * @param {{ horario?: object, pausas?: { desde: string, hasta: string }[] }} [extras]
  */
-export function resumenDias(dias, { metaDiaria, topeDeuda }, hoy) {
+export function resumenDias(dias, { metaDiaria, topeDeuda }, hoy, { horario = null, pausas = [] } = {}) {
   const fechas = Object.keys(dias).filter((f) => hechoDe(dias[f]) > 0 || dias[f]?.segundos > 0).sort();
   const primerDia = fechas[0] ?? hoy;
+  const meta = (f) => metaDelDia(f, metaDiaria, horario);
 
+  // Hacia adelante: deuda y estado de cada día cerrado (cumplió, salvado, pausa o falló)
   let deuda = 0;
+  const estado = {};
+  const salvadosEnSemana = {};
   for (let f = primerDia; f < hoy; f = sumarDias(f, 1)) {
-    const objetivo = metaDiaria + deuda;
-    deuda = Math.min(topeDeuda, Math.max(0, objetivo - hechoDe(dias[f])));
+    if (enPausa(f, pausas)) {
+      estado[f] = "pausa";
+      continue;
+    }
+    const hecho = hechoDe(dias[f]);
+    const objetivo = meta(f) + deuda;
+    deuda = Math.min(topeDeuda, Math.max(0, objetivo - hecho));
+    const lunes = lunesDe(f);
+    if (hecho >= meta(f)) estado[f] = "cumplio";
+    else if (hecho > 0 && (salvadosEnSemana[lunes] ?? 0) < SALVADOS_POR_SEMANA) {
+      estado[f] = "salvado";
+      salvadosEnSemana[lunes] = (salvadosEnSemana[lunes] ?? 0) + 1;
+    } else estado[f] = "fallo";
   }
 
+  const pausaHoy = enPausa(hoy, pausas);
   const hechoHoy = hechoDe(dias[hoy]);
-  const objetivoHoy = metaDiaria + deuda;
+  const metaHoy = pausaHoy ? 0 : meta(hoy);
+  const objetivoHoy = pausaHoy ? 0 : metaHoy + deuda;
+  const cumplioHoy = !pausaHoy && hechoHoy >= metaHoy && metaHoy > 0;
 
   let racha = 0;
-  let f = hechoHoy >= metaDiaria ? hoy : sumarDias(hoy, -1);
-  while (metaDiaria > 0 && hechoDe(dias[f]) >= metaDiaria) {
-    racha++;
-    f = sumarDias(f, -1);
+  if (metaDiaria > 0) {
+    let f = cumplioHoy ? hoy : sumarDias(hoy, -1);
+    if (cumplioHoy) {
+      racha++;
+      f = sumarDias(f, -1);
+    }
+    for (; f >= primerDia; f = sumarDias(f, -1)) {
+      if (estado[f] === "pausa") continue;
+      if (estado[f] === "cumplio" || estado[f] === "salvado") racha++;
+      else break;
+    }
   }
 
   const ayer = sumarDias(hoy, -1);
   const usoAyerOAntes = primerDia <= ayer;
+  const usadosSemana = salvadosEnSemana[lunesDe(hoy)] ?? 0;
 
   return {
-    hoy: { hecho: hechoHoy, objetivo: objetivoHoy, deuda, cumplio: hechoHoy >= objetivoHoy },
+    hoy: {
+      hecho: hechoHoy,
+      objetivo: objetivoHoy,
+      deuda: pausaHoy ? 0 : deuda,
+      cumplio: pausaHoy || hechoHoy >= objetivoHoy,
+      meta: metaHoy,
+      cumplioMeta: cumplioHoy,
+      pausa: pausaHoy,
+      // Si terminas hoy con algo hecho pero sin llegar, ¿la racha se salva?
+      salvable: !pausaHoy && hechoHoy > 0 && hechoHoy < metaHoy && usadosSemana < SALVADOS_POR_SEMANA,
+    },
     racha,
-    ayer: usoAyerOAntes ? { hecho: hechoDe(dias[ayer]), cumplio: hechoDe(dias[ayer]) >= metaDiaria } : null,
+    salvados: { semana: usadosSemana, maximo: SALVADOS_POR_SEMANA },
+    estados: estado,
+    ayer: usoAyerOAntes ? { hecho: hechoDe(dias[ayer]), cumplio: estado[ayer] === "cumplio" || estado[ayer] === "pausa", estado: estado[ayer] ?? null } : null,
   };
 }
 

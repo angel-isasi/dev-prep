@@ -11,6 +11,9 @@ import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { nombreColeccion } from "../lib/etiquetas.js";
 import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
 import { avanceUnidad, terminada } from "./leccion/motor.js";
+import { TiempoLibre } from "../components/TiempoLibre.jsx";
+import { TarjetaNivel } from "../components/Logros.jsx";
+import { PlanDeHoy, ResumenMes } from "../components/Rutina.jsx";
 import estilos from "./HoyMovil.module.css";
 
 const AREAS = ["javascript", "react", "typescript", "node"];
@@ -76,7 +79,17 @@ export function HoyMovil() {
         </div>
       </div>
 
+      <div style={{ marginBottom: "var(--espacio-4)" }}>
+        <PlanDeHoy />
+      </div>
       {lecciones && <TarjetaLeccion datos={lecciones} />}
+      {hoy.juego && <div style={{ marginBottom: "var(--espacio-4)" }}><TiempoLibre juego={hoy.juego} meta={hoy.meta} salvados={hoy.salvados} jefe={hoy.jefe} /></div>}
+      <div style={{ marginBottom: "var(--espacio-4)" }}>
+        <TarjetaNivel />
+      </div>
+      <div style={{ marginBottom: "var(--espacio-4)" }}>
+        <ResumenMes />
+      </div>
 
       {hoy.config.objetivo && (
         <blockquote className={estilos.objetivo}>

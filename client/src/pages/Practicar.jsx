@@ -20,6 +20,7 @@ const HERRAMIENTAS = [
   { a: "/revision", titulo: "Revisión de código", texto: "Marca los problemas en el código de un compañero" },
   { a: "/glosario", titulo: "Glosario", texto: "120 términos con una frase lista para decir" },
   { a: "/practicar/lista?coleccion=javascript%2Fdepurar", titulo: "Depurar código roto", texto: "Encuentra el error a partir del síntoma" },
+  { a: "/enfoque", titulo: "Modo enfoque", texto: "25 minutos de una sola cosa, sin juego ni celular" },
 ];
 
 const NIVELES = [

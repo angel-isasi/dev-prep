@@ -26,6 +26,9 @@ import DotGrid from "../components/reactbits/DotGrid.jsx";
 import ElectricBorder from "../components/reactbits/ElectricBorder.jsx";
 import SloshGauge from "../components/reactbits/SloshGauge.jsx";
 import SplitFlapText from "../components/reactbits/SplitFlapText.jsx";
+import { TiempoLibre } from "../components/TiempoLibre.jsx";
+import { TarjetaNivel } from "../components/Logros.jsx";
+import { PlanDeHoy, ResumenMes } from "../components/Rutina.jsx";
 import estilos from "./Inicio.module.css";
 
 const RITMO = {
@@ -269,6 +272,27 @@ export function Inicio() {
           </div>
         </MagicCard>
       </AnimatedGroup>
+
+      {api.planDeHoy && (
+        <div className={estilos.tiempoLibre}>
+          <PlanDeHoy />
+        </div>
+      )}
+      {datos.juego && (
+        <div className={estilos.tiempoLibre}>
+          <TiempoLibre juego={datos.juego} meta={datos.meta} salvados={datos.salvados} jefe={datos.jefe} />
+        </div>
+      )}
+      {api.logros && (
+        <div className={estilos.tiempoLibre}>
+          <TarjetaNivel />
+        </div>
+      )}
+      {api.resumenMes && (
+        <div className={estilos.tiempoLibre}>
+          <ResumenMes />
+        </div>
+      )}
 
       <div className={estilos.columnas}>
         <div className={estilos.bloque}>

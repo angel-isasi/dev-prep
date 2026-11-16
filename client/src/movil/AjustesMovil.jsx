@@ -8,6 +8,7 @@ import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import { IconoDescargar, IconoLuna, IconoSol } from "../components/Iconos.jsx";
 import estilos from "./AjustesMovil.module.css";
+import { SeccionRutina } from "../components/SeccionRutina.jsx";
 
 function fechaYHora(iso) {
   return new Date(iso).toLocaleString("es-PE", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
@@ -100,6 +101,8 @@ export function AjustesMovil() {
           {tema === "oscuro" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
         </button>
       </div>
+
+      <SeccionRutina />
 
       <div className={estilos.bloque}>
         <h2>Tu progreso</h2>

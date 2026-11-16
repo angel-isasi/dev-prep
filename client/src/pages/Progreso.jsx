@@ -10,6 +10,9 @@ import { AnimatedGroup } from "../components/ui/animated-group.jsx";
 import { MagicCard } from "../components/ui/magic-card.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { MapaDominio } from "../components/MapaDominio.jsx";
+import { EstudioJuego } from "../components/EstudioJuego.jsx";
+import { SemaforoPostular } from "../components/Logros.jsx";
+import { RetoMes, ResumenMes } from "../components/Rutina.jsx";
 import estilos from "./Progreso.module.css";
 
 const DIAS = ["L", "", "M", "", "V", "", "D"];
@@ -185,6 +188,14 @@ export function Progreso() {
           </div>
         </div>
 
+        <EstudioJuego dias={datos.estudioJuego} proyeccion={datos.proyeccion} fechaMeta={datos.config?.fechaMeta} />
+        {api.semaforo && <SemaforoPostular />}
+        {api.retoMes && (
+          <div style={{ marginTop: "var(--espacio-5)", display: "grid", gap: "var(--espacio-3)" }}>
+            <RetoMes />
+            <ResumenMes siempre />
+          </div>
+        )}
         {/* En la versión web, el mapa de dominio reemplaza las barras por tema */}
         {api.mapa ? (
           <MapaDominio />

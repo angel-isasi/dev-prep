@@ -3,6 +3,25 @@
 // versión publicada (que en pantalla grande muestra el mismo Inicio y Progreso que la laptop).
 import { fraseDelDia } from "./frases.js";
 import { calendario, preparacion, repasosDeHoy, resumenDias, ritmo, semana } from "./metricas.js";
+import { estadoJuego, estudioContraJuego, jefeDeLaSemana } from "./juego.js";
+import { vivos } from "./combinar.js";
+
+/** Ajustes que cambian los cálculos (horario, pausas, juego), sin su fecha. */
+function ajustesDe(datos) {
+  const a = vivos(datos.ajustes);
+  const sinFecha = (r) => (r ? Object.fromEntries(Object.entries(r).filter(([k]) => k !== "en")) : null);
+  return { horario: sinFecha(a.horario), pausas: a.pausas?.lista ?? [], juego: sinFecha(a.juego) ?? {} };
+}
+
+/**
+ * "Proyección honesta": si sigues con el ritmo de esta semana, con cuánta preparación llegas a tu fecha meta.
+ * Supone que cada ejercicio nuevo sube la preparación lo mismo que en promedio los que ya resolviste.
+ */
+export function proyeccion({ prep, resueltos, totalEjercicios, ritmo: r }) {
+  const porEjercicio = resueltos > 0 ? prep / resueltos : 100 / Math.max(1, totalEjercicios);
+  const masResueltos = Math.min(r.pendientes, r.promedioSemana * Math.max(0, r.diasRestantes));
+  return { preparacion: Math.min(100, Math.round(prep + porEjercicio * masResueltos)), ejerciciosMas: Math.round(masResueltos) };
+}
 
 const resumenCorto = (ej) => ({ id: ej.id, titulo: ej.titulo, tema: ej.tema, nivel: ej.nivel });
 
@@ -16,15 +35,19 @@ export function estadoGeneral({ ejercicios, datos, dias, hoy, prep }) {
   const registros = datos.ejercicios ?? {};
   const prepCalculada = prep ?? preparacion(ejercicios, registros, hoy);
   const resueltos = ejercicios.filter((ej) => registros[ej.id]?.estado === "resuelto").length;
+  const ajustes = ajustesDe(datos);
   return {
     hoy,
     config,
     registros,
     prep: prepCalculada,
     resueltos,
-    dias: resumenDias(dias, config, hoy),
+    ajustes,
+    dias: resumenDias(dias, config, hoy, ajustes),
     ritmo: ritmo({ fechaMeta: config.fechaMeta, hoy, totalEjercicios: ejercicios.length, resueltos, dias }),
     semana: semana(dias, hoy, prepCalculada.total),
+    juego: estadoJuego(dias, config, hoy, { horario: ajustes.horario, tope: ajustes.juego.tope }),
+    jefe: jefeDeLaSemana(ejercicios, registros, hoy),
   };
 }
 
@@ -63,6 +86,9 @@ export function vistaInicio(g, ejercicios) {
     siguiente: siguiente ? resumenCorto(siguiente) : null,
     sugeridos: sugeridos.map(resumenCorto),
     frase: fraseDelDia(g.hoy),
+    juego: g.juego,
+    salvados: g.dias.salvados,
+    jefe: g.jefe ? { ...resumenCorto(g.jefe), coleccion: g.jefe.coleccion } : null,
   };
 }
 
@@ -77,5 +103,7 @@ export function vistaProgreso(g, ejercicios, dias) {
     semana: g.semana,
     totales: { resueltos: g.resueltos, total: ejercicios.length },
     calendario: calendario(dias, g.hoy),
+    estudioJuego: estudioContraJuego(dias, g.hoy),
+    proyeccion: proyeccion({ prep: g.prep.total, resueltos: g.resueltos, totalEjercicios: ejercicios.length, ritmo: g.ritmo }),
   };
 }

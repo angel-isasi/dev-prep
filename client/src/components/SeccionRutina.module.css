@@ -1,0 +1,56 @@
+.semana {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--espacio-2);
+}
+
+.semana label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.semana select,
+.fila input,
+.fila select {
+  padding: 8px 10px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 10px;
+  background: var(--fondo-solido);
+  color: var(--texto);
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-3);
+  margin-top: var(--espacio-2);
+}
+
+.fila label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.fila input[type="number"] {
+  width: 80px;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: var(--espacio-2) 0;
+  padding-left: 18px;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.lista li strong {
+  color: var(--exito);
+}

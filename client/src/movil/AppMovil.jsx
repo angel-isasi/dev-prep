@@ -32,6 +32,9 @@ import { InglesMovil } from "./ingles/InglesMovil.jsx";
 import { InglesUnidad } from "./ingles/InglesUnidad.jsx";
 import { CasoRevision, ListaRevision } from "./practica/Revision.jsx";
 import { Glosario } from "./practica/Glosario.jsx";
+import { PaginaLogros } from "../components/Logros.jsx";
+import { SeccionRutina } from "../components/SeccionRutina.jsx";
+import { Enfoque, PaginaDiario } from "../components/Rutina.jsx";
 import { Inicio } from "../pages/Inicio.jsx";
 import { Progreso } from "../pages/Progreso.jsx";
 import { Ajustes } from "../pages/Ajustes.jsx";
@@ -59,6 +62,9 @@ export function App() {
       <Route path="revision" element={<ListaRevision />} />
       <Route path="revision/:id" element={<CasoRevision />} />
       <Route path="glosario" element={<Glosario />} />
+      <Route path="logros" element={<PaginaLogros />} />
+      <Route path="diario" element={<PaginaDiario />} />
+      <Route path="enfoque" element={<Enfoque />} />
       <Route path="camino" element={<CaminoMovil />} />
       <Route path="leccion" element={<LeccionMovil />} />
       <Route path="vincular" element={<VincularMovil />} />
@@ -74,6 +80,7 @@ export function App() {
             <>
               <SeccionSync />
               <SeccionLaptop />
+              <SeccionRutina />
             </>
           }
         >
@@ -104,6 +111,9 @@ export function App() {
       <Route path="revision" element={<ListaRevision />} />
       <Route path="revision/:id" element={<CasoRevision />} />
       <Route path="glosario" element={<Glosario />} />
+      <Route path="logros" element={<PaginaLogros />} />
+      <Route path="diario" element={<PaginaDiario />} />
+      <Route path="enfoque" element={<Enfoque />} />
           <Route path="camino" element={<CaminoMovil />} />
           <Route path="leccion" element={<LeccionMovil />} />
           <Route path="mas" element={grande ? <Navigate to="/" replace /> : <MasMovil />} />

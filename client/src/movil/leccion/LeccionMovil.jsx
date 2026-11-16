@@ -6,6 +6,7 @@ import { Link, useNavigate, useSearchParams } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { api } from "../../lib/api.js";
 import { celebrar } from "../../lib/celebrar.js";
+import { sonidos } from "../../lib/sonidos.js";
 import { sincronizar } from "../../lib/sync-movil.js";
 import { Markdown } from "../../components/Markdown.jsx";
 import { SlidingNumber } from "../../components/ui/sliding-number.jsx";
@@ -49,7 +50,10 @@ export function LeccionMovil() {
       const unidad = params.get("unidad") ?? d.unidadActual;
       const modo = params.get("modo") ?? "normal";
       const pasos = armarLeccion({ ...d, unidad, modo, conVoz: hayVoz(), azar: semilla(`${d.hoy}-${unidad}-${modo}-${Date.now()}`) });
-      if (pasos.length === 0) return setError(modo === "errores" ? "No tienes errores pendientes. ¡Bien!" : "No hay ítems para esta unidad todavía.");
+      if (pasos.length === 0)
+        return setError(
+          modo === "errores" ? "No tienes errores pendientes. ¡Bien!" : modo === "examen" ? "Todavía no practicaste suficiente esta semana para un examen: haz unas lecciones primero." : "No hay ítems para esta unidad todavía.",
+        );
       const nueva = crearSesion(pasos, { unidad, modo, hoy: d.hoy, ambito });
       api.guardarLeccionEnCurso(nueva);
       setSesion(nueva);
@@ -77,12 +81,13 @@ export function LeccionMovil() {
         const r = resumen(siguiente);
         const segundos = siguiente.inicio ? (Date.now() - siguiente.inicio) / 1000 : 0;
         await api.completarLeccion(r.xp, { ambito, segundos });
+        if (siguiente.modo === "examen") r.nota = await api.guardarExamen({ aciertos: r.aciertos, total: r.total });
         if (siguiente.modo === "nivel") {
           const nivel = resultadoNivel(siguiente, unidades);
           await api.guardarNivelIngles(nivel.empiezaEn);
           r.nivel = unidades.find((u) => u.id === nivel.empiezaEn) ?? null;
         }
-        celebrar();
+        celebrar("leccion");
         sincronizar(); // si hay internet, la laptop se entera de esta lección
         setFinal(r);
       } else {
@@ -102,11 +107,13 @@ export function LeccionMovil() {
     // En inglés, oír la respuesta correcta ayuda a fijarla
     if (item.audioRespuesta || (item.tipo === "armar" && item.audio)) hablar(item.audioRespuesta ?? item.audio);
     navigator.vibrate?.(correcto ? 25 : [40, 60, 40]);
+    (correcto ? sonidos.acierto : sonidos.fallo)();
     setRetro({ correcto, permitirEquivalente: (item.tipo === "ordenar" || item.tipo === "armar") && !correcto });
   }
 
   const alEmparejar = useCallback(
     (errores) => {
+      (errores === 0 ? sonidos.acierto : sonidos.fallo)();
       setRetro({ correcto: errores === 0, errores });
     },
     [],
@@ -139,7 +146,7 @@ export function LeccionMovil() {
     return (
       <div className={estilos.final}>
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className={estilos.finalTitulo}>
-          {final.nivel !== undefined ? "¡Prueba terminada!" : "¡Lección completa!"}
+          {final.nota !== undefined ? `Nota: ${final.nota}/20` : final.nivel !== undefined ? "¡Prueba terminada!" : "¡Lección completa!"}
         </motion.div>
         {final.nivel && (
           <p className={estilos.nivel}>
