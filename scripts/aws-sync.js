@@ -2,6 +2,7 @@
 //   npm run aws:crear    crea o actualiza la Lambda, la URL y la tabla (aws/sincronizar.yaml)
 //   npm run aws:borrar   borra todo (la tabla con tus datos incluida)
 //   npm run aws:estado   muestra la URL y si responde
+//   npm run aws:rotar    cambia el token secreto (si se filtró el QR): luego vuelve a vincular el celular
 // El token secreto se genera la primera vez y se guarda en data/sync.json (no va al repo).
 import { execFileSync } from "node:child_process";
 import { randomBytes } from "node:crypto";
@@ -72,7 +73,17 @@ async function estado() {
   console.log(`Sin token responde ${sinToken.status} (debe ser 401).`);
 }
 
-const comandos = { crear, borrar, estado };
+/** Cambia el token: el viejo deja de funcionar al instante. Hay que volver a escanear el QR. */
+async function rotar() {
+  const sync = await leerSync();
+  sync.token = randomBytes(32).toString("hex");
+  await guardarSync(sync);
+  console.log("Token nuevo generado. Actualizando AWS…");
+  await crear();
+  console.log("Listo: reinicia dev-prep y vuelve a vincular el celular con el QR de Ajustes.");
+}
+
+const comandos = { crear, borrar, estado, rotar };
 const comando = comandos[process.argv[2]];
 if (!comando) {
   console.log("Uso: node scripts/aws-sync.js crear | borrar | estado");

@@ -16,12 +16,13 @@
     "validar:aprender": "node scripts/validar-aprender.js",
     "acceso-directo": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/crear-acceso-directo.ps1",
     "exportar:movil": "node scripts/exportar-movil.js",
-    "build:movil": "node scripts/exportar-movil.js && vite build --mode movil",
+    "build:movil": "node scripts/exportar-movil.js && vite build --mode movil && node scripts/verificar-csp.js",
     "dev:movil": "node scripts/exportar-movil.js && vite --mode movil",
     "preview:movil": "vite preview --mode movil --port 4173",
     "aws:crear": "node scripts/aws-sync.js crear",
     "aws:borrar": "node scripts/aws-sync.js borrar",
-    "aws:estado": "node scripts/aws-sync.js estado"
+    "aws:estado": "node scripts/aws-sync.js estado",
+    "aws:rotar": "node scripts/aws-sync.js rotar"
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.2",
