@@ -7,6 +7,7 @@ import { filtrarEjercicios } from "../lib/filtrarEjercicios.js";
 import { nombreColeccion, nombreTema, numeroEjercicio } from "../lib/etiquetas.js";
 import { buscarColeccion, ejercicioAlAzar, siguienteEjercicio } from "../lib/areas.js";
 import { Selector } from "../components/Selector.jsx";
+import { ListaAnimada } from "../components/ListaAnimada.jsx";
 import { IconoFlechaIzq } from "../components/Iconos.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
@@ -194,7 +195,7 @@ export function ListaEjercicios() {
               </span>
             </h2>
             {/* Cada ejercicio es una ficha: número, nivel en rayitas, título y estado */}
-            <ul className={estilos.fichas}>
+            <ListaAnimada className={estilos.fichas}>
               {lista.map((e) => (
                 <li key={e.id}>
                   <Link to={`/practicar/${e.id}`} className={estilos.ficha} data-estado={e.estado}>
@@ -222,7 +223,7 @@ export function ListaEjercicios() {
                   </Link>
                 </li>
               ))}
-            </ul>
+            </ListaAnimada>
           </div>
         ))
       )}

@@ -124,6 +124,7 @@ async function main() {
     categorias: entrevistas.categorias,
     preguntas: entrevistas.preguntas,
     guias: entrevistas.guias,
+    proceso: entrevistas.proceso,
   });
 
   // 5. Aprender mejor: glosario y revisión de código (Lee y predice va dentro de los ítems)

@@ -7,6 +7,7 @@ import { Pestanas } from "../../components/Pestanas.jsx";
 import { Tarjeta } from "../../components/Tarjeta.jsx";
 import { Cv } from "./Cv.jsx";
 import { Portafolio, PruebasYProyecto } from "./Proyectos.jsx";
+import { ListaAnimada } from "../../components/ListaAnimada.jsx";
 import estilos from "./Trabajo.module.css";
 
 const ETAPAS = [
@@ -170,7 +171,7 @@ function Postulaciones() {
       )}
 
       {lista.length === 0 && !editando && <p className={estilos.ayuda}>Todavía no hay postulaciones. Cuando postules, anótala aquí para no perder el hilo.</p>}
-      <ul className={estilos.lista}>
+      <ListaAnimada className={estilos.lista}>
         {lista.map((p) => (
           <li key={p.id} className={estilos.item} data-etapa={p.etapa}>
             <div>
@@ -204,7 +205,7 @@ function Postulaciones() {
             </div>
           </li>
         ))}
-      </ul>
+      </ListaAnimada>
 
       <div className={estilos.fila}>
         <h2>Me preguntaron esto</h2>

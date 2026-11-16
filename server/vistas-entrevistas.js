@@ -24,6 +24,7 @@ export function resumenEntrevistas(entrevistas, registros, hoy) {
     total: entrevistas.preguntas.length,
     pendientesHoy: entrevistas.preguntas.filter((p) => preguntaPendiente(de(p), hoy)).length,
     guias: entrevistas.guias,
+    proceso: entrevistas.proceso ?? null,
   };
 }
 
@@ -32,11 +33,12 @@ export function resumenEntrevistas(entrevistas, registros, hoy) {
  * @param {{ preguntas: object[] }} entrevistas
  * @param {object} registros
  * @param {string} hoy
- * @param {{ categoria?: string, modo?: "repaso"|"nuevas" }} filtro
+ * @param {{ categoria?: string, categorias?: string[], modo?: "repaso"|"nuevas" }} filtro
  */
-export function tarjetas(entrevistas, registros, hoy, { categoria, modo } = {}) {
+export function tarjetas(entrevistas, registros, hoy, { categoria, categorias, modo } = {}) {
   let lista = entrevistas.preguntas;
   if (categoria) lista = lista.filter((p) => p.categoria === categoria);
+  if (categorias?.length) lista = lista.filter((p) => categorias.includes(p.categoria));
   if (modo === "repaso") lista = lista.filter((p) => preguntaPendiente(registros[p.id], hoy));
   if (modo === "nuevas") lista = lista.filter((p) => !registros[p.id]);
   const prioridad = (p) => {

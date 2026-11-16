@@ -1,0 +1,94 @@
+{
+  "etapas": [
+    {
+      "id": "rrhh",
+      "titulo": "Recursos humanos",
+      "minutos": 15,
+      "descripcion": "La primera llamada: quién eres, por qué esta empresa, disponibilidad y sueldo. Aquí te filtran por cómo te comunicas, no por el código."
+    },
+    {
+      "id": "tecnica",
+      "titulo": "Entrevista técnica",
+      "minutos": 45,
+      "descripcion": "Preguntas teóricas, un ejercicio en vivo pensando en voz alta y las repreguntas del entrevistador sobre tu solución."
+    },
+    {
+      "id": "proyecto",
+      "titulo": "Presentación de proyecto",
+      "minutos": 15,
+      "descripcion": "Tu pitch de un minuto y preguntas sobre tu propio proyecto: cómo funciona, por qué lo hiciste así y qué cambiarías."
+    },
+    {
+      "id": "cierre",
+      "titulo": "Cierre",
+      "minutos": 5,
+      "descripcion": "Tus preguntas al entrevistador y cómo te fue. Termina con un plan de refuerzo armado con lo que fallaste."
+    }
+  ],
+  "repreguntas": [
+    {
+      "id": "rep-01",
+      "pregunta": "¿Qué pasa con tu solución si la entrada viene vacía?",
+      "respuesta": "Di qué devuelve tu código con `[]`, `\"\"` o `null`, y si eso tiene sentido. Si no lo manejabas, dilo y propón la línea que lo arregla.",
+      "claves": ["Revisar los casos borde sin que te lo pidan es lo que más diferencia a un buen junior.", "Está bien no haberlo previsto si lo reconoces y lo corriges en el momento."]
+    },
+    {
+      "id": "rep-02",
+      "pregunta": "¿Cuál es la complejidad de tu solución? ¿Se puede mejorar?",
+      "respuesta": "Cuenta los recorridos: un bucle sobre n es O(n); un bucle dentro de otro, O(n²); un `includes` o `indexOf` dentro de un bucle también es O(n²). Si usas un `Map` o un `Set` para buscar, la búsqueda baja a O(1).",
+      "claves": ["No hace falta una fórmula perfecta: explica cuántas veces recorres los datos.", "Proponer el cambio (\"usaría un Set\") vale más que el número exacto."]
+    },
+    {
+      "id": "rep-03",
+      "pregunta": "¿Cómo probarías que tu código funciona?",
+      "respuesta": "Nombra 3 casos: uno normal, uno borde (vacío, un solo elemento) y uno raro (repetidos, negativos, mayúsculas). Di qué esperas en cada uno. Si es un componente, cómo lo probarías con Testing Library: qué ve el usuario y qué hace.",
+      "claves": ["Pensar en casos de prueba muestra que trabajarías con tests en el equipo.", "Habla en términos de lo que el usuario ve, no de detalles internos."]
+    },
+    {
+      "id": "rep-04",
+      "pregunta": "Si fueran un millón de elementos, ¿cambiarías algo?",
+      "respuesta": "Revisa si recorres los datos más de una vez o si buscas dentro de un bucle. Con muchos datos, importa pasar de O(n²) a O(n). En el frontend, además, no pintarías un millón de filas: paginarías o usarías una lista virtual.",
+      "claves": ["Conecta la complejidad con algo real: tiempo de espera, pantalla congelada.", "En frontend, la respuesta también es de interfaz: paginación o virtualización."]
+    },
+    {
+      "id": "rep-05",
+      "pregunta": "¿Por qué elegiste ese método y no otro? Por ejemplo, ¿por qué `reduce` y no un `for`?",
+      "respuesta": "Explica la ventaja que buscabas: legibilidad, no mutar datos, cortar antes. Un `for` permite cortar con `break`; `map` y `filter` comunican la intención; `reduce` sirve para acumular, pero si se vuelve difícil de leer, un `for` es mejor.",
+      "claves": ["No hay respuesta única: lo que importa es que tu elección tenga una razón.", "Reconocer cuándo tu opción no es la más legible suma puntos."]
+    },
+    {
+      "id": "rep-06",
+      "pregunta": "¿Tu función modifica los datos que recibe? ¿Importa?",
+      "respuesta": "Revisa si usas `push`, `sort`, `splice` o asignas propiedades del objeto que te pasaron. En React importa mucho: si mutas el estado, React no detecta el cambio. La solución es copiar primero (`[...lista]`, `{ ...obj }`) o usar métodos que devuelven copias (`toSorted`, `map`).",
+      "claves": ["`sort` y `reverse` mutan el arreglo original; es una trampa clásica.", "Conectarlo con React (inmutabilidad del estado) muestra que entiendes por qué importa."]
+    },
+    {
+      "id": "rep-07",
+      "pregunta": "¿Qué nombre le pondrías a esta función y a sus variables si fuera código del equipo?",
+      "respuesta": "Nombres que digan qué es, no cómo está hecho: `usuariosActivos` en vez de `arr2`, `calcularTotal` en vez de `fn`. Las funciones con verbo, los booleanos como pregunta (`estaVacio`, `tienePermiso`).",
+      "claves": ["El código se lee muchas más veces de las que se escribe.", "Mostrar que te importa la legibilidad es pensar en el equipo."]
+    },
+    {
+      "id": "rep-08",
+      "pregunta": "Si esto viniera de una API lenta o que a veces falla, ¿qué agregarías?",
+      "respuesta": "Tres estados además de los datos: cargando, error y vacío. Un mensaje claro si falla y un botón para reintentar. Si el usuario puede pedir varias veces seguidas, cancelar la petición vieja (`AbortController`) para que no llegue una respuesta vieja después de la nueva.",
+      "claves": ["Cargando, error, vacío y éxito: los cuatro estados de cualquier dato remoto.", "Nombrar la condición de carrera (respuesta vieja que pisa a la nueva) es nivel alto para junior."]
+    }
+  ],
+  "preguntasParaElEntrevistador": [
+    "¿Cómo es el primer mes de alguien que entra al equipo?",
+    "¿Cómo hacen las revisiones de código?",
+    "¿Qué es lo que más valoran en una persona junior después de seis meses?",
+    "¿Con qué tecnologías trabaja el equipo en el día a día?",
+    "¿Cuál es el mayor reto técnico que tiene el equipo ahora?",
+    "¿Cómo es un día normal en el equipo?",
+    "¿Hay alguien que acompañe o mentoree a quienes recién entran?",
+    "¿Cuáles son los siguientes pasos del proceso?"
+  ],
+  "reflexion": [
+    { "id": "bien", "pregunta": "¿Qué salió bien?" },
+    { "id": "trabo", "pregunta": "¿Qué te trabó o te puso nervioso?" },
+    { "id": "sorpresa", "pregunta": "¿Qué pregunta no esperabas?" },
+    { "id": "distinto", "pregunta": "¿Qué responderías distinto la próxima vez?" }
+  ]
+}

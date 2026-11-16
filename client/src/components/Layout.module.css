@@ -7,4 +7,6 @@
 .principal {
   overflow-y: auto;
   min-width: 0;
+  /* Al cambiar de sección solo se anima el contenido; la barra lateral queda quieta (ver base.css) */
+  view-transition-name: contenido;
 }

@@ -26,7 +26,7 @@ export function Entrevistas() {
 
   async function empezar(titulo, filtro) {
     const tarjetas = await api.tarjetas(filtro);
-    setSesion({ titulo, tarjetas: tarjetas.slice(0, 15), indice: 0, notas: [] });
+    setSesion({ titulo, tarjetas: tarjetas.slice(0, filtro.cantidad ?? 15), indice: 0, notas: [] });
   }
 
   async function calificar(nota) {
@@ -67,7 +67,16 @@ export function Entrevistas() {
           ) : (
             <ElegirMazo resumen={resumen} alEmpezar={empezar} />
           ))}
-        {pestana === "simulacro" && <Simulacro />}
+        {pestana === "simulacro" && (
+          <Simulacro
+            proceso={resumen.proceso}
+            alIr={setPestana}
+            alRepasar={(categoria) => {
+              setPestana("tarjetas");
+              empezar(categoria, { categoria });
+            }}
+          />
+        )}
         {pestana === "personal" && <PitchStar guias={resumen.guias} />}
         {pestana === "guia" && (
           <article className={estilos.guia}>
@@ -100,6 +109,19 @@ function ElegirMazo({ resumen, alEmpezar }) {
             <span>{hoy ? (hoy === 1 ? "tarjeta te toca hoy" : "tarjetas te tocan hoy") : "Nada pendiente. Practica una categoría nueva."}</span>
           </span>
           {hoy > 0 && <span className={estilos.ir}>Empezar →</span>}
+        </button>
+        <button
+          type="button"
+          className={estilos.mazo}
+          onClick={() => alEmpezar("Repaso rápido de HTML y CSS", { categorias: resumen.categorias.filter((c) => /html|css/i.test(c.nombre)).map((c) => c.nombre), cantidad: 10 })}
+        >
+          <span className={estilos.mazoIcono} aria-hidden>
+            {"</>"}
+          </span>
+          <span className={estilos.mazoTexto}>
+            <strong>Repaso rápido de HTML y CSS</strong>
+            <span>10 tarjetas para no olvidarlo, sin volver a estudiarlo todo</span>
+          </span>
         </button>
         <button type="button" className={estilos.mazo} onClick={() => alEmpezar("Preguntas nuevas", { modo: "nuevas" })}>
           <span className={estilos.mazoIcono} aria-hidden>

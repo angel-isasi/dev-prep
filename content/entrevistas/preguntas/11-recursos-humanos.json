@@ -1,0 +1,107 @@
+{
+  "categoria": "Recursos humanos (primera entrevista)",
+  "etapa": "rrhh",
+  "preguntas": [
+    {
+      "id": "ent-201",
+      "pregunta": "¿Por qué quieres trabajar en esta empresa?",
+      "preguntaEn": "Why do you want to work here?",
+      "respuesta": "Revisé su producto y me llamó la atención [algo concreto: el producto, un proyecto, cómo trabajan]. Busco un lugar donde pueda aprender de un equipo con experiencia en frontend, y por lo que vi ustedes trabajan con React y TypeScript, que es justo el stack que vengo practicando todos los días. Me motiva aportar en algo que usa gente real.",
+      "respuestaEn": "I looked at your product and [something specific: the product, a project, how you work] caught my attention. I am looking for a place where I can learn from an experienced frontend team, and from what I saw you work with React and TypeScript, which is exactly the stack I practice every day. I am motivated by contributing to something real people use.",
+      "claves": [
+        "Que investigaste: nombra algo concreto de la empresa (producto, cliente, blog técnico, valores), no algo que sirva para cualquiera.",
+        "Conecta lo que ellos hacen con lo que tú sabes y quieres aprender.",
+        "Muestra interés en aportar, no solo en recibir.",
+        "Trampa: responder \"porque es una empresa grande\" o \"porque necesito experiencia\" sin nada más."
+      ]
+    },
+    {
+      "id": "ent-202",
+      "pregunta": "¿Cuál es tu expectativa salarial?",
+      "preguntaEn": "What are your salary expectations?",
+      "respuesta": "Para unas prácticas o un primer puesto junior, mi prioridad es aprender y crecer con el equipo. Investigué los rangos del mercado para este tipo de puesto y estoy en ese rango [di una cifra o un rango que investigaste]. Igual me gustaría conocer el rango que ustedes tienen pensado para el puesto.",
+      "respuestaEn": "For an internship or a first junior role, my priority is to learn and grow with the team. I researched the market range for this kind of position and I am within that range [say a figure or range you researched]. I would also like to know the range you have in mind for the role.",
+      "claves": [
+        "Llega con un rango investigado (ofertas parecidas, compañeros, Glassdoor) y dilo con calma.",
+        "Un rango es mejor que una cifra exacta; que lo más bajo del rango sea algo que aceptarías de verdad.",
+        "Devolver la pregunta (\"¿qué rango manejan?\") es válido y profesional.",
+        "Trampa: decir \"lo que ustedes digan\" o \"no sé\"; parece que no investigaste."
+      ]
+    },
+    {
+      "id": "ent-203",
+      "pregunta": "¿Cuál es tu disponibilidad? ¿Cómo lo combinas con la universidad?",
+      "preguntaEn": "What is your availability? How do you balance it with university?",
+      "respuesta": "Estoy en [ciclo] de Ingeniería de Sistemas. Mis clases son [mañanas o tardes], así que puedo dedicar [horas] a la semana. Ya organizo mi semana con un horario fijo de estudio y una meta diaria, así que ya tengo la costumbre de cumplir con las dos cosas. En semanas de exámenes lo aviso con tiempo.",
+      "respuestaEn": "I am in my [year] of Systems Engineering. My classes are in the [mornings or afternoons], so I can work [hours] a week. I already organize my week with a fixed study schedule and a daily goal, so I am used to handling both. During exam weeks I let people know in advance.",
+      "claves": [
+        "Da números concretos: horas por semana y franjas en las que puedes.",
+        "Muestra que ya tienes un sistema para organizarte (horario, metas), no solo buena voluntad.",
+        "Ser honesto con las semanas de exámenes da confianza.",
+        "Trampa: prometer tiempo completo si no lo tienes; se nota en el primer mes."
+      ]
+    },
+    {
+      "id": "ent-204",
+      "pregunta": "¿Dónde te ves en 3 años?",
+      "preguntaEn": "Where do you see yourself in three years?",
+      "respuesta": "Me veo como desarrollador frontend con autonomía: tomando tareas completas, desde entender el requerimiento hasta subir el cambio con sus tests, y ayudando a quienes recién entran como me ayudaron a mí. También quiero profundizar en TypeScript y en la parte de servidor para entender el producto completo.",
+      "respuestaEn": "I see myself as a frontend developer with autonomy: owning complete tasks, from understanding the requirement to shipping the change with its tests, and helping newcomers the way others helped me. I also want to go deeper into TypeScript and the backend to understand the whole product.",
+      "claves": [
+        "Habla de crecer en habilidades y responsabilidad, no de un cargo exacto.",
+        "Que el plan sea compatible con quedarte en la empresa.",
+        "Trampa: \"tener mi propia empresa\" o \"no sé\"; suena a que te irás pronto o a que no lo pensaste."
+      ]
+    },
+    {
+      "id": "ent-205",
+      "pregunta": "¿Cuál es tu mayor debilidad?",
+      "preguntaEn": "What is your biggest weakness?",
+      "respuesta": "Me cuesta pedir ayuda pronto: a veces sigo intentando solo más tiempo del que conviene. Lo estoy trabajando con una regla: si llevo 30 minutos trabado, escribo qué probé y pregunto. Así no pierdo horas y la pregunta sale mucho más clara.",
+      "respuestaEn": "I find it hard to ask for help early: sometimes I keep trying alone longer than I should. I am working on it with a rule: if I am stuck for 30 minutes, I write down what I tried and ask. That way I do not lose hours and my question is much clearer.",
+      "claves": [
+        "Una debilidad real pero no grave para el puesto, más lo que haces para mejorarla.",
+        "El \"cómo lo trabajo\" es lo que más importa: una acción concreta y medible.",
+        "Trampa: \"soy muy perfeccionista\" o \"trabajo demasiado\"; suena ensayado y no dice nada."
+      ]
+    },
+    {
+      "id": "ent-206",
+      "pregunta": "¿Cómo aprendes una tecnología nueva?",
+      "preguntaEn": "How do you learn a new technology?",
+      "respuesta": "Primero leo lo justo de la documentación oficial para entender la idea principal, y enseguida hago algo pequeño con eso. Aprendo practicando: por ejemplo, armé mi propia app de práctica con ejercicios, tests y repaso espaciado, y la uso todos los días. Cuando me trabo, busco el error exacto, leo el código del ejemplo y recién después pregunto.",
+      "respuestaEn": "First I read just enough of the official docs to understand the main idea, and then I build something small with it right away. I learn by doing: for example, I built my own practice app with exercises, tests and spaced repetition, and I use it every day. When I get stuck, I search for the exact error, read the example code, and only then ask.",
+      "claves": [
+        "Un método con pasos (documentación, algo pequeño, practicar, preguntar), no \"veo tutoriales\".",
+        "Un ejemplo real tuyo vale más que la teoría: aquí dev-prep es tu mejor prueba.",
+        "Menciona la documentación oficial: muestra autonomía.",
+        "Trampa: depender solo de cursos en video o de la IA sin entender el resultado."
+      ]
+    },
+    {
+      "id": "ent-207",
+      "pregunta": "¿Prefieres trabajar solo o en equipo?",
+      "preguntaEn": "Do you prefer working alone or in a team?",
+      "respuesta": "Me siento cómodo de las dos formas. Para concentrarme en una tarea me gusta tener bloques de trabajo solo, pero valoro mucho el equipo para revisar código, resolver dudas y decidir cosas juntos. En el portal de mi facultad aprendí que una revisión de un compañero encuentra cosas que yo no veía.",
+      "respuestaEn": "I am comfortable both ways. To focus on a task I like having blocks of solo work, but I really value the team for code reviews, solving doubts and making decisions together. On my faculty's portal I learned that a teammate's review finds things I could not see.",
+      "claves": [
+        "Equilibrio: el trabajo de desarrollo tiene momentos solos y momentos en equipo.",
+        "Un ejemplo concreto de algo bueno que salió del trabajo en equipo.",
+        "Trampa: \"prefiero solo\" sin matices; suena a que te costará colaborar."
+      ]
+    },
+    {
+      "id": "ent-208",
+      "pregunta": "¿Tienes alguna pregunta para nosotros?",
+      "preguntaEn": "Do you have any questions for us?",
+      "respuesta": "Sí, tengo dos o tres. ¿Cómo es el primer mes de alguien que entra al equipo? ¿Cómo hacen las revisiones de código? ¿Qué es lo que más valoran en alguien junior después de seis meses?",
+      "respuestaEn": "Yes, I have two or three. What does the first month look like for someone joining the team? How do you do code reviews? What do you value most in a junior after six months?",
+      "claves": [
+        "Siempre ten 2 o 3 preguntas preparadas: decir \"no\" parece falta de interés.",
+        "Pregunta por el equipo, el aprendizaje y cómo trabajan, no por vacaciones o sueldo en la primera entrevista.",
+        "Si algo ya lo respondieron durante la entrevista, no lo repitas: muestra que escuchaste.",
+        "Trampa: preguntar algo que está en la primera página de su web."
+      ]
+    }
+  ]
+}

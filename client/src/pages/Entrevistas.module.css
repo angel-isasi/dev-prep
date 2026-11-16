@@ -19,6 +19,11 @@
   gap: var(--espacio-3);
 }
 
+/* El repaso de hoy ocupa la columna grande; los otros dos mazos se apilan a su derecha */
+.principales > .destacado {
+  grid-row: span 2;
+}
+
 .mazo {
   position: relative;
   display: flex;
@@ -116,6 +121,10 @@
   .categorias,
   .principales {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .principales > .destacado {
+    grid-row: auto;
+    grid-column: 1 / -1;
   }
 }
 

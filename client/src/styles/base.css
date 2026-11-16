@@ -255,3 +255,42 @@ option {
 :root[data-tema="claro"] [data-area="react"] {
   --color-area: #0e7490;
 }
+
+/* ---------- Transición entre pantallas (View Transitions del navegador) ----------
+   Al tocar una sección de la barra lateral, la pantalla vieja se desvanece hacia arriba y la
+   nueva entra, en vez de cambiar de golpe. Solo se mueve el contenido (view-transition-name en
+   Layout.module.css). Sin soporte del navegador, simplemente no hay transición. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(contenido) {
+  animation: vt-salir 160ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+::view-transition-new(contenido) {
+  animation: vt-entrar 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes vt-salir {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+/* La opacidad de la pantalla nueva ya la anima Layout.jsx (motion): aquí solo el desplazamiento */
+@keyframes vt-entrar {
+  from {
+    transform: translateY(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

@@ -15,7 +15,7 @@ export function rutasEntrevistas({ entrevistas, progreso, misRespuestas, indice 
   // ?categoria=CSS  o  ?modo=repaso (las que tocan hoy)  o  ?modo=nuevas
   router.get("/entrevistas/tarjetas", (req, res) => {
     const { categoria, modo } = req.query;
-    res.json(tarjetas(entrevistas, progreso.datos().preguntas, fechaLocal(), { categoria, modo }));
+    res.json(tarjetas(entrevistas, progreso.datos().preguntas, fechaLocal(), { categoria, modo, categorias: req.query.categorias ? String(req.query.categorias).split("|") : undefined }));
   });
 
   router.post("/entrevistas/preguntas/:id/calificar", async (req, res) => {

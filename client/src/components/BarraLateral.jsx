@@ -90,6 +90,7 @@ export function BarraLateral() {
             key={a}
             to={a}
             end={exacto}
+            viewTransition
             className={({ isActive }) =>
               `${estilos.enlace} ${isActive ? estilos.activo : ""}`
             }
@@ -123,6 +124,7 @@ export function BarraLateral() {
         )}
         <NavLink
           to="/ajustes"
+          viewTransition
           className={({ isActive }) =>
             `${estilos.enlace} ${isActive ? estilos.activo : ""}`
           }

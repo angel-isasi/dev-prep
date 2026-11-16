@@ -1,7 +1,24 @@
 /* Texto de lectura larga (teoría, enunciados, explicaciones): letra cómoda y código legible */
 .markdown {
-  font-size: 16.5px;
+  font-size: 17px;
   line-height: 1.75;
+  text-wrap: pretty; /* evita palabras sueltas al final de un párrafo */
+}
+
+/* Líneas de unos 70 caracteres: más largas cansan la vista y se pierde el renglón.
+   El código y las tablas sí usan todo el ancho. */
+.markdown p,
+.markdown li,
+.markdown blockquote,
+.markdown h2,
+.markdown h3,
+.markdown h4 {
+  max-width: 72ch;
+}
+
+.markdown h2,
+.markdown h3 {
+  text-wrap: balance;
 }
 
 .markdown > :first-child {

@@ -46,7 +46,8 @@ export function crearApi(base = "") {
     config: () => pedir("/api/config"),
     guardarConfig: (cambios) => put("/api/config", cambios),
     entrevistas: get("/api/entrevistas"),
-    tarjetas: (filtro) => pedir(`/api/entrevistas/tarjetas?${new URLSearchParams(filtro)}`),
+    tarjetas: ({ categorias, cantidad, ...filtro } = {}) =>
+      pedir(`/api/entrevistas/tarjetas?${new URLSearchParams({ ...filtro, ...(categorias ? { categorias: categorias.join("|") } : {}) })}`),
     calificar: (id, nota) =>
       pedir(`/api/entrevistas/preguntas/${encodeURIComponent(id)}/calificar`, {
         method: "POST",

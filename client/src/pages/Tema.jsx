@@ -5,6 +5,7 @@ import { Markdown } from "../components/Markdown.jsx";
 import { Pestanas } from "../components/Pestanas.jsx";
 import { Insignia } from "../components/Insignia.jsx";
 import { Quiz } from "../components/Quiz.jsx";
+import { PreguntaAncla } from "../components/PreguntaAncla.jsx";
 import { IconoFlechaIzq } from "../components/Iconos.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import estilos from "./Tema.module.css";
@@ -67,11 +68,7 @@ export function Tema() {
             <div className={`tarjeta ${estilos.teoria}`}>
               <Markdown>{tema.teoria}</Markdown>
             </div>
-            <div className={estilos.seguir}>
-              <button type="button" className="boton boton-primario" onClick={() => setPestana("ejercicios")}>
-                Practicar con los ejercicios →
-              </button>
-            </div>
+            <PreguntaAncla key={tema.id} preguntas={tema.quiz} alSeguir={() => setPestana("ejercicios")} />
           </>
         )}
 

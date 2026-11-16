@@ -1,0 +1,187 @@
+{
+  "categoria": "Defiende tu proyecto: dev-prep",
+  "etapa": "proyecto",
+  "preguntas": [
+    {
+      "id": "ent-221",
+      "pregunta": "Explícame dev-prep en un minuto: qué es, para quién y cómo está hecho.",
+      "preguntaEn": "Explain dev-prep in one minute: what it is, who it is for and how it is built.",
+      "respuesta": "Es mi app de práctica para entrevistas frontend, tipo un LeetCode personal en español. Tiene ejercicios con tests, teoría corta, tarjetas de entrevista con repaso espaciado, inglés y seguimiento de progreso. Funciona en tres lugares con el mismo progreso: en mi laptop con un servidor Node que abre VS Code y corre los tests en vivo, como web instalable en el celular que funciona sin internet, y en AWS, que sincroniza los dispositivos y manda avisos. El frontend es React con Vite.",
+      "respuestaEn": "It is my practice app for frontend interviews, like a personal LeetCode in Spanish. It has exercises with tests, short theory, interview flashcards with spaced repetition, English and progress tracking. It runs in three places with the same progress: on my laptop with a Node server that opens VS Code and runs tests live, as an installable web app on my phone that works offline, and on AWS, which syncs the devices and sends notifications. The frontend is React with Vite.",
+      "claves": [
+        "Empieza por el problema que resuelve (practicar a diario sin depender de internet), no por la lista de tecnologías.",
+        "Las tres piezas: laptop (Node + VS Code + Vitest), web offline (PWA) y nube (AWS).",
+        "Termina con algo que muestre que lo usas de verdad: racha, ejercicios resueltos.",
+        "Trampa: decir \"lo hice con IA\" y no saber explicar ninguna parte."
+      ]
+    },
+    {
+      "id": "ent-222",
+      "pregunta": "¿Cómo se entera la app de que guardaste tu archivo y de si los tests pasaron?",
+      "preguntaEn": "How does the app know you saved your file and whether the tests passed?",
+      "respuesta": "El servidor de la laptop deja corriendo Vitest en modo watch sobre la carpeta `workspace/`. Cuando guardo en VS Code, Vitest detecta el cambio y vuelve a correr solo los tests de ese ejercicio. El servidor lee el resultado y lo empuja al navegador por Server-Sent Events, una conexión abierta por donde el servidor manda avisos. La pantalla escucha con `EventSource` y pinta cada caso en verde o rojo.",
+      "respuestaEn": "The laptop server keeps Vitest running in watch mode over the `workspace/` folder. When I save in VS Code, Vitest detects the change and reruns only that exercise's tests. The server reads the result and pushes it to the browser through Server-Sent Events, an open connection the server uses to send updates. The page listens with `EventSource` and paints each case green or red.",
+      "claves": [
+        "Vitest en modo watch: no hay que apretar ningún botón para correr tests.",
+        "Server-Sent Events: comunicación del servidor al navegador, en un solo sentido; más simple que WebSockets para este caso.",
+        "Si una corrida no termina (por ejemplo un bucle infinito), el servidor la corta y reinicia Vitest.",
+        "Trampa: decir que el navegador \"revisa cada segundo\"; eso sería polling, y no es lo que hace."
+      ]
+    },
+    {
+      "id": "ent-223",
+      "pregunta": "¿Por qué Server-Sent Events y no WebSockets?",
+      "preguntaEn": "Why Server-Sent Events and not WebSockets?",
+      "respuesta": "Porque la información va en un solo sentido: del servidor al navegador (\"los tests están corriendo\", \"este es el resultado\"). Cuando el navegador necesita hacer algo, ya tiene las rutas normales de la API. SSE funciona sobre HTTP común, se reconecta solo si se corta, y no necesita librerías: en el servidor es una respuesta que no se cierra y en el navegador es `new EventSource(url)`.",
+      "respuestaEn": "Because the information flows one way: from the server to the browser (\"tests are running\", \"here is the result\"). When the browser needs to do something, it already has the regular API routes. SSE works over plain HTTP, reconnects on its own if it drops, and needs no libraries: on the server it is a response that stays open and in the browser it is `new EventSource(url)`.",
+      "claves": [
+        "Elegir la herramienta según el problema: un solo sentido, pocos mensajes.",
+        "Reconexión automática incluida en el navegador.",
+        "Sabes cuándo sí usarías WebSockets: chat o juego, donde los dos lados hablan todo el tiempo.",
+        "Trampa: decir \"porque es más moderno\" sin razones."
+      ]
+    },
+    {
+      "id": "ent-224",
+      "pregunta": "¿Por qué tu código de práctica va en `workspace/` y no editas el archivo original del ejercicio?",
+      "preguntaEn": "Why does your practice code go in `workspace/` instead of editing the original exercise file?",
+      "respuesta": "Los ejercicios viven en `content/`, cada uno en su carpeta con enunciado, archivo inicial, tests, pistas y solución. Si editara el original, perdería el punto de partida y no podría reiniciar el ejercicio. Por eso la app copia el archivo inicial y los tests a `workspace/<id>/`, y ahí trabajo. Reiniciar es volver a copiar. Además, agregar ejercicios nuevos es solo crear una carpeta, sin tocar el código de la app.",
+      "respuestaEn": "Exercises live in `content/`, each in its own folder with statement, starter file, tests, hints and solution. If I edited the original, I would lose the starting point and could not reset the exercise. So the app copies the starter file and tests to `workspace/<id>/`, and I work there. Resetting means copying again. Also, adding new exercises is just creating a folder, without touching the app code.",
+      "claves": [
+        "Separar el contenido (solo lectura) del trabajo del usuario.",
+        "El contenido como datos: carpetas con un formato fijo que el servidor lee del disco.",
+        "Hay validadores (`npm run validar`) que comprueban que cada solución oficial pase sus tests.",
+        "Trampa: no saber dónde está la solución ni cómo se oculta."
+      ]
+    },
+    {
+      "id": "ent-225",
+      "pregunta": "¿Cómo funciona la app en el celular sin internet?",
+      "preguntaEn": "How does the app work on your phone without internet?",
+      "respuesta": "La versión web es una PWA. Al construirla, un script exporta todo el contenido a archivos JSON, y un service worker guarda la app y esos datos en el celular. Desde ahí, abrir la app no necesita internet: el service worker responde desde su caché. El progreso se guarda en el almacenamiento del navegador del celular, y cuando vuelve el internet, se sube y se une con el de la laptop.",
+      "respuestaEn": "The web version is a PWA. At build time, a script exports all the content to JSON files, and a service worker stores the app and that data on the phone. From then on, opening the app needs no internet: the service worker answers from its cache. Progress is stored in the phone browser's storage, and when the internet comes back, it is uploaded and merged with the laptop's.",
+      "claves": [
+        "Service worker: un script que intercepta las peticiones y puede responder desde la caché.",
+        "El build de la web reemplaza la API del servidor por una que lee JSON exportados (`api-movil.js`), así las pantallas son las mismas.",
+        "Offline primero: guarda local y sincroniza después.",
+        "Trampa: confundir PWA con app nativa; no pasa por la tienda de aplicaciones."
+      ]
+    },
+    {
+      "id": "ent-226",
+      "pregunta": "Si estudias en el celular sin internet y en la laptop al mismo tiempo, ¿cómo evitas perder datos al sincronizar?",
+      "preguntaEn": "If you study offline on your phone and on your laptop at the same time, how do you avoid losing data when syncing?",
+      "respuesta": "Cada dispositivo sube su propio documento y, al bajar los de los otros, los mezcla registro por registro con reglas según el tipo de dato: en una tarjeta o un ejercicio gana el cambio más reciente, en un quiz se queda el mejor resultado, y los contadores del día se suman porque cada dispositivo cuenta lo suyo. Para los borrados uso una lápida, una marca de \"borrado en tal fecha\", para que lo borrado no vuelva a aparecer con la copia vieja del otro dispositivo. La mezcla da lo mismo si se repite, así que sincronizar dos veces no daña nada.",
+      "respuestaEn": "Each device uploads its own document and, when downloading the others, merges them record by record with rules by data type: for a flashcard or an exercise the most recent change wins, for a quiz the best result stays, and daily counters are added because each device counts its own. For deletions I use a tombstone, a \"deleted at this time\" mark, so a deleted item does not come back from the other device's old copy. The merge gives the same result if repeated, so syncing twice does no harm.",
+      "claves": [
+        "Reglas de mezcla por tipo de dato, no \"gana el último documento entero\".",
+        "Lápidas para borrados: sin ellas, lo borrado resucita.",
+        "Idempotente: aplicar la misma mezcla dos veces da lo mismo. Es lo que permite reintentar sin miedo.",
+        "Está en funciones puras (`server/combinar.js`) con tests, y las usan la laptop y el celular."
+      ]
+    },
+    {
+      "id": "ent-227",
+      "pregunta": "¿Qué hace tu parte en AWS y por qué esa arquitectura?",
+      "preguntaEn": "What does your AWS part do and why that architecture?",
+      "respuesta": "Es una sola función Lambda con URL propia, sin API Gateway, y una tabla DynamoDB. La Lambda guarda y entrega los documentos de progreso de cada dispositivo, protegida con un token secreto. Además, una regla programada la despierta cada 30 minutos para decidir si toca mandarme un aviso al celular. Elegí esto porque es serverless: no pago un servidor prendido todo el día, y con mi uso queda dentro del nivel gratuito. Todo está descrito en una plantilla de CloudFormation, así se crea y se borra con un comando.",
+      "respuestaEn": "It is a single Lambda function with its own URL, no API Gateway, and a DynamoDB table. The Lambda stores and returns each device's progress documents, protected by a secret token. Also, a scheduled rule wakes it up every 30 minutes to decide whether to send me a notification. I chose this because it is serverless: I do not pay for a server running all day, and my usage stays within the free tier. Everything is described in a CloudFormation template, so it is created and deleted with one command.",
+      "claves": [
+        "Serverless: pagas por uso, no por tener un servidor encendido.",
+        "Infraestructura como código (CloudFormation): reproducible, no clics en la consola.",
+        "Seguridad: token en un encabezado `Authorization`, la nube rechaza a quien no lo tenga.",
+        "Trampa: no saber cuánto cuesta ni qué pasaría si alguien encuentra la URL."
+      ]
+    },
+    {
+      "id": "ent-228",
+      "pregunta": "¿Cómo llegan los avisos al celular? ¿Usaste algún servicio?",
+      "preguntaEn": "How do notifications reach the phone? Did you use a service?",
+      "respuesta": "Uso Web Push, el estándar de los navegadores, sin librerías. El celular se suscribe y me da una dirección del servicio de push de su navegador y unas claves. Cuando la Lambda decide avisar, cifra el mensaje con esas claves y lo firma con mis claves VAPID, para que el servicio sepa quién envía. Google o Apple solo reenvían el mensaje cifrado, no pueden leerlo. Lo programé con `node:crypto` y lo probé con el ejemplo oficial del RFC 8291.",
+      "respuestaEn": "I use Web Push, the browser standard, without libraries. The phone subscribes and gives me an address on its browser's push service plus some keys. When the Lambda decides to notify, it encrypts the message with those keys and signs it with my VAPID keys, so the service knows who is sending. Google or Apple only forward the encrypted message; they cannot read it. I wrote it with `node:crypto` and tested it against the official example in RFC 8291.",
+      "claves": [
+        "Suscripción, cifrado y firma VAPID: tres piezas que puedes nombrar.",
+        "Probar contra el vector de prueba del estándar muestra rigor.",
+        "Reglas de cuándo avisar en funciones puras (máximo 2 avisos al día).",
+        "Trampa: decir que \"el servidor manda la notificación directo al celular\"; siempre pasa por el servicio de push del navegador."
+      ]
+    },
+    {
+      "id": "ent-229",
+      "pregunta": "¿Qué es una \"función pura\" y por qué tu proyecto tiene tantas?",
+      "preguntaEn": "What is a \"pure function\" and why does your project have so many?",
+      "respuesta": "Una función pura devuelve siempre lo mismo para los mismos datos y no cambia nada afuera: no lee el disco, no guarda, no depende de la hora actual si no se la paso. En dev-prep las reglas importantes son puras: cómo se calcula la racha, cuánto tiempo de juego gané, cómo se mezclan los datos, cuándo avisar. Así las pruebo con tests rápidos, y la misma regla la uso en la laptop, en el celular y en la Lambda sin copiar código.",
+      "respuestaEn": "A pure function always returns the same output for the same input and changes nothing outside: it does not read the disk, save, or depend on the current time unless I pass it in. In dev-prep the important rules are pure: how the streak is calculated, how much game time I earned, how data is merged, when to notify. That way I test them with fast tests, and I reuse the same rule on the laptop, the phone and the Lambda without copying code.",
+      "claves": [
+        "Definición clara: misma entrada, misma salida, sin efectos secundarios.",
+        "Ventaja concreta 1: se prueban fácil (la fecha se pasa como parámetro).",
+        "Ventaja concreta 2: se reutilizan en distintos entornos.",
+        "Los efectos (guardar, leer disco, mandar avisos) quedan en los bordes del sistema."
+      ]
+    },
+    {
+      "id": "ent-230",
+      "pregunta": "Tuviste un problema de rendimiento: la app se trababa al cambiar de pestaña. ¿Cómo lo encontraste y qué hiciste?",
+      "preguntaEn": "You had a performance problem: the app lagged when switching tabs. How did you find it and what did you do?",
+      "respuesta": "Primero lo medí en vez de adivinar: con `PerformanceObserver` vi tareas largas que bloqueaban el hilo principal. Las causas eran varias: cada pantalla volvía a pedir sus datos al entrar, Referencia pintaba cientos de entradas de golpe y había efectos animados con desenfoque sobre capas que se movían. Lo arreglé con una caché de datos por pantalla, cargando Referencia por tandas con `IntersectionObserver`, y quitando los desenfoques y las animaciones infinitas a pantalla completa.",
+      "respuestaEn": "First I measured instead of guessing: with `PerformanceObserver` I saw long tasks blocking the main thread. There were several causes: each page fetched its data again on entry, the Reference page rendered hundreds of entries at once, and there were animated blur effects on moving layers. I fixed it with a per-page data cache, loading Reference in batches with `IntersectionObserver`, and removing blurs and infinite full-screen animations.",
+      "claves": [
+        "Medir antes de optimizar: nombra la herramienta (Performance, long tasks).",
+        "Varias causas, cada una con su solución concreta.",
+        "Este es un buen ejemplo STAR de \"un problema difícil que resolviste\".",
+        "Trampa: decir \"lo optimicé\" sin explicar qué medías ni qué cambiaste."
+      ]
+    },
+    {
+      "id": "ent-231",
+      "pregunta": "¿Cómo detecta la app cuánto tiempo juegas Dota 2?",
+      "preguntaEn": "How does the app detect how long you play Dota 2?",
+      "respuesta": "El servidor de la laptop tiene un vigilante que cada minuto ejecuta `tasklist` de Windows y mira si el proceso del juego está abierto. Si lo está, suma un minuto a lo jugado hoy. Una regla pura calcula cuánto tiempo libre gané según lo que estudié, con un tope de 120 minutos. Cuando se acaba, me avisa por voz y al celular, y lo jugado de más pasa a deuda para el día siguiente. Nunca cierra el juego: es un sistema de presión, no de castigo.",
+      "respuestaEn": "The laptop server has a watcher that runs Windows `tasklist` every minute and checks whether the game process is open. If it is, it adds a minute to today's playtime. A pure rule calculates how much free time I earned based on what I studied, capped at 120 minutes. When it runs out, it warns me by voice and on my phone, and extra playtime becomes debt for the next day. It never closes the game: it is a pressure system, not a punishment.",
+      "claves": [
+        "Detección por procesos del sistema operativo, sin tocar el juego.",
+        "Lo que se guarda son minutos jugados; el tiempo ganado se calcula, no se guarda.",
+        "Muestra que diseñaste algo para ti mismo con criterio de producto.",
+        "Trampa: no saber qué pasa si la laptop se suspende (simplemente no suma minutos)."
+      ]
+    },
+    {
+      "id": "ent-232",
+      "pregunta": "¿Cómo pruebas tu propio proyecto?",
+      "preguntaEn": "How do you test your own project?",
+      "respuesta": "Tengo tres niveles. Tests de Vitest para las reglas puras: racha, mezcla de datos, avisos, tiempo de juego, cifrado de los avisos. Validadores que revisan todo el contenido: que cada ejercicio tenga sus archivos, que cada solución oficial pase sus tests y que cada fragmento de \"Lee y predice\" imprima lo que dice la respuesta. Y antes de publicar, construyo las dos versiones y reviso la app a mano en la laptop y en el celular.",
+      "respuestaEn": "I have three levels. Vitest tests for the pure rules: streak, data merging, notifications, game time, notification encryption. Validators that check all the content: that each exercise has its files, that each official solution passes its tests, and that each \"read and predict\" snippet prints what the answer says. And before publishing, I build both versions and check the app by hand on the laptop and on the phone.",
+      "claves": [
+        "Distintos tipos de prueba para distintos riesgos.",
+        "Validar el contenido como si fuera código: los ejercicios también pueden tener errores.",
+        "Nombrar los comandos (`npm test`, `npm run validar`) muestra que es real.",
+        "Trampa: \"lo pruebo usándolo\" como única respuesta."
+      ]
+    },
+    {
+      "id": "ent-233",
+      "pregunta": "Si tuvieras que empezar dev-prep de nuevo, ¿qué harías distinto?",
+      "preguntaEn": "If you had to start dev-prep again, what would you do differently?",
+      "respuesta": "Pensaría la sincronización desde el principio. Empecé con todo guardado en la laptop y después agregué el celular y la nube, y tuve que rehacer el modelo de datos para que se pudiera mezclar sin perder nada. También usaría TypeScript desde el inicio en los módulos de reglas, porque los datos de progreso tienen muchas formas y los tipos habrían atrapado errores antes.",
+      "respuestaEn": "I would design sync from the start. I began with everything stored on the laptop and later added the phone and the cloud, and I had to redo the data model so it could merge without losing anything. I would also use TypeScript from the beginning in the rules modules, because progress data has many shapes and types would have caught errors earlier.",
+      "claves": [
+        "Reconocer una decisión mejorable muestra madurez, no debilidad.",
+        "Que lo que cambiarías sea concreto y venga de algo que te pasó.",
+        "Trampa: \"nada, quedó perfecto\"."
+      ]
+    },
+    {
+      "id": "ent-234",
+      "pregunta": "¿Qué parte del proyecto hiciste tú y en qué te ayudó la IA?",
+      "preguntaEn": "Which part of the project did you build and how did AI help you?",
+      "respuesta": "Las decisiones del producto son mías: qué necesitaba para estudiar, cómo debía funcionar sin internet, las reglas de racha, deuda y tiempo de juego, y qué entraba o no. Usé IA como un compañero para escribir código más rápido y para generar contenido, pero cada parte la revisé, la probé y la uso todos los días. Lo importante es que puedo explicar cómo funciona cada pieza, por qué está así y qué cambiaría.",
+      "respuestaEn": "The product decisions are mine: what I needed to study, how it had to work offline, the streak, debt and game time rules, and what went in or not. I used AI as a partner to write code faster and to generate content, but I reviewed and tested every part, and I use it every day. What matters is that I can explain how each piece works, why it is that way and what I would change.",
+      "claves": [
+        "Honestidad: hoy casi todos usan IA; lo que se evalúa es si entiendes lo que entregas.",
+        "Separa decisiones (tuyas) de escritura de código (asistida).",
+        "Demuéstralo respondiendo con detalle las otras preguntas de esta categoría.",
+        "Trampa: negar que usaste IA o, al revés, no poder explicar nada sin ella."
+      ]
+    }
+  ]
+}
