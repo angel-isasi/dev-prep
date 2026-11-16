@@ -62,8 +62,9 @@ export async function crearProgreso({ datosDir }) {
   // Avisos de "el progreso cambió" (los usa la sincronización para subir los cambios).
   const oyentes = new Set();
 
-  function guardar() {
-    for (const oyente of oyentes) oyente();
+  /** @param {{ avisar?: boolean }} [opciones] avisar: false cuando el cambio vino de la nube (no hay nada nuevo que subir) */
+  function guardar({ avisar = true } = {}) {
+    if (avisar) for (const oyente of oyentes) oyente();
     cola = cola
       .then(async () => {
         const tmp = `${archivo}.tmp`;
@@ -141,11 +142,14 @@ export async function crearProgreso({ datosDir }) {
     documento: () => documentoParaSubir(datos),
     /** Mezcla los documentos de otros dispositivos con el tuyo (sin perder nada). */
     async fusionar(documentos) {
+      const antes = JSON.stringify(datos);
       for (const { dispositivo, doc } of documentos) datos = fusionarDocumento(datos, doc, dispositivo);
       datos.ejercicios ??= {};
       datos.preguntas ??= {};
       datos.quizzes ??= {};
-      await guardar();
+      // Si la mezcla no cambió nada, no se escribe. Y nunca avisa a la sincronización: lo que llegó
+      // de la nube no hay que volver a subirlo (avisar aquí hacía sincronizar cada 8 segundos sin parar).
+      if (JSON.stringify(datos) !== antes) await guardar({ avisar: false });
     },
     alCambiar(oyente) {
       oyentes.add(oyente);
