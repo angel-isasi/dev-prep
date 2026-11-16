@@ -122,3 +122,16 @@
   margin: 0;
   color: var(--texto-suave);
 }
+
+/* Celular: pantallas de 600 px o menos */
+@media (max-width: 600px) {
+  .pregunta {
+    font-size: 16px;
+  }
+  .opcion {
+    min-height: 48px;
+  }
+  .explicacion {
+    padding: var(--espacio-3) var(--espacio-4);
+  }
+}

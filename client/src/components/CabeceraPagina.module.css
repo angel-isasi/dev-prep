@@ -59,3 +59,19 @@
     align-items: stretch;
   }
 }
+
+/* Celular: pantallas de 600 px o menos */
+@media (max-width: 600px) {
+  .cabecera {
+    margin-bottom: var(--espacio-5);
+  }
+  .titulo {
+    font-size: 34px;
+  }
+  .subtitulo {
+    font-size: 15px;
+  }
+  .acciones {
+    flex-wrap: wrap;
+  }
+}

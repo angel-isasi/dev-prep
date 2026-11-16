@@ -1,0 +1,122 @@
+.pagina {
+  padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
+}
+
+.areas {
+  display: flex;
+  gap: var(--espacio-2);
+  margin: 0 calc(var(--espacio-4) * -1) var(--espacio-4);
+  padding: 0 var(--espacio-4);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.area {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--espacio-2);
+  height: 40px;
+  padding: 0 var(--espacio-4);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 999px;
+  background: none;
+  color: var(--texto-suave);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.area[aria-selected="true"] {
+  border-color: color-mix(in srgb, var(--color-area) 55%, transparent);
+  background: var(--color-area-suave);
+  color: var(--texto);
+}
+
+.punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 3px;
+  background: var(--color-area);
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.chuleta {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
+  overflow: hidden;
+}
+
+.chuleta[data-abierta="true"] {
+  border-color: color-mix(in srgb, var(--color-area) 45%, transparent);
+}
+
+.cabeza {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  width: 100%;
+  min-height: 60px;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: none;
+  background: none;
+  color: var(--texto);
+  font-size: 16px;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cabeza strong {
+  flex: 1;
+  font-family: var(--fuente-titulos);
+  font-weight: 650;
+}
+
+.cabeza i {
+  color: var(--texto-tenue);
+  font-size: 22px;
+  font-style: normal;
+}
+
+.numero {
+  color: transparent;
+  font-family: var(--fuente-titulos);
+  font-size: 26px;
+  font-weight: 800;
+  -webkit-text-stroke: 1.2px var(--color-area);
+}
+
+.cuerpo {
+  padding: 0 var(--espacio-4) var(--espacio-4);
+}
+
+.entrevista {
+  margin-top: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  border-radius: var(--radio);
+  background: var(--acento-suave);
+}
+
+.entrevista > span {
+  display: block;
+  margin-bottom: var(--espacio-1);
+  color: var(--acento);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.enlace {
+  display: inline-block;
+  margin-top: var(--espacio-3);
+  font-size: 14px;
+  font-weight: 600;
+}

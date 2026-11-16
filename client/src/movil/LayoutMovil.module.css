@@ -1,0 +1,73 @@
+/* En el celular se usa el scroll de la página (no el de un contenedor): es el que el
+   navegador sabe ocultar barras y mover con inercia. */
+.layout {
+  min-height: 100dvh;
+}
+
+.principal {
+  /* nada puede ensanchar la página hacia los lados (clip no rompe el sticky) */
+  overflow-x: clip;
+  padding-top: env(safe-area-inset-top);
+  /* espacio para que la navegación fija no tape el final del contenido */
+  padding-bottom: calc(76px + env(safe-area-inset-bottom));
+}
+
+.nav {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--borde);
+  background: color-mix(in srgb, var(--fondo-solido) 94%, transparent);
+}
+
+.enlace {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-height: 56px;
+  padding: 7px 2px 5px;
+  border-radius: 14px;
+  color: var(--texto-tenue);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color var(--transicion);
+}
+
+.enlace:hover {
+  text-decoration: none;
+}
+
+.activo {
+  color: var(--acento);
+}
+
+.indicador {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--acento-suave);
+}
+
+.icono {
+  display: grid;
+  place-items: center;
+}
+
+.icono svg {
+  width: 22px;
+  height: 22px;
+}
+
+.texto {
+  line-height: 1;
+}

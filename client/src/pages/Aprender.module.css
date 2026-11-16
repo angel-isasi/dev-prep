@@ -201,3 +201,32 @@
 .quiz[data-hecho="true"] {
   color: var(--acento);
 }
+
+/* Celular: pantallas de 600 px o menos */
+@media (max-width: 600px) {
+  .pagina {
+    padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
+  }
+  .areas {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(var(--espacio-4) * -1);
+    padding-inline: var(--espacio-4);
+  }
+  .areaBoton {
+    flex: none;
+  }
+  .intro {
+    display: none;
+  }
+  .temas {
+    grid-template-columns: 1fr;
+  }
+  .tema {
+    padding: var(--espacio-4);
+  }
+  .numero {
+    font-size: 38px;
+  }
+}

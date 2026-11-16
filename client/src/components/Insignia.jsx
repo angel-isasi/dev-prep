@@ -10,6 +10,7 @@ const ESTADOS = {
   "en-progreso": { texto: "En progreso", variante: "aviso" },
   repasar: { texto: "Para repasar", variante: "error" },
   pendiente: { texto: "Pendiente", variante: "neutro" },
+  estudiado: { texto: "Estudiado", variante: "exito" }, // solo en el celular
 };
 
 const NIVELES = {

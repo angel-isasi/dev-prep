@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { api } from "../lib/api.js";
+import { ES_MOVIL } from "../lib/modo.js";
 import { Tarjeta } from "./Tarjeta.jsx";
 import { Cronometro, mmss } from "./Cronometro.jsx";
 import estilos from "./Simulacro.module.css";
@@ -131,7 +132,7 @@ export function Simulacro() {
             acabe el tiempo que le darías en una entrevista, unos 15 minutos), vuelve aquí.
           </p>
           <div className={estilos.acciones}>
-            <a className="boton boton-primario" href={`/practicar/${actual.ej.id}`} target="_blank" rel="noreferrer">
+            <a className="boton boton-primario" href={`/practicar/${actual.ej.id}`} target={ES_MOVIL ? undefined : "_blank"} rel="noreferrer">
               Abrir el ejercicio
             </a>
             <button type="button" className="boton" onClick={() => avanzar("hecho")}>

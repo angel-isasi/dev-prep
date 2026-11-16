@@ -82,3 +82,13 @@
 .nota {
   font-size: 14px;
 }
+
+/* Celular: pantallas de 600 px o menos */
+@media (max-width: 600px) {
+  .panel {
+    padding: var(--espacio-5) var(--espacio-4);
+  }
+  .acciones {
+    flex-wrap: wrap;
+  }
+}

@@ -123,3 +123,10 @@
   flex-wrap: wrap;
   gap: var(--espacio-2);
 }
+
+/* Celular: pantallas de 600 px o menos */
+@media (max-width: 600px) {
+  .bloque {
+    padding: var(--espacio-4);
+  }
+}

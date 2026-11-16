@@ -92,3 +92,27 @@
 .markdown pre code {
   font-size: inherit;
 }
+
+/* Celular: pantallas de 600 px o menos */
+@media (max-width: 600px) {
+  .markdown {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .markdown h2 {
+    font-size: 22px;
+  }
+  .markdown h3 {
+    font-size: 18px;
+  }
+  .markdown pre {
+    margin-inline: calc(var(--espacio-2) * -1);
+    padding: var(--espacio-3);
+    font-size: 13.5px;
+  }
+  .markdown table {
+    display: block;
+    overflow-x: auto;
+    font-size: 14px;
+  }
+}

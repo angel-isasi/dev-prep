@@ -1,0 +1,216 @@
+.pagina {
+  padding: var(--espacio-4) var(--espacio-4) var(--espacio-6);
+}
+
+.mensaje {
+  color: var(--texto-suave);
+}
+
+.volver {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-1);
+  min-height: 40px;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.cabecera {
+  margin: var(--espacio-2) 0 var(--espacio-4);
+}
+
+.etiqueta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin: 0 0 var(--espacio-2);
+  color: var(--texto-suave);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.numero {
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: var(--color-area-suave);
+  color: var(--color-area);
+  font-family: var(--fuente-codigo);
+  letter-spacing: 0;
+}
+
+.cabecera h1 {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.meta {
+  display: flex;
+  gap: var(--espacio-2);
+  margin-top: var(--espacio-3);
+}
+
+.pestanas {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 calc(var(--espacio-4) * -1) var(--espacio-4);
+  padding: 0 var(--espacio-4);
+  background: var(--fondo);
+}
+
+.bloque {
+  margin-bottom: var(--espacio-3);
+  padding: var(--espacio-4);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
+}
+
+.bloquePlano {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+}
+
+.consejo {
+  margin: var(--espacio-4) 0 var(--espacio-3);
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+/* Botones de ancho completo, fáciles de tocar */
+.ancho {
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  font-size: 15px;
+}
+
+.revelar,
+.laptop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: var(--espacio-5) var(--espacio-4);
+  border: 1px dashed var(--borde-fuerte);
+  border-radius: var(--radio-grande);
+  color: var(--texto-suave);
+  font-size: 15px;
+}
+
+.revelar p,
+.laptop p {
+  margin: 0;
+}
+
+.laptop {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--acento) 35%, transparent);
+  background: var(--acento-suave);
+}
+
+.laptop strong {
+  color: var(--texto);
+  font-family: var(--fuente-titulos);
+  font-size: 19px;
+}
+
+/* Autoevaluación: tres botones grandes */
+.autoevaluacion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  margin-top: var(--espacio-4);
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
+}
+
+.autoevaluacion > strong {
+  font-family: var(--fuente-titulos);
+  font-size: 19px;
+}
+
+.notas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--espacio-2);
+}
+
+.nota {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 64px;
+  padding: var(--espacio-2);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 12px;
+  background: none;
+  color: var(--texto);
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 120ms ease, background var(--transicion), border-color var(--transicion);
+}
+
+.nota small {
+  color: var(--texto-suave);
+  font-size: 11px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.nota:active {
+  transform: scale(0.96);
+}
+
+.nota[data-tipo="error"] {
+  color: var(--error);
+}
+
+.nota[data-tipo="aviso"] {
+  color: var(--aviso);
+}
+
+.nota[data-tipo="exito"] {
+  color: var(--exito);
+}
+
+.nota[data-elegida="true"][data-tipo="error"] {
+  border-color: var(--error);
+  background: var(--error-suave);
+}
+
+.nota[data-elegida="true"][data-tipo="aviso"] {
+  border-color: var(--aviso);
+  background: var(--aviso-suave);
+}
+
+.nota[data-elegida="true"][data-tipo="exito"] {
+  border-color: var(--exito);
+  background: var(--exito-suave);
+}
+
+.aviso {
+  margin: var(--espacio-3) 0 0;
+  padding: var(--espacio-3) var(--espacio-4);
+  border-radius: var(--radio);
+  background: var(--acento-suave);
+  font-size: 14px;
+}
+
+.aviso[data-tipo="exito"] {
+  background: var(--exito-suave);
+  color: var(--exito);
+}
+
+.aviso[data-tipo="error"] {
+  background: var(--error-suave);
+  color: var(--error);
+}

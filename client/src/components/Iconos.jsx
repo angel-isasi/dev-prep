@@ -50,3 +50,12 @@ export const IconoApagar = () => (
 export const IconoFlechaIzq = () => (
   <svg {...base}><path d="M15 6l-6 6 6 6" /></svg>
 );
+export const IconoMas = () => (
+  <svg {...base}><circle cx="5" cy="12" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="19" cy="12" r="1.6" /></svg>
+);
+export const IconoChuleta = () => (
+  <svg {...base}><path d="M7 3h10a2 2 0 012 2v16l-7-4-7 4V5a2 2 0 012-2z" /></svg>
+);
+export const IconoDescargar = () => (
+  <svg {...base}><path d="M12 3v12" /><path d="M7 10l5 5 5-5" /><path d="M5 21h14" /></svg>
+);

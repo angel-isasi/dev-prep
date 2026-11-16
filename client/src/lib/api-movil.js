@@ -172,4 +172,23 @@ export const api = {
     return progreso.guardarQuiz(id, aciertos, tema.quiz.length);
   },
   referencia: conCache("referencia", () => json("referencia.json")),
+
+  /** Chuletas (solo celular): la "Chuleta" y "En la entrevista" de cada tema de Aprender. */
+  chuletas: conCache("chuletas", async () =>
+    (await aprender()).temas.map((t) => ({
+      id: t.id,
+      titulo: t.titulo,
+      area: t.area,
+      orden: t.orden,
+      chuleta: seccionMarkdown(t.teoria, "Chuleta"),
+      entrevista: seccionMarkdown(t.teoria, "En la entrevista"),
+    })),
+  ),
+
+  /** Respaldo manual del progreso del celular (Ajustes). */
+  exportarProgreso: () => progreso.exportar(),
+  importarProgreso: async (texto) => {
+    progreso.importar(texto);
+    cache.clear();
+  },
 };

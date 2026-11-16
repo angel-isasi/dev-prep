@@ -249,3 +249,29 @@
 .guia {
   max-width: 760px;
 }
+
+/* Celular: pantallas de 600 px o menos */
+@media (max-width: 600px) {
+  .pagina {
+    padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
+  }
+  .principales,
+  .categorias {
+    grid-template-columns: 1fr;
+  }
+  .mazo {
+    padding: var(--espacio-4);
+  }
+  .numeroGrande {
+    font-size: 48px;
+  }
+  .final {
+    padding: var(--espacio-5) var(--espacio-4);
+  }
+  .cuentas {
+    gap: var(--espacio-4);
+  }
+  .cuentas dd {
+    font-size: 34px;
+  }
+}

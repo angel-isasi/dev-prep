@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { api } from "../lib/api.js";
+import { ES_MOVIL } from "../lib/modo.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { filtrarEjercicios } from "../lib/filtrarEjercicios.js";
 import { nombreColeccion, nombreTema, numeroEjercicio } from "../lib/etiquetas.js";
@@ -14,12 +15,19 @@ import { BotonAzar } from "../components/BotonAzar.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import estilos from "./ListaEjercicios.module.css";
 
-const ESTADOS = [
-  ["pendiente", "Pendiente"],
-  ["en-progreso", "En progreso"],
-  ["resuelto", "Resuelto"],
-  ["repasar", "Para repasar"],
-];
+// En el celular no se resuelven ejercicios (eso es en la laptop): se estudian.
+const ESTADOS = ES_MOVIL
+  ? [
+      ["pendiente", "Pendiente"],
+      ["estudiado", "Estudiado"],
+      ["repasar", "Para repasar"],
+    ]
+  : [
+      ["pendiente", "Pendiente"],
+      ["en-progreso", "En progreso"],
+      ["resuelto", "Resuelto"],
+      ["repasar", "Para repasar"],
+    ];
 
 const TEXTO_ESTADO = Object.fromEntries(ESTADOS);
 const NIVEL = { 1: "Básico", 2: "Intermedio", 3: "Difícil" };
@@ -84,7 +92,9 @@ export function ListaEjercicios() {
   if (!ejercicios) return <Esqueleto variante="lista" />;
 
   const visibles = filtrarEjercicios(ejercicios, filtros);
-  const resueltos = deColeccion.filter((e) => e.estado === "resuelto").length;
+  // En el celular se cuenta lo estudiado (resolver con tests es en la laptop).
+  const hecho = (e) => (ES_MOVIL ? e.estado !== "pendiente" : e.estado === "resuelto");
+  const resueltos = deColeccion.filter(hecho).length;
   const hayFiltros = filtros.texto || filtros.tema || filtros.nivel || filtros.estado;
   const siguiente = siguienteEjercicio(deColeccion);
 
@@ -124,7 +134,7 @@ export function ListaEjercicios() {
           <small>/{deColeccion.length}</small>
         </strong>
         <div className={estilos.avanceTexto}>
-          <span>resueltos</span>
+          <span>{ES_MOVIL ? "estudiados" : "resueltos"}</span>
           <div className={estilos.barraProgreso}>
             <div style={{ width: `${pct}%` }} />
           </div>
@@ -180,7 +190,7 @@ export function ListaEjercicios() {
             <h2 className={estilos.tituloGrupo}>
               {nombreTema(tema)}
               <span>
-                {lista.filter((e) => e.estado === "resuelto").length}/{lista.length}
+                {lista.filter(hecho).length}/{lista.length}
               </span>
             </h2>
             {/* Cada ejercicio es una ficha: número, nivel en rayitas, título y estado */}

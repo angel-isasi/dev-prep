@@ -202,4 +202,31 @@
   border-color: var(--borde-fuerte);
 }
 
-
+/* Celular: pantallas de 600 px o menos */
+@media (max-width: 600px) {
+  .pagina {
+    padding: var(--espacio-4) var(--espacio-4) var(--espacio-6);
+  }
+  .cabecera {
+    align-items: flex-start;
+    gap: var(--espacio-3);
+  }
+  .numeroGrande {
+    font-size: 56px;
+  }
+  .cabecera h1 {
+    font-size: 28px;
+  }
+  .cabecera p {
+    font-size: 15px;
+  }
+  .teoria {
+    padding: var(--espacio-4);
+  }
+  .navegacion {
+    grid-template-columns: 1fr;
+  }
+  .vecino[data-lado="siguiente"] {
+    grid-column: auto;
+  }
+}

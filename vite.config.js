@@ -4,6 +4,7 @@
 // Modo "movil" (npm run build:movil): la versión para el celular. Mismo código, pero:
 //   - lib/api.js se cambia por lib/api-movil.js (lee JSON exportados, sin servidor)
 //   - lib/eventos.js se cambia por lib/eventos-movil.js (no hay tests en vivo)
+//   - App.jsx se cambia por movil/AppMovil.jsx (pantallas del celular)
 //   - los archivos públicos salen de client/public-movil y el build va a client/dist-movil
 //   - si algo del cliente importa node:* o express, el build falla (en el celular se rompería)
 import path from "node:path";
@@ -13,19 +14,22 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 const RAIZ = path.dirname(fileURLToPath(import.meta.url));
-const LIB = path.join(RAIZ, "client", "src", "lib");
+const SRC = path.join(RAIZ, "client", "src");
+const LIB = path.join(SRC, "lib");
 
 /** Cambia módulos del cliente por su versión celular, venga de donde venga el import. */
 function reemplazosMovil() {
   const reemplazos = new Map([
     [path.join(LIB, "api.js"), path.join(LIB, "api-movil.js")],
     [path.join(LIB, "eventos.js"), path.join(LIB, "eventos-movil.js")],
+    // Rutas y pantallas propias del celular (no carga las que solo sirven en la laptop)
+    [path.join(SRC, "App.jsx"), path.join(SRC, "movil", "AppMovil.jsx")],
   ]);
   return {
     name: "devprep-reemplazos-movil",
     enforce: "pre",
     async resolveId(fuente, importador, opciones) {
-      if (!importador || !/(^|\/)(api|eventos)\.js$/.test(fuente)) return null;
+      if (!importador || !/(^|\/)((api|eventos)\.js|App\.jsx)$/.test(fuente)) return null;
       const resuelto = await this.resolve(fuente, importador, { ...opciones, skipSelf: true });
       const destino = resuelto && reemplazos.get(path.normalize(resuelto.id));
       return destino ?? null;

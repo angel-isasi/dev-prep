@@ -35,3 +35,11 @@
 .buscador input::placeholder {
   color: var(--texto-tenue);
 }
+
+/* Celular: pantallas de 600 px o menos */
+@media (max-width: 600px) {
+  .buscador {
+    width: 100% !important;
+    height: 46px;
+  }
+}

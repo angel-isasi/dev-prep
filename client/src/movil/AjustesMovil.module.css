@@ -1,0 +1,90 @@
+.pagina {
+  padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
+}
+
+.bloque {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-3);
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
+  box-shadow: var(--brillo-borde);
+}
+
+.bloque h2 {
+  color: var(--texto-suave);
+  font-family: var(--fuente);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.bloque label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+}
+
+.bloque label span {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.bloque input,
+.bloque textarea {
+  padding: 12px 14px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  background: var(--codigo-fondo);
+  color: var(--texto);
+  font: inherit;
+  font-size: 16px; /* 16 px o más: así el celular no hace zoom al escribir */
+}
+
+.bloque textarea {
+  resize: vertical;
+}
+
+.ancho {
+  justify-content: center;
+  width: 100%;
+  min-height: 46px;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espacio-2);
+}
+
+.fila :global(.boton) {
+  justify-content: center;
+  min-height: 46px;
+}
+
+.ayuda {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.aviso {
+  padding: var(--espacio-3) var(--espacio-4);
+  border-radius: var(--radio);
+  background: var(--acento-suave);
+  font-size: 14px;
+}
+
+.aviso[data-tipo="exito"] {
+  background: var(--exito-suave);
+  color: var(--exito);
+}
+
+.aviso[data-tipo="error"] {
+  background: var(--error-suave);
+  color: var(--error);
+}

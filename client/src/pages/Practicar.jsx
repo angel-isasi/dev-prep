@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { api } from "../lib/api.js";
+import { ES_MOVIL } from "../lib/modo.js";
 import { AREAS, ejercicioAlAzar, siguienteEjercicio } from "../lib/areas.js";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
@@ -35,6 +36,9 @@ export function Practicar() {
   const deColeccion = (id) => ejercicios.filter((e) => e.coleccion === id);
   const deArea = (area) => area.colecciones.flatMap((c) => deColeccion(c.id));
   const resueltos = (lista) => lista.filter((e) => e.estado === "resuelto").length;
+  // En el celular no se resuelve: se cuenta lo estudiado.
+  const hechos = (lista) => (ES_MOVIL ? lista.filter((e) => e.estado !== "pendiente").length : resueltos(lista));
+  const palabraHechos = ES_MOVIL ? "estudiados" : "resueltos";
   const repasos = ejercicios.filter((e) => e.estado === "repasar");
 
   const ir = (ej) => ej && navigate(`/practicar/${ej.id}`);
@@ -47,7 +51,7 @@ export function Practicar() {
   return (
     <section className={estilos.pagina}>
       <CabeceraPagina
-        etiqueta={`${ejercicios.length} ejercicios · ${resueltos(ejercicios)} resueltos`}
+        etiqueta={`${ejercicios.length} ejercicios · ${hechos(ejercicios)} ${palabraHechos}`}
         titulo="Practicar"
         acciones={
           <Buscador
@@ -59,7 +63,9 @@ export function Practicar() {
           />
         }
       >
-        Elige un área y una colección. Cada ejercicio se abre en VS Code y los tests corren solos al guardar.
+        {ES_MOVIL
+          ? "Estudia los ejercicios: enunciado, pistas y solución explicada. Resolverlos con tests es en la laptop."
+          : "Elige un área y una colección. Cada ejercicio se abre en VS Code y los tests corren solos al guardar."}
       </CabeceraPagina>
 
       {repasos.length > 0 && (
@@ -88,7 +94,7 @@ export function Practicar() {
       {AREAS.map((area) => {
         const lista = deArea(area);
         if (lista.length === 0) return null;
-        const hechosArea = resueltos(lista);
+        const hechosArea = hechos(lista);
         return (
           <section key={area.id} className={estilos.area} data-area={area.id}>
             <header className={estilos.areaCabecera}>
@@ -101,7 +107,7 @@ export function Practicar() {
               </div>
               <div className={estilos.areaDatos}>
                 <span className={estilos.areaCuenta}>
-                  <strong>{hechosArea}</strong>/{lista.length} resueltos
+                  <strong>{hechosArea}</strong>/{lista.length} {palabraHechos}
                 </span>
                 <BotonAzar onClick={() => ir(ejercicioAlAzar(lista))} />
               </div>
@@ -112,10 +118,10 @@ export function Practicar() {
                 .map((c) => ({ c, ejs: deColeccion(c.id) }))
                 .filter(({ ejs }) => ejs.length > 0)
                 .map(({ c, ejs }) => {
-                  const hechos = resueltos(ejs);
+                  const hechosCol = hechos(ejs);
                   const siguiente = siguienteEjercicio(ejs);
                   const niveles = NIVELES.map(({ n, nombre }) => ({ n, nombre, total: ejs.filter((e) => e.nivel === n).length }));
-                  const pct = (hechos / ejs.length) * 100;
+                  const pct = (hechosCol / ejs.length) * 100;
                   return (
                     <MagicCard
                       key={c.id}
@@ -129,7 +135,7 @@ export function Practicar() {
                           <div className={estilos.coleccionCabeza}>
                             <h3>{c.nombre}</h3>
                             <span className={estilos.cuenta}>
-                              <strong>{hechos}</strong>
+                              <strong>{hechosCol}</strong>
                               <small>/{ejs.length}</small>
                             </span>
                           </div>
