@@ -356,3 +356,16 @@ Unas 40 funciones en 5 bloques, todas en la versión web y con sus reglas en mó
 - **Avisos**: Web Push sin librerías (`server/webpush.js`, probado con el ejemplo del RFC 8291), reglas de cuándo avisar (`server/avisos.js`) y Lambda empaquetada (`aws/lambda`).
 - **Inglés**: `content/ingles/{basico,intermedio,trabajo}` (formato en `docs/guia-ingles.md`), ítems en `scripts/items/ingles.js`.
 - **Trabajo**: postulaciones, ofertas (`server/ofertas.js`), CV, portafolio (`server/portafolio.js`), pruebas técnicas y proyecto guiado (`server/proyectos.js`, formato en `docs/guia-proyectos.md`).
+
+## Plan v4 (2026-11-16): diseño que fluye, entrevista completa y práctica de trabajo real
+
+Ideas elegidas por Angel después del plan v3. Todas con sus reglas en módulos puros de `server/` y tests:
+
+- **Diseño**: scroll suave con Lenis (el bucle de animación solo corre mientras te mueves, `client/src/hooks/useScrollSuave.js`), transición entre pantallas con View Transitions, listas animadas con AutoAnimate (`ListaAnimada`) y texto de lectura a 72 caracteres por línea.
+- **Entrevistas**: simulacro por etapas (`server/simulacro.js`, contenido en `content/entrevistas/proceso.json`), preguntas de recursos humanos y "Defiende tu proyecto" (`content/entrevistas/preguntas/11` y `12`), repaso rápido de HTML y CSS.
+- **Practicar**: colecciones `javascript/testing` (pruebas de mutación) y `react/apis`, API de práctica (`server/api-practica.js`), Git práctico (`server/git-practico.js`, escenarios en `content/git/escenarios.json`, cada uno probado con git real) y reto de la semana.
+- **Progreso**: cuánto avancé, plan de la semana y reto (`server/avance.js`), tu día en números, pregunta ancla.
+- **Inglés**: shadowing en cada unidad y 2 unidades nuevas (sonidos difíciles y falsos amigos).
+- **Trabajo**: ofertas para ti (`server/ofertas-auto.js`, APIs públicas, sin scraping ni IA) y el proyecto guiado "Primer día de trabajo" con tickets.
+
+Quedan para más adelante: avisar al celular cuando aparezca una oferta muy buena (necesita actualizar la Lambda de AWS) y las ideas que necesitan una clave de IA (convocatorias de prácticas día por día, conversación en inglés).

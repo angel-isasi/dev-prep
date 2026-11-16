@@ -15,7 +15,7 @@ Programas en VS Code, guardas con `Ctrl + S` y la app muestra al instante qué t
   - **Explícalo con tus palabras** y compáralo con la respuesta modelo.
   - **Repaso espaciado**: lo que resolviste vuelve en 1, 3, 7, 14 y 30 días.
   - **Modo entrevista**: cronómetro de 20 minutos.
-- **Entrevistas**: 100 preguntas en tarjetas (español e inglés) con lo que el entrevistador quiere escuchar, simulacro de 30 minutos, tu pitch de 1 minuto y tus historias STAR.
+- **Entrevistas**: más de 150 preguntas en tarjetas (español e inglés) con lo que el entrevistador quiere escuchar, simulacro por etapas, tu pitch de 1 minuto y tus historias STAR.
 - **Progreso**: calendario de actividad, avance por tema y resumen semanal.
 - **Referencia**: un mini MDN offline con buscador (arrays, strings, objetos, promesas, DOM, React...).
 - Modo oscuro y modo claro.
@@ -28,7 +28,11 @@ Todo lo anterior más lo que sigue. En tu laptop, con dev-prep abierto (arranca 
 - **Aprender mejor**: ejercicios de depurar código roto, Lee y predice (¿qué imprime?), revisión de código, glosario para entrevistas, explícalo en 60 segundos, mapa de lo que dominas y tus errores más frecuentes con un entrenamiento de tus puntos débiles.
 - **Motivación**: tiempo libre ganado para jugar (se desbloquea al cumplir tu meta, con deuda si te pasas; el motor de la laptop mide el juego solo), niveles e insignias, sonidos suaves, plan de hoy, día salvado, mi horario y semanas de exámenes, examen semanal, modo enfoque, reto y resumen del mes, diario de una línea y semáforo para postular.
 - **Avisos**: notificaciones al celular y a la laptop a tu hora habitual si no estudiaste, última llamada para tu racha, examen del sábado y resumen del domingo (máximo 2 al día). Atajos al mantener presionado el ícono de la app.
-- **Conseguir trabajo**: postulaciones con las preguntas reales que te hicieron, ¿estoy listo para esta oferta?, CV en PDF, portafolio exportable a un proyecto Vite listo para GitHub, pruebas técnicas para casa con rúbrica y un proyecto guiado por etapas. Grabadora de voz para el simulacro, el pitch y las tarjetas (los audios quedan solo en tu dispositivo).
+- **Conseguir trabajo**: ofertas para ti (ofertas reales de Get on Board, Remotive, RemoteOK y Arbeitnow ordenadas por cuánto te convienen, sin IA), postulaciones con las preguntas reales que te hicieron, ¿estoy listo para esta oferta?, CV en PDF, portafolio exportable a un proyecto Vite listo para GitHub, pruebas técnicas para casa con rúbrica y proyectos guiados por etapas (uno desde cero y otro de "primer día de trabajo" con tickets sobre código ajeno). Grabadora de voz para el simulacro, el pitch y las tarjetas (los audios quedan solo en tu dispositivo).
+- **Simulacro por etapas**: recursos humanos, entrevista técnica con repreguntas sobre tu ejercicio, presentación de tu proyecto ("Defiende tu proyecto", preguntas sobre el propio dev-prep) y cierre con tus preguntas; completo o por etapa, con reflexión y plan de refuerzo.
+- **Practicar más**: "Escribe tú los tests" (tus tests deben atrapar versiones con errores escondidos), "Consumir APIs" (retos de React con una API que tarda o falla), Git práctico (10 situaciones reales con un repositorio de verdad que el motor prepara y revisa) y el reto de la semana con tu marca personal.
+- **Progreso**: plan de la semana armado con tus puntos débiles, "cuánto avancé" (ahora contra hace 1 y 3 meses), tu día en números y la pregunta ancla al terminar de leer una teoría.
+- **API de práctica**: `http://localhost:4321/api/practica` sirve productos y tareas que tardan, fallan o vienen vacíos a propósito (`?retraso=2000`, `?fallo=0.5`, `?estado=500`, `?vacio=1`). Sirve para los retos y para tus proyectos con Vite.
 
 ## Requisitos
 
@@ -85,6 +89,7 @@ Si quieres empezar de cero, **Reiniciar** vuelve al archivo inicial y guarda tu 
 | `data/progreso.json` | Tu progreso (con una copia diaria en `data/respaldos/`) |
 | `data/mis-respuestas.json` | Tu pitch y tus historias STAR |
 | `data/eventos.jsonl` | Historial de lo que haces, para estadísticas futuras |
+| `Documentos/dev-prep-git/` | Los repositorios de Git práctico (puedes borrarlos: se vuelven a crear) |
 
 Ninguna de las dos carpetas se sube a Git.
 
