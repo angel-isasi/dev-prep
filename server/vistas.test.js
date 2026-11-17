@@ -55,9 +55,24 @@ describe("vistas de Aprender", () => {
       descripcion: "d1",
       totalEjercicios: 2,
       resueltos: 1,
+      conAyuda: 0,
       quiz: { mejor: 2, total: 2 },
       preguntasQuiz: 2,
     });
+  });
+
+  test("resumenTema: lo resuelto sigue contando aunque le toque repaso, y lo hecho viendo la solución va aparte", () => {
+    const registros = {
+      e1: { estado: "resuelto", repaso: { caja: 1, proximo: "2000-01-01" } }, // repaso vencido: se ve "repasar"
+      e2: { estado: "repasar", vioSolucion: true },
+    };
+    const r = resumenTema(temas[0], { ...progreso, registros });
+    expect([r.resueltos, r.conAyuda]).toEqual([1, 1]);
+    const d = detalleTema(aprender, "t1", indice, { ...progreso, registros });
+    expect(d.ejercicios.map((e) => [e.estado, e.resuelto, e.conAyuda])).toEqual([
+      ["repasar", true, false],
+      ["repasar", false, true],
+    ]);
   });
 
   test("detalleTema: vecinos solo dentro de la misma área y ejercicios que existen", () => {

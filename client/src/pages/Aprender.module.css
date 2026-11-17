@@ -230,3 +230,9 @@
     font-size: 38px;
   }
 }
+
+/* Hecho viendo la solución: cuenta a medias hasta que lo resuelvas en el repaso */
+.puntos i[data-ayuda="true"] {
+  border-color: var(--aviso);
+  background: linear-gradient(90deg, var(--aviso) 50%, transparent 50%);
+}

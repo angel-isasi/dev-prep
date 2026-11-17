@@ -227,3 +227,23 @@
     grid-column: auto;
   }
 }
+
+/* Resuelto aunque le toque repaso: sigue en verde */
+.pasos li[data-hecho="solo"] .paso {
+  border-color: var(--exito);
+  background: var(--exito);
+  color: var(--sobre-acento);
+}
+
+/* Hecho viendo la solución */
+.pasos li[data-hecho="ayuda"] .paso {
+  border-color: var(--aviso);
+  background: color-mix(in srgb, var(--aviso) 16%, var(--fondo-solido));
+  color: var(--aviso);
+}
+
+.notaAyuda {
+  margin: var(--espacio-4) 0 0;
+  color: var(--texto-suave);
+  font-size: 13px;
+}

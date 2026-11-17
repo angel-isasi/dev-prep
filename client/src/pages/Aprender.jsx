@@ -89,9 +89,13 @@ export function Aprender() {
                   <span className={estilos.descripcion}>{t.descripcion}</span>
                   <div className={estilos.avance}>
                     {/* Un punto por ejercicio guiado: lleno si lo resolviste */}
-                    <span className={estilos.puntos} aria-label={`${t.resueltos} de ${t.totalEjercicios} ejercicios`}>
+                    <span
+                      className={estilos.puntos}
+                      aria-label={`${t.resueltos} de ${t.totalEjercicios} ejercicios resueltos${t.conAyuda ? `, ${t.conAyuda} con ayuda` : ""}`}
+                      title={t.conAyuda ? `${t.conAyuda} hechos viendo la solución: cuentan cuando los resuelvas en el repaso` : undefined}
+                    >
                       {Array.from({ length: t.totalEjercicios }, (_, i) => (
-                        <i key={i} data-lleno={i < t.resueltos} />
+                        <i key={i} data-lleno={i < t.resueltos} data-ayuda={i >= t.resueltos && i < t.resueltos + (t.conAyuda ?? 0)} />
                       ))}
                       <small>
                         {t.resueltos}/{t.totalEjercicios}

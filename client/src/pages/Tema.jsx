@@ -79,8 +79,10 @@ export function Tema() {
             </p>
             <ol className={estilos.pasos}>
               {tema.ejercicios.map((ej, i) => (
-                <li key={ej.id} data-estado={ej.estado}>
-                  <span className={estilos.paso}>{ej.estado === "resuelto" ? "✓" : i + 1}</span>
+                <li key={ej.id} data-estado={ej.estado} data-hecho={ej.resuelto ? "solo" : ej.conAyuda ? "ayuda" : undefined}>
+                  <span className={estilos.paso} title={ej.conAyuda ? "Lo hiciste viendo la solución" : undefined}>
+                    {ej.resuelto || ej.conAyuda ? "✓" : i + 1}
+                  </span>
                   <Link to={`/practicar/${ej.id}`} className={estilos.ejercicio}>
                     <span>{ej.titulo}</span>
                     <Insignia nivel={ej.nivel} />
@@ -89,6 +91,12 @@ export function Tema() {
                 </li>
               ))}
             </ol>
+            {tema.ejercicios.some((ej) => ej.conAyuda) && (
+              <p className={estilos.notaAyuda}>
+                Los marcados en ámbar los hiciste viendo la solución: no cuentan como resueltos todavía. Vuelven en tu repaso (desde mañana)
+                y, si los resuelves sin mirarla, se ponen en verde.
+              </p>
+            )}
           </div>
         )}
 
