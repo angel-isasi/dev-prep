@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { api } from "../lib/api.js";
-import { Markdown } from "../components/Markdown.jsx";
+import { TeoriaTema } from "../components/TeoriaTema.jsx";
 import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
 import { Insignia } from "../components/Insignia.jsx";
 import { Quiz } from "../components/Quiz.jsx";
@@ -35,7 +35,7 @@ export function Tema() {
   const mejor = tema.resultadoQuiz?.mejor ?? tema.quiz?.mejor;
 
   return (
-    <article className={estilos.pagina} data-area={tema.area}>
+    <article className={estilos.pagina} data-area={tema.area} data-pestana={pestana}>
       <Link to={`/aprender?area=${tema.area}`} className={estilos.volver}>
         <IconoFlechaIzq /> Aprender
       </Link>
@@ -65,9 +65,7 @@ export function Tema() {
       <ContenidoPestanas activa={pestana} orden={["teoria", "ejercicios", "quiz"]} className={estilos.contenido}>
         {pestana === "teoria" && (
           <>
-            <div className={`tarjeta ${estilos.teoria}`}>
-              <Markdown>{tema.teoria}</Markdown>
-            </div>
+            <TeoriaTema id={tema.id} markdown={tema.teoria} />
             <PreguntaAncla key={tema.id} preguntas={tema.quiz} alSeguir={() => setPestana("ejercicios")} />
           </>
         )}

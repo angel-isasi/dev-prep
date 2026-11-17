@@ -29,6 +29,19 @@ export function subirArriba({ suave = false } = {}) {
     });
 }
 
+/** Desliza la pantalla hasta un elemento (con un poco de aire arriba). */
+export function irA(elemento, { aire = 20 } = {}) {
+  if (!elemento) return;
+  if (lenis) {
+    lenis.scrollTo(elemento, { offset: -aire });
+    arrancarBucle();
+  } else {
+    const caja = contenedor ?? document.scrollingElement;
+    const arriba = elemento.getBoundingClientRect().top - (contenedor?.getBoundingClientRect().top ?? 0);
+    caja.scrollTo({ top: caja.scrollTop + arriba - aire, behavior: "smooth" });
+  }
+}
+
 /**
  * @param {import("react").RefObject<HTMLElement>} ref  el elemento que tiene el scroll (el <main> del Layout)
  */

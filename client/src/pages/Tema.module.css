@@ -4,6 +4,11 @@
   padding: var(--espacio-5) var(--espacio-6) var(--espacio-7);
 }
 
+/* La teoría usa todo el ancho: índice, concepto y chuleta lado a lado */
+.pagina[data-pestana="teoria"] {
+  max-width: 1480px;
+}
+
 .mensaje {
   padding: var(--espacio-6);
   color: var(--texto-suave);
@@ -62,11 +67,6 @@
   margin: var(--espacio-2) 0 0;
   color: var(--texto-suave);
   font-size: 17px;
-}
-
-.teoria {
-  padding: var(--espacio-5) var(--espacio-6);
-  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
 }
 
 /* Ejercicios como pasos de un camino */
@@ -216,9 +216,6 @@
   }
   .cabecera p {
     font-size: 15px;
-  }
-  .teoria {
-    padding: var(--espacio-4);
   }
   .navegacion {
     grid-template-columns: 1fr;
