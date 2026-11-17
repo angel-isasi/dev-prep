@@ -143,7 +143,9 @@
   top: var(--espacio-5);
   align-self: start;
   max-height: calc(100vh - var(--espacio-6));
+  overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 @media (max-width: 1000px) {

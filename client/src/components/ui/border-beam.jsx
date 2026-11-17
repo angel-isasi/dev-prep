@@ -17,9 +17,11 @@ export function BorderBeam({
   const reducido = useReducedMotion();
   if (reducido) return null;
 
+  // La capa de afuera recorta: el cuadrado de luz se dibuja medio afuera del borde, y aunque la máscara
+  // lo oculta, sin este recorte igual ocupa espacio y hace aparecer barras de scroll en el contenedor.
   return (
+    <div aria-hidden style={{ position: "absolute", inset: 0, overflow: "hidden", borderRadius: "inherit", pointerEvents: "none" }}>
     <div
-      aria-hidden
       className="tw pointer-events-none absolute inset-0 rounded-[inherit] border-(length:--border-beam-width) border-transparent mask-[linear-gradient(transparent,transparent),linear-gradient(#000,#000)] mask-intersect [mask-clip:padding-box,border-box]"
       style={{ "--border-beam-width": `${borderWidth}px` }}
     >
@@ -42,6 +44,7 @@ export function BorderBeam({
         }}
         transition={{ repeat: Infinity, ease: "linear", duration, delay: -delay }}
       />
+    </div>
     </div>
   );
 }
