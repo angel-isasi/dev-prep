@@ -16,6 +16,7 @@ import { TarjetaNivel } from "../components/Logros.jsx";
 import { PlanDeHoy, ResumenMes } from "../components/Rutina.jsx";
 import { DiaEnNumeros, PlanSemana, RetoSemana } from "../components/Avance.jsx";
 import estilos from "./HoyMovil.module.css";
+import { IconoRepetir } from "../components/Iconos.jsx";
 
 const AREAS = ["javascript", "react", "typescript", "node"];
 
@@ -123,7 +124,9 @@ export function HoyMovil() {
           )}
           {repasos.slice(0, 5).map((e) => (
             <Link key={e.id} to={`/practicar/${e.id}`} className={estilos.tarjeta} data-tipo="ejercicio">
-              <span className={estilos.numero}>↻</span>
+              <span className={estilos.numero}>
+<IconoRepetir tamano={18} />
+</span>
               <span className={estilos.texto}>
                 <strong>{e.titulo}</strong>
                 <small>Repasar · {nombreColeccion(e.coleccion)}</small>

@@ -9,6 +9,7 @@ import { Grabadora } from "./Grabadora.jsx";
 import { Markdown } from "./Markdown.jsx";
 import { Cronometro, mmss } from "./Cronometro.jsx";
 import estilos from "./Simulacro.module.css";
+import { IconoEntrevistas, IconoPracticar, IconoTrabajo } from "./Iconos.jsx";
 
 /** Lo que mira un entrevistador además de la respuesta correcta. */
 const COMUNICACION = [
@@ -46,7 +47,7 @@ const TEXTOS = {
   hecho: "Lo resolví",
   "no-llegue": "No llegué",
 };
-const ICONOS = { rrhh: "☺", tecnica: "</>", proyecto: "◆", cierre: "✓" };
+const ICONOS = { rrhh: <IconoEntrevistas />, tecnica: <IconoPracticar />, proyecto: <IconoTrabajo />, cierre: "✓" };
 
 /**
  * Simulacro de entrevista por etapas, como un proceso real: recursos humanos, técnica (con

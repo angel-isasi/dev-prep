@@ -12,6 +12,7 @@ import { avanceConceptos } from "./variantes.js";
 import { hechaPorExamen } from "../ingles/examen.js";
 import { celebrar } from "../../lib/celebrar.js";
 import estilos from "./CaminoMovil.module.css";
+import { IconoEstrella, IconoRegalo } from "../../components/Iconos.jsx";
 
 const AREAS = { javascript: "JavaScript", algoritmos: "Algoritmos", react: "React", typescript: "TypeScript", node: "Node.js y SQL" };
 // Desplazamiento horizontal de cada nodo (en px): una onda suave, como un sendero.
@@ -108,7 +109,7 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
                     aria-expanded={abierta === u.id}
                   >
                     <AnilloProgreso valor={hecha ? 1 : av.porcentaje} tamano={72} grosor={6} completo={hecha}>
-                      <span className={estilos.numero}>{legendaria ? "★" : hecha ? "✓" : String(u.orden ?? i + 1).padStart(2, "0")}</span>
+                      <span className={estilos.numero}>{legendaria ? <IconoEstrella tamano={26} llena /> : hecha ? "✓" : String(u.orden ?? i + 1).padStart(2, "0")}</span>
                     </AnilloProgreso>
                     <span className={estilos.nombre}>{u.titulo}</span>
                     {ingles && (
@@ -155,7 +156,7 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
                             </div>
                             <small className={estilos.nota}>
                               Nivel {av.nivel} de 5{av.leccionesFaltan > 0 ? ` · unas ${av.leccionesFaltan} lecciones para verla completa` : " · ya la viste completa"}
-                              {legendaria ? " · legendaria ★" : ""}
+                              {legendaria ? " · legendaria" : ""}
                             </small>
                           </div>
                         ) : (
@@ -165,7 +166,8 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
                         )}
                         {cofre?.unidad === u.id && (
                           <div className={estilos.premio}>
-                            <strong>🎁 +{cofre.xp} XP{cofre.yaAbierto ? " (ya lo habías abierto)" : ""}</strong>
+                            <strong>
+<IconoRegalo tamano={16} /> +{cofre.xp} XP{cofre.yaAbierto ? " (ya lo habías abierto)" : ""}</strong>
                             {cofre.frase && (
                               <p>
                                 Frase para el trabajo: <em lang="en">{cofre.frase.en}</em>
@@ -191,12 +193,12 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
                           )}
                           {ingles && av.completa && !cofreAbierto && (
                             <button type="button" className="boton boton-primario" onClick={() => abrirCofre(u.id)}>
-                              🎁 Abrir cofre
+                              <IconoRegalo tamano={16} /> Abrir cofre
                             </button>
                           )}
                           {ingles && av.completa && (
                             <Link to={leccion(u.id, "&modo=legendario")} className="boton">
-                              {legendaria ? "★ Repetir legendario" : "★ Nivel legendario"}
+                              <IconoEstrella tamano={16} llena /> {legendaria ? "Repetir legendario" : "Nivel legendario"}
                             </Link>
                           )}
                           {!actual && (

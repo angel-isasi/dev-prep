@@ -7,6 +7,7 @@ import { Markdown } from "../../components/Markdown.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { Grabadora } from "../../components/Grabadora.jsx";
 import estilos from "./Ingles.module.css";
+import { IconoAudio, IconoEstrella } from "../../components/Iconos.jsx";
 
 export function InglesUnidad() {
   const { id } = useParams();
@@ -64,7 +65,7 @@ export function InglesUnidad() {
                   onClick={() => hablar(p.ejemplo?.en ? `${p.en}. ${p.ejemplo.en}` : p.en)}
                   aria-label={`Escuchar ${p.en}`}
                 >
-                  🔊
+                  <IconoAudio tamano={18} />
                 </button>
               )}
               <button
@@ -76,7 +77,7 @@ export function InglesUnidad() {
                   setMias(await api.misPalabras());
                 }}
               >
-                {mias[p.id] ? "★" : "☆"}
+                <IconoEstrella tamano={18} llena={!!mias[p.id]} />
               </button>
               <div>
                 <strong>{p.en}</strong> <span className={estilos.pron}>{p.pron}</span>
@@ -113,7 +114,7 @@ export function InglesUnidad() {
                 <strong>{d.titulo}</strong>
                 {voz && (
                   <button type="button" className="boton" onClick={() => hablarVarias(d.lineas.map((l) => l.en))}>
-                    🔊 Escuchar
+                    <IconoAudio tamano={16} /> Escuchar
                   </button>
                 )}
               </div>
@@ -158,7 +159,7 @@ function Shadowing({ frases }) {
         <small className={estilos.es}>{frase.es}</small>
         <div className={estilos.accionesFila}>
           <button type="button" className="boton boton-primario" onClick={() => hablar(frase.en, { lento })}>
-            🔊 Escuchar
+            <IconoAudio tamano={16} /> Escuchar
           </button>
           <label className={estilos.velocidad}>
             <input type="checkbox" checked={lento} onChange={(e) => setLento(e.target.checked)} /> Más lento

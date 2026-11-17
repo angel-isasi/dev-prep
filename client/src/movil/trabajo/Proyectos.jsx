@@ -226,7 +226,7 @@ function DetalleProyecto({ proyecto, alVolver }) {
               <ul>
                 {(a.casos ?? []).map((c) => (
                   <li key={c.nombre}>
-                    {c.ok ? "✅" : "❌"} {c.nombre}
+                    <span style={{ color: c.ok ? "var(--exito)" : "var(--error)", fontWeight: 700 }}>{c.ok ? "✓" : "✕"}</span> {c.nombre}
                   </li>
                 ))}
               </ul>

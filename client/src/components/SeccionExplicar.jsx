@@ -3,6 +3,7 @@ import { Markdown } from "./Markdown.jsx";
 import { api } from "../lib/api.js";
 import { useAhora } from "../hooks/useAhora.js";
 import estilos from "./Secciones.module.css";
+import { IconoReloj } from "./Iconos.jsx";
 
 const SEGUNDOS = 60;
 const NOTAS = [
@@ -81,7 +82,7 @@ export function SeccionExplicar({ id, resuelto, textoGuardado, modelo, alGuardar
               setReloj({ inicio: Date.now() });
             }}
           >
-            ⏱ Explícalo en {SEGUNDOS} segundos
+            <IconoReloj tamano={16} /> Explícalo en {SEGUNDOS} segundos
           </button>
           <span className={estilos.intro}>Como en la entrevista: sin pensarlo demasiado.</span>
         </div>

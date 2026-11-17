@@ -7,6 +7,7 @@ const CLAVE_IDIOMA = "devprep-tarjetas-en";
 import { motion } from "motion/react";
 import { Markdown } from "./Markdown.jsx";
 import estilos from "./Tarjeta.module.css";
+import { IconoAudio } from "./Iconos.jsx";
 
 const NOTAS = [
   { valor: "no", texto: "No lo sabía", tipo: "error" },
@@ -45,7 +46,7 @@ export function Tarjeta({ pregunta, alCalificar, posicion, grabar = false, enIng
           {posicion && <span className={estilos.posicion}>{posicion}</span>}
           {ingles && pregunta.preguntaEn && hayVoz() && (
             <button type="button" className={estilos.idioma} onClick={() => hablar(pregunta.preguntaEn)} aria-label="Escuchar la pregunta en inglés">
-              🔊
+              <IconoAudio tamano={16} />
             </button>
           )}
           <button type="button" className={estilos.idioma} onClick={() => setIngles((v) => !v)}>

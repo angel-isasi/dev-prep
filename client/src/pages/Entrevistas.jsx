@@ -13,6 +13,7 @@ import { MagicCard } from "../components/ui/magic-card.jsx";
 import { ShineBorder } from "../components/ui/shine-border.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import estilos from "./Entrevistas.module.css";
+import { IconoChispa } from "../components/Iconos.jsx";
 
 export function Entrevistas() {
   const [resumen, setResumen] = useState(api.entrevistas.guardado);
@@ -132,7 +133,7 @@ function ElegirMazo({ resumen, alEmpezar }) {
         </button>
         <button type="button" className={estilos.mazo} onClick={() => alEmpezar("Preguntas nuevas", { modo: "nuevas" })}>
           <span className={estilos.mazoIcono} aria-hidden>
-            ✦
+            <IconoChispa />
           </span>
           <span className={estilos.mazoTexto}>
             <strong>Preguntas nuevas</strong>

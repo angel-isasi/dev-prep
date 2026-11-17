@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useAhora } from "../hooks/useAhora.js";
 import estilos from "./Grabadora.module.css";
+import { IconoMicrofono } from "./Iconos.jsx";
 
 const BASE = "devprep-audios";
 const MAX_AUDIOS = 20;
@@ -113,7 +114,7 @@ export function Grabadora({ clave, maxSegundos = 120, texto = "Grabar mi respues
         </button>
       ) : (
         <button type="button" className="boton" onClick={grabar}>
-          🎙 {audio ? "Grabar de nuevo" : texto}
+          <IconoMicrofono tamano={16} /> {audio ? "Grabar de nuevo" : texto}
         </button>
       )}
       {audio && estado !== "grabando" && (

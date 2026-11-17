@@ -10,6 +10,7 @@ import { escucharVoz, hablar, hablarVarias, hayVoz } from "../../lib/voz.js";
 import { hablaCorrecta } from "../../../../scripts/items/ingles.js";
 import { barajar, semilla } from "./motor.js";
 import estilos from "./Items.module.css";
+import { IconoAudio, IconoMicrofono } from "../../components/Iconos.jsx";
 
 const TITULOS = {
   quiz: "Responde",
@@ -63,10 +64,10 @@ export function BotonAudio({ texto, auto = false, grande = false, etiqueta = "Es
   return (
     <div className={estilos.audios} data-grande={grande}>
       <button type="button" className={estilos.audio} onClick={() => hablar(texto)} aria-label={etiqueta}>
-        <span aria-hidden>🔊</span> {grande ? etiqueta : null}
+        <IconoAudio tamano={18} /> {grande ? etiqueta : null}
       </button>
       <button type="button" className={estilos.audio} data-lento onClick={() => hablar(texto, { lento: true })} aria-label="Escuchar lento">
-        <span aria-hidden>🐢</span>
+        <span className={estilos.lento}>lento</span>
       </button>
     </div>
   );
@@ -84,7 +85,7 @@ function Dialogo({ dialogo, traducir }) {
       {hayVoz() && (
         <div className={estilos.dialogoBotones}>
           <button type="button" className="boton boton-primario" onClick={() => hablarVarias(dialogo.lineas.map((l) => l.en))}>
-            🔊 Escuchar todo
+            <IconoAudio tamano={16} /> Escuchar todo
           </button>
           {oculto && (
             <button type="button" className="boton boton-fantasma" onClick={() => setVerTexto(true)}>
@@ -102,7 +103,7 @@ function Dialogo({ dialogo, traducir }) {
           </span>
           {hayVoz() && (
             <button type="button" className={estilos.audio} onClick={() => hablar(l.en)} aria-label="Escuchar esta línea">
-              🔊
+              <IconoAudio tamano={16} />
             </button>
           )}
         </div>
@@ -464,7 +465,7 @@ export function ItemHablar({ item, alResultado, alSaltar, bloqueado }) {
       </div>
       <BotonAudio texto={item.texto} etiqueta="Oír cómo se dice" grande />
       <button type="button" className={estilos.microfono} data-estado={estado} onClick={escuchar} disabled={bloqueado || estado === "escuchando"}>
-        <span aria-hidden>🎙️</span>
+        <IconoMicrofono tamano={20} />
         {estado === "escuchando" ? "Te escucho…" : "Toca y habla"}
       </button>
       {dicho && <p className={estilos.ayuda}>Entendí: “{dicho}”</p>}

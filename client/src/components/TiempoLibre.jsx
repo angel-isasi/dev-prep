@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { useEvento } from "../hooks/useEvento.js";
 import { ES_MOVIL } from "../lib/modo.js";
 import estilos from "./TiempoLibre.module.css";
+import { IconoCandado, IconoTrofeo } from "./Iconos.jsx";
 
 const horas = (min) => (min >= 60 ? `${Math.floor(min / 60)} h ${min % 60 ? `${min % 60} min` : ""}`.trim() : `${min} min`);
 
@@ -32,7 +33,7 @@ export function TiempoLibre({ juego: inicial, meta, salvados, jefe }) {
           <span className={estilos.etiqueta}>{jugando ? "Jugando ahora" : "Tiempo libre de hoy"}</span>
           {juego.bloqueado ? (
             <strong>
-              🔒 Bloqueado · te {juego.faltaParaDesbloquear === 1 ? "falta 1 ejercicio o repaso" : `faltan ${juego.faltaParaDesbloquear} ejercicios o repasos`}
+              <IconoCandado tamano={14} /> Bloqueado · te {juego.faltaParaDesbloquear === 1 ? "falta 1 ejercicio o repaso" : `faltan ${juego.faltaParaDesbloquear} ejercicios o repasos`}
             </strong>
           ) : (
             <strong>
@@ -74,7 +75,8 @@ export function TiempoLibre({ juego: inicial, meta, salvados, jefe }) {
 
       {jefe && (
         <Link to={`/practicar/${jefe.id}`} className={estilos.jefe}>
-          <span>⚔️ Jefe de la semana · +45 min</span>
+          <span>
+<IconoTrofeo tamano={16} /> Jefe de la semana · +45 min</span>
           <strong>{jefe.titulo} →</strong>
         </Link>
       )}

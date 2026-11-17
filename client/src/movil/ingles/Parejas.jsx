@@ -10,6 +10,7 @@ import { hablar, hayVoz } from "../../lib/voz.js";
 import { barajar } from "../leccion/motor.js";
 import { Bit } from "../../components/Bit.jsx";
 import estilos from "./Historias.module.css";
+import { IconoLlamita } from "../../components/Iconos.jsx";
 
 const SEGUNDOS = 60;
 const EN_TABLERO = 5;
@@ -201,7 +202,9 @@ export function ParejasMovil() {
         </span>
         {combo >= 3 && (
           <span>
-            <strong>🔥 {combo}</strong> seguidas
+            <strong>
+<IconoLlamita tamano={16} /> {combo}
+</strong> seguidas
           </span>
         )}
       </div>

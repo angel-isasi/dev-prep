@@ -13,6 +13,7 @@ import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { Bit } from "../../components/Bit.jsx";
 import { barajar, semilla } from "../leccion/motor.js";
 import estilos from "./Historias.module.css";
+import { IconoEntrevistas } from "../../components/Iconos.jsx";
 
 // Orden de las opciones barajado pero estable (la misma pregunta siempre igual): así la correcta no cae siempre en el mismo lugar.
 const ordenDe = (opciones, clave) => barajar(opciones.map((_, i) => i), semilla(clave));
@@ -71,7 +72,7 @@ export function ListaHistorias() {
                   {roleplays.map((r) => (
                     <li key={r.id}>
                       <Link to={`/ingles/roleplay/${r.id}`} className={estilos.fila} data-hecha={!!datos.hechas[r.id]} data-tipo="roleplay">
-                        <span className={estilos.numero}>{datos.hechas[r.id] ? "✓" : "💬"}</span>
+                        <span className={estilos.numero}>{datos.hechas[r.id] ? "✓" : <IconoEntrevistas />}</span>
                         <span>
                           <strong>{r.titulo}</strong>
                           <small>{r.situacion}</small>

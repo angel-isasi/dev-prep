@@ -6,6 +6,7 @@ import { hablar, hayVoz } from "../../lib/voz.js";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 import estilos from "./Practica.module.css";
+import { IconoAudio } from "../../components/Iconos.jsx";
 
 const normal = (t) =>
   String(t ?? "")
@@ -62,7 +63,7 @@ export function Glosario() {
                     )}
                     {voz && t.en && (
                       <button type="button" className="boton" onClick={() => hablar(t.en)}>
-                        🔊 Cómo se dice: {t.en}
+                        <IconoAudio tamano={16} /> Cómo se dice: {t.en}
                       </button>
                     )}
                   </div>

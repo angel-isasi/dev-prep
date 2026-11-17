@@ -17,6 +17,7 @@ import { hablar, hayMicrofono, hayVoz } from "../../lib/voz.js";
 import { elegirVariante, emparejarDe, variarPasos } from "./variantes.js";
 import { Bit, fraseDeBit } from "../../components/Bit.jsx";
 import estilos from "./LeccionMovil.module.css";
+import { IconoCorazon, IconoLlamita, IconoRepetir } from "../../components/Iconos.jsx";
 
 /** A dónde lleva "Ver más" según de dónde salió el ítem. */
 function enlaceFuente(fuente) {
@@ -267,7 +268,7 @@ export function LeccionMovil() {
               className="boton"
               onClick={() => navegar(`/leccion?ambito=ingles&claves=${encodeURIComponent(final.fallados.map((p) => p.clave).join(","))}`)}
             >
-              ↺ Repasar {final.fallados.length === 1 ? "esta" : `estas ${final.fallados.length}`} ahora
+              <IconoRepetir tamano={16} /> Repasar {final.fallados.length === 1 ? "esta" : `estas ${final.fallados.length}`} ahora
             </button>
           </div>
         )}
@@ -322,19 +323,19 @@ export function LeccionMovil() {
         </div>
         {(sesion.combo ?? 0) >= 3 && (
           <motion.span key={sesion.combo} className={estilos.combo} initial={{ scale: 1.4 }} animate={{ scale: 1 }} title="Aciertos seguidos">
-            🔥 {sesion.combo}
+            <IconoLlamita tamano={16} /> {sesion.combo}
           </motion.span>
         )}
         {sesion.vidas !== null && sesion.vidas !== undefined && (
           <span className={estilos.vidas} title="Vidas">
-            ❤️ {sesion.vidas}
+            <IconoCorazon tamano={16} /> {sesion.vidas}
           </span>
         )}
       </header>
       <AnimatePresence>
         {hito && (
           <motion.div className={estilos.hito} initial={{ opacity: 0, y: 20, scale: 0.8 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -20 }}>
-            🔥 ¡{hito} seguidas!
+            <IconoLlamita tamano={22} /> ¡{hito} seguidas!
           </motion.div>
         )}
       </AnimatePresence>

@@ -13,6 +13,7 @@ import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { Llama } from "../../components/Llama.jsx";
 import { SlidingNumber } from "../../components/ui/sliding-number.jsx";
 import { CaminoMovil } from "../leccion/CaminoMovil.jsx";
+import { IconoAudifonos, IconoEstrella, IconoFlechaDer, IconoLibro, IconoMezclar, IconoOido, IconoPlay, IconoRayo, IconoRegalo, IconoReloj, IconoRepetir } from "../../components/Iconos.jsx";
 import estilos from "./Ingles.module.css";
 
 /** Inglés real para escuchar fuera de la app, por nivel. Lo que escuches lo anotas en "Inmersión". */
@@ -74,7 +75,7 @@ export function InglesMovil() {
     const r = await api.cobrarCofreDiario({ conMicro: hayMicrofono() });
     if (r) {
       celebrar("logro");
-      setAviso(`🎁 Cofre del día: +${r.xp} XP`);
+      setAviso(`Cofre del día: +${r.xp} XP`);
     }
     cargar();
   }
@@ -137,8 +138,8 @@ export function InglesMovil() {
           )}
 
           <Link to={leccion()} className={`boton boton-primario ${estilos.continuar}`}>
-            <span className={estilos.iconoFicha} aria-hidden>
-              ◎
+            <span className={estilos.play} aria-hidden>
+              <IconoPlay tamano={20} />
             </span>
             <span>
               <strong>Rutina de hoy</strong>
@@ -173,68 +174,31 @@ export function InglesMovil() {
 
           <div className={`textura ${estilos.tarjetaLateral}`}>
             <h2>Más práctica</h2>
-            <div className={estilos.acciones}>
-              <Link to={leccion("rapida")} className="boton brillo">
-                <span className={estilos.iconoFicha} aria-hidden>
-                  ⚡
-                </span>
-                <strong>Inglés rápido</strong>
-                <small>5 ejercicios</small>
-              </Link>
-              {conVoz && (
-                <Link to={leccion("escuchar")} className="boton brillo">
-                  <span className={estilos.iconoFicha} aria-hidden>
-                    ♪
-                  </span>
-                  <strong>Solo escuchar</strong>
-                  <small>oído y dictado</small>
-                </Link>
-              )}
-              <Link to="/ingles/historias" className="boton brillo">
-                <span className={estilos.iconoFicha} aria-hidden>
-                  📖
-                </span>
-                <strong>Historias</strong>
-                <small>la serie de Ana y roleplays</small>
-              </Link>
-              <Link to="/ingles/parejas" className="boton brillo">
-                <span className={estilos.iconoFicha} aria-hidden>
-                  ⏱
-                </span>
-                <strong>Parejas</strong>
-                <small>60 segundos contrarreloj</small>
-              </Link>
-              <Link to={leccion("mezcla")} className="boton brillo">
-                <span className={estilos.iconoFicha} aria-hidden>
-                  ⇄
-                </span>
-                <strong>Repaso mezclado</strong>
-                <small>de todas tus unidades</small>
-              </Link>
-              {conVoz && (
-                <Link to={leccion("oido")} className="boton brillo">
-                  <span className={estilos.iconoFicha} aria-hidden>
-                    👂
-                  </span>
-                  <strong>Oído fino</strong>
-                  <small>ship o sheep</small>
-                </Link>
-              )}
-              <Link to={leccion("errores")} className="boton brillo">
-                <span className={estilos.iconoFicha} aria-hidden>
-                  ↺
-                </span>
-                <strong>Mis errores</strong>
-                <small>lo que fallaste</small>
-              </Link>
-              <Link to={leccion("mispalabras")} className="boton brillo">
-                <span className={estilos.iconoFicha} aria-hidden>
-                  ★
-                </span>
-                <strong>Mis palabras</strong>
-                <small>las que marcaste con ★</small>
-              </Link>
-            </div>
+            <ul className={estilos.modos}>
+              {[
+                { a: leccion("rapida"), Icono: IconoRayo, titulo: "Inglés rápido", sub: "5 ejercicios" },
+                conVoz && { a: leccion("escuchar"), Icono: IconoAudifonos, titulo: "Solo escuchar", sub: "oído y dictado" },
+                { a: "/ingles/historias", Icono: IconoLibro, titulo: "Historias", sub: "la serie de Ana y roleplays" },
+                { a: "/ingles/parejas", Icono: IconoReloj, titulo: "Parejas", sub: "60 segundos contrarreloj" },
+                { a: leccion("mezcla"), Icono: IconoMezclar, titulo: "Repaso mezclado", sub: "de todas tus unidades" },
+                conVoz && { a: leccion("oido"), Icono: IconoOido, titulo: "Oído fino", sub: "ship o sheep" },
+                { a: leccion("errores"), Icono: IconoRepetir, titulo: "Mis errores", sub: "lo que fallaste" },
+                { a: leccion("mispalabras"), Icono: IconoEstrella, titulo: "Mis palabras", sub: "las que marcaste con estrella" },
+              ]
+                .filter(Boolean)
+                .map(({ a, Icono, titulo, sub }) => (
+                  <li key={titulo}>
+                    <Link to={a} className={estilos.modo}>
+                      <Icono tamano={20} />
+                      <span>
+                        <strong>{titulo}</strong>
+                        <small>{sub}</small>
+                      </span>
+                      <IconoFlechaDer tamano={16} className={estilos.flecha} />
+                    </Link>
+                  </li>
+                ))}
+            </ul>
             <div className={estilos.opcionesIngles}>
               {motivacion && (
                 <label className={estilos.velocidad}>
@@ -368,10 +332,10 @@ function Motivacion({ datos, alCobrar }) {
           ))}
         </ul>
         {datos.cobrado ? (
-          <p className={estilos.ayuda}>🎁 Cofre de hoy abierto. Mañana hay misiones nuevas.</p>
+          <p className={estilos.ayuda}>Cofre de hoy abierto. Mañana hay misiones nuevas.</p>
         ) : datos.completas ? (
           <button type="button" className="boton boton-primario" onClick={alCobrar}>
-            🎁 Abrir el cofre del día (+{datos.xpCofre} XP)
+            <IconoRegalo /> Abrir el cofre del día (+{datos.xpCofre} XP)
           </button>
         ) : (
           <p className={estilos.ayuda}>Completa las 3 y abres el cofre del día (+{datos.xpCofre} XP).</p>

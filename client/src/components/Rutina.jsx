@@ -13,6 +13,7 @@ import { useEvento } from "../hooks/useEvento.js";
 import { CabeceraPagina } from "./CabeceraPagina.jsx";
 import { AnilloProgreso } from "./AnilloProgreso.jsx";
 import estilos from "./Rutina.module.css";
+import { IconoAlerta } from "./Iconos.jsx";
 
 export function PlanDeHoy() {
   const [plan, setPlan] = useState(null);
@@ -124,7 +125,8 @@ export function PaginaDiario() {
                 {new Date(`${e.fecha}T12:00:00`).toLocaleDateString("es-PE", { weekday: "long", day: "numeric", month: "long" })}
               </small>
               {e.aprendi && <p>✓ {e.aprendi}</p>}
-              {e.trabe && <p>⚠ {e.trabe}</p>}
+              {e.trabe && <p>
+<IconoAlerta tamano={14} /> {e.trabe}</p>}
             </li>
           ))}
           {entradas.length === 0 && <li className={estilos.vacio}>Aquí aparecerán tus días. La primera línea es la más difícil.</li>}

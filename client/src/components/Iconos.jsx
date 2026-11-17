@@ -180,3 +180,128 @@ export const IconoChevron = () => (
     <path d="M9 6l6 6-6 6" />
   </svg>
 );
+
+// --- Íconos de acciones y estados (mismo trazo que los de la barra). Aceptan props: tamano, className, style ---
+const svg = ({ tamano = 18, ...resto } = {}) => ({ ...base, width: tamano, height: tamano, ...resto });
+
+export const IconoAudio = (p) => (
+  <svg {...svg(p)}>
+    <path d="M11 5L6 9H3v6h3l5 4z" />
+    <path d="M15.5 8.5a5 5 0 010 7" />
+    <path d="M18.5 5.5a9 9 0 010 13" />
+  </svg>
+);
+export const IconoMicrofono = (p) => (
+  <svg {...svg(p)}>
+    <rect x="9" y="3" width="6" height="11" rx="3" />
+    <path d="M5 11a7 7 0 0014 0" />
+    <path d="M12 18v3" />
+  </svg>
+);
+export const IconoRegalo = (p) => (
+  <svg {...svg(p)}>
+    <rect x="3" y="8" width="18" height="4" rx="1" />
+    <path d="M5 12v9h14v-9" />
+    <path d="M12 8v13" />
+    <path d="M12 8c-1.5-3-5-4-5-1.5S10 8 12 8zM12 8c1.5-3 5-4 5-1.5S14 8 12 8z" />
+  </svg>
+);
+/** Estrella: vacía, o llena con `llena`. */
+export const IconoEstrella = ({ llena = false, ...p } = {}) => (
+  <svg {...svg(p)} fill={llena ? "currentColor" : "none"}>
+    <path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z" />
+  </svg>
+);
+export const IconoRayo = (p) => (
+  <svg {...svg(p)}>
+    <path d="M13 2L4 14h7l-1 8 9-12h-7z" />
+  </svg>
+);
+export const IconoAudifonos = (p) => (
+  <svg {...svg(p)}>
+    <path d="M4 15v-3a8 8 0 0116 0v3" />
+    <rect x="3" y="14" width="4" height="7" rx="1.5" />
+    <rect x="17" y="14" width="4" height="7" rx="1.5" />
+  </svg>
+);
+export const IconoLibro = (p) => (
+  <svg {...svg(p)}>
+    <path d="M12 6c-2-1.5-5-2-8-1.5v14c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5v-14c-3-.5-6 0-8 1.5z" />
+    <path d="M12 6v14" />
+  </svg>
+);
+export const IconoReloj = (p) => (
+  <svg {...svg(p)}>
+    <circle cx="12" cy="13" r="8" />
+    <path d="M12 9v4l2.5 2" />
+    <path d="M9 2h6" />
+  </svg>
+);
+export const IconoMezclar = (p) => (
+  <svg {...svg(p)}>
+    <path d="M16 3h5v5" />
+    <path d="M4 20L21 3" />
+    <path d="M21 16v5h-5" />
+    <path d="M15 15l6 6" />
+    <path d="M4 4l5 5" />
+  </svg>
+);
+export const IconoOido = (p) => (
+  <svg {...svg(p)}>
+    <path d="M6 9a6 6 0 1112 0c0 3-2 4-3.5 5.5S13 18 13 19a3 3 0 01-6 0" />
+    <path d="M9.5 9a2.5 2.5 0 015 0c0 1.5-1.5 2-1.5 3.5" />
+  </svg>
+);
+export const IconoRepetir = (p) => (
+  <svg {...svg(p)}>
+    <path d="M3 12a9 9 0 0115.5-6.2L21 8" />
+    <path d="M21 3v5h-5" />
+    <path d="M21 12a9 9 0 01-15.5 6.2L3 16" />
+    <path d="M3 21v-5h5" />
+  </svg>
+);
+export const IconoCandado = (p) => (
+  <svg {...svg(p)}>
+    <rect x="5" y="11" width="14" height="10" rx="2" />
+    <path d="M8 11V7a4 4 0 018 0v4" />
+  </svg>
+);
+export const IconoAlerta = (p) => (
+  <svg {...svg(p)}>
+    <path d="M10.3 3.9L2.4 18a2 2 0 001.7 3h15.8a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z" />
+    <path d="M12 9v4" />
+    <path d="M12 17h.01" />
+  </svg>
+);
+export const IconoCorazon = ({ lleno = true, ...p } = {}) => (
+  <svg {...svg(p)} fill={lleno ? "currentColor" : "none"}>
+    <path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z" />
+  </svg>
+);
+export const IconoLlamita = (p) => (
+  <svg {...svg(p)} fill="currentColor" stroke="none">
+    <path d="M12 22c4 0 7-2.7 7-6.8 0-3.6-2.4-6-4.3-8.2-.6 2-1.6 3.2-2.9 3.7.2-3.1-1-5.8-3.8-8.7-.3 3.7-5 6.4-5 11.6C3 18.6 7 22 12 22z" />
+  </svg>
+);
+export const IconoPlay = (p) => (
+  <svg {...svg(p)}>
+    <path d="M7 4.5v15l12-7.5z" />
+  </svg>
+);
+export const IconoTrofeo = (p) => (
+  <svg {...svg(p)}>
+    <path d="M8 4h8v5a4 4 0 01-8 0z" />
+    <path d="M16 6h3a3 3 0 01-3 4M8 6H5a3 3 0 003 4" />
+    <path d="M12 13v4M8 21h8M9 17h6" />
+  </svg>
+);
+export const IconoChispa = (p) => (
+  <svg {...svg(p)}>
+    <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" />
+  </svg>
+);
+export const IconoFlechaDer = (p) => (
+  <svg {...svg(p)}>
+    <path d="M9 6l6 6-6 6" />
+  </svg>
+);

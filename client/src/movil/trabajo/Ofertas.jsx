@@ -10,6 +10,7 @@ import { api } from "../../lib/api.js";
 import { ListaAnimada } from "../../components/ListaAnimada.jsx";
 import { mensajePostulacion } from "../../../../server/postulaciones.js";
 import estilos from "./Ofertas.module.css";
+import { IconoAlerta, IconoCandado, IconoEstrella } from "../../components/Iconos.jsx";
 
 /** Cuántas ofertas se muestran de entrada y cuántas más con cada "Ver más". */
 const POR_PAGINA = 20;
@@ -103,7 +104,7 @@ export function OfertasParaTi() {
   return (
     <div className={estilos.ofertas}>
       <p className={estilos.seguridad}>
-        🔒 Nunca pagues por postular ni des datos bancarios antes de un contrato. Ante la duda, abre "Ver detalle" y verifica la empresa.
+        <IconoCandado tamano={14} /> Nunca pagues por postular ni des datos bancarios antes de un contrato. Ante la duda, abre "Ver detalle" y verifica la empresa.
       </p>
       <details className={estilos.ayuda}>
         <summary>De dónde salen estas ofertas</summary>
@@ -148,7 +149,7 @@ export function OfertasParaTi() {
           {filtro === "para-mi"
             ? "Ahora no hay ofertas junior de frontend abiertas a Perú o Latinoamérica. Mira \"Todas\" o vuelve a buscar mañana: salen nuevas cada día."
             : filtro === "guardadas"
-              ? "No guardaste ofertas. Usa \"☆ Guardar\" en las que quieras revisar con calma."
+              ? "No guardaste ofertas. Usa \"Guardar\" en las que quieras revisar con calma."
               : "No hay ofertas con ese filtro ahora. Prueba otro o busca más tarde."}
         </p>
       )}
@@ -231,7 +232,7 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
           )}
           {alertas.length > 0 && (
             <span data-tipo="alerta" title={alertas.join(". ")}>
-              ⚠ Posible estafa
+              <IconoAlerta tamano={14} /> Posible estafa
             </span>
           )}
         </div>
@@ -254,7 +255,7 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
           </button>
           {marca !== "oculta" && (
             <button type="button" className="boton" data-activo={marca === "guardada"} onClick={() => alMarcar(marca === "guardada" ? null : "guardada")}>
-              {marca === "guardada" ? "★ Guardada" : "☆ Guardar"}
+              <IconoEstrella tamano={14} llena={marca === "guardada"} /> {marca === "guardada" ? "Guardada" : "Guardar"}
             </button>
           )}
           <button type="button" className="boton boton-fantasma" onClick={() => alMarcar(marca === "oculta" ? null : "oculta")}>
@@ -292,7 +293,9 @@ function Detalle({ oferta: o, cv }) {
     <div className={estilos.detalle}>
       {alertas.length > 0 && (
         <div className={estilos.cajaAlerta}>
-          <strong>⚠ Señales de posible estafa</strong>
+          <strong>
+<IconoAlerta tamano={16} /> Señales de posible estafa
+</strong>
           <ul>
             {alertas.map((a) => (
               <li key={a}>{a}</li>
