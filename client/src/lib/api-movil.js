@@ -22,6 +22,7 @@ import { COLECCION_EXTRA, extraDesdeRegistros, registrosDesdeViejo } from "../mo
 import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaSemana } from "../../../server/avance.js";
 import { buscarOfertas, nuevasDesde, ordenarOfertas } from "../../../server/ofertas-auto.js";
 import { conFechaDeEnvio, metaSemanal, numerosPostulaciones, seguimientosPendientes } from "../../../server/postulaciones.js";
+import { crearApiMapache } from "../movil/mapache/api-mapache.js";
 import { crearApi } from "./api-servidor.js";
 import { BASE_LOCAL, conectada } from "./conexion-local.js";
 
@@ -933,6 +934,8 @@ const apiWeb = {
     cache.clear();
     return { record, nuevoRecord: parejas > (extra.parejasRecord ?? 0) };
   },
+  // El mapache de inglés (ver movil/mapache/): lee tu progreso de inglés y guarda lo suyo en inglesExtra
+  ...crearApiMapache({ progreso, itemsIngles, json, extraIngles, limpiar: () => cache.clear() }),
   /** Mis palabras: las que marcaste con estrella para repasarlas aparte. */
   misPalabras: async () => progreso.registros("misPalabras"),
   alternarMiPalabra: async (id) => {

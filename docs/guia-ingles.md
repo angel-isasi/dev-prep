@@ -176,3 +176,14 @@ En las unidades solo de vocabulario, `## Cómo se forma` puede explicar cómo ag
 ### Frases de trabajo en `frases.json`
 
 Una frase puede llevar `"trabajo": true` cuando usa la gramática de la unidad en una situación de trabajo en tecnología (por ejemplo, en *there is / there are*: "There's a bug in line 12."). En las etapas básica e intermedia, cada unidad tiene 4 a 6.
+
+## El mapache (Inglés > Su casa)
+
+Una mascota que vive de tu inglés. Código en `client/src/movil/mapache/`.
+
+- **Come lo que aprendes:** palabras nuevas, aciertos, lecciones, historias, inmersión y sus actividades (`comidaDelDia` en `reglas.js`). Necesita 30 puntos al día. Abrir la app no lo alimenta.
+- **Estados:** nuevo, feliz, normal, hambriento, triste (se rompió la racha o te robó 15 o más palabras), dormido (de 23:00 a 6:00) y escapado (3 días sin inglés; vuelve apenas practicas). Nada se guarda: se calcula de tus contadores del día.
+- **Objetos perdidos:** los repasos vencidos de palabras y frases. Recuperarlos es un repaso de verdad (`calificarItem`).
+- **Lo que guarda:** registros `mapache:...` dentro de `inglesExtra` (nombre, compras, ropa puesta, pregunta del día, postales, récord de Trash panda). Se sincronizan como el resto; no hay nada nuevo en AWS.
+- **Contenido** en `contenido.js`: 8 preguntas del día por nivel (con una respuesta modelo), una postal por nivel con 2 preguntas, sueños, frases según su estado, tienda (se paga con XP de inglés), muebles que gana por unidad completada y las entrevistas (roleplays) que propone desde B1.
+- **Casa por nivel:** caja (A1), rincón (A2), cuarto (B1), cuarto con ventana (B2), departamento (C1), departamento con vista (C2). Regalos de nivel: mochila (B1), lentes (B2), corbata (C1), birrete (C2).

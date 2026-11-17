@@ -30,6 +30,7 @@ import { TiempoLibre } from "../components/TiempoLibre.jsx";
 import { TarjetaNivel } from "../components/Logros.jsx";
 import { PlanDeHoy, ResumenMes } from "../components/Rutina.jsx";
 import { DiaEnNumeros } from "../components/Avance.jsx";
+import { AvisoMapache } from "../movil/mapache/TarjetaMapache.jsx";
 import estilos from "./Inicio.module.css";
 
 const RITMO = {
@@ -135,6 +136,9 @@ export function Inicio() {
           />
         </p>
       </header>
+
+      {/* Si el mapache de inglés necesita algo, una línea que lleva a Inglés (solo en la web) */}
+      <AvisoMapache />
 
       {config.objetivo ? (
         <blockquote className={estilos.objetivo}>

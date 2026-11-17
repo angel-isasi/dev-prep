@@ -1,0 +1,108 @@
+.mapache {
+  display: block;
+  flex: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mapache svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Respira: el cuerpo sube y baja muy poco */
+.cuerpo {
+  transform-origin: 100px 210px;
+  animation: respirar 3.2s ease-in-out infinite;
+}
+
+@keyframes respirar {
+  50% {
+    transform: scale(1.015, 0.985);
+  }
+}
+
+/* Parpadea cada unos segundos */
+.parpadeo {
+  transform-origin: 100px 93px;
+  animation: parpadear 4.6s infinite;
+}
+
+@keyframes parpadear {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* Mueve la cola (más rápido si está feliz) */
+.cola {
+  transform-origin: 140px 186px;
+  animation: cola 2.4s ease-in-out infinite;
+}
+
+.mapache[data-estado="feliz"] .cola {
+  animation-duration: 0.9s;
+}
+
+.mapache[data-estado="dormido"] .cola,
+.mapache[data-estado="triste"] .cola {
+  animation-duration: 5s;
+}
+
+@keyframes cola {
+  50% {
+    transform: rotate(-9deg);
+  }
+}
+
+/* Al tocarlo, salta */
+.salta {
+  animation: saltar 0.45s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+@keyframes saltar {
+  40% {
+    transform: translateY(-14px) scale(1.03, 0.97);
+  }
+}
+
+.zzz {
+  animation: flotar 2.6s ease-in-out infinite;
+}
+
+.gota {
+  animation: flotar 1.8s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  50% {
+    transform: translateY(-5px);
+    opacity: 0.6;
+  }
+}
+
+.mapache[data-quieto="true"] *,
+.mapache[data-quieto="true"] svg {
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cuerpo,
+  .parpadeo,
+  .cola,
+  .salta,
+  .zzz,
+  .gota {
+    animation: none;
+  }
+}

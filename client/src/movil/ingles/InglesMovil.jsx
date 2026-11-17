@@ -13,6 +13,7 @@ import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { Llama } from "../../components/Llama.jsx";
 import { SlidingNumber } from "../../components/ui/sliding-number.jsx";
 import { CaminoMovil } from "../leccion/CaminoMovil.jsx";
+import { TarjetaMapache } from "../mapache/TarjetaMapache.jsx";
 import { IconoAudifonos, IconoEstrella, IconoFlechaDer, IconoLibro, IconoMezclar, IconoOido, IconoPlay, IconoRayo, IconoRegalo, IconoReloj, IconoRepetir } from "../../components/Iconos.jsx";
 import estilos from "./Ingles.module.css";
 
@@ -124,6 +125,8 @@ export function InglesMovil() {
               </div>
             </div>
           </div>
+
+          <TarjetaMapache />
 
           {!hoy.nivelHecho && (
             <div className={estilos.nivel}>

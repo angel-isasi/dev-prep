@@ -15,6 +15,7 @@ import { TiempoLibre } from "../components/TiempoLibre.jsx";
 import { TarjetaNivel } from "../components/Logros.jsx";
 import { PlanDeHoy, ResumenMes } from "../components/Rutina.jsx";
 import { DiaEnNumeros, PlanSemana, RetoSemana } from "../components/Avance.jsx";
+import { AvisoMapache } from "./mapache/TarjetaMapache.jsx";
 import estilos from "./HoyMovil.module.css";
 import { IconoRepetir } from "../components/Iconos.jsx";
 
@@ -70,6 +71,7 @@ export function HoyMovil() {
         </h1>
         <p className={estilos.frase}>{hoy.frase}</p>
       </header>
+      <AvisoMapache />
 
       <div className={estilos.racha} data-encendida={hoy.racha > 0}>
         <Llama encendida={hoy.racha > 0} tamano={34} />
