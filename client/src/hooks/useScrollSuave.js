@@ -52,12 +52,22 @@ export function useScrollSuave(ref) {
     });
 
     let cuadro = null;
+    let reanudar = false;
     const bucle = (t) => {
+      // Lenis avanza según el tiempo desde su último cuadro. Si el bucle estuvo parado (no girabas la
+      // rueda), ese tiempo serían segundos y saltaría de golpe al destino: se reinicia a un cuadro (~16 ms).
+      if (reanudar) {
+        lenis.time = t - 1000 / 60;
+        reanudar = false;
+      }
       lenis.raf(t);
       cuadro = lenis.isScrolling ? requestAnimationFrame(bucle) : null;
     };
     const arrancar = () => {
-      if (cuadro == null) cuadro = requestAnimationFrame(bucle);
+      if (cuadro == null) {
+        reanudar = true;
+        cuadro = requestAnimationFrame(bucle);
+      }
     };
     arrancarBucle = arrancar;
     const quitar = lenis.on("virtual-scroll", arrancar);

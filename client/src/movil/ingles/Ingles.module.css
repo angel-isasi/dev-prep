@@ -549,12 +549,9 @@
     grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
     align-items: start;
   }
+  /* Sin sticky ni scroll propio: un scroll dentro de otro traba la rueda con el scroll suave */
   .columnaLateral {
-    position: sticky;
-    top: var(--espacio-5);
-    max-height: calc(100vh - 2 * var(--espacio-5));
-    overflow-y: auto;
-    scrollbar-width: thin;
+    position: static;
   }
 }
 
