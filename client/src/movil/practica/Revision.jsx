@@ -87,6 +87,8 @@ export function CasoRevision() {
         Toca las líneas que corregirías. Hay entre 3 y 5 problemas. {!resultado && `Marcadas: ${marcadas.length}.`}
       </p>
 
+      {/* En pantalla ancha: el código a la izquierda y lo que encontraste a la derecha, a la vista */}
+      <div className={estilos.casoRevision}>
       <div className={estilos.codigo} role="list">
         {lineas.map((texto, i) => {
           const n = i + 1;
@@ -119,6 +121,10 @@ export function CasoRevision() {
         })}
       </div>
 
+      <div className={estilos.casoPanel}>
+      {!resultado && (
+        <p className={estilos.ayuda}>Cuando termines de marcar, revisa: aquí verás qué encontraste, qué se te pasó y cómo se arregla.</p>
+      )}
       {!resultado ? (
         <button type="button" className="boton boton-primario" onClick={revisar} disabled={marcadas.length === 0}>
           Revisar
@@ -162,6 +168,8 @@ export function CasoRevision() {
           </div>
         </>
       )}
+      </div>
+      </div>
     </section>
   );
 }

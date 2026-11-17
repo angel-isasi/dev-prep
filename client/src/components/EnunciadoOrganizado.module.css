@@ -1,0 +1,132 @@
+.enunciado {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.unico {
+  padding: var(--espacio-5) var(--espacio-6);
+}
+
+.etiqueta {
+  color: var(--color-area, var(--acento));
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+/* Lo que tienes que hacer: destacado, como "En una frase" en Aprender */
+.principal {
+  padding: var(--espacio-5) var(--espacio-6);
+  border: 1px solid color-mix(in srgb, var(--color-area, var(--acento)) 30%, var(--borde));
+  border-radius: var(--radio-grande);
+  background:
+    radial-gradient(520px 200px at 0% 0%, var(--color-area-suave, var(--acento-suave)), transparent 75%),
+    var(--superficie);
+}
+
+.principal > div {
+  margin-top: var(--espacio-2);
+}
+
+.principal > div > :last-child,
+.seccion > div > :last-child {
+  margin-bottom: 0;
+}
+
+/* Las demás secciones, dos por fila; las de código largo o tablas, a todo el ancho */
+.secciones {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-flow: row dense;
+  gap: var(--espacio-3);
+  align-items: start;
+}
+
+.seccion {
+  min-width: 0;
+  padding: var(--espacio-4) var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
+  box-shadow: var(--brillo-borde);
+}
+
+.seccion[data-ancho="true"] {
+  grid-column: 1 / -1;
+}
+
+.seccion > h2 {
+  margin-bottom: var(--espacio-3);
+  font-size: 18px;
+  letter-spacing: -0.015em;
+}
+
+.seccion > div {
+  font-size: 16px;
+}
+
+/* Una sola sección suelta ocupa todo el ancho */
+.seccion:only-child {
+  grid-column: 1 / -1;
+}
+
+/* Dos tarjetas por fila solo si hay espacio (depende del ancho donde está, no de la pantalla) */
+@container (min-width: 760px) {
+  .secciones {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .principal,
+  .seccion {
+    padding: var(--espacio-4);
+  }
+}
+
+/* Sección con pasos: cada "###" en su tarjeta, varias por fila */
+.conPasos {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.conPasos > h2 {
+  margin: var(--espacio-2) 0 var(--espacio-3);
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pasos > li {
+  min-width: 0;
+  padding: var(--espacio-4) var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-top: 3px solid color-mix(in srgb, var(--color-area, var(--acento)) 60%, transparent);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.pasos > li > h3 {
+  margin-bottom: var(--espacio-2);
+  font-size: 16px;
+  line-height: 1.35;
+}
+
+.pasos > li > div {
+  font-size: 15px;
+}
+
+.pasos > li > div > :last-child {
+  margin-bottom: 0;
+}

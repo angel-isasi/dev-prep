@@ -1,5 +1,5 @@
 .pagina {
-  max-width: 1280px;
+  max-width: var(--ancho-pagina);
   margin: 0 auto;
   padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
 }
@@ -337,5 +337,28 @@
 @media (min-width: 1100px) {
   .herramientas {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Caso de revisión en pantalla ancha: código a la izquierda; el botón y los hallazgos, fijos a la derecha */
+@media (min-width: 1100px) {
+  .casoRevision {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr);
+    gap: var(--espacio-4);
+    align-items: start;
+  }
+
+  .casoRevision > .codigo {
+    margin: 0;
+  }
+
+  .casoPanel {
+    position: sticky;
+    top: var(--espacio-4);
+  }
+
+  .casoPanel > :first-child {
+    margin-top: 0;
   }
 }

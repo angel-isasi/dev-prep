@@ -78,3 +78,42 @@ export function partesTeoria(markdown) {
     entrevistaTexto: entrevista ? "" : secciones["En la entrevista"],
   };
 }
+
+/**
+ * Corta cualquier Markdown en su texto inicial y sus secciones "## ".
+ * Cada sección sabe si trae código ancho (líneas largas): esas van a todo el ancho.
+ */
+export function seccionesDe(markdown) {
+  const texto = (markdown ?? "").replace(/\r/g, "");
+  const { antes, partes } = cortar(texto, (l) => l.startsWith("## "));
+  const secciones = partes.map((p) => {
+    const [cabecera, ...resto] = p.split("\n");
+    const cuerpo = resto.join("\n").trim();
+    const lineasCodigo = [];
+    let enCodigo = false;
+    for (const l of cuerpo.split("\n")) {
+      if (/^\s*```/.test(l)) enCodigo = !enCodigo;
+      else if (enCodigo) lineasCodigo.push(l);
+    }
+    const ancho = Math.max(0, ...lineasCodigo.map((l) => l.length)) > 52 || /^\|/m.test(cuerpo);
+    return { titulo: cabecera.slice(3).trim(), cuerpo, ancho };
+  });
+  return { antes, secciones };
+}
+
+/** Las preguntas de "En la entrevista" sueltas (lista o párrafos en negrita); null si no se pueden separar. */
+export function preguntasDe(markdown) {
+  return items((markdown ?? "").replace(/\r/g, "").trim(), (l) => /^(-\s+)?\*\*/.test(l));
+}
+
+/** Las subsecciones "### " de una sección (texto antes y cada una con su título y cuerpo). */
+export function subseccionesDe(cuerpo) {
+  const { antes, partes } = cortar(cuerpo ?? "", (l) => l.startsWith("### "));
+  return {
+    antes,
+    partes: partes.map((p) => {
+      const [cabecera, ...resto] = p.split("\n");
+      return { titulo: cabecera.slice(4).trim(), cuerpo: resto.join("\n").trim() };
+    }),
+  };
+}

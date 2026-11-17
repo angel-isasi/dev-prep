@@ -378,18 +378,13 @@
   letter-spacing: -0.02em;
 }
 
-.seccionCabecera span,
-.seccionNota {
+.seccionCabecera span {
   color: var(--texto-tenue);
   font-size: 14px;
 }
 
-.seccionNota {
-  margin: calc(var(--espacio-2) * -1) 0 var(--espacio-3);
-}
 
-.errores,
-.preguntas {
+.errores {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
   gap: var(--espacio-3);
@@ -401,8 +396,7 @@
   grid-template-columns: repeat(auto-fill, minmax(min(520px, 100%), 1fr));
 }
 
-.error,
-.pregunta {
+.error {
   min-width: 0;
   padding: var(--espacio-4) var(--espacio-5);
   border: 1px solid var(--borde);
@@ -437,8 +431,7 @@
   font-weight: 700;
 }
 
-.error > div,
-.pregunta > div {
+.error > div {
   font-size: 15px;
   line-height: 1.6;
 }
@@ -447,41 +440,13 @@
   font-size: 13px;
 }
 
-.error > div > :last-child,
-.pregunta > div > :last-child {
+.error > div > :last-child {
   margin-bottom: 0;
 }
 
-.pregunta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espacio-3);
-  font-size: 16px;
-  line-height: 1.45;
-}
 
-.pregunta[data-abierta="true"] {
-  border-color: color-mix(in srgb, var(--color-area) 40%, var(--borde));
-}
 
-.revelar,
-.verTodas {
-  align-self: flex-start;
-  padding: 6px 12px;
-  border: 1px dashed var(--borde-fuerte);
-  border-radius: 8px;
-  background: none;
-  color: var(--texto-suave);
-  font: inherit;
-  font-size: 13px;
-  cursor: pointer;
-}
 
-.revelar:hover,
-.verTodas:hover {
-  border-style: solid;
-  color: var(--texto);
-}
 
 /* Ventana mediana (laptop): la chuleta pasa debajo del concepto para que este no quede angosto */
 @media (max-width: 1560px) {
@@ -507,18 +472,31 @@
     grid-template-areas: "indice" "centro" "chuleta";
   }
 
-  .indice {
+  /* Sin cajas con scroll propio: el dedo siempre mueve la página */
+  .indice,
+  .chuleta {
     position: static;
     max-height: none;
+    overflow: visible;
+    overscroll-behavior: auto;
   }
 
+  .chuleta table {
+    display: table;
+  }
+
+  /* El índice como fichas que se acomodan en filas */
   .indice ol {
-    flex-direction: row;
-    overflow-x: auto;
+    flex-flow: row wrap;
+    gap: 6px;
   }
 
   .indice li button {
-    white-space: nowrap;
+    width: auto;
+    padding: 5px 10px 5px 6px;
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    font-size: 13px;
   }
 
   .frase,

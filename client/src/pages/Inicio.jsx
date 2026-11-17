@@ -274,31 +274,34 @@ export function Inicio() {
         </MagicCard>
       </AnimatedGroup>
 
-      {api.planDeHoy && (
-        <div className={estilos.tiempoLibre}>
-          <PlanDeHoy />
-        </div>
-      )}
-      {api.diaEnNumeros && (
-        <div className={estilos.tiempoLibre}>
-          <DiaEnNumeros />
-        </div>
-      )}
-      {datos.juego && (
-        <div className={estilos.tiempoLibre}>
-          <TiempoLibre juego={datos.juego} meta={datos.meta} salvados={datos.salvados} jefe={datos.jefe} />
-        </div>
-      )}
-      {api.logros && (
-        <div className={estilos.tiempoLibre}>
-          <TarjetaNivel />
-        </div>
-      )}
-      {api.resumenMes && (
-        <div className={estilos.tiempoLibre}>
-          <ResumenMes />
-        </div>
-      )}
+      {/* Lo de hoy en filas de dos tarjetas (una debajo de otra si la ventana es angosta) */}
+      <div className={estilos.panelHoy}>
+        {api.planDeHoy && (
+          <div className={estilos.tiempoLibre}>
+            <PlanDeHoy />
+          </div>
+        )}
+        {datos.juego && (
+          <div className={estilos.tiempoLibre}>
+            <TiempoLibre juego={datos.juego} meta={datos.meta} salvados={datos.salvados} jefe={datos.jefe} />
+          </div>
+        )}
+        {api.logros && (
+          <div className={estilos.tiempoLibre}>
+            <TarjetaNivel />
+          </div>
+        )}
+        {api.diaEnNumeros && (
+          <div className={estilos.tiempoLibre}>
+            <DiaEnNumeros />
+          </div>
+        )}
+        {api.resumenMes && (
+          <div className={estilos.tiempoLibre}>
+            <ResumenMes />
+          </div>
+        )}
+      </div>
 
       <div className={estilos.columnas}>
         <div className={estilos.bloque}>

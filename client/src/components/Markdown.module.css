@@ -122,14 +122,24 @@
   .markdown h3 {
     font-size: 18px;
   }
+  /* En el celular nada se desliza de costado: el código y las tablas se acomodan al ancho.
+     Si no, al deslizar el dedo sobre ellos (que llenan casi toda la pantalla) la página no bajaba. */
   .markdown pre {
     margin-inline: calc(var(--espacio-2) * -1);
     padding: var(--espacio-3);
-    font-size: 13.5px;
+    font-size: 13px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    overflow-x: visible;
   }
   .markdown table {
-    display: block;
-    overflow-x: auto;
-    font-size: 14px;
+    font-size: 13.5px;
+  }
+  .markdown th,
+  .markdown td {
+    padding: 8px 9px;
+  }
+  .markdown td {
+    overflow-wrap: anywhere;
   }
 }

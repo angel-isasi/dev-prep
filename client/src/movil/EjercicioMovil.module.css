@@ -215,11 +215,37 @@
   color: var(--error);
 }
 
-/* Pantalla grande (laptop): columna centrada y cómoda de leer */
+/* Pantalla grande (laptop): usa el ancho; el enunciado se reparte en tarjetas lado a lado */
 @media (min-width: 900px) {
   .pagina {
-    max-width: 880px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+  }
+}
+
+.solucionLado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+/* Pantalla ancha: código fijo a la izquierda y la explicación a la derecha */
+@media (min-width: 1500px) {
+  .pagina:has(.solucionLado) {
+    max-width: 1600px;
+  }
+
+  .solucionLado {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .codigoFijo {
+    position: sticky;
+    top: var(--espacio-4);
+    max-height: calc(100dvh - var(--espacio-4) * 2);
+    overflow: auto;
   }
 }

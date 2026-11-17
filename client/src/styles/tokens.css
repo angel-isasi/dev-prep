@@ -18,6 +18,7 @@
   --radio: 8px;
   --radio-grande: 14px;
   --ancho-barra: 232px;
+  --ancho-pagina: 1560px; /* páginas de listas y tableros: en pantallas grandes usan los costados */
   --transicion: 160ms ease;
 }
 

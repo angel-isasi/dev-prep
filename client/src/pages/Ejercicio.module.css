@@ -1,8 +1,8 @@
 .pagina {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
-  gap: var(--espacio-6);
-  max-width: 1280px;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 440px);
+  gap: var(--espacio-5);
+  max-width: 1640px;
   margin: 0 auto;
   padding: var(--espacio-5) var(--espacio-6) var(--espacio-7);
 }
@@ -119,11 +119,9 @@
   margin-top: var(--espacio-5);
 }
 
-/* Enunciado en una tarjeta de fondo sólido: se lee mejor sobre el grano */
+/* Enunciado en tarjetas (ver EnunciadoOrganizado) */
 .enunciado {
   margin-top: var(--espacio-4);
-  padding: var(--espacio-5) var(--espacio-6);
-  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
 }
 
 .enlaceAviso {

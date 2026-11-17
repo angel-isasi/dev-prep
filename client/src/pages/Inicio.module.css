@@ -15,7 +15,7 @@
 
 .pagina {
   position: relative;
-  max-width: 1280px;
+  max-width: var(--ancho-pagina);
   margin: 0 auto;
   padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
 }
@@ -428,4 +428,28 @@
 
 .tiempoLibre {
   margin-top: var(--espacio-5);
+}
+
+/* Lo de hoy: dos tarjetas por fila si caben (cada una de al menos 480 px), con la misma altura */
+.panelHoy {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr));
+  gap: var(--espacio-3);
+  margin: var(--espacio-5) 0 var(--espacio-3);
+}
+
+.panelHoy > .tiempoLibre {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+}
+
+.panelHoy > .tiempoLibre > * {
+  flex: 1;
+  margin: 0;
+}
+
+.panelHoy > .tiempoLibre:empty {
+  display: none;
 }

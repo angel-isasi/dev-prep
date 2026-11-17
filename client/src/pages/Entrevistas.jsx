@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
 import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
-import { Markdown } from "../components/Markdown.jsx";
+import { EnunciadoOrganizado } from "../components/EnunciadoOrganizado.jsx";
 import { Tarjeta } from "../components/Tarjeta.jsx";
 import { Simulacro } from "../components/Simulacro.jsx";
 import { PitchStar } from "../components/PitchStar.jsx";
@@ -80,9 +80,7 @@ export function Entrevistas() {
         )}
         {pestana === "personal" && <PitchStar guias={resumen.guias} />}
         {pestana === "guia" && (
-          <article className={estilos.guia}>
-            <Markdown>{resumen.guias.vozAlta}</Markdown>
-          </article>
+          <EnunciadoOrganizado markdown={resumen.guias.vozAlta} primeraDestacada />
         )}
       </ContenidoPestanas>
     </section>

@@ -7,6 +7,7 @@ import { api } from "../lib/api.js";
 import { buscarColeccion } from "../lib/areas.js";
 import { nombreColeccion, nombreTema, numeroEjercicio } from "../lib/etiquetas.js";
 import { Markdown } from "../components/Markdown.jsx";
+import { EnunciadoOrganizado } from "../components/EnunciadoOrganizado.jsx";
 import { Pestanas } from "../components/Pestanas.jsx";
 import { Insignia } from "../components/Insignia.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
@@ -105,9 +106,7 @@ export function EjercicioMovil() {
 
       {pestana === "enunciado" && (
         <>
-          <article className={`tarjeta ${estilos.bloque}`}>
-            <Markdown>{ej.enunciado}</Markdown>
-          </article>
+          <EnunciadoOrganizado markdown={ej.enunciado} />
           <p className={estilos.consejo}>
             Piensa cómo lo resolverías antes de mirar. Cuando tengas una idea, abre las pistas o la solución.
           </p>
@@ -144,12 +143,13 @@ export function EjercicioMovil() {
           </div>
         ) : (
           <>
-            <article className={`tarjeta ${estilos.bloque}`}>
-              <Markdown>{"```" + ej.solucion.lenguaje + "\n" + ej.solucion.codigo + "\n```"}</Markdown>
-            </article>
-            <article className={`tarjeta ${estilos.bloque}`}>
-              <Markdown>{ej.solucion.explicacion}</Markdown>
-            </article>
+            {/* En pantalla ancha: el código queda fijo a la izquierda mientras lees la explicación */}
+            <div className={estilos.solucionLado}>
+              <article className={`tarjeta ${estilos.bloque} ${estilos.codigoFijo}`}>
+                <Markdown>{"```" + ej.solucion.lenguaje + "\n" + ej.solucion.codigo + "\n```"}</Markdown>
+              </article>
+              <EnunciadoOrganizado markdown={ej.solucion.explicacion} etiqueta="Por qué funciona" />
+            </div>
 
             <div className={estilos.autoevaluacion}>
               <strong>¿Lo habrías resuelto sin ayuda?</strong>

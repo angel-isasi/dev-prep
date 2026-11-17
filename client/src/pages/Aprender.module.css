@@ -1,5 +1,5 @@
 .pagina {
-  max-width: 1280px;
+  max-width: var(--ancho-pagina);
   margin: 0 auto;
   padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
 }
@@ -235,4 +235,11 @@
 .puntos i[data-ayuda="true"] {
   border-color: var(--aviso);
   background: linear-gradient(90deg, var(--aviso) 50%, transparent 50%);
+}
+
+/* Pantalla muy ancha: una columna más de temas */
+@media (min-width: 1700px) {
+  .temas {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }

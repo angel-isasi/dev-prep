@@ -1,5 +1,5 @@
 .pagina {
-  max-width: 1280px;
+  max-width: var(--ancho-pagina);
   margin: 0 auto;
   padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
 }

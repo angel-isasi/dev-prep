@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { api } from "../../lib/api.js";
 import { hablar, hablarVarias, hayVoz } from "../../lib/voz.js";
-import { Markdown } from "../../components/Markdown.jsx";
+import { TeoriaIngles } from "./TeoriaIngles.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { Grabadora } from "../../components/Grabadora.jsx";
 import estilos from "./Ingles.module.css";
@@ -29,7 +29,7 @@ export function InglesUnidad() {
   if (!unidad) return <Esqueleto variante="texto" />;
 
   return (
-    <article className={estilos.pagina} data-area="ingles">
+    <article className={`${estilos.pagina} ${estilos.paginaUnidad}`} data-area="ingles">
       <Link to="/ingles" className={estilos.volver}>
         ← Inglés
       </Link>
@@ -49,9 +49,7 @@ export function InglesUnidad() {
         </Link>
       </div>
 
-      <div className={estilos.teoria}>
-        <Markdown>{unidad.teoria}</Markdown>
-      </div>
+      <TeoriaIngles markdown={unidad.teoria} />
 
       <section className={estilos.bloque}>
         <h2>Palabras</h2>
@@ -99,6 +97,8 @@ export function InglesUnidad() {
         </ul>
       </section>
 
+      {/* En pantalla grande, el shadowing y los diálogos van lado a lado */}
+      <div className={estilos.practicaUnidad}>
       {voz && unidad.frases?.length > 0 && <Shadowing frases={unidad.frases} />}
 
       {unidad.dialogos.length > 0 && (
@@ -129,6 +129,7 @@ export function InglesUnidad() {
           ))}
         </section>
       )}
+      </div>
     </article>
   );
 }

@@ -4,8 +4,10 @@
 //   un concepto a la vez (o todos seguidos, si lo prefieres) y la chuleta siempre a la vista.
 // - Abajo, los errores típicos en tarjetas y las preguntas de entrevista para pensar antes de ver la respuesta.
 // Si un tema no tiene las secciones de siempre, se muestra el texto completo como antes.
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Markdown } from "./Markdown.jsx";
+import { EnLinea } from "./EnLinea.jsx";
+import { PreguntasEntrevista } from "./PreguntasEntrevista.jsx";
 import { IconoFlechaDer, IconoFlechaIzq } from "./Iconos.jsx";
 import { partesTeoria } from "../lib/teoria.js";
 import { irA } from "../hooks/useScrollSuave.js";
@@ -30,17 +32,6 @@ function guardar(clave, valor) {
   }
 }
 
-/** Títulos con `código` y **negritas** en una sola línea. */
-function EnLinea({ texto }) {
-  return texto.split(/(`[^`]+`)/).map((t, i) =>
-    t.length > 1 && t.startsWith("`") && t.endsWith("`") ? (
-      <code key={i}>{t.slice(1, -1)}</code>
-    ) : (
-      <Fragment key={i}>{t.replace(/\*\*/g, "")}</Fragment>
-    ),
-  );
-}
-
 export function TeoriaTema({ id, markdown }) {
   const partes = useMemo(() => partesTeoria(markdown), [markdown]);
   if (!partes)
@@ -56,7 +47,6 @@ function TeoriaOrganizada({ id, frase, introduccion, conceptos, errores, errores
   const [modo, setModo] = useState(() => leer(CLAVE_MODO, "uno"));
   const [actual, setActual] = useState(0);
   const [leidos, setLeidos] = useState(() => new Set(leer(CLAVE_LEIDOS, {})[id] ?? []));
-  const [abiertas, setAbiertas] = useState(() => new Set());
   const lectura = useRef(null);
   const tarjetas = useRef([]);
   const erroresRef = useRef(null);
@@ -113,14 +103,6 @@ function TeoriaOrganizada({ id, frase, introduccion, conceptos, errores, errores
     setModo(nuevo);
     guardar(CLAVE_MODO, nuevo);
     if (nuevo === "seguido") requestAnimationFrame(() => irA(tarjetas.current[actual]));
-  }
-
-  function alternar(i) {
-    setAbiertas((previo) => {
-      const nuevo = new Set(previo);
-      nuevo.has(i) ? nuevo.delete(i) : nuevo.add(i);
-      return nuevo;
-    });
   }
 
   const concepto = (c, i) => (
@@ -275,41 +257,8 @@ function TeoriaOrganizada({ id, frase, introduccion, conceptos, errores, errores
         <section ref={entrevistaRef} className={estilos.seccion}>
           <div className={estilos.seccionCabecera}>
             <h2>En la entrevista</h2>
-            {entrevista.length > 0 && (
-              <button
-                type="button"
-                className={estilos.verTodas}
-                onClick={() =>
-                  setAbiertas(abiertas.size === entrevista.length ? new Set() : new Set(entrevista.map((_, i) => i)))
-                }
-              >
-                {abiertas.size === entrevista.length ? "Ocultar respuestas" : "Ver todas las respuestas"}
-              </button>
-            )}
           </div>
-          {entrevista.length ? (
-            <>
-              <p className={estilos.seccionNota}>Responde en voz alta como si te lo preguntaran, y luego compara.</p>
-              <div className={estilos.preguntas}>
-                {entrevista.map((p, i) => (
-                  <div key={i} className={estilos.pregunta} data-abierta={abiertas.has(i)}>
-                    <strong>
-                      <EnLinea texto={p.titulo} />
-                    </strong>
-                    {abiertas.has(i) ? (
-                      <Markdown>{p.cuerpo}</Markdown>
-                    ) : (
-                      <button type="button" className={estilos.revelar} onClick={() => alternar(i)}>
-                        Ver respuesta
-                      </button>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            <Markdown>{entrevistaTexto}</Markdown>
-          )}
+          {entrevista.length ? <PreguntasEntrevista preguntas={entrevista} /> : <Markdown>{entrevistaTexto}</Markdown>}
         </section>
       )}
     </div>

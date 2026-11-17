@@ -121,24 +121,122 @@
   font-weight: 600;
 }
 
-/* Pantalla grande (laptop): columna centrada y cómoda de leer */
+/* Pantalla grande (laptop): índice de temas a la izquierda y la chuleta elegida a lo ancho */
 @media (min-width: 900px) {
   .pagina {
-    max-width: 1280px;
+    max-width: 1560px;
     margin: 0 auto;
-    padding: var(--espacio-7) var(--espacio-6);
+    padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
   }
 }
 
-/* Dos columnas: al abrir una chuleta solo se mueve su columna */
-@media (min-width: 1100px) {
-  .lista {
-    display: block;
+.grande {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: var(--espacio-4);
+  align-items: start;
+}
+
+.indice {
+  position: sticky;
+  top: var(--espacio-4);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.indice button {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.indice button:hover {
+  background: var(--superficie-2);
+  color: var(--texto);
+}
+
+.indice button[aria-current="true"] {
+  background: var(--color-area-suave);
+  color: var(--texto);
+  font-weight: 600;
+}
+
+.indice .numero {
+  font-size: 18px;
+}
+
+.detalle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  min-width: 0;
+}
+
+.detalleCabecera {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-4);
+}
+
+.detalleCabecera h2 {
+  flex: 1;
+  font-size: 30px;
+  letter-spacing: -0.03em;
+}
+
+.numeroGrande {
+  color: transparent;
+  font-family: var(--fuente-titulos);
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1;
+  -webkit-text-stroke: 1.5px var(--color-area);
+}
+
+/* La chuleta: tabla o código a lo ancho, en una hoja */
+.hoja {
+  padding: var(--espacio-5);
+  border: 1px solid color-mix(in srgb, var(--color-area) 30%, var(--borde));
+  border-radius: var(--radio-grande);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
+}
+
+.hoja > div {
+  font-size: 15px;
+}
+
+.hoja > div > :last-child {
+  margin-bottom: 0;
+}
+
+/* Si la chuleta trae varios bloques (tabla, código, lista), se reparten en columnas */
+@media (min-width: 1400px) {
+  .hoja > div:has(> :nth-child(3)) {
     columns: 2;
-    column-gap: var(--espacio-3);
+    column-gap: var(--espacio-5);
   }
-  .chuleta {
+
+  .hoja > div > * {
     break-inside: avoid;
-    margin-bottom: var(--espacio-3);
   }
+}
+
+.preguntasGrande h3 {
+  margin-bottom: var(--espacio-3);
+  font-size: 22px;
+  letter-spacing: -0.02em;
 }

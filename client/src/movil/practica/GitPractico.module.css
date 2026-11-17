@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio-4);
-  max-width: 1280px;
+  max-width: var(--ancho-pagina);
   margin: 0 auto;
   padding: var(--espacio-7) var(--espacio-6);
 }

@@ -4,7 +4,7 @@ import { api } from "../lib/api.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { nombreColeccion, nombreTema, numeroEjercicio } from "../lib/etiquetas.js";
 import { Insignia } from "../components/Insignia.jsx";
-import { Markdown } from "../components/Markdown.jsx";
+import { EnunciadoOrganizado } from "../components/EnunciadoOrganizado.jsx";
 import { PanelTests } from "../components/PanelTests.jsx";
 import { Pestanas } from "../components/Pestanas.jsx";
 import { SeccionPistas } from "../components/SeccionPistas.jsx";
@@ -279,9 +279,9 @@ export function Ejercicio() {
         </div>
 
         {pestana === "enunciado" && (
-          <article className={`tarjeta ${estilos.enunciado}`}>
-            <Markdown>{ejercicio.enunciado}</Markdown>
-          </article>
+          <div className={estilos.enunciado}>
+            <EnunciadoOrganizado markdown={ejercicio.enunciado} />
+          </div>
         )}
         {pestana === "pistas" && (
           <SeccionPistas pistas={ejercicio.pistas} total={ejercicio.totalPistas} alVer={verPista} ocupado={ocupado} />

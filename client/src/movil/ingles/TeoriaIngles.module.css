@@ -1,0 +1,123 @@
+.teoria {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  margin: var(--espacio-4) 0;
+}
+
+.simple {
+  margin: var(--espacio-4) 0;
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.etiqueta {
+  color: var(--color-area);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.frase {
+  padding: var(--espacio-4) var(--espacio-5);
+  border: 1px solid color-mix(in srgb, var(--color-area) 30%, var(--borde));
+  border-radius: var(--radio-grande);
+  background:
+    radial-gradient(520px 200px at 0% 0%, var(--color-area-suave), transparent 75%),
+    var(--superficie);
+}
+
+.frase > div {
+  margin-top: var(--espacio-2);
+  font-size: 18px;
+}
+
+.frase > div > :last-child,
+.tarjeta > div > :last-child,
+.errores li > div > :last-child {
+  margin-bottom: 0;
+}
+
+/* Cómo se forma (ancho) y pronunciación (angosta), lado a lado */
+.fila {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: var(--espacio-3);
+  align-items: start;
+}
+
+.fila[data-solo="true"] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.tarjeta {
+  min-width: 0;
+  padding: var(--espacio-4) var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
+}
+
+.tarjeta h2,
+.subtitulo {
+  margin-bottom: var(--espacio-3);
+  font-size: 19px;
+  letter-spacing: -0.015em;
+}
+
+.tarjeta > div {
+  font-size: 16px;
+}
+
+.tarjeta[data-tipo="pronunciacion"] {
+  position: sticky;
+  top: var(--espacio-4);
+  border-color: color-mix(in srgb, var(--color-area) 25%, var(--borde));
+}
+
+.tarjeta[data-tipo="pronunciacion"] > div {
+  font-size: 15px;
+}
+
+/* Errores típicos: una tarjeta por error */
+.errores {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr));
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.errores li {
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-left: 3px solid color-mix(in srgb, var(--error) 60%, transparent);
+  border-radius: var(--radio);
+  background: var(--superficie);
+}
+
+.errores li > div {
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+@media (max-width: 1000px) {
+  .fila {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tarjeta[data-tipo="pronunciacion"] {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .frase,
+  .tarjeta {
+    padding: var(--espacio-4);
+  }
+}

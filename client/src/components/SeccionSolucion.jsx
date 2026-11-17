@@ -1,4 +1,5 @@
 import { Markdown } from "./Markdown.jsx";
+import { EnunciadoOrganizado } from "./EnunciadoOrganizado.jsx";
 import { Confirmar } from "./Confirmar.jsx";
 import estilos from "./Secciones.module.css";
 
@@ -54,7 +55,7 @@ export function SeccionSolucion({ solucion, resuelto, alVer, ocupado }) {
         <span className={estilos.etiqueta}>Solución oficial</span>
         <Markdown>{bloque}</Markdown>
       </div>
-      <Markdown>{solucion.explicacion}</Markdown>
+      <EnunciadoOrganizado markdown={solucion.explicacion} etiqueta="Por qué funciona" />
     </div>
   );
 }
