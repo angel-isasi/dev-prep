@@ -1,0 +1,118 @@
+[
+  {
+    "id": "en-superior-07-r01",
+    "titulo": "Explica tu PR por escrito",
+    "situacion": "Tom te pide por chat que resumas tu PR de reintentos de pago para las notas de la versión y para los revisores.",
+    "tu": "Ana",
+    "turnos": [
+      {
+        "quien": "Tom",
+        "en": "Can you write a one-line summary of your PR for the release notes?",
+        "es": "¿Puedes escribir un resumen de una línea de tu PR para las notas de la versión?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "In this PR, I have utilized a mechanism whereby the requests that failed are attempted again.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Pomposa y larga: *utilized* y *whereby* no aportan nada, y no dice para qué sirve el cambio."
+          },
+          {
+            "en": "fixed stuff with payments lol",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Demasiado informal y vaga para unas notas de versión que leen clientes y otros equipos."
+          },
+          {
+            "en": "Failed payment requests are now retried automatically, reducing checkout errors.",
+            "es": "Las peticiones de pago fallidas ahora se reintentan automáticamente, lo que reduce los errores en el checkout.",
+            "correcta": true,
+            "explicacion": "Concisa y centrada en lo que nota el usuario. Aquí la pasiva funciona: importa qué cambió, no quién lo hizo."
+          }
+        ]
+      },
+      {
+        "quien": "Tom",
+        "en": "Nice. And in the PR description, how would you explain why you chose this approach?",
+        "es": "Bien. Y en la descripción del PR, ¿cómo explicarías por qué elegiste este enfoque?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "It was decided that retries would be better.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Pasiva que esconde quién decidió y, sobre todo, por qué. No explica nada."
+          },
+          {
+            "en": "Most failures are timeouts that succeed on a second try, hence the retry with a short delay.",
+            "es": "La mayoría de fallos son timeouts que funcionan al segundo intento, de ahí el reintento con una pequeña espera.",
+            "correcta": true,
+            "explicacion": "Das el dato y la decisión que sale de él. **Hence** + sustantivo es breve y formal."
+          },
+          {
+            "en": "Retries are good, thereby I added them.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*Thereby* necesita un verbo en -ing y una consecuencia real. Y \"retries are good\" no es una razón."
+          }
+        ]
+      },
+      {
+        "quien": "Tom",
+        "en": "Makes sense. Any risks reviewers should know about?",
+        "es": "Tiene sentido. ¿Algún riesgo que deban conocer los revisores?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "Notwithstanding, there are no risks whatsoever.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*Notwithstanding* necesita un sustantivo después. Y decir que no hay ningún riesgo hace desconfiar al revisor."
+          },
+          {
+            "en": "Retries could charge a user twice, so each request now includes an idempotency key.",
+            "es": "Los reintentos podrían cobrarle dos veces a un usuario, así que cada petición ahora incluye una clave de idempotencia.",
+            "correcta": true,
+            "explicacion": "Nombras el riesgo concreto y cómo lo mitigaste. Es lo que un revisor necesita leer."
+          },
+          {
+            "en": "Maybe some, but whatever, the tests pass.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Informal y le resta importancia a un riesgo real con dinero de por medio."
+          }
+        ]
+      },
+      {
+        "quien": "Tom",
+        "en": "Great. Last thing: what's out of scope?",
+        "es": "Genial. Lo último: ¿qué queda fuera del alcance?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "The refund flow, which will be addressed in a separate PR.",
+            "es": "El flujo de reembolsos, que se verá en un PR aparte.",
+            "correcta": true,
+            "explicacion": "Breve y claro. La pasiva *will be addressed* es natural: lo importante es que se hará, no quién."
+          },
+          {
+            "en": "Everything else, more or less, I think, probably.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Demasiado vago: un revisor necesita saber exactamente qué no revisar."
+          },
+          {
+            "en": "The refund flow, whereas it will be addressed later.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*Whereas* contrasta dos ideas; no significa \"que\" ni \"el cual\". Aquí va *which*."
+          }
+        ]
+      }
+    ]
+  }
+]

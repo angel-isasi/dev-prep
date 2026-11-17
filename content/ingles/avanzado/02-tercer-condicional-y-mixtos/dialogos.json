@@ -1,0 +1,57 @@
+[
+  { "id": "en-avanzado-02-d01", "titulo": "El postmortem", "situacion": "El viernes por la noche se rompió el botón de pago. El lunes, Tom revisa con Ana qué pasó.",
+    "lineas": [
+      { "quien": "Tom", "en": "So, what happened on Friday night?", "es": "Bueno, ¿qué pasó el viernes por la noche?" },
+      { "quien": "Ana", "en": "I deployed a change to the checkout, and it broke the payment button.", "es": "Desplegué un cambio en el proceso de pago y rompió el botón de pagar." },
+      { "quien": "Tom", "en": "How long was it down?", "es": "¿Cuánto tiempo estuvo caído?" },
+      { "quien": "Ana", "en": "About two hours. If I'd run the end-to-end tests, I would have seen the problem.", "es": "Unas dos horas. Si hubiera corrido los tests end-to-end, habría visto el problema." },
+      { "quien": "Tom", "en": "Why didn't you run them?", "es": "¿Por qué no los corriste?" },
+      { "quien": "Ana", "en": "They take forty minutes, and I wanted to go home. In hindsight, it was a bad decision.", "es": "Tardan cuarenta minutos y quería irme a casa. Visto en retrospectiva, fue una mala decisión." },
+      { "quien": "Tom", "en": "Thanks for being honest. If the tests were faster, nobody would skip them. Let's fix that.", "es": "Gracias por ser sincera. Si los tests fueran más rápidos, nadie se los saltaría. Arreglemos eso." },
+      { "quien": "Ana", "en": "Agreed. I'll also add an alert, so we catch it sooner next time.", "es": "De acuerdo. También voy a agregar una alerta para detectarlo antes la próxima vez." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué se rompió?", "opciones": ["El botón de pago", "El login", "La base de datos"], "correcta": 0,
+        "explicacion": "\"It broke the payment button\"." },
+      { "pregunta": "¿Por qué Ana no corrió los tests?", "opciones": ["No sabía que existían", "Tardaban cuarenta minutos y quería irse a casa", "Tom le dijo que no los corriera"], "correcta": 1,
+        "explicacion": "\"They take forty minutes, and I wanted to go home\"." },
+      { "pregunta": "¿Qué propone Tom?", "opciones": ["Castigar a Ana", "Prohibir los despliegues", "Hacer que los tests sean más rápidos"], "correcta": 2,
+        "explicacion": "\"If the tests were faster, nobody would skip them. Let's fix that\": quiere arreglar el proceso, no buscar culpables." }
+    ] },
+  { "id": "en-avanzado-02-d02", "titulo": "Otra vida posible", "situacion": "Ana y Luis conversan sobre los planes que tenían antes de dedicarse a programar.",
+    "lineas": [
+      { "quien": "Luis", "en": "Do you ever think about your old plans? You wanted to study medicine, right?", "es": "¿Alguna vez piensas en tus planes de antes? Querías estudiar medicina, ¿no?" },
+      { "quien": "Ana", "en": "Yes! If I'd studied medicine, I would still be at university now.", "es": "¡Sí! Si hubiera estudiado medicina, todavía estaría en la universidad." },
+      { "quien": "Luis", "en": "And you wouldn't be fixing CSS at midnight.", "es": "Y no estarías arreglando CSS a medianoche." },
+      { "quien": "Ana", "en": "True. But honestly, I don't regret it. Programming was the right choice for me.", "es": "Es verdad. Pero sinceramente, no me arrepiento. Programar fue la elección correcta para mí." },
+      { "quien": "Luis", "en": "I sometimes wish I'd started earlier. I'd be a senior by now.", "es": "A veces quisiera haber empezado antes. A estas alturas ya sería senior." },
+      { "quien": "Ana", "en": "Maybe, but you learned a lot in your first job. Nothing was wasted.", "es": "Quizás, pero aprendiste mucho en tu primer trabajo. Nada fue en vano." },
+      { "quien": "Luis", "en": "That's a nice way to see it.", "es": "Es una linda forma de verlo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué quería estudiar Ana antes?", "opciones": ["Derecho", "Medicina", "Diseño"], "correcta": 1,
+        "explicacion": "Luis dice \"You wanted to study medicine, right?\" y Ana responde que sí." },
+      { "pregunta": "¿Ana se arrepiente de haber elegido programar?", "opciones": ["Sí, mucho", "A veces", "No"], "correcta": 2,
+        "explicacion": "\"I don't regret it. Programming was the right choice for me\"." },
+      { "pregunta": "¿Qué desearía Luis?", "opciones": ["Haber empezado a programar antes", "Haber estudiado medicina", "Cambiar de trabajo"], "correcta": 0,
+        "explicacion": "\"I sometimes wish I'd started earlier\": ojalá hubiera empezado antes." }
+    ] },
+  { "id": "en-avanzado-02-d03", "titulo": "¿Qué harías diferente?", "situacion": "En una entrevista, Sarah le pide a Luis que hable de un proyecto que salió mal.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Tell me about a project that didn't go well.", "es": "Cuéntame de un proyecto que no salió bien." },
+      { "quien": "Luis", "en": "Last year, our team launched an app two weeks late.", "es": "El año pasado, nuestro equipo lanzó una app con dos semanas de retraso." },
+      { "quien": "Sarah", "en": "What would you have done differently?", "es": "¿Qué habrías hecho diferente?" },
+      { "quien": "Luis", "en": "I would have split the work into smaller tasks. We tried to build everything at once.", "es": "Habría dividido el trabajo en tareas más pequeñas. Intentamos construir todo a la vez." },
+      { "quien": "Sarah", "en": "And what did you learn from it?", "es": "¿Y qué aprendiste de eso?" },
+      { "quien": "Luis", "en": "That we should have asked for feedback earlier. If we'd shown the client a prototype, we would have saved a lot of time.", "es": "Que debimos pedir opiniones antes. Si le hubiéramos mostrado un prototipo al cliente, habríamos ahorrado mucho tiempo." },
+      { "quien": "Sarah", "en": "That's a great lesson.", "es": "Es una gran lección." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuánto se retrasó el lanzamiento?", "opciones": ["Dos días", "Dos semanas", "Dos meses"], "correcta": 1,
+        "explicacion": "\"Our team launched an app two weeks late\"." },
+      { "pregunta": "¿Qué habría hecho Luis diferente?", "opciones": ["Dividir el trabajo en tareas más pequeñas", "Contratar más gente", "Usar otro lenguaje"], "correcta": 0,
+        "explicacion": "\"I would have split the work into smaller tasks\"." },
+      { "pregunta": "Según Luis, ¿qué habría pasado si le hubieran mostrado un prototipo al cliente?", "opciones": ["El cliente habría cancelado el proyecto", "Habrían ahorrado mucho tiempo", "Habrían terminado una semana antes"], "correcta": 1,
+        "explicacion": "\"We would have saved a lot of time\"." }
+    ] }
+]

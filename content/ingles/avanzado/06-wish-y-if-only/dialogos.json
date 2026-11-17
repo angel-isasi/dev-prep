@@ -1,0 +1,56 @@
+[
+  { "id": "en-avanzado-06-d01", "titulo": "Mirando atrás", "situacion": "Ana y Luis hablan de lo que harían distinto en sus estudios.",
+    "lineas": [
+      { "quien": "Luis", "en": "Do you ever regret studying systems engineering?", "es": "¿Alguna vez te arrepientes de haber estudiado Ingeniería de Sistemas?" },
+      { "quien": "Ana", "en": "Not at all. But I wish I had started coding earlier.", "es": "Para nada. Pero ojalá hubiera empezado a programar antes." },
+      { "quien": "Luis", "en": "Me too. And I wish I had taken English classes in school.", "es": "Yo también. Y ojalá hubiera llevado clases de inglés en el colegio." },
+      { "quien": "Ana", "en": "It's never too late. Why don't you give it a shot now?", "es": "Nunca es tarde. ¿Por qué no lo intentas ahora?" },
+      { "quien": "Luis", "en": "I'd rather learn on my own. Classes are so expensive.", "es": "Prefiero aprender por mi cuenta. Las clases son muy caras." },
+      { "quien": "Ana", "en": "Then it's time you downloaded a good app!", "es": "¡Entonces ya es hora de que descargues una buena app!" },
+      { "quien": "Luis", "en": "If only I had more spare time...", "es": "Si tan solo tuviera más tiempo libre..." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿De qué se arrepiente Ana?", "opciones": ["De haber estudiado Ingeniería de Sistemas", "De no haber empezado a programar antes", "De no haber llevado clases de inglés"], "correcta": 1,
+        "explicacion": "\"I wish I had started coding earlier\". Lo de las clases de inglés lo dice Luis." },
+      { "pregunta": "¿Por qué Luis prefiere aprender solo?", "opciones": ["Porque las clases son muy caras", "Porque no le gustan los profesores", "Porque ya habla bien inglés"], "correcta": 0,
+        "explicacion": "\"I'd rather learn on my own. Classes are so expensive\"." },
+      { "pregunta": "¿Qué le falta a Luis, según él?", "opciones": ["Dinero", "Tiempo libre", "Una buena app"], "correcta": 1,
+        "explicacion": "\"If only I had more spare time\": si tan solo tuviera más tiempo libre." }
+    ] },
+  { "id": "en-avanzado-06-d02", "titulo": "Otra vez a main", "situacion": "Sarah y Tom descubren que alguien volvió a subir código directo a la rama principal.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Tom, someone pushed directly to main again.", "es": "Tom, alguien volvió a hacer push directo a main." },
+      { "quien": "Tom", "en": "Again? I wish people would open a pull request first.", "es": "¿Otra vez? Ojalá la gente abriera primero un pull request." },
+      { "quien": "Sarah", "en": "It's about time we protected the main branch.", "es": "Ya era hora de que protegiéramos la rama principal." },
+      { "quien": "Tom", "en": "You're right. I'd rather we did it today, before another incident.", "es": "Tienes razón. Prefiero que lo hagamos hoy, antes de otro incidente." },
+      { "quien": "Sarah", "en": "If only we had done it last month!", "es": "¡Si tan solo lo hubiéramos hecho el mes pasado!" },
+      { "quien": "Tom", "en": "No point looking back. Can you set up the rule this afternoon?", "es": "No sirve de nada mirar atrás. ¿Puedes configurar la regla esta tarde?" },
+      { "quien": "Sarah", "en": "Sure. I'll send a message to the team, too.", "es": "Claro. También le mandaré un mensaje al equipo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué problema encontró Sarah?", "opciones": ["Alguien hizo push directo a main", "Se cayó el servidor", "Un pull request tiene errores"], "correcta": 0,
+        "explicacion": "\"Someone pushed directly to main again\"." },
+      { "pregunta": "¿Cuándo quiere Tom proteger la rama?", "opciones": ["El próximo mes", "Hoy, antes de otro incidente", "Después del próximo lanzamiento"], "correcta": 1,
+        "explicacion": "\"I'd rather we did it today, before another incident\"." },
+      { "pregunta": "¿Qué hará Sarah además de configurar la regla?", "opciones": ["Revertir el último commit", "Mandarle un mensaje al equipo", "Hablar con el cliente"], "correcta": 1,
+        "explicacion": "\"I'll send a message to the team, too\"." }
+    ] },
+  { "id": "en-avanzado-06-d03", "titulo": "¿Playa o montaña?", "situacion": "María y Carlos planean sus vacaciones de verano.",
+    "lineas": [
+      { "quien": "María", "en": "Would you rather go to the beach or the mountains this summer?", "es": "¿Preferirías ir a la playa o a la montaña este verano?" },
+      { "quien": "Carlos", "en": "The mountains. I'd rather hike than lie in the sun all day.", "es": "A la montaña. Prefiero caminar a estar echado al sol todo el día." },
+      { "quien": "María", "en": "I wish I liked hiking. I always get so tired.", "es": "Ojalá me gustara hacer caminatas. Siempre me canso muchísimo." },
+      { "quien": "Carlos", "en": "Come with me to Cusco, just for a change.", "es": "Ven conmigo a Cusco, aunque sea para variar." },
+      { "quien": "María", "en": "On second thought, why not? I'm fed up with the same beach every year.", "es": "Pensándolo bien, ¿por qué no? Estoy harta de la misma playa todos los años." },
+      { "quien": "Carlos", "en": "Great! But I'd rather you didn't complain on the trail.", "es": "¡Genial! Pero preferiría que no te quejaras en el camino." },
+      { "quien": "María", "en": "I'll try. No promises!", "es": "Lo intentaré. ¡No prometo nada!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué prefiere Carlos?", "opciones": ["Echarse al sol en la playa", "Hacer caminatas en la montaña", "Quedarse en casa"], "correcta": 1,
+        "explicacion": "\"I'd rather hike than lie in the sun all day\"." },
+      { "pregunta": "¿Por qué María acepta ir a Cusco?", "opciones": ["Porque le encanta caminar", "Porque está harta de ir a la misma playa", "Porque Carlos paga el viaje"], "correcta": 1,
+        "explicacion": "\"I'm fed up with the same beach every year\". Justamente dice que caminar la cansa." },
+      { "pregunta": "¿Qué le pide Carlos a María?", "opciones": ["Que no se queje en el camino", "Que compre los pasajes", "Que lleve comida"], "correcta": 0,
+        "explicacion": "\"I'd rather you didn't complain on the trail\": I'd rather + persona + pasado." }
+    ] }
+]

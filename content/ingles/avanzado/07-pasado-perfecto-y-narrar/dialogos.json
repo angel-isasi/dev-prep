@@ -1,0 +1,55 @@
+[
+  { "id": "en-avanzado-07-d01", "titulo": "Un bug difícil", "situacion": "Sarah entrevista a Carlos para un puesto frontend y le pide que cuente un bug complicado.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Tell me about a difficult bug you worked on.", "es": "Cuéntame de un bug difícil en el que hayas trabajado." },
+      { "quien": "Carlos", "en": "Sure. Last year, our checkout page had been failing for some users, but only on Safari.", "es": "Claro. El año pasado, nuestra página de pago venía fallando para algunos usuarios, pero solo en Safari." },
+      { "quien": "Sarah", "en": "How did you find the cause?", "es": "¿Cómo encontraste la causa?" },
+      { "quien": "Carlos", "en": "At first, I couldn't reproduce it. Then I noticed we had used a date format that Safari didn't support.", "es": "Al principio no podía reproducirlo. Luego noté que habíamos usado un formato de fecha que Safari no soportaba." },
+      { "quien": "Sarah", "en": "How long had it been happening?", "es": "¿Cuánto tiempo llevaba pasando?" },
+      { "quien": "Carlos", "en": "About two weeks. Nobody had reported it because most users were on Chrome.", "es": "Unas dos semanas. Nadie lo había reportado porque la mayoría de usuarios usaba Chrome." },
+      { "quien": "Sarah", "en": "And what did you learn from it?", "es": "¿Y qué aprendiste de eso?" },
+      { "quien": "Carlos", "en": "Since then, I always test on more than one browser.", "es": "Desde entonces, siempre pruebo en más de un navegador." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿En qué navegador fallaba la página?", "opciones": ["Chrome", "Safari", "En todos"], "correcta": 1,
+        "explicacion": "\"Our checkout page had been failing for some users, but only on Safari\"." },
+      { "pregunta": "¿Por qué nadie lo había reportado?", "opciones": ["Porque la mayoría de usuarios usaba Chrome", "Porque el error era muy pequeño", "Porque no había soporte técnico"], "correcta": 0,
+        "explicacion": "\"Nobody had reported it because most users were on Chrome\"." },
+      { "pregunta": "¿Qué hace Carlos desde entonces?", "opciones": ["Usa solo Safari", "Prueba en más de un navegador", "Evita usar fechas"], "correcta": 1,
+        "explicacion": "\"Since then, I always test on more than one browser\"." }
+    ] },
+  { "id": "en-avanzado-07-d02", "titulo": "La noche del incidente", "situacion": "Tom le cuenta a Sarah lo que pasó anoche con el sitio.",
+    "lineas": [
+      { "quien": "Tom", "en": "Did you hear about last night? The site was down for forty minutes.", "es": "¿Supiste lo de anoche? El sitio estuvo caído cuarenta minutos." },
+      { "quien": "Sarah", "en": "No! What happened?", "es": "¡No! ¿Qué pasó?" },
+      { "quien": "Tom", "en": "I got paged at two. By the time I logged in, the database had run out of space.", "es": "Me llegó la alerta a las dos. Para cuando entré, la base de datos se había quedado sin espacio." },
+      { "quien": "Sarah", "en": "Hadn't we set up an alert for that?", "es": "¿No habíamos configurado una alerta para eso?" },
+      { "quien": "Tom", "en": "We had, but someone had turned it off during a migration.", "es": "Sí, pero alguien la había apagado durante una migración." },
+      { "quien": "Sarah", "en": "Oh no. And nobody had turned it back on.", "es": "Ay, no. Y nadie la había vuelto a encender." },
+      { "quien": "Tom", "en": "Exactly. I'm writing the postmortem now, so it doesn't happen again.", "es": "Exacto. Estoy escribiendo el postmortem ahora para que no vuelva a pasar." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuánto tiempo estuvo caído el sitio?", "opciones": ["Dos horas", "Cuarenta minutos", "Toda la noche"], "correcta": 1,
+        "explicacion": "\"The site was down for forty minutes\". Las dos (*at two*) es la hora en que le llegó la alerta." },
+      { "pregunta": "¿Por qué la alerta de espacio no avisó a tiempo?", "opciones": ["Porque nunca la configuraron", "Porque alguien la había apagado durante una migración", "Porque Tom no vio el mensaje"], "correcta": 1,
+        "explicacion": "\"Someone had turned it off during a migration\", y nadie la volvió a encender." },
+      { "pregunta": "¿Qué está haciendo Tom ahora?", "opciones": ["Escribiendo el postmortem", "Reiniciando la base de datos", "Durmiendo"], "correcta": 0,
+        "explicacion": "\"I'm writing the postmortem now, so it doesn't happen again\"." }
+    ] },
+  { "id": "en-avanzado-07-d03", "titulo": "Un viaje desastroso", "situacion": "Luis le cuenta a María cómo le fue en su viaje a Arequipa.",
+    "lineas": [
+      { "quien": "María", "en": "How was your trip to Arequipa?", "es": "¿Qué tal tu viaje a Arequipa?" },
+      { "quien": "Luis", "en": "A disaster. When I got to the airport, my flight had already left.", "es": "Un desastre. Cuando llegué al aeropuerto, mi vuelo ya había salido." },
+      { "quien": "María", "en": "What? Hadn't you checked the time?", "es": "¿Qué? ¿No habías revisado la hora?" },
+      { "quien": "Luis", "en": "I had, but they had changed it. I hadn't seen the email.", "es": "Sí, pero la habían cambiado. No había visto el correo." },
+      { "quien": "María", "en": "Oh no! What did you do?", "es": "¡Ay, no! ¿Y qué hiciste?" },
+      { "quien": "Luis", "en": "I took a bus. By the time I arrived, I had been traveling for sixteen hours.", "es": "Tomé un bus. Para cuando llegué, llevaba dieciséis horas de viaje." },
+      { "quien": "María", "en": "Next time, check your email the night before!", "es": "¡La próxima vez, revisa tu correo la noche anterior!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Luis perdió el vuelo?", "opciones": ["Porque se quedó dormido", "Porque cambiaron la hora y no vio el correo", "Porque se equivocó de aeropuerto"], "correcta": 1,
+        "explicacion": "\"They had changed it. I hadn't seen the email\"." },
+      { "pregunta": "¿Cómo llegó Luis a Arequipa?", "opciones": ["En otro vuelo", "En bus, después de dieciséis horas", "No llegó"], "correcta": 1,
+        "explicacion": "\"I took a bus. By the time I arrived, I had been traveling for sixteen hours\"." }
+    ] }
+]

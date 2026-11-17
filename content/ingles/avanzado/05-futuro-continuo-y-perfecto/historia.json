@@ -1,0 +1,19 @@
+[
+  { "id": "en-avanzado-05-h01", "titulo": "Una fecha que se mueve", "situacion": "El cliente quiere adelantar el lanzamiento y Tom le pregunta a Ana si llega a tiempo.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, quick update: the client wants to move the launch up to next Friday.", "es": "Ana, una novedad rápida: el cliente quiere adelantar el lanzamiento al próximo viernes." },
+      { "quien": "Ana", "en": "Next Friday? That's a week earlier than we planned.", "es": "¿El próximo viernes? Es una semana antes de lo que planeamos." },
+      { "tipo": "completa", "quien": "Tom", "en": "I know. Do you think you ___ the payment page by then?", "es": "Lo sé. ¿Crees que para entonces habrás terminado la página de pagos?", "opciones": ["will have finished", "are finishing", "had finished"], "correcta": 0, "explicacion": "Con un plazo (**by then**) se usa el futuro perfecto: **will have + participio**. *had finished* es pasado y no mira al viernes." },
+      { "quien": "Ana", "en": "The page, yes. But I'll still be writing the tests on Thursday.", "es": "La página, sí. Pero el jueves todavía estaré escribiendo los tests." },
+      { "tipo": "pregunta", "pregunta": "¿Qué estará haciendo Ana el jueves?", "opciones": ["Escribiendo los tests", "Presentando la demo al cliente", "De vacaciones"], "correcta": 0, "explicacion": "Ana dice \"I'll still be writing the tests on Thursday\": futuro continuo, una acción en curso en ese momento." },
+      { "quien": "Tom", "en": "Could Sarah help you? She's finishing her task tomorrow.", "es": "¿Podría ayudarte Sarah? Ella termina su tarea mañana." },
+      { "quien": "Ana", "en": "That would help a lot. If she takes the edge cases, we'll be on schedule.", "es": "Eso ayudaría mucho. Si ella se encarga de los casos borde, llegamos a tiempo." },
+      { "quien": "Tom", "en": "Great. I'm meeting the client at four. I'll tell them the plan.", "es": "Genial. A las cuatro me reúno con el cliente. Les cuento el plan." },
+      { "tipo": "completa", "quien": "Ana", "en": "Perfect. By the time you ___ them, I'll have sent you a short summary.", "es": "Perfecto. Para cuando te reúnas con ellos, ya te habré enviado un resumen corto.", "opciones": ["meet", "will meet", "met"], "correcta": 0, "explicacion": "Después de **by the time** va presente aunque hables del futuro: *by the time you meet them*." },
+      { "quien": "Tom", "en": "You're a lifesaver. Oh, and remember, I'm flying out on Monday.", "es": "Me salvas la vida. Ah, y recuerda que el lunes viajo." },
+      { "quien": "Ana", "en": "Right. Will you be checking Slack while you're away?", "es": "Cierto. ¿Vas a revisar Slack mientras estés fuera?" },
+      { "quien": "Tom", "en": "Every morning. Message me if the date is going to slip.", "es": "Todas las mañanas. Escríbeme si la fecha se va a retrasar." },
+      { "tipo": "pregunta", "pregunta": "¿Qué hará Ana antes de que Tom se reúna con el cliente?", "opciones": ["Enviarle un resumen corto", "Hablar ella con el cliente", "Terminar todos los tests"], "correcta": 0, "explicacion": "\"By the time you meet them, I'll have sent you a short summary\"." },
+      { "tipo": "completa", "quien": "Ana", "en": "Don't worry. ___ let you know right away.", "es": "No te preocupes. Te aviso de inmediato.", "opciones": ["I'll", "I", "I'm"], "correcta": 0, "explicacion": "Una promesa se hace con **will**: *I'll let you know*. *I let you know* es el calco de \"te aviso\"." }
+    ] }
+]

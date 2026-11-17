@@ -1,0 +1,6 @@
+[
+  { "id": "en-avanzado-03-c01", "es": "Esta es la librería que uso.", "natural": "This is the library I use.", "calco": "This is the library that I use it.", "explicacion": "El relativo ya reemplaza al objeto: no repitas *it*. Al hablar, lo natural es quitar también el relativo: *the library I use*." },
+  { "id": "en-avanzado-03-c02", "es": "Mi mamá, que es profesora, vive en Cusco.", "natural": "My mom, who is a teacher, lives in Cusco.", "calco": "My mom, that is a teacher, lives in Cusco.", "explicacion": "Entre comas (dato extra) nunca va *that*: para personas, **who**." },
+  { "id": "en-avanzado-03-c03", "es": "Es la empresa donde trabajo.", "natural": "It's the company where I work.", "calco": "It's the company where I work in.", "explicacion": "**Where** ya incluye el \"en\". O usas *where I work*, o *the company I work in*, pero no las dos cosas." },
+  { "id": "en-avanzado-03-c04", "es": "El build falló, lo que retrasó el lanzamiento.", "natural": "The build failed, which delayed the release.", "calco": "The build failed, what delayed the release.", "explicacion": "\"Lo que\" referido a toda la frase anterior es **, which**. *What* no se usa así." }
+]

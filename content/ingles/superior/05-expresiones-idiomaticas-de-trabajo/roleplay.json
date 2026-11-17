@@ -1,0 +1,118 @@
+[
+  {
+    "id": "en-superior-05-r01",
+    "titulo": "Decir que no sin decir no",
+    "situacion": "En la planificación, Tom te pide estimar una tarea y luego sumarte otra. Ya estás al límite.",
+    "tu": "Ana",
+    "turnos": [
+      {
+        "quien": "Tom",
+        "en": "Ana, how long would the new search filter take?",
+        "es": "Ana, ¿cuánto tomaría el nuevo filtro de búsqueda?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "Exactly three days, I promise.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Prometer una cifra exacta sin revisar nada suena ingenuo. En EE. UU. se espera que marques la incertidumbre."
+          },
+          {
+            "en": "Ballpark? Three days, but I'll confirm once I've checked the API.",
+            "es": "¿Más o menos? Tres días, pero lo confirmo cuando haya revisado la API.",
+            "correcta": true,
+            "explicacion": "*Ballpark?* al inicio deja claro que es un cálculo aproximado, y prometes confirmar. Natural y honesto."
+          },
+          {
+            "en": "In the ballpark of maybe around three days or so, I guess.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Acumula atenuadores (*maybe*, *around*, *or so*, *I guess*) y suena inseguro. Con *ballpark* ya basta."
+          }
+        ]
+      },
+      {
+        "quien": "Tom",
+        "en": "Great. Could you also take on the export feature this sprint?",
+        "es": "Genial. ¿Podrías encargarte también de la exportación este sprint?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "No. Not my problem.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Demasiado brusco con tu líder. En EE. UU. un no se suaviza y se explica."
+          },
+          {
+            "en": "I'd like to help, but I don't have the bandwidth this sprint. Something would have to give.",
+            "es": "Me gustaría ayudar, pero este sprint no tengo tiempo. Algo tendría que quedar fuera.",
+            "correcta": true,
+            "explicacion": "Dices que no con cortesía y explicas el costo: *something would have to give* (algo tendría que ceder)."
+          },
+          {
+            "en": "Sure, I'll just cut corners on the filter.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*Cut corners* nunca es algo que propones: suena a que vas a bajar la calidad a propósito."
+          }
+        ]
+      },
+      {
+        "quien": "Tom",
+        "en": "Fair. Which one should we put on the back burner, then?",
+        "es": "Tiene sentido. ¿Entonces cuál dejamos para después?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "Whatever you want, the ball is in your court.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "El idiom está bien usado, pero aquí suena a que te lavas las manos: Tom te pidió tu opinión."
+          },
+          {
+            "en": "Let's think outside the box and leverage our synergies.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Clichés vacíos que no responden la pregunta."
+          },
+          {
+            "en": "I'd keep the filter. Users asked for it, so it's the one that will move the needle.",
+            "es": "Me quedaría con el filtro. Los usuarios lo pidieron, así que es el que de verdad va a marcar la diferencia.",
+            "correcta": true,
+            "explicacion": "Das tu opinión con una razón concreta. *Move the needle* está bien usado: el filtro tendrá un impacto real."
+          }
+        ]
+      },
+      {
+        "quien": "Tom",
+        "en": "Agreed. Let's touch base on Thursday.",
+        "es": "De acuerdo. Hablemos el jueves."
+      },
+      {
+        "opciones": [
+          {
+            "en": "Okay. I'll be waiting for your instructions.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Suena pasivo y sumiso. En un equipo de EE. UU. se espera que tú tomes la iniciativa."
+          },
+          {
+            "en": "Sounds good. I'll keep you in the loop if anything changes before then.",
+            "es": "Me parece bien. Te mantengo al tanto si algo cambia antes.",
+            "correcta": true,
+            "explicacion": "Aceptas y te ofreces a avisar: tomas la iniciativa del seguimiento."
+          },
+          {
+            "en": "Let's table it until Thursday.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*Table* es posponer un tema que se está discutiendo. Tom ya lo cerró: el jueves solo se van a poner al día."
+          }
+        ]
+      }
+    ]
+  }
+]

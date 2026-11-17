@@ -1,0 +1,29 @@
+[
+  { "id": "en-superior-01-r01", "titulo": "Defender tu propuesta", "situacion": "En la reunión de planificación, Tom duda de tu propuesta de agregar tests end-to-end antes del lanzamiento.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "I'm not sure we have time for end-to-end tests before the launch.", "es": "No estoy seguro de que tengamos tiempo para tests end-to-end antes del lanzamiento." },
+      { "opciones": [
+          { "en": "I understand, but what worries me is the checkout flow. It broke twice last month.", "es": "Entiendo, pero lo que me preocupa es el flujo de pago. Se rompió dos veces el mes pasado.", "correcta": true, "explicacion": "La cleft *what worries me is...* pone el foco en un riesgo concreto, y el dato lo respalda. Firme sin ser brusca." },
+          { "en": "Never have I seen a team launch without proper tests.", "es": "", "correcta": false, "explicacion": "La inversión aquí suena a reproche y a exageración. Con tu líder pierdes credibilidad: no das ningún dato." },
+          { "en": "What worries me is that everything is going to fail completely.", "es": "", "correcta": false, "explicacion": "La estructura está bien, pero el contenido es catastrofista y vago. Un argumento sin datos no convence." }
+        ] },
+      { "quien": "Tom", "en": "Fair enough. But the team is already at full capacity.", "es": "Es razonable. Pero el equipo ya está al máximo de su capacidad." },
+      { "opciones": [
+          { "en": "Only if you give me two days can I guarantee anything.", "es": "", "correcta": false, "explicacion": "Inversión con *only if* bien formada, pero suena a ultimátum: le pones condiciones a tu líder." },
+          { "en": "All we need is two days, and I can write most of them myself.", "es": "Lo único que necesitamos son dos días, y yo puedo escribir la mayoría.", "correcta": true, "explicacion": "*All we need is...* minimiza el costo y ofreces hacerte cargo. Es énfasis al servicio de una solución." },
+          { "en": "It's the team that has the problem, not me.", "es": "", "correcta": false, "explicacion": "Cleft correcta, pero culpa al equipo. El tono defensivo hace que la conversación empeore." }
+        ] },
+      { "quien": "Tom", "en": "Okay, let's try it. But if it slips, we drop it.", "es": "Ok, intentémoslo. Pero si se retrasa, lo dejamos." },
+      { "opciones": [
+          { "en": "Fine. Under no circumstances will it slip.", "es": "", "correcta": false, "explicacion": "Promesa absoluta y teatral. No puedes garantizarlo, y suena a desafío." },
+          { "en": "Fine. Not only will I finish it, but I'll finish it early.", "es": "", "correcta": false, "explicacion": "Suena arrogante y te compromete con algo que no controlas." },
+          { "en": "That's fair. And I do appreciate you giving it a chance.", "es": "Me parece justo. Y de verdad agradezco que le des una oportunidad.", "correcta": true, "explicacion": "El *do* enfático hace que el agradecimiento suene sincero. Aceptas la condición sin discutir." }
+        ] },
+      { "quien": "Tom", "en": "Great. Can you post a short summary for the team?", "es": "Genial. ¿Puedes publicar un resumen corto para el equipo?" },
+      { "opciones": [
+          { "en": "Sure. I'll keep it short: what we're adding is checkout tests, two days max.", "es": "Claro. Lo haré corto: lo que vamos a agregar son tests del pago, máximo dos días.", "correcta": true, "explicacion": "Para un resumen de equipo, una cleft simple basta: clara y sin dramatismo." },
+          { "en": "Sure. Never before has this team been so well protected.", "es": "", "correcta": false, "explicacion": "Grandilocuente para un mensaje de equipo. La inversión con *never before* es para discursos, no para Slack." },
+          { "en": "Sure. Rarely do we make such an important decision, so read it carefully.", "es": "", "correcta": false, "explicacion": "Formal de más y condescendiente: les dices a tus compañeros cómo deben leer." }
+        ] }
+    ] }
+]

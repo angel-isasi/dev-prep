@@ -1,0 +1,171 @@
+[
+  {
+    "id": "en-superior-05-e01",
+    "pregunta": "En una reunión con un equipo de Nueva York, tu líder dice: **\"Let's table this.\"** ¿Qué quiere?",
+    "opciones": [
+      "Ponerlo a discusión ahora mismo",
+      "Dejar el tema para después",
+      "Anotarlo en una tabla"
+    ],
+    "correcta": 1,
+    "explicacion": "En inglés de EE. UU., **table** como verbo es **posponer**: *let's table this* = dejémoslo para después. La trampa es pensar en \"poner sobre la mesa\", que es justo lo que significa en el Reino Unido."
+  },
+  {
+    "id": "en-superior-05-e02",
+    "pregunta": "We can't ___ on security, even with a tight deadline.",
+    "opciones": [
+      "cut the corners",
+      "cut angles",
+      "skip corners",
+      "cut corners"
+    ],
+    "correcta": 3,
+    "explicacion": "El idiom es fijo y va sin artículo: **cut corners**. *Cut the corners* sale porque en español pondríamos \"las\", pero así ya no se entiende como idiom."
+  },
+  {
+    "id": "en-superior-05-e03",
+    "pregunta": "¿En cuál de estas situaciones suena natural **bite the bullet**?",
+    "opciones": [
+      "Recibir un bono de fin de año",
+      "Probar una librería nueva por curiosidad",
+      "Migrar por fin un proyecto viejo, aunque tome semanas"
+    ],
+    "correcta": 2,
+    "explicacion": "**Bite the bullet** es aceptar algo incómodo que ya no se puede evitar: *We bit the bullet and migrated*. No sirve para algo agradable ni para algo que haces por gusto."
+  },
+  {
+    "id": "en-superior-05-e04",
+    "pregunta": "Un compañero dice en la daily: **\"I dropped the ball on the deploy.\"** ¿Qué está haciendo?",
+    "opciones": [
+      "Contar que el deploy salió perfecto",
+      "Culpar a otra persona",
+      "Admitir que descuidó algo que le tocaba"
+    ],
+    "correcta": 2,
+    "explicacion": "**Drop the ball** es descuidar una responsabilidad. Dicho sobre uno mismo muestra que te haces cargo, algo muy valorado en EE. UU. Dicho sobre otro (*He dropped the ball*) es una crítica."
+  },
+  {
+    "id": "en-superior-05-e05",
+    "pregunta": "Fixing the typos in the docs is ___: easy and visible.",
+    "opciones": [
+      "low-hanging fruits",
+      "a low fruit",
+      "low-hanging fruit",
+      "the hanging fruit"
+    ],
+    "correcta": 2,
+    "explicacion": "Se dice **low-hanging fruit**, en singular: aquí *fruit* funciona como algo que no se cuenta. El plural *fruits* es el error más común de los hispanohablantes."
+  },
+  {
+    "id": "en-superior-05-e06",
+    "pregunta": "¿Cuál de estas frases suena a cliché corporativo vacío?",
+    "opciones": [
+      "We need to leverage our synergies to move the needle.",
+      "This change won't move the needle on load time.",
+      "Let's touch base after lunch."
+    ],
+    "correcta": 0,
+    "explicacion": "Juntar *leverage*, *synergies* y *move the needle* en una sola frase no dice nada concreto. Las otras dos usan un idiom cada una y con un sentido claro: así sí suenan naturales."
+  },
+  {
+    "id": "en-superior-05-e07",
+    "pregunta": "Escribes el primer correo a un cliente nuevo para pedirle un estimado. ¿Qué es lo más adecuado?",
+    "opciones": [
+      "Could you throw me a ballpark on the timeline?",
+      "Could you share a rough estimate of the timeline?",
+      "Let's touch base on the ballpark figure ASAP."
+    ],
+    "correcta": 1,
+    "explicacion": "Con un cliente nuevo y por escrito, lo literal es lo más seguro: **a rough estimate**. *Throw me a ballpark* es de conversación entre colegas, y la tercera amontona idioms y suena apurada."
+  },
+  {
+    "id": "en-superior-05-e08",
+    "pregunta": "\"I'm still **on the fence** about it.\" significa:",
+    "opciones": [
+      "Todavía no me decido",
+      "Estoy en contra",
+      "Estoy esperando permiso"
+    ],
+    "correcta": 0,
+    "explicacion": "**On the fence** es estar sobre la cerca, sin elegir ningún lado: indeciso. No significa estar en contra."
+  },
+  {
+    "id": "en-superior-05-e09",
+    "pregunta": "The client keeps changing the requirements after we agree on them. They keep ___.",
+    "opciones": [
+      "moving the goalposts",
+      "moving the needle",
+      "raising a red flag",
+      "boiling the ocean"
+    ],
+    "correcta": 0,
+    "explicacion": "**Move the goalposts** es mover los arcos: cambiar las condiciones cuando ya estaban acordadas. *Move the needle* se parece, pero significa lograr un cambio que se note."
+  },
+  {
+    "id": "en-superior-05-e10",
+    "pregunta": "Tom te escribe: **\"Can I pick your brain about the cache issue?\"** ¿Qué te pide?",
+    "opciones": [
+      "Que arregles el problema por él",
+      "Que revises su código línea por línea",
+      "Tu opinión o lo que sabes del tema"
+    ],
+    "correcta": 2,
+    "explicacion": "**Pick someone's brain** es consultarle a alguien que sabe. Es una forma amable de pedir unos minutos de conversación, no que hagas el trabajo."
+  },
+  {
+    "id": "en-superior-05-e11",
+    "pregunta": "¿Cuál es la versión natural de \"no hay que ahogarse en un vaso de agua\"?",
+    "opciones": [
+      "Don't make a mountain out of a molehill.",
+      "Don't drown in a glass of water.",
+      "Don't sink in a cup of water."
+    ],
+    "correcta": 0,
+    "explicacion": "Los refranes no se traducen palabra por palabra: se busca el equivalente. En inglés se dice **don't make a mountain out of a molehill** (no hagas una montaña de un montoncito de tierra)."
+  },
+  {
+    "id": "en-superior-05-e12",
+    "pregunta": "En una entrevista te preguntan cómo fue tu primer mes. ¿Qué respuesta suena natural y profesional?",
+    "opciones": [
+      "I spent the first few weeks learning the ropes, and by week four I was shipping features.",
+      "I spent the first weeks learning the ropes and thinking outside the box to move the needle.",
+      "I spent the first weeks learning the cords of the job."
+    ],
+    "correcta": 0,
+    "explicacion": "La primera usa un idiom y luego un hecho concreto. La segunda amontona clichés que no dicen nada, y la tercera es un calco: el idiom es **learn the ropes**, no *cords*."
+  },
+  {
+    "id": "en-superior-05-e13",
+    "pregunta": "Sarah dice: \"It's **a long shot**, but have you tried restarting the dev server?\" ¿Qué tan segura está?",
+    "opciones": [
+      "Mucho: está segura de que funcionará",
+      "Poco: cree que es poco probable que funcione",
+      "Nada: cree que es imposible"
+    ],
+    "correcta": 1,
+    "explicacion": "**A long shot** es un tiro desde lejos: poco probable, pero vale la pena intentarlo. No es imposible."
+  },
+  {
+    "id": "en-superior-05-e14",
+    "pregunta": "I sent my part of the proposal, so now ___.",
+    "opciones": [
+      "the ball is on your side",
+      "the ball is in your field",
+      "the ball is in your court",
+      "you have the ball"
+    ],
+    "correcta": 2,
+    "explicacion": "El idiom es **the ball is in your court**: la pelota está en tu cancha de tenis, ahora te toca a ti. *Field* y *on your side* son calcos de \"en tu cancha\" o \"de tu lado\"."
+  },
+  {
+    "id": "en-superior-05-e15",
+    "pregunta": "¿Cuál es la forma más profesional de reconocer un error tuyo frente al equipo?",
+    "opciones": [
+      "Someone dropped the ball on the migration script.",
+      "That's on me. I dropped the ball on the migration script, and I'm fixing it today.",
+      "The intern dropped the ball, not me."
+    ],
+    "correcta": 1,
+    "explicacion": "**That's on me** más un plan concreto muestra responsabilidad. *Someone* esconde quién fue, y culpar al practicante es justo **throw someone under the bus**, algo muy mal visto."
+  }
+]

@@ -1,0 +1,387 @@
+[
+  {
+    "id": "en-superior-08-w01",
+    "en": "let me walk you through",
+    "es": "déjame explicarte paso a paso",
+    "pron": "lémi uókiu zrúu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let me walk you through the new checkout.",
+      "es": "Déjenme explicarles paso a paso el nuevo checkout."
+    }
+  },
+  {
+    "id": "en-superior-08-w02",
+    "en": "signposting",
+    "es": "frases que guían al público en una charla",
+    "pron": "sáinpoustin",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Good signposting makes a demo easy to follow.",
+      "es": "Unas buenas frases guía hacen que una demo sea fácil de seguir."
+    }
+  },
+  {
+    "id": "en-superior-08-w03",
+    "en": "first off",
+    "es": "para empezar",
+    "pron": "férst óf",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "First off, thanks for having me.",
+      "es": "Para empezar, gracias por invitarme."
+    }
+  },
+  {
+    "id": "en-superior-08-w04",
+    "en": "building on that",
+    "es": "a partir de eso, siguiendo esa idea",
+    "pron": "bíldin on dát",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Building on that, we also added offline support.",
+      "es": "A partir de eso, también agregamos soporte sin conexión."
+    }
+  },
+  {
+    "id": "en-superior-08-w05",
+    "en": "this brings me to",
+    "es": "esto me lleva a (el siguiente punto)",
+    "pron": "dis bríngz mi tu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "This brings me to the biggest challenge.",
+      "es": "Esto me lleva al mayor desafío."
+    }
+  },
+  {
+    "id": "en-superior-08-w06",
+    "en": "as you can see",
+    "es": "como pueden ver",
+    "pron": "az iú kan síi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "As you can see, errors dropped after the release.",
+      "es": "Como pueden ver, los errores bajaron después del release."
+    }
+  },
+  {
+    "id": "en-superior-08-w07",
+    "en": "to put it in perspective",
+    "es": "para ponerlo en contexto",
+    "pron": "tu put it in perspéktiv",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "To put it in perspective, that's a thousand orders a day.",
+      "es": "Para ponerlo en contexto, son mil pedidos al día."
+    }
+  },
+  {
+    "id": "en-superior-08-w08",
+    "en": "takeaway",
+    "es": "idea clave (con la que se queda el público)",
+    "pron": "téikauei",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The main takeaway is that small fixes add up.",
+      "es": "La idea clave es que los arreglos pequeños se van sumando."
+    }
+  },
+  {
+    "id": "en-superior-08-w09",
+    "en": "the bottom line",
+    "es": "en resumidas cuentas, lo esencial",
+    "pron": "de bátom láin",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The bottom line is that users pay faster.",
+      "es": "En resumidas cuentas, los usuarios pagan más rápido."
+    }
+  },
+  {
+    "id": "en-superior-08-w10",
+    "en": "the stakes",
+    "es": "lo que está en juego",
+    "pron": "de stéiks",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The stakes were high: the client was about to leave.",
+      "es": "Había mucho en juego: el cliente estaba a punto de irse."
+    }
+  },
+  {
+    "id": "en-superior-08-w11",
+    "en": "field questions",
+    "es": "responder preguntas (del público)",
+    "pron": "fíild kuéschonz",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sarah will field questions after the demo.",
+      "es": "Sarah va a responder las preguntas después de la demo."
+    }
+  },
+  {
+    "id": "en-superior-08-w12",
+    "en": "backstory",
+    "es": "antecedentes, la historia previa",
+    "pron": "bákstori",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Here's a bit of backstory on the project.",
+      "es": "Les cuento un poco de los antecedentes del proyecto."
+    }
+  },
+  {
+    "id": "en-superior-08-w13",
+    "en": "set the scene",
+    "es": "poner en contexto (al inicio de una historia)",
+    "pron": "sét de síin",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let me set the scene: it was Black Friday week.",
+      "es": "Déjame ponerte en contexto: era la semana del Black Friday."
+    }
+  },
+  {
+    "id": "en-superior-08-w14",
+    "en": "drive the point home",
+    "es": "dejar clara la idea, remacharla",
+    "pron": "dráiv de póint jóum",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "One last chart to drive the point home.",
+      "es": "Un último gráfico para dejar clara la idea."
+    }
+  },
+  {
+    "id": "en-superior-08-w15",
+    "en": "take ownership of",
+    "es": "hacerse cargo de (y responder por el resultado)",
+    "pron": "téik óunership ov",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I took ownership of the payment bugs.",
+      "es": "Me hice cargo de los bugs de pagos."
+    }
+  },
+  {
+    "id": "en-superior-08-w16",
+    "en": "quantify",
+    "es": "cuantificar, poner en números",
+    "pron": "kuántifai",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Can you quantify the impact?",
+      "es": "¿Puedes cuantificar el impacto?"
+    }
+  },
+  {
+    "id": "en-superior-08-w17",
+    "en": "impact",
+    "es": "impacto",
+    "pron": "ímpakt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The impact was a ten percent increase in sales.",
+      "es": "El impacto fue un aumento del diez por ciento en ventas."
+    }
+  },
+  {
+    "id": "en-superior-08-w18",
+    "en": "pivot",
+    "es": "cambiar de rumbo",
+    "pron": "pívot",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "When the API shut down, we had to pivot.",
+      "es": "Cuando cerraron la API, tuvimos que cambiar de rumbo."
+    }
+  },
+  {
+    "id": "en-superior-08-w19",
+    "en": "I'm glad you asked",
+    "es": "qué bueno que lo preguntas",
+    "pron": "áim glád iú áskt",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm glad you asked, because that was the hardest part.",
+      "es": "Qué bueno que lo preguntas, porque esa fue la parte más difícil."
+    }
+  },
+  {
+    "id": "en-superior-08-w20",
+    "en": "let me get back to you on that",
+    "es": "déjame confirmarlo y te respondo",
+    "pron": "lémi guet bák tu iú on dát",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Good question. Let me get back to you on that.",
+      "es": "Buena pregunta. Déjame confirmarlo y te respondo."
+    }
+  },
+  {
+    "id": "en-superior-08-w21",
+    "en": "to your point",
+    "es": "sobre lo que dices, retomando tu punto",
+    "pron": "tu iór póint",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "To your point, the first version was slower.",
+      "es": "Sobre lo que dices, la primera versión era más lenta."
+    }
+  },
+  {
+    "id": "en-superior-08-w22",
+    "en": "Q&A",
+    "es": "ronda de preguntas",
+    "pron": "kiú an éi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We'll have ten minutes of Q&A at the end.",
+      "es": "Tendremos diez minutos de preguntas al final."
+    }
+  },
+  {
+    "id": "en-superior-08-w23",
+    "en": "audience",
+    "es": "público",
+    "pron": "ódiens",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Know your audience before you prepare the slides.",
+      "es": "Conoce a tu público antes de preparar las diapositivas."
+    }
+  },
+  {
+    "id": "en-superior-08-w24",
+    "en": "in other words",
+    "es": "en otras palabras",
+    "pron": "in ázer uérdz",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "In other words, the page is three times faster.",
+      "es": "En otras palabras, la página es tres veces más rápida."
+    }
+  },
+  {
+    "id": "en-superior-08-w25",
+    "en": "grab attention",
+    "es": "captar la atención",
+    "pron": "gráb aténshon",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Start with a number to grab attention.",
+      "es": "Empieza con una cifra para captar la atención."
+    }
+  },
+  {
+    "id": "en-superior-08-w26",
+    "en": "segue",
+    "es": "transición (de un tema a otro)",
+    "pron": "ségüei",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "That's a perfect segue into the next slide.",
+      "es": "Esa es la transición perfecta a la siguiente diapositiva."
+    }
+  },
+  {
+    "id": "en-superior-08-w27",
+    "en": "go off on a tangent",
+    "es": "irse por las ramas",
+    "pron": "góu of on a tányent",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry, I went off on a tangent.",
+      "es": "Perdón, me fui por las ramas."
+    }
+  },
+  {
+    "id": "en-superior-08-w28",
+    "en": "ramble",
+    "es": "divagar, hablar sin rumbo",
+    "pron": "rámbol",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "When I'm nervous, I tend to ramble.",
+      "es": "Cuando estoy nervioso, tiendo a divagar."
+    }
+  },
+  {
+    "id": "en-superior-08-w29",
+    "en": "filler word",
+    "es": "muletilla",
+    "pron": "fíler uérd",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Like is a common filler word.",
+      "es": "Like es una muletilla común."
+    }
+  },
+  {
+    "id": "en-superior-08-w30",
+    "en": "deflect",
+    "es": "esquivar (una pregunta o una crítica)",
+    "pron": "diflékt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Don't deflect the question, answer it.",
+      "es": "No esquives la pregunta, respóndela."
+    }
+  },
+  {
+    "id": "en-superior-08-w31",
+    "en": "loaded question",
+    "es": "pregunta tramposa (que ya asume algo)",
+    "pron": "lóudid kuéschon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "That's a loaded question, but I'll answer it.",
+      "es": "Esa es una pregunta tramposa, pero la voy a responder."
+    }
+  },
+  {
+    "id": "en-superior-08-w32",
+    "en": "the short answer is",
+    "es": "la respuesta corta es",
+    "pron": "de shórt ánser iz",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The short answer is yes, but there's a catch.",
+      "es": "La respuesta corta es sí, pero hay un detalle."
+    }
+  },
+  {
+    "id": "en-superior-08-w33",
+    "en": "long story short",
+    "es": "para no hacerla larga",
+    "pron": "lóng stóri shórt",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Long story short, it was a time zone issue.",
+      "es": "Para no hacerla larga, era un problema de zona horaria."
+    }
+  },
+  {
+    "id": "en-superior-08-w34",
+    "en": "fast-forward",
+    "es": "adelantar (en un relato)",
+    "pron": "fást fóruard",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Fast-forward two weeks, and the bug was gone.",
+      "es": "Dos semanas después, el bug ya no estaba."
+    }
+  },
+  {
+    "id": "en-superior-08-w35",
+    "en": "it turns out",
+    "es": "resulta que",
+    "pron": "it térnz áut",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It turns out the cache was never cleared.",
+      "es": "Resulta que la caché nunca se limpiaba."
+    }
+  }
+]

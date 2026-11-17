@@ -1,0 +1,145 @@
+[
+  {
+    "id": "en-superior-08-r01",
+    "titulo": "Háblame de un proyecto del que estés orgullosa",
+    "situacion": "Jennifer, ingeniera, te pide una historia STAR en una entrevista y al final te hace una pregunta incómoda.",
+    "tu": "Ana",
+    "turnos": [
+      {
+        "quien": "Jennifer",
+        "en": "Tell me about a project you're proud of.",
+        "es": "Cuéntame de un proyecto del que estés orgullosa."
+      },
+      {
+        "opciones": [
+          {
+            "en": "Okay, so, basically, like, there was this project, and, um, it was very interesting.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Muletillas y nada concreto: el entrevistador sigue sin saber de qué proyecto hablas."
+          },
+          {
+            "en": "Sure. Let me set the scene: our checkout was failing for about one in ten users.",
+            "es": "Claro. Déjame ponerte en contexto: nuestro checkout fallaba para uno de cada diez usuarios.",
+            "correcta": true,
+            "explicacion": "Empiezas por la situación en una línea, con lo que estaba en juego. Directo y fácil de seguir."
+          },
+          {
+            "en": "Honestly, every project I've done is a project I'm proud of.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Esquiva la pregunta. Se espera un ejemplo concreto, no una frase general."
+          }
+        ]
+      },
+      {
+        "quien": "Jennifer",
+        "en": "Interesting. What was your role?",
+        "es": "Interesante. ¿Cuál era tu rol?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "I took ownership of the fix. I traced the failures to a race condition and rewrote the request logic.",
+            "es": "Me hice cargo del arreglo. Rastreé los fallos hasta una condición de carrera y reescribí la lógica de las peticiones.",
+            "correcta": true,
+            "explicacion": "Dices qué hiciste tú, en primera persona y con verbos de acción: *took ownership*, *traced*, *rewrote*."
+          },
+          {
+            "en": "We all did everything together as a team.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "No dice qué hiciste tú. Trabajar en equipo está bien, pero la pregunta es por tu aporte."
+          },
+          {
+            "en": "My role was being in charge of many things related to the checkout.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Vago: describe un cargo, no acciones. ¿Qué hiciste exactamente?"
+          }
+        ]
+      },
+      {
+        "quien": "Jennifer",
+        "en": "And what was the outcome?",
+        "es": "¿Y cuál fue el resultado?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "Checkout errors dropped from ten percent to under one, and sales went up that month.",
+            "es": "Los errores del checkout bajaron de diez por ciento a menos de uno, y las ventas subieron ese mes.",
+            "correcta": true,
+            "explicacion": "Un resultado medible y su impacto en el negocio: el mejor cierre posible para el Result."
+          },
+          {
+            "en": "It was a success. Everyone was very happy with the result.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Sin números, *success* no dice nada. ¿Cuánto mejoró?"
+          },
+          {
+            "en": "Long story short, it went well, more or less.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*Long story short* anuncia el desenlace, pero luego no lo das. Y *more or less* le resta valor a tu trabajo."
+          }
+        ]
+      },
+      {
+        "quien": "Jennifer",
+        "en": "Nice. Looking back, what would you do differently?",
+        "es": "Bien. Mirando hacia atrás, ¿qué harías diferente?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "In hindsight, I'd have added monitoring earlier. We only found the bug because a customer complained.",
+            "es": "En retrospectiva, habría agregado monitoreo antes. Solo encontramos el bug porque un cliente se quejó.",
+            "correcta": true,
+            "explicacion": "Autocrítica concreta y con una razón. Muestra que aprendes de tus proyectos."
+          },
+          {
+            "en": "Nothing, really. It went perfectly.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Suena arrogante o poco reflexivo: siempre hay algo que mejorar, y el entrevistador lo sabe."
+          },
+          {
+            "en": "In hindsight, the team should have tested more. It wasn't really my part.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Culpa al equipo y se desliga. La pregunta es qué harías **tú** diferente."
+          }
+        ]
+      },
+      {
+        "quien": "Jennifer",
+        "en": "Last one, a bit tricky: why did a bug like that reach production?",
+        "es": "La última, un poco difícil: ¿por qué un bug así llegó a producción?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "That wasn't my fault. QA should have caught it.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Le echas la culpa a otro equipo: es justo **throw someone under the bus**, y en una entrevista es una señal de alerta."
+          },
+          {
+            "en": "That's a fair question. It only showed up under real traffic, which our tests didn't simulate, so we now run load tests before every release.",
+            "es": "Es una pregunta justa. Solo aparecía con tráfico real, que nuestros tests no simulaban, así que ahora hacemos pruebas de carga antes de cada release.",
+            "correcta": true,
+            "explicacion": "Reconoces la pregunta, explicas la causa sin excusas y cierras con lo que cambió. Respondes a la carga de la pregunta sin ponerte a la defensiva."
+          },
+          {
+            "en": "I'm glad you asked! Anyway, do you have any other questions?",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*I'm glad you asked* anuncia una respuesta. Usarla para cambiar de tema es esquivar (**deflect**), y se nota."
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "en-superior-05-c01",
+    "es": "No hay que ahogarse en un vaso de agua.",
+    "natural": "Don't make a mountain out of a molehill.",
+    "calco": "Don't drown in a glass of water.",
+    "explicacion": "Los refranes no se traducen palabra por palabra. El equivalente es **make a mountain out of a molehill**: hacer una montaña de un montoncito de tierra."
+  },
+  {
+    "id": "en-superior-05-c02",
+    "es": "La pelota está en tu cancha.",
+    "natural": "The ball is in your court.",
+    "calco": "The ball is in your field.",
+    "explicacion": "La imagen es de tenis: **court**. *Field* es una cancha de fútbol y en este idiom no se usa."
+  },
+  {
+    "id": "en-superior-05-c03",
+    "es": "Hablemos el viernes para ponernos al día.",
+    "natural": "Let's touch base on Friday.",
+    "calco": "Let's put ourselves up to date on Friday.",
+    "explicacion": "\"Ponerse al día\" con alguien en el trabajo es **touch base** (o *catch up*). *Put ourselves up to date* es una traducción literal que nadie usa."
+  },
+  {
+    "id": "en-superior-05-c04",
+    "es": "Me tomó un mes agarrarle la mano al trabajo.",
+    "natural": "It took me a month to learn the ropes.",
+    "calco": "It took me a month to grab the hand of the job.",
+    "explicacion": "\"Agarrarle la mano\" a algo es **learn the ropes**: aprender a manejar las cuerdas, como un marinero nuevo."
+  }
+]

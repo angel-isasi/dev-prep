@@ -1,0 +1,176 @@
+[
+  {
+    "id": "en-superior-07-e01",
+    "pregunta": "We saw a significant reduction ___ load time.",
+    "opciones": [
+      "of",
+      "on",
+      "at",
+      "in"
+    ],
+    "correcta": 3,
+    "explicacion": "Lo que baja va con **in**: *a reduction in load time*. *Of* es el calco de \"reducción **de**\", aunque sí se usa para la cantidad: *a reduction **of** 40% **in** load time*."
+  },
+  {
+    "id": "en-superior-07-e02",
+    "pregunta": "We cache the results, ___ the number of requests.",
+    "opciones": [
+      "thereby we reduce",
+      "thereby reduce",
+      "thereby reducing",
+      "whereby reducing"
+    ],
+    "correcta": 2,
+    "explicacion": "**Thereby** va seguido de **-ing** y presenta la consecuencia de lo anterior. *Thereby we reduce* es la trampa: suena lógico en español (\"con lo cual reducimos\"), pero en inglés no se arma así."
+  },
+  {
+    "id": "en-superior-07-e03",
+    "pregunta": "Version 1 used REST, ___ version 2 uses GraphQL.",
+    "opciones": [
+      "meanwhile",
+      "whereas",
+      "whereby",
+      "thereby"
+    ],
+    "correcta": 1,
+    "explicacion": "**Whereas** contrasta dos hechos en la misma oración. *Meanwhile* es \"mientras tanto\", de tiempo, y *whereby* significa \"por el cual\"."
+  },
+  {
+    "id": "en-superior-07-e04",
+    "pregunta": "¿Cuál es mejor para la descripción de un PR?",
+    "opciones": [
+      "In this PR, it has been decided that validation would be added to the form of signup.",
+      "This PR adds input validation to the signup form.",
+      "Validation stuff for signup, see code."
+    ],
+    "correcta": 1,
+    "explicacion": "Voz activa, presente y directo: **This PR adds...** La segunda es pasiva, larga y con *the form of signup* (calco de \"el formulario de registro\"). La tercera no explica nada."
+  },
+  {
+    "id": "en-superior-07-e05",
+    "pregunta": "¿En cuál de estas frases la voz pasiva es la mejor opción?",
+    "opciones": [
+      "The bug was introduced by me in yesterday's commit.",
+      "The password is hashed before it's stored.",
+      "It was decided by the team that the release would be postponed."
+    ],
+    "correcta": 1,
+    "explicacion": "En la primera, quién hace el hash no importa: importa qué le pasa a la contraseña. En las otras el actor es importante y se dice mejor en activa: *I introduced the bug...*, *The team postponed the release*."
+  },
+  {
+    "id": "en-superior-07-e06",
+    "pregunta": "¿Cuál es la versión más concisa de \"In order to be able to deploy, at this point in time we need approval\"?",
+    "opciones": [
+      "In order to deploy, at this time we need approval.",
+      "We need approval to deploy.",
+      "To be able to deploy, approval is needed by us now."
+    ],
+    "correcta": 1,
+    "explicacion": "Se va todo lo que no aporta: *in order to* → *to*, *at this point in time* → nada, porque el presente ya dice \"ahora\". La tercera además usa una pasiva innecesaria."
+  },
+  {
+    "id": "en-superior-07-e07",
+    "pregunta": "___ these concerns, the committee approved the proposal.",
+    "opciones": [
+      "Nevertheless",
+      "Whereas",
+      "Notwithstanding",
+      "Hence"
+    ],
+    "correcta": 2,
+    "explicacion": "**Notwithstanding** funciona como preposición: va seguido de un sustantivo (*these concerns*). *Nevertheless* es un adverbio y necesita una oración aparte: *There were concerns; nevertheless, the committee approved it*."
+  },
+  {
+    "id": "en-superior-07-e08",
+    "pregunta": "The query works, ___ slowly.",
+    "opciones": [
+      "even though",
+      "albeit",
+      "despite",
+      "in spite"
+    ],
+    "correcta": 1,
+    "explicacion": "**Albeit** va seguido de una idea corta sin verbo: *albeit slowly*. *Even though* necesita una oración completa (*even though it's slow*), y *despite* necesita un sustantivo."
+  },
+  {
+    "id": "en-superior-07-e09",
+    "pregunta": "¿Cuál es la sustantivación correcta de \"We implemented the cache\"?",
+    "opciones": [
+      "The implementing of the cache",
+      "The implement of the cache",
+      "The implementation of the cache",
+      "The cache's implementing"
+    ],
+    "correcta": 2,
+    "explicacion": "El sustantivo de *implement* es **implementation**, y el objeto va con **of**. *Implement* como sustantivo significa \"herramienta\"."
+  },
+  {
+    "id": "en-superior-07-e10",
+    "pregunta": "The new API is faster; ___ the migration.",
+    "opciones": [
+      "thereby",
+      "whereas",
+      "provided",
+      "hence"
+    ],
+    "correcta": 3,
+    "explicacion": "**Hence** + sustantivo = \"de ahí\": *hence the migration*. *Thereby* necesitaría un verbo en -ing."
+  },
+  {
+    "id": "en-superior-07-e11",
+    "pregunta": "The change is safe, ___ the flag stays off.",
+    "opciones": [
+      "given that",
+      "whereas",
+      "hence",
+      "provided that"
+    ],
+    "correcta": 3,
+    "explicacion": "**Provided that** pone una condición (siempre que). *Given that* presenta un hecho ya dado (dado que): no sirve para algo que tiene que seguir cumpliéndose."
+  },
+  {
+    "id": "en-superior-07-e12",
+    "pregunta": "Un postmortem dice: \"Mistakes were made and the database was deleted.\" ¿Qué problema tiene?",
+    "opciones": [
+      "La pasiva esconde qué causó el problema y no ayuda a aprender del incidente",
+      "Tiene un error de gramática",
+      "Es demasiado informal"
+    ],
+    "correcta": 0,
+    "explicacion": "Un postmortem sin culpas nombra la causa técnica, no a la persona: *A migration script deleted the production table because...* La pasiva lo deja todo en el aire."
+  },
+  {
+    "id": "en-superior-07-e13",
+    "pregunta": "¿Qué versión es mejor en una documentación técnica?",
+    "opciones": [
+      "Utilize the force flag solely within development environments.",
+      "Use the force flag only in development.",
+      "The force flag, it is to be utilized in development only."
+    ],
+    "correcta": 1,
+    "explicacion": "**Use** y una oración directa. *Utilize* y *solely within* no agregan nada, y la tercera repite el sujeto (*the force flag, it*), un calco del español hablado."
+  },
+  {
+    "id": "en-superior-07-e14",
+    "pregunta": "In light ___ the outage, all releases are paused.",
+    "opciones": [
+      "of",
+      "on",
+      "to",
+      "from"
+    ],
+    "correcta": 0,
+    "explicacion": "La expresión fija es **in light of**: a la luz de, considerando."
+  },
+  {
+    "id": "en-superior-07-e15",
+    "pregunta": "Tu borrador de RFC tiene una oración de 45 palabras con tres *which*. ¿Qué haces?",
+    "opciones": [
+      "La divides en dos o tres oraciones cortas",
+      "La dejas así porque suena más académica",
+      "Cambias cada which por that"
+    ],
+    "correcta": 0,
+    "explicacion": "En español académico las oraciones largas se ven serias; en inglés técnico cansan al lector. Una idea por oración es la regla."
+  }
+]

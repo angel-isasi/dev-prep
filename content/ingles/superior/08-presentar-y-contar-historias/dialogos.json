@@ -1,0 +1,229 @@
+[
+  {
+    "id": "en-superior-08-d01",
+    "titulo": "Ensayar la demo",
+    "situacion": "Ana ensaya con Tom la demo del nuevo checkout que presentará el viernes.",
+    "lineas": [
+      {
+        "quien": "Tom",
+        "en": "Your demo is great, but you jump between topics without warning.",
+        "es": "Tu demo está muy bien, pero saltas de un tema a otro sin avisar."
+      },
+      {
+        "quien": "Ana",
+        "en": "I know. I get nervous and just start clicking.",
+        "es": "Lo sé. Me pongo nerviosa y empiezo a hacer clic."
+      },
+      {
+        "quien": "Tom",
+        "en": "Add some signposting. Open with \"Let me walk you through the new checkout.\"",
+        "es": "Agrega frases guía. Empieza con \"Let me walk you through the new checkout\"."
+      },
+      {
+        "quien": "Ana",
+        "en": "And between sections, something like \"Moving on to the payment step\"?",
+        "es": "¿Y entre secciones, algo como \"Moving on to the payment step\"?"
+      },
+      {
+        "quien": "Tom",
+        "en": "Exactly. And put the numbers in perspective. \"Two seconds faster\" means nothing on its own.",
+        "es": "Exacto. Y pon las cifras en contexto. \"Dos segundos más rápido\" solo no dice nada."
+      },
+      {
+        "quien": "Ana",
+        "en": "So, \"That's two seconds faster, which means about two hundred more sales a week\"?",
+        "es": "¿O sea, \"Son dos segundos menos, lo que significa unas doscientas ventas más por semana\"?"
+      },
+      {
+        "quien": "Tom",
+        "en": "Perfect. Now the business people will remember it.",
+        "es": "Perfecto. Ahora la gente de negocio lo va a recordar."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Cuál es el problema de la demo de Ana?",
+        "opciones": [
+          "Es demasiado larga",
+          "Tiene bugs",
+          "Salta de un tema a otro sin avisar"
+        ],
+        "correcta": 2,
+        "explicacion": "\"You jump between topics without warning.\" Le falta signposting."
+      },
+      {
+        "pregunta": "¿Qué le sugiere Tom para las cifras?",
+        "opciones": [
+          "Ponerlas en contexto con lo que significan para el negocio",
+          "Quitarlas",
+          "Decirlas más rápido"
+        ],
+        "correcta": 0,
+        "explicacion": "\"Put the numbers in perspective.\" Una cifra sola no se recuerda; su consecuencia, sí."
+      },
+      {
+        "pregunta": "¿Por qué la nueva frase de Ana es mejor?",
+        "opciones": [
+          "Porque es más corta",
+          "Porque conecta la mejora con más ventas",
+          "Porque usa una palabra técnica"
+        ],
+        "correcta": 1,
+        "explicacion": "Ahora el público entiende el impacto: dos segundos se traducen en doscientas ventas por semana."
+      }
+    ]
+  },
+  {
+    "id": "en-superior-08-d02",
+    "titulo": "La pregunta incómoda",
+    "situacion": "Al final de la demo, Carlos, del área comercial, hace preguntas difíciles en la ronda de preguntas.",
+    "lineas": [
+      {
+        "quien": "Carlos",
+        "en": "Thanks, Ana. But to be honest, wasn't this supposed to be ready last month?",
+        "es": "Gracias, Ana. Pero, sinceramente, ¿esto no tenía que estar listo el mes pasado?"
+      },
+      {
+        "quien": "Ana",
+        "en": "That's a fair question. Yes, we were three weeks late.",
+        "es": "Es una pregunta justa. Sí, nos atrasamos tres semanas."
+      },
+      {
+        "quien": "Ana",
+        "en": "It turns out the payment provider changed their API halfway through, so we had to pivot.",
+        "es": "Resulta que el proveedor de pagos cambió su API a mitad del proyecto, así que tuvimos que cambiar de rumbo."
+      },
+      {
+        "quien": "Carlos",
+        "en": "Will that happen again?",
+        "es": "¿Eso va a volver a pasar?"
+      },
+      {
+        "quien": "Ana",
+        "en": "It could. To reduce the risk, we now get their release notes a month in advance.",
+        "es": "Podría. Para reducir el riesgo, ahora recibimos sus notas de versión con un mes de anticipación."
+      },
+      {
+        "quien": "Carlos",
+        "en": "And how much did the delay cost us?",
+        "es": "¿Y cuánto nos costó el atraso?"
+      },
+      {
+        "quien": "Ana",
+        "en": "I don't have that number in front of me. Let me get back to you on that today.",
+        "es": "No tengo esa cifra a la mano. Déjame confirmarlo y te respondo hoy."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Cómo empieza Ana su respuesta?",
+        "opciones": [
+          "Negando el atraso",
+          "Reconociendo que la pregunta es justa y que hubo atraso",
+          "Culpando a Tom"
+        ],
+        "correcta": 1,
+        "explicacion": "\"That's a fair question. Yes, we were three weeks late.\" Reconoce el hecho antes de explicar."
+      },
+      {
+        "pregunta": "¿Por qué se atrasaron?",
+        "opciones": [
+          "El proveedor de pagos cambió su API",
+          "Ana estuvo enferma",
+          "Faltaban diseñadores"
+        ],
+        "correcta": 0,
+        "explicacion": "\"It turns out the payment provider changed their API halfway through.\""
+      },
+      {
+        "pregunta": "¿Qué hace Ana con la pregunta del costo?",
+        "opciones": [
+          "Admite que no tiene el dato y promete responder hoy",
+          "Inventa una cifra",
+          "No responde"
+        ],
+        "correcta": 0,
+        "explicacion": "\"I don't have that number in front of me. Let me get back to you on that today.\""
+      }
+    ]
+  },
+  {
+    "id": "en-superior-08-d03",
+    "titulo": "STAR con números",
+    "situacion": "Luis ensaya con Ana la respuesta a \"Tell me about a difficult project\" para una entrevista.",
+    "lineas": [
+      {
+        "quien": "Luis",
+        "en": "So, we had a bug, we worked hard and we fixed it. The end.",
+        "es": "Entonces, teníamos un bug, trabajamos duro y lo arreglamos. Fin."
+      },
+      {
+        "quien": "Ana",
+        "en": "That's the very short version. What was at stake?",
+        "es": "Esa es la versión demasiado corta. ¿Qué estaba en juego?"
+      },
+      {
+        "quien": "Luis",
+        "en": "The university's enrollment page crashed on the first day of registration.",
+        "es": "La página de matrícula de la universidad se caía el primer día de inscripciones."
+      },
+      {
+        "quien": "Ana",
+        "en": "Good, that's your situation. Now, what did you do? You, not the team.",
+        "es": "Bien, esa es tu situación. Ahora, ¿qué hiciste tú? Tú, no el equipo."
+      },
+      {
+        "quien": "Luis",
+        "en": "I found that every request loaded the whole student table, so I added pagination.",
+        "es": "Descubrí que cada petición cargaba toda la tabla de estudiantes, así que agregué paginación."
+      },
+      {
+        "quien": "Ana",
+        "en": "And the result? Give me a number.",
+        "es": "¿Y el resultado? Dame un número."
+      },
+      {
+        "quien": "Luis",
+        "en": "The page went from crashing to handling five thousand students an hour.",
+        "es": "La página pasó de caerse a atender a cinco mil estudiantes por hora."
+      },
+      {
+        "quien": "Ana",
+        "en": "Now that's a story. End with what you learned, and you're done.",
+        "es": "Eso sí es una historia. Termina con lo que aprendiste, y listo."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué le falta a la primera versión de Luis?",
+        "opciones": [
+          "Gramática correcta",
+          "Nada, está perfecta",
+          "Lo que estaba en juego, sus acciones y un resultado concreto"
+        ],
+        "correcta": 2,
+        "explicacion": "Luis solo dice que hubo un bug y que lo arreglaron: no hay situación, ni acción propia, ni número."
+      },
+      {
+        "pregunta": "¿Qué hizo Luis para resolver el problema?",
+        "opciones": [
+          "Agregó paginación",
+          "Compró más servidores",
+          "Cerró la página"
+        ],
+        "correcta": 0,
+        "explicacion": "\"Every request loaded the whole student table, so I added pagination.\""
+      },
+      {
+        "pregunta": "¿Qué le pide Ana para el final?",
+        "opciones": [
+          "Lo que aprendió",
+          "Un chiste",
+          "Los nombres del equipo"
+        ],
+        "correcta": 0,
+        "explicacion": "\"End with what you learned\": el cierre ideal de una historia STAR."
+      }
+    ]
+  }
+]

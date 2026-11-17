@@ -1,0 +1,6 @@
+[
+  { "id": "en-avanzado-05-c01", "es": "Lo termino para el viernes.", "natural": "I'll have it done by Friday.", "calco": "I finish it until Friday.", "explicacion": "Un plazo va con **by**; *until* es \"hasta\" y se usa con algo que dura. Además, una promesa sobre el futuro va con **will**, no con presente simple." },
+  { "id": "en-avanzado-05-c02", "es": "Cuando llegue, te llamo.", "natural": "When I arrive, I'll call you.", "calco": "When I will arrive, I call you.", "explicacion": "Después de **when** va presente (*when I arrive*) y la otra parte lleva **will** (*I'll call you*). Es justo al revés que en español." },
+  { "id": "en-avanzado-05-c03", "es": "¿Qué haces este fin de semana?", "natural": "What are you doing this weekend?", "calco": "What do you do this weekend?", "explicacion": "Para preguntar por planes se usa el **presente continuo**. *What do you do?* pregunta por tu trabajo o tu rutina." },
+  { "id": "en-avanzado-05-c04", "es": "Ya lo reviso.", "natural": "I'll check it now.", "calco": "I already check it.", "explicacion": "Aquí \"ya\" no significa *already*: es una decisión del momento, y eso va con **will**. *I already checked it* significaría \"ya lo revisé\"." }
+]

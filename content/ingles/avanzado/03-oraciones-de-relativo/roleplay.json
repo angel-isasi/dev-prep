@@ -1,0 +1,30 @@
+[
+  { "id": "en-avanzado-03-r01", "titulo": "Definir conceptos en la entrevista", "situacion": "Jennifer, ingeniera senior, empieza la entrevista técnica pidiéndote definiciones y que hables de tu proyecto.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Jennifer", "en": "Let's start with the basics. What's the virtual DOM?", "es": "Empecemos por lo básico. ¿Qué es el DOM virtual?" },
+      { "opciones": [
+          { "en": "It's the DOM that runs on a virtual machine.", "es": "", "correcta": false, "explicacion": "La gramática está bien, pero la definición es falsa: no tiene nada que ver con máquinas virtuales." },
+          { "en": "It's a copy of the DOM that React keeps in memory to decide what to update.", "es": "Es una copia del DOM que React guarda en memoria para decidir qué actualizar.", "correcta": true, "explicacion": "Definición correcta con **sustantivo + that**. Corta y precisa." },
+          { "en": "It's a copy of the DOM who React keeps in memory.", "es": "", "correcta": false, "explicacion": "*Who* es solo para personas. Para cosas: *that* o *which*." }
+        ] },
+      { "quien": "Jennifer", "en": "Good. And what's a component?", "es": "Bien. ¿Y qué es un componente?" },
+      { "opciones": [
+          { "en": "It's a reusable piece of UI that receives props and returns what should appear on the screen.", "es": "Es una pieza reutilizable de la interfaz que recibe props y devuelve lo que debe aparecer en la pantalla.", "correcta": true, "explicacion": "*That* es el sujeto de *receives* y *returns*: no hace falta repetir *it*." },
+          { "en": "Come on, everybody knows what a component is.", "es": "", "correcta": false, "explicacion": "Suena condescendiente. Las preguntas básicas sirven para ver cómo explicas: respóndelas con calma." },
+          { "en": "It's a piece of UI that it receives props.", "es": "", "correcta": false, "explicacion": "*That* ya es el sujeto: *that it receives* repite el sujeto, un calco típico." }
+        ] },
+      { "quien": "Jennifer", "en": "Tell me about a project you're proud of.", "es": "Cuéntame de un proyecto del que estés orgullosa." },
+      { "opciones": [
+          { "en": "The project that I'm most proud of it is a budget app.", "es": "", "correcta": false, "explicacion": "*It* repite el objeto: es *the project I'm most proud of* (la preposición queda al final, sola)." },
+          { "en": "I'm proud of all my projects. They're all great.", "es": "", "correcta": false, "explicacion": "Demasiado vago: te piden **uno**, para que hables de él con detalle." },
+          { "en": "The project I'm most proud of is a budget app, which I built with React and a small Node API.", "es": "El proyecto del que estoy más orgullosa es una app de presupuesto, que hice con React y una pequeña API en Node.", "correcta": true, "explicacion": "Relativo omitido con la preposición al final (*I'm most proud of*) y un dato extra con **, which**." }
+        ] },
+      { "quien": "Jennifer", "en": "Interesting. Who did you build it for?", "es": "Interesante. ¿Para quién la hiciste?" },
+      { "opciones": [
+          { "en": "For my uncle, who has a small hardware store in Lima and needed to track his expenses.", "es": "Para mi tío, que tiene una pequeña ferretería en Lima y necesitaba controlar sus gastos.", "correcta": true, "explicacion": "Dato extra sobre una persona: **, who**. Y explicas el problema real que resolvía, que es lo que interesa." },
+          { "en": "For my uncle, that has a small hardware store in Lima.", "es": "", "correcta": false, "explicacion": "Después de una coma nunca va *that*: es *, who has*." },
+          { "en": "For nobody. Just for practice.", "es": "", "correcta": false, "explicacion": "Puede ser verdad, pero pierdes la oportunidad de mostrar que resolviste un problema real de alguien." }
+        ] },
+      { "quien": "Jennifer", "en": "I like that. Let's look at some code now.", "es": "Me gusta eso. Ahora veamos algo de código." }
+    ] }
+]

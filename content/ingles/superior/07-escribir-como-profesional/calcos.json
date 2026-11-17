@@ -1,0 +1,30 @@
+[
+  {
+    "id": "en-superior-07-c01",
+    "es": "Logramos una reducción del tiempo de carga.",
+    "natural": "We achieved a reduction in load time.",
+    "calco": "We achieved a reduction of the load time.",
+    "explicacion": "Lo que baja va con **in**: *a reduction in load time*. \"Reducción **de**\" invita a poner *of*, que en inglés se reserva para la cantidad (*a reduction of 40%*)."
+  },
+  {
+    "id": "en-superior-07-c02",
+    "es": "Se decidió eliminar el endpoint.",
+    "natural": "The team decided to remove the endpoint.",
+    "calco": "It was decided to eliminate the endpoint.",
+    "explicacion": "El \"se\" impersonal del español se traduce mejor nombrando al actor. Y en código se **remove** algo; *eliminate* suena a erradicar una plaga."
+  },
+  {
+    "id": "en-superior-07-c03",
+    "es": "Con el fin de mejorar el rendimiento, agregamos una caché.",
+    "natural": "To improve performance, we added a cache.",
+    "calco": "With the end of improving the performance, we added a cache.",
+    "explicacion": "\"Con el fin de\" es simplemente **to**. *With the end of* no existe, y *performance* va sin *the* cuando hablas de él en general."
+  },
+  {
+    "id": "en-superior-07-c04",
+    "es": "A nivel de rendimiento, ambas opciones son parecidas.",
+    "natural": "In terms of performance, both options are similar.",
+    "calco": "At the level of performance, both options are similar.",
+    "explicacion": "\"A nivel de\" como muletilla se dice **in terms of** (o *performance-wise*). *At the level of* solo se usa para niveles de verdad: *at the database level*."
+  }
+]

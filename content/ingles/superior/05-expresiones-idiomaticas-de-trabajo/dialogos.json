@@ -1,0 +1,219 @@
+[
+  {
+    "id": "en-superior-05-d01",
+    "titulo": "Estimar sin prometer",
+    "situacion": "Tom le pide a Sarah un número aproximado para migrar el proyecto a TypeScript.",
+    "lineas": [
+      {
+        "quien": "Tom",
+        "en": "Sarah, can you give me a ballpark figure for the TypeScript migration?",
+        "es": "Sarah, ¿me puedes dar un número aproximado para la migración a TypeScript?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "Roughly three sprints, but the API types are still a moving target.",
+        "es": "Unos tres sprints, pero los tipos de la API todavía cambian todo el tiempo."
+      },
+      {
+        "quien": "Tom",
+        "en": "Could we speed it up if we skipped strict mode?",
+        "es": "¿Podríamos acelerarlo si nos saltamos el modo estricto?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "We could, but I'd rather not cut corners. We'd pay for it later.",
+        "es": "Podríamos, pero preferiría no hacerlo a la ligera. Lo pagaríamos después."
+      },
+      {
+        "quien": "Tom",
+        "en": "Fair. Is there any low-hanging fruit we can ship first?",
+        "es": "Tiene sentido. ¿Hay algo fácil que podamos entregar primero?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "The utility files. They're small and easy, a quick win for the team.",
+        "es": "Los archivos de utilidades. Son pequeños y fáciles, una mejora rápida para el equipo."
+      },
+      {
+        "quien": "Tom",
+        "en": "Great. Let's touch base on Friday and see where we are.",
+        "es": "Genial. Hablemos el viernes y vemos cómo vamos."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Por qué Sarah no puede dar un número exacto?",
+        "opciones": [
+          "Porque no sabe TypeScript",
+          "Porque los tipos de la API todavía cambian",
+          "Porque Tom no le dio tiempo"
+        ],
+        "correcta": 1,
+        "explicacion": "Sarah dice que los tipos de la API son \"a moving target\": cambian todo el tiempo."
+      },
+      {
+        "pregunta": "¿Qué opina Sarah de saltarse el modo estricto?",
+        "opciones": [
+          "Que es la mejor idea",
+          "Que sería hacerlo a la ligera y lo pagarían después",
+          "Que es técnicamente imposible"
+        ],
+        "correcta": 1,
+        "explicacion": "\"I'd rather not cut corners. We'd pay for it later.\""
+      },
+      {
+        "pregunta": "¿Qué van a migrar primero?",
+        "opciones": [
+          "Los tipos de la API",
+          "Todo el proyecto a la vez",
+          "Los archivos de utilidades"
+        ],
+        "correcta": 2,
+        "explicacion": "Sarah propone los archivos de utilidades: pequeños, fáciles y \"a quick win\"."
+      }
+    ]
+  },
+  {
+    "id": "en-superior-05-d02",
+    "titulo": "Se me pasó",
+    "situacion": "Ana se da cuenta de que no actualizó el changelog antes de un release y se lo cuenta a Tom.",
+    "lineas": [
+      {
+        "quien": "Ana",
+        "en": "Tom, quick heads-up: I dropped the ball on the changelog for today's release.",
+        "es": "Tom, te aviso rápido: se me pasó el changelog del release de hoy."
+      },
+      {
+        "quien": "Tom",
+        "en": "Ah, okay. Thanks for flagging it. How long would it take to fix?",
+        "es": "Ah, ok. Gracias por avisar. ¿Cuánto tomaría arreglarlo?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Twenty minutes, tops. I'll have it done before the deploy.",
+        "es": "Veinte minutos como mucho. Lo tendré listo antes del deploy."
+      },
+      {
+        "quien": "Tom",
+        "en": "Good. Let's not make it a whole thing, just keep me in the loop.",
+        "es": "Bien. No hagamos de esto un drama, solo mantenme al tanto."
+      },
+      {
+        "quien": "Ana",
+        "en": "Will do. Should I add a release checklist so it doesn't happen again?",
+        "es": "Hecho. ¿Agrego una lista de verificación para los releases, para que no vuelva a pasar?"
+      },
+      {
+        "quien": "Tom",
+        "en": "That's a no-brainer. Go for it.",
+        "es": "Eso ni se pregunta. Adelante."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué hace Ana al decir \"I dropped the ball\"?",
+        "opciones": [
+          "Culpa a Tom",
+          "Avisa que el deploy falló",
+          "Reconoce que se le pasó algo que le tocaba"
+        ],
+        "correcta": 2,
+        "explicacion": "Ana se hace cargo de su descuido antes de que alguien lo note, algo muy bien visto en un equipo."
+      },
+      {
+        "pregunta": "¿Cómo reacciona Tom?",
+        "opciones": [
+          "Se enoja y cancela el release",
+          "Le resta drama y le pide que lo mantenga al tanto",
+          "Le pide a otra persona que lo arregle"
+        ],
+        "correcta": 1,
+        "explicacion": "\"Let's not make it a whole thing, just keep me in the loop.\""
+      },
+      {
+        "pregunta": "¿Qué opina Tom de la lista de verificación?",
+        "opciones": [
+          "Que es demasiado trabajo",
+          "Que lo piensen la próxima semana",
+          "Que es una decisión obvia"
+        ],
+        "correcta": 2,
+        "explicacion": "\"That's a no-brainer\": la respuesta es tan obvia que no hay que pensarla."
+      }
+    ]
+  },
+  {
+    "id": "en-superior-05-d03",
+    "titulo": "¿Natural o cliché?",
+    "situacion": "Luis le muestra a Ana su nuevo resumen de LinkedIn, lleno de frases hechas.",
+    "lineas": [
+      {
+        "quien": "Luis",
+        "en": "Check out my LinkedIn summary: \"Results-driven developer who thinks outside the box.\"",
+        "es": "Mira mi resumen de LinkedIn: \"Desarrollador orientado a resultados que piensa de forma creativa\"."
+      },
+      {
+        "quien": "Ana",
+        "en": "Honestly? It sounds like every other profile. Recruiters see that all day.",
+        "es": "¿Sinceramente? Suena como cualquier otro perfil. Los reclutadores ven eso todo el día."
+      },
+      {
+        "quien": "Luis",
+        "en": "But I thought idioms made me sound fluent.",
+        "es": "Pero pensé que los idioms me hacían sonar fluido."
+      },
+      {
+        "quien": "Ana",
+        "en": "In conversation, sure. In writing, concrete facts work better.",
+        "es": "En una conversación, sí. Por escrito funcionan mejor los datos concretos."
+      },
+      {
+        "quien": "Luis",
+        "en": "So what should I write instead?",
+        "es": "¿Entonces qué debería escribir?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Something like \"I cut our page load time by forty percent.\" That's what moves the needle.",
+        "es": "Algo como \"Reduje en un cuarenta por ciento el tiempo de carga de nuestra página\". Eso es lo que marca la diferencia."
+      },
+      {
+        "quien": "Luis",
+        "en": "Okay, back to the drawing board, then.",
+        "es": "Ok, a empezar de nuevo, entonces."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué problema le ve Ana al resumen de Luis?",
+        "opciones": [
+          "Tiene errores de gramática",
+          "Es demasiado largo",
+          "Suena genérico, como cualquier otro perfil"
+        ],
+        "correcta": 2,
+        "explicacion": "\"It sounds like every other profile\": *think outside the box* es un cliché que los reclutadores leen todo el día."
+      },
+      {
+        "pregunta": "Según Ana, ¿dónde sí funcionan bien los idioms?",
+        "opciones": [
+          "En la conversación",
+          "En el CV",
+          "En los correos a clientes nuevos"
+        ],
+        "correcta": 0,
+        "explicacion": "\"In conversation, sure. In writing, concrete facts work better.\""
+      },
+      {
+        "pregunta": "¿Qué quiere decir Luis con \"back to the drawing board\"?",
+        "opciones": [
+          "Que va a reescribir su resumen desde cero",
+          "Que va a dibujar",
+          "Que se rinde"
+        ],
+        "correcta": 0,
+        "explicacion": "**Back to the drawing board** es volver a empezar desde el diseño, aquí desde el primer borrador."
+      }
+    ]
+  }
+]

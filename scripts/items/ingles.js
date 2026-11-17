@@ -81,6 +81,7 @@ const CONTRACCIONES = {
   "he'll": "he will", "she'll": "she will", "that'll": "that will", "there'll": "there will", "he'd": "he would", "she'd": "she would",
   "we'd": "we would", "they'd": "they would", "it'd": "it would", "here's": "here is", "how's": "how is", "mustn't": "must not",
   "should've": "should have", "would've": "would have", "could've": "could have",
+  "might've": "might have", "must've": "must have",
 };
 
 // Contracciones escritas sin apóstrofo (común con teclado en español). Fuera las que son otra palabra:
@@ -125,14 +126,28 @@ export function distancia(a, b) {
 
 /**
  * Una contracción puede esconder dos verbos: "he's" es "he is" o "he has", y "you'd" es "you would" o "you had".
- * comparable() expande la forma más común; aquí se suma la otra lectura para no rechazar "He has just joined".
+ * comparable() expande la forma más común; aquí se suman las otras lecturas, contracción por contracción
+ * ("If I'd known, I'd have..." = "If I had known, I would have..."), para no rechazar una respuesta bien escrita.
  */
-function otrasLecturas(texto) {
+export function otrasLecturas(texto) {
   const t = String(texto ?? "").replace(/[’‘`]/g, "'");
-  const has = t.replace(/\b(he|she|it|that|there|what|who|where|here|how)'s\b/gi, "$1 has");
-  const had = t.replace(/\b(i|you|he|she|we|they|it)'d\b/gi, "$1 had");
-  return [...new Set([t, has, had])];
+  const ambigua = /\b(he|she|it|that|there|what|who|where|here|how)'s\b|\b(i|you|he|she|we|they|it)'d\b/gi;
+  const partes = t.split(ambigua);
+  // split con 2 grupos: [texto, grupoS, grupoD, texto, grupoS, grupoD, ...]
+  let lecturas = [""];
+  for (let i = 0; i < partes.length; i += 3) {
+    lecturas = lecturas.map((l) => l + partes[i]);
+    if (i + 1 >= partes.length) break;
+    const [s, d] = [partes[i + 1], partes[i + 2]];
+    const opciones = s ? [`${s}'s`, `${s} has`] : [`${d}'d`, `${d} had`];
+    if (lecturas.length > 16) lecturas = lecturas.map((l) => l + opciones[0]); // tope: frases raras con muchas
+    else lecturas = lecturas.flatMap((l) => opciones.map((o) => l + o));
+  }
+  return [...new Set(lecturas)];
 }
+
+// "that" de relativo o tras said/told/think suele ser opcional: "the bug (that) I fixed", "she said (that) it works".
+const sinThat = (t) => t.replace(/\bthat\b/g, " ").replace(/\s+/g, " ").trim();
 
 /**
  * ¿Lo que escribiste es correcto? "exacta", "casi" (un error de tipeo) o false.
@@ -143,6 +158,8 @@ export function escrituraCorrecta(item, texto) {
   if (!tuyo) return false;
   const validas = [item.respuesta, ...(item.aceptadas ?? [])].flatMap(otrasLecturas).map(comparable);
   if (validas.includes(tuyo)) return "exacta";
+  // solo si la frase sigue teniendo sentido sin "that" (no "I know that", "that is...")
+  if (validas.some((v) => sinThat(v) === sinThat(tuyo) && sinThat(tuyo).split(" ").length >= 4 && !/^that\b|\bthat$/.test(v) && !/^that\b|\bthat$/.test(tuyo))) return "exacta";
   const tolerancia = (t) => (t.length < 5 ? 0 : Math.max(1, Math.floor(t.length / 14)));
   return validas.some((v) => distancia(tuyo, v) <= tolerancia(v)) ? "casi" : false;
 }

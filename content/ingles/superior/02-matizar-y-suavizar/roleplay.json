@@ -1,0 +1,29 @@
+[
+  { "id": "en-superior-02-r01", "titulo": "Un code review delicado", "situacion": "Revisas el pull request de Kevin, que acaba de entrar al equipo. Tiene un problema de seguridad y algunos detalles menores.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Kevin", "en": "Hey Ana, did you get a chance to look at my PR?", "es": "Hola Ana, ¿pudiste ver mi PR?" },
+      { "opciones": [
+          { "en": "I did! Nice work overall. I left one important comment and a few nits.", "es": "¡Sí! Buen trabajo en general. Dejé un comentario importante y algunos detalles menores.", "correcta": true, "explicacion": "Empiezas con algo positivo y le dices desde ya qué es grave y qué no. Así sabe qué priorizar." },
+          { "en": "Yes. There are a lot of problems, so check my comments.", "es": "", "correcta": false, "explicacion": "Correcto pero frío: no reconoces nada y no distingues lo grave de lo menor. Desmotiva a alguien nuevo." },
+          { "en": "I did, and it's arguably the weakest PR this month.", "es": "", "correcta": false, "explicacion": "*Arguably* no suaviza nada aquí: sigue siendo una comparación hiriente y personal." }
+        ] },
+      { "quien": "Kevin", "en": "Oh no. What's the important one?", "es": "Ay no. ¿Cuál es el importante?" },
+      { "opciones": [
+          { "en": "You put the token in localStorage. That's a terrible idea.", "es": "", "correcta": false, "explicacion": "Juzgas la idea con un adjetivo extremo y en segunda persona. Se pone a la defensiva." },
+          { "en": "It might perhaps possibly be a small risk, maybe, to use localStorage.", "es": "", "correcta": false, "explicacion": "Tanto matiz que no se entiende que es grave. Un problema de seguridad se dice claro, con un solo matiz." },
+          { "en": "It seems the token is stored in localStorage, which could be a security risk.", "es": "Parece que el token se guarda en localStorage, lo que podría ser un riesgo de seguridad.", "correcta": true, "explicacion": "*It seems* describe el código, no a la persona, y *could be a security risk* deja clara la gravedad." }
+        ] },
+      { "quien": "Kevin", "en": "I see. I wasn't sure where else to put it.", "es": "Ya veo. No sabía dónde más ponerlo." },
+      { "opciones": [
+          { "en": "Have you considered reading the security docs first?", "es": "", "correcta": false, "explicacion": "Tiene forma de sugerencia, pero es pasivo-agresiva: suena a \"no hiciste tu tarea\"." },
+          { "en": "No worries, it's a common mistake. Have you considered an httpOnly cookie?", "es": "Tranquilo, es un error común. ¿Has considerado una cookie httpOnly?", "correcta": true, "explicacion": "Le quitas peso al error y propones una alternativa concreta con *Have you considered...?*" },
+          { "en": "Well, everybody knows you should use cookies.", "es": "", "correcta": false, "explicacion": "*Everybody knows* es condescendiente: le dices que es el único que no lo sabía." }
+        ] },
+      { "quien": "Kevin", "en": "Good idea. And the nits?", "es": "Buena idea. ¿Y los detalles menores?" },
+      { "opciones": [
+          { "en": "They're not blockers, just naming suggestions. Feel free to push back on any of them.", "es": "No impiden el merge, son solo sugerencias de nombres. Si no estás de acuerdo con alguna, dímelo.", "correcta": true, "explicacion": "Dejas claro que son opcionales y lo invitas a discrepar: así funciona un buen review." },
+          { "en": "You must change all of them before merging.", "es": "", "correcta": false, "explicacion": "Convierte los nits en obligatorios, lo contrario de lo que es un nit." },
+          { "en": "They don't matter at all, I just like to comment.", "es": "", "correcta": false, "explicacion": "Le restas valor a tu propia revisión y lo confundes: ¿para qué los dejaste?" }
+        ] }
+    ] }
+]

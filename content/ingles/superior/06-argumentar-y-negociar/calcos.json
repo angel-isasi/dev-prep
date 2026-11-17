@@ -1,0 +1,30 @@
+[
+  {
+    "id": "en-superior-06-c01",
+    "es": "Tienes razón en parte.",
+    "natural": "You have a point.",
+    "calco": "You have part of the reason.",
+    "explicacion": "\"Tener razón\" nunca es *have the reason*. Para darle la razón a medias se dice **you have a point** o *that's partly true*."
+  },
+  {
+    "id": "en-superior-06-c02",
+    "es": "¿Podemos prorrogar la fecha de entrega?",
+    "natural": "Can we extend the deadline?",
+    "calco": "Can we prolong the deadline?",
+    "explicacion": "Una fecha límite se **extend**. *Prolong* se usa para algo que dura, como una reunión o un dolor."
+  },
+  {
+    "id": "en-superior-06-c03",
+    "es": "Quiero conversar sobre el sueldo.",
+    "natural": "I'd like to discuss the salary.",
+    "calco": "I'd like to discuss about the salary.",
+    "explicacion": "**Discuss** va directo con su objeto, sin *about*. Además, *I'd like* suena más cortés que *I want*."
+  },
+  {
+    "id": "en-superior-06-c04",
+    "es": "Hicimos una concesión en el alcance.",
+    "natural": "We made a concession on scope.",
+    "calco": "We did a concession in the scope.",
+    "explicacion": "Con *concession* el verbo es **make**, y la preposición es **on**: *a concession on scope*."
+  }
+]

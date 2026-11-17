@@ -1,0 +1,6 @@
+[
+  { "id": "en-avanzado-04-c01", "es": "Quiero que me ayudes.", "natural": "I want you to help me.", "calco": "I want that you help me.", "explicacion": "\"Querer que alguien haga algo\" es **want + persona + to + verbo**. *Want that* no existe en inglés." },
+  { "id": "en-avanzado-04-c02", "es": "Antes de desplegar, corre los tests.", "natural": "Before deploying, run the tests.", "calco": "Before to deploy, run the tests.", "explicacion": "Después de una preposición (*before, after, without, for*) va **-ing**, aunque en español uses el infinitivo." },
+  { "id": "en-avanzado-04-c03", "es": "Estoy acostumbrado a trabajar de noche.", "natural": "I'm used to working at night.", "calco": "I'm used to work at night.", "explicacion": "En **be used to**, *to* es preposición: va **-ing**. *Used to work* (sin *be*) significa otra cosa: \"antes trabajaba\"." },
+  { "id": "en-avanzado-04-c04", "es": "Tengo muchas ganas de conocerte.", "natural": "I'm looking forward to meeting you.", "calco": "I'm looking forward to meet you.", "explicacion": "En **look forward to**, *to* es preposición: va **-ing**. Es un error que se cuela mucho en correos de trabajo." }
+]

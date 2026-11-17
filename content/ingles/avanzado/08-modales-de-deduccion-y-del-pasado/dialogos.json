@@ -1,0 +1,52 @@
+[
+  { "id": "en-avanzado-08-d01", "titulo": "¿Qué habrá pasado?", "situacion": "La página de login dejó de funcionar y Sarah y Tom buscan la causa.",
+    "lineas": [
+      { "quien": "Sarah", "en": "The login page stopped working an hour ago.", "es": "La página de login dejó de funcionar hace una hora." },
+      { "quien": "Tom", "en": "It can't be the code. Nobody has deployed since yesterday.", "es": "No puede ser el código. Nadie ha desplegado desde ayer." },
+      { "quien": "Sarah", "en": "Then the auth server might be down.", "es": "Entonces puede que el servidor de autenticación esté caído." },
+      { "quien": "Tom", "en": "Maybe. Or the certificate might have expired.", "es": "Tal vez. O puede que el certificado haya vencido." },
+      { "quien": "Sarah", "en": "You're right, it expired this morning. Someone should have renewed it.", "es": "Tienes razón, venció esta mañana. Alguien debió renovarlo." },
+      { "quien": "Tom", "en": "That was on my list. My fault, I'll fix it now.", "es": "Eso estaba en mi lista. Es mi culpa, lo arreglo ahora." },
+      { "quien": "Sarah", "en": "No worries. Let's add a reminder so it doesn't happen again.", "es": "Tranquilo. Agreguemos un recordatorio para que no vuelva a pasar." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Tom descarta que sea el código?", "opciones": ["Porque nadie ha desplegado desde ayer", "Porque los tests pasan", "Porque el código es nuevo"], "correcta": 0,
+        "explicacion": "\"It can't be the code. Nobody has deployed since yesterday\"." },
+      { "pregunta": "¿Cuál era el problema?", "opciones": ["El servidor estaba caído", "El certificado venció esta mañana", "Alguien borró la base de datos"], "correcta": 1,
+        "explicacion": "\"You're right, it expired this morning\": el certificado." },
+      { "pregunta": "¿Qué propone Sarah para el futuro?", "opciones": ["Cambiar de servidor", "Agregar un recordatorio", "Culpar a Tom en la retro"], "correcta": 1,
+        "explicacion": "\"Let's add a reminder so it doesn't happen again\"." }
+    ] },
+  { "id": "en-avanzado-08-d02", "titulo": "Las llaves perdidas", "situacion": "Luis no encuentra sus llaves y Ana lo ayuda a pensar.",
+    "lineas": [
+      { "quien": "Luis", "en": "Have you seen my keys? I can't find them anywhere.", "es": "¿Has visto mis llaves? No las encuentro por ningún lado." },
+      { "quien": "Ana", "en": "You must have left them at the café.", "es": "Seguro que las dejaste en el café." },
+      { "quien": "Luis", "en": "I can't have left them there. I opened the door when we got home.", "es": "No puedo haberlas dejado ahí. Abrí la puerta cuando llegamos a casa." },
+      { "quien": "Ana", "en": "Then they must be somewhere in the apartment.", "es": "Entonces tienen que estar en algún lugar del departamento." },
+      { "quien": "Luis", "en": "Wait, here they are, in my jacket. I must have checked the wrong pocket.", "es": "Espera, aquí están, en mi casaca. Seguro que revisé el bolsillo equivocado." },
+      { "quien": "Ana", "en": "No wonder! You needn't have panicked.", "es": "¡Con razón! No hacía falta que entraras en pánico." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Luis está seguro de que no dejó las llaves en el café?", "opciones": ["Porque nunca fueron al café", "Porque abrió la puerta al llegar a casa", "Porque Ana las tiene"], "correcta": 1,
+        "explicacion": "\"I can't have left them there. I opened the door when we got home\"." },
+      { "pregunta": "¿Dónde estaban las llaves?", "opciones": ["En el café", "En la cocina", "En su casaca"], "correcta": 2,
+        "explicacion": "\"Here they are, in my jacket\"." }
+    ] },
+  { "id": "en-avanzado-08-d03", "titulo": "Después de la demo", "situacion": "Tom y Ana conversan sobre cómo le fue a Ana en la demo con el cliente.",
+    "lineas": [
+      { "quien": "Tom", "en": "The demo went well, but the client looked a little puzzled at the end.", "es": "La demo salió bien, pero al final el cliente parecía un poco desconcertado." },
+      { "quien": "Ana", "en": "I noticed. I should have explained the new filters more slowly.", "es": "Lo noté. Debí explicar los filtros nuevos más despacio." },
+      { "quien": "Tom", "en": "Maybe. Or they might not have understood the use case.", "es": "Tal vez. O puede que no hayan entendido el caso de uso." },
+      { "quien": "Ana", "en": "I could have shown a real example with their data.", "es": "Podría haber mostrado un ejemplo real con sus datos." },
+      { "quien": "Tom", "en": "Good idea for next time. And you needn't have stayed so late preparing it.", "es": "Buena idea para la próxima. Y no hacía falta que te quedaras hasta tan tarde preparándola." },
+      { "quien": "Ana", "en": "I know, but I wanted it to be perfect.", "es": "Lo sé, pero quería que saliera perfecta." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué cree Ana que debió hacer?", "opciones": ["Explicar los filtros nuevos más despacio", "Cancelar la demo", "Mostrar menos funciones"], "correcta": 0,
+        "explicacion": "\"I should have explained the new filters more slowly\"." },
+      { "pregunta": "¿Qué podría haber mostrado Ana?", "opciones": ["Un video", "Un ejemplo real con los datos del cliente", "El código fuente"], "correcta": 1,
+        "explicacion": "\"I could have shown a real example with their data\"." },
+      { "pregunta": "¿Qué le dice Tom sobre la preparación?", "opciones": ["Que debió prepararse más", "Que no hacía falta quedarse hasta tan tarde", "Que la próxima la prepare él"], "correcta": 1,
+        "explicacion": "\"You needn't have stayed so late preparing it\": lo hizo, pero no hacía falta." }
+    ] }
+]

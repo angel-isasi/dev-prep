@@ -1,0 +1,107 @@
+[
+  {
+    "id": "en-superior-08-h01",
+    "titulo": "La demo del modo sin conexión",
+    "situacion": "Ana presenta a toda la empresa el modo sin conexión que lideró. Después vienen las preguntas.",
+    "pasos": [
+      {
+        "quien": "Ana",
+        "en": "Good morning, everyone. Let me walk you through the new offline mode.",
+        "es": "Buenos días a todos. Déjenme explicarles paso a paso el nuevo modo sin conexión."
+      },
+      {
+        "quien": "Ana",
+        "en": "First, some backstory. Last quarter, a third of our support tickets came from bad connections.",
+        "es": "Primero, un poco de antecedentes. El trimestre pasado, un tercio de nuestros tickets de soporte vinieron de malas conexiones."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Por qué el equipo creó el modo sin conexión?",
+        "opciones": [
+          "Porque muchos tickets de soporte venían de malas conexiones",
+          "Porque un cliente lo pidió por correo",
+          "Porque era la tarea más fácil"
+        ],
+        "correcta": 0,
+        "explicacion": "\"A third of our support tickets came from bad connections\": así Ana muestra lo que estaba en juego."
+      },
+      {
+        "quien": "Ana",
+        "en": "As you can see, the app now saves your cart even without internet.",
+        "es": "Como pueden ver, la app ahora guarda tu carrito incluso sin internet."
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "Moving ___ to the results, support tickets dropped by forty percent.",
+        "es": "Pasando a los resultados, los tickets de soporte bajaron un cuarenta por ciento.",
+        "opciones": [
+          "in",
+          "on",
+          "to"
+        ],
+        "correcta": 1,
+        "explicacion": "**Moving on to** + el siguiente tema. La partícula es *on*; el *to* viene justo después."
+      },
+      {
+        "quien": "Sarah",
+        "en": "Great work. But to be honest, didn't the first version lose some orders?",
+        "es": "Gran trabajo. Pero, sinceramente, ¿la primera versión no perdió algunos pedidos?"
+      },
+      {
+        "quien": "Ana",
+        "en": "That's a fair question. It did, about twenty in the first week.",
+        "es": "Es una pregunta justa. Sí, unos veinte en la primera semana."
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "It ___ out the sync ran before the login finished, so we fixed the order.",
+        "es": "Resultó que la sincronización corría antes de que terminara el login, así que corregimos el orden.",
+        "opciones": [
+          "turned",
+          "resulted",
+          "came"
+        ],
+        "correcta": 0,
+        "explicacion": "**It turned out** = resultó que (en un relato en pasado; en presente, *it turns out*). *It resulted* es un calco del español."
+      },
+      {
+        "quien": "Tom",
+        "en": "How much did that cost us?",
+        "es": "¿Cuánto nos costó eso?"
+      },
+      {
+        "quien": "Ana",
+        "en": "I don't have the exact number in front of me. Let me get back to you on that by Friday.",
+        "es": "No tengo la cifra exacta a la mano. Déjame confirmarlo y te respondo para el viernes."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Qué hace Ana cuando no sabe la cifra?",
+        "opciones": [
+          "Inventa un número para no quedar mal",
+          "Le pasa la pregunta a Sarah",
+          "Admite que no la tiene y promete responder el viernes"
+        ],
+        "correcta": 2,
+        "explicacion": "**Let me get back to you on that** con un plazo concreto: honesta y profesional."
+      },
+      {
+        "quien": "Ana",
+        "en": "To wrap up, the key takeaway is simple: our users don't always have good internet, and now that's okay.",
+        "es": "Para cerrar, la idea clave es simple: nuestros usuarios no siempre tienen buen internet, y ahora eso ya no es problema."
+      },
+      {
+        "quien": "Tom",
+        "en": "Great job, Ana. That's the clearest demo we've had all year.",
+        "es": "Gran trabajo, Ana. Es la demo más clara que hemos tenido en todo el año."
+      },
+      {
+        "quien": "Sarah",
+        "en": "Agreed. And you only said \"basically\" once. I counted.",
+        "es": "De acuerdo. Y solo dijiste \"basically\" una vez. Lo conté."
+      }
+    ]
+  }
+]

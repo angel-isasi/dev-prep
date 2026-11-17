@@ -1,0 +1,18 @@
+[
+  { "id": "en-avanzado-04-h01", "titulo": "La primera semana de Luis", "situacion": "Luis empezó su primer trabajo como desarrollador hace una semana y está agobiado. Llama a Ana para pedirle consejos.",
+    "pasos": [
+      { "quien": "Luis", "en": "Ana, I'm exhausted. I can't get used to working eight hours in front of a screen.", "es": "Ana, estoy agotado. No me logro acostumbrar a trabajar ocho horas frente a una pantalla." },
+      { "quien": "Ana", "en": "I remember feeling exactly the same in my first month.", "es": "Recuerdo haberme sentido exactamente igual en mi primer mes." },
+      { "tipo": "pregunta", "pregunta": "¿Qué recuerda Ana?", "opciones": ["Que renunció en su primer mes", "Que se sintió igual en su primer mes", "Que nunca se cansaba"], "correcta": 1, "explicacion": "**Remember + -ing** = recordar algo que ya pasó: \"I remember feeling exactly the same\"." },
+      { "quien": "Luis", "en": "Really? You always seem so calm in meetings.", "es": "¿En serio? Siempre pareces muy tranquila en las reuniones." },
+      { "tipo": "completa", "quien": "Ana", "en": "Now, yes. But I used to ___ every time Tom asked me a question.", "es": "Ahora sí. Pero antes me entraba el pánico cada vez que Tom me hacía una pregunta.", "opciones": ["panic", "panicking", "panicked"], "correcta": 0, "explicacion": "**Used to + verbo base** para una costumbre del pasado: *used to panic*. Con *-ing* sería *be used to* (estar acostumbrado)." },
+      { "quien": "Luis", "en": "So what helped you?", "es": "¿Y qué te ayudó?" },
+      { "tipo": "completa", "quien": "Ana", "en": "First, I stopped ___ myself with the seniors. They have years of experience.", "es": "Primero, dejé de compararme con los seniors. Ellos tienen años de experiencia.", "opciones": ["comparing", "to compare", "compare"], "correcta": 0, "explicacion": "**Stop + -ing** = dejar de hacer algo. *Stopped to compare* significaría que paró **para** compararse." },
+      { "quien": "Ana", "en": "And when I got stuck, I started asking for help after thirty minutes, not after three hours.", "es": "Y cuando me atascaba, empecé a pedir ayuda a los treinta minutos, no a las tres horas." },
+      { "tipo": "completa", "quien": "Luis", "en": "I hate asking. I don't want them ___ I'm slow.", "es": "Odio preguntar. No quiero que piensen que soy lento.", "opciones": ["to think", "thinking", "that think"], "correcta": 0, "explicacion": "\"No quiero que piensen\" es **want + persona + to + verbo**: *I don't want them to think*." },
+      { "quien": "Ana", "en": "Nobody thinks that. Asking good questions is part of the job.", "es": "Nadie piensa eso. Hacer buenas preguntas es parte del trabajo." },
+      { "tipo": "pregunta", "pregunta": "¿Qué consejo le da Ana para cuando se atasque?", "opciones": ["Esperar tres horas antes de preguntar", "No preguntar nunca", "Pedir ayuda a los treinta minutos"], "correcta": 2, "explicacion": "\"I started asking for help after thirty minutes, not after three hours\"." },
+      { "quien": "Luis", "en": "Okay. I'll try. Thanks for listening, Ana.", "es": "Bueno. Lo voy a intentar. Gracias por escucharme, Ana." },
+      { "quien": "Ana", "en": "Anytime. And remember to take breaks. Your eyes will thank you.", "es": "Cuando quieras. Y acuérdate de tomar descansos. Tus ojos te lo van a agradecer." }
+    ] }
+]

@@ -1,0 +1,8 @@
+{
+  "id": "en-superior-07",
+  "titulo": "Escribir como profesional",
+  "etapa": "superior",
+  "orden": 7,
+  "nivel": "C1",
+  "descripcion": "Estilo escrito para documentación, RFCs y PRs: sustantivación (the implementation of, a reduction in), concisión, voz activa o pasiva, y conectores formales como whereas, thereby y notwithstanding."
+}

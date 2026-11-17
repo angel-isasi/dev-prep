@@ -1,0 +1,18 @@
+[
+  { "id": "en-avanzado-06-h01", "titulo": "Si tan solo hubiera hecho commit", "situacion": "Ana pierde una tarde de trabajo y se lo cuenta a Sarah.",
+    "pasos": [
+      { "quien": "Sarah", "en": "You look upset, Ana. What happened?", "es": "Te ves molesta, Ana. ¿Qué pasó?" },
+      { "quien": "Ana", "en": "My laptop crashed, and I lost three hours of work.", "es": "Mi laptop se colgó y perdí tres horas de trabajo." },
+      { "tipo": "completa", "quien": "Ana", "en": "If only I ___ my changes before lunch!", "es": "¡Si tan solo hubiera hecho commit de mis cambios antes del almuerzo!", "opciones": ["committed", "had committed", "have committed"], "correcta": 1, "explicacion": "**If only** sobre algo del pasado lleva **had + participio**: *If only I had committed*. *committed* solo no marca que el momento ya pasó." },
+      { "quien": "Sarah", "en": "Oh no. I wish I could say it never happens to me, but it does.", "es": "Uy, no. Ojalá pudiera decir que a mí nunca me pasa, pero sí me pasa." },
+      { "quien": "Sarah", "en": "Still, it's time you started making smaller commits.", "es": "Igual, ya es hora de que empieces a hacer commits más pequeños." },
+      { "tipo": "pregunta", "pregunta": "¿Qué le aconseja Sarah a Ana?", "opciones": ["Comprar otra laptop", "Hacer commits más pequeños", "No almorzar"], "correcta": 1, "explicacion": "\"It's time you started making smaller commits\": it's time + persona + pasado." },
+      { "quien": "Ana", "en": "I know. I always wait until the feature is perfect.", "es": "Lo sé. Siempre espero a que la funcionalidad esté perfecta." },
+      { "quien": "Sarah", "en": "I used to do that too. I'd rather have ten small commits than one perfect one.", "es": "Yo también lo hacía. Prefiero tener diez commits pequeños que uno perfecto." },
+      { "tipo": "completa", "quien": "Ana", "en": "You're right. I wish I ___ a faster laptop, too.", "es": "Tienes razón. Ojalá también tuviera una laptop más rápida.", "opciones": ["have", "would have", "had"], "correcta": 2, "explicacion": "Algo del presente que no es así: **wish + pasado** (*had*). *would have* es el calco del subjuntivo \"tuviera\"." },
+      { "quien": "Sarah", "en": "Ask Tom. It's about time the company replaced that old thing.", "es": "Pregúntale a Tom. Ya era hora de que la empresa cambiara esa cosa vieja." },
+      { "quien": "Ana", "en": "Good idea. From now on: commit early, commit often.", "es": "Buena idea. Desde ahora: commit temprano y seguido." },
+      { "tipo": "pregunta", "pregunta": "¿Qué propone Sarah sobre la laptop?", "opciones": ["Que Ana la repare sola", "Que Ana le pida a Tom que la empresa la cambie", "Que Ana siga usándola"], "correcta": 1, "explicacion": "\"Ask Tom. It's about time the company replaced that old thing\"." },
+      { "tipo": "completa", "quien": "Sarah", "en": "Exactly. And next time, I'd rather you ___ me for help before you lose everything.", "es": "Exacto. Y la próxima vez, prefiero que me pidas ayuda antes de perderlo todo.", "opciones": ["asked", "ask", "will ask"], "correcta": 0, "explicacion": "**I'd rather + persona + pasado**: *I'd rather you asked me*. Aunque hablas del futuro, va en pasado." }
+    ] }
+]

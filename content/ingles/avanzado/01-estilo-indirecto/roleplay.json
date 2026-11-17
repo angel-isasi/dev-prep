@@ -1,0 +1,30 @@
+[
+  { "id": "en-avanzado-01-r01", "titulo": "Resumir la llamada para tu líder", "situacion": "Tom no pudo entrar a la llamada con Jennifer, la clienta. Te pide que le cuentes qué dijo.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "Hey Ana, I couldn't join the call with Jennifer. What did she say?", "es": "Hola Ana, no pude entrar a la llamada con Jennifer. ¿Qué dijo?" },
+      { "opciones": [
+          { "en": "She said that she liked the prototype, but she asked us to simplify the checkout.", "es": "Dijo que le gustaba el prototipo, pero nos pidió que simplificáramos el proceso de pago.", "correcta": true, "explicacion": "Empiezas por lo principal: lo que le gustó (*said that she liked*) y lo que pidió (*asked us to simplify*)." },
+          { "en": "She said me that she likes the prototype.", "es": "", "correcta": false, "explicacion": "*Say* no lleva a la persona directo: es *she told me* o *she said that*. Además, se queda corto: no cuenta lo que pidió." },
+          { "en": "Honestly, she talked a lot. I don't really remember.", "es": "", "correcta": false, "explicacion": "Tu líder cuenta contigo para saber qué pasó. Decir que no te acuerdas da muy mala impresión: toma notas en las llamadas." }
+        ] },
+      { "quien": "Tom", "en": "Did she mention a deadline?", "es": "¿Mencionó una fecha límite?" },
+      { "opciones": [
+          { "en": "Yes, she mentioned a deadline.", "es": "", "correcta": false, "explicacion": "Gramaticalmente está bien, pero no responde lo importante: **cuál** es la fecha." },
+          { "en": "Yes. She said that she needed it before the end of the month.", "es": "Sí. Dijo que lo necesitaba antes de fin de mes.", "correcta": true, "explicacion": "Das el dato concreto, con el tiempo retrocedido: *she needed*." },
+          { "en": "Yes. She mentioned me the end of the month.", "es": "", "correcta": false, "explicacion": "*Mention* no lleva a la persona directo: es *she mentioned the end of the month* o *mentioned it to me*." }
+        ] },
+      { "quien": "Tom", "en": "Did she ask anything we need to answer?", "es": "¿Preguntó algo que tengamos que responder?" },
+      { "opciones": [
+          { "en": "She asked a lot of silly questions, to be honest.", "es": "", "correcta": false, "explicacion": "Hablar mal de la clienta no es profesional, y además no le dice a Tom qué preguntó." },
+          { "en": "She asked me could we connect it to their payment provider.", "es": "", "correcta": false, "explicacion": "En una pregunta reportada no se invierte el orden: es *she asked **if we could** connect it*." },
+          { "en": "She asked if we could connect it to their payment provider. I told her that I would check with you.", "es": "Preguntó si podíamos conectarlo con su proveedor de pagos. Le dije que lo consultaría contigo.", "correcta": true, "explicacion": "Pregunta reportada con **if** y orden normal, más lo que tú respondiste (*I told her that I would*)." }
+        ] },
+      { "quien": "Tom", "en": "Perfect. Can you also send me a short summary by email?", "es": "Perfecto. ¿Me mandas también un resumen corto por correo?" },
+      { "opciones": [
+          { "en": "Why? I just told you everything.", "es": "", "correcta": false, "explicacion": "Suena a queja. Un resumen escrito es normal en el trabajo: queda como registro para el equipo." },
+          { "en": "Sure. I'll send you a recap with her exact requests in an hour.", "es": "Claro. Te mando un resumen con sus pedidos exactos en una hora.", "correcta": true, "explicacion": "Aceptas y dices cuándo lo vas a mandar: así se responde en el trabajo." },
+          { "en": "Sure, I'll send it to Jennifer.", "es": "", "correcta": false, "explicacion": "Tom te pidió el resumen **a él** (*send me*), no a la clienta." }
+        ] },
+      { "quien": "Tom", "en": "Great, thanks. That helps a lot.", "es": "Genial, gracias. Eso ayuda mucho." }
+    ] }
+]

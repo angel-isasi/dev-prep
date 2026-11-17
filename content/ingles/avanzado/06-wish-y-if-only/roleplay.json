@@ -1,0 +1,29 @@
+[
+  { "id": "en-avanzado-06-r01", "titulo": "Tu reunión uno a uno", "situacion": "Llevas tres meses en el equipo. Tom, tu tech lead, te pregunta cómo te sientes y qué cambiarías.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "So, Ana, how are you feeling after three months?", "es": "Bueno, Ana, ¿cómo te sientes después de tres meses?" },
+      { "opciones": [
+          { "en": "Really good. I only wish I had asked for help sooner in my first weeks.", "es": "Muy bien. Solo me arrepiento de no haber pedido ayuda antes en mis primeras semanas.", "correcta": true, "explicacion": "**wish + had + participio** para algo del pasado. Además, una pequeña autocrítica da muy buena impresión en un uno a uno." },
+          { "en": "Good, but I wish I asked for help sooner in my first weeks.", "es": "", "correcta": false, "explicacion": "Las primeras semanas ya pasaron: es *I wish I **had asked***." },
+          { "en": "Everything is perfect. I have nothing to improve.", "es": "", "correcta": false, "explicacion": "Suena poco reflexivo. En un uno a uno se espera que pienses en qué puedes mejorar." }
+        ] },
+      { "quien": "Tom", "en": "That's normal. Is there anything you'd change about how we work?", "es": "Es normal. ¿Hay algo que cambiarías de nuestra forma de trabajar?" },
+      { "opciones": [
+          { "en": "Yes. Sarah never reviews my code. It's her fault.", "es": "", "correcta": false, "explicacion": "Culpar a una persona suena a acusación. Describe el problema y su efecto, no a quién culpas." },
+          { "en": "I wish the code reviews will be faster.", "es": "", "correcta": false, "explicacion": "Después de wish nunca va *will*. Para algo del presente que quieres cambiar: *I wish the reviews **were** faster*." },
+          { "en": "Honestly, I wish our code reviews were a bit faster. Sometimes I wait two days.", "es": "Sinceramente, me gustaría que las revisiones de código fueran un poco más rápidas. A veces espero dos días.", "correcta": true, "explicacion": "**wish + pasado** para algo actual que no es como quisieras, con un dato concreto (dos días) y sin señalar a nadie." }
+        ] },
+      { "quien": "Tom", "en": "Fair point. What would help?", "es": "Buen punto. ¿Qué ayudaría?" },
+      { "opciones": [
+          { "en": "Maybe it's time we set a rule: every PR gets a first look within a day.", "es": "Tal vez ya es hora de que pongamos una regla: cada PR recibe una primera revisión en un día.", "correcta": true, "explicacion": "**it's time + persona + pasado** (*set* es igual en pasado) y una propuesta concreta y realista." },
+          { "en": "I don't know, whatever you think is fine.", "es": "", "correcta": false, "explicacion": "Tom te pidió una propuesta. Responder sin aportar nada desaprovecha la oportunidad." },
+          { "en": "It's time we punished anyone who takes more than an hour to review.", "es": "", "correcta": false, "explicacion": "La gramática está bien, pero la propuesta es agresiva y poco realista: suena a castigo, no a mejora del equipo." }
+        ] },
+      { "quien": "Tom", "en": "I like that. Would you like to present it at the retro?", "es": "Me gusta. ¿Te gustaría presentarlo en la retro?" },
+      { "opciones": [
+          { "en": "Sure, but I'd rather you to introduce the topic first.", "es": "", "correcta": false, "explicacion": "Después de *I'd rather* + persona no va *to*: *I'd rather you **introduced** the topic*." },
+          { "en": "Sure, but I'd rather you introduced the topic first. I'm still new.", "es": "Claro, pero preferiría que tú presentaras el tema primero. Todavía soy nueva.", "correcta": true, "explicacion": "**I'd rather + persona + pasado**: aceptas y pides apoyo con tacto." },
+          { "en": "No. I'd rather not talk in meetings, ever.", "es": "", "correcta": false, "explicacion": "Cerrarte por completo da mala impresión. Puedes aceptar con una condición, como en la opción correcta." }
+        ] }
+    ] }
+]

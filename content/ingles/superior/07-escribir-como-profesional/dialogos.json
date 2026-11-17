@@ -1,0 +1,224 @@
+[
+  {
+    "id": "en-superior-07-d01",
+    "titulo": "Revisar un RFC",
+    "situacion": "Tom leyó el borrador del primer RFC de Ana y le da comentarios.",
+    "lineas": [
+      {
+        "quien": "Tom",
+        "en": "I read your RFC draft. The idea is solid, but the summary is a bit wordy.",
+        "es": "Leí el borrador de tu RFC. La idea es sólida, pero el resumen tiene palabras de más."
+      },
+      {
+        "quien": "Ana",
+        "en": "Fair. I tried to explain everything in the first paragraph.",
+        "es": "Es justo. Intenté explicar todo en el primer párrafo."
+      },
+      {
+        "quien": "Tom",
+        "en": "Keep it to three sentences: the problem, the proposal and the impact.",
+        "es": "Déjalo en tres oraciones: el problema, la propuesta y el impacto."
+      },
+      {
+        "quien": "Ana",
+        "en": "Got it. Should I move the other options to a separate section?",
+        "es": "Entendido. ¿Paso las otras opciones a una sección aparte?"
+      },
+      {
+        "quien": "Tom",
+        "en": "Yes, under \"Alternatives considered,\" with the rationale for rejecting each one.",
+        "es": "Sí, en \"Alternativas evaluadas\", con el motivo para descartar cada una."
+      },
+      {
+        "quien": "Ana",
+        "en": "And the mobile app? Some people will ask about it.",
+        "es": "¿Y la app móvil? Algunos van a preguntar por ella."
+      },
+      {
+        "quien": "Tom",
+        "en": "List it under non-goals. That keeps the scope from growing in the comments.",
+        "es": "Ponla en non-goals. Así el alcance no crece en los comentarios."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué problema tiene el resumen de Ana?",
+        "opciones": [
+          "Tiene palabras de más",
+          "Tiene errores de gramática",
+          "Le falta la propuesta"
+        ],
+        "correcta": 0,
+        "explicacion": "Tom dice que es \"a bit wordy\": dice en muchas palabras lo que se puede decir en pocas."
+      },
+      {
+        "pregunta": "¿Dónde van las otras opciones?",
+        "opciones": [
+          "En el resumen",
+          "En una sección aparte, con el motivo para descartar cada una",
+          "En un correo a cada persona"
+        ],
+        "correcta": 1,
+        "explicacion": "\"Under Alternatives considered, with the rationale for rejecting each one.\""
+      },
+      {
+        "pregunta": "¿Para qué sirve poner la app móvil en non-goals?",
+        "opciones": [
+          "Para que el alcance no crezca en los comentarios",
+          "Para hacerla primero",
+          "Porque ya está terminada"
+        ],
+        "correcta": 0,
+        "explicacion": "Decir por escrito lo que el proyecto no va a resolver evita discusiones fuera de tema."
+      }
+    ]
+  },
+  {
+    "id": "en-superior-07-d02",
+    "titulo": "¿Activa o pasiva?",
+    "situacion": "Sarah revisa el borrador del postmortem que escribió Ana después de una caída.",
+    "lineas": [
+      {
+        "quien": "Sarah",
+        "en": "In the postmortem, you wrote \"the table was deleted.\" Deleted by what?",
+        "es": "En el postmortem escribiste \"la tabla fue eliminada\". ¿Eliminada por qué?"
+      },
+      {
+        "quien": "Ana",
+        "en": "By a migration script. I didn't want it to sound like blame.",
+        "es": "Por un script de migración. No quería que sonara a culpa."
+      },
+      {
+        "quien": "Sarah",
+        "en": "Blameless doesn't mean vague. Name the script, not the person.",
+        "es": "Sin culpas no significa vago. Nombra el script, no a la persona."
+      },
+      {
+        "quien": "Ana",
+        "en": "So, \"A migration script deleted the orders table\"?",
+        "es": "¿O sea, \"Un script de migración eliminó la tabla de pedidos\"?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "Exactly. Active voice, clear cause.",
+        "es": "Exacto. Voz activa, causa clara."
+      },
+      {
+        "quien": "Ana",
+        "en": "And \"the backup was restored at 3 a.m.\"? Passive is fine there, right?",
+        "es": "¿Y \"el backup se restauró a las 3 a. m.\"? Ahí la pasiva está bien, ¿no?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "Right, because what matters is when it happened, not who clicked the button.",
+        "es": "Claro, porque lo que importa es cuándo pasó, no quién hizo clic."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué le critica Sarah a \"the table was deleted\"?",
+        "opciones": [
+          "Que es demasiado larga",
+          "Que culpa a una persona",
+          "Que no dice qué causó el problema"
+        ],
+        "correcta": 2,
+        "explicacion": "\"Deleted by what?\": la pasiva deja fuera la causa, justo lo que un postmortem debe explicar."
+      },
+      {
+        "pregunta": "Según Sarah, ¿qué significa un postmortem sin culpas?",
+        "opciones": [
+          "Nombrar la causa técnica, no a la persona",
+          "No dar detalles",
+          "No escribir el postmortem"
+        ],
+        "correcta": 0,
+        "explicacion": "\"Blameless doesn't mean vague. Name the script, not the person.\""
+      },
+      {
+        "pregunta": "¿Por qué la pasiva sí está bien en la frase del backup?",
+        "opciones": [
+          "Porque suena más formal",
+          "Porque nadie sabe quién fue",
+          "Porque importa cuándo pasó, no quién lo hizo"
+        ],
+        "correcta": 2,
+        "explicacion": "La pasiva es buena cuando el actor no importa: aquí lo importante es la hora."
+      }
+    ]
+  },
+  {
+    "id": "en-superior-07-d03",
+    "titulo": "Formal, no pomposo",
+    "situacion": "Luis reescribió el README de su portafolio para que suene profesional y le pide opinión a Ana.",
+    "lineas": [
+      {
+        "quien": "Luis",
+        "en": "I rewrote my README to sound more professional. Can you take a look?",
+        "es": "Reescribí mi README para que suene más profesional. ¿Le echas un vistazo?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Sure. Hmm, \"Notwithstanding the aforementioned considerations, the application utilizes React.\"",
+        "es": "Claro. Mmm, \"No obstante las consideraciones antes mencionadas, la aplicación utiliza React\"."
+      },
+      {
+        "quien": "Luis",
+        "en": "Sounds smart, doesn't it?",
+        "es": "Suena inteligente, ¿no?"
+      },
+      {
+        "quien": "Ana",
+        "en": "It sounds like a legal contract. Just say \"The app uses React.\"",
+        "es": "Suena a contrato legal. Solo di \"The app uses React\"."
+      },
+      {
+        "quien": "Luis",
+        "en": "Then when should I use words like whereas or thereby?",
+        "es": "¿Entonces cuándo debería usar palabras como whereas o thereby?"
+      },
+      {
+        "quien": "Ana",
+        "en": "When they make the sentence shorter or clearer, like comparing two options in one line.",
+        "es": "Cuando hacen la oración más corta o más clara, por ejemplo para comparar dos opciones en una línea."
+      },
+      {
+        "quien": "Luis",
+        "en": "Okay. So formal is fine, but pompous isn't.",
+        "es": "Ok. O sea, formal está bien, pero pomposo no."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué opina Ana de la frase de Luis?",
+        "opciones": [
+          "Que es perfecta para un README",
+          "Que tiene un error de gramática",
+          "Que suena a contrato legal"
+        ],
+        "correcta": 2,
+        "explicacion": "\"It sounds like a legal contract.\" La gramática está bien; el problema es el tono."
+      },
+      {
+        "pregunta": "Según Ana, ¿cuándo conviene usar whereas o thereby?",
+        "opciones": [
+          "Cuando hacen la oración más corta o más clara",
+          "Siempre, para sonar profesional",
+          "Nunca"
+        ],
+        "correcta": 0,
+        "explicacion": "Un conector formal se gana su lugar si ahorra palabras o aclara una relación."
+      },
+      {
+        "pregunta": "¿Qué conclusión saca Luis?",
+        "opciones": [
+          "Hay que escribir como un abogado",
+          "El README no importa",
+          "Formal sí, pomposo no"
+        ],
+        "correcta": 2,
+        "explicacion": "\"So formal is fine, but pompous isn't.\""
+      }
+    ]
+  }
+]

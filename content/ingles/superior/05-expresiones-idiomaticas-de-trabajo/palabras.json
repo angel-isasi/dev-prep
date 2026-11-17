@@ -1,0 +1,387 @@
+[
+  {
+    "id": "en-superior-05-w01",
+    "en": "ballpark figure",
+    "es": "número aproximado, cálculo a ojo",
+    "pron": "bólpark fíguiar",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Can you give me a ballpark figure for the migration?",
+      "es": "¿Me puedes dar un número aproximado para la migración?"
+    }
+  },
+  {
+    "id": "en-superior-05-w02",
+    "en": "cut corners",
+    "es": "hacer algo a la ligera (para ahorrar tiempo)",
+    "pron": "kát kórnerz",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We can't cut corners on security.",
+      "es": "No podemos tomarnos la seguridad a la ligera."
+    }
+  },
+  {
+    "id": "en-superior-05-w03",
+    "en": "low-hanging fruit",
+    "es": "lo más fácil que ya da resultado",
+    "pron": "lóu jánguin frút",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Compressing the images is low-hanging fruit.",
+      "es": "Comprimir las imágenes es lo más fácil y ya da resultado."
+    }
+  },
+  {
+    "id": "en-superior-05-w04",
+    "en": "bite the bullet",
+    "es": "asumir algo incómodo que hay que hacer",
+    "pron": "báit de búlit",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We should bite the bullet and upgrade React.",
+      "es": "Deberíamos asumirlo de una vez y actualizar React."
+    }
+  },
+  {
+    "id": "en-superior-05-w05",
+    "en": "touch base",
+    "es": "hablar un momento para ponerse al día",
+    "pron": "tách béis",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let's touch base on Thursday.",
+      "es": "Hablemos el jueves para ponernos al día."
+    }
+  },
+  {
+    "id": "en-superior-05-w06",
+    "en": "move the needle",
+    "es": "lograr un cambio que se note",
+    "pron": "múuv de nídol",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "A new button color won't move the needle.",
+      "es": "Un nuevo color de botón no va a cambiar nada importante."
+    }
+  },
+  {
+    "id": "en-superior-05-w07",
+    "en": "a moving target",
+    "es": "algo que cambia todo el tiempo",
+    "pron": "a múuvin tárguet",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The requirements are a moving target.",
+      "es": "Los requisitos cambian todo el tiempo."
+    }
+  },
+  {
+    "id": "en-superior-05-w08",
+    "en": "back to the drawing board",
+    "es": "volver a empezar desde el diseño",
+    "pron": "bák tu de dróin bórd",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The prototype failed, so it's back to the drawing board.",
+      "es": "El prototipo falló, así que toca volver a empezar."
+    }
+  },
+  {
+    "id": "en-superior-05-w09",
+    "en": "drop the ball",
+    "es": "descuidar algo que te tocaba",
+    "pron": "dráp de ból",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I dropped the ball on the release notes.",
+      "es": "Se me pasaron las notas de la versión, fue mi culpa."
+    }
+  },
+  {
+    "id": "en-superior-05-w10",
+    "en": "put on the back burner",
+    "es": "dejar para después (sin prioridad)",
+    "pron": "put on de bák bérner",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We put the redesign on the back burner.",
+      "es": "Dejamos el rediseño para más adelante."
+    }
+  },
+  {
+    "id": "en-superior-05-w11",
+    "en": "get the ball rolling",
+    "es": "arrancar, poner algo en marcha",
+    "pron": "guét de ból róulin",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let me get the ball rolling with a quick demo.",
+      "es": "Déjame arrancar con una demo rápida."
+    }
+  },
+  {
+    "id": "en-superior-05-w12",
+    "en": "the big picture",
+    "es": "el panorama general",
+    "pron": "de bíg píkcher",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Don't lose sight of the big picture.",
+      "es": "No pierdas de vista el panorama general."
+    }
+  },
+  {
+    "id": "en-superior-05-w13",
+    "en": "keep someone in the loop",
+    "es": "mantener a alguien al tanto",
+    "pron": "kíip sámuan in de lúup",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Please keep me in the loop.",
+      "es": "Por favor, mantenme al tanto."
+    }
+  },
+  {
+    "id": "en-superior-05-w14",
+    "en": "bandwidth",
+    "es": "tiempo o capacidad disponible (de una persona)",
+    "pron": "bándwidz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I don't have the bandwidth for another project.",
+      "es": "No tengo tiempo para otro proyecto."
+    }
+  },
+  {
+    "id": "en-superior-05-w15",
+    "en": "deep dive",
+    "es": "análisis a fondo",
+    "pron": "díip dáiv",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let's do a deep dive into the crash reports.",
+      "es": "Hagamos un análisis a fondo de los reportes de fallos."
+    }
+  },
+  {
+    "id": "en-superior-05-w16",
+    "en": "quick win",
+    "es": "mejora rápida que se nota",
+    "pron": "kuík uín",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Caching the API response is a quick win.",
+      "es": "Cachear la respuesta de la API es una mejora rápida que se nota."
+    }
+  },
+  {
+    "id": "en-superior-05-w17",
+    "en": "hit the nail on the head",
+    "es": "dar en el clavo",
+    "pron": "jít de néil on de jéd",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "You hit the nail on the head: it's a caching issue.",
+      "es": "Diste en el clavo: es un problema de caché."
+    }
+  },
+  {
+    "id": "en-superior-05-w18",
+    "en": "game changer",
+    "es": "algo que lo cambia todo",
+    "pron": "guéim chéinyer",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Hot reload was a game changer for us.",
+      "es": "El hot reload nos cambió todo."
+    }
+  },
+  {
+    "id": "en-superior-05-w19",
+    "en": "hit the ground running",
+    "es": "rendir desde el primer día",
+    "pron": "jít de gráund ránin",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We need someone who can hit the ground running.",
+      "es": "Necesitamos a alguien que rinda desde el primer día."
+    }
+  },
+  {
+    "id": "en-superior-05-w20",
+    "en": "learn the ropes",
+    "es": "aprender cómo funciona todo (al empezar)",
+    "pron": "lérn de róups",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It took me a month to learn the ropes.",
+      "es": "Me tomó un mes aprender cómo funcionaba todo."
+    }
+  },
+  {
+    "id": "en-superior-05-w21",
+    "en": "think outside the box",
+    "es": "pensar de forma creativa (suena a cliché)",
+    "pron": "zínk autsáid de báks",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The job ad asks for people who think outside the box.",
+      "es": "El aviso pide gente que piense de forma creativa."
+    }
+  },
+  {
+    "id": "en-superior-05-w22",
+    "en": "pick someone's brain",
+    "es": "consultarle algo a quien sabe del tema",
+    "pron": "pík sámuanz bréin",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Can I pick your brain about GraphQL?",
+      "es": "¿Te puedo hacer unas consultas sobre GraphQL?"
+    }
+  },
+  {
+    "id": "en-superior-05-w23",
+    "en": "play it by ear",
+    "es": "ir viendo, improvisar según cómo vaya",
+    "pron": "pléi it bai íer",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let's play it by ear and decide on Monday.",
+      "es": "Vamos viendo y decidimos el lunes."
+    }
+  },
+  {
+    "id": "en-superior-05-w24",
+    "en": "the elephant in the room",
+    "es": "el problema obvio que nadie menciona",
+    "pron": "di élefant in de rúum",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The elephant in the room is the deadline.",
+      "es": "El problema que nadie menciona es la fecha de entrega."
+    }
+  },
+  {
+    "id": "en-superior-05-w25",
+    "en": "call it a day",
+    "es": "dar por terminado el día",
+    "pron": "kól it a déi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It's seven already, let's call it a day.",
+      "es": "Ya son las siete, dejémoslo por hoy."
+    }
+  },
+  {
+    "id": "en-superior-05-w26",
+    "en": "by the book",
+    "es": "al pie de la letra, según las reglas",
+    "pron": "bai de búk",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Security reviews are done by the book.",
+      "es": "Las revisiones de seguridad se hacen al pie de la letra."
+    }
+  },
+  {
+    "id": "en-superior-05-w27",
+    "en": "on the fence",
+    "es": "indeciso",
+    "pron": "on de féns",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm still on the fence about Tailwind.",
+      "es": "Todavía no me decido sobre Tailwind."
+    }
+  },
+  {
+    "id": "en-superior-05-w28",
+    "en": "a long shot",
+    "es": "algo poco probable (pero que vale intentar)",
+    "pron": "a lóng shát",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It's a long shot, but try clearing the cache.",
+      "es": "Es poco probable que funcione, pero prueba borrando la caché."
+    }
+  },
+  {
+    "id": "en-superior-05-w29",
+    "en": "the ball is in your court",
+    "es": "ahora te toca a ti (decidir o actuar)",
+    "pron": "de ból iz in iór kórt",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I've answered their questions, so the ball is in their court.",
+      "es": "Ya respondí sus preguntas, así que ahora les toca a ellos."
+    }
+  },
+  {
+    "id": "en-superior-05-w30",
+    "en": "reinvent the wheel",
+    "es": "hacer desde cero algo que ya existe",
+    "pron": "riinvént de uíil",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Don't reinvent the wheel, use a date library.",
+      "es": "No hagas desde cero lo que ya existe, usa una librería de fechas."
+    }
+  },
+  {
+    "id": "en-superior-05-w31",
+    "en": "boil the ocean",
+    "es": "querer abarcarlo todo a la vez",
+    "pron": "bóil di óushan",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let's not boil the ocean, start with one page.",
+      "es": "No intentemos abarcarlo todo, empecemos con una página."
+    }
+  },
+  {
+    "id": "en-superior-05-w32",
+    "en": "no-brainer",
+    "es": "decisión obvia",
+    "pron": "nóu bréiner",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Adding a linter is a no-brainer.",
+      "es": "Agregar un linter es una decisión obvia."
+    }
+  },
+  {
+    "id": "en-superior-05-w33",
+    "en": "throw someone under the bus",
+    "es": "echarle la culpa a alguien para salvarte",
+    "pron": "zróu sámuan ánder de bás",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "He threw the intern under the bus in the meeting.",
+      "es": "En la reunión le echó la culpa al practicante para salvarse."
+    }
+  },
+  {
+    "id": "en-superior-05-w34",
+    "en": "move the goalposts",
+    "es": "cambiar las condiciones a mitad de camino",
+    "pron": "múuv de góulpousts",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The client keeps moving the goalposts.",
+      "es": "El cliente sigue cambiando las condiciones a mitad de camino."
+    }
+  },
+  {
+    "id": "en-superior-05-w35",
+    "en": "let's table this",
+    "es": "dejemos esto para después (en EE. UU.)",
+    "pron": "lets téibol dis",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Good point, but let's table this for now.",
+      "es": "Buen punto, pero dejemos esto para después."
+    }
+  }
+]

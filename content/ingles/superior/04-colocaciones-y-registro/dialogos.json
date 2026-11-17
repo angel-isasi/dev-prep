@@ -1,0 +1,58 @@
+[
+  { "id": "en-superior-04-d01", "titulo": "El mismo mensaje, dos registros", "situacion": "Sarah le ayuda a Luis a convertir un mensaje de Slack en un correo para un cliente.",
+    "lineas": [
+      { "quien": "Luis", "en": "I wrote this for the client: hey, the fix is live, lmk if anything breaks.", "es": "Le escribí esto al cliente: oye, el arreglo ya está en producción, avísame si algo se rompe." },
+      { "quien": "Sarah", "en": "That's fine for Slack, but the register is too casual for a client.", "es": "Eso está bien para Slack, pero el registro es demasiado informal para un cliente." },
+      { "quien": "Luis", "en": "Okay. How would you start it?", "es": "Ok. ¿Cómo lo empezarías?" },
+      { "quien": "Sarah", "en": "Something like: with regard to the issue you reported, the fix is now live.", "es": "Algo como: con relación al problema que reportó, el arreglo ya está en producción." },
+      { "quien": "Luis", "en": "And instead of lmk?", "es": "¿Y en vez de lmk?" },
+      { "quien": "Sarah", "en": "Please let us know if you notice anything unusual. It's polite, but not stiff.", "es": "Por favor, avísenos si nota algo raro. Es cortés, pero no rígido." },
+      { "quien": "Luis", "en": "Should I end with sincerely?", "es": "¿Debería cerrar con atentamente?" },
+      { "quien": "Sarah", "en": "Best regards is enough. Sincerely is for very formal letters.", "es": "Con un saludo cordial basta. Atentamente es para cartas muy formales." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué problema tiene el mensaje de Luis?", "opciones": ["Tiene errores de gramática", "Su registro es demasiado informal para un cliente", "Es demasiado largo"], "correcta": 1,
+        "explicacion": "\"The register is too casual for a client\"." },
+      { "pregunta": "¿Qué frase propone Sarah en lugar de lmk?", "opciones": ["Please let us know if you notice anything unusual", "Shoot me a message", "Per my last email"], "correcta": 0,
+        "explicacion": "Es cortés y profesional sin sonar rígida." },
+      { "pregunta": "Según Sarah, ¿cuándo se usa sincerely?", "opciones": ["En todos los correos", "En cartas muy formales", "En Slack"], "correcta": 1,
+        "explicacion": "\"Sincerely is for very formal letters\"." }
+    ] },
+  { "id": "en-superior-04-d02", "titulo": "Plantear un riesgo", "situacion": "En la reunión de planificación, María avisa a Tom de un problema con una librería.",
+    "lineas": [
+      { "quien": "María", "en": "Before we move on, I'd like to raise an issue with the date picker library.", "es": "Antes de seguir, quisiera plantear un problema con la librería del selector de fechas." },
+      { "quien": "Tom", "en": "Sure, go ahead.", "es": "Claro, adelante." },
+      { "quien": "María", "en": "It hasn't been updated in three years, so it poses a security risk.", "es": "No se actualiza desde hace tres años, así que representa un riesgo de seguridad." },
+      { "quien": "Tom", "en": "Good catch. Can we replace it before the release?", "es": "Bien visto. ¿Podemos reemplazarla antes del lanzamiento?" },
+      { "quien": "María", "en": "Probably, but bear in mind that it's used on twelve screens.", "es": "Probablemente, pero ten presente que se usa en doce pantallas." },
+      { "quien": "Tom", "en": "Then let's not draw any conclusions yet. Can you take ownership of the research?", "es": "Entonces no saquemos conclusiones todavía. ¿Puedes hacerte cargo de investigarlo?" },
+      { "quien": "María", "en": "Sure. I'll have a proposal by Thursday so we can make a decision.", "es": "Claro. Tendré una propuesta para el jueves, así podemos tomar una decisión." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué la librería es un riesgo?", "opciones": ["Porque es muy cara", "Porque no se actualiza desde hace tres años", "Porque es muy lenta"], "correcta": 1,
+        "explicacion": "\"It hasn't been updated in three years, so it poses a security risk\"." },
+      { "pregunta": "¿Qué deben tener presente?", "opciones": ["Que se usa en doce pantallas", "Que el cliente la eligió", "Que es gratis"], "correcta": 0,
+        "explicacion": "\"Bear in mind that it's used on twelve screens\"." },
+      { "pregunta": "¿De qué se hace cargo María?", "opciones": ["De lanzar la app", "De investigar el reemplazo y traer una propuesta", "De hablar con el cliente"], "correcta": 1,
+        "explicacion": "Tom le pide \"take ownership of the research\" y ella promete una propuesta para el jueves." }
+    ] },
+  { "id": "en-superior-04-d03", "titulo": "Pedir acceso", "situacion": "Carlos es nuevo y necesita acceso a un servidor. Le pregunta a Tom cómo pedirlo.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Tom, I can't open the staging server. Who can grant me access?", "es": "Tom, no puedo entrar al servidor de pruebas. ¿Quién me puede dar acceso?" },
+      { "quien": "Tom", "en": "IT handles that. You need to submit a request through the portal.", "es": "Eso lo ve TI. Tienes que enviar una solicitud por el portal." },
+      { "quien": "Carlos", "en": "Should I write it formally?", "es": "¿Debería escribirla de manera formal?" },
+      { "quien": "Tom", "en": "Neutral is fine. Just say which server and why you need it.", "es": "Neutral está bien. Solo di qué servidor y para qué lo necesitas." },
+      { "quien": "Carlos", "en": "Okay. And if it takes too long?", "es": "Ok. ¿Y si tarda mucho?" },
+      { "quien": "Tom", "en": "Shoot me a message and I'll follow up with them.", "es": "Escríbeme y yo les hago seguimiento." },
+      { "quien": "Carlos", "en": "Thanks. In the meantime, can I grab the logs from the shared folder?", "es": "Gracias. Mientras tanto, ¿puedo sacar los logs de la carpeta compartida?" },
+      { "quien": "Tom", "en": "Yes, those are open to everyone.", "es": "Sí, esos están abiertos para todos." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cómo se pide el acceso?", "opciones": ["Llamando a Tom", "Enviando una solicitud por el portal de TI", "Por correo al cliente"], "correcta": 1,
+        "explicacion": "\"You need to submit a request through the portal\"." },
+      { "pregunta": "¿Qué registro le recomienda Tom para la solicitud?", "opciones": ["Muy formal", "Neutral", "Muy informal"], "correcta": 1,
+        "explicacion": "\"Neutral is fine. Just say which server and why you need it\"." },
+      { "pregunta": "¿Qué hará Tom si la solicitud tarda?", "opciones": ["Darle su contraseña", "Hacerle seguimiento con TI", "Nada"], "correcta": 1,
+        "explicacion": "\"Shoot me a message and I'll follow up with them\"." }
+    ] }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "en-superior-08-c01",
+    "es": "Les voy a explicar el proyecto.",
+    "natural": "Let me walk you through the project.",
+    "calco": "I'm going to explain you the project.",
+    "explicacion": "*Explain* no lleva a la persona directo: sería *explain the project to you*. Para presentar paso a paso, lo natural es **let me walk you through**."
+  },
+  {
+    "id": "en-superior-08-c02",
+    "es": "Resulta que el error estaba en la caché.",
+    "natural": "It turns out the bug was in the cache.",
+    "calco": "It results that the bug was in the cache.",
+    "explicacion": "\"Resulta que\" es **it turns out (that)**. *It results* solo se usa como *result in* (dar como resultado)."
+  },
+  {
+    "id": "en-superior-08-c03",
+    "es": "En resumen, fue un éxito.",
+    "natural": "In short, it was a success.",
+    "calco": "In resume, it was a success.",
+    "explicacion": "*Résumé* es el CV. \"En resumen\" es **in short** o *to sum up*."
+  },
+  {
+    "id": "en-superior-08-c04",
+    "es": "Me fui por las ramas.",
+    "natural": "I went off on a tangent.",
+    "calco": "I went through the branches.",
+    "explicacion": "En inglés no hay ramas: uno se va por la **tangente**, *go off on a tangent*."
+  }
+]

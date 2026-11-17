@@ -1,0 +1,59 @@
+[
+  { "id": "en-avanzado-03-d01", "titulo": "¿Quién es quién?", "situacion": "Luis ve una foto del equipo de Ana y le pregunta por cada persona.",
+    "lineas": [
+      { "quien": "Luis", "en": "Who's the guy with the glasses in your team photo?", "es": "¿Quién es el de lentes en la foto de tu equipo?" },
+      { "quien": "Ana", "en": "That's Tom, the tech lead who hired me.", "es": "Es Tom, el tech lead que me contrató." },
+      { "quien": "Luis", "en": "And the woman next to him?", "es": "¿Y la mujer que está a su lado?" },
+      { "quien": "Ana", "en": "That's Sarah, who has been my mentor since day one.", "es": "Es Sarah, que es mi mentora desde el primer día." },
+      { "quien": "Luis", "en": "Is she the one whose code reviews are super long?", "es": "¿Es la que hace revisiones de código larguísimas?" },
+      { "quien": "Ana", "en": "Yes! But the comments she writes always teach me something.", "es": "¡Sí! Pero los comentarios que escribe siempre me enseñan algo." },
+      { "quien": "Luis", "en": "And Carlos? Is he the guy you play chess with?", "es": "¿Y Carlos? ¿Es con el que juegas ajedrez?" },
+      { "quien": "Ana", "en": "Exactly. He's also the person I talk to when I'm stuck with the backend.", "es": "Exacto. También es la persona con la que hablo cuando me atasco con el backend." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Quién contrató a Ana?", "opciones": ["Sarah", "Tom", "Carlos"], "correcta": 1,
+        "explicacion": "\"That's Tom, the tech lead who hired me\"." },
+      { "pregunta": "¿Cómo son las revisiones de código de Sarah?", "opciones": ["Muy largas, pero le enseñan algo", "Muy cortas", "Muy duras y poco útiles"], "correcta": 0,
+        "explicacion": "Luis dice que son \"super long\" y Ana responde que sus comentarios \"always teach me something\"." },
+      { "pregunta": "¿Cuándo habla Ana con Carlos?", "opciones": ["Cuando tiene dudas de diseño", "Cuando quiere jugar fútbol", "Cuando se atasca con el backend"], "correcta": 2,
+        "explicacion": "\"He's also the person I talk to when I'm stuck with the backend\". Con él juega ajedrez, no fútbol." }
+    ] },
+  { "id": "en-avanzado-03-d02", "titulo": "Definiciones en la entrevista", "situacion": "Tom le pide a Luis que defina algunos conceptos de JavaScript.",
+    "lineas": [
+      { "quien": "Tom", "en": "Can you tell me what a closure is?", "es": "¿Me puedes decir qué es un closure?" },
+      { "quien": "Luis", "en": "Sure. It's a function that remembers the variables from the place where it was created.", "es": "Claro. Es una función que recuerda las variables del lugar donde fue creada." },
+      { "quien": "Tom", "en": "Good. And what's a promise?", "es": "Bien. ¿Y qué es una promesa?" },
+      { "quien": "Luis", "en": "It's an object that represents a value you'll get in the future.", "es": "Es un objeto que representa un valor que vas a obtener en el futuro." },
+      { "quien": "Tom", "en": "Can you give me an example of a situation where you'd use one?", "es": "¿Me das un ejemplo de una situación en la que usarías una?" },
+      { "quien": "Luis", "en": "When I fetch data from an API, which can take a few seconds.", "es": "Cuando pido datos a una API, lo cual puede tardar unos segundos." },
+      { "quien": "Tom", "en": "Nice. Last one: what's a pure function?", "es": "Bien. La última: ¿qué es una función pura?" },
+      { "quien": "Luis", "en": "It's a function whose output depends only on its inputs, with no side effects.", "es": "Es una función cuyo resultado depende solo de sus entradas, sin efectos secundarios." }
+    ],
+    "preguntas": [
+      { "pregunta": "Según Luis, ¿qué recuerda un closure?", "opciones": ["Las variables del lugar donde se creó", "Todas las funciones del programa", "El último valor que devolvió"], "correcta": 0,
+        "explicacion": "\"A function that remembers the variables from the place where it was created\"." },
+      { "pregunta": "¿Cuándo usaría Luis una promesa?", "opciones": ["Para sumar dos números", "Para pedir datos a una API", "Para cambiar un color"], "correcta": 1,
+        "explicacion": "\"When I fetch data from an API, which can take a few seconds\"." },
+      { "pregunta": "¿De qué depende el resultado de una función pura?", "opciones": ["De la hora", "De variables globales", "Solo de sus entradas"], "correcta": 2,
+        "explicacion": "\"Whose output depends only on its inputs\": **whose** = cuyo." }
+    ] },
+  { "id": "en-avanzado-03-d03", "titulo": "El departamento nuevo", "situacion": "Ana le cuenta a Sarah sobre un departamento que vio para mudarse.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Did you find a new apartment?", "es": "¿Encontraste departamento nuevo?" },
+      { "quien": "Ana", "en": "Maybe. Yesterday I saw one that's close to the coworking space where I work on Fridays.", "es": "Quizás. Ayer vi uno que está cerca del coworking donde trabajo los viernes." },
+      { "quien": "Sarah", "en": "Nice! What's it like?", "es": "¡Qué bien! ¿Cómo es?" },
+      { "quien": "Ana", "en": "It has a big window, which is perfect for my plants, and a corner where I can put my desk.", "es": "Tiene una ventana grande, que es perfecta para mis plantas, y un rincón donde puedo poner mi escritorio." },
+      { "quien": "Sarah", "en": "And the owner?", "es": "¿Y la dueña?" },
+      { "quien": "Ana", "en": "She's a woman whose son is a developer, so she understands why I need fast internet.", "es": "Es una señora cuyo hijo es desarrollador, así que entiende por qué necesito internet rápido." },
+      { "quien": "Sarah", "en": "Ha! That's the kind of owner everybody wants.", "es": "¡Ja! Esa es la clase de dueña que todos quieren." },
+      { "quien": "Ana", "en": "The only problem is the previous tenant, who left the kitchen a mess.", "es": "El único problema es el inquilino anterior, que dejó la cocina hecha un desastre." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Dónde está el departamento?", "opciones": ["Cerca de la oficina de Tom", "Cerca del coworking donde Ana trabaja los viernes", "En Cusco"], "correcta": 1,
+        "explicacion": "\"One that's close to the coworking space where I work on Fridays\"." },
+      { "pregunta": "¿Por qué la dueña entiende que Ana necesite internet rápido?", "opciones": ["Porque su hijo es desarrollador", "Porque ella trabaja desde casa", "Porque Ana se lo explicó"], "correcta": 0,
+        "explicacion": "\"A woman whose son is a developer\": **whose** = cuyo." },
+      { "pregunta": "¿Cuál es el único problema?", "opciones": ["El precio", "La ventana pequeña", "La cocina sucia que dejó el inquilino anterior"], "correcta": 2,
+        "explicacion": "\"The previous tenant, who left the kitchen a mess\"." }
+    ] }
+]

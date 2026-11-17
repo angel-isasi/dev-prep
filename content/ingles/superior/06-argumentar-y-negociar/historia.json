@@ -1,0 +1,113 @@
+[
+  {
+    "id": "en-superior-06-h01",
+    "titulo": "Ana pide más",
+    "situacion": "Después de seis meses liderando el checkout, Tom le ofrece a Ana un ascenso. El número no es el que ella esperaba.",
+    "pasos": [
+      {
+        "quien": "Tom",
+        "en": "Ana, you've been leading the checkout work for six months. We'd like to make you a mid-level developer.",
+        "es": "Ana, llevas seis meses liderando el trabajo del checkout. Queremos ascenderte a desarrolladora semi senior."
+      },
+      {
+        "quien": "Ana",
+        "en": "Thank you, Tom. I'm really happy to hear that.",
+        "es": "Gracias, Tom. Me alegra mucho escucharlo."
+      },
+      {
+        "quien": "Tom",
+        "en": "The new salary would be ten percent higher, starting next month.",
+        "es": "El nuevo sueldo sería un diez por ciento más alto, desde el próximo mes."
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "I appreciate it. That ___, I was hoping for something closer to twenty percent.",
+        "es": "Te lo agradezco. Dicho eso, esperaba algo más cerca del veinte por ciento.",
+        "opciones": [
+          "said",
+          "saying",
+          "says"
+        ],
+        "correcta": 0,
+        "explicacion": "**That said** es fijo: \"dicho eso\". Después de agradecer, introduce el contraste sin sonar a reclamo."
+      },
+      {
+        "quien": "Ana",
+        "en": "I've cut checkout errors in half, and the market rate for this level is higher.",
+        "es": "Reduje a la mitad los errores del checkout, y lo que paga el mercado por este nivel es más alto."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Con qué argumentos pide Ana más?",
+        "opciones": [
+          "Que está cansada",
+          "Que Luis gana más que ella",
+          "Sus resultados y lo que paga el mercado"
+        ],
+        "correcta": 2,
+        "explicacion": "Ana no pide por necesidad: da un resultado medible y un dato del mercado. Eso es negociar con argumentos."
+      },
+      {
+        "quien": "Tom",
+        "en": "I take your point. Twenty is a big ask with this year's budget, though.",
+        "es": "Entiendo tu argumento. Pero veinte es mucho pedir con el presupuesto de este año."
+      },
+      {
+        "quien": "Ana",
+        "en": "I understand. Could we meet halfway, fifteen now and a review in six months?",
+        "es": "Lo entiendo. ¿Podríamos llegar a un punto medio, quince ahora y una revisión en seis meses?"
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "And I'd be willing to mentor the new junior in ___ for a learning budget.",
+        "es": "Y estaría dispuesta a ser mentora del nuevo junior a cambio de un presupuesto para capacitación.",
+        "opciones": [
+          "exchange",
+          "change",
+          "trade"
+        ],
+        "correcta": 0,
+        "explicacion": "**In exchange for** = a cambio de. *In change for* es un calco de \"a cambio\" y no existe; *in trade for* tampoco se usa."
+      },
+      {
+        "quien": "Tom",
+        "en": "That's fair. Let me run it by finance and get back to you on Friday.",
+        "es": "Me parece justo. Déjame consultarlo con finanzas y te respondo el viernes."
+      },
+      {
+        "quien": "Ana",
+        "en": "Sounds good. Could you send me the final numbers in writing?",
+        "es": "Perfecto. ¿Me podrías enviar las cifras finales por escrito?"
+      },
+      {
+        "quien": "Tom",
+        "en": "Of course. And Ana, nice job. Most people just say yes to the first number.",
+        "es": "Claro. Y Ana, bien hecho. La mayoría de la gente acepta el primer número."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Qué propone Ana para llegar a un punto medio?",
+        "opciones": [
+          "Veinte por ciento o renuncia",
+          "Diez por ciento y más vacaciones",
+          "Quince por ciento ahora y una revisión en seis meses"
+        ],
+        "correcta": 2,
+        "explicacion": "\"Fifteen now and a review in six months\": cede una parte ahora y deja la puerta abierta para después."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Qué opina Tom de cómo negoció Ana?",
+        "opciones": [
+          "Que fue maleducada",
+          "Que lo hizo bien, porque la mayoría acepta el primer número",
+          "Que pidió demasiado"
+        ],
+        "correcta": 1,
+        "explicacion": "\"Nice job. Most people just say yes to the first number.\" Negociar con respeto no molesta: se valora."
+      }
+    ]
+  }
+]

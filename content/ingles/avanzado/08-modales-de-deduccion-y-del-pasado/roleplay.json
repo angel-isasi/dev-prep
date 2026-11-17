@@ -1,0 +1,29 @@
+[
+  { "id": "en-avanzado-08-r01", "titulo": "Precios equivocados", "situacion": "Un cliente reporta precios raros justo después de tu cambio de ayer. Tom te escribe para entender qué pasó.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "Ana, a client says the prices on the product page have looked wrong since this morning.", "es": "Ana, un cliente dice que los precios en la página de producto se ven mal desde esta mañana." },
+      { "opciones": [
+          { "en": "It can't be my code. My code is always fine.", "es": "", "correcta": false, "explicacion": "La gramática está bien, pero negar sin revisar suena defensivo, y tu cambio fue justo ayer." },
+          { "en": "That might be related to my change yesterday. Let me check right away.", "es": "Puede que tenga que ver con mi cambio de ayer. Déjame revisar de inmediato.", "correcta": true, "explicacion": "**might be** para una posibilidad, y te haces cargo sin dramatizar: así responde alguien confiable." },
+          { "en": "It must be the client's computer. They always complain.", "es": "", "correcta": false, "explicacion": "Culpas al cliente y sacas una conclusión sin ninguna evidencia." }
+        ] },
+      { "quien": "Tom", "en": "Thanks. What do you see?", "es": "Gracias. ¿Qué ves?" },
+      { "opciones": [
+          { "en": "The page is showing old prices. The cache must kept the old data.", "es": "", "correcta": false, "explicacion": "Deducción sobre el pasado: **must have + participio**: *must have kept*." },
+          { "en": "I don't know. Maybe it's magic?", "es": "", "correcta": false, "explicacion": "Una broma fuera de lugar cuando hay un cliente afectado. Tom necesita información." },
+          { "en": "The page is showing stale prices. The cache must have kept the old data after the deploy.", "es": "La página muestra precios desactualizados. Seguro que la caché se quedó con los datos viejos después del despliegue.", "correcta": true, "explicacion": "Describes lo que ves (*stale prices*) y deduces la causa con **must have + participio**." }
+        ] },
+      { "quien": "Tom", "en": "Makes sense. Could we have caught this earlier?", "es": "Tiene sentido. ¿Podríamos haberlo detectado antes?" },
+      { "opciones": [
+          { "en": "Yes. I should have tested with the cache on. That's on me.", "es": "Sí. Debí probar con la caché activada. Es mi responsabilidad.", "correcta": true, "explicacion": "**should have + participio** para lo que faltó, y *That's on me* asume el error con madurez." },
+          { "en": "Yes, but QA should have caught it, not me.", "es": "", "correcta": false, "explicacion": "La gramática está bien, pero echas la culpa a otro equipo (*pointing fingers*). Eso daña la confianza." },
+          { "en": "Yes. I should tested with the cache on.", "es": "", "correcta": false, "explicacion": "Falta *have*: **should have tested**." }
+        ] },
+      { "quien": "Tom", "en": "Okay. Should we roll back?", "es": "Ok. ¿Volvemos a la versión anterior?" },
+      { "opciones": [
+          { "en": "We mustn't roll back.", "es": "", "correcta": false, "explicacion": "*mustn't* es prohibición: suena a que está prohibido. Para \"no hace falta\" se dice *We don't need to*." },
+          { "en": "We don't need to. Clearing the cache will fix it, and I'll add that step to the deploy script.", "es": "No hace falta. Limpiar la caché lo arregla, y agregaré ese paso al script de despliegue.", "correcta": true, "explicacion": "**don't need to** = no hace falta. Das la solución inmediata y una mejora para que no se repita." },
+          { "en": "Let's roll back everything from the last month, just in case.", "es": "", "correcta": false, "explicacion": "Es exagerar (*overreact*): revertir un mes de trabajo por un problema de caché crea problemas nuevos." }
+        ] }
+    ] }
+]

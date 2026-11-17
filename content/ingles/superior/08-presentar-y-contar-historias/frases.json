@@ -1,0 +1,194 @@
+[
+  {
+    "id": "en-superior-08-f01",
+    "en": "Let me walk you through what we built this sprint.",
+    "es": "Déjenme explicarles paso a paso lo que construimos este sprint.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f02",
+    "en": "Here's what I'll cover today: the problem, the fix and the results.",
+    "es": "Esto es lo que voy a cubrir hoy: el problema, la solución y los resultados.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f03",
+    "en": "First off, thanks for joining on such short notice.",
+    "es": "Para empezar, gracias por conectarse con tan poca anticipación."
+  },
+  {
+    "id": "en-superior-08-f04",
+    "en": "Moving on to the second part, let's look at performance.",
+    "es": "Pasando a la segunda parte, veamos el rendimiento.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f05",
+    "en": "This brings me to the biggest challenge we faced.",
+    "es": "Esto me lleva al mayor desafío que enfrentamos.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f06",
+    "en": "Building on that, we also added offline support.",
+    "es": "A partir de eso, también agregamos soporte sin conexión."
+  },
+  {
+    "id": "en-superior-08-f07",
+    "en": "As you can see, the page now loads in under two seconds.",
+    "es": "Como pueden ver, la página ahora carga en menos de dos segundos.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f08",
+    "en": "To put it in perspective, that's about a thousand orders a day.",
+    "es": "Para ponerlo en contexto, son unos mil pedidos al día."
+  },
+  {
+    "id": "en-superior-08-f09",
+    "en": "To wrap up, the key takeaway is that small fixes add up.",
+    "es": "Para cerrar, la idea clave es que los arreglos pequeños se van sumando.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f10",
+    "en": "The bottom line is that users finish checkout faster.",
+    "es": "En resumidas cuentas, los usuarios terminan el checkout más rápido."
+  },
+  {
+    "id": "en-superior-08-f11",
+    "en": "The stakes were high because the client was about to cancel.",
+    "es": "Había mucho en juego porque el cliente estaba a punto de cancelar.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f12",
+    "en": "I was asked to take ownership of the checkout errors.",
+    "es": "Me pidieron hacerme cargo de los errores del checkout.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f13",
+    "en": "I traced the errors to a race condition, so I rewrote the request logic.",
+    "es": "Rastreé los errores hasta una condición de carrera, así que reescribí la lógica de las peticiones.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f14",
+    "en": "As a result, checkout errors dropped by sixty percent.",
+    "es": "Como resultado, los errores del checkout bajaron un sesenta por ciento.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f15",
+    "en": "In hindsight, I'd have added monitoring much earlier.",
+    "es": "En retrospectiva, habría agregado monitoreo mucho antes.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f16",
+    "en": "The turning point was when we finally reproduced the bug.",
+    "es": "El punto de quiebre fue cuando por fin reprodujimos el bug."
+  },
+  {
+    "id": "en-superior-08-f17",
+    "en": "Long story short, it was a time zone issue.",
+    "es": "Para no hacerla larga, era un problema de zona horaria."
+  },
+  {
+    "id": "en-superior-08-f18",
+    "en": "Fast-forward two weeks, and the error rate was almost zero.",
+    "es": "Dos semanas después, la tasa de errores era casi cero."
+  },
+  {
+    "id": "en-superior-08-f19",
+    "en": "It turns out the cache was never being cleared.",
+    "es": "Resulta que la caché nunca se estaba limpiando."
+  },
+  {
+    "id": "en-superior-08-f20",
+    "en": "We had to pivot when the API we depended on shut down.",
+    "es": "Tuvimos que cambiar de rumbo cuando cerró la API de la que dependíamos."
+  },
+  {
+    "id": "en-superior-08-f21",
+    "en": "Can you quantify the impact of that change?",
+    "es": "¿Puedes cuantificar el impacto de ese cambio?",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f22",
+    "en": "I'm glad you asked, because that was the hardest part.",
+    "es": "Qué bueno que lo preguntas, porque esa fue la parte más difícil."
+  },
+  {
+    "id": "en-superior-08-f23",
+    "en": "I don't have that number in front of me.",
+    "es": "No tengo esa cifra a la mano.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f24",
+    "en": "Let me get back to you on that by the end of the day.",
+    "es": "Déjame confirmarlo y te respondo antes de que termine el día.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f25",
+    "en": "To your point, the first version was slower, and here's what we changed.",
+    "es": "Sobre lo que dices, la primera versión era más lenta, y esto es lo que cambiamos.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f26",
+    "en": "That's a fair question, so let me think about it for a second.",
+    "es": "Es una pregunta justa, así que déjame pensarlo un segundo.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f27",
+    "en": "The short answer is yes, but there's a catch.",
+    "es": "La respuesta corta es sí, pero hay un detalle."
+  },
+  {
+    "id": "en-superior-08-f28",
+    "en": "Let's save the remaining questions for the Q&A.",
+    "es": "Dejemos las demás preguntas para la ronda de preguntas."
+  },
+  {
+    "id": "en-superior-08-f29",
+    "en": "Here's a quick recap before we move on.",
+    "es": "Aquí va un resumen rápido antes de seguir."
+  },
+  {
+    "id": "en-superior-08-f30",
+    "en": "Sorry, I went off on a tangent there.",
+    "es": "Perdón, ahí me fui por las ramas."
+  },
+  {
+    "id": "en-superior-08-f31",
+    "en": "Replace filler words with a short, silent pause.",
+    "es": "Cambia las muletillas por una pausa corta y en silencio."
+  },
+  {
+    "id": "en-superior-08-f32",
+    "en": "That's a bit of a loaded question, but I'll answer it.",
+    "es": "Esa es una pregunta un poco tramposa, pero la voy a responder."
+  },
+  {
+    "id": "en-superior-08-f33",
+    "en": "Let me set the scene: it was the week before Black Friday.",
+    "es": "Déjame ponerte en contexto: era la semana antes del Black Friday.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-08-f34",
+    "en": "A good segue makes the next slide feel natural.",
+    "es": "Una buena transición hace que la siguiente diapositiva se sienta natural."
+  },
+  {
+    "id": "en-superior-08-f35",
+    "en": "Tom will field questions while I share my screen.",
+    "es": "Tom va a responder las preguntas mientras yo comparto mi pantalla."
+  }
+]

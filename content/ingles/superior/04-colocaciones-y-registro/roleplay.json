@@ -1,0 +1,29 @@
+[
+  { "id": "en-superior-04-r01", "titulo": "Un cliente molesto", "situacion": "El pago de la tienda falla desde la mañana. El señor Brooks, el cliente, te llama muy molesto.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Mr. Brooks", "en": "Our users have been complaining about the checkout all morning.", "es": "Nuestros usuarios se han quejado del pago toda la mañana." },
+      { "opciones": [
+          { "en": "I'm sorry about that. We're aware of the issue, and we're addressing it right now.", "es": "Lo siento. Estamos al tanto del problema y nos estamos ocupando de él ahora mismo.", "correcta": true, "explicacion": "Te disculpas, confirmas que lo sabes y usas *address* para mostrar que ya están actuando. Registro profesional y tranquilo." },
+          { "en": "Yeah, we know, it's a mess. We're on it.", "es": "", "correcta": false, "explicacion": "Demasiado informal con un cliente molesto, y *it's a mess* lo alarma todavía más." },
+          { "en": "As per our documentation, the checkout works as expected.", "es": "", "correcta": false, "explicacion": "Niega el problema y suena a \"como ya le dijimos\". Con un cliente molesto empeora todo." }
+        ] },
+      { "quien": "Mr. Brooks", "en": "When will it be fixed?", "es": "¿Cuándo estará arreglado?" },
+      { "opciones": [
+          { "en": "It's too early to draw any conclusions, so I can't say anything.", "es": "", "correcta": false, "explicacion": "La colocación es correcta, pero no das ningún compromiso. El cliente necesita algo concreto." },
+          { "en": "We expect a fix within two hours, and I'll send you an update at noon either way.", "es": "Esperamos tener el arreglo en dos horas, y le enviaré una actualización al mediodía de todas formas.", "correcta": true, "explicacion": "Das un plazo realista y un compromiso que sí controlas: la actualización al mediodía." },
+          { "en": "ASAP, don't worry about it.", "es": "", "correcta": false, "explicacion": "*ASAP* no es una fecha, y *don't worry about it* le quita importancia a su queja." }
+        ] },
+      { "quien": "Mr. Brooks", "en": "This is the second time this month. I'm not happy.", "es": "Es la segunda vez este mes. No estoy contento." },
+      { "opciones": [
+          { "en": "To be honest, the first one wasn't our fault.", "es": "", "correcta": false, "explicacion": "Defensivo. Aunque sea verdad, no es el momento: el cliente quiere ver responsabilidad." },
+          { "en": "We sincerely regret any inconvenience this may have caused.", "es": "", "correcta": false, "explicacion": "Formal de más para una llamada: suena a plantilla de correo y parece que no lo escuchas." },
+          { "en": "That's completely fair. I'll take ownership of a full review so it doesn't happen again.", "es": "Es totalmente comprensible. Yo me haré cargo de una revisión completa para que no vuelva a pasar.", "correcta": true, "explicacion": "Le das la razón sin excusas y con *take ownership* muestras que hay una persona responsable." }
+        ] },
+      { "quien": "Mr. Brooks", "en": "Okay. Please send me the details in writing.", "es": "Ok. Envíeme los detalles por escrito, por favor." },
+      { "opciones": [
+          { "en": "Sure, shoot me a message if you have any questions.", "es": "", "correcta": false, "explicacion": "Informal, y además no responde: él te pidió que tú le envíes los detalles." },
+          { "en": "Of course. I'll email you a summary this afternoon, including the steps we're taking.", "es": "Por supuesto. Le enviaré un resumen por correo esta tarde, con los pasos que estamos tomando.", "correcta": true, "explicacion": "Confirmas qué vas a enviar y cuándo. Registro neutro y profesional." },
+          { "en": "Kindly note that all the details are in our documentation.", "es": "", "correcta": false, "explicacion": "*Kindly note* suena seco y lo mandas a buscar solo la información." }
+        ] }
+    ] }
+]

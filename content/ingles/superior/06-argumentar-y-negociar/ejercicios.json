@@ -1,0 +1,172 @@
+[
+  {
+    "id": "en-superior-06-e01",
+    "pregunta": "\"Granted, it's faster. ___, it's much harder to test.\"",
+    "opciones": [
+      "Granted",
+      "Therefore",
+      "That said",
+      "Because of that"
+    ],
+    "correcta": 2,
+    "explicacion": "**Granted** concede un punto y **that said** introduce el contraste: \"es cierto que..., aun así...\". *Therefore* anuncia una consecuencia, y aquí la segunda idea se opone a la primera."
+  },
+  {
+    "id": "en-superior-06-e02",
+    "pregunta": "Un compañero te responde: **\"I take your point.\"** ¿Qué significa?",
+    "opciones": [
+      "Entiendo tu argumento y lo acepto en parte",
+      "Me llevo tu idea para presentarla yo",
+      "No estoy de acuerdo contigo en nada"
+    ],
+    "correcta": 0,
+    "explicacion": "**I take your point** reconoce que tu argumento tiene sentido, aunque casi siempre viene un *but*. La trampa es leer *take* como \"llevarse\"."
+  },
+  {
+    "id": "en-superior-06-e03",
+    "pregunta": "¿Cuál es la forma más diplomática de objetar en una reunión con un equipo de EE. UU.?",
+    "opciones": [
+      "I see it a bit differently. My concern is the migration cost.",
+      "With all due respect, that's a bad idea.",
+      "No, you're wrong about the cost."
+    ],
+    "correcta": 0,
+    "explicacion": "Nombrar tu preocupación (*my concern is*) objeta sin atacar. **With all due respect** parece cortés, pero en inglés anuncia un golpe y suena más agresivo que en español."
+  },
+  {
+    "id": "en-superior-06-e04",
+    "pregunta": "Recibes una oferta y quieres más sueldo. ¿Qué frase suena firme pero cortés?",
+    "opciones": [
+      "Sorry, but maybe, if it's possible, could it be a little more?",
+      "Based on the market rate, I was hoping for something closer to 4,000.",
+      "I want 4,000 or I'm not interested."
+    ],
+    "correcta": 1,
+    "explicacion": "Das un dato (*market rate*) y una cifra concreta con *I was hoping for*. Disculparte y dudar te quita fuerza; un ultimátum cierra la conversación."
+  },
+  {
+    "id": "en-superior-06-e05",
+    "pregunta": "\"I **was hoping** for something closer to 4,000.\" ¿Por qué *was hoping* y no *hope*?",
+    "opciones": [
+      "Porque ya no quiere ese sueldo",
+      "El pasado continuo suaviza el pedido sin sonar inseguro",
+      "Porque la oferta llegó en el pasado"
+    ],
+    "correcta": 1,
+    "explicacion": "En inglés, el pasado continuo crea distancia y suena más cortés: *I was hoping*, *I was wondering*. No habla del pasado: es un pedido de ahora."
+  },
+  {
+    "id": "en-superior-06-e06",
+    "pregunta": "Could we ___ the deadline by two days?",
+    "opciones": [
+      "prolong",
+      "enlarge",
+      "lengthen",
+      "extend"
+    ],
+    "correcta": 3,
+    "explicacion": "Una fecha límite se **extend**. *Prolong* es el calco de \"prorrogar\" o \"prolongar\" y se usa para algo que dura (*prolong a meeting*), no para una fecha."
+  },
+  {
+    "id": "en-superior-06-e07",
+    "pregunta": "Friday is a hard deadline and the team is already full. ¿Cuál es la respuesta más honesta?",
+    "opciones": [
+      "We'll work harder and do everything by Friday.",
+      "We can hit Friday if we drop the export feature.",
+      "Friday is impossible, sorry."
+    ],
+    "correcta": 1,
+    "explicacion": "Si la fecha no se mueve, algo tiene que ceder: propones recortar el alcance. Prometer trabajar más es una promesa que probablemente no cumplas, y un no sin alternativa cierra la conversación."
+  },
+  {
+    "id": "en-superior-06-e08",
+    "pregunta": "\"No remote work would be a ___ for me.\"",
+    "opciones": [
+      "breaking point",
+      "deal-breaker",
+      "deal-maker",
+      "break point"
+    ],
+    "correcta": 1,
+    "explicacion": "**Deal-breaker** es algo que, por sí solo, te hace rechazar un acuerdo. *Breaking point* es el límite de lo que aguantas, otra idea."
+  },
+  {
+    "id": "en-superior-06-e09",
+    "pregunta": "¿Qué hace **granted** al inicio de \"Granted, the old version is stable\"?",
+    "opciones": [
+      "Da las gracias",
+      "Concede un punto antes de contradecirlo",
+      "Asegura que algo está garantizado"
+    ],
+    "correcta": 1,
+    "explicacion": "**Granted** = es cierto, lo concedo. La trampa es confundirlo con *guaranteed* (garantizado) o con *take for granted* (dar por sentado)."
+  },
+  {
+    "id": "en-superior-06-e10",
+    "pregunta": "The offer is contingent ___ a background check.",
+    "opciones": [
+      "to",
+      "of",
+      "in",
+      "on"
+    ],
+    "correcta": 3,
+    "explicacion": "Se dice **contingent on** (o *upon*). *To* sale del español \"condicionado **a**\"."
+  },
+  {
+    "id": "en-superior-06-e11",
+    "pregunta": "Tu líder quiere agregar una funcionalidad sin mover la fecha. ¿Cómo lo planteas?",
+    "opciones": [
+      "Okay, I'll stay late every day.",
+      "That's not my problem, the date is yours.",
+      "Happy to add it. What should we move to the next sprint to make room?"
+    ],
+    "correcta": 2,
+    "explicacion": "Aceptas y pones la decisión sobre la mesa: si entra algo, algo sale. Quedarte hasta tarde sin decir nada es insostenible, y la tercera es brusca."
+  },
+  {
+    "id": "en-superior-06-e12",
+    "pregunta": "¿Cuál de estas frases es la más formal, propia de un correo o un documento?",
+    "opciones": [
+      "Whatever, the deadline stays the same.",
+      "Be that as it may, the deadline remains unchanged.",
+      "Anyway, deadline's the same, so yeah."
+    ],
+    "correcta": 1,
+    "explicacion": "**Be that as it may** (sea como sea) y *remains unchanged* son de registro formal. *Whatever* puede sonar a desinterés, y la tercera es oral e informal."
+  },
+  {
+    "id": "en-superior-06-e13",
+    "pregunta": "La empresa no puede subir el sueldo base. ¿Qué pides con sentido?",
+    "opciones": [
+      "Then could you lower the base salary a little?",
+      "If the base salary is fixed, could we revisit the signing bonus?",
+      "Then I accept, I don't want to bother you."
+    ],
+    "correcta": 1,
+    "explicacion": "Si el sueldo base no se mueve, negocias otra parte del paquete. Aceptar por miedo a molestar es un error común: en EE. UU. negociar una oferta es normal y esperado."
+  },
+  {
+    "id": "en-superior-06-e14",
+    "pregunta": "En una discusión, **\"I hear you\"** significa:",
+    "opciones": [
+      "Te escucho bien por el micrófono",
+      "Estoy de acuerdo y cambio de opinión",
+      "Te entiendo, reconozco lo que dices"
+    ],
+    "correcta": 2,
+    "explicacion": "**I hear you** reconoce el punto del otro sin aceptarlo. Suele seguir *but* o *and I'd still...*."
+  },
+  {
+    "id": "en-superior-06-e15",
+    "pregunta": "Let's meet ___: two features now and one next sprint.",
+    "opciones": [
+      "halfway",
+      "in the middle way",
+      "at half",
+      "half"
+    ],
+    "correcta": 0,
+    "explicacion": "La expresión es **meet halfway**: encontrarse a mitad de camino. *In the middle way* es un calco que no existe."
+  }
+]

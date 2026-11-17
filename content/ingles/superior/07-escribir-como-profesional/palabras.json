@@ -1,0 +1,387 @@
+[
+  {
+    "id": "en-superior-07-w01",
+    "en": "whereas",
+    "es": "mientras que (para contrastar)",
+    "pron": "ueráz",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "Version one used REST, whereas version two uses GraphQL.",
+      "es": "La versión uno usaba REST, mientras que la dos usa GraphQL."
+    }
+  },
+  {
+    "id": "en-superior-07-w02",
+    "en": "thereby",
+    "es": "con lo cual, de ese modo",
+    "pron": "derbái",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "We cache the response, thereby reducing API calls.",
+      "es": "Cacheamos la respuesta, con lo cual reducimos las llamadas a la API."
+    }
+  },
+  {
+    "id": "en-superior-07-w03",
+    "en": "notwithstanding",
+    "es": "a pesar de (muy formal)",
+    "pron": "natuizstándin",
+    "tipo": "preposicion",
+    "ejemplo": {
+      "en": "Notwithstanding these risks, we recommend the upgrade.",
+      "es": "A pesar de estos riesgos, recomendamos la actualización."
+    }
+  },
+  {
+    "id": "en-superior-07-w04",
+    "en": "hence",
+    "es": "de ahí, por eso",
+    "pron": "jéns",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "The old API is slow; hence the cache.",
+      "es": "La API vieja es lenta; de ahí la caché."
+    }
+  },
+  {
+    "id": "en-superior-07-w05",
+    "en": "moreover",
+    "es": "además (añade un argumento más)",
+    "pron": "moróuver",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "The fix is simple. Moreover, it has no side effects.",
+      "es": "El arreglo es simple. Además, no tiene efectos secundarios."
+    }
+  },
+  {
+    "id": "en-superior-07-w06",
+    "en": "nevertheless",
+    "es": "aun así, sin embargo",
+    "pron": "neverdelés",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "The tests pass; nevertheless, we need a manual check.",
+      "es": "Los tests pasan; aun así, necesitamos una revisión manual."
+    }
+  },
+  {
+    "id": "en-superior-07-w07",
+    "en": "albeit",
+    "es": "aunque (seguido de una idea corta)",
+    "pron": "olbíit",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "It works, albeit slowly.",
+      "es": "Funciona, aunque lento."
+    }
+  },
+  {
+    "id": "en-superior-07-w08",
+    "en": "in light of",
+    "es": "a la luz de, considerando",
+    "pron": "in láit ov",
+    "tipo": "preposicion",
+    "ejemplo": {
+      "en": "In light of the outage, we're pausing releases.",
+      "es": "Considerando la caída, estamos pausando los releases."
+    }
+  },
+  {
+    "id": "en-superior-07-w09",
+    "en": "with respect to",
+    "es": "con respecto a",
+    "pron": "uíz rispékt tu",
+    "tipo": "preposicion",
+    "ejemplo": {
+      "en": "With respect to security, both options are equal.",
+      "es": "Con respecto a la seguridad, ambas opciones son iguales."
+    }
+  },
+  {
+    "id": "en-superior-07-w10",
+    "en": "whereby",
+    "es": "por el cual, mediante el cual",
+    "pron": "uerbái",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "We added a process whereby every RFC gets two reviewers.",
+      "es": "Agregamos un proceso por el cual cada RFC tiene dos revisores."
+    }
+  },
+  {
+    "id": "en-superior-07-w11",
+    "en": "conversely",
+    "es": "a la inversa, por el contrario",
+    "pron": "kanvérsli",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "Caching speeds up reads. Conversely, it can slow down writes.",
+      "es": "La caché acelera las lecturas. Por el contrario, puede hacer más lentas las escrituras."
+    }
+  },
+  {
+    "id": "en-superior-07-w12",
+    "en": "the need for",
+    "es": "la necesidad de",
+    "pron": "de níid for",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "This removes the need for a second request.",
+      "es": "Esto elimina la necesidad de una segunda petición."
+    }
+  },
+  {
+    "id": "en-superior-07-w13",
+    "en": "subsequently",
+    "es": "posteriormente",
+    "pron": "sábsekuentli",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "The bug was subsequently fixed in version four.",
+      "es": "Posteriormente, el bug se corrigió en la versión cuatro."
+    }
+  },
+  {
+    "id": "en-superior-07-w14",
+    "en": "a reduction in",
+    "es": "una reducción de",
+    "pron": "a ridákshon in",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We saw a reduction in load time.",
+      "es": "Vimos una reducción del tiempo de carga."
+    }
+  },
+  {
+    "id": "en-superior-07-w15",
+    "en": "the implementation of",
+    "es": "la implementación de",
+    "pron": "di implementéishon ov",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The implementation of the cache took two days.",
+      "es": "La implementación de la caché tomó dos días."
+    }
+  },
+  {
+    "id": "en-superior-07-w16",
+    "en": "the removal of",
+    "es": "la eliminación de",
+    "pron": "de rimúuval ov",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The removal of the old API is planned for May.",
+      "es": "La eliminación de la API vieja está planificada para mayo."
+    }
+  },
+  {
+    "id": "en-superior-07-w17",
+    "en": "the adoption of",
+    "es": "la adopción de",
+    "pron": "di adápshon ov",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The adoption of TypeScript reduced runtime errors.",
+      "es": "La adopción de TypeScript redujo los errores en tiempo de ejecución."
+    }
+  },
+  {
+    "id": "en-superior-07-w18",
+    "en": "rationale",
+    "es": "fundamento (de una decisión)",
+    "pron": "rashonál",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The rationale is explained in the next section.",
+      "es": "El fundamento se explica en la siguiente sección."
+    }
+  },
+  {
+    "id": "en-superior-07-w19",
+    "en": "RFC",
+    "es": "propuesta técnica para comentar (request for comments)",
+    "pron": "ar ef síi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I wrote an RFC for the new routing system.",
+      "es": "Escribí un RFC para el nuevo sistema de rutas."
+    }
+  },
+  {
+    "id": "en-superior-07-w20",
+    "en": "jargon",
+    "es": "jerga (técnica o corporativa)",
+    "pron": "yárgon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Avoid jargon in the summary.",
+      "es": "Evita la jerga en el resumen."
+    }
+  },
+  {
+    "id": "en-superior-07-w21",
+    "en": "non-goals",
+    "es": "lo que el proyecto no busca resolver",
+    "pron": "nan góulz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Rewriting the mobile app is listed under non-goals.",
+      "es": "Reescribir la app móvil está en la lista de lo que no se busca resolver."
+    }
+  },
+  {
+    "id": "en-superior-07-w22",
+    "en": "alternatives considered",
+    "es": "alternativas evaluadas (sección de un RFC)",
+    "pron": "oltérnativz konsíderd",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Each option is compared under alternatives considered.",
+      "es": "Cada opción se compara en la sección de alternativas evaluadas."
+    }
+  },
+  {
+    "id": "en-superior-07-w23",
+    "en": "open questions",
+    "es": "preguntas pendientes",
+    "pron": "óupen kuéschonz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Please add your doubts to the open questions.",
+      "es": "Por favor, agrega tus dudas a las preguntas pendientes."
+    }
+  },
+  {
+    "id": "en-superior-07-w24",
+    "en": "succinct",
+    "es": "breve y preciso",
+    "pron": "saksínkt",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Keep the summary succinct.",
+      "es": "Mantén el resumen breve y preciso."
+    }
+  },
+  {
+    "id": "en-superior-07-w25",
+    "en": "wordy",
+    "es": "con palabras de más",
+    "pron": "uérdi",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "This paragraph is too wordy.",
+      "es": "Este párrafo tiene palabras de más."
+    }
+  },
+  {
+    "id": "en-superior-07-w26",
+    "en": "redundant",
+    "es": "que sobra, redundante",
+    "pron": "ridándant",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The second sentence is redundant.",
+      "es": "La segunda oración sobra."
+    }
+  },
+  {
+    "id": "en-superior-07-w27",
+    "en": "passive voice",
+    "es": "voz pasiva",
+    "pron": "pásiv vóis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The passive voice hides who did what.",
+      "es": "La voz pasiva esconde quién hizo qué."
+    }
+  },
+  {
+    "id": "en-superior-07-w28",
+    "en": "active voice",
+    "es": "voz activa",
+    "pron": "áktiv vóis",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Write PR descriptions in the active voice.",
+      "es": "Escribe las descripciones de los PRs en voz activa."
+    }
+  },
+  {
+    "id": "en-superior-07-w29",
+    "en": "nominalization",
+    "es": "sustantivación",
+    "pron": "naminalaizéishon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Too much nominalization makes a text heavy.",
+      "es": "Demasiada sustantivación hace pesado un texto."
+    }
+  },
+  {
+    "id": "en-superior-07-w30",
+    "en": "utilize",
+    "es": "utilizar (suena pomposo: mejor use)",
+    "pron": "iútilaiz",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Don't write utilize when use works.",
+      "es": "No escribas utilize cuando use funciona."
+    }
+  },
+  {
+    "id": "en-superior-07-w31",
+    "en": "ensure",
+    "es": "asegurar, garantizar",
+    "pron": "inshúr",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "These tests ensure backward compatibility.",
+      "es": "Estos tests aseguran la compatibilidad con versiones anteriores."
+    }
+  },
+  {
+    "id": "en-superior-07-w32",
+    "en": "skim",
+    "es": "leer por encima",
+    "pron": "skím",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Most reviewers only skim the description.",
+      "es": "La mayoría de revisores solo lee la descripción por encima."
+    }
+  },
+  {
+    "id": "en-superior-07-w33",
+    "en": "for the sake of",
+    "es": "en aras de, para (mayor)",
+    "pron": "for de séik ov",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "For the sake of brevity, I've omitted the error handling.",
+      "es": "Para ser breve, omití el manejo de errores."
+    }
+  },
+  {
+    "id": "en-superior-07-w34",
+    "en": "to that end",
+    "es": "con ese fin",
+    "pron": "tu dát énd",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "We need faster builds. To that end, we're moving to Vite.",
+      "es": "Necesitamos builds más rápidos. Con ese fin, nos estamos pasando a Vite."
+    }
+  },
+  {
+    "id": "en-superior-07-w35",
+    "en": "respectively",
+    "es": "respectivamente",
+    "pron": "rispéktivli",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "The old and new builds take ten and two minutes, respectively.",
+      "es": "El build viejo y el nuevo toman diez y dos minutos, respectivamente."
+    }
+  }
+]

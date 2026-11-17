@@ -1,0 +1,6 @@
+[
+  { "id": "en-avanzado-08-c01", "es": "Debe de ser la caché.", "natural": "It must be the cache.", "calco": "It must to be the cache.", "explicacion": "Después de un modal (**must**, might, can't) va el verbo base sin *to*." },
+  { "id": "en-avanzado-08-c02", "es": "No puede ser verdad.", "natural": "It can't be true.", "calco": "It mustn't be true.", "explicacion": "Para deducir que algo es casi imposible se usa **can't**. *mustn't* es prohibición: \"no debe\" en el sentido de \"está prohibido\"." },
+  { "id": "en-avanzado-08-c03", "es": "Debí preguntarte.", "natural": "I should have asked you.", "calco": "I had to ask you.", "explicacion": "\"Debí\" (lo correcto, que no hiciste) es **should have + participio**. *I had to ask you* significa \"tuve que preguntarte\", y que sí lo hiciste." },
+  { "id": "en-avanzado-08-c04", "es": "Seguro que se olvidó.", "natural": "He must have forgotten.", "calco": "Sure he forgot.", "explicacion": "\"Seguro que\" para deducir no es *sure*: se dice con **must have + participio**. *Sure* solo funciona en *I'm sure he forgot*." }
+]

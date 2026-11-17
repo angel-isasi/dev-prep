@@ -1,0 +1,30 @@
+[
+  { "id": "en-avanzado-02-r01", "titulo": "Un error que cometiste", "situacion": "Mike, de RR. HH., te hace la pregunta que más miedo da: que cuentes un error de trabajo.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Mike", "en": "Tell me about a mistake you made at work.", "es": "Cuéntame de un error que cometiste en el trabajo." },
+      { "opciones": [
+          { "en": "I don't really make mistakes. I'm a perfectionist.", "es": "", "correcta": false, "explicacion": "Es la respuesta que todo entrevistador ha oído mil veces: suena falsa y evita la pregunta." },
+          { "en": "Last year, I deployed a change without running the full test suite, and it broke the checkout for an hour.", "es": "El año pasado desplegué un cambio sin correr todos los tests y rompió el proceso de pago durante una hora.", "correcta": true, "explicacion": "Un error real, concreto y con su impacto. Eso es lo que buscan: honestidad." },
+          { "en": "My lead gave me a bad task, so it wasn't my fault.", "es": "", "correcta": false, "explicacion": "Culpar a otros es una señal de alarma en una entrevista. Te preguntaron por **tu** error." }
+        ] },
+      { "quien": "Mike", "en": "What would you have done differently?", "es": "¿Qué habrías hecho diferente?" },
+      { "opciones": [
+          { "en": "If I would have run the tests, the bug wouldn't happen.", "es": "", "correcta": false, "explicacion": "*Would* no va en la parte del if (*If I had run*), y el resultado en el pasado es *wouldn't have happened*." },
+          { "en": "Nothing. Bugs happen to everyone.", "es": "", "correcta": false, "explicacion": "Puede ser verdad, pero no muestra que aprendiste algo, que es justo lo que quieren ver." },
+          { "en": "I would have run the tests, even if it took longer, and asked someone to review the deploy.", "es": "Habría corrido los tests, aunque tomara más tiempo, y le habría pedido a alguien que revisara el despliegue.", "correcta": true, "explicacion": "**Would have + participio** para lo que harías distinto, con dos acciones concretas." }
+        ] },
+      { "quien": "Mike", "en": "And what did you learn from it?", "es": "¿Y qué aprendiste de eso?" },
+      { "opciones": [
+          { "en": "I learned that skipping steps to save time usually costs more time.", "es": "Aprendí que saltarse pasos para ahorrar tiempo suele costar más tiempo.", "correcta": true, "explicacion": "Una lección general y madura, que sirve más allá de ese error." },
+          { "en": "I learned that I must have run the tests.", "es": "", "correcta": false, "explicacion": "*Must have run* es una deducción (seguro que los corrí), no una obligación. Para \"debí\" es *I should have run*." },
+          { "en": "That my boss gets really angry, haha.", "es": "", "correcta": false, "explicacion": "Demasiado informal, y deja mal a tu jefe y a ti." }
+        ] },
+      { "quien": "Mike", "en": "Looking back, do you think it made you a better developer?", "es": "Mirando atrás, ¿crees que te hizo mejor desarrolladora?" },
+      { "opciones": [
+          { "en": "No, it was just bad luck.", "es": "", "correcta": false, "explicacion": "Contradice todo lo que dijiste antes: si fue solo mala suerte, no hay nada que aprender." },
+          { "en": "Definitely. If it didn't happen, I wouldn't be so careful today.", "es": "", "correcta": false, "explicacion": "El error ya pasó, así que la parte del if va con *had + participio*: *If it hadn't happened*." },
+          { "en": "Definitely. If it hadn't happened, I wouldn't be so careful with deploys today.", "es": "Definitivamente. Si no hubiera pasado, hoy no sería tan cuidadosa con los despliegues.", "correcta": true, "explicacion": "Condicional mixto: un pasado distinto (*hadn't happened*) cambiaría tu presente (*wouldn't be... today*)." }
+        ] },
+      { "quien": "Mike", "en": "That's a very honest answer. Thank you.", "es": "Es una respuesta muy honesta. Gracias." }
+    ] }
+]

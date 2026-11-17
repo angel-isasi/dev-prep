@@ -1,0 +1,6 @@
+[
+  { "id": "en-avanzado-02-c01", "es": "Si lo hubiera sabido, te lo habría dicho.", "natural": "If I'd known, I would have told you.", "calco": "If I would have known, I would have told you.", "explicacion": "\"Si hubiera sabido\" se traduce con **had + participio** (*If I'd known*). *Would* nunca va en la parte del if." },
+  { "id": "en-avanzado-02-c02", "es": "Debí probarlo.", "natural": "I should have tested it.", "calco": "I must have tested it.", "explicacion": "\"Debí\" (y no lo hice) es **should have**. *Must have tested* significa \"seguro que lo probé\"." },
+  { "id": "en-avanzado-02-c03", "es": "Ojalá hubiera estudiado más.", "natural": "I wish I'd studied more.", "calco": "I wish I would have studied more.", "explicacion": "Después de **I wish**, para el pasado va **had + participio**. *I wish I would have* se oye, pero se considera incorrecto." },
+  { "id": "en-avanzado-02-c04", "es": "No lo hice a propósito.", "natural": "I didn't do it on purpose.", "calco": "I didn't do it by purpose.", "explicacion": "\"A propósito\" es **on purpose**. *By* va en lo contrario: *by mistake*, *by accident*." }
+]

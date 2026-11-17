@@ -1,0 +1,170 @@
+[
+  {
+    "id": "en-superior-08-e01",
+    "pregunta": "Empiezas una demo. ¿Qué frase guía mejor al público?",
+    "opciones": [
+      "I'm going to explain you what we built this sprint.",
+      "Let me walk you through what we built this sprint.",
+      "Now I will tell you all the things that we have been doing."
+    ],
+    "correcta": 1,
+    "explicacion": "**Let me walk you through** anuncia que vas a ir paso a paso. *Explain you* es el calco de \"explicarte\": en inglés es *explain it to you*. La tercera es larga y no dice qué viene."
+  },
+  {
+    "id": "en-superior-08-e02",
+    "pregunta": "Terminaste la parte de diseño y pasas a rendimiento. ¿Qué dices?",
+    "opciones": [
+      "Moving on to performance, ...",
+      "Passing to performance, ...",
+      "Changing the theme, ..."
+    ],
+    "correcta": 0,
+    "explicacion": "**Moving on to** + el siguiente tema. *Passing to* es el calco de \"pasando a\", y *changing the theme* confunde *theme* (tema visual) con *topic*. *Changing the subject* sí existe, pero suena a que esquivas un tema incómodo."
+  },
+  {
+    "id": "en-superior-08-e03",
+    "pregunta": "En una respuesta STAR, ¿qué frase muestra mejor tu aporte?",
+    "opciones": [
+      "We worked really hard as a team and fixed everything.",
+      "I traced the bug to the cache, so I proposed clearing it on every deploy.",
+      "The bug was fixed and everything was good."
+    ],
+    "correcta": 1,
+    "explicacion": "El entrevistador quiere saber qué hiciste **tú** y por qué: *I traced..., so I proposed...* Con *we* y con la pasiva desapareces de tu propia historia."
+  },
+  {
+    "id": "en-superior-08-e04",
+    "pregunta": "¿Cuál es el mejor cierre para el Result de una historia STAR?",
+    "opciones": [
+      "The result was very good and everybody was happy.",
+      "And that's it, basically.",
+      "Checkout errors dropped by sixty percent in two weeks."
+    ],
+    "correcta": 2,
+    "explicacion": "Un resultado se mide: una cifra y un plazo. *Very good* y *everybody was happy* no le dicen nada al entrevistador."
+  },
+  {
+    "id": "en-superior-08-e05",
+    "pregunta": "En una presentación te preguntan por una cifra que no recuerdas. ¿Qué haces?",
+    "opciones": [
+      "I don't have that number in front of me. Let me get back to you on that.",
+      "It was around ninety percent, more or less.",
+      "I don't know. Next question."
+    ],
+    "correcta": 0,
+    "explicacion": "Admitir que no tienes el dato y comprometerte a responder da confianza. Inventar una cifra es mucho peor: si alguien la revisa, pierdes credibilidad."
+  },
+  {
+    "id": "en-superior-08-e06",
+    "pregunta": "Alguien del público dice: \"Wasn't the first version slower?\" Y tiene razón. ¿Qué respondes?",
+    "opciones": [
+      "To your point, it was. Here's what we changed to fix it.",
+      "No, that's not really true.",
+      "With all due respect, you didn't understand the demo."
+    ],
+    "correcta": 0,
+    "explicacion": "**To your point** reconoce lo que dijo y te permite redirigir hacia la solución. Negar un hecho o atacar a quien pregunta destruye la confianza del público."
+  },
+  {
+    "id": "en-superior-08-e07",
+    "pregunta": "\"In hindsight, I ___ monitoring earlier.\"",
+    "opciones": [
+      "would add",
+      "had added",
+      "will have added",
+      "would have added"
+    ],
+    "correcta": 3,
+    "explicacion": "Hablas de algo que no hiciste en el pasado: **would have** + participio. *Would add* es la trampa porque en español decimos \"agregaría\"."
+  },
+  {
+    "id": "en-superior-08-e08",
+    "pregunta": "¿Para qué sirve **long story short** en un relato?",
+    "opciones": [
+      "Para empezar una historia con todo el contexto",
+      "Para pedir que te dejen hablar más",
+      "Para saltarte detalles e ir directo al resultado"
+    ],
+    "correcta": 2,
+    "explicacion": "**Long story short** = para no hacerla larga. Corta el relato y va al desenlace: *Long story short, it was a time zone issue.*"
+  },
+  {
+    "id": "en-superior-08-e09",
+    "pregunta": "¿Cuál es la forma más natural de ganar tiempo ante una pregunta difícil?",
+    "opciones": [
+      "Eeeh... well... like... you know...",
+      "Can you ask me something else?",
+      "That's a fair question. Let me think about it for a second."
+    ],
+    "correcta": 2,
+    "explicacion": "Nombrar la pausa (*let me think about it for a second*) suena seguro. Las muletillas suenan a nervios, y pedir otra pregunta suena a que esquivas."
+  },
+  {
+    "id": "en-superior-08-e10",
+    "pregunta": "Cuentas cómo encontraste un bug. ¿Qué frase introduce el descubrimiento con naturalidad?",
+    "opciones": [
+      "It results that the cache was never being cleared.",
+      "It turns out the cache was never being cleared.",
+      "It resulted the cache was not cleaning never."
+    ],
+    "correcta": 1,
+    "explicacion": "\"Resulta que\" es **it turns out (that)**. *It results that* es un calco, y la tercera además tiene doble negación."
+  },
+  {
+    "id": "en-superior-08-e11",
+    "pregunta": "Te hacen una pregunta tramposa: \"Why did your team miss the deadline so badly?\" ¿Qué haces?",
+    "opciones": [
+      "Le dices que la pregunta es injusta",
+      "Cambias de tema sin responder",
+      "Reconoces el hecho sin aceptar el adjetivo y explicas qué cambió"
+    ],
+    "correcta": 2,
+    "explicacion": "Ante una **loaded question**, responde al hecho, no a la carga: *We did miss it by a week. Here's why, and here's what we changed.* Esquivar (**deflect**) se nota y empeora la impresión."
+  },
+  {
+    "id": "en-superior-08-e12",
+    "pregunta": "\"Sorry, I went off on a ___ there. Back to the results.\"",
+    "opciones": [
+      "branch",
+      "side",
+      "tangent",
+      "detour"
+    ],
+    "correcta": 2,
+    "explicacion": "\"Irse por las ramas\" es **go off on a tangent**. *Branch* es el calco de \"rama\". *Take a detour* existe, pero no en esta expresión."
+  },
+  {
+    "id": "en-superior-08-e13",
+    "pregunta": "¿Qué frase pone una cifra en contexto?",
+    "opciones": [
+      "In perspective, it's a big number.",
+      "To put it in perspective, that's about a thousand orders a day.",
+      "For putting it in perspective, the number is big."
+    ],
+    "correcta": 1,
+    "explicacion": "La expresión completa es **to put it in perspective**, con *to*. Y una buena comparación concreta (*a thousand orders a day*) vale más que *a big number*."
+  },
+  {
+    "id": "en-superior-08-e14",
+    "pregunta": "\"I was asked to ___ the migration, from planning to rollout.\"",
+    "opciones": [
+      "take the ownership in",
+      "take ownership of",
+      "make ownership of",
+      "own of"
+    ],
+    "correcta": 1,
+    "explicacion": "La colocación es **take ownership of** (también se dice *own the migration*, sin *of*). Va sin artículo y con *of*."
+  },
+  {
+    "id": "en-superior-08-e15",
+    "pregunta": "¿Cuál es el mejor cierre de una presentación?",
+    "opciones": [
+      "To wrap up, the key takeaway is that small fixes add up. Happy to take questions.",
+      "So... yeah. That's all, I think.",
+      "In resume, that was everything."
+    ],
+    "correcta": 0,
+    "explicacion": "Anuncias el cierre, das una sola idea clave y abres las preguntas. *In resume* es un calco: *résumé* es el CV."
+  }
+]

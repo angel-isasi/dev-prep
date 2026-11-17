@@ -1,0 +1,29 @@
+[
+  { "id": "en-superior-03-r01", "titulo": "Explicar un retraso al cliente", "situacion": "Karen, gerente del cliente, esperaba los nuevos reportes esta semana. Tú le explicas por qué se retrasaron.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Karen", "en": "We were expecting the new reports this week. What happened?", "es": "Esperábamos los reportes nuevos esta semana. ¿Qué pasó?" },
+      { "opciones": [
+          { "en": "Having tested them with real data, we found that two totals were wrong.", "es": "Al probarlos con datos reales, encontramos que dos totales estaban mal.", "correcta": true, "explicacion": "Explicas la causa con precisión y en tono profesional. El sujeto de *having tested* es *we*: el mismo que encontró el error." },
+          { "en": "Having tested them with real data, two totals were found to be wrong.", "es": "", "correcta": false, "explicacion": "Participio colgante: parece que los totales hicieron las pruebas. Además, la pasiva esconde quién es responsable." },
+          { "en": "Well, stuff happened with the data, so yeah, they're late.", "es": "", "correcta": false, "explicacion": "Demasiado informal y vago para una cliente. No explica nada." }
+        ] },
+      { "quien": "Karen", "en": "I see. When can we expect them?", "es": "Entiendo. ¿Para cuándo podemos esperarlos?" },
+      { "opciones": [
+          { "en": "Next Wednesday, guaranteed, no matter what happens.", "es": "", "correcta": false, "explicacion": "Promesa absoluta justo después de un retraso. Si algo falla, pierdes la confianza del cliente." },
+          { "en": "Barring any new issues, by next Wednesday.", "es": "Salvo que surja algún problema nuevo, para el próximo miércoles.", "correcta": true, "explicacion": "*Barring* da una fecha concreta y, a la vez, un margen honesto." },
+          { "en": "Barring any new issues, whenever we can.", "es": "", "correcta": false, "explicacion": "La estructura está bien, pero no responde: el cliente pidió una fecha." }
+        ] },
+      { "quien": "Karen", "en": "Okay. Will the delay affect the rest of the project?", "es": "Ok. ¿El retraso afectará el resto del proyecto?" },
+      { "opciones": [
+          { "en": "Not at all, and honestly, the reports aren't that important anyway.", "es": "", "correcta": false, "explicacion": "Le quitas importancia a algo que el cliente estaba esperando. Suena a desinterés." },
+          { "en": "All things considered, who knows? Maybe.", "es": "", "correcta": false, "explicacion": "Inseguro y vago. *All things considered* debería llevar a una conclusión, no a un \"quién sabe\"." },
+          { "en": "Not significantly. Given that the reports were the last item, the launch date stays the same.", "es": "No mucho. Dado que los reportes eran lo último, la fecha de lanzamiento se mantiene.", "correcta": true, "explicacion": "*Given that* justifica la respuesta con un hecho concreto. Tranquiliza sin restar importancia." }
+        ] },
+      { "quien": "Karen", "en": "Thanks for being transparent about it.", "es": "Gracias por ser transparente." },
+      { "opciones": [
+          { "en": "Of course. I'll send a short summary, attached to today's meeting notes.", "es": "Por supuesto. Enviaré un resumen corto, adjunto a las notas de la reunión de hoy.", "correcta": true, "explicacion": "Cierras con una acción concreta y el registro adecuado para un cliente." },
+          { "en": "No problem, dude. I'll text you.", "es": "", "correcta": false, "explicacion": "*Dude* y *I'll text you* son demasiado informales con una cliente." },
+          { "en": "Of course. Having been transparent, I expect some patience now.", "es": "", "correcta": false, "explicacion": "Gramaticalmente correcta, pero exigente: pides algo a cambio de tu honestidad." }
+        ] }
+    ] }
+]

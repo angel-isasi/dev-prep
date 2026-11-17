@@ -1,0 +1,118 @@
+[
+  {
+    "id": "en-superior-06-r01",
+    "titulo": "El cliente quiere todo para el viernes",
+    "situacion": "David, el cliente, pide una funcionalidad más sin mover la fecha. Tú lideras la entrega.",
+    "tu": "Ana",
+    "turnos": [
+      {
+        "quien": "David",
+        "en": "We also need the PDF export by Friday. That's not a problem, right?",
+        "es": "También necesitamos la exportación a PDF para el viernes. No es problema, ¿verdad?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "No problem at all, we'll get it done.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Aceptar sin evaluar es una promesa que probablemente no cumplas. En EE. UU. se valora más avisar temprano."
+          },
+          {
+            "en": "I'd love to make that work. Realistically, though, adding it by Friday would put the other features at risk.",
+            "es": "Me encantaría lograrlo. Pero, siendo realistas, agregarla para el viernes pondría en riesgo las otras funcionalidades.",
+            "correcta": true,
+            "explicacion": "Muestras buena disposición y marcas el límite con un hecho, sin decir un no seco."
+          },
+          {
+            "en": "With all due respect, that's unrealistic.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*With all due respect* anuncia un ataque. Con un cliente suena hostil."
+          }
+        ]
+      },
+      {
+        "quien": "David",
+        "en": "Hmm. Friday is a hard deadline for us, though.",
+        "es": "Mmm. Pero para nosotros el viernes es una fecha que no se mueve."
+      },
+      {
+        "opciones": [
+          {
+            "en": "Understood. Then could we prioritize? If the PDF export matters most, we could move the filters to next week.",
+            "es": "Entendido. Entonces, ¿podríamos priorizar? Si la exportación a PDF es lo más importante, podríamos pasar los filtros a la próxima semana.",
+            "correcta": true,
+            "explicacion": "Si la fecha no se mueve, cambias el alcance: le das al cliente el poder de elegir qué entra."
+          },
+          {
+            "en": "Then it's impossible. Sorry.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Cierras la conversación sin ofrecer ninguna alternativa."
+          },
+          {
+            "en": "Understood. I guess we'll just cut some corners on testing.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Ofrecerle a un cliente bajar la calidad genera desconfianza, aunque lo digas medio en broma."
+          }
+        ]
+      },
+      {
+        "quien": "David",
+        "en": "The filters are already promised to our sales team.",
+        "es": "Los filtros ya están prometidos a nuestro equipo de ventas."
+      },
+      {
+        "opciones": [
+          {
+            "en": "Well, that's your problem, not ours.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Grosero: con un cliente, el problema se resuelve juntos."
+          },
+          {
+            "en": "I hear you. In that case, how about a simple CSV export on Friday and the full PDF next week?",
+            "es": "Te entiendo. En ese caso, ¿qué tal una exportación simple en CSV el viernes y el PDF completo la próxima semana?",
+            "correcta": true,
+            "explicacion": "Reconoces su restricción y propones un punto medio concreto: una versión simple a tiempo y la completa después."
+          },
+          {
+            "en": "I hear you, so we'll do everything by Friday.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*I hear you* anuncia un matiz, no una rendición. Aquí cedes en todo y contradices lo que dijiste antes."
+          }
+        ]
+      },
+      {
+        "quien": "David",
+        "en": "A CSV on Friday could work. Can you guarantee the PDF by Wednesday?",
+        "es": "Un CSV el viernes podría funcionar. ¿Puedes garantizar el PDF para el miércoles?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "Absolutely, one hundred percent guaranteed.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Una garantía absoluta sobre un plazo es arriesgada: si algo falla, pierdes credibilidad."
+          },
+          {
+            "en": "Maybe. Let's play it by ear.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Demasiado vago para un compromiso con un cliente: *play it by ear* suena a que no hay plan."
+          },
+          {
+            "en": "I'm confident about Wednesday. I'll confirm in writing today, with a day of buffer included.",
+            "es": "Confío en el miércoles. Te lo confirmo hoy por escrito, con un día de margen incluido.",
+            "correcta": true,
+            "explicacion": "Firme pero honesta: te comprometes, lo pones por escrito y dejas un margen por si algo falla."
+          }
+        ]
+      }
+    ]
+  }
+]

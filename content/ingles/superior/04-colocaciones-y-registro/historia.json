@@ -1,0 +1,20 @@
+[
+  { "id": "en-superior-04-h01", "titulo": "Tres mensajes, tres registros", "situacion": "Ana lidera el lanzamiento de esta semana, que se retrasa. Tiene que avisar al cliente, al equipo y actualizar la documentación.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, the release is moving to Thursday. Can you tell the client and the team, and update the docs?", "es": "Ana, el lanzamiento pasa al jueves. ¿Puedes avisar al cliente y al equipo, y actualizar la documentación?" },
+      { "quien": "Ana", "en": "Sure. I'll start with the client, since the register matters most there.", "es": "Claro. Empiezo con el cliente, porque ahí el registro es lo más importante." },
+      { "quien": "Sarah", "en": "Read it to me before you send it.", "es": "Léemelo antes de enviarlo." },
+      { "quien": "Ana", "en": "Dear Ms. Lopez, I'm writing to let you know that the release will move to Thursday.", "es": "Estimada Sra. López: le escribo para informarle que el lanzamiento pasará al jueves." },
+      { "tipo": "completa", "quien": "Ana", "en": "We found an issue during testing, and we want to ___ it before going live.", "es": "Encontramos un problema durante las pruebas y queremos ocuparnos de él antes de lanzar.", "opciones": ["address", "attend", "solve to"], "correcta": 0, "explicacion": "**Address an issue** = ocuparse de un problema. *Attend* es asistir a un evento: es el calco de \"atender\"." },
+      { "quien": "Sarah", "en": "Good. Formal, but not stiff. And for the team?", "es": "Bien. Formal, pero no rígido. ¿Y para el equipo?" },
+      { "quien": "Ana", "en": "Hey all, the release moved to Thursday. We found a checkout bug, details in the ticket.", "es": "Hola a todos, el lanzamiento pasó al jueves. Encontramos un bug en el pago, los detalles están en el ticket." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Ana escribe distinto al cliente y al equipo?", "opciones": ["Porque el cliente no habla inglés", "Porque cada uno necesita un registro diferente", "Porque Tom se lo pidió así"], "correcta": 1, "explicacion": "Con el cliente usa un registro formal (*Dear*, *I'm writing to*); con el equipo, uno informal y directo (*Hey all*)." },
+      { "quien": "Tom", "en": "Perfect. Will this affect phase two?", "es": "Perfecto. ¿Esto afecta la fase dos?" },
+      { "tipo": "completa", "quien": "Ana", "en": "No. We can still ___ the deadline for phase two.", "es": "No. Todavía podemos cumplir el plazo de la fase dos.", "opciones": ["meet", "fulfill", "reach"], "correcta": 0, "explicacion": "La colocación es **meet a deadline**. *Fulfill* va con *a requirement*; con *deadline* es el calco de \"cumplir\"." },
+      { "quien": "Ana", "en": "And in the docs, I'll add a short note: the release date has changed to Thursday.", "es": "Y en la documentación agregaré una nota corta: la fecha de lanzamiento cambió al jueves." },
+      { "quien": "Sarah", "en": "Nice. Three messages, three registers.", "es": "Bien. Tres mensajes, tres registros." },
+      { "quien": "Luis", "en": "Hey Ana! Still on for dinner tonight?", "es": "¡Hola Ana! ¿Sigue en pie la cena de esta noche?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Yes! ___ me a message when you leave.", "es": "¡Sí! Escríbeme cuando salgas.", "opciones": ["Shoot", "Submit", "Inquire"], "correcta": 0, "explicacion": "**Shoot me a message** es informal, perfecto con un amigo. *Submit* e *inquire* son formales y con Luis sonarían a correo de oficina." },
+      { "tipo": "pregunta", "pregunta": "¿Qué registro usa Ana con Luis?", "opciones": ["Formal, como con el cliente", "Informal, como con un amigo", "El de la documentación"], "correcta": 1, "explicacion": "Con un amigo, frases cortas e informales: *Shoot me a message*." }
+    ] }
+]

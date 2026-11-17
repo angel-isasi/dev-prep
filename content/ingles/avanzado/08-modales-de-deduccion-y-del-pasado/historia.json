@@ -1,0 +1,18 @@
+[
+  { "id": "en-avanzado-08-h01", "titulo": "¿Quién rompió el build?", "situacion": "El build falla desde la mañana y Ana tiene que averiguar por qué antes de la demo.",
+    "pasos": [
+      { "quien": "Sarah", "en": "Ana, the build has been failing since this morning. Any idea why?", "es": "Ana, el build está fallando desde esta mañana. ¿Alguna idea de por qué?" },
+      { "quien": "Ana", "en": "Let me look. It can't be my last commit. The tests passed.", "es": "Déjame ver. No puede ser mi último commit. Los tests pasaron." },
+      { "tipo": "completa", "quien": "Sarah", "en": "Then someone ___ updated a dependency last night.", "es": "Entonces alguien tiene que haber actualizado una dependencia anoche.", "opciones": ["must", "must have", "can't have"], "correcta": 1, "explicacion": "Deducción fuerte sobre el pasado: **must have + participio**. *can't have* diría lo contrario de lo que Sarah piensa." },
+      { "quien": "Ana", "en": "You're right. The date library jumped from version two to version three.", "es": "Tienes razón. La librería de fechas saltó de la versión dos a la tres." },
+      { "quien": "Sarah", "en": "Was it the new intern? He was working late yesterday.", "es": "¿Fue el practicante nuevo? Ayer se quedó trabajando hasta tarde." },
+      { "tipo": "completa", "quien": "Ana", "en": "Let's not jump to conclusions. It ___ been the bot that updates our packages.", "es": "No saquemos conclusiones apresuradas. Puede que haya sido el bot que actualiza nuestros paquetes.", "opciones": ["might", "should", "might have"], "correcta": 2, "explicacion": "Posibilidad sobre el pasado: **might have + participio** (*might have been*). *might been* no existe sin *have*." },
+      { "quien": "Ana", "en": "Yes, here it is. The bot opened the PR, and someone merged it without checking.", "es": "Sí, aquí está. El bot abrió el PR y alguien lo mergeó sin revisarlo." },
+      { "tipo": "pregunta", "pregunta": "¿Qué causó el fallo del build?", "opciones": ["El último commit de Ana", "Una actualización de la librería de fechas que alguien mergeó sin revisar", "Un error del practicante"], "correcta": 1, "explicacion": "El bot abrió el PR con la versión nueva y alguien lo mergeó \"without checking\"." },
+      { "quien": "Sarah", "en": "Oops. That was me. I must have clicked merge by mistake.", "es": "Uy. Fui yo. Seguro que hice clic en merge por error." },
+      { "quien": "Ana", "en": "No worries. I'll revert it, and we'll still have time before the demo.", "es": "Tranquila. Lo revierto y todavía tendremos tiempo antes de la demo." },
+      { "tipo": "completa", "quien": "Sarah", "en": "Thanks. I ___ blamed the intern so fast.", "es": "Gracias. No debí culpar tan rápido al practicante.", "opciones": ["shouldn't have", "mustn't have", "needn't"], "correcta": 0, "explicacion": "Algo que hiciste y estuvo mal: **shouldn't have + participio**. *mustn't have* no se usa para el pasado." },
+      { "quien": "Ana", "en": "In hindsight, we should have pinned the version in the first place.", "es": "En retrospectiva, debimos fijar la versión desde el principio." },
+      { "tipo": "pregunta", "pregunta": "¿Qué reconoce Sarah al final?", "opciones": ["Que Ana rompió el build", "Que la demo se cancela", "Que no debió culpar tan rápido al practicante"], "correcta": 2, "explicacion": "\"I shouldn't have blamed the intern so fast\"." }
+    ] }
+]

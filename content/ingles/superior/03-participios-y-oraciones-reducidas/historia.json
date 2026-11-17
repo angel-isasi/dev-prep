@@ -1,0 +1,20 @@
+[
+  { "id": "en-superior-03-h01", "titulo": "La guía que nadie leía", "situacion": "Ana se encargó de reescribir la guía para los nuevos del equipo. Ahora le cuenta a Tom y a Sarah cómo le fue.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, you rewrote the onboarding guide. How did it go?", "es": "Ana, reescribiste la guía para los nuevos. ¿Cómo te fue?" },
+      { "quien": "Ana", "en": "Pretty well. Having read the old guide, I understood why nobody used it.", "es": "Bastante bien. Después de leer la guía antigua, entendí por qué nadie la usaba." },
+      { "quien": "Sarah", "en": "Let me guess: it was too long?", "es": "Déjame adivinar: ¿era demasiado larga?" },
+      { "quien": "Ana", "en": "Forty pages, most of them written in 2019.", "es": "Cuarenta páginas, la mayoría escritas en 2019." },
+      { "tipo": "pregunta", "pregunta": "¿Qué problema tenía la guía antigua?", "opciones": ["Estaba en otro idioma", "Era muy larga y antigua", "No existía"], "correcta": 1, "explicacion": "Cuarenta páginas, la mayoría escritas en 2019: *written* es un participio pasivo que reduce *that were written*." },
+      { "tipo": "completa", "quien": "Ana", "en": "___ that new hires only need the basics on day one, I cut it to five pages.", "es": "Dado que los nuevos solo necesitan lo básico el primer día, la reduje a cinco páginas.", "opciones": ["Given", "Giving", "Gave"], "correcta": 0, "explicacion": "**Given that** = dado que. Es participio pasado; *giving* es el error típico porque \"dar\" parece activo." },
+      { "quien": "Tom", "en": "Five? Isn't that too short?", "es": "¿Cinco? ¿No es demasiado corta?" },
+      { "quien": "Ana", "en": "The rest is still there, linked at the end and marked as optional.", "es": "Lo demás sigue ahí, enlazado al final y marcado como opcional." },
+      { "tipo": "completa", "quien": "Ana", "en": "Also, every command ___ in the guide now has a copy button.", "es": "Además, cada comando que aparece en la guía ahora tiene un botón para copiar.", "opciones": ["shown", "showing", "is shown"], "correcta": 0, "explicacion": "Relativo reducido pasivo: *every command (that is) shown*. *Showing* significaría que el comando muestra algo." },
+      { "quien": "Sarah", "en": "Did you test it with someone new?", "es": "¿La probaste con alguien nuevo?" },
+      { "quien": "Ana", "en": "Yes. Our new intern followed it on her own.", "es": "Sí. Nuestra nueva practicante la siguió por su cuenta." },
+      { "quien": "Ana", "en": "Not knowing anything about our setup, she had the app running in an hour.", "es": "Sin saber nada de nuestra configuración, tenía la app corriendo en una hora." },
+      { "tipo": "pregunta", "pregunta": "¿Cómo probó Ana la guía nueva?", "opciones": ["Se la dio a una practicante nueva, que tuvo la app corriendo en una hora", "Le pidió a Tom que la leyera", "No la probó"], "correcta": 0, "explicacion": "\"Not knowing anything about our setup, she had the app running in an hour\"." },
+      { "quien": "Tom", "en": "All things considered, that's a huge improvement. Nice work.", "es": "Considerándolo todo, es una mejora enorme. Buen trabajo." },
+      { "tipo": "completa", "quien": "Ana", "en": "Thanks. ___, I'd like to do the same with the deployment docs.", "es": "Gracias. Si hay tiempo, me gustaría hacer lo mismo con la documentación de despliegue.", "opciones": ["Time permitting", "Permitting time", "Time permitted"], "correcta": 0, "explicacion": "Construcción absoluta fija: **Time permitting** (si el tiempo lo permite). El sujeto (*time*) va antes del participio." }
+    ] }
+]

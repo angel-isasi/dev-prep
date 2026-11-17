@@ -1,0 +1,58 @@
+[
+  { "id": "en-avanzado-04-d01", "titulo": "El horario de Berlín", "situacion": "Ana empezó a trabajar con un cliente de Berlín y las llamadas son muy temprano. Tom le pregunta cómo lo lleva.",
+    "lineas": [
+      { "quien": "Tom", "en": "How's the new schedule going? I know the calls with Berlin start very early for you.", "es": "¿Cómo va el horario nuevo? Sé que las llamadas con Berlín empiezan muy temprano para ti." },
+      { "quien": "Ana", "en": "Honestly, I'm still getting used to waking up at six.", "es": "Sinceramente, todavía me estoy acostumbrando a levantarme a las seis." },
+      { "quien": "Tom", "en": "I remember doing the same when I worked with a team in India. It's hard at first.", "es": "Recuerdo haber hecho lo mismo cuando trabajé con un equipo en India. Al principio cuesta." },
+      { "quien": "Ana", "en": "I used to be a night owl, so it's a big change.", "es": "Antes era noctámbula, así que es un cambio grande." },
+      { "quien": "Tom", "en": "Try going to bed earlier instead of drinking more coffee.", "es": "Prueba acostarte más temprano en vez de tomar más café." },
+      { "quien": "Ana", "en": "I'm trying. I stopped drinking coffee after lunch, and it helps.", "es": "Lo estoy intentando. Dejé de tomar café después del almuerzo y me ayuda." },
+      { "quien": "Tom", "en": "Good. And don't hesitate to tell me if it's too much.", "es": "Bien. Y no dudes en decirme si es demasiado." },
+      { "quien": "Ana", "en": "Thanks. I really appreciate you asking.", "es": "Gracias. De verdad te agradezco que me preguntes." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿A qué hora se levanta Ana ahora?", "opciones": ["A las cinco", "A las seis", "A las siete"], "correcta": 1,
+        "explicacion": "\"I'm still getting used to waking up at six\"." },
+      { "pregunta": "¿Qué le aconseja Tom?", "opciones": ["Tomar más café", "Cambiar de proyecto", "Acostarse más temprano en vez de tomar más café"], "correcta": 2,
+        "explicacion": "\"Try going to bed earlier instead of drinking more coffee\". **Try + -ing**: prueba a ver si funciona." },
+      { "pregunta": "¿Qué dejó de hacer Ana?", "opciones": ["Tomar café después del almuerzo", "Trabajar de noche", "Hablar con el cliente"], "correcta": 0,
+        "explicacion": "\"I stopped drinking coffee after lunch\": **stop + -ing** = dejar de." }
+    ] },
+  { "id": "en-avanzado-04-d02", "titulo": "Probar otra cosa", "situacion": "Ana lleva toda la mañana con un bug del login. Sarah se acerca a ayudarla.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Is the login still failing?", "es": "¿El login sigue fallando?" },
+      { "quien": "Ana", "en": "Yes. I've been trying to fix it all morning, but nothing works.", "es": "Sí. Llevo toda la mañana intentando arreglarlo, pero nada funciona." },
+      { "quien": "Sarah", "en": "Did you try clearing the cookies?", "es": "¿Probaste borrar las cookies?" },
+      { "quien": "Ana", "en": "Not yet... Oh, wait. It works now!", "es": "Todavía no... Ah, espera. ¡Ahora funciona!" },
+      { "quien": "Sarah", "en": "Classic. Remember to write it down in the README, so nobody else gets stuck.", "es": "Clásico. Acuérdate de anotarlo en el README, para que nadie más se atasque." },
+      { "quien": "Ana", "en": "Good idea. I keep forgetting to update the docs.", "es": "Buena idea. Siempre me olvido de actualizar la documentación." },
+      { "quien": "Sarah", "en": "Everyone does. But it's worth doing. It saves hours later.", "es": "A todos nos pasa. Pero vale la pena hacerlo. Ahorra horas después." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué estuvo haciendo Ana toda la mañana?", "opciones": ["Escribir la documentación", "Intentar arreglar el login", "Reunirse con el cliente"], "correcta": 1,
+        "explicacion": "\"I've been trying to fix it all morning, but nothing works\". **Try + to**: intentar algo que cuesta." },
+      { "pregunta": "¿Qué solucionó el problema?", "opciones": ["Borrar las cookies", "Reiniciar el servidor", "Cambiar la contraseña"], "correcta": 0,
+        "explicacion": "Sarah le pregunta \"Did you try clearing the cookies?\" y en cuanto lo hace, funciona." },
+      { "pregunta": "¿Qué le pide Sarah?", "opciones": ["Que borre el README", "Que no le cuente a nadie", "Que lo anote en el README"], "correcta": 2,
+        "explicacion": "\"Remember to write it down in the README, so nobody else gets stuck\"." }
+    ] },
+  { "id": "en-avanzado-04-d03", "titulo": "Preguntas de RR. HH.", "situacion": "Sarah, de recursos humanos, le pregunta a Luis sobre su forma de trabajar.",
+    "lineas": [
+      { "quien": "Sarah", "en": "What do you enjoy doing most as a developer?", "es": "¿Qué es lo que más disfrutas hacer como desarrollador?" },
+      { "quien": "Luis", "en": "I enjoy turning a design into something people can actually use.", "es": "Disfruto convertir un diseño en algo que la gente pueda usar de verdad." },
+      { "quien": "Sarah", "en": "And what do you find difficult?", "es": "¿Y qué te resulta difícil?" },
+      { "quien": "Luis", "en": "I tend to spend too much time on small details, so I'm learning to set time limits.", "es": "Suelo dedicar demasiado tiempo a detalles pequeños, así que estoy aprendiendo a ponerme límites de tiempo." },
+      { "quien": "Sarah", "en": "Our team is spread across three time zones. Are you used to that?", "es": "Nuestro equipo está repartido en tres zonas horarias. ¿Estás acostumbrado a eso?" },
+      { "quien": "Luis", "en": "Yes, I'm used to it. In my last job, I worked with people in Mexico and Spain.", "es": "Sí, estoy acostumbrado. En mi último trabajo, trabajé con gente de México y España." },
+      { "quien": "Sarah", "en": "Great. Would you consider relocating in the future?", "es": "Genial. ¿Considerarías mudarte en el futuro?" },
+      { "quien": "Luis", "en": "I'm open to it, but I'd prefer to start remotely.", "es": "Estoy abierto a hacerlo, pero preferiría empezar a distancia." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué disfruta más Luis de su trabajo?", "opciones": ["Convertir un diseño en algo que la gente pueda usar", "Escribir documentación", "Dirigir reuniones"], "correcta": 0,
+        "explicacion": "\"I enjoy turning a design into something people can actually use\"." },
+      { "pregunta": "¿Qué le cuesta a Luis?", "opciones": ["Trabajar en equipo", "No pasar demasiado tiempo en detalles pequeños", "Hablar inglés"], "correcta": 1,
+        "explicacion": "\"I tend to spend too much time on small details\". Y cuenta cómo lo está mejorando, algo que gusta en una entrevista." },
+      { "pregunta": "¿Luis se mudaría?", "opciones": ["No, nunca", "Sí, de inmediato", "Está abierto, pero prefiere empezar a distancia"], "correcta": 2,
+        "explicacion": "\"I'm open to it, but I'd prefer to start remotely\"." }
+    ] }
+]

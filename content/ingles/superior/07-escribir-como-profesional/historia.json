@@ -1,0 +1,107 @@
+[
+  {
+    "id": "en-superior-07-h01",
+    "titulo": "El primer RFC de Ana",
+    "situacion": "Ana propone cambiar la librería de formularios del equipo. Tom y Sarah comentan su borrador en una llamada.",
+    "pasos": [
+      {
+        "quien": "Tom",
+        "en": "Ana, I read your RFC on the new form library. Nice work. Just a few comments.",
+        "es": "Ana, leí tu RFC sobre la nueva librería de formularios. Buen trabajo. Solo unos comentarios."
+      },
+      {
+        "quien": "Tom",
+        "en": "Your first sentence is fifty words long. Could you split it?",
+        "es": "Tu primera oración tiene cincuenta palabras. ¿Podrías dividirla?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Sure. In Spanish, long sentences sound academic, so it's a habit.",
+        "es": "Claro. En español las oraciones largas suenan académicas, así que es una costumbre."
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "The adoption ___ a single form library will reduce duplicated code.",
+        "es": "La adopción de una sola librería de formularios reducirá el código duplicado.",
+        "opciones": [
+          "of",
+          "to",
+          "in"
+        ],
+        "correcta": 0,
+        "explicacion": "Los sustantivos que vienen de un verbo llevan **of** antes de su objeto: *the adoption of*, *the implementation of*."
+      },
+      {
+        "quien": "Sarah",
+        "en": "I like that. Also, you wrote \"it was decided to migrate.\" Who decided?",
+        "es": "Me gusta. Además, escribiste \"se decidió migrar\". ¿Quién lo decidió?"
+      },
+      {
+        "quien": "Ana",
+        "en": "The frontend team did, last sprint. I'll make it active: \"The frontend team decided to migrate.\"",
+        "es": "El equipo frontend, el sprint pasado. Lo pondré en activa: \"The frontend team decided to migrate\"."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Por qué Sarah critica \"it was decided to migrate\"?",
+        "opciones": [
+          "Porque tiene un error de ortografía",
+          "Porque es demasiado corta",
+          "Porque no dice quién lo decidió"
+        ],
+        "correcta": 2,
+        "explicacion": "Es la pasiva impersonal, calco de \"se decidió\": esconde al actor. En un RFC se dice quién decide."
+      },
+      {
+        "quien": "Tom",
+        "en": "One more thing. How does the new library compare to the current one?",
+        "es": "Una cosa más. ¿Cómo se compara la nueva librería con la actual?"
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "The current library validates on every keystroke, ___ the new one validates on blur.",
+        "es": "La librería actual valida con cada tecla, mientras que la nueva valida al salir del campo.",
+        "opciones": [
+          "thereby",
+          "whereas",
+          "hence"
+        ],
+        "correcta": 1,
+        "explicacion": "**Whereas** contrasta dos hechos en una sola oración. *Thereby* y *hence* presentan consecuencias, no contrastes."
+      },
+      {
+        "quien": "Ana",
+        "en": "It also caches the rules, thereby cutting re-renders in half.",
+        "es": "Además, cachea las reglas, con lo cual reduce a la mitad los re-renders."
+      },
+      {
+        "quien": "Sarah",
+        "en": "And the old forms? Do we have to migrate all forty of them?",
+        "es": "¿Y los formularios viejos? ¿Tenemos que migrar los cuarenta?"
+      },
+      {
+        "quien": "Ana",
+        "en": "No, that's a non-goal. We'll use it for new forms only, provided that the old ones keep working.",
+        "es": "No, eso no es un objetivo. Solo la usaremos en los formularios nuevos, siempre que los viejos sigan funcionando."
+      },
+      {
+        "quien": "Tom",
+        "en": "Perfect. Clear, short, and nobody can say they didn't understand it.",
+        "es": "Perfecto. Claro, corto, y nadie puede decir que no lo entendió."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Qué pasa con los cuarenta formularios viejos?",
+        "opciones": [
+          "Se migran todos este sprint",
+          "Se eliminan",
+          "No se migran: la librería nueva es solo para formularios nuevos"
+        ],
+        "correcta": 2,
+        "explicacion": "Ana lo pone como **non-goal**, con una condición: *provided that the old ones keep working*."
+      }
+    ]
+  }
+]

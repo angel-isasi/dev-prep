@@ -1,0 +1,59 @@
+[
+  { "id": "en-superior-01-d01", "titulo": "La retro después de la caída", "situacion": "Tom y Ana revisan qué falló la noche en que la app estuvo caída.",
+    "lineas": [
+      { "quien": "Tom", "en": "So, what exactly happened on Tuesday night?", "es": "Entonces, ¿qué pasó exactamente el martes en la noche?" },
+      { "quien": "Ana", "en": "What happened was that a migration locked the users table for twenty minutes.", "es": "Lo que pasó fue que una migración bloqueó la tabla de usuarios durante veinte minutos." },
+      { "quien": "Tom", "en": "And nobody noticed until the morning?", "es": "¿Y nadie se dio cuenta hasta la mañana?" },
+      { "quien": "Ana", "en": "Not until the first customer complained did we see the alerts.", "es": "Recién cuando se quejó el primer cliente vimos las alertas." },
+      { "quien": "Ana", "en": "The reason we missed them is that they were going to an old channel.", "es": "La razón por la que no las vimos es que llegaban a un canal antiguo." },
+      { "quien": "Tom", "en": "Okay. What do we need to change?", "es": "Ok. ¿Qué tenemos que cambiar?" },
+      { "quien": "Ana", "en": "What we need is one alert channel that someone actually watches.", "es": "Lo que necesitamos es un solo canal de alertas que alguien mire de verdad." },
+      { "quien": "Tom", "en": "Agreed. And under no circumstances should we run migrations at night again.", "es": "De acuerdo. Y bajo ninguna circunstancia volvemos a correr migraciones de noche." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué causó la caída?", "opciones": ["Un ataque al servidor", "Una migración que bloqueó la tabla de usuarios", "Un cliente que borró datos"], "correcta": 1,
+        "explicacion": "\"A migration locked the users table for twenty minutes\"." },
+      { "pregunta": "¿Por qué no vieron las alertas a tiempo?", "opciones": ["Porque llegaban a un canal antiguo", "Porque no había alertas", "Porque Tom las apagó"], "correcta": 0,
+        "explicacion": "\"They were going to an old channel\"." },
+      { "pregunta": "¿Qué decide Tom al final?", "opciones": ["Despedir al responsable", "No volver a correr migraciones de noche", "Correr las migraciones los viernes"], "correcta": 1,
+        "explicacion": "\"Under no circumstances should we run migrations at night again\"." }
+    ] },
+  { "id": "en-superior-01-d02", "titulo": "El proyecto del que estás orgulloso", "situacion": "En una entrevista, Sarah le pide a Luis que hable de un proyecto.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Tell me about a project you're proud of.", "es": "Cuéntame de un proyecto del que estés orgulloso." },
+      { "quien": "Luis", "en": "The one I'm proudest of is a booking app for a clinic in Cusco.", "es": "Del que más orgulloso estoy es una app de reservas para una clínica en Cusco." },
+      { "quien": "Sarah", "en": "What made it challenging?", "es": "¿Qué lo hizo difícil?" },
+      { "quien": "Luis", "en": "Not only did I build the frontend, but I also had to design the database.", "es": "No solo hice el frontend, sino que también tuve que diseñar la base de datos." },
+      { "quien": "Luis", "en": "What I learned most was how to talk to non-technical clients.", "es": "Lo que más aprendí fue a hablar con clientes que no son técnicos." },
+      { "quien": "Sarah", "en": "Did the clinic actually use it?", "es": "¿La clínica de verdad la usó?" },
+      { "quien": "Luis", "en": "They did use it, and they still do. It was the receptionist who asked for the reminders feature.", "es": "Sí la usaron, y la siguen usando. Fue la recepcionista quien pidió la función de recordatorios." },
+      { "quien": "Sarah", "en": "I do like that you listened to the real users.", "es": "Me gusta mucho que hayas escuchado a los usuarios reales." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué hizo Luis además del frontend?", "opciones": ["El diseño gráfico", "Diseñó la base de datos", "La campaña de marketing"], "correcta": 1,
+        "explicacion": "\"Not only did I build the frontend, but I also had to design the database\"." },
+      { "pregunta": "¿Qué fue lo que más aprendió?", "opciones": ["A usar una base de datos nueva", "A hablar con clientes no técnicos", "A trabajar más rápido"], "correcta": 1,
+        "explicacion": "\"What I learned most was how to talk to non-technical clients\"." },
+      { "pregunta": "¿Quién pidió la función de recordatorios?", "opciones": ["El dueño de la clínica", "La recepcionista", "Sarah"], "correcta": 1,
+        "explicacion": "\"It was the receptionist who asked for the reminders feature\"." }
+    ] },
+  { "id": "en-superior-01-d03", "titulo": "Ensayar la demo", "situacion": "María ensaya con Carlos cómo empezar y terminar la demo del nuevo buscador.",
+    "lineas": [
+      { "quien": "Carlos", "en": "Your demo is good, but the opening sounds a bit flat.", "es": "Tu demo está bien, pero el inicio suena un poco plano." },
+      { "quien": "María", "en": "Really? I just say that the new search is faster.", "es": "¿En serio? Solo digo que el nuevo buscador es más rápido." },
+      { "quien": "Carlos", "en": "Try something stronger, like: not only is it faster, but it's also cheaper to run.", "es": "Prueba algo más fuerte, como: no solo es más rápido, sino que también cuesta menos mantenerlo funcionando." },
+      { "quien": "María", "en": "Isn't that a bit dramatic?", "es": "¿No es un poco dramático?" },
+      { "quien": "Carlos", "en": "In a demo, no. In a Slack message, it would be.", "es": "En una demo, no. En un mensaje de Slack, sí lo sería." },
+      { "quien": "María", "en": "Okay. And how should I end?", "es": "Ok. ¿Y cómo debería cerrar?" },
+      { "quien": "Carlos", "en": "What users care about is speed, so finish with the numbers.", "es": "Lo que les importa a los usuarios es la velocidad, así que termina con las cifras." },
+      { "quien": "María", "en": "Got it. It's the numbers that people remember.", "es": "Entendido. Son las cifras lo que la gente recuerda." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué problema ve Carlos en la demo?", "opciones": ["Es demasiado larga", "El inicio suena plano", "Tiene errores en las cifras"], "correcta": 1,
+        "explicacion": "\"The opening sounds a bit flat\"." },
+      { "pregunta": "Según Carlos, ¿dónde sí sonaría demasiado dramática esa frase?", "opciones": ["En una demo", "En un mensaje de Slack", "En una entrevista"], "correcta": 1,
+        "explicacion": "\"In a demo, no. In a Slack message, it would be\": la inversión es para momentos con peso, no para un chat." },
+      { "pregunta": "¿Con qué le recomienda terminar?", "opciones": ["Con una broma", "Con las cifras de velocidad", "Con una pregunta al público"], "correcta": 1,
+        "explicacion": "\"What users care about is speed, so finish with the numbers\"." }
+    ] }
+]

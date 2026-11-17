@@ -1,0 +1,6 @@
+[
+  { "id": "en-superior-03-c01", "es": "Después de terminar el informe, lo envié.", "natural": "After finishing the report, I sent it.", "calco": "After finish the report, I sent it.", "explicacion": "Después de una preposición (*after*, *before*, *without*) el verbo va en **-ing**. En español va en infinitivo, por eso sale *after finish*. También puedes decir *Having finished the report, I sent it*." },
+  { "id": "en-superior-03-c02", "es": "Dado que no hay tiempo, dejémoslo para después.", "natural": "Given that there's no time, let's leave it for later.", "calco": "Giving that there's no time, let's leave it for later.", "explicacion": "\"Dado que\" es **given that**, con participio pasado. *Giving* es \"dando\"." },
+  { "id": "en-superior-03-c03", "es": "La persona que trabaja en eso es Sarah.", "natural": "The person working on that is Sarah.", "calco": "The person who working on that is Sarah.", "explicacion": "Puedes decir *who is working* o reducirlo a **working**, pero no quitar solo el *is*." },
+  { "id": "en-superior-03-c04", "es": "Hablando de la demo, ¿ya está lista?", "natural": "Speaking of the demo, is it ready yet?", "calco": "Speaking about the demo, is it ready yet?", "explicacion": "Para cambiar de tema, la expresión fija es **Speaking of**. *Speaking about* existe (\"hablar sobre\"), pero no se usa así al inicio de una frase." }
+]

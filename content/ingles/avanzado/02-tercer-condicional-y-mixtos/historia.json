@@ -1,0 +1,18 @@
+[
+  { "id": "en-avanzado-02-h01", "titulo": "La tabla vacía", "situacion": "Viernes por la tarde. Ana corre un script de migración y algo sale muy mal. El lunes, el equipo revisa qué aprendió.",
+    "pasos": [
+      { "quien": "Sarah", "en": "Ana, why is the users table empty in production?", "es": "Ana, ¿por qué está vacía la tabla de usuarios en producción?" },
+      { "quien": "Ana", "en": "Oh no. I ran the migration script... I thought I was connected to staging.", "es": "Ay, no. Corrí el script de migración... Pensé que estaba conectada a staging." },
+      { "tipo": "pregunta", "pregunta": "¿Qué pasó?", "opciones": ["Ana corrió el script en producción creyendo que era staging", "Sarah borró la tabla por error", "Se cayó el servidor de staging"], "correcta": 0, "explicacion": "Ana dice \"I thought I was connected to staging\": creía estar en staging, pero estaba en producción." },
+      { "quien": "Sarah", "en": "Okay, don't panic. We have a backup from this morning.", "es": "Bien, no te asustes. Tenemos una copia de seguridad de esta mañana." },
+      { "tipo": "completa", "quien": "Ana", "en": "Thank goodness. If we hadn't had a backup, we ___ thousands of users.", "es": "Menos mal. Si no hubiéramos tenido una copia, habríamos perdido miles de usuarios.", "opciones": ["would have lost", "would lose", "had lost"], "correcta": 0, "explicacion": "Tercer condicional: *if + had + participio*, **would have + participio**. *Had lost* repite la forma del if en la otra parte." },
+      { "quien": "Tom", "en": "Good morning, everyone. Let's talk about Friday. What can we learn from it?", "es": "Buenos días a todos. Hablemos del viernes. ¿Qué podemos aprender de lo que pasó?" },
+      { "quien": "Ana", "en": "I should have checked the connection before running the script.", "es": "Debí revisar la conexión antes de correr el script." },
+      { "tipo": "completa", "quien": "Tom", "en": "True, but it's not only your fault. If our scripts asked for confirmation, this ___ happened.", "es": "Cierto, pero no es solo culpa tuya. Si nuestros scripts pidieran confirmación, esto no habría pasado.", "opciones": ["wouldn't have", "won't have", "didn't"], "correcta": 0, "explicacion": "Condicional mixto: algo que **no es así ahora** (los scripts no piden confirmación) explica un resultado del pasado: **wouldn't have happened**." },
+      { "quien": "Sarah", "en": "And if I hadn't checked the dashboard, we wouldn't have noticed until Monday.", "es": "Y si yo no hubiera revisado el panel, no nos habríamos dado cuenta hasta el lunes." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué se dieron cuenta a tiempo?", "opciones": ["Porque un cliente se quejó", "Porque Sarah revisó el panel", "Porque sonó una alerta"], "correcta": 1, "explicacion": "Sarah dice \"if I hadn't checked the dashboard, we wouldn't have noticed\". Por eso Tom propone agregar una alerta." },
+      { "quien": "Tom", "en": "Exactly. So, two actions: a confirmation step and an alert for empty tables.", "es": "Exacto. Entonces, dos acciones: un paso de confirmación y una alerta para tablas vacías." },
+      { "tipo": "completa", "quien": "Ana", "en": "In ___, it was a close call. I learned that lesson the hard way.", "es": "Visto en retrospectiva, nos salvamos por poco. Aprendí esa lección a golpes.", "opciones": ["hindsight", "purpose", "mistake"], "correcta": 0, "explicacion": "**In hindsight** = visto en retrospectiva, ahora que sabes lo que pasó. *In purpose* e *in mistake* no existen." },
+      { "quien": "Tom", "en": "We've all been there. Next time, ask before you touch production.", "es": "Todos hemos pasado por eso. La próxima vez, pregunta antes de tocar producción." }
+    ] }
+]

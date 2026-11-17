@@ -1,0 +1,20 @@
+[
+  { "id": "en-avanzado-01-h01", "titulo": "El teléfono malogrado", "situacion": "Ana se perdió la reunión con un cliente. Le llegan versiones distintas de lo que se dijo y tiene que averiguar la verdad antes de hablar con Tom.",
+    "pasos": [
+      { "quien": "Carlos", "en": "Ana, you missed the client meeting! Apparently, they hated the new design.", "es": "¡Ana, te perdiste la reunión con el cliente! Al parecer, odiaron el diseño nuevo." },
+      { "quien": "Ana", "en": "Really? Who told you that?", "es": "¿En serio? ¿Quién te dijo eso?" },
+      { "quien": "Carlos", "en": "No one told me. I overheard it in the kitchen.", "es": "Nadie me lo dijo. Lo escuché sin querer en la cocina." },
+      { "tipo": "pregunta", "pregunta": "¿Cómo se enteró Carlos?", "opciones": ["Se lo dijo el cliente", "Lo escuchó sin querer en la cocina", "Lo leyó en un correo"], "correcta": 1, "explicacion": "**Overhear** = escuchar algo sin que te lo digan a ti: \"I overheard it in the kitchen\"." },
+      { "quien": "Ana", "en": "Hi Sarah, Carlos said that the client hated the design. Is that true?", "es": "Hola Sarah, Carlos dijo que el cliente odió el diseño. ¿Es cierto?" },
+      { "quien": "Sarah", "en": "Not at all! They said that they liked it, but the buttons were too small.", "es": "¡Para nada! Dijeron que les gustaba, pero que los botones eran demasiado pequeños." },
+      { "tipo": "completa", "quien": "Sarah", "en": "They also asked ___ we could finish the mobile version by Monday.", "es": "También preguntaron si podíamos terminar la versión móvil para el lunes.", "opciones": ["if", "that", "what"], "correcta": 0, "explicacion": "Una pregunta de sí o no se reporta con **if**: *asked if we could*. *That* no introduce preguntas." },
+      { "quien": "Ana", "en": "Monday? That's soon. Did they mention the colors?", "es": "¿El lunes? Es pronto. ¿Mencionaron los colores?" },
+      { "tipo": "completa", "quien": "Sarah", "en": "Yes. They told us ___ the colors, because the CEO loves them.", "es": "Sí. Nos dijeron que no cambiáramos los colores, porque al CEO le encantan.", "opciones": ["not to change", "don't change", "to not changing"], "correcta": 0, "explicacion": "Una orden negativa reportada: **tell + persona + not to + verbo**. *Don't change* es estilo directo y no encaja después de *told us*." },
+      { "quien": "Tom", "en": "Ana, can you give me a quick recap of the client meeting?", "es": "Ana, ¿me das un resumen rápido de la reunión con el cliente?" },
+      { "quien": "Ana", "en": "Sure. They said that they liked the design, but they asked us to make the buttons bigger.", "es": "Claro. Dijeron que les gustaba el diseño, pero nos pidieron que hiciéramos los botones más grandes." },
+      { "quien": "Ana", "en": "They also wanted to know if we could finish the mobile version by Monday.", "es": "También querían saber si podíamos terminar la versión móvil para el lunes." },
+      { "tipo": "pregunta", "pregunta": "¿Qué quería saber el cliente?", "opciones": ["Si podían cambiar los colores", "Si podían terminar la versión móvil para el lunes", "Cuánto costaría el diseño"], "correcta": 1, "explicacion": "\"They wanted to know if we could finish the mobile version by Monday\". Los colores, justamente, no querían cambiarlos." },
+      { "quien": "Tom", "en": "Good. And what about the rumor that they hated it?", "es": "Bien. ¿Y el rumor de que lo odiaron?" },
+      { "quien": "Ana", "en": "Just a rumor. Next time, I'll check the facts before I believe the kitchen.", "es": "Solo un rumor. La próxima vez, voy a comprobar los hechos antes de creerle a la cocina." }
+    ] }
+]

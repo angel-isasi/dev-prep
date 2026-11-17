@@ -1,0 +1,20 @@
+[
+  { "id": "en-avanzado-07-h01", "titulo": "El postmortem del carrito", "situacion": "Ana cuenta en la reunión de postmortem qué pasó el martes con el carrito de compras.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, can you walk us through what happened on Tuesday?", "es": "Ana, ¿puedes contarnos paso a paso lo que pasó el martes?" },
+      { "quien": "Ana", "en": "Sure. At around ten, we had just released the new cart.", "es": "Claro. Como a las diez, acabábamos de lanzar el carrito nuevo." },
+      { "quien": "Ana", "en": "Shortly after that, the support team started getting complaints.", "es": "Poco después, el equipo de soporte empezó a recibir quejas." },
+      { "tipo": "completa", "quien": "Ana", "en": "Some users ___ to pay for almost an hour before we noticed.", "es": "Algunos usuarios llevaban casi una hora intentando pagar antes de que nos diéramos cuenta.", "opciones": ["have been trying", "had been trying", "were try"], "correcta": 1, "explicacion": "Algo que venía pasando hasta un momento del pasado (cuando se dieron cuenta): **had been + -ing**." },
+      { "quien": "Sarah", "en": "Why didn't our alerts catch it?", "es": "¿Por qué no lo detectaron nuestras alertas?" },
+      { "quien": "Ana", "en": "Because the page didn't crash. The button just did nothing.", "es": "Porque la página no se caía. El botón simplemente no hacía nada." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué las alertas no detectaron el problema?", "opciones": ["Porque estaban apagadas", "Porque la página no se caía: el botón solo no hacía nada", "Porque pasó de madrugada"], "correcta": 1, "explicacion": "\"The page didn't crash. The button just did nothing\"." },
+      { "quien": "Tom", "en": "And what was the root cause?", "es": "¿Y cuál fue la causa raíz?" },
+      { "tipo": "completa", "quien": "Ana", "en": "It turned out that I ___ a required field from the form.", "es": "Resultó que yo había quitado un campo obligatorio del formulario.", "opciones": ["had removed", "have removed", "had remove"], "correcta": 0, "explicacion": "Quitar el campo pasó **antes** del problema: **had + participio** (*removed*)." },
+      { "quien": "Ana", "en": "The tests hadn't caught it because they used old data.", "es": "Los tests no lo habían detectado porque usaban datos viejos." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué los tests no detectaron el error?", "opciones": ["Porque nadie los corrió", "Porque Ana los borró", "Porque usaban datos viejos"], "correcta": 2, "explicacion": "\"The tests hadn't caught it because they used old data\"." },
+      { "quien": "Tom", "en": "Thanks for being so honest. What did we learn?", "es": "Gracias por ser tan honesta. ¿Qué aprendimos?" },
+      { "quien": "Ana", "en": "We've updated the test data, and I've added a check on the payment button.", "es": "Actualizamos los datos de prueba y agregué un control en el botón de pago." },
+      { "quien": "Sarah", "en": "Nice. Don't worry, I made the same mistake on my first project.", "es": "Bien. No te preocupes, yo cometí el mismo error en mi primer proyecto." },
+      { "tipo": "pregunta", "pregunta": "¿Cómo reacciona el equipo cuando Ana admite el error?", "opciones": ["La culpan delante de todos", "Le agradecen la honestidad y Sarah cuenta que le pasó lo mismo", "Cancelan el proyecto"], "correcta": 1, "explicacion": "Tom dice \"Thanks for being so honest\" y Sarah: \"I made the same mistake on my first project\"." }
+    ] }
+]

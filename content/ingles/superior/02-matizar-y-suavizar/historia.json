@@ -1,0 +1,19 @@
+[
+  { "id": "en-superior-02-h01", "titulo": "Decirle que no al tech lead", "situacion": "Ana lideró el nuevo dashboard. Tom quiere lanzarlo el lunes, pero ella cree que todavía no está listo.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, the dashboard looks great. Let's ship it on Monday.", "es": "Ana, el dashboard se ve genial. Lancémoslo el lunes." },
+      { "quien": "Ana", "en": "Thanks, Tom. I'm glad you like it, but I have some reservations about Monday.", "es": "Gracias, Tom. Me alegra que te guste, pero tengo algunos reparos con el lunes." },
+      { "quien": "Tom", "en": "Really? What's the problem?", "es": "¿En serio? ¿Cuál es el problema?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Large accounts ___ to load very slowly. Some charts take ten seconds.", "es": "Las cuentas grandes suelen cargar muy lento. Algunos gráficos tardan diez segundos.", "opciones": ["tend", "use", "are used"], "correcta": 0, "explicacion": "\"Suelen\" en presente es **tend to**. *Use to* no existe en presente y *are used to* significa \"están acostumbradas a\"." },
+      { "quien": "Tom", "en": "How many users have large accounts?", "es": "¿Cuántos usuarios tienen cuentas grandes?" },
+      { "quien": "Ana", "en": "Roughly fifteen percent, but they're our biggest clients.", "es": "Aproximadamente el quince por ciento, pero son nuestros clientes más grandes." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Ana tiene reparos con el lunes?", "opciones": ["Porque a Tom no le gusta el diseño", "Porque con cuentas grandes el dashboard carga muy lento", "Porque no ha escrito la documentación"], "correcta": 1, "explicacion": "Algunos gráficos tardan diez segundos en las cuentas grandes, que son de los clientes más importantes." },
+      { "quien": "Tom", "en": "Hmm. Couldn't we just fix it after the launch?", "es": "Mmm. ¿No podríamos arreglarlo después del lanzamiento?" },
+      { "tipo": "completa", "quien": "Ana", "en": "I see where you're ___ from, but those clients would notice first.", "es": "Entiendo por qué lo dices, pero esos clientes serían los primeros en notarlo.", "opciones": ["coming", "going", "looking"], "correcta": 0, "explicacion": "La expresión fija es **I see where you're coming from**: reconoces el punto del otro antes de contrastar con *but*." },
+      { "quien": "Ana", "en": "What if we launched for small accounts on Monday and for the rest next week?", "es": "¿Y si lanzamos el lunes para las cuentas pequeñas y la próxima semana para el resto?" },
+      { "quien": "Sarah", "en": "That could work. I can help with the caching, if needed.", "es": "Eso podría funcionar. Puedo ayudar con la caché, si hace falta." },
+      { "quien": "Tom", "en": "I'm not entirely convinced, but I do trust your judgment. Let's do it.", "es": "No estoy del todo convencido, pero confío en tu criterio. Hagámoslo." },
+      { "tipo": "pregunta", "pregunta": "¿Qué propone Ana?", "opciones": ["Cancelar el lanzamiento", "Lanzar primero para cuentas pequeñas y la semana siguiente para el resto", "Lanzar el lunes para todos"], "correcta": 1, "explicacion": "\"What if we launched for small accounts on Monday and for the rest next week?\": una propuesta en forma de pregunta, sin imponerse." },
+      { "quien": "Ana", "en": "Thanks. I'll share a rough plan in the channel this afternoon.", "es": "Gracias. Compartiré un plan preliminar en el canal esta tarde." }
+    ] }
+]

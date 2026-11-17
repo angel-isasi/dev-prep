@@ -1,0 +1,6 @@
+[
+  { "id": "en-avanzado-06-c01", "es": "Ojalá tuviera más tiempo.", "natural": "I wish I had more time.", "calco": "I wish I would have more time.", "explicacion": "El subjuntivo \"tuviera\" no se traduce con *would*: después de **wish** va **pasado** (*had*)." },
+  { "id": "en-avanzado-06-c02", "es": "Ojalá consigas el trabajo.", "natural": "I hope you get the job.", "calco": "I wish you get the job.", "explicacion": "\"Ojalá\" se traduce con **hope** cuando algo puede pasar. **wish** es para lo que no es real o ya no se puede cambiar." },
+  { "id": "en-avanzado-06-c03", "es": "Ya es hora de irnos.", "natural": "It's time to go.", "calco": "It's hour to go.", "explicacion": "\"Hora\" en este sentido es **time**. *hour* es la unidad de sesenta minutos." },
+  { "id": "en-avanzado-06-c04", "es": "Ojalá no hubiera dicho eso.", "natural": "I wish I hadn't said that.", "calco": "I wish I didn't say that.", "explicacion": "Para lamentar algo que ya pasó: **wish + had + participio**. *I wish I didn't say* es el error típico: wish + pasado simple sirve para el presente, no para algo que ya dijiste." }
+]

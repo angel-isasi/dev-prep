@@ -1,0 +1,6 @@
+[
+  { "id": "en-superior-04-c01", "es": "Cumplimos el plazo.", "natural": "We met the deadline.", "calco": "We fulfilled the deadline.", "explicacion": "Un plazo se **meet** (o se *miss*, si no lo cumples). *Fulfill* es para requisitos o promesas: *fulfill a requirement*." },
+  { "id": "en-superior-04-c02", "es": "Tomamos una decisión.", "natural": "We made a decision.", "calco": "We took a decision.", "explicacion": "En EE. UU. se dice **make a decision**. *Take a decision* se oye en Reino Unido, pero en EE. UU. suena extranjero." },
+  { "id": "en-superior-04-c03", "es": "Llegamos a una conclusión.", "natural": "We reached a conclusion.", "calco": "We arrived to a conclusion.", "explicacion": "Se dice **reach** (o *come to*) a conclusion. *Arrive to* no existe: sería *arrive at*, y aun así suena raro." },
+  { "id": "en-superior-04-c04", "es": "Quisiera plantear un problema.", "natural": "I'd like to raise an issue.", "calco": "I'd like to rise a problem.", "explicacion": "**Raise** lleva objeto (plantear algo); *rise* no (*prices rise*). Además, en el trabajo un \"problema\" que planteas suele ser *an issue*." }
+]

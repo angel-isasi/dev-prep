@@ -1,0 +1,107 @@
+[
+  {
+    "id": "en-superior-05-h01",
+    "titulo": "Seis segundos y un elefante",
+    "situacion": "Ana lidera por primera vez la planificación de una mejora de rendimiento. Tom y Sarah están en la reunión.",
+    "pasos": [
+      {
+        "quien": "Tom",
+        "en": "Ana, you're leading the performance work this sprint. Where do we start?",
+        "es": "Ana, este sprint tú lideras la mejora de rendimiento. ¿Por dónde empezamos?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Let me get the ball rolling with the numbers. The home page takes six seconds to load.",
+        "es": "Déjame arrancar con los números. La página de inicio tarda seis segundos en cargar."
+      },
+      {
+        "quien": "Sarah",
+        "en": "Honestly, I'd rewrite the whole frontend. The code is a mess.",
+        "es": "Sinceramente, yo reescribiría todo el frontend. El código es un desastre."
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "I get it, but let's not ___ the ocean. We have two weeks.",
+        "es": "Te entiendo, pero no intentemos abarcarlo todo. Tenemos dos semanas.",
+        "opciones": [
+          "boil",
+          "cook",
+          "heat"
+        ],
+        "correcta": 0,
+        "explicacion": "**Boil the ocean** es querer resolverlo todo a la vez. El idiom es fijo: no se cambia *boil* por *cook* ni por *heat*."
+      },
+      {
+        "quien": "Ana",
+        "en": "The images aren't compressed. That's the low-hanging fruit, and it could save two seconds.",
+        "es": "Las imágenes no están comprimidas. Eso es lo más fácil y ya da resultado: podría ahorrar dos segundos."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Por qué Ana empieza por las imágenes?",
+        "opciones": [
+          "Porque es fácil y da un resultado grande rápido",
+          "Porque Sarah se lo pidió",
+          "Porque es lo más difícil"
+        ],
+        "correcta": 0,
+        "explicacion": "Es **low-hanging fruit**: la fruta que cuelga bajo, la que se alcanza sin esfuerzo."
+      },
+      {
+        "quien": "Tom",
+        "en": "Makes sense. Can you give me a ballpark figure for the whole thing?",
+        "es": "Tiene sentido. ¿Me puedes dar un número aproximado para todo?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Around eight days. But let's address the elephant in the room: the old image server.",
+        "es": "Unos ocho días. Pero hablemos del problema que nadie menciona: el servidor viejo de imágenes."
+      },
+      {
+        "quien": "Ana",
+        "en": "Nobody wants to touch it, but it's the real bottleneck.",
+        "es": "Nadie quiere tocarlo, pero es el verdadero cuello de botella."
+      },
+      {
+        "quien": "Sarah",
+        "en": "So we have to bite the bullet and replace it?",
+        "es": "¿O sea que tenemos que asumirlo y reemplazarlo?"
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "Not this sprint. Let's put it on the back ___ and fix the images first.",
+        "es": "Este sprint no. Dejémoslo para después y arreglemos primero las imágenes.",
+        "opciones": [
+          "burner",
+          "stove",
+          "shelf"
+        ],
+        "correcta": 0,
+        "explicacion": "**Put it on the back burner** viene de la hornilla de atrás, la que queda a fuego lento. *Stove* es la cocina entera y *shelf* no forma parte de este idiom."
+      },
+      {
+        "quien": "Tom",
+        "en": "Good call. Sarah, if you have the bandwidth, could you pair with Ana on it?",
+        "es": "Buena decisión. Sarah, si tienes tiempo, ¿podrías trabajar en pareja con Ana en esto?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "Sure. Just keep me in the loop, and please, no more meetings with this many idioms.",
+        "es": "Claro. Solo mantenme al tanto y, por favor, no más reuniones con tantos idioms."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Qué decide Ana sobre el servidor viejo de imágenes?",
+        "opciones": [
+          "Reemplazarlo este sprint",
+          "Ignorarlo para siempre",
+          "Dejarlo para después y arreglar primero las imágenes"
+        ],
+        "correcta": 2,
+        "explicacion": "Ana lo nombra como el problema real, pero lo pone **on the back burner**: queda pendiente, no olvidado."
+      }
+    ]
+  }
+]

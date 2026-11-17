@@ -1,0 +1,58 @@
+[
+  { "id": "en-superior-03-d01", "titulo": "Leer el README juntos", "situacion": "Carlos acaba de entrar al equipo y María le ayuda a entender la guía de instalación.",
+    "lineas": [
+      { "quien": "Carlos", "en": "The README says all commands run from the root, unless otherwise stated. What does that mean?", "es": "El README dice que todos los comandos se ejecutan desde la raíz, salvo que se indique lo contrario. ¿Qué significa eso?" },
+      { "quien": "María", "en": "It means you run them from the main folder, unless a step says something different.", "es": "Significa que los ejecutas desde la carpeta principal, salvo que un paso diga otra cosa." },
+      { "quien": "Carlos", "en": "Okay. And here it says to enter your token when prompted.", "es": "Ok. Y aquí dice que ingreses tu token cuando se te pida." },
+      { "quien": "María", "en": "Right. The script asks for it, so don't paste it anywhere else.", "es": "Claro. El script te lo pide, así que no lo pegues en ningún otro lado." },
+      { "quien": "Carlos", "en": "Got it. Once everything is set up, should I run the tests?", "es": "Entendido. Una vez que esté todo configurado, ¿corro los tests?" },
+      { "quien": "María", "en": "Yes. Judging by the last build, a couple of them are flaky, so don't panic.", "es": "Sí. A juzgar por el último build, un par fallan a veces sin razón, así que no te asustes." },
+      { "quien": "Carlos", "en": "Good to know. Thanks for the tour.", "es": "Bueno saberlo. Gracias por el recorrido." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Desde dónde se ejecutan los comandos?", "opciones": ["Desde la carpeta principal, salvo que un paso diga otra cosa", "Desde cualquier carpeta", "Desde la carpeta de tests"], "correcta": 0,
+        "explicacion": "\"Unless otherwise stated\": desde la raíz, salvo que se indique lo contrario." },
+      { "pregunta": "¿Cuándo debe ingresar el token?", "opciones": ["Antes de abrir el proyecto", "Cuando el script se lo pida", "Nunca, lo pone María"], "correcta": 1,
+        "explicacion": "\"Enter your token when prompted\": cuando se te pida." },
+      { "pregunta": "¿Qué le advierte María sobre los tests?", "opciones": ["Que no hay tests", "Que un par fallan a veces sin razón", "Que tardan una hora"], "correcta": 1,
+        "explicacion": "\"A couple of them are flaky\": *flaky* es un test que a veces falla sin que el código esté mal." }
+    ] },
+  { "id": "en-superior-03-d02", "titulo": "El resumen del incidente", "situacion": "Tom y Sarah preparan el correo para explicarle al cliente lo que pasó.",
+    "lineas": [
+      { "quien": "Tom", "en": "Sarah, can you summarize the incident for the client email?", "es": "Sarah, ¿puedes resumir el incidente para el correo al cliente?" },
+      { "quien": "Sarah", "en": "Sure. Following a database update, some users couldn't log in for an hour.", "es": "Claro. Tras una actualización de la base de datos, algunos usuarios no pudieron iniciar sesión durante una hora." },
+      { "quien": "Tom", "en": "How many users were affected?", "es": "¿Cuántos usuarios fueron afectados?" },
+      { "quien": "Sarah", "en": "Roughly two hundred, based on the error logs.", "es": "Unos doscientos, según los logs de errores." },
+      { "quien": "Tom", "en": "And what are we saying about prevention?", "es": "¿Y qué decimos sobre la prevención?" },
+      { "quien": "Sarah", "en": "Having identified the cause, we've added a check before every update.", "es": "Una vez identificada la causa, agregamos una verificación antes de cada actualización." },
+      { "quien": "Tom", "en": "Good. All things considered, I think it's a fair summary.", "es": "Bien. Considerándolo todo, creo que es un resumen justo." },
+      { "quien": "Sarah", "en": "Great. I'll send it, pending your final approval.", "es": "Genial. Lo enviaré en cuanto me des la aprobación final." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué provocó el problema?", "opciones": ["Una actualización de la base de datos", "Un ataque", "Un error del cliente"], "correcta": 0,
+        "explicacion": "\"Following a database update, some users couldn't log in\"." },
+      { "pregunta": "¿Cuántos usuarios fueron afectados?", "opciones": ["Unos veinte", "Unos doscientos", "Todos"], "correcta": 1,
+        "explicacion": "\"Roughly two hundred, based on the error logs\"." },
+      { "pregunta": "¿Qué espera Sarah para enviar el correo?", "opciones": ["Que el cliente llame", "La aprobación final de Tom", "Que termine la semana"], "correcta": 1,
+        "explicacion": "\"Pending your final approval\": a la espera de la aprobación de Tom." }
+    ] },
+  { "id": "en-superior-03-d03", "titulo": "Elegir tecnología", "situacion": "María le pregunta a Luis por qué su equipo eligió Svelte para una app nueva.",
+    "lineas": [
+      { "quien": "María", "en": "Why did your team choose Svelte for the new app?", "es": "¿Por qué tu equipo eligió Svelte para la app nueva?" },
+      { "quien": "Luis", "en": "Given that the app is small, we wanted something light.", "es": "Dado que la app es pequeña, queríamos algo liviano." },
+      { "quien": "María", "en": "Wasn't the team more familiar with React?", "es": "¿El equipo no conocía más React?" },
+      { "quien": "Luis", "en": "Not really. Strictly speaking, only two of us had used React at work.", "es": "No tanto. En sentido estricto, solo dos de nosotros habíamos usado React en el trabajo." },
+      { "quien": "María", "en": "And how's it going so far?", "es": "¿Y cómo va hasta ahora?" },
+      { "quien": "Luis", "en": "Compared to our old React app, the bundle is about half the size.", "es": "Comparado con nuestra app antigua de React, el bundle pesa más o menos la mitad." },
+      { "quien": "Luis", "en": "Other things being equal, I'd choose it again.", "es": "En igualdad de condiciones, lo volvería a elegir." },
+      { "quien": "María", "en": "Interesting. Time permitting, I'd love to try it.", "es": "Interesante. Si tengo tiempo, me encantaría probarlo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué eligieron Svelte?", "opciones": ["Porque la app es pequeña y querían algo liviano", "Porque es más popular", "Porque el cliente lo pidió"], "correcta": 0,
+        "explicacion": "\"Given that the app is small, we wanted something light\"." },
+      { "pregunta": "¿Cuántos del equipo habían usado React en el trabajo?", "opciones": ["Todos", "Solo dos", "Nadie"], "correcta": 1,
+        "explicacion": "\"Strictly speaking, only two of us had used React at work\"." },
+      { "pregunta": "¿Qué ventaja menciona Luis?", "opciones": ["El bundle pesa más o menos la mitad", "Tiene más librerías", "Es más fácil de contratar gente"], "correcta": 0,
+        "explicacion": "\"The bundle is about half the size\"." }
+    ] }
+]

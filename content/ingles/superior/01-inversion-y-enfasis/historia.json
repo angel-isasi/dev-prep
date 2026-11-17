@@ -1,0 +1,20 @@
+[
+  { "id": "en-superior-01-h01", "titulo": "El doble cobro", "situacion": "Ana lideró el arreglo de un bug que cobraba dos veces a algunos clientes. Ahora lo explica ante el equipo.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, you led the fix for the checkout bug. Can you walk us through it?", "es": "Ana, tú lideraste el arreglo del bug del pago. ¿Nos lo explicas paso a paso?" },
+      { "quien": "Ana", "en": "Sure. For three days, some customers were charged twice.", "es": "Claro. Durante tres días, a algunos clientes se les cobró dos veces." },
+      { "quien": "Ana", "en": "At first we blamed the payment provider, but it wasn't their fault.", "es": "Al principio culpamos al proveedor de pagos, pero no era su culpa." },
+      { "tipo": "completa", "quien": "Ana", "en": "___ our retry logic that sent the payment twice.", "es": "Fue nuestra lógica de reintentos la que enviaba el pago dos veces.", "opciones": ["It was", "Was", "There was"], "correcta": 0, "explicacion": "Cleft sentence: **It was** + foco + **that**. Sin *It* es el calco de \"Fue nuestra lógica...\"; *There was* significa \"había\"." },
+      { "quien": "Sarah", "en": "How did you find it? The logs looked normal to me.", "es": "¿Cómo lo encontraste? A mí los logs me parecían normales." },
+      { "quien": "Ana", "en": "They did look normal, and that was the problem.", "es": "Sí parecían normales, y ese era el problema." },
+      { "tipo": "completa", "quien": "Ana", "en": "Only when I compared the timestamps ___ the pattern.", "es": "Solo cuando comparé las horas vi el patrón.", "opciones": ["did I see", "I saw", "I did see"], "correcta": 0, "explicacion": "Con **Only when** al inicio, la oración principal se invierte: **did I see**. *I did see* es do enfático, pero sin inversión." },
+      { "tipo": "pregunta", "pregunta": "¿Qué causaba el doble cobro?", "opciones": ["Un fallo del proveedor de pagos", "La lógica de reintentos del propio equipo", "Un error en los logs"], "correcta": 1, "explicacion": "\"It was our retry logic that sent the payment twice\". Al proveedor lo culparon al principio, pero no era su culpa." },
+      { "quien": "Tom", "en": "Good work. What do we need so that it never happens again?", "es": "Buen trabajo. ¿Qué necesitamos para que no vuelva a pasar?" },
+      { "quien": "Ana", "en": "What we need is an idempotency key on every payment request.", "es": "Lo que necesitamos es una clave de idempotencia en cada solicitud de pago." },
+      { "quien": "Ana", "en": "Not only does it stop duplicates, but it also makes retries safe.", "es": "No solo evita los duplicados, sino que también hace seguros los reintentos." },
+      { "quien": "Sarah", "en": "Honestly, never have I seen such a clear postmortem.", "es": "Sinceramente, nunca he visto un análisis de incidente tan claro." },
+      { "quien": "Tom", "en": "Agreed. I do want you to present this to the other teams, Ana.", "es": "De acuerdo. De verdad quiero que presentes esto a los otros equipos, Ana." },
+      { "tipo": "completa", "quien": "Ana", "en": "Thanks. ___ did I know that a tiny retry could cause so much trouble.", "es": "Gracias. No tenía idea de que un reintento tan pequeño pudiera causar tantos problemas.", "opciones": ["Little", "Few", "Less"], "correcta": 0, "explicacion": "La expresión fija es **Little did I know** (no tenía idea). *Few* y *less* no forman esta inversión." },
+      { "tipo": "pregunta", "pregunta": "¿Qué le pide Tom a Ana al final?", "opciones": ["Que presente el análisis a otros equipos", "Que escriba más tests", "Que cambie de proveedor de pagos"], "correcta": 0, "explicacion": "\"I do want you to present this to the other teams\": el **do** enfático muestra que lo dice en serio." }
+    ] }
+]

@@ -1,0 +1,29 @@
+[
+  { "id": "en-avanzado-07-r01", "titulo": "Cuéntame de una vez que algo salió mal", "situacion": "Estás en una entrevista para un nuevo puesto. Mike, el entrevistador, te pide contar un incidente real.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Mike", "en": "Tell me about a time something went wrong in production.", "es": "Cuéntame de una vez en que algo salió mal en producción." },
+      { "opciones": [
+          { "en": "Well, my team lead broke production once. It was a disaster.", "es": "", "correcta": false, "explicacion": "Te preguntan por tu experiencia, y en cambio expones el error de otra persona. Suena a chisme y a culpar." },
+          { "en": "Sure. A few months ago, we had just released a new cart, and users couldn't pay.", "es": "Claro. Hace unos meses acabábamos de lanzar un carrito nuevo y los usuarios no podían pagar.", "correcta": true, "explicacion": "Empiezas con el contexto (*had just released*) y el problema en una sola frase: claro y directo." },
+          { "en": "Nothing has ever gone wrong with my code.", "es": "", "correcta": false, "explicacion": "Nadie lo cree. El entrevistador quiere ver cómo manejas los errores, no que nunca los tienes." }
+        ] },
+      { "quien": "Mike", "en": "How did you find out?", "es": "¿Cómo te enteraste?" },
+      { "opciones": [
+          { "en": "The support team told us. Some users had been trying to pay for almost an hour.", "es": "Nos avisó el equipo de soporte. Algunos usuarios llevaban casi una hora intentando pagar.", "correcta": true, "explicacion": "**had been + -ing + for** para la duración hasta que se enteraron. Das un dato concreto." },
+          { "en": "The support team told us. Some users were trying to pay since an hour.", "es": "", "correcta": false, "explicacion": "Calco de \"desde hace una hora\": es *had been trying **for** an hour*." },
+          { "en": "I don't really remember. It was a long time ago.", "es": "", "correcta": false, "explicacion": "Suena evasivo. Si elegiste esa historia, tienes que conocer sus detalles." }
+        ] },
+      { "quien": "Mike", "en": "What was the cause?", "es": "¿Cuál fue la causa?" },
+      { "opciones": [
+          { "en": "It resulted that I had removed a required field.", "es": "", "correcta": false, "explicacion": "\"Resultó que\" es *It **turned out** that*. *It resulted* es un calco." },
+          { "en": "The tests were bad, so it wasn't really my fault.", "es": "", "correcta": false, "explicacion": "Echarle la culpa a las pruebas suena defensivo. Asumir tu parte da mucha más confianza." },
+          { "en": "It turned out that I had removed a required field. It was my mistake, and I owned it.", "es": "Resultó que yo había quitado un campo obligatorio. Fue mi error y lo asumí.", "correcta": true, "explicacion": "*It turned out that* + pasado perfecto para la causa, y asumes el error sin dramatizar." }
+        ] },
+      { "quien": "Mike", "en": "What did you do after that?", "es": "¿Qué hiciste después?" },
+      { "opciones": [
+          { "en": "We had reverted the change, and then I had added a test.", "es": "", "correcta": false, "explicacion": "Abuso de *had*: si cuentas los pasos en orden, va **pasado simple** (*we reverted..., then I added...*)." },
+          { "en": "I fixed it, and we never talked about it again.", "es": "", "correcta": false, "explicacion": "No muestra ningún aprendizaje. La parte más importante de la historia es lo que cambiaste después." },
+          { "en": "We reverted the change within ten minutes, and then I added a test with real data.", "es": "Revertimos el cambio en diez minutos y luego agregué un test con datos reales.", "correcta": true, "explicacion": "Pasado simple para las acciones en orden y una mejora concreta: cierras la historia con lo que aprendiste." }
+        ] }
+    ] }
+]

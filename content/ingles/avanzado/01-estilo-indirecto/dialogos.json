@@ -1,0 +1,59 @@
+[
+  { "id": "en-avanzado-01-d01", "titulo": "¿Qué dijo el cliente?", "situacion": "Ana no pudo entrar a la llamada con el cliente. Sarah le cuenta lo que se dijo.",
+    "lineas": [
+      { "quien": "Sarah", "en": "You missed the call with the client this morning.", "es": "Te perdiste la llamada con el cliente esta mañana." },
+      { "quien": "Ana", "en": "I know, I was at the dentist. What did they say?", "es": "Lo sé, estaba en el dentista. ¿Qué dijeron?" },
+      { "quien": "Sarah", "en": "Mark said that he loved the new dashboard.", "es": "Mark dijo que le encantaba el nuevo panel." },
+      { "quien": "Sarah", "en": "But he asked if we could add a dark mode before the launch.", "es": "Pero preguntó si podíamos agregar un modo oscuro antes del lanzamiento." },
+      { "quien": "Ana", "en": "Did he mention a deadline?", "es": "¿Mencionó una fecha límite?" },
+      { "quien": "Sarah", "en": "He said that he needed it by the end of the month.", "es": "Dijo que lo necesitaba para fin de mes." },
+      { "quien": "Ana", "en": "That's tight. Did he say anything about the extra hours?", "es": "Es poco tiempo. ¿Dijo algo de las horas extra?" },
+      { "quien": "Sarah", "en": "Yes. He told us not to worry and promised that he would approve them.", "es": "Sí. Nos dijo que no nos preocupáramos y prometió que las aprobaría." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué Ana no estuvo en la llamada?", "opciones": ["Estaba en el dentista", "Se quedó dormida", "Estaba en otra reunión"], "correcta": 0,
+        "explicacion": "Ana dice \"I was at the dentist\"." },
+      { "pregunta": "¿Qué pidió el cliente?", "opciones": ["Un panel nuevo", "Un modo oscuro antes del lanzamiento", "Más reuniones"], "correcta": 1,
+        "explicacion": "\"He asked if we could add a dark mode before the launch\". El panel nuevo ya le encantaba." },
+      { "pregunta": "¿Qué dijo el cliente sobre las horas extra?", "opciones": ["Que no las pagaría", "Que lo pensaría", "Que las aprobaría"], "correcta": 2,
+        "explicacion": "\"He promised that he would approve them\": prometió aprobarlas." }
+    ] },
+  { "id": "en-avanzado-01-d02", "titulo": "Pasar el mensaje", "situacion": "Tom busca a Carlos, pero Carlos ya se fue. Ana le pasa su mensaje.",
+    "lineas": [
+      { "quien": "Tom", "en": "Hi Ana, have you seen Carlos? I need his update on the payment bug.", "es": "Hola Ana, ¿has visto a Carlos? Necesito que me diga cómo va el bug de pagos." },
+      { "quien": "Ana", "en": "He just left. He told me that he had a doctor's appointment.", "es": "Se acaba de ir. Me dijo que tenía cita con el médico." },
+      { "quien": "Ana", "en": "But he asked me to give you a message.", "es": "Pero me pidió que te diera un mensaje." },
+      { "quien": "Tom", "en": "Sure, go ahead.", "es": "Claro, dime." },
+      { "quien": "Ana", "en": "He said that the bug was in the payment form, not on the server.", "es": "Dijo que el bug estaba en el formulario de pago, no en el servidor." },
+      { "quien": "Ana", "en": "He also mentioned that he would push the fix tonight.", "es": "También mencionó que subiría el arreglo esta noche." },
+      { "quien": "Tom", "en": "Great. Did he say if he needed help with the tests?", "es": "Genial. ¿Dijo si necesitaba ayuda con los tests?" },
+      { "quien": "Ana", "en": "He didn't, but I offered to write them, and he said that was fine.", "es": "No lo dijo, pero me ofrecí a escribirlos y dijo que estaba bien." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué se fue Carlos?", "opciones": ["Tenía cita con el médico", "Terminó su turno", "Se fue de vacaciones"], "correcta": 0,
+        "explicacion": "\"He told me that he had a doctor's appointment\"." },
+      { "pregunta": "¿Dónde estaba el bug?", "opciones": ["En el servidor", "En el formulario de pago", "En los tests"], "correcta": 1,
+        "explicacion": "\"The bug was in the payment form, not on the server\"." },
+      { "pregunta": "¿Qué ofreció Ana?", "opciones": ["Arreglar el bug ella misma", "Llamar a Carlos", "Escribir los tests"], "correcta": 2,
+        "explicacion": "\"I offered to write them\": se ofreció a escribir los tests." }
+    ] },
+  { "id": "en-avanzado-01-d03", "titulo": "Después de la entrevista", "situacion": "Luis sale de una entrevista y Ana le pregunta cómo le fue.",
+    "lineas": [
+      { "quien": "Ana", "en": "So, how was the interview? What did they ask you?", "es": "¿Y? ¿Cómo te fue en la entrevista? ¿Qué te preguntaron?" },
+      { "quien": "Luis", "en": "First, they asked me why I wanted to work there.", "es": "Primero me preguntaron por qué quería trabajar ahí." },
+      { "quien": "Luis", "en": "Then the interviewer asked if I had ever used TypeScript.", "es": "Después la entrevistadora preguntó si alguna vez había usado TypeScript." },
+      { "quien": "Ana", "en": "And what did you tell her?", "es": "¿Y qué le dijiste?" },
+      { "quien": "Luis", "en": "I told her that I had used it in two personal projects.", "es": "Le dije que lo había usado en dos proyectos personales." },
+      { "quien": "Ana", "en": "Did she explain what the next steps were?", "es": "¿Te explicó cuáles eran los siguientes pasos?" },
+      { "quien": "Luis", "en": "Yes. She said that they would email me by Friday.", "es": "Sí. Dijo que me escribirían a más tardar el viernes." },
+      { "quien": "Ana", "en": "Fingers crossed!", "es": "¡Crucemos los dedos!" }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué le preguntaron primero a Luis?", "opciones": ["Cuánto quería ganar", "Por qué quería trabajar ahí", "Si sabía TypeScript"], "correcta": 1,
+        "explicacion": "\"First, they asked me why I wanted to work there\". Lo de TypeScript fue después (\"then\")." },
+      { "pregunta": "¿Qué respondió sobre TypeScript?", "opciones": ["Que nunca lo había usado", "Que lo usaba en su trabajo actual", "Que lo había usado en dos proyectos personales"], "correcta": 2,
+        "explicacion": "\"I told her that I had used it in two personal projects\"." },
+      { "pregunta": "¿Cuándo le van a escribir?", "opciones": ["A más tardar el viernes", "Al día siguiente", "En un mes"], "correcta": 0,
+        "explicacion": "\"They would email me by Friday\": **by** = a más tardar." }
+    ] }
+]

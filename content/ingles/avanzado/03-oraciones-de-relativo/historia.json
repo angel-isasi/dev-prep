@@ -1,0 +1,19 @@
+[
+  { "id": "en-avanzado-03-h01", "titulo": "La nueva del equipo", "situacion": "Llega Emma, una desarrolladora junior nueva. Tom le pide a Ana, que ya lleva más de un año en la empresa, que le explique cómo funciona el equipo.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, this is Emma, the new developer who's joining your team today.", "es": "Ana, ella es Emma, la nueva desarrolladora que se une hoy a tu equipo." },
+      { "quien": "Ana", "en": "Welcome, Emma! I still remember my first day, when I didn't know anybody.", "es": "¡Bienvenida, Emma! Todavía me acuerdo de mi primer día, cuando no conocía a nadie." },
+      { "quien": "Emma", "en": "Thanks! There are so many people here. Who should I ask about the design?", "es": "¡Gracias! Hay muchísima gente aquí. ¿A quién le pregunto sobre el diseño?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Sarah is the person ___ designs most of our components.", "es": "Sarah es la persona que diseña la mayoría de nuestros componentes.", "opciones": ["who", "which", "whose"], "correcta": 0, "explicacion": "Para personas, **who**. *Which* es para cosas y *whose* significa \"cuyo\"." },
+      { "quien": "Ana", "en": "And Carlos is the one whose name you'll see in every backend pull request.", "es": "Y Carlos es aquel cuyo nombre vas a ver en todos los pull requests del backend." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Emma va a ver tanto el nombre de Carlos?", "opciones": ["Porque es el jefe de la empresa", "Porque aparece en todos los pull requests del backend", "Porque diseña los componentes"], "correcta": 1, "explicacion": "\"The one whose name you'll see in every backend pull request\". Los componentes los diseña Sarah." },
+      { "quien": "Emma", "en": "Got it. Is there a document where I can find all the tools you use?", "es": "Entendido. ¿Hay algún documento donde pueda encontrar todas las herramientas que usan?" },
+      { "quien": "Ana", "en": "Yes, the onboarding guide, which Tom updates every month.", "es": "Sí, la guía de bienvenida, que Tom actualiza cada mes." },
+      { "tipo": "completa", "quien": "Ana", "en": "It's the guide ___ helped me the most when I started.", "es": "Es la guía que más me ayudó cuando empecé.", "opciones": ["that", "who", "where"], "correcta": 0, "explicacion": "Para cosas, **that**. Aquí no se puede quitar, porque es el sujeto de *helped*." },
+      { "quien": "Emma", "en": "Great. And which channel should I use for questions?", "es": "Genial. ¿Y qué canal uso para hacer preguntas?" },
+      { "quien": "Ana", "en": "Use the frontend help channel. It's the channel where people answer the fastest.", "es": "Usa el canal de ayuda de frontend. Es el canal donde la gente responde más rápido." },
+      { "tipo": "pregunta", "pregunta": "¿Dónde debe hacer Emma sus preguntas?", "opciones": ["En el canal de ayuda de frontend", "Por correo a Tom", "En la daily"], "correcta": 0, "explicacion": "Ana le dice que use el canal de ayuda de frontend, \"where people answer the fastest\"." },
+      { "quien": "Emma", "en": "Thanks, Ana. You're the kind of person who makes the first day easier.", "es": "Gracias, Ana. Eres el tipo de persona que hace más fácil el primer día." },
+      { "quien": "Ana", "en": "That's what Sarah did for me. Now it's my turn.", "es": "Eso hizo Sarah por mí. Ahora me toca a mí." }
+    ] }
+]

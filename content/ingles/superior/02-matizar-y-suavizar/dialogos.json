@@ -1,0 +1,58 @@
+[
+  { "id": "en-superior-02-d01", "titulo": "Discrepar en la reunión de arquitectura", "situacion": "Tom propone cambiar la librería de estado de toda la app. Sarah no está de acuerdo.",
+    "lineas": [
+      { "quien": "Tom", "en": "I think we should move the whole app to a new state library.", "es": "Creo que deberíamos pasar toda la app a una nueva librería de estado." },
+      { "quien": "Sarah", "en": "I see where you're coming from, but I'm not entirely convinced.", "es": "Entiendo por qué lo dices, pero no termino de convencerme." },
+      { "quien": "Tom", "en": "Why not? The current setup is a mess.", "es": "¿Por qué no? Lo que tenemos ahora es un desastre." },
+      { "quien": "Sarah", "en": "To some extent, yes. But most of the mess is in two or three files.", "es": "Hasta cierto punto, sí. Pero la mayor parte del desorden está en dos o tres archivos." },
+      { "quien": "Sarah", "en": "I'd argue that a full migration is somewhat risky right before the launch.", "es": "Yo diría que una migración completa es algo arriesgada justo antes del lanzamiento." },
+      { "quien": "Tom", "en": "Fair. What would you suggest instead?", "es": "Es justo. ¿Qué sugerirías en su lugar?" },
+      { "quien": "Sarah", "en": "What if we cleaned up those files first and revisited this next quarter?", "es": "¿Y si primero limpiamos esos archivos y lo volvemos a ver el próximo trimestre?" },
+      { "quien": "Tom", "en": "That sounds reasonable. Let's tentatively plan it for the second quarter.", "es": "Suena razonable. Planeémoslo de forma provisional para el segundo trimestre." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Dónde está la mayor parte del desorden, según Sarah?", "opciones": ["En toda la app", "En dos o tres archivos", "En la librería nueva"], "correcta": 1,
+        "explicacion": "\"Most of the mess is in two or three files\"." },
+      { "pregunta": "¿Por qué Sarah no quiere migrar ahora?", "opciones": ["Porque es algo arriesgado antes del lanzamiento", "Porque no conoce la librería", "Porque Tom no le cae bien"], "correcta": 0,
+        "explicacion": "\"A full migration is somewhat risky right before the launch\"." },
+      { "pregunta": "¿Qué acuerdan al final?", "opciones": ["Migrar todo esta semana", "Limpiar primero y planear la migración para el segundo trimestre, de forma provisional", "Olvidarse del tema"], "correcta": 1,
+        "explicacion": "Sarah propone limpiar primero y Tom dice \"Let's tentatively plan it for the second quarter\"." }
+    ] },
+  { "id": "en-superior-02-d02", "titulo": "Un code review con tacto", "situacion": "María revisó el pull request de Carlos y le comenta lo que encontró.",
+    "lineas": [
+      { "quien": "María", "en": "Nice work on the filter. I left a few comments, mostly nits.", "es": "Buen trabajo con el filtro. Dejé algunos comentarios, casi todos detalles menores." },
+      { "quien": "Carlos", "en": "Thanks! Is anything blocking?", "es": "¡Gracias! ¿Algo impide el merge?" },
+      { "quien": "María", "en": "Just one thing. It seems the list re-renders on every keystroke.", "es": "Solo una cosa. Parece que la lista se vuelve a renderizar con cada tecla." },
+      { "quien": "Carlos", "en": "Oh, I hadn't noticed. Is it a big problem?", "es": "Ah, no me había dado cuenta. ¿Es un gran problema?" },
+      { "quien": "María", "en": "Not right now. But with a thousand items, it could potentially freeze.", "es": "Ahora no. Pero con mil elementos, podría llegar a congelarse." },
+      { "quien": "Carlos", "en": "Makes sense. Would a debounce of roughly three hundred milliseconds work?", "es": "Tiene sentido. ¿Funcionaría un debounce de aproximadamente trescientos milisegundos?" },
+      { "quien": "María", "en": "I'd say so. The rest is just naming, so feel free to ignore it.", "es": "Diría que sí. Lo demás son solo nombres, así que puedes ignorarlo si quieres." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué problema encontró María?", "opciones": ["El filtro no funciona", "La lista se vuelve a renderizar con cada tecla", "Faltan tests"], "correcta": 1,
+        "explicacion": "\"It seems the list re-renders on every keystroke\"." },
+      { "pregunta": "¿Cuándo sería grave el problema?", "opciones": ["Con mil elementos", "Solo en celulares", "Nunca"], "correcta": 0,
+        "explicacion": "\"With a thousand items, it could potentially freeze\"." },
+      { "pregunta": "¿Qué dice María de los demás comentarios?", "opciones": ["Que son obligatorios", "Que son solo de nombres y puede ignorarlos", "Que los revisará Tom"], "correcta": 1,
+        "explicacion": "\"The rest is just naming, so feel free to ignore it\"." }
+    ] },
+  { "id": "en-superior-02-d03", "titulo": "La estimación", "situacion": "Tom le pide a Luis una estimación para una función nueva.",
+    "lineas": [
+      { "quien": "Tom", "en": "Luis, how long would the export feature take?", "es": "Luis, ¿cuánto tomaría la función de exportar?" },
+      { "quien": "Luis", "en": "It's hard to say exactly. Can I give you a rough estimate?", "es": "Es difícil decirlo con exactitud. ¿Te puedo dar un estimado aproximado?" },
+      { "quien": "Tom", "en": "Sure, that's all I need for now.", "es": "Claro, es todo lo que necesito por ahora." },
+      { "quien": "Luis", "en": "Roughly a week, give or take. It depends on the PDF library.", "es": "Aproximadamente una semana, más o menos. Depende de la librería de PDF." },
+      { "quien": "Tom", "en": "Is there a risk it takes longer?", "es": "¿Hay riesgo de que tome más?" },
+      { "quien": "Luis", "en": "It's unlikely, but the library seems to have some issues with large tables.", "es": "Es poco probable, pero la librería parece tener algunos problemas con tablas grandes." },
+      { "quien": "Tom", "en": "Okay. Let me know if that changes.", "es": "Ok. Avísame si eso cambia." },
+      { "quien": "Luis", "en": "Will do. I'll have a better idea by Wednesday or so.", "es": "Así lo haré. Tendré una mejor idea para el miércoles o algo así." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuánto calcula Luis?", "opciones": ["Un día", "Aproximadamente una semana", "Un mes"], "correcta": 1,
+        "explicacion": "\"Roughly a week, give or take\"." },
+      { "pregunta": "¿De qué depende la estimación?", "opciones": ["De la librería de PDF", "Del diseño", "Del cliente"], "correcta": 0,
+        "explicacion": "\"It depends on the PDF library\"." },
+      { "pregunta": "¿Qué riesgo menciona Luis?", "opciones": ["Que se vaya de vacaciones", "Que la librería tenga problemas con tablas grandes", "Que el servidor sea lento"], "correcta": 1,
+        "explicacion": "\"The library seems to have some issues with large tables\"." }
+    ] }
+]

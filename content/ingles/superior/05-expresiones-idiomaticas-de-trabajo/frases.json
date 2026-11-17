@@ -1,0 +1,185 @@
+[
+  {
+    "id": "en-superior-05-f01",
+    "en": "Can you give me a ballpark figure for the migration?",
+    "es": "¿Me puedes dar un número aproximado para la migración?",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f02",
+    "en": "I'd rather not cut corners on accessibility.",
+    "es": "Preferiría no tomarme la accesibilidad a la ligera.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f03",
+    "en": "Compressing the images is the low-hanging fruit here.",
+    "es": "Aquí, comprimir las imágenes es lo más fácil y ya da resultado."
+  },
+  {
+    "id": "en-superior-05-f04",
+    "en": "We'll have to bite the bullet and rewrite the tests.",
+    "es": "Tendremos que asumirlo de una vez y reescribir los tests."
+  },
+  {
+    "id": "en-superior-05-f05",
+    "en": "Let's touch base after the client call.",
+    "es": "Hablemos un momento después de la llamada con el cliente.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f06",
+    "en": "Honestly, this feature won't move the needle.",
+    "es": "Sinceramente, esta funcionalidad no va a cambiar nada importante."
+  },
+  {
+    "id": "en-superior-05-f07",
+    "en": "The design is a moving target, so I'm keeping the code flexible.",
+    "es": "El diseño cambia todo el tiempo, así que estoy dejando el código flexible."
+  },
+  {
+    "id": "en-superior-05-f08",
+    "en": "The users hated it, so it's back to the drawing board.",
+    "es": "Los usuarios lo odiaron, así que toca volver a empezar."
+  },
+  {
+    "id": "en-superior-05-f09",
+    "en": "That's on me, I dropped the ball on the release notes.",
+    "es": "Eso es culpa mía, se me pasaron las notas de la versión.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f10",
+    "en": "We've put dark mode on the back burner for now.",
+    "es": "Por ahora hemos dejado el modo oscuro para más adelante."
+  },
+  {
+    "id": "en-superior-05-f11",
+    "en": "Let me get the ball rolling with a quick summary.",
+    "es": "Déjame arrancar con un resumen rápido.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f12",
+    "en": "Before we get into details, let's look at the big picture.",
+    "es": "Antes de entrar en detalles, veamos el panorama general.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f13",
+    "en": "Please keep me in the loop if anything changes.",
+    "es": "Por favor, mantenme al tanto si algo cambia.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f14",
+    "en": "I don't have the bandwidth for this right now.",
+    "es": "Ahora mismo no tengo tiempo para esto.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f15",
+    "en": "We need a deep dive into why checkout is so slow.",
+    "es": "Necesitamos analizar a fondo por qué el checkout es tan lento."
+  },
+  {
+    "id": "en-superior-05-f16",
+    "en": "Caching the API response would be a quick win.",
+    "es": "Cachear la respuesta de la API sería una mejora rápida que se nota."
+  },
+  {
+    "id": "en-superior-05-f17",
+    "en": "Sarah hit the nail on the head: the real problem is the old server.",
+    "es": "Sarah dio en el clavo: el verdadero problema es el servidor viejo."
+  },
+  {
+    "id": "en-superior-05-f18",
+    "en": "Switching to Vite was a game changer for our build times.",
+    "es": "Pasarnos a Vite cambió por completo nuestros tiempos de build."
+  },
+  {
+    "id": "en-superior-05-f19",
+    "en": "I learn fast, so I'm confident I can hit the ground running.",
+    "es": "Aprendo rápido, así que confío en que puedo rendir desde el primer día.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f20",
+    "en": "My first month was mostly about learning the ropes.",
+    "es": "Mi primer mes fue sobre todo para aprender cómo funcionaba todo.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f21",
+    "en": "Could I pick your brain about testing for ten minutes?",
+    "es": "¿Te puedo hacer unas consultas sobre testing por diez minutos?",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f22",
+    "en": "We don't know the traffic yet, so let's play it by ear.",
+    "es": "Todavía no sabemos cuánto tráfico habrá, así que vamos viendo."
+  },
+  {
+    "id": "en-superior-05-f23",
+    "en": "Let's address the elephant in the room: we're behind schedule.",
+    "es": "Hablemos del problema que nadie menciona: vamos atrasados."
+  },
+  {
+    "id": "en-superior-05-f24",
+    "en": "It's late and we're stuck, so let's call it a day.",
+    "es": "Es tarde y estamos atascados, así que dejémoslo por hoy."
+  },
+  {
+    "id": "en-superior-05-f25",
+    "en": "For anything involving payments, we do things by the book.",
+    "es": "Con todo lo que tenga que ver con pagos, seguimos las reglas al pie de la letra."
+  },
+  {
+    "id": "en-superior-05-f26",
+    "en": "I'm on the fence about adding another dependency.",
+    "es": "No me decido sobre agregar otra dependencia."
+  },
+  {
+    "id": "en-superior-05-f27",
+    "en": "It's a long shot, but try it in a private window.",
+    "es": "Es poco probable que funcione, pero pruébalo en una ventana privada."
+  },
+  {
+    "id": "en-superior-05-f28",
+    "en": "We sent the proposal on Monday, so the ball is in their court.",
+    "es": "Mandamos la propuesta el lunes, así que ahora les toca a ellos."
+  },
+  {
+    "id": "en-superior-05-f29",
+    "en": "There's already a library for that, so let's not reinvent the wheel.",
+    "es": "Ya existe una librería para eso, así que no hagamos todo desde cero."
+  },
+  {
+    "id": "en-superior-05-f30",
+    "en": "This sprint, let's not try to boil the ocean.",
+    "es": "En este sprint, no intentemos abarcarlo todo."
+  },
+  {
+    "id": "en-superior-05-f31",
+    "en": "Given how often it breaks, adding tests is a no-brainer.",
+    "es": "Con lo seguido que se rompe, agregar tests es una decisión obvia."
+  },
+  {
+    "id": "en-superior-05-f32",
+    "en": "I'd never throw a teammate under the bus in a meeting.",
+    "es": "Nunca le echaría la culpa a un compañero en una reunión para salvarme.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-05-f33",
+    "en": "They moved the goalposts two days before the launch.",
+    "es": "Cambiaron las condiciones dos días antes del lanzamiento."
+  },
+  {
+    "id": "en-superior-05-f34",
+    "en": "We're out of time, so let's table this until Monday.",
+    "es": "Se nos acabó el tiempo, así que dejemos esto para el lunes.",
+    "trabajo": true
+  }
+]

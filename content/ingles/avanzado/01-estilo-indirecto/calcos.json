@@ -1,0 +1,6 @@
+[
+  { "id": "en-avanzado-01-c01", "es": "Me dijo que esperara.", "natural": "He told me to wait.", "calco": "He told me that I wait.", "explicacion": "Las órdenes y pedidos se reportan con **tell + persona + to + verbo**. El \"que\" + subjuntivo del español no se traduce con *that*." },
+  { "id": "en-avanzado-01-c02", "es": "Me explicó el problema.", "natural": "He explained the problem to me.", "calco": "He explained me the problem.", "explicacion": "**Explain** no lleva a la persona justo después: *explain something **to** someone*." },
+  { "id": "en-avanzado-01-c03", "es": "Me preguntó dónde estaba el archivo.", "natural": "She asked me where the file was.", "calco": "She asked me where was the file.", "explicacion": "En la pregunta reportada va el orden de frase normal: **the file was**, no el de pregunta." },
+  { "id": "en-avanzado-01-c04", "es": "Me dijo que estaba ocupado.", "natural": "He told me that he was busy.", "calco": "He said me that he was busy.", "explicacion": "\"Me dijo\" con la persona es **told me**. *Say* va sin persona (*he said that...*) o con *to* (*he said to me*)." }
+]

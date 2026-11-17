@@ -1,0 +1,53 @@
+[
+  { "id": "en-avanzado-05-d01", "titulo": "Buscar un hueco en la agenda", "situacion": "Sarah quiere revisar la hoja de ruta con Ana esta semana.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Are you free on Thursday afternoon? I'd like to go over the roadmap.", "es": "¿Estás libre el jueves por la tarde? Me gustaría revisar la hoja de ruta." },
+      { "quien": "Ana", "en": "I'm meeting the design team at two, but I'll be free after four.", "es": "A las dos me reúno con el equipo de diseño, pero estaré libre después de las cuatro." },
+      { "quien": "Sarah", "en": "Perfect. Will you have finished the login page by then?", "es": "Perfecto. ¿Para entonces habrás terminado la página de login?" },
+      { "quien": "Ana", "en": "Probably not. I'll still be working on the tests.", "es": "Probablemente no. Todavía estaré trabajando en los tests." },
+      { "quien": "Sarah", "en": "No problem. When do you think it'll be ready?", "es": "No hay problema. ¿Cuándo crees que estará lista?" },
+      { "quien": "Ana", "en": "I'll have it done by Friday at noon, no later.", "es": "La tendré lista para el viernes al mediodía, a más tardar." },
+      { "quien": "Sarah", "en": "Great. Let's pencil in four o'clock on Thursday, then.", "es": "Genial. Entonces agendemos tentativamente el jueves a las cuatro." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué hace Ana el jueves a las dos?", "opciones": ["Se reúne con el equipo de diseño", "Revisa la hoja de ruta con Sarah", "Termina la página de login"], "correcta": 0,
+        "explicacion": "\"I'm meeting the design team at two\": un plan fijo, por eso va en presente continuo." },
+      { "pregunta": "¿Habrá terminado Ana la página de login el jueves por la tarde?", "opciones": ["Sí, ya la habrá terminado", "No, todavía estará con los tests", "No, ni siquiera la habrá empezado"], "correcta": 1,
+        "explicacion": "\"Probably not. I'll still be working on the tests\"." },
+      { "pregunta": "¿Para cuándo tendrá lista la página?", "opciones": ["El jueves a las cuatro", "El viernes al mediodía, a más tardar", "La próxima semana"], "correcta": 1,
+        "explicacion": "\"I'll have it done by Friday at noon, no later\"." }
+    ] },
+  { "id": "en-avanzado-05-d02", "titulo": "¿Quién estará de guardia?", "situacion": "Tom y Sarah organizan el despliegue del fin de semana.",
+    "lineas": [
+      { "quien": "Tom", "en": "We're deploying the new checkout on Saturday night.", "es": "El sábado por la noche desplegamos el nuevo checkout." },
+      { "quien": "Sarah", "en": "Who'll be on call that weekend?", "es": "¿Quién estará de guardia ese fin de semana?" },
+      { "quien": "Tom", "en": "I will. I'll be checking the dashboards every couple of hours.", "es": "Yo. Estaré revisando los paneles cada par de horas." },
+      { "quien": "Sarah", "en": "I can't help on Saturday. I'm flying out to Chicago for a wedding.", "es": "El sábado no puedo ayudar. Viajo a Chicago por una boda." },
+      { "quien": "Tom", "en": "No worries. By the time you're back, the rollout will have finished.", "es": "Tranquila. Para cuando vuelvas, el despliegue habrá terminado." },
+      { "quien": "Sarah", "en": "And what if something goes wrong?", "es": "¿Y si algo sale mal?" },
+      { "quien": "Tom", "en": "Then we'll roll back and try again next week.", "es": "Entonces volvemos a la versión anterior y lo intentamos la próxima semana." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cuándo es el despliegue?", "opciones": ["El sábado por la noche", "El domingo en la mañana", "La próxima semana"], "correcta": 0,
+        "explicacion": "\"We're deploying the new checkout on Saturday night\"." },
+      { "pregunta": "¿Por qué Sarah no puede ayudar el sábado?", "opciones": ["Porque estará de guardia en otro proyecto", "Porque viaja a Chicago para una boda", "Porque está enferma"], "correcta": 1,
+        "explicacion": "\"I'm flying out to Chicago for a wedding\"." },
+      { "pregunta": "¿Qué harán si algo sale mal?", "opciones": ["Llamar a Sarah", "Volver a la versión anterior e intentarlo la próxima semana", "Dejarlo así hasta el lunes"], "correcta": 1,
+        "explicacion": "\"Then we'll roll back and try again next week\"." }
+    ] },
+  { "id": "en-avanzado-05-d03", "titulo": "Planes de Ana", "situacion": "Luis y Ana hablan de sus planes en una cafetería.",
+    "lineas": [
+      { "quien": "Luis", "en": "What are you doing this weekend?", "es": "¿Qué vas a hacer este fin de semana?" },
+      { "quien": "Ana", "en": "I'm visiting my parents. My mom's turning sixty on Sunday.", "es": "Voy a visitar a mis papás. Mi mamá cumple sesenta el domingo." },
+      { "quien": "Luis", "en": "Nice! And when are you going to take that trip to Cusco?", "es": "¡Qué bien! ¿Y cuándo vas a hacer ese viaje a Cusco?" },
+      { "quien": "Ana", "en": "In March. By then, I'll have saved enough money.", "es": "En marzo. Para entonces habré ahorrado suficiente dinero." },
+      { "quien": "Luis", "en": "This time next year, you'll be planning a trip to Europe!", "es": "¡El próximo año a esta hora estarás planeando un viaje a Europa!" },
+      { "quien": "Ana", "en": "I hope so! By then, I'll have been working for two years.", "es": "¡Ojalá! Para entonces, cumpliré dos años trabajando." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué hace Ana este fin de semana?", "opciones": ["Viaja a Cusco", "Visita a sus papás por el cumpleaños de su mamá", "Trabaja desde casa"], "correcta": 1,
+        "explicacion": "\"I'm visiting my parents. My mom's turning sixty on Sunday\"." },
+      { "pregunta": "¿Por qué Ana viaja a Cusco en marzo?", "opciones": ["Porque para entonces habrá ahorrado suficiente", "Porque tiene vacaciones en marzo", "Porque Luis va con ella"], "correcta": 0,
+        "explicacion": "\"By then, I'll have saved enough money\": futuro perfecto, algo terminado antes de marzo." }
+    ] }
+]

@@ -9,6 +9,13 @@ La sección Inglés lleva a Angel desde lo básico hasta un inglés de trabajo p
 | Base | `content/ingles/basico/` | A1 a A2 | Entender y armar frases simples, presentarte, hablar de tu rutina y de tu pasado |
 | Intermedio | `content/ingles/intermedio/` | B1 | Contar tu experiencia, leer documentación, escribir mensajes de trabajo |
 | Trabajo | `content/ingles/trabajo/` | B1 alto a B2 | Entrevista completa, daily, revisión de código, conversación de equipo |
+| Avanzado | `content/ingles/avanzado/` | B2 | Gramática general de B2 aplicada al trabajo: estilo indirecto, condicionales mixtos, relativos, gerundio o infinitivo, futuros, wish, pasado perfecto, modales de deducción |
+| Superior | `content/ingles/superior/` | C1 | Matices y registro: inversión y énfasis, suavizar, participios, colocaciones, idioms de trabajo, negociar, escribir y presentar |
+| Dominio | `content/ingles/dominio/` | C2 | (pendiente) Naturalidad casi nativa |
+
+En C1 y C2 las frases pueden tener hasta 16 palabras y las palabras pueden ser expresiones o colocaciones completas.
+
+**Examen de nivel** (`client/src/movil/ingles/examen.js`): toma los ejercicios de gramática, los calcos ("¿cuál suena natural?") y el significado de las palabras de cada unidad. Por eso cada unidad necesita ejercicios que de verdad midan su nivel.
 
 ## Una unidad
 
@@ -24,8 +31,8 @@ Cada unidad es una carpeta `NN-slug` dentro de su etapa, por ejemplo `content/in
 | `dialogos.json` | no | Diálogos cortos con preguntas de comprensión |
 
 - `id`: `en-` + etapa + número, por ejemplo `en-basico-05`. Único en toda la sección.
-- `etapa`: `basico`, `intermedio` o `trabajo`.
-- `nivel`: `A1`, `A2`, `B1` o `B2`.
+- `etapa`: `basico`, `intermedio`, `trabajo`, `avanzado`, `superior` o `dominio`.
+- `nivel`: `A1`, `A2`, `B1`, `B2`, `C1` o `C2`.
 - `titulo` y `descripcion` en español, por ejemplo `"Presente simple"` y `"Hablar de rutinas y hechos: I work, she works, do you...?"`.
 
 ### `teoria.md`

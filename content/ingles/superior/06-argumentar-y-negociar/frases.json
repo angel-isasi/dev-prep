@@ -1,0 +1,193 @@
+[
+  {
+    "id": "en-superior-06-f01",
+    "en": "Granted, the old library is stable. That said, nobody maintains it anymore.",
+    "es": "Es cierto que la librería vieja es estable. Aun así, ya nadie la mantiene.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f02",
+    "en": "I take your point, but I'm worried about the migration cost.",
+    "es": "Entiendo tu argumento, pero me preocupa el costo de la migración.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f03",
+    "en": "The trade-off is that we ship later, but with fewer bugs.",
+    "es": "El costo es que entregamos más tarde, pero con menos bugs.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f04",
+    "en": "Would you be open to migrating just one page first?",
+    "es": "¿Estarías abierto a migrar primero una sola página?",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f05",
+    "en": "I'd like to make the case for keeping the current design.",
+    "es": "Me gustaría argumentar a favor de mantener el diseño actual."
+  },
+  {
+    "id": "en-superior-06-f06",
+    "en": "We could meet halfway: two features now and one next sprint.",
+    "es": "Podríamos llegar a un punto medio: dos funcionalidades ahora y una el próximo sprint.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f07",
+    "en": "If Friday is a hard deadline, we'll need to descope.",
+    "es": "Si el viernes es una fecha que no se mueve, vamos a tener que recortar el alcance.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f08",
+    "en": "Realistically, we can deliver two of the three features by Friday.",
+    "es": "Siendo realistas, podemos entregar dos de las tres funcionalidades para el viernes.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f09",
+    "en": "Let me play devil's advocate for a second.",
+    "es": "Déjame hacer de abogado del diablo un momento."
+  },
+  {
+    "id": "en-superior-06-f10",
+    "en": "The way I see it, the real risk is in the payment flow.",
+    "es": "Como yo lo veo, el verdadero riesgo está en el flujo de pago."
+  },
+  {
+    "id": "en-superior-06-f11",
+    "en": "On balance, I think the rewrite is worth it.",
+    "es": "Considerándolo todo, creo que la reescritura vale la pena."
+  },
+  {
+    "id": "en-superior-06-f12",
+    "en": "Be that as it may, the client still expects it on Monday.",
+    "es": "Sea como sea, el cliente igual lo espera para el lunes."
+  },
+  {
+    "id": "en-superior-06-f13",
+    "en": "The only sticking point is the start date.",
+    "es": "Lo único que traba el acuerdo es la fecha de inicio."
+  },
+  {
+    "id": "en-superior-06-f14",
+    "en": "I'm really excited about the role and the team.",
+    "es": "El puesto y el equipo me entusiasman mucho.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f15",
+    "en": "Is there any flexibility on the base salary?",
+    "es": "¿Hay algo de flexibilidad en el sueldo base?",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f16",
+    "en": "Based on the market rate, I was hoping for something closer to four thousand.",
+    "es": "Según lo que paga el mercado, esperaba algo más cerca de cuatro mil.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f17",
+    "en": "Could you send me the full offer in writing?",
+    "es": "¿Me podrías enviar la oferta completa por escrito?",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f18",
+    "en": "If the salary is fixed, could we revisit the signing bonus?",
+    "es": "Si el sueldo no se puede mover, ¿podríamos revisar el bono por firmar?",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f19",
+    "en": "I'd be willing to come to the office more in exchange for flexible hours.",
+    "es": "Estaría dispuesto a ir más a la oficina a cambio de horario flexible."
+  },
+  {
+    "id": "en-superior-06-f20",
+    "en": "No remote work at all would be a deal-breaker for me.",
+    "es": "Que no haya nada de trabajo remoto sería motivo suficiente para decir que no."
+  },
+  {
+    "id": "en-superior-06-f21",
+    "en": "The offer is contingent on a background check.",
+    "es": "La oferta está condicionada a una verificación de antecedentes."
+  },
+  {
+    "id": "en-superior-06-f22",
+    "en": "Accessibility is non-negotiable for this client.",
+    "es": "Para este cliente, la accesibilidad es innegociable."
+  },
+  {
+    "id": "en-superior-06-f23",
+    "en": "I'd like to raise a concern about the timeline.",
+    "es": "Quisiera plantear una preocupación sobre el cronograma.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f24",
+    "en": "I know it's a big ask, but could you review it today?",
+    "es": "Sé que es mucho pedir, pero ¿podrías revisarlo hoy?",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f25",
+    "en": "Let's treat the export feature as a stretch goal.",
+    "es": "Tomemos la exportación como una meta extra, si sobra tiempo."
+  },
+  {
+    "id": "en-superior-06-f26",
+    "en": "I added a two-day buffer in case the API changes.",
+    "es": "Agregué un margen de dos días por si cambia la API."
+  },
+  {
+    "id": "en-superior-06-f27",
+    "en": "If they won't move on salary, I'm prepared to walk away.",
+    "es": "Si no ceden en el sueldo, estoy preparado para retirarme de la negociación."
+  },
+  {
+    "id": "en-superior-06-f28",
+    "en": "A competing offer gives you some leverage.",
+    "es": "Una oferta de otra empresa te da algo de poder de negociación."
+  },
+  {
+    "id": "en-superior-06-f29",
+    "en": "Remote work is still on the table if you accept this week.",
+    "es": "El trabajo remoto sigue siendo una opción si aceptas esta semana."
+  },
+  {
+    "id": "en-superior-06-f30",
+    "en": "I hear you, and I'd still push for more tests before launch.",
+    "es": "Te entiendo, y aun así insistiría en más tests antes del lanzamiento."
+  },
+  {
+    "id": "en-superior-06-f31",
+    "en": "Let's start with the common ground and then look at the differences.",
+    "es": "Empecemos por los puntos en común y luego veamos las diferencias."
+  },
+  {
+    "id": "en-superior-06-f32",
+    "en": "We made a concession on scope, so the date has to stay.",
+    "es": "Cedimos en el alcance, así que la fecha tiene que mantenerse."
+  },
+  {
+    "id": "en-superior-06-f33",
+    "en": "They accepted my counteroffer after a short call.",
+    "es": "Aceptaron mi contraoferta después de una llamada corta."
+  },
+  {
+    "id": "en-superior-06-f34",
+    "en": "Could we extend the deadline by two days?",
+    "es": "¿Podríamos extender la fecha de entrega dos días?",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-06-f35",
+    "en": "Thank you, I'd like a couple of days to think it over.",
+    "es": "Gracias, me gustaría tomarme un par de días para pensarlo.",
+    "trabajo": true
+  }
+]

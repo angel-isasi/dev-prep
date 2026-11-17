@@ -1,0 +1,29 @@
+[
+  { "id": "en-avanzado-05-r01", "titulo": "¿Para cuándo estará listo?", "situacion": "Tom necesita darle una fecha al cliente y te pregunta por el dashboard en el que trabajas.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "Hey Ana, the client is asking when the dashboard will be ready. What should I tell them?", "es": "Oye Ana, el cliente pregunta cuándo estará listo el dashboard. ¿Qué le digo?" },
+      { "opciones": [
+          { "en": "I'll have the main charts done by Wednesday, and the filters by Friday.", "es": "Tendré los gráficos principales para el miércoles y los filtros para el viernes.", "correcta": true, "explicacion": "Plazos concretos con **by** y futuro perfecto: Tom puede pasarle esas fechas al cliente." },
+          { "en": "It'll be ready when it's ready.", "es": "", "correcta": false, "explicacion": "Suena defensivo y no da ninguna fecha. Tom necesita un plazo para el cliente." },
+          { "en": "I'll have finished everything until Wednesday.", "es": "", "correcta": false, "explicacion": "*until* es \"hasta\" (duración). Para un plazo se dice **by** Wednesday." }
+        ] },
+      { "quien": "Tom", "en": "Wednesday sounds good. Will you be working on anything else this week?", "es": "El miércoles suena bien. ¿Vas a estar trabajando en algo más esta semana?" },
+      { "opciones": [
+          { "en": "No, I'll be totally free. I can take five more tickets.", "es": "", "correcta": false, "explicacion": "Prometer de más es arriesgado: si aceptas cinco tickets más, las fechas que acabas de dar se caen." },
+          { "en": "Yes, I'm pairing with Sarah on Thursday morning, so I'll be a bit slower that day.", "es": "Sí, el jueves en la mañana hago pair programming con Sarah, así que ese día iré un poco más lenta.", "correcta": true, "explicacion": "Presente continuo para un plan fijo, y avisas con anticipación cómo afecta tu ritmo." },
+          { "en": "Maybe I pair with Sarah on Thursday, I don't know.", "es": "", "correcta": false, "explicacion": "Suena inseguro, y un plan ya fijado va en presente continuo: *I'm pairing with Sarah*." }
+        ] },
+      { "quien": "Tom", "en": "Got it. What if the API changes again?", "es": "Entendido. ¿Y si la API vuelve a cambiar?" },
+      { "opciones": [
+          { "en": "Then I'll let you know as soon as I will hear about it.", "es": "", "correcta": false, "explicacion": "Después de **as soon as** va presente: *as soon as I hear about it*." },
+          { "en": "That's not my problem. The backend team should handle it.", "es": "", "correcta": false, "explicacion": "Suena a lavarte las manos. Tom pregunta por el riesgo para el plazo, no de quién es la culpa." },
+          { "en": "Then the date might slip a day or two. I'll let you know as soon as I hear about it.", "es": "Entonces la fecha podría retrasarse uno o dos días. Te aviso apenas me entere.", "correcta": true, "explicacion": "Anticipas el riesgo con honestidad (*might slip*) y te comprometes a avisar: *as soon as* + presente." }
+        ] },
+      { "quien": "Tom", "en": "Perfect. I'm meeting them at five. Anything else I should mention?", "es": "Perfecto. Me reúno con ellos a las cinco. ¿Algo más que deba mencionar?" },
+      { "opciones": [
+          { "en": "Just that by the time they test it, we'll have fixed the export bug too.", "es": "Solo que para cuando lo prueben, también habremos arreglado el bug de exportación.", "correcta": true, "explicacion": "**by the time** + presente y futuro perfecto: das una buena noticia concreta y realista." },
+          { "en": "Tell them we'll finish everything tomorrow, no problem.", "es": "", "correcta": false, "explicacion": "Contradice las fechas que acabas de dar (miércoles y viernes). Sobreprometer daña la confianza del cliente." },
+          { "en": "Just that by the time they will test it, we'll have fixed the export bug too.", "es": "", "correcta": false, "explicacion": "Después de **by the time** no va *will*: *by the time they test it*." }
+        ] }
+    ] }
+]

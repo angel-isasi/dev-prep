@@ -1,0 +1,6 @@
+[
+  { "id": "en-superior-02-c01", "es": "Suelo trabajar de noche.", "natural": "I tend to work at night.", "calco": "I use to work at night.", "explicacion": "En presente no existe *use to*. \"Soler\" es **tend to** (o *I usually work at night*). *Used to* solo habla del pasado." },
+  { "id": "en-superior-02-c02", "es": "En cierta medida, tienes razón.", "natural": "To some extent, you're right.", "calco": "In some measure, you have reason.", "explicacion": "\"En cierta medida\" es **to some extent** y \"tener razón\" es **be right**. *Have reason* no existe con ese sentido." },
+  { "id": "en-superior-02-c03", "es": "Parece que es un problema de caché.", "natural": "It seems to be a caching issue.", "calco": "It seems that is a caching issue.", "explicacion": "Al calco le falta el sujeto: *that **it** is*. Lo más natural es **It seems to be...**" },
+  { "id": "en-superior-02-c04", "es": "Entiendo tu punto, pero no estoy de acuerdo.", "natural": "I see your point, but I don't agree.", "calco": "I understand your point, but I'm not agree.", "explicacion": "*Agree* es un verbo, no un adjetivo: **I don't agree** o *I disagree*. *I'm not agree* es el calco de \"no estoy de acuerdo\"." }
+]

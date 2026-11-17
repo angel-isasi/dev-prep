@@ -1,0 +1,6 @@
+[
+  { "id": "en-superior-01-c01", "es": "Nunca he visto algo así.", "natural": "I've never seen anything like it.", "calco": "Never I have seen something like this.", "explicacion": "Si empiezas con **Never** tienes que invertir (*Never have I seen...*), y eso suena formal. En una conversación lo natural es *I've never seen anything like it*. Además, en negativa \"algo\" es **anything**." },
+  { "id": "en-superior-01-c02", "es": "Lo que necesito es más tiempo.", "natural": "What I need is more time.", "calco": "That what I need is more time.", "explicacion": "\"Lo que\" al inicio es **What**, sin *That* delante. *The what* y *That what* son calcos del artículo español." },
+  { "id": "en-superior-01-c03", "es": "Fue Sarah quien lo encontró.", "natural": "It was Sarah who found it.", "calco": "Was Sarah who found it.", "explicacion": "En inglés la oración necesita sujeto: **It** was Sarah who... En español \"fue\" va solo, por eso se pierde el *It*." },
+  { "id": "en-superior-01-c04", "es": "Todo lo que hice fue reiniciar el servidor.", "natural": "All I did was restart the server.", "calco": "All what I did was restart the server.", "explicacion": "\"Todo lo que\" es **All** (o *All that*), nunca *All what*." }
+]

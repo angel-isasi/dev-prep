@@ -1,0 +1,185 @@
+[
+  {
+    "id": "en-superior-07-f01",
+    "en": "REST returns full objects, whereas GraphQL returns only the requested fields.",
+    "es": "REST devuelve objetos completos, mientras que GraphQL devuelve solo los campos pedidos.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f02",
+    "en": "We cache the response, thereby reducing the number of API calls.",
+    "es": "Cacheamos la respuesta, con lo cual reducimos la cantidad de llamadas a la API.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f03",
+    "en": "Notwithstanding these risks, we recommend upgrading to version five.",
+    "es": "A pesar de estos riesgos, recomendamos actualizar a la versión cinco."
+  },
+  {
+    "id": "en-superior-07-f04",
+    "en": "The old endpoint times out under heavy load; hence the new queue.",
+    "es": "El endpoint viejo da timeout con mucha carga; de ahí la nueva cola."
+  },
+  {
+    "id": "en-superior-07-f05",
+    "en": "The migration works, albeit more slowly than expected.",
+    "es": "La migración funciona, aunque más lento de lo esperado."
+  },
+  {
+    "id": "en-superior-07-f06",
+    "en": "In light of last week's outage, we're pausing all releases.",
+    "es": "Considerando la caída de la semana pasada, estamos pausando todos los releases."
+  },
+  {
+    "id": "en-superior-07-f07",
+    "en": "This change is safe, provided that the feature flag stays off.",
+    "es": "Este cambio es seguro, siempre que el feature flag siga apagado.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f08",
+    "en": "Given that most users are on mobile, we prioritized the responsive layout.",
+    "es": "Dado que la mayoría de usuarios usa el celular, priorizamos el diseño responsive."
+  },
+  {
+    "id": "en-superior-07-f09",
+    "en": "The implementation of the cache led to a forty percent reduction in load time.",
+    "es": "La implementación de la caché llevó a una reducción del cuarenta por ciento en el tiempo de carga.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f10",
+    "en": "The removal of the legacy API is planned for next quarter.",
+    "es": "La eliminación de la API heredada está planificada para el próximo trimestre."
+  },
+  {
+    "id": "en-superior-07-f11",
+    "en": "The adoption of TypeScript has reduced the number of runtime errors.",
+    "es": "La adopción de TypeScript ha reducido la cantidad de errores en tiempo de ejecución."
+  },
+  {
+    "id": "en-superior-07-f12",
+    "en": "This RFC proposes replacing our custom router with a standard library.",
+    "es": "Este RFC propone reemplazar nuestro router propio por una librería estándar.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f13",
+    "en": "The rationale for this decision is explained in the next section.",
+    "es": "El fundamento de esta decisión se explica en la siguiente sección."
+  },
+  {
+    "id": "en-superior-07-f14",
+    "en": "Please add your concerns to the open questions section.",
+    "es": "Por favor, agrega tus preocupaciones a la sección de preguntas pendientes.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f15",
+    "en": "We evaluated two alternatives before choosing this approach.",
+    "es": "Evaluamos dos alternativas antes de elegir este enfoque."
+  },
+  {
+    "id": "en-superior-07-f16",
+    "en": "This PR removes the old endpoint and updates the tests.",
+    "es": "Este PR elimina el endpoint viejo y actualiza los tests.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f17",
+    "en": "The token is stored in memory, never in local storage.",
+    "es": "El token se guarda en memoria, nunca en el local storage.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f18",
+    "en": "The team decided to roll back the release.",
+    "es": "El equipo decidió revertir el release.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f19",
+    "en": "Please keep the description succinct and link the ticket.",
+    "es": "Por favor, mantén la descripción breve y precisa, y enlaza el ticket."
+  },
+  {
+    "id": "en-superior-07-f20",
+    "en": "This paragraph is too wordy, so let's cut it in half.",
+    "es": "Este párrafo tiene palabras de más, así que recortémoslo a la mitad."
+  },
+  {
+    "id": "en-superior-07-f21",
+    "en": "The second sentence is redundant because the title already says it.",
+    "es": "La segunda oración sobra porque el título ya lo dice."
+  },
+  {
+    "id": "en-superior-07-f22",
+    "en": "Use the active voice unless the actor is unknown.",
+    "es": "Usa la voz activa, salvo que no se sepa quién hace la acción."
+  },
+  {
+    "id": "en-superior-07-f23",
+    "en": "To ensure backward compatibility, the old field is still returned.",
+    "es": "Para asegurar la compatibilidad con versiones anteriores, el campo viejo se sigue devolviendo."
+  },
+  {
+    "id": "en-superior-07-f24",
+    "en": "Rate limiting will mitigate the risk of abuse.",
+    "es": "El rate limiting mitigará el riesgo de abuso."
+  },
+  {
+    "id": "en-superior-07-f25",
+    "en": "For the sake of clarity, I've split the change into three commits.",
+    "es": "Para mayor claridad, he dividido el cambio en tres commits.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f26",
+    "en": "We need faster builds; to that end, we're moving to Vite.",
+    "es": "Necesitamos builds más rápidos; con ese fin, nos estamos pasando a Vite."
+  },
+  {
+    "id": "en-superior-07-f27",
+    "en": "The API was subsequently updated to support pagination.",
+    "es": "Posteriormente, la API se actualizó para admitir paginación."
+  },
+  {
+    "id": "en-superior-07-f28",
+    "en": "With respect to performance, both options are similar.",
+    "es": "Con respecto al rendimiento, ambas opciones son parecidas."
+  },
+  {
+    "id": "en-superior-07-f29",
+    "en": "The cache improves speed; nevertheless, it adds complexity.",
+    "es": "La caché mejora la velocidad; aun así, agrega complejidad."
+  },
+  {
+    "id": "en-superior-07-f30",
+    "en": "Moreover, the new design reduces the bundle size.",
+    "es": "Además (en registro formal), el nuevo diseño reduce el tamaño del bundle."
+  },
+  {
+    "id": "en-superior-07-f31",
+    "en": "Most reviewers skim the description, so put the key point first.",
+    "es": "La mayoría de revisores lee la descripción por encima, así que pon lo más importante primero.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f32",
+    "en": "This document outlines the problem, the proposal and the trade-offs.",
+    "es": "Este documento resume el problema, la propuesta y los trade-offs.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f33",
+    "en": "The bug was introduced in version three and fixed in version four.",
+    "es": "El bug se introdujo en la versión tres y se corrigió en la versión cuatro.",
+    "trabajo": true
+  },
+  {
+    "id": "en-superior-07-f34",
+    "en": "The new endpoint removes the need for a second request.",
+    "es": "El nuevo endpoint elimina la necesidad de una segunda petición."
+  }
+]

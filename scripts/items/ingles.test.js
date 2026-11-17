@@ -115,6 +115,16 @@ describe("ítems de inglés", () => {
     expect(escrituraCorrecta({ respuesta: "He's from Lima." }, "he is from Lima")).toBe("exacta");
   });
 
+  test("cada 'd y 's se lee por separado, y el 'that' opcional no cuenta", () => {
+    const item = { respuesta: "If I'd known, I'd have told you." };
+    expect(escrituraCorrecta(item, "If I had known, I would have told you")).toBe("exacta");
+    expect(escrituraCorrecta(item, "if id known id have told you")).not.toBe("exacta"); // "id" es otra palabra
+    expect(escrituraCorrecta({ respuesta: "She said that the build was broken." }, "She said the build was broken")).toBe("exacta");
+    expect(escrituraCorrecta({ respuesta: "This is the bug I fixed yesterday." }, "This is the bug that I fixed yesterday")).toBe("exacta");
+    expect(escrituraCorrecta({ respuesta: "I know that." }, "I know")).toBe(false);
+    expect(escrituraCorrecta({ respuesta: "It might've been the cache." }, "It might have been the cache")).toBe("exacta");
+  });
+
   test("las opciones no tienen dos significados iguales", () => {
     expect(nucleos("gracias (informal)")).toEqual(["gracias"]);
     expect(nucleos("muy / de verdad")).toEqual(["muy", "de verdad"]);

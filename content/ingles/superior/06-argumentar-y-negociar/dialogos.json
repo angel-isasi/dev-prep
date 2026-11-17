@@ -1,0 +1,234 @@
+[
+  {
+    "id": "en-superior-06-d01",
+    "titulo": "Alcance contra fecha",
+    "situacion": "El cliente quiere tres funcionalidades para el viernes. Ana, que lidera la tarea, lo conversa con Tom.",
+    "lineas": [
+      {
+        "quien": "Tom",
+        "en": "The client wants the dashboard, the export and the filters by Friday.",
+        "es": "El cliente quiere el dashboard, la exportación y los filtros para el viernes."
+      },
+      {
+        "quien": "Ana",
+        "en": "Realistically, we can deliver two of the three by Friday.",
+        "es": "Siendo realistas, podemos entregar dos de las tres para el viernes."
+      },
+      {
+        "quien": "Ana",
+        "en": "Is Friday a hard deadline, or is there some flexibility?",
+        "es": "¿El viernes es una fecha que no se mueve, o hay algo de flexibilidad?"
+      },
+      {
+        "quien": "Tom",
+        "en": "It's a hard one. They're presenting it to their board on Monday.",
+        "es": "No se mueve. Lo presentan a su directorio el lunes."
+      },
+      {
+        "quien": "Ana",
+        "en": "Then I'd propose we descope: the dashboard and filters now, the export next week.",
+        "es": "Entonces propondría recortar el alcance: el dashboard y los filtros ahora, la exportación la próxima semana."
+      },
+      {
+        "quien": "Tom",
+        "en": "I take your point, but the export is what they asked for first.",
+        "es": "Entiendo tu argumento, pero la exportación es lo primero que pidieron."
+      },
+      {
+        "quien": "Ana",
+        "en": "Granted. That said, nobody exports data from an empty dashboard.",
+        "es": "Es cierto. Aun así, nadie exporta datos de un dashboard vacío."
+      },
+      {
+        "quien": "Tom",
+        "en": "Fair. I'll pitch it to them as phase one and phase two.",
+        "es": "Tiene sentido. Se lo propondré como fase uno y fase dos."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Por qué no se puede mover el viernes?",
+        "opciones": [
+          "Tom se va de vacaciones",
+          "El cliente lo presenta a su directorio el lunes",
+          "Es feriado"
+        ],
+        "correcta": 1,
+        "explicacion": "\"They're presenting it to their board on Monday.\""
+      },
+      {
+        "pregunta": "¿Qué propone Ana?",
+        "opciones": [
+          "Trabajar el fin de semana",
+          "Cancelar el proyecto",
+          "Recortar el alcance y dejar la exportación para la próxima semana"
+        ],
+        "correcta": 2,
+        "explicacion": "Como la fecha no se mueve, Ana propone **descope**: entregar menos, pero a tiempo."
+      },
+      {
+        "pregunta": "¿Con qué argumento convence Ana a Tom?",
+        "opciones": [
+          "La exportación es muy difícil",
+          "Sin dashboard no hay datos que exportar",
+          "El cliente nunca pidió la exportación"
+        ],
+        "correcta": 1,
+        "explicacion": "\"Nobody exports data from an empty dashboard\": el orden de las fases tiene una razón técnica."
+      }
+    ]
+  },
+  {
+    "id": "en-superior-06-d02",
+    "titulo": "La oferta",
+    "situacion": "Mike, de RR. HH., le presenta una oferta a Luis. Luis la quiere, pero espera un poco más.",
+    "lineas": [
+      {
+        "quien": "Mike",
+        "en": "We'd like to offer you the position at a base salary of thirty-five hundred a month.",
+        "es": "Nos gustaría ofrecerte el puesto con un sueldo base de tres mil quinientos al mes."
+      },
+      {
+        "quien": "Luis",
+        "en": "Thank you, I'm really excited about the role. Could I ask a few questions about the package?",
+        "es": "Gracias, el puesto me entusiasma mucho. ¿Podría hacer algunas preguntas sobre el paquete?"
+      },
+      {
+        "quien": "Mike",
+        "en": "Of course. Go ahead.",
+        "es": "Claro. Adelante."
+      },
+      {
+        "quien": "Luis",
+        "en": "Based on the market rate for this role, I was hoping for something closer to four thousand.",
+        "es": "Según lo que paga el mercado por este puesto, esperaba algo más cerca de cuatro mil."
+      },
+      {
+        "quien": "Mike",
+        "en": "I hear you. The base salary is pretty fixed, but there's some room elsewhere.",
+        "es": "Te entiendo. El sueldo base está bastante fijo, pero hay algo de margen en otras partes."
+      },
+      {
+        "quien": "Luis",
+        "en": "In that case, could we revisit the signing bonus or the learning budget?",
+        "es": "En ese caso, ¿podríamos revisar el bono por firmar o el presupuesto para capacitación?"
+      },
+      {
+        "quien": "Mike",
+        "en": "I can probably add a signing bonus of two thousand. Let me check and get back to you.",
+        "es": "Probablemente pueda agregar un bono por firmar de dos mil. Déjame confirmar y te respondo."
+      },
+      {
+        "quien": "Luis",
+        "en": "That would be great. Could you send me the full offer in writing?",
+        "es": "Sería genial. ¿Me podrías enviar la oferta completa por escrito?"
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Cómo empieza Luis su respuesta a la oferta?",
+        "opciones": [
+          "Agradeciendo y mostrando interés en el puesto",
+          "Pidiendo más dinero de inmediato",
+          "Rechazando la oferta"
+        ],
+        "correcta": 0,
+        "explicacion": "Primero agradece (*Thank you, I'm really excited about the role*) y después negocia."
+      },
+      {
+        "pregunta": "¿Qué dice Mike sobre el sueldo base?",
+        "opciones": [
+          "Que puede subir mucho",
+          "Que es negociable sin límite",
+          "Que está bastante fijo, pero hay margen en otras cosas"
+        ],
+        "correcta": 2,
+        "explicacion": "\"The base salary is pretty fixed, but there's some room elsewhere.\""
+      },
+      {
+        "pregunta": "¿Qué pide Luis al final?",
+        "opciones": [
+          "La oferta completa por escrito",
+          "Una reunión con el gerente general",
+          "Más días de vacaciones"
+        ],
+        "correcta": 0,
+        "explicacion": "\"Could you send me the full offer in writing?\": nada es seguro hasta que está por escrito."
+      }
+    ]
+  },
+  {
+    "id": "en-superior-06-d03",
+    "titulo": "Abogada del diablo",
+    "situacion": "Sarah quiere pasar todo el estado de la app a una librería nueva. Ana pone a prueba la idea.",
+    "lineas": [
+      {
+        "quien": "Sarah",
+        "en": "I think we should move all our state to the new library. It's so much cleaner.",
+        "es": "Creo que deberíamos pasar todo nuestro estado a la librería nueva. Es mucho más limpia."
+      },
+      {
+        "quien": "Ana",
+        "en": "Let me play devil's advocate for a second. What happens if it's abandoned next year?",
+        "es": "Déjame hacer de abogada del diablo un momento. ¿Qué pasa si la abandonan el próximo año?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "It has a big community. I don't see that happening.",
+        "es": "Tiene una comunidad grande. No creo que pase."
+      },
+      {
+        "quien": "Ana",
+        "en": "Fair enough. The way I see it, the real cost is migrating forty components.",
+        "es": "Está bien. Como yo lo veo, el costo real es migrar cuarenta componentes."
+      },
+      {
+        "quien": "Sarah",
+        "en": "So you're against it?",
+        "es": "¿O sea que estás en contra?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Not at all. On balance, I like it. I'd just start with the new settings page.",
+        "es": "Para nada. Considerándolo todo, me gusta. Solo empezaría con la nueva página de configuración."
+      },
+      {
+        "quien": "Sarah",
+        "en": "Okay, that's common ground. New code first, old code when we touch it.",
+        "es": "Ok, en eso coincidimos. Primero el código nuevo, y el viejo cuando lo toquemos."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Para qué hace Ana de abogada del diablo?",
+        "opciones": [
+          "Para poner a prueba la idea buscando sus riesgos",
+          "Porque odia la librería",
+          "Para terminar rápido la reunión"
+        ],
+        "correcta": 0,
+        "explicacion": "**Play devil's advocate** es defender la postura contraria a propósito, para ver si la idea resiste."
+      },
+      {
+        "pregunta": "¿Ana está en contra de la idea?",
+        "opciones": [
+          "Sí, totalmente",
+          "No da su opinión",
+          "No: le gusta, pero quiere empezar de a poco"
+        ],
+        "correcta": 2,
+        "explicacion": "\"On balance, I like it. I'd just start with the new settings page.\""
+      },
+      {
+        "pregunta": "¿En qué quedan?",
+        "opciones": [
+          "Migrar todo esta semana",
+          "Usar la librería en el código nuevo y migrar el viejo cuando lo toquen",
+          "No usar la librería"
+        ],
+        "correcta": 1,
+        "explicacion": "\"New code first, old code when we touch it.\""
+      }
+    ]
+  }
+]

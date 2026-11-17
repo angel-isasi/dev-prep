@@ -1,0 +1,30 @@
+[
+  { "id": "en-avanzado-04-r01", "titulo": "Tu forma de trabajar", "situacion": "Mike, de RR. HH., quiere saber cómo organizas tu día y cómo trabajas en equipo.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Mike", "en": "How do you usually organize your day?", "es": "¿Cómo sueles organizar tu día?" },
+      { "opciones": [
+          { "en": "Honestly, I just do whatever I feel like doing.", "es": "", "correcta": false, "explicacion": "La gramática está bien, pero suena a que no te organizas. Te preguntan justo para saber si eres ordenada." },
+          { "en": "I avoid to check messages in the morning.", "es": "", "correcta": false, "explicacion": "**Avoid** va con -ing: *I avoid checking*." },
+          { "en": "I tend to start with the hardest task, and I avoid checking messages until ten.", "es": "Suelo empezar por la tarea más difícil y evito revisar mensajes hasta las diez.", "correcta": true, "explicacion": "*Tend to + verbo* y *avoid + -ing*: un hábito concreto y creíble." }
+        ] },
+      { "quien": "Mike", "en": "What do you do when you get stuck on a problem?", "es": "¿Qué haces cuando te atascas con un problema?" },
+      { "opciones": [
+          { "en": "I try a few things on my own first, and if I'm still stuck after thirty minutes, I ask for help.", "es": "Primero pruebo algunas cosas por mi cuenta y, si sigo atascada después de treinta minutos, pido ayuda.", "correcta": true, "explicacion": "Muestra autonomía y que no pierdes horas en silencio: lo que buscan en un junior." },
+          { "en": "I never get stuck.", "es": "", "correcta": false, "explicacion": "Nadie se lo cree. Todos se atascan; lo que importa es cómo sales." },
+          { "en": "I keep to try for days until it works.", "es": "", "correcta": false, "explicacion": "**Keep** va con -ing (*keep trying*), y pasar días sin pedir ayuda preocupa a cualquier líder." }
+        ] },
+      { "quien": "Mike", "en": "Our team works with people in Europe. Are you used to that?", "es": "Nuestro equipo trabaja con gente de Europa. ¿Estás acostumbrada a eso?" },
+      { "opciones": [
+          { "en": "Yes, I'm used to work with different time zones.", "es": "", "correcta": false, "explicacion": "En *be used to*, *to* es preposición: *I'm used to **working***." },
+          { "en": "Yes, I'm used to working with different time zones. In my last project, our designer was in Spain.", "es": "Sí, estoy acostumbrada a trabajar con distintas zonas horarias. En mi último proyecto, nuestra diseñadora estaba en España.", "correcta": true, "explicacion": "**Be used to + -ing** y un ejemplo real que lo respalda." },
+          { "en": "Not really, and I'm not interested in waking up early.", "es": "", "correcta": false, "explicacion": "La gramática está bien (*interested in + -ing*), pero le cierras la puerta a algo que el puesto necesita." }
+        ] },
+      { "quien": "Mike", "en": "Last question: what are you looking forward to in your next role?", "es": "Última pregunta: ¿qué es lo que más esperas de tu próximo puesto?" },
+      { "opciones": [
+          { "en": "I'm looking forward to getting paid more, mainly.", "es": "", "correcta": false, "explicacion": "El sueldo importa, pero decir que es lo principal da mala impresión en esta pregunta." },
+          { "en": "I'm looking forward to learn from a senior team.", "es": "", "correcta": false, "explicacion": "En *look forward to*, *to* es preposición: *to **learning***." },
+          { "en": "I'm looking forward to learning from a senior team and working on a real product.", "es": "Tengo muchas ganas de aprender de un equipo senior y de trabajar en un producto real.", "correcta": true, "explicacion": "*Look forward to + -ing*, con dos metas que muestran ganas de crecer." }
+        ] },
+      { "quien": "Mike", "en": "Great answers. We'll be in touch soon.", "es": "Muy buenas respuestas. Te escribiremos pronto." }
+    ] }
+]

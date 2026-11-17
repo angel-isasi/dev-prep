@@ -1,0 +1,387 @@
+[
+  {
+    "id": "en-superior-06-w01",
+    "en": "granted",
+    "es": "es cierto (que), lo concedo",
+    "pron": "gránted",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "Granted, the old API is stable. That said, it's slow.",
+      "es": "Es cierto que la API vieja es estable. Aun así, es lenta."
+    }
+  },
+  {
+    "id": "en-superior-06-w02",
+    "en": "I take your point",
+    "es": "entiendo tu argumento (y lo acepto en parte)",
+    "pron": "ái téik iór póint",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I take your point, but the risk is still high.",
+      "es": "Entiendo tu argumento, pero el riesgo sigue siendo alto."
+    }
+  },
+  {
+    "id": "en-superior-06-w03",
+    "en": "concede",
+    "es": "admitir (que el otro tiene razón en algo)",
+    "pron": "konsíid",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I'll concede that the old version was faster.",
+      "es": "Admito que la versión vieja era más rápida."
+    }
+  },
+  {
+    "id": "en-superior-06-w04",
+    "en": "make the case for",
+    "es": "argumentar a favor de",
+    "pron": "méik de kéis for",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let me make the case for server-side rendering.",
+      "es": "Déjame argumentar a favor del renderizado en el servidor."
+    }
+  },
+  {
+    "id": "en-superior-06-w05",
+    "en": "counteroffer",
+    "es": "contraoferta",
+    "pron": "káunterofer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "They accepted my counteroffer.",
+      "es": "Aceptaron mi contraoferta."
+    }
+  },
+  {
+    "id": "en-superior-06-w06",
+    "en": "make a concession",
+    "es": "ceder en algo",
+    "pron": "méik a konséshon",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We made a concession on the deadline.",
+      "es": "Cedimos en la fecha de entrega."
+    }
+  },
+  {
+    "id": "en-superior-06-w07",
+    "en": "leverage",
+    "es": "poder de negociación",
+    "pron": "léverich",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "A second offer gives you leverage.",
+      "es": "Una segunda oferta te da poder de negociación."
+    }
+  },
+  {
+    "id": "en-superior-06-w08",
+    "en": "non-negotiable",
+    "es": "innegociable",
+    "pron": "nan nigóushabol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Accessibility is non-negotiable for this client.",
+      "es": "Para este cliente, la accesibilidad es innegociable."
+    }
+  },
+  {
+    "id": "en-superior-06-w09",
+    "en": "deal-breaker",
+    "es": "motivo suficiente para decir que no",
+    "pron": "díil bréiker",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "No remote work would be a deal-breaker for me.",
+      "es": "No poder trabajar remoto sería motivo suficiente para decir que no."
+    }
+  },
+  {
+    "id": "en-superior-06-w10",
+    "en": "meet someone halfway",
+    "es": "llegar a un punto medio con alguien",
+    "pron": "míit sámuan jáfuei",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Could you meet me halfway on the start date?",
+      "es": "¿Podemos llegar a un punto medio con la fecha de inicio?"
+    }
+  },
+  {
+    "id": "en-superior-06-w11",
+    "en": "common ground",
+    "es": "puntos en común",
+    "pron": "kámon gráund",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Let's start with the common ground.",
+      "es": "Empecemos por los puntos en común."
+    }
+  },
+  {
+    "id": "en-superior-06-w12",
+    "en": "on the table",
+    "es": "en discusión, disponible como opción",
+    "pron": "on de téibol",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Is remote work still on the table?",
+      "es": "¿El trabajo remoto sigue siendo una opción?"
+    }
+  },
+  {
+    "id": "en-superior-06-w13",
+    "en": "descope",
+    "es": "recortar el alcance",
+    "pron": "diskóup",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "If the date is fixed, we need to descope.",
+      "es": "Si la fecha no se mueve, tenemos que recortar el alcance."
+    }
+  },
+  {
+    "id": "en-superior-06-w14",
+    "en": "realistically",
+    "es": "siendo realistas",
+    "pron": "rialístikli",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "Realistically, we can ship two of the three features.",
+      "es": "Siendo realistas, podemos entregar dos de las tres funcionalidades."
+    }
+  },
+  {
+    "id": "en-superior-06-w15",
+    "en": "I hear you",
+    "es": "te entiendo (sin decir que estás de acuerdo)",
+    "pron": "ái jíer iú",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I hear you, but the date can't move.",
+      "es": "Te entiendo, pero la fecha no se puede mover."
+    }
+  },
+  {
+    "id": "en-superior-06-w16",
+    "en": "play devil's advocate",
+    "es": "hacer de abogado del diablo",
+    "pron": "pléi dévolz ádvokat",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let me play devil's advocate for a second.",
+      "es": "Déjame hacer de abogado del diablo un momento."
+    }
+  },
+  {
+    "id": "en-superior-06-w17",
+    "en": "the way I see it",
+    "es": "como yo lo veo",
+    "pron": "de uéi ái síi it",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The way I see it, the risk is in the payment flow.",
+      "es": "Como yo lo veo, el riesgo está en el flujo de pago."
+    }
+  },
+  {
+    "id": "en-superior-06-w18",
+    "en": "on balance",
+    "es": "considerándolo todo",
+    "pron": "on bálans",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "On balance, the rewrite is worth the risk.",
+      "es": "Considerándolo todo, la reescritura vale el riesgo."
+    }
+  },
+  {
+    "id": "en-superior-06-w19",
+    "en": "be that as it may",
+    "es": "sea como sea (formal)",
+    "pron": "bíi dát az it méi",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "Be that as it may, the deadline hasn't changed.",
+      "es": "Sea como sea, la fecha de entrega no ha cambiado."
+    }
+  },
+  {
+    "id": "en-superior-06-w20",
+    "en": "sticking point",
+    "es": "punto que traba el acuerdo",
+    "pron": "stíkin póint",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The start date is the only sticking point.",
+      "es": "La fecha de inicio es lo único que traba el acuerdo."
+    }
+  },
+  {
+    "id": "en-superior-06-w21",
+    "en": "compensation package",
+    "es": "paquete de compensación (todo lo que recibes)",
+    "pron": "kampenséishon pákich",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The compensation package includes health insurance.",
+      "es": "El paquete de compensación incluye seguro de salud."
+    }
+  },
+  {
+    "id": "en-superior-06-w22",
+    "en": "base salary",
+    "es": "sueldo base",
+    "pron": "béis sálari",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The base salary is fixed, but the bonus isn't.",
+      "es": "El sueldo base es fijo, pero el bono no."
+    }
+  },
+  {
+    "id": "en-superior-06-w23",
+    "en": "signing bonus",
+    "es": "bono por firmar (al aceptar la oferta)",
+    "pron": "sáinin bóunas",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "They offered a signing bonus of two thousand dollars.",
+      "es": "Ofrecieron un bono por firmar de dos mil dólares."
+    }
+  },
+  {
+    "id": "en-superior-06-w24",
+    "en": "equity",
+    "es": "acciones de la empresa (como parte del pago)",
+    "pron": "ékuiti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Startups often offer equity instead of a higher salary.",
+      "es": "Las startups suelen ofrecer acciones en lugar de un sueldo más alto."
+    }
+  },
+  {
+    "id": "en-superior-06-w25",
+    "en": "market rate",
+    "es": "lo que paga el mercado (por un puesto)",
+    "pron": "márket réit",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The offer is below the market rate.",
+      "es": "La oferta está por debajo de lo que paga el mercado."
+    }
+  },
+  {
+    "id": "en-superior-06-w26",
+    "en": "get it in writing",
+    "es": "pedirlo por escrito",
+    "pron": "guét it in ráitin",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Before you resign, get it in writing.",
+      "es": "Antes de renunciar, pídelo por escrito."
+    }
+  },
+  {
+    "id": "en-superior-06-w27",
+    "en": "be willing to",
+    "es": "estar dispuesto a",
+    "pron": "bíi uílin tu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm willing to travel once a month.",
+      "es": "Estoy dispuesto a viajar una vez al mes."
+    }
+  },
+  {
+    "id": "en-superior-06-w28",
+    "en": "in exchange for",
+    "es": "a cambio de",
+    "pron": "in ikschéinch for",
+    "tipo": "preposicion",
+    "ejemplo": {
+      "en": "I'll take the bug in exchange for skipping the demo.",
+      "es": "Me encargo del bug a cambio de saltarme la demo."
+    }
+  },
+  {
+    "id": "en-superior-06-w29",
+    "en": "hard deadline",
+    "es": "fecha límite que no se mueve",
+    "pron": "járd dédlain",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The launch on May first is a hard deadline.",
+      "es": "El lanzamiento del primero de mayo es una fecha que no se mueve."
+    }
+  },
+  {
+    "id": "en-superior-06-w30",
+    "en": "contingent on",
+    "es": "condicionado a",
+    "pron": "kontínyent on",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The offer is contingent on a background check.",
+      "es": "La oferta está condicionada a una verificación de antecedentes."
+    }
+  },
+  {
+    "id": "en-superior-06-w31",
+    "en": "walk away",
+    "es": "retirarse (de una negociación)",
+    "pron": "uók auéi",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "If they won't move, be ready to walk away.",
+      "es": "Si no ceden, prepárate para retirarte."
+    }
+  },
+  {
+    "id": "en-superior-06-w32",
+    "en": "raise a concern",
+    "es": "plantear una preocupación",
+    "pron": "réiz a konsérn",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'd like to raise a concern about security.",
+      "es": "Quisiera plantear una preocupación sobre la seguridad."
+    }
+  },
+  {
+    "id": "en-superior-06-w33",
+    "en": "a big ask",
+    "es": "mucho pedir",
+    "pron": "a bíg ásk",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I know it's a big ask, but could you review it today?",
+      "es": "Sé que es mucho pedir, pero ¿podrías revisarlo hoy?"
+    }
+  },
+  {
+    "id": "en-superior-06-w34",
+    "en": "stretch goal",
+    "es": "meta extra (si sobra tiempo)",
+    "pron": "strétch góul",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Dark mode is a stretch goal for this sprint.",
+      "es": "El modo oscuro es una meta extra para este sprint."
+    }
+  },
+  {
+    "id": "en-superior-06-w35",
+    "en": "buffer",
+    "es": "margen (de tiempo) por si algo falla",
+    "pron": "báfer",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I added two days of buffer to the estimate.",
+      "es": "Agregué dos días de margen al estimado."
+    }
+  }
+]
