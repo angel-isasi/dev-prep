@@ -22,7 +22,7 @@
       { "quien": "Jennifer", "en": "We'll get back to you by Friday. Thanks for your time, Ana.", "es": "Te respondemos antes del viernes. Gracias por tu tiempo, Ana." },
       { "opciones": [
           { "en": "Thanks. Bye.", "es": "", "correcta": false, "explicacion": "Correcto, pero muy seco para cerrar una entrevista." },
-          { "en": "Thank you to you for the opportunity.", "es": "", "correcta": false, "explicacion": "Calco de \"gracias a ti\". Se dice *Thank you* o *Thanks, you too*." },
+          { "en": "Thank you to you for the opportunity.", "es": "", "correcta": false, "explicacion": "Calco de \"gracias a ti\". Basta *Thank you for the opportunity*; para devolver el agradecimiento, *Thank YOU*, con énfasis." },
           { "en": "Thank you, Jennifer. I really enjoyed our conversation, and I'm excited about the role.", "es": "Gracias, Jennifer. Disfruté mucho la conversación y me entusiasma el puesto.", "correcta": true, "explicacion": "Cierre cálido: agradeces, das una impresión positiva y muestras interés." }
         ] }
     ] }

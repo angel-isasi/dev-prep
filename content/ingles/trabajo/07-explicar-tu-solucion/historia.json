@@ -10,7 +10,7 @@
       { "quien": "Ana", "en": "Then I loop over the sales once and keep track of the totals in another object.", "es": "Luego recorro las ventas una sola vez y llevo la cuenta de los totales en otro objeto." },
       { "tipo": "pregunta", "pregunta": "¿Qué cambio hizo Ana para que el reporte fuera rápido?", "opciones": ["Compró un servidor más grande", "Creó un Map de clientes y recorrió las ventas una sola vez", "Borró la mitad de las ventas"], "correcta": 1, "explicacion": "Con un **Map**, buscar un cliente es inmediato, así que solo hace falta un recorrido." },
       { "tipo": "completa", "quien": "Ana", "en": "This runs in linear time ___ looking up a key in a Map is constant time.", "es": "Esto corre en tiempo lineal porque buscar una clave en un Map toma tiempo constante.", "opciones": ["because", "so", "although"], "correcta": 0, "explicacion": "**Because** introduce la causa: *runs in linear time because...* Es la frase clave para justificar tu complejidad." },
-      { "quien": "Tom", "en": "Nice. Is there any trade-off?", "es": "Bien. ¿Hay algún trade-off?" },
+      { "quien": "Tom", "en": "Nice. Are there any trade-offs?", "es": "Bien. ¿Hay algún trade-off?" },
       { "quien": "Ana", "en": "Yes, it uses more memory, because the Map stores all the customers.", "es": "Sí, usa más memoria, porque el Map guarda a todos los clientes." },
       { "quien": "Ana", "en": "But it's only a few megabytes, so I think it's worth it.", "es": "Pero son solo unos megas, así que creo que vale la pena." },
       { "quien": "Sarah", "en": "Now I can't use \"the report is loading\" as an excuse for my coffee breaks.", "es": "Ahora ya no puedo usar \"el reporte está cargando\" como excusa para mis pausas de café." },

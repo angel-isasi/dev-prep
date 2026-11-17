@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { armadoCorrecto, comparable, conceptoDeClave, escrituraCorrecta, expandirIngles, fichasDe, generarItemsIngles, hablaCorrecta, registrosPorConcepto } from "./ingles.js";
+import { armadoCorrecto, comparable, conceptoDeClave, escrituraCorrecta, expandirIngles, fichasDe, generarItemsIngles, hablaCorrecta, nucleos, registrosPorConcepto } from "./ingles.js";
 
 const unidad = {
   id: "en-basico-05",
@@ -95,6 +95,29 @@ describe("ítems de inglés", () => {
     expect(escrituraCorrecta(item, "I not ready")).toBe(false);
     expect(escrituraCorrecta({ respuesta: "dog" }, "dig")).toBe(false); // palabras cortas: exacto
     expect(comparable("Don’t")).toBe("do not");
+  });
+
+  test("contracciones sin apóstrofo y números en cifras también valen", () => {
+    expect(escrituraCorrecta({ respuesta: "I'm not ready yet." }, "Im not ready yet")).toBe("exacta");
+    expect(escrituraCorrecta({ respuesta: "I don't like coffee." }, "I dont like coffee")).toBe("exacta");
+    expect(comparable("its were well")).toBe("its were well"); // estas son otras palabras: no se tocan
+    expect(hablaCorrecta("My sister is fifteen.", ["my sister is 15"])).toBe(true);
+    expect(hablaCorrecta("They have two children.", ["they have 2 children"])).toBe(true);
+    expect(comparable("I have 125 apples")).toBe("i have 125 apples");
+  });
+
+  test("ok = okay, contracciones menos comunes y 's o 'd con su otra lectura", () => {
+    expect(escrituraCorrecta({ respuesta: "Okay, let's start." }, "ok lets start")).toBe(false); // lets es otra palabra
+    expect(escrituraCorrecta({ respuesta: "Okay, let's start." }, "ok let's start")).toBe("exacta");
+    expect(escrituraCorrecta({ respuesta: "She'll be here soon." }, "she will be here soon")).toBe("exacta");
+    expect(escrituraCorrecta({ respuesta: "He's just joined the team." }, "He has just joined the team")).toBe("exacta");
+    expect(escrituraCorrecta({ respuesta: "You'd better save your work." }, "you had better save your work")).toBe("exacta");
+    expect(escrituraCorrecta({ respuesta: "He's from Lima." }, "he is from Lima")).toBe("exacta");
+  });
+
+  test("las opciones no tienen dos significados iguales", () => {
+    expect(nucleos("gracias (informal)")).toEqual(["gracias"]);
+    expect(nucleos("muy / de verdad")).toEqual(["muy", "de verdad"]);
   });
 
   test("hablar acepta si dijiste al menos el 80% de las palabras en orden", () => {

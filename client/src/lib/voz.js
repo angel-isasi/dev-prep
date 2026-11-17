@@ -1,5 +1,7 @@
 // Voz en inglés del propio dispositivo (speechSynthesis): funciona sin internet si el sistema
 // tiene una voz en inglés instalada. Si no hay ninguna, los botones de audio no aparecen.
+import { useEffect, useState } from "react";
+
 const CLAVE_VELOCIDAD = "devprep-voz-velocidad";
 export const VELOCIDADES = { lento: 0.72, normal: 0.95 };
 
@@ -13,6 +15,20 @@ function voces() {
 }
 // Chrome carga las voces tarde: las pide de nuevo cuando avisa.
 globalThis.speechSynthesis?.addEventListener?.("voiceschanged", () => voces());
+
+/** hayVoz() que se vuelve a evaluar cuando llegan las voces (si no, la pantalla puede decir que no hay voz). */
+export function useHayVoz() {
+  const [conVoz, setConVoz] = useState(hayVoz);
+  useEffect(() => {
+    const sintesis = globalThis.speechSynthesis;
+    if (!sintesis?.addEventListener) return;
+    const alCambiar = () => setConVoz(hayVoz());
+    sintesis.addEventListener("voiceschanged", alCambiar);
+    alCambiar();
+    return () => sintesis.removeEventListener("voiceschanged", alCambiar);
+  }, []);
+  return conVoz;
+}
 
 /** La mejor voz en inglés de Estados Unidos que tenga el dispositivo. */
 function vozIngles() {

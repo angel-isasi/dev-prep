@@ -1,7 +1,7 @@
 // Un componente por tipo de ítem de lección. Casi todos se responden tocando; en inglés también
 // hay escribir (sin banco de palabras) y hablar (reconocimiento de voz).
 // Cada uno avisa su respuesta al padre (LeccionMovil), que corrige con motor.js.
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { Markdown } from "../../components/Markdown.jsx";
 import { Tarjeta } from "../../components/Tarjeta.jsx";
@@ -409,17 +409,29 @@ export function ItemHablar({ item, alResultado, alSaltar, bloqueado }) {
   const [estado, setEstado] = useState("listo"); // listo | escuchando | error
   const [mensaje, setMensaje] = useState("");
   const [dicho, setDicho] = useState("");
+  // escucha en curso: si sales del ejercicio, se detiene y su resultado ya no califica el siguiente paso
+  const escucha = useRef(null);
+  useEffect(
+    () => () => {
+      escucha.current?.detener();
+      escucha.current = null;
+    },
+    [],
+  );
 
   async function escuchar() {
     setEstado("escuchando");
     setMensaje("");
-    const { promesa } = escucharVoz();
+    const actual = escucharVoz();
+    escucha.current = actual;
     try {
-      const opciones = await promesa;
+      const opciones = await actual.promesa;
+      if (escucha.current !== actual) return;
       setDicho(opciones[0] ?? "");
       setEstado("listo");
       alResultado(hablaCorrecta(item.texto, opciones), opciones[0] ?? "");
     } catch (error) {
+      if (escucha.current !== actual) return;
       setEstado("error");
       setMensaje(error.message);
     }
@@ -438,7 +450,7 @@ export function ItemHablar({ item, alResultado, alSaltar, bloqueado }) {
       </button>
       {dicho && <p className={estilos.ayuda}>Entendí: “{dicho}”</p>}
       {mensaje && <p className={estilos.aviso}>{mensaje}</p>}
-      {!bloqueado && (
+      {!bloqueado && estado !== "escuchando" && (
         <button type="button" className="boton boton-fantasma" onClick={alSaltar}>
           Ahora no puedo hablar
         </button>

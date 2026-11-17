@@ -11,7 +11,11 @@ import { Markdown } from "../../components/Markdown.jsx";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { Bit } from "../../components/Bit.jsx";
+import { barajar, semilla } from "../leccion/motor.js";
 import estilos from "./Historias.module.css";
+
+// Orden de las opciones barajado pero estable (la misma pregunta siempre igual): así la correcta no cae siempre en el mismo lugar.
+const ordenDe = (opciones, clave) => barajar(opciones.map((_, i) => i), semilla(clave));
 
 const ETAPAS = { basico: "Base (A1 a A2)", intermedio: "Intermedio (B1)", trabajo: "Inglés de trabajo (B1 a B2)" };
 const XP_HISTORIA = { base: 20, porAcierto: 5 };
@@ -90,6 +94,7 @@ function Reto({ paso, alTerminar }) {
   const [elegida, setElegida] = useState(null);
   const listo = elegida !== null;
   const correcto = elegida === paso.correcta;
+  const orden = useMemo(() => ordenDe(paso.opciones, paso.en ?? paso.pregunta ?? ""), [paso]);
   return (
     <div className={estilos.reto}>
       {paso.tipo === "completa" ? (
@@ -102,7 +107,7 @@ function Reto({ paso, alTerminar }) {
         </div>
       )}
       <div className={estilos.opciones}>
-        {paso.opciones.map((o, i) => (
+        {orden.map((i) => [paso.opciones[i], i]).map(([o, i]) => (
           <button
             key={o}
             type="button"
@@ -273,6 +278,7 @@ export function RoleplayMovil() {
   const turnos = item?.turnos ?? [];
   const tuyos = turnos.filter((t) => t.opciones).length;
   const actual = turnos[posicion];
+  const orden = useMemo(() => (actual?.opciones ? ordenDe(actual.opciones, actual.opciones.map((o) => o.en).join("|")) : []), [actual]);
 
   useEffect(() => {
     if (actual && !actual.opciones && hayVoz()) hablar(actual.en);
@@ -350,7 +356,7 @@ export function RoleplayMovil() {
           <div className={estilos.reto}>
             <p className={estilos.ayuda}>¿Qué dices?</p>
             <div className={estilos.opciones}>
-              {actual.opciones.map((o, i) => (
+              {orden.map((i) => [actual.opciones[i], i]).map(([o, i]) => (
                 <button
                   key={o.en}
                   type="button"

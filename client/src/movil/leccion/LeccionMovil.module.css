@@ -227,7 +227,7 @@
   font-size: 18px;
 }
 
-.cifras span {
+.cifras > div > span {
   color: var(--texto-suave);
   font-size: 13px;
 }

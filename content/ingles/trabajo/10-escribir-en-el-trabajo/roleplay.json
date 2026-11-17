@@ -5,7 +5,7 @@
       { "opciones": [
           { "en": "Hi Sarah! I'm getting a CORS error when the app calls the users API. Do you have 10 minutes?", "es": "¡Hola, Sarah! Me sale un error de CORS cuando la app llama a la API de usuarios. ¿Tienes 10 minutos?", "correcta": true, "explicacion": "Mensaje con contexto (qué error y dónde) y una petición concreta de tiempo." },
           { "en": "help", "es": "", "correcta": false, "explicacion": "Sin contexto, la otra persona no sabe qué pasa ni cuánto tiempo le tomará." },
-          { "en": "Hi, I have a doubt.", "es": "", "correcta": false, "explicacion": "Calco de \"tengo una duda\": *doubt* es desconfianza. Se dice *I have a question*. Y falta el contexto." }
+          { "en": "Hi, I have a doubt.", "es": "", "correcta": false, "explicacion": "Calco de \"tengo una duda\": *doubt* es dudar de que algo sea cierto (*I doubt it* = lo dudo). Para preguntar se dice *I have a question*. Y falta el contexto." }
         ] },
       { "quien": "Sarah", "en": "Sure. What have you tried?", "es": "Claro. ¿Qué has intentado?" },
       { "opciones": [

@@ -3,7 +3,7 @@
     "turnos": [
       { "quien": "Sarah", "en": "Hey Ana, can you look at my PR? Any suggestions?", "es": "Oye, Ana, ¿puedes ver mi PR? ¿Alguna sugerencia?" },
       { "opciones": [
-          { "en": "You should rename this variable. *data2* isn't very clear.", "es": "Deberías renombrar esta variable. *data2* no es muy clara.", "correcta": true, "explicacion": "*Should* da un consejo sin sonar a orden, y explicas el porqué." },
+          { "en": "You should rename this variable. \"data2\" isn't very clear.", "es": "Deberías renombrar esta variable. \"data2\" no es muy clara.", "correcta": true, "explicacion": "*Should* da un consejo sin sonar a orden, y explicas el porqué." },
           { "en": "You must to rename this variable.", "es": "", "correcta": false, "explicacion": "Después de *must* va el verbo sin *to*. Además *must* suena muy fuerte para un consejo." },
           { "en": "This variable name is terrible.", "es": "", "correcta": false, "explicacion": "Suena brusco: critica sin proponer nada." }
         ] },

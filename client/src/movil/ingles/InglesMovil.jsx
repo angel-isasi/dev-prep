@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
-import { cambiarMicro, cambiarVelocidad, hayMicrofono, hayVoz, microApagado, microDisponible, velocidad } from "../../lib/voz.js";
+import { cambiarMicro, cambiarVelocidad, hayMicrofono, microApagado, microDisponible, useHayVoz, velocidad } from "../../lib/voz.js";
 import { celebrar } from "../../lib/celebrar.js";
 import { Bit } from "../../components/Bit.jsx";
 import { AnilloProgreso } from "../../components/AnilloProgreso.jsx";
@@ -54,6 +54,7 @@ export function InglesMovil() {
   const [aviso, setAviso] = useState(null);
   const [motivacion, setMotivacion] = useState(null);
   const [micro, setMicro] = useState(!microApagado());
+  const conVoz = useHayVoz();
 
   const cargar = () => {
     api.inglesMotivacion?.({ conMicro: hayMicrofono() }).then(setMotivacion);
@@ -70,7 +71,7 @@ export function InglesMovil() {
   const leccion = (modo) => `/leccion?ambito=ingles${modo ? `&modo=${modo}` : ""}`;
 
   async function cobrarCofre() {
-    const r = await api.cobrarCofreDiario();
+    const r = await api.cobrarCofreDiario({ conMicro: hayMicrofono() });
     if (r) {
       celebrar("logro");
       setAviso(`🎁 Cofre del día: +${r.xp} XP`);
@@ -164,7 +165,7 @@ export function InglesMovil() {
               <strong>Inglés rápido</strong>
               <small>5 ejercicios</small>
             </Link>
-            {hayVoz() && (
+            {conVoz && (
               <Link to={leccion("escuchar")} className="boton brillo">
                 <span className={estilos.iconoFicha} aria-hidden>
                   ♪
@@ -194,7 +195,7 @@ export function InglesMovil() {
               <strong>Repaso mezclado</strong>
               <small>de todas tus unidades</small>
             </Link>
-            {hayVoz() && (
+            {conVoz && (
               <Link to={leccion("oido")} className="boton brillo">
                 <span className={estilos.iconoFicha} aria-hidden>
                   👂
@@ -248,7 +249,7 @@ export function InglesMovil() {
             )}
           </div>
 
-          {hayVoz() ? (
+          {conVoz ? (
             <label className={estilos.velocidad}>
               <input
                 type="checkbox"

@@ -6,7 +6,7 @@
       { "tipo": "pregunta", "pregunta": "¿Qué pide Ana con \"walk me through\"?", "opciones": ["Que el candidato camine", "Que explique el proyecto paso a paso", "Que termine rápido"], "correcta": 1, "explicacion": "**Walk me through** significa \"explícame paso a paso\"." },
       { "quien": "Ana", "en": "Don't worry, there's no rush. Start with the problem it solves.", "es": "Tranquilo, no hay apuro. Empieza por el problema que resuelve." },
       { "quien": "Tom", "en": "Thanks, Diego. Tell me about a time you disagreed with a teammate.", "es": "Gracias, Diego. Cuéntame de una vez en que no estuviste de acuerdo con un compañero." },
-      { "quien": "Ana", "en": "A real example is better than a theory, Diego. Take your time.", "es": "Un ejemplo real es mejor que la teoría, Diego. Tómate tu tiempo." },
+      { "quien": "Ana", "en": "A real example is better than theory, Diego. Take your time.", "es": "Un ejemplo real es mejor que la teoría, Diego. Tómate tu tiempo." },
       { "tipo": "completa", "quien": "Ana", "en": "Next one. What's your ___ on using TypeScript in small projects?", "es": "La siguiente. ¿Qué opinas de usar TypeScript en proyectos pequeños?", "opciones": ["take", "taking", "took"], "correcta": 0, "explicacion": "**What's your take on...?** significa \"¿qué opinas de...?\". *Take* aquí es un sustantivo." },
       { "quien": "Tom", "en": "He said it's useful, but maybe too much for a weekend project. Fair enough.", "es": "Dijo que es útil, pero quizá demasiado para un proyecto de fin de semana. Me parece razonable." },
       { "quien": "Ana", "en": "Last question. How would you approach a bug that only happens on old phones?", "es": "Última pregunta. ¿Cómo abordarías un bug que solo pasa en celulares viejos?" },

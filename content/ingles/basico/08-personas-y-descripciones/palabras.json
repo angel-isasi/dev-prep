@@ -73,7 +73,7 @@
     "ejemplo": { "en": "Our office is small.", "es": "Nuestra oficina es pequeña." } },
   { "id": "en-basico-08-w37", "en": "their", "es": "su, sus (de ellos)", "pron": "dér", "tipo": "pronombre",
     "ejemplo": { "en": "Their kids are very smart.", "es": "Sus hijos son muy inteligentes." } },
-  { "id": "en-basico-08-w38", "en": "whose", "es": "de quién", "pron": "jús", "tipo": "pronombre",
+  { "id": "en-basico-08-w38", "en": "whose", "es": "de quién", "pron": "júz", "tipo": "pronombre",
     "ejemplo": { "en": "Whose phone is this?", "es": "¿De quién es este celular?" } },
   { "id": "en-basico-08-w39", "en": "tall", "es": "alto", "pron": "tól", "tipo": "adjetivo",
     "ejemplo": { "en": "My brother is very tall.", "es": "Mi hermano es muy alto." } },

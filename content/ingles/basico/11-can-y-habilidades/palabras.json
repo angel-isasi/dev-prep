@@ -91,7 +91,7 @@
     "ejemplo": { "en": "I have a guitar lesson today.", "es": "Hoy tengo clase de guitarra." } },
   { "id": "en-basico-11-w46", "en": "favor", "es": "favor", "pron": "féivor", "tipo": "sustantivo",
     "ejemplo": { "en": "I need a favor.", "es": "Necesito un favor." } },
-  { "id": "en-basico-11-w47", "en": "well", "es": "bien", "pron": "uél", "tipo": "adverbio",
+  { "id": "en-basico-11-w47", "en": "well", "es": "bien (cómo haces algo)", "pron": "uél", "tipo": "adverbio",
     "ejemplo": { "en": "She dances very well.", "es": "Ella baila muy bien." } },
   { "id": "en-basico-11-w48", "en": "badly", "es": "mal", "pron": "bádli", "tipo": "adverbio",
     "ejemplo": { "en": "I sing badly.", "es": "Canto mal." } },

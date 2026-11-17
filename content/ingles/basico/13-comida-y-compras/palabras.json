@@ -111,7 +111,7 @@
     "ejemplo": { "en": "I love spicy food.", "es": "Me encanta la comida picante." } },
   { "id": "en-basico-13-w56", "en": "sweet", "es": "dulce", "pron": "suít", "tipo": "adjetivo",
     "ejemplo": { "en": "This cake is too sweet.", "es": "Esta torta está demasiado dulce." } },
-  { "id": "en-basico-13-w57", "en": "fresh", "es": "fresco", "pron": "fresh", "tipo": "adjetivo",
+  { "id": "en-basico-13-w57", "en": "fresh", "es": "fresco (recién hecho)", "pron": "fresh", "tipo": "adjetivo",
     "ejemplo": { "en": "The bread is fresh.", "es": "El pan está fresco." } },
   { "id": "en-basico-13-w58", "en": "I'd like", "es": "quisiera (pedido cortés)", "pron": "áid láik", "tipo": "expresion",
     "ejemplo": { "en": "I'd like a table for two.", "es": "Quisiera una mesa para dos." } },

@@ -53,6 +53,16 @@ describe("avance por conceptos", () => {
     const registros = { "fr:0": { caja: 1 }, "fr:1": { caja: 1 }, "fr:2": { caja: 3 }, "fr:3": { caja: 0 } };
     expect(avanceConceptos(items, registros, "u1")).toMatchObject({ total: 10, vistos: 4, aprendidos: 3, fijados: 1, nivel: 1, leccionesFaltan: 1, completa: false });
   });
+
+  test("fallar un concepto no lo cuenta como aprendido ni sube su dificultad", () => {
+    const fallados = Object.fromEntries(items.map((it) => [it.clave, { caja: 1, ultima: "no" }]));
+    expect(avanceConceptos(items, fallados, "u1")).toMatchObject({ vistos: 10, aprendidos: 0, nivel: 0, completa: false });
+    const acertados = Object.fromEntries(items.map((it) => [it.clave, { caja: 1, ultima: "sabia" }]));
+    expect(avanceConceptos(items, acertados, "u1")).toMatchObject({ aprendidos: 10, completa: true });
+    const item = concepto("fr:x");
+    expect(elegirVariante(item, { caja: 1, ultima: "no" }, { azar: () => 0 }).nivel).toBe(0);
+    expect(elegirVariante(item, { caja: 1, ultima: "sabia" }, { azar: () => 0 }).nivel).toBe(1);
+  });
 });
 
 describe("lección de inglés", () => {

@@ -23,7 +23,7 @@
     "ejemplo": { "en": "The database schema has five tables.", "es": "El esquema de la base de datos tiene cinco tablas." } },
   { "id": "en-trabajo-01-w12", "en": "algorithm", "es": "algoritmo", "pron": "álgorizem", "tipo": "sustantivo",
     "ejemplo": { "en": "This algorithm sorts the list.", "es": "Este algoritmo ordena la lista." } },
-  { "id": "en-trabajo-01-w13", "en": "asynchronous", "es": "asíncrono", "pron": "eisínkronos", "tipo": "adjetivo",
+  { "id": "en-trabajo-01-w13", "en": "asynchronous", "es": "asíncrono (palabra completa)", "pron": "eisínkronos", "tipo": "adjetivo",
     "ejemplo": { "en": "Fetching data is asynchronous.", "es": "Traer datos es asíncrono." } },
   { "id": "en-trabajo-01-w14", "en": "synchronous", "es": "síncrono", "pron": "sínkronos", "tipo": "adjetivo",
     "ejemplo": { "en": "This code is synchronous, so it blocks.", "es": "Este código es síncrono, así que bloquea." } },

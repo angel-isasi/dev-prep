@@ -16,7 +16,8 @@ export function elegirVariante(item, registro, { conVoz = true, conMicro = false
   if (!item.variantes) return item;
   const posibles = item.variantes.filter((v) => (conVoz || !v.voz) && (conMicro || !v.micro) && (!soloVoz || v.voz));
   if (!posibles.length) return null;
-  const caja = registro?.caja ?? 0;
+  // si lo fallaste la última vez, vuelve a la forma más fácil
+  const caja = registro?.ultima === "no" ? 0 : (registro?.caja ?? 0);
   const maximo = Math.max(...posibles.map((v) => v.nivel));
   let candidatas;
   if (nivelMinimo > 0) {
@@ -61,7 +62,7 @@ export function emparejarDe(items, azar = Math.random) {
 
 /**
  * Avance de una unidad de inglés por conceptos:
- * - aprendidos: los acertaste al menos una vez (caja 1 o más)
+ * - aprendidos: los acertaste al menos una vez (caja 2 o más, o caja 1 sin haberlo fallado la última vez)
  * - fijados: los recordaste días después (caja 3 o más)
  * - nivel: de 0 a 5, cada nivel es un 20% de aprendidos (como las coronas de un nodo)
  * - leccionesFaltan: cuántas lecciones de unos 6 nuevos faltan para verlos todos
@@ -71,7 +72,9 @@ export function avanceConceptos(items, registros, unidad) {
   const total = deUnidad.length;
   const caja = (it) => registros[it.clave]?.caja ?? 0;
   const vistos = deUnidad.filter((it) => registros[it.clave]).length;
-  const aprendidos = deUnidad.filter((it) => caja(it) >= 1).length;
+  // fallar deja la caja en 1 ("no"), así que caja 1 solo cuenta si la última nota no fue un fallo
+  const aprendido = (it) => caja(it) >= 2 || (caja(it) === 1 && registros[it.clave]?.ultima !== "no");
+  const aprendidos = deUnidad.filter(aprendido).length;
   const fijados = deUnidad.filter((it) => caja(it) >= 3).length;
   const nivel = total ? Math.floor((aprendidos / total) * 5 + 1e-9) : 0;
   return {

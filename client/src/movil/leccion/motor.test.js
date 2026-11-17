@@ -199,6 +199,18 @@ describe("inglés: escuchar, armar y prueba de nivel", () => {
     expect(terminada(s)).toBe(true);
     expect(resultadoNivel(s, unidades).empiezaEn).toBe("u2");
   });
+
+  test("prueba de nivel con muchas unidades: 1 por unidad alternando, ninguna queda fuera", () => {
+    const muchas = Array.from({ length: 47 }, (_, i) => ({ id: `m${i}` }));
+    const conceptos = muchas.flatMap(({ id }) => [
+      { clave: `gra:${id}`, tipo: "opcion", subtipo: "gramatica", unidad: id },
+      { clave: `en:${id}`, tipo: "concepto", concepto: "palabra", unidad: id },
+    ]);
+    const pasos = armarLeccion({ items: conceptos, registros: {}, hoy: "2026-11-16", unidades: muchas, modo: "nivel" });
+    expect(pasos).toHaveLength(47);
+    expect(new Set(pasos.map((p) => p.item.unidad)).size).toBe(47);
+    expect(pasos.slice(0, 2).map((p) => p.clave)).toEqual(["gra:m0", "en:m1"]);
+  });
 });
 
 describe("examen semanal", () => {

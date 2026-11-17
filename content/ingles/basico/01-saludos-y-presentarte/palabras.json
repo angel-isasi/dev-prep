@@ -127,7 +127,7 @@
     "ejemplo": { "en": "Thank you. You're welcome.", "es": "Gracias. De nada." } },
   { "id": "en-basico-01-w64", "en": "sorry", "es": "perdón / lo siento", "pron": "sórri", "tipo": "expresion",
     "ejemplo": { "en": "Sorry, I'm late.", "es": "Perdón, llego tarde." } },
-  { "id": "en-basico-01-w65", "en": "excuse me", "es": "disculpa / con permiso", "pron": "ekskiús mi", "tipo": "expresion",
+  { "id": "en-basico-01-w65", "en": "excuse me", "es": "disculpa / con permiso", "pron": "ekskiúz mi", "tipo": "expresion",
     "ejemplo": { "en": "Excuse me, are you Ana?", "es": "Disculpa, ¿eres Ana?" } },
   { "id": "en-basico-01-w66", "en": "yes", "es": "sí", "pron": "iés", "tipo": "expresion",
     "ejemplo": { "en": "Yes, I'm Luis.", "es": "Sí, soy Luis." } },

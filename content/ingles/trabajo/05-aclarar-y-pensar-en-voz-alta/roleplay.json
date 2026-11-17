@@ -3,7 +3,7 @@
     "turnos": [
       { "quien": "Jennifer", "en": "Write a function that removes duplicates from an array.", "es": "Escribe una función que elimine los duplicados de un array." },
       { "opciones": [
-          { "en": "OK. *empieza a escribir código en silencio*", "es": "", "correcta": false, "explicacion": "El error más común: programar sin hablar ni aclarar. El entrevistador quiere oír cómo piensas." },
+          { "en": "OK, I'll just start coding.", "es": "", "correcta": false, "explicacion": "El error más común: programar sin hablar ni aclarar. El entrevistador quiere oír cómo piensas." },
           { "en": "Just to clarify, is it an array of numbers, or can it have objects?", "es": "Solo para aclarar, ¿es un array de números o puede tener objetos?", "correcta": true, "explicacion": "*Just to clarify* abre una pregunta de aclaración: así empiezan las buenas entrevistas." },
           { "en": "For clarify, what type is the array?", "es": "", "correcta": false, "explicacion": "Después de *for* no va el verbo base. Se dice *Just to clarify* o *To clarify*." }
         ] },

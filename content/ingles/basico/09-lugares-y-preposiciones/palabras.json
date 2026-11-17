@@ -79,7 +79,7 @@
     "ejemplo": { "en": "The cat is under the table.", "es": "El gato está debajo de la mesa." } },
   { "id": "en-basico-09-w40", "en": "above", "es": "encima de, arriba de (sin tocar)", "pron": "abóv", "tipo": "preposicion",
     "ejemplo": { "en": "My apartment is above a store.", "es": "Mi departamento está encima de una tienda." } },
-  { "id": "en-basico-09-w41", "en": "inside", "es": "adentro, dentro de", "pron": "insáid", "tipo": "preposicion",
+  { "id": "en-basico-09-w41", "en": "inside", "es": "adentro / por dentro", "pron": "insáid", "tipo": "preposicion",
     "ejemplo": { "en": "Wait inside the building.", "es": "Espera dentro del edificio." } },
   { "id": "en-basico-09-w42", "en": "outside", "es": "afuera, fuera de", "pron": "autsáid", "tipo": "preposicion",
     "ejemplo": { "en": "I'm outside the office.", "es": "Estoy afuera de la oficina." } },

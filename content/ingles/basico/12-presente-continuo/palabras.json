@@ -29,7 +29,7 @@
     "ejemplo": { "en": "This jacket is very warm.", "es": "Esta casaca es muy abrigadora." } },
   { "id": "en-basico-12-w15", "en": "cold", "es": "frío", "pron": "kóuld", "tipo": "adjetivo",
     "ejemplo": { "en": "I'm cold. Can you close the window?", "es": "Tengo frío. ¿Puedes cerrar la ventana?" } },
-  { "id": "en-basico-12-w16", "en": "cool", "es": "fresco", "pron": "kul", "tipo": "adjetivo",
+  { "id": "en-basico-12-w16", "en": "cool", "es": "fresco (clima) / genial", "pron": "kul", "tipo": "adjetivo",
     "ejemplo": { "en": "It's cool in the evening.", "es": "En la noche está fresco." } },
   { "id": "en-basico-12-w17", "en": "humid", "es": "húmedo", "pron": "jiúmid", "tipo": "adjetivo",
     "ejemplo": { "en": "Lima is very humid.", "es": "Lima es muy húmeda." } },

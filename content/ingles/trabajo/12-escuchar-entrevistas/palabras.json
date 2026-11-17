@@ -94,7 +94,7 @@
     "pron": "lets dáiv ín",
     "tipo": "expresion",
     "ejemplo": {
-      "en": "Okay, let's dive in with the first problem.",
+      "en": "Okay, let's dive into the first problem.",
       "es": "Bien, entremos en materia con el primer problema."
     }
   },
@@ -134,7 +134,7 @@
   {
     "id": "en-trabajo-12-w13",
     "en": "for instance",
-    "es": "por ejemplo",
+    "es": "por ejemplo (otra forma hablada)",
     "pron": "for ínstans",
     "tipo": "conector",
     "ejemplo": {

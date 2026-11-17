@@ -40,13 +40,21 @@ function barajar(lista, azar) {
 }
 
 /** La correcta más 3 distractores distintos entre sí y de la correcta; la correcta en un lugar estable. */
+/** Núcleos de un significado: sin lo que va entre paréntesis y separado por "/" o ",". */
+export const nucleos = (t) => {
+  const partes = String(t ?? "").replace(/\([^)]*\)/g, " ").split(/[/,]/).map(normal).filter(Boolean);
+  return partes.length ? partes : [normal(t)];
+};
+
 function armarOpciones(correcta, candidatos, azar, cuantos = 3) {
-  const usadas = new Set([normal(correcta)]);
+  // Se compara el núcleo de cada significado: "gracias (informal)" y "gracias" chocan, igual que "muy / de verdad" y "muy".
+  const usadas = new Set(nucleos(correcta));
   const distractores = [];
   for (const c of barajar(candidatos, azar)) {
     if (distractores.length >= cuantos) break;
-    if (!c || usadas.has(normal(c))) continue;
-    usadas.add(normal(c));
+    const suyos = c ? nucleos(c) : [];
+    if (!c || suyos.some((n) => usadas.has(n))) continue;
+    suyos.forEach((n) => usadas.add(n));
     distractores.push(c);
   }
   if (distractores.length < 2) return null;
@@ -70,9 +78,24 @@ const CONTRACCIONES = {
   "you'd": "you would", "don't": "do not", "doesn't": "does not", "didn't": "did not", "isn't": "is not", "aren't": "are not",
   "wasn't": "was not", "weren't": "were not", "can't": "cannot", "couldn't": "could not", "won't": "will not",
   "wouldn't": "would not", "shouldn't": "should not", "haven't": "have not", "hasn't": "has not", "hadn't": "had not",
+  "he'll": "he will", "she'll": "she will", "that'll": "that will", "there'll": "there will", "he'd": "he would", "she'd": "she would",
+  "we'd": "we would", "they'd": "they would", "it'd": "it would", "here's": "here is", "how's": "how is", "mustn't": "must not",
+  "should've": "should have", "would've": "would have", "could've": "could have",
 };
 
-/** Texto comparable: minúsculas, sin signos, contracciones expandidas, espacios simples. */
+// Contracciones escritas sin apóstrofo (común con teclado en español). Fuera las que son otra palabra:
+// its, were, well, ill, id, hell, shell, wed, lets.
+const SIN_APOSTROFO = Object.fromEntries(
+  ["i'm", "you're", "they're", "he's", "she's", "that's", "there's", "what's", "where's", "who's", "i've", "you've", "we've", "they've", "you'll", "they'll", "don't", "doesn't", "didn't", "isn't", "aren't", "wasn't", "weren't", "can't", "couldn't", "won't", "wouldn't", "shouldn't", "haven't", "hasn't", "hadn't"].map((c) => [
+    c.replace("'", ""),
+    CONTRACCIONES[c],
+  ]),
+);
+
+// El reconocimiento de voz suele devolver números en cifras ("15" en vez de "fifteen").
+const NUMEROS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
+
+/** Texto comparable: minúsculas, sin signos, contracciones expandidas, ok = okay, números del 0 al 20 en letras, espacios simples. */
 export function comparable(texto) {
   return String(texto ?? "")
     .toLowerCase()
@@ -80,7 +103,7 @@ export function comparable(texto) {
     .replace(/[.,!?;:"()¿¡]/g, " ")
     .split(/\s+/)
     .filter(Boolean)
-    .map((p) => CONTRACCIONES[p] ?? p)
+    .map((p) => CONTRACCIONES[p] ?? SIN_APOSTROFO[p] ?? (p === "ok" ? "okay" : /^\d{1,2}$/.test(p) && Number(p) <= 20 ? NUMEROS[Number(p)] : p))
     .join(" ")
     .replace(/\bcan not\b/g, "cannot");
 }
@@ -101,13 +124,24 @@ export function distancia(a, b) {
 }
 
 /**
+ * Una contracción puede esconder dos verbos: "he's" es "he is" o "he has", y "you'd" es "you would" o "you had".
+ * comparable() expande la forma más común; aquí se suma la otra lectura para no rechazar "He has just joined".
+ */
+function otrasLecturas(texto) {
+  const t = String(texto ?? "").replace(/[’‘`]/g, "'");
+  const has = t.replace(/\b(he|she|it|that|there|what|who|where|here|how)'s\b/gi, "$1 has");
+  const had = t.replace(/\b(i|you|he|she|we|they|it)'d\b/gi, "$1 had");
+  return [...new Set([t, has, had])];
+}
+
+/**
  * ¿Lo que escribiste es correcto? "exacta", "casi" (un error de tipeo) o false.
  * @param {{ respuesta: string, aceptadas?: string[] }} item
  */
 export function escrituraCorrecta(item, texto) {
   const tuyo = comparable(texto);
   if (!tuyo) return false;
-  const validas = [item.respuesta, ...(item.aceptadas ?? [])].map(comparable);
+  const validas = [item.respuesta, ...(item.aceptadas ?? [])].flatMap(otrasLecturas).map(comparable);
   if (validas.includes(tuyo)) return "exacta";
   const tolerancia = (t) => (t.length < 5 ? 0 : Math.max(1, Math.floor(t.length / 14)));
   return validas.some((v) => distancia(tuyo, v) <= tolerancia(v)) ? "casi" : false;

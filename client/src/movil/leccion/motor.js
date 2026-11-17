@@ -119,13 +119,20 @@ export function armarLeccion({ items, registros, reportados = {}, preguntas = []
   }
 
   if (modo === "nivel") {
-    // Prueba de nivel: 2 preguntas por unidad, en orden (gramática y vocabulario), sin repetir lo fallado.
-    for (const u of unidades) {
+    // Prueba de nivel, en orden de unidades y sin repetir lo fallado. Si caben, 2 preguntas por unidad
+    // (gramática y vocabulario); si no, 1 por unidad alternando, para que ninguna unidad quede sin probar.
+    const dos = unidades.length * 2 <= tamano;
+    const tope = Math.max(tamano, unidades.length);
+    unidades.forEach((u, i) => {
       const deU = disponibles.filter((it) => it.unidad === u.id);
       const gramatica = deU.find((it) => it.subtipo === "gramatica") ?? deU.find((it) => it.subtipo === "inversa");
-      const palabra = deU.find((it) => it.subtipo === "palabra" && it !== gramatica);
-      for (const it of [gramatica, palabra]) if (it && elegidos.length < tamano) elegidos.push(paso(it));
-    }
+      const palabra = deU.find((it) => (it.subtipo === "palabra" || it.concepto === "palabra") && it !== gramatica);
+      const orden = dos ? [gramatica, palabra] : i % 2 ? [palabra ?? gramatica] : [gramatica ?? palabra];
+      for (const it of orden) {
+        const p = it && elegidos.length < tope ? paso(it) : null;
+        if (p) elegidos.push(p);
+      }
+    });
     return elegidos;
   }
 

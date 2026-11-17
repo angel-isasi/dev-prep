@@ -4,7 +4,7 @@
   gap: var(--espacio-5);
   max-width: 760px;
   margin: 0 auto;
-  padding-bottom: 120px;
+  padding: var(--espacio-5) var(--espacio-4) 120px;
 }
 .mensaje {
   padding: var(--espacio-5);

@@ -43,6 +43,7 @@ export function ParejasMovil() {
   const [resultado, setResultado] = useState(null);
   const siguiente = useRef(0);
   const restantes = useRef([]);
+  const inicio = useRef(0); // para sumar solo los segundos que jugaste de verdad
   const enJuego = useRef(new Set()); // claves en el tablero (para no repetir una pareja visible)
   enJuego.current = new Set(tablero.map((p) => p.clave));
 
@@ -89,12 +90,13 @@ export function ParejasMovil() {
     setParejas(0);
     setCombo(0);
     setQuedan(SEGUNDOS);
+    inicio.current = Date.now();
     setEstado("jugando");
   }
 
   async function terminar() {
     setEstado("fin");
-    const r = await api.terminarParejas(parejas, parejas * XP_POR_PAREJA);
+    const r = await api.terminarParejas(parejas, parejas * XP_POR_PAREJA, Math.min(SEGUNDOS, (Date.now() - inicio.current) / 1000));
     if (r.nuevoRecord && parejas > 0) celebrar("logro");
     setRecord(r.record);
     setResultado(r);

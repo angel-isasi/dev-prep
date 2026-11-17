@@ -834,7 +834,8 @@ const apiWeb = {
     const dias = progreso.dias();
     const hoy = progreso.hoy();
     const minutos = (f) => Math.round(((dias[f]?.inglesSegundos ?? 0) / 60 + (dias[f]?.inmersion ?? 0)) * 10) / 10;
-    const practico = (f) => (dias[f]?.ingles ?? 0) + (dias[f]?.inmersion ?? 0) > 0;
+    // cuenta cualquier práctica: lecciones, inmersión, historias o parejas
+    const practico = (f) => (dias[f]?.ingles ?? 0) + (dias[f]?.inmersion ?? 0) + (dias[f]?.inglesHistorias ?? 0) + (dias[f]?.inglesSegundos ?? 0) > 0;
     let f = practico(hoy) ? hoy : sumarDias(hoy, -1);
     let racha = 0;
     while (practico(f)) {
@@ -881,11 +882,11 @@ const apiWeb = {
     const misiones = misionesDelDia(hoy, dias[hoy] ?? {}, { conMicro });
     return { misiones, completas: misiones.every((m) => m.hecha), cobrado: extra.cofreDiario === hoy, xpCofre: XP_COFRE_DIARIO, liga: ligaSemanal(dias, hoy), vidas: !!extra.vidas, parejasRecord: extra.parejasRecord ?? 0 };
   },
-  async cobrarCofreDiario() {
+  async cobrarCofreDiario({ conMicro = false } = {}) {
     const hoy = progreso.hoy();
     const extra = extraIngles();
     const dias = progreso.dias();
-    if (extra.cofreDiario === hoy || !misionesDelDia(hoy, dias[hoy] ?? {}).every((m) => m.hecha)) return null;
+    if (extra.cofreDiario === hoy || !misionesDelDia(hoy, dias[hoy] ?? {}, { conMicro }).every((m) => m.hecha)) return null;
     guardarExtra({ cofreDiario: hoy });
     progreso.sumarXp(XP_COFRE_DIARIO);
     cache.clear();
@@ -909,11 +910,11 @@ const apiWeb = {
   },
   cambiarVidasIngles: async (activas) => guardarExtra({ vidas: !!activas }),
   /** Parejas contrarreloj: guarda tu récord y suma el XP. */
-  async terminarParejas(parejas, xp) {
+  async terminarParejas(parejas, xp, segundos = 60) {
     const extra = extraIngles();
     const record = Math.max(extra.parejasRecord ?? 0, parejas);
     guardarExtra({ parejasRecord: record });
-    progreso.sumarContadores({ inglesAciertos: parejas, inglesSegundos: 60 });
+    progreso.sumarContadores({ inglesAciertos: parejas, inglesSegundos: Math.round(Math.max(0, Math.min(segundos, 60))) });
     if (xp) progreso.sumarXp(xp);
     cache.clear();
     return { record, nuevoRecord: parejas > (extra.parejasRecord ?? 0) };

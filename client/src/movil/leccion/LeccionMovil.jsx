@@ -243,9 +243,10 @@ export function LeccionMovil() {
         {final.fallados.length > 0 && (
           <div className={estilos.repasar}>
             <span>Para repasar</span>
-            {final.fallados.map((p) => {
+            {final.fallados.map((p, i) => {
               const enlace = enlaceFuente(p.item?.fuente);
-              return enlace ? (
+              const repetido = final.fallados.slice(0, i).some((q) => enlaceFuente(q.item?.fuente) === enlace);
+              return enlace && !repetido ? (
                 <Link key={p.clave} to={enlace}>
                   {p.item.fuente.titulo ?? p.clave} →
                 </Link>

@@ -21,7 +21,7 @@
     "ejemplo": { "en": "I advise you to read the docs first.", "es": "Te aconsejo leer la documentación primero." } },
   { "id": "en-intermedio-05-w11", "en": "recommendation", "es": "recomendación", "pron": "rekomendéishon", "tipo": "sustantivo",
     "ejemplo": { "en": "Do you have any book recommendations?", "es": "¿Tienes alguna recomendación de libros?" } },
-  { "id": "en-intermedio-05-w12", "en": "rule", "es": "regla", "pron": "rúl", "tipo": "sustantivo",
+  { "id": "en-intermedio-05-w12", "en": "rule", "es": "regla (norma)", "pron": "rúl", "tipo": "sustantivo",
     "ejemplo": { "en": "Our team has a few simple rules.", "es": "Nuestro equipo tiene algunas reglas simples." } },
   { "id": "en-intermedio-05-w13", "en": "requirement", "es": "requisito", "pron": "rikuáierment", "tipo": "sustantivo",
     "ejemplo": { "en": "English is a requirement for this job.", "es": "El inglés es un requisito para este trabajo." } },

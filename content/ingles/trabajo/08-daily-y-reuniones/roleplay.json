@@ -23,7 +23,7 @@
       { "opciones": [
           { "en": "It will take me two days, more or less, if the API is ready.", "es": "Me tomará unos dos días, si la API está lista.", "correcta": true, "explicacion": "*It will take me* + tiempo, con la condición que afecta la estimación." },
           { "en": "It will delay me two days.", "es": "", "correcta": false, "explicacion": "Calco de \"me demoraré\": *delay* es retrasar. Lo natural es *It'll take me two days*." },
-          { "en": "I don't know, it's ready when it's ready.", "es": "", "correcta": false, "explicacion": "Suena evasivo; en la planning se espera una estimación aunque sea aproximada." }
+          { "en": "I don't know, it's ready when it's ready.", "es": "", "correcta": false, "explicacion": "Suena evasivo; en la daily se espera una estimación aunque sea aproximada." }
         ] }
     ] }
 ]

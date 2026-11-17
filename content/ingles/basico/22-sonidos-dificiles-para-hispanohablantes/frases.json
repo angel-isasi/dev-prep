@@ -13,7 +13,7 @@
   { "id": "en-basico-22-f12", "en": "I need a cup of coffee.", "es": "Necesito una taza de café." },
   { "id": "en-basico-22-f13", "en": "The passwords don't match.", "es": "Las contraseñas no coinciden." },
   { "id": "en-basico-22-f14", "en": "There's a bug in my bag.", "es": "Hay un bicho en mi bolsa." },
-  { "id": "en-basico-22-f15", "en": "They banned his account yesterday.", "es": "Ayer bloquearon su cuenta." },
+  { "id": "en-basico-22-f15", "en": "They banned his account yesterday.", "es": "Ayer bloquearon su cuenta (de él)." },
   { "id": "en-basico-22-f16", "en": "We need a van for the event.", "es": "Necesitamos una camioneta para el evento." },
   { "id": "en-basico-22-f17", "en": "I bet the test fails.", "es": "Apuesto a que la prueba falla." },
   { "id": "en-basico-22-f18", "en": "We found three bugs today.", "es": "Hoy encontramos tres errores." },

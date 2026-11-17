@@ -61,7 +61,7 @@
     "ejemplo": { "en": "The car has a full tank.", "es": "El carro tiene el tanque lleno." } },
   { "id": "en-basico-22-w31", "en": "day", "es": "día", "pron": "déi (d normal)", "tipo": "sustantivo",
     "ejemplo": { "en": "I study English every day.", "es": "Estudio inglés todos los días." } },
-  { "id": "en-basico-22-w32", "en": "though", "es": "aunque", "pron": "dóu (th sonora)", "tipo": "conector",
+  { "id": "en-basico-22-w32", "en": "though", "es": "aunque (informal, también al final)", "pron": "dóu (th sonora)", "tipo": "conector",
     "ejemplo": { "en": "The test passed, though it was slow.", "es": "La prueba pasó, aunque fue lenta." } },
   { "id": "en-basico-22-w33", "en": "mouth", "es": "boca", "pron": "máuz", "tipo": "sustantivo",
     "ejemplo": { "en": "Open your mouth a little more.", "es": "Abre un poco más la boca." } },
