@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-02-r01", "titulo": "El día que se cayó la app", "situacion": "Mike, de RR. HH., te pide que cuentes un problema que resolviste. Cuéntalo en orden.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Mike", "en": "Can you tell me about a problem you solved?", "es": "¿Puedes contarme de un problema que resolviste?" },
+      { "opciones": [
+          { "en": "Sure. I was testing my app when it suddenly crashed.", "es": "Claro. Estaba probando mi app cuando de repente se cayó.", "correcta": true, "explicacion": "Pasado continuo para la acción en curso (*was testing*) y pasado simple para lo que la interrumpió (*crashed*)." },
+          { "en": "Sure. I tested my app when it was crashing suddenly.", "es": "", "correcta": false, "explicacion": "Tiempos al revés: la acción larga va en continuo (*was testing*) y la interrupción en simple (*crashed*)." },
+          { "en": "Sure. I was test my app when it crashed.", "es": "", "correcta": false, "explicacion": "Pasado continuo es *was* + verbo con *-ing*: *I was testing*." }
+        ] },
+      { "quien": "Mike", "en": "Oh no. What were you doing exactly?", "es": "Uy. ¿Qué estabas haciendo exactamente?" },
+      { "opciones": [
+          { "en": "I uploaded a big photo while the form send the data.", "es": "", "correcta": false, "explicacion": "Falta el pasado continuo para las acciones simultáneas y *send* debería estar en pasado." },
+          { "en": "Nothing special, apps just crash sometimes, you know.", "es": "", "correcta": false, "explicacion": "No responde la pregunta y quita importancia al problema: mala impresión en una entrevista." },
+          { "en": "I was uploading a big photo while the form was sending data.", "es": "Estaba subiendo una foto grande mientras el formulario enviaba datos.", "correcta": true, "explicacion": "*While* une dos acciones largas al mismo tiempo, las dos en pasado continuo." }
+        ] },
+      { "quien": "Mike", "en": "And how did you fix it?", "es": "¿Y cómo lo arreglaste?" },
+      { "opciones": [
+          { "en": "First I fixed the size, then I read the logs, finally I found it.", "es": "", "correcta": false, "explicacion": "El orden no tiene sentido: primero se leen los logs, después se encuentra la causa y al final se arregla." },
+          { "en": "First, I read the logs. Then I found the photo was too big. Finally, I limited the size.", "es": "Primero leí los logs. Luego vi que la foto era muy grande. Al final limité el tamaño.", "correcta": true, "explicacion": "*First, then, finally* ordenan la historia; los pasos van en pasado simple." },
+          { "en": "First, I was reading the logs, then I was finding the photo.", "es": "", "correcta": false, "explicacion": "Pasos que se terminan uno tras otro van en pasado simple, no en continuo." }
+        ] },
+      { "quien": "Mike", "en": "What happened after that?", "es": "¿Qué pasó después de eso?" },
+      { "opciones": [
+          { "en": "After that, the app didn't crash again.", "es": "Después de eso, la app no se volvió a caer.", "correcta": true, "explicacion": "*After that* + pasado simple para cerrar la historia con el resultado." },
+          { "en": "After that, the app didn't crashed again.", "es": "", "correcta": false, "explicacion": "Después de *didn't* el verbo va en base: *didn't crash*." },
+          { "en": "After that, the app wasn't crash again.", "es": "", "correcta": false, "explicacion": "Negativa de pasado simple con *didn't*, no con *wasn't*." }
+        ] }
+    ] }
+]

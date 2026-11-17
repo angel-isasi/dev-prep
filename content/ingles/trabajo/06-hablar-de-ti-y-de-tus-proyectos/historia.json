@@ -1,0 +1,19 @@
+[
+  { "id": "en-trabajo-06-h01", "titulo": "Presentarse ante el cliente", "situacion": "Llega un cliente nuevo de Chicago. Tom le pide a cada uno que se presente en un minuto.",
+    "pasos": [
+      { "quien": "Tom", "en": "Let's do quick intros for our new client. Ana, you go first.", "es": "Hagamos presentaciones rápidas para nuestro cliente nuevo. Ana, empiezas tú." },
+      { "quien": "Ana", "en": "Hi everyone, I'm Ana. I'm a frontend developer based in Lima, Peru.", "es": "Hola a todos, soy Ana. Soy desarrolladora frontend y vivo en Lima, Perú." },
+      { "tipo": "completa", "quien": "Ana", "en": "I ___ Systems Engineering, and I've been on this team for a year.", "es": "Estudié Ingeniería de Sistemas, y estoy en este equipo desde hace un año.", "opciones": ["studied", "have studied in", "study of"], "correcta": 0, "explicacion": "Para tus estudios terminados va pasado simple: **I studied Systems Engineering**. Sin preposición después de *studied*." },
+      { "quien": "Ana", "en": "I got into programming because I wanted to build things people actually use.", "es": "Empecé a programar porque quería construir cosas que la gente use de verdad." },
+      { "quien": "Ana", "en": "One project I'm proud of is our checkout page. I made it load twice as fast.", "es": "Un proyecto del que estoy orgullosa es nuestra página de pago. Hice que cargue el doble de rápido." },
+      { "tipo": "pregunta", "pregunta": "¿De qué proyecto está orgullosa Ana?", "opciones": ["Del buscador de productos", "De la página de pago", "De su portafolio"], "correcta": 1, "explicacion": "Ana dice \"One project I'm proud of is our checkout page\"." },
+      { "quien": "Ana", "en": "The biggest challenge was a bug that only happened on old phones.", "es": "El mayor reto fue un bug que solo pasaba en celulares viejos." },
+      { "quien": "Ana", "en": "I borrowed my grandma's phone to test it. She still asks for it back.", "es": "Le pedí prestado el celular a mi abuela para probarlo. Todavía me lo pide de vuelta." },
+      { "quien": "Tom", "en": "True story. Her grandma is now our official QA tester.", "es": "Historia real. Su abuela ahora es nuestra tester oficial de QA." },
+      { "tipo": "completa", "quien": "Ana", "en": "I really enjoy ___ with Sarah, because we review each other's code.", "es": "Me gusta mucho trabajar con Sarah, porque revisamos el código de la otra.", "opciones": ["work", "to working", "working"], "correcta": 2, "explicacion": "Después de **enjoy** el verbo va con *-ing*: *I enjoy working*. Nunca *enjoy to work*." },
+      { "quien": "Ana", "en": "Right now I'm learning more about accessibility. That's me!", "es": "Ahora estoy aprendiendo más sobre accesibilidad. ¡Esa soy yo!" },
+      { "quien": "Tom", "en": "Exactly one minute. Sarah, beat that.", "es": "Exactamente un minuto. Sarah, supera eso." },
+      { "quien": "Sarah", "en": "Hi, I'm Sarah. I also borrowed her grandma's phone.", "es": "Hola, soy Sarah. Yo también le pedí prestado el celular a su abuela." },
+      { "tipo": "pregunta", "pregunta": "¿Cuál fue el mayor reto técnico de Ana?", "opciones": ["Un bug que solo pasaba en celulares viejos", "Aprender inglés", "Trabajar con un cliente nuevo"], "correcta": 0, "explicacion": "Ana dice \"a bug that only happened on old phones\", y lo probó con el celular de su abuela." }
+    ] }
+]

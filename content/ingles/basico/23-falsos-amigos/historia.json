@@ -1,0 +1,20 @@
+[
+  { "id": "en-basico-23-h01", "titulo": "No estoy estreñida, estoy resfriada", "situacion": "Ana se siente mal y escribe en el chat de su equipo remoto. Un año antes era solo una estudiante en Lima.",
+    "pasos": [
+      { "quien": "Ana", "en": "Good morning, team. Sorry, I'm constipated today. I'm going to work from bed.", "es": "Buenos días, equipo. Perdón, hoy estoy estreñida. Voy a trabajar desde la cama. (Ana quería decir resfriada)." },
+      { "quien": "Sarah", "en": "Oh! Ana... do you mean you have a cold?", "es": "¡Uy! Ana... ¿quieres decir que estás resfriada?" },
+      { "quien": "Ana", "en": "Yes! A cold. Why? What does constipated mean?", "es": "¡Sí! Resfriada. ¿Por qué? ¿Qué significa constipated?" },
+      { "quien": "Sarah", "en": "It means you have a stomach problem... a bathroom problem.", "es": "Significa que tienes un problema de estómago... un problema de baño." },
+      { "tipo": "pregunta", "pregunta": "¿Qué quiso decir Ana en su mensaje?", "opciones": ["Que está resfriada", "Que está estreñida", "Que está cansada"], "correcta": 0, "explicacion": "Resfriada es **I have a cold**. *Constipated* parece \"constipada\", pero significa estreñida." },
+      { "quien": "Ana", "en": "Oh no! Please delete my message!", "es": "¡Ay, no! ¡Por favor, borren mi mensaje!" },
+      { "quien": "Tom", "en": "Too late, ha, ha. Feel better, Ana. Take the day off.", "es": "Muy tarde, ja, ja. Que te mejores, Ana. Tómate el día libre." },
+      { "tipo": "completa", "quien": "Ana", "en": "Thanks, Tom. ___, I finished the login form yesterday, so it's OK.", "opciones": ["Actually", "Currently", "Eventually"], "correcta": 0, "explicacion": "**Actually** significa \"en realidad\", no \"actualmente\" (eso es *currently*). *Eventually* es \"con el tiempo\".", "es": "Gracias, Tom. En realidad, ayer terminé el formulario de login, así que no hay problema." },
+      { "quien": "Tom", "en": "Great. Tomorrow I have a new task for you: a custom dropdown for the settings page.", "es": "Genial. Mañana tengo una tarea nueva para ti: un dropdown personalizado para la página de configuración." },
+      { "quien": "Ana", "en": "A costume? For a party?", "es": "¿Un disfraz? ¿Para una fiesta?" },
+      { "quien": "Sarah", "en": "Ha, ha. No, custom! Made only for our app.", "es": "¡Ja, ja! ¡No, custom! Hecho solo para nuestra app." },
+      { "tipo": "completa", "quien": "Ana", "en": "Got it. A ___ dropdown, not a party costume.", "opciones": ["custom", "costume", "customer"], "correcta": 0, "explicacion": "**Custom** es personalizado. *Costume* es disfraz y *customer* es cliente: se parecen, pero no significan lo mismo.", "es": "Entendido. Un dropdown personalizado, no un disfraz de fiesta." },
+      { "quien": "Ana", "en": "One year ago, I was a student in Lima. Now I make funny mistakes with a remote team.", "es": "Hace un año era estudiante en Lima. Ahora cometo errores graciosos con un equipo remoto." },
+      { "quien": "Tom", "en": "And you learn from every mistake. Get some rest, Ana!", "es": "Y aprendes de cada error. ¡Descansa, Ana!" },
+      { "tipo": "pregunta", "pregunta": "¿Qué significa custom?", "opciones": ["Personalizado", "Disfraz", "Cliente"], "correcta": 0, "explicacion": "**Custom** es personalizado o hecho a medida. Disfraz es *costume* y cliente es *customer*." }
+    ] }
+]

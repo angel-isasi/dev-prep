@@ -1,0 +1,7 @@
+[
+  { "id": "en-basico-06-c01", "es": "No entiendo.", "natural": "I don't understand.", "calco": "I no understand.", "explicacion": "Para negar en presente se usa **don't** o **doesn't**, nunca *no* antes del verbo." },
+  { "id": "en-basico-06-c02", "es": "¿Dónde vives?", "natural": "Where do you live?", "calco": "Where you live?", "explicacion": "Las preguntas en presente necesitan **do** o **does**: *Where do you live?*" },
+  { "id": "en-basico-06-c03", "es": "Tengo una duda.", "natural": "I have a question.", "calco": "I have a doubt.", "explicacion": "Una duda que preguntas es una **question**. *Doubt* es desconfianza o inseguridad." },
+  { "id": "en-basico-06-c04", "es": "No funciona.", "natural": "It doesn't work.", "calco": "No works.", "explicacion": "Falta el sujeto **it** y el auxiliar **doesn't**: *It doesn't work*." },
+  { "id": "en-basico-06-c05", "es": "¿Qué significa esto?", "natural": "What does this mean?", "calco": "What means this?", "explicacion": "La pregunta necesita **does** y el verbo va sin -s: *What does this mean?*" }
+]

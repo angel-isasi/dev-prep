@@ -28,5 +28,10 @@
   { "id": "en-basico-09-f27", "en": "The hotel is on this street.", "es": "El hotel está en esta calle." },
   { "id": "en-basico-09-f28", "en": "Do you have a map of the city?", "es": "¿Tienes un mapa de la ciudad?" },
   { "id": "en-basico-09-f29", "en": "The police station is over there.", "es": "La comisaría está por allá." },
-  { "id": "en-basico-09-f30", "en": "I'm at work from nine to six.", "es": "Estoy en el trabajo de nueve a seis." }
+  { "id": "en-basico-09-f30", "en": "I'm at work from nine to six.", "es": "Estoy en el trabajo de nueve a seis." },
+  { "id": "en-basico-09-f31", "en": "The meeting room is on the second floor.", "es": "La sala de reuniones está en el segundo piso.", "trabajo": true },
+  { "id": "en-basico-09-f32", "en": "My desk is next to the window.", "es": "Mi escritorio está al lado de la ventana.", "trabajo": true },
+  { "id": "en-basico-09-f33", "en": "The menu is at the top of the page.", "es": "El menú está en la parte de arriba de la página.", "trabajo": true },
+  { "id": "en-basico-09-f34", "en": "Click the button on the left.", "es": "Haz clic en el botón de la izquierda.", "trabajo": true },
+  { "id": "en-basico-09-f35", "en": "The logo is in the top right corner.", "es": "El logo está en la esquina superior derecha.", "trabajo": true }
 ]

@@ -1,0 +1,20 @@
+[
+  { "id": "en-basico-02-h01", "titulo": "El micrófono de Ana", "situacion": "Ana está en su cuarto, lista para su primera clase online de inglés. Luis la acompaña.",
+    "pasos": [
+      { "quien": "Luis", "en": "Hi, Ana! How are you?", "es": "¡Hola, Ana! ¿Cómo estás?" },
+      { "quien": "Ana", "en": "I'm fine. I'm not nervous.", "es": "Estoy bien. No estoy nerviosa." },
+      { "quien": "Luis", "en": "Are you sure? Your coffee is on the keyboard.", "es": "¿Segura? Tu café está sobre el teclado." },
+      { "quien": "Ana", "en": "Oh no! OK, I'm a little nervous.", "es": "¡Ay, no! Ya, estoy un poco nerviosa." },
+      { "tipo": "pregunta", "pregunta": "¿Cómo está Ana en realidad?", "opciones": ["Un poco nerviosa", "Muy feliz", "Cansada"], "correcta": 0, "explicacion": "Primero dice **I'm not nervous**, pero luego admite **I'm a little nervous**." },
+      { "quien": "Luis", "en": "Why? Is the class hard?", "es": "¿Por qué? ¿La clase es difícil?" },
+      { "quien": "Ana", "en": "No, it isn't. The teacher is Sarah. She's very nice.", "es": "No. La profesora es Sarah. Es muy amable." },
+      { "tipo": "completa", "quien": "Ana", "en": "Sarah ___ a developer in the United States.", "opciones": ["is", "are", "am"], "correcta": 0, "explicacion": "Sarah es una sola persona (she), por eso **is**. *Are* es para you, we y they.", "es": "Sarah es desarrolladora en Estados Unidos." },
+      { "quien": "Luis", "en": "A developer? Cool! Are you ready?", "es": "¿Desarrolladora? ¡Genial! ¿Estás lista?" },
+      { "quien": "Ana", "en": "Yes, I'm ready. My laptop is OK, the camera is on...", "es": "Sí, estoy lista. Mi laptop está bien, la cámara está prendida..." },
+      { "quien": "Luis", "en": "And the microphone?", "es": "¿Y el micrófono?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Oh no! The microphone ___ on!", "opciones": ["isn't", "aren't", "not"], "correcta": 0, "explicacion": "La negativa de **is** es **isn't**. El micrófono es uno solo, por eso no va *aren't*, y *not* solo necesita el verbo antes.", "es": "¡Ay, no! ¡El micrófono no está prendido!" },
+      { "quien": "Luis", "en": "Ha, ha! Now you're ready.", "es": "¡Ja, ja! Ahora sí estás lista." },
+      { "quien": "Ana", "en": "Thank you, Luis. You're a good friend.", "es": "Gracias, Luis. Eres un buen amigo." },
+      { "tipo": "pregunta", "pregunta": "¿Qué problema tenía Ana antes de la clase?", "opciones": ["El micrófono estaba apagado", "No tenía laptop", "La cámara no funcionaba"], "correcta": 0, "explicacion": "Ana dice **the microphone isn't on**: el micrófono no estaba prendido. La cámara sí estaba prendida." }
+    ] }
+]

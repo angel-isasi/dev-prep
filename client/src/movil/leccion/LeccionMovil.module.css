@@ -299,3 +299,33 @@
   color: var(--texto-suave);
   text-align: center;
 }
+
+/* Combo y vidas (inglés) */
+.combo,
+.vidas {
+  font-weight: 800;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.combo {
+  color: #ff9f43;
+}
+.avance[data-combo="true"] > div {
+  background: linear-gradient(90deg, #ff9f43, #ff5e57) !important;
+}
+.hito {
+  position: fixed;
+  top: 18%;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 30;
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff9f43, #ff5e57);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.15rem;
+  box-shadow: 0 10px 30px rgb(255 94 87 / 0.35);
+  pointer-events: none;
+}

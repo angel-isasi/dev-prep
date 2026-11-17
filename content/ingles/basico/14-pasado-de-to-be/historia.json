@@ -1,0 +1,19 @@
+[
+  { "id": "en-basico-14-h01", "titulo": "Un cuadrado negro", "situacion": "Ayer Ana tuvo su entrevista con Tom. Hoy Luis le pregunta cómo le fue.",
+    "pasos": [
+      { "quien": "Luis", "en": "So? How was the interview yesterday?", "es": "¿Y? ¿Cómo te fue ayer en la entrevista?" },
+      { "quien": "Ana", "en": "It was OK... I think. I was very nervous.", "es": "Estuvo bien... creo. Estaba muy nerviosa." },
+      { "quien": "Luis", "en": "Was Tom nice?", "es": "¿Tom fue amable?" },
+      { "quien": "Ana", "en": "Yes, he was very nice. The questions were about React and JavaScript.", "es": "Sí, fue muy amable. Las preguntas fueron de React y JavaScript." },
+      { "tipo": "completa", "quien": "Luis", "en": "___ the questions difficult?", "opciones": ["Were", "Was", "Did"], "correcta": 0, "explicacion": "*The questions* es plural, así que la pregunta en pasado va con **were**. *Was* es para I, he, she, it.", "es": "¿Las preguntas fueron difíciles?" },
+      { "quien": "Ana", "en": "Some were easy, and one was hard. But the questions weren't the problem.", "es": "Algunas fueron fáciles y una fue difícil. Pero las preguntas no fueron el problema." },
+      { "quien": "Luis", "en": "What was the problem?", "es": "¿Cuál fue el problema?" },
+      { "quien": "Ana", "en": "My camera was off for five minutes! I was a black square.", "es": "¡Mi cámara estuvo apagada cinco minutos! Yo era un cuadrado negro." },
+      { "tipo": "pregunta", "pregunta": "¿Qué problema tuvo Ana en la entrevista?", "opciones": ["Su cámara estuvo apagada", "Llegó tarde", "Tom no se conectó"], "correcta": 0, "explicacion": "Ana dice **my camera was off for five minutes**." },
+      { "quien": "Luis", "en": "Ha, ha! And Tom?", "es": "¡Ja, ja! ¿Y Tom?" },
+      { "quien": "Ana", "en": "He was very relaxed. \"No problem, Ana!\"", "es": "Estuvo muy tranquilo. \"¡No hay problema, Ana!\"." },
+      { "tipo": "completa", "quien": "Ana", "en": "And at the end, Tom ___ happy with my code.", "opciones": ["was", "were", "is"], "correcta": 0, "explicacion": "Habla del final de la entrevista, que ya pasó: pasado de to be. Tom es **he**, por eso **was**.", "es": "Y al final, Tom quedó contento con mi código." },
+      { "quien": "Luis", "en": "So it wasn't a bad interview. It was a good interview with a black square.", "es": "O sea que no fue una mala entrevista. Fue una buena entrevista con un cuadrado negro." },
+      { "tipo": "pregunta", "pregunta": "¿Cómo se sentía Ana durante la entrevista?", "opciones": ["Muy nerviosa", "Muy tranquila", "Aburrida"], "correcta": 0, "explicacion": "Ana dice **I was very nervous**. El que estuvo tranquilo fue Tom." }
+    ] }
+]

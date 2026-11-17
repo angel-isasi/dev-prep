@@ -1,0 +1,19 @@
+[
+  { "id": "en-basico-08-h01", "titulo": "¿Quién es el de la foto?", "situacion": "Sarah le muestra a Ana una foto de su equipo de trabajo.",
+    "pasos": [
+      { "quien": "Ana", "en": "Sarah, who is the tall man in the photo?", "es": "Sarah, ¿quién es el hombre alto de la foto?" },
+      { "quien": "Sarah", "en": "That's Tom. He's our tech lead. He's from Chicago.", "es": "Ese es Tom. Es nuestro tech lead. Es de Chicago." },
+      { "quien": "Ana", "en": "He looks serious.", "es": "Se ve serio." },
+      { "quien": "Sarah", "en": "He looks serious, but he's very friendly and funny.", "es": "Se ve serio, pero es muy amable y gracioso." },
+      { "tipo": "pregunta", "pregunta": "¿Cómo es Tom en realidad?", "opciones": ["Amable y gracioso", "Serio y tímido", "Bajo y callado"], "correcta": 0, "explicacion": "Sarah dice **he's very friendly and funny**. Solo **se ve** serio (*he looks serious*)." },
+      { "quien": "Ana", "en": "And the woman with short hair and glasses?", "es": "¿Y la mujer de pelo corto y lentes?" },
+      { "tipo": "completa", "quien": "Sarah", "en": "Ha, ha! That's me! I ___ short hair in the photo.", "opciones": ["have", "am", "has"], "correcta": 0, "explicacion": "El pelo se describe con **have**: *I have short hair*. Decir *I am short hair* es un calco del español. *Has* es para he, she, it.", "es": "¡Ja, ja! ¡Esa soy yo! En la foto tengo el pelo corto." },
+      { "quien": "Ana", "en": "Oh, sorry! Your hair is long now.", "es": "¡Ay, perdón! Ahora tienes el pelo largo." },
+      { "quien": "Sarah", "en": "Yes, the photo is old. So, how do your friends describe you?", "es": "Sí, la foto es vieja. A ver, ¿cómo te describen tus amigos?" },
+      { "quien": "Ana", "en": "They say I'm hardworking and a little shy.", "es": "Dicen que soy trabajadora y un poco tímida." },
+      { "tipo": "completa", "quien": "Sarah", "en": "Hardworking is great. Tom ___ hardworking people.", "opciones": ["likes", "like", "is like"], "correcta": 0, "explicacion": "Tom es **he**, por eso el verbo lleva **-s**: *Tom likes*.", "es": "Ser trabajadora es genial. A Tom le gustan las personas trabajadoras." },
+      { "quien": "Ana", "en": "And shy?", "es": "¿Y tímida?" },
+      { "quien": "Sarah", "en": "Shy is OK. In interviews, just smile and talk about your code.", "es": "Ser tímida está bien. En las entrevistas, solo sonríe y habla de tu código." },
+      { "tipo": "pregunta", "pregunta": "¿Qué consejo le da Sarah?", "opciones": ["Sonreír y hablar de su código", "No hablar en la entrevista", "Cortarse el pelo"], "correcta": 0, "explicacion": "Sarah dice **just smile and talk about your code**." }
+    ] }
+]

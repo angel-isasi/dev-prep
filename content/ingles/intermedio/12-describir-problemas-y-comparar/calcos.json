@@ -1,0 +1,6 @@
+[
+  { "id": "en-intermedio-12-c01", "es": "Lanza error.", "natural": "It throws an error.", "calco": "It throws error.", "explicacion": "**Error** se cuenta, así que necesita **an**: *throws an error*." },
+  { "id": "en-intermedio-12-c02", "es": "Es más legible que el otro.", "natural": "It's more readable than the other one.", "calco": "It's more readable that the other one.", "explicacion": "El \"que\" de comparar es **than**, no *that*." },
+  { "id": "en-intermedio-12-c03", "es": "Es la forma más fácil.", "natural": "It's the easiest way.", "calco": "It's the more easy way.", "explicacion": "Los adjetivos que terminan en -y cambian a **-iest**: *the easiest*." },
+  { "id": "en-intermedio-12-c04", "es": "El error pasa solo en Safari.", "natural": "The error only happens on Safari.", "calco": "The error only passes on Safari.", "explicacion": "\"Pasar\" de ocurrir es **happen**. *Pass* es pasar un test o pasar algo a alguien." }
+]

@@ -1,0 +1,20 @@
+[
+  { "id": "en-basico-10-h01", "titulo": "¿Diez años de experiencia?", "situacion": "Ana lee con Luis la oferta de trabajo de la empresa de Sarah.",
+    "pasos": [
+      { "quien": "Luis", "en": "Is there a job for you on the website?", "es": "¿Hay un trabajo para ti en la página web?" },
+      { "quien": "Ana", "en": "Yes! There's a job for a junior frontend developer. It's at Sarah's company!", "es": "¡Sí! Hay un puesto de desarrollador frontend junior. ¡Es en la empresa de Sarah!" },
+      { "quien": "Luis", "en": "Great! Are there any requirements?", "es": "¡Genial! ¿Hay requisitos?" },
+      { "quien": "Ana", "en": "There are five: JavaScript, React, Git, English, and... ten years of experience.", "es": "Hay cinco: JavaScript, React, Git, inglés y... diez años de experiencia." },
+      { "quien": "Luis", "en": "Ten years? For a junior job?", "es": "¿Diez años? ¿Para un puesto junior?" },
+      { "quien": "Ana", "en": "Oh, wait. It's one year, not ten. Sorry!", "es": "Ay, espera. Es un año, no diez. ¡Perdón!" },
+      { "tipo": "pregunta", "pregunta": "¿Qué había leído mal Ana?", "opciones": ["Los años de experiencia", "El nombre de la empresa", "El lenguaje de programación"], "correcta": 0, "explicacion": "Ana leyó **ten years**, pero en realidad era **one year**." },
+      { "tipo": "completa", "quien": "Ana", "en": "And there ___ three steps in the process.", "opciones": ["are", "is", "be"], "correcta": 0, "explicacion": "Son tres pasos (plural), por eso **there are**. *There is* es para una sola cosa.", "es": "Y hay tres pasos en el proceso." },
+      { "quien": "Luis", "en": "What are the steps?", "es": "¿Cuáles son los pasos?" },
+      { "quien": "Ana", "en": "There's a call with a recruiter, a coding test, and an interview with Tom, the tech lead.", "es": "Hay una llamada con una reclutadora, una prueba de código y una entrevista con Tom, el tech lead." },
+      { "quien": "Luis", "en": "Is there a salary on the page?", "es": "¿Hay un sueldo en la página?" },
+      { "tipo": "completa", "quien": "Ana", "en": "No, there ___ a salary, but there's a nice photo of the office.", "opciones": ["isn't", "aren't", "not"], "correcta": 0, "explicacion": "*A salary* es singular, así que la negativa es **there isn't**. *Aren't* sería para plurales.", "es": "No, no hay sueldo, pero hay una foto bonita de la oficina." },
+      { "quien": "Luis", "en": "OK, so... apply now!", "es": "Ya, entonces... ¡postula ya!" },
+      { "quien": "Ana", "en": "OK! My resume is ready. Click!", "es": "¡Ya! Mi CV está listo. ¡Clic!" },
+      { "tipo": "pregunta", "pregunta": "¿Cuál es el último paso del proceso?", "opciones": ["Una entrevista con Tom", "Una prueba de código", "Una llamada con una reclutadora"], "correcta": 0, "explicacion": "Ana nombra los pasos en orden y termina con **an interview with Tom**." }
+    ] }
+]

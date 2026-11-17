@@ -1,0 +1,19 @@
+[
+  { "id": "en-basico-15-h01", "titulo": "Pensar en voz alta", "situacion": "Ana le cuenta a Sarah cómo le fue en la entrevista técnica en vivo con Tom.",
+    "pasos": [
+      { "quien": "Sarah", "en": "Hi, Ana! Tom talked about your technical interview today.", "es": "¡Hola, Ana! Tom habló hoy de tu entrevista técnica." },
+      { "quien": "Ana", "en": "Really? Was it bad?", "es": "¿En serio? ¿Estuvo mal?" },
+      { "quien": "Sarah", "en": "No! Tell me about it.", "es": "¡No! Cuéntame." },
+      { "quien": "Ana", "en": "OK. Tom asked me to reverse a string. I started very fast and I typed a lot.", "es": "Ya. Tom me pidió invertir un string. Empecé muy rápido y tipeé un montón." },
+      { "quien": "Ana", "en": "Then my code crashed, and I panicked.", "es": "Luego mi código falló y entré en pánico." },
+      { "tipo": "pregunta", "pregunta": "¿Qué pasó con el primer intento de Ana?", "opciones": ["Su código falló", "Funcionó a la primera", "Tom lo borró"], "correcta": 0, "explicacion": "Ana dice **my code crashed**: falló." },
+      { "quien": "Sarah", "en": "And then?", "es": "¿Y luego?" },
+      { "quien": "Ana", "en": "I stopped, I breathed, and I explained my plan out loud.", "es": "Paré, respiré y expliqué mi plan en voz alta." },
+      { "tipo": "completa", "quien": "Ana", "en": "Then I ___ the bug in two minutes.", "opciones": ["fixed", "fix", "fixes"], "correcta": 0, "explicacion": "Es una acción terminada: pasado simple. Los verbos regulares agregan **-ed**: *fix → fixed*.", "es": "Luego arreglé el bug en dos minutos." },
+      { "quien": "Ana", "en": "I also tested the code with an empty string.", "es": "También probé el código con un string vacío." },
+      { "quien": "Sarah", "en": "That's why Tom liked it! He loved your plan.", "es": "¡Por eso a Tom le gustó! Le encantó tu plan." },
+      { "tipo": "completa", "quien": "Ana", "en": "Really? But I ___ finish the bonus question.", "opciones": ["didn't", "don't", "wasn't"], "correcta": 0, "explicacion": "La negativa en pasado es **didn't** + verbo en forma base: *I didn't finish*. *Wasn't* no va con otro verbo así.", "es": "¿En serio? Pero no terminé la pregunta extra." },
+      { "quien": "Sarah", "en": "That's OK. The plan is the important part.", "es": "No importa. El plan es la parte importante." },
+      { "tipo": "pregunta", "pregunta": "¿Qué le gustó a Tom de la entrevista?", "opciones": ["Que Ana explicara su plan", "Que Ana escribiera rápido", "Que terminara la pregunta extra"], "correcta": 0, "explicacion": "Sarah dice **he loved your plan**. La pregunta extra Ana no la terminó." }
+    ] }
+]

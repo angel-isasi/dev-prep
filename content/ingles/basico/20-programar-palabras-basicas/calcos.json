@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-20-c01", "es": "Arreglé el error del login.", "natural": "I fixed the login bug.", "calco": "I fixed the error of the login.", "explicacion": "Un error del código es un **bug**, y se dice *the login bug* (o *the bug in the login*), no *of the login*." },
+  { "id": "en-basico-20-c02", "es": "Hice un commit.", "natural": "I made a commit.", "calco": "I did a commit.", "explicacion": "Con commit se usa **make**, o directamente el verbo: *I committed the changes*." },
+  { "id": "en-basico-20-c03", "es": "Los datos son correctos.", "natural": "The data is correct.", "calco": "The datas are correct.", "explicacion": "**Data** no lleva -s y en el trabajo se usa en singular: *the data is*." },
+  { "id": "en-basico-20-c04", "es": "Llamo a la función con dos argumentos.", "natural": "I call the function with two arguments.", "calco": "I call to the function with two arguments.", "explicacion": "**Call** va directo, sin *to*: *call the function*." }
+]

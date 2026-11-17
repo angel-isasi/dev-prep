@@ -28,5 +28,10 @@
   { "id": "en-basico-08-f27", "en": "A good developer is honest and patient.", "es": "Un buen desarrollador es honesto y paciente." },
   { "id": "en-basico-08-f28", "en": "His girlfriend is very outgoing.", "es": "Su enamorada es muy sociable." },
   { "id": "en-basico-08-f29", "en": "I'm hardworking and I learn fast.", "es": "Soy trabajador y aprendo rápido." },
-  { "id": "en-basico-08-f30", "en": "My nephew and my niece are very young.", "es": "Mi sobrino y mi sobrina son muy chicos." }
+  { "id": "en-basico-08-f30", "en": "My nephew and my niece are very young.", "es": "Mi sobrino y mi sobrina son muy chicos." },
+  { "id": "en-basico-08-f31", "en": "My team lead is very patient.", "es": "Mi líder de equipo es muy paciente.", "trabajo": true },
+  { "id": "en-basico-08-f32", "en": "Sarah is our new designer.", "es": "Sarah es nuestra nueva diseñadora.", "trabajo": true },
+  { "id": "en-basico-08-f33", "en": "Tom's code is very clean.", "es": "El código de Tom es muy limpio.", "trabajo": true },
+  { "id": "en-basico-08-f34", "en": "What's the new intern like?", "es": "¿Cómo es el nuevo practicante?", "trabajo": true },
+  { "id": "en-basico-08-f35", "en": "Ana's coworkers are very helpful.", "es": "Los compañeros de Ana ayudan mucho.", "trabajo": true }
 ]

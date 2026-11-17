@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-10-c01", "es": "Hay un problema.", "natural": "There's a problem.", "calco": "Exists a problem.", "explicacion": "\"Hay\" se dice **there is** o **there are**. *Exist* no se usa así." },
+  { "id": "en-basico-10-c02", "es": "Hay dos baños.", "natural": "There are two bathrooms.", "calco": "Have two bathrooms.", "explicacion": "Para decir \"hay\" no se usa *have*: *there are two bathrooms*." },
+  { "id": "en-basico-10-c03", "es": "Sí, hay.", "natural": "Yes, there is.", "calco": "Yes, there's.", "explicacion": "En respuestas cortas afirmativas no se contrae: **Yes, there is**. *There's* solo va en medio de la frase." },
+  { "id": "en-basico-10-c04", "es": "No hay sillas.", "natural": "There aren't any chairs.", "calco": "There aren't some chairs.", "explicacion": "En negativas y preguntas se usa **any**. *Some* es para frases afirmativas." }
+]

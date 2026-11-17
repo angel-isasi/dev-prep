@@ -28,5 +28,11 @@
   { "id": "en-intermedio-12-f27", "en": "The second version isn't as fast as the first.", "es": "La segunda versión no es tan rápida como la primera." },
   { "id": "en-intermedio-12-f28", "en": "This library is lightweight and easy to use.", "es": "Esta librería es liviana y fácil de usar." },
   { "id": "en-intermedio-12-f29", "en": "It's the most maintainable option for our team.", "es": "Es la opción más fácil de mantener para nuestro equipo." },
-  { "id": "en-intermedio-12-f30", "en": "It works on Chrome, but it's broken on Safari.", "es": "Funciona en Chrome, pero en Safari no funciona." }
+  { "id": "en-intermedio-12-f30", "en": "It works on Chrome, but it's broken on Safari.", "es": "Funciona en Chrome, pero en Safari no funciona." },
+  { "id": "en-intermedio-12-f31", "en": "The app crashes when I upload a large file.", "es": "La app se cae cuando subo un archivo grande.", "trabajo": true },
+  { "id": "en-intermedio-12-f32", "en": "The page hangs after I log in.", "es": "La página se cuelga después de iniciar sesión.", "trabajo": true },
+  { "id": "en-intermedio-12-f33", "en": "The new version is slower than the old one.", "es": "La nueva versión es más lenta que la anterior.", "trabajo": true },
+  { "id": "en-intermedio-12-f34", "en": "This approach is more readable than the old one.", "es": "Este enfoque es más legible que el anterior.", "trabajo": true },
+  { "id": "en-intermedio-12-f35", "en": "Using a map is the fastest way.", "es": "Usar un map es la forma más rápida.", "trabajo": true },
+  { "id": "en-intermedio-12-f36", "en": "It only happens on mobile devices.", "es": "Solo pasa en dispositivos móviles.", "trabajo": true }
 ]

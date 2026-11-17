@@ -1,0 +1,19 @@
+[
+  { "id": "en-trabajo-09-h01", "titulo": "Revisar el código de Sarah", "situacion": "Por primera vez, Ana tiene que revisar un pull request de Sarah, que tiene más experiencia. Le da miedo comentar.",
+    "pasos": [
+      { "quien": "Ana", "en": "Tom, I have to review Sarah's PR. But she's more senior than me.", "es": "Tom, tengo que revisar el PR de Sarah. Pero ella tiene más experiencia que yo." },
+      { "quien": "Tom", "en": "Doesn't matter. Everyone's code gets reviewed. Just be kind and specific.", "es": "No importa. El código de todos se revisa. Solo sé amable y concreta." },
+      { "quien": "Ana", "en": "Okay. I found a function with sixty lines that does three things.", "es": "Bueno. Encontré una función de sesenta líneas que hace tres cosas." },
+      { "tipo": "completa", "quien": "Ana", "en": "Could we ___ the validation into its own function?", "es": "¿Podríamos extraer la validación a su propia función?", "opciones": ["extract", "extracting", "to extract"], "correcta": 0, "explicacion": "**Could we + verbo base** es una sugerencia amable: *Could we extract...?* Suena a trabajo en equipo, no a una orden." },
+      { "quien": "Ana", "en": "And this one is small. I'll mark it as a nit: \"data2\" could have a clearer name.", "es": "Y esta es pequeña. La marco como nit: \"data2\" podría tener un nombre más claro." },
+      { "tipo": "pregunta", "pregunta": "¿Qué significa marcar un comentario como \"nit\"?", "opciones": ["Que es un error grave", "Que es un detalle pequeño y no bloquea", "Que el código está perfecto"], "correcta": 1, "explicacion": "Un **nit** es un detalle menor, como un nombre. No impide aprobar el PR." },
+      { "quien": "Sarah", "en": "Thanks for the review, Ana. Good catch on the long function.", "es": "Gracias por la revisión, Ana. Bien visto lo de la función larga." },
+      { "quien": "Sarah", "en": "About \"data2\"... that name is from a Friday at 7 p.m.", "es": "Sobre \"data2\"... ese nombre es de un viernes a las 7 p. m." },
+      { "quien": "Ana", "en": "I understand. My Friday names are \"thing\" and \"finalFinal\".", "es": "Te entiendo. Mis nombres de viernes son \"thing\" y \"finalFinal\"." },
+      { "quien": "Sarah", "en": "I've pushed the changes. Can you take another look?", "es": "Ya subí los cambios. ¿Puedes darle otra mirada?" },
+      { "quien": "Ana", "en": "Looks great. The validation is much easier to test now.", "es": "Se ve genial. Ahora la validación es mucho más fácil de probar." },
+      { "tipo": "completa", "quien": "Ana", "en": "___! Approving now.", "es": "¡Se ve bien! Lo apruebo ahora.", "opciones": ["LGTM", "Request changes", "WIP"], "correcta": 0, "explicacion": "**LGTM** (*looks good to me*) se usa al aprobar. *Request changes* es pedir cambios, y *WIP* significa que aún está en progreso." },
+      { "quien": "Tom", "en": "See? Kind, specific, and nobody cried.", "es": "¿Ves? Amable, concreta, y nadie lloró." },
+      { "tipo": "pregunta", "pregunta": "¿Qué consejo le dio Tom a Ana para revisar código?", "opciones": ["Aprobar todo para no tener problemas", "Ser amable y concreta", "Dejar que Sarah se revise sola"], "correcta": 1, "explicacion": "Tom dice \"Just be kind and specific\"." }
+    ] }
+]

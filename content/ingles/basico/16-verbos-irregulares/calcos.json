@@ -1,0 +1,7 @@
+[
+  { "id": "en-basico-16-c01", "es": "Ella me dijo la verdad.", "natural": "She told me the truth.", "calco": "She said me the truth.", "explicacion": "Cuando dices a quién, se usa **tell**: *she told me*. *Say* no lleva a la persona detrás." },
+  { "id": "en-basico-16-c02", "es": "No fui a la reunión.", "natural": "I didn't go to the meeting.", "calco": "I didn't went to the meeting.", "explicacion": "Después de **didn't** va el verbo base: *didn't go*, no *went*." },
+  { "id": "en-basico-16-c03", "es": "Tomé el bus ayer.", "natural": "I took the bus yesterday.", "calco": "I taked the bus yesterday.", "explicacion": "**Take** es irregular: el pasado es *took*." },
+  { "id": "en-basico-16-c04", "es": "Hice mi tarea.", "natural": "I did my homework.", "calco": "I made my homework.", "explicacion": "La tarea, el trabajo y los ejercicios van con **do**: *do homework*. *Make* es fabricar o crear." },
+  { "id": "en-basico-16-c05", "es": "¿Viste el mensaje?", "natural": "Did you see the message?", "calco": "Did you saw the message?", "explicacion": "En la pregunta con **did** el verbo va en forma base: *see*, no *saw*." }
+]

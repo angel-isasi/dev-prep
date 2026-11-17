@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-11-r01", "titulo": "Lo que dice la documentación", "situacion": "Sarah te pregunta qué leíste en la documentación de una librería antes de usarla.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Sarah", "en": "Did you check the docs for that date library?", "es": "¿Revisaste la documentación de esa librería de fechas?" },
+      { "opciones": [
+          { "en": "Yes. The format() function is deprecated, so we should use formatDate().", "es": "Sí. La función format() está obsoleta, así que deberíamos usar formatDate().", "correcta": true, "explicacion": "*Deprecated* = obsoleta: todavía funciona, pero la van a quitar." },
+          { "en": "Yes. The format() function is depreciated.", "es": "", "correcta": false, "explicacion": "*Depreciated* significa perder valor (dinero). En documentación es *deprecated*." },
+          { "en": "Yes. The format() is old, I think it doesn't matter.", "es": "", "correcta": false, "explicacion": "Ignorar un aviso de *deprecated* trae problemas cuando la quiten." }
+        ] },
+      { "quien": "Sarah", "en": "OK. Do we have to pass the locale?", "es": "Ok. ¿Tenemos que pasar el locale?" },
+      { "opciones": [
+          { "en": "No, it's optional. The default is en-US.", "es": "No, es opcional. El valor por defecto es en-US.", "correcta": true, "explicacion": "*Optional* = no obligatorio; *default* = valor por defecto." },
+          { "en": "No, it's optional. The defect is en-US.", "es": "", "correcta": false, "explicacion": "Falso amigo: *defect* es un defecto o fallo. \"Por defecto\" es *default*." },
+          { "en": "Yes, it's optional, so it's required.", "es": "", "correcta": false, "explicacion": "Se contradice: *optional* y *required* son lo contrario." }
+        ] },
+      { "quien": "Sarah", "en": "And what does it return?", "es": "¿Y qué devuelve?" },
+      { "opciones": [
+          { "en": "It returns a string, like \"Nov 17, 2026\".", "es": "Devuelve un string, como \"Nov 17, 2026\".", "correcta": true, "explicacion": "*Returns* es el verbo de la documentación para lo que devuelve una función." },
+          { "en": "It gives back to us a string.", "es": "", "correcta": false, "explicacion": "Calco y orden raro. En documentación se dice simplemente *It returns a string*." },
+          { "en": "It return a string.", "es": "", "correcta": false, "explicacion": "Falta la *-s* de tercera persona: *returns*." }
+        ] },
+      { "quien": "Sarah", "en": "What if the date is invalid?", "es": "¿Y si la fecha es inválida?" },
+      { "opciones": [
+          { "en": "It launches an error.", "es": "", "correcta": false, "explicacion": "Calco de \"lanza un error\". En inglés el error se *throws*." },
+          { "en": "It throws a RangeError, so we need a try/catch.", "es": "Lanza un RangeError, así que necesitamos un try/catch.", "correcta": true, "explicacion": "*Throws* = lanza un error. Por eso se usa *try/catch*." },
+          { "en": "It throws an error, but we can ignore it.", "es": "", "correcta": false, "explicacion": "Ignorar un error que se lanza puede romper la app." }
+        ] }
+    ] }
+]

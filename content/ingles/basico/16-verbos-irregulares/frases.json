@@ -33,5 +33,11 @@
   { "id": "en-basico-16-f32", "en": "The phone rang during the class.", "es": "El celular sonó durante la clase." },
   { "id": "en-basico-16-f33", "en": "I fell asleep on the sofa.", "es": "Me quedé dormido en el sofá." },
   { "id": "en-basico-16-f34", "en": "Tom paid for the tickets.", "es": "Tom pagó las entradas." },
-  { "id": "en-basico-16-f35", "en": "We got home very late.", "es": "Llegamos a casa muy tarde." }
+  { "id": "en-basico-16-f35", "en": "We got home very late.", "es": "Llegamos a casa muy tarde." },
+  { "id": "en-basico-16-f36", "en": "I wrote the tests last night.", "es": "Escribí los tests anoche.", "trabajo": true },
+  { "id": "en-basico-16-f37", "en": "Did you get my message?", "es": "¿Te llegó mi mensaje?", "trabajo": true },
+  { "id": "en-basico-16-f38", "en": "Tom gave me good feedback.", "es": "Tom me dio buen feedback.", "trabajo": true },
+  { "id": "en-basico-16-f39", "en": "The build broke after my commit.", "es": "El build se rompió después de mi commit.", "trabajo": true },
+  { "id": "en-basico-16-f40", "en": "I didn't find the error.", "es": "No encontré el error.", "trabajo": true },
+  { "id": "en-basico-16-f41", "en": "We met with the client on Tuesday.", "es": "Nos reunimos con el cliente el martes.", "trabajo": true }
 ]

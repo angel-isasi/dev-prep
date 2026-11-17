@@ -1,0 +1,7 @@
+[
+  { "id": "en-basico-21-c01", "es": "Haz clic en el botón.", "natural": "Click the button.", "calco": "Make click on the button.", "explicacion": "**Click** ya es el verbo: *click the button*. *Make click* es el calco de \"hacer clic\"." },
+  { "id": "en-basico-21-c02", "es": "La página está cargando.", "natural": "The page is loading.", "calco": "The page is charging.", "explicacion": "Una página **loads**. *Charge* es cargar una batería o cobrar." },
+  { "id": "en-basico-21-c03", "es": "Estás en mute.", "natural": "You're on mute.", "calco": "You're in mute.", "explicacion": "Se dice **on mute**, con *on*." },
+  { "id": "en-basico-21-c04", "es": "Tengo un bloqueo.", "natural": "I have a blocker.", "calco": "I have a block.", "explicacion": "Algo que no te deja avanzar es un **blocker**. *Block* es un bloque." },
+  { "id": "en-basico-21-c05", "es": "Me registré en la app.", "natural": "I signed up for the app.", "calco": "I registered me in the app.", "explicacion": "Crear una cuenta es **sign up for**. Y en inglés no va el \"me\" del español." }
+]

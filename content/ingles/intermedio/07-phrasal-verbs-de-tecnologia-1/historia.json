@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-07-h01", "titulo": "Configurar la laptop nueva", "situacion": "Primer día de Ana. Tiene que dejar listo el proyecto en su laptop antes del almuerzo.",
+    "pasos": [
+      { "quien": "Tom", "en": "Morning, Ana! Your first task is to set up the project on your laptop.", "es": "¡Buenos días, Ana! Tu primera tarea es configurar el proyecto en tu laptop." },
+      { "quien": "Ana", "en": "Sure. Is there a guide?", "es": "Claro. ¿Hay alguna guía?" },
+      { "quien": "Tom", "en": "Yes, it's in the README. Sarah wrote it last year.", "es": "Sí, está en el README. Sarah la escribió el año pasado." },
+      { "quien": "Ana", "en": "Sarah, I ran into a problem. npm install fails with a weird error.", "es": "Sarah, me topé con un problema. npm install falla con un error raro." },
+      { "tipo": "completa", "quien": "Sarah", "en": "Let me see. Can you look ___ up on Google while I check the README?", "es": "A ver. ¿Puedes buscarlo en Google mientras reviso el README?", "opciones": ["it", "them", "on"], "correcta": 0, "explicacion": "Con un phrasal verb separable, el pronombre va en medio: **look it up**. Hablamos de un error, así que es *it*, no *them*." },
+      { "quien": "Sarah", "en": "Oh no. The README says Node 14. That's very old.", "es": "Ay, no. El README dice Node 14. Eso es muy antiguo." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué fallaba npm install?", "opciones": ["La laptop no tenía internet", "El README pedía una versión de Node muy antigua", "Ana escribió mal el comando"], "correcta": 1, "explicacion": "Sarah descubre que el README dice Node 14, una versión muy antigua." },
+      { "quien": "Ana", "en": "I figured it out! I installed Node 20 and now it works.", "es": "¡Lo resolví! Instalé Node 20 y ya funciona." },
+      { "quien": "Sarah", "en": "Great. Can you back up your settings before you change anything else?", "es": "Genial. ¿Puedes hacer una copia de seguridad de tu configuración antes de cambiar algo más?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Yesterday Luis ___ up with a script that does it automatically.", "es": "Ayer a Luis se le ocurrió un script que lo hace automáticamente.", "opciones": ["comes", "came", "come"], "correcta": 1, "explicacion": "**Come up with** es irregular en pasado: *came up with*. Va en pasado por *yesterday*." },
+      { "quien": "Tom", "en": "How's it going? Is everything set up?", "es": "¿Cómo va? ¿Todo configurado?" },
+      { "quien": "Ana", "en": "Yes! And I updated the README to Node 20, so the next person won't run into it.", "es": "¡Sí! Y actualicé el README a Node 20, para que la próxima persona no se tope con eso." },
+      { "quien": "Tom", "en": "First day and you're already fixing our docs. Lunch is on me.", "es": "Primer día y ya estás arreglando nuestra documentación. El almuerzo lo invito yo." },
+      { "tipo": "pregunta", "pregunta": "¿Qué hizo Ana para ayudar a la próxima persona?", "opciones": ["Escribió un script", "Actualizó el README a Node 20", "Le explicó a Tom el problema"], "correcta": 1, "explicacion": "Ana dice \"I updated the README to Node 20\"." }
+    ] }
+]

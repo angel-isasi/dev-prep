@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-11-c01", "es": "Sé programar en JavaScript.", "natural": "I can code in JavaScript.", "calco": "I know code in JavaScript.", "explicacion": "\"Saber hacer algo\" se dice con **can**: *I can code*. *Know* solo, seguido de un verbo, está mal." },
+  { "id": "en-basico-11-c02", "es": "¿Puedes ayudarme?", "natural": "Can you help me?", "calco": "Do you can help me?", "explicacion": "**Can** arma la pregunta solo, sin *do*: *Can you help me?*" },
+  { "id": "en-basico-11-c03", "es": "Puedo manejar.", "natural": "I can drive.", "calco": "I can to drive.", "explicacion": "Después de **can** el verbo va sin *to*: *I can drive*." },
+  { "id": "en-basico-11-c04", "es": "Juego fútbol.", "natural": "I play soccer.", "calco": "I play the soccer.", "explicacion": "Los deportes van sin artículo: *play soccer*, *play tennis*." }
+]

@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-02-h01", "titulo": "La prueba técnica y el apagón", "situacion": "Ana le cuenta a Luis qué pasó mientras hacía la prueba técnica de una empresa.",
+    "pasos": [
+      { "quien": "Luis", "en": "So, how was the technical test?", "es": "¿Y? ¿Qué tal la prueba técnica?" },
+      { "quien": "Ana", "en": "A disaster at first. I was writing the last function when the power went out.", "es": "Un desastre al principio. Estaba escribiendo la última función cuando se fue la luz." },
+      { "tipo": "completa", "quien": "Ana", "en": "I ___ the search filter when my screen went black.", "es": "Estaba probando el filtro de búsqueda cuando mi pantalla se puso negra.", "opciones": ["tested", "was testing", "am testing"], "correcta": 1, "explicacion": "La acción larga que fue interrumpida va en pasado continuo: **was testing**. La interrupción corta va en pasado simple: *went*." },
+      { "quien": "Luis", "en": "No way! What were you doing when the lights came back?", "es": "¡No puede ser! ¿Qué estabas haciendo cuando volvió la luz?" },
+      { "quien": "Ana", "en": "I was looking for candles, and my cat was sitting on my keyboard.", "es": "Estaba buscando velas, y mi gato estaba sentado en mi teclado." },
+      { "tipo": "pregunta", "pregunta": "¿Qué estaba haciendo el gato de Ana?", "opciones": ["Durmiendo en la cama", "Sentado en el teclado", "Jugando con las velas"], "correcta": 1, "explicacion": "Ana dice \"my cat was sitting on my keyboard\"." },
+      { "quien": "Luis", "en": "Did you lose your code?", "es": "¿Perdiste tu código?" },
+      { "quien": "Ana", "en": "First, I panicked. Then, I remembered that I push to GitHub every hour.", "es": "Primero, entré en pánico. Luego, recordé que hago push a GitHub cada hora." },
+      { "quien": "Ana", "en": "After that, I cloned the repo again and finished the function.", "es": "Después de eso, cloné el repo otra vez y terminé la función." },
+      { "tipo": "completa", "quien": "Luis", "en": "___ you were fixing it, did the timer keep running?", "es": "Mientras lo arreglabas, ¿el temporizador siguió corriendo?", "opciones": ["While", "During", "Then"], "correcta": 0, "explicacion": "**While** va antes de una oración con sujeto y verbo: *while you were fixing it*. **During** solo va antes de un sustantivo: *during the test*." },
+      { "quien": "Ana", "en": "Yes, but I wrote an email and explained the situation.", "es": "Sí, pero escribí un correo y expliqué la situación." },
+      { "quien": "Ana", "en": "Finally, they gave me thirty more minutes. And the cat got a new nickname: Bug.", "es": "Al final, me dieron treinta minutos más. Y el gato tiene un nuevo apodo: Bug." },
+      { "quien": "Luis", "en": "Perfect name. He was debugging your keyboard.", "es": "Nombre perfecto. Estaba depurando tu teclado." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Ana no perdió su código?", "opciones": ["Porque lo guardaba en una USB", "Porque hacía push a GitHub cada hora", "Porque la empresa lo guardó"], "correcta": 1, "explicacion": "Ana recordó que hace push a GitHub cada hora y clonó el repo otra vez." }
+    ] }
+]

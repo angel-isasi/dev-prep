@@ -1,0 +1,19 @@
+[
+  { "id": "en-trabajo-04-h01", "titulo": "Actualmente, un malentendido", "situacion": "En la reunión semanal, una palabra traducida del español hace que Tom piense algo que no es.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, what's the status of the new checkout?", "es": "Ana, ¿cómo va el nuevo checkout?" },
+      { "quien": "Ana", "en": "Actually, I'm working on the tests.", "es": "En realidad, estoy trabajando en los tests." },
+      { "quien": "Tom", "en": "Oh, \"actually\"? Is something wrong? I thought you were done.", "es": "¿Ah, \"en realidad\"? ¿Pasa algo? Pensé que ya habías terminado." },
+      { "quien": "Ana", "en": "No, no! I meant \"currently\". Everything is fine.", "es": "¡No, no! Quise decir \"actualmente\". Todo está bien." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Tom se preocupó?", "opciones": ["Porque Ana llegó tarde", "Porque \"actually\" significa \"en realidad\", no \"actualmente\"", "Porque los tests fallaban"], "correcta": 1, "explicacion": "**Actually** = en realidad, y suena a que corriges algo. \"Actualmente\" se dice **currently**." },
+      { "tipo": "completa", "quien": "Ana", "en": "___, I'm working on the tests. They'll be ready tomorrow.", "es": "Actualmente estoy trabajando en los tests. Estarán listos mañana.", "opciones": ["Actually", "Currently", "Actual"], "correcta": 1, "explicacion": "**Currently** es \"actualmente\". *Actually* es un falso amigo: significa \"en realidad\"." },
+      { "quien": "Tom", "en": "Phew. Okay. Sarah, are you going to the client meeting?", "es": "Uf. Bueno. Sarah, ¿vas a ir a la reunión con el cliente?" },
+      { "quien": "Sarah", "en": "Yes, Ana and I will both attend.", "es": "Sí, Ana y yo vamos a asistir juntas." },
+      { "quien": "Ana", "en": "Can you explain me what the client wants?", "es": "¿Me puedes explicar qué quiere el cliente?" },
+      { "tipo": "completa", "quien": "Sarah", "en": "Sure, but it's \"explain ___ me\". The client wants a dark mode.", "es": "Claro, pero es \"explícame a mí\". El cliente quiere un modo oscuro.", "opciones": ["to", "for", "at"], "correcta": 0, "explicacion": "Se dice **explain to me** o **explain it to me**. *Explain me* es un calco del español." },
+      { "quien": "Ana", "en": "Thanks. I'm learning a lot in this team. I agree with everything.", "es": "Gracias. Estoy aprendiendo mucho en este equipo. Estoy de acuerdo con todo." },
+      { "quien": "Tom", "en": "Even with my jokes?", "es": "¿Incluso con mis chistes?" },
+      { "quien": "Ana", "en": "Actually... no. And this time I really mean \"actually\".", "es": "En realidad... no. Y esta vez sí quiero decir \"en realidad\"." },
+      { "tipo": "pregunta", "pregunta": "¿Cuál es la forma correcta de \"asistir a una reunión\"?", "opciones": ["Assist a meeting", "Attend a meeting", "Assist to a meeting"], "correcta": 1, "explicacion": "**Attend** es asistir a un evento. **Assist** significa ayudar a alguien." }
+    ] }
+]

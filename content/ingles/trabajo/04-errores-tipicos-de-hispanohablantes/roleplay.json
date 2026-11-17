@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-04-r01", "titulo": "Sin calcos en la entrevista", "situacion": "Mike, de RR. HH., abre la entrevista con preguntas personales. Evita las frases traducidas del español.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Mike", "en": "Let's start with the basics. How old are you, and what do you study?", "es": "Empecemos con lo básico. ¿Cuántos años tienes y qué estudias?" },
+      { "opciones": [
+          { "en": "I have 22 years and I study Systems Engineering.", "es": "", "correcta": false, "explicacion": "Calco clásico: la edad va con *to be*, *I'm 22*." },
+          { "en": "I'm 22, and I'm studying Systems Engineering in Lima.", "es": "Tengo 22 años y estudio Ingeniería de Sistemas en Lima.", "correcta": true, "explicacion": "*I'm 22*: la edad con *to be*. Natural y directo." },
+          { "en": "I am 22 years and I study Systems Engineering.", "es": "", "correcta": false, "explicacion": "Si dices *years*, completa con *old*: *22 years old*. O solo *I'm 22*." }
+        ] },
+      { "quien": "Mike", "en": "We value people who ask questions. Do you agree?", "es": "Valoramos a las personas que hacen preguntas. ¿Estás de acuerdo?" },
+      { "opciones": [
+          { "en": "Yes, I'm agree. Asking saves a lot of time.", "es": "", "correcta": false, "explicacion": "*Agree* ya es verbo: *I agree*, sin *am*." },
+          { "en": "Yes, I agree. Asking saves a lot of time.", "es": "Sí, estoy de acuerdo. Preguntar ahorra mucho tiempo.", "correcta": true, "explicacion": "*I agree* y una razón corta." },
+          { "en": "Yes, I make questions all the time.", "es": "", "correcta": false, "explicacion": "Calco de \"hacer preguntas\": en inglés es *ask questions*." }
+        ] },
+      { "quien": "Mike", "en": "Is this your first job in tech?", "es": "¿Es tu primer trabajo en tecnología?" },
+      { "opciones": [
+          { "en": "Yes. Actually, I've only done freelance projects so far.", "es": "Sí. En realidad, hasta ahora solo he hecho proyectos freelance.", "correcta": true, "explicacion": "*Actually* = en realidad: bien usado para aclarar." },
+          { "en": "Yes. Actually I am in the fifth year of my career.", "es": "", "correcta": false, "explicacion": "*Career* es tu trayectoria profesional, no la carrera universitaria (*degree* o *major*). Y *actually* no es \"actualmente\"." },
+          { "en": "Yes, I don't have experience in nothing.", "es": "", "correcta": false, "explicacion": "Doble negación del español: en inglés es *I don't have any experience*. Además te vendes mal." }
+        ] },
+      { "quien": "Mike", "en": "Can you explain your most recent project?", "es": "¿Puedes explicarme tu proyecto más reciente?" },
+      { "opciones": [
+          { "en": "Sure, let me explain you how it works.", "es": "", "correcta": false, "explicacion": "Calco de \"explicarte\": *explain* no lleva la persona directo. Es *explain to you* o *explain how it works*." },
+          { "en": "Sure, it assists the students with exercises.", "es": "", "correcta": false, "explicacion": "*Assist* suena formal y sobra *the*. Lo natural es *it helps students practice*." },
+          { "en": "Sure, let me explain how it works. It helps students practice for interviews.", "es": "Claro, déjame explicar cómo funciona. Ayuda a estudiantes a practicar para entrevistas.", "correcta": true, "explicacion": "*Explain how it works* sin objeto directo de persona, y *help* + persona + verbo." }
+        ] }
+    ] }
+]

@@ -1,0 +1,7 @@
+[
+  { "id": "en-basico-01-c01", "es": "Soy desarrollador.", "natural": "I'm a developer.", "calco": "I'm developer.", "explicacion": "Con profesiones siempre va **a** o **an**: *I'm a developer*. En español no se pone artículo, en inglés sí." },
+  { "id": "en-basico-01-c02", "es": "Mucho gusto.", "natural": "Nice to meet you.", "calco": "Nice to know you.", "explicacion": "Al conocer a alguien se dice **meet**. *Know* es conocer en general, no el momento de la presentación." },
+  { "id": "en-basico-01-c03", "es": "Soy de Perú.", "natural": "I'm from Peru.", "calco": "I'm of Peru.", "explicacion": "Para decir de dónde eres se usa **from**. *Of* es el \"de\" de pertenencia, no de origen." },
+  { "id": "en-basico-01-c04", "es": "Buenas noches (al llegar a una reunión).", "natural": "Good evening.", "calco": "Good night.", "explicacion": "*Good night* es solo para despedirte o irte a dormir. Al llegar de noche se dice **good evening**." },
+  { "id": "en-basico-01-c05", "es": "Me llamo Ana.", "natural": "My name is Ana.", "calco": "I call myself Ana.", "explicacion": "\"Me llamo\" no se traduce palabra por palabra: se dice **My name is...** o *I'm Ana*." }
+]

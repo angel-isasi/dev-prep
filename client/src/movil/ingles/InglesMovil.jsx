@@ -4,7 +4,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
-import { cambiarVelocidad, hayVoz, velocidad } from "../../lib/voz.js";
+import { cambiarMicro, cambiarVelocidad, hayMicrofono, hayVoz, microApagado, microDisponible, velocidad } from "../../lib/voz.js";
+import { celebrar } from "../../lib/celebrar.js";
+import { Bit } from "../../components/Bit.jsx";
 import { AnilloProgreso } from "../../components/AnilloProgreso.jsx";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
@@ -50,8 +52,13 @@ export function InglesMovil() {
   const [inmersion, setInmersion] = useState(null); // minutos elegidos
   const [que, setQue] = useState("");
   const [aviso, setAviso] = useState(null);
+  const [motivacion, setMotivacion] = useState(null);
+  const [micro, setMicro] = useState(!microApagado());
 
-  const cargar = () => api.inglesHoy().then(setHoy, (e) => setError(e.message));
+  const cargar = () => {
+    api.inglesMotivacion?.({ conMicro: hayMicrofono() }).then(setMotivacion);
+    return api.inglesHoy().then(setHoy, (e) => setError(e.message));
+  };
   useEffect(() => {
     cargar();
   }, []);
@@ -61,6 +68,15 @@ export function InglesMovil() {
 
   const avanceHoy = hoy.meta ? Math.min(1, hoy.minutosHoy / hoy.meta) : 0;
   const leccion = (modo) => `/leccion?ambito=ingles${modo ? `&modo=${modo}` : ""}`;
+
+  async function cobrarCofre() {
+    const r = await api.cobrarCofreDiario();
+    if (r) {
+      celebrar("logro");
+      setAviso(`🎁 Cofre del día: +${r.xp} XP`);
+    }
+    cargar();
+  }
 
   async function guardarInmersion() {
     if (!inmersion) return;
@@ -119,6 +135,8 @@ export function InglesMovil() {
             ))}
           </div>
 
+          {motivacion && <Motivacion datos={motivacion} alCobrar={cobrarCofre} />}
+
           {!hoy.nivelHecho && (
             <div className={estilos.nivel}>
               <div>
@@ -137,7 +155,7 @@ export function InglesMovil() {
                 ◎
               </span>
               <strong>Rutina de hoy</strong>
-              <small>10 ejercicios: palabras, frases, escuchar y gramática</small>
+              <small>12 ejercicios: lo que toca repasar y hasta 6 nuevos</small>
             </Link>
             <Link to={leccion("rapida")} className="boton brillo">
               <span className={estilos.iconoFicha} aria-hidden>
@@ -155,6 +173,36 @@ export function InglesMovil() {
                 <small>oído y dictado</small>
               </Link>
             )}
+            <Link to="/ingles/historias" className="boton brillo">
+              <span className={estilos.iconoFicha} aria-hidden>
+                📖
+              </span>
+              <strong>Historias</strong>
+              <small>la serie de Ana y roleplays</small>
+            </Link>
+            <Link to="/ingles/parejas" className="boton brillo">
+              <span className={estilos.iconoFicha} aria-hidden>
+                ⏱
+              </span>
+              <strong>Parejas</strong>
+              <small>60 segundos contrarreloj</small>
+            </Link>
+            <Link to={leccion("mezcla")} className="boton brillo">
+              <span className={estilos.iconoFicha} aria-hidden>
+                ⇄
+              </span>
+              <strong>Repaso mezclado</strong>
+              <small>de todas tus unidades</small>
+            </Link>
+            {hayVoz() && (
+              <Link to={leccion("oido")} className="boton brillo">
+                <span className={estilos.iconoFicha} aria-hidden>
+                  👂
+                </span>
+                <strong>Oído fino</strong>
+                <small>ship o sheep</small>
+              </Link>
+            )}
             <Link to={leccion("errores")} className="boton brillo">
               <span className={estilos.iconoFicha} aria-hidden>
                 ↺
@@ -169,6 +217,35 @@ export function InglesMovil() {
               <strong>Mis palabras</strong>
               <small>las que marcaste con ★</small>
             </Link>
+          </div>
+
+          <div className={estilos.opcionesIngles}>
+            {motivacion && (
+              <label className={estilos.velocidad}>
+                <input
+                  type="checkbox"
+                  checked={motivacion.vidas}
+                  onChange={async (e) => {
+                    await api.cambiarVidasIngles(e.target.checked);
+                    cargar();
+                  }}
+                />
+                Jugar con vidas (5 por lección: si las pierdes, termina)
+              </label>
+            )}
+            {microDisponible() && (
+              <label className={estilos.velocidad}>
+                <input
+                  type="checkbox"
+                  checked={micro}
+                  onChange={(e) => {
+                    setMicro(e.target.checked);
+                    cambiarMicro(e.target.checked);
+                  }}
+                />
+                Ejercicios de hablar (usan el micrófono y necesitan internet)
+              </label>
+            )}
           </div>
 
           {hayVoz() ? (
@@ -239,5 +316,76 @@ export function InglesMovil() {
         <CaminoMovil ambito="ingles" sinCabecera />
       </section>
     </section>
+  );
+}
+
+/** Misiones de hoy (3), cofre del día y la liga contra ti mismo. */
+function Motivacion({ datos, alCobrar }) {
+  const hechas = datos.misiones.filter((m) => m.hecha).length;
+  const { liga } = datos;
+  const maximo = Math.max(1, ...liga.porDia.map((d) => Math.max(d.xp, d.pasada)));
+  return (
+    <div className={estilos.motivacion}>
+      <div className={`textura ${estilos.bloque} ${estilos.misiones}`}>
+        <div className={estilos.cabeceraBloque}>
+          <h2>Misiones de hoy</h2>
+          <small>
+            {hechas}/{datos.misiones.length}
+          </small>
+        </div>
+        <ul>
+          {datos.misiones.map((m) => (
+            <li key={m.id} data-hecha={m.hecha}>
+              <span>{m.hecha ? "✓" : "○"}</span>
+              <div>
+                <p>{m.texto}</p>
+                <div className={estilos.barraMision}>
+                  <i style={{ width: `${(m.valor / m.meta) * 100}%` }} />
+                </div>
+              </div>
+              <small>
+                {m.valor}/{m.meta}
+              </small>
+            </li>
+          ))}
+        </ul>
+        {datos.cobrado ? (
+          <p className={estilos.ayuda}>🎁 Cofre de hoy abierto. Mañana hay misiones nuevas.</p>
+        ) : datos.completas ? (
+          <button type="button" className="boton boton-primario" onClick={alCobrar}>
+            🎁 Abrir el cofre del día (+{datos.xpCofre} XP)
+          </button>
+        ) : (
+          <p className={estilos.ayuda}>Completa las 3 y abres el cofre del día (+{datos.xpCofre} XP).</p>
+        )}
+      </div>
+
+      <div className={`textura ${estilos.bloque} ${estilos.liga}`}>
+        <div className={estilos.cabeceraBloque}>
+          <h2>Tú contra ti</h2>
+          <small>XP de inglés</small>
+        </div>
+        <Bit
+          animo={liga.ganando ? "feliz" : liga.estaSemana === 0 ? "pensando" : "sorpresa"}
+          tamano={44}
+          dice={
+            liga.pasadaHastaHoy === 0 && liga.estaSemana === 0
+              ? "Esta semana todavía no sumas XP. ¿Una lección rápida?"
+              : liga.ganando
+                ? `Vas ${liga.estaSemana} XP contra ${liga.pasadaHastaHoy} de la semana pasada a esta altura${liga.diferencia !== null ? ` (+${liga.diferencia}%)` : ""}.`
+                : `La semana pasada a esta altura llevabas ${liga.pasadaHastaHoy} XP; ahora ${liga.estaSemana}. Te faltan ${liga.pasadaHastaHoy - liga.estaSemana + 1} para pasarte.`
+          }
+        />
+        <div className={estilos.ligaDias} aria-label="XP por día: esta semana contra la pasada">
+          {liga.porDia.map((d) => (
+            <div key={d.fecha} title={`${d.fecha}: ${d.xp} XP (semana pasada: ${d.pasada})`}>
+              <span data-tipo="pasada" style={{ height: `${(d.pasada / maximo) * 100}%` }} />
+              <span style={{ height: `${(d.xp / maximo) * 100}%` }} />
+              <small>{new Date(`${d.fecha}T12:00:00`).toLocaleDateString("es-PE", { weekday: "narrow" })}</small>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

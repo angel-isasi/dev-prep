@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-12-c01", "es": "Está lloviendo.", "natural": "It's raining.", "calco": "Is raining.", "explicacion": "En inglés siempre hay sujeto, aunque sea **it**: *It's raining*." },
+  { "id": "en-basico-12-c02", "es": "¿Qué estás haciendo?", "natural": "What are you doing?", "calco": "What you are doing?", "explicacion": "En la pregunta, **are** va antes del sujeto: *What are you doing?*" },
+  { "id": "en-basico-12-c03", "es": "Estoy esperando a Tom.", "natural": "I'm waiting for Tom.", "calco": "I'm waiting Tom.", "explicacion": "**Wait** necesita **for** antes de la persona o cosa que esperas." },
+  { "id": "en-basico-12-c04", "es": "Estoy escuchando música.", "natural": "I'm listening to music.", "calco": "I'm listening music.", "explicacion": "**Listen** necesita **to** antes de lo que escuchas: *listen to music*." }
+]

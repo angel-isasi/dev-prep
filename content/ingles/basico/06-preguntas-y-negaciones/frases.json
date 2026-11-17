@@ -28,5 +28,11 @@
   { "id": "en-basico-06-f27", "en": "Do you remember the password?", "es": "¿Recuerdas la contraseña?" },
   { "id": "en-basico-06-f28", "en": "Who helps you with the code?", "es": "¿Quién te ayuda con el código?" },
   { "id": "en-basico-06-f29", "en": "Wait, I don't understand this part.", "es": "Espera, no entiendo esta parte." },
-  { "id": "en-basico-06-f30", "en": "What kind of music do you like?", "es": "¿Qué tipo de música te gusta?" }
+  { "id": "en-basico-06-f30", "en": "What kind of music do you like?", "es": "¿Qué tipo de música te gusta?" },
+  { "id": "en-basico-06-f31", "en": "Does the app work offline?", "es": "¿La app funciona sin conexión?", "trabajo": true },
+  { "id": "en-basico-06-f32", "en": "I don't understand this error.", "es": "No entiendo este error.", "trabajo": true },
+  { "id": "en-basico-06-f33", "en": "Where do we save the files?", "es": "¿Dónde guardamos los archivos?", "trabajo": true },
+  { "id": "en-basico-06-f34", "en": "The button doesn't work on Safari.", "es": "El botón no funciona en Safari.", "trabajo": true },
+  { "id": "en-basico-06-f35", "en": "Why does the test fail?", "es": "¿Por qué falla el test?", "trabajo": true },
+  { "id": "en-basico-06-f36", "en": "How many users do we have?", "es": "¿Cuántos usuarios tenemos?", "trabajo": true }
 ]

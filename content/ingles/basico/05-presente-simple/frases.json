@@ -28,5 +28,10 @@
   { "id": "en-basico-05-f27", "en": "The app runs on my laptop.", "es": "La aplicación funciona en mi laptop." },
   { "id": "en-basico-05-f28", "en": "She teaches math at a school.", "es": "Ella enseña matemáticas en un colegio." },
   { "id": "en-basico-05-f29", "en": "I understand the problem now.", "es": "Ahora entiendo el problema." },
-  { "id": "en-basico-05-f30", "en": "Ana sends emails in English.", "es": "Ana envía correos en inglés." }
+  { "id": "en-basico-05-f30", "en": "Ana sends emails in English.", "es": "Ana envía correos en inglés." },
+  { "id": "en-basico-05-f31", "en": "Tom reviews my pull requests.", "es": "Tom revisa mis pull requests.", "trabajo": true },
+  { "id": "en-basico-05-f32", "en": "The app works on my phone.", "es": "La app funciona en mi celular.", "trabajo": true },
+  { "id": "en-basico-05-f33", "en": "Sarah writes the tests.", "es": "Sarah escribe los tests.", "trabajo": true },
+  { "id": "en-basico-05-f34", "en": "The function returns a number.", "es": "La función devuelve un número.", "trabajo": true },
+  { "id": "en-basico-05-f35", "en": "We use React and TypeScript.", "es": "Usamos React y TypeScript.", "trabajo": true }
 ]

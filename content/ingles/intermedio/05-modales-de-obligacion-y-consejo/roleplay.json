@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-05-r01", "titulo": "Tu primera revisión de código", "situacion": "Sarah te pide que revises su pull request. Dale consejos claros y amables.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Sarah", "en": "Hey Ana, can you look at my PR? Any suggestions?", "es": "Oye, Ana, ¿puedes ver mi PR? ¿Alguna sugerencia?" },
+      { "opciones": [
+          { "en": "You should rename this variable. *data2* isn't very clear.", "es": "Deberías renombrar esta variable. *data2* no es muy clara.", "correcta": true, "explicacion": "*Should* da un consejo sin sonar a orden, y explicas el porqué." },
+          { "en": "You must to rename this variable.", "es": "", "correcta": false, "explicacion": "Después de *must* va el verbo sin *to*. Además *must* suena muy fuerte para un consejo." },
+          { "en": "This variable name is terrible.", "es": "", "correcta": false, "explicacion": "Suena brusco: critica sin proponer nada." }
+        ] },
+      { "quien": "Sarah", "en": "Fair. What about the API key in config.js?", "es": "Es justo. ¿Y la clave de la API en config.js?" },
+      { "opciones": [
+          { "en": "You don't have to push passwords or keys to the repo.", "es": "", "correcta": false, "explicacion": "Falso amigo de obligación: *don't have to* es \"no es necesario\". Para prohibir se usa *must not*." },
+          { "en": "We must not push keys to the repo. Let's move it to a .env file.", "es": "No debemos subir claves al repo. Pasémosla a un archivo .env.", "correcta": true, "explicacion": "*Must not* expresa prohibición: algo que no se puede hacer." },
+          { "en": "Maybe it could be a problem, I don't know.", "es": "", "correcta": false, "explicacion": "Demasiado vago para un problema de seguridad: aquí hay que ser claro." }
+        ] },
+      { "quien": "Sarah", "en": "Good catch. Do I need to add tests for the helper too?", "es": "Bien visto. ¿También tengo que agregar tests para el helper?" },
+      { "opciones": [
+          { "en": "No, you mustn't add tests, it's very simple.", "es": "", "correcta": false, "explicacion": "*Mustn't* prohíbe. Para \"no hace falta\" se usa *don't have to*." },
+          { "en": "No, you haven't to add them.", "es": "", "correcta": false, "explicacion": "La negativa de *have to* es *don't have to*, no *haven't to*." },
+          { "en": "You don't have to, it's tiny. But it might fail with empty arrays.", "es": "No es necesario, es muy pequeño. Pero podría fallar con arrays vacíos.", "correcta": true, "explicacion": "*Don't have to* = no es obligatorio. *Might* expresa una posibilidad." }
+        ] },
+      { "quien": "Sarah", "en": "Thanks! Anything else before I merge?", "es": "¡Gracias! ¿Algo más antes de hacer merge?" },
+      { "opciones": [
+          { "en": "You should to run the linter first.", "es": "", "correcta": false, "explicacion": "*Should* va sin *to*: *You should run*." },
+          { "en": "Just make sure the CI is green. Otherwise, looks good to me!", "es": "Solo asegúrate de que el CI esté en verde. Por lo demás, ¡me parece bien!", "correcta": true, "explicacion": "*Make sure* es un consejo natural, y *looks good to me* (LGTM) es lo típico al aprobar." },
+          { "en": "Merge it, whatever.", "es": "", "correcta": false, "explicacion": "Suena descuidado y poco profesional en una revisión." }
+        ] }
+    ] }
+]

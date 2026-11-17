@@ -29,5 +29,10 @@
   { "id": "en-basico-14-f28", "en": "I wasn't alone. My sister was with me.", "es": "No estaba solo. Mi hermana estaba conmigo." },
   { "id": "en-basico-14-f29", "en": "How was the interview?", "es": "¿Qué tal la entrevista?" },
   { "id": "en-basico-14-f30", "en": "It was terrible. I was very stressed.", "es": "Fue terrible. Estaba muy estresado." },
-  { "id": "en-basico-14-f31", "en": "We were grateful for your help.", "es": "Estábamos agradecidos por tu ayuda." }
+  { "id": "en-basico-14-f31", "en": "We were grateful for your help.", "es": "Estábamos agradecidos por tu ayuda." },
+  { "id": "en-basico-14-f32", "en": "The meeting was very long.", "es": "La reunión fue muy larga.", "trabajo": true },
+  { "id": "en-basico-14-f33", "en": "Were you at the daily yesterday?", "es": "¿Estuviste en la daily ayer?", "trabajo": true },
+  { "id": "en-basico-14-f34", "en": "The server was down for two hours.", "es": "El servidor estuvo caído dos horas.", "trabajo": true },
+  { "id": "en-basico-14-f35", "en": "I was nervous before the interview.", "es": "Estaba nervioso antes de la entrevista.", "trabajo": true },
+  { "id": "en-basico-14-f36", "en": "The tests weren't ready on Friday.", "es": "Los tests no estaban listos el viernes.", "trabajo": true }
 ]

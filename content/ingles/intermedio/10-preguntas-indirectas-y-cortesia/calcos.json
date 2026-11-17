@@ -1,0 +1,6 @@
+[
+  { "id": "en-intermedio-10-c01", "es": "¿Me puedes decir dónde está el archivo?", "natural": "Could you tell me where the file is?", "calco": "Could you tell me where is the file?", "explicacion": "En la pregunta indirecta el orden es normal: **where the file is**, sin invertir." },
+  { "id": "en-intermedio-10-c02", "es": "¿Sabes a qué hora empieza?", "natural": "Do you know what time it starts?", "calco": "Do you know what time does it start?", "explicacion": "Dentro de una pregunta indirecta no va *does*: *what time it starts*." },
+  { "id": "en-intermedio-10-c03", "es": "¿Sabes si está listo?", "natural": "Do you know if it's ready?", "calco": "Do you know is it ready?", "explicacion": "Para preguntas de sí o no se agrega **if** o *whether*: *if it's ready*." },
+  { "id": "en-intermedio-10-c04", "es": "Me preguntaba si podías ayudarme.", "natural": "I was wondering if you could help me.", "calco": "I was asking me if you could help me.", "explicacion": "\"Preguntarse\" es **wonder**, no *ask me*." }
+]

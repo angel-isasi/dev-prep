@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-01-r01", "titulo": "Tu experiencia con React", "situacion": "Jennifer, ingeniera, te entrevista por videollamada y quiere saber cuánta experiencia tienes.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Jennifer", "en": "Hi Ana, thanks for joining. How long have you worked with React?", "es": "Hola, Ana, gracias por conectarte. ¿Cuánto tiempo llevas trabajando con React?" },
+      { "opciones": [
+          { "en": "I work with React since last year.", "es": "", "correcta": false, "explicacion": "Calco de \"trabajo desde\": con *since* y algo que sigue hasta hoy va presente perfecto, *I've worked*." },
+          { "en": "I've worked with React for about a year.", "es": "He trabajado con React desde hace un año más o menos.", "correcta": true, "explicacion": "Presente perfecto con *for* + periodo: algo que empezó en el pasado y sigue hoy." },
+          { "en": "I have worked with React since one year.", "es": "", "correcta": false, "explicacion": "*Since* va con un punto en el tiempo (since 2025). Con un periodo se usa *for*: *for a year*." }
+        ] },
+      { "quien": "Jennifer", "en": "Nice. Have you ever used TypeScript in a project?", "es": "Bien. ¿Alguna vez has usado TypeScript en un proyecto?" },
+      { "opciones": [
+          { "en": "Yes, I used it ever in my study app.", "es": "", "correcta": false, "explicacion": "*Ever* va en preguntas (Have you ever...?), no en la respuesta afirmativa. Además falta el presente perfecto." },
+          { "en": "Yeah, whatever, it's just JavaScript with types.", "es": "", "correcta": false, "explicacion": "Demasiado informal y suena despectivo en una entrevista." },
+          { "en": "Yes, I've used it in my study app, but I'm still learning it.", "es": "Sí, lo he usado en mi app de estudio, pero todavía lo estoy aprendiendo.", "correcta": true, "explicacion": "Responde con el mismo tiempo de la pregunta (*I've used*) y es honesta sobre su nivel." }
+        ] },
+      { "quien": "Jennifer", "en": "Have you deployed any of your projects yet?", "es": "¿Ya has desplegado alguno de tus proyectos?" },
+      { "opciones": [
+          { "en": "Yes, I've already deployed two of them on Vercel.", "es": "Sí, ya he desplegado dos en Vercel.", "correcta": true, "explicacion": "*Already* en afirmativa con presente perfecto: ya lo hiciste." },
+          { "en": "Yes, I already have deploy two of them.", "es": "", "correcta": false, "explicacion": "Después de *have* va el participio: *have deployed*, no *have deploy*." },
+          { "en": "Yes, I have deployed them since two months.", "es": "", "correcta": false, "explicacion": "Calco de \"desde hace dos meses\": con un periodo va *for*, y para algo ya hecho basta *I've already deployed them*." }
+        ] },
+      { "quien": "Jennifer", "en": "Great. What have you learned recently?", "es": "Genial. ¿Qué has aprendido últimamente?" },
+      { "opciones": [
+          { "en": "I've just learned how to write tests with Vitest.", "es": "Acabo de aprender a escribir tests con Vitest.", "correcta": true, "explicacion": "*Just* + presente perfecto: algo muy reciente. Es el equivalente de \"acabo de\"." },
+          { "en": "I finish to learn tests with Vitest.", "es": "", "correcta": false, "explicacion": "Calco de \"acabo de\": en inglés no es *finish to*, es *I've just learned*." },
+          { "en": "I have learned Vitest last week.", "es": "", "correcta": false, "explicacion": "Con un momento terminado (*last week*) va pasado simple: *I learned Vitest last week*." }
+        ] }
+    ] }
+]

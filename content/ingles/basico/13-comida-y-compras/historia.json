@@ -1,0 +1,19 @@
+[
+  { "id": "en-basico-13-h01", "titulo": "Empanadas y ni un sol", "situacion": "Sarah está de vacaciones en Lima y va con Ana a una cafetería. La entrevista con Tom es pronto.",
+    "pasos": [
+      { "quien": "Sarah", "en": "I love Lima! What's good here?", "es": "¡Me encanta Lima! ¿Qué es rico aquí?" },
+      { "quien": "Ana", "en": "The coffee is great, and the empanadas are delicious.", "es": "El café es muy bueno, y las empanadas son deliciosas." },
+      { "quien": "Sarah", "en": "How much is an empanada?", "es": "¿Cuánto cuesta una empanada?" },
+      { "quien": "Ana", "en": "Eight soles. And a coffee is seven.", "es": "Ocho soles. Y un café cuesta siete." },
+      { "tipo": "completa", "quien": "Sarah", "en": "OK. I'd like two empanadas and ___ water, please.", "opciones": ["some", "a", "an"], "correcta": 0, "explicacion": "*Water* es **incontable**: no lleva a ni an, sino **some**. *A water* es un error típico.", "es": "Ya. Quisiera dos empanadas y agua, por favor." },
+      { "quien": "Ana", "en": "Two empanadas? They're big!", "es": "¿Dos empanadas? ¡Son grandes!" },
+      { "quien": "Sarah", "en": "I'm very hungry. So, are you nervous about the interview with Tom?", "es": "Tengo mucha hambre. Oye, ¿estás nerviosa por la entrevista con Tom?" },
+      { "quien": "Ana", "en": "A little. It's on Friday.", "es": "Un poco. Es el viernes." },
+      { "quien": "Sarah", "en": "Don't worry. Tom asks about your code, not about empanadas.", "es": "Tranquila. Tom pregunta por tu código, no por empanadas." },
+      { "tipo": "pregunta", "pregunta": "¿Cuándo es la entrevista con Tom?", "opciones": ["El viernes", "Hoy", "El lunes"], "correcta": 0, "explicacion": "Ana dice **it's on Friday**." },
+      { "quien": "Ana", "en": "Ha, ha. OK. Oh no, I don't have any cash!", "es": "Ja, ja. Ya. ¡Ay, no, no tengo efectivo!" },
+      { "tipo": "completa", "quien": "Sarah", "en": "No problem. How ___ is it? I have a card.", "opciones": ["much", "many", "cost"], "correcta": 0, "explicacion": "Para preguntar un **precio** se dice **how much**. *How many* es para contar cosas, como empanadas.", "es": "No hay problema. ¿Cuánto es? Tengo tarjeta." },
+      { "quien": "Ana", "en": "It's twenty-five soles. Thank you, Sarah! Next time, I pay.", "es": "Son veinticinco soles. ¡Gracias, Sarah! La próxima vez pago yo." },
+      { "tipo": "pregunta", "pregunta": "¿Quién paga la cuenta?", "opciones": ["Sarah, con tarjeta", "Ana, en efectivo", "Las dos por partes iguales"], "correcta": 0, "explicacion": "Ana no tiene efectivo y Sarah dice **I have a card**." }
+    ] }
+]

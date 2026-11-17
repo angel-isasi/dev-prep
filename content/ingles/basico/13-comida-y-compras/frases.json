@@ -30,5 +30,10 @@
   { "id": "en-basico-13-f29", "en": "Potatoes are cheap at the market.", "es": "Las papas están baratas en el mercado." },
   { "id": "en-basico-13-f30", "en": "Do you want some tea?", "es": "¿Quieres un poco de té?" },
   { "id": "en-basico-13-f31", "en": "I'm thirsty. Can I have some water?", "es": "Tengo sed. ¿Me das un poco de agua?" },
-  { "id": "en-basico-13-f32", "en": "A table for two, please.", "es": "Una mesa para dos, por favor." }
+  { "id": "en-basico-13-f32", "en": "A table for two, please.", "es": "Una mesa para dos, por favor." },
+  { "id": "en-basico-13-f33", "en": "How many users are online?", "es": "¿Cuántos usuarios hay en línea?", "trabajo": true },
+  { "id": "en-basico-13-f34", "en": "We have a few bugs left.", "es": "Nos quedan algunos bugs.", "trabajo": true },
+  { "id": "en-basico-13-f35", "en": "I need a little more time.", "es": "Necesito un poco más de tiempo.", "trabajo": true },
+  { "id": "en-basico-13-f36", "en": "How much memory does it use?", "es": "¿Cuánta memoria usa?", "trabajo": true },
+  { "id": "en-basico-13-f37", "en": "How much does the cloud server cost?", "es": "¿Cuánto cuesta el servidor en la nube?", "trabajo": true }
 ]

@@ -374,3 +374,15 @@ Después se agregó el aviso al celular de ofertas nuevas para junior en Perú o
 - Fuentes: se suman We Work Remotely (RSS, piden citar la fuente) y Himalayas (API, piden postular con su enlace; solo motor y Lambda por CORS). De Arbeitnow, solo las remotas; si una oferta se repite, gana la bolsa más confiable.
 - Por oferta: filtro "Solo para mí", guardar y ocultar (colección `ofertasMarcadas`, se sincroniza), "Nuevas desde tu última visita", qué te falta con enlace a la lección, palabras clave para el CV (`palabrasParaCv` en `server/ofertas.js`) y mensaje para postular.
 - Postulaciones (`server/postulaciones.js`): fecha de envío, seguimiento a los 7 días (aviso a las 12:00 los días 7, 14 y 21), etapa "Sin respuesta", números por semana y por fuente, y meta semanal opcional.
+
+## Inglés v2 (2026-11-17): estilo Duolingo de verdad
+
+Pedido de Angel: el inglés se sentía repetitivo y "0 de 227 dominados" no tenía sentido. Cambios:
+
+- **Conceptos en vez de preguntas sueltas**: cada palabra o frase se domina una sola vez y se pregunta de otra forma según su caja (reconocer, producir con ayuda, sin ayuda). La unidad 10 bajó de 227 ítems a 106 conceptos. El progreso viejo se junta solo (`registrosPorConcepto`).
+- **Formas nuevas de preguntar**: completar el hueco, escribir sin banco de palabras (tolera contracciones y un error de tipeo), hablar en voz alta (reconocimiento de voz, necesita internet en Chrome), ¿natural o calco?, oído fino con pares mínimos.
+- **Camino**: nivel 0 a 5 por unidad, barras de aprendidos y fijados, cofre al ver la unidad completa y nivel legendario.
+- **Motivación**: combo dentro de la lección, lección perfecta, vidas opcionales, misiones diarias con cofre, "Tú contra ti" (XP de esta semana contra la pasada) y Bit, el personaje de la app.
+- **Contenido nuevo**: 47 historias (la serie de Ana), 24 roleplays, 199 calcos, 194 frases de trabajo y 40 pares mínimos.
+- **Modos nuevos**: historias, roleplays, parejas contrarreloj, repaso mezclado y oído fino.
+- **Peso**: los ítems de inglés se guardan compactos y se expanden al cargar (`expandirIngles`): 2,5 MB en total, todo disponible sin internet. Sin cambios en AWS.

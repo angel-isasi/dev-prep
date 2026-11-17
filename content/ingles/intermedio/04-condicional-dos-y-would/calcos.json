@@ -1,0 +1,6 @@
+[
+  { "id": "en-intermedio-04-c01", "es": "Si tuviera más tiempo, aprendería Python.", "natural": "If I had more time, I'd learn Python.", "calco": "If I would have more time, I'd learn Python.", "explicacion": "**Would** nunca va en la parte del *if*. Ahí va el pasado: *If I had*." },
+  { "id": "en-intermedio-04-c02", "es": "¿Te molestaría ayudarme?", "natural": "Would you mind helping me?", "calco": "Would you mind to help me?", "explicacion": "Después de **mind** el verbo va en **-ing**: *helping*." },
+  { "id": "en-intermedio-04-c03", "es": "Preferiría quedarme.", "natural": "I'd rather stay.", "calco": "I'd rather to stay.", "explicacion": "Después de **would rather** el verbo va sin *to*." },
+  { "id": "en-intermedio-04-c04", "es": "Yo que tú, preguntaría.", "natural": "If I were you, I'd ask.", "calco": "If I would be you, I'd ask.", "explicacion": "Para dar un consejo se dice **If I were you**, con *were* y sin *would*." }
+]

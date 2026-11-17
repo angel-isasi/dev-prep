@@ -28,5 +28,11 @@
   { "id": "en-basico-19-f27", "en": "Is the job remote or on-site?", "es": "¿El trabajo es remoto o presencial?" },
   { "id": "en-basico-19-f28", "en": "Are you available for a quick call?", "es": "¿Tienes tiempo para una llamada corta?" },
   { "id": "en-basico-19-f29", "en": "They hired three interns this year.", "es": "Contrataron a tres practicantes este año." },
-  { "id": "en-basico-19-f30", "en": "I'm going to shut down my laptop now.", "es": "Voy a apagar mi laptop ahora." }
+  { "id": "en-basico-19-f30", "en": "I'm going to shut down my laptop now.", "es": "Voy a apagar mi laptop ahora." },
+  { "id": "en-basico-19-f31", "en": "My laptop charger is at home.", "es": "El cargador de mi laptop está en casa.", "trabajo": true },
+  { "id": "en-basico-19-f32", "en": "Can you send me the file by email?", "es": "¿Me puedes enviar el archivo por correo?", "trabajo": true },
+  { "id": "en-basico-19-f33", "en": "I have a meeting with my manager at three.", "es": "Tengo una reunión con mi jefe a las tres.", "trabajo": true },
+  { "id": "en-basico-19-f34", "en": "The deadline is next Thursday.", "es": "La fecha límite es el próximo jueves.", "trabajo": true },
+  { "id": "en-basico-19-f35", "en": "I'm going to attend the meeting at noon.", "es": "Voy a asistir a la reunión al mediodía.", "trabajo": true },
+  { "id": "en-basico-19-f36", "en": "Please save the document before the meeting.", "es": "Por favor, guarda el documento antes de la reunión.", "trabajo": true }
 ]

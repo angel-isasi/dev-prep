@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { armadoCorrecto, fichasDe, generarItemsIngles } from "./ingles.js";
+import { armadoCorrecto, comparable, conceptoDeClave, escrituraCorrecta, expandirIngles, fichasDe, generarItemsIngles, hablaCorrecta, registrosPorConcepto } from "./ingles.js";
 
 const unidad = {
   id: "en-basico-05",
@@ -21,6 +21,8 @@ const unidad = {
     { id: "f4", en: "They live in Lima.", es: "Ellos viven en Lima." },
   ],
   ejercicios: [{ id: "e1", pregunta: "She ___ at a bank.", opciones: ["work", "works", "working"], correcta: 1, explicacion: "Con she, -s." }],
+  calcos: [{ id: "c1", es: "Tengo 20 años.", natural: "I'm 20 years old.", calco: "I have 20 years.", explicacion: "Edad con to be." }],
+  pares: [{ id: "p1", a: "ship", aEs: "barco", b: "sheep", bEs: "oveja", sonido: "i", nota: "corta y larga" }],
   dialogos: [
     {
       id: "d1",
@@ -35,40 +37,74 @@ const unidad = {
 };
 
 describe("ítems de inglés", () => {
-  const { unidades, items } = generarItemsIngles([unidad]);
+  const { unidades, items } = expandirIngles(generarItemsIngles([unidad]));
   const porClave = new Map(items.map((it) => [it.clave, it]));
 
   test("una unidad de área inglés por cada carpeta", () => {
     expect(unidades).toEqual([expect.objectContaining({ id: "en-basico-05", area: "ingles", orden: 1 })]);
   });
 
-  test("palabras: significado con audio y la versión inversa, con una sola respuesta correcta", () => {
+  test("una palabra es un solo concepto con varias formas de preguntarla, de reconocer a escribir", () => {
     const p = porClave.get("en:w1");
-    expect(p.opciones[p.correcta]).toBe("trabajar");
-    expect(p.audio).toBe("work");
-    expect(new Set(p.opciones).size).toBe(p.opciones.length);
-    const r = porClave.get("enr:w1");
-    expect(r.opciones[r.correcta]).toBe("work");
+    expect(p.tipo).toBe("concepto");
+    expect(p.variantes.map((v) => v.forma)).toEqual(["palabra", "oir-palabra", "inversa", "escribir-palabra"]);
+    const significado = p.variantes[0];
+    expect(significado.opciones[significado.correcta]).toBe("trabajar");
+    expect(new Set(significado.opciones).size).toBe(significado.opciones.length);
+    const inversa = p.variantes.find((v) => v.forma === "inversa");
+    expect(inversa.opciones[inversa.correcta]).toBe("work");
+    expect(p.variantes.find((v) => v.forma === "escribir-palabra").respuesta).toBe("work");
+    expect(porClave.has("enr:w1")).toBe(false);
   });
 
-  test("frases: escuchar, traducir y dictado; las fichas traen la respuesta y distractores", () => {
-    expect(porClave.get("esc:f1").soloAudio).toBe(true);
-    const a = porClave.get("arm:f1");
+  test("una frase es un concepto: escuchar, hueco, traducir, dictado, hablar y escribir", () => {
+    const f = porClave.get("fr:f1");
+    expect(f.variantes.map((v) => v.forma)).toEqual(["escuchar", "hueco", "traducir", "dictado", "hablar", "escribir"]);
+    const a = f.variantes.find((v) => v.forma === "traducir");
     expect(a.respuesta).toEqual(["She", "works", "at", "a", "bank"]);
     for (const ficha of a.respuesta) expect(a.fichas).toContain(ficha);
-    expect(a.fichas.length).toBeGreaterThan(a.respuesta.length);
-    expect(porClave.get("dic:f1").audio).toBe("She works at a bank.");
+    const hueco = f.variantes.find((v) => v.forma === "hueco");
+    expect(hueco.pregunta).toContain("___");
+    expect(hueco.opciones[hueco.correcta]).not.toBe("");
+    expect(f.variantes.find((v) => v.forma === "dictado").voz).toBe(true);
+    expect(f.variantes.find((v) => v.forma === "hablar").micro).toBe(true);
   });
 
-  test("gramática, emparejar y diálogos", () => {
+  test("gramática, diálogos, calcos y pares mínimos", () => {
     expect(porClave.get("gra:e1").correcta).toBe(1);
-    expect(porClave.get("par:en:en-basico-05:0").pares).toHaveLength(4);
     expect(porClave.get("dia:d1:0").dialogo.lineas).toHaveLength(2);
+    const c = porClave.get("cal:c1");
+    expect(c.opciones[c.correcta]).toBe("I'm 20 years old.");
+    const par = porClave.get("oido:p1");
+    expect(par.variantes.map((v) => v.opciones[v.correcta])).toEqual(["ship (barco)", "sheep (oveja)"]);
+  });
+
+  test("las claves viejas se juntan en su concepto sin pisar el registro nuevo", () => {
+    expect(conceptoDeClave("enr:w1")).toBe("en:w1");
+    expect(conceptoDeClave("dic:f1")).toBe("fr:f1");
+    const r = registrosPorConcepto({ "esc:f1": { caja: 1, proximo: "2026-11-18" }, "arm:f1": { caja: 2, proximo: "2026-11-20" } });
+    expect(r["fr:f1"]).toMatchObject({ caja: 2, proximo: "2026-11-18" });
+    const propio = registrosPorConcepto({ "en:w1": { caja: 3, proximo: "x" }, "enr:w1": { caja: 1, proximo: "a" } });
+    expect(propio["en:w1"]).toEqual({ caja: 3, proximo: "x" });
+  });
+
+  test("escribir perdona mayúsculas, signos, contracciones y un error de tipeo", () => {
+    const item = { respuesta: "I'm not ready yet." };
+    expect(escrituraCorrecta(item, "i am not ready yet")).toBe("exacta");
+    expect(escrituraCorrecta(item, "I'm not redy yet")).toBe("casi");
+    expect(escrituraCorrecta(item, "I not ready")).toBe(false);
+    expect(escrituraCorrecta({ respuesta: "dog" }, "dig")).toBe(false); // palabras cortas: exacto
+    expect(comparable("Don’t")).toBe("do not");
+  });
+
+  test("hablar acepta si dijiste al menos el 80% de las palabras en orden", () => {
+    expect(hablaCorrecta("She works at a bank.", ["she works at the bank", "otra"])).toBe(true);
+    expect(hablaCorrecta("She works at a bank.", ["she walks"])).toBe(false);
   });
 
   test("las claves son únicas y estables entre exportaciones", () => {
     expect(new Set(items.map((it) => it.clave)).size).toBe(items.length);
-    expect(generarItemsIngles([unidad]).items).toEqual(items);
+    expect(expandirIngles(generarItemsIngles([unidad])).items).toEqual(items);
   });
 
   test("armar no distingue mayúsculas ni signos, y respeta las contracciones", () => {

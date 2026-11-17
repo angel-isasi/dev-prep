@@ -1,0 +1,20 @@
+[
+  { "id": "en-intermedio-12-h01", "titulo": "El bug que aparece a veces", "situacion": "Al final de su primer mes, Ana encuentra un bug raro y tiene que explicarlo y proponer soluciones.",
+    "pasos": [
+      { "quien": "Ana", "en": "Tom, I found a weird bug. The search page hangs sometimes.", "es": "Tom, encontré un bug raro. La página de búsqueda se cuelga a veces." },
+      { "quien": "Tom", "en": "Hangs or crashes? Those are different things.", "es": "¿Se cuelga o se cae? Son cosas distintas." },
+      { "quien": "Ana", "en": "It hangs. It doesn't close, it just freezes for about ten seconds.", "es": "Se cuelga. No se cierra, solo se congela unos diez segundos." },
+      { "tipo": "completa", "quien": "Ana", "en": "And it's ___: it happens maybe once every five searches.", "es": "Y es intermitente: pasa quizás una vez cada cinco búsquedas.", "opciones": ["intermittent", "always", "constant"], "correcta": 0, "explicacion": "**Intermittent** es un bug que aparece y desaparece. *Constant* sería que pasa todo el tiempo." },
+      { "quien": "Tom", "en": "Can you reproduce it?", "es": "¿Puedes reproducirlo?" },
+      { "quien": "Ana", "en": "Yes. It happens when someone types very fast. The app sends a request for every letter.", "es": "Sí. Pasa cuando alguien escribe muy rápido. La app manda una petición por cada letra." },
+      { "tipo": "pregunta", "pregunta": "¿Cuándo se cuelga la página?", "opciones": ["Cuando no hay internet", "Cuando alguien escribe muy rápido", "Cuando la lista está vacía"], "correcta": 1, "explicacion": "Ana dice que pasa cuando alguien escribe muy rápido, porque se manda una petición por letra." },
+      { "quien": "Tom", "en": "I see. What are our options?", "es": "Ya veo. ¿Cuáles son nuestras opciones?" },
+      { "quien": "Ana", "en": "Option one: a debounce. We wait 300 milliseconds before we search.", "es": "Opción uno: un debounce. Esperamos 300 milisegundos antes de buscar." },
+      { "quien": "Ana", "en": "Option two: we load all the products once and filter them in the browser.", "es": "Opción dos: cargamos todos los productos una vez y los filtramos en el navegador." },
+      { "tipo": "completa", "quien": "Tom", "en": "Which one is ___ for our users?", "es": "¿Cuál es mejor para nuestros usuarios?", "opciones": ["more better", "better", "the better"], "correcta": 1, "explicacion": "**Good** es irregular: *good, better, the best*. Nunca *more better*." },
+      { "quien": "Ana", "en": "The debounce is easier than option two, and it's faster to build.", "es": "El debounce es más fácil que la opción dos, y es más rápido de construir." },
+      { "quien": "Ana", "en": "But we have ten thousand products, so option two is the slowest on old phones.", "es": "Pero tenemos diez mil productos, así que la opción dos es la más lenta en celulares viejos." },
+      { "tipo": "pregunta", "pregunta": "¿Qué opción recomienda Ana y por qué?", "opciones": ["El debounce, porque es más fácil y no carga diez mil productos", "Cargar todo, porque es más rápido en celulares viejos", "Ninguna, prefiere esperar"], "correcta": 0, "explicacion": "El debounce es más fácil y rápido de hacer, y la opción dos sería la más lenta en celulares viejos." },
+      { "quien": "Tom", "en": "Debounce it is. Great bug report, Ana. You explained it better than me.", "es": "Entonces debounce. Muy buen reporte, Ana. Lo explicaste mejor que yo." }
+    ] }
+]

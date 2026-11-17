@@ -28,5 +28,11 @@
   { "id": "en-basico-10-f27", "en": "There's a rug under the table.", "es": "Hay una alfombra debajo de la mesa." },
   { "id": "en-basico-10-f28", "en": "How many floors are there in your building?", "es": "¿Cuántos pisos hay en tu edificio?" },
   { "id": "en-basico-10-f29", "en": "There's a problem with the stove.", "es": "Hay un problema con la cocina." },
-  { "id": "en-basico-10-f30", "en": "The keys are in the drawer.", "es": "Las llaves están en el cajón." }
+  { "id": "en-basico-10-f30", "en": "The keys are in the drawer.", "es": "Las llaves están en el cajón." },
+  { "id": "en-basico-10-f31", "en": "There's a bug in line 12.", "es": "Hay un bug en la línea 12.", "trabajo": true },
+  { "id": "en-basico-10-f32", "en": "There are three open pull requests.", "es": "Hay tres pull requests abiertos.", "trabajo": true },
+  { "id": "en-basico-10-f33", "en": "Is there a test for this function?", "es": "¿Hay un test para esta función?", "trabajo": true },
+  { "id": "en-basico-10-f34", "en": "There aren't any errors in the console.", "es": "No hay errores en la consola.", "trabajo": true },
+  { "id": "en-basico-10-f35", "en": "Are there any questions?", "es": "¿Hay alguna pregunta?", "trabajo": true },
+  { "id": "en-basico-10-f36", "en": "There's a typo in the title.", "es": "Hay un typo en el título.", "trabajo": true }
 ]

@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-01-h01", "titulo": "Ensayo con Luis", "situacion": "Mañana Ana tiene su primera entrevista en inglés. Luis se hace pasar por el entrevistador.",
+    "pasos": [
+      { "quien": "Luis", "en": "Okay, I'm the interviewer now. Have you ever worked on a real project?", "es": "Bueno, ahora yo soy el entrevistador. ¿Alguna vez has trabajado en un proyecto real?" },
+      { "quien": "Ana", "en": "Yes, I have. I've built a practice app for my studies.", "es": "Sí. He construido una app de práctica para mis estudios." },
+      { "quien": "Luis", "en": "Nice. How long have you used React?", "es": "Bien. ¿Hace cuánto usas React?" },
+      { "tipo": "completa", "quien": "Ana", "en": "I've used React ___ six months.", "es": "Uso React desde hace seis meses.", "opciones": ["since", "for", "ago"], "correcta": 1, "explicacion": "Con una duración (six months) va **for**. **Since** va con un punto de inicio, como *since June*." },
+      { "quien": "Luis", "en": "And JavaScript? You've studied it since 2024, right?", "es": "¿Y JavaScript? Lo estudias desde 2024, ¿no?" },
+      { "quien": "Ana", "en": "Right. I've already finished thirty exercises this month.", "es": "Así es. Ya terminé treinta ejercicios este mes." },
+      { "tipo": "pregunta", "pregunta": "¿Cuántos ejercicios terminó Ana este mes?", "opciones": ["Seis", "Treinta", "Ninguno todavía"], "correcta": 1, "explicacion": "Ana dice \"I've already finished thirty exercises this month\"." },
+      { "quien": "Luis", "en": "Great answer. Have you sent your portfolio yet?", "es": "Buena respuesta. ¿Ya enviaste tu portafolio?" },
+      { "quien": "Ana", "en": "Not yet. I've just noticed a typo on the first page.", "es": "Todavía no. Acabo de notar un error de tipeo en la primera página." },
+      { "tipo": "completa", "quien": "Luis", "en": "Wait, you haven't fixed it ___?", "es": "Espera, ¿todavía no lo has corregido?", "opciones": ["already", "just", "yet"], "correcta": 2, "explicacion": "En preguntas y negativas, al final va **yet**: *you haven't fixed it yet?* **Already** y **just** van antes del verbo." },
+      { "quien": "Ana", "en": "Relax, it's only one letter. My name says \"Aan\".", "es": "Tranquilo, es solo una letra. Mi nombre dice \"Aan\"." },
+      { "quien": "Luis", "en": "Ana, that's the most important word on the page!", "es": "¡Ana, esa es la palabra más importante de la página!" },
+      { "quien": "Ana", "en": "Okay, okay. I've just fixed it. Next question, please.", "es": "Ya, ya. Acabo de corregirlo. Siguiente pregunta, por favor." },
+      { "tipo": "pregunta", "pregunta": "¿Cuál era el error en el portafolio de Ana?", "opciones": ["Le faltaba un proyecto", "Su nombre estaba mal escrito", "El enlace no funcionaba"], "correcta": 1, "explicacion": "Decía \"Aan\" en vez de \"Ana\": por eso Luis dice que es la palabra más importante." }
+    ] }
+]

@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-01-c01", "es": "Revisa el alto de la imagen.", "natural": "Check the height of the image.", "calco": "Check the tall of the image.", "explicacion": "\"Alto\" como medida es **height** (jáit). *Tall* es un adjetivo: *a tall person*." },
+  { "id": "en-trabajo-01-c02", "es": "Recorre el arreglo.", "natural": "Loop through the array.", "calco": "Loop through the arrangement.", "explicacion": "Un arreglo en programación es un **array** (aréi). *Arrangement* es un arreglo floral o un acuerdo." },
+  { "id": "en-trabajo-01-c03", "es": "Devuelve una cadena.", "natural": "It returns a string.", "calco": "It returns a chain.", "explicacion": "Una cadena de texto es un **string** (string, sin \"e\" delante). *Chain* es una cadena de metal." },
+  { "id": "en-trabajo-01-c04", "es": "El trabajo está en la cola.", "natural": "The job is in the queue.", "calco": "The job is in the tail.", "explicacion": "Una cola de tareas es una **queue** (kiú). *Tail* es la cola de un animal." }
+]

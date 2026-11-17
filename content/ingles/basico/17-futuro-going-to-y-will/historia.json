@@ -1,0 +1,18 @@
+[
+  { "id": "en-basico-17-h01", "titulo": "La noche antes del primer día", "situacion": "Es domingo. Ana empieza a trabajar mañana y habla con Sarah por videollamada.",
+    "pasos": [
+      { "quien": "Sarah", "en": "Are you ready for tomorrow?", "es": "¿Estás lista para mañana?" },
+      { "quien": "Ana", "en": "I think so. I'm going to wake up at six and test my internet.", "es": "Creo que sí. Me voy a levantar a las seis y voy a probar mi internet." },
+      { "quien": "Sarah", "en": "Good idea. Tom is meeting you at nine for a welcome call.", "es": "Buena idea. Tom se reúne contigo a las nueve para una llamada de bienvenida." },
+      { "tipo": "completa", "quien": "Ana", "en": "And then I'm ___ set up the project on my new laptop.", "opciones": ["going to", "will", "go to"], "correcta": 0, "explicacion": "Es un plan ya decidido: **am going to** + verbo. *Will* no va después de *I'm*.", "es": "Y luego voy a configurar el proyecto en mi laptop nueva." },
+      { "quien": "Sarah", "en": "The setup is a little long. I'll send you my notes.", "es": "La configuración es un poco larga. Te voy a mandar mis notas." },
+      { "quien": "Ana", "en": "Thanks! Will I write code on the first day?", "es": "¡Gracias! ¿Voy a escribir código el primer día?" },
+      { "quien": "Sarah", "en": "Probably not. You're going to read a lot of documentation.", "es": "Probablemente no. Vas a leer mucha documentación." },
+      { "tipo": "pregunta", "pregunta": "¿Qué va a hacer Ana probablemente el primer día?", "opciones": ["Leer documentación", "Escribir mucho código", "Dar una charla"], "correcta": 0, "explicacion": "Sarah dice **you're going to read a lot of documentation**." },
+      { "quien": "Ana", "en": "OK. Oh, look at the time! It's going to be a long day.", "es": "Ya. ¡Uy, mira la hora! Va a ser un día largo." },
+      { "quien": "Sarah", "en": "Don't worry. You'll be fine.", "es": "No te preocupes. Te va a ir bien." },
+      { "tipo": "completa", "quien": "Ana", "en": "Thanks, Sarah. I ___ forget the mute button this time!", "opciones": ["won't", "am not going", "don't"], "correcta": 0, "explicacion": "Es una **promesa**, y las promesas van con will: la negativa es **won't** + verbo. *Am not going* necesita *to*.", "es": "Gracias, Sarah. ¡Esta vez no me voy a olvidar del botón de silencio!" },
+      { "quien": "Sarah", "en": "Ha, ha. I'll remember that.", "es": "Ja, ja. Me voy a acordar de eso." },
+      { "tipo": "pregunta", "pregunta": "¿Qué le ofrece Sarah a Ana?", "opciones": ["Mandarle sus notas", "Llamarla a las seis", "Escribir el código por ella"], "correcta": 0, "explicacion": "Sarah dice **I'll send you my notes**: una oferta con will." }
+    ] }
+]

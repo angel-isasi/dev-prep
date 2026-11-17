@@ -1,0 +1,19 @@
+[
+  { "id": "en-trabajo-08-h01", "titulo": "Una daily de 15 minutos", "situacion": "Daily por videollamada. Ana tiene un bloqueo y Tom intenta que la reunión no dure una hora.",
+    "pasos": [
+      { "quien": "Tom", "en": "Morning, everyone. Let's keep it short today. Ana, go ahead.", "es": "Buenos días a todos. Hoy hagámosla corta. Ana, adelante." },
+      { "tipo": "completa", "quien": "Ana", "en": "Yesterday I ___ the filters on the orders page.", "es": "Ayer terminé los filtros de la página de pedidos.", "opciones": ["have finished", "finished", "finish"], "correcta": 1, "explicacion": "Con **yesterday** va pasado simple: *I finished*. Es la forma normal de dar tu update en la daily." },
+      { "quien": "Ana", "en": "Today I'm going to work on the export button.", "es": "Hoy voy a trabajar en el botón de exportar." },
+      { "quien": "Ana", "en": "I have one blocker: I don't have access to the staging server.", "es": "Tengo un bloqueo: no tengo acceso al servidor de staging." },
+      { "tipo": "pregunta", "pregunta": "¿Cuál es el bloqueo de Ana?", "opciones": ["No sabe hacer el botón", "No tiene acceso al servidor de staging", "Su laptop no funciona"], "correcta": 1, "explicacion": "Ana dice \"I don't have access to the staging server\"." },
+      { "quien": "Tom", "en": "I'll give you access right after the call.", "es": "Te doy acceso justo después de la llamada." },
+      { "quien": "Sarah", "en": "Yesterday I reviewed two PRs. Today I'm fixing the menu, and... can I talk about the new design?", "es": "Ayer revisé dos PR. Hoy estoy arreglando el menú, y... ¿puedo hablar del nuevo diseño?" },
+      { "quien": "Tom", "en": "Let's take that offline. It's a bigger topic.", "es": "Hablemos de eso aparte. Es un tema más grande." },
+      { "quien": "Ana", "en": "Sorry to interrupt, but the design affects my export button too.", "es": "Perdón por interrumpir, pero el diseño también afecta mi botón de exportar." },
+      { "tipo": "completa", "quien": "Ana", "en": "Just to make ___ I understand: do we keep the old colors for now?", "es": "Solo para asegurarme de que entiendo: ¿por ahora mantenemos los colores antiguos?", "opciones": ["sure", "sense", "clear"], "correcta": 0, "explicacion": "**Just to make sure I understand** es la frase para confirmar algo. *Make sense* significa tener sentido." },
+      { "quien": "Tom", "en": "Yes, old colors until Friday. Sarah, Ana, let's meet after this.", "es": "Sí, colores antiguos hasta el viernes. Sarah, Ana, reunámonos después de esto." },
+      { "quien": "Tom", "en": "That's it. Fourteen minutes. A new record.", "es": "Eso es todo. Catorce minutos. Un nuevo récord." },
+      { "quien": "Sarah", "en": "And now we have a meeting about the meeting.", "es": "Y ahora tenemos una reunión sobre la reunión." },
+      { "tipo": "pregunta", "pregunta": "¿Qué significa \"Let's take that offline\" en la reunión?", "opciones": ["Apaguemos el internet", "Hablemos de eso aparte, después", "Cancelemos la reunión"], "correcta": 1, "explicacion": "**Take it offline** es tratar un tema fuera de la reunión, con las personas que importan." }
+    ] }
+]

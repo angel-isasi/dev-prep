@@ -1,0 +1,18 @@
+[
+  { "id": "en-basico-22-h01", "titulo": "Ship, no sheep", "situacion": "Ana termina el menú nuevo y el equipo va a lanzarlo hoy. Pero una vocal le juega una broma.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, the new menu looks great. Are we going to ship it today?", "es": "Ana, el menú nuevo se ve genial. ¿Lo vamos a lanzar hoy?" },
+      { "quien": "Ana", "en": "Yes! We're going to sheep it at five.", "es": "¡Sí! Lo vamos a lanzar a las cinco. (Pero Ana pronuncia sheep: oveja)." },
+      { "quien": "Sarah", "en": "Sheep? Are we sending sheep to our users?", "es": "¿Ovejas? ¿Les vamos a mandar ovejas a los usuarios?" },
+      { "tipo": "pregunta", "pregunta": "¿Por qué se ríe Sarah?", "opciones": ["Ana dijo sheep (oveja) en vez de ship (lanzar)", "Ana habló en español", "El menú tenía un bug"], "correcta": 0, "explicacion": "**Ship** con i corta es lanzar un producto; **sheep** con i larga es oveja." },
+      { "quien": "Ana", "en": "Ha, ha. No! Ship, with a short i.", "es": "¡Ja, ja! ¡No! Ship, con i corta." },
+      { "tipo": "completa", "quien": "Tom", "en": "Right. Ship is short, and ___ is long, like a smile.", "opciones": ["sheep", "ship", "chip"], "correcta": 0, "explicacion": "**Sheep** tiene la i larga, como sonriendo. *Ship* es la corta y *chip* cambia el primer sonido.", "es": "Exacto. Ship es corta, y sheep es larga, como una sonrisa." },
+      { "quien": "Tom", "en": "Don't worry. My Spanish is worse. I say \"pero\" and \"perro\" the same.", "es": "No te preocupes. Mi español es peor. Digo \"pero\" y \"perro\" igual." },
+      { "quien": "Ana", "en": "Ha, ha. OK. Let's test the menu on a small phone first.", "es": "Ja, ja. Ya. Primero probemos el menú en un celular pequeño." },
+      { "quien": "Sarah", "en": "It looks good. The button works too.", "es": "Se ve bien. El botón también funciona." },
+      { "tipo": "completa", "quien": "Ana", "en": "Great! Can I ___ early today? I have a class.", "opciones": ["leave", "live", "lift"], "correcta": 0, "explicacion": "**Leave** (irse, salir) tiene la i larga. *Live* (vivir) tiene la i corta: si la dices mal, cambias el significado.", "es": "¡Genial! ¿Puedo salir temprano hoy? Tengo clase." },
+      { "quien": "Tom", "en": "Sure. Great job, Ana. We ship at five.", "es": "Claro. Buen trabajo, Ana. Lanzamos a las cinco." },
+      { "quien": "Ana", "en": "Thanks! Bye, team. No sheep today!", "es": "¡Gracias! Chau, equipo. ¡Hoy nada de ovejas!" },
+      { "tipo": "pregunta", "pregunta": "¿A qué hora lanzan el menú nuevo?", "opciones": ["A las cinco", "A las nueve", "Mañana"], "correcta": 0, "explicacion": "Tom confirma **we ship at five**." }
+    ] }
+]

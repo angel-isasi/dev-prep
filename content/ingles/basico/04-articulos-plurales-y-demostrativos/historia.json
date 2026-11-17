@@ -1,0 +1,19 @@
+[
+  { "id": "en-basico-04-h01", "titulo": "Un regalo con dos cargadores", "situacion": "Luis le regala a Ana su laptop vieja para que practique.",
+    "pasos": [
+      { "quien": "Luis", "en": "Ana, this is a gift for you.", "es": "Ana, esto es un regalo para ti." },
+      { "quien": "Ana", "en": "A laptop! Is this your old laptop?", "es": "¡Una laptop! ¿Esta es tu laptop vieja?" },
+      { "quien": "Luis", "en": "Yes, it is. It's old, but it's good.", "es": "Sí. Es vieja, pero es buena." },
+      { "tipo": "completa", "quien": "Ana", "en": "It's ___ old laptop, but it's perfect!", "opciones": ["an", "a", "the"], "correcta": 0, "explicacion": "**An** va antes de sonido de vocal: *an old laptop*. *A* sería para una palabra que empieza con consonante.", "es": "Es una laptop vieja, ¡pero es perfecta!" },
+      { "quien": "Ana", "en": "And what are these?", "es": "¿Y qué son estos?" },
+      { "tipo": "completa", "quien": "Luis", "en": "___ are the chargers. Two chargers!", "opciones": ["These", "This", "That"], "correcta": 0, "explicacion": "Son dos cargadores y están cerca: **these**. *This* y *that* son para una sola cosa.", "es": "Estos son los cargadores. ¡Dos cargadores!" },
+      { "quien": "Ana", "en": "Two chargers for one laptop?", "es": "¿Dos cargadores para una laptop?" },
+      { "quien": "Luis", "en": "Oops! That charger is for my phone.", "es": "¡Uy! Ese cargador es de mi celular." },
+      { "tipo": "pregunta", "pregunta": "¿Para qué es el segundo cargador?", "opciones": ["Es del celular de Luis", "Es para el mouse", "Es para otra laptop"], "correcta": 0, "explicacion": "Luis dice **that charger is for my phone**: es de su celular." },
+      { "quien": "Ana", "en": "Ha, ha. And that? Is that a mouse?", "es": "Ja, ja. ¿Y eso? ¿Eso es un mouse?" },
+      { "quien": "Luis", "en": "No, that's a cookie. It's for you too.", "es": "No, eso es una galleta. También es para ti." },
+      { "tipo": "pregunta", "pregunta": "¿Qué es lo que Ana confunde con un mouse?", "opciones": ["Una galleta", "Un cargador", "Un celular"], "correcta": 0, "explicacion": "Luis responde **that's a cookie**: es una galleta." },
+      { "quien": "Ana", "en": "Now this is my desk: a laptop, a cookie, and an app idea.", "es": "Ahora este es mi escritorio: una laptop, una galleta y una idea de app." },
+      { "quien": "Luis", "en": "Perfect for a future developer.", "es": "Perfecto para una futura desarrolladora." }
+    ] }
+]

@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-05-c01", "es": "¿Puedo asumir que el array no está vacío?", "natural": "Can I assume the array isn't empty?", "calco": "Can I suppose the array isn't empty?", "explicacion": "En una entrevista técnica se dice **assume**. *Can I suppose* suena muy poco natural." },
+  { "id": "en-trabajo-05-c02", "es": "Voy a pensar en voz alta.", "natural": "I'm going to think out loud.", "calco": "I'm going to think in loud voice.", "explicacion": "\"Pensar en voz alta\" es **think out loud**." },
+  { "id": "en-trabajo-05-c03", "es": "¿Qué pasa si el input está vacío?", "natural": "What happens if the input is empty?", "calco": "What passes if the input is empty?", "explicacion": "\"Pasar\" de ocurrir es **happen**: *What happens if...?*" },
+  { "id": "en-trabajo-05-c04", "es": "Déjame explicarte mi solución.", "natural": "Let me walk you through my solution.", "calco": "Let me explain you my solution.", "explicacion": "**Explain** no lleva a la persona directo. Lo más natural es **walk you through**." }
+]

@@ -1,0 +1,20 @@
+[
+  { "id": "en-trabajo-01-h01", "titulo": "¿Káche o kásh?", "situacion": "Ana ya trabaja en un equipo remoto. En una llamada explica un problema, pero Tom no entiende una palabra.",
+    "pasos": [
+      { "quien": "Ana", "en": "I think the problem is the \"káche\". The old data is still there.", "es": "Creo que el problema es el \"káche\". Los datos viejos siguen ahí." },
+      { "quien": "Tom", "en": "Sorry, the what? Is that a new library?", "es": "Perdón, ¿el qué? ¿Es una librería nueva?" },
+      { "quien": "Sarah", "en": "I think she means the cache. In English we say \"kásh\", like cash.", "es": "Creo que se refiere al cache. En inglés decimos \"kásh\", como cash (efectivo)." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Tom no entendió a Ana?", "opciones": ["Porque habló muy rápido", "Porque pronunció cache como se escribe", "Porque se cortó la llamada"], "correcta": 1, "explicacion": "Ana dijo \"káche\", pero en inglés **cache** suena como *cash*." },
+      { "quien": "Ana", "en": "Oh! Yes, the cache. The browser keeps the old version of the page.", "es": "¡Ah! Sí, el cache. El navegador guarda la versión vieja de la página." },
+      { "quien": "Tom", "en": "Got it. So we need to clear the cache. Anything else?", "es": "Entendido. Entonces hay que limpiar el cache. ¿Algo más?" },
+      { "quien": "Ana", "en": "Yes. The jobs are waiting in the... \"kuéue\".", "es": "Sí. Las tareas están esperando en la... \"kuéue\"." },
+      { "tipo": "completa", "quien": "Sarah", "en": "The ___! It sounds like the letter Q: \"kiú\".", "es": "¡La queue! Suena como la letra Q: \"kiú\".", "opciones": ["queue", "cue", "key"], "correcta": 0, "explicacion": "**Queue** (cola) se pronuncia igual que la letra Q. Las cuatro últimas letras son mudas." },
+      { "quien": "Ana", "en": "Five letters and only one sound. English is unfair.", "es": "Cinco letras y un solo sonido. El inglés es injusto." },
+      { "quien": "Tom", "en": "Totally. And how do you say the database language?", "es": "Totalmente. ¿Y cómo dices el lenguaje de base de datos?" },
+      { "tipo": "pregunta", "pregunta": "¿Cuál es una forma correcta de decir SQL en inglés?", "opciones": ["\"Esecuele\", como en español", "\"Síquel\" o letra por letra", "\"Squal\""], "correcta": 1, "explicacion": "**SQL** se dice *sequel* (síquel) o letra por letra: es-kiu-él. Las dos son normales en un equipo." },
+      { "quien": "Ana", "en": "Sequel. I practiced that one last night.", "es": "Síquel. Esa la practiqué anoche." },
+      { "quien": "Sarah", "en": "Perfect. And don't worry, Tom says \"Vite\" wrong too.", "es": "Perfecto. Y no te preocupes, Tom también dice \"Vite\" mal." },
+      { "tipo": "completa", "quien": "Tom", "en": "Hey! I know it's \"veet\", it means ___ in French.", "es": "¡Oye! Sé que es \"vit\", significa rápido en francés.", "opciones": ["fast", "fasted", "fastly"], "correcta": 0, "explicacion": "**Vite** se pronuncia *vit* y significa *fast* (rápido) en francés. *Fastly* no existe: *fast* también es adverbio." },
+      { "quien": "Ana", "en": "Then why do you always say \"vait\"?", "es": "¿Entonces por qué siempre dices \"vait\"?" }
+    ] }
+]

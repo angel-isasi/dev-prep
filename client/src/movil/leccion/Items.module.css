@@ -409,3 +409,62 @@
 .palabraFicha[data-usada="true"] {
   opacity: 0.25;
 }
+
+/* Escribir y hablar (inglés) */
+.escribir {
+  width: 100%;
+  font: inherit;
+  font-size: 1.15rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radio);
+  border: 2px solid var(--borde);
+  background: var(--superficie);
+  color: inherit;
+  resize: none;
+}
+.escribir:focus {
+  outline: none;
+  border-color: var(--acento);
+}
+.hablarFrase {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radio);
+  border: 1px solid var(--borde);
+}
+.hablarFrase strong {
+  font-size: 1.3rem;
+}
+.hablarFrase span {
+  color: var(--texto-suave);
+}
+.microfono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 1.1rem;
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.05rem;
+  border-radius: 999px;
+  border: 2px solid var(--acento);
+  background: color-mix(in srgb, var(--acento) 14%, transparent);
+  color: inherit;
+  cursor: pointer;
+}
+.microfono[data-estado="escuchando"] {
+  animation: latido 1s ease-in-out infinite;
+}
+@keyframes latido {
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 8px color-mix(in srgb, var(--acento) 18%, transparent);
+  }
+}
+.aviso {
+  color: var(--error);
+  font-size: 0.9rem;
+}

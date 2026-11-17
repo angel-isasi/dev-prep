@@ -1,0 +1,19 @@
+[
+  { "id": "en-basico-03-h01", "titulo": "Un formulario y un número favorito", "situacion": "Ana se inscribe en un curso online de programación. Luis la ayuda con el formulario.",
+    "pasos": [
+      { "quien": "Luis", "en": "OK, Ana. Name: Ana. How old are you?", "es": "Ya, Ana. Nombre: Ana. ¿Cuántos años tienes?" },
+      { "tipo": "completa", "quien": "Ana", "en": "I'm twenty-two ___ old.", "opciones": ["years", "year", "age"], "correcta": 0, "explicacion": "La edad se dice con to be: **I'm 22 years old**. Va **years** en plural porque son más de uno.", "es": "Tengo veintidós años." },
+      { "quien": "Luis", "en": "And your phone number?", "es": "¿Y tu número de teléfono?" },
+      { "quien": "Ana", "en": "It's nine, eight, seven, six, five, four, three, two, one.", "es": "Es nueve, ocho, siete, seis, cinco, cuatro, tres, dos, uno." },
+      { "tipo": "completa", "quien": "Luis", "en": "OK. The coding course is on Monday, March ___.", "opciones": ["2nd", "2th", "two"], "correcta": 0, "explicacion": "En las fechas se usan los ordinales: **2nd** (second). *2th* no existe: 1st, 2nd y 3rd tienen su propia terminación.", "es": "Ya. El curso de programación es el lunes 2 de marzo." },
+      { "quien": "Ana", "en": "What time is the class?", "es": "¿A qué hora es la clase?" },
+      { "quien": "Luis", "en": "It's at nine a.m. in New York.", "es": "Es a las nueve de la mañana en Nueva York." },
+      { "quien": "Ana", "en": "Nine in New York... What time is it in Lima?", "es": "Nueve en Nueva York... ¿Qué hora es en Lima?" },
+      { "quien": "Luis", "en": "In March, it's nine in Lima too.", "es": "En marzo, también son las nueve en Lima." },
+      { "tipo": "pregunta", "pregunta": "¿A qué hora es la clase en Lima?", "opciones": ["A las 9 a. m.", "A las 10 a. m.", "A las 8 a. m."], "correcta": 0, "explicacion": "Luis dice **it's nine in Lima too**: a inicios de marzo Lima y Nueva York tienen la misma hora." },
+      { "quien": "Ana", "en": "Great! And the price?", "es": "¡Genial! ¿Y el precio?" },
+      { "quien": "Luis", "en": "It's zero dollars. It's free!", "es": "Cuesta cero dólares. ¡Es gratis!" },
+      { "quien": "Ana", "en": "Zero? My favorite number!", "es": "¿Cero? ¡Mi número favorito!" },
+      { "tipo": "pregunta", "pregunta": "¿Cuánto cuesta el curso?", "opciones": ["Es gratis", "Cuesta 20 dólares", "Cuesta 9 dólares"], "correcta": 0, "explicacion": "Luis dice **zero dollars** y **it's free**: es gratis." }
+    ] }
+]

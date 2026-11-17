@@ -28,5 +28,10 @@
   { "id": "en-basico-04-f27", "en": "This is an important word.", "es": "Esta es una palabra importante." },
   { "id": "en-basico-04-f28", "en": "Those pencils are yellow, not red.", "es": "Esos lápices son amarillos, no rojos." },
   { "id": "en-basico-04-f29", "en": "These questions are easy.", "es": "Estas preguntas son fáciles." },
-  { "id": "en-basico-04-f30", "en": "My feet are tired.", "es": "Tengo los pies cansados." }
+  { "id": "en-basico-04-f30", "en": "My feet are tired.", "es": "Tengo los pies cansados." },
+  { "id": "en-basico-04-f31", "en": "These files are old.", "es": "Estos archivos son viejos.", "trabajo": true },
+  { "id": "en-basico-04-f32", "en": "That bug is a big problem.", "es": "Ese bug es un gran problema.", "trabajo": true },
+  { "id": "en-basico-04-f33", "en": "Those tests are new.", "es": "Esos tests son nuevos.", "trabajo": true },
+  { "id": "en-basico-04-f34", "en": "It's an easy task.", "es": "Es una tarea fácil.", "trabajo": true },
+  { "id": "en-basico-04-f35", "en": "This is an old version of the app.", "es": "Esta es una versión vieja de la app.", "trabajo": true }
 ]

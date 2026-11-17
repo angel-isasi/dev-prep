@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-07-r01", "titulo": "El deploy que salió mal", "situacion": "Después de un deploy, Tom te escribe porque algo falla en producción.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "Ana, the checkout page is broken in production. What happened?", "es": "Ana, la página de pago está rota en producción. ¿Qué pasó?" },
+      { "opciones": [
+          { "en": "I ran into an error with the new payment form.", "es": "Me encontré con un error en el nuevo formulario de pago.", "correcta": true, "explicacion": "*Run into* = encontrarse con un problema inesperado." },
+          { "en": "I ran an error into the payment form.", "es": "", "correcta": false, "explicacion": "*Run into* no se separa así; el objeto va después: *ran into an error*." },
+          { "en": "I found me with an error.", "es": "", "correcta": false, "explicacion": "Calco de \"me encontré con\". En inglés: *I ran into an error*." }
+        ] },
+      { "quien": "Tom", "en": "OK. Should we roll back the deploy?", "es": "Ok. ¿Revertimos el deploy?" },
+      { "opciones": [
+          { "en": "Yes, let's return back to the old version.", "es": "", "correcta": false, "explicacion": "*Return back* es redundante. Para un deploy se usa *roll back*." },
+          { "en": "Yes, let's roll it back while I figure out the cause.", "es": "Sí, revirtámoslo mientras averiguo la causa.", "correcta": true, "explicacion": "*Roll back* = revertir; *figure out* = averiguar o entender." },
+          { "en": "Yes, let's roll back it.", "es": "", "correcta": false, "explicacion": "Con un pronombre (*it*), el phrasal verb se separa: *roll it back*." }
+        ] },
+      { "quien": "Tom", "en": "Done. Do you know why it failed?", "es": "Listo. ¿Sabes por qué falló?" },
+      { "opciones": [
+          { "en": "Not yet, but I'll figure it out today.", "es": "Todavía no, pero lo averiguo hoy.", "correcta": true, "explicacion": "*Figure it out*: con pronombre en medio. Es honesto y propone un plazo." },
+          { "en": "Not yet, but I'll figure out it today.", "es": "", "correcta": false, "explicacion": "El pronombre va en medio: *figure it out*." },
+          { "en": "No idea, it's probably the server's fault.", "es": "", "correcta": false, "explicacion": "Culpar sin investigar da mala impresión." }
+        ] },
+      { "quien": "Tom", "en": "Thanks. Let me know if you need help.", "es": "Gracias. Avísame si necesitas ayuda." },
+      { "opciones": [
+          { "en": "Will do. I'll set up a test for this case so it doesn't happen again.", "es": "Dale. Prepararé un test para este caso para que no vuelva a pasar.", "correcta": true, "explicacion": "*Set up* = preparar o configurar. Cierra con una solución preventiva." },
+          { "en": "Will do. I'll come up a test for this.", "es": "", "correcta": false, "explicacion": "*Come up with* necesita *with*: *come up with a test*." },
+          { "en": "Will do. I'll set a test up it.", "es": "", "correcta": false, "explicacion": "Orden incorrecto: *set up a test* o *set it up*." }
+        ] }
+    ] }
+]

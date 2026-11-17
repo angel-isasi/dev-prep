@@ -1,0 +1,7 @@
+[
+  { "id": "en-basico-13-c01", "es": "Tengo hambre.", "natural": "I'm hungry.", "calco": "I have hunger.", "explicacion": "El hambre y la sed van con **to be**: *I'm hungry*, *I'm thirsty*." },
+  { "id": "en-basico-13-c02", "es": "¿Cuánto cuesta?", "natural": "How much is it?", "calco": "How much costs it?", "explicacion": "Lo más natural es **How much is it?** Si usas *cost*, necesita *does*: *How much does it cost?*" },
+  { "id": "en-basico-13-c03", "es": "Quiero pan.", "natural": "I want some bread.", "calco": "I want a bread.", "explicacion": "**Bread** no se cuenta, así que no lleva *a*. Se dice *some bread* o *a loaf of bread*." },
+  { "id": "en-basico-13-c04", "es": "La cuenta, por favor.", "natural": "Can we have the check, please?", "calco": "The account, please.", "explicacion": "En un restaurante de EE. UU. la cuenta es **the check**. *Account* es una cuenta de banco o de usuario." },
+  { "id": "en-basico-13-c05", "es": "Tengo un poco de dinero.", "natural": "I have a little money.", "calco": "I have a few money.", "explicacion": "**Money** no se cuenta, así que va con **a little**. *A few* es para cosas que se cuentan." }
+]

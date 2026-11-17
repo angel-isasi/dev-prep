@@ -30,6 +30,8 @@ import { LeccionMovil } from "./leccion/LeccionMovil.jsx";
 import { CaminoMovil } from "./leccion/CaminoMovil.jsx";
 import { InglesMovil } from "./ingles/InglesMovil.jsx";
 import { InglesUnidad } from "./ingles/InglesUnidad.jsx";
+import { HistoriaMovil, ListaHistorias, RoleplayMovil } from "./ingles/Historias.jsx";
+import { ParejasMovil } from "./ingles/Parejas.jsx";
 import { CasoRevision, ListaRevision } from "./practica/Revision.jsx";
 import { Glosario } from "./practica/Glosario.jsx";
 import { GitPractico } from "./practica/GitPractico.jsx";
@@ -62,6 +64,10 @@ export function App() {
       <Route path="chuletas" element={<ChuletasMovil />} />
       <Route path="ingles" element={<InglesMovil />} />
       <Route path="ingles/unidad/:id" element={<InglesUnidad />} />
+      <Route path="ingles/historias" element={<ListaHistorias />} />
+      <Route path="ingles/historia/:id" element={<HistoriaMovil />} />
+      <Route path="ingles/roleplay/:id" element={<RoleplayMovil />} />
+      <Route path="ingles/parejas" element={<ParejasMovil />} />
       <Route path="revision" element={<ListaRevision />} />
       <Route path="revision/:id" element={<CasoRevision />} />
       <Route path="glosario" element={<Glosario />} />
@@ -114,6 +120,10 @@ export function App() {
           <Route path="chuletas" element={<ChuletasMovil />} />
           <Route path="ingles" element={<InglesMovil />} />
           <Route path="ingles/unidad/:id" element={<InglesUnidad />} />
+          <Route path="ingles/historias" element={<ListaHistorias />} />
+          <Route path="ingles/historia/:id" element={<HistoriaMovil />} />
+          <Route path="ingles/roleplay/:id" element={<RoleplayMovil />} />
+          <Route path="ingles/parejas" element={<ParejasMovil />} />
       <Route path="revision" element={<ListaRevision />} />
       <Route path="revision/:id" element={<CasoRevision />} />
       <Route path="glosario" element={<Glosario />} />

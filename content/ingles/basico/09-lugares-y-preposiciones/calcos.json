@@ -1,0 +1,7 @@
+[
+  { "id": "en-basico-09-c01", "es": "Estoy en casa.", "natural": "I'm at home.", "calco": "I'm in home.", "explicacion": "\"En casa\" es **at home**, sin artículo y con *at*." },
+  { "id": "en-basico-09-c02", "es": "El banco está al lado del parque.", "natural": "The bank is next to the park.", "calco": "The bank is next of the park.", "explicacion": "\"Al lado de\" es **next to**. El \"de\" del español no se traduce como *of*." },
+  { "id": "en-basico-09-c03", "es": "La oficina está cerca de la estación.", "natural": "The office is near the station.", "calco": "The office is near of the station.", "explicacion": "**Near** va directo, sin *of*: *near the station*." },
+  { "id": "en-basico-09-c04", "es": "Llego a la oficina a las nueve.", "natural": "I arrive at the office at nine.", "calco": "I arrive to the office at nine.", "explicacion": "Con **arrive** se usa **at** (un lugar) o **in** (una ciudad), nunca *to*." },
+  { "id": "en-basico-09-c05", "es": "Estoy en el trabajo.", "natural": "I'm at work.", "calco": "I'm in the work.", "explicacion": "\"En el trabajo\" es **at work**, sin *the*." }
+]

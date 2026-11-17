@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-10-r01", "titulo": "Pedir ayuda por Slack", "situacion": "Estás atascada con un error de CORS y le escribes a Sarah por Slack. Elige el mensaje más claro.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Sarah", "en": "Hey Ana! What's up?", "es": "¡Hola, Ana! ¿Qué tal?" },
+      { "opciones": [
+          { "en": "Hi Sarah! I'm getting a CORS error when the app calls the users API. Do you have 10 minutes?", "es": "¡Hola, Sarah! Me sale un error de CORS cuando la app llama a la API de usuarios. ¿Tienes 10 minutos?", "correcta": true, "explicacion": "Mensaje con contexto (qué error y dónde) y una petición concreta de tiempo." },
+          { "en": "help", "es": "", "correcta": false, "explicacion": "Sin contexto, la otra persona no sabe qué pasa ni cuánto tiempo le tomará." },
+          { "en": "Hi, I have a doubt.", "es": "", "correcta": false, "explicacion": "Calco de \"tengo una duda\": *doubt* es desconfianza. Se dice *I have a question*. Y falta el contexto." }
+        ] },
+      { "quien": "Sarah", "en": "Sure. What have you tried?", "es": "Claro. ¿Qué has intentado?" },
+      { "opciones": [
+          { "en": "I tried everything.", "es": "", "correcta": false, "explicacion": "No ayuda: di qué intentaste para que no repitan lo mismo." },
+          { "en": "I've checked the URL and the headers in the Network tab. The preflight request fails.", "es": "Revisé la URL y los headers en la pestaña Network. La petición preflight falla.", "correcta": true, "explicacion": "Presente perfecto para lo que ya intentaste y un dato concreto del problema." },
+          { "en": "I have proved with the URL and the headers.", "es": "", "correcta": false, "explicacion": "Falso amigo: *prove* es demostrar. Aquí es *I've tried* o *I've checked*." }
+        ] },
+      { "quien": "Sarah", "en": "It's the server config. Tom fixed it in main. Merge main and commit. What's your commit message?", "es": "Es la configuración del servidor. Tom lo arregló en main. Haz merge de main y un commit. ¿Cuál es tu mensaje de commit?" },
+      { "opciones": [
+          { "en": "Merged main, CORS is fixed now", "es": "", "correcta": false, "explicacion": "Sirve para Slack, pero en un commit se usa imperativo (*Merge*), no pasado (*Merged*)." },
+          { "en": "Merge main to fix the CORS error", "es": "Hace merge de main para arreglar el error de CORS", "correcta": true, "explicacion": "Commit en imperativo, como si completara la frase *This commit will...*." },
+          { "en": "I merged main and now works the CORS", "es": "", "correcta": false, "explicacion": "Un commit no va en primera persona, y el orden *now works the CORS* es calco del español." }
+        ] },
+      { "quien": "Sarah", "en": "Did it work?", "es": "¿Funcionó?" },
+      { "opciones": [
+          { "en": "Yes, it works now! Thanks a lot for the quick help.", "es": "¡Sí, ya funciona! Muchas gracias por la ayuda rápida.", "correcta": true, "explicacion": "Cierra el hilo confirmando que se resolvió y agradeciendo." },
+          { "en": "Yes it works.", "es": "", "correcta": false, "explicacion": "Correcto, pero frío: agradecer en Slack ayuda a la relación con el equipo." },
+          { "en": "Yes, already works.", "es": "", "correcta": false, "explicacion": "Calco de \"ya funciona\": falta el sujeto, *it works now*." }
+        ] }
+    ] }
+]

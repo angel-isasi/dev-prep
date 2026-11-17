@@ -28,5 +28,11 @@
   { "id": "en-intermedio-09-f27", "en": "The server is configured with environment variables.", "es": "El servidor se configura con variables de entorno." },
   { "id": "en-intermedio-09-f28", "en": "All the images were uploaded manually.", "es": "Todas las imágenes se subieron a mano." },
   { "id": "en-intermedio-09-f29", "en": "Is the build triggered by every commit?", "es": "¿Cada commit dispara el build?" },
-  { "id": "en-intermedio-09-f30", "en": "Was the incident reported to the team lead?", "es": "¿Se le reportó el incidente al líder del equipo?" }
+  { "id": "en-intermedio-09-f30", "en": "Was the incident reported to the team lead?", "es": "¿Se le reportó el incidente al líder del equipo?" },
+  { "id": "en-intermedio-09-f31", "en": "The bug was reported by a user.", "es": "Un usuario reportó el bug.", "trabajo": true },
+  { "id": "en-intermedio-09-f32", "en": "The tests are run on every commit.", "es": "Los tests se corren en cada commit.", "trabajo": true },
+  { "id": "en-intermedio-09-f33", "en": "This endpoint was removed last month.", "es": "Este endpoint se eliminó el mes pasado.", "trabajo": true },
+  { "id": "en-intermedio-09-f34", "en": "The data is stored in a database.", "es": "Los datos se guardan en una base de datos.", "trabajo": true },
+  { "id": "en-intermedio-09-f35", "en": "The new version was released yesterday.", "es": "La nueva versión se lanzó ayer.", "trabajo": true },
+  { "id": "en-intermedio-09-f36", "en": "The meeting was moved to Thursday.", "es": "La reunión se pasó al jueves.", "trabajo": true }
 ]

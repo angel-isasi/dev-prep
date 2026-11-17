@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-03-r01", "titulo": "¿Qué pasa si el usuario hace clic?", "situacion": "Sarah revisa contigo cómo funciona el modal que programaste y qué pasa con el deploy.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Sarah", "en": "So how does your modal work?", "es": "Entonces, ¿cómo funciona tu modal?" },
+      { "opciones": [
+          { "en": "If the user will click the button, the modal opens.", "es": "", "correcta": false, "explicacion": "Después de *if* no va *will*: *If the user clicks*." },
+          { "en": "If the user clicks the button, the modal opens.", "es": "Si el usuario hace clic en el botón, el modal se abre.", "correcta": true, "explicacion": "Condicional cero: *if* + presente, presente. Sirve para explicar cómo funciona algo siempre." },
+          { "en": "If the user click the button, the modal open.", "es": "", "correcta": false, "explicacion": "Falta la *-s* de tercera persona: *clicks*, *opens*." }
+        ] },
+      { "quien": "Sarah", "en": "And what if they press Escape?", "es": "¿Y si presionan Escape?" },
+      { "opciones": [
+          { "en": "It closes, unless there's unsaved text in the form.", "es": "Se cierra, a menos que haya texto sin guardar en el formulario.", "correcta": true, "explicacion": "*Unless* significa \"a menos que\" y va con presente." },
+          { "en": "It closes, unless there isn't unsaved text.", "es": "", "correcta": false, "explicacion": "*Unless* ya es negativo; con *isn't* dices lo contrario de lo que quieres." },
+          { "en": "Escape is obvious, I don't need to explain it.", "es": "", "correcta": false, "explicacion": "Suena brusco con una compañera y no responde la pregunta." }
+        ] },
+      { "quien": "Sarah", "en": "Cool. When are we deploying it?", "es": "Bien. ¿Cuándo lo desplegamos?" },
+      { "opciones": [
+          { "en": "If the tests passed, we'll deploy it tomorrow.", "es": "", "correcta": false, "explicacion": "Mezcla de condicionales: para algo real y futuro va presente después de *if* (*pass*), no pasado." },
+          { "en": "If the tests will pass, we'll deploy it tomorrow.", "es": "", "correcta": false, "explicacion": "Error típico: *will* no va después de *if*." },
+          { "en": "If the tests pass, we'll deploy it tomorrow.", "es": "Si los tests pasan, lo desplegamos mañana.", "correcta": true, "explicacion": "Condicional uno: *if* + presente, *will* + verbo. Para algo que probablemente pase." }
+        ] },
+      { "quien": "Sarah", "en": "Should I review it today?", "es": "¿Lo reviso hoy?" },
+      { "opciones": [
+          { "en": "Yes, please. Otherwise, we'll miss the release.", "es": "Sí, por favor. Si no, nos perdemos el release.", "correcta": true, "explicacion": "*Otherwise* = \"si no / de lo contrario\", seguido de la consecuencia con *will*." },
+          { "en": "Yes, please. In other case, we miss the release.", "es": "", "correcta": false, "explicacion": "*In other case* es calco de \"en otro caso\". Lo natural es *otherwise*." },
+          { "en": "Yes, review it, if not we are going to lose the release.", "es": "", "correcta": false, "explicacion": "*Lose the release* es calco de \"perder\"; se dice *miss the release*." }
+        ] }
+    ] }
+]

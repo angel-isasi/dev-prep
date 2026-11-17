@@ -19,7 +19,7 @@ import { cargarReferencia, cargarTemas } from "../server/aprender.js";
 import { cargarEntrevistas } from "../server/entrevistas.js";
 import { COLECCIONES_SIN_SOLUCION, generarItems } from "./items/index.js";
 import { cargarIngles } from "../server/ingles.js";
-import { generarItemsIngles, unidadesParaLeer } from "./items/ingles.js";
+import { generarItemsIngles, historiasParaLeer, unidadesParaLeer } from "./items/ingles.js";
 import { cargarGlosario, cargarPredice, cargarRevision } from "../server/aprender-mejor.js";
 
 const SALIDA = path.join(config.raiz, "client", "public-movil", "datos");
@@ -154,6 +154,7 @@ async function main() {
   const ingles = await cargarIngles(config.contenidoDir);
   for (const error of ingles.errores) console.warn(`  aviso: ${error}`);
   total += await escribir("ingles.json", { unidades: unidadesParaLeer(ingles.unidades) });
+  total += await escribir("historias-ingles.json", historiasParaLeer(ingles.unidades));
   const itemsIngles = generarItemsIngles(ingles.unidades);
   // Un archivo por etapa (básico, intermedio, trabajo): así ninguno pasa el límite del service worker
   let bytesIngles = 0;

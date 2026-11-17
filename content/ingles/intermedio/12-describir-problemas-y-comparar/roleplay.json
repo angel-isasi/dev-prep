@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-12-r01", "titulo": "Un bug que va y viene", "situacion": "Le cuentas a Tom un bug raro de la lista de productos y comparan cómo resolverlo.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "What's going on with the product list?", "es": "¿Qué pasa con la lista de productos?" },
+      { "opciones": [
+          { "en": "It hangs for a few seconds when I scroll fast.", "es": "Se queda congelada unos segundos cuando hago scroll rápido.", "correcta": true, "explicacion": "*It hangs* = se queda colgada, sin responder. Y dices cuándo pasa." },
+          { "en": "It doesn't work.", "es": "", "correcta": false, "explicacion": "Demasiado vago: no dice qué pasa ni cuándo." },
+          { "en": "It stays hanged when I scroll.", "es": "", "correcta": false, "explicacion": "Calco de \"se queda colgada\". Se dice *it hangs* o *it freezes*." }
+        ] },
+      { "quien": "Tom", "en": "Does it happen every time?", "es": "¿Pasa siempre?" },
+      { "opciones": [
+          { "en": "No, it's intermittent. It happens maybe one in five times.", "es": "No, es intermitente. Pasa más o menos una de cada cinco veces.", "correcta": true, "explicacion": "*Intermittent* = que va y viene. Dar la frecuencia ayuda mucho." },
+          { "en": "No, sometimes yes, sometimes no.", "es": "", "correcta": false, "explicacion": "Calco de \"a veces sí, a veces no\": se entiende, pero suena poco profesional. Mejor *intermittent*." },
+          { "en": "No, it happens sometimes times.", "es": "", "correcta": false, "explicacion": "Repite *times* sin sentido: es solo *sometimes*." }
+        ] },
+      { "quien": "Tom", "en": "OK. Should we use pagination or virtualization?", "es": "Ok. ¿Usamos paginación o virtualización?" },
+      { "opciones": [
+          { "en": "Pagination is more easy than virtualization.", "es": "", "correcta": false, "explicacion": "Adjetivo corto: *easier*, no *more easy*." },
+          { "en": "Pagination is easier, but virtualization is better for long lists.", "es": "La paginación es más fácil, pero la virtualización es mejor para listas largas.", "correcta": true, "explicacion": "Comparativos bien formados: *easier*, *better*, y das el contexto de cada opción." },
+          { "en": "Virtualization is more better.", "es": "", "correcta": false, "explicacion": "*Better* ya es comparativo; *more better* es un error." }
+        ] },
+      { "quien": "Tom", "en": "Which one would you pick?", "es": "¿Cuál elegirías?" },
+      { "opciones": [
+          { "en": "Pagination. It's the easiest way and it's more readable than a custom scroller.", "es": "Paginación. Es la forma más fácil y es más legible que un scroll personalizado.", "correcta": true, "explicacion": "Superlativo (*the easiest*) y comparativo largo (*more readable than*)." },
+          { "en": "Pagination. It's the most easy way.", "es": "", "correcta": false, "explicacion": "Superlativo de adjetivo corto: *the easiest*." },
+          { "en": "Pagination, it's more readable that virtualization.", "es": "", "correcta": false, "explicacion": "Con comparativos va *than*, no *that*." }
+        ] }
+    ] }
+]

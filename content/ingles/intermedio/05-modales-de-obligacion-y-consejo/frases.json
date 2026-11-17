@@ -28,5 +28,11 @@
   { "id": "en-intermedio-05-f27", "en": "It may take a few days to review everything.", "es": "Puede tomar unos días revisarlo todo." },
   { "id": "en-intermedio-05-f28", "en": "Be careful with this function. It changes the original array.", "es": "Ten cuidado con esta función. Cambia el array original." },
   { "id": "en-intermedio-05-f29", "en": "Variable names should follow the same convention everywhere.", "es": "Los nombres de variables deberían seguir la misma convención en todas partes." },
-  { "id": "en-intermedio-05-f30", "en": "Someone has to approve the changes before we merge.", "es": "Alguien tiene que aprobar los cambios antes de hacer merge." }
+  { "id": "en-intermedio-05-f30", "en": "Someone has to approve the changes before we merge.", "es": "Alguien tiene que aprobar los cambios antes de hacer merge." },
+  { "id": "en-intermedio-05-f31", "en": "You should split this into two functions.", "es": "Deberías dividir esto en dos funciones.", "trabajo": true },
+  { "id": "en-intermedio-05-f32", "en": "You must not share the API key.", "es": "No debes compartir la clave de la API.", "trabajo": true },
+  { "id": "en-intermedio-05-f33", "en": "You don't have to fix it today.", "es": "No tienes que arreglarlo hoy.", "trabajo": true },
+  { "id": "en-intermedio-05-f34", "en": "This might break on older browsers.", "es": "Esto podría fallar en navegadores antiguos.", "trabajo": true },
+  { "id": "en-intermedio-05-f35", "en": "I had to restart the server twice.", "es": "Tuve que reiniciar el servidor dos veces.", "trabajo": true },
+  { "id": "en-intermedio-05-f36", "en": "Should I write a test for this?", "es": "¿Debería escribir un test para esto?", "trabajo": true }
 ]

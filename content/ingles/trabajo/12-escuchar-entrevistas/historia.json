@@ -1,0 +1,19 @@
+[
+  { "id": "en-trabajo-12-h01", "titulo": "Ana, del otro lado", "situacion": "Ana entrevista a un candidato junior junto con Tom. Ahora es ella quien hace las preguntas.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, you start. Remember, the candidate is nervous. You were too, two years ago.", "es": "Ana, empiezas tú. Recuerda, el candidato está nervioso. Tú también lo estabas hace dos años." },
+      { "quien": "Ana", "en": "Hi Diego, thanks for joining. Can you walk me through your last project?", "es": "Hola Diego, gracias por conectarte. ¿Me explicas paso a paso tu último proyecto?" },
+      { "tipo": "pregunta", "pregunta": "¿Qué pide Ana con \"walk me through\"?", "opciones": ["Que el candidato camine", "Que explique el proyecto paso a paso", "Que termine rápido"], "correcta": 1, "explicacion": "**Walk me through** significa \"explícame paso a paso\"." },
+      { "quien": "Ana", "en": "Don't worry, there's no rush. Start with the problem it solves.", "es": "Tranquilo, no hay apuro. Empieza por el problema que resuelve." },
+      { "quien": "Tom", "en": "Thanks, Diego. Tell me about a time you disagreed with a teammate.", "es": "Gracias, Diego. Cuéntame de una vez en que no estuviste de acuerdo con un compañero." },
+      { "quien": "Ana", "en": "A real example is better than a theory, Diego. Take your time.", "es": "Un ejemplo real es mejor que la teoría, Diego. Tómate tu tiempo." },
+      { "tipo": "completa", "quien": "Ana", "en": "Next one. What's your ___ on using TypeScript in small projects?", "es": "La siguiente. ¿Qué opinas de usar TypeScript en proyectos pequeños?", "opciones": ["take", "taking", "took"], "correcta": 0, "explicacion": "**What's your take on...?** significa \"¿qué opinas de...?\". *Take* aquí es un sustantivo." },
+      { "quien": "Tom", "en": "He said it's useful, but maybe too much for a weekend project. Fair enough.", "es": "Dijo que es útil, pero quizá demasiado para un proyecto de fin de semana. Me parece razonable." },
+      { "quien": "Ana", "en": "Last question. How would you approach a bug that only happens on old phones?", "es": "Última pregunta. ¿Cómo abordarías un bug que solo pasa en celulares viejos?" },
+      { "tipo": "completa", "quien": "Tom", "en": "He said he'd borrow his grandma's phone. That ___ familiar.", "es": "Dijo que le pediría prestado el celular a su abuela. Eso me suena conocido.", "opciones": ["sounds", "listens", "hears"], "correcta": 0, "explicacion": "**That sounds familiar** = eso me suena. Con *sound* se describe la impresión que da algo." },
+      { "quien": "Ana", "en": "Ha! I like him. He asked good questions before he answered.", "es": "¡Ja! Me cae bien. Hizo buenas preguntas antes de responder." },
+      { "quien": "Tom", "en": "Agreed. So, what's your verdict?", "es": "De acuerdo. Entonces, ¿cuál es tu veredicto?" },
+      { "quien": "Ana", "en": "Strong yes. And I'd like to be his mentor.", "es": "Un sí rotundo. Y me gustaría ser su mentora." },
+      { "tipo": "pregunta", "pregunta": "¿Qué quiere hacer Ana si contratan a Diego?", "opciones": ["Revisar todo su código", "Ser su mentora", "Prestarle su laptop"], "correcta": 1, "explicacion": "Ana dice \"I'd like to be his mentor\": la serie cierra con Ana ayudando a un nuevo junior." }
+    ] }
+]

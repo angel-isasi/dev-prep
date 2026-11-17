@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-06-r01", "titulo": "¿Context o Redux?", "situacion": "En una reunión, Tom pregunta tu opinión sobre cómo manejar el estado de la app.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "Ana, what do you think? Should we use Redux or just React Context?", "es": "Ana, ¿qué opinas? ¿Usamos Redux o solo React Context?" },
+      { "opciones": [
+          { "en": "In my opinion, Context is enough, because the app is small.", "es": "En mi opinión, Context es suficiente, porque la app es pequeña.", "correcta": true, "explicacion": "*In my opinion* da tu postura y *because* la justifica." },
+          { "en": "According to me, Context is enough.", "es": "", "correcta": false, "explicacion": "*According to me* es calco de \"según yo\"; suena raro. Se dice *In my opinion* o *I think*." },
+          { "en": "I don't care, both are fine.", "es": "", "correcta": false, "explicacion": "Suena desinteresado; en una reunión técnica se espera una opinión con razones." }
+        ] },
+      { "quien": "Tom", "en": "But Redux has great dev tools.", "es": "Pero Redux tiene muy buenas herramientas de desarrollo." },
+      { "opciones": [
+          { "en": "That's true. However, it adds a lot of boilerplate for a small app.", "es": "Es cierto. Sin embargo, agrega mucho código repetitivo para una app pequeña.", "correcta": true, "explicacion": "Reconoces el punto del otro y *however* introduce el contraste." },
+          { "en": "That's true. Although, it adds a lot of code.", "es": "", "correcta": false, "explicacion": "*Although* une dos ideas en una misma oración (Although it's true, ...). Para empezar una oración de contraste va *However*." },
+          { "en": "No, you are wrong.", "es": "", "correcta": false, "explicacion": "Demasiado directo con tu tech lead; mejor mostrar desacuerdo con tacto." }
+        ] },
+      { "quien": "Sarah", "en": "I agree with Ana. We can switch later if we need to.", "es": "Estoy de acuerdo con Ana. Podemos cambiar después si hace falta." },
+      { "opciones": [
+          { "en": "Exactly. I am agree with you.", "es": "", "correcta": false, "explicacion": "Calco de \"estoy de acuerdo\": es *I agree*, sin *am*." },
+          { "en": "Exactly, so we should start simple and refactor if it grows.", "es": "Exacto, así que deberíamos empezar simple y refactorizar si crece.", "correcta": true, "explicacion": "*So* introduce la consecuencia de lo que se dijo." },
+          { "en": "Exactly, therefore because it's simple.", "es": "", "correcta": false, "explicacion": "*Therefore* (por lo tanto) y *because* (porque) chocan: uno da la consecuencia y otro la causa." }
+        ] },
+      { "quien": "Tom", "en": "OK, I'm convinced. Context it is.", "es": "Ok, me convencieron. Vamos con Context." },
+      { "opciones": [
+          { "en": "Great. On the other hand, I'll write a short note about the decision.", "es": "", "correcta": false, "explicacion": "*On the other hand* presenta un punto contrario, no una acción siguiente. Aquí no tiene sentido." },
+          { "en": "Great. I'll write a short note in the docs, so everyone knows why.", "es": "Genial. Escribiré una nota corta en la documentación, así todos saben por qué.", "correcta": true, "explicacion": "Cierra con una acción concreta; *so* indica el propósito." },
+          { "en": "Great. In conclusion, finally, we decided it.", "es": "", "correcta": false, "explicacion": "Acumula conectores sin sentido; suena forzado." }
+        ] }
+    ] }
+]

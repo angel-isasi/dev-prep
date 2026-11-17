@@ -1,11 +1,13 @@
-// Un componente por tipo de ítem de lección. Todos se responden tocando (nada de escribir).
+// Un componente por tipo de ítem de lección. Casi todos se responden tocando; en inglés también
+// hay escribir (sin banco de palabras) y hablar (reconocimiento de voz).
 // Cada uno avisa su respuesta al padre (LeccionMovil), que corrige con motor.js.
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { Markdown } from "../../components/Markdown.jsx";
 import { Tarjeta } from "../../components/Tarjeta.jsx";
 import { api } from "../../lib/api.js";
-import { hablar, hablarVarias, hayVoz } from "../../lib/voz.js";
+import { escucharVoz, hablar, hablarVarias, hayVoz } from "../../lib/voz.js";
+import { hablaCorrecta } from "../../../../scripts/items/ingles.js";
 import { barajar, semilla } from "./motor.js";
 import estilos from "./Items.module.css";
 
@@ -26,6 +28,10 @@ const TITULOS = {
   traducir: "Traduce",
   dictado: "Escucha y arma",
   dialogo: "Escucha el diálogo",
+  natural: "¿Natural o traducido?",
+  oido: "Oído fino",
+  escribir: "Escríbelo",
+  hablar: "Dilo en voz alta",
 };
 
 export const tituloDe = (paso) => TITULOS[paso.item?.subtipo ?? paso.tipo] ?? "Responde";
@@ -360,6 +366,83 @@ export function ItemEntrevista({ pregunta, alCalificar }) {
   return (
     <div className={estilos.item}>
       <Tarjeta key={pregunta.id} pregunta={pregunta} alCalificar={alCalificar} />
+    </div>
+  );
+}
+
+/** Escribir sin banco de palabras: Enter comprueba. */
+export function ItemEscribir({ item, valor, alCambiar, alEnviar, bloqueado }) {
+  return (
+    <div className={estilos.item}>
+      <div className={estilos.pregunta}>
+        <Markdown>{item.pregunta}</Markdown>
+      </div>
+      <textarea
+        className={estilos.escribir}
+        value={valor}
+        onChange={(e) => alCambiar(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            if (valor.trim()) alEnviar();
+          }
+        }}
+        disabled={bloqueado}
+        autoFocus
+        rows={2}
+        spellCheck={false}
+        autoCapitalize="off"
+        autoComplete="off"
+        lang="en"
+        placeholder="Escribe en inglés"
+      />
+      <p className={estilos.ayuda}>No importan mayúsculas ni signos, y puedes usar o no contracciones (I'm o I am).</p>
+    </div>
+  );
+}
+
+/**
+ * Hablar: lees la frase en voz alta y el navegador te escucha.
+ * Si no puedes hablar ahora, se salta sin contar en contra.
+ */
+export function ItemHablar({ item, alResultado, alSaltar, bloqueado }) {
+  const [estado, setEstado] = useState("listo"); // listo | escuchando | error
+  const [mensaje, setMensaje] = useState("");
+  const [dicho, setDicho] = useState("");
+
+  async function escuchar() {
+    setEstado("escuchando");
+    setMensaje("");
+    const { promesa } = escucharVoz();
+    try {
+      const opciones = await promesa;
+      setDicho(opciones[0] ?? "");
+      setEstado("listo");
+      alResultado(hablaCorrecta(item.texto, opciones), opciones[0] ?? "");
+    } catch (error) {
+      setEstado("error");
+      setMensaje(error.message);
+    }
+  }
+
+  return (
+    <div className={estilos.item}>
+      <div className={estilos.hablarFrase}>
+        <strong lang="en">{item.texto}</strong>
+        <span>{item.traduccion}</span>
+      </div>
+      <BotonAudio texto={item.texto} etiqueta="Oír cómo se dice" grande />
+      <button type="button" className={estilos.microfono} data-estado={estado} onClick={escuchar} disabled={bloqueado || estado === "escuchando"}>
+        <span aria-hidden>🎙️</span>
+        {estado === "escuchando" ? "Te escucho…" : "Toca y habla"}
+      </button>
+      {dicho && <p className={estilos.ayuda}>Entendí: “{dicho}”</p>}
+      {mensaje && <p className={estilos.aviso}>{mensaje}</p>}
+      {!bloqueado && (
+        <button type="button" className="boton boton-fantasma" onClick={alSaltar}>
+          Ahora no puedo hablar
+        </button>
+      )}
     </div>
   );
 }

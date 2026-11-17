@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-12-c01", "es": "Tiene sentido.", "natural": "That makes sense.", "calco": "That has sense.", "explicacion": "\"Tener sentido\" es **make sense**." },
+  { "id": "en-trabajo-12-c02", "es": "¿Puedes repetirlo más despacio?", "natural": "Could you say that again more slowly?", "calco": "Can you repeat more slow?", "explicacion": "Con un verbo va el adverbio **slowly**, y *repeat* necesita objeto." },
+  { "id": "en-trabajo-12-c03", "es": "¿Cuál es tu opinión sobre TypeScript?", "natural": "What's your opinion on TypeScript?", "calco": "Which is your opinion about TypeScript?", "explicacion": "\"¿Cuál es...?\" se dice **What's...?** *Which* es para elegir entre opciones." },
+  { "id": "en-trabajo-12-c04", "es": "Cuéntame de una vez que fallaste.", "natural": "Tell me about a time you failed.", "calco": "Count me about a time you failed.", "explicacion": "\"Contar\" una historia es **tell**. *Count* es contar números." }
+]

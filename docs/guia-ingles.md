@@ -104,3 +104,68 @@ En las unidades solo de vocabulario, `## Cómo se forma` puede explicar cómo ag
 - Vocabulario útil para la vida diaria y para trabajar en tecnología, priorizando las palabras más frecuentes del idioma.
 - Nada de rayas largas en los textos en español; usa dos puntos o comas.
 - Valida con `npm run validar:ingles` (forma, ids únicos, opciones sin repetir, una sola respuesta, palabras sin repetir).
+
+## Archivos extra (opcionales) para lecciones más variadas
+
+### `historia.json`: una historia corta por unidad (estilo "Stories")
+
+```json
+[
+  { "id": "en-basico-10-h01", "titulo": "Un bug en la línea 12", "situacion": "Ana empieza su primer día en una startup.",
+    "pasos": [
+      { "quien": "Tom", "en": "Welcome, Ana! There's a desk for you near the window.", "es": "¡Bienvenida, Ana! Hay un escritorio para ti cerca de la ventana." },
+      { "tipo": "pregunta", "pregunta": "¿Dónde está el escritorio de Ana?", "opciones": ["Cerca de la ventana", "En la cocina", "No hay escritorio"], "correcta": 0, "explicacion": "Tom dice \"near the window\"." },
+      { "tipo": "completa", "quien": "Ana", "en": "Thanks! Are ___ any laptops for the team?", "opciones": ["there", "they", "their"], "correcta": 0, "explicacion": "Pregunta con **are there**: ¿hay...?" }
+    ] }
+]
+```
+
+- Personajes fijos en toda la sección: **Ana** (desarrolladora junior de Lima, la protagonista), **Tom** (tech lead, Estados Unidos), **Sarah** (compañera frontend), **Luis** (amigo de Ana). Así las historias forman una serie: Ana estudia, postula, entra a trabajar y crece.
+- 8 a 14 líneas de diálogo con 3 a 5 pasos de `pregunta` (comprensión, en español) o `completa` (la línea tiene `___` y opciones en inglés) intercalados. Solo gramática de la unidad y anteriores.
+- Al menos una línea con tema de trabajo en tecnología.
+
+### `roleplay.json`: conversación guiada donde tú eliges qué decir
+
+```json
+[
+  { "id": "en-trabajo-08-r01", "titulo": "Tu primer daily", "situacion": "Tom te pregunta en qué estás trabajando.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "Morning, Ana! What did you work on yesterday?", "es": "¡Buenos días, Ana! ¿En qué trabajaste ayer?" },
+      { "opciones": [
+          { "en": "Yesterday I fixed the login bug.", "es": "Ayer arreglé el bug del login.", "correcta": true, "explicacion": "Pasado simple y directo: así se habla en un daily." },
+          { "en": "Yesterday I have fixed the login bug.", "es": "", "correcta": false, "explicacion": "Con *yesterday* va pasado simple (fixed), no presente perfecto." },
+          { "en": "I am fix the login bug yesterday.", "es": "", "correcta": false, "explicacion": "Mezcla de tiempos: es *I fixed*." }
+        ] },
+      { "quien": "Tom", "en": "Great. Any blockers?", "es": "Genial. ¿Algún bloqueo?" }
+    ] }
+]
+```
+
+- 3 a 6 turnos tuyos (`opciones`, 3 cada uno, una sola `correcta: true`), alternados con líneas del otro personaje. `es` solo hace falta en la opción correcta.
+- Las incorrectas son errores típicos de hispanohablantes o respuestas fuera de lugar (demasiado informales, que no responden lo que se preguntó).
+
+### `calcos.json`: ¿natural o traducido del español?
+
+```json
+[
+  { "id": "en-basico-02-c01", "es": "Tengo 20 años.", "natural": "I'm 20 years old.", "calco": "I have 20 years.",
+    "explicacion": "La edad va con **to be**: *I'm 20*. *Have* es el calco de \"tener\"." }
+]
+```
+
+- 3 a 5 por unidad, solo de lo que se ve en esa unidad o antes. Errores reales que comete un hispanohablante.
+
+### `pares.json` (solo en `basico/22-sonidos-dificiles-para-hispanohablantes`): pares mínimos
+
+```json
+[
+  { "id": "en-basico-22-p01", "a": "ship", "aEs": "barco", "b": "sheep", "bEs": "oveja", "sonido": "i corta / i larga",
+    "nota": "**ship** es una i corta y relajada; **sheep** es una i larga, como sonriendo." }
+]
+```
+
+- Palabras reales y frecuentes, las dos con significado. 30 a 40 pares de los contrastes difíciles: i/ii, a/e (bad/bed), b/v, s/z, sh/ch, th/t, th/d, final consonante (cap/cab), vocales con r.
+
+### Frases de trabajo en `frases.json`
+
+Una frase puede llevar `"trabajo": true` cuando usa la gramática de la unidad en una situación de trabajo en tecnología (por ejemplo, en *there is / there are*: "There's a bug in line 12."). En las etapas básica e intermedia, cada unidad tiene 4 a 6.

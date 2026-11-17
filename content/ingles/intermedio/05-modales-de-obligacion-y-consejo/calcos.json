@@ -1,0 +1,7 @@
+[
+  { "id": "en-intermedio-05-c01", "es": "Deberías probarlo.", "natural": "You should test it.", "calco": "You should to test it.", "explicacion": "Después de **should** el verbo va sin *to*." },
+  { "id": "en-intermedio-05-c02", "es": "Ayer tuve que quedarme hasta tarde.", "natural": "I had to stay late yesterday.", "calco": "Yesterday I must stay late.", "explicacion": "**Must** no tiene pasado. Para una obligación pasada se usa **had to**." },
+  { "id": "en-intermedio-05-c03", "es": "¿Me das un consejo?", "natural": "Can you give me some advice?", "calco": "Can you give me an advice?", "explicacion": "**Advice** no se cuenta: *some advice* o *a piece of advice*, nunca *an advice*." },
+  { "id": "en-intermedio-05-c04", "es": "No es necesario que vengas.", "natural": "You don't have to come.", "calco": "You must not come.", "explicacion": "**Don't have to** es \"no hace falta\". *Must not* es \"está prohibido\": cambia todo el sentido." },
+  { "id": "en-intermedio-05-c05", "es": "Puede que falle.", "natural": "It might fail.", "calco": "It can be that it fails.", "explicacion": "\"Puede que\" o \"puede ser que\" se dice con **might** o **may**: *It might fail*." }
+]

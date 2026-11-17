@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-04-h01", "titulo": "¿Qué harías si...?", "situacion": "Última entrevista: Tom, el tech lead, le hace a Ana preguntas de situaciones imaginarias.",
+    "pasos": [
+      { "quien": "Tom", "en": "Hi Ana, I'm Tom. I'd like to ask you a few \"what if\" questions.", "es": "Hola Ana, soy Tom. Me gustaría hacerte algunas preguntas de \"qué pasaría si\"." },
+      { "quien": "Tom", "en": "What would you do if you broke the main branch on a Friday?", "es": "¿Qué harías si rompieras la rama principal un viernes?" },
+      { "tipo": "completa", "quien": "Ana", "en": "If I broke it, I ___ tell the team right away.", "es": "Si la rompiera, se lo diría al equipo de inmediato.", "opciones": ["will", "would", "am"], "correcta": 1, "explicacion": "Condicional dos (situación imaginaria): **if + pasado, would + verbo**. *Will* es para situaciones reales y probables." },
+      { "quien": "Ana", "en": "Then I would revert my commit and look for the cause.", "es": "Luego revertiría mi commit y buscaría la causa." },
+      { "quien": "Tom", "en": "Good. And if you had more time to study, what would you learn?", "es": "Bien. Y si tuvieras más tiempo para estudiar, ¿qué aprenderías?" },
+      { "quien": "Ana", "en": "If I had more time, I'd learn TypeScript properly.", "es": "Si tuviera más tiempo, aprendería TypeScript bien." },
+      { "tipo": "pregunta", "pregunta": "¿Qué aprendería Ana si tuviera más tiempo?", "opciones": ["Python", "TypeScript", "Diseño"], "correcta": 1, "explicacion": "Ana dice \"I'd learn TypeScript properly\"." },
+      { "quien": "Tom", "en": "Last one. If you were a JavaScript method, which one would you be?", "es": "La última. Si fueras un método de JavaScript, ¿cuál serías?" },
+      { "quien": "Ana", "en": "Hmm... I'd be filter. I'd keep only the good things.", "es": "Mmm... Sería filter. Me quedaría solo con lo bueno." },
+      { "quien": "Tom", "en": "Ha! That's a new one. Would you mind sending me your portfolio again?", "es": "¡Ja! Esa no la había escuchado. ¿Te molestaría enviarme tu portafolio otra vez?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Not at all. ___ you give me your email, please?", "es": "Para nada. ¿Podrías darme tu correo, por favor?", "opciones": ["Could", "Would you mind", "Do"], "correcta": 0, "explicacion": "**Could you + verbo** es la forma cortés de pedir algo. *Would you mind* necesita el verbo con -ing: *would you mind giving*." },
+      { "quien": "Tom", "en": "Sure, it's on the screen. Honestly, I'd hire someone who answers like that.", "es": "Claro, está en la pantalla. Sinceramente, contrataría a alguien que responde así." },
+      { "quien": "Ana", "en": "Thank you! If I got the job, I'd celebrate with my friend Luis.", "es": "¡Gracias! Si consiguiera el trabajo, lo celebraría con mi amigo Luis." },
+      { "tipo": "pregunta", "pregunta": "Si Ana rompiera la rama principal, ¿qué haría primero?", "opciones": ["Lo arreglaría sola sin decir nada", "Avisaría al equipo de inmediato", "Esperaría al lunes"], "correcta": 1, "explicacion": "Ana dice que lo diría al equipo \"right away\" y luego revertiría su commit." }
+    ] }
+]

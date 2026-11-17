@@ -10,10 +10,12 @@ import { sonidos } from "../../lib/sonidos.js";
 import { sincronizar } from "../../lib/sync-movil.js";
 import { Markdown } from "../../components/Markdown.jsx";
 import { SlidingNumber } from "../../components/ui/sliding-number.jsx";
-import { armarLeccion, avance, crearSesion, ordenCorrecto, pasoActual, responder, resultadoNivel, resumen, semilla, terminada } from "./motor.js";
-import { BotonAudio, ItemArmar, ItemEmparejar, ItemEntrevista, ItemOpcion, ItemOrdenar, ItemTarjeta, tituloDe } from "./Items.jsx";
-import { armadoCorrecto } from "../../../../scripts/items/ingles.js";
-import { hablar, hayVoz } from "../../lib/voz.js";
+import { armarLeccion, avance, crearSesion, HITOS_COMBO, ordenCorrecto, pasoActual, responder, resultadoNivel, resumen, semilla, terminada, VIDAS } from "./motor.js";
+import { BotonAudio, ItemArmar, ItemEmparejar, ItemEntrevista, ItemEscribir, ItemHablar, ItemOpcion, ItemOrdenar, ItemTarjeta, tituloDe } from "./Items.jsx";
+import { armadoCorrecto, escrituraCorrecta } from "../../../../scripts/items/ingles.js";
+import { hablar, hayMicrofono, hayVoz } from "../../lib/voz.js";
+import { elegirVariante, emparejarDe } from "./variantes.js";
+import { Bit, fraseDeBit } from "../../components/Bit.jsx";
 import estilos from "./LeccionMovil.module.css";
 
 /** A dónde lleva "Ver más" según de dónde salió el ítem. */
@@ -26,7 +28,17 @@ function enlaceFuente(fuente) {
   return null;
 }
 
-const textoCorrecta = (item) => item.opciones?.[item.correcta] ?? item.respuesta?.join(" ") ?? item.lineas?.join("\n") ?? "";
+const textoCorrecta = (item) => item.opciones?.[item.correcta] ?? (Array.isArray(item.respuesta) ? item.respuesta.join(" ") : item.respuesta) ?? item.lineas?.join("\n") ?? "";
+
+/** Inglés: mete un "une las parejas" (no calificado) a mitad de la lección, con palabras que ya viste. */
+function conEmparejar(pasos, d, unidad, azar) {
+  const vistas = d.items.filter((it) => it.unidad === unidad && it.concepto === "palabra" && (d.registros[it.clave]?.caja ?? 0) >= 1);
+  const enLeccion = pasos.map((p) => d.items.find((it) => it.clave === p.clave)).filter(Boolean);
+  const par = emparejarDe(vistas.length >= 4 ? vistas : enLeccion, azar);
+  if (!par) return pasos;
+  const mitad = Math.floor(pasos.length / 2);
+  return [...pasos.slice(0, mitad), { clave: par.clave, tipo: "emparejar", item: par }, ...pasos.slice(mitad)];
+}
 
 export function LeccionMovil() {
   const [params] = useSearchParams();
@@ -38,6 +50,8 @@ export function LeccionMovil() {
   const [retro, setRetro] = useState(null); // { correcto, permitirEquivalente }
   const [final, setFinal] = useState(null);
   const [unidades, setUnidades] = useState([]);
+  const [escrito, setEscrito] = useState(""); // en escribir
+  const [hito, setHito] = useState(null); // combo que se celebra
   const ambito = params.get("ambito") === "ingles" ? "ingles" : "programacion";
   const inicio = ambito === "ingles" ? "/ingles" : "/";
 
@@ -48,17 +62,22 @@ export function LeccionMovil() {
       if (params.get("modo") === "debiles" && api.mapa) d = { ...d, unidades: (await api.mapa()).debiles };
       if (params.get("modo") === "mispalabras") {
         const mias = new Set(Object.keys(await api.misPalabras()));
-        d = { ...d, items: d.items.filter((it) => mias.has(it.clave.replace(/^enr?:/, "")) && /^enr?:/.test(it.clave)) };
+        d = { ...d, items: d.items.filter((it) => /^en:/.test(it.clave) && mias.has(it.clave.slice(3))) };
       }
       if (params.get("retomar") && d.enCurso && !terminada(d.enCurso)) return setSesion(d.enCurso);
       const unidad = params.get("unidad") ?? d.unidadActual;
       const modo = params.get("modo") === "mispalabras" ? "todos" : (params.get("modo") ?? "normal");
-      const pasos = armarLeccion({ ...d, unidad, modo, conVoz: hayVoz(), azar: semilla(`${d.hoy}-${unidad}-${modo}-${Date.now()}`) });
+      const azar = semilla(`${d.hoy}-${unidad}-${modo}-${Date.now()}`);
+      const ingles = ambito === "ingles";
+      // En inglés cada concepto se pregunta según cuánto lo dominas (ver variantes.js)
+      const variante = ingles ? (it, op) => elegirVariante(it, d.registros[it.clave], { conVoz: hayVoz(), conMicro: hayMicrofono(), azar, ...op }) : undefined;
+      let pasos = armarLeccion({ ...d, unidad, modo, conVoz: hayVoz(), azar, variante });
+      if (ingles && modo === "normal") pasos = conEmparejar(pasos, d, unidad, azar);
       if (pasos.length === 0)
         return setError(
           modo === "errores" ? "No tienes errores pendientes. ¡Bien!" : modo === "examen" ? "Todavía no practicaste suficiente esta semana para un examen: haz unas lecciones primero." : "No hay ítems para esta unidad todavía.",
         );
-      const nueva = crearSesion(pasos, { unidad, modo, hoy: d.hoy, ambito });
+      const nueva = crearSesion(pasos, { unidad, modo, hoy: d.hoy, ambito, vidas: ingles && d.extra?.vidas && modo !== "nivel" ? VIDAS : null });
       api.guardarLeccionEnCurso(nueva);
       setSesion(nueva);
     }, (e) => setError(e.message));
@@ -70,28 +89,40 @@ export function LeccionMovil() {
     setElegida(null);
     setOrden([]);
     setRetro(null);
+    setEscrito("");
   };
 
   /** Registra la nota final del ítem (si quedó decidida) y avanza. */
   const avanzar = useCallback(
     async (respuesta) => {
       const { sesion: siguiente, nota } = responder(sesion, respuesta);
-      if (nota) {
+      if (nota && !paso.item?.extra) {
         if (paso.tipo === "entrevista") await api.calificar(paso.pregunta.id, nota);
         else await api.calificarItem(paso.clave, nota);
       }
       limpiar();
+      // Combo: se celebra al llegar a 5, 10, 15...
+      if (HITOS_COMBO.includes(siguiente.combo) && siguiente.combo !== sesion.combo) {
+        setHito(siguiente.combo);
+        sonidos.meta();
+        setTimeout(() => setHito(null), 1400);
+      }
       if (terminada(siguiente)) {
         const r = resumen(siguiente);
         const segundos = siguiente.inicio ? (Date.now() - siguiente.inicio) / 1000 : 0;
         await api.completarLeccion(r.xp, { ambito, segundos });
+        if (ambito === "ingles" && api.registrarLeccionIngles) await api.registrarLeccionIngles(siguiente, r);
+        if (siguiente.modo === "legendario" && !r.sinVidas && r.total && r.aciertos / r.total >= 0.9) {
+          await api.marcarLegendaria(siguiente.unidad);
+          r.legendaria = true;
+        }
         if (siguiente.modo === "examen") r.nota = await api.guardarExamen({ aciertos: r.aciertos, total: r.total });
         if (siguiente.modo === "nivel") {
           const nivel = resultadoNivel(siguiente, unidades);
           await api.guardarNivelIngles(nivel.empiezaEn);
           r.nivel = unidades.find((u) => u.id === nivel.empiezaEn) ?? null;
         }
-        celebrar("leccion");
+        celebrar(r.perfecta || r.legendaria ? "logro" : "leccion");
         sincronizar(); // si hay internet, la laptop se entera de esta lección
         setFinal(r);
       } else {
@@ -107,12 +138,22 @@ export function LeccionMovil() {
     let correcto;
     if (item.tipo === "ordenar") correcto = ordenCorrecto(item, orden.map((i) => item.lineas[i]));
     else if (item.tipo === "armar") correcto = armadoCorrecto(item, orden.map((i) => item.fichas[i]));
+    else if (item.tipo === "escribir") correcto = escrituraCorrecta(item, escrito);
     else correcto = elegida === item.correcta;
+    const casi = correcto === "casi";
+    correcto = !!correcto;
     // En inglés, oír la respuesta correcta ayuda a fijarla
     if (item.audioRespuesta || (item.tipo === "armar" && item.audio)) hablar(item.audioRespuesta ?? item.audio);
     navigator.vibrate?.(correcto ? 25 : [40, 60, 40]);
     (correcto ? sonidos.acierto : sonidos.fallo)();
-    setRetro({ correcto, permitirEquivalente: (item.tipo === "ordenar" || item.tipo === "armar") && !correcto });
+    setRetro({ correcto, casi, permitirEquivalente: (item.tipo === "ordenar" || item.tipo === "armar" || item.tipo === "escribir") && !correcto });
+  }
+
+  /** Hablar: el componente ya corrigió con el reconocimiento de voz. */
+  function alHablar(correcto) {
+    navigator.vibrate?.(correcto ? 25 : [40, 60, 40]);
+    (correcto ? sonidos.acierto : sonidos.fallo)();
+    setRetro({ correcto, permitirEquivalente: !correcto });
   }
 
   const alEmparejar = useCallback(
@@ -150,8 +191,35 @@ export function LeccionMovil() {
     return (
       <div className={estilos.final}>
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className={estilos.finalTitulo}>
-          {final.nota !== undefined ? `Nota: ${final.nota}/20` : final.nivel !== undefined ? "¡Prueba terminada!" : "¡Lección completa!"}
+          {final.nota !== undefined
+            ? `Nota: ${final.nota}/20`
+            : final.nivel !== undefined
+              ? "¡Prueba terminada!"
+              : final.sinVidas
+                ? "Te quedaste sin vidas"
+                : final.legendaria
+                  ? "¡Unidad legendaria!"
+                  : final.perfecta
+                    ? "¡Lección perfecta!"
+                    : "¡Lección completa!"}
         </motion.div>
+        {ambito === "ingles" && (
+          <Bit
+            animo={final.sinVidas ? "triste" : "fiesta"}
+            tamano={72}
+            dice={
+              final.sinVidas
+                ? "No pasa nada: lo que respondiste ya cuenta. Repasa tus errores y vuelve."
+                : final.legendaria
+                  ? "La dominas de verdad. Ahora es dorada."
+                  : final.perfecta
+                    ? `Cero errores. +${10} XP extra.`
+                    : final.comboMax >= 5
+                      ? `Tu mejor combo: ${final.comboMax} seguidas.`
+                      : "Un día más. Así se aprende un idioma."
+            }
+          />
+        )}
         {final.nivel && (
           <p className={estilos.nivel}>
             Empiezas en <strong>{final.nivel.titulo}</strong> ({final.nivel.nivel}). Lo anterior ya lo dominas; igual puedes repasarlo cuando quieras.
@@ -207,7 +275,9 @@ export function LeccionMovil() {
         ? orden.length === item.lineas.length
         : item.tipo === "armar"
           ? orden.length > 0
-          : false);
+          : item.tipo === "escribir"
+            ? escrito.trim().length > 0
+            : false);
 
   return (
     <div className={estilos.leccion}>
@@ -215,10 +285,27 @@ export function LeccionMovil() {
         <button type="button" className={estilos.cerrar} onClick={salir} aria-label="Salir de la lección">
           ✕
         </button>
-        <div className={estilos.avance}>
+        <div className={estilos.avance} data-combo={(sesion.combo ?? 0) >= 5}>
           <motion.div animate={{ width: `${Math.max(4, progreso * 100)}%` }} transition={{ type: "spring", stiffness: 140, damping: 22 }} />
         </div>
+        {(sesion.combo ?? 0) >= 3 && (
+          <motion.span key={sesion.combo} className={estilos.combo} initial={{ scale: 1.4 }} animate={{ scale: 1 }} title="Aciertos seguidos">
+            🔥 {sesion.combo}
+          </motion.span>
+        )}
+        {sesion.vidas !== null && sesion.vidas !== undefined && (
+          <span className={estilos.vidas} title="Vidas">
+            ❤️ {sesion.vidas}
+          </span>
+        )}
       </header>
+      <AnimatePresence>
+        {hito && (
+          <motion.div className={estilos.hito} initial={{ opacity: 0, y: 20, scale: 0.8 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -20 }}>
+            🔥 ¡{hito} seguidas!
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence mode="wait">
         <motion.main
@@ -242,11 +329,13 @@ export function LeccionMovil() {
           {paso.tipo === "ordenar" && <ItemOrdenar item={item} elegidas={orden} alCambiar={setOrden} bloqueado={!!retro} />}
           {paso.tipo === "armar" && <ItemArmar item={item} elegidas={orden} alCambiar={setOrden} bloqueado={!!retro} />}
           {paso.tipo === "emparejar" && <ItemEmparejar item={item} alCompletar={alEmparejar} />}
+          {paso.tipo === "escribir" && <ItemEscribir item={item} valor={escrito} alCambiar={setEscrito} alEnviar={comprobar} bloqueado={!!retro} />}
+          {paso.tipo === "hablar" && <ItemHablar item={item} alResultado={alHablar} alSaltar={() => avanzar({ saltar: true })} bloqueado={!!retro} />}
         </motion.main>
       </AnimatePresence>
 
       {/* Pie: Comprobar, o la hoja con el resultado */}
-      {item && !retro && paso.tipo !== "emparejar" && paso.tipo !== "tarjeta" && (
+      {item && !retro && paso.tipo !== "emparejar" && paso.tipo !== "tarjeta" && paso.tipo !== "hablar" && (
         <footer className={estilos.pie}>
           <button type="button" className={`boton boton-primario ${estilos.grande}`} disabled={!puedeComprobar} onClick={comprobar}>
             Comprobar
@@ -264,13 +353,37 @@ export function LeccionMovil() {
             exit={{ y: "100%" }}
             transition={{ type: "spring", stiffness: 380, damping: 34 }}
           >
-            <strong className={estilos.veredicto}>
-              {retro.correcto ? "¡Bien!" : paso.tipo === "emparejar" ? `Con ${retro.errores} ${retro.errores === 1 ? "error" : "errores"}` : "No es así"}
-            </strong>
+            {ambito === "ingles" ? (
+              <Bit
+                animo={retro.correcto ? "feliz" : "triste"}
+                tamano={44}
+                dice={
+                  retro.casi
+                    ? "¡Bien! Ojo con la ortografía: compárala abajo."
+                    : retro.correcto
+                      ? (sesion.combo ?? 0) >= 5
+                        ? fraseDeBit("combo", sesion.posicion)
+                        : fraseDeBit("acierto", sesion.posicion)
+                      : paso.tipo === "emparejar"
+                        ? `Con ${retro.errores} ${retro.errores === 1 ? "error" : "errores"}`
+                        : fraseDeBit("fallo", sesion.posicion)
+                }
+              />
+            ) : (
+              <strong className={estilos.veredicto}>
+                {retro.correcto ? "¡Bien!" : paso.tipo === "emparejar" ? `Con ${retro.errores} ${retro.errores === 1 ? "error" : "errores"}` : "No es así"}
+              </strong>
+            )}
             {!retro.correcto && item.tipo === "ordenar" && (
               <div className={estilos.correcta}>
                 <span>Orden correcto</span>
                 <Markdown>{"```" + (item.lenguaje ?? "js") + "\n" + item.lineas.join("\n") + "\n```"}</Markdown>
+              </div>
+            )}
+            {(!retro.correcto || retro.casi) && (item.tipo === "escribir" || item.tipo === "hablar") && (
+              <div className={estilos.correcta}>
+                <span>{item.tipo === "hablar" ? "La frase" : "Respuesta correcta"}</span>
+                <p>{item.respuesta ?? item.texto}</p>
               </div>
             )}
             {!retro.correcto && item.tipo === "armar" && (
@@ -308,7 +421,7 @@ export function LeccionMovil() {
             <div className={estilos.botonesHoja}>
               {retro.permitirEquivalente && (
                 <button type="button" className="boton" onClick={() => avanzar({ correcto: true })}>
-                  {item.tipo === "armar" ? "Mi frase también es correcta" : "Mi orden también vale"}
+                  {item.tipo === "hablar" ? "Sí lo dije bien" : item.tipo === "armar" || item.tipo === "escribir" ? "Mi frase también es correcta" : "Mi orden también vale"}
                 </button>
               )}
               <button type="button" className={`boton boton-primario ${estilos.grande}`} onClick={() => avanzar({ correcto: retro.correcto })}>

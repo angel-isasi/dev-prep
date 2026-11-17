@@ -28,5 +28,11 @@
   { "id": "en-intermedio-02-f27", "en": "Meanwhile, Carlos was updating the documentation.", "es": "Mientras tanto, Carlos actualizaba la documentación." },
   { "id": "en-intermedio-02-f28", "en": "I felt relieved when all the tests passed.", "es": "Me sentí aliviado cuando pasaron todos los tests." },
   { "id": "en-intermedio-02-f29", "en": "The app crashed in the middle of the presentation.", "es": "La app se cayó a mitad de la presentación." },
-  { "id": "en-intermedio-02-f30", "en": "Afterward, we wrote a short report about the outage.", "es": "Después, escribimos un informe corto sobre la caída." }
+  { "id": "en-intermedio-02-f30", "en": "Afterward, we wrote a short report about the outage.", "es": "Después, escribimos un informe corto sobre la caída." },
+  { "id": "en-intermedio-02-f31", "en": "I was debugging when the call started.", "es": "Estaba depurando cuando empezó la llamada.", "trabajo": true },
+  { "id": "en-intermedio-02-f32", "en": "We were deploying when the server crashed.", "es": "Estábamos haciendo el deploy cuando se cayó el servidor.", "trabajo": true },
+  { "id": "en-intermedio-02-f33", "en": "While Tom was testing, I updated the docs.", "es": "Mientras Tom probaba, actualicé la documentación.", "trabajo": true },
+  { "id": "en-intermedio-02-f34", "en": "First, I checked the logs.", "es": "Primero, revisé los logs.", "trabajo": true },
+  { "id": "en-intermedio-02-f35", "en": "After that, I wrote a test.", "es": "Después de eso, escribí un test.", "trabajo": true },
+  { "id": "en-intermedio-02-f36", "en": "Finally, we found the problem.", "es": "Finalmente, encontramos el problema.", "trabajo": true }
 ]

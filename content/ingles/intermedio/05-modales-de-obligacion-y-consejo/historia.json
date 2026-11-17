@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-05-h01", "titulo": "La contraseña en el commit", "situacion": "Primera semana de Ana en el trabajo. Sarah revisa su primer pull request.",
+    "pasos": [
+      { "quien": "Sarah", "en": "Hey Ana, I'm looking at your first PR. Good job overall!", "es": "Hola Ana, estoy viendo tu primer PR. ¡Buen trabajo en general!" },
+      { "quien": "Sarah", "en": "But you should rename this variable. \"x2\" doesn't say much.", "es": "Pero deberías cambiarle el nombre a esta variable. \"x2\" no dice mucho." },
+      { "quien": "Ana", "en": "Fair. I'll call it \"filteredUsers\".", "es": "Tienes razón. Le pondré \"filteredUsers\"." },
+      { "quien": "Sarah", "en": "Also... is that the database password in the .env file?", "es": "Además... ¿esa es la contraseña de la base de datos en el archivo .env?" },
+      { "quien": "Ana", "en": "Oh no. Is it bad? It's only \"password123\".", "es": "Ay, no. ¿Está mal? Es solo \"password123\"." },
+      { "tipo": "completa", "quien": "Sarah", "en": "You ___ push passwords to GitHub. Never, ever.", "es": "No debes subir contraseñas a GitHub. Nunca, jamás.", "opciones": ["don't have to", "mustn't", "might not"], "correcta": 1, "explicacion": "**Mustn't** es una prohibición: está prohibido. **Don't have to** significa \"no es necesario\", que aquí no tiene sentido." },
+      { "quien": "Sarah", "en": "And please tell Tom to change that password. It's also the Wi-Fi password.", "es": "Y por favor dile a Tom que cambie esa contraseña. También es la del Wi-Fi." },
+      { "tipo": "pregunta", "pregunta": "¿Qué error grave cometió Ana?", "opciones": ["Usó un nombre de variable largo", "Subió una contraseña a GitHub", "Borró la base de datos"], "correcta": 1, "explicacion": "La contraseña estaba en el archivo **.env** dentro del PR." },
+      { "quien": "Ana", "en": "Do I have to close the PR and start again?", "es": "¿Tengo que cerrar el PR y empezar de nuevo?" },
+      { "tipo": "completa", "quien": "Sarah", "en": "No, you ___ close it. Just remove the file and add it to .gitignore.", "es": "No, no tienes que cerrarlo. Solo quita el archivo y agrégalo a .gitignore.", "opciones": ["mustn't", "don't have to", "shouldn't to"], "correcta": 1, "explicacion": "**Don't have to** = no es necesario. *Mustn't* sería prohibirlo, y *shouldn't to* está mal: después de *should* no va *to*." },
+      { "quien": "Ana", "en": "Okay. I should probably tell Tom now.", "es": "Bueno. Probablemente debería decirle a Tom ahora." },
+      { "quien": "Sarah", "en": "You should. He might laugh, but he'll thank you.", "es": "Deberías. Puede que se ría, pero te lo va a agradecer." },
+      { "quien": "Ana", "en": "Lesson learned: secrets go in .env, and .env goes in .gitignore.", "es": "Lección aprendida: los secretos van en .env, y .env va en .gitignore." },
+      { "tipo": "pregunta", "pregunta": "¿Qué tiene que hacer Ana con el PR?", "opciones": ["Cerrarlo y empezar otro", "Quitar el archivo y agregarlo a .gitignore", "Nada, ya está aprobado"], "correcta": 1, "explicacion": "Sarah dice que no tiene que cerrarlo: solo quitar el archivo y agregarlo a **.gitignore**." }
+    ] }
+]

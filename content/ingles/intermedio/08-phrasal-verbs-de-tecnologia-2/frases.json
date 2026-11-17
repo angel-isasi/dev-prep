@@ -28,5 +28,11 @@
   { "id": "en-intermedio-08-f27", "en": "The tests are off. Can you turn them on?", "es": "Las pruebas están apagadas. ¿Puedes activarlas?" },
   { "id": "en-intermedio-08-f28", "en": "I picked up a lot of React at my internship.", "es": "Aprendí mucho de React en mis prácticas." },
   { "id": "en-intermedio-08-f29", "en": "I'll hand it over to Ana on Friday.", "es": "Se lo paso a Ana el viernes." },
-  { "id": "en-intermedio-08-f30", "en": "Too many wrong passwords will lock you out.", "es": "Si pones muchas contraseñas incorrectas, te quedas sin acceso." }
+  { "id": "en-intermedio-08-f30", "en": "Too many wrong passwords will lock you out.", "es": "Si pones muchas contraseñas incorrectas, te quedas sin acceso." },
+  { "id": "en-intermedio-08-f31", "en": "This task is too big, let's break it down.", "es": "Esta tarea es muy grande, dividámosla.", "trabajo": true },
+  { "id": "en-intermedio-08-f32", "en": "Turn it off and on again.", "es": "Apágalo y vuelve a prenderlo.", "trabajo": true },
+  { "id": "en-intermedio-08-f33", "en": "I need to catch up on my emails.", "es": "Necesito ponerme al día con mis correos.", "trabajo": true },
+  { "id": "en-intermedio-08-f34", "en": "Tom will deal with the client.", "es": "Tom se va a encargar del cliente.", "trabajo": true },
+  { "id": "en-intermedio-08-f35", "en": "We should get rid of this old library.", "es": "Deberíamos deshacernos de esta librería vieja.", "trabajo": true },
+  { "id": "en-intermedio-08-f36", "en": "Okay, let's wrap up.", "es": "Bueno, terminemos.", "trabajo": true }
 ]

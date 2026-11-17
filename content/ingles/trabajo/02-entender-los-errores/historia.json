@@ -1,0 +1,19 @@
+[
+  { "id": "en-trabajo-02-h01", "titulo": "Pantalla blanca en producción", "situacion": "Un lunes temprano, la página de pedidos sale en blanco para todos los clientes. Ana está de turno.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, the orders page is blank in production. Can you take a look?", "es": "Ana, la página de pedidos está en blanco en producción. ¿Puedes revisarla?" },
+      { "quien": "Ana", "en": "On it. The console says: \"TypeError: Cannot read properties of undefined (reading 'map')\".", "es": "Voy. La consola dice: \"TypeError: no se pueden leer propiedades de undefined (leyendo 'map')\"." },
+      { "tipo": "pregunta", "pregunta": "¿Qué significa ese error?", "opciones": ["Que map no existe en JavaScript", "Que se llamó a map sobre algo que es undefined", "Que no hay internet"], "correcta": 1, "explicacion": "**Cannot read properties of undefined (reading 'map')** significa que la variable donde usaste *.map* es *undefined*, no un array." },
+      { "quien": "Tom", "en": "So something we call map on is undefined. Which variable?", "es": "O sea que algo sobre lo que llamamos map es undefined. ¿Qué variable?" },
+      { "quien": "Ana", "en": "It's \"orders\". The API used to return an array, but now it returns an object.", "es": "Es \"orders\". La API antes devolvía un array, pero ahora devuelve un objeto." },
+      { "quien": "Ana", "en": "The array is inside \"data.items\" now. Someone changed the backend on Friday.", "es": "Ahora el array está dentro de \"data.items\". Alguien cambió el backend el viernes." },
+      { "tipo": "completa", "quien": "Tom", "en": "Let me guess. The Network tab ___ a 200, so nobody noticed.", "es": "Déjame adivinar. La pestaña Network muestra un 200, así que nadie se dio cuenta.", "opciones": ["shows", "is show", "showing"], "correcta": 0, "explicacion": "Presente simple con tercera persona: **the Network tab shows**. Un 200 significa que la petición salió bien, aunque los datos cambiaron." },
+      { "quien": "Ana", "en": "Exactly. The request works. Our code is what breaks.", "es": "Exacto. La petición funciona. Lo que se rompe es nuestro código." },
+      { "quien": "Sarah", "en": "Sorry, that was me. I didn't know the frontend used that endpoint.", "es": "Perdón, fui yo. No sabía que el frontend usaba ese endpoint." },
+      { "quien": "Ana", "en": "No worries. I'll use \"data.items\" and add a default empty array.", "es": "No pasa nada. Voy a usar \"data.items\" y agregar un array vacío por defecto." },
+      { "tipo": "completa", "quien": "Ana", "en": "That way, if the list is ___, the page shows \"No orders yet\" instead of crashing.", "es": "Así, si la lista falta, la página muestra \"Todavía no hay pedidos\" en vez de caerse.", "opciones": ["missing", "missed", "miss"], "correcta": 0, "explicacion": "**Missing** es el adjetivo para algo que falta o no está. *Missed* es el pasado de *miss* (extrañar o perder)." },
+      { "quien": "Tom", "en": "Great fix. The page is back. Sarah, you're buying coffee for everyone.", "es": "Excelente arreglo. La página volvió. Sarah, tú invitas el café a todos." },
+      { "quien": "Sarah", "en": "Fair. It's a remote team, so I'll send you a coffee emoji.", "es": "Justo. Es un equipo remoto, así que les mando un emoji de café." },
+      { "tipo": "pregunta", "pregunta": "¿Cuál era la causa real del problema?", "opciones": ["El servidor estaba caído", "La API cambió el formato de los datos", "Ana borró la variable orders"], "correcta": 1, "explicacion": "La API pasó de devolver un array a devolver un objeto con el array en **data.items**." }
+    ] }
+]

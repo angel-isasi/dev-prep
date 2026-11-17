@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-07-r01", "titulo": "Explica tu solución", "situacion": "Terminaste el ejercicio de encontrar duplicados. Jennifer, ingeniera, te pide que expliques tu código.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Jennifer", "en": "OK, walk me through your solution.", "es": "Ok, explícame tu solución paso a paso." },
+      { "opciones": [
+          { "en": "I iterate over the array and keep track of the numbers I've seen in a Set.", "es": "Recorro el array y llevo el registro de los números que ya vi en un Set.", "correcta": true, "explicacion": "*Iterate over* y *keep track of* son las frases típicas para explicar un recorrido." },
+          { "en": "I walk the array and I save the seen numbers.", "es": "", "correcta": false, "explicacion": "*Walk the array* no se usa. Lo natural es *iterate over* o *loop through*." },
+          { "en": "The code is there, you can read it.", "es": "", "correcta": false, "explicacion": "Te pidieron explicarlo: negarte suena arrogante." }
+        ] },
+      { "quien": "Jennifer", "en": "What's the time complexity?", "es": "¿Cuál es la complejidad en tiempo?" },
+      { "opciones": [
+          { "en": "It's O of n squared because I use a Set.", "es": "", "correcta": false, "explicacion": "Incorrecto: con un Set, buscar es O(1), así que el total es O(n)." },
+          { "en": "It runs in linear time, O of n, because I go through the array once.", "es": "Corre en tiempo lineal, O de n, porque recorro el array una vez.", "correcta": true, "explicacion": "*It runs in linear time because...*: das la complejidad y la razón." },
+          { "en": "It's very fast.", "es": "", "correcta": false, "explicacion": "Demasiado vago: se espera la notación Big O y el porqué." }
+        ] },
+      { "quien": "Jennifer", "en": "And space?", "es": "¿Y en espacio?" },
+      { "opciones": [
+          { "en": "Also O of n, because in the worst case the Set stores every number.", "es": "También O de n, porque en el peor caso el Set guarda todos los números.", "correcta": true, "explicacion": "*In the worst case* es clave al hablar de complejidad." },
+          { "en": "Zero, because a Set doesn't use memory.", "es": "", "correcta": false, "explicacion": "Un Set sí usa memoria; crece con los datos." },
+          { "en": "Also O of n, in the worse case.", "es": "", "correcta": false, "explicacion": "Es *worst* (superlativo), no *worse*: *in the worst case*." }
+        ] },
+      { "quien": "Jennifer", "en": "Could you do it without extra memory?", "es": "¿Podrías hacerlo sin memoria extra?" },
+      { "opciones": [
+          { "en": "Yes, I could sort it first, but then it's O of n log n. It's a trade-off.", "es": "Sí, podría ordenarlo primero, pero entonces es O de n log n. Es un compromiso.", "correcta": true, "explicacion": "*Trade-off* = ganas algo y pierdes otra cosa. Muestra que piensas en alternativas." },
+          { "en": "Impossible.", "es": "", "correcta": false, "explicacion": "Cerrarte sin pensar da mala impresión; hay alternativas." },
+          { "en": "Yes, but it's a trade-in.", "es": "", "correcta": false, "explicacion": "*Trade-in* es entregar algo usado como parte de pago. La palabra es *trade-off*." }
+        ] }
+    ] }
+]

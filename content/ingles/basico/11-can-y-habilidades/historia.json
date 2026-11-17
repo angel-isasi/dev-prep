@@ -1,0 +1,20 @@
+[
+  { "id": "en-basico-11-h01", "titulo": "Ensayo con un reclutador falso", "situacion": "Ana tiene su llamada con la reclutadora mañana. Luis hace de reclutador para practicar.",
+    "pasos": [
+      { "quien": "Luis", "en": "OK, I'm the recruiter. Hello, Ana. Can you hear me?", "es": "Ya, yo soy el reclutador. Hola, Ana. ¿Me escuchas?" },
+      { "quien": "Ana", "en": "Yes, I can hear you.", "es": "Sí, te escucho." },
+      { "quien": "Luis", "en": "So, what can you do?", "es": "A ver, ¿qué sabes hacer?" },
+      { "quien": "Ana", "en": "I can build websites with HTML, CSS, and JavaScript. I can use React too.", "es": "Sé crear sitios web con HTML, CSS y JavaScript. También sé usar React." },
+      { "tipo": "completa", "quien": "Luis", "en": "___ you work in a team?", "opciones": ["Can", "Do can", "Are"], "correcta": 0, "explicacion": "Para preguntar con can, **can** va al inicio: *Can you work...?* Can no usa do.", "es": "¿Puedes trabajar en equipo?" },
+      { "quien": "Ana", "en": "Yes, I can. I can use Git and GitHub with my classmates.", "es": "Sí. Sé usar Git y GitHub con mis compañeros de clase." },
+      { "quien": "Luis", "en": "And can you speak English?", "es": "¿Y sabes hablar inglés?" },
+      { "quien": "Ana", "en": "Luis... this call is in English!", "es": "Luis... ¡esta llamada es en inglés!" },
+      { "quien": "Luis", "en": "Oh, right. Good point.", "es": "Ah, cierto. Buen punto." },
+      { "tipo": "completa", "quien": "Ana", "en": "But I ___ understand English when people speak very fast.", "opciones": ["can't", "don't can", "not can"], "correcta": 0, "explicacion": "La negativa de can es **can't** + verbo. *Don't can* y *not can* no existen.", "es": "Pero no entiendo el inglés cuando la gente habla muy rápido." },
+      { "tipo": "pregunta", "pregunta": "¿Qué le cuesta todavía a Ana?", "opciones": ["Entender inglés muy rápido", "Usar Git", "Crear sitios web"], "correcta": 0, "explicacion": "Ana dice **I can't understand English when people speak very fast**." },
+      { "quien": "Luis", "en": "That's normal. Just say: \"Could you repeat that, please?\"", "es": "Es normal. Solo di: \"¿Podrías repetir eso, por favor?\"." },
+      { "quien": "Ana", "en": "Could you repeat that, please?", "es": "¿Podrías repetir eso, por favor?" },
+      { "quien": "Luis", "en": "Ha, ha! Perfect. You can do this, Ana.", "es": "¡Ja, ja! Perfecto. Tú puedes, Ana." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Luis le enseña la frase con could?", "opciones": ["Para pedir con cortesía que repitan", "Para terminar la llamada", "Para pedir más sueldo"], "correcta": 0, "explicacion": "**Could you...?** es la forma cortés de pedir algo, como que repitan lo que dijeron." }
+    ] }
+]

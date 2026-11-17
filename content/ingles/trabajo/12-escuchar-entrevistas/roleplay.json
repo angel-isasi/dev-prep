@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-12-r01", "titulo": "Entender lo que te piden", "situacion": "Jennifer, ingeniera, habla rápido y usa frases típicas de entrevista. Responde a lo que de verdad te pide.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Jennifer", "en": "Tell me about a time you had to learn something new really fast.", "es": "Cuéntame de una vez en que tuviste que aprender algo nuevo muy rápido." },
+      { "opciones": [
+          { "en": "I learn fast. I'm a fast learner.", "es": "", "correcta": false, "explicacion": "*Tell me about a time* pide un ejemplo concreto del pasado, no una cualidad general." },
+          { "en": "Last semester I had to learn React in two weeks for a group project.", "es": "El semestre pasado tuve que aprender React en dos semanas para un proyecto grupal.", "correcta": true, "explicacion": "*Tell me about a time* espera una historia real, en pasado (método STAR)." },
+          { "en": "Sure, what time do you want?", "es": "", "correcta": false, "explicacion": "Aquí *a time* significa \"una vez / una ocasión\", no una hora." }
+        ] },
+      { "quien": "Jennifer", "en": "Fair enough. What's your take on writing tests?", "es": "Me parece razonable. ¿Cuál es tu opinión sobre escribir tests?" },
+      { "opciones": [
+          { "en": "I take the tests every week in the university.", "es": "", "correcta": false, "explicacion": "*What's your take on...?* pide tu opinión; no tiene que ver con dar exámenes." },
+          { "en": "I think they're worth it. They help me change code without fear.", "es": "Creo que valen la pena. Me ayudan a cambiar código sin miedo.", "correcta": true, "explicacion": "*What's your take on...?* = ¿qué opinas de...? Respondes con opinión y razón." },
+          { "en": "Yes, I can take them.", "es": "", "correcta": false, "explicacion": "Malinterpreta *take*: aquí es tu punto de vista." }
+        ] },
+      { "quien": "Jennifer", "en": "Good. How would you approach a page that loads slowly?", "es": "Bien. ¿Cómo abordarías una página que carga lento?" },
+      { "opciones": [
+          { "en": "First I'd measure it with Lighthouse, then I'd look at images and big bundles.", "es": "Primero la mediría con Lighthouse y luego revisaría las imágenes y los bundles grandes.", "correcta": true, "explicacion": "*How would you approach...?* pide tu plan paso a paso, con *would*." },
+          { "en": "I approached it with my car.", "es": "", "correcta": false, "explicacion": "*Approach* aquí es abordar un problema, no acercarse físicamente." },
+          { "en": "Sorry, can you repeat? I didn't hear.", "es": "", "correcta": false, "explicacion": "Pedir que repitan está bien, pero aquí sí entendiste la pregunta. Mejor responder." }
+        ] },
+      { "quien": "Jennifer", "en": "Take your time. Can you walk me through the first step?", "es": "Tómate tu tiempo. ¿Puedes explicarme el primer paso en detalle?" },
+      { "opciones": [
+          { "en": "OK, let's walk to the first step.", "es": "", "correcta": false, "explicacion": "*Walk me through* es explicar paso a paso, no caminar." },
+          { "en": "Sure. I'd open Lighthouse in Chrome, run an audit, and check the slowest parts first.", "es": "Claro. Abriría Lighthouse en Chrome, haría una auditoría y revisaría primero las partes más lentas.", "correcta": true, "explicacion": "*Walk me through* = explícame paso a paso. Respondes con pasos ordenados." },
+          { "en": "I don't have time, sorry.", "es": "", "correcta": false, "explicacion": "*Take your time* significa que no hay apuro: puedes pensar con calma." }
+        ] }
+    ] }
+]

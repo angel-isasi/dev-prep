@@ -30,5 +30,11 @@
   { "id": "en-basico-15-f29", "en": "We celebrated my birthday at home.", "es": "Celebramos mi cumpleaños en casa." },
   { "id": "en-basico-15-f30", "en": "I applied for a job yesterday.", "es": "Ayer postulé a un trabajo." },
   { "id": "en-basico-15-f31", "en": "Why did you cancel the meeting?", "es": "¿Por qué cancelaste la reunión?" },
-  { "id": "en-basico-15-f32", "en": "I didn't remember his name.", "es": "No me acordé de su nombre." }
+  { "id": "en-basico-15-f32", "en": "I didn't remember his name.", "es": "No me acordé de su nombre." },
+  { "id": "en-basico-15-f33", "en": "I fixed the login bug this morning.", "es": "Arreglé el bug del login esta mañana.", "trabajo": true },
+  { "id": "en-basico-15-f34", "en": "Did you push your changes?", "es": "¿Subiste tus cambios?", "trabajo": true },
+  { "id": "en-basico-15-f35", "en": "We deployed the app on Monday.", "es": "Desplegamos la app el lunes.", "trabajo": true },
+  { "id": "en-basico-15-f36", "en": "I didn't check the logs.", "es": "No revisé los logs.", "trabajo": true },
+  { "id": "en-basico-15-f37", "en": "Sarah tested the new feature.", "es": "Sarah probó la nueva funcionalidad.", "trabajo": true },
+  { "id": "en-basico-15-f38", "en": "The tests passed on the first try.", "es": "Los tests pasaron al primer intento.", "trabajo": true }
 ]

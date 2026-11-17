@@ -28,5 +28,10 @@
   { "id": "en-basico-11-f27", "en": "Carlos is an expert at chess.", "es": "Carlos es un experto en ajedrez." },
   { "id": "en-basico-11-f28", "en": "Can I ask a question?", "es": "¿Puedo hacer una pregunta?" },
   { "id": "en-basico-11-f29", "en": "She can play the piano and the violin.", "es": "Ella sabe tocar el piano y el violín." },
-  { "id": "en-basico-11-f30", "en": "We play board games on Fridays.", "es": "Jugamos juegos de mesa los viernes." }
+  { "id": "en-basico-11-f30", "en": "We play board games on Fridays.", "es": "Jugamos juegos de mesa los viernes." },
+  { "id": "en-basico-11-f31", "en": "Can you share your screen?", "es": "¿Puedes compartir tu pantalla?", "trabajo": true },
+  { "id": "en-basico-11-f32", "en": "I can't open the file.", "es": "No puedo abrir el archivo.", "trabajo": true },
+  { "id": "en-basico-11-f33", "en": "Could you review my code, please?", "es": "¿Podrías revisar mi código, por favor?", "trabajo": true },
+  { "id": "en-basico-11-f34", "en": "Can I join the call?", "es": "¿Puedo unirme a la llamada?", "trabajo": true },
+  { "id": "en-basico-11-f35", "en": "Tom can explain it very well.", "es": "Tom puede explicarlo muy bien.", "trabajo": true }
 ]

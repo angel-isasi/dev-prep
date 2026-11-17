@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-08-r01", "titulo": "Ponerte al día después de vacaciones", "situacion": "Vuelves de una semana libre y Sarah te ayuda a ponerte al día.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Sarah", "en": "Welcome back, Ana! How was your week off?", "es": "¡Bienvenida, Ana! ¿Qué tal tu semana libre?" },
+      { "opciones": [
+          { "en": "Great, thanks! Now I need to catch up on everything.", "es": "¡Genial, gracias! Ahora tengo que ponerme al día con todo.", "correcta": true, "explicacion": "*Catch up on* = ponerse al día con algo." },
+          { "en": "Great! Now I need to put me at day.", "es": "", "correcta": false, "explicacion": "Calco de \"ponerme al día\". En inglés: *catch up*." },
+          { "en": "Great! Now I need to catch on everything.", "es": "", "correcta": false, "explicacion": "*Catch on* significa entender o ponerse de moda. Para ponerse al día es *catch up on*." }
+        ] },
+      { "quien": "Sarah", "en": "Sure. The big task this week is the new dashboard.", "es": "Claro. La tarea grande de esta semana es el nuevo dashboard." },
+      { "opciones": [
+          { "en": "It sounds huge. Can we break down it?", "es": "", "correcta": false, "explicacion": "Con pronombre va en medio: *break it down*." },
+          { "en": "It sounds big. Can we break it down into smaller tickets?", "es": "Suena grande. ¿Podemos dividirla en tickets más pequeños?", "correcta": true, "explicacion": "*Break down* = dividir una tarea en partes." },
+          { "en": "It sounds big. Can we break it?", "es": "", "correcta": false, "explicacion": "Sin *down*, *break* significa romper. Cambia totalmente el sentido." }
+        ] },
+      { "quien": "Sarah", "en": "Good idea. Also, the old charts library is really slow.", "es": "Buena idea. Además, la librería vieja de gráficos es muy lenta." },
+      { "opciones": [
+          { "en": "Then let's get rid of it and use something lighter.", "es": "Entonces deshagámonos de ella y usemos algo más liviano.", "correcta": true, "explicacion": "*Get rid of* = deshacerse de algo." },
+          { "en": "Then let's get rid it.", "es": "", "correcta": false, "explicacion": "Falta *of*: *get rid of it*." },
+          { "en": "Then let's turn it off forever.", "es": "", "correcta": false, "explicacion": "*Turn off* es apagar (un botón, una función), no eliminar una librería del proyecto." }
+        ] },
+      { "quien": "Sarah", "en": "Perfect. Let's sync again on Friday.", "es": "Perfecto. Volvamos a hablar el viernes." },
+      { "opciones": [
+          { "en": "Sounds good. I'll deal it before Friday.", "es": "", "correcta": false, "explicacion": "*Deal* necesita *with*: *deal with it*." },
+          { "en": "Sounds good. Let's wrap up the plan on Friday.", "es": "Me parece bien. Cerramos el plan el viernes.", "correcta": true, "explicacion": "*Wrap up* = terminar o cerrar algo." },
+          { "en": "OK. Let's wrap the plan on Friday.", "es": "", "correcta": false, "explicacion": "*Wrap* solo es envolver. Para cerrar o terminar se dice *wrap up*." }
+        ] }
+    ] }
+]

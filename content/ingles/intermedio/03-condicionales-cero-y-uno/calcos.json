@@ -1,0 +1,6 @@
+[
+  { "id": "en-intermedio-03-c01", "es": "Si tengo tiempo, te ayudo.", "natural": "If I have time, I'll help you.", "calco": "If I have time, I help you.", "explicacion": "Para una promesa sobre el futuro, la otra parte va con **will**: *I'll help you*. En español basta el presente." },
+  { "id": "en-intermedio-03-c02", "es": "A menos que guardes, vas a perder los cambios.", "natural": "Unless you save, you'll lose your changes.", "calco": "Unless you don't save, you'll lose your changes.", "explicacion": "**Unless** ya significa \"si no\", así que no lleva otra negación." },
+  { "id": "en-intermedio-03-c03", "es": "Lleva paraguas por si llueve.", "natural": "Take an umbrella in case it rains.", "calco": "Take an umbrella in case of it rains.", "explicacion": "Antes de una frase con verbo va **in case**. *In case of* va con sustantivo: *in case of fire*." },
+  { "id": "en-intermedio-03-c04", "es": "Cuando termine, te aviso.", "natural": "When I finish, I'll let you know.", "calco": "When I will finish, I'll let you know.", "explicacion": "Después de **when** e **if** va presente, aunque hables del futuro: *When I finish*." }
+]

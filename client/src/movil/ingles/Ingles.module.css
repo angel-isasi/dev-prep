@@ -479,3 +479,110 @@
     gap: var(--espacio-2);
   }
 }
+
+/* Misiones, liga y opciones */
+.opcionesIngles {
+  display: grid;
+  margin-top: var(--espacio-3);
+}
+.opcionesIngles .velocidad {
+  margin-bottom: var(--espacio-2);
+}
+.motivacion {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-4);
+}
+.motivacion .bloque {
+  margin-top: 0;
+  padding: var(--espacio-4);
+  border-radius: var(--radio-grande);
+  border: 1px solid var(--borde);
+  background: var(--superficie);
+  display: grid;
+  gap: var(--espacio-3);
+  align-content: start;
+}
+.cabeceraBloque {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.cabeceraBloque h2 {
+  margin: 0;
+  font-size: 18px;
+}
+.cabeceraBloque small {
+  color: var(--texto-tenue);
+}
+.misiones ul {
+  display: grid;
+  gap: var(--espacio-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.misiones li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--espacio-2);
+  align-items: center;
+}
+.misiones li p {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+.misiones li > span {
+  color: var(--texto-tenue);
+}
+.misiones li[data-hecha="true"] > span {
+  color: var(--exito);
+  font-weight: 800;
+}
+.misiones li small {
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+.barraMision {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--superficie-2);
+  overflow: hidden;
+}
+.barraMision i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #ff9f43, #f0c850);
+  border-radius: inherit;
+  transition: width 0.5s ease;
+}
+.ligaDias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  height: 90px;
+}
+.ligaDias div {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2px;
+  padding-bottom: 16px;
+}
+.ligaDias span {
+  width: 40%;
+  min-height: 2px;
+  border-radius: 3px 3px 0 0;
+  background: var(--acento);
+}
+.ligaDias span[data-tipo="pasada"] {
+  background: var(--borde-fuerte);
+}
+.ligaDias small {
+  position: absolute;
+  bottom: 0;
+  font-size: 11px;
+  color: var(--texto-tenue);
+}

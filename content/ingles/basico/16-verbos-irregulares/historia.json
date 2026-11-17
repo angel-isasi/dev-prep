@@ -1,0 +1,20 @@
+[
+  { "id": "en-basico-16-h01", "titulo": "¡Conseguí el trabajo!", "situacion": "Ana llama a Luis muy temprano con una noticia.",
+    "pasos": [
+      { "quien": "Ana", "en": "Luis! I got an email from Tom this morning!", "es": "¡Luis! ¡Esta mañana me llegó un correo de Tom!" },
+      { "quien": "Luis", "en": "And? What did it say?", "es": "¿Y? ¿Qué decía?" },
+      { "quien": "Ana", "en": "I read it three times. I got the job!", "es": "Lo leí tres veces. ¡Conseguí el trabajo!" },
+      { "quien": "Luis", "en": "I knew it! Congratulations!", "es": "¡Lo sabía! ¡Felicitaciones!" },
+      { "tipo": "completa", "quien": "Ana", "en": "I ___ to the kitchen and told my mom.", "opciones": ["went", "goed", "go"], "correcta": 0, "explicacion": "*Go* es **irregular**: su pasado es **went**. *Goed* no existe.", "es": "Fui a la cocina y se lo conté a mi mamá." },
+      { "quien": "Luis", "en": "What did she do?", "es": "¿Y ella qué hizo?" },
+      { "quien": "Ana", "en": "She cried, and then she made pancakes for everyone.", "es": "Lloró y luego hizo panqueques para todos." },
+      { "tipo": "pregunta", "pregunta": "¿Qué hizo la mamá de Ana?", "opciones": ["Lloró e hizo panqueques", "Llamó a Tom", "Se fue a trabajar"], "correcta": 0, "explicacion": "Ana dice **she cried, and then she made pancakes**." },
+      { "quien": "Luis", "en": "Ha, ha. Did you tell Sarah?", "es": "Ja, ja. ¿Le contaste a Sarah?" },
+      { "quien": "Ana", "en": "Yes, I wrote her a message. She sent me ten emojis.", "es": "Sí, le escribí un mensaje. Me mandó diez emojis." },
+      { "tipo": "completa", "quien": "Luis", "en": "Did you ___ anything about the first day?", "opciones": ["hear", "heard", "hears"], "correcta": 0, "explicacion": "Después de **did** el verbo va en forma base: *did you hear*. El pasado ya lo marca did.", "es": "¿Te dijeron algo del primer día?" },
+      { "quien": "Ana", "en": "Yes. I start on Monday. And they sent me a new laptop!", "es": "Sí. Empiezo el lunes. ¡Y me mandaron una laptop nueva!" },
+      { "quien": "Luis", "en": "A new laptop? Then give me my old laptop back, ha, ha.", "es": "¿Una laptop nueva? Entonces devuélveme mi laptop vieja, ja, ja." },
+      { "quien": "Ana", "en": "Never! That old laptop got me this job.", "es": "¡Nunca! Esa laptop vieja me consiguió este trabajo." },
+      { "tipo": "pregunta", "pregunta": "¿Cuándo empieza Ana a trabajar?", "opciones": ["El lunes", "Mañana", "En un mes"], "correcta": 0, "explicacion": "Ana dice **I start on Monday**." }
+    ] }
+]

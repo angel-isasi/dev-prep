@@ -28,5 +28,11 @@
   { "id": "en-basico-07-f27", "en": "My alarm rings at six every day.", "es": "Mi alarma suena a las seis todos los días." },
   { "id": "en-basico-07-f28", "en": "Do you work on weekends?", "es": "¿Trabajas los fines de semana?" },
   { "id": "en-basico-07-f29", "en": "I usually fall asleep at midnight.", "es": "Normalmente me quedo dormido a la medianoche." },
-  { "id": "en-basico-07-f30", "en": "We take a break at eleven.", "es": "Tomamos un descanso a las once." }
+  { "id": "en-basico-07-f30", "en": "We take a break at eleven.", "es": "Tomamos un descanso a las once." },
+  { "id": "en-basico-07-f31", "en": "I usually check my email at nine.", "es": "Normalmente reviso mi correo a las nueve.", "trabajo": true },
+  { "id": "en-basico-07-f32", "en": "We always have a meeting on Mondays.", "es": "Siempre tenemos una reunión los lunes.", "trabajo": true },
+  { "id": "en-basico-07-f33", "en": "Tom never pushes code on Fridays.", "es": "Tom nunca sube código los viernes.", "trabajo": true },
+  { "id": "en-basico-07-f34", "en": "I often work late on Thursdays.", "es": "A menudo trabajo hasta tarde los jueves.", "trabajo": true },
+  { "id": "en-basico-07-f35", "en": "The tests always run before the deploy.", "es": "Los tests siempre corren antes del deploy.", "trabajo": true },
+  { "id": "en-basico-07-f36", "en": "How often do you deploy?", "es": "¿Con qué frecuencia hacen deploy?", "trabajo": true }
 ]

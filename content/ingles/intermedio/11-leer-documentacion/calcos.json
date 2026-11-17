@@ -1,0 +1,6 @@
+[
+  { "id": "en-intermedio-11-c01", "es": "El valor por defecto es cero.", "natural": "The default value is zero.", "calco": "The value by default is zero.", "explicacion": "En la documentación se dice **the default value**, con *default* como adjetivo." },
+  { "id": "en-intermedio-11-c02", "es": "Este parámetro es obligatorio.", "natural": "This parameter is required.", "calco": "This parameter is obligatory.", "explicacion": "En la documentación \"obligatorio\" es **required**. *Obligatory* casi no se usa." },
+  { "id": "en-intermedio-11-c03", "es": "Lanza un error si el valor es null.", "natural": "It throws an error if the value is null.", "calco": "It launches an error if the value is null.", "explicacion": "Un error se **throws**. *Launch* es lanzar un producto o un cohete." },
+  { "id": "en-intermedio-11-c04", "es": "Mira la documentación.", "natural": "Check the documentation.", "calco": "Look the documentation.", "explicacion": "*Look* necesita **at** (*look at the docs*). Lo más natural es **check**." }
+]

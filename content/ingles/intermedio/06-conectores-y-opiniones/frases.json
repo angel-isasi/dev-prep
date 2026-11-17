@@ -28,5 +28,11 @@
   { "id": "en-intermedio-06-f27", "en": "As a result, the page loads twice as fast.", "es": "Como resultado, la página carga el doble de rápido." },
   { "id": "en-intermedio-06-f28", "en": "I don't agree with that, but let's try it.", "es": "No estoy de acuerdo con eso, pero probémoslo." },
   { "id": "en-intermedio-06-f29", "en": "To sum up, I recommend the simpler option.", "es": "En resumen, recomiendo la opción más simple." },
-  { "id": "en-intermedio-06-f30", "en": "Is it really worth it to rewrite the whole app?", "es": "¿De verdad vale la pena reescribir toda la app?" }
+  { "id": "en-intermedio-06-f30", "en": "Is it really worth it to rewrite the whole app?", "es": "¿De verdad vale la pena reescribir toda la app?" },
+  { "id": "en-intermedio-06-f31", "en": "I agree, but it's harder to test.", "es": "Estoy de acuerdo, pero es más difícil de probar.", "trabajo": true },
+  { "id": "en-intermedio-06-f32", "en": "However, the old version is faster.", "es": "Sin embargo, la versión anterior es más rápida.", "trabajo": true },
+  { "id": "en-intermedio-06-f33", "en": "I disagree because it adds complexity.", "es": "No estoy de acuerdo porque agrega complejidad.", "trabajo": true },
+  { "id": "en-intermedio-06-f34", "en": "We chose React because the team knows it.", "es": "Elegimos React porque el equipo lo conoce.", "trabajo": true },
+  { "id": "en-intermedio-06-f35", "en": "In my opinion, this library is too heavy.", "es": "En mi opinión, esta librería es demasiado pesada.", "trabajo": true },
+  { "id": "en-intermedio-06-f36", "en": "It's faster. Therefore, we should use it.", "es": "Es más rápido. Por lo tanto, deberíamos usarlo.", "trabajo": true }
 ]

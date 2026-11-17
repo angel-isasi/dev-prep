@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-08-c01", "es": "Estoy bloqueado por la API.", "natural": "I'm blocked by the API.", "calco": "I'm blocked for the API.", "explicacion": "Lo que te bloquea va con **by**, no con *for*." },
+  { "id": "en-trabajo-08-c02", "es": "¿Puedes repetir?", "natural": "Could you repeat that?", "calco": "Can you repeat?", "explicacion": "**Repeat** necesita un objeto: *repeat that*." },
+  { "id": "en-trabajo-08-c03", "es": "No entendí nada.", "natural": "I didn't understand anything.", "calco": "I didn't understand nothing.", "explicacion": "En inglés no se usan dos negaciones: con *didn't* va **anything**." },
+  { "id": "en-trabajo-08-c04", "es": "Perdón que te interrumpa.", "natural": "Sorry to interrupt.", "calco": "Excuse me, I interrupt you.", "explicacion": "Para interrumpir con cortesía se dice **Sorry to interrupt**." }
+]

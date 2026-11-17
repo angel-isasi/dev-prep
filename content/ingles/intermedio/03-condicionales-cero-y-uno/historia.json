@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-03-h01", "titulo": "Explicar el código en vivo", "situacion": "En la segunda entrevista, Sarah le pide a Ana que explique su buscador mientras lo comparte en pantalla.",
+    "pasos": [
+      { "quien": "Sarah", "en": "Hi Ana, I'm Sarah from the frontend team. Can you walk me through your search box?", "es": "Hola Ana, soy Sarah del equipo frontend. ¿Me explicas tu buscador paso a paso?" },
+      { "quien": "Ana", "en": "Sure. If the user types a word, the list updates right away.", "es": "Claro. Si el usuario escribe una palabra, la lista se actualiza de inmediato." },
+      { "quien": "Ana", "en": "If the input is empty, the app shows all the products.", "es": "Si el campo está vacío, la app muestra todos los productos." },
+      { "quien": "Sarah", "en": "Nice. What happens if there are no results?", "es": "Bien. ¿Qué pasa si no hay resultados?" },
+      { "tipo": "completa", "quien": "Ana", "en": "If nothing matches, the app ___ a \"No results\" message.", "es": "Si nada coincide, la app muestra un mensaje de \"Sin resultados\".", "opciones": ["shows", "will showing", "showed"], "correcta": 0, "explicacion": "Condicional cero (algo que siempre pasa): **if + presente, presente**. *Will showing* no existe: después de *will* va el verbo base." },
+      { "quien": "Sarah", "en": "Let's try it. I'll type \"banana\".", "es": "Probemos. Voy a escribir \"banana\"." },
+      { "quien": "Ana", "en": "Hmm, it says \"No results\"... but we sell bananas.", "es": "Mmm, dice \"Sin resultados\"... pero sí vendemos bananas." },
+      { "tipo": "pregunta", "pregunta": "¿Qué problema encontraron al probar el buscador?", "opciones": ["La app se cerró", "No encontró bananas aunque sí había", "Mostró todos los productos"], "correcta": 1, "explicacion": "Dijo \"No results\" aunque sí venden bananas." },
+      { "quien": "Sarah", "en": "Your data says \"Banana\" with a capital B. Any idea?", "es": "Tus datos dicen \"Banana\" con B mayúscula. ¿Alguna idea?" },
+      { "quien": "Ana", "en": "Oh! If I use toLowerCase on both words, it'll work.", "es": "¡Ah! Si uso toLowerCase en las dos palabras, va a funcionar." },
+      { "tipo": "completa", "quien": "Sarah", "en": "Okay. If you fix it in two minutes, I ___ you a bonus point.", "es": "Bueno. Si lo arreglas en dos minutos, te doy un punto extra.", "opciones": ["give", "'ll give", "gave"], "correcta": 1, "explicacion": "Condicional uno (una situación futura posible): **if + presente, will + verbo**: *I'll give*." },
+      { "quien": "Ana", "en": "Done. Unless the user types in Japanese, it works now.", "es": "Listo. A menos que el usuario escriba en japonés, ya funciona." },
+      { "quien": "Sarah", "en": "Ha! That's a problem for next sprint.", "es": "¡Ja! Ese es un problema para el siguiente sprint." },
+      { "tipo": "pregunta", "pregunta": "¿Cómo arregló Ana el problema?", "opciones": ["Borró la palabra banana", "Pasó las dos palabras a minúsculas", "Cambió los datos a mayúsculas"], "correcta": 1, "explicacion": "Usó **toLowerCase** en las dos palabras para que no importen las mayúsculas." }
+    ] }
+]

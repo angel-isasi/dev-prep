@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-02-c01", "es": "El error me dice que falta el archivo.", "natural": "The error says the file is missing.", "calco": "The error says me that the file is missing.", "explicacion": "**Say** no lleva a la persona detrás. Si quieres decir \"me\", usa **tell**: *it tells me*." },
+  { "id": "en-trabajo-02-c02", "es": "No se encontró la página.", "natural": "The page wasn't found.", "calco": "The page doesn't found.", "explicacion": "\"No se encontró\" es pasiva: **wasn't found**." },
+  { "id": "en-trabajo-02-c03", "es": "Me sale un error.", "natural": "I'm getting an error.", "calco": "It comes out an error to me.", "explicacion": "\"Me sale un error\" se dice **I'm getting an error** o *I get an error*." },
+  { "id": "en-trabajo-02-c04", "es": "La petición falló.", "natural": "The request failed.", "calco": "The petition failed.", "explicacion": "Una petición HTTP es un **request**. *Petition* es una solicitud firmada por muchas personas." }
+]

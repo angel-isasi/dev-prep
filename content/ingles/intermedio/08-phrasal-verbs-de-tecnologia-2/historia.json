@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-08-h01", "titulo": "Una tarea gigante", "situacion": "Ana volvió de dos días enferma y tiene una tarea enorme. Luis la llama a la hora del almuerzo.",
+    "pasos": [
+      { "quien": "Luis", "en": "Hey! How's your second week going?", "es": "¡Hola! ¿Cómo va tu segunda semana?" },
+      { "quien": "Ana", "en": "Stressful. I was sick for two days, and now I have to catch up.", "es": "Estresante. Estuve enferma dos días, y ahora tengo que ponerme al día." },
+      { "quien": "Ana", "en": "Tom gave me a huge task: the whole payment page.", "es": "Tom me dio una tarea enorme: toda la página de pagos." },
+      { "quien": "Luis", "en": "Why don't you break it down into small tasks?", "es": "¿Por qué no la divides en tareas pequeñas?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Good idea. I'll break it ___ into five tickets.", "es": "Buena idea. La voy a dividir en cinco tickets.", "opciones": ["up", "down", "off"], "correcta": 1, "explicacion": "**Break down** es dividir algo grande en partes pequeñas. *Break up* se usa más para terminar una relación." },
+      { "quien": "Luis", "en": "And turn off Slack notifications for an hour. They kill your focus.", "es": "Y apaga las notificaciones de Slack por una hora. Matan tu concentración." },
+      { "quien": "Ana", "en": "I can't. Tom sends me memes all day.", "es": "No puedo. Tom me manda memes todo el día." },
+      { "tipo": "pregunta", "pregunta": "¿Qué le recomienda Luis para concentrarse?", "opciones": ["Trabajar de noche", "Apagar las notificaciones de Slack", "Pedirle a Tom menos trabajo"], "correcta": 1, "explicacion": "Luis dice \"turn off Slack notifications for an hour\"." },
+      { "quien": "Luis", "en": "Then mute him. You can deal with the memes later.", "es": "Entonces siléncialo. Puedes ocuparte de los memes después." },
+      { "quien": "Ana", "en": "Also, the old page has a lot of dead code.", "es": "Además, la página antigua tiene mucho código muerto." },
+      { "tipo": "completa", "quien": "Luis", "en": "Then get ___ of it first. Less code, fewer bugs.", "es": "Entonces deshazte de él primero. Menos código, menos bugs.", "opciones": ["rid", "out", "away"], "correcta": 0, "explicacion": "**Get rid of** significa deshacerse de algo. Es una expresión fija de tres palabras." },
+      { "quien": "Ana", "en": "Okay. I'll wrap up the first ticket today and show Tom tomorrow.", "es": "Bueno. Termino el primer ticket hoy y se lo muestro a Tom mañana." },
+      { "quien": "Luis", "en": "See? Not so huge now. You owe me a coffee.", "es": "¿Ves? Ya no es tan enorme. Me debes un café." },
+      { "tipo": "pregunta", "pregunta": "¿Qué va a hacer Ana hoy?", "opciones": ["Terminar toda la página de pagos", "Terminar el primer ticket", "Tomar un café con Luis"], "correcta": 1, "explicacion": "Ana dice \"I'll wrap up the first ticket today\": va a terminar solo el primero." }
+    ] }
+]

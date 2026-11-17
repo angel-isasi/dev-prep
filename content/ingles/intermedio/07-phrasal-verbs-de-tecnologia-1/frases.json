@@ -28,5 +28,11 @@
   { "id": "en-intermedio-07-f27", "en": "It's hard to keep up with new frameworks.", "es": "Es difícil estar al día con los frameworks nuevos." },
   { "id": "en-intermedio-07-f28", "en": "The server ran out of memory last night.", "es": "El servidor se quedó sin memoria anoche." },
   { "id": "en-intermedio-07-f29", "en": "I deleted my branch and started over.", "es": "Borré mi rama y empecé de nuevo." },
-  { "id": "en-intermedio-07-f30", "en": "Carry on, I'll check your code later.", "es": "Sigue, reviso tu código después." }
+  { "id": "en-intermedio-07-f30", "en": "Carry on, I'll check your code later.", "es": "Sigue, reviso tu código después." },
+  { "id": "en-intermedio-07-f31", "en": "Can you help me set up the project?", "es": "¿Me ayudas a configurar el proyecto?", "trabajo": true },
+  { "id": "en-intermedio-07-f32", "en": "We had to roll back the last deploy.", "es": "Tuvimos que revertir el último deploy.", "trabajo": true },
+  { "id": "en-intermedio-07-f33", "en": "I finally figured out the problem.", "es": "Por fin entendí el problema.", "trabajo": true },
+  { "id": "en-intermedio-07-f34", "en": "We ran into a CORS error.", "es": "Nos topamos con un error de CORS.", "trabajo": true },
+  { "id": "en-intermedio-07-f35", "en": "Sarah came up with a better solution.", "es": "A Sarah se le ocurrió una mejor solución.", "trabajo": true },
+  { "id": "en-intermedio-07-f36", "en": "Please back up the database first.", "es": "Por favor, primero haz un backup de la base de datos.", "trabajo": true }
 ]

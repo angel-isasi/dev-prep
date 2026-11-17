@@ -1,0 +1,20 @@
+[
+  { "id": "en-basico-20-h01", "titulo": "La función que no devolvía nada", "situacion": "Ana hace pair programming con Sarah en su primera tarea real.",
+    "pasos": [
+      { "quien": "Sarah", "en": "OK, Ana, what does this function do?", "es": "A ver, Ana, ¿qué hace esta función?" },
+      { "quien": "Ana", "en": "It takes an array of users and filters the active users.", "es": "Recibe un array de usuarios y filtra los usuarios activos." },
+      { "quien": "Sarah", "en": "Nice. But the page is empty. Let's check the console.", "es": "Bien. Pero la página está vacía. Revisemos la consola." },
+      { "quien": "Ana", "en": "The console says the value is undefined.", "es": "La consola dice que el valor es undefined." },
+      { "tipo": "pregunta", "pregunta": "¿Qué muestra la consola?", "opciones": ["Que el valor es undefined", "Un error de sintaxis", "La lista de usuarios"], "correcta": 0, "explicacion": "Ana lee **the value is undefined**." },
+      { "quien": "Sarah", "en": "Hmm. Read the function out loud.", "es": "Mmm. Lee la función en voz alta." },
+      { "quien": "Ana", "en": "\"Const active users equals users dot filter...\" Oh! I forgot the return keyword.", "es": "\"Const usuarios activos es igual a users punto filter...\" ¡Ah! Me olvidé de la palabra return." },
+      { "tipo": "completa", "quien": "Ana", "en": "The function doesn't ___ anything!", "opciones": ["return", "returns", "returned"], "correcta": 0, "explicacion": "Después de **doesn't** el verbo va en forma base: *doesn't return*. La -s ya la lleva *does*.", "es": "¡La función no devuelve nada!" },
+      { "quien": "Sarah", "en": "Classic bug. I do that every week.", "es": "Bug clásico. Yo lo hago todas las semanas." },
+      { "quien": "Ana", "en": "OK, I'm adding the return now. Let's run the tests.", "es": "Ya, estoy agregando el return. Corramos los tests." },
+      { "tipo": "completa", "quien": "Sarah", "en": "Great. Now the function returns an ___ with three users.", "opciones": ["array", "boolean", "index"], "correcta": 0, "explicacion": "Una lista de usuarios es un **array**. Un *boolean* solo es true o false, y un *index* es la posición de un elemento.", "es": "Genial. Ahora la función devuelve un array con tres usuarios." },
+      { "quien": "Sarah", "en": "Now push your changes and open a pull request.", "es": "Ahora sube tus cambios y abre un pull request." },
+      { "quien": "Ana", "en": "Done. My first pull request!", "es": "Listo. ¡Mi primer pull request!" },
+      { "quien": "Sarah", "en": "Congrats! Tom's going to review it. Get ready for comments, ha, ha.", "es": "¡Felicitaciones! Tom lo va a revisar. Prepárate para los comentarios, ja, ja." },
+      { "tipo": "pregunta", "pregunta": "¿Cuál era el bug?", "opciones": ["Faltaba el return", "El array estaba vacío", "El loop nunca terminaba"], "correcta": 0, "explicacion": "Ana dice **I forgot the return keyword**: sin return la función devuelve undefined." }
+    ] }
+]

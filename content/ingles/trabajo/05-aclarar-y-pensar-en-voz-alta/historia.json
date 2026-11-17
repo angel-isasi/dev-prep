@@ -1,0 +1,20 @@
+[
+  { "id": "en-trabajo-05-h01", "titulo": "Live coding de práctica", "situacion": "Ana va a entrevistar candidatos pronto. Antes, Tom le hace un live coding de práctica para que vea cómo se siente estar del otro lado.",
+    "pasos": [
+      { "quien": "Tom", "en": "Here's the problem: write a function that removes duplicates from an array.", "es": "Este es el problema: escribe una función que quite los duplicados de un array." },
+      { "quien": "Ana", "en": "Okay. Just to clarify, is it an array of numbers or of objects?", "es": "Bueno. Solo para aclarar, ¿es un array de números o de objetos?" },
+      { "quien": "Tom", "en": "Numbers. Good question.", "es": "Números. Buena pregunta." },
+      { "tipo": "completa", "quien": "Ana", "en": "Can I ___ that the order should stay the same?", "es": "¿Puedo asumir que el orden debe mantenerse igual?", "opciones": ["assume", "assuming", "suppose to"], "correcta": 0, "explicacion": "**Can I assume that...?** es la frase para confirmar un supuesto antes de programar. Después de *can* va el verbo base, no *-ing* ni *to*." },
+      { "quien": "Tom", "en": "Yes. Keep the first time each number appears.", "es": "Sí. Quédate con la primera vez que aparece cada número." },
+      { "quien": "Ana", "en": "Let me think out loud. My first idea is two loops, but that's slow.", "es": "Déjame pensar en voz alta. Mi primera idea es usar dos bucles, pero eso es lento." },
+      { "quien": "Ana", "en": "A better idea is a Set, because it only keeps unique values.", "es": "Una mejor idea es un Set, porque solo guarda valores únicos." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Ana prefiere usar un Set?", "opciones": ["Porque ordena los números", "Porque solo guarda valores únicos", "Porque Tom se lo pidió"], "correcta": 1, "explicacion": "Ana dice que un Set \"only keeps unique values\", y además es más rápido que dos bucles." },
+      { "quien": "Tom", "en": "Sounds good. Go ahead.", "es": "Suena bien. Adelante." },
+      { "quien": "Ana", "en": "Done. Let me test it with an example: one, two, two, three.", "es": "Listo. Déjame probarlo con un ejemplo: uno, dos, dos, tres." },
+      { "tipo": "completa", "quien": "Ana", "en": "Hmm, it returns a Set, not an array. Let me ___ that.", "es": "Mmm, devuelve un Set, no un array. Déjame corregir eso.", "opciones": ["fix", "fixing", "to fix"], "correcta": 0, "explicacion": "Después de **let me** va el verbo base: *let me fix*, *let me think*, *let me test*." },
+      { "quien": "Ana", "en": "I'll spread it into an array. Now it returns one, two, three.", "es": "Lo convierto en array con spread. Ahora devuelve uno, dos, tres." },
+      { "quien": "Tom", "en": "Perfect. You found your own bug, and you said everything out loud. That's what we want to see.", "es": "Perfecto. Encontraste tu propio bug y dijiste todo en voz alta. Eso es lo que queremos ver." },
+      { "quien": "Ana", "en": "Great. Can I be the interviewer now? I have a hard question about your jokes.", "es": "Genial. ¿Ahora puedo ser yo la entrevistadora? Tengo una pregunta difícil sobre tus chistes." },
+      { "tipo": "pregunta", "pregunta": "Según Tom, ¿qué hizo bien Ana?", "opciones": ["Escribió el código en un minuto", "Encontró su propio bug y pensó en voz alta", "No hizo ninguna pregunta"], "correcta": 1, "explicacion": "Tom valora que encontró su propio bug y que dijo todo en voz alta." }
+    ] }
+]

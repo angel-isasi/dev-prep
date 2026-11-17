@@ -1,0 +1,19 @@
+[
+  { "id": "en-trabajo-11-h01", "titulo": "La oferta de tiempo completo", "situacion": "Después de un año, la empresa quiere contratar a Ana a tiempo completo. Al final de la conversación, le toca preguntar a ella.",
+    "pasos": [
+      { "quien": "Tom", "en": "So, Ana, that's the offer. Do you have any questions for us?", "es": "Entonces, Ana, esa es la oferta. ¿Tienes alguna pregunta para nosotros?" },
+      { "quien": "Ana", "en": "Yes, a few. What would a typical day look like in the new role?", "es": "Sí, algunas. ¿Cómo sería un día típico en el nuevo puesto?" },
+      { "quien": "Tom", "en": "Similar to now, but you'd own a feature from start to finish.", "es": "Parecido a ahora, pero serías responsable de una funcionalidad de principio a fin." },
+      { "tipo": "completa", "quien": "Ana", "en": "That sounds great. Will there be ___ mentorship, or will I be on my own?", "es": "Suena genial. ¿Seguirá habiendo mentoría, o estaré sola?", "opciones": ["still", "yet", "already"], "correcta": 0, "explicacion": "**Still** indica que algo continúa: *will there still be mentorship?* *Yet* va al final en preguntas y negativas." },
+      { "quien": "Tom", "en": "You'll still have one-on-ones with me every two weeks.", "es": "Seguirás teniendo reuniones uno a uno conmigo cada dos semanas." },
+      { "quien": "Ana", "en": "Perfect. And will the role stay fully remote?", "es": "Perfecto. ¿Y el puesto seguirá siendo totalmente remoto?" },
+      { "quien": "Tom", "en": "Yes, fully remote. We'll just fly you to Austin once a year.", "es": "Sí, totalmente remoto. Solo te traeremos a Austin una vez al año." },
+      { "tipo": "pregunta", "pregunta": "¿Cada cuánto tendrá Ana reuniones uno a uno con Tom?", "opciones": ["Cada semana", "Cada dos semanas", "Una vez al año"], "correcta": 1, "explicacion": "Tom dice \"every two weeks\". Una vez al año es el viaje a Austin." },
+      { "quien": "Ana", "en": "About the salary, I was expecting something closer to the market range for this role.", "es": "Sobre el sueldo, esperaba algo más cerca del rango del mercado para este puesto." },
+      { "tipo": "completa", "quien": "Tom", "en": "Fair. I'll talk to HR and ___ back to you by Friday.", "es": "Justo. Hablaré con Recursos Humanos y te respondo antes del viernes.", "opciones": ["get", "come", "return"], "correcta": 0, "explicacion": "**Get back to you** significa responderte más tarde. Es la frase típica al cerrar una conversación de trabajo." },
+      { "quien": "Ana", "en": "Thank you. I really appreciate the offer, and I'm excited about the team.", "es": "Gracias. De verdad agradezco la oferta, y me emociona el equipo." },
+      { "quien": "Tom", "en": "One last question from me: do you need time to think?", "es": "Una última pregunta de mi parte: ¿necesitas tiempo para pensarlo?" },
+      { "quien": "Ana", "en": "Only until Friday. Luis wants to plan the celebration.", "es": "Solo hasta el viernes. Luis quiere planear la celebración." },
+      { "tipo": "pregunta", "pregunta": "¿Cómo pidió Ana un mejor sueldo?", "opciones": ["Amenazó con irse", "Dijo con calma que esperaba algo más cerca del rango del mercado", "No habló del sueldo"], "correcta": 1, "explicacion": "Ana fue educada y concreta: \"I was expecting something closer to the market range\"." }
+    ] }
+]

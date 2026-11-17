@@ -28,5 +28,10 @@
   { "id": "en-basico-20-f27", "en": "I'll refactor this code after the release.", "es": "Voy a refactorizar este código después del lanzamiento." },
   { "id": "en-basico-20-f28", "en": "The users are in a table with four columns.", "es": "Los usuarios están en una tabla de cuatro columnas." },
   { "id": "en-basico-20-f29", "en": "Can you show me how this hook works?", "es": "¿Me puedes mostrar cómo funciona este hook?" },
-  { "id": "en-basico-20-f30", "en": "I want to work on the frontend.", "es": "Quiero trabajar en el frontend." }
+  { "id": "en-basico-20-f30", "en": "I want to work on the frontend.", "es": "Quiero trabajar en el frontend." },
+  { "id": "en-basico-20-f31", "en": "The endpoint returns a list of users.", "es": "El endpoint devuelve una lista de usuarios.", "trabajo": true },
+  { "id": "en-basico-20-f32", "en": "I opened a pull request for the fix.", "es": "Abrí un pull request para el fix.", "trabajo": true },
+  { "id": "en-basico-20-f33", "en": "We need to deploy before five.", "es": "Tenemos que hacer el deploy antes de las cinco.", "trabajo": true },
+  { "id": "en-basico-20-f34", "en": "Don't commit your passwords.", "es": "No hagas commit de tus contraseñas.", "trabajo": true },
+  { "id": "en-basico-20-f35", "en": "Can you merge my branch?", "es": "¿Puedes hacer merge de mi rama?", "trabajo": true }
 ]

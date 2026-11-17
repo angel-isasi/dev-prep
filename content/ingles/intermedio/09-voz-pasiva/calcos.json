@@ -1,0 +1,6 @@
+[
+  { "id": "en-intermedio-09-c01", "es": "Se borró el archivo.", "natural": "The file was deleted.", "calco": "Was deleted the file.", "explicacion": "En inglés la cosa va **primero**: *The file was deleted*. No se empieza con el verbo." },
+  { "id": "en-intermedio-09-c02", "es": "Se usa React en el frontend.", "natural": "React is used on the frontend.", "calco": "Is used React on the frontend.", "explicacion": "El \"se\" impersonal se traduce con **pasiva** y el sujeto adelante: *React is used*." },
+  { "id": "en-intermedio-09-c03", "es": "El artículo fue escrito por Ana.", "natural": "The article was written by Ana.", "calco": "The article was written for Ana.", "explicacion": "Quien hace la acción va con **by**. *For Ana* significa \"para Ana\"." },
+  { "id": "en-intermedio-09-c04", "es": "El bug se arregló ayer.", "natural": "The bug was fixed yesterday.", "calco": "The bug fixed yesterday.", "explicacion": "Sin **was**, parece que el bug arregló algo. La pasiva necesita *be* + participio." }
+]

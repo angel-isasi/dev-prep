@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-17-c01", "es": "Voy a viajar.", "natural": "I'm going to travel.", "calco": "I going to travel.", "explicacion": "**Going to** necesita *am*, *is* o *are* antes: *I'm going to travel*." },
+  { "id": "en-basico-17-c02", "es": "Te llamo luego.", "natural": "I'll call you later.", "calco": "I call you later.", "explicacion": "En español usamos el presente para prometer algo, en inglés se usa **will**: *I'll call you*." },
+  { "id": "en-basico-17-c03", "es": "No voy a olvidarlo.", "natural": "I won't forget it.", "calco": "I don't will forget it.", "explicacion": "La negación de *will* es **won't**, sin *don't*." },
+  { "id": "en-basico-17-c04", "es": "Mañana voy a Cusco.", "natural": "I'm going to Cusco tomorrow.", "calco": "I go to Cusco tomorrow.", "explicacion": "Para un plan que ya está decidido se usa **presente continuo** o *going to*, no presente simple." }
+]

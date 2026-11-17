@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-15-c01", "es": "No trabajé ayer.", "natural": "I didn't work yesterday.", "calco": "I didn't worked yesterday.", "explicacion": "Después de **didn't** el verbo va en forma base: *didn't work*. El pasado ya está en *did*." },
+  { "id": "en-basico-15-c02", "es": "Ayer trabajé hasta tarde.", "natural": "Yesterday I worked late.", "calco": "Yesterday I work late.", "explicacion": "En inglés el pasado siempre se marca en el verbo, aunque digas *yesterday*: **worked**." },
+  { "id": "en-basico-15-c03", "es": "¿Visitaste Cusco?", "natural": "Did you visit Cusco?", "calco": "Did you visited Cusco?", "explicacion": "En la pregunta, **did** lleva el pasado y el verbo va en forma base: *visit*." },
+  { "id": "en-basico-15-c04", "es": "Me mudé a Lima en 2020.", "natural": "I moved to Lima in 2020.", "calco": "I moved me to Lima in 2020.", "explicacion": "**Move** no lleva el \"me\" del español: *I moved to Lima*." }
+]

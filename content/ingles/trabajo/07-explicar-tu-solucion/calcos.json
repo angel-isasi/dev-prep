@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-07-c01", "es": "Recorro el array.", "natural": "I iterate over the array.", "calco": "I travel the array.", "explicacion": "\"Recorrer\" un array es **iterate over** o *loop through*. *Travel* es viajar." },
+  { "id": "en-trabajo-07-c02", "es": "La desventaja es que usa más memoria.", "natural": "The trade-off is that it uses more memory.", "calco": "The trade-off is that uses more memory.", "explicacion": "En inglés el sujeto nunca desaparece: *that **it** uses*." },
+  { "id": "en-trabajo-07-c03", "es": "Es O de n al cuadrado.", "natural": "It's O of n squared.", "calco": "It's O of n square.", "explicacion": "\"Al cuadrado\" es **squared**, con *-d*." },
+  { "id": "en-trabajo-07-c04", "es": "Llevo la cuenta de los elementos que vi.", "natural": "I keep track of the elements I've seen.", "calco": "I carry the count of the elements I saw.", "explicacion": "\"Llevar la cuenta\" es **keep track of**." }
+]

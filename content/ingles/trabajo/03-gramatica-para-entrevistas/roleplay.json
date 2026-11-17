@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-03-r01", "titulo": "Tu experiencia sin errores de tiempo", "situacion": "Mike, de RR. HH., te hace preguntas sobre tu experiencia. Cuida los tiempos verbales.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Mike", "en": "What are you working on these days?", "es": "¿En qué estás trabajando estos días?" },
+      { "opciones": [
+          { "en": "I'm currently learning TypeScript and building a study app.", "es": "Ahora mismo estoy aprendiendo TypeScript y construyendo una app de estudio.", "correcta": true, "explicacion": "Presente continuo con *currently* para lo que haces en esta etapa." },
+          { "en": "I currently learn TypeScript and build a study app.", "es": "", "correcta": false, "explicacion": "Para algo en curso ahora va presente continuo: *I'm learning*." },
+          { "en": "Actually I learn TypeScript.", "es": "", "correcta": false, "explicacion": "Falso amigo: *actually* es \"en realidad\", no \"actualmente\". Se dice *currently*." }
+        ] },
+      { "quien": "Mike", "en": "How long have you been working on that app?", "es": "¿Cuánto tiempo llevas trabajando en esa app?" },
+      { "opciones": [
+          { "en": "I'm working on it since March.", "es": "", "correcta": false, "explicacion": "Calco de \"trabajo en ella desde marzo\". Con *since* va presente perfecto continuo." },
+          { "en": "I've been working on it since March.", "es": "Llevo trabajando en ella desde marzo.", "correcta": true, "explicacion": "Presente perfecto continuo: algo que empezó en el pasado y sigue en curso." },
+          { "en": "I have been work on it for March.", "es": "", "correcta": false, "explicacion": "Falta *-ing* (*working*) y con un mes va *since*, no *for*." }
+        ] },
+      { "quien": "Mike", "en": "What was your role in your university project?", "es": "¿Cuál fue tu rol en tu proyecto de la universidad?" },
+      { "opciones": [
+          { "en": "I was the responsible of the frontend.", "es": "", "correcta": false, "explicacion": "Calco de \"la responsable de\". En inglés: *I was responsible for*." },
+          { "en": "I am responsible for the frontend.", "es": "", "correcta": false, "explicacion": "El proyecto ya terminó: va en pasado, *I was*." },
+          { "en": "I was responsible for the frontend, and I built the main screens.", "es": "Fui la responsable del frontend y construí las pantallas principales.", "correcta": true, "explicacion": "*Responsible for* en pasado, y *built* (pasado de *build*) para lo que hiciste." }
+        ] },
+      { "quien": "Mike", "en": "Looking back, what would you do differently?", "es": "Mirando atrás, ¿qué harías diferente?" },
+      { "opciones": [
+          { "en": "I would have written tests from the start.", "es": "Habría escrito tests desde el principio.", "correcta": true, "explicacion": "*Would have* + participio: lo que habrías hecho distinto en el pasado." },
+          { "en": "I would have write tests from the start.", "es": "", "correcta": false, "explicacion": "Después de *would have* va el participio: *written*." },
+          { "en": "Nothing, everything was perfect.", "es": "", "correcta": false, "explicacion": "En una entrevista se espera reflexión; decir que todo fue perfecto suena poco honesto." }
+        ] }
+    ] }
+]

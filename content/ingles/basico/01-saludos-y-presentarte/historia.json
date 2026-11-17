@@ -1,0 +1,19 @@
+[
+  { "id": "en-basico-01-h01", "titulo": "Good night... ¿o good evening?", "situacion": "Ana llega de noche a un evento de programadores en Lima con su amigo Luis.",
+    "pasos": [
+      { "quien": "Ana", "en": "Good night, everyone!", "es": "¡Buenas noches a todos!" },
+      { "quien": "Luis", "en": "Ana, it's good evening. Good night is for bye.", "es": "Ana, se dice good evening. Good night es para despedirse." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Luis corrige a Ana?", "opciones": ["Good night solo se usa para despedirse", "Ana llega tarde", "Ana habla en español"], "correcta": 0, "explicacion": "Al **llegar** de noche se dice **good evening**; **good night** es para irte o ir a dormir." },
+      { "quien": "Sarah", "en": "Hi! Good evening. I'm Sarah.", "es": "¡Hola! Buenas noches. Soy Sarah." },
+      { "quien": "Ana", "en": "Hi, Sarah. My name is Ana. Nice to meet you.", "es": "Hola, Sarah. Me llamo Ana. Mucho gusto." },
+      { "quien": "Sarah", "en": "Nice to meet you too. Where are you from?", "es": "Igualmente. ¿De dónde eres?" },
+      { "quien": "Ana", "en": "I'm from Lima, Peru. I'm Peruvian.", "es": "Soy de Lima, Perú. Soy peruana." },
+      { "tipo": "completa", "quien": "Sarah", "en": "I'm from the United States. I'm ___ frontend developer.", "opciones": ["a", "an", "the"], "correcta": 0, "explicacion": "Con profesiones siempre va **a** o **an**. *Frontend* empieza con sonido de consonante, por eso **a** y no *an*.", "es": "Soy de Estados Unidos. Soy desarrolladora frontend." },
+      { "quien": "Ana", "en": "Cool! I'm a student. I'm a future developer!", "es": "¡Genial! Soy estudiante. ¡Soy una futura desarrolladora!" },
+      { "quien": "Luis", "en": "And I'm Luis. I'm an engineer.", "es": "Y yo soy Luis. Soy ingeniero." },
+      { "tipo": "pregunta", "pregunta": "¿A qué se dedica Sarah?", "opciones": ["Es desarrolladora frontend", "Es estudiante", "Es ingeniera"], "correcta": 0, "explicacion": "Sarah dice **I'm a frontend developer**. La estudiante es Ana y el ingeniero es Luis." },
+      { "quien": "Sarah", "en": "Excuse me, it's late. Bye, Ana! Bye, Luis!", "es": "Disculpen, ya es tarde. ¡Chau, Ana! ¡Chau, Luis!" },
+      { "tipo": "completa", "quien": "Ana", "en": "Bye, Sarah! Good ___!", "opciones": ["night", "morning", "evening"], "correcta": 0, "explicacion": "Al **despedirte** de noche dices **good night**. *Good evening* es para saludar al llegar.", "es": "¡Chau, Sarah! ¡Buenas noches!" },
+      { "quien": "Luis", "en": "Yes! Now good night is OK.", "es": "¡Sí! Ahora good night sí está bien." }
+    ] }
+]

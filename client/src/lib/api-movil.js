@@ -16,6 +16,8 @@ import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
 import { analizarOferta, palabrasParaCv } from "../../../server/ofertas.js";
 import { diaSemana, lunesDe } from "../../../server/metricas.js";
 import { avanceUnidad } from "../movil/leccion/motor.js";
+import { expandirIngles, registrosPorConcepto } from "../../../scripts/items/ingles.js";
+import { contadoresDeLeccion, ligaSemanal, misionesDelDia, premioDeCofre, XP_COFRE_DIARIO } from "../movil/ingles/misiones.js";
 import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaSemana } from "../../../server/avance.js";
 import { buscarOfertas, nuevasDesde, ordenarOfertas } from "../../../server/ofertas-auto.js";
 import { conFechaDeEnvio, metaSemanal, numerosPostulaciones, seguimientosPendientes } from "../../../server/postulaciones.js";
@@ -42,6 +44,10 @@ function huella(texto) {
 
 // --- Lectura de los JSON (cada archivo se pide una sola vez) ---
 const archivos = new Map();
+
+/** Lo propio de las lecciones de inglés: historias hechas, cofres, unidades legendarias, vidas, récords. */
+const extraIngles = () => progreso.ajuste("inglesExtra", {});
+const guardarExtra = (cambios) => progreso.cambiarAjuste("inglesExtra", { ...extraIngles(), ...cambios });
 
 function json(ruta) {
   if (!archivos.has(ruta)) {
@@ -102,9 +108,13 @@ const resumenEj = (e) => ({ ...e, estado: estadoMovil(e.id), ultimoResultado: nu
 
 /** Lo que comparten Inicio y Progreso, igual que en el servidor de la laptop. */
 /** Ítems de inglés de las tres etapas juntos (un archivo por etapa; si alguno no existe, se omite). */
+let inglesExpandido = null; // el archivo trae conceptos compactos: se expanden una sola vez
 async function itemsIngles() {
-  const partes = await Promise.all(["basico", "intermedio", "trabajo"].map((e) => json(`items-ingles-${e}.json`).catch(() => ({ unidades: [], items: [] }))));
-  return { unidades: partes.flatMap((p) => p.unidades), items: partes.flatMap((p) => p.items) };
+  if (inglesExpandido) return inglesExpandido;
+  const partes = await Promise.all(["basico", "intermedio", "trabajo"].map((e) => json(`items-ingles-${e}.json`).catch(() => null)));
+  const datos = expandirIngles({ unidades: partes.flatMap((p) => p?.unidades ?? []), items: partes.flatMap((p) => p?.items ?? []) });
+  if (partes.every(Boolean)) inglesExpandido = datos;
+  return datos;
 }
 
 /** ¿Hubo alguna semana con la meta cumplida de lunes a viernes? */
@@ -309,8 +319,10 @@ const apiWeb = {
       unidades,
       items: datosItems.items,
       preguntas: entrevistas?.preguntas ?? [],
-      registros: d.items,
+      // En inglés, el progreso viejo (una clave por forma de preguntar) se junta en su concepto
+      registros: ingles ? registrosPorConcepto(d.items) : d.items,
       registrosPreguntas: d.preguntas,
+      extra: ingles ? extraIngles() : null,
       reportados: d.reportados,
       unidadActual: actual?.id ?? null,
       lecciones: d.lecciones,
@@ -841,6 +853,70 @@ const apiWeb = {
       semana,
       nivelHecho: !!ajuste.nivelHecho,
     };
+  },
+  /** Historias y roleplays de todas las unidades, con cuáles ya hiciste. */
+  async historiasIngles() {
+    const datos = await json("historias-ingles.json").catch(() => ({ historias: [], roleplays: [] }));
+    const extra = extraIngles();
+    return { ...datos, hechas: extra.historias ?? {}, unidad: progreso.ajuste("ingles", {}).unidad ?? null };
+  },
+  /** Terminaste una historia o un roleplay: XP, cuenta para la misión y queda marcada. */
+  async terminarHistoria(id, { xp = 0, segundos = 0 } = {}) {
+    const extra = extraIngles();
+    guardarExtra({ historias: { ...(extra.historias ?? {}), [id]: progreso.hoy() } });
+    progreso.sumarContadores({ inglesHistorias: 1, inglesSegundos: Math.round(Math.min(segundos, 3600)) });
+    if (xp) progreso.sumarXp(xp);
+    cache.clear();
+  },
+  /** Lección de inglés terminada: contadores para misiones y liga. */
+  async registrarLeccionIngles(sesion, final) {
+    progreso.sumarContadores(contadoresDeLeccion(sesion, final));
+    cache.clear();
+  },
+  /** Misiones de hoy, liga contra ti mismo y si ya cobraste el cofre diario. */
+  async inglesMotivacion({ conMicro = false } = {}) {
+    const dias = progreso.dias();
+    const hoy = progreso.hoy();
+    const extra = extraIngles();
+    const misiones = misionesDelDia(hoy, dias[hoy] ?? {}, { conMicro });
+    return { misiones, completas: misiones.every((m) => m.hecha), cobrado: extra.cofreDiario === hoy, xpCofre: XP_COFRE_DIARIO, liga: ligaSemanal(dias, hoy), vidas: !!extra.vidas, parejasRecord: extra.parejasRecord ?? 0 };
+  },
+  async cobrarCofreDiario() {
+    const hoy = progreso.hoy();
+    const extra = extraIngles();
+    const dias = progreso.dias();
+    if (extra.cofreDiario === hoy || !misionesDelDia(hoy, dias[hoy] ?? {}).every((m) => m.hecha)) return null;
+    guardarExtra({ cofreDiario: hoy });
+    progreso.sumarXp(XP_COFRE_DIARIO);
+    cache.clear();
+    return { xp: XP_COFRE_DIARIO };
+  },
+  /** Abre el cofre de una unidad terminada (todos sus conceptos aprendidos): una frase de trabajo y XP. */
+  async abrirCofreUnidad(unidad) {
+    const extra = extraIngles();
+    const { items } = await itemsIngles();
+    const premio = premioDeCofre(items, unidad);
+    if ((extra.cofres ?? {})[unidad]) return { ...premio, yaAbierto: true };
+    guardarExtra({ cofres: { ...(extra.cofres ?? {}), [unidad]: progreso.hoy() } });
+    progreso.sumarXp(premio.xp);
+    cache.clear();
+    return premio;
+  },
+  /** Repaso legendario aprobado: la unidad queda dorada. */
+  async marcarLegendaria(unidad) {
+    const extra = extraIngles();
+    guardarExtra({ legendarias: { ...(extra.legendarias ?? {}), [unidad]: progreso.hoy() } });
+  },
+  cambiarVidasIngles: async (activas) => guardarExtra({ vidas: !!activas }),
+  /** Parejas contrarreloj: guarda tu récord y suma el XP. */
+  async terminarParejas(parejas, xp) {
+    const extra = extraIngles();
+    const record = Math.max(extra.parejasRecord ?? 0, parejas);
+    guardarExtra({ parejasRecord: record });
+    progreso.sumarContadores({ inglesAciertos: parejas, inglesSegundos: 60 });
+    if (xp) progreso.sumarXp(xp);
+    cache.clear();
+    return { record, nuevoRecord: parejas > (extra.parejasRecord ?? 0) };
   },
   /** Mis palabras: las que marcaste con estrella para repasarlas aparte. */
   misPalabras: async () => progreso.registros("misPalabras"),

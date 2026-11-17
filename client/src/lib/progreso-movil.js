@@ -176,6 +176,18 @@ export function crearProgresoMovil(almacenamiento, reloj = {}) {
       guardar();
       return datos.lecciones;
     },
+    /** XP suelto (cofres, misiones): suma al total y al XP de inglés del día. */
+    sumarXp(xp) {
+      datos.lecciones = { ...(datos.lecciones ?? { xp: 0, completadas: 0 }), xp: (datos.lecciones?.xp ?? 0) + xp };
+      datos.dias = sumarAlDia(datos.dias, hoy(), "inglesXp", xp);
+      guardar();
+      return datos.lecciones;
+    },
+    /** Varios contadores del día a la vez (los de una lección de inglés). */
+    sumarContadores(contadores) {
+      for (const [campo, n] of Object.entries(contadores)) if (n) datos.dias = sumarAlDia(datos.dias, hoy(), campo, n);
+      guardar();
+    },
     reportar(clave) {
       datos.reportados = { ...datos.reportados, [clave]: hoy() };
       guardar();

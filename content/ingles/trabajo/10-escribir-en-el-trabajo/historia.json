@@ -1,0 +1,20 @@
+[
+  { "id": "en-trabajo-10-h01", "titulo": "El commit \"cambios\"", "situacion": "Tom revisa el historial de Git y encuentra un commit de Ana que no explica nada.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, quick question. What does your commit \"changes\" do?", "es": "Ana, una pregunta rápida. ¿Qué hace tu commit \"changes\"?" },
+      { "quien": "Ana", "en": "Oh. It fixes the date filter. And the footer. And a typo.", "es": "Ah. Arregla el filtro de fechas. Y el footer. Y un error de tipeo." },
+      { "quien": "Tom", "en": "That's three commits hiding in one. Next time, split them.", "es": "Son tres commits escondidos en uno. La próxima vez, sepáralos." },
+      { "tipo": "completa", "quien": "Tom", "en": "And use the imperative, like \"___ date filter for empty ranges\".", "es": "Y usa el imperativo, como \"Arregla el filtro de fechas para rangos vacíos\".", "opciones": ["Fixed", "Fix", "Fixing"], "correcta": 1, "explicacion": "Los commits van en imperativo: **Fix**, *Add*, *Remove*. Se leen como \"este commit va a... *fix date filter*\"." },
+      { "quien": "Ana", "en": "Got it. And for the PR description?", "es": "Entendido. ¿Y para la descripción del PR?" },
+      { "quien": "Tom", "en": "Say what changed, why, and how to test it. Three short parts.", "es": "Di qué cambió, por qué y cómo probarlo. Tres partes cortas." },
+      { "tipo": "pregunta", "pregunta": "¿Qué debe tener la descripción de un PR, según Tom?", "opciones": ["Solo el título", "Qué cambió, por qué y cómo probarlo", "La lista de todos los archivos"], "correcta": 1, "explicacion": "Tom dice \"what changed, why, and how to test it\"." },
+      { "quien": "Ana", "en": "Also, I'm stuck with the export. Can I just write \"help\" on Slack?", "es": "Además, estoy atascada con la exportación. ¿Puedo escribir solo \"ayuda\" en Slack?" },
+      { "quien": "Tom", "en": "Please don't. Give context: what you tried, the error, and what you expect.", "es": "Por favor no. Da contexto: qué intentaste, el error y qué esperas." },
+      { "quien": "Ana", "en": "\"Hi team, the CSV export fails with a 500 error. I've checked the logs and the query works. Any ideas?\"", "es": "\"Hola equipo, la exportación a CSV falla con un error 500. Revisé los logs y la consulta funciona. ¿Alguna idea?\"" },
+      { "tipo": "completa", "quien": "Sarah", "en": "Great message! I ___ that error last week. It's the file size limit.", "es": "¡Muy buen mensaje! Tuve ese error la semana pasada. Es el límite de tamaño del archivo.", "opciones": ["had", "have had", "have"], "correcta": 0, "explicacion": "Con **last week** va pasado simple: *I had*. El presente perfecto no va con un tiempo terminado." },
+      { "quien": "Ana", "en": "Wow, five minutes. My old \"help\" messages took two days.", "es": "Guau, cinco minutos. Mis antiguos mensajes de \"ayuda\" tardaban dos días." },
+      { "quien": "Tom", "en": "Because nobody knew what you needed. Now, about that commit...", "es": "Porque nadie sabía qué necesitabas. Ahora, sobre ese commit..." },
+      { "quien": "Ana", "en": "I know, I know. \"Split changes into three commits.\"", "es": "Ya sé, ya sé. \"Separa los cambios en tres commits.\"" },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Sarah respondió tan rápido esta vez?", "opciones": ["Porque estaba aburrida", "Porque el mensaje tenía contexto claro", "Porque Tom se lo ordenó"], "correcta": 1, "explicacion": "El mensaje decía el error, qué revisó Ana y qué necesitaba: así es fácil ayudar." }
+    ] }
+]

@@ -1,0 +1,20 @@
+[
+  { "id": "en-basico-12-h01", "titulo": "La prueba técnica y el arroz", "situacion": "Ana está haciendo la prueba de código de la empresa de Sarah cuando Luis la llama.",
+    "pasos": [
+      { "quien": "Luis", "en": "Hi, Ana! What are you doing?", "es": "¡Hola, Ana! ¿Qué estás haciendo?" },
+      { "quien": "Ana", "en": "I'm doing the coding test for Sarah's company. I'm writing a search filter in React.", "es": "Estoy haciendo la prueba de código de la empresa de Sarah. Estoy escribiendo un filtro de búsqueda en React." },
+      { "quien": "Luis", "en": "Cool. How is it going?", "es": "Genial. ¿Cómo va?" },
+      { "quien": "Ana", "en": "Well, two tests are passing and one test is failing.", "es": "Bueno, dos tests están pasando y uno está fallando." },
+      { "tipo": "pregunta", "pregunta": "¿Cuántos tests están fallando?", "opciones": ["Uno", "Dos", "Ninguno"], "correcta": 0, "explicacion": "Ana dice **one test is failing**. Los otros dos están pasando." },
+      { "quien": "Luis", "en": "I'm cooking rice right now. I usually cook on Sundays.", "es": "Yo estoy cocinando arroz ahora mismo. Normalmente cocino los domingos." },
+      { "quien": "Ana", "en": "Luis, wait. What's that noise?", "es": "Luis, espera. ¿Qué es ese ruido?" },
+      { "quien": "Luis", "en": "Oh no! The rice is burning!", "es": "¡Ay, no! ¡El arroz se está quemando!" },
+      { "tipo": "completa", "quien": "Luis", "en": "And the smoke alarm ___ ringing!", "opciones": ["is", "are", "does"], "correcta": 0, "explicacion": "El presente continuo es **am/is/are + verbo con -ing**. La alarma es una sola, por eso **is ringing**.", "es": "¡Y la alarma de humo está sonando!" },
+      { "quien": "Ana", "en": "Go, go! Call me later.", "es": "¡Anda, anda! Llámame después." },
+      { "quien": "Luis", "en": "OK, the kitchen is fine now. Are you still working?", "es": "Ya, la cocina está bien. ¿Sigues trabajando?" },
+      { "quien": "Ana", "en": "Yes, but now all the tests are passing!", "es": "Sí, ¡pero ahora todos los tests están pasando!" },
+      { "tipo": "completa", "quien": "Ana", "en": "Right now I ___ the README.", "opciones": ["am writing", "write", "writing"], "correcta": 0, "explicacion": "*Right now* indica algo que pasa **en este momento**: presente continuo, *I am writing*. *I write* sería una rutina.", "es": "Ahora mismo estoy escribiendo el README." },
+      { "quien": "Luis", "en": "Great! Today you're writing code and I'm burning rice.", "es": "¡Genial! Hoy tú escribes código y yo quemo arroz." },
+      { "tipo": "pregunta", "pregunta": "¿Qué se quemó en la casa de Luis?", "opciones": ["El arroz", "El pollo", "La laptop"], "correcta": 0, "explicacion": "Luis dice **the rice is burning**." }
+    ] }
+]

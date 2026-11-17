@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-11-r01", "titulo": "¿Tienes alguna pregunta para mí?", "situacion": "Al final de la entrevista, Jennifer, ingeniera, te da tiempo para preguntar y luego cierra.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Jennifer", "en": "We have a few minutes left. Do you have any questions for me?", "es": "Nos quedan unos minutos. ¿Tienes alguna pregunta para mí?" },
+      { "opciones": [
+          { "en": "No, everything is clear.", "es": "", "correcta": false, "explicacion": "No preguntar nada suele leerse como falta de interés." },
+          { "en": "Yes. What does a typical day look like for a junior developer on your team?", "es": "Sí. ¿Cómo es un día típico para un desarrollador junior en su equipo?", "correcta": true, "explicacion": "Pregunta concreta sobre el día a día: muestra interés real." },
+          { "en": "Yes. How is a typical day?", "es": "", "correcta": false, "explicacion": "Calco de \"¿cómo es...?\". En inglés se dice *What is... like?* o *What does... look like?*." }
+        ] },
+      { "quien": "Jennifer", "en": "We start with a daily, then mostly coding and pairing.", "es": "Empezamos con un daily y luego sobre todo programamos y trabajamos en pareja." },
+      { "opciones": [
+          { "en": "That sounds great. How does onboarding work for new juniors? Is there mentoring?", "es": "Suena genial. ¿Cómo es la incorporación para los juniors nuevos? ¿Hay mentoría?", "correcta": true, "explicacion": "Preguntar por *onboarding* y *mentoring* muestra que quieres crecer." },
+          { "en": "OK. Do you work from home all the time? I don't like offices.", "es": "", "correcta": false, "explicacion": "Preguntar por modalidad está bien, pero la segunda frase suena negativa." },
+          { "en": "How many vacation days do I get?", "es": "", "correcta": false, "explicacion": "No es una pregunta prohibida, pero como segunda pregunta da la impresión de que solo te importa eso." }
+        ] },
+      { "quien": "Jennifer", "en": "Yes, every junior gets a mentor for the first three months. Anything else?", "es": "Sí, cada junior tiene un mentor los primeros tres meses. ¿Algo más?" },
+      { "opciones": [
+          { "en": "What are the next steps in the process?", "es": "¿Cuáles son los siguientes pasos del proceso?", "correcta": true, "explicacion": "Pregunta clásica de cierre: te deja saber qué esperar." },
+          { "en": "What are the next steps of the process, and when you will answer me?", "es": "", "correcta": false, "explicacion": "Orden de pregunta incorrecto (*when will you...*) y *answer me* suena exigente." },
+          { "en": "So, did I pass?", "es": "", "correcta": false, "explicacion": "Demasiado directo; la entrevistadora normalmente no puede decirlo en el momento." }
+        ] },
+      { "quien": "Jennifer", "en": "We'll get back to you by Friday. Thanks for your time, Ana.", "es": "Te respondemos antes del viernes. Gracias por tu tiempo, Ana." },
+      { "opciones": [
+          { "en": "Thanks. Bye.", "es": "", "correcta": false, "explicacion": "Correcto, pero muy seco para cerrar una entrevista." },
+          { "en": "Thank you to you for the opportunity.", "es": "", "correcta": false, "explicacion": "Calco de \"gracias a ti\". Se dice *Thank you* o *Thanks, you too*." },
+          { "en": "Thank you, Jennifer. I really enjoyed our conversation, and I'm excited about the role.", "es": "Gracias, Jennifer. Disfruté mucho la conversación y me entusiasma el puesto.", "correcta": true, "explicacion": "Cierre cálido: agradeces, das una impresión positiva y muestras interés." }
+        ] }
+    ] }
+]

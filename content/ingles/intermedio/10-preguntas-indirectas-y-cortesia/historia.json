@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-10-h01", "titulo": "Preguntar sin miedo", "situacion": "Ana tiene que desplegar por primera vez y no sabe cómo. Le da vergüenza preguntar, pero lo hace.",
+    "pasos": [
+      { "quien": "Ana", "en": "Hi Tom, sorry to bother you. Do you have a minute?", "es": "Hola Tom, perdón por molestarte. ¿Tienes un minuto?" },
+      { "quien": "Tom", "en": "Sure, what's up?", "es": "Claro, ¿qué pasa?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Could you tell me where ___?", "es": "¿Podrías decirme dónde está la guía de despliegue?", "opciones": ["is the deploy guide", "the deploy guide is", "does the deploy guide"], "correcta": 1, "explicacion": "En una pregunta indirecta el orden es normal, sujeto + verbo: *where the deploy guide is*. No se invierte como en *where is it?*" },
+      { "quien": "Tom", "en": "It's in the wiki, under \"Release\". But it's a bit old.", "es": "Está en la wiki, en \"Release\". Pero está un poco desactualizada." },
+      { "quien": "Ana", "en": "I was wondering whether I can deploy on a Friday.", "es": "Me preguntaba si puedo desplegar un viernes." },
+      { "quien": "Tom", "en": "Technically yes. But nobody here deploys on Fridays. It's a tradition.", "es": "Técnicamente sí. Pero aquí nadie despliega los viernes. Es una tradición." },
+      { "tipo": "pregunta", "pregunta": "¿Qué dice Tom sobre desplegar los viernes?", "opciones": ["Que está prohibido por contrato", "Que se puede, pero nadie lo hace", "Que es el mejor día"], "correcta": 1, "explicacion": "Tom dice \"Technically yes\", pero que nadie lo hace: es una tradición." },
+      { "tipo": "completa", "quien": "Ana", "en": "Got it. Do you know ___ Sarah can review my PR today?", "es": "Entendido. ¿Sabes si Sarah puede revisar mi PR hoy?", "opciones": ["if", "that", "what"], "correcta": 0, "explicacion": "Para una pregunta de sí o no dentro de otra pregunta se usa **if** (o *whether*): *Do you know if...?*" },
+      { "quien": "Tom", "en": "I think so. Ask her directly, she's very friendly.", "es": "Creo que sí. Pregúntale directamente, es muy amable." },
+      { "quien": "Ana", "en": "Thanks. One more thing: would you mind checking my deploy with me?", "es": "Gracias. Una cosa más: ¿te importaría revisar el despliegue conmigo?" },
+      { "quien": "Tom", "en": "Not at all. And Ana, you never bother me. Questions are part of the job.", "es": "Para nada. Y Ana, nunca me molestas. Las preguntas son parte del trabajo." },
+      { "quien": "Ana", "en": "Good to know. Then I have twelve more questions.", "es": "Bueno saberlo. Entonces tengo doce preguntas más." },
+      { "quien": "Tom", "en": "Okay... maybe write them in a doc first.", "es": "Bueno... quizá escríbelas primero en un documento." },
+      { "tipo": "pregunta", "pregunta": "¿Qué piensa Tom de que Ana haga preguntas?", "opciones": ["Que lo molesta mucho", "Que son parte del trabajo", "Que debe preguntar solo a Sarah"], "correcta": 1, "explicacion": "Tom dice \"Questions are part of the job\", aunque después le pide que escriba las doce en un documento." }
+    ] }
+]

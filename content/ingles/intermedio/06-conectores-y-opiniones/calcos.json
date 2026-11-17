@@ -1,0 +1,6 @@
+[
+  { "id": "en-intermedio-06-c01", "es": "Estoy de acuerdo.", "natural": "I agree.", "calco": "I am agree.", "explicacion": "**Agree** es un verbo, no un adjetivo: *I agree*, sin *am*." },
+  { "id": "en-intermedio-06-c02", "es": "Según yo, es mejor.", "natural": "In my opinion, it's better.", "calco": "According to me, it's better.", "explicacion": "**According to** se usa para citar a otros (*according to the docs*). Para tu opinión: *In my opinion* o *I think*." },
+  { "id": "en-intermedio-06-c03", "es": "Aunque funciona, es lento.", "natural": "Although it works, it's slow.", "calco": "Although it works, but it's slow.", "explicacion": "En inglés no se usan *although* y *but* juntos en la misma oración." },
+  { "id": "en-intermedio-06-c04", "es": "A pesar de que era tarde, seguimos trabajando.", "natural": "Although it was late, we kept working.", "calco": "Despite it was late, we kept working.", "explicacion": "**Despite** va con sustantivo (*despite the time*). Antes de una frase con verbo va **although**." }
+]

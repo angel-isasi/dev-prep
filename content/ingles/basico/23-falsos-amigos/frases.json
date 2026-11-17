@@ -32,5 +32,10 @@
   { "id": "en-basico-23-f31", "en": "I'm going to record the demo.", "es": "Voy a grabar la demo." },
   { "id": "en-basico-23-f32", "en": "Check the recipient before you send the email.", "es": "Revisa el destinatario antes de mandar el correo." },
   { "id": "en-basico-23-f33", "en": "Her name sounds familiar.", "es": "Su nombre me suena." },
-  { "id": "en-basico-23-f34", "en": "The actual problem is in the API.", "es": "El problema real está en la API." }
+  { "id": "en-basico-23-f34", "en": "The actual problem is in the API.", "es": "El problema real está en la API." },
+  { "id": "en-basico-23-f35", "en": "Actually, the bug is in the backend.", "es": "En realidad, el bug está en el backend.", "trabajo": true },
+  { "id": "en-basico-23-f36", "en": "I realized my mistake after the deploy.", "es": "Me di cuenta de mi error después del deploy.", "trabajo": true },
+  { "id": "en-basico-23-f37", "en": "I'll attend the meeting tomorrow.", "es": "Mañana asistiré a la reunión.", "trabajo": true },
+  { "id": "en-basico-23-f38", "en": "Eventually, we fixed the problem.", "es": "Al final, arreglamos el problema.", "trabajo": true },
+  { "id": "en-basico-23-f39", "en": "I'm currently working on two projects.", "es": "Actualmente estoy trabajando en dos proyectos.", "trabajo": true }
 ]

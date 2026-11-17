@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-02-r01", "titulo": "Explicar un error de la consola", "situacion": "Sarah ve un error en tu pantalla y te pregunta qué está pasando.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Sarah", "en": "Whoa, lots of red in the console. What's the error?", "es": "Uy, mucho rojo en la consola. ¿Cuál es el error?" },
+      { "opciones": [
+          { "en": "It says \"Cannot read properties of undefined, reading map\".", "es": "Dice \"Cannot read properties of undefined, reading map\".", "correcta": true, "explicacion": "Primero lee el mensaje exacto: así tu compañera entiende el problema rápido." },
+          { "en": "It says error, like always.", "es": "", "correcta": false, "explicacion": "No da información útil; lo primero es leer el mensaje exacto." },
+          { "en": "It says me that there is an error.", "es": "", "correcta": false, "explicacion": "Calco de \"me dice\": *say* no lleva objeto así. Es *It says...* o *It tells me...*." }
+        ] },
+      { "quien": "Sarah", "en": "OK. What do you think it means?", "es": "Ok. ¿Qué crees que significa?" },
+      { "opciones": [
+          { "en": "It means that map doesn't exist in JavaScript.", "es": "", "correcta": false, "explicacion": "Interpretación incorrecta: *map* existe; el problema es que la variable es *undefined*." },
+          { "en": "It means the products variable is undefined, so I can't call map on it.", "es": "Significa que la variable products es undefined, así que no puedo usar map en ella.", "correcta": true, "explicacion": "Explica la causa real: el valor todavía no existe cuando se llama a *map*." },
+          { "en": "It signifies the variable is undefined.", "es": "", "correcta": false, "explicacion": "*Signify* es muy formal y raro aquí. Lo natural es *It means*." }
+        ] },
+      { "quien": "Sarah", "en": "Right. Why would it be undefined?", "es": "Claro. ¿Por qué sería undefined?" },
+      { "opciones": [
+          { "en": "Because the fetch hasn't finished yet when the component renders.", "es": "Porque el fetch todavía no ha terminado cuando el componente se renderiza.", "correcta": true, "explicacion": "*Hasn't finished yet* describe bien la causa típica: datos asíncronos." },
+          { "en": "Because the fetch isn't finish yet when the component renders.", "es": "", "correcta": false, "explicacion": "*Is* no va con el verbo base. Es *hasn't finished yet* o *isn't finished yet*." },
+          { "en": "Because JavaScript is broken.", "es": "", "correcta": false, "explicacion": "No es una causa real; da mala impresión culpar al lenguaje." }
+        ] },
+      { "quien": "Sarah", "en": "Makes sense. How will you fix it?", "es": "Tiene sentido. ¿Cómo lo vas a arreglar?" },
+      { "opciones": [
+          { "en": "I'll start the state as an empty array, so map always works.", "es": "Voy a iniciar el estado como un array vacío, así map siempre funciona.", "correcta": true, "explicacion": "Solución concreta y explicada con *so*." },
+          { "en": "I'll delete the map and see.", "es": "", "correcta": false, "explicacion": "Quitar el código no arregla la causa." },
+          { "en": "I will to put an empty array.", "es": "", "correcta": false, "explicacion": "Después de *will* el verbo va sin *to*: *I'll put*." }
+        ] }
+    ] }
+]

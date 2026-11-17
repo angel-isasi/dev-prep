@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-10-c01", "es": "Espero tu respuesta.", "natural": "I look forward to hearing from you.", "calco": "I wait your answer.", "explicacion": "Al cerrar un correo se dice **I look forward to hearing from you**. *Wait* necesita *for* y suena impaciente." },
+  { "id": "en-trabajo-10-c02", "es": "Te adjunto el archivo.", "natural": "I've attached the file.", "calco": "I attach you the file.", "explicacion": "**Attach** no lleva a la persona: *I've attached the file*." },
+  { "id": "en-trabajo-10-c03", "es": "Quedo atento a tus comentarios.", "natural": "Let me know if you have any feedback.", "calco": "I stay attentive to your comments.", "explicacion": "\"Quedo atento\" no existe en inglés. Se dice **Let me know if...**" },
+  { "id": "en-trabajo-10-c04", "es": "Saludos cordiales.", "natural": "Best regards,", "calco": "Cordial greetings,", "explicacion": "Para cerrar un correo de trabajo se usa **Best regards** o *Best*." }
+]

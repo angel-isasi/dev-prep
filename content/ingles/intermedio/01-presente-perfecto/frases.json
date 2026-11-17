@@ -28,5 +28,11 @@
   { "id": "en-intermedio-01-f27", "en": "Have you ever worked as a freelance developer?", "es": "¿Alguna vez has trabajado como desarrollador independiente?" },
   { "id": "en-intermedio-01-f28", "en": "I've struggled with CSS for a long time.", "es": "Me ha costado CSS durante mucho tiempo." },
   { "id": "en-intermedio-01-f29", "en": "She's been our team lead since March.", "es": "Ella es nuestra líder de equipo desde marzo." },
-  { "id": "en-intermedio-01-f30", "en": "I've gained a lot of experience with APIs.", "es": "He ganado mucha experiencia con APIs." }
+  { "id": "en-intermedio-01-f30", "en": "I've gained a lot of experience with APIs.", "es": "He ganado mucha experiencia con APIs." },
+  { "id": "en-intermedio-01-f31", "en": "I've already pushed the fix.", "es": "Ya subí el fix.", "trabajo": true },
+  { "id": "en-intermedio-01-f32", "en": "Have you reviewed my pull request yet?", "es": "¿Ya revisaste mi pull request?", "trabajo": true },
+  { "id": "en-intermedio-01-f33", "en": "We've used TypeScript since last year.", "es": "Usamos TypeScript desde el año pasado.", "trabajo": true },
+  { "id": "en-intermedio-01-f34", "en": "The client hasn't replied yet.", "es": "El cliente todavía no responde.", "trabajo": true },
+  { "id": "en-intermedio-01-f35", "en": "I've just merged the branch.", "es": "Acabo de hacer merge de la rama.", "trabajo": true },
+  { "id": "en-intermedio-01-f36", "en": "Have you ever used Docker?", "es": "¿Alguna vez has usado Docker?", "trabajo": true }
 ]

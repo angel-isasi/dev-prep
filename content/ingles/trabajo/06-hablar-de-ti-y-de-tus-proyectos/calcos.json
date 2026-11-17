@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-06-c01", "es": "Soy estudiante de Ingeniería de Sistemas.", "natural": "I'm a Systems Engineering student.", "calco": "I'm student of Systems Engineering.", "explicacion": "Falta el **a** y lo que estudias va antes: *a Systems Engineering student*." },
+  { "id": "en-trabajo-06-c02", "es": "Me apasiona programar.", "natural": "I'm passionate about coding.", "calco": "I'm passionate for coding.", "explicacion": "**Passionate** va con **about**." },
+  { "id": "en-trabajo-06-c03", "es": "Estudio en una universidad de Lima.", "natural": "I study at a university in Lima.", "calco": "I study in a university of Lima.", "explicacion": "Se estudia **at** una universidad, y la ciudad va con **in**." },
+  { "id": "en-trabajo-06-c04", "es": "Tengo experiencia en React desde hace un año.", "natural": "I've been working with React for a year.", "calco": "I have experience in React since one year.", "explicacion": "Con una duración va **for**, y lo natural es *I've been working with*." }
+]

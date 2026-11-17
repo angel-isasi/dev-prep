@@ -45,6 +45,10 @@ export async function cargarIngles(contenidoDir) {
           frases: await leerJson(path.join(carpeta, "frases.json"), []),
           ejercicios: await leerJson(path.join(carpeta, "ejercicios.json"), []),
           dialogos: await leerJson(path.join(carpeta, "dialogos.json"), []),
+          historias: await leerJson(path.join(carpeta, "historia.json"), []),
+          roleplays: await leerJson(path.join(carpeta, "roleplay.json"), []),
+          calcos: await leerJson(path.join(carpeta, "calcos.json"), []),
+          pares: await leerJson(path.join(carpeta, "pares.json"), []),
         });
       } catch (error) {
         errores.push(`${etapa}/${c.name}: ${error.message}`);
@@ -120,6 +124,52 @@ export function revisarIngles(unidades) {
       if (!Array.isArray(dl.lineas) || dl.lineas.length < 2) problemas.push(`${donde}: necesita al menos 2 líneas`);
       for (const l of dl.lineas ?? []) if (!l.quien || !l.en || !l.es) problemas.push(`${donde}: línea incompleta`);
       (dl.preguntas ?? []).forEach((p, i) => revisarOpcion(p, `${donde} pregunta ${i + 1}`, problemas));
+    }
+    for (const h of u.historias ?? []) {
+      const donde = `${d} historia ${h.id}`;
+      usarId(h.id, donde);
+      if (!h.titulo) problemas.push(`${donde}: falta titulo`);
+      const pasos = Array.isArray(h.pasos) ? h.pasos : [];
+      const lineas = pasos.filter((p) => !p.tipo);
+      const retos = pasos.filter((p) => p.tipo);
+      if (lineas.length < 6) problemas.push(`${donde}: ${lineas.length} líneas (mínimo 6)`);
+      if (retos.length < 2) problemas.push(`${donde}: ${retos.length} preguntas (mínimo 2)`);
+      for (const l of lineas) if (!l.quien || !l.en || !l.es) problemas.push(`${donde}: línea incompleta`);
+      retos.forEach((p, i) => {
+        if (p.tipo !== "pregunta" && p.tipo !== "completa") problemas.push(`${donde} paso ${i + 1}: tipo "${p.tipo}" inválido`);
+        if (p.tipo === "completa") {
+          if (!p.quien || !String(p.en ?? "").includes("___")) problemas.push(`${donde} paso ${i + 1}: "completa" necesita quien y una línea con ___`);
+          revisarOpcion({ ...p, pregunta: p.en }, `${donde} paso ${i + 1}`, problemas);
+        } else revisarOpcion(p, `${donde} paso ${i + 1}`, problemas);
+      });
+    }
+    for (const r of u.roleplays ?? []) {
+      const donde = `${d} roleplay ${r.id}`;
+      usarId(r.id, donde);
+      if (!r.titulo || !r.situacion) problemas.push(`${donde}: falta titulo o situacion`);
+      const turnos = Array.isArray(r.turnos) ? r.turnos : [];
+      const tuyos = turnos.filter((t) => t.opciones);
+      if (tuyos.length < 2) problemas.push(`${donde}: ${tuyos.length} turnos tuyos (mínimo 2)`);
+      for (const t of turnos) {
+        if (t.opciones) {
+          if (t.opciones.length < 2 || t.opciones.length > 4) problemas.push(`${donde}: un turno necesita 2 a 4 opciones`);
+          if (t.opciones.filter((o) => o.correcta === true).length !== 1) problemas.push(`${donde}: un turno necesita exactamente una opción correcta`);
+          if (new Set(t.opciones.map((o) => normal(o.en))).size !== t.opciones.length) problemas.push(`${donde}: opciones repetidas`);
+          for (const o of t.opciones) if (!o.en || !o.explicacion || (o.correcta && !o.es)) problemas.push(`${donde}: opción incompleta (${o.en ?? "?"})`);
+        } else if (!t.quien || !t.en || !t.es) problemas.push(`${donde}: línea incompleta`);
+      }
+    }
+    for (const c of u.calcos ?? []) {
+      const donde = `${d} calco ${c.id}`;
+      usarId(c.id, donde);
+      if (!c.es || !c.natural || !c.calco || !c.explicacion) problemas.push(`${donde}: faltan es, natural, calco o explicacion`);
+      if (normal(c.natural) === normal(c.calco)) problemas.push(`${donde}: natural y calco son iguales`);
+    }
+    for (const p of u.pares ?? []) {
+      const donde = `${d} par ${p.id}`;
+      usarId(p.id, donde);
+      if (!p.a || !p.b || !p.aEs || !p.bEs || !p.nota) problemas.push(`${donde}: faltan a, b, aEs, bEs o nota`);
+      if (normal(p.a) === normal(p.b)) problemas.push(`${donde}: a y b son iguales`);
     }
   }
   return problemas;

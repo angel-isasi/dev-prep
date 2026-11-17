@@ -1,0 +1,19 @@
+[
+  { "id": "en-basico-19-h01", "titulo": "La laptop elige el peor momento", "situacion": "Lunes por la mañana. Faltan cinco minutos para la reunión del equipo y la laptop de Ana tiene otros planes.",
+    "pasos": [
+      { "quien": "Ana", "en": "Sarah, help! My laptop is updating, and the meeting is in five minutes.", "es": "¡Sarah, ayuda! Mi laptop se está actualizando y la reunión es en cinco minutos." },
+      { "quien": "Sarah", "en": "Oh no. How long is the update?", "es": "Ay, no. ¿Cuánto dura la actualización?" },
+      { "quien": "Ana", "en": "It says thirty minutes. And my battery is at ten percent.", "es": "Dice treinta minutos. Y mi batería está al diez por ciento." },
+      { "tipo": "pregunta", "pregunta": "¿Cuáles son los dos problemas de Ana?", "opciones": ["La laptop se actualiza y tiene poca batería", "No tiene internet ni cámara", "Perdió su mouse y su teclado"], "correcta": 0, "explicacion": "Ana dice **my laptop is updating** y **my battery is at ten percent**." },
+      { "quien": "Sarah", "en": "Do you have a charger?", "es": "¿Tienes cargador?" },
+      { "quien": "Ana", "en": "Yes, but I left it at Luis's house!", "es": "¡Sí, pero lo dejé en la casa de Luis!" },
+      { "quien": "Sarah", "en": "Join the meeting from your phone. I'll tell Tom.", "es": "Entra a la reunión desde tu celular. Yo le aviso a Tom." },
+      { "tipo": "completa", "quien": "Ana", "en": "OK. But I can't log in. I forgot my ___.", "opciones": ["password", "passport", "pass"], "correcta": 0, "explicacion": "**Password** es contraseña, lo que necesitas para iniciar sesión. *Passport* es pasaporte.", "es": "Ya. Pero no puedo iniciar sesión. Olvidé mi contraseña." },
+      { "quien": "Sarah", "en": "Click \"Forgot password?\" and check your email.", "es": "Haz clic en \"¿Olvidaste tu contraseña?\" y revisa tu correo." },
+      { "quien": "Ana", "en": "Done! I'm in the meeting now.", "es": "¡Listo! Ya estoy en la reunión." },
+      { "quien": "Tom", "en": "Hi, Ana! Wow, your face is very big on my screen.", "es": "¡Hola, Ana! Uy, tu cara se ve enorme en mi pantalla." },
+      { "quien": "Ana", "en": "Sorry, Tom. I'm on my phone. My laptop is restarting. Long story.", "es": "Perdón, Tom. Estoy en el celular. Mi laptop se está reiniciando. Es una larga historia." },
+      { "tipo": "completa", "quien": "Tom", "en": "No problem. Next time, update your laptop on Friday and ___ the files before the meeting.", "opciones": ["download", "discharge", "unload"], "correcta": 0, "explicacion": "Bajar un archivo a tu computadora es **download**. *Discharge* es dar de alta o descargar una batería.", "es": "No hay problema. La próxima vez, actualiza tu laptop el viernes y descarga los archivos antes de la reunión." },
+      { "tipo": "pregunta", "pregunta": "¿Qué consejo le da Tom a Ana?", "opciones": ["Actualizar la laptop el viernes", "Comprar otra laptop", "No entrar a las reuniones"], "correcta": 0, "explicacion": "Tom dice **next time, update your laptop on Friday**." }
+    ] }
+]

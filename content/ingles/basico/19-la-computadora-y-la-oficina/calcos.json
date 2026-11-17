@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-19-c01", "es": "Voy a asistir a la reunión.", "natural": "I'm going to attend the meeting.", "calco": "I'm going to assist the meeting.", "explicacion": "Asistir a una reunión es **attend**. *Assist* significa ayudar." },
+  { "id": "en-basico-19-c02", "es": "Es mi compañero de trabajo.", "natural": "He's my coworker.", "calco": "He's my companion of work.", "explicacion": "\"Compañero de trabajo\" es **coworker** (o *colleague*). *Companion* es acompañante." },
+  { "id": "en-basico-19-c03", "es": "Envíame el archivo por correo.", "natural": "Send me the file by email.", "calco": "Send me the file for email.", "explicacion": "\"Por correo\" es **by email**. El \"por\" de medio no se traduce como *for*." },
+  { "id": "en-basico-19-c04", "es": "La fecha límite es el viernes.", "natural": "The deadline is Friday.", "calco": "The limit date is Friday.", "explicacion": "\"Fecha límite\" es **deadline**, una sola palabra." }
+]

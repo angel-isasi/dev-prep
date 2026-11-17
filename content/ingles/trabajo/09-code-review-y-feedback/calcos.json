@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-09-c01", "es": "Gracias por los comentarios.", "natural": "Thanks for the feedback.", "calco": "Thanks for the feedbacks.", "explicacion": "**Feedback** no se cuenta: nunca lleva -s." },
+  { "id": "en-trabajo-09-c02", "es": "Tienes razón, lo cambio.", "natural": "You're right, I'll change it.", "calco": "You have reason, I change it.", "explicacion": "\"Tener razón\" es **be right**, y para lo que vas a hacer usa **I'll**." },
+  { "id": "en-trabajo-09-c03", "es": "¿Podemos sacar esto a una función?", "natural": "Could we extract this into a function?", "calco": "Could we take out this to a function?", "explicacion": "Mover código a una función es **extract into**." },
+  { "id": "en-trabajo-09-c04", "es": "Se ve bien.", "natural": "Looks good to me.", "calco": "It sees good.", "explicacion": "\"Se ve bien\" es **looks good**. *See* es ver con los ojos. De ahí viene *LGTM*." }
+]

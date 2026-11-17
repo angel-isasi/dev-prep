@@ -1,0 +1,19 @@
+[
+  { "id": "en-basico-05-h01", "titulo": "Un perfil muy corto", "situacion": "Ana escribe su perfil de LinkedIn y Luis lo revisa.",
+    "pasos": [
+      { "quien": "Ana", "en": "Luis, read my profile, please.", "es": "Luis, lee mi perfil, por favor." },
+      { "quien": "Luis", "en": "\"I'm Ana. I'm a student. I'm from Lima.\" Hmm... It's very short.", "es": "\"Soy Ana. Soy estudiante. Soy de Lima.\" Mmm... Es muy corto." },
+      { "quien": "Ana", "en": "OK. I live in Lima. I study systems engineering.", "es": "Ya. Vivo en Lima. Estudio Ingeniería de Sistemas." },
+      { "tipo": "completa", "quien": "Ana", "en": "I ___ JavaScript every day.", "opciones": ["practice", "practices", "practicing"], "correcta": 0, "explicacion": "Con **I** el verbo va en su forma base, sin -s: *I practice*. La -s es solo para he, she, it.", "es": "Practico JavaScript todos los días." },
+      { "quien": "Luis", "en": "Good! And you like React.", "es": "¡Bien! Y te gusta React." },
+      { "quien": "Ana", "en": "Yes, I like React. And my friend Luis works at a bank.", "es": "Sí, me gusta React. Y mi amigo Luis trabaja en un banco." },
+      { "quien": "Luis", "en": "Ana! Recruiters want your information, not my information.", "es": "¡Ana! Los reclutadores quieren tu información, no la mía." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué se queja Luis?", "opciones": ["Ana habla de Luis en su perfil", "El perfil está en español", "Ana no estudia"], "correcta": 0, "explicacion": "Ana escribe **my friend Luis works at a bank**, pero el perfil debe hablar de ella." },
+      { "tipo": "completa", "quien": "Ana", "en": "OK, OK. Now it says: \"Ana ___ websites with HTML, CSS, and JavaScript.\"", "opciones": ["builds", "build", "is build"], "correcta": 0, "explicacion": "Ana es **she**, así que el verbo lleva **-s**: *Ana builds*. No se pone *is* antes de otro verbo.", "es": "Ya, ya. Ahora dice: \"Ana crea sitios web con HTML, CSS y JavaScript\"." },
+      { "quien": "Luis", "en": "Great! That sounds good.", "es": "¡Genial! Eso suena bien." },
+      { "quien": "Ana", "en": "And this: \"She loves coffee.\"", "es": "Y esto: \"Le encanta el café\"." },
+      { "quien": "Luis", "en": "That's true, but it's not important.", "es": "Es cierto, pero no es importante." },
+      { "quien": "Ana", "en": "Ha, ha. OK, bye, coffee!", "es": "Ja, ja. ¡Ya, chau, café!" },
+      { "tipo": "pregunta", "pregunta": "¿Qué frase saca Ana del perfil?", "opciones": ["La del café", "La de React", "La de Lima"], "correcta": 0, "explicacion": "Luis dice que lo del café **is not important**, y Ana se despide: **bye, coffee**." }
+    ] }
+]

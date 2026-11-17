@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-11-c01", "es": "¿Cuánto pagan?", "natural": "What's the salary range for this position?", "calco": "How much you pay?", "explicacion": "Para preguntar el sueldo con cortesía se dice **What's the salary range...?**" },
+  { "id": "en-trabajo-11-c02", "es": "Puedo empezar la próxima semana.", "natural": "I can start next week.", "calco": "I can start the next week.", "explicacion": "**Next week** va sin *the*." },
+  { "id": "en-trabajo-11-c03", "es": "¿Cómo es un día típico?", "natural": "What does a typical day look like?", "calco": "How is a typical day?", "explicacion": "Para pedir que te describan algo se dice **What does... look like?**" },
+  { "id": "en-trabajo-11-c04", "es": "Tengo un par de preguntas.", "natural": "I have a couple of questions.", "calco": "I have a pair of questions.", "explicacion": "\"Un par\" de cosas es **a couple of**. *A pair of* es para cosas que van juntas: *a pair of shoes*." }
+]

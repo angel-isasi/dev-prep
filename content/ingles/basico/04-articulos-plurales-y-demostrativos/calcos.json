@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-04-c01", "es": "La gente es amable.", "natural": "People are nice.", "calco": "The people is nice.", "explicacion": "**People** ya es plural, así que va con **are**. Y para hablar de la gente en general no lleva *the*." },
+  { "id": "en-basico-04-c02", "es": "Es una laptop nueva.", "natural": "It's a new laptop.", "calco": "It's a laptop new.", "explicacion": "En inglés el adjetivo va **antes** del sustantivo: *a new laptop*." },
+  { "id": "en-basico-04-c03", "es": "Son botones rojos.", "natural": "They're red buttons.", "calco": "They're buttons reds.", "explicacion": "El adjetivo va antes y **nunca lleva -s**: *red buttons*, no *reds*." },
+  { "id": "en-basico-04-c04", "es": "Es una hora.", "natural": "It's an hour.", "calco": "It's a hour.", "explicacion": "Lo que manda es el sonido: en **hour** la h no suena y empieza con vocal, así que va **an**." }
+]

@@ -28,5 +28,11 @@
   { "id": "en-intermedio-10-f27", "en": "Is there any chance we could talk today?", "es": "¿Habrá alguna posibilidad de que hablemos hoy?" },
   { "id": "en-intermedio-10-f28", "en": "Sorry, I didn't catch that. Could you repeat it?", "es": "Perdón, no te entendí. ¿Podrías repetirlo?" },
   { "id": "en-intermedio-10-f29", "en": "Do you know if Ana is working from home today?", "es": "¿Sabes si Ana está trabajando desde casa hoy?" },
-  { "id": "en-intermedio-10-f30", "en": "Would you mind explaining that part one more time?", "es": "¿Te molestaría explicar esa parte una vez más?" }
+  { "id": "en-intermedio-10-f30", "en": "Would you mind explaining that part one more time?", "es": "¿Te molestaría explicar esa parte una vez más?" },
+  { "id": "en-intermedio-10-f31", "en": "Do you know where the config file is?", "es": "¿Sabes dónde está el archivo de configuración?", "trabajo": true },
+  { "id": "en-intermedio-10-f32", "en": "Could you tell me who owns this repo?", "es": "¿Me podrías decir quién es el dueño de este repo?", "trabajo": true },
+  { "id": "en-intermedio-10-f33", "en": "I was wondering if we could move the meeting.", "es": "Me preguntaba si podríamos mover la reunión.", "trabajo": true },
+  { "id": "en-intermedio-10-f34", "en": "Do you know if the API is down?", "es": "¿Sabes si la API está caída?", "trabajo": true },
+  { "id": "en-intermedio-10-f35", "en": "Can you tell me what the error says?", "es": "¿Me puedes decir qué dice el error?", "trabajo": true },
+  { "id": "en-intermedio-10-f36", "en": "Would you mind explaining that again?", "es": "¿Te molestaría explicar eso otra vez?", "trabajo": true }
 ]

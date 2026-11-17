@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-01-r01", "titulo": "Tu stack en voz alta", "situacion": "Jennifer, ingeniera, te pide que expliques el stack de tu proyecto. Elige la frase que mejor guía la pronunciación.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Jennifer", "en": "So, what's the stack of your project?", "es": "Entonces, ¿cuál es el stack de tu proyecto?" },
+      { "opciones": [
+          { "en": "It's React with Vite, that's \"veet\", and a Node server.", "es": "Es React con Vite, que se dice \"vit\", y un servidor Node.", "correcta": true, "explicacion": "Vite es una palabra francesa: se pronuncia *veet*, rima con *street*." },
+          { "en": "It's React with Vite, that's \"vait\", like \"bite\".", "es": "", "correcta": false, "explicacion": "Error común: Vite no se dice como *bite*; es *veet*." },
+          { "en": "It's React with Vite, that's \"vi-te\", with two syllables.", "es": "", "correcta": false, "explicacion": "Leerla como en español (vi-te) es un error típico: es una sola sílaba, *veet*." }
+        ] },
+      { "quien": "Jennifer", "en": "Nice. Where do you store the data?", "es": "Bien. ¿Dónde guardas los datos?" },
+      { "opciones": [
+          { "en": "In SQLite, and I say SQL as \"es-ku-ele\".", "es": "", "correcta": false, "explicacion": "Deletrear con letras en español suena raro. En inglés es *S-Q-L* (es-kiu-el) o *sequel*." },
+          { "en": "In SQLite. I keep a small cache, \"cash\", for the stats.", "es": "En SQLite. Guardo un pequeño caché, que se dice \"cash\", para las estadísticas.", "correcta": true, "explicacion": "*Cache* se pronuncia igual que *cash*, una sola sílaba." },
+          { "en": "In SQLite, with a small cache, \"ca-ché\", for the stats.", "es": "", "correcta": false, "explicacion": "*Ca-ché* es la pronunciación en español. En inglés es *cash*." }
+        ] },
+      { "quien": "Jennifer", "en": "How do you handle the tasks that run later?", "es": "¿Cómo manejas las tareas que se ejecutan después?" },
+      { "opciones": [
+          { "en": "I use a queue, pronounced \"kiu\", like the letter Q.", "es": "Uso una cola, que se dice \"kiu\", como la letra Q.", "correcta": true, "explicacion": "*Queue* suena exactamente como la letra *Q*; las demás letras son mudas." },
+          { "en": "I use a queue, pronounced \"ku-eu-e\".", "es": "", "correcta": false, "explicacion": "Leerla letra por letra es el error típico: es solo *kiu*." },
+          { "en": "I use a queue, pronounced \"kweh\".", "es": "", "correcta": false, "explicacion": "No suena como *que* en español: es *kiu*." }
+        ] },
+      { "quien": "Jennifer", "en": "And where's the code?", "es": "¿Y dónde está el código?" },
+      { "opciones": [
+          { "en": "On GitHub, \"git-jub\".", "es": "", "correcta": false, "explicacion": "La *h* inglesa es suave, no como la *j* española: es *git-hub*, con *h* aspirada." },
+          { "en": "On GitHub, with a soft \"h\": git-hub.", "es": "En GitHub, con una \"h\" suave: git-hub.", "correcta": true, "explicacion": "La *h* inglesa es solo aire, mucho más suave que la *j*. Y *git* lleva *g* fuerte, como en *gato*." },
+          { "en": "On GitHub, \"yit-ub\", with a soft g.", "es": "", "correcta": false, "explicacion": "La *g* de *git* es fuerte (como en *gato*) y la *h* se oye un poco." }
+        ] }
+    ] }
+]

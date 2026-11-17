@@ -1,0 +1,7 @@
+[
+  { "id": "en-basico-23-c01", "es": "Actualmente trabajo en una tienda.", "natural": "I currently work at a store.", "calco": "I actually work at a store.", "explicacion": "**Actually** es \"en realidad\". \"Actualmente\" es **currently**." },
+  { "id": "en-basico-23-c02", "es": "Realicé las pruebas.", "natural": "I ran the tests.", "calco": "I realized the tests.", "explicacion": "**Realize** es darse cuenta. Hacer pruebas es **run tests**." },
+  { "id": "en-basico-23-c03", "es": "Asistí a una conferencia.", "natural": "I attended a conference.", "calco": "I assisted to a conference.", "explicacion": "Asistir a un evento es **attend**, sin *to*. *Assist* es ayudar." },
+  { "id": "en-basico-23-c04", "es": "Trabajo en una fábrica.", "natural": "I work at a factory.", "calco": "I work in a fabric.", "explicacion": "**Fabric** es tela. Fábrica es **factory**." },
+  { "id": "en-basico-23-c05", "es": "Fue una gran decepción.", "natural": "It was a big disappointment.", "calco": "It was a big deception.", "explicacion": "**Deception** es engaño. Decepción es **disappointment**." }
+]

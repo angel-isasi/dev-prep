@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-06-r01", "titulo": "Háblame de ti", "situacion": "Mike, de RR. HH., empieza la primera entrevista por videollamada.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Mike", "en": "Thanks for joining, Ana. So, tell me about yourself.", "es": "Gracias por conectarte, Ana. Bueno, háblame de ti." },
+      { "opciones": [
+          { "en": "Well, I was born in Lima, I have two brothers, and I like pizza.", "es": "", "correcta": false, "explicacion": "Demasiado personal: en una entrevista se habla de estudios, enfoque y lo que buscas." },
+          { "en": "I'm a Systems Engineering student in Lima, and I'm focused on frontend with React.", "es": "Soy estudiante de Ingeniería de Sistemas en Lima y me enfoco en frontend con React.", "correcta": true, "explicacion": "Empieza por quién eres profesionalmente y tu enfoque: lo que el entrevistador quiere oír." },
+          { "en": "I am student of Systems Engineering.", "es": "", "correcta": false, "explicacion": "Falta el artículo: *I'm a student*. Además se queda muy corto." }
+        ] },
+      { "quien": "Mike", "en": "Great. What's a project you're proud of?", "es": "Genial. ¿De qué proyecto estás orgullosa?" },
+      { "opciones": [
+          { "en": "I'm proud of my study app. I use it every day, and it runs offline.", "es": "Estoy orgullosa de mi app de estudio. La uso todos los días y funciona sin internet.", "correcta": true, "explicacion": "*Proud of* + proyecto concreto y un detalle que lo hace interesante." },
+          { "en": "I'm proud for my study app.", "es": "", "correcta": false, "explicacion": "*Proud* va con *of*: *proud of*." },
+          { "en": "I'm orgullous of my app.", "es": "", "correcta": false, "explicacion": "*Orgullous* no existe. Es *proud*." }
+        ] },
+      { "quien": "Mike", "en": "Do you prefer working alone or in a team?", "es": "¿Prefieres trabajar sola o en equipo?" },
+      { "opciones": [
+          { "en": "Alone. Teams are slow.", "es": "", "correcta": false, "explicacion": "Suena negativo y poco colaborativo." },
+          { "en": "I like both, but I learn more in a team, from code reviews and pairing.", "es": "Me gustan las dos, pero aprendo más en equipo, con code reviews y trabajando en pareja.", "correcta": true, "explicacion": "Respuesta equilibrada con un ejemplo concreto." },
+          { "en": "I prefer to work in equip.", "es": "", "correcta": false, "explicacion": "Falso amigo: *equip* es equipar. Equipo de personas es *team*." }
+        ] },
+      { "quien": "Mike", "en": "And why are you interested in this role?", "es": "¿Y por qué te interesa este puesto?" },
+      { "opciones": [
+          { "en": "Because I need money.", "es": "", "correcta": false, "explicacion": "Honesto, pero no muestra interés en el puesto ni en la empresa." },
+          { "en": "Because I want to learn a lot of things.", "es": "", "correcta": false, "explicacion": "Muy genérico: no habla de la empresa ni de lo que aportas." },
+          { "en": "Your team builds tools for students, and I'd love to grow as a frontend developer here.", "es": "Su equipo crea herramientas para estudiantes, y me encantaría crecer como desarrolladora frontend aquí.", "correcta": true, "explicacion": "Conecta lo que hace la empresa con tu interés: es lo que buscan oír." }
+        ] }
+    ] }
+]

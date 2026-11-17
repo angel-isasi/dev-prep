@@ -28,5 +28,10 @@
   { "id": "en-basico-21-f27", "en": "Let's continue this in the thread.", "es": "Sigamos con esto en el hilo." },
   { "id": "en-basico-21-f28", "en": "I'll ping you after lunch.", "es": "Te escribo después del almuerzo." },
   { "id": "en-basico-21-f29", "en": "We're on track for the demo on Friday.", "es": "Vamos al día para la demo del viernes." },
-  { "id": "en-basico-21-f30", "en": "Sarah is out of office this week.", "es": "Sarah está fuera esta semana." }
+  { "id": "en-basico-21-f30", "en": "Sarah is out of office this week.", "es": "Sarah está fuera esta semana." },
+  { "id": "en-basico-21-f31", "en": "Can you hear me now?", "es": "¿Ahora me escuchas?", "trabajo": true },
+  { "id": "en-basico-21-f32", "en": "Please clear your browser cache.", "es": "Por favor, borra la caché del navegador.", "trabajo": true },
+  { "id": "en-basico-21-f33", "en": "I can't log in to the dashboard.", "es": "No puedo iniciar sesión en el dashboard.", "trabajo": true },
+  { "id": "en-basico-21-f34", "en": "The sprint ends next Friday.", "es": "El sprint termina el próximo viernes.", "trabajo": true },
+  { "id": "en-basico-21-f35", "en": "Sorry, my internet is slow today.", "es": "Perdón, mi internet está lento hoy.", "trabajo": true }
 ]

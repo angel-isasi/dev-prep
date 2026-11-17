@@ -1,0 +1,18 @@
+[
+  { "id": "en-basico-09-h01", "titulo": "Luis, el peor GPS de Lima", "situacion": "Ana va a una feria de empleo de tecnología y Luis la guía por teléfono.",
+    "pasos": [
+      { "quien": "Ana", "en": "Luis, I'm at the building, but where is the job fair?", "es": "Luis, estoy en el edificio, pero ¿dónde es la feria de empleo?" },
+      { "quien": "Luis", "en": "It's on the third floor, next to the cafeteria.", "es": "Es en el tercer piso, al lado de la cafetería." },
+      { "quien": "Ana", "en": "OK, I'm on the third floor, in front of the cafeteria.", "es": "Ya, estoy en el tercer piso, frente a la cafetería." },
+      { "quien": "Luis", "en": "Good. Go straight and turn left. The room is between the elevator and the bathrooms.", "es": "Bien. Sigue derecho y voltea a la izquierda. La sala está entre el ascensor y los baños." },
+      { "tipo": "completa", "quien": "Ana", "en": "Is the fair ___ room 305?", "opciones": ["in", "on", "at"], "correcta": 0, "explicacion": "Para estar **dentro** de un cuarto o una sala se usa **in**: *in room 305*. *On* es para pisos y superficies.", "es": "¿La feria es en la sala 305?" },
+      { "quien": "Luis", "en": "Yes, room 305. It starts at ten.", "es": "Sí, la sala 305. Empieza a las diez." },
+      { "quien": "Ana", "en": "It's nine forty-five. OK, I'm in the room... but it's a yoga class!", "es": "Son las nueve y cuarenta y cinco. Ya, estoy en la sala... ¡pero es una clase de yoga!" },
+      { "tipo": "pregunta", "pregunta": "¿Qué encuentra Ana en la sala?", "opciones": ["Una clase de yoga", "La feria de empleo", "Una cafetería"], "correcta": 0, "explicacion": "Ana dice **it's a yoga class**: entró a la sala equivocada." },
+      { "quien": "Luis", "en": "Oh, sorry! Turn right, not left!", "es": "¡Uy, perdón! ¡Voltea a la derecha, no a la izquierda!" },
+      { "quien": "Ana", "en": "Right... OK! Now I see the fair. Many tech companies are here.", "es": "Derecha... ¡Ya! Ahora veo la feria. Hay muchas empresas de tecnología aquí." },
+      { "tipo": "completa", "quien": "Luis", "en": "Great! The frontend talk is ___ 10:30.", "opciones": ["at", "on", "in"], "correcta": 0, "explicacion": "Con una hora exacta se usa **at**: *at 10:30*. *On* es para días y *in* para meses o años.", "es": "¡Genial! La charla de frontend es a las 10:30." },
+      { "quien": "Ana", "en": "Thanks, Luis. You're a good friend... but a bad GPS.", "es": "Gracias, Luis. Eres un buen amigo... pero un mal GPS." },
+      { "tipo": "pregunta", "pregunta": "¿Cuál fue el error de Luis?", "opciones": ["Le dijo izquierda en vez de derecha", "Le dio el piso equivocado", "Le dio la hora equivocada"], "correcta": 0, "explicacion": "Luis se corrige: **turn right, not left**." }
+    ] }
+]

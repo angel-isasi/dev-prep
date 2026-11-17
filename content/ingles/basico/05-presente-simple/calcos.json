@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-05-c01", "es": "Trabajo en una startup.", "natural": "I work at a startup.", "calco": "I am work at a startup.", "explicacion": "En presente simple no va **am** antes del verbo: *I work*. *Am* solo va con adjetivos, lugares o -ing." },
+  { "id": "en-basico-05-c02", "es": "Me gusta el café.", "natural": "I like coffee.", "calco": "I like the coffee.", "explicacion": "Para hablar de algo en general no se pone *the*: *I like coffee*. *The coffee* sería un café específico." },
+  { "id": "en-basico-05-c03", "es": "Mis papás viven en Cusco.", "natural": "My parents live in Cusco.", "calco": "My parents lives in Cusco.", "explicacion": "**My parents** son dos personas (they), así que el verbo va **sin -s**: *live*." },
+  { "id": "en-basico-05-c04", "es": "Ella habla inglés.", "natural": "She speaks English.", "calco": "She talks English.", "explicacion": "Para idiomas se usa **speak**. *Talk* es conversar: *talk to someone*." }
+]

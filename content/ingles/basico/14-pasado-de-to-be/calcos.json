@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-14-c01", "es": "Nací en Lima.", "natural": "I was born in Lima.", "calco": "I born in Lima.", "explicacion": "\"Nacer\" se dice **was born**, siempre con *was* o *were*." },
+  { "id": "en-basico-14-c02", "es": "Estuve en Cusco hace tres años.", "natural": "I was in Cusco three years ago.", "calco": "I was in Cusco ago three years.", "explicacion": "**Ago** va **después** del tiempo: *three years ago*." },
+  { "id": "en-basico-14-c03", "es": "Estuve enfermo la semana pasada.", "natural": "I was sick last week.", "calco": "I was sick the last week.", "explicacion": "\"La semana pasada\" es **last week**, sin *the*. *The last week* es \"la última semana\"." },
+  { "id": "en-basico-14-c04", "es": "¿Estabas en casa?", "natural": "Were you at home?", "calco": "Did you were at home?", "explicacion": "**Was** y **were** arman la pregunta solos, sin *did*." }
+]

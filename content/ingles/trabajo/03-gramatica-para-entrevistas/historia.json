@@ -1,0 +1,20 @@
+[
+  { "id": "en-trabajo-03-h01", "titulo": "Ana entrena a Luis", "situacion": "Ahora es Luis quien tiene una entrevista en inglés. Ana, que ya trabaja en un equipo remoto, lo ayuda a practicar.",
+    "pasos": [
+      { "quien": "Luis", "en": "Okay, ask me something. I'm ready.", "es": "Bueno, pregúntame algo. Estoy listo." },
+      { "quien": "Ana", "en": "Tell me about your last project.", "es": "Cuéntame de tu último proyecto." },
+      { "quien": "Luis", "en": "Last year I have built a website for my uncle's restaurant.", "es": "El año pasado he construido una web para el restaurante de mi tío." },
+      { "tipo": "completa", "quien": "Ana", "en": "Stop. With \"last year\" you say: \"Last year I ___ a website.\"", "es": "Para. Con \"last year\" dices: \"El año pasado construí una web.\"", "opciones": ["have built", "built", "was build"], "correcta": 1, "explicacion": "Con un tiempo terminado (*last year*) va pasado simple: **I built**. El presente perfecto no va con fechas del pasado." },
+      { "quien": "Luis", "en": "Right. Last year I built a website. I was responsible for the menu page.", "es": "Cierto. El año pasado construí una web. Estaba a cargo de la página del menú." },
+      { "quien": "Ana", "en": "Much better. And what are you doing now?", "es": "Mucho mejor. ¿Y qué estás haciendo ahora?" },
+      { "tipo": "completa", "quien": "Luis", "en": "I've ___ working on an online store since March.", "es": "Estoy trabajando en una tienda online desde marzo.", "opciones": ["been", "be", "being"], "correcta": 0, "explicacion": "Presente perfecto continuo: **I've been working**. Sirve para algo que empezó antes y sigue ahora, con *since* o *for*." },
+      { "quien": "Ana", "en": "Perfect. And are you learning anything new?", "es": "Perfecto. ¿Y estás aprendiendo algo nuevo?" },
+      { "quien": "Luis", "en": "I'm currently learning TypeScript. I really like it.", "es": "Actualmente estoy aprendiendo TypeScript. Me gusta mucho." },
+      { "tipo": "pregunta", "pregunta": "¿Desde cuándo trabaja Luis en la tienda online?", "opciones": ["Desde el año pasado", "Desde marzo", "Desde hoy"], "correcta": 1, "explicacion": "Luis dice \"since March\"." },
+      { "quien": "Ana", "en": "Last one. What would you do differently in the restaurant project?", "es": "La última. ¿Qué harías diferente en el proyecto del restaurante?" },
+      { "quien": "Luis", "en": "I would have used a real database. The menu was in an Excel file.", "es": "Habría usado una base de datos de verdad. El menú estaba en un Excel." },
+      { "quien": "Ana", "en": "Honest answer. Interviewers love that. Did your uncle like the site?", "es": "Respuesta honesta. A los entrevistadores les encanta. ¿A tu tío le gustó la web?" },
+      { "quien": "Luis", "en": "He loved it. He still prints the menu, though.", "es": "Le encantó. Aunque igual sigue imprimiendo el menú." },
+      { "tipo": "pregunta", "pregunta": "¿Qué error de gramática corrigió Ana al principio?", "opciones": ["Usar presente perfecto con \"last year\"", "Decir \"I was responsible\"", "Usar since con un mes"], "correcta": 0, "explicacion": "Luis dijo *Last year I have built*: con *last year* va pasado simple, **I built**." }
+    ] }
+]

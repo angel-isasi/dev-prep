@@ -1,0 +1,7 @@
+[
+  { "id": "en-basico-07-c01", "es": "Siempre llego tarde.", "natural": "I'm always late.", "calco": "I always am late.", "explicacion": "Con **to be**, la palabra de frecuencia va **después**: *I'm always late*." },
+  { "id": "en-basico-07-c02", "es": "Tomo desayuno a las siete.", "natural": "I have breakfast at seven.", "calco": "I take breakfast at seven.", "explicacion": "Las comidas van con **have**: *have breakfast*, *have lunch*. *Take* es el calco de \"tomar\"." },
+  { "id": "en-basico-07-c03", "es": "Me despierto a las seis.", "natural": "I wake up at six.", "calco": "I wake me up at six.", "explicacion": "**Wake up** no lleva el \"me\" del español. Igual con *get up* y *get dressed*." },
+  { "id": "en-basico-07-c04", "es": "Voy siempre al gimnasio.", "natural": "I always go to the gym.", "calco": "I go always to the gym.", "explicacion": "*Always*, *usually* y *never* van **antes** del verbo principal: *I always go*." },
+  { "id": "en-basico-07-c05", "es": "Trabajo en las noches.", "natural": "I work at night.", "calco": "I work in the nights.", "explicacion": "\"En la noche\" es **at night**, en singular y con *at*." }
+]

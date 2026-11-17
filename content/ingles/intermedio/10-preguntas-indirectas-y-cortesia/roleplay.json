@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-10-r01", "titulo": "Pedir ayuda en tu primera semana", "situacion": "Es tu primera semana y necesitas que Tom te explique cómo correr el proyecto.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "Hey Ana, how's it going? Need anything?", "es": "Hola, Ana, ¿cómo vas? ¿Necesitas algo?" },
+      { "opciones": [
+          { "en": "Yes, actually. Could you tell me where the setup docs are?", "es": "Sí, la verdad. ¿Podrías decirme dónde está la documentación de instalación?", "correcta": true, "explicacion": "Pregunta indirecta: después de *Could you tell me* el orden es de afirmación (*where the docs are*)." },
+          { "en": "Yes. Could you tell me where are the setup docs?", "es": "", "correcta": false, "explicacion": "En la pregunta indirecta no se invierte el verbo: *where the docs are*." },
+          { "en": "Yes. Give me the setup docs.", "es": "", "correcta": false, "explicacion": "Imperativo demasiado directo para pedirle algo a tu tech lead." }
+        ] },
+      { "quien": "Tom", "en": "Sure, they're in the wiki. Anything else?", "es": "Claro, están en la wiki. ¿Algo más?" },
+      { "opciones": [
+          { "en": "Do you know if I need Docker for the backend?", "es": "¿Sabes si necesito Docker para el backend?", "correcta": true, "explicacion": "*Do you know if...* + orden normal: pregunta indirecta de sí o no." },
+          { "en": "Do you know if do I need Docker?", "es": "", "correcta": false, "explicacion": "No se repite el auxiliar dentro de la pregunta indirecta: *if I need*." },
+          { "en": "Do you know that I need Docker?", "es": "", "correcta": false, "explicacion": "*That* afirma algo; para preguntar si es cierto va *if* o *whether*." }
+        ] },
+      { "quien": "Tom", "en": "Yeah, you'll need it. It's in the wiki too.", "es": "Sí, lo vas a necesitar. También está en la wiki." },
+      { "opciones": [
+          { "en": "I was wondering whether we could pair for 20 minutes on it.", "es": "Me preguntaba si podríamos trabajar juntos 20 minutos en eso.", "correcta": true, "explicacion": "*I was wondering whether...* es muy cortés para pedir tiempo a alguien." },
+          { "en": "I was wondering if could we pair on it.", "es": "", "correcta": false, "explicacion": "Orden de pregunta dentro de una indirecta: debe ser *if we could*." },
+          { "en": "We pair now, OK?", "es": "", "correcta": false, "explicacion": "Suena a orden, no a petición." }
+        ] },
+      { "quien": "Tom", "en": "Of course. How about 3 p.m.?", "es": "Claro. ¿Qué tal a las 3 p. m.?" },
+      { "opciones": [
+          { "en": "3 p.m. works for me. Thanks a lot!", "es": "Las 3 p. m. me funciona. ¡Muchas gracias!", "correcta": true, "explicacion": "*Works for me* es la forma natural de aceptar un horario." },
+          { "en": "3 p.m. is good for me. Thanks for your help me.", "es": "", "correcta": false, "explicacion": "*Thanks for your help* o *thanks for helping me*; no se mezclan." },
+          { "en": "It's OK. Thank you very much for all.", "es": "", "correcta": false, "explicacion": "*For all* es calco de \"por todo\": se dice *for everything*." }
+        ] }
+    ] }
+]

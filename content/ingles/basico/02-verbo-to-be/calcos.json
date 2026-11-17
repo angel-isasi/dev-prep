@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-02-c01", "es": "Es importante.", "natural": "It's important.", "calco": "Is important.", "explicacion": "En inglés el sujeto nunca se omite. Para \"es importante\" o \"es tarde\" el sujeto es **it**: *It's important*." },
+  { "id": "en-basico-02-c02", "es": "Estoy aburrido.", "natural": "I'm bored.", "calco": "I'm boring.", "explicacion": "**Bored** es cómo te sientes (aburrido). *Boring* describe algo o a alguien que aburre: *I'm boring* es \"soy aburrido\"." },
+  { "id": "en-basico-02-c03", "es": "Tengo frío.", "natural": "I'm cold.", "calco": "I have cold.", "explicacion": "Frío, calor, hambre o miedo van con **to be**: *I'm cold*. *Have* es el calco de \"tener\"." },
+  { "id": "en-basico-02-c04", "es": "Tienes razón.", "natural": "You're right.", "calco": "You have reason.", "explicacion": "\"Tener razón\" es **to be right**: *You're right*. *Have reason* no se dice." }
+]

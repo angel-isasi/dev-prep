@@ -30,5 +30,11 @@
   { "id": "en-basico-12-f29", "en": "I'm learning to cook.", "es": "Estoy aprendiendo a cocinar." },
   { "id": "en-basico-12-f30", "en": "What size are these jeans?", "es": "¿De qué talla es este jean?" },
   { "id": "en-basico-12-f31", "en": "It's cloudy, but it isn't raining.", "es": "Está nublado, pero no está lloviendo." },
-  { "id": "en-basico-12-f32", "en": "He works in an office, but today he's working at home.", "es": "Él trabaja en una oficina, pero hoy está trabajando en casa." }
+  { "id": "en-basico-12-f32", "en": "He works in an office, but today he's working at home.", "es": "Él trabaja en una oficina, pero hoy está trabajando en casa." },
+  { "id": "en-basico-12-f33", "en": "I'm working on the login page.", "es": "Estoy trabajando en la página de login.", "trabajo": true },
+  { "id": "en-basico-12-f34", "en": "The tests are running right now.", "es": "Los tests están corriendo ahora mismo.", "trabajo": true },
+  { "id": "en-basico-12-f35", "en": "Sarah is fixing the CSS bug.", "es": "Sarah está arreglando el bug de CSS.", "trabajo": true },
+  { "id": "en-basico-12-f36", "en": "Are you using the new branch?", "es": "¿Estás usando la nueva rama?", "trabajo": true },
+  { "id": "en-basico-12-f37", "en": "The server isn't responding.", "es": "El servidor no responde.", "trabajo": true },
+  { "id": "en-basico-12-f38", "en": "I'm waiting for the build.", "es": "Estoy esperando el build.", "trabajo": true }
 ]

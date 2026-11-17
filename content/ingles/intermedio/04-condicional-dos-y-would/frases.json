@@ -28,5 +28,11 @@
   { "id": "en-intermedio-04-f27", "en": "If I didn't have exams, I'd work part-time.", "es": "Si no tuviera exámenes, trabajaría a medio tiempo." },
   { "id": "en-intermedio-04-f28", "en": "I'd really appreciate your feedback on my portfolio.", "es": "Te agradecería mucho tu opinión sobre mi portafolio." },
   { "id": "en-intermedio-04-f29", "en": "Would you relocate to another country for a job?", "es": "¿Te mudarías a otro país por un trabajo?" },
-  { "id": "en-intermedio-04-f30", "en": "If I had unlimited money, I'd travel more.", "es": "Si tuviera dinero ilimitado, viajaría más." }
+  { "id": "en-intermedio-04-f30", "en": "If I had unlimited money, I'd travel more.", "es": "Si tuviera dinero ilimitado, viajaría más." },
+  { "id": "en-intermedio-04-f31", "en": "Would you mind joining the call later?", "es": "¿Te molestaría entrar a la llamada más tarde?", "trabajo": true },
+  { "id": "en-intermedio-04-f32", "en": "If I were you, I'd add a test.", "es": "Yo que tú, agregaría un test.", "trabajo": true },
+  { "id": "en-intermedio-04-f33", "en": "What would you do if the API failed?", "es": "¿Qué harías si la API fallara?", "trabajo": true },
+  { "id": "en-intermedio-04-f34", "en": "If we had more time, we'd refactor it.", "es": "Si tuviéramos más tiempo, lo refactorizaríamos.", "trabajo": true },
+  { "id": "en-intermedio-04-f35", "en": "I'd like to work on the frontend.", "es": "Me gustaría trabajar en el frontend.", "trabajo": true },
+  { "id": "en-intermedio-04-f36", "en": "I'd rather use a simple array here.", "es": "Aquí preferiría usar un array simple.", "trabajo": true }
 ]

@@ -1,0 +1,19 @@
+[
+  { "id": "en-basico-18-h01", "titulo": "Más rápido que una tortuga", "situacion": "Primera semana de Ana. Su internet falla en plena reunión con Tom y Sarah, y al día siguiente prueba otra solución.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, your video is frozen again.", "es": "Ana, tu video se congeló otra vez." },
+      { "quien": "Ana", "en": "Sorry, Tom! My internet is slower than a turtle today.", "es": "¡Perdón, Tom! Hoy mi internet es más lento que una tortuga." },
+      { "quien": "Sarah", "en": "Try a coworking space. Their internet is usually faster than home internet.", "es": "Prueba un coworking. Su internet suele ser más rápido que el de la casa." },
+      { "quien": "Ana", "en": "Luis says his house has the fastest Wi-Fi in Lima. And it's closer.", "es": "Luis dice que su casa tiene el Wi-Fi más rápido de Lima. Y está más cerca." },
+      { "tipo": "pregunta", "pregunta": "¿Qué problema tiene Ana?", "opciones": ["Su internet está muy lento", "Su laptop no prende", "No tiene micrófono"], "correcta": 0, "explicacion": "Ana dice **my internet is slower than a turtle**." },
+      { "quien": "Ana", "en": "And it's cheaper than a coworking. It's free!", "es": "Y es más barato que un coworking. ¡Es gratis!" },
+      { "tipo": "completa", "quien": "Sarah", "en": "Free is better ___ expensive, ha, ha.", "opciones": ["than", "that", "then"], "correcta": 0, "explicacion": "Para comparar dos cosas se usa **than**: *better than*. *Then* significa \"entonces\".", "es": "Gratis es mejor que caro, ja, ja." },
+      { "quien": "Tom", "en": "Hi, Ana! Your video looks great today. But what's that noise?", "es": "¡Hola, Ana! Hoy tu video se ve genial. Pero ¿qué es ese ruido?" },
+      { "quien": "Ana", "en": "That's Luis's dog. It's the loudest dog in the neighborhood.", "es": "Es el perro de Luis. Es el perro más ruidoso del barrio." },
+      { "tipo": "completa", "quien": "Ana", "en": "But the Wi-Fi here is the ___ in Lima.", "opciones": ["best", "better", "most good"], "correcta": 0, "explicacion": "Para el que más destaca de un grupo se usa el superlativo. *Good* es irregular: **the best**. *Better* compara solo dos.", "es": "Pero el Wi-Fi aquí es el mejor de Lima." },
+      { "quien": "Tom", "en": "Ha, ha. OK, a loud dog is better than a frozen video.", "es": "Ja, ja. Bueno, un perro ruidoso es mejor que un video congelado." },
+      { "quien": "Sarah", "en": "Now let's compare the two designs for the login page. Version B is simpler.", "es": "Ahora comparemos los dos diseños de la página de login. La versión B es más simple." },
+      { "quien": "Ana", "en": "I agree. Version B is easier to use and more modern.", "es": "Estoy de acuerdo. La versión B es más fácil de usar y más moderna." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué prefieren la versión B del login?", "opciones": ["Es más simple y fácil de usar", "Es más barata", "Es más colorida"], "correcta": 0, "explicacion": "Sarah dice **version B is simpler** y Ana agrega **easier to use and more modern**." }
+    ] }
+]

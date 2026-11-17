@@ -28,5 +28,10 @@
   { "id": "en-basico-18-f27", "en": "Prices are higher than last year.", "es": "Los precios están más altos que el año pasado." },
   { "id": "en-basico-18-f28", "en": "Your English is getting better every day.", "es": "Tu inglés mejora cada día." },
   { "id": "en-basico-18-f29", "en": "Tomorrow will be warmer than today.", "es": "Mañana va a hacer más calor que hoy." },
-  { "id": "en-basico-18-f30", "en": "I bought the cheapest ticket.", "es": "Compré el boleto más barato." }
+  { "id": "en-basico-18-f30", "en": "I bought the cheapest ticket.", "es": "Compré el boleto más barato." },
+  { "id": "en-basico-18-f31", "en": "Vite is faster than Webpack.", "es": "Vite es más rápido que Webpack.", "trabajo": true },
+  { "id": "en-basico-18-f32", "en": "This solution is simpler than the old one.", "es": "Esta solución es más simple que la anterior.", "trabajo": true },
+  { "id": "en-basico-18-f33", "en": "It's the best library for forms.", "es": "Es la mejor librería para formularios.", "trabajo": true },
+  { "id": "en-basico-18-f34", "en": "Your code is as clean as Tom's.", "es": "Tu código es tan limpio como el de Tom.", "trabajo": true },
+  { "id": "en-basico-18-f35", "en": "This is the slowest page in the app.", "es": "Esta es la página más lenta de la app.", "trabajo": true }
 ]

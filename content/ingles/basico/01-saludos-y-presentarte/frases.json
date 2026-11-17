@@ -28,5 +28,10 @@
   { "id": "en-basico-01-f27", "en": "Yes, please. Thank you.", "es": "Sí, por favor. Gracias." },
   { "id": "en-basico-01-f28", "en": "No, thanks. I'm fine.", "es": "No, gracias. Estoy bien." },
   { "id": "en-basico-01-f29", "en": "Hi, I'm Sarah. I'm a nurse.", "es": "Hola, soy Sarah. Soy enfermera." },
-  { "id": "en-basico-01-f30", "en": "Good night, Ana. See you tomorrow.", "es": "Buenas noches, Ana. Hasta mañana." }
+  { "id": "en-basico-01-f30", "en": "Good night, Ana. See you tomorrow.", "es": "Buenas noches, Ana. Hasta mañana." },
+  { "id": "en-basico-01-f31", "en": "Hi, I'm Ana, the new frontend developer.", "es": "Hola, soy Ana, la nueva desarrolladora frontend.", "trabajo": true },
+  { "id": "en-basico-01-f32", "en": "Nice to meet you all.", "es": "Mucho gusto a todos.", "trabajo": true },
+  { "id": "en-basico-01-f33", "en": "I'm a junior developer from Lima.", "es": "Soy desarrollador junior de Lima.", "trabajo": true },
+  { "id": "en-basico-01-f34", "en": "Good morning, everyone. I'm Tom, the tech lead.", "es": "Buenos días a todos. Soy Tom, el líder técnico.", "trabajo": true },
+  { "id": "en-basico-01-f35", "en": "Welcome to the team, Ana!", "es": "¡Bienvenida al equipo, Ana!", "trabajo": true }
 ]

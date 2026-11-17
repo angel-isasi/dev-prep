@@ -1,0 +1,6 @@
+[
+  { "id": "en-intermedio-02-c01", "es": "Mientras trabajaba, se fue la luz.", "natural": "While I was working, the power went out.", "calco": "During I was working, the power went out.", "explicacion": "Antes de una frase con verbo va **while**. *During* solo va con un sustantivo: *during the meeting*." },
+  { "id": "en-intermedio-02-c02", "es": "Sabía la respuesta.", "natural": "I knew the answer.", "calco": "I was knowing the answer.", "explicacion": "**Know** es un verbo de estado y casi nunca va en -ing: *I knew*." },
+  { "id": "en-intermedio-02-c03", "es": "Al final, lo arreglamos.", "natural": "In the end, we fixed it.", "calco": "At the end, we fixed it.", "explicacion": "\"Al final\" de una historia es **in the end**. *At the end* necesita *of*: *at the end of the day*." },
+  { "id": "en-intermedio-02-c04", "es": "Estaba probando la app cuando se cayó.", "natural": "I was testing the app when it crashed.", "calco": "I was testing the app when it fell.", "explicacion": "Una app que deja de funcionar **crashes**. *Fall* es caerse físicamente." }
+]

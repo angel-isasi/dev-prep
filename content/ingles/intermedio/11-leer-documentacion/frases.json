@@ -28,5 +28,11 @@
   { "id": "en-intermedio-11-f27", "en": "Some browsers don't support this attribute yet.", "es": "Algunos navegadores todavía no soportan este atributo." },
   { "id": "en-intermedio-11-f28", "en": "One common pitfall is forgetting the dependency array.", "es": "Un error común es olvidar el arreglo de dependencias." },
   { "id": "en-intermedio-11-f29", "en": "Read the readme first, it explains the usage.", "es": "Lee primero el README, explica cómo se usa." },
-  { "id": "en-intermedio-11-f30", "en": "The legacy API is still supported but not recommended.", "es": "La API antigua todavía tiene soporte, pero no se recomienda." }
+  { "id": "en-intermedio-11-f30", "en": "The legacy API is still supported but not recommended.", "es": "La API antigua todavía tiene soporte, pero no se recomienda." },
+  { "id": "en-intermedio-11-f31", "en": "This method is deprecated in React 18.", "es": "Este método está obsoleto en React 18.", "trabajo": true },
+  { "id": "en-intermedio-11-f32", "en": "The second parameter is optional.", "es": "El segundo parámetro es opcional.", "trabajo": true },
+  { "id": "en-intermedio-11-f33", "en": "It returns a promise that resolves to an array.", "es": "Devuelve una promesa que se resuelve en un array.", "trabajo": true },
+  { "id": "en-intermedio-11-f34", "en": "This function throws an error if the input is empty.", "es": "Esta función lanza un error si la entrada está vacía.", "trabajo": true },
+  { "id": "en-intermedio-11-f35", "en": "The default value is false.", "es": "El valor por defecto es false.", "trabajo": true },
+  { "id": "en-intermedio-11-f36", "en": "The timeout option is required.", "es": "La opción timeout es obligatoria.", "trabajo": true }
 ]

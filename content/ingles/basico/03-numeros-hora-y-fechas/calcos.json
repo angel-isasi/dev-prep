@@ -1,0 +1,7 @@
+[
+  { "id": "en-basico-03-c01", "es": "Tengo 20 años.", "natural": "I'm 20 years old.", "calco": "I have 20 years.", "explicacion": "La edad va con **to be**: *I'm 20* o *I'm 20 years old*. *Have* es el calco de \"tener\"." },
+  { "id": "en-basico-03-c02", "es": "La reunión es el lunes.", "natural": "The meeting is on Monday.", "calco": "The meeting is the Monday.", "explicacion": "Con días de la semana va **on**, sin artículo: *on Monday*. El \"el\" del español no se traduce." },
+  { "id": "en-basico-03-c03", "es": "Son las nueve y media.", "natural": "It's nine thirty.", "calco": "It's nine and a half.", "explicacion": "La hora se dice **nine thirty** o *half past nine*. *Nine and a half* es el número 9,5, no una hora." },
+  { "id": "en-basico-03-c04", "es": "Mi cumpleaños es el 5 de mayo.", "natural": "My birthday is on May fifth.", "calco": "My birthday is the five of May.", "explicacion": "Las fechas se dicen con **on** y número ordinal: *on May fifth*." },
+  { "id": "en-basico-03-c05", "es": "¿Qué hora es?", "natural": "What time is it?", "calco": "What hour is it?", "explicacion": "Para preguntar la hora se usa **time**, no *hour*. *Hour* es la duración de 60 minutos." }
+]

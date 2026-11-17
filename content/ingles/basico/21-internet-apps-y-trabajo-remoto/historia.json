@@ -1,0 +1,20 @@
+[
+  { "id": "en-basico-21-h01", "titulo": "Estás en silencio, Ana", "situacion": "Es la daily del equipo por videollamada. Todos trabajan desde sus casas.",
+    "pasos": [
+      { "quien": "Tom", "en": "Good morning, team. Ana, what are you working on?", "es": "Buenos días, equipo. Ana, ¿en qué estás trabajando?" },
+      { "quien": "Sarah", "en": "Ana, you're on mute!", "es": "¡Ana, estás en silencio!" },
+      { "quien": "Ana", "en": "Sorry! Can you hear me now?", "es": "¡Perdón! ¿Ahora sí me escuchan?" },
+      { "quien": "Tom", "en": "Yes. Go ahead.", "es": "Sí. Adelante." },
+      { "quien": "Ana", "en": "Yesterday I fixed the search bar. Today I'm working on the menu. The button doesn't work on mobile.", "es": "Ayer arreglé la barra de búsqueda. Hoy estoy trabajando en el menú. El botón no funciona en el celular." },
+      { "tipo": "pregunta", "pregunta": "¿En qué trabaja Ana hoy?", "opciones": ["En el menú", "En la barra de búsqueda", "En el login"], "correcta": 0, "explicacion": "Ana dice **today I'm working on the menu**. La barra de búsqueda la arregló ayer." },
+      { "tipo": "completa", "quien": "Tom", "en": "Do you have any ___?", "opciones": ["blockers", "blocks", "locks"], "correcta": 0, "explicacion": "En una daily, un **blocker** es algo que no te deja avanzar. *Blocks* son bloques y *locks* son cerraduras.", "es": "¿Tienes algún bloqueo?" },
+      { "quien": "Ana", "en": "Yes. I can't test it on an iPhone.", "es": "Sí. No puedo probarlo en un iPhone." },
+      { "quien": "Sarah", "en": "I have an iPhone. Send me the link and I'll check it.", "es": "Yo tengo un iPhone. Mándame el enlace y lo reviso." },
+      { "quien": "Ana", "en": "Thanks! I'm sharing my screen now... wait, that's my chat with Luis.", "es": "¡Gracias! Estoy compartiendo mi pantalla... espera, ese es mi chat con Luis." },
+      { "quien": "Tom", "en": "Ha, ha. Nice dog photo. Now the right tab, please.", "es": "Ja, ja. Linda foto del perro. Ahora la pestaña correcta, por favor." },
+      { "tipo": "completa", "quien": "Ana", "en": "OK, this is the page. When you ___ the button on a phone, nothing happens.", "opciones": ["tap", "tip", "type"], "correcta": 0, "explicacion": "En una pantalla táctil, tocar es **tap**. *Type* es escribir con el teclado.", "es": "Ya, esta es la página. Cuando tocas el botón en un celular, no pasa nada." },
+      { "quien": "Sarah", "en": "I see it. Clear the cache and refresh the page.", "es": "Ya lo veo. Borra la caché y recarga la página." },
+      { "quien": "Ana", "en": "It works! The problem was the cache.", "es": "¡Funciona! El problema era la caché." },
+      { "tipo": "pregunta", "pregunta": "¿Qué compartió Ana por error?", "opciones": ["Su chat con Luis", "Su contraseña", "Un video"], "correcta": 0, "explicacion": "Ana dice **that's my chat with Luis**, y Tom ve la foto del perro." }
+    ] }
+]

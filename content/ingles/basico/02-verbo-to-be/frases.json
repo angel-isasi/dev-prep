@@ -28,5 +28,10 @@
   { "id": "en-basico-02-f27", "en": "My laptop is old, but it's good.", "es": "Mi laptop es vieja, pero es buena." },
   { "id": "en-basico-02-f28", "en": "We're interested in the job.", "es": "Estamos interesados en el trabajo." },
   { "id": "en-basico-02-f29", "en": "Is Tom available today?", "es": "¿Tom está disponible hoy?" },
-  { "id": "en-basico-02-f30", "en": "I'm not sure. Is it wrong?", "es": "No estoy seguro. ¿Está mal?" }
+  { "id": "en-basico-02-f30", "en": "I'm not sure. Is it wrong?", "es": "No estoy seguro. ¿Está mal?" },
+  { "id": "en-basico-02-f31", "en": "Is the server down?", "es": "¿Está caído el servidor?", "trabajo": true },
+  { "id": "en-basico-02-f32", "en": "I'm not ready for the demo.", "es": "No estoy listo para la demo.", "trabajo": true },
+  { "id": "en-basico-02-f33", "en": "Sorry, I'm busy right now.", "es": "Perdón, ahora estoy ocupado.", "trabajo": true },
+  { "id": "en-basico-02-f34", "en": "Are you free after lunch?", "es": "¿Estás libre después del almuerzo?", "trabajo": true },
+  { "id": "en-basico-02-f35", "en": "The new design is very nice.", "es": "El nuevo diseño está muy bonito.", "trabajo": true }
 ]

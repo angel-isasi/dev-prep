@@ -28,5 +28,10 @@
   { "id": "en-basico-17-f27", "en": "They'll probably arrive before noon.", "es": "Probablemente lleguen antes del mediodía." },
   { "id": "en-basico-17-f28", "en": "I'm going to look for a job next year.", "es": "El próximo año voy a buscar trabajo." },
   { "id": "en-basico-17-f29", "en": "Sarah is checking out of the hotel tomorrow.", "es": "Sarah deja el hotel mañana." },
-  { "id": "en-basico-17-f30", "en": "I'll be back in five minutes.", "es": "Vuelvo en cinco minutos." }
+  { "id": "en-basico-17-f30", "en": "I'll be back in five minutes.", "es": "Vuelvo en cinco minutos." },
+  { "id": "en-basico-17-f31", "en": "I'll send you the link.", "es": "Te mando el link.", "trabajo": true },
+  { "id": "en-basico-17-f32", "en": "We're going to deploy on Friday.", "es": "Vamos a hacer el deploy el viernes.", "trabajo": true },
+  { "id": "en-basico-17-f33", "en": "I'll fix it after lunch.", "es": "Lo arreglo después del almuerzo.", "trabajo": true },
+  { "id": "en-basico-17-f34", "en": "Are you going to join the meeting?", "es": "¿Vas a entrar a la reunión?", "trabajo": true },
+  { "id": "en-basico-17-f35", "en": "I won't be at the daily tomorrow.", "es": "Mañana no estaré en la daily.", "trabajo": true }
 ]

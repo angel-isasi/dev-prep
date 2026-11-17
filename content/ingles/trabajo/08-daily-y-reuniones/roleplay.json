@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-08-r01", "titulo": "Tu primer daily", "situacion": "Tom te pregunta en el daily en qué estás trabajando.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "Morning, Ana! What did you work on yesterday?", "es": "¡Buenos días, Ana! ¿En qué trabajaste ayer?" },
+      { "opciones": [
+          { "en": "Yesterday I fixed the login bug.", "es": "Ayer arreglé el bug del login.", "correcta": true, "explicacion": "Pasado simple y directo: así se habla en un daily." },
+          { "en": "Yesterday I have fixed the login bug.", "es": "", "correcta": false, "explicacion": "Con *yesterday* va pasado simple (fixed), no presente perfecto." },
+          { "en": "I am fix the login bug yesterday.", "es": "", "correcta": false, "explicacion": "Mezcla de tiempos: es *I fixed*." }
+        ] },
+      { "quien": "Tom", "en": "Great. What's the plan for today?", "es": "Genial. ¿Cuál es el plan para hoy?" },
+      { "opciones": [
+          { "en": "Today I'm going to start the profile page.", "es": "Hoy voy a empezar la página de perfil.", "correcta": true, "explicacion": "*Going to* para un plan ya decidido." },
+          { "en": "Today I go to start the profile page.", "es": "", "correcta": false, "explicacion": "Calco de \"voy a\": en inglés es *I'm going to*." },
+          { "en": "Well, first I had breakfast, then I checked Slack, then...", "es": "", "correcta": false, "explicacion": "El daily es corto: solo lo relevante del trabajo." }
+        ] },
+      { "quien": "Tom", "en": "Any blockers?", "es": "¿Algún bloqueo?" },
+      { "opciones": [
+          { "en": "No, nothing.", "es": "", "correcta": false, "explicacion": "Si de verdad tienes un bloqueo (te falta el diseño), callarlo retrasa al equipo." },
+          { "en": "Yes, I'm waiting for the designs. Could Sarah share them after the meeting?", "es": "Sí, estoy esperando los diseños. ¿Sarah podría compartirlos después de la reunión?", "correcta": true, "explicacion": "Dices el bloqueo y propones cómo resolverlo, sin alargar la reunión." },
+          { "en": "Yes, I am waiting the designs.", "es": "", "correcta": false, "explicacion": "*Wait* necesita *for*: *waiting for the designs*." }
+        ] },
+      { "quien": "Tom", "en": "Sure. And how long will the profile page take?", "es": "Claro. ¿Y cuánto te tomará la página de perfil?" },
+      { "opciones": [
+          { "en": "It will take me two days, more or less, if the API is ready.", "es": "Me tomará unos dos días, si la API está lista.", "correcta": true, "explicacion": "*It will take me* + tiempo, con la condición que afecta la estimación." },
+          { "en": "It will delay me two days.", "es": "", "correcta": false, "explicacion": "Calco de \"me demoraré\": *delay* es retrasar. Lo natural es *It'll take me two days*." },
+          { "en": "I don't know, it's ready when it's ready.", "es": "", "correcta": false, "explicacion": "Suena evasivo; en la planning se espera una estimación aunque sea aproximada." }
+        ] }
+    ] }
+]

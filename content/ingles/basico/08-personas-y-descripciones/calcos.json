@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-08-c01", "es": "El jefe de Ana es amable.", "natural": "Ana's boss is nice.", "calco": "The boss of Ana is nice.", "explicacion": "Para decir de quién es algo con personas se usa **'s**: *Ana's boss*." },
+  { "id": "en-basico-08-c02", "es": "Es una persona muy amable.", "natural": "He's a very kind person.", "calco": "He's a person very kind.", "explicacion": "El adjetivo va **antes** del sustantivo: *a very kind person*." },
+  { "id": "en-basico-08-c03", "es": "¿Cómo es tu jefe?", "natural": "What's your boss like?", "calco": "How is your boss?", "explicacion": "Para preguntar cómo es alguien se dice **What's... like?** *How is your boss?* pregunta cómo está de salud o de ánimo." },
+  { "id": "en-basico-08-c04", "es": "María vive con su esposo.", "natural": "María lives with her husband.", "calco": "María lives with his husband.", "explicacion": "**His** o **her** depende de quién es el dueño: María es mujer, entonces *her husband*." }
+]

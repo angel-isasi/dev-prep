@@ -1,0 +1,6 @@
+[
+  { "id": "en-intermedio-01-c01", "es": "Trabajo aquí desde 2023.", "natural": "I've worked here since 2023.", "calco": "I work here since 2023.", "explicacion": "Algo que empezó en el pasado y sigue va en **presente perfecto**: *I've worked here since 2023*." },
+  { "id": "en-intermedio-01-c02", "es": "Hace dos años que estudio inglés.", "natural": "I've studied English for two years.", "calco": "I study English since two years.", "explicacion": "Con una duración va **for**, y el tiempo es presente perfecto: *for two years*." },
+  { "id": "en-intermedio-01-c03", "es": "Lo terminé ayer.", "natural": "I finished it yesterday.", "calco": "I have finished it yesterday.", "explicacion": "Con un momento terminado como *yesterday* va **pasado simple**, no presente perfecto." },
+  { "id": "en-intermedio-01-c04", "es": "Llevo un año usando React.", "natural": "I've used React for a year.", "calco": "I carry a year using React.", "explicacion": "\"Llevo un año\" no se traduce con *carry*: se usa **presente perfecto + for**." }
+]

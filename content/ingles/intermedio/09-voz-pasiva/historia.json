@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-09-h01", "titulo": "¿Quién borró el botón?", "situacion": "El botón de \"Comprar\" desapareció de la web. Tom le pide a Ana que escriba el reporte del incidente.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, the Buy button disappeared this morning. Can you write the incident report?", "es": "Ana, el botón de Comprar desapareció esta mañana. ¿Puedes escribir el reporte del incidente?" },
+      { "quien": "Ana", "en": "Sure. I checked the logs. The button was removed in yesterday's deploy.", "es": "Claro. Revisé los logs. El botón fue eliminado en el despliegue de ayer." },
+      { "quien": "Tom", "en": "Removed by who?", "es": "¿Eliminado por quién?" },
+      { "quien": "Ana", "en": "Hmm... by me. It was hidden by a CSS class I added.", "es": "Mmm... por mí. Quedó oculto por una clase de CSS que agregué." },
+      { "tipo": "pregunta", "pregunta": "¿Qué causó el problema?", "opciones": ["Un ataque de hackers", "Una clase de CSS que Ana agregó", "Un error del servidor"], "correcta": 1, "explicacion": "Ana admite: \"It was hidden by a CSS class I added\"." },
+      { "quien": "Tom", "en": "Okay, it happens. In the report, we don't blame people. Just say what happened.", "es": "Bueno, pasa. En el reporte no culpamos a nadie. Solo di qué pasó." },
+      { "tipo": "completa", "quien": "Ana", "en": "Got it. \"The Buy button ___ by a CSS change.\"", "es": "Entendido. \"El botón de Comprar fue ocultado por un cambio de CSS.\"", "opciones": ["hid", "was hidden", "was hide"], "correcta": 1, "explicacion": "Voz pasiva en pasado: **was + participio**. El participio de *hide* es *hidden*, no *hide*." },
+      { "quien": "Ana", "en": "\"The bug was found by a customer at 9 a.m. and it was fixed at 10.\"", "es": "\"El bug fue encontrado por un cliente a las 9 a. m. y fue arreglado a las 10.\"" },
+      { "quien": "Tom", "en": "Perfect. What will we do so it doesn't happen again?", "es": "Perfecto. ¿Qué vamos a hacer para que no vuelva a pasar?" },
+      { "tipo": "completa", "quien": "Ana", "en": "From now on, a visual test ___ before every deploy.", "es": "De ahora en adelante, se corre un test visual antes de cada despliegue.", "opciones": ["is run", "runs by", "is running by"], "correcta": 0, "explicacion": "Voz pasiva en presente para algo que pasa siempre: **is + participio**. El participio de *run* es *run*." },
+      { "quien": "Tom", "en": "Great. And how many sales were lost?", "es": "Genial. ¿Y cuántas ventas se perdieron?" },
+      { "quien": "Ana", "en": "Only three. And two of them were made by my mom, so she'll try again.", "es": "Solo tres. Y dos de ellas las hizo mi mamá, así que va a intentarlo de nuevo." },
+      { "quien": "Tom", "en": "Ha! Your mom is our best customer. Send the report when it's done.", "es": "¡Ja! Tu mamá es nuestra mejor clienta. Manda el reporte cuando esté listo." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué el reporte no dice \"Ana borró el botón\"?", "opciones": ["Porque Ana quiere esconderlo", "Porque en el equipo no se culpa a las personas", "Porque Tom no lo sabe"], "correcta": 1, "explicacion": "Tom dice \"we don't blame people\": la voz pasiva sirve para contar qué pasó sin decir quién." }
+    ] }
+]

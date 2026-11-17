@@ -1,0 +1,6 @@
+[
+  { "id": "en-trabajo-03-c01", "es": "Lo construí el año pasado.", "natural": "I built it last year.", "calco": "I have built it last year.", "explicacion": "Con un tiempo terminado como *last year* va **pasado simple**: *I built*." },
+  { "id": "en-trabajo-03-c02", "es": "Yo era responsable del frontend.", "natural": "I was responsible for the frontend.", "calco": "I was responsible of the frontend.", "explicacion": "**Responsible** va con **for**, no con *of*." },
+  { "id": "en-trabajo-03-c03", "es": "Usé React para manejar el estado.", "natural": "I used React to manage the state.", "calco": "I used React for manage the state.", "explicacion": "Para decir el propósito se usa **to** + verbo: *to manage*." },
+  { "id": "en-trabajo-03-c04", "es": "Antes trabajaba de noche.", "natural": "I used to work at night.", "calco": "I use to work at night.", "explicacion": "Para hábitos del pasado es **used to**, con *-d*." }
+]

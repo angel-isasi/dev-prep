@@ -56,3 +56,44 @@ export function hablarVarias(textos) {
 }
 
 export const callar = () => globalThis.speechSynthesis?.cancel();
+
+// --- Reconocimiento de voz (ejercicios de hablar) ---
+// Usa el reconocimiento del navegador (Chrome y Edge). Ojo: en Chrome necesita internet, porque
+// la voz se procesa en los servidores de Google. Sin internet el ejercicio se puede saltar.
+const Reconocedor = () => globalThis.SpeechRecognition ?? globalThis.webkitSpeechRecognition ?? null;
+const CLAVE_MICRO = "devprep-hablar";
+
+/** ¿Este navegador puede escucharte? (y no lo apagaste en Inglés) */
+export const hayMicrofono = () => !!Reconocedor() && localStorage.getItem(CLAVE_MICRO) !== "no";
+export const microApagado = () => localStorage.getItem(CLAVE_MICRO) === "no";
+export const cambiarMicro = (activo) => localStorage.setItem(CLAVE_MICRO, activo ? "si" : "no");
+export const microDisponible = () => !!Reconocedor();
+
+/**
+ * Escucha una frase en inglés.
+ * @returns {{ promesa: Promise<string[]>, detener: () => void }} las transcripciones posibles
+ */
+export function escucharVoz() {
+  const Clase = Reconocedor();
+  if (!Clase) return { promesa: Promise.reject(new Error("Este navegador no reconoce voz")), detener: () => {} };
+  const r = new Clase();
+  r.lang = "en-US";
+  r.interimResults = false;
+  r.maxAlternatives = 5;
+  const promesa = new Promise((resolver, rechazar) => {
+    let listo = false;
+    r.onresult = (e) => {
+      listo = true;
+      resolver(Array.from(e.results[0] ?? []).map((a) => a.transcript));
+    };
+    r.onerror = (e) => {
+      listo = true;
+      rechazar(new Error(e.error === "network" ? "Hablar necesita internet en este navegador" : e.error === "not-allowed" ? "Permite el micrófono para hablar" : "No te escuché bien"));
+    };
+    r.onend = () => {
+      if (!listo) rechazar(new Error("No te escuché: habla un poco más fuerte"));
+    };
+  });
+  r.start();
+  return { promesa, detener: () => r.stop() };
+}

@@ -1,0 +1,20 @@
+[
+  { "id": "en-basico-07-h01", "titulo": "La rutina de Ana (y la de Luis)", "situacion": "Ana se prepara para postular y le cuenta a Luis cómo organiza su día.",
+    "pasos": [
+      { "quien": "Luis", "en": "Ana, what time do you get up?", "es": "Ana, ¿a qué hora te levantas?" },
+      { "quien": "Ana", "en": "I always get up at six. I usually study English before breakfast.", "es": "Siempre me levanto a las seis. Normalmente estudio inglés antes del desayuno." },
+      { "quien": "Luis", "en": "Six? I never get up at six.", "es": "¿A las seis? Yo nunca me levanto a las seis." },
+      { "tipo": "completa", "quien": "Ana", "en": "And I ___ late for class.", "opciones": ["am never", "never am", "never"], "correcta": 0, "explicacion": "Con **to be**, el adverbio va **después** del verbo: *I'm never late*. Con otros verbos va antes: *I never get up*.", "es": "Y nunca llego tarde a clase." },
+      { "quien": "Luis", "en": "And after class?", "es": "¿Y después de clase?" },
+      { "quien": "Ana", "en": "I practice JavaScript for two hours. On Saturdays, I sometimes build small apps.", "es": "Practico JavaScript dos horas. Los sábados, a veces creo apps pequeñas." },
+      { "quien": "Luis", "en": "Wow. How often do you watch TV?", "es": "Guau. ¿Cada cuánto ves televisión?" },
+      { "quien": "Ana", "en": "Hardly ever. And you?", "es": "Casi nunca. ¿Y tú?" },
+      { "quien": "Luis", "en": "Every night. Sometimes I sleep on the sofa with the TV on.", "es": "Todas las noches. A veces me duermo en el sofá con la tele prendida." },
+      { "tipo": "pregunta", "pregunta": "¿Con qué frecuencia ve televisión Ana?", "opciones": ["Casi nunca", "Todas las noches", "A veces"], "correcta": 0, "explicacion": "Ana dice **hardly ever**: casi nunca. El que la ve todas las noches es Luis." },
+      { "quien": "Luis", "en": "Your routine is great. My routine is... the TV.", "es": "Tu rutina es genial. Mi rutina es... la tele." },
+      { "quien": "Ana", "en": "Ha, ha! Study with me on Saturdays.", "es": "¡Ja, ja! Estudia conmigo los sábados." },
+      { "tipo": "completa", "quien": "Luis", "en": "Deal! But I ___ wake up before nine on Saturdays.", "opciones": ["never", "ever", "always not"], "correcta": 0, "explicacion": "**Never** ya es negativo y va antes del verbo: *I never wake up*. *Always not* no se usa.", "es": "¡Trato hecho! Pero los sábados nunca me despierto antes de las nueve." },
+      { "quien": "Ana", "en": "Then we study at ten.", "es": "Entonces estudiamos a las diez." },
+      { "tipo": "pregunta", "pregunta": "¿Qué hace Ana los sábados a veces?", "opciones": ["Crea apps pequeñas", "Ve televisión", "Duerme hasta las nueve"], "correcta": 0, "explicacion": "Ana dice **on Saturdays, I sometimes build small apps**." }
+    ] }
+]

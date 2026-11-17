@@ -28,5 +28,10 @@
   { "id": "en-basico-03-f27", "en": "The internship is in March.", "es": "Las prácticas son en marzo." },
   { "id": "en-basico-03-f28", "en": "What time is the class?", "es": "¿A qué hora es la clase?" },
   { "id": "en-basico-03-f29", "en": "It's at eight p.m.", "es": "Es a las ocho de la noche." },
-  { "id": "en-basico-03-f30", "en": "The store is closed on Sundays.", "es": "La tienda está cerrada los domingos." }
+  { "id": "en-basico-03-f30", "en": "The store is closed on Sundays.", "es": "La tienda está cerrada los domingos." },
+  { "id": "en-basico-03-f31", "en": "The code review is at four.", "es": "La revisión de código es a las cuatro.", "trabajo": true },
+  { "id": "en-basico-03-f32", "en": "The deadline is on Friday.", "es": "La fecha límite es el viernes.", "trabajo": true },
+  { "id": "en-basico-03-f33", "en": "The demo is on March third.", "es": "La demo es el 3 de marzo.", "trabajo": true },
+  { "id": "en-basico-03-f34", "en": "The API is on port 3000.", "es": "La API está en el puerto 3000.", "trabajo": true },
+  { "id": "en-basico-03-f35", "en": "The interview is on Tuesday at three.", "es": "La entrevista es el martes a las tres.", "trabajo": true }
 ]

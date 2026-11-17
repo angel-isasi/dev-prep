@@ -1,0 +1,20 @@
+[
+  { "id": "en-basico-06-h01", "titulo": "Nadie quiere conflictos de merge", "situacion": "Sarah, la desarrolladora que Ana conoció en el evento, la llama para conversar.",
+    "pasos": [
+      { "quien": "Sarah", "en": "Hi, Ana! Do you have five minutes?", "es": "¡Hola, Ana! ¿Tienes cinco minutos?" },
+      { "quien": "Ana", "en": "Yes, I do. Hi, Sarah!", "es": "Sí. ¡Hola, Sarah!" },
+      { "quien": "Sarah", "en": "So, do you work, or do you study?", "es": "Entonces, ¿trabajas o estudias?" },
+      { "tipo": "completa", "quien": "Ana", "en": "I study. I ___ work at a company.", "opciones": ["don't", "doesn't", "not"], "correcta": 0, "explicacion": "Con **I** la negativa es **don't** + verbo. *Doesn't* es para he, she, it, y *not* solo no funciona sin el ayudante.", "es": "Estudio. No trabajo en una empresa." },
+      { "quien": "Sarah", "en": "Does your university teach React?", "es": "¿Tu universidad enseña React?" },
+      { "quien": "Ana", "en": "No, it doesn't. I learn React at home, with videos.", "es": "No. Aprendo React en casa, con videos." },
+      { "quien": "Sarah", "en": "Nice. Do you know Git?", "es": "Bien. ¿Sabes Git?" },
+      { "quien": "Ana", "en": "Yes, I do. But I don't like merge conflicts.", "es": "Sí. Pero no me gustan los conflictos de merge." },
+      { "quien": "Sarah", "en": "Ha, ha! Nobody likes merge conflicts.", "es": "¡Ja, ja! A nadie le gustan los conflictos de merge." },
+      { "tipo": "pregunta", "pregunta": "¿Qué no le gusta a Ana?", "opciones": ["Los conflictos de merge", "React", "Estudiar en casa"], "correcta": 0, "explicacion": "Ana dice **I don't like merge conflicts**." },
+      { "quien": "Sarah", "en": "My company needs junior developers. Do you want the link?", "es": "Mi empresa necesita desarrolladores junior. ¿Quieres el enlace?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Yes, please! ___ the company work with React?", "opciones": ["Does", "Do", "Is"], "correcta": 0, "explicacion": "*The company* es **it**, por eso la pregunta va con **does**. *Is* no va con otro verbo en presente simple.", "es": "¡Sí, por favor! ¿La empresa trabaja con React?" },
+      { "quien": "Sarah", "en": "Yes, it does. And the team speaks English.", "es": "Sí. Y el equipo habla inglés." },
+      { "quien": "Ana", "en": "English? OK... I study English every day too!", "es": "¿Inglés? Ya... ¡también estudio inglés todos los días!" },
+      { "tipo": "pregunta", "pregunta": "¿Qué le ofrece Sarah a Ana?", "opciones": ["El enlace de una oferta para juniors", "Un curso de inglés", "Una laptop"], "correcta": 0, "explicacion": "Sarah dice que su empresa **needs junior developers** y le ofrece **the link**." }
+    ] }
+]

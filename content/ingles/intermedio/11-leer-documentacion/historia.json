@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-11-h01", "titulo": "La advertencia amarilla", "situacion": "La consola de Ana está llena de advertencias. Sarah le enseña a leer la documentación.",
+    "pasos": [
+      { "quien": "Ana", "en": "Sarah, my console says this function is deprecated. Is that bad?", "es": "Sarah, mi consola dice que esta función está obsoleta. ¿Eso es malo?" },
+      { "quien": "Sarah", "en": "Not yet. Deprecated means it still works, but it'll be removed in a future version.", "es": "Todavía no. Obsoleta significa que aún funciona, pero la van a eliminar en una versión futura." },
+      { "tipo": "pregunta", "pregunta": "¿Qué significa que una función esté \"deprecated\"?", "opciones": ["Que ya no funciona", "Que funciona pero la van a quitar", "Que es nueva y experimental"], "correcta": 1, "explicacion": "Sarah explica que todavía funciona, pero se eliminará en una versión futura." },
+      { "quien": "Sarah", "en": "Let's open the docs. What does it say we should use instead?", "es": "Abramos la documentación. ¿Qué dice que deberíamos usar en su lugar?" },
+      { "quien": "Ana", "en": "It says: \"Use formatPrice instead. The currency parameter is optional.\"", "es": "Dice: \"Usa formatPrice en su lugar. El parámetro currency es opcional.\"" },
+      { "tipo": "completa", "quien": "Sarah", "en": "Right. If you don't pass it, the ___ value is \"USD\".", "es": "Así es. Si no lo pasas, el valor por defecto es \"USD\".", "opciones": ["required", "default", "deprecated"], "correcta": 1, "explicacion": "**Default** es el valor que se usa si no pasas nada. *Required* significa obligatorio, lo contrario de opcional." },
+      { "quien": "Ana", "en": "But our prices are in soles. So I have to pass \"PEN\".", "es": "Pero nuestros precios están en soles. Así que tengo que pasar \"PEN\"." },
+      { "quien": "Sarah", "en": "Exactly. And look at this part: \"Throws an error if the amount is negative.\"", "es": "Exacto. Y mira esta parte: \"Lanza un error si el monto es negativo.\"" },
+      { "tipo": "completa", "quien": "Ana", "en": "So if a refund is negative, the function ___ an error?", "es": "¿Entonces si un reembolso es negativo, la función lanza un error?", "opciones": ["returns", "throws", "deprecates"], "correcta": 1, "explicacion": "**Throws** se usa para errores: la función lanza una excepción. **Returns** es para el valor que devuelve." },
+      { "quien": "Sarah", "en": "Yes. That's why the refunds page crashed last month.", "es": "Sí. Por eso se cayó la página de reembolsos el mes pasado." },
+      { "quien": "Ana", "en": "Wow. Five minutes of docs and I already know more than last month's team.", "es": "Guau. Cinco minutos de documentación y ya sé más que el equipo del mes pasado." },
+      { "quien": "Sarah", "en": "Last month's team was me. Let's not talk about it.", "es": "El equipo del mes pasado era yo. Mejor no hablemos de eso." },
+      { "quien": "Ana", "en": "Oops. Okay, I'll replace the old function and add a test for negative amounts.", "es": "Uy. Bueno, reemplazo la función antigua y agrego un test para montos negativos." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Ana tiene que pasar el parámetro currency?", "opciones": ["Porque es obligatorio", "Porque sus precios están en soles, no en dólares", "Porque la función está obsoleta"], "correcta": 1, "explicacion": "El valor por defecto es \"USD\", pero sus precios están en soles (\"PEN\")." }
+    ] }
+]

@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-04-r01", "titulo": "¿Qué harías si...?", "situacion": "Mike, de RR. HH., te hace preguntas hipotéticas en una entrevista.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Mike", "en": "What would you do if you didn't understand a task?", "es": "¿Qué harías si no entendieras una tarea?" },
+      { "opciones": [
+          { "en": "If I wouldn't understand it, I would ask.", "es": "", "correcta": false, "explicacion": "*Would* no va en la parte del *if*: *If I didn't understand it*." },
+          { "en": "If I didn't understand it, I'd ask my lead for an example.", "es": "Si no la entendiera, le pediría un ejemplo a mi líder.", "correcta": true, "explicacion": "Condicional dos: *if* + pasado, *would* + verbo. Para situaciones imaginadas." },
+          { "en": "If I don't understand, I will google it and never ask.", "es": "", "correcta": false, "explicacion": "Además del tiempo, la respuesta da mala impresión: en un equipo se espera que preguntes." }
+        ] },
+      { "quien": "Mike", "en": "Interesting. And if you had more free time, what would you learn?", "es": "Interesante. ¿Y si tuvieras más tiempo libre, qué aprenderías?" },
+      { "opciones": [
+          { "en": "If I would have more time, I learn Python.", "es": "", "correcta": false, "explicacion": "Calco del subjuntivo: no es *would have*, es *If I had*. Y la otra parte lleva *would*." },
+          { "en": "If I had more time, I'll learn Python.", "es": "", "correcta": false, "explicacion": "Mezcla condicional dos con *will*. Debe ser *I'd learn*." },
+          { "en": "If I had more time, I'd learn TypeScript in depth.", "es": "Si tuviera más tiempo, aprendería TypeScript a fondo.", "correcta": true, "explicacion": "*If I had* + *I'd* (I would). Estructura correcta del condicional dos." }
+        ] },
+      { "quien": "Mike", "en": "Great. Any questions for me?", "es": "Genial. ¿Alguna pregunta para mí?" },
+      { "opciones": [
+          { "en": "Yes. Could you tell me what a typical day looks like for a junior?", "es": "Sí. ¿Podría contarme cómo es un día típico para un junior?", "correcta": true, "explicacion": "*Could you...?* es una forma cortés de pedir información." },
+          { "en": "Yes. Tell me how is a typical day.", "es": "", "correcta": false, "explicacion": "Imperativo muy directo y orden de pregunta indirecta incorrecto: *what a typical day is like*." },
+          { "en": "Yes. How much would you pay me?", "es": "", "correcta": false, "explicacion": "Demasiado directo como primera pregunta; el salario se trata con más tacto y en otro momento." }
+        ] },
+      { "quien": "Mike", "en": "Sure. Is there anything else?", "es": "Claro. ¿Algo más?" },
+      { "opciones": [
+          { "en": "Would you mind to send me the next steps?", "es": "", "correcta": false, "explicacion": "Después de *would you mind* va verbo con *-ing*: *sending*." },
+          { "en": "Would you mind sending me the next steps by email?", "es": "¿Le molestaría enviarme los siguientes pasos por correo?", "correcta": true, "explicacion": "*Would you mind* + *-ing* es una petición muy cortés." },
+          { "en": "Can you send me the next steps? Thanks bro.", "es": "", "correcta": false, "explicacion": "*Bro* es demasiado informal con alguien de RR. HH." }
+        ] }
+    ] }
+]

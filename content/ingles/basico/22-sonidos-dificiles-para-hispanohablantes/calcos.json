@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-22-c01", "es": "Salgo de la oficina a las seis.", "natural": "I leave the office at six.", "calco": "I live the office at six.", "explicacion": "**Leave** (salir) tiene una i larga, \"líiv\". *Live* (vivir) es una i corta." },
+  { "id": "en-basico-22-c02", "es": "Tenemos tres bugs.", "natural": "We have three bugs.", "calco": "We have tree bugs.", "explicacion": "**Three** se dice con la lengua entre los dientes. *Tree* es árbol." },
+  { "id": "en-basico-22-c03", "es": "Necesito una taza de café.", "natural": "I need a cup of coffee.", "calco": "I need a cap of coffee.", "explicacion": "**Cup** tiene una a cerrada, \"káp\". *Cap* es gorra, con una a abierta." },
+  { "id": "en-basico-22-c04", "es": "Muy bien.", "natural": "Very good.", "calco": "Berry good.", "explicacion": "La **v** se hace con el labio de abajo y los dientes de arriba. *Berry* con b es una fruta." }
+]

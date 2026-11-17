@@ -1,0 +1,19 @@
+[
+  { "id": "en-trabajo-07-h01", "titulo": "De 40 segundos a 1", "situacion": "En la demo del viernes, Ana explica cómo hizo que un reporte lento fuera casi instantáneo.",
+    "pasos": [
+      { "quien": "Tom", "en": "Ana, the sales report used to take forty seconds. Now it takes one. What did you do?", "es": "Ana, el reporte de ventas tardaba cuarenta segundos. Ahora tarda uno. ¿Qué hiciste?" },
+      { "quien": "Ana", "en": "The old code iterated over all the sales, and for each sale, it searched the whole customer list.", "es": "El código antiguo recorría todas las ventas, y por cada venta buscaba en toda la lista de clientes." },
+      { "tipo": "completa", "quien": "Ana", "en": "That's a loop inside a loop, so it runs in ___ time.", "es": "Es un bucle dentro de otro, así que corre en tiempo cuadrático.", "opciones": ["linear", "quadratic", "constant"], "correcta": 1, "explicacion": "Un bucle dentro de otro sobre listas grandes es **O(n²)**, tiempo **quadratic**. *Linear* sería un solo recorrido." },
+      { "quien": "Sarah", "en": "And how many sales do we have?", "es": "¿Y cuántas ventas tenemos?" },
+      { "quien": "Ana", "en": "About fifty thousand. So it was doing millions of comparisons.", "es": "Unas cincuenta mil. O sea que hacía millones de comparaciones." },
+      { "quien": "Ana", "en": "Now I build a Map of customers first, using the ID as the key.", "es": "Ahora primero armo un Map de clientes, usando el ID como clave." },
+      { "quien": "Ana", "en": "Then I loop over the sales once and keep track of the totals in another object.", "es": "Luego recorro las ventas una sola vez y llevo la cuenta de los totales en otro objeto." },
+      { "tipo": "pregunta", "pregunta": "¿Qué cambio hizo Ana para que el reporte fuera rápido?", "opciones": ["Compró un servidor más grande", "Creó un Map de clientes y recorrió las ventas una sola vez", "Borró la mitad de las ventas"], "correcta": 1, "explicacion": "Con un **Map**, buscar un cliente es inmediato, así que solo hace falta un recorrido." },
+      { "tipo": "completa", "quien": "Ana", "en": "This runs in linear time ___ looking up a key in a Map is constant time.", "es": "Esto corre en tiempo lineal porque buscar una clave en un Map toma tiempo constante.", "opciones": ["because", "so", "although"], "correcta": 0, "explicacion": "**Because** introduce la causa: *runs in linear time because...* Es la frase clave para justificar tu complejidad." },
+      { "quien": "Tom", "en": "Nice. Is there any trade-off?", "es": "Bien. ¿Hay algún trade-off?" },
+      { "quien": "Ana", "en": "Yes, it uses more memory, because the Map stores all the customers.", "es": "Sí, usa más memoria, porque el Map guarda a todos los clientes." },
+      { "quien": "Ana", "en": "But it's only a few megabytes, so I think it's worth it.", "es": "Pero son solo unos megas, así que creo que vale la pena." },
+      { "quien": "Sarah", "en": "Now I can't use \"the report is loading\" as an excuse for my coffee breaks.", "es": "Ahora ya no puedo usar \"el reporte está cargando\" como excusa para mis pausas de café." },
+      { "tipo": "pregunta", "pregunta": "¿Cuál es el trade-off de la solución de Ana?", "opciones": ["Es más lenta", "Usa más memoria", "Tiene más bugs"], "correcta": 1, "explicacion": "El Map guarda todos los clientes, así que usa más memoria a cambio de mucha más velocidad." }
+    ] }
+]

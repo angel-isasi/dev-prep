@@ -1,0 +1,29 @@
+[
+  { "id": "en-intermedio-09-r01", "titulo": "Reportar el estado de un bug", "situacion": "Tom pregunta en la reunión qué pasó con el bug de las fechas que reportó un cliente.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "Any news on the date bug the client reported?", "es": "¿Alguna novedad del bug de fechas que reportó el cliente?" },
+      { "opciones": [
+          { "en": "Yes, the bug was fixed yesterday.", "es": "Sí, el bug se arregló ayer.", "correcta": true, "explicacion": "Pasiva en pasado: *was* + participio. Lo importante es el bug, no quién lo arregló." },
+          { "en": "Yes, the bug fixed yesterday.", "es": "", "correcta": false, "explicacion": "Calco de \"se arregló\": sin *was* parece que el bug arregló algo." },
+          { "en": "Yes, the bug was fix yesterday.", "es": "", "correcta": false, "explicacion": "La pasiva necesita el participio: *fixed*." }
+        ] },
+      { "quien": "Tom", "en": "Great. Is it in production already?", "es": "Genial. ¿Ya está en producción?" },
+      { "opciones": [
+          { "en": "Not yet. It will deployed on Friday.", "es": "", "correcta": false, "explicacion": "Pasiva futura: *will be* + participio. Falta *be*." },
+          { "en": "Not yet. It will be deployed on Friday, like every week.", "es": "Todavía no. Se desplegará el viernes, como cada semana.", "correcta": true, "explicacion": "*Will be deployed*: pasiva en futuro." },
+          { "en": "Not yet. It deploys itself on Friday.", "es": "", "correcta": false, "explicacion": "Calco del \"se\" reflexivo. En inglés no se usa *itself* así; va la pasiva." }
+        ] },
+      { "quien": "Tom", "en": "What caused it?", "es": "¿Qué lo causó?" },
+      { "opciones": [
+          { "en": "Sarah's fault. She wrote the bad code.", "es": "", "correcta": false, "explicacion": "Culpar a una compañera en una reunión es poco profesional; la pasiva sirve justamente para evitarlo." },
+          { "en": "The dates were saved in local time instead of UTC.", "es": "Las fechas se guardaban en hora local en vez de UTC.", "correcta": true, "explicacion": "*Were saved*: pasiva en plural. Explica la causa sin señalar a nadie." },
+          { "en": "The dates was saved in local time.", "es": "", "correcta": false, "explicacion": "*Dates* es plural: *were saved*." }
+        ] },
+      { "quien": "Tom", "en": "Got it. Is it documented?", "es": "Entendido. ¿Está documentado?" },
+      { "opciones": [
+          { "en": "Yes, a note has been added to the README.", "es": "Sí, se agregó una nota al README.", "correcta": true, "explicacion": "*Has been added*: pasiva en presente perfecto." },
+          { "en": "Yes, it has been add to the README.", "es": "", "correcta": false, "explicacion": "Falta el participio: *added*." },
+          { "en": "Yes, is documented in the README.", "es": "", "correcta": false, "explicacion": "En inglés siempre va sujeto: *it is documented*." }
+        ] }
+    ] }
+]

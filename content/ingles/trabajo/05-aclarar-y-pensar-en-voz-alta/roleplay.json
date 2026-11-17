@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-05-r01", "titulo": "Antes de escribir código", "situacion": "Jennifer, ingeniera, te da un problema en una entrevista técnica. Aclara antes de programar.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Jennifer", "en": "Write a function that removes duplicates from an array.", "es": "Escribe una función que elimine los duplicados de un array." },
+      { "opciones": [
+          { "en": "OK. *empieza a escribir código en silencio*", "es": "", "correcta": false, "explicacion": "El error más común: programar sin hablar ni aclarar. El entrevistador quiere oír cómo piensas." },
+          { "en": "Just to clarify, is it an array of numbers, or can it have objects?", "es": "Solo para aclarar, ¿es un array de números o puede tener objetos?", "correcta": true, "explicacion": "*Just to clarify* abre una pregunta de aclaración: así empiezan las buenas entrevistas." },
+          { "en": "For clarify, what type is the array?", "es": "", "correcta": false, "explicacion": "Después de *for* no va el verbo base. Se dice *Just to clarify* o *To clarify*." }
+        ] },
+      { "quien": "Jennifer", "en": "Good question. Just numbers.", "es": "Buena pregunta. Solo números." },
+      { "opciones": [
+          { "en": "Can I assume I should keep the original order?", "es": "¿Puedo asumir que debo mantener el orden original?", "correcta": true, "explicacion": "*Can I assume...?* confirma un supuesto antes de diseñar la solución." },
+          { "en": "Can I suppose that the order is kept?", "es": "", "correcta": false, "explicacion": "*Suppose* se entiende, pero en entrevistas lo natural es *Can I assume...?*." },
+          { "en": "I assume the order doesn't matter.", "es": "", "correcta": false, "explicacion": "Asumir sin preguntar es arriesgado: puede cambiar toda la solución." }
+        ] },
+      { "quien": "Jennifer", "en": "Yes, keep the order. How would you approach it?", "es": "Sí, mantén el orden. ¿Cómo lo abordarías?" },
+      { "opciones": [
+          { "en": "Let me think out loud. My first idea is to use a Set to track what I've seen.", "es": "Déjame pensar en voz alta. Mi primera idea es usar un Set para registrar lo que ya vi.", "correcta": true, "explicacion": "*Let me think out loud* y *My first idea is* muestran tu proceso." },
+          { "en": "Let me think in high voice.", "es": "", "correcta": false, "explicacion": "Calco de \"en voz alta\": en inglés es *out loud*." },
+          { "en": "I don't know, give me a hint.", "es": "", "correcta": false, "explicacion": "Pedir pista sin intentar nada da mala impresión; primero comparte una idea." }
+        ] },
+      { "quien": "Jennifer", "en": "Sounds good. Go ahead.", "es": "Suena bien. Adelante." },
+      { "opciones": [
+          { "en": "Done. I'm sure it works.", "es": "", "correcta": false, "explicacion": "Sin probar, decir que funciona no convence. Siempre prueba con un ejemplo." },
+          { "en": "Done. Let me prove it with an example.", "es": "", "correcta": false, "explicacion": "Falso amigo: *prove* es demostrar. \"Probar con un ejemplo\" es *test it* o *try it*." },
+          { "en": "OK, it's done. Let me test it with an example: [1, 2, 2, 3].", "es": "Ok, listo. Déjame probarlo con un ejemplo: [1, 2, 2, 3].", "correcta": true, "explicacion": "*Let me test it with an example* cierra el proceso: verificas en voz alta." }
+        ] }
+    ] }
+]

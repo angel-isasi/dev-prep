@@ -1,0 +1,19 @@
+[
+  { "id": "en-intermedio-06-h01", "titulo": "La gran discusión de las fechas", "situacion": "Ana y Sarah no se ponen de acuerdo sobre qué librería usar para las fechas. Tom tiene que decidir.",
+    "pasos": [
+      { "quien": "Tom", "en": "Okay, we need to format dates in the dashboard. Any ideas?", "es": "Bueno, necesitamos dar formato a las fechas en el panel. ¿Alguna idea?" },
+      { "quien": "Sarah", "en": "In my opinion, we should install a library. It's faster.", "es": "En mi opinión, deberíamos instalar una librería. Es más rápido." },
+      { "quien": "Ana", "en": "I see your point. However, we only need one format.", "es": "Entiendo tu punto. Sin embargo, solo necesitamos un formato." },
+      { "tipo": "completa", "quien": "Ana", "en": "___ libraries are useful, this one adds a lot of weight to the app.", "es": "Aunque las librerías son útiles, esta le agrega mucho peso a la app.", "opciones": ["Although", "However", "Because"], "correcta": 0, "explicacion": "**Although** une dos ideas que contrastan dentro de la misma oración. **However** va al inicio de una oración nueva, seguido de coma." },
+      { "quien": "Ana", "en": "JavaScript already has Intl.DateTimeFormat, so we don't need anything else.", "es": "JavaScript ya tiene Intl.DateTimeFormat, así que no necesitamos nada más." },
+      { "quien": "Sarah", "en": "I disagree. Dates look easy, but time zones are a nightmare.", "es": "No estoy de acuerdo. Las fechas parecen fáciles, pero las zonas horarias son una pesadilla." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Ana no quiere instalar la librería?", "opciones": ["Porque no sabe usarla", "Porque agrega mucho peso y solo necesitan un formato", "Porque Tom la prohibió"], "correcta": 1, "explicacion": "Ana dice que solo necesitan un formato y que la librería pesa mucho." },
+      { "quien": "Tom", "en": "Do our users live in different time zones?", "es": "¿Nuestros usuarios viven en zonas horarias distintas?" },
+      { "quien": "Ana", "en": "No, they all live in Lima. Therefore, time zones aren't a problem.", "es": "No, todos viven en Lima. Por lo tanto, las zonas horarias no son un problema." },
+      { "tipo": "completa", "quien": "Sarah", "en": "Fine, I ___ with Ana. No library for now.", "es": "Está bien, estoy de acuerdo con Ana. Sin librería por ahora.", "opciones": ["am agree", "agree", "am agreed"], "correcta": 1, "explicacion": "En inglés es **I agree**, sin *am*. *I am agree* es un calco típico de \"estoy de acuerdo\"." },
+      { "quien": "Tom", "en": "Great. Ana, you write it, because it was your idea.", "es": "Genial. Ana, tú lo escribes, porque fue tu idea." },
+      { "quien": "Ana", "en": "That's fair. Although... I'm starting to like that library.", "es": "Me parece justo. Aunque... me está empezando a gustar esa librería." },
+      { "quien": "Sarah", "en": "Too late! Good luck with the date formats.", "es": "¡Demasiado tarde! Suerte con los formatos de fecha." },
+      { "tipo": "pregunta", "pregunta": "¿Quién va a escribir el código de las fechas y por qué?", "opciones": ["Sarah, porque sabe más", "Ana, porque fue su idea", "Tom, porque es el líder"], "correcta": 1, "explicacion": "Tom dice \"Ana, you write it, because it was your idea\"." }
+    ] }
+]

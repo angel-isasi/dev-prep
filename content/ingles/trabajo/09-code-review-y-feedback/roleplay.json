@@ -1,0 +1,29 @@
+[
+  { "id": "en-trabajo-09-r01", "titulo": "Recibir feedback sin ponerte a la defensiva", "situacion": "Tom dejó comentarios en tu pull request y lo conversan por videollamada.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "I left a few comments on your PR. The first one: this function is doing too much.", "es": "Dejé algunos comentarios en tu PR. El primero: esta función hace demasiadas cosas." },
+      { "opciones": [
+          { "en": "But it works! Why do I have to change it?", "es": "", "correcta": false, "explicacion": "Suena defensivo. En una revisión se espera apertura." },
+          { "en": "Good point. Could we extract the validation into its own function?", "es": "Buen punto. ¿Podríamos extraer la validación en su propia función?", "correcta": true, "explicacion": "Aceptas el comentario y propones una solución con *Could we...?*." },
+          { "en": "Good point. Can we extract the validation in other function?", "es": "", "correcta": false, "explicacion": "Calco de \"en otra función\": se dice *into a separate function* o *into its own function*." }
+        ] },
+      { "quien": "Tom", "en": "Yes, exactly. Also, you're not handling the empty case.", "es": "Sí, exacto. Además, no estás manejando el caso vacío." },
+      { "opciones": [
+          { "en": "Good catch! I'll add a check and a test for it.", "es": "¡Bien visto! Agrego una validación y un test para eso.", "correcta": true, "explicacion": "*Good catch* = bien visto. Es la forma natural de agradecer que encontraron un error." },
+          { "en": "Good fishing! I'll add it.", "es": "", "correcta": false, "explicacion": "Traducción literal que no existe. Es *Good catch*." },
+          { "en": "That will never happen.", "es": "", "correcta": false, "explicacion": "Descartar un caso borde sin pensar suele traer bugs y suena defensivo." }
+        ] },
+      { "quien": "Tom", "en": "The last one is just a nit: there's an extra blank line.", "es": "El último es solo un detalle: hay una línea en blanco de más." },
+      { "opciones": [
+          { "en": "Sorry, sorry, I'm so bad at this.", "es": "", "correcta": false, "explicacion": "Un *nit* es un detalle menor: no hace falta disculparse tanto." },
+          { "en": "What is a nit? A bug?", "es": "", "correcta": false, "explicacion": "Un *nit* no es un bug: es un detalle menor de estilo. Conviene saberlo antes de la revisión." },
+          { "en": "No problem, I'll clean it up.", "es": "Sin problema, lo limpio.", "correcta": true, "explicacion": "Un *nit* es un comentario pequeño de estilo: se acepta rápido y sin drama." }
+        ] },
+      { "quien": "Tom", "en": "Thanks. Ping me when it's ready and I'll approve it.", "es": "Gracias. Avísame cuando esté listo y lo apruebo." },
+      { "opciones": [
+          { "en": "Will do. Thanks for the feedback, it really helps.", "es": "Dale. Gracias por el feedback, me ayuda mucho.", "correcta": true, "explicacion": "Agradecer el feedback deja una buena impresión." },
+          { "en": "OK. Thanks for the feedbacks.", "es": "", "correcta": false, "explicacion": "*Feedback* es incontable: no lleva *s*." },
+          { "en": "OK. Approve it fast, please, I'm in a hurry.", "es": "", "correcta": false, "explicacion": "Presionar al revisor suena poco profesional." }
+        ] }
+    ] }
+]

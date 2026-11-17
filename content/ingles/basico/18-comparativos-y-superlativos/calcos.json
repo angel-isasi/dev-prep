@@ -1,0 +1,6 @@
+[
+  { "id": "en-basico-18-c01", "es": "Es más rápido que el bus.", "natural": "It's faster than the bus.", "calco": "It's more fast than the bus.", "explicacion": "Los adjetivos cortos usan **-er**: *faster*. *More* es para los largos." },
+  { "id": "en-basico-18-c02", "es": "Es más fácil.", "natural": "It's easier.", "calco": "It's more easier.", "explicacion": "Nunca van *more* y *-er* juntos: **easier** ya significa \"más fácil\"." },
+  { "id": "en-basico-18-c03", "es": "Es el más caro de la ciudad.", "natural": "It's the most expensive in the city.", "calco": "It's the most expensive of the city.", "explicacion": "Con un lugar, el \"de\" del superlativo es **in**: *in the city*, *in the team*." },
+  { "id": "en-basico-18-c04", "es": "Es mejor que el otro.", "natural": "It's better than the other one.", "calco": "It's more good than the other one.", "explicacion": "**Good** es irregular: *better* y *the best*." }
+]
