@@ -1,5 +1,5 @@
 [
-  { "id": "en-basico-20-d01", "titulo": "Pedir ayuda con un error", "situacion": "Luis no entiende un error y le escribe a Tom, un desarrollador senior.",
+  { "id": "en-basico-20-d01", "titulo": "Pedir ayuda con un error", "situacion": "Luis no entiende un error y le escribe a Tom, el tech lead del equipo.",
     "lineas": [
       { "quien": "Luis", "en": "Tom, can you help me with a bug?", "es": "Tom, ¿me ayudas con un error?" },
       { "quien": "Tom", "en": "Sure. What's the problem?", "es": "Claro. ¿Cuál es el problema?" },

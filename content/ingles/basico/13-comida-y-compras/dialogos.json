@@ -1,18 +1,18 @@
 [
-  { "id": "en-basico-13-d01", "titulo": "En el restaurante", "situacion": "María llega a almorzar y Tom, el mesero, la atiende.",
+  { "id": "en-basico-13-d01", "titulo": "En el restaurante", "situacion": "María llega a almorzar y Jake, el mesero, la atiende.",
     "lineas": [
-      { "quien": "Tom", "en": "Hi! Are you ready to order?", "es": "¡Hola! ¿Lista para pedir?" },
+      { "quien": "Jake", "en": "Hi! Are you ready to order?", "es": "¡Hola! ¿Lista para pedir?" },
       { "quien": "María", "en": "Yes. What do you recommend?", "es": "Sí. ¿Qué me recomienda?" },
-      { "quien": "Tom", "en": "The chicken with rice is very good today.", "es": "Hoy el pollo con arroz está muy bueno." },
+      { "quien": "Jake", "en": "The chicken with rice is very good today.", "es": "Hoy el pollo con arroz está muy bueno." },
       { "quien": "María", "en": "Great. I'd like that, please. Is it spicy?", "es": "Perfecto. Quisiera eso, por favor. ¿Es picante?" },
-      { "quien": "Tom", "en": "Just a little. Anything to drink?", "es": "Solo un poco. ¿Algo de tomar?" },
+      { "quien": "Jake", "en": "Just a little. Anything to drink?", "es": "Solo un poco. ¿Algo de tomar?" },
       { "quien": "María", "en": "A glass of orange juice, please.", "es": "Un vaso de jugo de naranja, por favor." },
-      { "quien": "Tom", "en": "Perfect. For here or to go?", "es": "Perfecto. ¿Para comer aquí o para llevar?" },
+      { "quien": "Jake", "en": "Perfect. For here or to go?", "es": "Perfecto. ¿Para comer aquí o para llevar?" },
       { "quien": "María", "en": "For here, thanks.", "es": "Para aquí, gracias." }
     ],
     "preguntas": [
-      { "pregunta": "¿Qué le recomienda Tom?", "opciones": ["Pescado con papas", "Pollo con arroz", "Sopa de verduras"], "correcta": 1,
-        "explicacion": "Tom dice \"The chicken with rice is very good today\": le recomienda el pollo con arroz." },
+      { "pregunta": "¿Qué le recomienda Jake?", "opciones": ["Pescado con papas", "Pollo con arroz", "Sopa de verduras"], "correcta": 1,
+        "explicacion": "Jake dice \"The chicken with rice is very good today\": le recomienda el pollo con arroz." },
       { "pregunta": "¿Qué pide María para tomar?", "opciones": ["Café", "Agua", "Jugo de naranja"], "correcta": 2,
         "explicacion": "María pide \"A glass of orange juice\": un vaso de jugo de naranja." },
       { "pregunta": "¿Dónde va a comer María?", "opciones": ["En el restaurante", "En su casa", "En la oficina"], "correcta": 0,

@@ -91,14 +91,14 @@ export function InglesMovil() {
   return (
     <section className={estilos.pagina} data-area="ingles">
       <CabeceraPagina etiqueta="Para trabajar en inglés" titulo="Inglés" resaltado="todos los días">
-        Repaso espaciado, escuchar, armar frases y hablar. 15 minutos al día valen más que 2 horas el domingo.
+        15 minutos al día valen más que 2 horas el domingo.
       </CabeceraPagina>
 
       <div className={estilos.tablero}>
         <div className={estilos.columnaPrincipal}>
           <div className={estilos.resumen}>
             <div className={estilos.meta}>
-              <AnilloProgreso valor={avanceHoy} tamano={96} grosor={8} completo={avanceHoy >= 1}>
+              <AnilloProgreso valor={avanceHoy} tamano={60} grosor={6} completo={avanceHoy >= 1}>
                 <strong className={estilos.minutos}>
                   <SlidingNumber number={Math.floor(hoy.minutosHoy)} />
                 </strong>
@@ -124,153 +124,168 @@ export function InglesMovil() {
             </div>
           </div>
 
-          <div className={estilos.semana} aria-label="Minutos de inglés en los últimos 7 días">
-            {hoy.semana.map((d) => (
-              <div key={d.fecha} title={`${d.fecha}: ${d.minutos} min`}>
-                <span
-                  style={{ height: `${Math.min(100, (d.minutos / Math.max(hoy.meta, 1)) * 100)}%` }}
-                  data-cumplio={d.minutos >= hoy.meta}
-                />
-                <small>{new Date(`${d.fecha}T12:00:00`).toLocaleDateString("es-PE", { weekday: "narrow" })}</small>
-              </div>
-            ))}
-          </div>
-
-          {motivacion && <Motivacion datos={motivacion} alCobrar={cobrarCofre} />}
-
           {!hoy.nivelHecho && (
             <div className={estilos.nivel}>
               <div>
                 <strong>¿Ya sabes algo de inglés?</strong>
-                <p>Haz la prueba de nivel (unos 8 minutos) y empieza donde de verdad te toca.</p>
+                <p>El examen de nivel se adapta a ti (de A1 a C2) y marca como hechas las unidades que ya dominas.</p>
               </div>
-              <Link to={leccion("nivel")} className="boton boton-primario">
-                Hacer la prueba
+              <Link to="/ingles/examen" className="boton boton-primario">
+                Hacer el examen
               </Link>
             </div>
           )}
 
-          <div className={estilos.acciones}>
-            <Link to={leccion()} className={`boton boton-primario ${estilos.principal}`}>
-              <span className={estilos.iconoFicha} aria-hidden>
-                ◎
-              </span>
+          <Link to={leccion()} className={`boton boton-primario ${estilos.continuar}`}>
+            <span className={estilos.iconoFicha} aria-hidden>
+              ◎
+            </span>
+            <span>
               <strong>Rutina de hoy</strong>
               <small>12 ejercicios: lo que toca repasar y hasta 6 nuevos</small>
-            </Link>
-            <Link to={leccion("rapida")} className="boton brillo">
-              <span className={estilos.iconoFicha} aria-hidden>
-                ⚡
-              </span>
-              <strong>Inglés rápido</strong>
-              <small>5 ejercicios</small>
-            </Link>
-            {conVoz && (
-              <Link to={leccion("escuchar")} className="boton brillo">
-                <span className={estilos.iconoFicha} aria-hidden>
-                  ♪
-                </span>
-                <strong>Solo escuchar</strong>
-                <small>oído y dictado</small>
-              </Link>
-            )}
-            <Link to="/ingles/historias" className="boton brillo">
-              <span className={estilos.iconoFicha} aria-hidden>
-                📖
-              </span>
-              <strong>Historias</strong>
-              <small>la serie de Ana y roleplays</small>
-            </Link>
-            <Link to="/ingles/parejas" className="boton brillo">
-              <span className={estilos.iconoFicha} aria-hidden>
-                ⏱
-              </span>
-              <strong>Parejas</strong>
-              <small>60 segundos contrarreloj</small>
-            </Link>
-            <Link to={leccion("mezcla")} className="boton brillo">
-              <span className={estilos.iconoFicha} aria-hidden>
-                ⇄
-              </span>
-              <strong>Repaso mezclado</strong>
-              <small>de todas tus unidades</small>
-            </Link>
-            {conVoz && (
-              <Link to={leccion("oido")} className="boton brillo">
-                <span className={estilos.iconoFicha} aria-hidden>
-                  👂
-                </span>
-                <strong>Oído fino</strong>
-                <small>ship o sheep</small>
-              </Link>
-            )}
-            <Link to={leccion("errores")} className="boton brillo">
-              <span className={estilos.iconoFicha} aria-hidden>
-                ↺
-              </span>
-              <strong>Mis errores</strong>
-              <small>lo que fallaste</small>
-            </Link>
-            <Link to={leccion("mispalabras")} className="boton brillo">
-              <span className={estilos.iconoFicha} aria-hidden>
-                ★
-              </span>
-              <strong>Mis palabras</strong>
-              <small>las que marcaste con ★</small>
-            </Link>
-          </div>
+            </span>
+          </Link>
 
-          <div className={estilos.opcionesIngles}>
-            {motivacion && (
-              <label className={estilos.velocidad}>
-                <input
-                  type="checkbox"
-                  checked={motivacion.vidas}
-                  onChange={async (e) => {
-                    await api.cambiarVidasIngles(e.target.checked);
-                    cargar();
-                  }}
-                />
-                Jugar con vidas (5 por lección: si las pierdes, termina)
-              </label>
-            )}
-            {microDisponible() && (
-              <label className={estilos.velocidad}>
-                <input
-                  type="checkbox"
-                  checked={micro}
-                  onChange={(e) => {
-                    setMicro(e.target.checked);
-                    cambiarMicro(e.target.checked);
-                  }}
-                />
-                Ejercicios de hablar (usan el micrófono y necesitan internet)
-              </label>
-            )}
-          </div>
-
-          {conVoz ? (
-            <label className={estilos.velocidad}>
-              <input
-                type="checkbox"
-                checked={lento}
-                onChange={(e) => {
-                  setLento(e.target.checked);
-                  cambiarVelocidad(e.target.checked ? "lento" : "normal");
-                }}
-              />
-              Audio más lento
-            </label>
-          ) : (
-            <p className={estilos.ayuda}>
-              Este dispositivo no tiene una voz en inglés instalada, así que los ejercicios de escuchar no aparecen. En Windows:
-              Configuración, Hora e idioma, Voz, agrega una voz en inglés (Estados Unidos). En Android viene con Google.
-            </p>
-          )}
+          <h2 className={estilos.tituloCamino}>Tu camino</h2>
+          <CaminoMovil ambito="ingles" sinCabecera />
         </div>
 
-        <aside className={`textura ${estilos.bloque} ${estilos.columnaLateral}`}>
-          <h2>Inmersión: inglés real</h2>
+        <aside className={estilos.columnaLateral}>
+          {motivacion && <Motivacion datos={motivacion} alCobrar={cobrarCofre} />}
+
+          <div className={`textura ${estilos.tarjetaLateral}`}>
+            <div className={estilos.cabeceraBloque}>
+              <h2>Tu semana</h2>
+              <small>minutos por día</small>
+            </div>
+            <div className={estilos.semana} aria-label="Minutos de inglés en los últimos 7 días">
+              {hoy.semana.map((d) => (
+                <div key={d.fecha} title={`${d.fecha}: ${d.minutos} min`}>
+                  <span
+                    style={{ height: `${Math.min(100, (d.minutos / Math.max(hoy.meta, 1)) * 100)}%` }}
+                    data-cumplio={d.minutos >= hoy.meta}
+                  />
+                  <small>{new Date(`${d.fecha}T12:00:00`).toLocaleDateString("es-PE", { weekday: "narrow" })}</small>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={`textura ${estilos.tarjetaLateral}`}>
+            <h2>Más práctica</h2>
+            <div className={estilos.acciones}>
+              <Link to={leccion("rapida")} className="boton brillo">
+                <span className={estilos.iconoFicha} aria-hidden>
+                  ⚡
+                </span>
+                <strong>Inglés rápido</strong>
+                <small>5 ejercicios</small>
+              </Link>
+              {conVoz && (
+                <Link to={leccion("escuchar")} className="boton brillo">
+                  <span className={estilos.iconoFicha} aria-hidden>
+                    ♪
+                  </span>
+                  <strong>Solo escuchar</strong>
+                  <small>oído y dictado</small>
+                </Link>
+              )}
+              <Link to="/ingles/historias" className="boton brillo">
+                <span className={estilos.iconoFicha} aria-hidden>
+                  📖
+                </span>
+                <strong>Historias</strong>
+                <small>la serie de Ana y roleplays</small>
+              </Link>
+              <Link to="/ingles/parejas" className="boton brillo">
+                <span className={estilos.iconoFicha} aria-hidden>
+                  ⏱
+                </span>
+                <strong>Parejas</strong>
+                <small>60 segundos contrarreloj</small>
+              </Link>
+              <Link to={leccion("mezcla")} className="boton brillo">
+                <span className={estilos.iconoFicha} aria-hidden>
+                  ⇄
+                </span>
+                <strong>Repaso mezclado</strong>
+                <small>de todas tus unidades</small>
+              </Link>
+              {conVoz && (
+                <Link to={leccion("oido")} className="boton brillo">
+                  <span className={estilos.iconoFicha} aria-hidden>
+                    👂
+                  </span>
+                  <strong>Oído fino</strong>
+                  <small>ship o sheep</small>
+                </Link>
+              )}
+              <Link to={leccion("errores")} className="boton brillo">
+                <span className={estilos.iconoFicha} aria-hidden>
+                  ↺
+                </span>
+                <strong>Mis errores</strong>
+                <small>lo que fallaste</small>
+              </Link>
+              <Link to={leccion("mispalabras")} className="boton brillo">
+                <span className={estilos.iconoFicha} aria-hidden>
+                  ★
+                </span>
+                <strong>Mis palabras</strong>
+                <small>las que marcaste con ★</small>
+              </Link>
+            </div>
+            <div className={estilos.opcionesIngles}>
+              {motivacion && (
+                <label className={estilos.velocidad}>
+                  <input
+                    type="checkbox"
+                    checked={motivacion.vidas}
+                    onChange={async (e) => {
+                      await api.cambiarVidasIngles(e.target.checked);
+                      cargar();
+                    }}
+                  />
+                  Jugar con vidas (5 por lección: si las pierdes, termina)
+                </label>
+              )}
+              {microDisponible() && (
+                <label className={estilos.velocidad}>
+                  <input
+                    type="checkbox"
+                    checked={micro}
+                    onChange={(e) => {
+                      setMicro(e.target.checked);
+                      cambiarMicro(e.target.checked);
+                    }}
+                  />
+                  Ejercicios de hablar (usan el micrófono y necesitan internet)
+                </label>
+              )}
+            </div>
+
+            {conVoz ? (
+              <label className={estilos.velocidad}>
+                <input
+                  type="checkbox"
+                  checked={lento}
+                  onChange={(e) => {
+                    setLento(e.target.checked);
+                    cambiarVelocidad(e.target.checked ? "lento" : "normal");
+                  }}
+                />
+                Audio más lento
+              </label>
+            ) : (
+              <p className={estilos.ayuda}>
+                Este dispositivo no tiene una voz en inglés instalada, así que los ejercicios de escuchar no aparecen. En Windows:
+                Configuración, Hora e idioma, Voz, agrega una voz en inglés (Estados Unidos). En Android viene con Google.
+              </p>
+            )}
+          </div>
+
+          <div className={`textura ${estilos.tarjetaLateral}`}>
+            <h2>Inmersión: inglés real</h2>
           <p className={estilos.ayuda}>
             La app te da la base; el oído se entrena escuchando mucho inglés de verdad. Anota lo que viste o escuchaste hoy en inglés y
             cuenta para tu meta.
@@ -309,13 +324,15 @@ export function InglesMovil() {
               </div>
             ))}
           </details>
+
+            {hoy.nivelHecho && (
+              <Link to="/ingles/examen" className={`boton boton-fantasma ${estilos.repetirExamen}`}>
+                Repetir el examen de nivel
+              </Link>
+            )}
+          </div>
         </aside>
       </div>
-
-      <section className={estilos.bloque}>
-        <h2>Tu camino</h2>
-        <CaminoMovil ambito="ingles" sinCabecera />
-      </section>
     </section>
   );
 }
@@ -377,6 +394,7 @@ function Motivacion({ datos, alCobrar }) {
                 : `La semana pasada a esta altura llevabas ${liga.pasadaHastaHoy} XP; ahora ${liga.estaSemana}. Te faltan ${liga.pasadaHastaHoy - liga.estaSemana + 1} para pasarte.`
           }
         />
+        {(liga.estaSemana > 0 || liga.pasada > 0) && (
         <div className={estilos.ligaDias} aria-label="XP por día: esta semana contra la pasada">
           {liga.porDia.map((d) => (
             <div key={d.fecha} title={`${d.fecha}: ${d.xp} XP (semana pasada: ${d.pasada})`}>
@@ -386,6 +404,7 @@ function Motivacion({ datos, alCobrar }) {
             </div>
           ))}
         </div>
+        )}
       </div>
     </div>
   );

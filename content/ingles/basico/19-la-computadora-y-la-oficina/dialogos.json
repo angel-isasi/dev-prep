@@ -17,7 +17,7 @@
       { "pregunta": "¿Cuándo va a llamar Luis a soporte?", "opciones": ["Ahora mismo", "Mañana", "Después de la reunión"],
         "correcta": 2, "explicacion": "Luis dice \"I'll call IT after the meeting\"." }
     ] },
-  { "id": "en-basico-19-d02", "titulo": "Cambiar una reunión", "situacion": "Ana, la jefa del equipo, habla con Carlos por chat.",
+  { "id": "en-basico-19-d02", "titulo": "Cambiar una reunión", "situacion": "Ana necesita mover una reunión y le escribe a Carlos por chat.",
     "lineas": [
       { "quien": "Ana", "en": "Carlos, are you available at three?", "es": "Carlos, ¿estás disponible a las tres?" },
       { "quien": "Carlos", "en": "Sorry, I have a call with the client.", "es": "Perdón, tengo una llamada con el cliente." },

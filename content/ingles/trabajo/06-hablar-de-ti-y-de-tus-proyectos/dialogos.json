@@ -42,18 +42,18 @@
       { "pregunta": "¿Qué aprendió Ana?", "opciones": ["A medir antes de cambiar algo", "A no trabajar sola", "A usar otro framework"],
         "correcta": 0, "explicacion": "Ana termina con \"To measure before I change anything\"." }
     ] },
-  { "id": "en-trabajo-06-d03", "titulo": "Trabajo en equipo", "situacion": "Una reclutadora le pregunta a Carlos cómo trabaja con otras personas.",
+  { "id": "en-trabajo-06-d03", "titulo": "Trabajo en equipo", "situacion": "Lisa, una reclutadora, le pregunta a Carlos cómo trabaja con otras personas.",
     "lineas": [
-      { "quien": "Sarah", "en": "Can you give me an example of teamwork?", "es": "¿Me das un ejemplo de trabajo en equipo?" },
+      { "quien": "Lisa", "en": "Can you give me an example of teamwork?", "es": "¿Me das un ejemplo de trabajo en equipo?" },
       { "quien": "Carlos", "en": "Sure. In a university project, we were a team of four.", "es": "Claro. En un proyecto de la universidad éramos un equipo de cuatro." },
       { "quien": "Carlos", "en": "Two of us wanted React, and the other two wanted Vue.", "es": "Dos queríamos React, y los otros dos querían Vue." },
-      { "quien": "Sarah", "en": "How did you solve that?", "es": "¿Cómo lo resolvieron?" },
+      { "quien": "Lisa", "en": "How did you solve that?", "es": "¿Cómo lo resolvieron?" },
       { "quien": "Carlos", "en": "I suggested building the same small page with both and comparing.", "es": "Propuse hacer la misma página pequeña con los dos y comparar." },
-      { "quien": "Sarah", "en": "And what did you choose?", "es": "¿Y qué eligieron?" },
+      { "quien": "Lisa", "en": "And what did you choose?", "es": "¿Y qué eligieron?" },
       { "quien": "Carlos", "en": "React, because more of us felt comfortable with it.", "es": "React, porque más de nosotros nos sentíamos cómodos con él." },
-      { "quien": "Sarah", "en": "Was everyone happy with the decision?", "es": "¿Todos quedaron contentos con la decisión?" },
+      { "quien": "Lisa", "en": "Was everyone happy with the decision?", "es": "¿Todos quedaron contentos con la decisión?" },
       { "quien": "Carlos", "en": "Yes, because we decided with data, not with opinions.", "es": "Sí, porque decidimos con datos, no con opiniones." },
-      { "quien": "Sarah", "en": "I like that. It sounds like you're a real team player.", "es": "Me gusta. Parece que trabajas muy bien en equipo." }
+      { "quien": "Lisa", "en": "I like that. It sounds like you're a real team player.", "es": "Me gusta. Parece que trabajas muy bien en equipo." }
     ],
     "preguntas": [
       { "pregunta": "¿Cuál era el desacuerdo del equipo?", "opciones": ["El horario de trabajo", "Usar React o Vue", "Quién era el líder"],

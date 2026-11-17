@@ -88,5 +88,5 @@
   { "id": "en-trabajo-01-w44", "en": "YAML", "es": "YAML (formato de configuración)", "pron": "yámel", "tipo": "sustantivo",
     "ejemplo": { "en": "The pipeline is a YAML file.", "es": "El pipeline es un archivo YAML." } },
   { "id": "en-trabajo-01-w45", "en": "Chrome", "es": "Chrome (navegador)", "pron": "króum", "tipo": "sustantivo",
-    "ejemplo": { "en": "It works in Chrome but not in Safari.", "es": "Funciona en Chrome pero no en Safari." } }
+    "ejemplo": { "en": "I use Chrome for web development.", "es": "Uso Chrome para desarrollo web." } }
 ]

@@ -468,3 +468,25 @@
   color: var(--error);
   font-size: 0.9rem;
 }
+
+/* Escuchar de verdad: el texto del diálogo y la traducción del hueco, solo si los pides */
+.dialogoBotones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
+}
+.oculto {
+  color: var(--texto-tenue);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+.verPista {
+  align-self: flex-start;
+  min-height: 36px;
+  font-size: 14px;
+}
+.pista {
+  margin: 0;
+  color: var(--texto-suave);
+  font-style: italic;
+}

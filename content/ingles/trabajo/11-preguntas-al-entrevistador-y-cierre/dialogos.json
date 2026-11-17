@@ -20,18 +20,18 @@
       { "pregunta": "¿Cómo describe Sarah un día típico?", "opciones": ["Muchas reuniones largas", "Daily a las diez y luego sobre todo programar", "Trabajo solo, sin reuniones"],
         "correcta": 1, "explicacion": "\"Standup at ten, then mostly coding\"." }
     ] },
-  { "id": "en-trabajo-11-d02", "titulo": "Salario y disponibilidad", "situacion": "Ana habla con Tom, el reclutador, en la llamada final.",
+  { "id": "en-trabajo-11-d02", "titulo": "Salario y disponibilidad", "situacion": "Ana habla con Mike, de RR. HH., en la llamada final.",
     "lineas": [
-      { "quien": "Tom", "en": "The team really liked you. Can I ask about your salary expectations?", "es": "Al equipo le gustaste mucho. ¿Puedo preguntarte por tus expectativas salariales?" },
+      { "quien": "Mike", "en": "The team really liked you. Can I ask about your salary expectations?", "es": "Al equipo le gustaste mucho. ¿Puedo preguntarte por tus expectativas salariales?" },
       { "quien": "Ana", "en": "Sure. Could you first tell me the salary range for this position?", "es": "Claro. ¿Primero me podrías decir el rango salarial de este puesto?" },
-      { "quien": "Tom", "en": "Of course. It's between eighteen hundred and twenty-two hundred dollars a month.", "es": "Por supuesto. Es entre mil ochocientos y dos mil doscientos dólares al mes." },
+      { "quien": "Mike", "en": "Of course. It's between eighteen hundred and twenty-two hundred dollars a month.", "es": "Por supuesto. Es entre mil ochocientos y dos mil doscientos dólares al mes." },
       { "quien": "Ana", "en": "Thanks. Based on my research, I was looking for something around two thousand.", "es": "Gracias. Según lo que investigué, buscaba algo cerca de dos mil." },
       { "quien": "Ana", "en": "But I'm open to discussing it.", "es": "Pero estoy abierta a conversarlo." },
-      { "quien": "Tom", "en": "That fits our range. And when would you be available to start?", "es": "Eso entra en nuestro rango. ¿Y cuándo podrías empezar?" },
+      { "quien": "Mike", "en": "That fits our range. And when would you be available to start?", "es": "Eso entra en nuestro rango. ¿Y cuándo podrías empezar?" },
       { "quien": "Ana", "en": "I finish my semester in two weeks, so I could start after that.", "es": "Termino mi ciclo en dos semanas, así que podría empezar después." },
-      { "quien": "Tom", "en": "That works for us. Do you have any other questions?", "es": "Eso nos funciona. ¿Tienes alguna otra pregunta?" },
+      { "quien": "Mike", "en": "That works for us. Do you have any other questions?", "es": "Eso nos funciona. ¿Tienes alguna otra pregunta?" },
       { "quien": "Ana", "en": "Just one. When can I expect to hear back?", "es": "Solo una. ¿Cuándo puedo esperar una respuesta?" },
-      { "quien": "Tom", "en": "By Friday at the latest. Thank you for your time, Ana.", "es": "A más tardar el viernes. Gracias por tu tiempo, Ana." }
+      { "quien": "Mike", "en": "By Friday at the latest. Thank you for your time, Ana.", "es": "A más tardar el viernes. Gracias por tu tiempo, Ana." }
     ],
     "preguntas": [
       { "pregunta": "¿Qué hace Ana antes de dar su cifra?", "opciones": ["Pide el rango salarial del puesto", "Dice que acepta cualquier salario", "Cambia de tema"],
@@ -39,7 +39,7 @@
       { "pregunta": "¿Cuándo puede empezar Ana?", "opciones": ["De inmediato", "En dos semanas, cuando termine su ciclo", "En dos meses"],
         "correcta": 1, "explicacion": "\"I finish my semester in two weeks, so I could start after that\"." },
       { "pregunta": "¿Cuándo le van a responder?", "opciones": ["El lunes", "A más tardar el viernes", "No lo dicen"],
-        "correcta": 1, "explicacion": "Tom dice \"By Friday at the latest\"." }
+        "correcta": 1, "explicacion": "Mike dice \"By Friday at the latest\"." }
     ] },
   { "id": "en-trabajo-11-d03", "titulo": "Trabajo remoto desde Perú", "situacion": "María, desde Lima, pregunta por la modalidad a Carlos, el hiring manager de una empresa de Estados Unidos.",
     "lineas": [

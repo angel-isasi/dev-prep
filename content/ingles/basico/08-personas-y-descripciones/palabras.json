@@ -62,7 +62,7 @@
   { "id": "en-basico-08-w31", "en": "my", "es": "mi, mis", "pron": "mái", "tipo": "pronombre",
     "ejemplo": { "en": "This is my laptop.", "es": "Esta es mi laptop." } },
   { "id": "en-basico-08-w32", "en": "your", "es": "tu, tus / su, sus (de usted, de ustedes)", "pron": "iór", "tipo": "pronombre",
-    "ejemplo": { "en": "What's your last name?", "es": "¿Cuál es tu apellido?" } },
+    "ejemplo": { "en": "Is this your laptop?", "es": "¿Esta es tu laptop?" } },
   { "id": "en-basico-08-w33", "en": "his", "es": "su, sus (de él)", "pron": "jís", "tipo": "pronombre",
     "ejemplo": { "en": "Luis and his brother work together.", "es": "Luis y su hermano trabajan juntos." } },
   { "id": "en-basico-08-w34", "en": "her", "es": "su, sus (de ella)", "pron": "jér", "tipo": "pronombre",

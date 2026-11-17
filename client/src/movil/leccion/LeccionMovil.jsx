@@ -14,7 +14,7 @@ import { armarLeccion, avance, crearSesion, HITOS_COMBO, ordenCorrecto, pasoActu
 import { BotonAudio, ItemArmar, ItemEmparejar, ItemEntrevista, ItemEscribir, ItemHablar, ItemOpcion, ItemOrdenar, ItemTarjeta, tituloDe } from "./Items.jsx";
 import { armadoCorrecto, escrituraCorrecta } from "../../../../scripts/items/ingles.js";
 import { hablar, hayMicrofono, hayVoz } from "../../lib/voz.js";
-import { elegirVariante, emparejarDe } from "./variantes.js";
+import { elegirVariante, emparejarDe, variarPasos } from "./variantes.js";
 import { Bit, fraseDeBit } from "../../components/Bit.jsx";
 import estilos from "./LeccionMovil.module.css";
 
@@ -40,6 +40,9 @@ function conEmparejar(pasos, d, unidad, azar) {
   return [...pasos.slice(0, mitad), { clave: par.clave, tipo: "emparejar", item: par }, ...pasos.slice(mitad)];
 }
 
+/** Una línea corta de una pregunta en markdown (para la lista de falladas). */
+const textoCorto = (md) => String(md ?? "").replace(/[*_~`#>]/g, "").split("\n").find((l) => l.trim())?.slice(0, 80) ?? "";
+
 export function LeccionMovil() {
   const [params] = useSearchParams();
   const navegar = useNavigate();
@@ -64,15 +67,20 @@ export function LeccionMovil() {
         const mias = new Set(Object.keys(await api.misPalabras()));
         d = { ...d, items: d.items.filter((it) => /^en:/.test(it.clave) && mias.has(it.clave.slice(3))) };
       }
+      if (params.get("claves")) {
+        const estas = new Set(params.get("claves").split(","));
+        d = { ...d, items: d.items.filter((it) => estas.has(it.clave)) };
+      }
       if (params.get("retomar") && d.enCurso && !terminada(d.enCurso)) return setSesion(d.enCurso);
       const unidad = params.get("unidad") ?? d.unidadActual;
-      const modo = params.get("modo") === "mispalabras" ? "todos" : (params.get("modo") ?? "normal");
+      const modo = params.get("modo") === "mispalabras" || params.get("claves") ? "todos" : (params.get("modo") ?? "normal");
       const azar = semilla(`${d.hoy}-${unidad}-${modo}-${Date.now()}`);
       const ingles = ambito === "ingles";
       // En inglés cada concepto se pregunta según cuánto lo dominas (ver variantes.js)
       const variante = ingles ? (it, op) => elegirVariante(it, d.registros[it.clave], { conVoz: hayVoz(), conMicro: hayMicrofono(), azar, ...op }) : undefined;
       let pasos = armarLeccion({ ...d, unidad, modo, conVoz: hayVoz(), azar, variante });
       if (ingles && modo === "normal") pasos = conEmparejar(pasos, d, unidad, azar);
+      if (ingles && (modo === "normal" || modo === "rapida")) pasos = variarPasos(pasos, new Map(d.items.map((it) => [it.clave, it])), { conVoz: hayVoz() });
       if (pasos.length === 0)
         return setError(
           modo === "errores" ? "No tienes errores pendientes. ¡Bien!" : modo === "examen" ? "Todavía no practicaste suficiente esta semana para un examen: haz unas lecciones primero." : "No hay ítems para esta unidad todavía.",
@@ -240,7 +248,30 @@ export function LeccionMovil() {
             <span>XP</span>
           </div>
         </div>
-        {final.fallados.length > 0 && (
+        {ambito === "ingles" && final.fallados.length > 0 && (
+          <div className={estilos.falladas}>
+            <span>Para repasar</span>
+            <ul>
+              {final.fallados.slice(0, 5).map((p) => (
+                <li key={p.clave}>
+                  <div>
+                    <strong lang="en">{p.item?.en ?? textoCorto(p.item?.pregunta)}</strong>
+                    {p.item?.es && <small>{p.item.es}</small>}
+                  </div>
+                  {p.item?.en && <BotonAudio texto={p.item.en} />}
+                </li>
+              ))}
+            </ul>
+            <button
+              type="button"
+              className="boton"
+              onClick={() => navegar(`/leccion?ambito=ingles&claves=${encodeURIComponent(final.fallados.map((p) => p.clave).join(","))}`)}
+            >
+              ↺ Repasar {final.fallados.length === 1 ? "esta" : `estas ${final.fallados.length}`} ahora
+            </button>
+          </div>
+        )}
+        {ambito !== "ingles" && final.fallados.length > 0 && (
           <div className={estilos.repasar}>
             <span>Para repasar</span>
             {final.fallados.map((p, i) => {

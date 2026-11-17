@@ -1,5 +1,5 @@
 [
-  { "id": "en-intermedio-07-d01", "titulo": "El deploy salió mal", "situacion": "Sarah, la líder del equipo, le escribe a Luis porque los usuarios ven errores.",
+  { "id": "en-intermedio-07-d01", "titulo": "El deploy salió mal", "situacion": "Sarah, su compañera de equipo, le escribe a Luis porque los usuarios ven errores.",
     "lineas": [
       { "quien": "Sarah", "en": "Luis, users are running into errors on the checkout page.", "es": "Luis, los usuarios se están topando con errores en la página de pago." },
       { "quien": "Luis", "en": "I saw that. I think it's from this morning's deploy.", "es": "Lo vi. Creo que viene del deploy de esta mañana." },

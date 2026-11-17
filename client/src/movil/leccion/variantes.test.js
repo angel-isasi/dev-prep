@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { avanceConceptos, elegirVariante, emparejarDe } from "./variantes.js";
+import { avanceConceptos, elegirVariante, emparejarDe, variarPasos } from "./variantes.js";
 import { armarLeccion, crearSesion, responder, resumen, semilla, terminada, sinVidas, XP } from "./motor.js";
 
 const HOY = "2026-11-17";
@@ -131,5 +131,33 @@ describe("sesión: combo, vidas, saltar y lección perfecta", () => {
     s = sesion;
     for (let i = 1; i < 6; i++) s = responder(s, { correcto: true }).sesion;
     expect(resumen(s)).toMatchObject({ total: 5, aciertos: 5, perfecta: true });
+  });
+});
+
+describe("variedad mínima de una lección", () => {
+  const frase = (n) => ({
+    clave: `fr:${n}`,
+    unidad: "u1",
+    tipo: "concepto",
+    concepto: "frase",
+    en: `frase ${n}`,
+    es: `frase ${n}`,
+    variantes: [v("escuchar", 0, { voz: true, subtipo: "escuchar" }), v("hueco", 0), { forma: "traducir", nivel: 1, tipo: "armar", respuesta: ["a"] }],
+  });
+  const items = [frase(1), frase(2), frase(3)];
+  const conceptos = new Map(items.map((it) => [it.clave, it]));
+  const pasos = items.map((it) => ({ clave: it.clave, tipo: "opcion", item: { ...it, ...v("hueco", 0), forma: "hueco" } }));
+
+  test("si todo es de opción, una frase pasa a armar y otra a escuchar", () => {
+    const r = variarPasos(pasos, conceptos);
+    expect(r.map((p) => p.item.forma)).toEqual(["traducir", "escuchar", "hueco"]);
+    expect(r[0].tipo).toBe("armar");
+    expect(r[0].item.variantes).toBeUndefined();
+  });
+
+  test("sin voz no fuerza escuchar, y si ya hay armar no cambia nada", () => {
+    expect(variarPasos(pasos, conceptos, { conVoz: false }).map((p) => p.item.forma)).toEqual(["traducir", "hueco", "hueco"]);
+    const conArmar = [{ ...pasos[0], tipo: "armar", item: { ...pasos[0].item, tipo: "armar", forma: "traducir" } }, pasos[1]];
+    expect(variarPasos(conArmar, conceptos, { conVoz: false })).toEqual(conArmar);
   });
 });

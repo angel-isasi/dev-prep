@@ -1,16 +1,16 @@
 [
-  { "id": "en-basico-03-d01", "titulo": "Agendar una entrevista", "situacion": "Sarah, de recursos humanos, llama a Luis para fijar la hora de su entrevista.",
+  { "id": "en-basico-03-d01", "titulo": "Agendar una entrevista", "situacion": "Lisa, de recursos humanos, llama a Luis para fijar la hora de su entrevista.",
     "lineas": [
-      { "quien": "Sarah", "en": "Hi, Luis. Are you free on Thursday?", "es": "Hola, Luis. ¿Estás libre el jueves?" },
+      { "quien": "Lisa", "en": "Hi, Luis. Are you free on Thursday?", "es": "Hola, Luis. ¿Estás libre el jueves?" },
       { "quien": "Luis", "en": "Yes, I am. What time?", "es": "Sí. ¿A qué hora?" },
-      { "quien": "Sarah", "en": "Is ten o'clock okay?", "es": "¿Te parece bien a las diez?" },
+      { "quien": "Lisa", "en": "Is ten o'clock okay?", "es": "¿Te parece bien a las diez?" },
       { "quien": "Luis", "en": "Sorry, I'm busy in the morning. Is three p.m. okay?", "es": "Perdón, estoy ocupado en la mañana. ¿Puede ser a las tres de la tarde?" },
-      { "quien": "Sarah", "en": "Yes, perfect. Thursday, May fifth, at three p.m.", "es": "Sí, perfecto. Jueves 5 de mayo, a las tres de la tarde." },
-      { "quien": "Luis", "en": "Great. Thank you, Sarah!", "es": "Genial. ¡Gracias, Sarah!" }
+      { "quien": "Lisa", "en": "Yes, perfect. Thursday, May fifth, at three p.m.", "es": "Sí, perfecto. Jueves 5 de mayo, a las tres de la tarde." },
+      { "quien": "Luis", "en": "Great. Thank you, Lisa!", "es": "Genial. ¡Gracias, Lisa!" }
     ],
     "preguntas": [
       { "pregunta": "¿Qué día es la entrevista?", "opciones": ["El martes", "El jueves", "El viernes"], "correcta": 1,
-        "explicacion": "Sarah confirma **Thursday, May fifth**: el jueves 5 de mayo." },
+        "explicacion": "Lisa confirma **Thursday, May fifth**: el jueves 5 de mayo." },
       { "pregunta": "¿A qué hora es la entrevista?", "opciones": ["A las diez de la mañana", "A las tres de la tarde", "A las tres y media"], "correcta": 1,
         "explicacion": "Quedan en **three p.m.**, las tres de la tarde. Las diez era la primera propuesta." },
       { "pregunta": "¿Por qué Luis no puede a las diez?", "opciones": ["Está ocupado en la mañana", "Está enfermo", "Llega tarde"], "correcta": 0,

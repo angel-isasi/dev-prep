@@ -20,7 +20,7 @@
       { "pregunta": "¿Qué pasa cuando Luis termine los cambios?", "opciones": ["Tom pedirá más cambios", "Tom aprobará el PR", "Luis hará merge sin revisión"],
         "correcta": 1, "explicacion": "\"Ping me when it's ready and I'll approve it\"." }
     ] },
-  { "id": "en-trabajo-09-d02", "titulo": "Sin ponerse a la defensiva", "situacion": "Sarah, la líder técnica, comenta el código de Ana, que es nueva en el equipo.",
+  { "id": "en-trabajo-09-d02", "titulo": "Sin ponerse a la defensiva", "situacion": "Sarah, una desarrolladora senior del equipo, comenta el código de Ana, que es nueva en el equipo.",
     "lineas": [
       { "quien": "Sarah", "en": "Ana, I requested changes on your PR. Do you have a minute?", "es": "Ana, pedí cambios en tu PR. ¿Tienes un minuto?" },
       { "quien": "Ana", "en": "Sure. I'm not sure I follow your second comment.", "es": "Claro. No estoy segura de entender tu segundo comentario." },

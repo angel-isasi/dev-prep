@@ -1,15 +1,15 @@
 [
-  { "id": "en-trabajo-04-d01", "titulo": "Actually o currently", "situacion": "Un reclutador le pregunta a María qué hace ahora. Ella se corrige a tiempo.",
+  { "id": "en-trabajo-04-d01", "titulo": "Actually o currently", "situacion": "Mike, de RR. HH., le pregunta a María qué hace ahora. Ella se corrige a tiempo.",
     "lineas": [
-      { "quien": "Tom", "en": "So, María, what are you doing these days?", "es": "Y María, ¿qué estás haciendo estos días?" },
+      { "quien": "Mike", "en": "So, María, what are you doing these days?", "es": "Y María, ¿qué estás haciendo estos días?" },
       { "quien": "María", "en": "Actually, I'm... sorry, I mean currently, I'm in my last year of college.", "es": "En realidad... perdón, quiero decir actualmente, estoy en mi último año de universidad." },
-      { "quien": "Tom", "en": "No problem. What's your major?", "es": "No hay problema. ¿Qué carrera estudias?" },
+      { "quien": "Mike", "en": "No problem. What's your major?", "es": "No hay problema. ¿Qué carrera estudias?" },
       { "quien": "María", "en": "Systems Engineering, at a university in Lima.", "es": "Ingeniería de Sistemas, en una universidad de Lima." },
-      { "quien": "Tom", "en": "And are you working right now?", "es": "¿Y estás trabajando ahora?" },
+      { "quien": "Mike", "en": "And are you working right now?", "es": "¿Y estás trabajando ahora?" },
       { "quien": "María", "en": "Yes, part-time. I help a small business with its website.", "es": "Sí, a medio tiempo. Ayudo a un pequeño negocio con su página web." },
-      { "quien": "Tom", "en": "Nice. Why do you want to start your career in frontend?", "es": "Bien. ¿Por qué quieres empezar tu vida profesional en frontend?" },
+      { "quien": "Mike", "en": "Nice. Why do you want to start your career in frontend?", "es": "Bien. ¿Por qué quieres empezar tu vida profesional en frontend?" },
       { "quien": "María", "en": "Because I love building things that people can see and use.", "es": "Porque me encanta construir cosas que la gente pueda ver y usar." },
-      { "quien": "Tom", "en": "That's a great answer.", "es": "Esa es una gran respuesta." }
+      { "quien": "Mike", "en": "That's a great answer.", "es": "Esa es una gran respuesta." }
     ],
     "preguntas": [
       { "pregunta": "¿Por qué se corrige María?", "opciones": ["Dijo actually cuando quería decir currently", "Dijo mal su nombre", "Se equivocó de universidad"],
@@ -19,7 +19,7 @@
       { "pregunta": "¿Por qué le gusta el frontend?", "opciones": ["Porque paga más", "Porque construye cosas que la gente ve y usa", "Porque es más fácil"],
         "correcta": 1, "explicacion": "María dice \"I love building things that people can see and use\"." }
     ] },
-  { "id": "en-trabajo-04-d02", "titulo": "Pedir que te expliquen", "situacion": "En su primera semana, Luis no entiende una tarea y le pregunta a Sarah, su líder.",
+  { "id": "en-trabajo-04-d02", "titulo": "Pedir que te expliquen", "situacion": "En su primera semana, Luis no entiende una tarea y le pregunta a Sarah, una compañera con más experiencia.",
     "lineas": [
       { "quien": "Luis", "en": "Sarah, can I ask you a question about my ticket?", "es": "Sarah, ¿te puedo hacer una pregunta sobre mi ticket?" },
       { "quien": "Sarah", "en": "Of course. What's up?", "es": "Por supuesto. ¿Qué pasa?" },

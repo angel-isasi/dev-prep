@@ -18,7 +18,7 @@ import { crearIndice } from "../server/contenido.js";
 import { cargarReferencia, cargarTemas } from "../server/aprender.js";
 import { cargarEntrevistas } from "../server/entrevistas.js";
 import { COLECCIONES_SIN_SOLUCION, generarItems } from "./items/index.js";
-import { cargarIngles } from "../server/ingles.js";
+import { cargarIngles, ETAPAS as ETAPAS_INGLES } from "../server/ingles.js";
 import { generarItemsIngles, historiasParaLeer, unidadesParaLeer } from "./items/ingles.js";
 import { cargarGlosario, cargarPredice, cargarRevision } from "../server/aprender-mejor.js";
 
@@ -158,7 +158,7 @@ async function main() {
   const itemsIngles = generarItemsIngles(ingles.unidades);
   // Un archivo por etapa (básico, intermedio, trabajo): así ninguno pasa el límite del service worker
   let bytesIngles = 0;
-  for (const etapa of ["basico", "intermedio", "trabajo"]) {
+  for (const etapa of ETAPAS_INGLES) {
     const unidades = itemsIngles.unidades.filter((u) => u.etapa === etapa);
     const ids = new Set(unidades.map((u) => u.id));
     bytesIngles += await escribir(`items-ingles-${etapa}.json`, { version: 1, unidades, items: itemsIngles.items.filter((it) => ids.has(it.unidad)) });

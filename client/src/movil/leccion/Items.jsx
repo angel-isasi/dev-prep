@@ -74,20 +74,30 @@ export function BotonAudio({ texto, auto = false, grande = false, etiqueta = "Es
 
 /** Diálogo: cada línea con su botón de audio, y "Escuchar todo". La traducción aparece al responder. */
 function Dialogo({ dialogo, traducir }) {
+  // Con voz, el diálogo se escucha: el texto aparece al responder (o si tocas "Ver texto").
+  const [verTexto, setVerTexto] = useState(false);
   if (!dialogo) return null;
+  const oculto = hayVoz() && !traducir && !verTexto;
   return (
     <div className={estilos.dialogo}>
       {dialogo.situacion && <p className={estilos.ayuda}>{dialogo.situacion}</p>}
       {hayVoz() && (
-        <button type="button" className="boton" onClick={() => hablarVarias(dialogo.lineas.map((l) => l.en))}>
-          🔊 Escuchar todo
-        </button>
+        <div className={estilos.dialogoBotones}>
+          <button type="button" className="boton boton-primario" onClick={() => hablarVarias(dialogo.lineas.map((l) => l.en))}>
+            🔊 Escuchar todo
+          </button>
+          {oculto && (
+            <button type="button" className="boton boton-fantasma" onClick={() => setVerTexto(true)}>
+              Ver texto
+            </button>
+          )}
+        </div>
       )}
       {dialogo.lineas.map((l, i) => (
         <div key={i} className={estilos.lineaDialogo}>
           <strong>{l.quien}</strong>
           <span>
-            {l.en}
+            {oculto ? <span className={estilos.oculto}>Escucha la línea</span> : l.en}
             {traducir && <small>{l.es}</small>}
           </span>
           {hayVoz() && (
@@ -113,6 +123,7 @@ export function useOpciones(item) {
 /** Opción múltiple (quiz, ¿qué método?, ¿qué devuelve?, TypeScript) y completar el hueco. */
 export function ItemOpcion({ item, elegida, alElegir, bloqueado, correcta }) {
   const orden = useOpciones(item);
+  const [verPista, setVerPista] = useState(false);
   return (
     <div className={estilos.item}>
       {item.pregunta && (
@@ -120,6 +131,14 @@ export function ItemOpcion({ item, elegida, alElegir, bloqueado, correcta }) {
           <Markdown>{item.pregunta}</Markdown>
         </div>
       )}
+      {item.pista &&
+        (verPista || bloqueado ? (
+          <p className={estilos.pista}>{item.pista}</p>
+        ) : (
+          <button type="button" className={`boton boton-fantasma ${estilos.verPista}`} onClick={() => setVerPista(true)}>
+            Ver traducción
+          </button>
+        ))}
       {item.audio && <BotonAudio texto={item.audio} auto grande={item.soloAudio} />}
       <Dialogo dialogo={item.dialogo} traducir={bloqueado} />
       <Codigo codigo={item.codigo} />

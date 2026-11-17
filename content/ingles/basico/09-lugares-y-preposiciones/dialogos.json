@@ -1,16 +1,16 @@
 [
-  { "id": "en-basico-09-d01", "titulo": "¿Dónde queda el banco?", "situacion": "Una turista le pide indicaciones a Luis en Lima.",
+  { "id": "en-basico-09-d01", "titulo": "¿Dónde queda el banco?", "situacion": "Kate, una turista, le pide indicaciones a Luis en Lima.",
     "lineas": [
-      { "quien": "Sarah", "en": "Excuse me, how do I get to the bank?", "es": "Disculpa, ¿cómo llego al banco?" },
+      { "quien": "Kate", "en": "Excuse me, how do I get to the bank?", "es": "Disculpa, ¿cómo llego al banco?" },
       { "quien": "Luis", "en": "Go straight for two blocks.", "es": "Sigue derecho dos cuadras." },
-      { "quien": "Sarah", "en": "And then?", "es": "¿Y luego?" },
+      { "quien": "Kate", "en": "And then?", "es": "¿Y luego?" },
       { "quien": "Luis", "en": "Turn left at the corner. The bank is next to a pharmacy.", "es": "Voltea a la izquierda en la esquina. El banco está al lado de una farmacia." },
-      { "quien": "Sarah", "en": "Is it far from here?", "es": "¿Está lejos de aquí?" },
+      { "quien": "Kate", "en": "Is it far from here?", "es": "¿Está lejos de aquí?" },
       { "quien": "Luis", "en": "No, it's five minutes from here.", "es": "No, está a cinco minutos de aquí." },
-      { "quien": "Sarah", "en": "Thank you very much!", "es": "¡Muchas gracias!" }
+      { "quien": "Kate", "en": "Thank you very much!", "es": "¡Muchas gracias!" }
     ],
     "preguntas": [
-      { "pregunta": "¿Cuántas cuadras debe seguir derecho Sarah?", "opciones": ["Una", "Dos", "Cinco"], "correcta": 1,
+      { "pregunta": "¿Cuántas cuadras debe seguir derecho Kate?", "opciones": ["Una", "Dos", "Cinco"], "correcta": 1,
         "explicacion": "Luis dice \"Go straight for two blocks\"." },
       { "pregunta": "¿Al lado de qué está el banco?", "opciones": ["De una farmacia", "De un hospital", "De un parque"], "correcta": 0,
         "explicacion": "Luis dice \"The bank is next to a pharmacy\"." },

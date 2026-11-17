@@ -19,17 +19,17 @@
       { "pregunta": "¿Qué hizo bien Luis cuando no lo entendieron?", "opciones": ["Cambió de tema", "Deletreó la palabra", "Escribió en el chat"],
         "correcta": 1, "explicacion": "Luis deletreó C-A-C-H-E y Sarah le dice \"Spelling the word was smart too\"." }
     ] },
-  { "id": "en-trabajo-01-d02", "titulo": "Tu stack en voz alta", "situacion": "Un reclutador le pregunta a María qué tecnologías usa y ella corrige su propia pronunciación.",
+  { "id": "en-trabajo-01-d02", "titulo": "Tu stack en voz alta", "situacion": "Mike, de RR. HH., le pregunta a María qué tecnologías usa y ella corrige su propia pronunciación.",
     "lineas": [
-      { "quien": "Tom", "en": "Can you tell me about the tools you use every day?", "es": "¿Me cuentas qué herramientas usas todos los días?" },
+      { "quien": "Mike", "en": "Can you tell me about the tools you use every day?", "es": "¿Me cuentas qué herramientas usas todos los días?" },
       { "quien": "María", "en": "Sure. I mostly write JavaScript and TypeScript.", "es": "Claro. Escribo sobre todo JavaScript y TypeScript." },
-      { "quien": "Tom", "en": "Nice. And for the frontend?", "es": "Bien. ¿Y para el frontend?" },
+      { "quien": "Mike", "en": "Nice. And for the frontend?", "es": "Bien. ¿Y para el frontend?" },
       { "quien": "María", "en": "I use React with Vite. It's pronounced veet, like the French word.", "es": "Uso React con Vite. Se pronuncia vit, como la palabra francesa." },
-      { "quien": "Tom", "en": "Good to know. I always say it wrong. What about the backend?", "es": "Bueno saberlo. Yo siempre lo digo mal. ¿Y el backend?" },
+      { "quien": "Mike", "en": "Good to know. I always say it wrong. What about the backend?", "es": "Bueno saberlo. Yo siempre lo digo mal. ¿Y el backend?" },
       { "quien": "María", "en": "A little Node.js, and I store the data in a SQL database.", "es": "Un poco de Node.js, y guardo los datos en una base de datos SQL." },
-      { "quien": "Tom", "en": "Do you work with Docker too?", "es": "¿También trabajas con Docker?" },
+      { "quien": "Mike", "en": "Do you work with Docker too?", "es": "¿También trabajas con Docker?" },
       { "quien": "María", "en": "Not yet, but it's next on my list.", "es": "Todavía no, pero es lo siguiente en mi lista." },
-      { "quien": "Tom", "en": "Great. Where can I see your code?", "es": "Genial. ¿Dónde puedo ver tu código?" },
+      { "quien": "Mike", "en": "Great. Where can I see your code?", "es": "Genial. ¿Dónde puedo ver tu código?" },
       { "quien": "María", "en": "Everything is on my GitHub. I'll send you the link.", "es": "Todo está en mi GitHub. Te envío el enlace." }
     ],
     "preguntas": [
@@ -37,10 +37,10 @@
         "correcta": 1, "explicacion": "María dice \"I use React with Vite\"." },
       { "pregunta": "¿Qué tecnología todavía no usa María?", "opciones": ["Docker", "SQL", "TypeScript"],
         "correcta": 0, "explicacion": "Sobre Docker responde \"Not yet, but it's next on my list\"." },
-      { "pregunta": "¿Qué le va a enviar María a Tom?", "opciones": ["Su CV", "El enlace a su GitHub", "Un video de su app"],
+      { "pregunta": "¿Qué le va a enviar María a Mike?", "opciones": ["Su CV", "El enlace a su GitHub", "Un video de su app"],
         "correcta": 1, "explicacion": "María dice \"Everything is on my GitHub. I'll send you the link\"." }
     ] },
-  { "id": "en-trabajo-01-d03", "titulo": "La cola de tareas", "situacion": "Carlos le explica a Sarah, su nueva líder, un problema con los correos de la app.",
+  { "id": "en-trabajo-01-d03", "titulo": "La cola de tareas", "situacion": "Carlos le explica a Sarah, una compañera con más experiencia, un problema con los correos de la app.",
     "lineas": [
       { "quien": "Carlos", "en": "Sarah, the emails are arriving very late today.", "es": "Sarah, los correos están llegando muy tarde hoy." },
       { "quien": "Sarah", "en": "Did you check the queue?", "es": "¿Revisaste la cola?" },

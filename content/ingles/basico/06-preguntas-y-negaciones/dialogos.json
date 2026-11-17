@@ -17,15 +17,15 @@
       { "pregunta": "¿Dónde se sienta Luis?", "opciones": ["Con el equipo de frontend", "En la oficina de Carlos", "En su casa"], "correcta": 0,
         "explicacion": "Sarah le responde \"Here, with the frontend team\"." }
     ] },
-  { "id": "en-basico-06-d02", "titulo": "Una entrevista corta", "situacion": "Una reclutadora le hace preguntas a Ana por videollamada.",
+  { "id": "en-basico-06-d02", "titulo": "Una entrevista corta", "situacion": "Lisa, una reclutadora, le hace preguntas a Ana por videollamada.",
     "lineas": [
-      { "quien": "Sarah", "en": "How many languages do you speak, Ana?", "es": "¿Cuántos idiomas hablas, Ana?" },
+      { "quien": "Lisa", "en": "How many languages do you speak, Ana?", "es": "¿Cuántos idiomas hablas, Ana?" },
       { "quien": "Ana", "en": "I speak Spanish and a little English.", "es": "Hablo español y un poco de inglés." },
-      { "quien": "Sarah", "en": "Why do you want this job?", "es": "¿Por qué quieres este trabajo?" },
+      { "quien": "Lisa", "en": "Why do you want this job?", "es": "¿Por qué quieres este trabajo?" },
       { "quien": "Ana", "en": "Because I like frontend and I want to learn.", "es": "Porque me gusta el frontend y quiero aprender." },
-      { "quien": "Sarah", "en": "Do you know React?", "es": "¿Sabes React?" },
+      { "quien": "Lisa", "en": "Do you know React?", "es": "¿Sabes React?" },
       { "quien": "Ana", "en": "Yes, I do. I use it in my projects.", "es": "Sí. Lo uso en mis proyectos." },
-      { "quien": "Sarah", "en": "Great. When do you finish university?", "es": "Genial. ¿Cuándo terminas la universidad?" },
+      { "quien": "Lisa", "en": "Great. When do you finish university?", "es": "Genial. ¿Cuándo terminas la universidad?" },
       { "quien": "Ana", "en": "I finish in December.", "es": "Termino en diciembre." }
     ],
     "preguntas": [

@@ -23,7 +23,7 @@
   { "id": "en-intermedio-07-f22", "en": "Hold on, I'm checking the server logs.", "es": "Espera, estoy revisando los logs del servidor." },
   { "id": "en-intermedio-07-f23", "en": "Okay, let's move on to the next ticket.", "es": "Bueno, pasemos al siguiente ticket." },
   { "id": "en-intermedio-07-f24", "en": "Can you fill in for me at the standup?", "es": "¿Puedes reemplazarme en la daily?" },
-  { "id": "en-intermedio-07-f25", "en": "Scroll down to the bottom of the page.", "es": "Baja hasta el final de la página." },
+  { "id": "en-intermedio-07-f25", "en": "Scroll down and click the Save button.", "es": "Baja y haz clic en el botón Guardar." },
   { "id": "en-intermedio-07-f26", "en": "Can you zoom in? I can't read the code.", "es": "¿Puedes acercar el zoom? No puedo leer el código." },
   { "id": "en-intermedio-07-f27", "en": "It's hard to keep up with new frameworks.", "es": "Es difícil estar al día con los frameworks nuevos." },
   { "id": "en-intermedio-07-f28", "en": "The server ran out of memory last night.", "es": "El servidor se quedó sin memoria anoche." },

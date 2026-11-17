@@ -9,11 +9,15 @@ import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { avanceUnidad } from "./motor.js";
 import { avanceConceptos } from "./variantes.js";
+import { hechaPorExamen } from "../ingles/examen.js";
 import { celebrar } from "../../lib/celebrar.js";
 import estilos from "./CaminoMovil.module.css";
 
 const AREAS = { javascript: "JavaScript", algoritmos: "Algoritmos", react: "React", typescript: "TypeScript", node: "Node.js y SQL" };
-const ETAPAS = { basico: "Base (A1 a A2)", intermedio: "Intermedio (B1)", trabajo: "Inglés de trabajo (B1 a B2)" };
+// Desplazamiento horizontal de cada nodo (en px): una onda suave, como un sendero.
+const ONDA = [0, 46, 72, 46, 0, -46, -72, -46];
+
+const ETAPAS = { basico: "Base (A1 a A2)", intermedio: "Intermedio (B1)", trabajo: "Inglés de trabajo (B1 a B2)", avanzado: "Avanzado (B2)", superior: "Superior (C1)", dominio: "Dominio (C2)" };
 
 /**
  * @param {{ ambito?: "programacion"|"ingles", sinCabecera?: boolean }} props
@@ -38,6 +42,9 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
   const conUnidades = grupos.filter((g) => g.unidades.length);
   const leccion = (id, extra = "") => `/leccion?unidad=${encodeURIComponent(id)}${ingles ? "&ambito=ingles" : ""}${extra}`;
   const elegir = (id) => (ingles ? api.elegirUnidadIngles(id) : api.elegirUnidad(id));
+  // Examen de nivel: las unidades anteriores a donde llegaste cuentan como hechas
+  const ordenIngles = ingles ? datos.unidades.map((u) => u.id) : [];
+  const porExamen = (id) => ingles && hechaPorExamen(datos.extra?.examen, ordenIngles, id);
 
   async function abrirCofre(id) {
     const premio = await api.abrirCofreUnidad(id);
@@ -59,31 +66,49 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
         </CabeceraPagina>
       )}
 
-      {conUnidades.map(({ clave, area, titulo, unidades }) => (
+      {conUnidades.map(({ clave, area, titulo, unidades }) => {
+        const avances = new Map(unidades.map((u) => [u.id, ingles ? avanceConceptos(datos.items, datos.registros, u.id) : avanceUnidad(datos.items, datos.registros, u.id)]));
+        const hechaDe = (u) => (ingles ? avances.get(u.id).completa || porExamen(u.id) : avances.get(u.id).dominada);
+        const hechas = unidades.filter(hechaDe).length;
+        return (
         <div key={clave} className={estilos.area} data-area={area}>
-          <h2 className={estilos.areaTitulo}>
-            <span aria-hidden className={estilos.punto} />
-            {titulo}
-          </h2>
+          <header className={estilos.etapa}>
+            <div>
+              <h2 className={estilos.areaTitulo}>
+                <span aria-hidden className={estilos.punto} />
+                {titulo}
+              </h2>
+              <small>
+                {hechas} de {unidades.length} {unidades.length === 1 ? "unidad hecha" : "unidades hechas"}
+              </small>
+            </div>
+            <div className={estilos.barraEtapa} aria-hidden>
+              <i style={{ width: `${(hechas / unidades.length) * 100}%` }} />
+            </div>
+          </header>
           <ol className={estilos.nodos}>
             {unidades.map((u, i) => {
-              const av = ingles ? avanceConceptos(datos.items, datos.registros, u.id) : avanceUnidad(datos.items, datos.registros, u.id);
+              const av = avances.get(u.id);
               const legendaria = ingles && !!datos.extra?.legendarias?.[u.id];
               const cofreAbierto = ingles && !!datos.extra?.cofres?.[u.id];
               const actual = u.id === datos.unidadActual;
+              const aprobada = ingles && porExamen(u.id) && !av.completa;
+              const hecha = hechaDe(u);
+              const estado = hecha ? "hecha" : actual ? "actual" : av.vistos > 0 ? "empezada" : "pendiente";
               return (
-                <li key={u.id} className={estilos.fila} data-lado={i % 2 ? "der" : "izq"}>
+                <li key={u.id} className={estilos.fila} style={{ "--x": `${ONDA[i % ONDA.length]}px` }}>
                   <button
                     type="button"
                     className={estilos.nodo}
+                    data-estado={estado}
                     data-actual={actual}
                     data-dominada={av.dominada}
                     data-legendaria={legendaria}
                     onClick={() => setAbierta(abierta === u.id ? null : u.id)}
                     aria-expanded={abierta === u.id}
                   >
-                    <AnilloProgreso valor={av.porcentaje} tamano={78} grosor={6} completo={ingles ? av.completa : av.dominada}>
-                      <span className={estilos.numero}>{legendaria ? "★" : av.dominada ? "✓" : String(u.orden ?? i + 1).padStart(2, "0")}</span>
+                    <AnilloProgreso valor={hecha ? 1 : av.porcentaje} tamano={72} grosor={6} completo={hecha}>
+                      <span className={estilos.numero}>{legendaria ? "★" : hecha ? "✓" : String(u.orden ?? i + 1).padStart(2, "0")}</span>
                     </AnilloProgreso>
                     <span className={estilos.nombre}>{u.titulo}</span>
                     {ingles && (
@@ -93,17 +118,23 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
                         ))}
                       </span>
                     )}
-                    {actual && <span className={estilos.actual}>Aquí vas</span>}
+                    {actual && <span className={estilos.actual}>{hecha ? "Aquí vas" : "Empieza aquí"}</span>}
                   </button>
 
                   <AnimatePresence>
                     {abierta === u.id && (
                       <motion.div
                         className={estilos.panel}
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
+                        initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                        transition={{ duration: 0.16 }}
                       >
+                        <div className={estilos.panelCabecera}>
+                          <strong>{u.titulo}</strong>
+                          {u.nivel && <span>{u.nivel}</span>}
+                        </div>
+                        {aprobada && <p className={estilos.aprobada}>Aprobada en el examen de nivel. Puedes repasarla cuando quieras.</p>}
                         {ingles ? (
                           <div className={estilos.barras}>
                             <div>
@@ -182,7 +213,8 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
             })}
           </ol>
         </div>
-      ))}
+        );
+      })}
     </section>
   );
 }

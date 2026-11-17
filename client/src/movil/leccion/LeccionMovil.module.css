@@ -329,3 +329,53 @@
   box-shadow: 0 10px 30px rgb(255 94 87 / 0.35);
   pointer-events: none;
 }
+
+/* Final de lección en inglés: lo que fallaste, con audio, y repasarlo ya */
+.falladas {
+  display: grid;
+  gap: var(--espacio-2);
+  width: 100%;
+  max-width: 420px;
+  text-align: left;
+}
+.falladas > span {
+  color: var(--texto-suave);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.falladas ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.falladas li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--superficie);
+}
+.falladas li > div {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.falladas li strong {
+  font-size: 14px;
+}
+.falladas li small {
+  color: var(--texto-suave);
+  font-size: 12px;
+}
+.falladas :global(.boton) {
+  justify-content: center;
+  min-height: 44px;
+}

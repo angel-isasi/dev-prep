@@ -1,0 +1,169 @@
+.reglas {
+  display: grid;
+  gap: var(--espacio-2);
+  max-width: 44ch;
+  color: var(--texto-suave);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.reglas p {
+  margin: 0;
+}
+
+.contador {
+  min-width: 28px;
+  color: var(--texto-suave);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.etiqueta {
+  align-self: flex-start;
+  color: var(--acento);
+  font-family: var(--fuente);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pie {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--espacio-2);
+}
+
+.nose {
+  min-height: 52px;
+  padding-inline: var(--espacio-4);
+  border-radius: 14px;
+}
+
+/* Resultado: se puede bajar para ver lo que fallaste */
+.fin {
+  justify-content: flex-start;
+  gap: var(--espacio-3);
+  overflow-y: auto;
+  padding-top: var(--espacio-6);
+  padding-bottom: var(--espacio-7);
+}
+
+.nivel {
+  font-family: var(--fuente-titulos);
+  font-size: 72px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, var(--acento), var(--exito));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.descripcion {
+  max-width: 36ch;
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+.escala {
+  display: flex;
+  gap: 6px;
+}
+
+.escala span {
+  padding: 4px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  color: var(--texto-tenue);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.escala span[data-pasado="true"] {
+  border-color: color-mix(in srgb, var(--exito) 50%, transparent);
+  color: var(--exito);
+}
+
+.escala span[data-activo="true"] {
+  border-color: var(--acento);
+  background: var(--acento);
+  color: var(--sobre-acento);
+}
+
+.resumen {
+  max-width: 44ch;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.resumen small {
+  color: var(--texto-tenue);
+}
+
+.porNivel {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.porNivel > div {
+  display: grid;
+  grid-template-columns: 28px 1fr 34px;
+  align-items: center;
+  gap: var(--espacio-2);
+  font-size: 13px;
+}
+
+.porNivel small {
+  color: var(--texto-suave);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.barra {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--superficie-2);
+  overflow: hidden;
+}
+
+.barra i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--acento), var(--exito));
+}
+
+.fallos {
+  width: 100%;
+  max-width: 560px;
+  margin-top: var(--espacio-3);
+  text-align: left;
+}
+
+.fallos summary {
+  cursor: pointer;
+  color: var(--texto-suave);
+  text-align: center;
+}
+
+.fallo {
+  margin-top: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  font-size: 14px;
+}
+
+.fallo p {
+  margin: var(--espacio-2) 0;
+}
+
+.fin .etiqueta {
+  align-self: center;
+}

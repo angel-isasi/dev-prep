@@ -3,8 +3,8 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 
-export const ETAPAS = ["basico", "intermedio", "trabajo"];
-export const NIVELES = ["A1", "A2", "B1", "B2"];
+export const ETAPAS = ["basico", "intermedio", "trabajo", "avanzado", "superior", "dominio"];
+export const NIVELES = ["A1", "A2", "B1", "B2", "C1", "C2"];
 export const TIPOS_PALABRA = ["sustantivo", "verbo", "adjetivo", "adverbio", "expresion", "pronombre", "preposicion", "conector", "numero"];
 export const SECCIONES_TEORIA = ["En una frase", "Cómo se forma", "Errores típicos", "Pronunciación"];
 

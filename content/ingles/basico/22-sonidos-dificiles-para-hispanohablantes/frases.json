@@ -32,7 +32,7 @@
   { "id": "en-basico-22-f31", "en": "My computer is very slow today.", "es": "Mi computadora está muy lenta hoy." },
   { "id": "en-basico-22-f32", "en": "The data is in the cache.", "es": "Los datos están en la caché." },
   { "id": "en-basico-22-f33", "en": "Change the width and height of the image.", "es": "Cambia el ancho y el alto de la imagen." },
-  { "id": "en-basico-22-f34", "en": "The value is null.", "es": "El valor es nulo." },
+  { "id": "en-basico-22-f34", "en": "The user's name is null.", "es": "El nombre del usuario es nulo." },
   { "id": "en-basico-22-f35", "en": "I use Git and Linux every day.", "es": "Uso Git y Linux todos los días." },
   { "id": "en-basico-22-f36", "en": "I usually leave work at six.", "es": "Normalmente salgo del trabajo a las seis.", "trabajo": true },
   { "id": "en-basico-22-f37", "en": "We found three bugs in the form.", "es": "Encontramos tres bugs en el formulario.", "trabajo": true },

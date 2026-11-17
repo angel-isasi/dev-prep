@@ -18,6 +18,7 @@ import { diaSemana, lunesDe } from "../../../server/metricas.js";
 import { avanceUnidad } from "../movil/leccion/motor.js";
 import { expandirIngles, registrosPorConcepto } from "../../../scripts/items/ingles.js";
 import { contadoresDeLeccion, ligaSemanal, misionesDelDia, premioDeCofre, XP_COFRE_DIARIO } from "../movil/ingles/misiones.js";
+import { COLECCION_EXTRA, extraDesdeRegistros, registrosDesdeViejo } from "../movil/ingles/extra.js";
 import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaSemana } from "../../../server/avance.js";
 import { buscarOfertas, nuevasDesde, ordenarOfertas } from "../../../server/ofertas-auto.js";
 import { conFechaDeEnvio, metaSemanal, numerosPostulaciones, seguimientosPendientes } from "../../../server/postulaciones.js";
@@ -45,9 +46,17 @@ function huella(texto) {
 // --- Lectura de los JSON (cada archivo se pide una sola vez) ---
 const archivos = new Map();
 
-/** Lo propio de las lecciones de inglés: historias hechas, cofres, unidades legendarias, vidas, récords. */
-const extraIngles = () => progreso.ajuste("inglesExtra", {});
-const guardarExtra = (cambios) => progreso.cambiarAjuste("inglesExtra", { ...extraIngles(), ...cambios });
+/** Lo propio de las lecciones de inglés: historias hechas, cofres, legendarias, vidas, récords, examen (ver ingles/extra.js). */
+function extraIngles() {
+  // Antes todo vivía en un solo ajuste; se pasa una vez a registros sueltos y el ajuste queda vacío.
+  const viejo = progreso.ajuste("inglesExtra", null);
+  if (viejo && !viejo.migrado) {
+    for (const [id, v] of registrosDesdeViejo(viejo)) progreso.guardarRegistro(COLECCION_EXTRA, id, { v });
+    progreso.cambiarAjuste("inglesExtra", { migrado: true });
+  }
+  return extraDesdeRegistros(progreso.registros(COLECCION_EXTRA));
+}
+const marcarExtra = (id, v) => progreso.guardarRegistro(COLECCION_EXTRA, id, { v });
 
 function json(ruta) {
   if (!archivos.has(ruta)) {
@@ -111,7 +120,7 @@ const resumenEj = (e) => ({ ...e, estado: estadoMovil(e.id), ultimoResultado: nu
 let inglesExpandido = null; // el archivo trae conceptos compactos: se expanden una sola vez
 async function itemsIngles() {
   if (inglesExpandido) return inglesExpandido;
-  const partes = await Promise.all(["basico", "intermedio", "trabajo"].map((e) => json(`items-ingles-${e}.json`).catch(() => null)));
+  const partes = await Promise.all(["basico", "intermedio", "trabajo", "avanzado", "superior", "dominio"].map((e) => json(`items-ingles-${e}.json`).catch(() => null)));
   const datos = expandirIngles({ unidades: partes.flatMap((p) => p?.unidades ?? []), items: partes.flatMap((p) => p?.items ?? []) });
   if (partes.every(Boolean)) inglesExpandido = datos;
   return datos;
@@ -863,8 +872,7 @@ const apiWeb = {
   },
   /** Terminaste una historia o un roleplay: XP, cuenta para la misión y queda marcada. */
   async terminarHistoria(id, { xp = 0, segundos = 0 } = {}) {
-    const extra = extraIngles();
-    guardarExtra({ historias: { ...(extra.historias ?? {}), [id]: progreso.hoy() } });
+    marcarExtra(`historia:${id}`, progreso.hoy());
     progreso.sumarContadores({ inglesHistorias: 1, inglesSegundos: Math.round(Math.min(segundos, 3600)) });
     if (xp) progreso.sumarXp(xp);
     cache.clear();
@@ -887,7 +895,7 @@ const apiWeb = {
     const extra = extraIngles();
     const dias = progreso.dias();
     if (extra.cofreDiario === hoy || !misionesDelDia(hoy, dias[hoy] ?? {}, { conMicro }).every((m) => m.hecha)) return null;
-    guardarExtra({ cofreDiario: hoy });
+    marcarExtra("cofreDiario", hoy);
     progreso.sumarXp(XP_COFRE_DIARIO);
     cache.clear();
     return { xp: XP_COFRE_DIARIO };
@@ -898,22 +906,28 @@ const apiWeb = {
     const { items } = await itemsIngles();
     const premio = premioDeCofre(items, unidad);
     if ((extra.cofres ?? {})[unidad]) return { ...premio, yaAbierto: true };
-    guardarExtra({ cofres: { ...(extra.cofres ?? {}), [unidad]: progreso.hoy() } });
+    marcarExtra(`cofre:${unidad}`, progreso.hoy());
     progreso.sumarXp(premio.xp);
     cache.clear();
     return premio;
   },
   /** Repaso legendario aprobado: la unidad queda dorada. */
   async marcarLegendaria(unidad) {
-    const extra = extraIngles();
-    guardarExtra({ legendarias: { ...(extra.legendarias ?? {}), [unidad]: progreso.hoy() } });
+    marcarExtra(`legendaria:${unidad}`, progreso.hoy());
   },
-  cambiarVidasIngles: async (activas) => guardarExtra({ vidas: !!activas }),
+  cambiarVidasIngles: async (activas) => marcarExtra("vidas", !!activas),
+  /** Examen de nivel terminado: las unidades anteriores quedan hechas y tu unidad actual pasa a donde llegaste. */
+  async guardarExamenIngles(r, segundos = 0) {
+    marcarExtra("examen", { hasta: r.hasta, todas: r.todas, nivel: r.nivel, dominadas: r.dominadas, aciertos: r.aciertos, total: r.total, fecha: progreso.hoy() });
+    progreso.cambiarAjuste("ingles", { ...progreso.ajuste("ingles", {}), unidad: r.hasta, nivelHecho: true });
+    progreso.sumarContadores({ inglesSegundos: Math.round(Math.min(segundos, 3600)) });
+    cache.clear();
+  },
   /** Parejas contrarreloj: guarda tu récord y suma el XP. */
   async terminarParejas(parejas, xp, segundos = 60) {
     const extra = extraIngles();
     const record = Math.max(extra.parejasRecord ?? 0, parejas);
-    guardarExtra({ parejasRecord: record });
+    marcarExtra("parejasRecord", record);
     progreso.sumarContadores({ inglesAciertos: parejas, inglesSegundos: Math.round(Math.max(0, Math.min(segundos, 60))) });
     if (xp) progreso.sumarXp(xp);
     cache.clear();

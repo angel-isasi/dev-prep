@@ -326,7 +326,8 @@ function variantesDeFrase(f) {
   if (f.esc) variantes.push({ forma: "escuchar", nivel: 0, voz: true, tipo: "opcion", subtipo: "escuchar", pregunta: "¿Qué escuchaste?", audio: f.en, soloAudio: true, opciones: f.esc[0], correcta: f.esc[1] });
   if (f.hue) {
     const [conHueco, opciones, correcta] = f.hue;
-    variantes.push({ forma: "hueco", nivel: 0, tipo: "opcion", subtipo: "hueco", pregunta: `Completa la frase:\n\n**${conHueco}**\n\n*${f.es}*`, audio: f.en, opciones, correcta, audioRespuesta: f.en });
+    // la traducción queda como pista (regalaría la palabra) y la frase se oye al responder, no antes
+    variantes.push({ forma: "hueco", nivel: 0, tipo: "opcion", subtipo: "hueco", pregunta: `Completa la frase:\n\n**${conHueco}**`, pista: f.es, opciones, correcta, audioRespuesta: f.en });
   }
   if (f.fi) {
     const respuesta = fichasDe(f.en);

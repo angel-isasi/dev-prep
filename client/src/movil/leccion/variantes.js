@@ -91,3 +91,28 @@ export function avanceConceptos(items, registros, unidad) {
     leccionesFaltan: Math.ceil((total - vistos) / 6),
   };
 }
+
+/**
+ * Que una lección de inglés no sea solo de opción múltiple (pasa al empezar, cuando todo es nuevo):
+ * si no hay ningún "armar", una frase pasa a "traducir armando"; y si hay voz y nada se escucha, otra pasa a "escuchar".
+ * @param {object[]} pasos      pasos ya armados ({ clave, tipo, item })
+ * @param {Map<string, object>} conceptos  clave -> ítem original con sus `variantes`
+ */
+export function variarPasos(pasos, conceptos, { conVoz = true } = {}) {
+  const resultado = [...pasos];
+  const cambiar = (forma, yaHay) => {
+    if (resultado.some((p) => yaHay(p.item ?? {}))) return;
+    const i = resultado.findIndex((p) => {
+      const original = conceptos.get(p.clave);
+      return original?.concepto === "frase" && p.item?.forma !== forma && !p.convertido && original.variantes?.some((v) => v.forma === forma);
+    });
+    if (i < 0) return;
+    const original = conceptos.get(resultado[i].clave);
+    const v = original.variantes.find((x) => x.forma === forma);
+    const { variantes: _v, tipo: _t, ...concepto } = original;
+    resultado[i] = { ...resultado[i], tipo: v.tipo, item: { ...concepto, ...v }, convertido: true };
+  };
+  cambiar("traducir", (it) => it.tipo === "armar");
+  if (conVoz) cambiar("escuchar", (it) => it.voz || it.subtipo === "escuchar" || it.subtipo === "dictado");
+  return resultado;
+}

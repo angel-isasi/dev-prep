@@ -17,7 +17,7 @@ import estilos from "./Historias.module.css";
 // Orden de las opciones barajado pero estable (la misma pregunta siempre igual): así la correcta no cae siempre en el mismo lugar.
 const ordenDe = (opciones, clave) => barajar(opciones.map((_, i) => i), semilla(clave));
 
-const ETAPAS = { basico: "Base (A1 a A2)", intermedio: "Intermedio (B1)", trabajo: "Inglés de trabajo (B1 a B2)" };
+const ETAPAS = { basico: "Base (A1 a A2)", intermedio: "Intermedio (B1)", trabajo: "Inglés de trabajo (B1 a B2)", avanzado: "Avanzado (B2)", superior: "Superior (C1)", dominio: "Dominio (C2)" };
 const XP_HISTORIA = { base: 20, porAcierto: 5 };
 
 /** Lista de historias y roleplays por etapa; marca las hechas y sugiere la de tu unidad. */

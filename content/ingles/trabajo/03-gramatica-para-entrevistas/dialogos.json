@@ -20,17 +20,17 @@
       { "pregunta": "¿Qué haría distinto Luis?", "opciones": ["Usar otro framework", "Escribir tests desde el principio", "Trabajar solo"],
         "correcta": 1, "explicacion": "Luis responde \"I would have written tests from the beginning\"." }
     ] },
-  { "id": "en-trabajo-03-d02", "titulo": "¿Cuánto tiempo llevas?", "situacion": "Un reclutador revisa la experiencia de Ana en una llamada corta.",
+  { "id": "en-trabajo-03-d02", "titulo": "¿Cuánto tiempo llevas?", "situacion": "Mike, de RR. HH., revisa la experiencia de Ana en una llamada corta.",
     "lineas": [
-      { "quien": "Tom", "en": "How long have you been programming?", "es": "¿Cuánto tiempo llevas programando?" },
+      { "quien": "Mike", "en": "How long have you been programming?", "es": "¿Cuánto tiempo llevas programando?" },
       { "quien": "Ana", "en": "I've been programming for about three years.", "es": "Llevo unos tres años programando." },
-      { "quien": "Tom", "en": "And how long have you used React?", "es": "¿Y desde cuándo usas React?" },
+      { "quien": "Mike", "en": "And how long have you used React?", "es": "¿Y desde cuándo usas React?" },
       { "quien": "Ana", "en": "I've used it since last year, in four projects.", "es": "Lo uso desde el año pasado, en cuatro proyectos." },
-      { "quien": "Tom", "en": "Have you ever worked with TypeScript?", "es": "¿Has trabajado alguna vez con TypeScript?" },
+      { "quien": "Mike", "en": "Have you ever worked with TypeScript?", "es": "¿Has trabajado alguna vez con TypeScript?" },
       { "quien": "Ana", "en": "A little. I'm currently learning it with a course.", "es": "Un poco. Ahora estoy aprendiendo con un curso." },
-      { "quien": "Tom", "en": "What are you working on right now?", "es": "¿En qué estás trabajando ahora?" },
+      { "quien": "Mike", "en": "What are you working on right now?", "es": "¿En qué estás trabajando ahora?" },
       { "quien": "Ana", "en": "I've been working on a budget app since September.", "es": "Estoy trabajando en una app de presupuesto desde septiembre." },
-      { "quien": "Tom", "en": "Great. Can you send me the repository?", "es": "Genial. ¿Me puedes enviar el repositorio?" },
+      { "quien": "Mike", "en": "Great. Can you send me the repository?", "es": "Genial. ¿Me puedes enviar el repositorio?" },
       { "quien": "Ana", "en": "Of course. I'll send it after the call.", "es": "Por supuesto. Te lo envío después de la llamada." }
     ],
     "preguntas": [

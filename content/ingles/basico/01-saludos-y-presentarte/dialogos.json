@@ -5,33 +5,33 @@
       { "quien": "Ana", "en": "Good morning, Tom. My name is Ana.", "es": "Buenos días, Tom. Me llamo Ana." },
       { "quien": "Tom", "en": "Nice to meet you, Ana. Where are you from?", "es": "Mucho gusto, Ana. ¿De dónde eres?" },
       { "quien": "Ana", "en": "Nice to meet you too. I'm from Lima, Peru.", "es": "Igualmente. Soy de Lima, Perú." },
-      { "quien": "Tom", "en": "Cool! I'm from Canada. I'm a designer.", "es": "¡Genial! Yo soy de Canadá. Soy diseñador." },
+      { "quien": "Tom", "en": "Cool! I'm from Chicago. I'm the tech lead.", "es": "¡Genial! Yo soy de Chicago. Soy el tech lead." },
       { "quien": "Ana", "en": "I'm a frontend developer.", "es": "Yo soy desarrolladora frontend." }
     ],
     "preguntas": [
-      { "pregunta": "¿De qué país es Tom?", "opciones": ["Perú", "Canadá", "Estados Unidos"], "correcta": 1,
-        "explicacion": "Tom dice **I'm from Canada**. Perú es el país de Ana." },
-      { "pregunta": "¿A qué se dedica Ana?", "opciones": ["Es diseñadora", "Es desarrolladora frontend", "Es estudiante"], "correcta": 1,
-        "explicacion": "Ana dice **I'm a frontend developer**. El diseñador es Tom." },
+      { "pregunta": "¿De qué país es Tom?", "opciones": ["Perú", "Canadá", "Estados Unidos"], "correcta": 2,
+        "explicacion": "Tom dice **I'm from Chicago**, una ciudad de Estados Unidos. Perú es el país de Ana." },
+      { "pregunta": "¿A qué se dedica Ana?", "opciones": ["Es tech lead", "Es desarrolladora frontend", "Es estudiante"], "correcta": 1,
+        "explicacion": "Ana dice **I'm a frontend developer**. El tech lead es Tom." },
       { "pregunta": "¿En qué momento del día se conocen?", "opciones": ["En la mañana", "En la tarde", "En la noche"], "correcta": 0,
         "explicacion": "Los dos dicen **good morning**, que se usa en la mañana." }
     ] },
-  { "id": "en-basico-01-d02", "titulo": "En un evento de tecnología", "situacion": "Luis conoce a Sarah en un evento para programadores en Lima, de noche.",
+  { "id": "en-basico-01-d02", "titulo": "En un evento de tecnología", "situacion": "Luis conoce a Emily en un evento para programadores en Lima, de noche.",
     "lineas": [
-      { "quien": "Sarah", "en": "Good evening! Excuse me, what's your name?", "es": "¡Buenas noches! Disculpa, ¿cómo te llamas?" },
+      { "quien": "Emily", "en": "Good evening! Excuse me, what's your name?", "es": "¡Buenas noches! Disculpa, ¿cómo te llamas?" },
       { "quien": "Luis", "en": "Hi! I'm Luis. And you?", "es": "¡Hola! Soy Luis. ¿Y tú?" },
-      { "quien": "Sarah", "en": "I'm Sarah. I'm from the United States.", "es": "Soy Sarah. Soy de Estados Unidos." },
-      { "quien": "Luis", "en": "Nice to meet you, Sarah. I'm a student.", "es": "Mucho gusto, Sarah. Soy estudiante." },
-      { "quien": "Sarah", "en": "Nice to meet you too. I'm a teacher.", "es": "Igualmente. Yo soy profesora." },
-      { "quien": "Luis", "en": "Thank you, Sarah. See you later!", "es": "Gracias, Sarah. ¡Nos vemos luego!" },
-      { "quien": "Sarah", "en": "Bye, Luis. Good night!", "es": "Chau, Luis. ¡Buenas noches!" }
+      { "quien": "Emily", "en": "I'm Emily. I'm from the United States.", "es": "Soy Emily. Soy de Estados Unidos." },
+      { "quien": "Luis", "en": "Nice to meet you, Emily. I'm a student.", "es": "Mucho gusto, Emily. Soy estudiante." },
+      { "quien": "Emily", "en": "Nice to meet you too. I'm a teacher.", "es": "Igualmente. Yo soy profesora." },
+      { "quien": "Luis", "en": "Thank you, Emily. See you later!", "es": "Gracias, Emily. ¡Nos vemos luego!" },
+      { "quien": "Emily", "en": "Bye, Luis. Good night!", "es": "Chau, Luis. ¡Buenas noches!" }
     ],
     "preguntas": [
-      { "pregunta": "¿De dónde es Sarah?", "opciones": ["De Perú", "De Estados Unidos", "De Inglaterra"], "correcta": 1,
-        "explicacion": "Sarah dice **I'm from the United States**: es de Estados Unidos." },
+      { "pregunta": "¿De dónde es Emily?", "opciones": ["De Perú", "De Estados Unidos", "De Inglaterra"], "correcta": 1,
+        "explicacion": "Emily dice **I'm from the United States**: es de Estados Unidos." },
       { "pregunta": "¿A qué se dedica Luis?", "opciones": ["Es profesor", "Es estudiante", "Es ingeniero"], "correcta": 1,
-        "explicacion": "Luis dice **I'm a student**. La profesora es Sarah." },
-      { "pregunta": "¿A qué se dedica Sarah?", "opciones": ["Es profesora", "Es estudiante", "Es diseñadora"], "correcta": 0,
-        "explicacion": "Sarah dice **I'm a teacher**: es profesora." }
+        "explicacion": "Luis dice **I'm a student**. La profesora es Emily." },
+      { "pregunta": "¿A qué se dedica Emily?", "opciones": ["Es profesora", "Es estudiante", "Es diseñadora"], "correcta": 0,
+        "explicacion": "Emily dice **I'm a teacher**: es profesora." }
     ] }
 ]

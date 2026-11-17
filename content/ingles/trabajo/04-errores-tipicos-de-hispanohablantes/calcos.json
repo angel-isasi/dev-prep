@@ -1,7 +1,7 @@
 [
-  { "id": "en-trabajo-04-c01", "es": "¿Puedo hacer una pregunta?", "natural": "Can I ask a question?", "calco": "Can I make a question?", "explicacion": "Una pregunta se **ask**. *Make* es el calco de \"hacer\"." },
+  { "id": "en-trabajo-04-c01", "es": "¿Puedo hacerte una pregunta?", "natural": "Can I ask you a question?", "calco": "Can I make you a question?", "explicacion": "Una pregunta se **ask**. *Make* es el calco de \"hacer\"." },
   { "id": "en-trabajo-04-c02", "es": "¿Me lo puedes explicar?", "natural": "Can you explain it to me?", "calco": "Can you explain me?", "explicacion": "**Explain** no lleva a la persona directo: *explain it to me*." },
   { "id": "en-trabajo-04-c03", "es": "Cometí un error.", "natural": "I made a mistake.", "calco": "I did a mistake.", "explicacion": "Un error se **make**: *make a mistake*." },
-  { "id": "en-trabajo-04-c04", "es": "Mi carrera es Ingeniería de Sistemas.", "natural": "My major is Systems Engineering.", "calco": "My career is Systems Engineering.", "explicacion": "*Career* es tu trayectoria profesional. Lo que estudias es tu **major** o se dice *I'm studying...*" },
+  { "id": "en-trabajo-04-c04", "es": "Mi carrera es Ingeniería de Software.", "natural": "My major is Software Engineering.", "calco": "My career is Software Engineering.", "explicacion": "*Career* es tu trayectoria profesional. Lo que estudias es tu **major** o se dice *I'm studying...*" },
   { "id": "en-trabajo-04-c05", "es": "La información es útil.", "natural": "The information is useful.", "calco": "The informations are useful.", "explicacion": "**Information** no se cuenta: no lleva -s y va en singular." }
 ]

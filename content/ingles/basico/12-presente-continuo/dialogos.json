@@ -16,13 +16,13 @@
       { "pregunta": "¿Qué problema tiene Ana?", "opciones": ["Perdió el bus", "No tiene dinero", "No lleva casaca"], "correcta": 2,
         "explicacion": "Ana dice \"I'm not wearing a jacket\": está bajo la lluvia sin casaca." }
     ] },
-  { "id": "en-basico-12-d02", "titulo": "En la tienda de ropa", "situacion": "Luis busca ropa para el frío y Sarah lo atiende.",
+  { "id": "en-basico-12-d02", "titulo": "En la tienda de ropa", "situacion": "Luis busca ropa para el frío y Amy, la vendedora, lo atiende.",
     "lineas": [
-      { "quien": "Sarah", "en": "Hi! Are you looking for something?", "es": "¡Hola! ¿Buscas algo?" },
+      { "quien": "Amy", "en": "Hi! Are you looking for something?", "es": "¡Hola! ¿Buscas algo?" },
       { "quien": "Luis", "en": "Yes, I need a jacket. It's very cold this week.", "es": "Sí, necesito una casaca. Esta semana hace mucho frío." },
-      { "quien": "Sarah", "en": "What size are you?", "es": "¿Qué talla eres?" },
+      { "quien": "Amy", "en": "What size are you?", "es": "¿Qué talla eres?" },
       { "quien": "Luis", "en": "Medium, I think.", "es": "Mediana, creo." },
-      { "quien": "Sarah", "en": "Here you go. Try it on.", "es": "Aquí tienes. Pruébatela." },
+      { "quien": "Amy", "en": "Here you go. Try it on.", "es": "Aquí tienes. Pruébatela." },
       { "quien": "Luis", "en": "It's very comfortable. I'm taking it!", "es": "Es muy cómoda. ¡Me la llevo!" }
     ],
     "preguntas": [

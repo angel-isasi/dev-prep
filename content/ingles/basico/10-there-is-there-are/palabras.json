@@ -50,7 +50,7 @@
   { "id": "en-basico-10-w25", "en": "door", "es": "puerta", "pron": "dór", "tipo": "sustantivo",
     "ejemplo": { "en": "Close the door, please.", "es": "Cierra la puerta, por favor." } },
   { "id": "en-basico-10-w26", "en": "window", "es": "ventana", "pron": "uíndou", "tipo": "sustantivo",
-    "ejemplo": { "en": "My desk is next to the window.", "es": "Mi escritorio está al lado de la ventana." } },
+    "ejemplo": { "en": "There's a big window in my room.", "es": "Hay una ventana grande en mi cuarto." } },
   { "id": "en-basico-10-w27", "en": "furniture", "es": "muebles", "pron": "férnicher", "tipo": "sustantivo",
     "ejemplo": { "en": "The apartment has new furniture.", "es": "El departamento tiene muebles nuevos." } },
   { "id": "en-basico-10-w28", "en": "bed", "es": "cama", "pron": "béd", "tipo": "sustantivo",

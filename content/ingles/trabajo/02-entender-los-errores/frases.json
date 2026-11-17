@@ -21,7 +21,7 @@
   { "id": "en-trabajo-02-f20", "en": "The network request failed, so maybe the server is down.", "es": "La petición de red falló, así que quizás el servidor está caído." },
   { "id": "en-trabajo-02-f21", "en": "It only happens on the production server, not on localhost.", "es": "Solo pasa en el servidor de producción, no en localhost." },
   { "id": "en-trabajo-02-f22", "en": "I can't reproduce the bug on my machine.", "es": "No logro reproducir el error en mi máquina." },
-  { "id": "en-trabajo-02-f23", "en": "Can you send me a screenshot of the error?", "es": "¿Me puedes enviar una captura del error?" },
+  { "id": "en-trabajo-02-f23", "en": "Could you paste the full error message here?", "es": "¿Podrías pegar aquí el mensaje de error completo?" },
   { "id": "en-trabajo-02-f24", "en": "The stack trace points to line twenty of the form component.", "es": "La traza apunta a la línea veinte del componente del formulario." },
   { "id": "en-trabajo-02-f25", "en": "The token expired, so the API returns unauthorized.", "es": "El token venció, así que la API devuelve no autorizado." },
   { "id": "en-trabajo-02-f26", "en": "It's just a warning, but that method is deprecated.", "es": "Es solo una advertencia, pero ese método está obsoleto." },

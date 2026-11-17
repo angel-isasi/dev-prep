@@ -5,7 +5,7 @@
       { "quien": "Ana", "en": "Yes, I can play volleyball very well.", "es": "Sí, sé jugar vóley muy bien." },
       { "quien": "Tom", "en": "Cool! Can you swim too?", "es": "¡Genial! ¿También sabes nadar?" },
       { "quien": "Ana", "en": "No, I can't swim at all.", "es": "No, no sé nadar para nada." },
-      { "quien": "Tom", "en": "I'm a swimming coach. I can teach you.", "es": "Soy entrenador de natación. Puedo enseñarte." },
+      { "quien": "Tom", "en": "I can swim very well. I can teach you.", "es": "Yo sé nadar muy bien. Puedo enseñarte." },
       { "quien": "Ana", "en": "Really? That's great, thank you!", "es": "¿En serio? ¡Qué bien, gracias!" }
     ],
     "preguntas": [
@@ -14,7 +14,7 @@
       { "pregunta": "¿Qué no sabe hacer Ana?", "opciones": ["Nadar", "Jugar vóley", "Bailar"], "correcta": 0,
         "explicacion": "Ana dice \"I can't swim at all\": no sabe nadar para nada." },
       { "pregunta": "¿Qué le ofrece Tom?", "opciones": ["Jugar vóley con ella", "Prestarle una pelota", "Enseñarle a nadar"], "correcta": 2,
-        "explicacion": "Tom es entrenador de natación y dice \"I can teach you\": puede enseñarle." }
+        "explicacion": "Tom sabe nadar muy bien y dice \"I can teach you\": puede enseñarle." }
     ] },
   { "id": "en-basico-11-d02", "titulo": "Un pedido en la oficina", "situacion": "Luis necesita ayuda con una caja y se la pide a Sarah.",
     "lineas": [

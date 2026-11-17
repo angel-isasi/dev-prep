@@ -1,23 +1,23 @@
 [
-  { "id": "en-intermedio-09-d01", "titulo": "Reporte de un incidente", "situacion": "Sarah, la gerente, le pregunta a Luis qué pasó con el sitio anoche.",
+  { "id": "en-intermedio-09-d01", "titulo": "Reporte de un incidente", "situacion": "Tom, el tech lead, le pregunta a Luis qué pasó con el sitio anoche.",
     "lineas": [
-      { "quien": "Sarah", "en": "Luis, what happened with the site last night?", "es": "Luis, ¿qué pasó con el sitio anoche?" },
+      { "quien": "Tom", "en": "Luis, what happened with the site last night?", "es": "Luis, ¿qué pasó con el sitio anoche?" },
       { "quien": "Luis", "en": "There was an outage. The site was down for about forty minutes.", "es": "Hubo una caída. El sitio estuvo abajo unos cuarenta minutos." },
-      { "quien": "Sarah", "en": "How many users were affected?", "es": "¿A cuántos usuarios afectó?" },
+      { "quien": "Tom", "en": "How many users were affected?", "es": "¿A cuántos usuarios afectó?" },
       { "quien": "Luis", "en": "Around two thousand. The problem was detected by our monitoring at 2 a.m.", "es": "A unos dos mil. Nuestro monitoreo detectó el problema a las 2 de la mañana." },
-      { "quien": "Sarah", "en": "And was the root cause found?", "es": "¿Y se encontró la causa raíz?" },
+      { "quien": "Tom", "en": "And was the root cause found?", "es": "¿Y se encontró la causa raíz?" },
       { "quien": "Luis", "en": "Yes. It was caused by an expired SSL certificate.", "es": "Sí. La causó un certificado SSL vencido." },
-      { "quien": "Sarah", "en": "Okay. Has it been renewed?", "es": "Bueno. ¿Ya se renovó?" },
+      { "quien": "Tom", "en": "Okay. Has it been renewed?", "es": "Bueno. ¿Ya se renovó?" },
       { "quien": "Luis", "en": "It was renewed this morning, and a reminder was added to the calendar.", "es": "Se renovó esta mañana y se agregó un recordatorio al calendario." },
-      { "quien": "Sarah", "en": "Good. Please make sure a postmortem is written by Friday.", "es": "Bien. Por favor, asegúrate de que el análisis del incidente esté escrito para el viernes." }
+      { "quien": "Tom", "en": "Good. Please make sure a postmortem is written by Friday.", "es": "Bien. Por favor, asegúrate de que el análisis del incidente esté escrito para el viernes." }
     ],
     "preguntas": [
       { "pregunta": "¿Cuánto tiempo estuvo caído el sitio?", "opciones": ["Unos cuarenta minutos", "Dos horas", "Toda la noche"],
         "correcta": 0, "explicacion": "Luis dice \"The site was down for about forty minutes\"." },
       { "pregunta": "¿Qué causó la caída?", "opciones": ["Un error en el código", "Un certificado SSL vencido", "Demasiados usuarios"],
         "correcta": 1, "explicacion": "Luis dice \"It was caused by an expired SSL certificate\"." },
-      { "pregunta": "¿Qué pide Sarah para el viernes?", "opciones": ["Un nuevo certificado", "Una reunión con los usuarios", "El análisis escrito del incidente"],
-        "correcta": 2, "explicacion": "Sarah dice \"make sure a postmortem is written by Friday\"." }
+      { "pregunta": "¿Qué pide Tom para el viernes?", "opciones": ["Un nuevo certificado", "Una reunión con los usuarios", "El análisis escrito del incidente"],
+        "correcta": 2, "explicacion": "Tom dice \"make sure a postmortem is written by Friday\"." }
     ] },
   { "id": "en-intermedio-09-d02", "titulo": "Leer el changelog", "situacion": "El build de Ana falla después de actualizar un paquete y Tom la ayuda.",
     "lineas": [

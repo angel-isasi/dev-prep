@@ -16,13 +16,13 @@
       { "pregunta": "¿Qué idiomas habla Carlos, según Tom?", "opciones": ["Inglés y portugués", "Solo inglés", "Español y francés"], "correcta": 0,
         "explicacion": "Tom dice **He speaks English and Portuguese**." }
     ] },
-  { "id": "en-basico-05-d02", "titulo": "Un día de Luis", "situacion": "Sarah, una profesora de inglés, conversa con Luis sobre su día.",
+  { "id": "en-basico-05-d02", "titulo": "Un día de Luis", "situacion": "Emily, una profesora de inglés, conversa con Luis sobre su día.",
     "lineas": [
-      { "quien": "Sarah", "en": "Luis, tell me about your day.", "es": "Luis, cuéntame de tu día." },
+      { "quien": "Emily", "en": "Luis, tell me about your day.", "es": "Luis, cuéntame de tu día." },
       { "quien": "Luis", "en": "I study at the university in the morning.", "es": "Estudio en la universidad en la mañana." },
-      { "quien": "Sarah", "en": "And in the afternoon?", "es": "¿Y en la tarde?" },
+      { "quien": "Emily", "en": "And in the afternoon?", "es": "¿Y en la tarde?" },
       { "quien": "Luis", "en": "I work in a store. It closes at eight.", "es": "Trabajo en una tienda. Cierra a las ocho." },
-      { "quien": "Sarah", "en": "Wow, you're very busy!", "es": "¡Wow, estás muy ocupado!" },
+      { "quien": "Emily", "en": "Wow, you're very busy!", "es": "¡Wow, estás muy ocupado!" },
       { "quien": "Luis", "en": "Yes, but I practice English every night. I watch videos and read.", "es": "Sí, pero practico inglés todas las noches. Veo videos y leo." }
     ],
     "preguntas": [

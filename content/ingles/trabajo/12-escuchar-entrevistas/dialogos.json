@@ -1,5 +1,5 @@
 [
-  { "id": "en-trabajo-12-d01", "titulo": "Entrevista técnica: preguntas de JavaScript", "situacion": "Tom, ingeniero senior, entrevista a Luis por videollamada para un puesto de frontend junior.",
+  { "id": "en-trabajo-12-d01", "titulo": "Entrevista técnica: preguntas de JavaScript", "situacion": "Tom, el tech lead, entrevista a Luis por videollamada para un puesto de frontend junior.",
     "lineas": [
       { "quien": "Tom", "en": "Alright, let's dive in. Off the top of your head, what's a closure?", "es": "Bien, entremos en materia. Así de memoria, ¿qué es un closure?" },
       { "quien": "Luis", "en": "It's a function that remembers the variables from where it was created.", "es": "Es una función que recuerda las variables del lugar donde se creó." },
@@ -21,23 +21,23 @@
       { "pregunta": "¿Qué tipo de pregunta hizo Tom con \"Let's say a page loads very slowly\"?", "opciones": ["Una pregunta de opinión", "Un caso hipotético para ver cómo abordarías el problema", "Una pregunta personal"],
         "correcta": 1, "explicacion": "**Let's say** + **How would you approach** plantean un caso imaginario y piden tu plan." }
     ] },
-  { "id": "en-trabajo-12-d02", "titulo": "Entrevista de recursos humanos", "situacion": "Sarah, de recursos humanos, hace las preguntas personales a Ana.",
+  { "id": "en-trabajo-12-d02", "titulo": "Entrevista de recursos humanos", "situacion": "Lisa, de recursos humanos, hace las preguntas personales a Ana.",
     "lineas": [
-      { "quien": "Sarah", "en": "Thanks for joining, Ana. To start, what drew you to frontend development?", "es": "Gracias por conectarte, Ana. Para empezar, ¿qué te atrajo del desarrollo frontend?" },
+      { "quien": "Lisa", "en": "Thanks for joining, Ana. To start, what drew you to frontend development?", "es": "Gracias por conectarte, Ana. Para empezar, ¿qué te atrajo del desarrollo frontend?" },
       { "quien": "Ana", "en": "I love building things people can see and use right away.", "es": "Me encanta construir cosas que la gente puede ver y usar de inmediato." },
-      { "quien": "Sarah", "en": "Great. Tell me about a time you had to learn something new very quickly.", "es": "Genial. Cuéntame de una vez en que tuviste que aprender algo nuevo muy rápido." },
+      { "quien": "Lisa", "en": "Great. Tell me about a time you had to learn something new very quickly.", "es": "Genial. Cuéntame de una vez en que tuviste que aprender algo nuevo muy rápido." },
       { "quien": "Ana", "en": "Last year, my team needed a chart for our university project, and I learned D3 in a week.", "es": "El año pasado, mi equipo necesitaba un gráfico para el proyecto de la universidad, y aprendí D3 en una semana." },
-      { "quien": "Sarah", "en": "Interesting. How did you go about it?", "es": "Interesante. ¿Cómo lo hiciste?" },
+      { "quien": "Lisa", "en": "Interesting. How did you go about it?", "es": "Interesante. ¿Cómo lo hiciste?" },
       { "quien": "Ana", "en": "I followed the docs, built a small demo first, and then added it to the project.", "es": "Seguí la documentación, hice primero una demo pequeña y luego la agregué al proyecto." },
-      { "quien": "Sarah", "en": "Out of curiosity, what was the hardest part?", "es": "Por curiosidad, ¿qué fue lo más difícil?" },
+      { "quien": "Lisa", "en": "Out of curiosity, what was the hardest part?", "es": "Por curiosidad, ¿qué fue lo más difícil?" },
       { "quien": "Ana", "en": "Understanding the scales. I asked a teammate, and it clicked.", "es": "Entender las escalas. Le pregunté a un compañero y lo entendí." },
-      { "quien": "Sarah", "en": "Makes sense. Last one: where do you see yourself in three years?", "es": "Tiene sentido. La última: ¿dónde te ves en tres años?" },
+      { "quien": "Lisa", "en": "Makes sense. Last one: where do you see yourself in three years?", "es": "Tiene sentido. La última: ¿dónde te ves en tres años?" },
       { "quien": "Ana", "en": "I'd like to be a solid mid-level developer, and maybe mentor new juniors.", "es": "Me gustaría ser una desarrolladora semi senior sólida, y quizás ser mentora de los nuevos juniors." }
     ],
     "preguntas": [
-      { "pregunta": "¿Qué esperaba Sarah con \"Tell me about a time...\"?", "opciones": ["Una opinión general", "Un caso real del pasado", "Una definición"],
+      { "pregunta": "¿Qué esperaba Lisa con \"Tell me about a time...\"?", "opciones": ["Una opinión general", "Un caso real del pasado", "Una definición"],
         "correcta": 1, "explicacion": "**Tell me about a time** pide una historia concreta. Ana cuenta lo que pasó con D3 el año pasado." },
-      { "pregunta": "¿Qué preguntó Sarah con \"How did you go about it?\"", "opciones": ["Cómo llegó Ana a la universidad", "Qué pasos siguió Ana para aprender", "Cuánto tiempo le tomó"],
+      { "pregunta": "¿Qué preguntó Lisa con \"How did you go about it?\"", "opciones": ["Cómo llegó Ana a la universidad", "Qué pasos siguió Ana para aprender", "Cuánto tiempo le tomó"],
         "correcta": 1, "explicacion": "**Go about something** es la forma de hacerlo. Ana responde con sus pasos: docs, demo y proyecto." },
       { "pregunta": "¿Qué significa \"it clicked\" en la respuesta de Ana?", "opciones": ["Que hizo clic en un botón", "Que de pronto lo entendió", "Que se rompió el gráfico"],
         "correcta": 1, "explicacion": "**It clicked** es \"me hizo clic\": de repente lo entendió." }

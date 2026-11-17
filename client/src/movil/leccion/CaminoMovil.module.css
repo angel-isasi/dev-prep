@@ -2,16 +2,43 @@
   padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
 }
 
+.incrustado {
+  padding: 0;
+}
+
 .area {
   margin-bottom: var(--espacio-6);
+}
+
+/* Cabecera de cada etapa (o área): título, cuántas unidades llevas hechas y una barra */
+.etapa {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: grid;
+  gap: var(--espacio-2);
+  margin-bottom: var(--espacio-4);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid color-mix(in srgb, var(--color-area) 35%, var(--borde));
+  border-radius: var(--radio-grande);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--color-area) 16%, transparent), transparent 70%),
+    linear-gradient(var(--superficie), var(--superficie)),
+    var(--fondo-solido);
+  backdrop-filter: blur(8px);
+}
+
+.etapa small {
+  color: var(--texto-suave);
+  font-size: 13px;
 }
 
 .areaTitulo {
   display: flex;
   align-items: center;
   gap: var(--espacio-2);
-  margin-bottom: var(--espacio-3);
-  font-size: 22px;
+  margin: 0 0 2px;
+  font-size: 19px;
 }
 
 .punto {
@@ -22,29 +49,38 @@
   box-shadow: 0 0 12px var(--color-area);
 }
 
+.barraEtapa {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--superficie-2);
+  overflow: hidden;
+}
+
+.barraEtapa i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-area);
+  transition: width 0.5s ease;
+}
+
+/* El sendero: una columna angosta y centrada; cada nodo se corre a los lados con --x (onda suave) */
 .nodos {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-2);
-  margin: 0;
+  align-items: center;
+  gap: var(--espacio-1);
+  max-width: 420px;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
 }
 
-/* Zigzag: un nodo a la izquierda, el siguiente a la derecha */
 .fila {
   display: flex;
   flex-direction: column;
-}
-
-.fila[data-lado="izq"] .nodo {
-  align-self: flex-start;
-  margin-left: 8%;
-}
-
-.fila[data-lado="der"] .nodo {
-  align-self: flex-end;
-  margin-right: 8%;
+  align-items: center;
+  width: 100%;
 }
 
 .nodo {
@@ -52,13 +88,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   width: 150px;
-  padding: var(--espacio-2);
+  padding: var(--espacio-2) var(--espacio-1);
   border: none;
   background: none;
   color: var(--texto);
   cursor: pointer;
+  transform: translateX(var(--x, 0));
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -66,34 +103,73 @@
   border-radius: 50%;
   background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
   box-shadow: 0 6px 0 color-mix(in srgb, var(--color-area) 25%, transparent);
-  transition: transform 120ms ease;
+  transition:
+    transform 120ms ease,
+    box-shadow 200ms ease;
 }
 
 .nodo:active > div:first-child {
   transform: translateY(3px);
 }
 
+.nodo:focus-visible {
+  outline: none;
+}
+
+.nodo:focus-visible > div:first-child {
+  box-shadow:
+    0 0 0 3px var(--acento),
+    0 6px 0 color-mix(in srgb, var(--color-area) 25%, transparent);
+}
+
+/* Hecha: disco relleno con el color del área */
+.nodo[data-estado="hecha"] > div:first-child {
+  background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--color-area) 55%, white 10%), color-mix(in srgb, var(--color-area) 75%, black));
+  box-shadow: 0 6px 0 color-mix(in srgb, var(--color-area) 45%, black);
+}
+
+.nodo[data-estado="hecha"] .numero {
+  color: var(--sobre-acento, #111);
+  -webkit-text-stroke: 0;
+}
+
+/* Actual: anillo que respira */
+.nodo[data-estado="actual"] > div:first-child,
 .nodo[data-actual="true"] > div:first-child {
   box-shadow:
-    0 0 0 4px color-mix(in srgb, var(--color-area) 45%, transparent),
+    0 0 0 5px color-mix(in srgb, var(--color-area) 40%, transparent),
     0 6px 0 color-mix(in srgb, var(--color-area) 30%, transparent);
+  animation: respira 2.4s ease-in-out infinite;
+}
+
+@keyframes respira {
+  50% {
+    box-shadow:
+      0 0 0 9px color-mix(in srgb, var(--color-area) 18%, transparent),
+      0 6px 0 color-mix(in srgb, var(--color-area) 30%, transparent);
+  }
+}
+
+/* Pendiente: más tenue, para que destaque lo que toca */
+.nodo[data-estado="pendiente"] {
+  opacity: 0.62;
+}
+
+.nodo[data-estado="pendiente"]:hover {
+  opacity: 1;
 }
 
 .numero {
   color: transparent;
   font-family: var(--fuente-titulos);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
   -webkit-text-stroke: 1.2px var(--color-area);
 }
 
-.nodo[data-dominada="true"] .numero {
-  color: var(--exito);
-  -webkit-text-stroke: 0;
-}
-
 .nombre {
-  font-size: 14px;
+  max-width: 150px;
+  font-size: 13px;
   font-weight: 600;
   line-height: 1.25;
   text-align: center;
@@ -101,36 +177,71 @@
 
 .actual {
   position: absolute;
-  top: -2px;
-  padding: 1px 8px;
+  top: -8px;
+  z-index: 1;
+  padding: 2px 9px;
   border-radius: 999px;
   background: var(--color-area);
   color: var(--sobre-acento);
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-weight: 800;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--color-area) 40%, transparent);
 }
 
+/* Panel de la unidad: justo debajo del nodo, centrado en el sendero */
 .panel {
-  overflow: hidden;
-  margin: 0 var(--espacio-1);
+  width: min(100%, 380px);
+  margin: var(--espacio-1) 0 var(--espacio-3);
+  padding: var(--espacio-4);
   border: 1px solid color-mix(in srgb, var(--color-area) 40%, transparent);
   border-radius: var(--radio-grande);
   background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
+  box-shadow: var(--sombra);
+  transform-origin: top center;
+}
+
+.panelCabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+  margin-bottom: var(--espacio-3);
+}
+
+.panelCabecera strong {
+  font-family: var(--fuente-titulos);
+  font-size: 16px;
+}
+
+.panelCabecera span {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-area) 18%, transparent);
+  color: var(--color-area);
+  font-size: 11px;
+  font-weight: 700;
 }
 
 .panel p {
-  margin: var(--espacio-3) var(--espacio-4) 0;
+  margin: 0 0 var(--espacio-3);
   color: var(--texto-suave);
   font-size: 13px;
+}
+
+.aprobada {
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio);
+  background: color-mix(in srgb, var(--exito) 12%, transparent);
+  color: var(--texto) !important;
 }
 
 .acciones {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--espacio-2);
-  padding: var(--espacio-3) var(--espacio-4) var(--espacio-4);
 }
 
 .acciones :global(.boton) {
@@ -138,40 +249,29 @@
   min-height: 44px;
 }
 
-/* Pantalla grande (laptop): columna centrada y cómoda de leer */
+/* Pantalla grande: el sendero sigue angosto, solo un poco más amplio */
 @media (min-width: 900px) {
   .pagina {
-    max-width: 1100px;
+    max-width: 760px;
     margin: 0 auto;
     padding: var(--espacio-7) var(--espacio-6);
   }
-  .fila[data-lado="izq"] .nodo {
-    margin-left: 18%;
-  }
-  .fila[data-lado="der"] .nodo {
-    margin-right: 18%;
-  }
-  .nodo {
-    width: 180px;
-  }
-  .nodo > div:first-child {
-    transform: scale(1.12);
+  .nodos {
+    max-width: 460px;
   }
   .nodo:hover > div:first-child {
-    transform: scale(1.18) translateY(-2px);
+    transform: translateY(-2px);
   }
   .nombre {
-    margin-top: 6px;
-    font-size: 15px;
-  }
-  .panel {
-    max-width: 640px;
-    margin-inline: auto;
+    font-size: 14px;
   }
 }
 
-.incrustado {
-  padding: 0;
+@media (prefers-reduced-motion: reduce) {
+  .nodo[data-estado="actual"] > div:first-child,
+  .nodo[data-actual="true"] > div:first-child {
+    animation: none;
+  }
 }
 
 /* Inglés: niveles del nodo, barras de aprendidos y fijados, cofre y legendario */
@@ -198,7 +298,7 @@
 .barras {
   display: grid;
   gap: 0.6rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: var(--espacio-3);
   font-size: 0.9rem;
 }
 .barras small {
@@ -233,4 +333,14 @@
 }
 .premio p {
   margin: 0.35rem 0 0;
+}
+
+/* "Marcar como actual" (o lo que quede suelto al final) ocupa toda la fila */
+.acciones > :last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+/* espacio para la etiqueta "Empieza aquí" sin tapar la unidad de arriba */
+.nodo[data-actual="true"] {
+  margin-top: 14px;
 }

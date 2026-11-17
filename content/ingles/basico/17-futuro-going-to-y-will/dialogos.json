@@ -18,23 +18,23 @@
       { "pregunta": "¿Qué consejo le da Carlos?", "opciones": ["Reservar un hotel", "Cambiar dinero", "Llevar una casaca"], "correcta": 2,
         "explicacion": "*It'll be cold there. Take a jacket!*: le dice que lleve una casaca porque hará frío." }
     ] },
-  { "id": "en-basico-17-d02", "titulo": "En el aeropuerto", "situacion": "María llega al mostrador de la aerolínea y Tom la atiende.",
+  { "id": "en-basico-17-d02", "titulo": "En el aeropuerto", "situacion": "María llega al mostrador de la aerolínea y Ryan la atiende.",
     "lineas": [
-      { "quien": "Tom", "en": "Good morning. Can I see your passport, please?", "es": "Buenos días. ¿Me muestra su pasaporte, por favor?" },
+      { "quien": "Ryan", "en": "Good morning. Can I see your passport, please?", "es": "Buenos días. ¿Me muestra su pasaporte, por favor?" },
       { "quien": "María", "en": "Sure, here you go.", "es": "Claro, aquí tiene." },
-      { "quien": "Tom", "en": "Are you checking any bags today?", "es": "¿Va a despachar alguna maleta hoy?" },
+      { "quien": "Ryan", "en": "Are you checking any bags today?", "es": "¿Va a despachar alguna maleta hoy?" },
       { "quien": "María", "en": "No, I only have a carry-on.", "es": "No, solo tengo equipaje de mano." },
-      { "quien": "Tom", "en": "Window or aisle seat?", "es": "¿Ventana o pasillo?" },
+      { "quien": "Ryan", "en": "Window or aisle seat?", "es": "¿Ventana o pasillo?" },
       { "quien": "María", "en": "Aisle, please. Is the flight going to leave on time?", "es": "Pasillo, por favor. ¿El vuelo va a salir a tiempo?" },
-      { "quien": "Tom", "en": "Yes. Here's your boarding pass. You're at gate 12.", "es": "Sí. Aquí tiene su pase de abordar. Su puerta es la 12." },
+      { "quien": "Ryan", "en": "Yes. Here's your boarding pass. You're at gate 12.", "es": "Sí. Aquí tiene su pase de abordar. Su puerta es la 12." },
       { "quien": "María", "en": "Thank you! I'll go to the gate now.", "es": "¡Gracias! Voy a la puerta ahora." }
     ],
     "preguntas": [
       { "pregunta": "¿Qué equipaje lleva María?", "opciones": ["Dos maletas", "Una mochila y una maleta", "Solo equipaje de mano"], "correcta": 2,
         "explicacion": "María dice: *I only have a carry-on*, solo equipaje de mano." },
       { "pregunta": "¿Qué asiento pide María?", "opciones": ["Ventana", "Pasillo", "Primera clase"], "correcta": 1,
-        "explicacion": "Tom pregunta *Window or aisle seat?* y ella responde *Aisle, please*: pasillo." },
+        "explicacion": "Ryan pregunta *Window or aisle seat?* y ella responde *Aisle, please*: pasillo." },
       { "pregunta": "¿Por qué puerta sale el vuelo?", "opciones": ["La 12", "La 2", "La 20"], "correcta": 0,
-        "explicacion": "Tom dice: *You're at gate 12*, la puerta 12." }
+        "explicacion": "Ryan dice: *You're at gate 12*, la puerta 12." }
     ] }
 ]
