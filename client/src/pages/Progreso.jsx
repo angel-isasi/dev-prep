@@ -9,7 +9,7 @@ import { Llama } from "../components/Llama.jsx";
 import { AnimatedGroup } from "../components/ui/animated-group.jsx";
 import { MagicCard } from "../components/ui/magic-card.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
-import { MapaDominio } from "../components/MapaDominio.jsx";
+import { EntrenamientoHoy, MapaDominio, useMapaDominio } from "../components/MapaDominio.jsx";
 import { EstudioJuego } from "../components/EstudioJuego.jsx";
 import { SemaforoPostular } from "../components/Logros.jsx";
 import { RetoMes, ResumenMes } from "../components/Rutina.jsx";
@@ -39,6 +39,7 @@ function porSemanas(celdas) {
 export function Progreso() {
   const [datos, setDatos] = useState(api.progreso.guardado);
   const [error, setError] = useState(null);
+  const { mapa, errores } = useMapaDominio();
 
   useEffect(() => {
     api.progreso().then(setDatos, (e) => setError(e.message));
@@ -155,81 +156,104 @@ export function Progreso() {
         </AnimatedGroup>
       </div>
 
-      <div className={estilos.columnas}>
-        <div className={estilos.bloque}>
-          <div className={estilos.bloqueCabecera}>
-            <h2>Actividad</h2>
-            <span>{activos} días activos en las últimas 20 semanas</span>
-          </div>
-          <div className={estilos.calendario}>
-            <div className={estilos.diasSemana}>
-              {DIAS.map((d, i) => (
-                <span key={i}>{d}</span>
-              ))}
+      {/* Por filas: qué hacer ahora, lo que dominas, tu constancia y si ya puedes postular.
+          Cada fila pone sus tarjetas lado a lado (misma altura) y pasa a una columna si no caben. */}
+      <div className={estilos.cuerpo}>
+        <div className={estilos.fila}>
+          {api.planSemana && (
+            <div className={estilos.hueco}>
+              <PlanSemana />
             </div>
-            {porSemanas(calendario).map((sem, i) => (
-              <div key={i} className={estilos.columna}>
-                {sem.map((c) => (
-                  <span
-                    key={c.fecha}
-                    className={estilos.celda}
-                    data-nivel={c.nivel}
-                    title={textoCelda(c)}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
-          <div className={estilos.leyenda}>
-            Menos
-            {[0, 1, 2, 3, 4].map((n) => (
-              <span key={n} className={estilos.celda} data-nivel={n} />
-            ))}
-            Más
+          )}
+          <div className={estilos.pila}>
+            <EntrenamientoHoy mapa={mapa} errores={errores} />
+            {api.retoMes && <RetoMes />}
+            {api.retoMes && <ResumenMes siempre />}
           </div>
         </div>
 
-        <EstudioJuego dias={datos.estudioJuego} proyeccion={datos.proyeccion} fechaMeta={datos.config?.fechaMeta} />
-        {api.planSemana && (
-          <div className={estilos.avance}>
-            <PlanSemana />
-            <CuantoAvance />
-          </div>
-        )}
-        {api.semaforo && <SemaforoPostular />}
-        {api.retoMes && (
-          <div style={{ marginTop: "var(--espacio-5)", display: "grid", gap: "var(--espacio-3)" }}>
-            <RetoMes />
-            <ResumenMes siempre />
-          </div>
-        )}
         {/* En la versión web, el mapa de dominio reemplaza las barras por tema */}
         {api.mapa ? (
-          <MapaDominio />
-        ) : (
-        <div className={estilos.bloque}>
-          <div className={estilos.bloqueCabecera}>
-            <h2>Por tema</h2>
-            <span>Dominio de cada tema</span>
+          <div className={estilos.hueco}>
+            <MapaDominio mapa={mapa} />
           </div>
-          <ul className={estilos.temas}>
-            {preparacion.porTema.map((t) => (
-              <li
-                key={t.tema}
-                data-completo={t.total > 0 && t.resueltos === t.total}
-              >
-                <span className={estilos.tema}>{nombreTema(t.tema)}</span>
-                <div className={estilos.barra}>
-                  <div style={{ width: `${t.porcentaje}%` }} />
-                </div>
-                <span className={estilos.cifra}>
-                  {t.resueltos}/{t.total}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        ) : (
+          <div className={estilos.bloque}>
+            <div className={estilos.bloqueCabecera}>
+              <h2>Por tema</h2>
+              <span>Dominio de cada tema</span>
+            </div>
+            <ul className={estilos.temas}>
+              {preparacion.porTema.map((t) => (
+                <li
+                  key={t.tema}
+                  data-completo={t.total > 0 && t.resueltos === t.total}
+                >
+                  <span className={estilos.tema}>{nombreTema(t.tema)}</span>
+                  <div className={estilos.barra}>
+                    <div style={{ width: `${t.porcentaje}%` }} />
+                  </div>
+                  <span className={estilos.cifra}>
+                    {t.resueltos}/{t.total}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
+
+        <div className={estilos.fila}>
+          <div className={estilos.hueco}>
+            <div className={estilos.bloque}>
+              <div className={estilos.bloqueCabecera}>
+                <h2>Actividad</h2>
+                <span>{activos} días activos en las últimas 20 semanas</span>
+              </div>
+              <div className={estilos.calendario}>
+                <div className={estilos.diasSemana}>
+                  {DIAS.map((d, i) => (
+                    <span key={i}>{d}</span>
+                  ))}
+                </div>
+                {porSemanas(calendario).map((sem, i) => (
+                  <div key={i} className={estilos.columna}>
+                    {sem.map((c) => (
+                      <span
+                        key={c.fecha}
+                        className={estilos.celda}
+                        data-nivel={c.nivel}
+                        title={textoCelda(c)}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+              <div className={estilos.leyenda}>
+                Menos
+                {[0, 1, 2, 3, 4].map((n) => (
+                  <span key={n} className={estilos.celda} data-nivel={n} />
+                ))}
+                Más
+              </div>
+            </div>
+          </div>
+          <div className={estilos.hueco}>
+            <EstudioJuego dias={datos.estudioJuego} proyeccion={datos.proyeccion} fechaMeta={datos.config?.fechaMeta} />
+          </div>
+        </div>
+
+        <div className={estilos.fila}>
+          {api.planSemana && (
+            <div className={estilos.hueco}>
+              <CuantoAvance />
+            </div>
+          )}
+          {api.semaforo && (
+            <div className={estilos.hueco}>
+              <SemaforoPostular />
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

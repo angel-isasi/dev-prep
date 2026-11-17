@@ -16,7 +16,8 @@
   margin-bottom: var(--espacio-3);
 }
 
-@media (max-width: 1000px) {
+/* Ventana mediana: la preparación arriba a lo ancho (los 4 datos van en una fila, al final del archivo) */
+@media (max-width: 1200px) {
   .resumen {
     grid-template-columns: 1fr;
   }
@@ -264,39 +265,81 @@
   color: var(--exito);
 }
 
-/* Actividad y Por tema, lado a lado */
-.columnas {
+/* Cuerpo de la página: filas de tarjetas con el mismo espacio entre todas */
+.cuerpo {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
   gap: var(--espacio-3);
-  align-items: start;
 }
 
-.columnas .bloque {
-  margin-bottom: 0;
-}
-
-.columnas .temas {
-  column-gap: var(--espacio-5);
-}
-
-.columnas .temas li {
-  grid-template-columns: 140px 1fr 40px;
+/* Dos tarjetas lado a lado si caben (cada una de al menos 440 px); si no, una debajo de otra.
+   Si una de las dos no aparece, la otra ocupa todo el ancho. */
+.fila {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr));
   gap: var(--espacio-3);
-  font-size: 13px;
+  align-items: stretch;
 }
 
-@media (max-width: 1100px) {
-  .columnas {
-    grid-template-columns: 1fr;
+/* Cada tarjeta llena la altura de su fila; sus márgenes propios no cuentan aquí */
+.hueco {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hueco > * {
+  flex: 1;
+}
+
+.pila {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  min-width: 0;
+}
+
+.pila > :first-child {
+  flex: 1;
+}
+
+.hueco > *,
+.pila > * {
+  margin: 0;
+}
+
+.hueco:empty,
+.pila:empty {
+  display: none;
+}
+
+.cuerpo > .bloque {
+  margin: 0;
+}
+
+/* Actividad junto a otra tarjeta más alta: el calendario queda al medio y la leyenda al pie */
+.hueco > .bloque {
+  display: flex;
+  flex-direction: column;
+}
+
+.hueco .calendario {
+  flex: 1;
+  align-items: center;
+}
+
+.hueco .leyenda {
+  margin-top: var(--espacio-3);
+}
+
+/* Ventana mediana (va al final para ganarle a la regla base de .datos) */
+@media (max-width: 1200px) {
+  .datos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
-/* Plan de la semana y Cuánto avancé (versión web) */
-.avance {
-  display: grid;
-  grid-column: 1 / -1;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-  align-items: start;
-  gap: var(--espacio-3);
+@media (max-width: 1000px) {
+  .datos {
+    grid-template-columns: 1fr 1fr;
+  }
 }
