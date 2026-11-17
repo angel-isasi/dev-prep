@@ -1,0 +1,10 @@
+[
+  { "id": "en-dominio-02-c01", "es": "Te recomiendo que actualices la librería.", "natural": "I recommend that you update the library.", "calco": "I recommend you to update the library.",
+    "explicacion": "*Recommend* no va con objeto + *to*. Va con **that** + sujeto + forma base (*that you update*) o con *-ing* (*I recommend updating the library*)." },
+  { "id": "en-dominio-02-c02", "es": "Insistió en que lo incluyeran en la reunión.", "natural": "He insisted on being included in the meeting.", "calco": "He insisted in that they included him in the meeting.",
+    "explicacion": "\"Insistir en\" es **insist on** + *-ing*, o *insist that* + forma base. *Insist in* es el calco de la preposición española." },
+  { "id": "en-dominio-02-c03", "es": "En caso de dudas, contáctame.", "natural": "If you have any questions, feel free to contact me.", "calco": "In case of doubts, contact me.",
+    "explicacion": "Las \"dudas\" de un correo son **questions**: *doubts* suena a desconfianza. Y la versión formal es *Should you have any questions...*" },
+  { "id": "en-dominio-02-c04", "es": "Por la presente renuncio a mi cargo.", "natural": "I hereby resign from my position.", "calco": "By the present I resign to my position.",
+    "explicacion": "\"Por la presente\" es **hereby**, y \"renunciar a un cargo\" es **resign from**. *By the present* y *resign to* son traducciones palabra por palabra." }
+]

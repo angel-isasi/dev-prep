@@ -1,0 +1,10 @@
+[
+  { "id": "en-dominio-03-c01", "es": "Lo vemos aparte, fuera de la reunión.", "natural": "Let's take this offline.", "calco": "Let's see it apart, outside the meeting.",
+    "explicacion": "\"Verlo aparte\" en una reunión es **take this offline**. *See it apart* no existe con ese sentido, y *apart* significa separado o desarmado." },
+  { "id": "en-dominio-03-c02", "es": "Ni me lo digas, a mí me pasa lo mismo.", "natural": "Tell me about it. Same here.", "calco": "Don't even tell me. Same here.",
+    "explicacion": "\"Ni me lo digas\" es justo lo contrario en palabras: **Tell me about it**. *Don't even tell me* suena a que no quieres escuchar nada." },
+  { "id": "en-dominio-03-c03", "es": "La fecha no se mueve. Es lo que hay.", "natural": "The deadline won't move. It is what it is.", "calco": "The deadline won't move. It's what there is.",
+    "explicacion": "\"Es lo que hay\" se dice **it is what it is**. *It's what there is* es la traducción palabra por palabra y no se usa." },
+  { "id": "en-dominio-03-c04", "es": "Deberíamos tomar un café un día de estos.", "natural": "We should grab coffee sometime.", "calco": "We should take a coffee one of these days.",
+    "explicacion": "En EE. UU. se dice **grab coffee** (o *get coffee*), sin artículo, y \"un día de estos\" es **sometime**. *Take a coffee* es un calco del español." }
+]

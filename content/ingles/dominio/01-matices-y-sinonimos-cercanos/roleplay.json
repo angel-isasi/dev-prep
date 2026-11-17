@@ -1,0 +1,29 @@
+[
+  { "id": "en-dominio-01-r01", "titulo": "La palabra justa con tu tech lead", "situacion": "Tom te pregunta por Kevin, que lleva tres días con un bug, y por un proveedor nuevo. Cada palabra que elijas dice algo de alguien.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Tom", "en": "Ana, how's Kevin doing with the payments bug? It's been three days.", "es": "Ana, ¿cómo va Kevin con el bug de pagos? Ya van tres días." },
+      { "opciones": [
+          { "en": "He's been really persistent. He's narrowed it down to the retry logic.", "es": "Ha sido muy persistente. Ya lo redujo a la lógica de reintentos.", "correcta": true, "explicacion": "*Persistent* reconoce su esfuerzo y el dato concreto muestra que avanza." },
+          { "en": "He's been really stubborn. He's narrowed it down to the retry logic.", "es": "", "correcta": false, "explicacion": "*Stubborn* es terco: le pones una etiqueta negativa a alguien que está haciendo bien su trabajo, y frente a su tech lead." },
+          { "en": "He's been literally working on it nonstop for three days.", "es": "", "correcta": false, "explicacion": "*Literally* como exageración es coloquial y aquí es falso: nadie trabajó tres días sin parar. Además no dices cómo va el bug." }
+        ] },
+      { "quien": "Tom", "en": "Good. Also, the new vendor says their SDK cuts load time in half. Thoughts?", "es": "Bien. Además, el nuevo proveedor dice que su SDK reduce el tiempo de carga a la mitad. ¿Qué opinas?" },
+      { "opciones": [
+          { "en": "That's what they state, so we can take it as a fact.", "es": "", "correcta": false, "explicacion": "*State* presenta algo como un hecho. Darle ese peso a la promesa de un proveedor sin medirla es ingenuo." },
+          { "en": "That's what they claim. I'd like to see our own benchmarks before we commit.", "es": "Eso es lo que aseguran. Me gustaría ver nuestras propias mediciones antes de comprometernos.", "correcta": true, "explicacion": "*Claim* marca la distancia justa: lo dicen ellos, no está comprobado. Y propones cómo verificarlo." },
+          { "en": "That's what they infer, but I'm not sure.", "es": "", "correcta": false, "explicacion": "El proveedor no deduce nada: lo afirma. *Infer* lo hace quien escucha, no quien hace la promesa." }
+        ] },
+      { "quien": "Tom", "en": "Fair. Could you run a quick test? Nothing fancy, just one page.", "es": "Es justo. ¿Podrías hacer una prueba rápida? Nada elaborado, solo una página." },
+      { "opciones": [
+          { "en": "Sure, I'll do something cheap and quick.", "es": "", "correcta": false, "explicacion": "*Cheap* suena a trabajo de mala calidad. Si quieres decir que costará poco esfuerzo, di *quick* o *lightweight*." },
+          { "en": "Sure. There will be less risks if I only test one page.", "es": "", "correcta": false, "explicacion": "*Risks* es contable: *fewer risks*. Además, Tom ya dijo que es una sola página; no hace falta justificarlo." },
+          { "en": "Sure. It's a small test, so it won't affect the sprint.", "es": "Claro. Es una prueba pequeña, así que no afectará el sprint.", "correcta": true, "explicacion": "*Affect* como verbo (influir) y tranquilizas a Tom sobre lo que le importa: el sprint." }
+        ] },
+      { "quien": "Tom", "en": "Perfect. One more thing: keep the vendor talks quiet until the board meeting.", "es": "Perfecto. Una cosa más: no comentes lo del proveedor hasta la reunión del directorio." },
+      { "opciones": [
+          { "en": "Got it. I'll be discreet.", "es": "Entendido, seré discreta.", "correcta": true, "explicacion": "*Discreet* = reservado. Justo lo que pide Tom." },
+          { "en": "Got it, I'll be candid about it.", "es": "", "correcta": false, "explicacion": "*Candid* es franco, abierto: lo contrario de guardar silencio." },
+          { "en": "Got it, I'll be disinterested about it.", "es": "", "correcta": false, "explicacion": "*Disinterested* significa imparcial; no tiene nada que ver con guardar un secreto." }
+        ] }
+    ] }
+]

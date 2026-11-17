@@ -1,0 +1,55 @@
+[
+  { "id": "en-dominio-01-d01", "titulo": "El correo que se leyó mal", "situacion": "Un gerente de otra área escribió sobre la caída de ayer. Sarah cree que los está culpando.",
+    "lineas": [
+      { "quien": "Sarah", "en": "Did you see Mike's email? He's implying the outage was our fault.", "es": "¿Viste el correo de Mike? Está insinuando que la caída fue culpa nuestra." },
+      { "quien": "Tom", "en": "Is he, though? I read it twice and didn't infer that at all.", "es": "¿En serio? Lo leí dos veces y no deduje eso para nada." },
+      { "quien": "Sarah", "en": "He says the incident \"coincided\" with our deploy.", "es": "Dice que el incidente \"coincidió\" con nuestro deploy." },
+      { "quien": "Tom", "en": "Coinciding isn't causing. He's stating a fact, not making a claim.", "es": "Coincidir no es causar. Está constatando un hecho, no haciendo una afirmación." },
+      { "quien": "Sarah", "en": "Fair. But it could still affect how the client sees us.", "es": "Es justo. Pero igual podría afectar cómo nos ve el cliente." },
+      { "quien": "Tom", "en": "Then let's reply with the timeline. Facts will have more effect than complaints.", "es": "Entonces respondamos con la línea de tiempo. Los hechos tendrán más efecto que las quejas." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué cree Sarah que hace Mike en su correo?", "opciones": ["Felicitar al equipo", "Insinuar que la caída fue culpa del equipo", "Pedir un deploy nuevo"], "correcta": 1,
+        "explicacion": "\"He's implying the outage was our fault\"." },
+      { "pregunta": "¿Por qué Tom no está de acuerdo con Sarah?", "opciones": ["Porque Mike solo dice que el incidente coincidió con el deploy, no que lo causó", "Porque Mike no escribió ningún correo", "Porque Tom no leyó el correo"], "correcta": 0,
+        "explicacion": "\"Coinciding isn't causing\": decir que dos cosas pasaron a la vez no es acusar." },
+      { "pregunta": "¿Qué propone Tom?", "opciones": ["Quejarse con el jefe de Mike", "No responder", "Responder con la línea de tiempo del incidente"], "correcta": 2,
+        "explicacion": "\"Let's reply with the timeline. Facts will have more effect than complaints\"." }
+    ] },
+  { "id": "en-dominio-01-d02", "titulo": "Hablar de un candidato", "situacion": "Tom y Ana entrevistaron a una candidata frontend y comparan impresiones.",
+    "lineas": [
+      { "quien": "Tom", "en": "So, what did you think of her?", "es": "Entonces, ¿qué te pareció?" },
+      { "quien": "Ana", "en": "Technically strong. And she was very candid about what she didn't know.", "es": "Fuerte en lo técnico. Y fue muy franca sobre lo que no sabía." },
+      { "quien": "Tom", "en": "I liked that too. Was she a bit pushy about the salary, though?", "es": "Eso también me gustó. Pero, ¿no presionó un poco de más con el sueldo?" },
+      { "quien": "Ana", "en": "I'd call it assertive. She knew her market rate and asked for it.", "es": "Yo diría que fue firme. Conocía su precio de mercado y lo pidió." },
+      { "quien": "Tom", "en": "Fair point. And the coding exercise?", "es": "Buen punto. ¿Y el ejercicio de código?" },
+      { "quien": "Ana", "en": "Fewer tests than I'd like, but she was persistent with the tricky edge case.", "es": "Menos tests de los que me gustaría, pero fue persistente con el caso límite difícil." },
+      { "quien": "Tom", "en": "Persistent or stubborn? She ignored the hint I gave her.", "es": "¿Persistente o terca? Ignoró la pista que le di." },
+      { "quien": "Ana", "en": "Hmm. Maybe a little of both.", "es": "Mmm. Quizás un poco de las dos." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cómo describe Ana la actitud de la candidata con el sueldo?", "opciones": ["Firme: sabía cuánto vale y lo pidió", "Avasalladora y agresiva", "Insegura"], "correcta": 0,
+        "explicacion": "Tom dice *pushy* (negativo) y Ana lo corrige con *assertive* (positivo): \"She knew her market rate and asked for it\"." },
+      { "pregunta": "¿Qué le faltó en el ejercicio, según Ana?", "opciones": ["Terminar el código", "Explicar su solución", "Escribir más tests"], "correcta": 2,
+        "explicacion": "\"Fewer tests than I'd like\"." },
+      { "pregunta": "¿Por qué Tom duda entre *persistent* y *stubborn*?", "opciones": ["Porque la candidata no resolvió el ejercicio", "Porque la candidata ignoró la pista que él le dio", "Porque llegó tarde"], "correcta": 1,
+        "explicacion": "No rendirse es *persistent*, pero no escuchar una pista es *stubborn*: \"She ignored the hint I gave her\"." }
+    ] },
+  { "id": "en-dominio-01-d03", "titulo": "El hosting barato", "situacion": "Luis le cuenta a Ana dónde va a alojar su proyecto personal.",
+    "lineas": [
+      { "quien": "Luis", "en": "I found a really cheap hosting provider for my side project.", "es": "Encontré un proveedor de hosting bien barato para mi proyecto personal." },
+      { "quien": "Ana", "en": "Cheap or inexpensive? There's a difference.", "es": "¿Barato o económico? Hay una diferencia." },
+      { "quien": "Luis", "en": "Five dollars a month. It does go down every few days, though.", "es": "Cinco dólares al mes. Aunque sí se cae cada pocos días." },
+      { "quien": "Ana", "en": "Then it's cheap. Continual outages will hurt your users more than ten dollars will hurt you.", "es": "Entonces es barato. Las caídas constantes van a perjudicar a tus usuarios más de lo que a ti te perjudican diez dólares." },
+      { "quien": "Luis", "en": "I'm trying to be frugal, not reckless.", "es": "Intento ser ahorrativo, no imprudente." },
+      { "quien": "Ana", "en": "Then pay ten. It's still economical, and you'll sleep better.", "es": "Entonces paga diez. Sigue siendo económico y dormirás más tranquilo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué problema tiene el hosting de Luis?", "opciones": ["Es muy caro", "Se cae cada pocos días", "No acepta pagos desde Perú"], "correcta": 1,
+        "explicacion": "\"It does go down every few days\"." },
+      { "pregunta": "¿Por qué Ana dice que es *cheap* y no *inexpensive*?", "opciones": ["Porque cuesta poco pero es de mala calidad", "Porque cuesta más de diez dólares", "Porque Luis no lo pagó"], "correcta": 0,
+        "explicacion": "*Cheap* insinúa mala calidad; *inexpensive* solo dice que cuesta poco. Las caídas constantes lo hacen *cheap*." },
+      { "pregunta": "¿Qué le aconseja Ana?", "opciones": ["Programar su propio servidor", "Dejar el proyecto", "Pagar un plan de diez dólares"], "correcta": 2,
+        "explicacion": "\"Then pay ten. It's still economical\"." }
+    ] }
+]

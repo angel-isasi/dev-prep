@@ -1,0 +1,234 @@
+[
+  {
+    "id": "en-dominio-06-d01",
+    "titulo": "Un supuesto que sostiene todo",
+    "situacion": "Ana presenta su diseño del sistema de notificaciones. Tom lo pone a prueba.",
+    "lineas": [
+      {
+        "quien": "Ana",
+        "en": "So the design assumes about five thousand notifications per second at peak.",
+        "es": "Entonces, el diseño supone unas cinco mil notificaciones por segundo en el pico."
+      },
+      {
+        "quien": "Tom",
+        "en": "Where does that number come from? It's pretty load-bearing.",
+        "es": "¿De dónde sale ese número? Todo se apoya en él."
+      },
+      {
+        "quien": "Ana",
+        "en": "Back-of-the-envelope: two million users, ten percent active at peak, a few events each.",
+        "es": "Un cálculo rápido: dos millones de usuarios, diez por ciento activos en el pico, unos cuantos eventos cada uno."
+      },
+      {
+        "quien": "Tom",
+        "en": "Fair. And what's the failure mode if we get ten times that?",
+        "es": "Bien. ¿Y cómo falla si nos llega diez veces eso?"
+      },
+      {
+        "quien": "Ana",
+        "en": "The queue absorbs the spike, and backpressure slows the producers instead of dropping messages.",
+        "es": "La cola absorbe el pico, y la contrapresión frena a los productores en lugar de perder mensajes."
+      },
+      {
+        "quien": "Tom",
+        "en": "And if the queue itself goes down?",
+        "es": "¿Y si se cae la cola misma?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Today it's a single point of failure. I'd want to validate the managed option's failover before we commit.",
+        "es": "Hoy es un punto único de falla. Querría validar la conmutación por fallo de la opción administrada antes de comprometernos."
+      },
+      {
+        "quien": "Tom",
+        "en": "Good. Let's call that the biggest known unknown in the doc.",
+        "es": "Bien. Pongamos eso en el documento como la mayor incógnita identificada."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿De dónde sale el número de cinco mil por segundo?",
+        "opciones": [
+          "De un cálculo rápido con usuarios, porcentaje activo y eventos",
+          "De un benchmark real",
+          "Se lo dio el cliente"
+        ],
+        "correcta": 0,
+        "explicacion": "\"Back-of-the-envelope: two million users, ten percent active at peak, a few events each.\""
+      },
+      {
+        "pregunta": "¿Qué pasa si llega un pico diez veces mayor?",
+        "opciones": [
+          "Se pierden mensajes",
+          "La cola lo absorbe y la contrapresión frena a los productores",
+          "El sistema se apaga a propósito"
+        ],
+        "correcta": 1,
+        "explicacion": "\"The queue absorbs the spike, and backpressure slows the producers instead of dropping messages.\""
+      },
+      {
+        "pregunta": "¿Qué queda pendiente de validar?",
+        "opciones": [
+          "El costo de los servidores",
+          "El diseño de la interfaz",
+          "La conmutación por fallo de la cola administrada"
+        ],
+        "correcta": 2,
+        "explicacion": "\"I'd want to validate the managed option's failover\": Tom lo anota como el mayor *known unknown*."
+      }
+    ]
+  },
+  {
+    "id": "en-dominio-06-d02",
+    "titulo": "Defender un trade-off",
+    "situacion": "Sarah cuestiona que el feed de actividad tenga consistencia eventual. Ana defiende su decisión.",
+    "lineas": [
+      {
+        "quien": "Sarah",
+        "en": "I'm not comfortable with the feed being eventually consistent. Users will see stale data.",
+        "es": "No me convence que el feed tenga consistencia eventual. Los usuarios van a ver datos desactualizados."
+      },
+      {
+        "quien": "Ana",
+        "en": "If I'm hearing you correctly, the worry is that someone posts and doesn't see their own post. Is that it?",
+        "es": "Si te entiendo bien, lo que te preocupa es que alguien publique y no vea su propia publicación. ¿Es eso?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "Exactly. That looks like a bug.",
+        "es": "Exacto. Eso parece un bug."
+      },
+      {
+        "quien": "Ana",
+        "en": "That's a fair challenge. We can read your own posts from the primary, and everyone else's from a replica.",
+        "es": "Es una objeción válida. Podemos leer tus propias publicaciones desde la base principal, y las de los demás desde una réplica."
+      },
+      {
+        "quien": "Sarah",
+        "en": "So only other people's posts lag a bit?",
+        "es": "¿Entonces solo las publicaciones de los demás se atrasan un poco?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Right, by a second or two. And I stand by the trade-off: strong consistency here would triple our database cost.",
+        "es": "Exacto, uno o dos segundos. Y mantengo el trade-off: una consistencia fuerte aquí triplicaría el costo de la base de datos."
+      },
+      {
+        "quien": "Sarah",
+        "en": "Okay, I can live with that, as long as we measure the lag.",
+        "es": "Ok, puedo aceptarlo, siempre que midamos el retraso."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué le preocupa a Sarah?",
+        "opciones": [
+          "Que el feed sea muy caro",
+          "Que un usuario publique y no vea su propia publicación",
+          "Que el feed sea muy lento para todos"
+        ],
+        "correcta": 1,
+        "explicacion": "Ana reformula la objeción y Sarah confirma: \"Exactly. That looks like a bug.\""
+      },
+      {
+        "pregunta": "¿Cómo lo resuelve Ana?",
+        "opciones": [
+          "Leyendo las publicaciones propias desde la base principal",
+          "Eliminando las réplicas",
+          "Ocultando el feed"
+        ],
+        "correcta": 0,
+        "explicacion": "\"We can read your own posts from the primary, and everyone else's from a replica.\""
+      },
+      {
+        "pregunta": "¿Por qué Ana mantiene la consistencia eventual?",
+        "opciones": [
+          "Porque es más fácil de programar",
+          "Porque Tom lo ordenó",
+          "Porque la consistencia fuerte triplicaría el costo de la base de datos"
+        ],
+        "correcta": 2,
+        "explicacion": "\"Strong consistency here would triple our database cost.\""
+      }
+    ]
+  },
+  {
+    "id": "en-dominio-06-d03",
+    "titulo": "Luis en una entrevista de system design",
+    "situacion": "Luis postula a un puesto en una empresa de EE. UU. Jennifer, la entrevistadora, le pide diseñar un acortador de URLs.",
+    "lineas": [
+      {
+        "quien": "Jennifer",
+        "en": "Let's say we need to design a URL shortener. Where would you start?",
+        "es": "Supongamos que tenemos que diseñar un acortador de URLs. ¿Por dónde empezarías?"
+      },
+      {
+        "quien": "Luis",
+        "en": "With the requirements. Roughly how many new links per day, and is it read-heavy?",
+        "es": "Por los requisitos. Más o menos, ¿cuántos enlaces nuevos por día, y hay muchas más lecturas que escrituras?"
+      },
+      {
+        "quien": "Jennifer",
+        "en": "Assume a hundred million reads a day, and about one percent of that in writes.",
+        "es": "Supón cien millones de lecturas al día, y alrededor del uno por ciento de eso en escrituras."
+      },
+      {
+        "quien": "Luis",
+        "en": "So it's very read-heavy. My working assumption is that caching popular links matters more than the database choice.",
+        "es": "Entonces casi todo son lecturas. Mi supuesto de trabajo es que cachear los enlaces populares importa más que la base de datos que elijamos."
+      },
+      {
+        "quien": "Jennifer",
+        "en": "Let me push back: why not just use a bigger database?",
+        "es": "Te voy a cuestionar: ¿por qué no usar simplemente una base de datos más grande?"
+      },
+      {
+        "quien": "Luis",
+        "en": "We could, at first. But a cache scales out cheaply, and it takes the load off the hot path.",
+        "es": "Podríamos, al principio. Pero una caché escala horizontalmente a bajo costo, y le quita carga a la ruta crítica."
+      },
+      {
+        "quien": "Jennifer",
+        "en": "And what would you not be sure about?",
+        "es": "¿Y de qué no estarías seguro?"
+      },
+      {
+        "quien": "Luis",
+        "en": "How skewed the traffic is. If a few links get most of the hits, the cache wins big. I'd want to validate that with real data.",
+        "es": "De qué tan concentrado está el tráfico. Si unos pocos enlaces se llevan casi todas las visitas, la caché gana por mucho. Querría validarlo con datos reales."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Por qué Luis le da tanta importancia a la caché?",
+        "opciones": [
+          "Porque hay muchísimas más lecturas que escrituras",
+          "Porque la base de datos es gratis",
+          "Porque Jennifer se lo pidió"
+        ],
+        "correcta": 0,
+        "explicacion": "Con cien millones de lecturas y solo un uno por ciento de escrituras, el sistema es *read-heavy*."
+      },
+      {
+        "pregunta": "¿Cómo responde Luis cuando Jennifer lo cuestiona?",
+        "opciones": [
+          "Cambia de idea de inmediato",
+          "Concede que funcionaría al principio y explica por qué la caché escala mejor",
+          "Dice que la pregunta no tiene sentido"
+        ],
+        "correcta": 1,
+        "explicacion": "\"We could, at first. But a cache scales out cheaply...\": concede y luego sostiene su postura."
+      },
+      {
+        "pregunta": "¿Qué es lo que Luis no sabe con seguridad?",
+        "opciones": [
+          "Cuánto cuesta la caché",
+          "Qué lenguaje usar",
+          "Qué tan concentrado está el tráfico en pocos enlaces"
+        ],
+        "correcta": 2,
+        "explicacion": "\"How skewed the traffic is... I'd want to validate that with real data.\""
+      }
+    ]
+  }
+]

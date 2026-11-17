@@ -1,0 +1,29 @@
+[
+  { "id": "en-dominio-03-r01", "titulo": "Lo que la clienta no dice", "situacion": "Le muestras un prototipo a Linda, gerente de producto del cliente. Ella es muy amable, pero no dice las cosas de frente. Tienes que leer lo que hay detrás y responder con el mismo tacto.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Linda", "en": "Thanks for the demo, Ana. It's... interesting. Very different from what we discussed.", "es": "Gracias por la demo, Ana. Es... interesante. Muy distinta de lo que conversamos." },
+      { "opciones": [
+          { "en": "Thank you! I'm glad you find it interesting.", "es": "", "correcta": false, "explicacion": "Te quedas con la letra e ignoras la pausa y el \"very different\": ella está marcando una duda." },
+          { "en": "I appreciate the honesty. What feels most different from what you had in mind?", "es": "Gracias por la sinceridad. ¿Qué es lo que más se aleja de lo que tenías en mente?", "correcta": true, "explicacion": "Captas la duda y la invitas a concretarla con una pregunta abierta, sin ponerte a la defensiva." },
+          { "en": "Different is good, though. You'll get used to it.", "es": "", "correcta": false, "explicacion": "Desestimas su preocupación. Con un cliente, *you'll get used to it* suena a que su opinión no importa." }
+        ] },
+      { "quien": "Linda", "en": "Well, the navigation is a bold choice. Our users are, let's say, not very tech-savvy.", "es": "Bueno, la navegación es una decisión audaz. Nuestros usuarios no son, digamos, muy hábiles con la tecnología." },
+      { "opciones": [
+          { "en": "Bold, yes! That's what makes it feel modern.", "es": "", "correcta": false, "explicacion": "Tomas *bold choice* como elogio, cuando ella te está diciendo que cree que sus usuarios se van a perder." },
+          { "en": "No offense, but your users will have to learn eventually.", "es": "", "correcta": false, "explicacion": "*No offense, but* anuncia algo ofensivo, y aquí lo es: culpas a los usuarios del cliente." },
+          { "en": "That's a fair concern. We could test it with five of your users before going any further.", "es": "Es una preocupación válida. Podríamos probarla con cinco de sus usuarios antes de avanzar más.", "correcta": true, "explicacion": "Reconoces la crítica que había detrás de *bold choice* y propones una forma concreta de resolver la duda." }
+        ] },
+      { "quien": "Linda", "en": "That would help. Honestly, the timeline worries me a little, too.", "es": "Eso ayudaría. Sinceramente, el cronograma también me preocupa un poco." },
+      { "opciones": [
+          { "en": "Understood. If it's a real concern, let's go over the timeline together this week.", "es": "Entendido. Si es una preocupación real, revisemos juntas el cronograma esta semana.", "correcta": true, "explicacion": "*A little* es understatement: si una clienta lo menciona, le preocupa bastante. Le das un espacio concreto para hablarlo." },
+          { "en": "Don't worry, it's only a little.", "es": "", "correcta": false, "explicacion": "Tomas el *a little* al pie de la letra. Con un cliente de EE. UU., una preocupación \"pequeña\" dicha en voz alta casi nunca es pequeña." },
+          { "en": "Oh, great. Another concern.", "es": "", "correcta": false, "explicacion": "Sarcasmo con una clienta: aunque lo digas en broma, se lee como fastidio y falta de respeto." }
+        ] },
+      { "quien": "Linda", "en": "Let's do that. And we should grab coffee next time you're in Chicago.", "es": "Hagámoslo. Y deberíamos tomar un café la próxima vez que vengas a Chicago." },
+      { "opciones": [
+          { "en": "We'll see.", "es": "", "correcta": false, "explicacion": "*We'll see* suena a escepticismo o a un no educado: un mal cierre después de una reunión tensa." },
+          { "en": "Sure, what's your home address?", "es": "", "correcta": false, "explicacion": "Te sales de lo profesional: el café es en la oficina o cerca, y no se pide la dirección de la casa de una clienta." },
+          { "en": "I'd love that. I'll let you know as soon as I book my next trip.", "es": "Me encantaría. Te aviso apenas reserve mi próximo viaje.", "correcta": true, "explicacion": "Aceptas con calidez y lo vuelves algo concreto, que es como un *we should grab coffee* se convierte en un plan de verdad." }
+        ] }
+    ] }
+]

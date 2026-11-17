@@ -1,0 +1,56 @@
+[
+  { "id": "en-dominio-03-d01", "titulo": "¿Le gustó o no?", "situacion": "Ana salió de presentarle una propuesta al VP de ingeniería y se lo cuenta a Sarah.",
+    "lineas": [
+      { "quien": "Ana", "en": "I think the VP liked my proposal. He said it was \"interesting.\"", "es": "Creo que al VP le gustó mi propuesta. Dijo que era \"interesante\"." },
+      { "quien": "Sarah", "en": "Hmm. Did he sound excited, or kind of flat?", "es": "Mmm. ¿Sonaba entusiasmado o más bien plano?" },
+      { "quien": "Ana", "en": "Flat, I guess. Then he said, \"We'll see.\"", "es": "Plano, supongo. Después dijo: \"Ya veremos\"." },
+      { "quien": "Sarah", "en": "Ah. Coming from him, that usually means he's not sold yet.", "es": "Ah. Viniendo de él, eso suele significar que todavía no lo convenciste." },
+      { "quien": "Ana", "en": "Seriously? So what do I do now?", "es": "¿En serio? ¿Y ahora qué hago?" },
+      { "quien": "Sarah", "en": "Ask him what gives him pause, and bring real numbers next time.", "es": "Pregúntale qué le genera dudas, y la próxima vez lleva números reales." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué cree Ana al principio?", "opciones": ["Que al VP no le gustó", "Que al VP le gustó su propuesta", "Que el VP no la escuchó"], "correcta": 1,
+        "explicacion": "\"I think the VP liked my proposal\": Ana toma *interesting* al pie de la letra." },
+      { "pregunta": "Según Sarah, ¿qué significan sus palabras?", "opciones": ["Que todavía no está convencido", "Que la va a ascender", "Que quiere lanzarla mañana"], "correcta": 0,
+        "explicacion": "\"That usually means he's not sold yet\": *not sold* = no convencido." },
+      { "pregunta": "¿Qué le aconseja Sarah?", "opciones": ["Olvidarse de la propuesta", "Quejarse con Tom", "Preguntarle qué dudas tiene y llevar números reales"], "correcta": 2,
+        "explicacion": "\"Ask him what gives him pause, and bring real numbers next time\"." }
+    ] },
+  { "id": "en-dominio-03-d02", "titulo": "Small talk antes de la llamada", "situacion": "Tom y Ana esperan a que el cliente se conecte a la videollamada.",
+    "lineas": [
+      { "quien": "Tom", "en": "Hey Ana, how's your week shaping up?", "es": "Hola, Ana, ¿qué tal viene tu semana?" },
+      { "quien": "Ana", "en": "Can't complain. Busy, but the good kind of busy. Yours?", "es": "No me quejo. Ocupada, pero de la buena. ¿Y la tuya?" },
+      { "quien": "Tom", "en": "Not too shabby. My daughter had her first soccer game on Saturday.", "es": "Nada mal. Mi hija tuvo su primer partido de fútbol el sábado." },
+      { "quien": "Ana", "en": "Oh, nice! Did they win?", "es": "¡Qué bien! ¿Ganaron?" },
+      { "quien": "Tom", "en": "They lost seven to one. But she scored the one, so you'd think they'd won the World Cup.", "es": "Perdieron siete a uno. Pero ella metió el gol, así que cualquiera diría que ganaron el Mundial." },
+      { "quien": "Ana", "en": "Ha! Sounds like a win to me. Anything fun planned for this weekend?", "es": "¡Ja! A mí me suena a victoria. ¿Algún plan divertido para este fin de semana?" },
+      { "quien": "Tom", "en": "Just resting, hopefully. Okay, the client's joining. Let's do this.", "es": "Solo descansar, ojalá. Bueno, ya entra el cliente. Vamos." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Cómo está la semana de Ana?", "opciones": ["Ocupada, pero bien", "Muy mala", "Tranquila y aburrida"], "correcta": 0,
+        "explicacion": "\"Can't complain. Busy, but the good kind of busy\"." },
+      { "pregunta": "¿Qué pasó en el partido de la hija de Tom?", "opciones": ["Ganaron siete a uno", "Perdieron, pero ella metió el único gol", "No jugó"], "correcta": 1,
+        "explicacion": "\"They lost seven to one. But she scored the one\"." },
+      { "pregunta": "¿Qué planea Tom para el fin de semana?", "opciones": ["Otro partido", "Un viaje", "Descansar"], "correcta": 2,
+        "explicacion": "\"Just resting, hopefully\"." }
+    ] },
+  { "id": "en-dominio-03-d03", "titulo": "Un comentario de una línea", "situacion": "Luis recibió un comentario corto en su pull request y no sabe si es bueno o malo.",
+    "lineas": [
+      { "quien": "Luis", "en": "My reviewer left one comment on my PR: \"That's one way to do it.\" Is that good?", "es": "Mi revisor dejó un solo comentario en mi PR: \"That's one way to do it\". ¿Eso es bueno?" },
+      { "quien": "Ana", "en": "Not really. It's a polite way of saying there's a better way.", "es": "No mucho. Es una forma educada de decir que hay una mejor manera." },
+      { "quien": "Luis", "en": "Oh, great. So what do I reply? \"Thanks\"?", "es": "Ay, genial. ¿Y qué respondo? ¿\"Gracias\"?" },
+      { "quien": "Ana", "en": "Don't get defensive. Ask what they'd do instead.", "es": "No te pongas a la defensiva. Pregúntale qué haría en tu lugar." },
+      { "quien": "Luis", "en": "Something like \"Help me understand what you'd change\"?", "es": "¿Algo como \"Ayúdame a entender qué cambiarías\"?" },
+      { "quien": "Ana", "en": "Careful, that can sound like pushback. Try \"Open to suggestions. What would you do here?\"", "es": "Cuidado, eso puede sonar a que no estás de acuerdo. Prueba con \"Abierto a sugerencias. ¿Qué harías aquí?\"." },
+      { "quien": "Luis", "en": "Got it. Reading between the lines is a full-time job.", "es": "Entendido. Leer entre líneas es un trabajo a tiempo completo." },
+      { "quien": "Ana", "en": "Tell me about it.", "es": "Ni me lo digas." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué significa el comentario del revisor?", "opciones": ["Que el código es perfecto", "Que hay una forma mejor de hacerlo", "Que no revisó el código"], "correcta": 1,
+        "explicacion": "\"It's a polite way of saying there's a better way\"." },
+      { "pregunta": "¿Por qué Ana le dice que tenga cuidado con \"Help me understand\"?", "opciones": ["Porque puede sonar a que no está de acuerdo", "Porque es demasiado informal", "Porque está mal escrito"], "correcta": 0,
+        "explicacion": "\"That can sound like pushback\": *help me understand* suele usarse para cuestionar algo." },
+      { "pregunta": "¿Qué quiere decir Ana con \"Tell me about it\" al final?", "opciones": ["Que Luis le explique más", "Que no le interesa", "Que ella piensa lo mismo"], "correcta": 2,
+        "explicacion": "*Tell me about it* = ni me lo digas: ella también lo vive todos los días." }
+    ] }
+]

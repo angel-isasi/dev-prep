@@ -1,0 +1,30 @@
+[
+  {
+    "id": "en-dominio-06-c01",
+    "es": "Eventualmente usamos la réplica, solo cuando falla la principal.",
+    "natural": "We only use the replica occasionally, when the primary fails.",
+    "calco": "We eventually use the replica, only when the primary fails.",
+    "explicacion": "*Eventually* significa \"al final, tarde o temprano\". El \"eventualmente\" del español (de vez en cuando, en algún caso) es **occasionally** o *in some cases*."
+  },
+  {
+    "id": "en-dominio-06-c02",
+    "es": "Esa decisión no tiene vuelta atrás.",
+    "natural": "There's no going back from that decision.",
+    "calco": "That decision has no return back.",
+    "explicacion": "\"No tener vuelta atrás\" es **there's no going back**. En una discusión técnica también se dice *it's a one-way door*."
+  },
+  {
+    "id": "en-dominio-06-c03",
+    "es": "Eso escapa al alcance de esta discusión.",
+    "natural": "That's out of scope for this discussion.",
+    "calco": "That escapes the scope of this discussion.",
+    "explicacion": "En inglés nada \"escapa\" al alcance: se dice **out of scope** o *beyond the scope of*."
+  },
+  {
+    "id": "en-dominio-06-c04",
+    "es": "Hicimos un benchmark de las dos opciones.",
+    "natural": "We benchmarked both options.",
+    "calco": "We made a benchmark of both options.",
+    "explicacion": "*Benchmark* se usa como verbo (**we benchmarked both options**) o con *run* (*we ran a benchmark*). Con *make* suena traducido."
+  }
+]

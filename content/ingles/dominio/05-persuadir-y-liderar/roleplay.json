@@ -1,0 +1,118 @@
+[
+  {
+    "id": "en-dominio-05-r01",
+    "titulo": "Convencer a un escéptico",
+    "situacion": "En la reunión de arquitectura propones migrar los tests end-to-end a una herramienta nueva. Mark, un senior con mucha influencia, no está convencido.",
+    "tu": "Ana",
+    "turnos": [
+      {
+        "quien": "Mark",
+        "en": "Honestly, I don't see why we'd change. Our current setup works.",
+        "es": "Sinceramente, no veo por qué cambiaríamos. Lo que tenemos funciona."
+      },
+      {
+        "opciones": [
+          {
+            "en": "That's fair, and it does work. The problem is that our test runs went from ten to forty minutes this year.",
+            "es": "Es justo, y sí funciona. El problema es que nuestras corridas de tests pasaron de diez a cuarenta minutos este año.",
+            "correcta": true,
+            "explicacion": "Le das la razón en lo que la tiene y mueves la conversación a un dato que nadie discute."
+          },
+          {
+            "en": "It doesn't work, though. Everyone knows it's terrible.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Atacas lo que él probablemente construyó y hablas por \"everyone\". Lo pones a la defensiva desde el inicio."
+          },
+          {
+            "en": "Sorry, you're right, never mind.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Te rindes a la primera objeción. Si de verdad crees en la propuesta, defiéndela con datos."
+          }
+        ]
+      },
+      {
+        "quien": "Mark",
+        "en": "Forty minutes, sure. But migrating hundreds of tests is a huge risk.",
+        "es": "Cuarenta minutos, de acuerdo. Pero migrar cientos de tests es un riesgo enorme."
+      },
+      {
+        "opciones": [
+          {
+            "en": "Trust me, it's going to be fine.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Pedir confianza sin dar razones no convence a un escéptico; le confirma que no pensaste en el riesgo."
+          },
+          {
+            "en": "Risk is part of the job, Mark.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Suena condescendiente y no responde a su preocupación."
+          },
+          {
+            "en": "Agreed, which is why I'm not proposing a big bang. We'd migrate one suite as a pilot and compare.",
+            "es": "De acuerdo, por eso no propongo hacerlo todo de golpe. Migraríamos una suite como piloto y compararíamos.",
+            "correcta": true,
+            "explicacion": "Haces tuya su preocupación (*agreed*) y la conviertes en parte del plan: un piloto reduce el riesgo."
+          }
+        ]
+      },
+      {
+        "quien": "Mark",
+        "en": "And if the pilot goes badly?",
+        "es": "¿Y si el piloto sale mal?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "Then we've lost two weeks and learned something, and I'll be the first to say so.",
+            "es": "Entonces habremos perdido dos semanas y aprendido algo, y yo seré la primera en decirlo.",
+            "correcta": true,
+            "explicacion": "Acotas el costo del fracaso y te comprometes a reconocerlo. Eso da credibilidad."
+          },
+          {
+            "en": "It won't go badly.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Negar la posibilidad de fallar suena a exceso de confianza y no responde la pregunta."
+          },
+          {
+            "en": "Then it'll be on you for not supporting it.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Le echas la culpa por adelantado. Así no ganas su apoyo, ganas un enemigo."
+          }
+        ]
+      },
+      {
+        "quien": "Mark",
+        "en": "Okay. I'm still skeptical, but I won't block it.",
+        "es": "Está bien. Sigo escéptico, pero no lo voy a bloquear."
+      },
+      {
+        "opciones": [
+          {
+            "en": "Great, so you agree with me now.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*I won't block it* no es *I agree*. Ponerle palabras en la boca puede hacer que cambie de opinión."
+          },
+          {
+            "en": "I appreciate that. I'll share the pilot results with you first, so you can poke holes in them.",
+            "es": "Te lo agradezco. Te mostraré a ti primero los resultados del piloto, para que les busques los puntos débiles.",
+            "correcta": true,
+            "explicacion": "Agradeces sin exagerar y lo conviertes en revisor del piloto: el escéptico pasa a ser parte del proceso."
+          },
+          {
+            "en": "Whatever, we're doing it anyway.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Despectivo. Acabas de perder lo que habías ganado."
+          }
+        ]
+      }
+    ]
+  }
+]

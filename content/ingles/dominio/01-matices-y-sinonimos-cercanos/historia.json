@@ -1,0 +1,20 @@
+[
+  { "id": "en-dominio-01-h01", "titulo": "Una letra de diferencia", "situacion": "Sarah escribió las notas de la nueva versión para los clientes. Antes de enviarlas, Ana las revisa palabra por palabra.",
+    "pasos": [
+      { "quien": "Sarah", "en": "Ana, could you look over the release notes before they go out? Tom wants them polished.", "es": "Ana, ¿podrías revisar las notas de la versión antes de que salgan? Tom las quiere pulidas." },
+      { "quien": "Ana", "en": "Sure. First line: \"This update will effect all users.\" That should be \"affect.\"", "es": "Claro. Primera línea: \"This update will effect all users\". Debería ser \"affect\"." },
+      { "quien": "Sarah", "en": "Ugh, I always mix those up. What else?", "es": "Uf, siempre las confundo. ¿Qué más?" },
+      { "tipo": "completa", "quien": "Ana", "en": "\"Less crashes\" should be \"___ crashes,\" since you can count them.", "es": "\"Less crashes\" debería ser \"fewer crashes\", porque se pueden contar.", "opciones": ["fewer", "lesser", "little"], "correcta": 0, "explicacion": "Con un plural contable va **fewer**: *fewer crashes*. *Less* es para lo incontable (*less memory*)." },
+      { "quien": "Sarah", "en": "Fine. And the pricing part? I wrote that the new plan is cheap.", "es": "Bien. ¿Y la parte de precios? Escribí que el nuevo plan es barato." },
+      { "quien": "Ana", "en": "I'd say \"affordable.\" \"Cheap\" makes it sound like it breaks easily.", "es": "Yo diría \"affordable\". \"Cheap\" hace que suene a que se rompe fácil." },
+      { "tipo": "pregunta", "pregunta": "¿Por qué Ana cambia \"cheap\" por \"affordable\"?", "opciones": ["Porque el plan es caro", "Porque \"cheap\" insinúa mala calidad", "Porque \"affordable\" es más corto"], "correcta": 1, "explicacion": "*Cheap* puede sonar a barato y malo; *affordable* solo dice que el precio es accesible." },
+      { "quien": "Tom", "en": "Hey, I saw your comments. Are you implying the notes were sloppy?", "es": "Oye, vi tus comentarios. ¿Estás insinuando que las notas estaban descuidadas?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Not at all. You asked for them polished, so I ___ you wanted every word checked.", "es": "Para nada. Las pediste pulidas, así que deduje que querías que revisara cada palabra.", "opciones": ["inferred", "implied", "insinuated"], "correcta": 0, "explicacion": "Ana saca una conclusión de lo que dijo Tom: eso es **infer**. *Implied* sería que ella lo dio a entender." },
+      { "quien": "Tom", "en": "Ha, fair enough. Sarah says you were very persistent with the wording.", "es": "Ja, es justo. Sarah dice que fuiste muy persistente con la redacción." },
+      { "quien": "Sarah", "en": "\"Persistent\" is the nice word. I was going to say \"stubborn.\"", "es": "\"Persistente\" es la palabra amable. Yo iba a decir \"terca\"." },
+      { "tipo": "pregunta", "pregunta": "¿Qué diferencia hay entre la palabra de Tom y la de Sarah?", "opciones": ["Son sinónimos exactos", "Tom usa una palabra negativa y Sarah una positiva", "Tom usa una palabra positiva y Sarah, en broma, una negativa"], "correcta": 2, "explicacion": "*Persistent* es un elogio (no se rinde); *stubborn* es terco. Sarah lo dice en broma." },
+      { "quien": "Ana", "en": "Guilty. But I'd rather argue about a word now than explain it to a client later.", "es": "Culpable. Pero prefiero discutir por una palabra ahora que explicársela a un cliente después." },
+      { "quien": "Tom", "en": "Agreed. Anything else before we send them?", "es": "De acuerdo. ¿Algo más antes de enviarlas?" },
+      { "tipo": "completa", "quien": "Ana", "en": "Just one. The notes ___ three sections now, so I added a short summary at the top.", "es": "Solo una. Las notas tienen ahora tres secciones, así que agregué un resumen corto arriba.", "opciones": ["comprise", "comprise of", "are comprised by"], "correcta": 0, "explicacion": "El todo **comprises** las partes, sin preposición. *Comprise of* es un error frecuente por la mezcla con *consist of*." }
+    ] }
+]

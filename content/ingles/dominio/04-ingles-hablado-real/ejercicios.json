@@ -1,0 +1,182 @@
+[
+  {
+    "id": "en-dominio-04-e01",
+    "pregunta": "Tom pregunta muy rápido: **\"Whatcha working on?\"** ¿Qué dijo?",
+    "opciones": [
+      "What did you work on?",
+      "Watch your work.",
+      "What are you working on?",
+      "What have you worked on?"
+    ],
+    "correcta": 2,
+    "explicacion": "**Whatcha** une *what are you* (o *what have you*): la t de *what* y la y de *you* se funden en \"ch\". Con un verbo en -ing solo puede ser *what are you*. La trampa es *what did you*, que se reduce distinto: \"uádiyu\"."
+  },
+  {
+    "id": "en-dominio-04-e02",
+    "pregunta": "En una llamada oyes: **\"Didja get a chance to look at my PR?\"** ¿Qué te preguntan?",
+    "opciones": [
+      "¿Pudiste revisar mi PR?",
+      "¿Quieres revisar mi PR?",
+      "¿Vas a revisar mi PR?",
+      "¿Te gustaría revisar mi PR?"
+    ],
+    "correcta": 0,
+    "explicacion": "**Didja** = *did you*: la d y la y se funden en \"díya\". Es pasado: ¿tuviste oportunidad de...? La trampa es *wouldja* (*would you*), que suena parecido pero pide un favor."
+  },
+  {
+    "id": "en-dominio-04-e03",
+    "pregunta": "¿Cuál está mal incluso en una conversación informal?",
+    "opciones": [
+      "I'm gonna grab a coffee.",
+      "We're gonna need more tests.",
+      "I'm gonna the office tomorrow.",
+      "It's gonna be fine."
+    ],
+    "correcta": 2,
+    "explicacion": "**Gonna** solo reemplaza *going to* cuando sigue un verbo (futuro). En *going to the office*, *go* es un movimiento real y *to* va con un lugar: ahí ningún nativo dice *gonna*."
+  },
+  {
+    "id": "en-dominio-04-e04",
+    "pregunta": "Hablando rápido, ¿cuál es correcta?",
+    "opciones": [
+      "He wanna review it first.",
+      "He wants to review it first.",
+      "He want review it first.",
+      "He wannas review it first."
+    ],
+    "correcta": 1,
+    "explicacion": "**Wanna** solo reemplaza *want to* (con I, you, we, they). Con *he* va *wants to*, que en habla rápida suena \"uántsta\", nunca *wanna*. *He wanna* es un error que un nativo nota al instante."
+  },
+  {
+    "id": "en-dominio-04-e05",
+    "pregunta": "Tu tech lead responde a tu propuesta: **\"Yeah, no, that's a good call.\"** ¿Qué quiere decir?",
+    "opciones": [
+      "Está de acuerdo contigo, con énfasis",
+      "No está de acuerdo, pero lo dice con cortesía",
+      "Todavía no está seguro",
+      "Te pide que lo repitas"
+    ],
+    "correcta": 0,
+    "explicacion": "**Yeah, no** es muy de EE. UU.: el *yeah* reconoce lo que dijiste y el *no* descarta cualquier duda (\"sí, sí, totalmente\"). Decide lo que viene después: con *that's a good call* es acuerdo; en *Yeah, no, that's not happening* sería un no."
+  },
+  {
+    "id": "en-dominio-04-e06",
+    "pregunta": "Después del almuerzo te ofrecen más café y respondes **\"I'm good, thanks.\"** ¿Qué entendió la otra persona?",
+    "opciones": [
+      "Que estás bien de salud",
+      "Que el café está bueno",
+      "Que aceptas otra taza",
+      "Que no quieres más"
+    ],
+    "correcta": 3,
+    "explicacion": "**I'm good** (con *thanks*) es la forma más común de rechazar algo con amabilidad: \"así estoy bien, gracias\". La trampa es leerlo como un saludo o como un sí."
+  },
+  {
+    "id": "en-dominio-04-e07",
+    "pregunta": "Preguntas: \"Did you deploy the fix?\" y Sarah responde **\"Uh-uh.\"**, con un corte seco en el medio. ¿Qué dijo?",
+    "opciones": [
+      "Sí",
+      "No",
+      "Que no sabe",
+      "Que lo hará después"
+    ],
+    "correcta": 1,
+    "explicacion": "**Uh-uh** (corte seco en el medio, sin h) es **no**. **Uh-huh** (con una h suave en el medio) es **sí**. En una llamada ese detalle lo cambia todo; si dudas, confirma: *Sorry, is that a no?*"
+  },
+  {
+    "id": "en-dominio-04-e08",
+    "pregunta": "En una entrevista te preguntan por qué quieres el puesto. ¿Qué respuesta suena natural sin ser demasiado informal?",
+    "opciones": [
+      "So, like, I wanna, like, grow and stuff, you know?",
+      "I'm looking to grow into a bigger role, and your team works on exactly the problems I enjoy.",
+      "I desire to grow professionally in your esteemed company.",
+      "Dunno, it just looks kinda cool."
+    ],
+    "correcta": 1,
+    "explicacion": "Directa y concreta, con el registro de una conversación profesional. Amontonar *like*, *and stuff* y *you know* suena inmaduro; *I desire... esteemed company* es tan rígido que suena traducido."
+  },
+  {
+    "id": "en-dominio-04-e09",
+    "pregunta": "¿Dónde está bien **escribir** *gonna*?",
+    "opciones": [
+      "En un mensaje rápido de Slack a tu equipo",
+      "En la descripción de un RFC",
+      "En tu carta de presentación",
+      "En un correo a un cliente nuevo"
+    ],
+    "correcta": 0,
+    "explicacion": "Escrito, *gonna* solo cabe en un chat informal con gente de confianza. En documentos, correos formales o tu CV va *going to*, aunque al leerlo en voz alta un nativo diga \"gána\"."
+  },
+  {
+    "id": "en-dominio-04-e10",
+    "pregunta": "Sarah dice: **\"It's not like we have a choice.\"** ¿Qué quiere decir?",
+    "opciones": [
+      "Que tienen una opción parecida",
+      "Que no les gusta ninguna opción",
+      "Que no hay alternativa, así que toca hacerlo",
+      "Que alguien les quitó la opción"
+    ],
+    "correcta": 2,
+    "explicacion": "**It's not like...** = tampoco es que: niega una idea para justificar otra. Aquí: no hay otra salida. La trampa es traducir *like* como \"parecido\"."
+  },
+  {
+    "id": "en-dominio-04-e11",
+    "pregunta": "Sarah cuenta: **\"And then the client was like, 'Can we launch tomorrow?'\"** ¿Qué hace *was like* aquí?",
+    "opciones": [
+      "Compara al cliente con otra persona",
+      "Dice que al cliente le gustó algo",
+      "Indica que el cliente casi lo dijo",
+      "Introduce lo que el cliente dijo o cómo reaccionó"
+    ],
+    "correcta": 3,
+    "explicacion": "**Be like** es el verbo de citar más usado en el inglés hablado: *he was like* = él dijo, él salió con. Puede citar palabras exactas o una reacción. No tiene nada que ver con *like* (gustar)."
+  },
+  {
+    "id": "en-dominio-04-e12",
+    "pregunta": "En una llamada oyes algo como **\"I'll léchu know.\"** ¿Qué dijo?",
+    "opciones": [
+      "I'll let you know.",
+      "I'll let it go.",
+      "I'll lecture you.",
+      "I'll let you go."
+    ],
+    "correcta": 0,
+    "explicacion": "La t de *let* y la y de *you* se funden en \"ch\": *let you* → \"léchu\". *I'll let you know* = te aviso. La trampa es *I'll let you go*, que se usa para terminar una llamada: termina en *go*, no en *know*."
+  },
+  {
+    "id": "en-dominio-04-e13",
+    "pregunta": "El audio de Kevin se cortó justo cuando decía la fecha. ¿Qué dices?",
+    "opciones": [
+      "What?",
+      "Repeat, please.",
+      "Sorry, you cut out there. Could you say the date again?",
+      "Your internet is really bad."
+    ],
+    "correcta": 2,
+    "explicacion": "Dices qué pasó (*you cut out*) y pides solo lo que perdiste. *What?* a secas suena brusco, *Repeat, please* suena a orden y culpar a su internet es poco amable."
+  },
+  {
+    "id": "en-dominio-04-e14",
+    "pregunta": "Tom responde a tu idea: **\"I guess we could ship it Friday.\"** ¿Qué transmite?",
+    "opciones": [
+      "Que está seguro de que es la mejor opción",
+      "Que lo acepta, pero sin mucha seguridad ni entusiasmo",
+      "Que está adivinando al azar",
+      "Que ya lo decidió el cliente"
+    ],
+    "correcta": 1,
+    "explicacion": "**I guess** suaviza: \"supongo que sí\". Muchas veces es un sí a medias. Si necesitas saber si está de acuerdo de verdad, pregunta: *Are you comfortable with that?* La trampa es traducir *guess* como \"adivinar\"."
+  },
+  {
+    "id": "en-dominio-04-e15",
+    "pregunta": "\"The rewrite is risky. ___, the old code is a mess.\" (quieres matizar tu propia idea)",
+    "opciones": [
+      "Again",
+      "Then",
+      "Once again",
+      "Then again"
+    ],
+    "correcta": 3,
+    "explicacion": "**Then again** = aunque, por otro lado: matiza lo que acabas de decir. *Again* y *once again* (otra vez) repiten, no contrastan; *then* solo marca orden o consecuencia."
+  }
+]

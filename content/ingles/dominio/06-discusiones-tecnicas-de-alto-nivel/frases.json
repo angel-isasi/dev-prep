@@ -1,0 +1,203 @@
+[
+  {
+    "id": "en-dominio-06-f01",
+    "en": "At our current growth, the database becomes the bottleneck within a year.",
+    "es": "Al ritmo de crecimiento actual, la base de datos se vuelve el cuello de botella en un año.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f02",
+    "en": "Let me do some back-of-the-envelope math before we pick a design.",
+    "es": "Déjame hacer unas cuentas rápidas antes de elegir un diseño.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f03",
+    "en": "That's roughly an order of magnitude more traffic than we handle today.",
+    "es": "Eso es aproximadamente diez veces más tráfico del que manejamos hoy.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f04",
+    "en": "Right now the auth service is a single point of failure.",
+    "es": "Ahora mismo el servicio de autenticación es un punto único de falla.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f05",
+    "en": "Rather than a bigger machine, I'd scale out behind a load balancer.",
+    "es": "En lugar de una máquina más grande, agregaría máquinas detrás de un balanceador de carga.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f06",
+    "en": "We're optimizing for read latency, so writes can afford to be slower.",
+    "es": "Estamos optimizando la latencia de lectura, así que las escrituras pueden ser más lentas.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f07",
+    "en": "The average looks fine; it's the tail latency that users feel.",
+    "es": "El promedio se ve bien; lo que sienten los usuarios es la latencia de cola.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f08",
+    "en": "A feed can be eventually consistent, but a bank balance can't.",
+    "es": "Un feed puede tener consistencia eventual, pero un saldo bancario no.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f09",
+    "en": "If the recommendations service goes down, the page should degrade gracefully.",
+    "es": "Si se cae el servicio de recomendaciones, la página debería seguir funcionando sin él.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f10",
+    "en": "The payment endpoint has to be idempotent, or retries will charge twice.",
+    "es": "El endpoint de pagos tiene que ser idempotente, o los reintentos cobrarán dos veces.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f11",
+    "en": "Let's limit the blast radius with a canary release to five percent.",
+    "es": "Limitemos el alcance del daño con un despliegue canario al cinco por ciento.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f12",
+    "en": "Moving to a new database is a one-way door, so let's slow down.",
+    "es": "Migrar a una base de datos nueva no tiene vuelta atrás, así que vayamos más despacio.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f13",
+    "en": "The whole design hinges on how often users edit the same document.",
+    "es": "Todo el diseño depende de qué tan seguido los usuarios editan el mismo documento.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f14",
+    "en": "I think we're conflating two problems: speed and correctness.",
+    "es": "Creo que estamos mezclando dos problemas: la velocidad y la corrección.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f15",
+    "en": "Caching is orthogonal to the schema question, so let's park it.",
+    "es": "La caché no tiene que ver con lo del esquema, así que dejémosla de lado por ahora.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f16",
+    "en": "If I'm hearing you correctly, your concern is cost, not complexity.",
+    "es": "Si te entiendo bien, lo que te preocupa es el costo, no la complejidad.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f17",
+    "en": "Let me steelman your point before I respond to it.",
+    "es": "Déjame presentar tu argumento en su mejor versión antes de responderte.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f18",
+    "en": "I think that's a straw man; nobody is proposing a full rewrite.",
+    "es": "Creo que eso es un hombre de paja: nadie está proponiendo reescribir todo.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f19",
+    "en": "I hear the concern, but I stand by the decision, and here's why.",
+    "es": "Entiendo la preocupación, pero mantengo la decisión, y te explico por qué.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f20",
+    "en": "That's a fair challenge, and I don't have a complete answer yet.",
+    "es": "Es una objeción válida, y todavía no tengo una respuesta completa.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f21",
+    "en": "I'd want to validate that with real traffic before committing to it.",
+    "es": "Querría validarlo con tráfico real antes de comprometerme.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f22",
+    "en": "My working assumption is ten thousand writes per second at peak.",
+    "es": "Mi supuesto de trabajo es diez mil escrituras por segundo en el pico.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f23",
+    "en": "I'm fairly confident about reads, much less so about writes.",
+    "es": "Tengo bastante confianza en las lecturas, mucho menos en las escrituras.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f24",
+    "en": "The biggest known unknown is how the vendor's API behaves under load.",
+    "es": "La mayor incógnita que tenemos identificada es cómo se comporta la API del proveedor bajo carga.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f25",
+    "en": "That number is load-bearing, so let's double-check where it came from.",
+    "es": "Todo se apoya en ese número, así que verifiquemos de dónde salió.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f26",
+    "en": "What's the failure mode if the queue fills up?",
+    "es": "¿Cómo falla el sistema si la cola se llena?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f27",
+    "en": "Without backpressure, a traffic spike would take down the workers.",
+    "es": "Sin contrapresión, un pico de tráfico tumbaría a los workers.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f28",
+    "en": "We could de-risk the migration by running both systems in parallel.",
+    "es": "Podríamos reducir el riesgo de la migración ejecutando ambos sistemas en paralelo.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f29",
+    "en": "Just to pressure-test this, what happens when a region goes down?",
+    "es": "Solo para poner esto a prueba, ¿qué pasa si se cae una región?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f30",
+    "en": "The crux is whether we can tolerate stale data for a few seconds.",
+    "es": "El punto clave es si podemos tolerar datos desactualizados por unos segundos.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f31",
+    "en": "That sounds a little hand-wavy; can you walk me through the numbers?",
+    "es": "Eso suena un poco vago; ¿me explicas los números paso a paso?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-06-f32",
+    "en": "We have plenty of headroom on reads, but writes are near the limit.",
+    "es": "Tenemos bastante margen en las lecturas, pero las escrituras están cerca del límite."
+  },
+  {
+    "id": "en-dominio-06-f33",
+    "en": "Keep that check off the hot path; it runs on every request.",
+    "es": "Saca esa verificación de la ruta crítica: se ejecuta en cada petición."
+  },
+  {
+    "id": "en-dominio-06-f34",
+    "en": "If we shard by user ID, cross-user queries get expensive.",
+    "es": "Si fragmentamos por ID de usuario, las consultas entre usuarios se vuelven caras."
+  }
+]

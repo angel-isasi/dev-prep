@@ -1,0 +1,118 @@
+[
+  {
+    "id": "en-dominio-06-h01",
+    "titulo": "Ana defiende su diseño",
+    "situacion": "Ana presenta su diseño para la nueva búsqueda de productos. Tom decide ponerlo a prueba con preguntas duras, y Sarah tiene dudas.",
+    "pasos": [
+      {
+        "quien": "Ana",
+        "en": "The short version: we move search out of the main database into a dedicated search service.",
+        "es": "La versión corta: sacamos la búsqueda de la base de datos principal y la pasamos a un servicio de búsqueda dedicado."
+      },
+      {
+        "quien": "Tom",
+        "en": "I'm going to pressure-test this a bit, if that's okay. Is this a one-way door?",
+        "es": "Voy a poner esto un poco a prueba, si te parece. ¿Es una decisión sin vuelta atrás?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Not really. We keep writing to the main database, so we can switch back in a day.",
+        "es": "En realidad no. Seguimos escribiendo en la base principal, así que podemos volver atrás en un día."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Por qué la decisión no es irreversible?",
+        "opciones": [
+          "Porque el servicio es gratis",
+          "Porque siguen escribiendo en la base principal y pueden volver en un día",
+          "Porque Tom todavía no la aprobó"
+        ],
+        "correcta": 1,
+        "explicacion": "\"We keep writing to the main database, so we can switch back in a day\": es una *two-way door*."
+      },
+      {
+        "quien": "Sarah",
+        "en": "But then the search index will be stale, and stale data is basically broken data.",
+        "es": "Pero entonces el índice de búsqueda va a estar desactualizado, y datos desactualizados son básicamente datos rotos."
+      },
+      {
+        "quien": "Ana",
+        "en": "Let me steelman that: if a user edits a product and can't find it, they'll think we lost it.",
+        "es": "Déjame presentar eso en su mejor versión: si un usuario edita un producto y no lo encuentra, va a pensar que lo perdimos."
+      },
+      {
+        "quien": "Ana",
+        "en": "That said, I think we're conflating two things: a delay of seconds and data that's wrong.",
+        "es": "Dicho eso, creo que estamos mezclando dos cosas: un retraso de segundos y datos que están mal."
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "The index is ___ consistent: it catches up within about two seconds.",
+        "es": "El índice tiene consistencia eventual: se pone al día en unos dos segundos.",
+        "opciones": [
+          "finally",
+          "eventually",
+          "lately"
+        ],
+        "correcta": 1,
+        "explicacion": "**Eventually consistent** = se pone al día tarde o temprano. *Eventually* no es \"eventualmente\" (a veces), y *finally* no forma este término técnico."
+      },
+      {
+        "quien": "Tom",
+        "en": "Two seconds at today's traffic. What about Black Friday?",
+        "es": "Dos segundos con el tráfico de hoy. ¿Y en Black Friday?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Honestly, I don't know yet. My working assumption is under ten seconds, but I'd want to validate that with a load test.",
+        "es": "Sinceramente, todavía no lo sé. Mi supuesto de trabajo es menos de diez segundos, pero querría validarlo con una prueba de carga."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Qué hace Ana cuando no sabe la respuesta?",
+        "opciones": [
+          "Inventa un número para no quedar mal",
+          "Cambia de tema",
+          "Admite que no lo sabe, da su supuesto y dice cómo lo validaría"
+        ],
+        "correcta": 2,
+        "explicacion": "\"I don't know yet. My working assumption is... but I'd want to validate that\": incertidumbre dicha con precisión."
+      },
+      {
+        "quien": "Tom",
+        "en": "That's the right answer. I'd rather hear that than a confident guess.",
+        "es": "Esa es la respuesta correcta. Prefiero escuchar eso a una suposición dicha con total seguridad."
+      },
+      {
+        "quien": "Sarah",
+        "en": "Okay, I'm on board, as long as the product page reads from the main database.",
+        "es": "Ok, me sumo, siempre que la página de producto lea de la base principal."
+      },
+      {
+        "tipo": "completa",
+        "quien": "Tom",
+        "en": "Then let's de-___ it: run the load test before we commit.",
+        "es": "Entonces reduzcamos el riesgo: hagamos la prueba de carga antes de comprometernos.",
+        "opciones": [
+          "danger",
+          "risk",
+          "hazard"
+        ],
+        "correcta": 1,
+        "explicacion": "**De-risk** = reducir el riesgo de algo. Es la única forma que existe; *de-danger* y *de-hazard* no se usan."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿En qué quedan al final?",
+        "opciones": [
+          "Hacer la prueba de carga antes de comprometerse",
+          "Cancelar el servicio de búsqueda",
+          "Lanzarlo en Black Friday sin probar"
+        ],
+        "correcta": 0,
+        "explicacion": "\"Run the load test before we commit\", y Sarah se suma con una condición."
+      }
+    ]
+  }
+]

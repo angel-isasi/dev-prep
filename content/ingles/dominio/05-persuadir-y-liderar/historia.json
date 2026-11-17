@@ -1,0 +1,113 @@
+[
+  {
+    "id": "en-dominio-05-h01",
+    "titulo": "Ana asume su error",
+    "situacion": "Un release que Ana aprobó rompió el checkout un viernes. El lunes, en la reunión con todo el equipo, ella toma la palabra.",
+    "pasos": [
+      {
+        "quien": "Tom",
+        "en": "Okay, everyone. Let's talk about Friday's incident. Ana, do you want to start?",
+        "es": "Bien, todos. Hablemos del incidente del viernes. Ana, ¿quieres empezar?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Sure. First, that's on me. I approved the release without testing the rollback.",
+        "es": "Claro. Primero, eso es culpa mía. Aprobé el release sin probar el rollback."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Cómo empieza Ana?",
+        "opciones": [
+          "Culpando a QA",
+          "Pidiendo que no se hable del tema",
+          "Asumiendo el error sin rodeos"
+        ],
+        "correcta": 2,
+        "explicacion": "\"That's on me\": lo primero que hace es hacerse cargo, antes de dar detalles."
+      },
+      {
+        "quien": "Ana",
+        "en": "Checkout was down for forty minutes, and we lost about two hundred orders.",
+        "es": "El checkout estuvo caído cuarenta minutos y perdimos unos doscientos pedidos."
+      },
+      {
+        "quien": "Ana",
+        "en": "I won't sugarcoat it: that's real money, and the client noticed.",
+        "es": "No lo voy a endulzar: es dinero de verdad, y el cliente se dio cuenta."
+      },
+      {
+        "quien": "Sarah",
+        "en": "To be fair, the rollback script had been broken for weeks. Nobody knew.",
+        "es": "Para ser justos, el script de rollback llevaba semanas roto. Nadie lo sabía."
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "Thanks, Sarah. That's why I want to keep the postmortem ___ and focus on the process.",
+        "es": "Gracias, Sarah. Por eso quiero hacer el postmortem sin buscar culpables y enfocarnos en el proceso.",
+        "opciones": [
+          "faultless",
+          "blameless",
+          "guiltless"
+        ],
+        "correcta": 1,
+        "explicacion": "Un **blameless postmortem** analiza el sistema, no a las personas. *Faultless* significa perfecto, sin defectos, y *guiltless* (inocente) no se usa así."
+      },
+      {
+        "quien": "Ana",
+        "en": "Here's what I'm changing: every release now needs a tested rollback before approval.",
+        "es": "Esto es lo que estoy cambiando: desde ahora, cada release necesita un rollback probado antes de aprobarse."
+      },
+      {
+        "quien": "Tom",
+        "en": "Good. I'll take the heat with the client this week. You focus on the process.",
+        "es": "Bien. Yo asumo las críticas del cliente esta semana. Tú enfócate en el proceso."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Qué cambio propone Ana?",
+        "opciones": [
+          "Que cada release tenga un rollback probado antes de aprobarse",
+          "Que Sarah apruebe todos los releases",
+          "No lanzar nada los viernes"
+        ],
+        "correcta": 0,
+        "explicacion": "\"Every release now needs a tested rollback before approval.\""
+      },
+      {
+        "quien": "Luis",
+        "en": "Wait, you admitted it in front of everyone? Weren't you scared?",
+        "es": "Espera, ¿lo admitiste delante de todos? ¿No tenías miedo?"
+      },
+      {
+        "quien": "Ana",
+        "en": "A little. But if I'd hidden it, I'd have lost their trust. Owning it is part of leading.",
+        "es": "Un poco. Pero si lo hubiera escondido, habría perdido su confianza. Hacerse cargo es parte de liderar."
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "And Tom went to ___ for me with the client, so it worked out.",
+        "es": "Y Tom dio la cara por mí con el cliente, así que todo salió bien.",
+        "opciones": [
+          "bat",
+          "war",
+          "bed"
+        ],
+        "correcta": 0,
+        "explicacion": "**Go to bat for someone** = dar la cara por alguien. *Go to war* sería pelear contra alguien."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "Según Ana, ¿por qué admitió el error en público?",
+        "opciones": [
+          "Porque Tom se lo ordenó",
+          "Porque esconderlo le habría costado la confianza del equipo",
+          "Porque el cliente ya lo sabía"
+        ],
+        "correcta": 1,
+        "explicacion": "\"If I'd hidden it, I'd have lost their trust.\""
+      }
+    ]
+  }
+]

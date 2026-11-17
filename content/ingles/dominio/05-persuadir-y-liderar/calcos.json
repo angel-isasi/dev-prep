@@ -1,0 +1,30 @@
+[
+  {
+    "id": "en-dominio-05-c01",
+    "es": "Tengo que darte un feedback.",
+    "natural": "I have some feedback for you.",
+    "calco": "I have to give you a feedback.",
+    "explicacion": "*Feedback* es incontable: nunca *a feedback*. Además, *I have to give you* suena a obligación o a mala noticia; **I have some feedback for you** es lo natural."
+  },
+  {
+    "id": "en-dominio-05-c02",
+    "es": "Fue mi culpa.",
+    "natural": "That's on me.",
+    "calco": "It was my guilt.",
+    "explicacion": "*Guilt* es el sentimiento de culpa, no la responsabilidad. Para asumir un error se dice **that's on me** o *that was my fault*."
+  },
+  {
+    "id": "en-dominio-05-c03",
+    "es": "Te propongo algo.",
+    "natural": "Here's what I'd suggest.",
+    "calco": "I propose you something.",
+    "explicacion": "*Propose* no lleva a la persona directo: sería *propose something to you*. Lo natural es **Here's what I'd suggest** o *Let me propose something*."
+  },
+  {
+    "id": "en-dominio-05-c04",
+    "es": "Tom dio la cara por mí.",
+    "natural": "Tom went to bat for me.",
+    "calco": "Tom gave the face for me.",
+    "explicacion": "\"Dar la cara\" no existe en inglés con *face*. Defender a alguien ante otros es **go to bat for someone** o *stand up for someone*."
+  }
+]

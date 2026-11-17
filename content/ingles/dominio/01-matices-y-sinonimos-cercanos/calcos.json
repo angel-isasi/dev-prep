@@ -1,0 +1,10 @@
+[
+  { "id": "en-dominio-01-c01", "es": "Reclamé al soporte porque el servidor se cayó.", "natural": "I complained to support because the server went down.", "calco": "I claimed to support because the server went down.",
+    "explicacion": "\"Reclamar\" (quejarse) es **complain**. *Claim* significa afirmar algo o reclamar un derecho o un objeto (*claim a refund*, *baggage claim*), nunca quejarse con alguien." },
+  { "id": "en-dominio-01-c02", "es": "El cambio va a afectar a todos los usuarios.", "natural": "The change will affect all users.", "calco": "The change will affect to all users.",
+    "explicacion": "**Affect** es transitivo: va directo al objeto, sin preposición. La \"a\" del español no se traduce." },
+  { "id": "en-dominio-01-c03", "es": "Ahora tenemos menos errores que antes.", "natural": "We have fewer errors than before.", "calco": "We have less errors than before.",
+    "explicacion": "El español usa \"menos\" para todo; el inglés distingue: **fewer** con lo contable (*errors*) y *less* con lo incontable (*less time*)." },
+  { "id": "en-dominio-01-c04", "es": "El equipo consiste en cinco personas.", "natural": "The team consists of five people.", "calco": "The team consists in five people.",
+    "explicacion": "Para las partes de un todo es **consist of** (o *comprise*, sin preposición). *Consist in* existe, pero significa \"radicar en\": *Success consists in doing the basics well*." }
+]

@@ -1,0 +1,234 @@
+[
+  {
+    "id": "en-dominio-05-d01",
+    "titulo": "Feedback que sirve",
+    "situacion": "Ana es la mentora de Jake, un dev junior. Tiene que hablarle de sus últimos PR.",
+    "lineas": [
+      {
+        "quien": "Ana",
+        "en": "Hey Jake, got a few minutes? I wanted to share some feedback on the last sprint.",
+        "es": "Hola, Jake, ¿tienes unos minutos? Quería darte un poco de feedback sobre el último sprint."
+      },
+      {
+        "quien": "Jake",
+        "en": "Sure. Is something wrong?",
+        "es": "Claro. ¿Pasó algo?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Nothing dramatic. In the last three PRs, the edge cases weren't tested, and two of them caused bugs in production.",
+        "es": "Nada dramático. En los últimos tres PR, los casos borde no se probaron, y dos de ellos causaron bugs en producción."
+      },
+      {
+        "quien": "Jake",
+        "en": "Oh. I guess I was rushing to hit the deadline.",
+        "es": "Ah. Supongo que estaba apurado por llegar a la fecha."
+      },
+      {
+        "quien": "Ana",
+        "en": "I get that. Help me understand what's getting in the way. Is it time, or knowing what to test?",
+        "es": "Te entiendo. Ayúdame a entender qué te está frenando. ¿Es el tiempo, o saber qué probar?"
+      },
+      {
+        "quien": "Jake",
+        "en": "Honestly, a bit of both. I'm never sure which cases matter.",
+        "es": "La verdad, un poco de las dos. Nunca sé qué casos importan."
+      },
+      {
+        "quien": "Ana",
+        "en": "Okay, that's actionable. Let's pair on your next PR and write the test list together first.",
+        "es": "Bien, con eso podemos trabajar. Hagamos juntos tu próximo PR y escribamos primero la lista de tests."
+      },
+      {
+        "quien": "Jake",
+        "en": "That would help a lot. Thanks for being candid.",
+        "es": "Eso me ayudaría mucho. Gracias por ser franca."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué problema concreto señala Ana?",
+        "opciones": [
+          "Que Jake llega tarde a las reuniones",
+          "Que en tres PR no se probaron los casos borde y dos causaron bugs",
+          "Que Jake escribe demasiados tests"
+        ],
+        "correcta": 1,
+        "explicacion": "Ana da un hecho y su impacto, sin juzgar a Jake como persona."
+      },
+      {
+        "pregunta": "¿Qué hace Ana antes de proponer una solución?",
+        "opciones": [
+          "Le pregunta qué le está frenando",
+          "Le pone una fecha límite",
+          "Habla con su manager"
+        ],
+        "correcta": 0,
+        "explicacion": "\"Help me understand what's getting in the way\": primero entiende la causa."
+      },
+      {
+        "pregunta": "¿Qué acuerdan?",
+        "opciones": [
+          "Que Jake deje de hacer PR",
+          "Que Ana revise todo en secreto",
+          "Hacer juntos el próximo PR y escribir primero la lista de tests"
+        ],
+        "correcta": 2,
+        "explicacion": "\"Let's pair on your next PR and write the test list together first.\""
+      }
+    ]
+  },
+  {
+    "id": "en-dominio-05-d02",
+    "titulo": "Desacuerdo en la reunión grande",
+    "situacion": "Rachel, la engineering manager, presenta un plan ante todo el equipo. Ana ve un riesgo y lo dice en público.",
+    "lineas": [
+      {
+        "quien": "Rachel",
+        "en": "So the plan is to split the app into microfrontends by the third quarter. Any thoughts?",
+        "es": "Entonces, el plan es dividir la app en microfrontends para el tercer trimestre. ¿Comentarios?"
+      },
+      {
+        "quien": "Ana",
+        "en": "I want to build on that, because I agree with the goal. I do see a risk in the timeline, though.",
+        "es": "Quiero partir de eso, porque estoy de acuerdo con el objetivo. Pero sí veo un riesgo en el cronograma."
+      },
+      {
+        "quien": "Rachel",
+        "en": "Go on.",
+        "es": "Sigue."
+      },
+      {
+        "quien": "Ana",
+        "en": "Right now, three teams share one design system. If we split before we version it, we'll ship three different buttons.",
+        "es": "Ahora mismo, tres equipos comparten un design system. Si dividimos antes de versionarlo, vamos a terminar con tres botones distintos."
+      },
+      {
+        "quien": "Tom",
+        "en": "That's a fair concern. What would you suggest?",
+        "es": "Es una preocupación válida. ¿Qué sugieres?"
+      },
+      {
+        "quien": "Ana",
+        "en": "Version the design system first, then split one team as a pilot. I can draft a short RFC.",
+        "es": "Versionar primero el design system y luego separar a un equipo como piloto. Puedo escribir un RFC corto."
+      },
+      {
+        "quien": "Rachel",
+        "en": "I like that. Socialize it with the other leads before Friday's review.",
+        "es": "Me gusta. Compártelo con los otros líderes antes de la revisión del viernes."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Ana está en contra del plan?",
+        "opciones": [
+          "Sí, totalmente",
+          "No: está de acuerdo con el objetivo, pero ve un riesgo en el cronograma",
+          "No da su opinión"
+        ],
+        "correcta": 1,
+        "explicacion": "\"I agree with the goal. I do see a risk in the timeline, though.\""
+      },
+      {
+        "pregunta": "¿Cuál es el riesgo que ve Ana?",
+        "opciones": [
+          "Que cada equipo termine con componentes distintos",
+          "Que el proyecto sea muy caro",
+          "Que Rachel se vaya de la empresa"
+        ],
+        "correcta": 0,
+        "explicacion": "\"We'll ship three different buttons\": sin versionar el design system, cada equipo se separaría."
+      },
+      {
+        "pregunta": "¿Qué le pide Rachel a Ana al final?",
+        "opciones": [
+          "Que olvide la idea",
+          "Que lo implemente sola esa semana",
+          "Que comparta el RFC con los otros líderes antes del viernes"
+        ],
+        "correcta": 2,
+        "explicacion": "\"Socialize it with the other leads before Friday's review.\""
+      }
+    ]
+  },
+  {
+    "id": "en-dominio-05-d03",
+    "titulo": "Pedir apoyo sin llegar con las manos vacías",
+    "situacion": "El proyecto de pagos va atrasado. Ana le pide ayuda a Tom con un pedido claro.",
+    "lineas": [
+      {
+        "quien": "Ana",
+        "en": "Tom, do you have ten minutes? I need your help with the payments project.",
+        "es": "Tom, ¿tienes diez minutos? Necesito tu ayuda con el proyecto de pagos."
+      },
+      {
+        "quien": "Tom",
+        "en": "Sure. What's going on?",
+        "es": "Claro. ¿Qué pasa?"
+      },
+      {
+        "quien": "Ana",
+        "en": "At the current pace, we'll miss the March date by about three weeks.",
+        "es": "Al ritmo actual, vamos a pasarnos de la fecha de marzo por unas tres semanas."
+      },
+      {
+        "quien": "Tom",
+        "en": "Okay. What's the ask?",
+        "es": "Ok. ¿Qué necesitas?"
+      },
+      {
+        "quien": "Ana",
+        "en": "One of two things: another engineer for six weeks, or we move the refunds feature to April.",
+        "es": "Una de dos: otro ingeniero por seis semanas, o pasamos la funcionalidad de reembolsos a abril."
+      },
+      {
+        "quien": "Tom",
+        "en": "Headcount is tight. If we move refunds, leadership might push back.",
+        "es": "Estamos cortos de gente. Si movemos los reembolsos, la dirección podría oponerse."
+      },
+      {
+        "quien": "Ana",
+        "en": "That's why I'd need your air cover. I'll bring the data, so you're not going in empty-handed.",
+        "es": "Por eso necesitaría tu respaldo. Yo llevo los datos, para que no vayas con las manos vacías."
+      },
+      {
+        "quien": "Tom",
+        "en": "Deal. Send me the numbers today and I'll take it to Rachel.",
+        "es": "Trato hecho. Mándame los números hoy y se lo llevo a Rachel."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Cuánto se atrasaría el proyecto?",
+        "opciones": [
+          "Una semana",
+          "Tres meses",
+          "Unas tres semanas"
+        ],
+        "correcta": 2,
+        "explicacion": "\"We'll miss the March date by about three weeks.\""
+      },
+      {
+        "pregunta": "¿Qué opciones le da Ana a Tom?",
+        "opciones": [
+          "Otro ingeniero por seis semanas o mover los reembolsos a abril",
+          "Trabajar los fines de semana o cancelar el proyecto",
+          "Cambiar de proveedor o contratar una agencia"
+        ],
+        "correcta": 0,
+        "explicacion": "\"Another engineer for six weeks, or we move the refunds feature to April.\""
+      },
+      {
+        "pregunta": "¿Qué ofrece Ana para que Tom la respalde?",
+        "opciones": [
+          "Hacer horas extra",
+          "Llevarle los datos",
+          "Hablar ella misma con la dirección"
+        ],
+        "correcta": 1,
+        "explicacion": "\"I'll bring the data, so you're not going in empty-handed.\""
+      }
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "id": "en-dominio-06",
+  "titulo": "Discusiones técnicas de alto nivel",
+  "etapa": "dominio",
+  "orden": 6,
+  "nivel": "C2",
+  "descripcion": "System design y arquitectura en inglés: trade-offs a escala (throughput, tail latency, blast radius), defender una decisión ante el pushback, reformular y hacer steelman de una objeción, hablar de riesgos y supuestos, y admitir incertidumbre con precisión (I'd want to validate that)."
+}

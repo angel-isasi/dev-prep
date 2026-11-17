@@ -1,0 +1,182 @@
+[
+  {
+    "id": "en-dominio-06-e01",
+    "pregunta": "\"Migrating to a new database is a ___ door, so let's slow down.\"",
+    "opciones": [
+      "one-way",
+      "two-way",
+      "back",
+      "revolving"
+    ],
+    "correcta": 0,
+    "explicacion": "Una **one-way door** es una decisión difícil o imposible de revertir: merece análisis lento. La trampa es *two-way door*: una decisión reversible, donde conviene decidir rápido y probar."
+  },
+  {
+    "id": "en-dominio-06-e02",
+    "pregunta": "En una entrevista de system design te preguntan si un solo nodo de Redis aguanta el pico. No estás seguro. ¿Qué respondes?",
+    "opciones": [
+      "Yes, definitely, Redis is really fast.",
+      "I don't know.",
+      "My understanding is that a single node handles around a hundred thousand operations per second, but I'd want to validate that with a benchmark.",
+      "Probably, maybe, I think so."
+    ],
+    "correcta": 2,
+    "explicacion": "Incertidumbre precisa: das lo que sabes, de dónde viene y cómo lo validarías. *Definitely* sin datos es arriesgado; *I don't know* a secas cierra la conversación, y *probably, maybe* suena inseguro sin aportar nada."
+  },
+  {
+    "id": "en-dominio-06-e03",
+    "pregunta": "Un colega dice: **\"This will never scale.\"** ¿Qué respuesta reformula la objeción para entenderla?",
+    "opciones": [
+      "If I'm hearing you correctly, your concern is write volume at peak. Is that right?",
+      "Yes, it will.",
+      "You're wrong, it scales fine.",
+      "Let's agree to disagree."
+    ],
+    "correcta": 0,
+    "explicacion": "Reformular convierte una queja vaga en un problema concreto que se puede discutir, y muestra que escuchaste. Contradecir sin más o cerrar el tema no avanza nada."
+  },
+  {
+    "id": "en-dominio-06-e04",
+    "pregunta": "Alguien propuso migrar un solo módulo y tú respondes: **\"So you basically want to rewrite everything from scratch?\"** ¿Qué hiciste?",
+    "opciones": [
+      "Un steelman",
+      "Un straw man",
+      "Un trade-off",
+      "Una prueba de carga"
+    ],
+    "correcta": 1,
+    "explicacion": "Un **straw man** deforma el argumento del otro para que sea fácil de atacar. Lo opuesto es el **steelman**: presentar la mejor versión de su idea antes de responder."
+  },
+  {
+    "id": "en-dominio-06-e05",
+    "pregunta": "Te dicen: **\"You're conflating latency and throughput.\"** ¿Qué te están diciendo?",
+    "opciones": [
+      "Que estás inflando las cifras",
+      "Que tus números de latencia están bien",
+      "Que la latencia depende del throughput",
+      "Que estás tratando dos cosas distintas como si fueran la misma"
+    ],
+    "correcta": 3,
+    "explicacion": "**Conflate** = mezclar o confundir dos ideas. La latencia es cuánto tarda una petición; el throughput, cuántas se procesan por segundo. La trampa es el parecido con *inflate* (inflar)."
+  },
+  {
+    "id": "en-dominio-06-e06",
+    "pregunta": "\"Caching is **orthogonal** to the schema question.\" ¿Qué significa?",
+    "opciones": [
+      "Que la caché depende del esquema",
+      "Que son temas independientes y se pueden decidir por separado",
+      "Que la caché contradice el esquema",
+      "Que la caché es más importante"
+    ],
+    "correcta": 1,
+    "explicacion": "En una discusión técnica, **orthogonal** = independiente, sin relación. La trampa es pensar en *perpendicular* como \"opuesto\" o \"en contra\"."
+  },
+  {
+    "id": "en-dominio-06-e07",
+    "pregunta": "El entrevistador te cuestiona: \"Why not just use a relational database?\" Elegiste una base de documentos por buenas razones. ¿Qué respondes?",
+    "opciones": [
+      "You're right, let's use SQL instead.",
+      "Fair challenge. SQL would work at first. I chose a document store because each tenant has a different schema, but if we need lots of joins, I'd revisit it.",
+      "Because NoSQL is the modern way to do it.",
+      "I always use NoSQL."
+    ],
+    "correcta": 1,
+    "explicacion": "Defiendes con la razón concreta, concedes cuándo ganaría la otra opción y dices qué te haría cambiar. Ceder sin pensar o responder \"es lo moderno\" muestra que no entiendes el trade-off."
+  },
+  {
+    "id": "en-dominio-06-e08",
+    "pregunta": "\"Our p50 is 80 ms, but the **tail latency** is over two seconds.\" ¿Qué pasa?",
+    "opciones": [
+      "Todas las peticiones tardan dos segundos",
+      "La latencia sube al final del día",
+      "Las peticiones más lentas, más o menos el último uno por ciento, tardan más de dos segundos",
+      "El promedio es de dos segundos"
+    ],
+    "correcta": 2,
+    "explicacion": "**Tail latency** es la de la \"cola\" de la distribución: los percentiles altos (p99, p99.9). La mitad de las peticiones tarda 80 ms o menos (p50), pero las más lentas pasan de dos segundos, y a escala eso afecta a muchos usuarios."
+  },
+  {
+    "id": "en-dominio-06-e09",
+    "pregunta": "\"Retries are only safe if the payment endpoint is ___.\"",
+    "opciones": [
+      "idempotent",
+      "immutable",
+      "stateless",
+      "atomic"
+    ],
+    "correcta": 0,
+    "explicacion": "**Idempotent**: repetir la misma petición deja el mismo resultado, así que un reintento no cobra dos veces. *Stateless* (sin estado en el servidor) no evita el doble cobro, y *atomic* (todo o nada) protege una operación, no su repetición."
+  },
+  {
+    "id": "en-dominio-06-e10",
+    "pregunta": "En una revisión de arquitectura, ¿cuál describe mejor un riesgo?",
+    "opciones": [
+      "There might be some problems.",
+      "Everything has risks.",
+      "No risks, it's a standard setup.",
+      "The main risk is the vendor's rate limit: if we exceed it at peak, checkout fails. We'd mitigate it with a queue and retries with backoff."
+    ],
+    "correcta": 3,
+    "explicacion": "Un riesgo bien dicho tiene causa, consecuencia y mitigación. Las otras son tan generales que no ayudan a decidir nada, y \"no risks\" resta credibilidad."
+  },
+  {
+    "id": "en-dominio-06-e11",
+    "pregunta": "\"Let me do some **back-of-the-envelope** math.\" ¿Qué va a hacer?",
+    "opciones": [
+      "Anotarlo para revisarlo después",
+      "Pedirle los números a otro equipo",
+      "Un cálculo rápido y aproximado para ver el orden de magnitud",
+      "Un análisis formal con todos los datos"
+    ],
+    "correcta": 2,
+    "explicacion": "**Back-of-the-envelope** = un cálculo rápido, como en el reverso de un sobre: sirve para saber si hablamos de cien o de cien mil. Es lo contrario de un análisis formal."
+  },
+  {
+    "id": "en-dominio-06-e12",
+    "pregunta": "\"The whole design ___ on how often users edit the same document.\"",
+    "opciones": [
+      "hinges",
+      "leans",
+      "insists",
+      "bases"
+    ],
+    "correcta": 0,
+    "explicacion": "**Hinge on** = depender por completo de algo, como una puerta de su bisagra. *Insist on* es insistir; *bases* necesitaría la pasiva (*is based on*), y *lean on* es apoyarse en alguien."
+  },
+  {
+    "id": "en-dominio-06-e13",
+    "pregunta": "El entrevistador dice: **\"That sounds a bit hand-wavy.\"** ¿Qué te está diciendo?",
+    "opciones": [
+      "Que mueves mucho las manos en cámara",
+      "Que tu respuesta es muy larga",
+      "Que está de acuerdo contigo",
+      "Que tu explicación es vaga y se salta lo difícil"
+    ],
+    "correcta": 3,
+    "explicacion": "**Hand-wavy**: una explicación que esquiva los detalles con gestos (\"it just scales\"). Respóndele bajando a números y mecanismos concretos."
+  },
+  {
+    "id": "en-dominio-06-e14",
+    "pregunta": "Tom hace de abogado del diablo: \"What if traffic grows ten times?\" ¿Qué respuesta tiene más nivel?",
+    "opciones": [
+      "That won't happen.",
+      "Then we'd need more servers, I guess.",
+      "Good question. Next.",
+      "Then writes hit the limit first. We'd shard by tenant, and we'd see it coming because we alert at seventy percent capacity."
+    ],
+    "correcta": 3,
+    "explicacion": "Dices qué se rompe primero, cómo lo resolverías y cómo lo verías venir. Negar el escenario o responder \"more servers\" sin más suena a que no lo pensaste."
+  },
+  {
+    "id": "en-dominio-06-e15",
+    "pregunta": "\"That assumption is **load-bearing**.\" ¿Qué significa?",
+    "opciones": [
+      "Que es difícil de explicar",
+      "Que si resulta falsa, se cae buena parte del diseño",
+      "Que genera mucha carga en el servidor",
+      "Que nadie la ha cuestionado"
+    ],
+    "correcta": 1,
+    "explicacion": "Como una pared de carga: si la quitas, se cae lo que sostiene. Un supuesto **load-bearing** merece validarse primero. La trampa es leer *load* como carga del servidor."
+  }
+]

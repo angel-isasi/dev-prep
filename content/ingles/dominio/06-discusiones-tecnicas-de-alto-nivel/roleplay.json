@@ -1,0 +1,118 @@
+[
+  {
+    "id": "en-dominio-06-r01",
+    "titulo": "System design con pushback",
+    "situacion": "Daniel, staff engineer, revisa tu diseño de procesamiento de pagos y te cuestiona cada decisión.",
+    "tu": "Ana",
+    "turnos": [
+      {
+        "quien": "Daniel",
+        "en": "You put a message queue between the API and the workers. Why not call the workers directly?",
+        "es": "Pusiste una cola de mensajes entre la API y los workers. ¿Por qué no llamar a los workers directamente?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "Because queues are best practice.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Citar una \"buena práctica\" sin razón concreta suena a que no entiendes el trade-off."
+          },
+          {
+            "en": "Mainly to absorb spikes. If traffic triples for an hour, the queue buffers it instead of the workers falling over.",
+            "es": "Sobre todo para absorber picos. Si el tráfico se triplica por una hora, la cola lo amortigua en vez de que los workers se caigan.",
+            "correcta": true,
+            "explicacion": "Das la razón principal y un escenario concreto que la demuestra."
+          },
+          {
+            "en": "I don't know, it's just how I always do it.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Admitir que no sabes está bien, pero aquí es tu propio diseño: tienes que poder explicarlo."
+          }
+        ]
+      },
+      {
+        "quien": "Daniel",
+        "en": "Sure, but now you've added another moving part. Isn't that over-engineering for a small team?",
+        "es": "De acuerdo, pero ahora agregaste otra pieza más. ¿No es sobreingeniería para un equipo chico?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "That's a fair challenge. For a small team, I'd use a managed queue, so the operational cost stays low. If traffic stays flat, I'd revisit it.",
+            "es": "Es una objeción válida. Para un equipo chico, usaría una cola administrada, para que el costo de operarla sea bajo. Si el tráfico no crece, lo reconsideraría.",
+            "correcta": true,
+            "explicacion": "Concedes lo cierto (es una pieza más), lo mitigas y dices qué te haría cambiar de opinión."
+          },
+          {
+            "en": "No, it's not over-engineering.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Negar sin argumentos no responde a su preocupación por el costo de mantenerlo."
+          },
+          {
+            "en": "You're right, let's remove it.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Cedes a la primera, sin evaluar. Si tenías una buena razón hace un minuto, todavía la tienes."
+          }
+        ]
+      },
+      {
+        "quien": "Daniel",
+        "en": "What happens if a worker processes the same message twice?",
+        "es": "¿Qué pasa si un worker procesa el mismo mensaje dos veces?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "That never happens with a good queue.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Falso: la mayoría de las colas entregan cada mensaje *al menos una vez*, así que los duplicados son normales."
+          },
+          {
+            "en": "That's why the handler has to be idempotent: we store a key per payment, so a retry doesn't charge twice.",
+            "es": "Por eso el handler tiene que ser idempotente: guardamos una clave por pago, así un reintento no cobra dos veces.",
+            "correcta": true,
+            "explicacion": "Nombras el concepto exacto y el mecanismo que lo garantiza."
+          },
+          {
+            "en": "Then the user gets charged twice, but that's rare.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "En pagos, \"es raro\" no basta: a escala, lo raro pasa todos los días."
+          }
+        ]
+      },
+      {
+        "quien": "Daniel",
+        "en": "How confident are you that the managed queue can handle our peak?",
+        "es": "¿Qué tan seguro estás de que la cola administrada aguanta nuestro pico?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "A hundred percent. It's from a big provider.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Una certeza absoluta basada solo en la marca del proveedor resta credibilidad."
+          },
+          {
+            "en": "I guess it should probably be fine, maybe.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Tantos matices juntos (*I guess*, *probably*, *maybe*) suenan inseguros y no dan ningún dato."
+          },
+          {
+            "en": "Fairly confident, based on their published limits, but I'd want to validate that with a load test before launch.",
+            "es": "Bastante seguro, según los límites que publican, pero querría validarlo con una prueba de carga antes del lanzamiento.",
+            "correcta": true,
+            "explicacion": "Calibras tu seguridad, dices en qué se basa y cómo la confirmarías."
+          }
+        ]
+      }
+    ]
+  }
+]

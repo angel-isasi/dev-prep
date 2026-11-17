@@ -1,0 +1,229 @@
+[
+  {
+    "id": "en-dominio-04-d01",
+    "titulo": "Una llamada de dos minutos",
+    "situacion": "Tom llama a Ana sin avisar. Habla rápido y con todas las reducciones.",
+    "lineas": [
+      {
+        "quien": "Tom",
+        "en": "Hey Ana, got a sec? Whatcha working on?",
+        "es": "Hola, Ana, ¿tienes un segundo? ¿En qué estás trabajando?"
+      },
+      {
+        "quien": "Ana",
+        "en": "The checkout tests. Why, what's up?",
+        "es": "En los tests del checkout. ¿Por qué, qué pasa?"
+      },
+      {
+        "quien": "Tom",
+        "en": "So the client's gonna demo the app tomorrow, and I dunno if the new filters are ready.",
+        "es": "Mira, el cliente va a hacer una demo de la app mañana, y no sé si los filtros nuevos están listos."
+      },
+      {
+        "quien": "Ana",
+        "en": "They're kinda ready. I mean, they work, but they're slow on big lists.",
+        "es": "Están medio listos. O sea, funcionan, pero van lentos con listas grandes."
+      },
+      {
+        "quien": "Tom",
+        "en": "Gotcha. Can you gimme a quick fix by six-ish?",
+        "es": "Entendido. ¿Me puedes dar un arreglo rápido para eso de las seis?"
+      },
+      {
+        "quien": "Ana",
+        "en": "For sure. Lemme add pagination and I'll ping you.",
+        "es": "Claro. Déjame agregar paginación y te aviso."
+      },
+      {
+        "quien": "Tom",
+        "en": "Sounds like a plan. I gotta jump on another call. Thanks!",
+        "es": "Me parece bien. Tengo que entrar a otra llamada. ¡Gracias!"
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Por qué llama Tom?",
+        "opciones": [
+          "Porque el cliente hará una demo mañana y no sabe si los filtros están listos",
+          "Porque Ana rompió los tests",
+          "Para invitarla a almorzar"
+        ],
+        "correcta": 0,
+        "explicacion": "\"The client's gonna demo the app tomorrow, and I dunno if the new filters are ready\": *gonna* = va a, *dunno* = no sé."
+      },
+      {
+        "pregunta": "¿Cómo están los filtros, según Ana?",
+        "opciones": [
+          "Listos y rápidos",
+          "Funcionan, pero van lentos con listas grandes",
+          "No funcionan"
+        ],
+        "correcta": 1,
+        "explicacion": "\"They're kinda ready. I mean, they work, but they're slow\": *I mean* precisa el *kinda ready*."
+      },
+      {
+        "pregunta": "¿Por qué corta Tom la llamada?",
+        "opciones": [
+          "Se quedó sin batería",
+          "Ana no lo entiende",
+          "Tiene que entrar a otra llamada"
+        ],
+        "correcta": 2,
+        "explicacion": "\"I gotta jump on another call\": *gotta* = tengo que; *jump on a call* = entrar a una llamada."
+      }
+    ]
+  },
+  {
+    "id": "en-dominio-04-d02",
+    "titulo": "Sarah cuenta su semana",
+    "situacion": "En el café virtual del viernes, Sarah le cuenta a Ana cómo le fue con un bug.",
+    "lineas": [
+      {
+        "quien": "Sarah",
+        "en": "So, you know the payment bug? It came back on Monday.",
+        "es": "Oye, ¿te acuerdas del bug de pagos? Volvió el lunes."
+      },
+      {
+        "quien": "Ana",
+        "en": "No way. The one we fixed last sprint?",
+        "es": "No puede ser. ¿El que arreglamos el sprint pasado?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "Yep. And the client was like, \"Is this ever gonna be stable?\"",
+        "es": "Sí. Y el cliente me sale con: \"¿Esto algún día va a ser estable?\""
+      },
+      {
+        "quien": "Ana",
+        "en": "Ouch. What did you say?",
+        "es": "Uf. ¿Y qué le dijiste?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "I mean, what could I say? It's not like we had logs for that flow.",
+        "es": "O sea, ¿qué le iba a decir? Tampoco es que tuviéramos logs de ese flujo."
+      },
+      {
+        "quien": "Sarah",
+        "en": "Plus, the API team was out all week, so I couldn't even ask anyone.",
+        "es": "Además, el equipo de la API no estuvo en toda la semana, así que ni siquiera pude preguntarle a nadie."
+      },
+      {
+        "quien": "Ana",
+        "en": "Come to think of it, I've got a script that replays payment events. Wanna try it?",
+        "es": "Ahora que lo pienso, tengo un script que reproduce eventos de pago. ¿Quieres probarlo?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "Seriously? Yeah, no, that'd be amazing.",
+        "es": "¿En serio? Sí, sí, sería genial."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Qué le dijo el cliente a Sarah?",
+        "opciones": [
+          "Que le gustaba el arreglo",
+          "Le preguntó si eso iba a ser estable algún día",
+          "Que cancelaba el contrato"
+        ],
+        "correcta": 1,
+        "explicacion": "\"The client was like, 'Is this ever gonna be stable?'\": *was like* introduce lo que dijo."
+      },
+      {
+        "pregunta": "¿Por qué Sarah no pudo resolverlo rápido?",
+        "opciones": [
+          "No había logs de ese flujo y el equipo de la API no estaba",
+          "Estaba de vacaciones",
+          "El cliente no le dio acceso"
+        ],
+        "correcta": 0,
+        "explicacion": "\"It's not like we had logs for that flow. Plus, the API team was out all week.\""
+      },
+      {
+        "pregunta": "¿Cómo reacciona Sarah a la oferta de Ana?",
+        "opciones": [
+          "La rechaza con cortesía",
+          "Duda y lo deja para después",
+          "La acepta con entusiasmo"
+        ],
+        "correcta": 2,
+        "explicacion": "\"Yeah, no, that'd be amazing\": aquí *yeah, no* es un sí enfático."
+      }
+    ]
+  },
+  {
+    "id": "en-dominio-04-d03",
+    "titulo": "Se corta la llamada",
+    "situacion": "Kevin, un dev del equipo de EE. UU., explica una idea desde el tren. La conexión falla.",
+    "lineas": [
+      {
+        "quien": "Kevin",
+        "en": "...so if we move the auth check to the edge, we're gonna...",
+        "es": "...entonces si movemos la verificación de auth al edge, vamos a..."
+      },
+      {
+        "quien": "Ana",
+        "en": "Sorry, Kevin, you cut out there. Come again?",
+        "es": "Perdón, Kevin, se te cortó ahí. ¿Cómo dices?"
+      },
+      {
+        "quien": "Kevin",
+        "en": "My bad, I'm on train wifi. I said we could move the auth check to the edge.",
+        "es": "Culpa mía, estoy con el wifi del tren. Dije que podríamos mover la verificación de auth al edge."
+      },
+      {
+        "quien": "Ana",
+        "en": "Okay, you lost me a little. The edge as in the CDN?",
+        "es": "Ok, me perdí un poco. ¿El edge, o sea, el CDN?"
+      },
+      {
+        "quien": "Kevin",
+        "en": "Yeah, exactly. That way bad tokens never even hit our servers.",
+        "es": "Sí, exacto. Así los tokens inválidos ni siquiera llegan a nuestros servidores."
+      },
+      {
+        "quien": "Ana",
+        "en": "Gotcha. Hold that thought, though. Tom's gonna wanna hear this.",
+        "es": "Entendido. Pero guarda esa idea. Tom va a querer escuchar esto."
+      },
+      {
+        "quien": "Kevin",
+        "en": "For sure. Lemme write it up and we'll go over it tomorrow.",
+        "es": "Claro. Déjame ponerlo por escrito y lo revisamos mañana."
+      }
+    ],
+    "preguntas": [
+      {
+        "pregunta": "¿Por qué Ana le pide que repita?",
+        "opciones": [
+          "Kevin habló en español",
+          "Se cortó el audio por el wifi del tren",
+          "Ana estaba distraída"
+        ],
+        "correcta": 1,
+        "explicacion": "\"You cut out there. Come again?\" y Kevin explica: \"I'm on train wifi\"."
+      },
+      {
+        "pregunta": "¿Qué propone Kevin?",
+        "opciones": [
+          "Mover la verificación de auth al CDN",
+          "Cambiar de proveedor de wifi",
+          "Eliminar los tokens"
+        ],
+        "correcta": 0,
+        "explicacion": "\"Move the auth check to the edge\": al CDN, para que los tokens inválidos no lleguen a los servidores."
+      },
+      {
+        "pregunta": "¿Qué van a hacer al final?",
+        "opciones": [
+          "Decidirlo en ese momento",
+          "Olvidar la idea",
+          "Kevin lo pondrá por escrito y lo revisarán mañana"
+        ],
+        "correcta": 2,
+        "explicacion": "\"Lemme write it up and we'll go over it tomorrow\": *write it up* = ponerlo por escrito."
+      }
+    ]
+  }
+]

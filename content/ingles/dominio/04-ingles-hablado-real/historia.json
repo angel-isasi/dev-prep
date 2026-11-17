@@ -1,0 +1,118 @@
+[
+  {
+    "id": "en-dominio-04-h01",
+    "titulo": "Ana entra a una llamada a toda velocidad",
+    "situacion": "Ana ya es semi senior y entra a una llamada sin agenda con Tom y Sarah. Hablan rápido y entre ellos, como nativos.",
+    "pasos": [
+      {
+        "quien": "Tom",
+        "en": "Hey, you guys hear me okay? Cool. So, real quick, we gotta talk about Friday.",
+        "es": "Oigan, ¿me escuchan bien? Bien. A ver, rapidito, tenemos que hablar del viernes."
+      },
+      {
+        "quien": "Sarah",
+        "en": "Yeah, so the release is kinda blocked 'cause QA found a crash on Android.",
+        "es": "Sí, el release está medio bloqueado porque QA encontró un crash en Android."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Por qué está bloqueado el release?",
+        "opciones": [
+          "Tom está de vacaciones",
+          "QA encontró un crash en Android",
+          "El cliente canceló"
+        ],
+        "correcta": 1,
+        "explicacion": "\"Kinda blocked 'cause QA found a crash\": *kinda* = medio, *'cause* = porque."
+      },
+      {
+        "quien": "Tom",
+        "en": "Ugh. Didja figure out what's causing it?",
+        "es": "Uf. ¿Descubrieron qué lo causa?"
+      },
+      {
+        "quien": "Sarah",
+        "en": "Not yet. I mean, it only happens on older phones, so it's hard to repro.",
+        "es": "Todavía no. O sea, solo pasa en celulares viejos, así que es difícil de reproducir."
+      },
+      {
+        "quien": "Ana",
+        "en": "Hang on, older phones? Come to think of it, we bumped the image library last week.",
+        "es": "Espera, ¿celulares viejos? Ahora que lo pienso, la semana pasada subimos de versión la librería de imágenes."
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "I ___ checked the release notes before we upgraded.",
+        "es": "Debí haber revisado las notas de la versión antes de actualizar.",
+        "opciones": [
+          "must have",
+          "should have",
+          "should"
+        ],
+        "correcta": 1,
+        "explicacion": "**Should have** + participio = debí haber (y no lo hice); al hablar suena \"shúda\". *Must have checked* sería una deducción (seguro que lo revisé), lo contrario de lo que quiere decir."
+      },
+      {
+        "quien": "Tom",
+        "en": "Huh. So it's not like we even touched the Android code.",
+        "es": "Mmm. O sea que ni siquiera tocamos el código de Android."
+      },
+      {
+        "quien": "Sarah",
+        "en": "Right. Lemme roll back the library on a branch and test it on my old phone.",
+        "es": "Exacto. Déjame revertir la librería en una rama y probarlo en mi celular viejo."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Qué sospecha Ana?",
+        "opciones": [
+          "Que el crash viene de la actualización de la librería de imágenes",
+          "Que el código de Android tiene un bug viejo",
+          "Que QA se equivocó"
+        ],
+        "correcta": 0,
+        "explicacion": "\"We bumped the image library last week\": *bump* una versión = subirla. Tom lo confirma: no tocaron el código de Android."
+      },
+      {
+        "quien": "Tom",
+        "en": "Sounds like a plan. Nice catch, Ana. Can you guys ping me in an hour-ish?",
+        "es": "Me parece bien. Buena observación, Ana. ¿Me avisan en una hora más o menos?"
+      },
+      {
+        "tipo": "completa",
+        "quien": "Ana",
+        "en": "For ___. I'll post an update in the channel.",
+        "es": "Claro. Publico una actualización en el canal.",
+        "opciones": [
+          "certain",
+          "sure",
+          "safe"
+        ],
+        "correcta": 1,
+        "explicacion": "**For sure** = claro, por supuesto: así se acepta un pedido. *For certain* significa \"con certeza\" y no se usa para decir que sí."
+      },
+      {
+        "quien": "Luis",
+        "en": "Wait, how do you even follow them? They talk so fast.",
+        "es": "Espera, ¿cómo haces para seguirles? Hablan rapidísimo."
+      },
+      {
+        "quien": "Ana",
+        "en": "Honestly, I just learned the reductions. Once you hear gonna and lemme as words, it clicks.",
+        "es": "La verdad, solo aprendí las reducciones. Cuando oyes gonna y lemme como palabras, todo encaja."
+      },
+      {
+        "tipo": "pregunta",
+        "pregunta": "¿Qué le explica Ana a Luis?",
+        "opciones": [
+          "Que pide que le hablen más lento",
+          "Que usa subtítulos en las llamadas",
+          "Que aprendió a reconocer las reducciones y ahora las entiende"
+        ],
+        "correcta": 2,
+        "explicacion": "\"I just learned the reductions... it clicks\": *it clicks* = de pronto lo entiendes."
+      }
+    ]
+  }
+]

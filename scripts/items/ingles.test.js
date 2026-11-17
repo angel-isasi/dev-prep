@@ -104,6 +104,8 @@ describe("ítems de inglés", () => {
     expect(hablaCorrecta("My sister is fifteen.", ["my sister is 15"])).toBe(true);
     expect(hablaCorrecta("They have two children.", ["they have 2 children"])).toBe(true);
     expect(comparable("I have 125 apples")).toBe("i have 125 apples");
+    expect(comparable("-ish")).toBe("ish");
+    expect(comparable("a well-known bug")).toBe("a well-known bug");
   });
 
   test("ok = okay, contracciones menos comunes y 's o 'd con su otra lectura", () => {

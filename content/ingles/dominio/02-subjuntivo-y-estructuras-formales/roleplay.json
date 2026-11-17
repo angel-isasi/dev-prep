@@ -1,0 +1,29 @@
+[
+  { "id": "en-dominio-02-r01", "titulo": "Negociar el contrato con Recursos Humanos", "situacion": "Estás en una videollamada con Rachel, de Recursos Humanos, para revisar tu contrato nuevo. Quieres pedir cambios en un registro formal, pero cordial y humano.", "tu": "Ana",
+    "turnos": [
+      { "quien": "Rachel", "en": "Hi Ana! Did you have a chance to review the agreement?", "es": "¡Hola, Ana! ¿Pudiste revisar el contrato?" },
+      { "opciones": [
+          { "en": "Yes. Pursuant to my review, I hereby have some questions.", "es": "", "correcta": false, "explicacion": "*Pursuant to* y *hereby* son para el papel, no para una llamada: suena a parodia de abogado." },
+          { "en": "I did, thank you. Overall it looks great, but I have a couple of questions about specific clauses.", "es": "Sí, gracias. En general se ve muy bien, pero tengo un par de preguntas sobre algunas cláusulas.", "correcta": true, "explicacion": "Cordial, positiva y concreta: abres la conversación sin sonar desconfiada." },
+          { "en": "Yeah, it's mostly fine, but some parts are kind of shady.", "es": "", "correcta": false, "explicacion": "*Shady* (turbio) acusa a la empresa de mala fe, y el tono es demasiado informal para Recursos Humanos." }
+        ] },
+      { "quien": "Rachel", "en": "Of course. What would you like to discuss?", "es": "Claro. ¿Qué te gustaría conversar?" },
+      { "opciones": [
+          { "en": "The non-compete. I'd ask that it is limited to direct competitors.", "es": "", "correcta": false, "explicacion": "Después de *ask that* va subjuntivo: *that it be limited*. *Is limited* convierte la petición en una afirmación rara." },
+          { "en": "The non-compete. You need to delete it.", "es": "", "correcta": false, "explicacion": "Es una orden. En una negociación pides y das opciones; no le dices a Recursos Humanos qué tiene que hacer." },
+          { "en": "The non-compete. I'd ask that it be limited to direct competitors, or removed entirely.", "es": "La cláusula de no competencia. Pediría que se limite a competidores directos, o que se elimine por completo.", "correcta": true, "explicacion": "*I'd ask that it be...* es firme y educado, y das dos salidas posibles." }
+        ] },
+      { "quien": "Rachel", "en": "That's a common request. I'll check with legal. Anything else?", "es": "Es un pedido común. Lo consultaré con legal. ¿Algo más?" },
+      { "opciones": [
+          { "en": "Yes. Should my side projects need approval, who would I send them to?", "es": "Sí. Si mis proyectos personales necesitaran aprobación, ¿a quién se los enviaría?", "correcta": true, "explicacion": "*Should* + sujeto + forma base: condicional formal bien armado y una pregunta práctica." },
+          { "en": "Yes. Should my side projects needed approval, who would I send them to?", "es": "", "correcta": false, "explicacion": "Después de *should* va la forma base: *need*, no *needed*." },
+          { "en": "Yes. If my side projects would need approval, who I send them to?", "es": "", "correcta": false, "explicacion": "Dos errores típicos: *would* dentro del *if* y la pregunta sin auxiliar (*who would I send them to?*)." }
+        ] },
+      { "quien": "Rachel", "en": "You'd send them to me, and I'll loop in legal if need be. Anything else before you sign?", "es": "Me los enviarías a mí, y yo involucro a legal si hace falta. ¿Algo más antes de que firmes?" },
+      { "opciones": [
+          { "en": "No. Suffice it to say, I'm done.", "es": "", "correcta": false, "explicacion": "*Suffice it to say* introduce algo que no quieres detallar; aquí suena cortante, como si la llamada te hubiera molestado." },
+          { "en": "No, so be it.", "es": "", "correcta": false, "explicacion": "*So be it* es resignación: suena a que aceptas algo malo a la fuerza." },
+          { "en": "No, that covers it. Thanks for walking me through everything.", "es": "No, eso es todo. Gracias por explicarme todo con calma.", "correcta": true, "explicacion": "Cierre natural y agradecido. El registro formal se queda en el contrato, no en la conversación." }
+        ] }
+    ] }
+]

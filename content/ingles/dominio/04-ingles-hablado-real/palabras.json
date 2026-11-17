@@ -1,0 +1,387 @@
+[
+  {
+    "id": "en-dominio-04-w01",
+    "en": "gonna",
+    "es": "voy a, vas a (going to + verbo, oral)",
+    "pron": "gána",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'm gonna grab a coffee before standup.",
+      "es": "Voy por un café antes del daily."
+    }
+  },
+  {
+    "id": "en-dominio-04-w02",
+    "en": "wanna",
+    "es": "querer (want to / want a, oral)",
+    "pron": "uána",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Do you wanna pair on this after lunch?",
+      "es": "¿Quieres que lo hagamos juntos después del almuerzo?"
+    }
+  },
+  {
+    "id": "en-dominio-04-w03",
+    "en": "gotta",
+    "es": "tener que (have got to, oral)",
+    "pron": "gára",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I gotta jump, I have another call.",
+      "es": "Tengo que irme, tengo otra llamada."
+    }
+  },
+  {
+    "id": "en-dominio-04-w04",
+    "en": "kinda",
+    "es": "medio, un poco (kind of, oral)",
+    "pron": "káinda",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "The new flow is kinda confusing.",
+      "es": "El nuevo flujo es medio confuso."
+    }
+  },
+  {
+    "id": "en-dominio-04-w05",
+    "en": "lemme",
+    "es": "déjame (let me, oral)",
+    "pron": "lémi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Lemme check and get back to you.",
+      "es": "Déjame revisar y te aviso."
+    }
+  },
+  {
+    "id": "en-dominio-04-w06",
+    "en": "gimme",
+    "es": "dame (give me, oral)",
+    "pron": "guími",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Gimme a sec, I'm pulling it up.",
+      "es": "Dame un segundo, lo estoy abriendo."
+    }
+  },
+  {
+    "id": "en-dominio-04-w07",
+    "en": "dunno",
+    "es": "no sé (I don't know, oral)",
+    "pron": "danóu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I dunno, it worked on my machine.",
+      "es": "No sé, en mi máquina funcionaba."
+    }
+  },
+  {
+    "id": "en-dominio-04-w08",
+    "en": "whatcha",
+    "es": "¿qué estás...? (what are you, oral)",
+    "pron": "uácha",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Whatcha working on today?",
+      "es": "¿En qué estás trabajando hoy?"
+    }
+  },
+  {
+    "id": "en-dominio-04-w09",
+    "en": "didja",
+    "es": "¿(tú) + pasado? (did you, oral)",
+    "pron": "díya",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Didja see the message from Tom?",
+      "es": "¿Viste el mensaje de Tom?"
+    }
+  },
+  {
+    "id": "en-dominio-04-w10",
+    "en": "'cause",
+    "es": "porque (because, oral)",
+    "pron": "káz",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "I logged off early 'cause the build was broken.",
+      "es": "Me desconecté temprano porque el build estaba roto."
+    }
+  },
+  {
+    "id": "en-dominio-04-w11",
+    "en": "shoulda",
+    "es": "debí haber (should have, oral)",
+    "pron": "shúda",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I shoulda tested it on mobile.",
+      "es": "Debí haberlo probado en el celular."
+    }
+  },
+  {
+    "id": "en-dominio-04-w12",
+    "en": "I mean",
+    "es": "o sea, quiero decir",
+    "pron": "ái míin",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It's fine. I mean, it could be faster.",
+      "es": "Está bien. O sea, podría ser más rápido."
+    }
+  },
+  {
+    "id": "en-dominio-04-w13",
+    "en": "you know",
+    "es": "¿sabes?, ¿te acuerdas de...? (muletilla)",
+    "pron": "iu nóu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "You know that flicker on the dashboard? I found the cause.",
+      "es": "¿Te acuerdas de ese parpadeo en el dashboard? Encontré la causa."
+    }
+  },
+  {
+    "id": "en-dominio-04-w14",
+    "en": "be like",
+    "es": "decir, reaccionar (al contar algo, oral)",
+    "pron": "bíi láik",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "And the client was like, \"Can we launch tomorrow?\"",
+      "es": "Y el cliente me sale con: \"¿Podemos lanzar mañana?\""
+    }
+  },
+  {
+    "id": "en-dominio-04-w15",
+    "en": "so yeah",
+    "es": "así que eso (para cerrar lo que cuentas)",
+    "pron": "sóu iéa",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "So yeah, that's where we are with the migration.",
+      "es": "Así que eso, ahí estamos con la migración."
+    }
+  },
+  {
+    "id": "en-dominio-04-w16",
+    "en": "I guess",
+    "es": "supongo (con poca seguridad o entusiasmo)",
+    "pron": "ái gués",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I guess we could push it to Monday.",
+      "es": "Supongo que podríamos pasarlo al lunes."
+    }
+  },
+  {
+    "id": "en-dominio-04-w17",
+    "en": "it's not like",
+    "es": "tampoco es que",
+    "pron": "its nát láik",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It's not like we have a choice.",
+      "es": "Tampoco es que tengamos opción."
+    }
+  },
+  {
+    "id": "en-dominio-04-w18",
+    "en": "and stuff",
+    "es": "y esas cosas",
+    "pron": "and stáf",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "We set up the linter, the CI and stuff.",
+      "es": "Configuramos el linter, el CI y esas cosas."
+    }
+  },
+  {
+    "id": "en-dominio-04-w19",
+    "en": "plus",
+    "es": "además (oral)",
+    "pron": "plás",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "It's faster. Plus, it's easier to test.",
+      "es": "Es más rápido. Además, es más fácil de probar."
+    }
+  },
+  {
+    "id": "en-dominio-04-w20",
+    "en": "then again",
+    "es": "aunque, por otro lado",
+    "pron": "dén aguén",
+    "tipo": "conector",
+    "ejemplo": {
+      "en": "It's risky. Then again, the old code is a mess.",
+      "es": "Es arriesgado. Aunque, por otro lado, el código viejo es un desastre."
+    }
+  },
+  {
+    "id": "en-dominio-04-w21",
+    "en": "come to think of it",
+    "es": "ahora que lo pienso",
+    "pron": "kám tu zínk av it",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Come to think of it, we never tested that on Safari.",
+      "es": "Ahora que lo pienso, nunca probamos eso en Safari."
+    }
+  },
+  {
+    "id": "en-dominio-04-w22",
+    "en": "hang on",
+    "es": "espera (un momento)",
+    "pron": "jáng on",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Hang on, I'm getting a weird error.",
+      "es": "Espera, me sale un error raro."
+    }
+  },
+  {
+    "id": "en-dominio-04-w23",
+    "en": "come again?",
+    "es": "¿cómo dices? (no te oí bien)",
+    "pron": "kám aguén",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Come again? You cut out for a second.",
+      "es": "¿Cómo dices? Se te cortó por un segundo."
+    }
+  },
+  {
+    "id": "en-dominio-04-w24",
+    "en": "you lost me",
+    "es": "me perdí, ya no te sigo",
+    "pron": "iu lóst mi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "You lost me at the part about tokens.",
+      "es": "Me perdí en la parte de los tokens."
+    }
+  },
+  {
+    "id": "en-dominio-04-w25",
+    "en": "where was I?",
+    "es": "¿en qué estaba?",
+    "pron": "uér uáz ái",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sorry, where was I? Oh, the cache.",
+      "es": "Perdón, ¿en qué estaba? Ah, la caché."
+    }
+  },
+  {
+    "id": "en-dominio-04-w26",
+    "en": "hold that thought",
+    "es": "guarda esa idea (la vemos en un momento)",
+    "pron": "jóuld dát zót",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Hold that thought, Tom just joined.",
+      "es": "Guarda esa idea, Tom acaba de entrar."
+    }
+  },
+  {
+    "id": "en-dominio-04-w27",
+    "en": "gotcha",
+    "es": "entendido (got you, oral)",
+    "pron": "gácha",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Gotcha, I'll update the ticket.",
+      "es": "Entendido, actualizo el ticket."
+    }
+  },
+  {
+    "id": "en-dominio-04-w28",
+    "en": "uh-huh",
+    "es": "ajá, sí (no confundir con uh-uh: no)",
+    "pron": "ajá",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Uh-huh, I'm following you.",
+      "es": "Ajá, te sigo."
+    }
+  },
+  {
+    "id": "en-dominio-04-w29",
+    "en": "real quick",
+    "es": "un momentito, rapidito",
+    "pron": "ríil kuík",
+    "tipo": "adverbio",
+    "ejemplo": {
+      "en": "Can I share my screen real quick?",
+      "es": "¿Puedo compartir mi pantalla un momentito?"
+    }
+  },
+  {
+    "id": "en-dominio-04-w30",
+    "en": "my bad",
+    "es": "culpa mía, error mío",
+    "pron": "mái bád",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "My bad, I sent the wrong link.",
+      "es": "Culpa mía, mandé el link equivocado."
+    }
+  },
+  {
+    "id": "en-dominio-04-w31",
+    "en": "for sure",
+    "es": "claro, por supuesto",
+    "pron": "for shúr",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "For sure, send it over.",
+      "es": "Claro, mándamelo."
+    }
+  },
+  {
+    "id": "en-dominio-04-w32",
+    "en": "-ish",
+    "es": "más o menos, a eso de",
+    "pron": "ish",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Let's sync at three-ish.",
+      "es": "Hablemos a eso de las tres."
+    }
+  },
+  {
+    "id": "en-dominio-04-w33",
+    "en": "you guys",
+    "es": "ustedes (también para grupos mixtos)",
+    "pron": "iú gáiz",
+    "tipo": "pronombre",
+    "ejemplo": {
+      "en": "Do you guys have a minute?",
+      "es": "¿Tienen un minuto?"
+    }
+  },
+  {
+    "id": "en-dominio-04-w34",
+    "en": "yeah, no",
+    "es": "sí, sí, totalmente (o un no, según lo que sigue)",
+    "pron": "iéa nóu",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Yeah, no, that totally makes sense.",
+      "es": "Sí, sí, tiene todo el sentido."
+    }
+  },
+  {
+    "id": "en-dominio-04-w35",
+    "en": "sounds like a plan",
+    "es": "me parece bien, trato hecho",
+    "pron": "sáundz laik a plán",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Sounds like a plan. I'll send the invite.",
+      "es": "Me parece bien. Mando la invitación."
+    }
+  }
+]

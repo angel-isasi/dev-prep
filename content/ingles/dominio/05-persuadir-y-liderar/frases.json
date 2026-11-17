@@ -1,0 +1,204 @@
+[
+  {
+    "id": "en-dominio-05-f01",
+    "en": "I'd like to socialize this idea before we make it official.",
+    "es": "Me gustaría hacer circular esta idea antes de oficializarla.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f02",
+    "en": "Before I write the RFC, I want your early feedback.",
+    "es": "Antes de escribir el RFC, quiero tu opinión desde el inicio.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f03",
+    "en": "The problem isn't the code, it's that nobody owns the build.",
+    "es": "El problema no es el código, es que nadie se hace cargo del build.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f04",
+    "en": "Hear me out: what if we froze new features for one sprint?",
+    "es": "Escúchame hasta el final: ¿y si congeláramos las funcionalidades nuevas por un sprint?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f05",
+    "en": "I'm not asking for a decision today, just for your input.",
+    "es": "No te pido una decisión hoy, solo tu opinión.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f06",
+    "en": "Can I give you some candid feedback on the demo?",
+    "es": "¿Puedo darte una opinión franca sobre la demo?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f07",
+    "en": "When you interrupt Sarah, it shuts down the discussion.",
+    "es": "Cuando interrumpes a Sarah, se corta la discusión.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f08",
+    "en": "I noticed the last three PRs went in without tests.",
+    "es": "Noté que los últimos tres PR entraron sin tests.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f09",
+    "en": "Help me understand what's getting in the way.",
+    "es": "Ayúdame a entender qué te está frenando.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f10",
+    "en": "I see this differently, and I think it's worth saying out loud.",
+    "es": "Lo veo distinto, y creo que vale la pena decirlo en voz alta.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f11",
+    "en": "I want to build on Tom's point, but take it in a different direction.",
+    "es": "Quiero partir del punto de Tom, pero llevarlo en otra dirección.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f12",
+    "en": "I may be in the minority here, but I'm not sold on this.",
+    "es": "Puede que sea minoría aquí, pero esto no me termina de convencer.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f13",
+    "en": "Happy to take the details offline, but I want to flag the risk now.",
+    "es": "Con gusto vemos los detalles aparte, pero quiero señalar el riesgo ahora.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f14",
+    "en": "I'll disagree and commit, but let's revisit it in a month.",
+    "es": "No estoy de acuerdo, pero me comprometo; revisémoslo en un mes.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f15",
+    "en": "What would it take to get the mobile team's buy-in?",
+    "es": "¿Qué haría falta para tener el apoyo del equipo móvil?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f16",
+    "en": "The ask is two engineers for six weeks, not a new team.",
+    "es": "Lo que pido son dos ingenieros por seis semanas, no un equipo nuevo.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f17",
+    "en": "I'll need your air cover if leadership pushes back on the timeline.",
+    "es": "Voy a necesitar tu respaldo si la dirección cuestiona el cronograma.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f18",
+    "en": "We don't have the headcount to support both platforms.",
+    "es": "No tenemos la gente para mantener las dos plataformas.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f19",
+    "en": "That's on me. I approved the change without testing the rollback.",
+    "es": "Eso es culpa mía. Aprobé el cambio sin probar el rollback.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f20",
+    "en": "I got this wrong, and here's what I'm doing about it.",
+    "es": "Me equivoqué en esto, y esto es lo que estoy haciendo al respecto.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f21",
+    "en": "I want to walk back what I said about the deadline yesterday.",
+    "es": "Quiero retractarme de lo que dije ayer sobre la fecha de entrega.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f22",
+    "en": "The buck stops with me, so I'll take the heat with the client.",
+    "es": "La responsabilidad final es mía, así que yo asumo las críticas del cliente.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f23",
+    "en": "We caught it early enough to course-correct.",
+    "es": "Lo detectamos a tiempo para corregir el rumbo."
+  },
+  {
+    "id": "en-dominio-05-f24",
+    "en": "Let's keep the postmortem blameless and focus on the process.",
+    "es": "Hagamos el postmortem sin buscar culpables y enfoquémonos en el proceso.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f25",
+    "en": "I don't want to come across as defensive, so let me ask first.",
+    "es": "No quiero sonar a la defensiva, así que déjame preguntar primero."
+  },
+  {
+    "id": "en-dominio-05-f26",
+    "en": "I won't sugarcoat it: we're two weeks behind.",
+    "es": "No lo voy a endulzar: vamos dos semanas atrasados.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f27",
+    "en": "Read the room before you push your idea a third time.",
+    "es": "Lee el ambiente antes de insistir con tu idea por tercera vez."
+  },
+  {
+    "id": "en-dominio-05-f28",
+    "en": "Naming conventions aren't a hill to die on.",
+    "es": "Las convenciones de nombres no son algo por lo que valga la pena pelear."
+  },
+  {
+    "id": "en-dominio-05-f29",
+    "en": "Pick your battles: push hard on security, let the styling go.",
+    "es": "Elige tus peleas: insiste en la seguridad y deja pasar lo del estilo."
+  },
+  {
+    "id": "en-dominio-05-f30",
+    "en": "Tom went to bat for me when the project slipped.",
+    "es": "Tom dio la cara por mí cuando el proyecto se atrasó."
+  },
+  {
+    "id": "en-dominio-05-f31",
+    "en": "The benchmark data is what finally brought Sarah around.",
+    "es": "Los datos del benchmark fueron lo que por fin hizo cambiar de opinión a Sarah."
+  },
+  {
+    "id": "en-dominio-05-f32",
+    "en": "A quick prototype will win over more people than a long document.",
+    "es": "Un prototipo rápido va a convencer a más gente que un documento largo.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f33",
+    "en": "People should feel safe raising problems without being blamed.",
+    "es": "La gente debe sentirse segura de plantear problemas sin que la culpen.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-05-f34",
+    "en": "If you want accountability, give people real ownership first.",
+    "es": "Si quieres que la gente responda por los resultados, primero dale autonomía real."
+  },
+  {
+    "id": "en-dominio-05-f35",
+    "en": "I'd like to bring this up in my skip-level next week.",
+    "es": "Quiero plantear esto la próxima semana en mi reunión con el jefe de mi jefe.",
+    "trabajo": true
+  }
+]

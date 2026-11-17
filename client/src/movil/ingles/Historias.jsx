@@ -235,7 +235,7 @@ export function HistoriaMovil() {
                       <strong>{p.quien}:</strong> {p.en.replace("___", p.opciones[p.correcta])}
                     </>
                   ) : (
-                    <>✓ {p.pregunta}</>
+                    <>✓ {p.pregunta.replace(/[*_]/g, "")}</>
                   )}
                 </p>
               )

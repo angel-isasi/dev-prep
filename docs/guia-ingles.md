@@ -11,7 +11,7 @@ La sección Inglés lleva a Angel desde lo básico hasta un inglés de trabajo p
 | Trabajo | `content/ingles/trabajo/` | B1 alto a B2 | Entrevista completa, daily, revisión de código, conversación de equipo |
 | Avanzado | `content/ingles/avanzado/` | B2 | Gramática general de B2 aplicada al trabajo: estilo indirecto, condicionales mixtos, relativos, gerundio o infinitivo, futuros, wish, pasado perfecto, modales de deducción |
 | Superior | `content/ingles/superior/` | C1 | Matices y registro: inversión y énfasis, suavizar, participios, colocaciones, idioms de trabajo, negociar, escribir y presentar |
-| Dominio | `content/ingles/dominio/` | C2 | (pendiente) Naturalidad casi nativa |
+| Dominio | `content/ingles/dominio/` | C2 | Naturalidad casi nativa: matices y sinónimos cercanos, subjuntivo y contratos, ironía y leer entre líneas, inglés hablado real, persuadir y liderar, discusiones técnicas de alto nivel |
 
 En C1 y C2 las frases pueden tener hasta 16 palabras y las palabras pueden ser expresiones o colocaciones completas.
 

@@ -103,6 +103,7 @@ export function comparable(texto) {
     .replace(/[’‘`]/g, "'")
     .replace(/[.,!?;:"()¿¡]/g, " ")
     .split(/\s+/)
+    .map((p) => p.replace(/^-+|-+$/g, "")) // "-ish" y "ish" valen igual; el guion de adentro ("well-known") se queda
     .filter(Boolean)
     .map((p) => CONTRACCIONES[p] ?? SIN_APOSTROFO[p] ?? (p === "ok" ? "okay" : /^\d{1,2}$/.test(p) && Number(p) <= 20 ? NUMEROS[Number(p)] : p))
     .join(" ")

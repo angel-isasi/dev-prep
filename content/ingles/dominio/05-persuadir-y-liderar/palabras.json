@@ -1,0 +1,395 @@
+[
+  {
+    "id": "en-dominio-05-w01",
+    "en": "influence without authority",
+    "es": "influir sin tener autoridad formal",
+    "pron": "ínfluens uidáut azórari",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "As a senior, you lead through influence without authority.",
+      "es": "Como senior, lideras influyendo sin tener autoridad formal."
+    }
+  },
+  {
+    "id": "en-dominio-05-w02",
+    "en": "buy-in",
+    "es": "apoyo, compromiso (de otros con una idea)",
+    "pron": "bái in",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We need buy-in from the mobile team first.",
+      "es": "Primero necesitamos el apoyo del equipo móvil."
+    }
+  },
+  {
+    "id": "en-dominio-05-w03",
+    "en": "champion",
+    "es": "impulsar, defender (una idea o iniciativa)",
+    "pron": "chámpion",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Sarah championed the accessibility audit.",
+      "es": "Sarah impulsó la auditoría de accesibilidad."
+    }
+  },
+  {
+    "id": "en-dominio-05-w04",
+    "en": "rally around",
+    "es": "unirse en torno a",
+    "pron": "ráli aráund",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "The team rallied around the new plan.",
+      "es": "El equipo se unió en torno al nuevo plan."
+    }
+  },
+  {
+    "id": "en-dominio-05-w05",
+    "en": "compelling",
+    "es": "convincente, contundente",
+    "pron": "kompélin",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "You need a compelling reason to rewrite it.",
+      "es": "Necesitas una razón convincente para reescribirlo."
+    }
+  },
+  {
+    "id": "en-dominio-05-w06",
+    "en": "socialize",
+    "es": "hacer circular (una idea entre las personas clave antes de decidir)",
+    "pron": "sóushalaiz",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Let's socialize the proposal before the review.",
+      "es": "Hagamos circular la propuesta antes de la revisión."
+    }
+  },
+  {
+    "id": "en-dominio-05-w07",
+    "en": "disagree and commit",
+    "es": "no estar de acuerdo y aun así comprometerse con la decisión",
+    "pron": "disagrí and komít",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I'd do it differently, but I'll disagree and commit.",
+      "es": "Yo lo haría distinto, pero acepto la decisión y me comprometo con ella."
+    }
+  },
+  {
+    "id": "en-dominio-05-w08",
+    "en": "candid",
+    "es": "franco, sincero",
+    "pron": "kándid",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Can I be candid about the last release?",
+      "es": "¿Puedo ser franco sobre el último release?"
+    }
+  },
+  {
+    "id": "en-dominio-05-w09",
+    "en": "actionable",
+    "es": "concreto, que se puede poner en práctica",
+    "pron": "ákshonabol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Make your feedback specific and actionable.",
+      "es": "Haz que tu feedback sea específico y aplicable."
+    }
+  },
+  {
+    "id": "en-dominio-05-w10",
+    "en": "accountability",
+    "es": "responsabilidad (responder por los resultados)",
+    "pron": "akauntabíliri",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Accountability means owning the outcome, not just the task.",
+      "es": "Ser responsable de verdad es responder por el resultado, no solo por la tarea."
+    }
+  },
+  {
+    "id": "en-dominio-05-w11",
+    "en": "the buck stops with me",
+    "es": "la responsabilidad final es mía",
+    "pron": "de bák stáps uíz mi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I approved the release, so the buck stops with me.",
+      "es": "Yo aprobé el release, así que la responsabilidad final es mía."
+    }
+  },
+  {
+    "id": "en-dominio-05-w12",
+    "en": "course-correct",
+    "es": "corregir el rumbo",
+    "pron": "kórs korékt",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "We caught it early and course-corrected.",
+      "es": "Lo detectamos temprano y corregimos el rumbo."
+    }
+  },
+  {
+    "id": "en-dominio-05-w13",
+    "en": "blameless",
+    "es": "sin buscar culpables (enfocado en el sistema)",
+    "pron": "bléimles",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "We'll run a blameless postmortem on Monday.",
+      "es": "El lunes haremos un postmortem sin buscar culpables."
+    }
+  },
+  {
+    "id": "en-dominio-05-w14",
+    "en": "skip-level",
+    "es": "reunión con el jefe de tu jefe",
+    "pron": "skíp lévol",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I brought it up in my skip-level with the director.",
+      "es": "Lo planteé en mi reunión con la directora, la jefa de mi jefe."
+    }
+  },
+  {
+    "id": "en-dominio-05-w15",
+    "en": "air cover",
+    "es": "respaldo (de un jefe ante la presión de arriba)",
+    "pron": "ér káver",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "I'll need some air cover if the deadline slips.",
+      "es": "Voy a necesitar respaldo si la fecha se atrasa."
+    }
+  },
+  {
+    "id": "en-dominio-05-w16",
+    "en": "headcount",
+    "es": "número de personas (puestos) de un equipo",
+    "pron": "jédkaunt",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We don't have the headcount for a second project.",
+      "es": "No tenemos la gente para un segundo proyecto."
+    }
+  },
+  {
+    "id": "en-dominio-05-w17",
+    "en": "win over",
+    "es": "ganarse (a alguien), convencer",
+    "pron": "uín óuver",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "won over",
+      "participio": "won over"
+    },
+    "ejemplo": {
+      "en": "The demo won over the skeptics.",
+      "es": "La demo convenció a los escépticos."
+    }
+  },
+  {
+    "id": "en-dominio-05-w18",
+    "en": "bring someone around",
+    "es": "hacer que alguien cambie de opinión",
+    "pron": "bríng sámuan aráund",
+    "tipo": "verbo",
+    "formas": {
+      "pasado": "brought someone around",
+      "participio": "brought someone around"
+    },
+    "ejemplo": {
+      "en": "The benchmark data brought Tom around.",
+      "es": "Los datos del benchmark hicieron que Tom cambiara de opinión."
+    }
+  },
+  {
+    "id": "en-dominio-05-w19",
+    "en": "credibility",
+    "es": "credibilidad",
+    "pron": "kredabíliri",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Missing the same deadline twice hurts your credibility.",
+      "es": "Incumplir la misma fecha dos veces daña tu credibilidad."
+    }
+  },
+  {
+    "id": "en-dominio-05-w20",
+    "en": "set the tone",
+    "es": "marcar la pauta",
+    "pron": "sét de tóun",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "How you handle the first incident sets the tone.",
+      "es": "Cómo manejas el primer incidente marca la pauta."
+    }
+  },
+  {
+    "id": "en-dominio-05-w21",
+    "en": "psychological safety",
+    "es": "seguridad psicológica (poder hablar sin miedo)",
+    "pron": "saikolóyikol séifti",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Psychological safety lets juniors admit they're stuck.",
+      "es": "La seguridad psicológica permite que los juniors admitan que están trabados."
+    }
+  },
+  {
+    "id": "en-dominio-05-w22",
+    "en": "come across as",
+    "es": "dar la impresión de, sonar",
+    "pron": "kám akrós az",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I didn't want to come across as defensive.",
+      "es": "No quería sonar a la defensiva."
+    }
+  },
+  {
+    "id": "en-dominio-05-w23",
+    "en": "tactful",
+    "es": "con tacto, diplomático",
+    "pron": "táktful",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Be honest, but be tactful about it.",
+      "es": "Sé honesto, pero con tacto."
+    }
+  },
+  {
+    "id": "en-dominio-05-w24",
+    "en": "blunt",
+    "es": "directo, sin rodeos (a veces brusco)",
+    "pron": "blánt",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "Sorry to be blunt, but this won't ship on Friday.",
+      "es": "Perdón por ser tan directo, pero esto no sale el viernes."
+    }
+  },
+  {
+    "id": "en-dominio-05-w25",
+    "en": "sugarcoat",
+    "es": "endulzar (una mala noticia)",
+    "pron": "shúgerkout",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I won't sugarcoat it: we're two weeks behind.",
+      "es": "No lo voy a endulzar: vamos dos semanas atrasados."
+    }
+  },
+  {
+    "id": "en-dominio-05-w26",
+    "en": "the ask",
+    "es": "el pedido concreto, lo que se pide",
+    "pron": "di ásk",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "So what's the ask? More time or more people?",
+      "es": "Entonces, ¿qué pides? ¿Más tiempo o más gente?"
+    }
+  },
+  {
+    "id": "en-dominio-05-w27",
+    "en": "lay the groundwork",
+    "es": "preparar el terreno",
+    "pron": "léi de gráunduerk",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The prototype laid the groundwork for the RFC.",
+      "es": "El prototipo preparó el terreno para el RFC."
+    }
+  },
+  {
+    "id": "en-dominio-05-w28",
+    "en": "go to bat for",
+    "es": "dar la cara por, defender (a alguien)",
+    "pron": "góu tu bát for",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Tom went to bat for me in the promotion meeting.",
+      "es": "Tom dio la cara por mí en la reunión de ascensos."
+    }
+  },
+  {
+    "id": "en-dominio-05-w29",
+    "en": "take the heat",
+    "es": "asumir las críticas",
+    "pron": "téik de jíit",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "The manager took the heat for the outage.",
+      "es": "El manager asumió las críticas por la caída."
+    }
+  },
+  {
+    "id": "en-dominio-05-w30",
+    "en": "that's on me",
+    "es": "eso es culpa mía, me hago cargo",
+    "pron": "dáts on mi",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "That's on me. I forgot to update the docs.",
+      "es": "Eso es culpa mía. Me olvidé de actualizar la documentación."
+    }
+  },
+  {
+    "id": "en-dominio-05-w31",
+    "en": "pick your battles",
+    "es": "elegir qué peleas dar",
+    "pron": "pík iór báralz",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Pick your battles: not every nit is worth a debate.",
+      "es": "Elige tus peleas: no todo detalle vale un debate."
+    }
+  },
+  {
+    "id": "en-dominio-05-w32",
+    "en": "read the room",
+    "es": "leer el ambiente",
+    "pron": "ríid de rúum",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Read the room before you bring it up again.",
+      "es": "Lee el ambiente antes de volver a sacar el tema."
+    }
+  },
+  {
+    "id": "en-dominio-05-w33",
+    "en": "hear me out",
+    "es": "escúchame hasta el final",
+    "pron": "jíer mi áut",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Hear me out before you say no.",
+      "es": "Escúchame hasta el final antes de decir que no."
+    }
+  },
+  {
+    "id": "en-dominio-05-w34",
+    "en": "a hill to die on",
+    "es": "algo por lo que vale la pena pelear hasta el final",
+    "pron": "a jíl tu dái on",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "Tabs versus spaces is not a hill to die on.",
+      "es": "Tabs contra espacios no es algo por lo que valga la pena pelear."
+    }
+  },
+  {
+    "id": "en-dominio-05-w35",
+    "en": "walk back",
+    "es": "retractarse (de algo que dijiste)",
+    "pron": "uók bák",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "I need to walk back what I said about the deadline.",
+      "es": "Tengo que retractarme de lo que dije sobre la fecha de entrega."
+    }
+  }
+]

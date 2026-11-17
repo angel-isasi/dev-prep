@@ -1,0 +1,387 @@
+[
+  {
+    "id": "en-dominio-06-w01",
+    "en": "at scale",
+    "es": "a gran escala",
+    "pron": "at skéil",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "This works for ten users, but not at scale.",
+      "es": "Esto funciona con diez usuarios, pero no a gran escala."
+    }
+  },
+  {
+    "id": "en-dominio-06-w02",
+    "en": "single point of failure",
+    "es": "punto único de falla",
+    "pron": "síngol póint av féiliur",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "One database for everything is a single point of failure.",
+      "es": "Una sola base de datos para todo es un punto único de falla."
+    }
+  },
+  {
+    "id": "en-dominio-06-w03",
+    "en": "scale out",
+    "es": "escalar horizontalmente (agregar máquinas)",
+    "pron": "skéil áut",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Instead of a bigger server, we scale out.",
+      "es": "En vez de un servidor más grande, agregamos más máquinas."
+    }
+  },
+  {
+    "id": "en-dominio-06-w04",
+    "en": "throughput",
+    "es": "rendimiento (trabajo procesado por segundo)",
+    "pron": "zrúput",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Batching doubled our throughput.",
+      "es": "Agrupar las peticiones duplicó nuestro rendimiento."
+    }
+  },
+  {
+    "id": "en-dominio-06-w05",
+    "en": "tail latency",
+    "es": "latencia de cola (la de las peticiones más lentas, como el p99)",
+    "pron": "téil léitensi",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The average is fine, but tail latency is terrible.",
+      "es": "El promedio está bien, pero la latencia de cola es pésima."
+    }
+  },
+  {
+    "id": "en-dominio-06-w06",
+    "en": "eventually consistent",
+    "es": "con consistencia eventual (se pone al día en poco tiempo)",
+    "pron": "ivénchuali konsístent",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The search index is eventually consistent.",
+      "es": "El índice de búsqueda tiene consistencia eventual."
+    }
+  },
+  {
+    "id": "en-dominio-06-w07",
+    "en": "fault-tolerant",
+    "es": "tolerante a fallos",
+    "pron": "fólt tálerant",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The system is fault-tolerant: losing a node doesn't stop it.",
+      "es": "El sistema es tolerante a fallos: perder un nodo no lo detiene."
+    }
+  },
+  {
+    "id": "en-dominio-06-w08",
+    "en": "degrade gracefully",
+    "es": "seguir funcionando con menos (sin caerse del todo)",
+    "pron": "digréid gréisfuli",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "If recommendations fail, the page should degrade gracefully.",
+      "es": "Si fallan las recomendaciones, la página debería seguir funcionando sin ellas."
+    }
+  },
+  {
+    "id": "en-dominio-06-w09",
+    "en": "backpressure",
+    "es": "contrapresión (frenar a quien produce más de lo que se procesa)",
+    "pron": "bákpresher",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Without backpressure, the queue grows until it crashes.",
+      "es": "Sin contrapresión, la cola crece hasta que se cae."
+    }
+  },
+  {
+    "id": "en-dominio-06-w10",
+    "en": "idempotent",
+    "es": "idempotente (repetirlo da el mismo resultado)",
+    "pron": "aidempóutent",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The payment endpoint has to be idempotent.",
+      "es": "El endpoint de pagos tiene que ser idempotente."
+    }
+  },
+  {
+    "id": "en-dominio-06-w11",
+    "en": "shard",
+    "es": "fragmentar (una base de datos en partes)",
+    "pron": "shárd",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "We shard users by region.",
+      "es": "Fragmentamos a los usuarios por región."
+    }
+  },
+  {
+    "id": "en-dominio-06-w12",
+    "en": "read replica",
+    "es": "réplica de lectura",
+    "pron": "ríid réplika",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Reports run on a read replica, not the primary.",
+      "es": "Los reportes corren en una réplica de lectura, no en la principal."
+    }
+  },
+  {
+    "id": "en-dominio-06-w13",
+    "en": "failover",
+    "es": "conmutación a un respaldo (cuando falla el principal)",
+    "pron": "féilouver",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Failover to the second region takes about a minute.",
+      "es": "Pasar a la segunda región toma alrededor de un minuto."
+    }
+  },
+  {
+    "id": "en-dominio-06-w14",
+    "en": "blast radius",
+    "es": "alcance del daño (si algo falla)",
+    "pron": "blást réidias",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Feature flags keep the blast radius small.",
+      "es": "Los feature flags mantienen pequeño el alcance del daño."
+    }
+  },
+  {
+    "id": "en-dominio-06-w15",
+    "en": "back-of-the-envelope",
+    "es": "aproximado, hecho a ojo (un cálculo rápido)",
+    "pron": "bák av di énveloup",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "A back-of-the-envelope estimate says we need three servers.",
+      "es": "Un cálculo rápido dice que necesitamos tres servidores."
+    }
+  },
+  {
+    "id": "en-dominio-06-w16",
+    "en": "order of magnitude",
+    "es": "orden de magnitud (unas diez veces)",
+    "pron": "órder av mágnitud",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The cache made reads an order of magnitude faster.",
+      "es": "La caché hizo las lecturas unas diez veces más rápidas."
+    }
+  },
+  {
+    "id": "en-dominio-06-w17",
+    "en": "headroom",
+    "es": "margen (de capacidad libre)",
+    "pron": "jédruum",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "We have plenty of headroom for Black Friday.",
+      "es": "Tenemos bastante margen para Black Friday."
+    }
+  },
+  {
+    "id": "en-dominio-06-w18",
+    "en": "hot path",
+    "es": "ruta crítica (el código que se ejecuta muchísimo)",
+    "pron": "ját páz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Logging on the hot path slowed every request.",
+      "es": "Registrar logs en la ruta crítica hizo lentas todas las peticiones."
+    }
+  },
+  {
+    "id": "en-dominio-06-w19",
+    "en": "load-bearing",
+    "es": "que sostiene todo (como una pared de carga)",
+    "pron": "lóud bérin",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "That estimate is load-bearing for the whole design.",
+      "es": "Ese estimado sostiene todo el diseño."
+    }
+  },
+  {
+    "id": "en-dominio-06-w20",
+    "en": "steelman",
+    "es": "presentar la mejor versión del argumento contrario",
+    "pron": "stíilman",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Let me steelman your position first.",
+      "es": "Déjame presentar primero tu postura en su mejor versión."
+    }
+  },
+  {
+    "id": "en-dominio-06-w21",
+    "en": "straw man",
+    "es": "hombre de paja (deformar el argumento ajeno para atacarlo)",
+    "pron": "stró man",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Nobody said rewrite everything. That's a straw man.",
+      "es": "Nadie dijo reescribir todo. Eso es un hombre de paja."
+    }
+  },
+  {
+    "id": "en-dominio-06-w22",
+    "en": "I'd want to validate that",
+    "es": "tendría que validarlo (antes de afirmarlo)",
+    "pron": "áid uánt tu válideit dát",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "It should handle the peak, but I'd want to validate that.",
+      "es": "Debería aguantar el pico, pero tendría que validarlo."
+    }
+  },
+  {
+    "id": "en-dominio-06-w23",
+    "en": "working assumption",
+    "es": "supuesto de trabajo (provisional)",
+    "pron": "uérkin asámshon",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Our working assumption is a million users in year one.",
+      "es": "Nuestro supuesto de trabajo es un millón de usuarios el primer año."
+    }
+  },
+  {
+    "id": "en-dominio-06-w24",
+    "en": "failure mode",
+    "es": "modo de falla (la forma en que algo puede fallar)",
+    "pron": "féiliur móud",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The worst failure mode is charging a user twice.",
+      "es": "El peor modo de falla es cobrarle dos veces a un usuario."
+    }
+  },
+  {
+    "id": "en-dominio-06-w25",
+    "en": "one-way door",
+    "es": "decisión irreversible (puerta de un solo sentido)",
+    "pron": "uán uéi dór",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Choosing the database is a one-way door.",
+      "es": "Elegir la base de datos es una decisión irreversible."
+    }
+  },
+  {
+    "id": "en-dominio-06-w26",
+    "en": "hand-wavy",
+    "es": "vago, sin detalles (que esquiva lo difícil)",
+    "pron": "jánd uéivi",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "The scaling section of the doc is a bit hand-wavy.",
+      "es": "La sección de escalado del documento es un poco vaga."
+    }
+  },
+  {
+    "id": "en-dominio-06-w27",
+    "en": "de-risk",
+    "es": "reducir el riesgo de",
+    "pron": "di rísk",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "A pilot will de-risk the migration.",
+      "es": "Un piloto va a reducir el riesgo de la migración."
+    }
+  },
+  {
+    "id": "en-dominio-06-w28",
+    "en": "the crux",
+    "es": "el meollo, el punto clave",
+    "pron": "de kráks",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "The crux of the problem is concurrent edits.",
+      "es": "El meollo del problema son las ediciones simultáneas."
+    }
+  },
+  {
+    "id": "en-dominio-06-w29",
+    "en": "conflate",
+    "es": "mezclar, confundir (dos ideas distintas)",
+    "pron": "konfléit",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Don't conflate latency with throughput.",
+      "es": "No confundas la latencia con el rendimiento."
+    }
+  },
+  {
+    "id": "en-dominio-06-w30",
+    "en": "orthogonal",
+    "es": "independiente, que no tiene que ver (con otro tema)",
+    "pron": "orzágonol",
+    "tipo": "adjetivo",
+    "ejemplo": {
+      "en": "That question is orthogonal to the database choice.",
+      "es": "Esa pregunta no tiene que ver con la elección de base de datos."
+    }
+  },
+  {
+    "id": "en-dominio-06-w31",
+    "en": "hinge on",
+    "es": "depender (por completo) de",
+    "pron": "jínch on",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Everything hinges on the vendor's rate limit.",
+      "es": "Todo depende del límite de peticiones del proveedor."
+    }
+  },
+  {
+    "id": "en-dominio-06-w32",
+    "en": "if I'm hearing you correctly",
+    "es": "si te entiendo bien",
+    "pron": "if áim jíerin iu koréktli",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "If I'm hearing you correctly, the issue is cost.",
+      "es": "Si te entiendo bien, el problema es el costo."
+    }
+  },
+  {
+    "id": "en-dominio-06-w33",
+    "en": "I stand by",
+    "es": "mantengo (una decisión o una afirmación)",
+    "pron": "ái stánd bái",
+    "tipo": "expresion",
+    "ejemplo": {
+      "en": "I still stand by what I said in the review.",
+      "es": "Sigo manteniendo lo que dije en la revisión."
+    }
+  },
+  {
+    "id": "en-dominio-06-w34",
+    "en": "known unknowns",
+    "es": "lo que sabemos que no sabemos",
+    "pron": "nóun announz",
+    "tipo": "sustantivo",
+    "ejemplo": {
+      "en": "Let's list the known unknowns before we commit.",
+      "es": "Hagamos una lista de las incógnitas que ya tenemos identificadas antes de comprometernos."
+    }
+  },
+  {
+    "id": "en-dominio-06-w35",
+    "en": "pressure-test",
+    "es": "poner a prueba (una idea, con preguntas duras)",
+    "pron": "présher tést",
+    "tipo": "verbo",
+    "ejemplo": {
+      "en": "Let's pressure-test the design before the review.",
+      "es": "Pongamos a prueba el diseño antes de la revisión."
+    }
+  }
+]

@@ -1,0 +1,118 @@
+[
+  {
+    "id": "en-dominio-04-r01",
+    "titulo": "Una entrevista relajada, pero entrevista",
+    "situacion": "Rachel, engineering manager de una empresa de EE. UU., te entrevista. Es muy informal y habla rápido, pero sigue evaluándote.",
+    "tu": "Ana",
+    "turnos": [
+      {
+        "quien": "Rachel",
+        "en": "Hey Ana! How's it going? Sorry, I'm running a couple minutes late.",
+        "es": "¡Hola, Ana! ¿Cómo va todo? Perdón, voy un par de minutos tarde."
+      },
+      {
+        "opciones": [
+          {
+            "en": "Yeah, no, it's all good, like, whatever, you know?",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Demasiadas muletillas juntas, y *whatever* suena a que no te importa. Relajado sí, descuidado no."
+          },
+          {
+            "en": "No worries at all. It's going well, thanks. How's your day going?",
+            "es": "No hay problema. Todo bien, gracias. ¿Cómo va tu día?",
+            "correcta": true,
+            "explicacion": "Le quitas importancia al retraso, respondes y devuelves la pregunta. Cálida y profesional a la vez."
+          },
+          {
+            "en": "Good afternoon. I am very well, thank you. I accept your apology.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Gramaticalmente bien, pero rígida, y *I accept your apology* convierte una cortesía en un asunto serio."
+          }
+        ]
+      },
+      {
+        "quien": "Rachel",
+        "en": "Good, good. So, whatcha been working on lately?",
+        "es": "Bien, bien. Bueno, ¿en qué has estado trabajando últimamente?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "Sorry, how?",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*How?* es el calco de \"¿cómo?\". Si no entendiste, di *Sorry?* o *Could you say that again?*. Además, *whatcha been* es *what have you been*: era entendible."
+          },
+          {
+            "en": "I'm gonna tell you, like, all the stuff I've been doing and stuff.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "No responde nada concreto y repite *stuff*. En una entrevista cada frase tiene que aportar algo."
+          },
+          {
+            "en": "Lately I've been leading the migration of our checkout to a new payment provider.",
+            "es": "Últimamente he estado liderando la migración de nuestro checkout a un nuevo proveedor de pagos.",
+            "correcta": true,
+            "explicacion": "Entendiste *whatcha been* (what have you been) y respondes con algo concreto y con tu rol."
+          }
+        ]
+      },
+      {
+        "quien": "Rachel",
+        "en": "Nice. And what was the trickiest part?",
+        "es": "Genial. ¿Y cuál fue la parte más complicada?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "I mean, the code was the easy part. The hard part was getting three teams to agree on a cutover date.",
+            "es": "O sea, el código era la parte fácil. Lo difícil fue lograr que tres equipos se pusieran de acuerdo en una fecha de cambio.",
+            "correcta": true,
+            "explicacion": "Un solo *I mean*, usado para precisar, suena natural incluso en una entrevista. Y la respuesta muestra criterio: lo difícil fue coordinar personas."
+          },
+          {
+            "en": "The trickiest part was, like, kinda everything, and stuff.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Vago y lleno de relleno. *Kinda everything* no le dice nada a Rachel."
+          },
+          {
+            "en": "It's not like it was tricky. I'm very good at everything.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*It's not like...* aquí suena despectivo, y decir que todo te sale bien suena arrogante."
+          }
+        ]
+      },
+      {
+        "quien": "Rachel",
+        "en": "Ha, I can relate. Okay, I gotta jump to another interview, but any questions for me?",
+        "es": "Ja, te entiendo. Bueno, tengo que pasar a otra entrevista, pero ¿tienes alguna pregunta para mí?"
+      },
+      {
+        "opciones": [
+          {
+            "en": "Nah, I'm good.",
+            "es": "",
+            "correcta": false,
+            "explicacion": "*I'm good* rechaza la oferta. En una entrevista, no tener preguntas suena a poco interés."
+          },
+          {
+            "en": "Gotcha. So yeah. Bye!",
+            "es": "",
+            "correcta": false,
+            "explicacion": "Cierras sin aprovechar el momento. *So yeah* cierra una historia, no una entrevista."
+          },
+          {
+            "en": "Just one, real quick: what would success look like in this role after six months?",
+            "es": "Solo una, rapidito: ¿cómo se vería el éxito en este puesto después de seis meses?",
+            "correcta": true,
+            "explicacion": "*Real quick* respeta que ella tiene prisa, y la pregunta es concreta y muestra que piensas en resultados."
+          }
+        ]
+      }
+    ]
+  }
+]

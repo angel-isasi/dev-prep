@@ -1,0 +1,58 @@
+[
+  { "id": "en-dominio-02-d01", "titulo": "El contrato que parece otro idioma", "situacion": "Luis recibió su primera oferta de una startup de EE. UU. y le pide ayuda a Ana con el contrato.",
+    "lineas": [
+      { "quien": "Luis", "en": "Ana, I got an offer from a US startup, but the contract reads like another language.", "es": "Ana, me llegó una oferta de una startup de EE. UU., pero el contrato parece escrito en otro idioma." },
+      { "quien": "Ana", "en": "Ha, welcome to legalese. What's confusing you?", "es": "Ja, bienvenido al lenguaje legal. ¿Qué te confunde?" },
+      { "quien": "Luis", "en": "It says I \"shall not engage in any competing business.\" Is that a suggestion?", "es": "Dice que \"shall not engage in any competing business\". ¿Es una sugerencia?" },
+      { "quien": "Ana", "en": "No, \"shall\" means you're required to. That's the non-compete clause.", "es": "No, \"shall\" significa que estás obligado. Esa es la cláusula de no competencia." },
+      { "quien": "Luis", "en": "For how long? I can't find it.", "es": "¿Por cuánto tiempo? No lo encuentro." },
+      { "quien": "Ana", "en": "Check the termination section. It usually says something like \"for twelve months thereafter.\"", "es": "Revisa la sección de terminación. Suele decir algo como \"durante los doce meses siguientes\"." },
+      { "quien": "Luis", "en": "Twelve months? That seems like a lot for a junior role.", "es": "¿Doce meses? Parece mucho para un puesto junior." },
+      { "quien": "Ana", "en": "It might be. Ask them to shorten it, or to waive it entirely.", "es": "Puede ser. Pídeles que lo acorten, o que lo eliminen por completo." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué significa *shall* en el contrato de Luis?", "opciones": ["Una sugerencia", "Una obligación", "Un plan para el futuro"], "correcta": 1,
+        "explicacion": "\"Shall means you're required to\": en un contrato, *shall* es obligación." },
+      { "pregunta": "¿Dónde le dice Ana que busque la duración de la cláusula?", "opciones": ["En la sección de terminación", "En la página de salario", "En el correo de bienvenida"], "correcta": 0,
+        "explicacion": "\"Check the termination section\"." },
+      { "pregunta": "¿Qué le sugiere Ana a Luis?", "opciones": ["Firmar sin preguntar", "Rechazar la oferta", "Pedir que acorten o eliminen la cláusula"], "correcta": 2,
+        "explicacion": "\"Ask them to shorten it, or to waive it entirely\"." }
+    ] },
+  { "id": "en-dominio-02-d02", "titulo": "Una política que no sea opcional", "situacion": "Tom y Sarah escriben la nueva política de seguridad del equipo.",
+    "lineas": [
+      { "quien": "Tom", "en": "For the security policy, I wrote \"Developers should not push secrets.\"", "es": "Para la política de seguridad, escribí \"Developers should not push secrets\"." },
+      { "quien": "Sarah", "en": "\"Should\" sounds optional. Legal asked that it be a hard requirement.", "es": "\"Should\" suena opcional. El área legal pidió que fuera un requisito estricto." },
+      { "quien": "Tom", "en": "Then how about \"It is essential that no developer push secrets to the repository\"?", "es": "Entonces, ¿qué tal \"It is essential that no developer push secrets to the repository\"?" },
+      { "quien": "Sarah", "en": "Better. And add what happens if someone does.", "es": "Mejor. Y agrega qué pasa si alguien lo hace." },
+      { "quien": "Tom", "en": "\"Any breach of this policy may result in termination.\" Too harsh?", "es": "\"Cualquier incumplimiento de esta política puede resultar en despido\". ¿Demasiado duro?" },
+      { "quien": "Sarah", "en": "It's a policy, not a Slack message. Harsh is fine here.", "es": "Es una política, no un mensaje de Slack. Aquí está bien que sea duro." },
+      { "quien": "Tom", "en": "Fair. Should anyone need help with the secrets vault, they can ping you, right?", "es": "Es justo. Si alguien necesita ayuda con el almacén de secretos, puede escribirte, ¿no?" },
+      { "quien": "Sarah", "en": "If need be, sure. But link the docs first.", "es": "Si hace falta, claro. Pero pon primero el enlace a la documentación." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Por qué a Sarah no le gusta *should*?", "opciones": ["Porque suena opcional y legal pidió un requisito estricto", "Porque está mal escrito", "Porque es muy formal"], "correcta": 0,
+        "explicacion": "\"Should sounds optional. Legal asked that it be a hard requirement\"." },
+      { "pregunta": "¿Qué puede pasar si alguien incumple la política?", "opciones": ["Nada", "Una advertencia por Slack", "Puede ser despedido"], "correcta": 2,
+        "explicacion": "\"Any breach of this policy may result in termination\"." },
+      { "pregunta": "¿Qué pide Sarah antes de que le escriban?", "opciones": ["Que se lo pidan a Tom", "Que pongan el enlace a la documentación", "Que esperen una semana"], "correcta": 1,
+        "explicacion": "\"If need be, sure. But link the docs first\"." }
+    ] },
+  { "id": "en-dominio-02-d03", "titulo": "El cliente exige", "situacion": "Tom le cuenta a Ana lo que pidió el cliente para el rediseño.",
+    "lineas": [
+      { "quien": "Tom", "en": "The client demanded that we deliver the whole redesign by Friday.", "es": "El cliente exigió que entreguemos todo el rediseño para el viernes." },
+      { "quien": "Ana", "en": "By Friday? Were we to rush it, we'd have to skip accessibility testing.", "es": "¿Para el viernes? Si lo hiciéramos a la carrera, tendríamos que saltarnos las pruebas de accesibilidad." },
+      { "quien": "Tom", "en": "I know. I recommended that they accept a phased release.", "es": "Lo sé. Les recomendé que aceptaran un lanzamiento por fases." },
+      { "quien": "Ana", "en": "And?", "es": "¿Y?" },
+      { "quien": "Tom", "en": "Suffice it to say, they weren't thrilled.", "es": "Baste decir que no les encantó." },
+      { "quien": "Ana", "en": "If they insist, so be it. But I'd ask that they confirm it in writing.", "es": "Si insisten, que así sea. Pero yo pediría que lo confirmen por escrito." },
+      { "quien": "Tom", "en": "Agreed. Had they asked a month ago, this wouldn't be a problem.", "es": "De acuerdo. Si lo hubieran pedido hace un mes, esto no sería un problema." }
+    ],
+    "preguntas": [
+      { "pregunta": "¿Qué exige el cliente?", "opciones": ["Un lanzamiento por fases", "Todo el rediseño para el viernes", "Más pruebas de accesibilidad"], "correcta": 1,
+        "explicacion": "\"The client demanded that we deliver the whole redesign by Friday\"." },
+      { "pregunta": "¿Qué riesgo ve Ana?", "opciones": ["Saltarse las pruebas de accesibilidad", "Perder al cliente", "Que Tom se enoje"], "correcta": 0,
+        "explicacion": "\"Were we to rush it, we'd have to skip accessibility testing\"." },
+      { "pregunta": "¿Qué pediría Ana si el cliente insiste?", "opciones": ["Más dinero", "Una reunión con el director", "Que lo confirme por escrito"], "correcta": 2,
+        "explicacion": "\"I'd ask that they confirm it in writing\": así queda claro que la decisión fue del cliente." }
+    ] }
+]

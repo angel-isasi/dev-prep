@@ -1,0 +1,21 @@
+[
+  { "id": "en-dominio-02-h01", "titulo": "La letra pequeña", "situacion": "Después del ascenso, la empresa de EE. UU. le envía a Ana un contrato nuevo como empleada directa. Lo revisa con Sarah antes de firmar.",
+    "pasos": [
+      { "quien": "Sarah", "en": "So, did the new contract arrive? Congrats on going full-time!", "es": "Entonces, ¿llegó el contrato nuevo? ¡Felicitaciones por pasar a planilla!" },
+      { "quien": "Ana", "en": "It did, thanks. But honestly, half of it reads like a medieval scroll.", "es": "Sí, gracias. Pero, sinceramente, la mitad parece un pergamino medieval." },
+      { "quien": "Sarah", "en": "Ha. Let me guess: \"hereinafter referred to as the Employee\"?", "es": "Ja. A ver si adivino: \"en adelante denominada la Empleada\"." },
+      { "quien": "Ana", "en": "Exactly. And \"the Employee shall not disclose any confidential information.\"", "es": "Exacto. Y \"la Empleada no deberá revelar ninguna información confidencial\"." },
+      { "tipo": "pregunta", "pregunta": "¿Qué significa \"shall not\" en el contrato de Ana?", "opciones": ["Que tiene prohibido hacerlo", "Que no lo hará más adelante", "Que se le sugiere no hacerlo"], "correcta": 0, "explicacion": "En un contrato, *shall* es obligación, y *shall not* es prohibición." },
+      { "quien": "Sarah", "en": "That one's standard. Did you check the intellectual property clause?", "es": "Esa es estándar. ¿Revisaste la cláusula de propiedad intelectual?" },
+      { "quien": "Ana", "en": "Yes. Anything I build during work hours belongs to the company. But what about my side projects?", "es": "Sí. Todo lo que construya en horario de trabajo es de la empresa. Pero, ¿y mis proyectos personales?" },
+      { "tipo": "completa", "quien": "Sarah", "en": "Ask Tom. Mine required that I ___ all my side projects before signing.", "es": "Pregúntale a Tom. El mío exigía que hiciera una lista de todos mis proyectos personales antes de firmar.", "opciones": ["list", "listed", "lists"], "correcta": 0, "explicacion": "*Require that* + forma base: **that I list**. Aunque la frase está en pasado, el subjuntivo no cambia." },
+      { "quien": "Tom", "en": "Did I hear my name? Contract questions?", "es": "¿Escuché mi nombre? ¿Preguntas sobre el contrato?" },
+      { "quien": "Ana", "en": "Yes. There's a one-year non-compete. Is that negotiable?", "es": "Sí. Hay una cláusula de no competencia de un año. ¿Se puede negociar?" },
+      { "quien": "Tom", "en": "Usually, yes. I'll recommend that HR waive it for you.", "es": "Normalmente, sí. Le recomendaré a Recursos Humanos que te la quiten." },
+      { "tipo": "completa", "quien": "Ana", "en": "Thanks. And ___ they refuse, can I still sign?", "es": "Gracias. ¿Y si se niegan, igual puedo firmar?", "opciones": ["should", "would", "shall"], "correcta": 0, "explicacion": "**Should** + sujeto + forma base = *if they refuse*, en registro formal. *Would* no forma este condicional." },
+      { "quien": "Tom", "en": "Of course. It's not a deal-breaker. Just don't sign anything you don't understand.", "es": "Claro. No es motivo para rechazar la oferta. Solo no firmes nada que no entiendas." },
+      { "tipo": "pregunta", "pregunta": "¿Qué hará Tom con la cláusula de no competencia?", "opciones": ["Firmarla en nombre de Ana", "Recomendar a Recursos Humanos que la quiten", "Nada, porque es obligatoria"], "correcta": 1, "explicacion": "\"I'll recommend that HR waive it for you\": *waive* es renunciar a un derecho o dispensar una cláusula." },
+      { "tipo": "completa", "quien": "Ana", "en": "Got it. I'll read every clause twice, lest I ___ my weekends away by accident.", "es": "Entendido. Leeré cada cláusula dos veces, no sea que regale mis fines de semana sin darme cuenta.", "opciones": ["sign", "signed", "am signing"], "correcta": 0, "explicacion": "**Lest** va con la forma base: *lest I sign*. Aquí Ana lo usa con humor, justamente porque *lest* suena tan solemne como el contrato." },
+      { "quien": "Sarah", "en": "Spoken like a true senior.", "es": "Así habla una verdadera senior." }
+    ] }
+]

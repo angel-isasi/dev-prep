@@ -1,0 +1,30 @@
+[
+  {
+    "id": "en-dominio-04-c01",
+    "es": "O sea, funciona, pero es lento.",
+    "natural": "I mean, it works, but it's slow.",
+    "calco": "Or be, it works, but it's slow.",
+    "explicacion": "\"O sea\" para precisar es **I mean**. *Or be* es la traducción palabra por palabra y no significa nada en inglés."
+  },
+  {
+    "id": "en-dominio-04-c02",
+    "es": "¿Cómo? No te escuché.",
+    "natural": "Sorry? I didn't catch that.",
+    "calco": "How? I didn't listen to you.",
+    "explicacion": "Para pedir que repitan se dice **Sorry?** o *Come again?*; *How?* pregunta por la manera de hacer algo. Y no oír algo es *hear* o *catch*, no *listen*."
+  },
+  {
+    "id": "en-dominio-04-c03",
+    "es": "¿Me entiendes?",
+    "natural": "You know what I mean?",
+    "calco": "You understand me?",
+    "explicacion": "**You know what I mean?** busca complicidad. *You understand me?* suena a regaño, como si la otra persona no pusiera atención."
+  },
+  {
+    "id": "en-dominio-04-c04",
+    "es": "Este... no estoy seguro.",
+    "natural": "Um, I'm not sure.",
+    "calco": "This... I'm not sure.",
+    "explicacion": "La muletilla \"este\" no se traduce: en inglés se usa **um** o *uh*, o mejor, una pausa corta en silencio."
+  }
+]

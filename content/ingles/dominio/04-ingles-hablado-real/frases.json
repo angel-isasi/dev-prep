@@ -1,0 +1,200 @@
+[
+  {
+    "id": "en-dominio-04-f01",
+    "en": "I mean, it works, it's just really slow.",
+    "es": "O sea, funciona, solo que es muy lento.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f02",
+    "en": "You know the login bug from last week? It's back.",
+    "es": "¿Te acuerdas del bug del login de la semana pasada? Volvió.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f03",
+    "en": "So yeah, that's pretty much where we are.",
+    "es": "Así que eso, básicamente ahí estamos.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f04",
+    "en": "Hang on, let me share my screen.",
+    "es": "Espera, déjame compartir mi pantalla.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f05",
+    "en": "Sorry, you lost me at the part about the cache.",
+    "es": "Perdón, me perdí en la parte de la caché.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f06",
+    "en": "Come again? You cut out for a second.",
+    "es": "¿Cómo dices? Se te cortó por un segundo.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f07",
+    "en": "Hold that thought, I want to finish this first.",
+    "es": "Guarda esa idea, quiero terminar esto primero.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f08",
+    "en": "Where was I? Oh right, the deploy script.",
+    "es": "¿En qué estaba? Ah, cierto, el script de despliegue."
+  },
+  {
+    "id": "en-dominio-04-f09",
+    "en": "Come to think of it, we never tested that on Safari.",
+    "es": "Ahora que lo pienso, nunca probamos eso en Safari.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f10",
+    "en": "My bad, I pushed to the wrong branch.",
+    "es": "Culpa mía, hice push a la rama equivocada.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f11",
+    "en": "For sure, I can take a look after lunch.",
+    "es": "Claro, puedo revisarlo después del almuerzo.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f12",
+    "en": "It's not like we have a choice, the client wants it Friday.",
+    "es": "Tampoco es que tengamos opción, el cliente lo quiere el viernes."
+  },
+  {
+    "id": "en-dominio-04-f13",
+    "en": "Plus, the old version doesn't even support dark mode.",
+    "es": "Además, la versión vieja ni siquiera tiene modo oscuro."
+  },
+  {
+    "id": "en-dominio-04-f14",
+    "en": "Then again, rewriting it would take at least a month.",
+    "es": "Aunque, por otro lado, reescribirlo tomaría al menos un mes."
+  },
+  {
+    "id": "en-dominio-04-f15",
+    "en": "I guess we could just ship it behind a feature flag.",
+    "es": "Supongo que podríamos lanzarlo detrás de un feature flag y ya.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f16",
+    "en": "Can we meet at ten-ish tomorrow?",
+    "es": "¿Nos vemos mañana a eso de las diez?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f17",
+    "en": "Quick question for you guys about the release.",
+    "es": "Una pregunta rápida para ustedes sobre el release.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f18",
+    "en": "Sounds like a plan. I'll send the invite.",
+    "es": "Me parece bien. Mando la invitación.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f19",
+    "en": "And she was like, why is this even here?",
+    "es": "Y ella me sale con: ¿y esto por qué está aquí?"
+  },
+  {
+    "id": "en-dominio-04-f20",
+    "en": "We need logs, metrics, alerts and stuff like that.",
+    "es": "Necesitamos logs, métricas, alertas y cosas así.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f21",
+    "en": "Right, I'm following you, keep going.",
+    "es": "Ajá, te sigo, continúa.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f22",
+    "en": "Sorry, I didn't catch that last part.",
+    "es": "Perdón, no entendí bien esa última parte.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f23",
+    "en": "Wait, so are we doing the migration this sprint or not?",
+    "es": "A ver, entonces, ¿hacemos la migración este sprint o no?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f24",
+    "en": "Anyway, the staging server was down again, so I couldn't test.",
+    "es": "En fin, el servidor de staging se volvió a caer, así que no pude probar.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f25",
+    "en": "You know what I mean? It just feels kind of hacky.",
+    "es": "¿Me entiendes? Se siente medio improvisado.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f26",
+    "en": "Honestly, I'm not sure, but I can find out.",
+    "es": "La verdad, no estoy seguro, pero puedo averiguarlo.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f27",
+    "en": "Okay, so, quick update: the bug is fixed.",
+    "es": "Bueno, a ver, una actualización rápida: el bug está arreglado.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f28",
+    "en": "Sorry, go ahead, you were saying?",
+    "es": "Perdón, sigue, ¿qué estabas diciendo?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f29",
+    "en": "No, you go first, I'll wait.",
+    "es": "No, tú primero, yo espero.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f30",
+    "en": "Just thinking out loud here, but what if we cache it?",
+    "es": "Solo estoy pensando en voz alta, pero ¿y si lo guardamos en caché?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f31",
+    "en": "Got it, so the fix goes in before the code freeze.",
+    "es": "Entendido, entonces el arreglo entra antes del congelamiento de código.",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f32",
+    "en": "Hey, real quick, did anyone touch the config file?",
+    "es": "Oigan, rapidito, ¿alguien tocó el archivo de configuración?",
+    "trabajo": true
+  },
+  {
+    "id": "en-dominio-04-f33",
+    "en": "It was like three hundred errors in an hour.",
+    "es": "Fueron como trescientos errores en una hora."
+  },
+  {
+    "id": "en-dominio-04-f34",
+    "en": "Here's the thing: the API changed overnight.",
+    "es": "El tema es este: la API cambió de la noche a la mañana.",
+    "trabajo": true
+  }
+]

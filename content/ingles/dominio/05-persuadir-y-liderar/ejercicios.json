@@ -1,0 +1,182 @@
+[
+  {
+    "id": "en-dominio-05-e01",
+    "pregunta": "Tienes que darle feedback difícil a un compañero. ¿Cuál es concreto y no ataca a la persona?",
+    "opciones": [
+      "You're always careless with tests.",
+      "In the last three PRs, the edge cases weren't tested, and two of them caused production bugs.",
+      "Maybe it's just me, but maybe the tests could maybe be a bit better?",
+      "Great job overall! Also, tests. But great job!"
+    ],
+    "correcta": 1,
+    "explicacion": "Hecho concreto + impacto: el otro puede verlo y corregirlo. *Always* generaliza y ataca a la persona; tanto *maybe* diluye el mensaje, y el sándwich de elogios esconde el problema."
+  },
+  {
+    "id": "en-dominio-05-e02",
+    "pregunta": "En una reunión con diez personas, la directora propone un plan que ves riesgoso. ¿Qué dices?",
+    "opciones": [
+      "Honestly, that's a bad idea.",
+      "Sorry, I'm probably wrong, forget it.",
+      "I might be missing some context, but I see a risk in the data migration. Can I walk through it?",
+      "Let's not do that."
+    ],
+    "correcta": 2,
+    "explicacion": "Reconocer que te puede faltar contexto le deja una salida, nombras un riesgo concreto y pides permiso para explicarlo. *That's a bad idea* en público la pone a la defensiva; retirarlo por miedo es callar un riesgo real."
+  },
+  {
+    "id": "en-dominio-05-e03",
+    "pregunta": "Tom dice: **\"I'll disagree and commit.\"** ¿Qué quiere decir?",
+    "opciones": [
+      "No está de acuerdo, pero apoya la decisión y la ejecuta en serio",
+      "Finge estar de acuerdo para evitar el conflicto",
+      "Acepta solo si el otro cede en algo",
+      "Seguirá discutiendo hasta convencer a todos"
+    ],
+    "correcta": 0,
+    "explicacion": "**Disagree and commit**: dices tu desacuerdo, y una vez tomada la decisión la ejecutas como si fuera tuya, sin sabotearla. La trampa es leerlo como fingir: el desacuerdo se dice en voz alta."
+  },
+  {
+    "id": "en-dominio-05-e04",
+    "pregunta": "\"Let's **socialize** the proposal before Friday's review.\" ¿Qué hay que hacer?",
+    "opciones": [
+      "Presentarla en una fiesta del equipo",
+      "Publicarla en redes sociales",
+      "Hacerla obligatoria para todos",
+      "Compartirla de a poco con las personas clave para recoger opiniones antes de decidir"
+    ],
+    "correcta": 3,
+    "explicacion": "En el trabajo, **socialize an idea** es hacerla circular antes de la reunión formal, para que nadie se sorprenda y lleguen las objeciones temprano. Nada que ver con fiestas ni redes."
+  },
+  {
+    "id": "en-dominio-05-e05",
+    "pregunta": "Vas atrasada y necesitas ayuda de tu manager. ¿Cuál es el pedido más eficaz?",
+    "opciones": [
+      "I'm drowning. I need help.",
+      "Can you tell the client the deadline is impossible?",
+      "To hit March, I need one more engineer for six weeks, or we move refunds to April. Which would you prefer?",
+      "I need help with everything on this project."
+    ],
+    "correcta": 2,
+    "explicacion": "Un buen **ask** es concreto y medible, y trae opciones: tu manager solo tiene que elegir. *I'm drowning* transmite angustia, pero no dice qué necesitas."
+  },
+  {
+    "id": "en-dominio-05-e06",
+    "pregunta": "Un release que aprobaste rompió producción. ¿Qué dices en la reunión del equipo?",
+    "opciones": [
+      "That's on me. I skipped the rollback test, and here's what I'm changing.",
+      "Mistakes were made during the release.",
+      "It wasn't really my fault, QA should have caught it.",
+      "I'm so sorry, I'm terrible at this, I always mess up."
+    ],
+    "correcta": 0,
+    "explicacion": "Asumes, dices qué pasó y qué cambias. *Mistakes were made* (pasiva) esconde quién; culpar a QA rompe la confianza; disculparte de más pone el foco en ti y no en el arreglo."
+  },
+  {
+    "id": "en-dominio-05-e07",
+    "pregunta": "\"I won't ___ it: we're two weeks behind.\"",
+    "opciones": [
+      "sugarcoat",
+      "sweeten",
+      "candy",
+      "soften up"
+    ],
+    "correcta": 0,
+    "explicacion": "**Sugarcoat** = endulzar una mala noticia para que no suene tan mal. La trampa es *sweeten*, que es mejorar una oferta (*sweeten the deal*), no suavizar una noticia."
+  },
+  {
+    "id": "en-dominio-05-e08",
+    "pregunta": "\"Tom went to ___ for me in the promotion meeting.\"",
+    "opciones": [
+      "war",
+      "bat",
+      "bed",
+      "battle"
+    ],
+    "correcta": 1,
+    "explicacion": "**Go to bat for someone** viene del béisbol: salir a batear por otro, dar la cara por él. *Go to war* es pelear contra alguien, otra idea."
+  },
+  {
+    "id": "en-dominio-05-e09",
+    "pregunta": "Una líder dice: **\"The buck stops with me.\"** ¿Qué quiere decir?",
+    "opciones": [
+      "Que se quedó sin presupuesto",
+      "Que ella decide cuándo se detiene el proyecto",
+      "Que ella maneja el dinero",
+      "Que la responsabilidad final es suya y no se la pasa a nadie"
+    ],
+    "correcta": 3,
+    "explicacion": "Viene de *pass the buck* (echarle la responsabilidad a otro): con ella, se acaba el pase. La trampa es leer *buck* como \"dólar\", que es otro sentido coloquial."
+  },
+  {
+    "id": "en-dominio-05-e10",
+    "pregunta": "Ana le dice a su manager: **\"I'll need some air cover if leadership pushes back.\"** ¿Qué le pide?",
+    "opciones": [
+      "Cobertura de wifi para trabajar remoto",
+      "Que la respalde ante la presión de los jefes de arriba",
+      "Que haga el trabajo por ella",
+      "Más días libres"
+    ],
+    "correcta": 1,
+    "explicacion": "**Air cover** es la protección que da un manager ante la presión de arriba, para que el equipo pueda hacer lo correcto. Es una metáfora militar, no tecnológica."
+  },
+  {
+    "id": "en-dominio-05-e11",
+    "pregunta": "Quieres que otro equipo adopte tu librería de componentes, pero no eres su jefe. ¿Qué dices?",
+    "opciones": [
+      "You have to use it, it's just better.",
+      "My manager says you should switch.",
+      "Everyone else is already using it.",
+      "What's the biggest pain in your current setup? Let me show you how this handles it."
+    ],
+    "correcta": 3,
+    "explicacion": "Influir sin autoridad es partir de **su** problema. Imponer, usar el nombre de tu jefe o la presión de grupo genera rechazo aunque tengas razón."
+  },
+  {
+    "id": "en-dominio-05-e12",
+    "pregunta": "\"The CTO **walked back** his comments about the deadline.\" ¿Qué pasó?",
+    "opciones": [
+      "Se retractó de lo que dijo sobre la fecha",
+      "Repitió sus comentarios",
+      "Se fue caminando de la reunión",
+      "Explicó sus comentarios con más detalle"
+    ],
+    "correcta": 0,
+    "explicacion": "**Walk back** una declaración = retractarse o suavizarla públicamente. La trampa es leerlo literal (volver caminando)."
+  },
+  {
+    "id": "en-dominio-05-e13",
+    "pregunta": "Escribes un RFC para un cambio grande. ¿Con qué conviene empezar?",
+    "opciones": [
+      "Con la solución detallada y el código",
+      "Con la lista de tecnologías que vas a usar",
+      "Con el problema y por qué importa ahora, con datos",
+      "Con quiénes podrían oponerse"
+    ],
+    "correcta": 2,
+    "explicacion": "Si el lector no comparte el problema, ninguna solución lo convence. Primero el dolor con números (*builds take forty minutes*), luego la propuesta, las alternativas y los riesgos."
+  },
+  {
+    "id": "en-dominio-05-e14",
+    "pregunta": "Llevas una hora de reunión, todos están agotados y vuelves a proponer tu idea por tercera vez. Sarah te escribe: **\"Read the room.\"** ¿Qué quiere decir?",
+    "opciones": [
+      "Que leas el documento de la reunión",
+      "Que te fijes en el ambiente: no es el momento",
+      "Que hables más fuerte",
+      "Que revises quién está conectado"
+    ],
+    "correcta": 1,
+    "explicacion": "**Read the room** = percibir el ánimo del grupo y actuar según eso. Insistir cuando el grupo está cansado te resta credibilidad aunque tengas razón."
+  },
+  {
+    "id": "en-dominio-05-e15",
+    "pregunta": "\"You can't argue every nit in code review. Pick your ___.\"",
+    "opciones": [
+      "fights",
+      "wars",
+      "battles",
+      "struggles"
+    ],
+    "correcta": 2,
+    "explicacion": "La expresión fija es **pick your battles**: elige qué peleas valen la pena. *Fights* se entiende, pero no es la frase hecha que usa un nativo."
+  }
+]
