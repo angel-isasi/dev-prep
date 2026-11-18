@@ -5,7 +5,7 @@ import { sumarDias } from "../../../../server/progreso-reglas.js";
 import { avanceConceptos } from "../leccion/variantes.js";
 import { COLECCION_EXTRA } from "../ingles/extra.js";
 import { hechaPorExamen } from "../ingles/examen.js";
-import { cumpleReto, EXPRESIONES, franjaDe, FRASES_NIVEL, lineaDiario, RETOS } from "./contenido-nivel.js";
+import { CHARLA, cumpleReto, EXPRESIONES, franjaDe, FRASES_NIVEL, lineaDiario, RETOS } from "./contenido-nivel.js";
 import { CASAS, clavesRobadas, elegir, estadoMapache, hash, nivelIngles, practico, regalosDeNivel, revisarRespuesta, xpDisponible } from "./reglas.js";
 import { ENTREVISTAS, MINIMO_PALABRAS, MUEBLES_GANADOS, POSTALES, PREGUNTAS, ROPA_NIVEL, SUENOS, TIENDA, TROFEO } from "./contenido.js";
 
@@ -135,8 +135,21 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
 
       // Lo que dice
       const clave = robadas.length >= 3 && estado.estado !== "escapado" && estado.estado !== "dormido" && estado.estado !== "feliz" ? "robos" : estado.estado;
-      const frase = elegir(FRASES_NIVEL[franja][clave] ?? FRASES_NIVEL[franja].normal, hoy + clave + palabra);
+      const delEstado = FRASES_NIVEL[franja][clave] ?? FRASES_NIVEL[franja].normal;
+      const frase = elegir(delEstado, hoy + clave + palabra);
       const rellenar = (t) => t.replaceAll("{w}", palabra).replaceAll("{n}", String(robadas.length));
+      const formato = (f) => ({ en: rellenar(f.en), es: rellenar(f.es), expresion: f.expresion ?? null });
+      // Cada vez que lo tocas dice otra: primero la del día, luego las de su estado alternadas con consejos
+      const porDia = (lista, sal) => [...lista].sort((x, y) => hash(hoy + sal + x.en) - hash(hoy + sal + y.en));
+      const restoEstado = porDia(delEstado.filter((f) => f !== frase), "estado");
+      const charla = ["dormido", "escapado"].includes(clave) ? [] : porDia(CHARLA, "charla");
+      const frases = frase ? [frase] : [];
+      for (let i = 0; i < Math.max(restoEstado.length, charla.length); i++) {
+        if (restoEstado[i]) frases.push(restoEstado[i]);
+        if (charla[i]) frases.push(charla[i]);
+      }
+      const sueno = elegir(SUENOS, hoy + "sueno");
+      const suenos = [sueno, ...porDia(SUENOS.filter((x) => x !== sueno), "sueno")];
 
       // Ropa: lo comprado y los regalos de nivel; lo que tiene puesto
       const compradas = compras(p);
@@ -210,9 +223,11 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
         nivel,
         ...estado,
         nivelMapache,
-        frase: frase ? { en: rellenar(frase.en), es: rellenar(frase.es), expresion: frase.expresion ?? null } : null,
+        frase: frase ? formato(frase) : null,
+        frases: frases.map(formato),
         expresionDelDia: elegir([...EXPRESIONES.B, ...EXPRESIONES.C], hoy + "expresion"),
-        sueno: elegir(SUENOS, hoy + "sueno"),
+        sueno,
+        suenos,
         casa: CASAS[nivel],
         robados: robadas.slice(0, 12).map((k) => acertijo(porClave.get(k), palabras)).filter(Boolean),
         totalRobados: robadas.length,

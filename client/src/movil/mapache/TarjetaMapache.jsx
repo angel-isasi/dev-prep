@@ -16,23 +16,42 @@ const CORTO = {
   escapado: "Se escapó a buscar comida.",
 };
 
+/**
+ * Lo que dice el mapache y qué pasa al tocarlo: despierto empieza con la frase del día y cada
+ * toque pasa a la siguiente (y la dice en voz alta); dormido, cada toque cuenta otro sueño.
+ */
+export function useCharlaMapache(datos) {
+  const voz = useHayVoz();
+  const [toques, setToques] = useState(0);
+  const dormido = datos?.estado === "dormido";
+  const lista = (dormido ? datos?.suenos : datos?.frases) ?? [];
+  const indice = dormido ? toques - 1 : toques;
+  const dice = indice >= 0 && lista.length ? lista[indice % lista.length] : null;
+  const tocar = () => {
+    if (!lista.length) return;
+    const siguiente = lista[(dormido ? toques : toques + 1) % lista.length];
+    setToques((t) => t + 1);
+    if (voz) hablar(siguiente.en);
+  };
+  return { dice, tocar, voz };
+}
+
 /** Versión corta para la pantalla de Inglés: el mapache, lo que dice y su pancita. */
 export function TarjetaMapache() {
   const [datos, setDatos] = useState(null);
-  const voz = useHayVoz();
+  const { dice, tocar } = useCharlaMapache(datos);
   useEffect(() => {
     api.mapache?.().then(setDatos, () => {});
   }, []);
   if (!datos) return null;
   const comida = Math.min(1, datos.comidaHoy / datos.meta);
-  const dice = datos.estado === "dormido" ? null : datos.frase;
   return (
     <div className={estilos.tarjeta}>
       <div className={estilos.dibujo}>
         {datos.estado === "escapado" ? (
           <CajaVacia tamano={104} />
         ) : (
-          <Mapache estado={datos.estado === "nuevo" ? "normal" : datos.estado} equipo={datos.equipo} tamano={104} alTocar={() => voz && dice && hablar(dice.en)} />
+          <Mapache estado={datos.estado === "nuevo" ? "normal" : datos.estado} equipo={datos.equipo} tamano={104} alTocar={tocar} />
         )}
       </div>
       <div className={estilos.texto}>
@@ -41,7 +60,7 @@ export function TarjetaMapache() {
           <span>{CORTO[datos.estado]}</span>
         </div>
         {dice && (
-          <p className={estilos.globo} lang="en" title={dice.es}>
+          <p key={dice.en} className={estilos.globo} lang="en" title={dice.es}>
             {dice.en}
           </p>
         )}

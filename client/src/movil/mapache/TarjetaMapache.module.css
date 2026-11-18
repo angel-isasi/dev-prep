@@ -98,3 +98,11 @@
     gap: var(--espacio-3);
   }
 }
+
+/* Al tocar al mapache la frase cambia con un pequeño fundido */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(4px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .globo { animation: aparecer 0.25s ease-out; }
+}

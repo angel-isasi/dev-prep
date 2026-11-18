@@ -66,8 +66,15 @@ export const FRASES_NIVEL = {
     escapado: [{ en: "I've gone out to look for food. Come back when you've done some English!", es: "Salí a buscar comida. ¡Vuelve cuando hayas hecho algo de inglés!", expresion: { en: "when you've done", es: "cuando hayas hecho" } }],
   },
   C: {
-    nuevo: [{ en: "Pleased to meet you. Fair warning: I have an insatiable appetite for English.", es: "Encantado. Te advierto: tengo un apetito insaciable de inglés.", expresion: { en: "fair warning", es: "te lo advierto" } }],
+    nuevo: [
+      { en: "Pleased to meet you. Fair warning: I have an insatiable appetite for English.", es: "Encantado. Te advierto: tengo un apetito insaciable de inglés.", expresion: { en: "fair warning", es: "te lo advierto" } },
+      { en: "So this is my new home? Cosy. It could do with a few more words, though.", es: "¿Así que esta es mi nueva casa? Acogedora. Aunque le vendrían bien unas cuantas palabras más.", expresion: { en: "could do with", es: "le vendría bien" } },
+      { en: "Let's get off on the right foot: one lesson, and I'm yours for life.", es: "Empecemos con el pie derecho: una lección y soy tuyo de por vida.", expresion: { en: "get off on the right foot", es: "empezar con el pie derecho" } },
+    ],
     feliz: [
+      { en: "You've been firing on all cylinders today. I could get used to this.", es: "Hoy estuviste a toda máquina. Podría acostumbrarme a esto.", expresion: { en: "firing on all cylinders", es: "a toda máquina" } },
+      { en: "I'm so full I can barely keep my eyes open. Worth every word.", es: "Estoy tan lleno que apenas puedo mantener los ojos abiertos. Valió cada palabra.", expresion: { en: "worth every...", es: "valió cada..." } },
+      { en: "Credit where credit's due: that was a seriously solid session.", es: "Hay que reconocerlo: fue una sesión muy sólida.", expresion: { en: "credit where credit's due", es: "hay que reconocerlo" } },
       { en: "Not only did you show up, but you nailed it. I'm stuffed.", es: "No solo viniste, sino que lo hiciste perfecto. Estoy repleto.", expresion: { en: "Not only did you..., but...", es: "no solo..., sino que... (inversión)" } },
       { en: "Had I known you'd study this much, I'd have saved room for dessert.", es: "Si hubiera sabido que ibas a estudiar tanto, habría dejado espacio para el postre.", expresion: { en: "save room for", es: "dejar espacio para" } },
       { en: "\"{w}\" went down a treat. Honestly, you're on a roll.", es: "\"{w}\" me encantó. La verdad, estás en racha.", expresion: { en: "on a roll", es: "en racha" } },
@@ -76,24 +83,49 @@ export const FRASES_NIVEL = {
       { en: "Reasonably fed, mildly ambitious. Shall we push it a bit further?", es: "Razonablemente alimentado, algo ambicioso. ¿Vamos un poco más allá?", expresion: { en: "push it further", es: "ir más allá" } },
       { en: "I wouldn't say no to a quick review of \"{w}\", for old times' sake.", es: "No le diría que no a un repaso rápido de \"{w}\", por los viejos tiempos.", expresion: { en: "wouldn't say no to", es: "no le diría que no a" } },
       { en: "No pressure, but my dinner plans depend entirely on you.", es: "Sin presión, pero mis planes de cena dependen por completo de ti.", expresion: { en: "No pressure, but...", es: "sin presión, pero... (ironía)" } },
+      { en: "We're halfway there. It'd be a shame to call it a day just yet.", es: "Vamos a la mitad. Sería una pena dar el día por terminado todavía.", expresion: { en: "call it a day", es: "dar el día por terminado" } },
+      { en: "I'm peckish rather than starving, which, frankly, is progress.", es: "Tengo algo de hambre, no muchísima, lo cual, francamente, es un avance.", expresion: { en: "peckish", es: "con algo de hambre" } },
+      { en: "One more lesson and I'll stop dropping hints. Probably.", es: "Una lección más y dejo de lanzarte indirectas. Probablemente.", expresion: { en: "drop hints", es: "lanzar indirectas" } },
     ],
     hambriento: [
       { en: "I'm so hungry I could eat a dictionary. Cover to cover.", es: "Tengo tanta hambre que me comería un diccionario. De principio a fin.", expresion: { en: "cover to cover", es: "de principio a fin" } },
       { en: "Were you to do one lesson now, I'd be eternally grateful.", es: "Si hicieras una lección ahora, te estaría eternamente agradecido.", expresion: { en: "Were you to...", es: "si hicieras... (inversión formal)" } },
       { en: "Not a single word all day. I'm beginning to take it personally.", es: "Ni una palabra en todo el día. Empiezo a tomármelo personal.", expresion: { en: "take it personally", es: "tomárselo personal" } },
+      { en: "My stomach is making noises I can only describe as passive-aggressive.", es: "Mi estómago hace ruidos que solo puedo describir como pasivo-agresivos.", expresion: { en: "I can only describe as", es: "que solo puedo describir como" } },
+      { en: "Just a handful of words would tide me over until dinner.", es: "Un puñado de palabras me ayudaría a aguantar hasta la cena.", expresion: { en: "tide someone over", es: "ayudar a aguantar" } },
+      { en: "I've been running on empty since this morning. Throw me a bone?", es: "Ando con el tanque vacío desde la mañana. ¿Me tiras un hueso?", expresion: { en: "running on empty", es: "con el tanque vacío" } },
     ],
     triste: [
       { en: "Our streak has gone down the drain, but there's no use crying over spilt milk.", es: "La racha se fue al tacho, pero a lo hecho, pecho.", expresion: { en: "no use crying over spilt milk", es: "a lo hecho, pecho" } },
       { en: "I won't hold it against you. Just don't make a habit of it.", es: "No te lo voy a reprochar. Solo no lo conviertas en costumbre.", expresion: { en: "hold it against someone", es: "reprocharle algo a alguien" } },
+      { en: "Every streak starts at day one. Let's dust ourselves off and get back on track.", es: "Toda racha empieza en el día uno. Sacudámonos el polvo y volvamos al camino.", expresion: { en: "get back on track", es: "retomar el rumbo" } },
+      { en: "I've been moping around all day. A lesson would cheer me up no end.", es: "Estuve desanimado todo el día. Una lección me alegraría muchísimo.", expresion: { en: "no end", es: "muchísimo" } },
+      { en: "It's not the end of the world, but I did miss you, you know.", es: "No es el fin del mundo, pero sí te extrañé, ¿sabes?", expresion: { en: "I did miss you", es: "sí te extrañé (did para enfatizar)" } },
     ],
     robos: [
       { en: "Full disclosure: {n} of your words are in my secret stash. Earn them back.", es: "Para ser sincero: {n} de tus palabras están en mi escondite secreto. Recupéralas.", expresion: { en: "full disclosure", es: "para ser totalmente sincero" } },
       { en: "Let's just say {n} words mysteriously vanished on my watch.", es: "Digamos que {n} palabras desaparecieron misteriosamente mientras yo vigilaba.", expresion: { en: "on my watch", es: "bajo mi responsabilidad" } },
+      { en: "I've got {n} of your words tucked away. Finders keepers, unless you review them.", es: "Tengo {n} de tus palabras bien guardadas. El que lo encuentra se lo queda, a menos que las repases.", expresion: { en: "finders keepers", es: "el que lo encuentra se lo queda" } },
+      { en: "{n} words are gathering dust in my den. Rescue them before I grow attached.", es: "{n} palabras están juntando polvo en mi madriguera. Rescátalas antes de que me encariñe.", expresion: { en: "grow attached", es: "encariñarse" } },
     ],
     dormido: [{ en: "Zzz... wake me up when the code compiles...", es: "Zzz... despiértame cuando el código compile..." }],
     escapado: [{ en: "Off foraging. Should you feel like practicing, you know where to find me.", es: "Salí a buscar comida. Si te animas a practicar, ya sabes dónde encontrarme.", expresion: { en: "Should you feel like...", es: "si te animas a... (inversión formal)" } }],
   },
 };
+
+/** Lo que dice cuando lo sigues tocando: consejos y comentarios en C1 que valen para cualquier estado despierto. */
+export const CHARLA = [
+  { en: "Quick tip: in an interview, \"I'm not sure, but I'd start by...\" beats silence every time.", es: "Consejo rápido: en una entrevista, \"I'm not sure, but I'd start by...\" le gana siempre al silencio.", expresion: { en: "beats ... every time", es: "siempre le gana a" } },
+  { en: "Remember: you \"make\" a mistake, but you \"do\" your homework. I learned that the hard way.", es: "Recuerda: \"make\" a mistake, pero \"do\" your homework. Lo aprendí a la mala.", expresion: { en: "the hard way", es: "a la mala" } },
+  { en: "If a recruiter says \"we'll be in touch\", don't hold your breath. Keep applying.", es: "Si un reclutador dice \"we'll be in touch\", no esperes sentado. Sigue postulando.", expresion: { en: "don't hold your breath", es: "no esperes sentado" } },
+  { en: "Between you and me, \"actually\" doesn't mean \"actualmente\". It means \"en realidad\".", es: "Entre nos, \"actually\" no significa \"actualmente\". Significa \"en realidad\".", expresion: { en: "between you and me", es: "entre nos" } },
+  { en: "I've been meaning to tell you: your pronunciation is coming along nicely.", es: "Hace rato quería decírtelo: tu pronunciación está mejorando bastante.", expresion: { en: "come along", es: "ir mejorando" } },
+  { en: "Pro tip: when a word escapes you, describe it. Nobody expects a walking dictionary.", es: "Consejo: cuando se te escape una palabra, descríbela. Nadie espera un diccionario andante.", expresion: { en: "a word escapes you", es: "se te escapa una palabra" } },
+  { en: "Whenever you're stuck on a bug, explain it out loud. To me, ideally. I'm a great listener.", es: "Cuando te trabes con un bug, explícalo en voz alta. A mí, de preferencia. Sé escuchar muy bien.", expresion: { en: "be stuck on", es: "estar trabado con" } },
+  { en: "\"I look forward to hearing from you\": the line that wraps up any decent email.", es: "\"I look forward to hearing from you\": la frase que cierra cualquier buen correo.", expresion: { en: "wrap up", es: "cerrar, concluir" } },
+  { en: "Raccoons wash their food before eating it. I'd rather wash mine down with phrasal verbs.", es: "Los mapaches lavan su comida antes de comerla. Yo prefiero bajar la mía con phrasal verbs.", expresion: { en: "wash something down", es: "bajar la comida con algo" } },
+  { en: "Little by little, a little becomes a lot. That's my whole philosophy, and my diet.", es: "Poco a poco, lo poco se vuelve mucho. Esa es toda mi filosofía, y mi dieta.", expresion: { en: "little by little", es: "poco a poco" } },
+];
 
 /** Una línea de su diario por día, a tu franja de nivel; cambia según el día para no repetirse. */
 export function lineaDiario({ minutos, palabras, lecciones, historias, franja = "A", semilla = 0 }) {

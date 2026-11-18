@@ -787,3 +787,11 @@
   color: var(--texto-tenue);
   font-size: 12px;
 }
+
+/* Al tocar al mapache la frase cambia con un pequeño fundido */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(4px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .globo p { animation: aparecer 0.25s ease-out; }
+}

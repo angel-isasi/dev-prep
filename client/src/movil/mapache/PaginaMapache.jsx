@@ -4,11 +4,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
-import { hablar, useHayVoz } from "../../lib/voz.js";
+import { hablar } from "../../lib/voz.js";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { ContenidoPestanas, Pestanas } from "../../components/Pestanas.jsx";
 import { IconoAudio, IconoFlechaIzq } from "../../components/Iconos.jsx";
 import { Casa } from "./Casa.jsx";
+import { useCharlaMapache } from "./TarjetaMapache.jsx";
 import { Album, Diario, Entrevista, ObjetosPerdidos, PalabraDelDia, Postales, PreguntaDelDia, RepiteConmigo, Ropa, Tienda, TrashPanda, TusErrores } from "./Actividades.jsx";
 import estilos from "./PaginaMapache.module.css";
 
@@ -34,9 +35,8 @@ export function PaginaMapache() {
   const [error, setError] = useState(null);
   const [pestana, setPestana] = useState("hoy");
   const [traduccion, setTraduccion] = useState(false);
-  const [sueno, setSueno] = useState(false);
   const [editando, setEditando] = useState(false);
-  const voz = useHayVoz();
+  const { dice: charla, tocar: tocarMapache, voz } = useCharlaMapache(datos);
 
   const cargar = () => api.mapache().then(setDatos, (e) => setError(e.message));
   useEffect(() => {
@@ -46,13 +46,8 @@ export function PaginaMapache() {
   if (error) return <p className={estilos.mensaje}>{error}</p>;
   if (!datos) return <Esqueleto variante="tarjetas" />;
 
-  const dice = sueno && datos.estado === "dormido" ? datos.sueno : datos.frase;
-  // Tocarlo: dice su frase en voz alta; si está dormido, te cuenta qué soñaba
-  const tocarMapache = () => {
-    const frase = datos.estado === "dormido" ? datos.sueno : datos.frase;
-    if (datos.estado === "dormido") setSueno(true);
-    if (voz && frase) hablar(frase.en);
-  };
+  // Tocarlo: cada vez dice otra frase; si está dormido, te cuenta qué soñaba (antes de tocarlo, su "Zzz")
+  const dice = charla ?? datos.frase;
 
   async function renombrar(e) {
     e.preventDefault();
@@ -94,7 +89,7 @@ export function PaginaMapache() {
 
           {dice && (
             <div className={estilos.globo}>
-              <p lang="en">{dice.en}</p>
+              <p key={dice.en} lang="en">{dice.en}</p>
               {traduccion && <small>{dice.es}</small>}
               {dice.expresion && (
                 <span className={estilos.expresion}>
