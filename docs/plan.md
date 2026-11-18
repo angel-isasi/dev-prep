@@ -420,3 +420,8 @@ Reglas: el progreso guardado no cambia (las medidas nuevas se calculan al leer),
 - La lista de rutas de la web ya no está copiada dos veces.
 
 Pendiente de la tanda 2: unir las tres versiones de Ajustes y que la app local (`localhost:4321`) muestre exactamente la misma web. Inicio + Hoy y las dos versiones de Ejercicio se unen cuando se rehagan esas pantallas (tandas 3 y 5).
+
+### Tanda 2, segunda parte (2026-11-18): una sola pantalla de Ajustes y un solo punto de entrada
+
+- **Ajustes es una sola pantalla** (`pages/Ajustes.jsx`) en la laptop, la web y el celular; antes había tres con campos distintos. En el celular ya se pueden cambiar la meta diaria, el tope de deuda y la fecha meta, y está Empezar de cero. En pantallas anchas las secciones van en dos columnas.
+- **El acceso directo abre la versión web** si existe `data/abrir-web.txt` con su dirección (`scripts/abrir.ps1`). Es la misma app conectada al motor, así que ya no hay que elegir entre la interfaz local y la web. Sin ese archivo se abre la interfaz local de siempre.

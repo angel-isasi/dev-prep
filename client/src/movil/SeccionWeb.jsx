@@ -8,8 +8,15 @@ import { SeccionRutina } from "../components/SeccionRutina.jsx";
 import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
 import { SeccionLaptop } from "./SeccionLaptop.jsx";
 import { HoldButton } from "../components/ui/hold-button.jsx";
+import { usePantallaGrande } from "../hooks/usePantallaGrande.js";
 
-const fecha = (iso) => new Date(iso).toLocaleString("es-PE", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+const fecha = (iso) =>
+  new Date(iso).toLocaleString("es-PE", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
 /** Borra el service worker y la caché, y recarga: descarga todo de nuevo (requiere internet). */
 async function forzarActualizacion() {
@@ -22,14 +29,19 @@ export function SeccionWeb() {
   const [vinculo, setVinculo] = useState(leerVinculo);
   const [version, setVersion] = useState(null);
   const [aviso, setAviso] = useState(null);
+  const [reportados, setReportados] = useState({});
   const archivo = useRef(null);
+  const grande = usePantallaGrande();
 
   useEffect(() => {
     api.version().then(setVersion, () => {});
+    api.reportados().then(setReportados, () => {});
   }, []);
 
   function descargar() {
-    const blob = new Blob([api.exportarProgreso()], { type: "application/json" });
+    const blob = new Blob([api.exportarProgreso()], {
+      type: "application/json",
+    });
     const enlace = document.createElement("a");
     enlace.href = URL.createObjectURL(blob);
     enlace.download = `dev-prep-respaldo-${new Date().toISOString().slice(0, 10)}.json`;
@@ -51,7 +63,8 @@ export function SeccionWeb() {
 
   return (
     <>
-      <SeccionLaptop />
+      {/* Conectar con el dev-prep de la laptop solo tiene sentido en una computadora */}
+      {grande && <SeccionLaptop />}
       <SeccionAvisos />
       <SeccionRutina />
 
@@ -123,6 +136,29 @@ export function SeccionWeb() {
         </div>
         {aviso && <p className={estilos.ayuda}>{aviso}</p>}
       </section>
+
+      {Object.keys(reportados).length > 0 && (
+        <section className={estilos.seccion}>
+          <h2>Preguntas reportadas</h2>
+          <p className={estilos.ayuda}>Las marcaste como mal hechas y no salen en las lecciones. Si fue un error, restáuralas.</p>
+          {Object.entries(reportados).map(([clave, fechaReporte]) => (
+            <div key={clave} className={estilos.acciones}>
+              <code>{clave}</code>
+              <small>{fechaReporte}</small>
+              <button
+                type="button"
+                className="boton boton-fantasma"
+                onClick={async () => {
+                  await api.quitarReporte(clave);
+                  setReportados(await api.reportados());
+                }}
+              >
+                Restaurar
+              </button>
+            </div>
+          ))}
+        </section>
+      )}
 
       <section className={estilos.seccion}>
         <h2>Contenido</h2>

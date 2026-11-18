@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio-3);
-  margin-top: var(--espacio-4);
+  margin-bottom: var(--espacio-4);
   padding: var(--espacio-6);
+  break-inside: avoid; /* en Ajustes van en columnas: la tarjeta no se parte */
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
   background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
@@ -58,4 +59,10 @@
   margin: 0;
   color: var(--texto-suave);
   font-size: var(--letra-4);
+}
+
+@media (max-width: 600px) {
+  .seccion {
+    padding: var(--espacio-4);
+  }
 }

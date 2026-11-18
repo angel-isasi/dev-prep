@@ -97,6 +97,7 @@ npm install
 - **Desktop shortcut (recommended):** run `npm run acceso-directo` once. Double-click **dev-prep** on the desktop and the app opens in the browser in a few seconds, with no console window.
 - **Web version only:** run `npm run arranque:activar` once. The engine starts hidden with Windows (about 100 MB of memory), and dev-prep.angel-isasi.com on this laptop gets VS Code and live tests. `npm run arranque:quitar` undoes it.
 - **With a console (to see errors):** double-click `iniciar.bat`.
+- **Open the web version from the shortcut:** create `data/abrir-web.txt` with the address of the published app (for example `https://dev-prep.angel-isasi.com`). The shortcut then starts the engine and opens that page instead of the local interface: same app, connected to the engine for VS Code and live tests, plus English, lessons and job search. It still opens offline, because the browser stores it on the first visit.
 
 ### Practicing an exercise
 

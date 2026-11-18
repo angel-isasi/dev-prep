@@ -13,6 +13,16 @@ Set-Location -LiteralPath $raiz
 $puerto = 4321
 $url = "http://localhost:$puerto"
 
+# Si existe data/abrir-web.txt con una direccion (por ejemplo https://dev-prep.angel-isasi.com), se abre
+# esa version web en lugar de la interfaz local: es la misma app, conectada a este motor para VS Code y
+# los tests en vivo, y con todo lo demas (ingles, lecciones, trabajo). Sin internet abre igual, porque el
+# navegador la guarda la primera vez. Sin ese archivo, se abre la interfaz local de siempre.
+$archivoWeb = Join-Path $raiz "data/abrir-web.txt"
+if (Test-Path -LiteralPath $archivoWeb) {
+  $web = (Get-Content -LiteralPath $archivoWeb -Raw).Trim()
+  if ($web -match "^https://") { $url = $web }
+}
+
 function Avisar($mensaje) {
   (New-Object -ComObject WScript.Shell).Popup($mensaje, 30, "dev-prep", 48) | Out-Null
 }

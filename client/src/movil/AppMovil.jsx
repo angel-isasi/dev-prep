@@ -28,7 +28,6 @@ import { perezoso } from "../lib/perezoso.js";
 const HoyMovil = perezoso(() => import("./HoyMovil.jsx"), "HoyMovil");
 const EjercicioMovil = perezoso(() => import("./EjercicioMovil.jsx"), "EjercicioMovil");
 const ChuletasMovil = perezoso(() => import("./ChuletasMovil.jsx"), "ChuletasMovil");
-const AjustesMovil = perezoso(() => import("./AjustesMovil.jsx"), "AjustesMovil");
 const VincularMovil = perezoso(() => import("./VincularMovil.jsx"), "VincularMovil");
 const LeccionMovil = perezoso(() => import("./leccion/LeccionMovil.jsx"), "LeccionMovil");
 const RutaLecciones = perezoso(() => import("./leccion/RutaLecciones.jsx"), "RutaLecciones");
@@ -128,7 +127,7 @@ export function App() {
           <Route path="entrevistas" element={<Entrevistas />} />
           <Route path="referencia" element={<Referencia />} />
           <Route path="progreso" element={<Progreso />} />
-          <Route path="ajustes" element={grande ? <Ajustes seccionExtra={<SeccionWeb />} /> : <AjustesMovil />} />
+          <Route path="ajustes" element={<Ajustes seccionExtra={<SeccionWeb />} />} />
           {soloWeb}
           <Route path="*" element={<Proximamente titulo="Página no encontrada" texto="Esta ruta no existe." />} />
         </Route>

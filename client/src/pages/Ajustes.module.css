@@ -1,5 +1,5 @@
 .pagina {
-  max-width: 880px;
+  max-width: var(--ancho-pagina);
   margin: 0 auto;
   padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
 }
@@ -9,10 +9,25 @@
   color: var(--texto-suave);
 }
 
+/* Las secciones en dos columnas cuando hay ancho; cada tarjeta entera en una columna */
+.columnas {
+  max-width: 880px;
+}
+
+@media (min-width: 1200px) {
+  .columnas {
+    max-width: none;
+    columns: 2;
+    column-gap: var(--espacio-4);
+  }
+}
+
 .formulario {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-5);
+  margin-bottom: var(--espacio-4);
+  break-inside: avoid;
   padding: var(--espacio-6);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
@@ -109,4 +124,15 @@
 /* Los tres campos de la fila quedan alineados abajo aunque su ayuda ocupe dos líneas */
 .fila input {
   margin-top: auto;
+}
+
+/* Celular: menos margen y menos relleno en las tarjetas */
+@media (max-width: 600px) {
+  .pagina {
+    padding: var(--espacio-4) var(--espacio-4) var(--espacio-6);
+  }
+
+  .formulario {
+    padding: var(--espacio-4);
+  }
 }
