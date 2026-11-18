@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { CLAVE, crearProgresoMovil, rachaMovil } from "./progreso-movil.js";
+import { CLAVE, crearProgresoMovil } from "./progreso-movil.js";
 
 /** Un localStorage falso, en memoria. */
 function almacenFalso(inicial = {}) {
@@ -83,19 +83,6 @@ describe("progreso del celular", () => {
     b.importar(a.exportar());
     expect(b.datos().preguntas["ent-003"].ultima).toBe("dude");
     expect(b.datos().misRespuestas.pitch).toBe("Hola");
-  });
-});
-
-describe("racha del celular", () => {
-  test("cuenta días seguidos con algo estudiado, terminando hoy o ayer", () => {
-    const dias = {
-      "2026-11-12": { preguntas: 2 },
-      "2026-11-13": { quizzes: 1 },
-      "2026-11-14": { lecturas: 1 },
-    };
-    expect(rachaMovil(dias, "2026-11-15")).toBe(3); // hoy aún no estudió: cuenta hasta ayer
-    expect(rachaMovil({ ...dias, "2026-11-15": { preguntas: 1 } }, "2026-11-15")).toBe(4);
-    expect(rachaMovil(dias, "2026-11-16")).toBe(0); // ayer (15) no estudió
   });
 });
 

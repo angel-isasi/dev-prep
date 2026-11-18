@@ -1,9 +1,11 @@
 // Métricas de la pantalla Inicio y Progreso, como funciones puras.
-// "Hecho" en un día = ejercicios resueltos + repasos completados + (si estudiaste en el celular)
-// una lección completa, que cuenta 1 como máximo: la meta sigue pidiendo práctica real en la laptop.
+// "Hecho" en un día = sus puntos de estudio (server/puntos.js): cuenta todo lo que haces, en la
+// laptop y en el celular, cada cosa con su peso. La meta, la deuda y la racha se miden en puntos.
 import { estadoVisible, sumarDias } from "./progreso-reglas.js";
+import { PUNTOS_POR_META, huboEstudio, puntosDe, segundosDe } from "./puntos.js";
 
-export const hechoDe = (dia) => (dia?.resueltos ?? 0) + (dia?.repasos ?? 0) + Math.min(dia?.lecciones ?? 0, 1);
+/** Lo hecho en un día, en puntos de estudio. */
+export const hechoDe = puntosDe;
 
 /** Días entre dos fechas "AAAA-MM-DD" (b - a). */
 export function diasEntre(a, b) {
@@ -26,15 +28,17 @@ export const PESOS_HORARIO = { libre: 0, poco: 0.5, normal: 1, mucho: 1.5 };
 export const DIAS_SEMANA = ["lun", "mar", "mie", "jue", "vie", "sab", "dom"];
 
 /**
- * Meta de un día según tu horario: la meta diaria repartida por pesos (más el sábado, menos el día
- * de clases largas). Sin horario, es la meta diaria de siempre.
+ * Meta de un día, en puntos. El número de Ajustes (`metaDiaria`) son unidades de 25 puntos: con 2,
+ * la meta es de 50 puntos. Con horario se reparte por pesos (más el sábado, menos el día de clases
+ * largas) sin cambiar el total de la semana, redondeada de 5 en 5.
  */
 export function metaDelDia(fecha, metaDiaria, horario) {
-  if (!horario) return metaDiaria;
+  const base = metaDiaria * PUNTOS_POR_META;
+  if (!horario) return base;
   const pesos = DIAS_SEMANA.map((d) => PESOS_HORARIO[horario[d]] ?? 1);
   const promedio = pesos.reduce((a, b) => a + b, 0) / 7;
-  if (!promedio) return metaDiaria;
-  return Math.round((metaDiaria * pesos[diaSemana(fecha)]) / promedio);
+  if (!promedio) return base;
+  return Math.round((base * pesos[diaSemana(fecha)]) / promedio / 5) * 5;
 }
 
 /** ¿Esa fecha cae en una pausa (semana de exámenes)? */
@@ -44,8 +48,9 @@ export const enPausa = (fecha, pausas = []) => pausas.some((p) => p.desde <= fec
 export const SALVADOS_POR_SEMANA = 2;
 
 /**
- * Meta del día, deuda y racha.
- * - Deuda: lo que no hiciste un día se suma al siguiente, con tope. Cuenta desde tu primer día.
+ * Meta del día, deuda y racha. Todo en puntos de estudio.
+ * - Deuda: lo que no hiciste un día se suma al siguiente, con tope (`topeDeuda` son unidades de
+ *   25 puntos, igual que la meta). Cuenta desde tu primer día.
  * - Racha: días seguidos cumpliendo la meta (termina hoy si ya cumpliste, si no, ayer).
  * - Día salvado: si un día hiciste algo pero no llegaste, la racha no se rompe (máximo 2 por
  *   semana, de lunes a domingo). La deuda igual suma. Hoy se acredita recién al cerrar el día.
@@ -56,9 +61,10 @@ export const SALVADOS_POR_SEMANA = 2;
  * @param {{ horario?: object, pausas?: { desde: string, hasta: string }[] }} [extras]
  */
 export function resumenDias(dias, { metaDiaria, topeDeuda }, hoy, { horario = null, pausas = [] } = {}) {
-  const fechas = Object.keys(dias).filter((f) => hechoDe(dias[f]) > 0 || dias[f]?.segundos > 0).sort();
+  const fechas = Object.keys(dias).filter((f) => huboEstudio(dias[f])).sort();
   const primerDia = fechas[0] ?? hoy;
   const meta = (f) => metaDelDia(f, metaDiaria, horario);
+  const tope = topeDeuda * PUNTOS_POR_META;
 
   // Hacia adelante: deuda y estado de cada día cerrado (cumplió, salvado, pausa o falló)
   let deuda = 0;
@@ -71,7 +77,7 @@ export function resumenDias(dias, { metaDiaria, topeDeuda }, hoy, { horario = nu
     }
     const hecho = hechoDe(dias[f]);
     const objetivo = meta(f) + deuda;
-    deuda = Math.min(topeDeuda, Math.max(0, objetivo - hecho));
+    deuda = Math.min(tope, Math.max(0, objetivo - hecho));
     const lunes = lunesDe(f);
     if (hecho >= meta(f)) estado[f] = "cumplio";
     else if (hecho > 0 && (salvadosEnSemana[lunes] ?? 0) < SALVADOS_POR_SEMANA) {
@@ -119,7 +125,7 @@ export function resumenDias(dias, { metaDiaria, topeDeuda }, hoy, { horario = nu
     racha,
     salvados: { semana: usadosSemana, maximo: SALVADOS_POR_SEMANA },
     estados: estado,
-    ayer: usoAyerOAntes ? { hecho: hechoDe(dias[ayer]), cumplio: estado[ayer] === "cumplio" || estado[ayer] === "pausa", estado: estado[ayer] ?? null } : null,
+    ayer: usoAyerOAntes ? { hecho: hechoDe(dias[ayer]), meta: enPausa(ayer, pausas) ? 0 : meta(ayer), cumplio: estado[ayer] === "cumplio" || estado[ayer] === "pausa", estado: estado[ayer] ?? null } : null,
   };
 }
 
@@ -192,7 +198,7 @@ export function ritmo({ fechaMeta, hoy, totalEjercicios, resueltos, dias }) {
   const diasRestantes = diasEntre(hoy, fechaMeta);
   const pendientes = Math.max(0, totalEjercicios - resueltos);
 
-  const conActividad = Object.keys(dias).filter((f) => hechoDe(dias[f]) > 0 || dias[f]?.segundos > 0).sort();
+  const conActividad = Object.keys(dias).filter((f) => huboEstudio(dias[f])).sort();
   const primerDia = conActividad[0] && conActividad[0] <= hoy ? conActividad[0] : hoy;
   const diasHistoria = Math.min(7, diasEntre(primerDia, hoy) + 1);
 
@@ -226,10 +232,12 @@ export function semana(dias, hoy, preparacionHoy) {
   let resueltos = 0;
   let repasos = 0;
   let segundos = 0;
+  let puntos = 0;
   for (let f = lunes; f <= hoy; f = sumarDias(f, 1)) {
     resueltos += dias[f]?.resueltos ?? 0;
     repasos += dias[f]?.repasos ?? 0;
-    segundos += dias[f]?.segundos ?? 0;
+    segundos += segundosDe(dias[f]);
+    puntos += hechoDe(dias[f]);
   }
 
   // La última foto de preparación antes del lunes (o 0 si no hay).
@@ -241,20 +249,24 @@ export function semana(dias, hoy, preparacionHoy) {
   // Los 7 días de lunes a domingo, para el gráfico de barras de Inicio (los que aún no llegan, futuro: true).
   const porDia = Array.from({ length: 7 }, (_, i) => {
     const fecha = sumarDias(lunes, i);
-    return { fecha, hecho: hechoDe(dias[fecha]), minutos: Math.round((dias[fecha]?.segundos ?? 0) / 60), futuro: fecha > hoy };
+    return { fecha, hecho: hechoDe(dias[fecha]), minutos: Math.round(segundosDe(dias[fecha]) / 60), futuro: fecha > hoy };
   });
 
   return {
     desde: lunes,
     resueltos,
     repasos,
+    puntos,
     minutos: Math.round(segundos / 60),
     subioPreparacion: Math.round((preparacionHoy - antes) * 10) / 10,
     dias: porDia,
   };
 }
 
-/** Calendario tipo GitHub: las últimas `semanas` semanas, con intensidad de 0 a 4. */
+/**
+ * Calendario tipo GitHub: las últimas `semanas` semanas, con intensidad de 0 a 4 según los puntos
+ * del día (1: algo; 2: un ejercicio o su equivalente; 3: tres; 4: cinco o más).
+ */
 export function calendario(dias, hoy, semanas = 20) {
   const [a, m, d] = hoy.split("-").map(Number);
   const diaSemana = (new Date(a, m - 1, d).getDay() + 6) % 7;
@@ -262,8 +274,9 @@ export function calendario(dias, hoy, semanas = 20) {
   const celdas = [];
   for (let f = inicio; f <= hoy; f = sumarDias(f, 1)) {
     const hecho = hechoDe(dias[f]);
-    const minutos = Math.round((dias[f]?.segundos ?? 0) / 60);
-    const nivel = hecho >= 5 ? 4 : hecho >= 3 ? 3 : hecho >= 1 ? 2 : minutos > 0 ? 1 : 0;
+    const minutos = Math.round(segundosDe(dias[f]) / 60);
+    const unidades = hecho / PUNTOS_POR_META;
+    const nivel = unidades >= 5 ? 4 : unidades >= 3 ? 3 : unidades >= 1 ? 2 : huboEstudio(dias[f]) ? 1 : 0;
     celdas.push({ fecha: f, hecho, minutos, nivel });
   }
   return celdas;

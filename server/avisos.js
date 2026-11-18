@@ -8,7 +8,8 @@
 // - A las 11:00: ofertas de trabajo nuevas que te convienen (las busca la Lambda; ver ofertas-auto.js).
 // - A las 12:00: una postulación cumple 7, 14 o 21 días sin respuesta (ver postulaciones.js).
 import { diasCombinados, fusionarDocumento, vivos } from "./combinar.js";
-import { DIAS_SEMANA, diaSemana, enPausa, hechoDe, lunesDe, resumenDias } from "./metricas.js";
+import { DIAS_SEMANA, diaSemana, enPausa, lunesDe, resumenDias } from "./metricas.js";
+import { huboEstudio } from "./puntos.js";
 import { seguimientosParaAvisar } from "./postulaciones.js";
 import { sumarDias } from "./progreso-reglas.js";
 
@@ -95,7 +96,7 @@ export function decidirAvisos(documentos, ahora, estado = {}, { ofertasNuevas = 
   const dias = diasCombinados(doc);
   const resumen = resumenDias(dias, config, hoy, { horario, pausas });
   const dia = dias[hoy] ?? {};
-  const algoHoy = hechoDe(dia) + (dia.preguntas ?? 0) + (dia.ingles ?? 0) + (dia.lecturas ?? 0) + (dia.quizzes ?? 0) > 0;
+  const algoHoy = huboEstudio(dia);
   const horaRecordatorio = Number(String(ajustes.avisos?.hora ?? "").slice(0, 2)) || horaHabitual(doc, hoy);
 
   const candidatos = [];
@@ -103,18 +104,18 @@ export function decidirAvisos(documentos, ahora, estado = {}, { ofertasNuevas = 
     candidatos.push({
       tipo: "recordatorio",
       titulo: resumen.racha > 0 ? `Tu racha de ${resumen.racha} ${resumen.racha === 1 ? "día" : "días"} te espera` : "Hoy toca practicar",
-      cuerpo: "Una lección de 5 minutos ya cuenta. Empieza por ahí.",
+      cuerpo: "Una lección de 3 minutos ya suma puntos. Empieza por ahí.",
       url: "/",
     });
   }
   if (hora === 21 && !resumen.hoy.cumplioMeta && resumen.racha > 0) {
-    const falta = Math.max(1, resumen.hoy.meta - resumen.hoy.hecho);
+    const falta = Math.max(1, resumen.hoy.meta - resumen.hoy.hecho); // en puntos
     candidatos.push({
       tipo: "ultima-llamada",
       titulo: "Última llamada para tu racha",
       cuerpo: resumen.hoy.salvable
         ? "Ya hiciste algo hoy: si lo dejas aquí, la racha se salva. Una cosa más y cumples."
-        : `Te ${falta === 1 ? "falta 1" : `faltan ${falta}`} para tu meta. 10 minutos salvan el día.`,
+        : `Te ${falta === 1 ? "falta 1 punto" : `faltan ${falta} puntos`} para tu meta. Una lección da 8.`,
       url: "/leccion?modo=rapida",
     });
   }

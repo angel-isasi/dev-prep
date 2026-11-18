@@ -16,7 +16,7 @@ export function GraficoSemana({ dias, meta, hoy }) {
   const alturaMeta = (meta / tope) * 100;
 
   return (
-    <div className={estilos.grafico} role="img" aria-label={`Ejercicios por día esta semana. Meta: ${meta} al día.`}>
+    <div className={estilos.grafico} role="img" aria-label={`Puntos de estudio por día esta semana. Meta: ${meta} al día.`}>
       <div className={estilos.zona}>
         <div className={estilos.meta} style={{ bottom: `${alturaMeta}%` }}>
           <span>meta {meta}</span>
@@ -24,13 +24,13 @@ export function GraficoSemana({ dias, meta, hoy }) {
         {dias.map((d, i) => {
           const esHoy = d.fecha === hoy;
           const cumplio = d.hecho >= meta && meta > 0;
-          // Un día con solo minutos (sin ejercicios terminados) deja una barra mínima
+          // Un día con solo minutos (sin puntos) deja una barra mínima
           const altura = d.hecho > 0 ? (d.hecho / tope) * 100 : d.minutos > 0 ? 4 : 0;
           return (
             <div
               key={d.fecha}
               className={estilos.columna}
-              title={`${NOMBRES[i]}: ${d.hecho} ${d.hecho === 1 ? "ejercicio" : "ejercicios"}, ${d.minutos} min`}
+              title={`${NOMBRES[i]}: ${d.hecho} ${d.hecho === 1 ? "punto" : "puntos"}, ${d.minutos} min`}
             >
               <motion.div
                 className={estilos.barra}

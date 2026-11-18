@@ -1,38 +1,23 @@
 // Tiempo libre ganado (Dota 2 u otro juego), como funciones puras.
 //
-// Los minutos se ganan con lo que demuestras (tests que pasan, repasos, lecciones...), se
+// Cada punto de estudio (server/puntos.js) es un minuto de tiempo libre. Los minutos se
 // desbloquean al cumplir la meta del día y no se acumulan de un día a otro. Lo que juegas de más
 // (o sin haber cumplido) pasa a deuda y se descuenta mañana. El tiempo jugado lo mide el motor
 // de la laptop (server/juego-vigilante.js) en dias[fecha].juego (segundos).
 import { sumarDias } from "./progreso-reglas.js";
 import { diaSemana, hechoDe, lunesDe, metaDelDia } from "./metricas.js";
+import { PUNTOS, puntosDe } from "./puntos.js";
 
-/** Minutos que da cada cosa demostrada, con su máximo por día (null = sin máximo). */
-export const GANANCIA = [
-  { campo: "resueltos", minutos: 25, max: null, texto: "Ejercicio resuelto (los tests pasan)" },
-  { campo: "limpios", minutos: 10, max: null, texto: "Bono: resuelto sin pistas" },
-  { campo: "repasos", minutos: 10, max: null, texto: "Repaso completado" },
-  { campo: "lecciones", minutos: 8, max: 3, texto: "Lección completa (máximo 3 al día)" },
-  { campo: "ingles", minutos: 8, max: 3, texto: "Lección de inglés (máximo 3 al día)" },
-  { campo: "tandasTarjetas", minutos: 5, max: 2, texto: "10 tarjetas de entrevista (máximo 2 tandas)" },
-  { campo: "enfoques", minutos: 5, max: 4, texto: "Sesión de enfoque de 25 min (máximo 4)" },
-  { campo: "simulacros", minutos: 20, max: null, texto: "Simulacro completo" },
-  { campo: "jefes", minutos: 45, max: null, texto: "Jefe de la semana" },
-];
+/** La misma tabla de puntos, vista como minutos de tiempo libre (1 punto = 1 minuto). */
+export const GANANCIA = PUNTOS.map((p) => ({ ...p, minutos: p.puntos }));
 
 export const TOPE_DIA = 120;
 export const TOPE_FIN_DE_SEMANA = 180; // si cumpliste de lunes a viernes
 export const TOPE_DEUDA = 120;
 const DIAS_HISTORIA = 60;
 
-/** Minutos brutos ganados en un día (antes de topes y de la regla de la racha). */
-export function minutosBrutos(dia) {
-  if (!dia) return 0;
-  return GANANCIA.reduce((total, g) => {
-    const cantidad = g.campo === "tandasTarjetas" ? Math.floor((dia.preguntas ?? 0) / 10) : (dia[g.campo] ?? 0);
-    return total + g.minutos * (g.max == null ? cantidad : Math.min(cantidad, g.max));
-  }, 0);
-}
+/** Minutos brutos ganados en un día (antes de topes y de la regla de la racha): sus puntos. */
+export const minutosBrutos = (dia) => puntosDe(dia);
 
 /**
  * Estado del tiempo libre de hoy.

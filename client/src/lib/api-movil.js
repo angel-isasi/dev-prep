@@ -9,7 +9,7 @@ import { preguntaPendiente, sumarDias } from "../../../server/progreso-reglas.js
 import { fraseDelDia } from "../../../server/frases.js";
 import { estadoGeneral, vistaInicio, vistaProgreso } from "../../../server/vistas-progreso.js";
 import { preparacion } from "../../../server/metricas.js";
-import { crearProgresoMovil, rachaMovil } from "./progreso-movil.js";
+import { crearProgresoMovil } from "./progreso-movil.js";
 import { mapaDominio, unidadesDebiles } from "../../../server/dominio.js";
 import { erroresFrecuentes } from "../../../server/errores.js";
 import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
@@ -24,6 +24,7 @@ import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaS
 import { buscarOfertas, nuevasDesde, ordenarOfertas } from "../../../server/ofertas-auto.js";
 import { conFechaDeEnvio, metaSemanal, numerosPostulaciones, seguimientosPendientes } from "../../../server/postulaciones.js";
 import { crearApiMapache } from "../movil/mapache/api-mapache.js";
+import { rachaIngles } from "../movil/mapache/reglas.js";
 import { crearApi } from "./api-servidor.js";
 import { BASE_LOCAL, conectada } from "./conexion-local.js";
 
@@ -260,14 +261,14 @@ const apiWeb = {
       hoy,
       frase: fraseDelDia(hoy),
       config: datos.config,
-      racha: rachaMovil(progreso.dias(), hoy),
       estudiadoHoy: progreso.dias()[hoy] ?? null,
       tarjetasParaHoy: preguntas.filter((p) => preguntaPendiente(datos.preguntas[p.id], hoy)).length,
       ejerciciosParaRepasar,
       quizzesHechos: Object.keys(datos.quizzes).length,
       ...(() => {
         const g = general(ejercicios);
-        return { juego: g.juego, meta: g.dias.hoy, salvados: g.dias.salvados, jefe: g.jefe ? { id: g.jefe.id, titulo: g.jefe.titulo } : null };
+        // La racha es la misma en todos lados: días seguidos cumpliendo la meta (server/metricas.js)
+        return { racha: g.dias.racha, juego: g.juego, meta: g.dias.hoy, salvados: g.dias.salvados, jefe: g.jefe ? { id: g.jefe.id, titulo: g.jefe.titulo } : null };
       })(),
     };
   }),
@@ -438,13 +439,13 @@ const apiWeb = {
         ? null
         : {
             id: "meta",
-            texto: `Meta: ${g.dias.hoy.meta} ${g.dias.hoy.meta === 1 ? "ejercicio o repaso" : "ejercicios o repasos"}`,
-            detalle: `${g.dias.hoy.hecho} de ${g.dias.hoy.meta}${siguiente ? ` · sigue con ${siguiente.titulo}` : ""}`,
+            texto: `Meta de hoy: ${g.dias.hoy.meta} puntos`,
+            detalle: `${g.dias.hoy.hecho} de ${g.dias.hoy.meta} · un ejercicio da 25${siguiente ? ` · sigue con ${siguiente.titulo}` : ""}`,
             hecho: g.dias.hoy.cumplioMeta,
             a: siguiente ? `/practicar/${siguiente.id}` : "/practicar",
           },
       { id: "ingles", texto: `Inglés: ${ingles.meta} minutos`, detalle: `${Math.floor(ingles.minutosHoy)} de ${ingles.meta} min`, hecho: ingles.minutosHoy >= ingles.meta, a: "/leccion?ambito=ingles" },
-      { id: "leccion", texto: "Una lección de programación", detalle: "10 preguntas, unos 5 minutos", hecho: (dia.lecciones ?? 0) > 0, a: "/leccion" },
+      { id: "leccion", texto: "Una lección de programación", detalle: "Unas 8 preguntas, 3 minutos", hecho: (dia.lecciones ?? 0) > 0, a: "/leccion" },
       tarjetas > 0 ? { id: "tarjetas", texto: `${tarjetas} tarjetas de entrevista para repasar`, detalle: "Piensa la respuesta y luego revela", hecho: false, a: "/entrevistas" } : null,
       finDeSemana ? { id: "examen", texto: "Examen semanal", detalle: "20 preguntas de lo que viste esta semana", hecho: examenHecho, a: "/leccion?modo=examen" } : null,
       g.dias.hoy.cumplioMeta ? { id: "diario", texto: "Tu diario de una línea", detalle: "¿Qué aprendiste hoy? ¿Qué te trabó?", hecho: diarioHecho, a: "/diario" } : null,
@@ -850,14 +851,8 @@ const apiWeb = {
     const dias = progreso.dias();
     const hoy = progreso.hoy();
     const minutos = (f) => Math.round(((dias[f]?.inglesSegundos ?? 0) / 60 + (dias[f]?.inmersion ?? 0)) * 10) / 10;
-    // cuenta cualquier práctica: lecciones, inmersión, historias o parejas
-    const practico = (f) => (dias[f]?.ingles ?? 0) + (dias[f]?.inmersion ?? 0) + (dias[f]?.inglesHistorias ?? 0) + (dias[f]?.inglesSegundos ?? 0) > 0;
-    let f = practico(hoy) ? hoy : sumarDias(hoy, -1);
-    let racha = 0;
-    while (practico(f)) {
-      racha++;
-      f = sumarDias(f, -1);
-    }
+    // La misma racha de inglés que usa el mapache (cuenta cualquier práctica, también con él)
+    const racha = rachaIngles(dias, hoy);
     const semana = Array.from({ length: 7 }, (_, i) => sumarDias(hoy, i - 6)).map((fecha) => ({ fecha, minutos: minutos(fecha) }));
     const ajuste = progreso.ajuste("ingles", {});
     return {

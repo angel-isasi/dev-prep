@@ -33,7 +33,7 @@ export function TiempoLibre({ juego: inicial, meta, salvados, jefe }) {
           <span className={estilos.etiqueta}>{jugando ? "Jugando ahora" : "Tiempo libre de hoy"}</span>
           {juego.bloqueado ? (
             <strong>
-              <IconoCandado tamano={14} /> Bloqueado · te {juego.faltaParaDesbloquear === 1 ? "falta 1 ejercicio o repaso" : `faltan ${juego.faltaParaDesbloquear} ejercicios o repasos`}
+              <IconoCandado tamano={14} /> Bloqueado · te {juego.faltaParaDesbloquear === 1 ? "falta 1 punto" : `faltan ${juego.faltaParaDesbloquear} puntos`} para tu meta
             </strong>
           ) : (
             <strong>

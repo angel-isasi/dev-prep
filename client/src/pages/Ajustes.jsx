@@ -50,7 +50,7 @@ export function Ajustes({ seccionExtra }) {
   return (
     <section className={estilos.pagina}>
       <CabeceraPagina etiqueta="Tu configuración" titulo="Ajustes">
-        Lo que pongas aquí define tu meta diaria, la deuda y la cuenta regresiva de Inicio.
+        Lo que pongas aquí define tu meta diaria, la deuda y la cuenta regresiva. Todo lo que estudias suma puntos: la tabla está más abajo.
       </CabeceraPagina>
       <div className={estilos.columnas}>
         <form className={estilos.formulario} onSubmit={guardar}>
@@ -76,12 +76,12 @@ export function Ajustes({ seccionExtra }) {
           <div className={estilos.fila}>
             <label>
               <span>Meta diaria</span>
-              <small>Ejercicios resueltos + repasos por día</small>
+              <small>En unidades de 25 puntos: con 2, son 50 puntos al día</small>
               <input type="number" min={0} max={20} value={form.metaDiaria} onChange={(e) => cambiar("metaDiaria", e.target.value)} />
             </label>
             <label>
               <span>Tope de deuda</span>
-              <small>Máximo que se acumula de días sin cumplir</small>
+              <small>Máximo que se acumula, también en unidades de 25</small>
               <input type="number" min={0} max={50} value={form.topeDeuda} onChange={(e) => cambiar("topeDeuda", e.target.value)} />
             </label>
             <label>

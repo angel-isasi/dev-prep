@@ -80,7 +80,7 @@ export function HoyMovil() {
           <strong className={estilos.rachaNumero}>
             <SlidingNumber number={hoy.racha} />
           </strong>
-          <span>{hoy.racha === 1 ? "día seguido estudiando" : "días seguidos estudiando"}</span>
+          <span>{hoy.racha === 1 ? "día seguido cumpliendo tu meta" : "días seguidos cumpliendo tu meta"}</span>
         </div>
       </div>
 

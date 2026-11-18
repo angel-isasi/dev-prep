@@ -5,7 +5,7 @@
 // Además de lo de la laptop (preguntas, quizzes, días), guarda "lecturas": los ejercicios
 // que estudiaste en el celular (pistas vistas, si viste la solución y tu autoevaluación).
 // En el celular un ejercicio nunca queda "resuelto": eso solo lo dan los tests de la laptop.
-import { calificarPregunta, preguntaPendiente, progresoVacio, registrarQuiz, sumarAlDia, sumarDias, validarConfig } from "../../../server/progreso-reglas.js";
+import { calificarPregunta, preguntaPendiente, progresoVacio, registrarQuiz, sumarAlDia, validarConfig } from "../../../server/progreso-reglas.js";
 import { ahoraIso, fechaLocal } from "../../../server/fechas.js";
 import { diasCombinados, documentoParaSubir, fusionarDocumento, vaciarProgreso, vivos } from "../../../server/combinar.js";
 
@@ -263,20 +263,3 @@ export function crearProgresoMovil(almacenamiento, reloj = {}) {
   };
 }
 
-/**
- * Racha del celular: días seguidos con algo estudiado (tarjetas, quizzes o ejercicios).
- * Termina hoy si ya estudiaste hoy; si no, ayer.
- */
-export function rachaMovil(dias, hoy) {
-  const estudio = (f) => {
-    const d = dias[f];
-    return !!d && (d.preguntas ?? 0) + (d.quizzes ?? 0) + (d.lecturas ?? 0) + (d.lecciones ?? 0) > 0;
-  };
-  let f = estudio(hoy) ? hoy : sumarDias(hoy, -1);
-  let racha = 0;
-  while (estudio(f)) {
-    racha++;
-    f = sumarDias(f, -1);
-  }
-  return racha;
-}

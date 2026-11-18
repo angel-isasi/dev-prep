@@ -113,14 +113,14 @@ export function SeccionRutina() {
       </section>
 
       <section className={estilos.seccion}>
-        <h2>Tiempo libre</h2>
+        <h2>Puntos y tiempo libre</h2>
         <p className={estilos.ayuda}>
-          Se gana con lo que demuestras y se desbloquea al cumplir tu meta. Lo de más pasa a deuda. Si dev-prep está abierto en tu laptop, mide solo el tiempo de juego.
+          Cada punto de estudio es un minuto de tiempo libre. Esta misma tabla mide tu meta diaria y tu racha. El tiempo se desbloquea al cumplir tu meta y lo de más pasa a deuda. Si dev-prep está abierto en tu laptop, mide solo el tiempo de juego.
         </p>
         <ul className={propios.lista}>
           {GANANCIA.map((g) => (
             <li key={g.campo}>
-              {g.texto} <strong>+{g.minutos} min</strong>
+              {g.texto} <strong>+{g.minutos} puntos</strong>
             </li>
           ))}
         </ul>

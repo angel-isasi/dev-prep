@@ -12,7 +12,7 @@ describe("tiempo libre ganado", () => {
   test("bloqueado hasta cumplir la meta; al cumplir, se puede jugar lo ganado", () => {
     const dias = { "2026-11-17": { resueltos: 2 }, "2026-11-18": { resueltos: 1 } };
     const antes = estadoJuego(dias, CONFIG, "2026-11-18");
-    expect(antes).toMatchObject({ bloqueado: true, disponible: 0, faltaParaDesbloquear: 1 });
+    expect(antes).toMatchObject({ bloqueado: true, disponible: 0, faltaParaDesbloquear: 25 }); // en puntos
     const despues = estadoJuego({ ...dias, "2026-11-18": { resueltos: 2 } }, CONFIG, "2026-11-18");
     expect(despues).toMatchObject({ bloqueado: false, ganado: 50, disponible: 50, restante: 50 });
   });

@@ -425,3 +425,12 @@ Pendiente de la tanda 2: unir las tres versiones de Ajustes y que la app local (
 
 - **Ajustes es una sola pantalla** (`pages/Ajustes.jsx`) en la laptop, la web y el celular; antes había tres con campos distintos. En el celular ya se pueden cambiar la meta diaria, el tope de deuda y la fecha meta, y está Empezar de cero. En pantallas anchas las secciones van en dos columnas.
 - **El acceso directo abre la versión web** si existe `data/abrir-web.txt` con su dirección (`scripts/abrir.ps1`). Es la misma app conectada al motor, así que ya no hay que elegir entre la interfaz local y la web. Sin ese archivo se abre la interfaz local de siempre.
+
+### Tanda 3, primera parte (2026-11-18): una sola medida y una sola racha
+
+- **Puntos de estudio** (`server/puntos.js`): una sola tabla dice cuánto vale cada cosa que haces, en la laptop y en el celular. Un ejercicio resuelto da 25; una lección, 8 (máximo 3 al día); un quiz, 5; 10 tarjetas de entrevista, 5. Lo fácil de repetir tiene máximo diario para que la meta no se cumpla solo con eso. Se calculan al leer los contadores de cada día: no se guarda nada nuevo ni cambia la sincronización.
+- **La meta diaria, la deuda y la racha se miden en puntos** (`server/metricas.js`). El número de Ajustes sigue siendo el mismo, pero ahora son unidades de 25 puntos (meta 2 = 50 puntos). Con horario, la meta de cada día se reparte de 5 en 5 puntos.
+- **Una sola racha** en toda la app: días seguidos cumpliendo la meta. Se quitó la racha aparte del celular. La de inglés es una sola (la misma en Inglés y en el mapache) y se sigue llamando racha de inglés.
+- **Tiempo libre**: 1 punto = 1 minuto, con la misma tabla. Se agregaron el ejercicio estudiado sin tests y el quiz.
+- **El calendario y la semana ven todo**: cuentan los puntos y los minutos de inglés y de lecciones, no solo los ejercicios de la laptop.
+- Los avisos al celular hablan en puntos (`server/avisos.js`; la Lambda se actualiza con `npm run aws:crear`).

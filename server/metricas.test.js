@@ -1,12 +1,13 @@
 import { describe, test, expect } from "vitest";
 import { resumenDias, preparacion, ritmo, semana, calendario, diasEntre, dominio, metaDelDia, diaSemana } from "./metricas.js";
 
+// La meta y la deuda se miden en puntos: metaDiaria 2 son 50 puntos (un ejercicio resuelto da 25)
 const CONFIG = { metaDiaria: 2, topeDeuda: 6 };
 
 describe("resumenDias", () => {
   test("primer día de uso: sin deuda ni racha", () => {
     const r = resumenDias({}, CONFIG, "2026-11-13");
-    expect(r.hoy).toMatchObject({ hecho: 0, objetivo: 2, deuda: 0, cumplio: false });
+    expect(r.hoy).toMatchObject({ hecho: 0, objetivo: 50, deuda: 0, cumplio: false });
     expect(r.racha).toBe(0);
     expect(r.ayer).toBeNull();
   });
@@ -30,14 +31,35 @@ describe("resumenDias", () => {
   test("lo que no hiciste se suma a hoy como deuda", () => {
     const dias = { "2026-11-11": { resueltos: 2 }, "2026-11-12": { resueltos: 0, segundos: 60 } };
     const r = resumenDias(dias, CONFIG, "2026-11-13");
-    expect(r.hoy.deuda).toBe(2);
-    expect(r.hoy.objetivo).toBe(4);
+    expect(r.hoy.deuda).toBe(50);
+    expect(r.hoy.objetivo).toBe(100);
     expect(r.ayer.cumplio).toBe(false);
   });
 
   test("la deuda tiene tope", () => {
     const dias = { "2026-11-01": { resueltos: 2 } };
-    expect(resumenDias(dias, CONFIG, "2026-11-13").hoy.deuda).toBe(6);
+    expect(resumenDias(dias, CONFIG, "2026-11-13").hoy.deuda).toBe(150);
+  });
+
+  test("lo que haces en el celular también cuenta para la meta", () => {
+    // 3 lecciones (24) + 3 de inglés (24) + un quiz (5) = 53 puntos, sin tocar la laptop
+    const dias = { "2026-11-13": { lecciones: 3, ingles: 3, quizzes: 1 } };
+    const r = resumenDias(dias, CONFIG, "2026-11-13");
+    expect(r.hoy).toMatchObject({ hecho: 53, meta: 50, cumplioMeta: true });
+    expect(r.racha).toBe(1);
+  });
+
+  test("lo fácil de repetir tiene un máximo al día: diez lecciones no cumplen la meta", () => {
+    const r = resumenDias({ "2026-11-13": { lecciones: 10 } }, CONFIG, "2026-11-13");
+    expect(r.hoy).toMatchObject({ hecho: 24, cumplioMeta: false });
+  });
+
+  test("un día solo con inglés ya cuenta como primer día de uso", () => {
+    const dias = { "2026-11-11": { ingles: 1 }, "2026-11-12": { resueltos: 2 } };
+    const r = resumenDias(dias, CONFIG, "2026-11-13");
+    // día 11: 8 de 50, quedan 42 de deuda; día 12: 50 de 92, quedan 42
+    expect(r.hoy.deuda).toBe(42);
+    expect(r.estados["2026-11-11"]).toBe("salvado");
   });
 });
 
@@ -118,14 +140,15 @@ describe("semana y calendario", () => {
       desde: "2026-11-09",
       resueltos: 3,
       repasos: 1,
+      puntos: 85,
       minutos: 10,
       subioPreparacion: 5.5,
       dias: [
-        { fecha: "2026-11-09", hecho: 2, minutos: 10, futuro: false },
+        { fecha: "2026-11-09", hecho: 50, minutos: 10, futuro: false },
         { fecha: "2026-11-10", hecho: 0, minutos: 0, futuro: false },
         { fecha: "2026-11-11", hecho: 0, minutos: 0, futuro: false },
         { fecha: "2026-11-12", hecho: 0, minutos: 0, futuro: false },
-        { fecha: "2026-11-13", hecho: 2, minutos: 0, futuro: false },
+        { fecha: "2026-11-13", hecho: 35, minutos: 0, futuro: false },
         { fecha: "2026-11-14", hecho: 0, minutos: 0, futuro: true },
         { fecha: "2026-11-15", hecho: 0, minutos: 0, futuro: true },
       ],
@@ -135,7 +158,13 @@ describe("semana y calendario", () => {
   test("el calendario termina hoy y empieza un lunes", () => {
     const celdas = calendario({ "2026-11-13": { resueltos: 3 } }, "2026-11-13", 2);
     expect(celdas[0].fecha).toBe("2026-11-02");
-    expect(celdas.at(-1)).toEqual({ fecha: "2026-11-13", hecho: 3, minutos: 0, nivel: 3 });
+    expect(celdas.at(-1)).toEqual({ fecha: "2026-11-13", hecho: 75, minutos: 0, nivel: 3 });
+  });
+
+  test("el calendario y la semana ven el inglés y las lecciones del celular", () => {
+    const dias = { "2026-11-13": { ingles: 2, inglesSegundos: 600, leccionesSegundos: 300 } };
+    expect(calendario(dias, "2026-11-13", 1).at(-1)).toEqual({ fecha: "2026-11-13", hecho: 16, minutos: 15, nivel: 1 });
+    expect(semana(dias, "2026-11-13", 0)).toMatchObject({ puntos: 16, minutos: 15 });
   });
 
   test("diasEntre", () => {
@@ -192,7 +221,8 @@ describe("día salvado, pausas y horario", () => {
     const horario = { lun: "poco", mar: "normal", mie: "normal", jue: "normal", vie: "poco", sab: "mucho", dom: "libre" };
     expect(diaSemana("2026-11-16")).toBe(0);
     const metas = ["2026-11-16", "2026-11-17", "2026-11-18", "2026-11-19", "2026-11-20", "2026-11-21", "2026-11-22"].map((f) => metaDelDia(f, 2, horario));
-    expect(metas).toEqual([1, 3, 3, 3, 1, 4, 0]);
+    expect(metas).toEqual([30, 65, 65, 65, 30, 95, 0]);
+    expect(metas.reduce((a, b) => a + b, 0)).toBe(2 * 25 * 7);
     const dias = { "2026-11-22": { resueltos: 0 }, "2026-11-21": { resueltos: 4 } };
     expect(resumenDias(dias, CONFIG, "2026-11-23", { horario }).ayer.estado).not.toBe("fallo");
   });

@@ -173,7 +173,7 @@ export function Inicio() {
         >
           <p className={estilos.aviso} data-tipo="error">
             <span className={estilos.alerta} aria-hidden />
-            Ayer no cumpliste tu meta ({ayer.hecho} de {config.metaDiaria}). Hoy te toca {meta.objetivo}
+            Ayer no cumpliste tu meta ({ayer.hecho} de {ayer.meta} puntos). Hoy te tocan {meta.objetivo} puntos
             {meta.deuda > 0 && `, incluida una deuda de ${meta.deuda}`}.
           </p>
         </ElectricBorder>
@@ -209,8 +209,8 @@ export function Inicio() {
             width={40}
             height={84}
             radius={12}
-            ticks={meta.objetivo > 1 ? meta.objetivo - 1 : 0}
-            ariaLabel={`Meta de hoy: ${meta.hecho} de ${meta.objetivo}`}
+            ticks={Math.max(0, Math.round(meta.objetivo / 25) - 1)}
+            ariaLabel={`Meta de hoy: ${meta.hecho} de ${meta.objetivo} puntos`}
           />
           <div className={estilos.textoAnillo}>
             <span className={estilos.etiqueta}>Meta de hoy</span>
@@ -222,8 +222,8 @@ export function Inicio() {
               {meta.cumplio
                 ? "¡Cumplida!"
                 : meta.deuda > 0
-                  ? `${config.metaDiaria} de meta + ${meta.deuda} de deuda`
-                  : "resueltos + repasos"}
+                  ? `${meta.meta} de meta + ${meta.deuda} de deuda`
+                  : "puntos de estudio"}
             </span>
           </div>
           </div>
@@ -321,7 +321,7 @@ export function Inicio() {
 
         <div className={estilos.bloque}>
           <h2>Esta semana</h2>
-          {semana.dias && <GraficoSemana dias={semana.dias} meta={config.metaDiaria} hoy={datos.hoy} />}
+          {semana.dias && <GraficoSemana dias={semana.dias} meta={meta.meta || config.metaDiaria * 25} hoy={datos.hoy} />}
           <dl className={estilos.semana}>
             <div>
               <dt>Resueltos</dt>
