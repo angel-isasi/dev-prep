@@ -1,6 +1,7 @@
 // Glosario para entrevistas: cada término con una definición de una frase lista para decir,
 // cómo se pronuncia en inglés y qué suma puntos en la entrevista. Se busca por nombre o definición.
 import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router";
 import { api } from "../../lib/api.js";
 import { hablar, hayVoz } from "../../lib/voz.js";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
@@ -16,7 +17,9 @@ const normal = (t) =>
 
 export function Glosario() {
   const [categorias, setCategorias] = useState(null);
-  const [busqueda, setBusqueda] = useState("");
+  // ?q=closure (desde el buscador global): llega ya filtrado
+  const [params] = useSearchParams();
+  const [busqueda, setBusqueda] = useState(() => params.get("q") ?? "");
   const [abierto, setAbierto] = useState(null);
   const voz = hayVoz();
 

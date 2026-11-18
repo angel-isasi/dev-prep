@@ -28,7 +28,6 @@ import { perezoso } from "../lib/perezoso.js";
 const HoyMovil = perezoso(() => import("./HoyMovil.jsx"), "HoyMovil");
 const EjercicioMovil = perezoso(() => import("./EjercicioMovil.jsx"), "EjercicioMovil");
 const ChuletasMovil = perezoso(() => import("./ChuletasMovil.jsx"), "ChuletasMovil");
-const MasMovil = perezoso(() => import("./MasMovil.jsx"), "MasMovil");
 const AjustesMovil = perezoso(() => import("./AjustesMovil.jsx"), "AjustesMovil");
 const VincularMovil = perezoso(() => import("./VincularMovil.jsx"), "VincularMovil");
 const LeccionMovil = perezoso(() => import("./leccion/LeccionMovil.jsx"), "LeccionMovil");
@@ -90,6 +89,8 @@ export function App() {
       <Route path="camino" element={<RutaLecciones />} />
       <Route path="leccion" element={<LeccionMovil />} />
       <Route path="vincular" element={<VincularMovil />} />
+      {/* "Más" ya no existe: sus opciones están en las 6 secciones y en el buscador */}
+      <Route path="mas" element={<Navigate to="/" replace />} />
     </>
   );
 
@@ -126,29 +127,9 @@ export function App() {
           <Route path="practicar/:id" element={<EjercicioMovil />} />
           <Route path="entrevistas" element={<Entrevistas />} />
           <Route path="referencia" element={<Referencia />} />
-          <Route path="progreso" element={grande ? <Progreso /> : <Navigate to="/" replace />} />
+          <Route path="progreso" element={<Progreso />} />
           <Route path="ajustes" element={grande ? <Ajustes seccionExtra={<SeccionWeb />} /> : <AjustesMovil />} />
-          <Route path="chuletas" element={<ChuletasMovil />} />
-          <Route path="ingles" element={<InglesMovil />} />
-          <Route path="ingles/unidad/:id" element={<InglesUnidad />} />
-          <Route path="ingles/historias" element={<ListaHistorias />} />
-          <Route path="ingles/historia/:id" element={<HistoriaMovil />} />
-          <Route path="ingles/roleplay/:id" element={<RoleplayMovil />} />
-          <Route path="ingles/parejas" element={<ParejasMovil />} />
-          <Route path="ingles/examen" element={<ExamenNivel />} />
-          <Route path="ingles/mapache" element={<PaginaMapache />} />
-      <Route path="revision" element={<ListaRevision />} />
-      <Route path="revision/:id" element={<CasoRevision />} />
-      <Route path="glosario" element={<Glosario />} />
-      <Route path="git" element={<GitPractico />} />
-      <Route path="logros" element={<PaginaLogros />} />
-      <Route path="diario" element={<PaginaDiario />} />
-      <Route path="enfoque" element={<Enfoque />} />
-      <Route path="trabajo" element={<Trabajo />} />
-          <Route path="camino" element={<RutaLecciones />} />
-          <Route path="leccion" element={<LeccionMovil />} />
-          <Route path="mas" element={grande ? <Navigate to="/" replace /> : <MasMovil />} />
-          <Route path="vincular" element={<VincularMovil />} />
+          {soloWeb}
           <Route path="*" element={<Proximamente titulo="Página no encontrada" texto="Esta ruta no existe." />} />
         </Route>
       </Routes>

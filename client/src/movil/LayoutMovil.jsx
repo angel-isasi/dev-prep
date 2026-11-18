@@ -1,26 +1,21 @@
-// Marco de la versión publicada en pantallas chicas (celular). En pantalla grande se usa el
-// mismo Layout de la laptop (ver AppMovil.jsx).
-// el contenido arriba y la navegación fija abajo, al alcance del pulgar.
+// Armazón de la app en pantallas chicas (celular). En pantalla grande se usa Layout (barra lateral).
+// Arriba: la marca, el buscador y los ajustes. Abajo, al alcance del pulgar: las 6 secciones,
+// las mismas de la barra lateral (ver lib/navegacion.js).
 // Sin efectos de canvas de pantalla completa (en el celular gastan batería y traban).
-import { NavLink, Outlet, useLocation } from "react-router";
-import { motion, useReducedMotion } from "motion/react";
 import { Suspense, useEffect } from "react";
+import { Link, NavLink, Outlet, useLocation } from "react-router";
+import { motion, useReducedMotion } from "motion/react";
 import { Esqueleto } from "../components/Esqueleto.jsx";
-import { IconoAprender, IconoIngles, IconoInicio, IconoMas, IconoPracticar } from "../components/Iconos.jsx";
+import { Paleta } from "../components/Paleta.jsx";
+import { IconoAjustes, IconoReferencia } from "../components/Iconos.jsx";
+import { SECCIONES, ubicar } from "../lib/navegacion.js";
+import { abrirPaleta } from "../lib/paleta.js";
 import estilos from "./LayoutMovil.module.css";
-
-const SECCIONES = [
-  { a: "/", texto: "Hoy", Icono: IconoInicio, exacto: true },
-  { a: "/aprender", texto: "Aprender", Icono: IconoAprender },
-  { a: "/practicar", texto: "Practicar", Icono: IconoPracticar },
-  { a: "/ingles", texto: "Inglés", Icono: IconoIngles },
-  // "Más" agrupa Entrevistas, Lecciones, Referencia, Chuletas y Ajustes
-  { a: "/mas", texto: "Más", Icono: IconoMas, tambien: ["/entrevistas", "/camino", "/referencia", "/chuletas", "/ajustes", "/trabajo", "/logros", "/diario", "/glosario"] },
-];
 
 export function LayoutMovil() {
   const { pathname } = useLocation();
   const reducido = useReducedMotion();
+  const actual = ubicar(pathname).seccion;
 
   // Al cambiar de pantalla, vuelve arriba (en el celular se usa el scroll de la página).
   useEffect(() => {
@@ -29,6 +24,21 @@ export function LayoutMovil() {
 
   return (
     <div className={estilos.layout}>
+      <header className={estilos.arriba}>
+        <Link to="/" className={estilos.marca}>
+          <span className={estilos.logo} aria-hidden>
+            {"</>"}
+          </span>
+          dev-prep
+        </Link>
+        <button type="button" className={estilos.accion} onClick={abrirPaleta} aria-label="Buscar">
+          <IconoReferencia />
+        </button>
+        <Link to="/ajustes" className={estilos.accion} aria-label="Ajustes" data-activa={pathname === "/ajustes"}>
+          <IconoAjustes />
+        </Link>
+      </header>
+
       <main className={estilos.principal}>
         <motion.div
           key={pathname}
@@ -42,36 +52,29 @@ export function LayoutMovil() {
         </motion.div>
       </main>
 
-      <nav className={estilos.nav} aria-label="Secciones">
-        {SECCIONES.map(({ a, texto, Icono, exacto, tambien }) => {
-          const extra = tambien?.some((r) => pathname.startsWith(r));
+      <nav className={estilos.nav} aria-label="Secciones" style={{ "--secciones": SECCIONES.length }}>
+        {SECCIONES.map(({ id, a, texto, corto, Icono, exacto }) => {
+          const activa = actual?.id === id;
           return (
-            <NavLink
-              key={a}
-              to={a}
-              end={exacto}
-              className={({ isActive }) => `${estilos.enlace} ${isActive || extra ? estilos.activo : ""}`}
-            >
-              {({ isActive }) => (
-                <>
-                  {(isActive || extra) && (
-                    <motion.span
-                      layoutId="indicador-movil"
-                      className={estilos.indicador}
-                      transition={{ type: "spring", stiffness: 480, damping: 36 }}
-                      aria-hidden
-                    />
-                  )}
-                  <span className={estilos.icono}>
-                    <Icono />
-                  </span>
-                  <span className={estilos.texto}>{texto}</span>
-                </>
+            <NavLink key={id} to={a} end={exacto} className={`${estilos.enlace} ${activa ? estilos.activo : ""}`}>
+              {activa && (
+                <motion.span
+                  layoutId="indicador-movil"
+                  className={estilos.indicador}
+                  transition={{ type: "spring", stiffness: 480, damping: 36 }}
+                  aria-hidden
+                />
               )}
+              <span className={estilos.icono}>
+                <Icono />
+              </span>
+              <span className={estilos.texto}>{corto ?? texto}</span>
             </NavLink>
           );
         })}
       </nav>
+
+      <Paleta />
     </div>
   );
 }

@@ -8,6 +8,7 @@ import { useColorTema, usePorTema } from "../hooks/useColorTema.js";
 import { useScrollSuave } from "../hooks/useScrollSuave.js";
 import { useBrillo } from "../hooks/useBrillo.js";
 import { Esqueleto } from "./Esqueleto.jsx";
+import { Paleta } from "./Paleta.jsx";
 import estilos from "./Layout.module.css";
 
 export function Layout() {
@@ -42,6 +43,8 @@ export function Layout() {
           </div>
         </main>
       </div>
+      {/* Buscador global: se abre con Ctrl+K o con el botón Buscar de la barra */}
+      <Paleta />
       {/* Grano de película muy suave (React Bits). Va DETRÁS del contenido (z-index -1):
           da textura al fondo sin ensuciar los textos ni las tarjetas. Es estático (fps 0):
           animado obligaba a repintar toda la pantalla 18 veces por segundo y trababa la app. */}

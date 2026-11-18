@@ -1,5 +1,6 @@
 import { AuroraText } from "./ui/aurora-text.jsx";
 import { TextEffect } from "./ui/text-effect.jsx";
+import { SubNav } from "./SubNav.jsx";
 import estilos from "./CabeceraPagina.module.css";
 
 /**
@@ -11,6 +12,8 @@ export function CabeceraPagina({ etiqueta, titulo, resaltado, children, acciones
   return (
     <header className={estilos.cabecera}>
       <div className={estilos.texto}>
+        {/* En el celular: los otros destinos de esta sección */}
+        <SubNav />
         {etiqueta && <p className={estilos.etiqueta}>{etiqueta}</p>}
         <h1 className={estilos.titulo}>
           {/* Motion Primitives: cada palabra sube y se aclara al entrar a la pantalla */}

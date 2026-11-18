@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { api } from "../lib/api.js";
+import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { TeoriaTema } from "../components/TeoriaTema.jsx";
 import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
 import { Insignia } from "../components/Insignia.jsx";
@@ -16,7 +17,7 @@ export function Tema() {
   const { id } = useParams();
   const [tema, setTema] = useState(() => api.tema.guardado(id));
   const [error, setError] = useState(null);
-  const [pestana, setPestana] = useState("teoria");
+  const [pestana, setPestana] = usePestanaUrl(["teoria", "ejercicios", "quiz"]);
 
   useEffect(() => {
     setTema(null);

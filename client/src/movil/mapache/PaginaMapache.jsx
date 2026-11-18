@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
+import { usePestanaUrl } from "../../hooks/usePestanaUrl.js";
 import { hablar } from "../../lib/voz.js";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { ContenidoPestanas, Pestanas } from "../../components/Pestanas.jsx";
@@ -33,7 +34,7 @@ const PESTANAS = [
 export function PaginaMapache() {
   const [datos, setDatos] = useState(null);
   const [error, setError] = useState(null);
-  const [pestana, setPestana] = useState("hoy");
+  const [pestana, setPestana] = usePestanaUrl(PESTANAS.map((p) => p.id));
   const [traduccion, setTraduccion] = useState(false);
   const [editando, setEditando] = useState(false);
   const { dice: charla, tocar: tocarMapache, voz } = useCharlaMapache(datos);

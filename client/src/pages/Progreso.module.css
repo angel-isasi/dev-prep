@@ -343,3 +343,21 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* Celular: menos margen a los lados y el anillo de preparación encima de su explicación */
+@media (max-width: 600px) {
+  .pagina {
+    padding: var(--espacio-4) var(--espacio-4) var(--espacio-6);
+  }
+
+  .preparacion {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--espacio-3);
+  }
+
+  .preparacion,
+  .bloque {
+    padding: var(--espacio-4);
+  }
+}

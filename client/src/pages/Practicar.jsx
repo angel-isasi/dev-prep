@@ -18,11 +18,7 @@ import practica from "../movil/practica/Practica.module.css";
 /** "Aprender mejor" (solo en la versión web): sesiones cortas que no son ejercicios de VS Code. */
 const HERRAMIENTAS = [
   { a: "/leccion?modo=predice", titulo: "Lee y predice", texto: "¿Qué imprime este código? 10 trampas clásicas de entrevista" },
-  { a: "/revision", titulo: "Revisión de código", texto: "Marca los problemas en el código de un compañero" },
-  { a: "/glosario", titulo: "Glosario", texto: "120 términos con una frase lista para decir" },
   { a: "/practicar/lista?coleccion=javascript%2Fdepurar", titulo: "Depurar código roto", texto: "Encuentra el error a partir del síntoma" },
-  { a: "/git", titulo: "Git práctico", texto: "Conflictos, ramas, pull, push y revert con un repositorio de verdad" },
-  { a: "/enfoque", titulo: "Modo enfoque", texto: "25 minutos de una sola cosa, sin juego ni celular" },
 ];
 
 const NIVELES = [

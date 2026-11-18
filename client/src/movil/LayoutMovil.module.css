@@ -4,10 +4,68 @@
   min-height: 100dvh;
 }
 
+/* Barra de arriba: la marca, el buscador y los ajustes. Se va con el scroll (no es fija). */
+.arriba {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-1);
+  padding: calc(var(--espacio-2) + env(safe-area-inset-top)) var(--espacio-3) 0 var(--espacio-4);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin-right: auto;
+  color: var(--texto);
+  font-size: var(--letra-5);
+  font-weight: var(--peso-negrita);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radio-sm);
+  background: linear-gradient(135deg, var(--acento), color-mix(in srgb, var(--acento) 55%, #5fd3be));
+  color: var(--sobre-acento);
+  font-family: var(--fuente-codigo);
+  font-size: 9px;
+  font-weight: var(--peso-negrita);
+}
+
+.accion {
+  display: grid;
+  place-items: center;
+  width: var(--toque);
+  height: var(--toque);
+  border: none;
+  border-radius: var(--radio-pildora);
+  background: none;
+  color: var(--texto-suave);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.accion:active {
+  background: var(--superficie-2);
+}
+
+.accion[data-activa="true"] {
+  color: var(--acento);
+}
+
+.accion svg {
+  width: 21px;
+  height: 21px;
+}
+
 .principal {
   /* nada puede ensanchar la página hacia los lados (clip no rompe el sticky) */
   overflow-x: clip;
-  padding-top: env(safe-area-inset-top);
   /* espacio para que la navegación fija no tape el final del contenido */
   padding-bottom: calc(76px + env(safe-area-inset-bottom));
 }
@@ -17,8 +75,8 @@
   inset: auto 0 0;
   z-index: 50;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+  grid-template-columns: repeat(var(--secciones, 6), 1fr);
+  padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
   border-top: 1px solid var(--borde);
   background: color-mix(in srgb, var(--fondo-solido) 94%, transparent);
 }

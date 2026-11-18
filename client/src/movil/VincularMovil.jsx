@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import { leerVinculo, sincronizar, vincular } from "../lib/sync-movil.js";
 import { marcarMiLaptop, probar } from "../lib/conexion-local.js";
 import { decidirVinculo } from "../lib/vinculo.js";
-import estilos from "./MasMovil.module.css";
+import estilos from "./VincularMovil.module.css";
 
 export function VincularMovil() {
   const [estado, setEstado] = useState("vinculando");

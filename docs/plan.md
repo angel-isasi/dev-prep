@@ -409,3 +409,14 @@ Reglas: el progreso guardado no cambia (las medidas nuevas se calculan al leer),
 - **Tema claro**: el gris tenue ya pasa el contraste AA, el confeti toma los colores del tema y la barra del sistema cambia de color con el tema.
 - **Accesibilidad**: pestañas con flechas, Inicio y Fin; botones de 44 px de alto con el dedo; las animaciones se apagan en toda la app si el sistema pide menos movimiento.
 - **Abrir al instante**: cada pantalla se descarga cuando se abre (`client/src/lib/perezoso.js`). El primer archivo de la web bajó de 1.621 KB a 493 KB (de 520 a 162 KB comprimido). Sin internet abre igual: el service worker guarda todos los trozos.
+
+### Tanda 2, primera parte (2026-11-18): menú de 6 y buscador
+
+- **Una sola definición de navegación** en `client/src/lib/navegacion.js`: 6 secciones (Hoy, Aprender, Practicar, Inglés, Conseguir trabajo, Progreso), cada una con sus destinos. La usan la barra lateral, la barra del celular, las pastillas de sección y el buscador.
+- **Barra lateral**: de 17 entradas a 6. La sección en la que estás despliega sus destinos (en Aprender: Temas, Lecciones, Chuletas, Referencia y Glosario). Arriba, el botón Buscar; abajo, Modo enfoque, Ajustes y el tema.
+- **Celular**: barra de abajo con las 6 secciones (antes 5, con un menú "Más" de 9 opciones, que ya no existe), barra de arriba con la lupa y los ajustes, y pastillas con los destinos de la sección (`components/SubNav.jsx`, dentro de `CabeceraPagina`). Progreso ya abre en el celular.
+- **Buscador global** (`components/Paleta.jsx`, lógica y tests en `lib/paleta.js`): Ctrl+K o la lupa. Busca en temas, ejercicios, referencia, glosario, preguntas de entrevista y acciones, sin tildes y exigiendo todas las palabras. Flechas y Enter para ir.
+- **Pestañas en la dirección** (`hooks/usePestanaUrl.js`): Entrevistas, Trabajo, Tema y Mapache guardan la pestaña en `?pestana=`, así se puede enlazar y recargar. `/entrevistas?pregunta=ent-031` abre una pregunta sola y `/glosario?q=closure` llega filtrado.
+- La lista de rutas de la web ya no está copiada dos veces.
+
+Pendiente de la tanda 2: unir las tres versiones de Ajustes y que la app local (`localhost:4321`) muestre exactamente la misma web. Inicio + Hoy y las dos versiones de Ejercicio se unen cuando se rehagan esas pantallas (tandas 3 y 5).

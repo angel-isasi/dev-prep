@@ -7,92 +7,10 @@ import { useEvento } from "../hooks/useEvento.js";
 import { Confirmar } from "./Confirmar.jsx";
 import { useTema } from "../hooks/useTema.js";
 import { ES_MOVIL } from "../lib/modo.js";
-import {
-  IconoAjustes,
-  IconoApagar,
-  IconoInicio,
-  IconoAprender,
-  IconoReferencia,
-  IconoEntrevistas,
-  IconoIngles,
-  IconoTrabajo,
-  IconoLuna,
-  IconoPracticar,
-  IconoProgreso,
-  IconoSol,
-  IconoChevron,
-  IconoDiario,
-  IconoEnfoque,
-  IconoGit,
-  IconoGlosario,
-  IconoInsignias,
-  IconoLecciones,
-  IconoRevision,
-  IconoChuleta,
-} from "./Iconos.jsx";
+import { IconoAjustes, IconoApagar, IconoEnfoque, IconoLuna, IconoReferencia, IconoSol } from "./Iconos.jsx";
+import { SECCIONES, estaEnDestino, ubicar } from "../lib/navegacion.js";
+import { abrirPaleta } from "../lib/paleta.js";
 import estilos from "./BarraLateral.module.css";
-
-/**
- * Las secciones de la barra, en grupos para que no se vea recargada. Los grupos con
- * `plegable` se abren y cierran (y recuerdan cómo los dejaste); se abren solos si estás
- * en una de sus pantallas. Lo marcado con `web` solo existe en la versión publicada.
- */
-const GRUPOS = [
-  { id: "inicio", secciones: [{ a: "/", texto: "Inicio", Icono: IconoInicio, exacto: true }] },
-  {
-    id: "estudiar",
-    titulo: "Estudiar",
-    secciones: [
-      { a: "/aprender", texto: "Aprender", Icono: IconoAprender },
-      { a: "/camino", texto: "Lecciones", Icono: IconoLecciones, web: true },
-      { a: "/practicar", texto: "Practicar", Icono: IconoPracticar },
-      { a: "/ingles", texto: "Inglés", Icono: IconoIngles, web: true },
-      { a: "/chuletas", texto: "Chuletas", Icono: IconoChuleta, web: true },
-      { a: "/referencia", texto: "Referencia", Icono: IconoReferencia },
-    ],
-  },
-  {
-    id: "trabajo",
-    titulo: "Conseguir trabajo",
-    secciones: [
-      { a: "/entrevistas", texto: "Entrevistas", Icono: IconoEntrevistas },
-      { a: "/trabajo", texto: "Trabajo", Icono: IconoTrabajo, web: true },
-    ],
-  },
-  {
-    id: "herramientas",
-    titulo: "Herramientas",
-    plegable: true,
-    secciones: [
-      { a: "/glosario", texto: "Glosario", Icono: IconoGlosario, web: true },
-      { a: "/revision", texto: "Revisión de código", Icono: IconoRevision, web: true },
-      { a: "/git", texto: "Git práctico", Icono: IconoGit, web: true },
-      { a: "/enfoque", texto: "Modo enfoque", Icono: IconoEnfoque, web: true },
-    ],
-  },
-  {
-    id: "tu",
-    titulo: "Tú",
-    plegable: true,
-    secciones: [
-      { a: "/progreso", texto: "Progreso", Icono: IconoProgreso },
-      { a: "/logros", texto: "Insignias", Icono: IconoInsignias, web: true },
-      { a: "/diario", texto: "Diario", Icono: IconoDiario, web: true },
-    ],
-  },
-]
-  .map((g) => ({ ...g, secciones: g.secciones.filter((s) => ES_MOVIL || !s.web) }))
-  .filter((g) => g.secciones.length > 0);
-
-const CLAVE_GRUPOS = "devprep-barra-grupos";
-const leerAbiertos = () => {
-  try {
-    return JSON.parse(localStorage.getItem(CLAVE_GRUPOS) ?? "{}");
-  } catch {
-    return {};
-  }
-};
-const estaEn = (pathname, a, exacto) => (exacto ? pathname === a : pathname === a || pathname.startsWith(`${a}/`));
 
 // Fondo del enlace activo. Todos comparten layoutId: al cambiar de sección, Motion
 // lo desliza desde el enlace anterior hasta el nuevo en lugar de saltar.
@@ -110,13 +28,7 @@ export function BarraLateral() {
   const [racha, setRacha] = useState(null);
   const [cerrada, setCerrada] = useState(false);
   const { pathname } = useLocation();
-  const [abiertos, setAbiertos] = useState(leerAbiertos);
-  const alternarGrupo = (id) =>
-    setAbiertos((v) => {
-      const nuevo = { ...v, [id]: !v[id] };
-      localStorage.setItem(CLAVE_GRUPOS, JSON.stringify(nuevo));
-      return nuevo;
-    });
+  const actual = ubicar(pathname).seccion;
 
   async function cerrarApp() {
     await api.apagar().catch(() => {});
@@ -145,53 +57,44 @@ export function BarraLateral() {
         dev-prep
       </div>
 
+      {/* Buscador global: también se abre con Ctrl+K */}
+      <button type="button" className={estilos.buscar} onClick={abrirPaleta}>
+        <IconoReferencia />
+        <span>Buscar</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+
       <nav className={estilos.nav} aria-label="Secciones">
-        {GRUPOS.map((g) => {
-          const activoAqui = g.secciones.some((s) => estaEn(pathname, s.a, s.exacto));
-          const abierto = !g.plegable || activoAqui || (abiertos[g.id] ?? false);
+        {SECCIONES.map((s) => {
+          const activa = actual?.id === s.id;
+          const { a, texto, Icono, exacto } = s;
           return (
-            <div key={g.id} className={estilos.grupo}>
-              {g.titulo &&
-                (g.plegable ? (
-                  <button
-                    type="button"
-                    className={estilos.tituloGrupo}
-                    aria-expanded={abierto}
-                    disabled={activoAqui}
-                    onClick={() => alternarGrupo(g.id)}
-                  >
-                    {g.titulo}
-                    <span className={estilos.chevron} data-abierto={abierto}>
-                      <IconoChevron />
-                    </span>
-                  </button>
-                ) : (
-                  <span className={estilos.tituloGrupo}>{g.titulo}</span>
-                ))}
+            <div key={s.id} className={estilos.grupo}>
+              <NavLink to={a} end={exacto} viewTransition className={`${estilos.enlace} ${activa ? estilos.activo : ""}`}>
+                {activa && <Indicador />}
+                <Icono />
+                {texto}
+              </NavLink>
+              {/* Los destinos de la sección se despliegan solo cuando estás en ella */}
               <AnimatePresence initial={false}>
-                {abierto && (
+                {activa && s.sub.length > 1 && (
                   <motion.div
-                    className={estilos.enlaces}
+                    className={estilos.subs}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.22, ease: [0.2, 0.8, 0.2, 1] }}
                   >
-                    {g.secciones.map(({ a, texto, Icono, exacto }) => (
+                    {s.sub.map((destino) => (
                       <NavLink
-                        key={a}
-                        to={a}
-                        end={exacto}
+                        key={destino.a}
+                        to={destino.a}
                         viewTransition
-                        className={({ isActive }) => `${estilos.enlace} ${isActive ? estilos.activo : ""}`}
+                        className={estilos.sub}
+                        data-activo={estaEnDestino(pathname, destino)}
+                        aria-current={estaEnDestino(pathname, destino) ? "page" : undefined}
                       >
-                        {({ isActive }) => (
-                          <>
-                            {isActive && <Indicador />}
-                            <Icono />
-                            {texto}
-                          </>
-                        )}
+                        {destino.texto}
                       </NavLink>
                     ))}
                   </motion.div>
@@ -213,6 +116,18 @@ export function BarraLateral() {
             <strong>{racha.dias}</strong>
             {racha.dias === 1 ? "día de racha" : "días de racha"}
           </div>
+        )}
+        {/* El modo enfoque siempre a la mano (solo en la versión publicada) */}
+        {ES_MOVIL && (
+          <NavLink to="/enfoque" viewTransition className={({ isActive }) => `${estilos.enlace} ${isActive ? estilos.activo : ""}`}>
+            {({ isActive }) => (
+              <>
+                {isActive && <Indicador />}
+                <IconoEnfoque />
+                Modo enfoque
+              </>
+            )}
+          </NavLink>
         )}
         <NavLink to="/ajustes" viewTransition className={({ isActive }) => `${estilos.enlace} ${isActive ? estilos.activo : ""}`}>
           {({ isActive }) => (

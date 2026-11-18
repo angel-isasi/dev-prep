@@ -34,7 +34,7 @@
 .nav {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-3);
+  gap: 2px;
   flex: 1;
   min-height: 0;
   margin: 0 calc(var(--espacio-1) * -1);
@@ -48,53 +48,76 @@
   flex-direction: column;
 }
 
-.enlaces {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  overflow: hidden;
-}
-
-/* Título de cada grupo: pequeño y tenue, para ordenar sin recargar */
-.tituloGrupo {
+/* Buscador global (Ctrl+K) */
+.buscar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--espacio-2);
   width: 100%;
-  margin-bottom: 4px;
-  padding: 2px var(--espacio-3);
-  border: none;
-  background: none;
+  height: 36px;
+  padding: 0 var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--superficie);
   color: var(--texto-tenue);
   font: inherit;
-  font-size: var(--letra-1);
-  font-weight: var(--peso-semi);
-  letter-spacing: 0.08em;
-  text-align: left;
-  text-transform: uppercase;
-}
-
-button.tituloGrupo {
+  font-size: var(--letra-3);
   cursor: pointer;
-  border-radius: var(--radio-sm);
-  transition: color var(--transicion);
+  transition:
+    border-color var(--transicion),
+    color var(--transicion);
 }
 
-button.tituloGrupo:hover:not(:disabled) {
+.buscar:hover {
+  border-color: var(--borde-fuerte);
   color: var(--texto-suave);
 }
 
-button.tituloGrupo:disabled {
-  cursor: default;
+.buscar span {
+  flex: 1;
+  text-align: left;
 }
 
-.chevron {
-  display: grid;
-  transition: transform 200ms ease;
+.buscar kbd {
+  padding: 1px 6px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-xs);
+  background: var(--superficie-2);
+  font-family: var(--fuente);
+  font-size: var(--letra-1);
+  font-weight: var(--peso-semi);
 }
 
-.chevron[data-abierto="true"] {
-  transform: rotate(90deg);
+/* Destinos de la sección activa: una lista con sangría y una línea guía a la izquierda */
+.subs {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  margin: 2px 0 var(--espacio-2) 21px;
+  padding-left: var(--espacio-3);
+  border-left: 1px solid var(--borde);
+  overflow: hidden;
+}
+
+.sub {
+  padding: 5px var(--espacio-3);
+  border-radius: var(--radio-sm);
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-medio);
+  transition:
+    background var(--transicion),
+    color var(--transicion);
+}
+
+.sub:hover {
+  background: var(--superficie-2);
+  color: var(--texto);
+}
+
+.sub[data-activo="true"] {
+  color: var(--texto);
+  font-weight: var(--peso-semi);
 }
 
 .enlace {

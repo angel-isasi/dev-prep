@@ -1,7 +1,7 @@
 // "Conseguir trabajo": todo lo que va más allá de practicar. Pestañas: postulaciones (con las preguntas
 // reales que te hicieron), ¿estoy listo para esta oferta?, tu CV, portafolio, y pruebas técnicas y proyecto.
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
+import { usePestanaUrl } from "../../hooks/usePestanaUrl.js";
 import { api } from "../../lib/api.js";
 import { ETAPAS, mensajeSeguimiento } from "../../../../server/postulaciones.js";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
@@ -26,8 +26,7 @@ const PREGUNTAS_PARA_ELLOS = [
 
 export function Trabajo() {
   // ?pestana=postulaciones: el aviso de seguimiento abre directo en tus postulaciones
-  const [params] = useSearchParams();
-  const [pestana, setPestana] = useState(() => (params.get("pestana") === "postulaciones" ? "postulaciones" : "ofertas"));
+  const [pestana, setPestana] = usePestanaUrl(["ofertas", "postulaciones", "oferta", "cv", "portafolio", "pruebas"]);
   const pestanas = [
     { id: "ofertas", texto: "Ofertas para ti" },
     { id: "postulaciones", texto: "Postulaciones" },

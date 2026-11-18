@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
+import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { api } from "../lib/api.js";
 import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
 import { EnunciadoOrganizado } from "../components/EnunciadoOrganizado.jsx";
@@ -17,13 +19,24 @@ import { IconoChispa } from "../components/Iconos.jsx";
 
 export function Entrevistas() {
   const [resumen, setResumen] = useState(api.entrevistas.guardado);
-  const [pestana, setPestana] = useState("tarjetas");
+  const [pestana, setPestana] = usePestanaUrl(["tarjetas", "simulacro", "personal", "guia"]);
+  const [params] = useSearchParams();
+  const preguntaPedida = params.get("pregunta");
   const [sesion, setSesion] = useState(null); // { titulo, tarjetas, indice, notas }
 
   const cargar = () => api.entrevistas().then(setResumen);
   useEffect(() => {
     cargar();
   }, []);
+
+  // ?pregunta=ent-031 (desde el buscador): abre esa pregunta sola, lista para responder
+  useEffect(() => {
+    if (!preguntaPedida) return;
+    api.tarjetas({}).then((todas) => {
+      const una = todas.find((p) => p.id === preguntaPedida);
+      if (una) setSesion({ titulo: una.categoria, tarjetas: [una], indice: 0, notas: [] });
+    });
+  }, [preguntaPedida]);
 
   async function empezar(titulo, filtro) {
     const tarjetas = await api.tarjetas(filtro);

@@ -1,0 +1,209 @@
+.fondo {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-aviso);
+  background: rgb(0 0 0 / 0.6);
+  animation: fundido var(--dur) ease-out;
+}
+
+/* La caja queda en el tercio superior, como los buscadores de los editores */
+.caja {
+  position: fixed;
+  top: min(14vh, 120px);
+  left: 50%;
+  z-index: calc(var(--z-aviso) + 1);
+  display: flex;
+  flex-direction: column;
+  width: min(640px, calc(100vw - 24px));
+  max-height: min(70vh, 560px);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-xl);
+  background: var(--superficie);
+  box-shadow: var(--sombra-3);
+  transform: translateX(-50%);
+  overflow: hidden;
+  animation: entrar var(--dur-lenta) var(--curva);
+}
+
+@keyframes fundido {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px) scale(0.98);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fondo,
+  .caja {
+    animation: none;
+  }
+}
+
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.campo {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: 0 var(--espacio-4);
+  border-bottom: 1px solid var(--borde);
+  color: var(--texto-tenue);
+}
+
+.campo input {
+  flex: 1;
+  min-width: 0;
+  height: 56px;
+  border: none;
+  outline: none; /* el foco siempre está aquí mientras la caja está abierta */
+  background: none;
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--letra-6);
+}
+
+.campo input::placeholder {
+  color: var(--texto-tenue);
+}
+
+.caja kbd {
+  padding: 1px 6px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-xs);
+  background: var(--superficie-2);
+  color: var(--texto-tenue);
+  font-family: var(--fuente);
+  font-size: var(--letra-1);
+  font-weight: var(--peso-semi);
+}
+
+.resultados {
+  flex: 1;
+  min-height: 0;
+  padding: var(--espacio-2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.vacio {
+  margin: 0;
+  padding: var(--espacio-5) var(--espacio-3);
+  color: var(--texto-tenue);
+  font-size: var(--letra-4);
+  text-align: center;
+}
+
+.grupo + .grupo {
+  margin-top: var(--espacio-2);
+}
+
+.nombreGrupo {
+  margin: 0;
+  padding: var(--espacio-2) var(--espacio-3) var(--espacio-1);
+  color: var(--texto-tenue);
+  font-size: var(--letra-1);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.entrada {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espacio-3);
+  width: 100%;
+  min-height: 40px;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: none;
+  border-radius: var(--radio);
+  background: none;
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--letra-4);
+  text-align: left;
+  cursor: pointer;
+}
+
+.entrada strong {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  font-weight: var(--peso-semi);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* El detalle se corta con puntos suspensivos: una fila, sin desbordar */
+.entrada span {
+  flex: 1 100 0;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entrada[aria-selected="true"] {
+  background: var(--acento-suave);
+}
+
+.entrada[aria-selected="true"] strong {
+  color: var(--acento);
+}
+
+.ayuda {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: var(--espacio-2) var(--espacio-4);
+  border-top: 1px solid var(--borde);
+  color: var(--texto-tenue);
+  font-size: var(--letra-2);
+}
+
+.ayuda kbd:not(:first-child):not(:nth-child(2)) {
+  margin-left: var(--espacio-3);
+}
+
+/* En el celular: título arriba y detalle abajo, y sin la fila de atajos de teclado */
+@media (max-width: 600px) {
+  .caja {
+    top: 12px;
+    max-height: calc(100dvh - 24px);
+  }
+
+  .entrada {
+    flex-direction: column;
+    gap: 0;
+    min-height: var(--toque);
+  }
+
+  .entrada strong {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .entrada span {
+    flex: none;
+    max-width: 100%;
+  }
+
+  .ayuda {
+    display: none;
+  }
+}

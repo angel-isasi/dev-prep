@@ -1,0 +1,38 @@
+/* Solo en el celular: en la laptop los destinos están en la barra lateral */
+.subnav {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .subnav {
+    display: flex;
+    flex-wrap: wrap; /* si no caben, bajan a otra fila: nada se desliza de costado */
+    gap: var(--espacio-2);
+    margin-bottom: var(--espacio-4);
+  }
+}
+
+.pastilla {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-pildora);
+  background: var(--superficie);
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background var(--transicion),
+    color var(--transicion),
+    border-color var(--transicion);
+}
+
+.pastilla[data-activa="true"] {
+  border-color: color-mix(in srgb, var(--acento) 40%, transparent);
+  background: var(--acento-suave);
+  color: var(--acento);
+}
