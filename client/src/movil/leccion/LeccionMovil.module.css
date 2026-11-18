@@ -379,3 +379,58 @@
   justify-content: center;
   min-height: 44px;
 }
+
+/* Final de una lección de programación: cómo quedó la unidad */
+.final {
+  overflow-y: auto;
+}
+
+.unidadFinal {
+  display: grid;
+  gap: var(--espacio-2);
+  width: 100%;
+  max-width: 420px;
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  background: var(--superficie);
+  text-align: left;
+}
+
+.unidadFinalCabeza {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  font-size: 14px;
+}
+
+.unidadFinalCabeza span {
+  color: var(--texto-suave);
+}
+
+.unidadFinal small {
+  color: var(--texto-suave);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.segmentos {
+  display: flex;
+  gap: 4px;
+}
+
+.segmentos i {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--superficie-2);
+}
+
+.segmentos i[data-hecha="true"] {
+  background: var(--exito, #4ade80);
+}
+
+.segmentos i[data-esta="true"] {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}

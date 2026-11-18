@@ -16,6 +16,7 @@ import { armadoCorrecto, escrituraCorrecta } from "../../../../scripts/items/ing
 import { hablar, hayMicrofono, hayVoz } from "../../lib/voz.js";
 import { elegirVariante, emparejarDe, variarPasos } from "./variantes.js";
 import { Bit, fraseDeBit } from "../../components/Bit.jsx";
+import { despuesDe, leccionDe, planUnidad, PRUEBA, pruebaAprobada } from "./plan.js";
 import estilos from "./LeccionMovil.module.css";
 import { IconoCorazon, IconoLlamita, IconoRepetir } from "../../components/Iconos.jsx";
 
@@ -44,6 +45,31 @@ function conEmparejar(pasos, d, unidad, azar) {
 /** Una línea corta de una pregunta en markdown (para la lista de falladas). */
 const textoCorto = (md) => String(md ?? "").replace(/[*_~`#>]/g, "").split("\n").find((l) => l.trim())?.slice(0, 80) ?? "";
 
+/** Al terminar: cómo quedó la unidad, una rayita por lección (la que acabas de hacer, resaltada). */
+function AvanceUnidad({ unidad }) {
+  const { plan, hecha } = unidad;
+  const requeridas = plan.grupos.filter((g) => !g.opcional).flatMap((g) => g.lecciones);
+  return (
+    <div className={estilos.unidadFinal}>
+      <div className={estilos.unidadFinalCabeza}>
+        <span>{unidad.titulo}</span>
+        <strong>
+          {plan.hechas} de {plan.total} lecciones
+        </strong>
+      </div>
+      <div className={estilos.segmentos} aria-hidden>
+        {requeridas.map((l) => (
+          <i key={l.id} data-hecha={l.hecha} data-esta={l.id === hecha?.id} />
+        ))}
+      </div>
+      <small>
+        {hecha?.hecha ? `Terminaste "${hecha.nombre}". ` : ""}
+        {plan.completa ? "Unidad completa: ya puedes hacer su prueba." : `Llevas ${plan.preguntas.aprendidos} de ${plan.preguntas.total} preguntas aprendidas en la unidad.`}
+      </small>
+    </div>
+  );
+}
+
 export function LeccionMovil() {
   const [params] = useSearchParams();
   const navegar = useNavigate();
@@ -57,10 +83,15 @@ export function LeccionMovil() {
   const [escrito, setEscrito] = useState(""); // en escribir
   const [hito, setHito] = useState(null); // combo que se celebra
   const ambito = params.get("ambito") === "ingles" ? "ingles" : "programacion";
-  const inicio = ambito === "ingles" ? "/ingles" : "/";
+  // Programación: si vienes de una unidad (Lecciones), vuelves ahí
+  const inicio = ambito === "ingles" ? "/ingles" : params.get("unidad") ? "/camino" : "/";
 
   // Arma la lección (o retoma la que quedó a medias)
   useEffect(() => {
+    // Al pasar a la siguiente lección (cambian los parámetros) se empieza de cero
+    setFinal(null);
+    setSesion(null);
+    setError(null);
     api.lecciones(ambito).then(async (d) => {
       setUnidades(d.unidades);
       if (params.get("modo") === "debiles" && api.mapa) d = { ...d, unidades: (await api.mapa()).debiles };
@@ -74,7 +105,13 @@ export function LeccionMovil() {
       }
       if (params.get("retomar") && d.enCurso && !terminada(d.enCurso)) return setSesion(d.enCurso);
       const unidad = params.get("unidad") ?? d.unidadActual;
-      const modo = params.get("modo") === "mispalabras" || params.get("claves") ? "todos" : (params.get("modo") ?? "normal");
+      // Una lección fija de la unidad (plan.js): solo sus preguntas
+      const parte = params.get("parte") && ambito === "programacion" ? leccionDe(planUnidad(d.items, d.registros, unidad, d.reportados), params.get("parte")) : null;
+      if (parte) {
+        const estas = new Set(parte.claves);
+        d = { ...d, items: d.items.filter((it) => estas.has(it.clave)) };
+      }
+      const modo = parte ? "parte" : params.get("modo") === "mispalabras" || params.get("claves") ? "todos" : (params.get("modo") ?? "normal");
       const azar = semilla(`${d.hoy}-${unidad}-${modo}-${Date.now()}`);
       const ingles = ambito === "ingles";
       // En inglés cada concepto se pregunta según cuánto lo dominas (ver variantes.js)
@@ -86,7 +123,7 @@ export function LeccionMovil() {
         return setError(
           modo === "errores" ? "No tienes errores pendientes. ¡Bien!" : modo === "examen" ? "Todavía no practicaste suficiente esta semana para un examen: haz unas lecciones primero." : "No hay ítems para esta unidad todavía.",
         );
-      const nueva = crearSesion(pasos, { unidad, modo, hoy: d.hoy, ambito, vidas: ingles && d.extra?.vidas && modo !== "nivel" ? VIDAS : null });
+      const nueva = crearSesion(pasos, { unidad, modo, hoy: d.hoy, ambito, parte: parte?.id ?? null, vidas: ingles && d.extra?.vidas && modo !== "nivel" ? VIDAS : null });
       api.guardarLeccionEnCurso(nueva);
       setSesion(nueva);
     }, (e) => setError(e.message));
@@ -126,6 +163,17 @@ export function LeccionMovil() {
           r.legendaria = true;
         }
         if (siguiente.modo === "examen") r.nota = await api.guardarExamen({ aciertos: r.aciertos, total: r.total });
+        if (siguiente.modo === "prueba") {
+          const registro = await api.guardarPrueba(siguiente.unidad, r.aciertos, r.total);
+          r.prueba = { aprobada: r.total > 0 && r.aciertos / r.total >= PRUEBA.aprobar, yaAprobada: pruebaAprobada(registro) };
+        }
+        // Programación: cómo quedó la unidad y qué lección sigue
+        if (ambito === "programacion" && siguiente.unidad) {
+          const d = await api.lecciones("programacion");
+          const plan = planUnidad(d.items, d.registros, siguiente.unidad, d.reportados);
+          const titulo = d.unidades.find((u) => u.id === siguiente.unidad)?.titulo ?? siguiente.unidad;
+          r.unidad = { id: siguiente.unidad, titulo, plan, hecha: siguiente.parte ? leccionDe(plan, siguiente.parte) : null, siguiente: (siguiente.parte && despuesDe(plan, siguiente.parte)) || plan.siguiente };
+        }
         if (siguiente.modo === "nivel") {
           const nivel = resultadoNivel(siguiente, unidades);
           await api.guardarNivelIngles(nivel.empiezaEn);
@@ -200,7 +248,11 @@ export function LeccionMovil() {
     return (
       <div className={estilos.final}>
         <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className={estilos.finalTitulo}>
-          {final.nota !== undefined
+          {final.prueba
+            ? final.prueba.aprobada
+              ? "¡Prueba aprobada!"
+              : `Prueba: ${final.aciertos} de ${final.total}`
+            : final.nota !== undefined
             ? `Nota: ${final.nota}/20`
             : final.nivel !== undefined
               ? "¡Prueba terminada!"
@@ -272,6 +324,14 @@ export function LeccionMovil() {
             </button>
           </div>
         )}
+        {final.prueba && (
+          <p className={estilos.nivel}>
+            {final.prueba.aprobada
+              ? "Aprobaste la unidad: queda marcada en Lecciones."
+              : `Necesitas ${Math.ceil(PRUEBA.aprobar * final.total)} de ${final.total} para aprobarla.${final.prueba.yaAprobada ? " Igual ya la tenías aprobada de antes." : " Repasa lo que fallaste y vuelve a intentarlo."}`}
+          </p>
+        )}
+        {final.unidad && <AvanceUnidad unidad={final.unidad} />}
         {ambito !== "ingles" && final.fallados.length > 0 && (
           <div className={estilos.repasar}>
             <span>Para repasar</span>
@@ -287,11 +347,22 @@ export function LeccionMovil() {
           </div>
         )}
         <div className={estilos.acciones}>
-          <button type="button" className="boton boton-primario" onClick={() => navegar(0)}>
-            Otra lección
-          </button>
+          {final.unidad?.siguiente && sesion.modo !== "prueba" ? (
+            <Link to={`/leccion?unidad=${encodeURIComponent(final.unidad.id)}&parte=${final.unidad.siguiente.id}`} className="boton boton-primario">
+              Siguiente: {final.unidad.siguiente.nombre}
+            </Link>
+          ) : (
+            <button type="button" className="boton boton-primario" onClick={() => navegar(0)}>
+              {sesion.modo === "prueba" ? "Otra prueba" : "Otra lección"}
+            </button>
+          )}
+          {final.unidad?.siguiente && sesion.parte && (
+            <button type="button" className="boton" onClick={() => navegar(0)}>
+              Repetir esta
+            </button>
+          )}
           <Link to={inicio} className="boton">
-            {ambito === "ingles" ? "Volver a Inglés" : "Volver a Hoy"}
+            {ambito === "ingles" ? "Volver a Inglés" : inicio === "/camino" ? "Volver a Lecciones" : "Volver a Hoy"}
           </Link>
         </div>
       </div>
@@ -350,7 +421,11 @@ export function LeccionMovil() {
           transition={{ duration: 0.18 }}
         >
           <h1 className={estilos.titulo}>
-            {sesion.fallados.includes(sesion.cola[sesion.posicion]) && <span className={estilos.denuevo}>Otra vez</span>}
+            {sesion.fallados.includes(sesion.cola[sesion.posicion]) && (
+              <span className={estilos.denuevo} title="La fallaste hace un momento: vuelve al final de la lección para que la fijes">
+                Otra vez: la fallaste hace un momento
+              </span>
+            )}
             {tituloDe(paso)}
           </h1>
 

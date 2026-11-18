@@ -10,7 +10,8 @@ import { AuroraText } from "../components/ui/aurora-text.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { nombreColeccion } from "../lib/etiquetas.js";
 import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
-import { avanceUnidad, terminada } from "./leccion/motor.js";
+import { terminada } from "./leccion/motor.js";
+import { planUnidad } from "./leccion/plan.js";
 import { TiempoLibre } from "../components/TiempoLibre.jsx";
 import { TarjetaNivel } from "../components/Logros.jsx";
 import { PlanDeHoy, ResumenMes } from "../components/Rutina.jsx";
@@ -181,34 +182,45 @@ export function HoyMovil() {
 function TarjetaLeccion({ datos }) {
   const unidad = datos.unidades.find((u) => u.id === datos.unidadActual) ?? datos.unidades[0];
   if (!unidad) return null;
-  const av = avanceUnidad(datos.items, datos.registros, unidad.id);
+  const plan = planUnidad(datos.items, datos.registros, unidad.id, datos.reportados);
   const enCurso = datos.enCurso && !terminada(datos.enCurso);
-  const errores = datos.items.filter((it) => datos.registros[it.clave]?.caja === 1 && !datos.reportados[it.clave]).length;
+  const errores = datos.items.filter((it) => datos.registros[it.clave]?.ultima === "no" && !datos.reportados[it.clave]).length;
+  const siguiente = plan.siguiente;
 
   return (
     <div className={estilos.leccion} data-area={unidad.area}>
       <div className={estilos.leccionCabeza}>
-        <AnilloProgreso valor={av.porcentaje} tamano={64} grosor={6} completo={av.dominada}>
-          <span className={estilos.leccionPct}>{Math.round(av.porcentaje * 100)}%</span>
+        <AnilloProgreso valor={plan.porcentaje} tamano={64} grosor={6} completo={plan.completa}>
+          <span className={estilos.leccionPct}>
+            {plan.hechas}/{plan.total}
+          </span>
         </AnilloProgreso>
         <div className={estilos.texto}>
-          <small>Tu unidad · {datos.lecciones?.xp ?? 0} XP</small>
+          <small>
+            Tu unidad · {plan.hechas} de {plan.total} lecciones
+          </small>
           <strong>{unidad.titulo}</strong>
+          {siguiente && !enCurso && <small>Sigue: {siguiente.nombre}</small>}
         </div>
       </div>
       {enCurso ? (
         <Link to="/leccion?retomar=1" className={`boton boton-primario ${estilos.empezar}`}>
           Continuar la lección
         </Link>
+      ) : siguiente ? (
+        <Link to={`/leccion?unidad=${encodeURIComponent(unidad.id)}&parte=${siguiente.id}`} className={`boton boton-primario ${estilos.empezar}`}>
+          Siguiente lección
+        </Link>
       ) : (
         <Link to="/leccion" className={`boton boton-primario ${estilos.empezar}`}>
-          Empezar lección
+          Repaso del día
         </Link>
       )}
       <div className={estilos.leccionEnlaces}>
+        {siguiente && <Link to="/leccion">Repaso del día</Link>}
         <Link to="/leccion?modo=rapida">Rápida (5)</Link>
-        {errores > 0 && <Link to="/leccion?modo=errores">Repasar errores ({errores})</Link>}
-        <Link to="/camino">Ver el camino</Link>
+        {errores > 0 && <Link to="/leccion?modo=errores">Corregir errores ({errores})</Link>}
+        <Link to="/camino">Ver lecciones</Link>
       </div>
     </div>
   );

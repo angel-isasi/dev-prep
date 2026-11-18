@@ -5,7 +5,7 @@
 // actual, ordenados de reconocer a producir. Lo que fallas vuelve al final de la misma lección.
 // La nota de cada ítem alimenta el repaso espaciado (cajas de Leitner, server/progreso-reglas.js).
 
-export const TAMANO = { normal: 10, rapida: 5, errores: 10, quiz: 5, escuchar: 10, nivel: 40, predice: 10, debiles: 10, examen: 20, mezcla: 12, legendario: 15, oido: 12 };
+export const TAMANO = { normal: 10, rapida: 5, errores: 10, quiz: 5, escuchar: 10, nivel: 40, predice: 10, debiles: 10, examen: 20, mezcla: 12, legendario: 15, oido: 12, parte: 12, prueba: 12 };
 export const MAX_NUEVOS = 4;
 export const MAX_ENTREVISTA = 2;
 /** En inglés cada concepto es una palabra o frase entera: lecciones de 12 con hasta 6 nuevos. */
@@ -110,9 +110,10 @@ export function armarLeccion({ items, registros, reportados = {}, preguntas = []
   const hastaActual = (it) => (posUnidad.get(it.unidad) ?? 0) <= (posUnidad.get(unidad) ?? Infinity);
 
   if (modo === "errores") {
-    // Lo que fallaste la última vez (caja 1), empezando por lo más antiguo.
+    // Lo que fallaste la última vez, empezando por lo más antiguo. Acertar a la primera también deja la
+    // caja en 1, así que cuenta la última nota (los registros viejos sin nota: caja 1).
     const fallados = disponibles
-      .filter((it) => registros[it.clave]?.caja === 1)
+      .filter((it) => registros[it.clave]?.ultima === "no" || (registros[it.clave]?.caja === 1 && !registros[it.clave]?.ultima))
       .sort((a, b) => (registros[a.clave].proximo ?? "").localeCompare(registros[b.clave].proximo ?? ""));
     tomar(fallados, tamano);
     return ordenar(elegidos, azar);
@@ -212,6 +213,18 @@ export function armarLeccion({ items, registros, reportados = {}, preguntas = []
     return ordenar(elegidos, azar);
   }
 
+  if (modo === "parte") {
+    // Una lección fija de una unidad (plan.js): todas sus preguntas, de reconocer a producir
+    tomar(intercalarPorTipo(disponibles), tamano);
+    return ordenar(elegidos, azar);
+  }
+
+  if (modo === "prueba") {
+    // Prueba de la unidad: preguntas al azar de toda la unidad, sin tarjetas de autoevaluación ni segunda oportunidad
+    tomar(intercalarPorTipo(barajar(deUnidad.filter((it) => it.tipo !== "tarjeta"), azar)), tamano);
+    return barajar(elegidos, azar);
+  }
+
   if (modo === "quiz") {
     tomar(barajar(deUnidad.filter((it) => it.subtipo === "quiz"), azar), tamano);
     return ordenar(elegidos, azar);
@@ -272,11 +285,12 @@ function ordenar(pasos, azar) {
 // --- Sesión: avanza paso a paso y reprograma lo fallado ---
 
 /** Estado inicial de una lección. Se puede guardar como JSON para retomarla. */
-export function crearSesion(pasos, { unidad, modo = "normal", hoy, ambito = "programacion", inicio = Date.now(), vidas = null } = {}) {
+export function crearSesion(pasos, { unidad, modo = "normal", hoy, ambito = "programacion", inicio = Date.now(), vidas = null, parte = null } = {}) {
   return {
+    parte, // id de la lección fija de la unidad ("esencial-1"), si es una
     ambito,
     inicio, // para medir cuánto duró (minutos de inglés)
-    unaVez: modo === "nivel" || modo === "examen" || modo === "legendario", // aquí lo fallado no vuelve
+    unaVez: modo === "nivel" || modo === "examen" || modo === "legendario" || modo === "prueba", // aquí lo fallado no vuelve
     vidas: modo === "legendario" ? 3 : vidas, // null: sin vidas
     combo: 0, // aciertos a la primera seguidos
     comboMax: 0,

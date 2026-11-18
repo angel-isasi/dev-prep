@@ -27,7 +27,7 @@ import { AjustesMovil } from "./AjustesMovil.jsx";
 import { SeccionWeb } from "./SeccionWeb.jsx";
 import { VincularMovil } from "./VincularMovil.jsx";
 import { LeccionMovil } from "./leccion/LeccionMovil.jsx";
-import { CaminoMovil } from "./leccion/CaminoMovil.jsx";
+import { RutaLecciones } from "./leccion/RutaLecciones.jsx";
 import { InglesMovil } from "./ingles/InglesMovil.jsx";
 import { InglesUnidad } from "./ingles/InglesUnidad.jsx";
 import { HistoriaMovil, ListaHistorias, RoleplayMovil } from "./ingles/Historias.jsx";
@@ -80,7 +80,7 @@ export function App() {
       <Route path="diario" element={<PaginaDiario />} />
       <Route path="enfoque" element={<Enfoque />} />
       <Route path="trabajo" element={<Trabajo />} />
-      <Route path="camino" element={<CaminoMovil />} />
+      <Route path="camino" element={<RutaLecciones />} />
       <Route path="leccion" element={<LeccionMovil />} />
       <Route path="vincular" element={<VincularMovil />} />
     </>
@@ -138,7 +138,7 @@ export function App() {
       <Route path="diario" element={<PaginaDiario />} />
       <Route path="enfoque" element={<Enfoque />} />
       <Route path="trabajo" element={<Trabajo />} />
-          <Route path="camino" element={<CaminoMovil />} />
+          <Route path="camino" element={<RutaLecciones />} />
           <Route path="leccion" element={<LeccionMovil />} />
           <Route path="mas" element={grande ? <Navigate to="/" replace /> : <MasMovil />} />
           <Route path="vincular" element={<VincularMovil />} />

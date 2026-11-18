@@ -16,6 +16,7 @@ import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
 import { analizarOferta, palabrasParaCv } from "../../../server/ofertas.js";
 import { diaSemana, lunesDe } from "../../../server/metricas.js";
 import { avanceUnidad } from "../movil/leccion/motor.js";
+import { partesTeoria } from "./teoria.js";
 import { expandirIngles, registrosPorConcepto } from "../../../scripts/items/ingles.js";
 import { contadoresDeLeccion, ligaSemanal, misionesDelDia, premioDeCofre, XP_COFRE_DIARIO } from "../movil/ingles/misiones.js";
 import { COLECCION_EXTRA, extraDesdeRegistros, registrosDesdeViejo } from "../movil/ingles/extra.js";
@@ -318,7 +319,7 @@ const apiWeb = {
   /** @param {"programacion"|"ingles"} [ambito] las lecciones de inglés usan sus propios ítems y su unidad actual */
   async lecciones(ambito = "programacion") {
     const ingles = ambito === "ingles";
-    const [datosItems, entrevistas] = await Promise.all([ingles ? itemsIngles() : json("items.json"), ingles ? null : json("entrevistas.json")]);
+    const [datosItems, entrevistas, temas] = await Promise.all([ingles ? itemsIngles() : json("items.json"), ingles ? null : json("entrevistas.json"), ingles ? null : aprender().then((a) => a.temas).catch(() => [])]);
     const d = progreso.datos();
     const unidades = datosItems.unidades;
     const elegida = ingles ? progreso.ajuste("ingles", {}).unidad : d.unidadActual;
@@ -336,6 +337,9 @@ const apiWeb = {
       reportados: d.reportados,
       unidadActual: actual?.id ?? null,
       lecciones: d.lecciones,
+      // Programación: cuántos conceptos tiene la teoría de cada tema (para "3 de 7 leídos") y tus quizzes y pruebas
+      teoria: ingles ? null : Object.fromEntries((temas ?? []).map((t) => [t.id, partesTeoria(t.teoria)?.conceptos.length ?? 0])),
+      quizzes: ingles ? null : (d.quizzes ?? {}),
       enCurso,
       hoy: progreso.hoy(),
     };
@@ -361,6 +365,8 @@ const apiWeb = {
     cache.clear(); // Hoy y las demás pantallas deben ver la lección nueva
     return r;
   },
+  /** Prueba de una unidad de programación: se guarda como un quiz más ("prueba:<unidad>", guarda tu mejor nota). */
+  guardarPrueba: async (unidad, aciertos, total) => progreso.guardarQuiz(`prueba:${unidad}`, aciertos, total),
   reportar: async (clave) => progreso.reportar(clave),
   quitarReporte: async (clave) => progreso.quitarReporte(clave),
   reportados: async () => progreso.datos().reportados,
