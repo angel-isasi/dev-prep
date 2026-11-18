@@ -244,3 +244,201 @@
   color: var(--texto-suave);
   font-size: var(--letra-3);
 }
+
+/* ---------- El tema como centro: dominio, lecciones, más práctica y entrevista ---------- */
+
+/* Las pestañas con rejillas usan el ancho completo, igual que la teoría */
+.pagina[data-pestana="lecciones"],
+.pagina[data-pestana="entrevista"],
+.pagina[data-pestana="ejercicios"] {
+  max-width: 1480px;
+}
+
+.titulo {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Medidor de dominio a la derecha de la cabecera */
+.dominio {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--espacio-4);
+  max-width: 420px;
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.porcentaje {
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-8);
+  font-weight: var(--peso-negrita);
+}
+
+.falta {
+  margin: var(--espacio-2) 0 0;
+  padding-left: var(--espacio-4);
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+p.falta {
+  padding-left: 0;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-4);
+}
+
+.nota {
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+}
+
+.grupos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--espacio-4);
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.subtitulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--espacio-2);
+  margin: var(--espacio-6) 0 var(--espacio-3);
+  font-size: var(--titulo-1);
+}
+
+.entrevista > section:first-child .subtitulo,
+.dosColumnas .subtitulo {
+  margin-top: 0;
+}
+
+.subtitulo small {
+  color: var(--texto-tenue);
+  font-family: var(--fuente);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-normal);
+  letter-spacing: 0;
+}
+
+.rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--espacio-2);
+}
+
+.entrevista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-6);
+}
+
+.dosColumnas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: var(--espacio-5);
+  align-items: start;
+}
+
+.terminos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  margin: 0;
+}
+
+.terminos > div {
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--superficie);
+}
+
+.terminos dt {
+  font-weight: var(--peso-semi);
+}
+
+.terminos dt small {
+  color: var(--texto-tenue);
+  font-weight: var(--peso-normal);
+}
+
+.terminos dd {
+  margin: var(--espacio-1) 0 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+}
+
+.terminos dd.frase {
+  color: var(--color-area, var(--acento));
+}
+
+.metodos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: var(--espacio-2);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--superficie);
+  list-style: none;
+}
+
+.metodos a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio);
+  color: var(--texto);
+  text-decoration: none;
+}
+
+.metodos a:hover {
+  background: var(--superficie-2);
+}
+
+.metodos code {
+  color: var(--color-area, var(--acento));
+  font-weight: var(--peso-semi);
+}
+
+.metodos span {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+@media (max-width: 1200px) {
+  .cabecera {
+    flex-wrap: wrap;
+  }
+
+  .dominio {
+    flex-basis: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .grupos {
+    padding: var(--espacio-3);
+  }
+
+  .dosColumnas {
+    grid-template-columns: 1fr;
+  }
+}

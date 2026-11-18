@@ -243,3 +243,33 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+/* Barra de dominio al pie de cada tema: se llena y cambia de color según cuánto lo dominas */
+.barraDominio {
+  display: block;
+  height: 4px;
+  margin-top: var(--espacio-3);
+  border-radius: var(--radio-pildora);
+  background: var(--superficie-3);
+  overflow: hidden;
+}
+
+.barraDominio i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--texto-tenue);
+  transition: width var(--dur-lenta) var(--curva);
+}
+
+.barraDominio[data-estado="verde"] i {
+  background: var(--exito);
+}
+
+.barraDominio[data-estado="amarillo"] i {
+  background: var(--aviso);
+}
+
+.barraDominio[data-estado="rojo"] i {
+  background: var(--error);
+}

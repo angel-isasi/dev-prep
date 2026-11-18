@@ -328,7 +328,8 @@ function Unidad({ unidad, numero, plan, actual, abierta, alAbrir, alHacerActual,
   );
 }
 
-function Grupo({ grupo, unidad }) {
+/** Un grupo de lecciones de una unidad ("Lo esencial", "Con código real"...). También lo usa la página del tema. */
+export function Grupo({ grupo, unidad }) {
   const [todas, setTodas] = useState(false);
   const visibles = todas ? grupo.lecciones : grupo.lecciones.slice(0, VISIBLES);
   return (

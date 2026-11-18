@@ -16,6 +16,7 @@ import { GraficoSemana } from "../components/GraficoSemana.jsx";
 import { Llama } from "../components/Llama.jsx";
 import { TiempoLibre } from "../components/TiempoLibre.jsx";
 import { AvisoMapache } from "../movil/mapache/TarjetaMapache.jsx";
+import { ESTADO_RUTA, useRuta } from "../components/Ruta.jsx";
 import estilos from "./Hoy.module.css";
 
 const RITMO = {
@@ -44,6 +45,7 @@ export function Hoy() {
   const [datos, setDatos] = useState(api.inicio.guardado);
   const [sesion, setSesion] = useState(null);
   const [error, setError] = useState(null);
+  const ruta = useRuta();
   // Colores del tema para el tanque y el tablero de fichas (se dibujan en canvas)
   const colorAcento = useColorTema("--acento");
   const colorExito = useColorTema("--exito");
@@ -70,7 +72,9 @@ export function Hoy() {
   if (!datos) return <Esqueleto variante="tarjetas" />;
 
   const { config, meta, ayer, racha, ritmo, semana } = datos;
-  const ritmoInfo = RITMO[ritmo.estado];
+  // Con la ruta (versión web), "vas al día" se mide por unidades; sin ella, con la regla de la app local
+  const ritmoInfo = ruta ? ESTADO_RUTA[ruta.estado] : RITMO[ritmo.estado];
+  const estaSemana = ruta?.estaSemana ?? [];
   const falloAyer = ayer && !ayer.cumplio && ayer.estado !== "salvado" && !meta.cumplio;
 
   return (
@@ -163,7 +167,7 @@ export function Hoy() {
             </span>
           </div>
 
-          <Link to="/progreso" className={`tarjeta ${estilos.numero}`}>
+          <Link to="/progreso#ruta" className={`tarjeta ${estilos.numero}`}>
             <span className="etiqueta">Faltan para tu meta</span>
             {/* Los días que faltan, en un tablero de fichas */}
             <span className={estilos.tablero}>
@@ -188,15 +192,21 @@ export function Hoy() {
               </span>{" "}
               {fecha(config.fechaMeta, { day: "numeric", month: "short", year: "numeric" })}
             </span>
+            {estaSemana.length > 0 && (
+              <span className={estilos.detalle}>
+                Esta semana: {estaSemana.slice(0, 2).map((u) => u.titulo).join(", ")}
+                {estaSemana.length > 2 && ` y ${estaSemana.length - 2} más`}
+              </span>
+            )}
           </Link>
 
           <Link to="/progreso" className={`tarjeta ${estilos.numero}`}>
-            <span className="etiqueta">Preparación</span>
+            <span className="etiqueta">Cuánto dominas</span>
             <strong className={estilos.cifra}>
-              {datos.preparacion}
+              {ruta ? ruta.dominio : datos.preparacion}
               <small> %</small>
             </strong>
-            <span className={estilos.detalle}>Lo que dominas de verdad · ver progreso →</span>
+            <span className={estilos.detalle}>{ruta ? `${ruta.listas} de ${ruta.total} unidades listas` : "Lo que dominas de verdad"} · ver progreso →</span>
           </Link>
         </div>
       </div>

@@ -1,0 +1,228 @@
+.ruta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  padding: var(--espacio-5);
+}
+
+.cabecera {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espacio-5);
+}
+
+.cabecera h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-3);
+  margin-top: var(--espacio-1);
+  font-size: var(--titulo-3);
+  font-weight: var(--peso-negrita);
+  letter-spacing: -0.03em;
+}
+
+/* El chip dentro del título usa la letra normal, no la de títulos */
+.cabecera h2 :global(.chip) {
+  font-family: var(--fuente);
+  letter-spacing: 0;
+}
+
+.cabecera p {
+  margin: var(--espacio-2) 0 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-5);
+}
+
+.datos {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--espacio-5);
+  margin: 0;
+}
+
+.datos dt {
+  color: var(--texto-tenue);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.datos dd {
+  margin: 2px 0 0;
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-8);
+  font-weight: var(--peso-negrita);
+  white-space: nowrap;
+}
+
+.aviso {
+  margin: 0;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid color-mix(in srgb, var(--aviso) 35%, transparent);
+  border-radius: var(--radio-lg);
+  background: var(--aviso-suave);
+  color: var(--aviso);
+  font-size: var(--letra-4);
+}
+
+.aviso a {
+  color: inherit;
+  font-weight: var(--peso-semi);
+  text-decoration: underline;
+}
+
+/* Las semanas en filas de tarjetas: tantas columnas como quepan */
+.semanas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.semana {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--hundido);
+}
+
+.semana[data-actual="true"] {
+  border-color: color-mix(in srgb, var(--acento) 50%, transparent);
+  background: var(--acento-suave);
+}
+
+.semana[data-hito="true"] {
+  border-style: dashed;
+}
+
+.semanaCabeza {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+}
+
+.semanaCabeza strong {
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
+}
+
+.semana[data-actual="true"] .semanaCabeza strong {
+  color: var(--acento);
+}
+
+.semanaCabeza span {
+  color: var(--texto-tenue);
+  font-size: var(--letra-2);
+  white-space: nowrap;
+}
+
+.unidades {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.unidades a {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  padding: 5px var(--espacio-2);
+  border-radius: var(--radio-sm);
+  color: var(--texto);
+  font-size: var(--letra-4);
+  text-decoration: none;
+  transition: background var(--transicion);
+}
+
+.unidades a:hover {
+  background: var(--superficie-2);
+}
+
+/* Símbolo del estado: se entiende por la forma y además por el color */
+.unidades i {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+  font-style: normal;
+  font-weight: var(--peso-negrita);
+}
+
+.unidades i[data-estado="rojo"] {
+  color: var(--error);
+}
+
+.unidades i[data-estado="amarillo"] {
+  color: var(--aviso);
+}
+
+.unidades i[data-estado="verde"] {
+  background: var(--exito);
+  color: var(--sobre-acento);
+}
+
+.hito {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+}
+
+.hito strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-7);
+}
+
+.hito span,
+.libre {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.leyenda {
+  margin: 0;
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+}
+
+@media (max-width: 900px) {
+  .cabecera {
+    flex-direction: column;
+    gap: var(--espacio-3);
+  }
+}
+
+@media (max-width: 600px) {
+  .ruta {
+    padding: var(--espacio-4);
+  }
+
+  .datos {
+    gap: var(--espacio-4);
+  }
+
+  .semanas {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* En Progreso va entre el resumen y las demás filas */
+.ruta {
+  margin-bottom: var(--espacio-3);
+}

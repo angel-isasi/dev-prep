@@ -14,6 +14,7 @@ import { EstudioJuego } from "../components/EstudioJuego.jsx";
 import { SemaforoPostular, TarjetaNivel } from "../components/Logros.jsx";
 import { RetoMes, ResumenMes } from "../components/Rutina.jsx";
 import { CuantoAvance, DiaEnNumeros, PlanSemana } from "../components/Avance.jsx";
+import { Ruta, useRuta } from "../components/Ruta.jsx";
 import estilos from "./Progreso.module.css";
 
 const DIAS = ["L", "", "M", "", "V", "", "D"];
@@ -25,7 +26,7 @@ function textoCelda(c) {
     month: "short",
   });
   if (!c.hecho && !c.minutos) return `${fecha}: sin actividad`;
-  return `${fecha}: ${c.hecho} hecho(s), ${c.minutos} min`;
+  return `${fecha}: ${c.hecho} puntos, ${c.minutos} min`;
 }
 
 /** Agrupa las celdas en columnas de 7 días (una columna por semana). */
@@ -40,6 +41,7 @@ export function Progreso() {
   const [datos, setDatos] = useState(api.progreso.guardado);
   const [error, setError] = useState(null);
   const { mapa, errores } = useMapaDominio();
+  const ruta = useRuta();
 
   useEffect(() => {
     api.progreso().then(setDatos, (e) => setError(e.message));
@@ -49,7 +51,10 @@ export function Progreso() {
     return <p className={estilos.mensaje}>No se pudo cargar: {error}</p>;
   if (!datos) return <Esqueleto variante="tarjetas" />;
 
-  const { preparacion, racha, semana, ritmo, totales, calendario } = datos;
+  const { preparacion, racha, semana, totales, calendario } = datos;
+  // Un solo "cuánto dominas": el promedio del mapa (ejercicios, lecciones y quiz). Sin mapa
+  // (app local), queda la preparación de siempre, que solo mira los ejercicios.
+  const dominio = ruta ? ruta.dominio : preparacion.total;
   const activos = calendario.filter((c) => c.nivel > 0).length;
 
   return (
@@ -65,26 +70,26 @@ export function Progreso() {
         {/* Preparación: anillo grande */}
         <div className={estilos.preparacion}>
           <AnilloProgreso
-            valor={preparacion.total / 100}
+            valor={dominio / 100}
             tamano={168}
             grosor={12}
           >
             <strong className={estilos.porcentaje}>
               <NumeroAnimado
-                valor={preparacion.total}
-                decimales={preparacion.total % 1 ? 1 : 0}
+                valor={dominio}
+                decimales={dominio % 1 ? 1 : 0}
               />
               <small>%</small>
             </strong>
           </AnilloProgreso>
           <div>
             <span className={estilos.etiqueta}>
-              Preparación para entrevista
+              Cuánto dominas
             </span>
             <p className={estilos.nota}>
-              Cuenta solo lo resuelto sin ver la solución. Usar las 3 pistas
-              vale menos, y un repaso vencido le resta. Los temas que más
-              preguntan en entrevistas pesan más.
+              El promedio de tu mapa: en cada unidad cuentan los ejercicios
+              resueltos sin ver la solución (la mitad), las preguntas de
+              lección fijadas y el quiz. Un repaso vencido le resta.
             </p>
           </div>
         </div>
@@ -127,34 +132,30 @@ export function Progreso() {
             <div className={estilos.datoInterior}>
               <span className={estilos.etiqueta}>Esta semana</span>
               <strong className={estilos.numero}>
-                <SlidingNumber number={semana.resueltos + semana.repasos} />
+                <SlidingNumber number={semana.puntos ?? 0} />
               </strong>
               <span className={estilos.detalle}>
-                hechos · {semana.minutos} min
+                puntos · {semana.minutos} min
               </span>
             </div>
           </MagicCard>
           <MagicCard className={estilos.dato}>
             <div className={estilos.datoInterior}>
-              <span className={estilos.etiqueta}>Ritmo</span>
-              <strong
-                className={estilos.numero}
-                data-tipo={
-                  ritmo.promedioSemana >= ritmo.necesarioPorDia
-                    ? "exito"
-                    : "error"
-                }
-              >
-                {ritmo.promedioSemana}
-                <small>/día</small>
+              <span className={estilos.etiqueta}>Unidades listas</span>
+              <strong className={estilos.numero}>
+                <SlidingNumber number={ruta ? ruta.listas : totales.resueltos} />
+                <small>/{ruta ? ruta.total : totales.total}</small>
               </strong>
               <span className={estilos.detalle}>
-                necesitas {ritmo.necesarioPorDia} al día
+                {ruta ? `${ruta.dominadas} en verde` : "ejercicios resueltos"}
               </span>
             </div>
           </MagicCard>
         </AnimatedGroup>
       </div>
+
+      {/* La ruta semana a semana hasta tu fecha meta (solo en la versión web) */}
+      <Ruta ruta={ruta} />
 
       {/* Por filas: qué hacer ahora, lo que dominas, tu constancia y si ya puedes postular.
           Cada fila pone sus tarjetas lado a lado (misma altura) y pasa a una columna si no caben. */}

@@ -16,8 +16,12 @@ import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
 import { analizarOferta, palabrasParaCv } from "../../../server/ofertas.js";
 import { diaSemana, lunesDe } from "../../../server/metricas.js";
 import { avanceUnidad, terminada } from "../movil/leccion/motor.js";
-import { planUnidad } from "../movil/leccion/plan.js";
+import { clavePrueba, planUnidad } from "../movil/leccion/plan.js";
 import { armarSesion } from "../../../server/sesion.js";
+import { armarRuta } from "../../../server/ruta.js";
+import { huboEstudio } from "../../../server/puntos.js";
+import { preguntasDelTema } from "../../../server/centro-tema.js";
+import { unidadDeEjercicio } from "../../../scripts/items/unidades.js";
 import { partesTeoria } from "./teoria.js";
 import { expandirIngles, registrosPorConcepto } from "../../../scripts/items/ingles.js";
 import { contadoresDeLeccion, ligaSemanal, misionesDelDia, premioDeCofre, XP_COFRE_DIARIO } from "../movil/ingles/misiones.js";
@@ -391,6 +395,48 @@ const apiWeb = {
       hoy: progreso.hoy(),
     });
     return { unidades, debiles: unidadesDebiles(unidades) };
+  },
+  /**
+   * Todo lo de un tema en un solo lugar (página del tema): cuánto lo dominas y qué te falta, sus
+   * lecciones, los demás ejercicios de la unidad, sus términos del glosario, sus métodos de la
+   * Referencia y las preguntas de entrevista que lo tocan.
+   */
+  async centroDelTema(id) {
+    const [{ unidades }, lecc, { ejercicios }, ap, glosario, referencia, entrevistas] = await Promise.all([
+      apiWeb.mapa(),
+      apiWeb.lecciones(),
+      indice(),
+      aprender(),
+      json("glosario.json"),
+      json("referencia.json"),
+      json("entrevistas.json"),
+    ]);
+    const tema = ap.porId.get(id);
+    if (!tema) return null;
+    const guiados = new Set(tema.ejercicios ?? []);
+    const terminos = glosario.flatMap((c) => c.terminos).filter((t) => t.unidad === id);
+    const idsReferencia = new Set(lecc.items.filter((it) => it.unidad === id && it.fuente?.tipo === "referencia").map((it) => it.fuente.id));
+    return {
+      dominio: unidades.find((u) => u.id === id) ?? null,
+      plan: planUnidad(lecc.items, lecc.registros, id, lecc.reportados),
+      prueba: lecc.quizzes?.[clavePrueba(id)] ?? null,
+      otrosEjercicios: ejercicios.filter((e) => !guiados.has(e.id) && unidadDeEjercicio(e, ap.temas) === id).map(resumenEj),
+      terminos,
+      metodos: referencia.entradas.filter((e) => idsReferencia.has(e.id)),
+      preguntas: preguntasDelTema(entrevistas.preguntas, { area: tema.area, titulo: tema.titulo, terminos }),
+    };
+  },
+
+  /**
+   * La ruta semana a semana hasta tu fecha meta: qué unidades tocan cada semana y si vas al día
+   * (la regla está en server/ruta.js). Sale del mismo mapa de dominio.
+   */
+  async ruta() {
+    const { unidades } = await apiWeb.mapa();
+    const hoy = progreso.hoy();
+    const dias = progreso.dias();
+    const inicio = Object.keys(dias).filter((f) => huboEstudio(dias[f])).sort()[0] ?? hoy;
+    return armarRuta({ hoy, fechaMeta: progreso.datos().config.fechaMeta, inicio, unidades, pausas: progreso.ajuste("pausas", { lista: [] }).lista });
   },
   /** Tus errores más comunes al correr los tests (los cuenta la laptop y llegan al sincronizar). */
   erroresFrecuentes: async () => erroresFrecuentes(progreso.dias()).slice(0, 5),

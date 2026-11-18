@@ -17,14 +17,20 @@ const AREAS = [
 export function Aprender() {
   const [temas, setTemas] = useState(api.temas.guardado);
   const [error, setError] = useState(null);
+  // El mapa de dominio (solo en la versión web): pinta cada tema según cuánto lo dominas
+  const [dominio, setDominio] = useState(() => new Map());
   const [params, setParams] = useSearchParams();
   const area = params.get("area") ?? "javascript";
 
   useEffect(() => {
     api.temas().then(setTemas, (e) => setError(e.message));
+    api.mapa?.().then(
+      (mapa) => setDominio(new Map(mapa.unidades.map((u) => [u.id, u]))),
+      () => {},
+    );
   }, []);
 
-  if (error) return <p className={estilos.mensaje}>No se pudo cargar: {error}. Cierra la app y vuelve a abrir iniciar.bat.</p>;
+  if (error) return <p className={estilos.mensaje}>No se pudo cargar: {error}. Recarga la página.</p>;
   if (!temas) return <Esqueleto variante="lista" />;
 
   const delArea = temas.filter((t) => t.area === area);
@@ -43,7 +49,7 @@ export function Aprender() {
           </Link>
         }
       >
-        Teoría de una pantalla, ejercicios guiados y un quiz para comprobar que lo entendiste.
+        Cada tema reúne su teoría, lecciones, ejercicios, quiz y lo que te preguntan en entrevistas. El color dice cuánto lo dominas.
       </CabeceraPagina>
 
       {/* Selector de área: JavaScript (amarillo) o React (celeste) */}
@@ -72,6 +78,7 @@ export function Aprender() {
         <AnimatedGroup key={area} preset="slide" stagger={0.04} as="ol" asChild="li" className={estilos.temas} itemClassName={estilos.celda}>
           {delArea.map((t) => {
             const completo = esCompleto(t);
+            const d = dominio.get(t.id);
             return (
               <MagicCard
                 key={t.id}
@@ -83,7 +90,14 @@ export function Aprender() {
                 <Link to={`/aprender/${t.id}`} className={estilos.tema} data-completo={completo}>
                   <div className={estilos.temaArriba}>
                     <span className={estilos.numero}>{String(t.orden).padStart(2, "0")}</span>
-                    {completo && <span className={estilos.completo}>✓ Completo</span>}
+                    {/* Cuánto dominas el tema (el mismo cálculo del mapa de Progreso); el símbolo acompaña al color */}
+                    {d ? (
+                      <span className="chip" data-tono={TONO[d.estado]} title={ESTADO[d.estado]}>
+                        {SIMBOLO[d.estado]} {Math.round(d.valor * 100)}%
+                      </span>
+                    ) : (
+                      completo && <span className={estilos.completo}>✓ Completo</span>
+                    )}
                   </div>
                   <strong className={estilos.titulo}>{t.titulo}</strong>
                   <span className={estilos.descripcion}>{t.descripcion}</span>
@@ -105,6 +119,11 @@ export function Aprender() {
                       {t.quiz ? `Quiz ${t.quiz.mejor}/${t.quiz.total}` : "Quiz pendiente"}
                     </span>
                   </div>
+                  {d && (
+                    <span className={estilos.barraDominio} data-estado={d.estado} aria-hidden>
+                      <i style={{ width: `${Math.round(d.valor * 100)}%` }} />
+                    </span>
+                  )}
                 </Link>
               </MagicCard>
             );
@@ -114,6 +133,11 @@ export function Aprender() {
     </section>
   );
 }
+
+// El estado de cada tema se lee por su símbolo, no solo por el color
+const SIMBOLO = { verde: "✓", amarillo: "◐", rojo: "○", "sin-empezar": "○" };
+const ESTADO = { verde: "Lo dominas", amarillo: "A medias", rojo: "Flojo", "sin-empezar": "Sin empezar" };
+const TONO = { verde: "exito", amarillo: "aviso", rojo: "error", "sin-empezar": undefined };
 
 function esCompleto(t) {
   return t.resueltos === t.totalEjercicios && !!t.quiz && t.quiz.mejor === t.quiz.total;
