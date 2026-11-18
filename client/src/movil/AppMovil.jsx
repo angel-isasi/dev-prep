@@ -25,7 +25,6 @@ import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
 import { perezoso } from "../lib/perezoso.js";
 
 // Cada pantalla se descarga cuando se abre (ver lib/perezoso.js)
-const HoyMovil = perezoso(() => import("./HoyMovil.jsx"), "HoyMovil");
 const EjercicioMovil = perezoso(() => import("./EjercicioMovil.jsx"), "EjercicioMovil");
 const ChuletasMovil = perezoso(() => import("./ChuletasMovil.jsx"), "ChuletasMovil");
 const VincularMovil = perezoso(() => import("./VincularMovil.jsx"), "VincularMovil");
@@ -47,7 +46,7 @@ const PaginaLogros = perezoso(() => import("../components/Logros.jsx"), "PaginaL
 const Trabajo = perezoso(() => import("./trabajo/Trabajo.jsx"), "Trabajo");
 const Enfoque = perezoso(() => import("../components/Rutina.jsx"), "Enfoque");
 const PaginaDiario = perezoso(() => import("../components/Rutina.jsx"), "PaginaDiario");
-const Inicio = perezoso(() => import("../pages/Inicio.jsx"), "Inicio");
+const Hoy = perezoso(() => import("../pages/Hoy.jsx"), "Hoy");
 const Progreso = perezoso(() => import("../pages/Progreso.jsx"), "Progreso");
 const Ajustes = perezoso(() => import("../pages/Ajustes.jsx"), "Ajustes");
 const Practicar = perezoso(() => import("../pages/Practicar.jsx"), "Practicar");
@@ -118,7 +117,7 @@ export function App() {
     <>
       <Routes key="web">
         <Route element={grande ? <Layout /> : <LayoutMovil />}>
-          <Route index element={grande ? <Inicio /> : <HoyMovil />} />
+          <Route index element={<Hoy />} />
           <Route path="aprender" element={<Aprender />} />
           <Route path="aprender/:id" element={<Tema />} />
           <Route path="practicar" element={<Practicar />} />

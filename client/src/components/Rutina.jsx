@@ -1,10 +1,8 @@
 // Piezas de la rutina diaria (versión web):
-// - PlanDeHoy: una sola lista de lo que toca hoy, con "Siguiente".
 // - TarjetaDiario y PaginaDiario: tu diario de una línea.
 // - Enfoque: sesiones de 25 minutos (en la laptop, si abres el juego durante la sesión, se anula).
 // - RetoMes y ResumenMes: el reto del mes y lo que lograste el mes pasado.
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
 import { api } from "../lib/api.js";
 import { celebrar } from "../lib/celebrar.js";
 import { sonidos } from "../lib/sonidos.js";
@@ -15,51 +13,6 @@ import { AnilloProgreso } from "./AnilloProgreso.jsx";
 import estilos from "./Rutina.module.css";
 import { IconoAlerta } from "./Iconos.jsx";
 
-export function PlanDeHoy() {
-  const [plan, setPlan] = useState(null);
-  useEffect(() => {
-    api.planDeHoy?.().then(setPlan, () => {});
-  }, []);
-  if (!plan) return null;
-  const hechos = plan.pasos.filter((p) => p.hecho).length;
-
-  return (
-    <div className={estilos.tarjeta}>
-      <div className={estilos.cabecera}>
-        <div>
-          <span className={estilos.etiqueta}>{plan.pausa ? "Semana de exámenes: sin presión" : "Tu plan de hoy"}</span>
-          <strong>
-            {hechos} de {plan.pasos.length} listos
-          </strong>
-        </div>
-        {plan.siguiente ? (
-          <Link to={plan.siguiente.a} className="boton boton-primario">
-            Siguiente: {plan.siguiente.texto.split(":")[0]} →
-          </Link>
-        ) : (
-          <span className={estilos.listo}>¡Día completo!</span>
-        )}
-      </div>
-      <ol className={estilos.pasos}>
-        {plan.pasos.map((p) => (
-          <li key={p.id} data-hecho={p.hecho}>
-            <Link to={p.a}>
-              <span className={estilos.check} aria-hidden>
-                {p.hecho ? "✓" : ""}
-              </span>
-              <span>
-                <strong>{p.texto}</strong>
-                <small>{p.detalle}</small>
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-}
-
-/** El diario: dos líneas al cerrar el día. */
 export function PaginaDiario() {
   const [entradas, setEntradas] = useState([]);
   const [aprendi, setAprendi] = useState("");

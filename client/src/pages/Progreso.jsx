@@ -11,9 +11,9 @@ import { MagicCard } from "../components/ui/magic-card.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { EntrenamientoHoy, MapaDominio, useMapaDominio } from "../components/MapaDominio.jsx";
 import { EstudioJuego } from "../components/EstudioJuego.jsx";
-import { SemaforoPostular } from "../components/Logros.jsx";
+import { SemaforoPostular, TarjetaNivel } from "../components/Logros.jsx";
 import { RetoMes, ResumenMes } from "../components/Rutina.jsx";
-import { CuantoAvance, PlanSemana } from "../components/Avance.jsx";
+import { CuantoAvance, DiaEnNumeros, PlanSemana } from "../components/Avance.jsx";
 import estilos from "./Progreso.module.css";
 
 const DIAS = ["L", "", "M", "", "V", "", "D"];
@@ -169,6 +169,9 @@ export function Progreso() {
             <EntrenamientoHoy mapa={mapa} errores={errores} />
             {api.retoMes && <RetoMes />}
             {api.retoMes && <ResumenMes siempre />}
+            {/* Antes estaban en la pantalla de entrada: tu nivel e insignias y los números de hoy */}
+            {api.logros && <TarjetaNivel />}
+            {api.diaEnNumeros && <DiaEnNumeros />}
           </div>
         </div>
 

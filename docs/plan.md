@@ -434,3 +434,10 @@ Pendiente de la tanda 2: unir las tres versiones de Ajustes y que la app local (
 - **Tiempo libre**: 1 punto = 1 minuto, con la misma tabla. Se agregaron el ejercicio estudiado sin tests y el quiz.
 - **El calendario y la semana ven todo**: cuentan los puntos y los minutos de inglés y de lecciones, no solo los ejercicios de la laptop.
 - Los avisos al celular hablan en puntos (`server/avisos.js`; la Lambda se actualiza con `npm run aws:crear`).
+
+### Tanda 3, segunda parte (2026-11-18): sesión de hoy y una sola pantalla Hoy
+
+- **Sesión de hoy** (`server/sesion.js`, con tests): una sola lista ordenada de lo que conviene hacer, primero lo que toca repasar (preguntas de lección, tarjetas de entrevista y ejercicios que vencen hoy) y después lo nuevo (inglés, tu siguiente lección y tu siguiente ejercicio). Cada paso dice cuántos puntos da y cuánto tarda, y hay un único "siguiente". Reemplaza al mazo de Inicio, a la lista del celular y al plan de hoy.
+- **Hoy es una sola pantalla** (`pages/Hoy.jsx`) en la laptop, la web y el celular; antes eran Inicio y Hoy, con bloques distintos. Tiene un bloque protagonista (la sesión, con el botón Empezar), cuatro números (puntos de hoy en el tanque, racha, días para la fecha meta en el tablero de fichas y preparación), el tiempo libre y la semana.
+- **Lo demás se mudó a Progreso**: tu nivel e insignias y el día en números. El plan y el reto de la semana ya estaban en Progreso y Practicar.
+- Se quitaron los efectos que ya no se usan (rejilla de puntos, borde eléctrico, partículas, mazo de cartas).

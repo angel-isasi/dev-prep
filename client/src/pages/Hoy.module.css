@@ -1,0 +1,424 @@
+.pagina {
+  max-width: var(--ancho-pagina);
+  margin: 0 auto;
+  padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+}
+
+.mensaje {
+  padding: var(--espacio-6);
+  color: var(--texto-suave);
+}
+
+/* ---------- Cabecera: saludo a la izquierda, tu objetivo a la derecha ---------- */
+.cabecera {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--espacio-5);
+  margin-bottom: var(--espacio-5);
+}
+
+.fecha {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+}
+
+/* Solo la primera letra en mayúscula ("Miércoles, 18 de noviembre") */
+.fecha::first-letter {
+  text-transform: uppercase;
+}
+
+.saludo {
+  font-size: var(--titulo-6);
+  font-weight: var(--peso-negrita);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.objetivo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 46ch;
+  margin: 0;
+  padding-left: var(--espacio-4);
+  border-left: 2px solid var(--acento);
+  color: var(--texto);
+  font-size: var(--letra-5);
+  line-height: 1.45;
+}
+
+a.objetivo {
+  color: var(--texto-suave);
+}
+
+/* ---------- Avisos de una línea ---------- */
+.aviso {
+  margin: 0 0 var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  font-size: var(--letra-4);
+  font-weight: var(--peso-medio);
+}
+
+.aviso[data-tono="error"] {
+  border-color: color-mix(in srgb, var(--error) 35%, transparent);
+  background: var(--error-suave);
+  color: var(--error);
+}
+
+.aviso[data-tono="aviso"] {
+  border-color: color-mix(in srgb, var(--aviso) 35%, transparent);
+  background: var(--aviso-suave);
+  color: var(--aviso);
+}
+
+.aviso[data-tono="exito"] {
+  border-color: color-mix(in srgb, var(--exito) 35%, transparent);
+  background: var(--exito-suave);
+  color: var(--exito);
+}
+
+.aviso[data-tono="acento"] {
+  border-color: color-mix(in srgb, var(--acento) 35%, transparent);
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
+/* ---------- Zona principal: la sesión manda; los cuatro números al costado ---------- */
+.principal {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: var(--espacio-4);
+  margin-top: var(--espacio-4);
+}
+
+.sesion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-5);
+  padding: var(--espacio-6);
+}
+
+.cargando {
+  min-height: 320px;
+}
+
+.sesionCabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-5);
+}
+
+.sesionTexto {
+  min-width: 0;
+}
+
+.sesionTexto h2 {
+  margin-top: var(--espacio-1);
+  font-size: var(--titulo-4);
+  font-weight: var(--peso-negrita);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.sesionTexto p {
+  margin: var(--espacio-2) 0 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-5);
+}
+
+/* El único botón grande de la pantalla */
+.empezar {
+  flex-shrink: 0;
+  height: 52px;
+  padding: 0 var(--espacio-6);
+  border-radius: var(--radio-lg);
+  font-size: var(--letra-6);
+  font-weight: var(--peso-semi);
+}
+
+.pasos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pasos a {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  min-height: 56px;
+  padding: var(--espacio-2) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--hundido);
+  color: var(--texto);
+  text-decoration: none;
+  transition:
+    border-color var(--transicion),
+    background var(--transicion);
+}
+
+.pasos a:hover {
+  border-color: var(--borde-fuerte);
+  background: var(--superficie-2);
+}
+
+.pasos li[data-siguiente="true"] a {
+  border-color: color-mix(in srgb, var(--acento) 45%, transparent);
+}
+
+.check {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--borde-fuerte);
+  border-radius: 50%;
+  color: var(--sobre-acento);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-negrita);
+}
+
+.pasos li[data-siguiente="true"] .check {
+  border-color: var(--acento);
+}
+
+.pasos li[data-hecho="true"] .check {
+  border-color: var(--exito);
+  background: var(--exito);
+}
+
+.pasoTexto {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pasoTexto strong {
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
+}
+
+.pasoTexto small {
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+}
+
+.pasos li[data-hecho="true"] .pasoTexto strong {
+  color: var(--texto-tenue);
+  text-decoration: line-through;
+}
+
+.pasoValor {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.3;
+}
+
+.pasoValor strong {
+  color: var(--acento);
+  font-size: var(--letra-4);
+  font-weight: var(--peso-negrita);
+  font-variant-numeric: tabular-nums;
+}
+
+.pasoValor small {
+  color: var(--texto-tenue);
+  font-size: var(--letra-2);
+}
+
+.pasos li[data-hecho="true"] .pasoValor strong {
+  color: var(--exito);
+}
+
+.frase {
+  margin: 0;
+  color: var(--texto-tenue);
+  font-size: var(--letra-4);
+  font-style: italic;
+}
+
+/* ---------- Los cuatro números ---------- */
+.numeros {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-3);
+  align-content: start;
+}
+
+.numero {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  padding: var(--espacio-5);
+  color: var(--texto);
+  text-decoration: none;
+}
+
+a.numero {
+  transition: border-color var(--transicion);
+}
+
+a.numero:hover {
+  border-color: var(--borde-fuerte);
+}
+
+/* Los puntos de hoy: el tanque al lado del número */
+.puntos {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--espacio-4);
+}
+
+.puntos > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  min-width: 0;
+}
+
+/* El tanque de los puntos de hoy */
+.tanque {
+  flex: none;
+  box-shadow:
+    inset 0 0 0 1px var(--borde-fuerte),
+    0 0 18px var(--acento-suave);
+}
+
+/* Días restantes en el tablero de fichas */
+.tablero {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--espacio-2);
+  margin: 2px 0;
+}
+
+.tablero small {
+  color: var(--texto-tenue);
+  font-size: var(--letra-4);
+}
+
+.cifra {
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-5);
+  font-weight: var(--peso-negrita);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.cifra small {
+  color: var(--texto-tenue);
+  font-size: var(--letra-8);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0;
+}
+
+.cifra[data-tono="aviso"] {
+  color: var(--aviso);
+}
+
+.detalle {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+/* ---------- Abajo: tiempo libre y la semana ---------- */
+.abajo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-4);
+  margin-top: var(--espacio-4);
+}
+
+.abajo > :only-child {
+  grid-column: 1 / -1;
+}
+
+.semana {
+  padding: var(--espacio-5);
+}
+
+.semanaCabeza {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-4);
+}
+
+.semanaCabeza h2 {
+  font-size: var(--titulo-1);
+}
+
+/* ---------- Ventana mediana: los números bajan y se ponen en una fila ---------- */
+@media (max-width: 1200px) {
+  .principal {
+    grid-template-columns: 1fr;
+  }
+
+  .numeros {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .cabecera {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--espacio-3);
+  }
+
+  .numeros {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .abajo {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 600px) {
+  .pagina {
+    padding: var(--espacio-3) var(--espacio-4) var(--espacio-6);
+  }
+
+  .sesion {
+    gap: var(--espacio-4);
+    padding: var(--espacio-4);
+  }
+
+  /* El botón pasa abajo del título y ocupa todo el ancho: fácil de tocar con el pulgar */
+  .sesionCabeza {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--espacio-4);
+  }
+
+  .empezar {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .pasos a {
+    padding: var(--espacio-2) var(--espacio-3);
+  }
+
+  .numero {
+    padding: var(--espacio-4);
+  }
+}

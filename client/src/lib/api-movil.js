@@ -15,7 +15,9 @@ import { erroresFrecuentes } from "../../../server/errores.js";
 import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
 import { analizarOferta, palabrasParaCv } from "../../../server/ofertas.js";
 import { diaSemana, lunesDe } from "../../../server/metricas.js";
-import { avanceUnidad } from "../movil/leccion/motor.js";
+import { avanceUnidad, terminada } from "../movil/leccion/motor.js";
+import { planUnidad } from "../movil/leccion/plan.js";
+import { armarSesion } from "../../../server/sesion.js";
 import { partesTeoria } from "./teoria.js";
 import { expandirIngles, registrosPorConcepto } from "../../../scripts/items/ingles.js";
 import { contadoresDeLeccion, ligaSemanal, misionesDelDia, premioDeCofre, XP_COFRE_DIARIO } from "../movil/ingles/misiones.js";
@@ -419,38 +421,46 @@ const apiWeb = {
   },
 
   // --- Rutina: plan de hoy, examen semanal, enfoque, reto y resumen del mes, diario, horario ---
-  /** Una sola lista de lo que toca hoy, en orden, con lo ya hecho marcado. */
-  async planDeHoy() {
-    const { ejercicios } = await indice();
-    const g = general(ejercicios);
+  /**
+   * La sesión de hoy: una sola lista ordenada, primero lo que toca repasar y luego lo nuevo
+   * (la regla está en server/sesion.js). Reemplaza al mazo de Inicio y a la lista del celular.
+   */
+  async sesionDeHoy() {
     const hoy = progreso.hoy();
-    const dia = progreso.dias()[hoy] ?? {};
-    const ingles = await apiWeb.inglesHoy();
-    const { preguntas } = await json("entrevistas.json");
+    const conMotor = conectada();
+    // api.inicio viene de la laptop si está conectada: ahí están los ejercicios resueltos con tests
+    const [inicio, { ejercicios }, lecc, ingles, { preguntas }] = await Promise.all([api.inicio(), indice(), apiWeb.lecciones(), apiWeb.inglesHoy(), json("entrevistas.json")]);
     const d = progreso.datos();
-    const tarjetas = preguntas.filter((p) => preguntaPendiente(d.preguntas[p.id], hoy)).length;
-    const lunes = lunesDe(hoy);
-    const finDeSemana = diaSemana(hoy) >= 5;
-    const examenHecho = !!progreso.registros("examenes")[lunes];
-    const diarioHecho = !!progreso.registros("diario")[hoy];
-    const siguiente = vistaInicio(g, ejercicios).continuar ?? vistaInicio(g, ejercicios).siguiente;
-    const pasos = [
-      g.dias.hoy.pausa
-        ? null
-        : {
-            id: "meta",
-            texto: `Meta de hoy: ${g.dias.hoy.meta} puntos`,
-            detalle: `${g.dias.hoy.hecho} de ${g.dias.hoy.meta} · un ejercicio da 25${siguiente ? ` · sigue con ${siguiente.titulo}` : ""}`,
-            hecho: g.dias.hoy.cumplioMeta,
-            a: siguiente ? `/practicar/${siguiente.id}` : "/practicar",
-          },
-      { id: "ingles", texto: `Inglés: ${ingles.meta} minutos`, detalle: `${Math.floor(ingles.minutosHoy)} de ${ingles.meta} min`, hecho: ingles.minutosHoy >= ingles.meta, a: "/leccion?ambito=ingles" },
-      { id: "leccion", texto: "Una lección de programación", detalle: "Unas 8 preguntas, 3 minutos", hecho: (dia.lecciones ?? 0) > 0, a: "/leccion" },
-      tarjetas > 0 ? { id: "tarjetas", texto: `${tarjetas} tarjetas de entrevista para repasar`, detalle: "Piensa la respuesta y luego revela", hecho: false, a: "/entrevistas" } : null,
-      finDeSemana ? { id: "examen", texto: "Examen semanal", detalle: "20 preguntas de lo que viste esta semana", hecho: examenHecho, a: "/leccion?modo=examen" } : null,
-      g.dias.hoy.cumplioMeta ? { id: "diario", texto: "Tu diario de una línea", detalle: "¿Qué aprendiste hoy? ¿Qué te trabó?", hecho: diarioHecho, a: "/diario" } : null,
-    ].filter(Boolean);
-    return { pasos, siguiente: pasos.find((p) => !p.hecho) ?? null, pausa: g.dias.hoy.pausa };
+    const dia = progreso.dias()[hoy] ?? {};
+
+    // Lo que vence hoy: preguntas de lección, tarjetas de entrevista y ejercicios (con tests o estudiados)
+    const preguntasVencidas = lecc.items.filter((it) => !lecc.reportados[it.clave] && lecc.registros[it.clave]?.proximo && lecc.registros[it.clave].proximo <= hoy).length;
+    const tarjetasVencidas = preguntas.filter((p) => preguntaPendiente(d.preguntas[p.id], hoy)).length;
+    const estudiados = ejercicios.filter((e) => progreso.estadoLectura(e.id) === "repasar").map((e) => ({ id: e.id, titulo: e.titulo }));
+    const paraRepasar = [...inicio.repasos, ...estudiados.filter((e) => !inicio.repasos.some((r) => r.id === e.id))];
+
+    // Lo nuevo: tu siguiente lección (o la que dejaste a medias) y tu siguiente ejercicio
+    const unidad = lecc.unidades.find((u) => u.id === lecc.unidadActual) ?? lecc.unidades[0];
+    const plan = unidad ? planUnidad(lecc.items, lecc.registros, unidad.id, lecc.reportados) : null;
+    const leccion =
+      lecc.enCurso && !terminada(lecc.enCurso)
+        ? { titulo: "la que dejaste a medias", unidad: unidad?.titulo ?? "", a: "/leccion?retomar=1" }
+        : plan?.siguiente
+          ? { titulo: plan.siguiente.nombre, unidad: unidad.titulo, a: `/leccion?unidad=${encodeURIComponent(unidad.id)}&parte=${plan.siguiente.id}` }
+          : null;
+    const proximo = inicio.continuar ?? inicio.siguiente;
+
+    return armarSesion({
+      meta: inicio.meta,
+      dia,
+      repaso: { preguntas: preguntasVencidas, tarjetas: tarjetasVencidas, ejercicios: paraRepasar },
+      nuevo: { leccion, ejercicio: proximo && !paraRepasar.some((r) => r.id === proximo.id) ? { id: proximo.id, titulo: proximo.titulo } : null, continuar: !!inicio.continuar },
+      ingles: { meta: ingles.meta, minutosHoy: ingles.minutosHoy },
+      finDeSemana: diaSemana(hoy) >= 5,
+      examenHecho: !!progreso.registros("examenes")[lunesDe(hoy)],
+      diarioHecho: !!progreso.registros("diario")[hoy],
+      conMotor,
+    });
   },
 
   /** Examen semanal terminado: nota de 0 a 20, una por semana (se queda la mejor). */
