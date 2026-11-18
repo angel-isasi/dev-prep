@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useSearchParams } from "react-router";
 import { api } from "../lib/api.js";
 import { ES_MOVIL } from "../lib/modo.js";
 import { AREAS, ejercicioAlAzar, siguienteEjercicio } from "../lib/areas.js";
@@ -14,6 +14,7 @@ import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { RetoSemana } from "../components/Avance.jsx";
 import estilos from "./Practicar.module.css";
 import practica from "../movil/practica/Practica.module.css";
+import selector from "./Aprender.module.css";
 
 /** "Aprender mejor" (solo en la versión web): sesiones cortas que no son ejercicios de VS Code. */
 const HERRAMIENTAS = [
@@ -33,12 +34,13 @@ export function Practicar() {
   const [error, setError] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const navigate = useNavigate();
+  const [params, setParams] = useSearchParams();
 
   useEffect(() => {
     api.ejercicios().then(setEjercicios, (e) => setError(e.message));
   }, []);
 
-  if (error) return <p className={estilos.mensaje}>No se pudo cargar: {error}. Cierra la app y vuelve a abrir iniciar.bat.</p>;
+  if (error) return <p className={estilos.mensaje}>No se pudo cargar: {error}. Recarga la página.</p>;
   if (!ejercicios) return <Esqueleto variante="tarjetas" />;
 
   const deColeccion = (id) => ejercicios.filter((e) => e.coleccion === id);
@@ -50,6 +52,10 @@ export function Practicar() {
   const repasos = ejercicios.filter((e) => e.estado === "repasar");
 
   const ir = (ej) => ej && navigate(`/practicar/${ej.id}`);
+
+  // Se muestra un área a la vez (queda en la dirección: ?area=react), en vez de las cinco una debajo de otra
+  const conEjercicios = AREAS.filter((a) => deArea(a).length > 0);
+  const areaActiva = conEjercicios.find((a) => a.id === params.get("area")) ?? conEjercicios[0];
 
   function buscar(evento) {
     evento.preventDefault();
@@ -115,9 +121,28 @@ export function Practicar() {
         <RetoSemana />
       </div>
 
-      {AREAS.map((area) => {
+      <div className={selector.areas} role="tablist" aria-label="Área">
+        {conEjercicios.map((a) => (
+          <button
+            key={a.id}
+            type="button"
+            role="tab"
+            data-area={a.id}
+            aria-selected={a.id === areaActiva?.id}
+            className={selector.areaBoton}
+            onClick={() => setParams({ area: a.id }, { replace: true })}
+          >
+            <span className={selector.areaPunto} aria-hidden />
+            {a.titulo}
+            <small>
+              {hechos(deArea(a))}/{deArea(a).length}
+            </small>
+          </button>
+        ))}
+      </div>
+
+      {(areaActiva ? [areaActiva] : []).map((area) => {
         const lista = deArea(area);
-        if (lista.length === 0) return null;
         const hechosArea = hechos(lista);
         return (
           <section key={area.id} className={estilos.area} data-area={area.id}>

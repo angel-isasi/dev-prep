@@ -448,3 +448,13 @@ Pendiente de la tanda 2: unir las tres versiones de Ajustes y que la app local (
 - **El tema como centro** (`pages/Tema.jsx`, `api.centroDelTema`): la página de cada tema reúne en pestañas su teoría con chuleta, sus lecciones, sus ejercicios guiados más los demás ejercicios de Practicar del mismo tema, su quiz y "Para la entrevista" (términos del Glosario, métodos de la Referencia y las preguntas de Entrevistas que lo tocan, elegidas por palabras clave en `server/centro-tema.js`). Arriba, cuánto dominas el tema y qué te falta para ponerlo en verde.
 - **Aprender es un mapa**: cada tema muestra su porcentaje de dominio con un símbolo y una barra de color.
 - **Progreso**: un solo "cuánto dominas" (el promedio del mapa: ejercicios, lecciones y quiz), igual en Hoy y en Progreso; la ruta completa; y los puntos de la semana. Lecciones, Chuletas, Referencia y Glosario siguen existiendo como vistas de consulta de todos los temas a la vez.
+
+### Tanda 5 (2026-11-18): pantallas más cortas y la misma respuesta en toda la app
+
+- **Practicar** muestra un área a la vez (JavaScript, Algoritmos, React, TypeScript, Node), elegida con un selector que queda en la dirección (`?area=react`); antes eran las cinco una debajo de otra.
+- **Inglés**: la rutina de hoy subió junto al resumen, así el camino se ve sin bajar.
+- **Estados de carga**: Postulaciones, CV, Portafolio, Pruebas, Insignias y Pitch muestran la silueta de la pantalla mientras cargan (antes quedaban en blanco) y los mensajes de error ya no hablan de `iniciar.bat` en la web.
+- **Una sola respuesta** (`lib/feedback.js`): acierto, fallo, toque y logro suenan y vibran igual en lecciones, historias, parejas y el quiz de cada tema (que antes no hacía nada). Terminar un simulacro o un quiz perfecto se celebra.
+- **Transición con sentido**: al abrir un tema desde Aprender, su título viaja de la tarjeta al encabezado de la página (View Transitions del navegador).
+- **Cierre de sesión**: al terminar la sesión de hoy, Hoy resume los puntos, los minutos y la racha.
+- La pantalla de Ejercicio con tests ya tenía dos columnas (enunciado y tests en vivo), así que no se rehízo; sus dos versiones siguen separadas por lo que cada una puede hacer (con tests en la laptop, modo estudio sin ella).

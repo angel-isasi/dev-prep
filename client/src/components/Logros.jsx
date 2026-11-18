@@ -81,7 +81,7 @@ export function PaginaLogros() {
     api.logros().then(setLogros, () => setLogros(false));
   }, []);
   if (logros === null) return <Esqueleto variante="tarjetas" />;
-  if (!logros) return null;
+  if (!logros) return <p style={{ padding: "var(--espacio-6)", color: "var(--texto-suave)" }}>No se pudieron cargar tus insignias. Recarga la página.</p>;
 
   return (
     <section className={estilos.pagina}>

@@ -12,6 +12,7 @@ import { Portafolio, PruebasYProyecto } from "./Proyectos.jsx";
 import { ListaAnimada } from "../../components/ListaAnimada.jsx";
 import { OfertasParaTi } from "./Ofertas.jsx";
 import estilos from "./Trabajo.module.css";
+import { Esqueleto } from "../../components/Esqueleto.jsx";
 
 const nombreEtapa = Object.fromEntries(ETAPAS);
 const vacia = { empresa: "", puesto: "", enlace: "", fuente: "", etapa: "por-postular", notas: "", proximo: "", proximoFecha: "" };
@@ -69,7 +70,7 @@ function Postulaciones() {
   useEffect(() => {
     cargar();
   }, []);
-  if (!lista) return null;
+  if (!lista) return <Esqueleto variante="lista" />;
 
   async function guardar(e) {
     e.preventDefault();

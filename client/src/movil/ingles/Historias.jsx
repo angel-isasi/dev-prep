@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { api } from "../../lib/api.js";
 import { celebrar } from "../../lib/celebrar.js";
-import { sonidos } from "../../lib/sonidos.js";
+import { feedback } from "../../lib/feedback.js";
 import { hablar, hayVoz } from "../../lib/voz.js";
 import { Markdown } from "../../components/Markdown.jsx";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
@@ -117,7 +117,7 @@ function Reto({ paso, alTerminar }) {
             data-estado={listo ? (i === paso.correcta ? "bien" : i === elegida ? "mal" : "") : ""}
             onClick={() => {
               setElegida(i);
-              (i === paso.correcta ? sonidos.acierto : sonidos.fallo)();
+              (i === paso.correcta ? feedback.acierto : feedback.fallo)();
               if (paso.tipo === "completa" && hayVoz()) hablar(paso.en.replace("___", paso.opciones[paso.correcta]));
             }}
           >
@@ -300,11 +300,11 @@ export function RoleplayMovil() {
 
   function elegir(o, i) {
     if (o.correcta) {
-      sonidos.acierto();
+      feedback.acierto();
       if (hayVoz()) hablar(o.en);
       setExplicacion({ correcta: true, texto: o.explicacion });
     } else {
-      sonidos.fallo();
+      feedback.fallo();
       if (!fallidas.length) setErrores((e) => e + 1);
       setFallidas([...fallidas, i]);
       setExplicacion({ correcta: false, texto: o.explicacion });

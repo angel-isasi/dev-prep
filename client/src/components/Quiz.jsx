@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Markdown } from "./Markdown.jsx";
+import { feedback } from "../lib/feedback.js";
 import estilos from "./Quiz.module.css";
 
 /**
@@ -49,12 +50,17 @@ export function Quiz({ preguntas, alTerminar, mejor }) {
   function elegir(i) {
     if (respondida) return;
     setElegida(i);
-    if (i === p.correcta) setAciertos((a) => a + 1);
+    if (i === p.correcta) {
+      setAciertos((a) => a + 1);
+      feedback.acierto();
+    } else feedback.fallo();
   }
 
   function siguiente() {
     if (indice + 1 >= preguntas.length) {
       setTerminado(true);
+      // Quiz perfecto: se celebra como una lección
+      if (aciertos === preguntas.length) feedback.logro("leccion");
       alTerminar(aciertos);
     } else {
       setIndice(indice + 1);

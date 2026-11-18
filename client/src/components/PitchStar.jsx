@@ -3,6 +3,7 @@ import { api } from "../lib/api.js";
 import { Markdown } from "./Markdown.jsx";
 import { Grabadora } from "./Grabadora.jsx";
 import estilos from "./PitchStar.module.css";
+import { Esqueleto } from "./Esqueleto.jsx";
 
 const PALABRAS_POR_MINUTO = 140;
 
@@ -33,7 +34,7 @@ export function PitchStar({ guias }) {
     api.misRespuestas().then(setDatos);
   }, []);
 
-  if (!datos) return <p>Cargando…</p>;
+  if (!datos) return <Esqueleto variante="texto" />;
 
   const cambiar = (nuevos) => {
     setDatos((d) => ({ ...d, ...nuevos }));

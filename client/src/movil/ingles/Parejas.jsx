@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { api } from "../../lib/api.js";
 import { celebrar } from "../../lib/celebrar.js";
-import { sonidos } from "../../lib/sonidos.js";
+import { feedback } from "../../lib/feedback.js";
 import { hablar, hayVoz } from "../../lib/voz.js";
 import { barajar } from "../leccion/motor.js";
 import { Bit } from "../../components/Bit.jsx";
@@ -106,7 +106,7 @@ export function ParejasMovil() {
   function elegirDer(clave) {
     if (!izq || hechas.has(clave)) return;
     if (izq === clave) {
-      sonidos.acierto();
+      feedback.acierto();
       const palabra = tablero.find((p) => p.clave === clave);
       if (hayVoz()) hablar(palabra.en);
       setParejas((n) => n + 1);
@@ -129,7 +129,7 @@ export function ParejasMovil() {
         });
       }, 350);
     } else {
-      sonidos.fallo();
+      feedback.fallo();
       setCombo(0);
       setMal(clave);
       setTimeout(() => setMal(null), 350);

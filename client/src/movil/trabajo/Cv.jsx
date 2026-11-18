@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../../lib/api.js";
 import estilos from "./Trabajo.module.css";
+import { Esqueleto } from "../../components/Esqueleto.jsx";
 
 const MENSAJES = [
   {
@@ -33,7 +34,7 @@ export function Cv() {
       setHabilidades(r.habilidades);
     });
   }, []);
-  if (!cv) return null;
+  if (!cv) return <Esqueleto variante="texto" />;
 
   const cambiar = (campo) => (e) => {
     setCv({ ...cv, [campo]: e.target.value });

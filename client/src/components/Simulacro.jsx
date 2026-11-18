@@ -10,6 +10,7 @@ import { Markdown } from "./Markdown.jsx";
 import { Cronometro, mmss } from "./Cronometro.jsx";
 import estilos from "./Simulacro.module.css";
 import { IconoEntrevistas, IconoPracticar, IconoTrabajo } from "./Iconos.jsx";
+import { feedback } from "../lib/feedback.js";
 
 /** Lo que mira un entrevistador además de la respuesta correcta. */
 const COMUNICACION = [
@@ -131,6 +132,8 @@ export function Simulacro({ proceso, alRepasar, alIr }) {
         tusPreguntas={tusPreguntas.length}
         segundos={Math.round((fin - inicio) / 1000)}
         alGuardar={async (plan) => {
+          // Terminar un simulacro completo se celebra como un logro
+          feedback.logro("logro");
           await api.guardarSimulacro?.({
             segundos: Math.round((fin - inicio) / 1000),
             ingles,

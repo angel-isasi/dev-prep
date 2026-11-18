@@ -127,7 +127,7 @@ export function Hoy() {
       <AvisoMapache />
 
       <div className={estilos.principal}>
-        <Sesion sesion={sesion} frase={datos.frase} />
+        <Sesion sesion={sesion} frase={datos.frase} resumen={`Hoy sumaste ${meta.hecho} puntos${semana.dias ? ` en ${semana.dias.find((d) => d.fecha === datos.hoy)?.minutos ?? 0} min` : ""}. Racha: ${racha} ${racha === 1 ? "día" : "días"}.`} />
 
         <div className={estilos.numeros}>
           {/* Puntos de hoy: el tanque se llena hacia el objetivo (meta más deuda); cada marca son 25 puntos */}
@@ -229,7 +229,7 @@ export function Hoy() {
 }
 
 /** El bloque protagonista: qué sigue, cuánto falta y la lista completa de la sesión. */
-function Sesion({ sesion, frase }) {
+function Sesion({ sesion, frase, resumen }) {
   if (!sesion) return <div className={`tarjeta-protagonista ${estilos.sesion} ${estilos.cargando}`} aria-busy="true" />;
   const { pasos, siguiente, hechos, minutos, completa, pausa } = sesion;
   const empezo = hechos > 0;
@@ -244,7 +244,7 @@ function Sesion({ sesion, frase }) {
             {siguiente
               ? `${hechos} de ${pasos.length} pasos listos · te quedan unos ${minutos} min`
               : completa
-                ? "Hiciste todo lo de hoy. Lo que sumes ahora adelanta mañana."
+                ? `${resumen} Lo que sumes ahora adelanta mañana.`
                 : "Elige un tema en Aprender o un ejercicio en Practicar."}
           </p>
         </div>

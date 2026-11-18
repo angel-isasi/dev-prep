@@ -11,6 +11,7 @@ import { hablaCorrecta } from "../../../../scripts/items/ingles.js";
 import { barajar, semilla } from "./motor.js";
 import estilos from "./Items.module.css";
 import { IconoAudio, IconoMicrofono } from "../../components/Iconos.jsx";
+import { feedback } from "../../lib/feedback.js";
 
 const TITULOS = {
   quiz: "Responde",
@@ -185,11 +186,11 @@ export function ItemEmparejar({ item, alCompletar }) {
     if (elegido === null || hechos.includes(i)) return;
     if (i === elegido) {
       setHechos((h) => [...h, i]);
-      navigator.vibrate?.(15);
+      feedback.toque();
     } else {
       setErrores((e) => e + 1);
       setError(i);
-      navigator.vibrate?.([30, 40, 30]);
+      feedback.fallo();
       setTimeout(() => setError(null), 450);
     }
     setElegido(null);

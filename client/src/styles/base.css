@@ -456,3 +456,17 @@ span > svg,
 summary > svg {
   vertical-align: -0.18em;
 }
+
+/* El título de un tema viaja de su tarjeta en Aprender al encabezado de su página */
+::view-transition-group(titulo-tema) {
+  animation-duration: var(--dur-lenta);
+  animation-timing-function: var(--curva);
+}
+
+::view-transition-old(titulo-tema),
+::view-transition-new(titulo-tema) {
+  /* El texto cambia de tamaño: se estira con su caja en vez de deformarse */
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
+}

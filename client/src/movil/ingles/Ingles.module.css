@@ -753,3 +753,23 @@
     align-items: start;
   }
 }
+
+/* La rutina de hoy dentro del resumen: debajo en el celular, al costado en pantallas anchas */
+.resumen .continuar {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+@media (min-width: 1200px) {
+  .resumen {
+    grid-template-columns: minmax(0, 1fr) auto minmax(280px, 1.1fr);
+  }
+
+  /* Mismo alto que las tarjetas de al lado (el alto fijo de .boton no aplica aquí) */
+  .resumen .continuar {
+    grid-column: auto;
+    height: auto;
+    min-height: 0;
+    align-self: stretch;
+  }
+}

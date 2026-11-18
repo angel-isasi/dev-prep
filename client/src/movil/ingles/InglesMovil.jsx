@@ -124,6 +124,16 @@ export function InglesMovil() {
                 <small>{hoy.racha === 1 ? "día seguido" : "días seguidos"}</small>
               </div>
             </div>
+            {/* La rutina de hoy va arriba, junto al resumen: así el camino se ve sin bajar */}
+            <Link to={leccion()} className={`boton boton-primario ${estilos.continuar}`}>
+              <span className={estilos.play} aria-hidden>
+                <IconoPlay tamano={20} />
+              </span>
+              <span>
+                <strong>Rutina de hoy</strong>
+                <small>12 ejercicios: lo que toca repasar y hasta 6 nuevos</small>
+              </span>
+            </Link>
           </div>
 
           <TarjetaMapache />
@@ -139,16 +149,6 @@ export function InglesMovil() {
               </Link>
             </div>
           )}
-
-          <Link to={leccion()} className={`boton boton-primario ${estilos.continuar}`}>
-            <span className={estilos.play} aria-hidden>
-              <IconoPlay tamano={20} />
-            </span>
-            <span>
-              <strong>Rutina de hoy</strong>
-              <small>12 ejercicios: lo que toca repasar y hasta 6 nuevos</small>
-            </span>
-          </Link>
 
           <h2 className={estilos.tituloCamino}>Tu camino</h2>
           <CaminoMovil ambito="ingles" sinCabecera />

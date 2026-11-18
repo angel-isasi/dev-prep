@@ -6,6 +6,7 @@ import { api } from "../../lib/api.js";
 import { celebrar } from "../../lib/celebrar.js";
 import { Markdown } from "../../components/Markdown.jsx";
 import estilos from "./Trabajo.module.css";
+import { Esqueleto } from "../../components/Esqueleto.jsx";
 
 function SinLaptop() {
   return (
@@ -29,7 +30,7 @@ export function Portafolio() {
     cargar();
   }, []);
   if (!api.portafolio) return <SinLaptop />;
-  if (!fichas) return null;
+  if (!fichas) return <Esqueleto variante="tarjetas" />;
 
   return (
     <>
@@ -116,7 +117,7 @@ export function PruebasYProyecto() {
     api.proyectos?.().then(setLista, () => setLista([]));
   }, []);
   if (!api.proyectos) return <SinLaptop />;
-  if (!lista) return null;
+  if (!lista) return <Esqueleto variante="tarjetas" />;
   const elegido = lista.find((p) => p.id === abierto);
   if (elegido) return <DetalleProyecto proyecto={elegido} alVolver={() => setAbierto(null)} />;
 

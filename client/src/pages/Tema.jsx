@@ -70,7 +70,7 @@ export function Tema() {
 
   return (
     <article className={estilos.pagina} data-area={tema.area} data-pestana={activa}>
-      <Link to={`/aprender?area=${tema.area}`} className={estilos.volver}>
+      <Link to={`/aprender?area=${tema.area}`} viewTransition className={estilos.volver}>
         <IconoFlechaIzq /> Aprender
       </Link>
       <header className={estilos.cabecera}>
@@ -81,7 +81,8 @@ export function Tema() {
           <span className={estilos.numero}>
             {NOMBRE_AREA[tema.area] ?? "JavaScript"} · Tema {String(tema.orden).padStart(2, "0")}
           </span>
-          <h1>{tema.titulo}</h1>
+          {/* Comparte nombre con el título de la tarjeta de Aprender: el navegador anima el paso de uno a otro */}
+          <h1 style={{ viewTransitionName: "titulo-tema" }}>{tema.titulo}</h1>
           <p>{tema.descripcion}</p>
         </div>
 

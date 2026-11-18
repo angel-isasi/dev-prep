@@ -19,6 +19,7 @@ import { Bit, fraseDeBit } from "../../components/Bit.jsx";
 import { despuesDe, leccionDe, planUnidad, PRUEBA, pruebaAprobada } from "./plan.js";
 import estilos from "./LeccionMovil.module.css";
 import { IconoCorazon, IconoLlamita, IconoRepetir } from "../../components/Iconos.jsx";
+import { feedback } from "../../lib/feedback.js";
 
 /** A dónde lleva "Ver más" según de dónde salió el ítem. */
 function enlaceFuente(fuente) {
@@ -201,15 +202,13 @@ export function LeccionMovil() {
     correcto = !!correcto;
     // En inglés, oír la respuesta correcta ayuda a fijarla
     if (item.audioRespuesta || (item.tipo === "armar" && item.audio)) hablar(item.audioRespuesta ?? item.audio);
-    navigator.vibrate?.(correcto ? 25 : [40, 60, 40]);
-    (correcto ? sonidos.acierto : sonidos.fallo)();
+    (correcto ? feedback.acierto : feedback.fallo)();
     setRetro({ correcto, casi, permitirEquivalente: (item.tipo === "ordenar" || item.tipo === "armar" || item.tipo === "escribir") && !correcto });
   }
 
   /** Hablar: el componente ya corrigió con el reconocimiento de voz. */
   function alHablar(correcto) {
-    navigator.vibrate?.(correcto ? 25 : [40, 60, 40]);
-    (correcto ? sonidos.acierto : sonidos.fallo)();
+    (correcto ? feedback.acierto : feedback.fallo)();
     setRetro({ correcto, permitirEquivalente: !correcto });
   }
 

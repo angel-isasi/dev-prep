@@ -87,7 +87,7 @@ export function Aprender() {
                 gradientTo="var(--acento)"
                 gradientColor="var(--color-area-suave)"
               >
-                <Link to={`/aprender/${t.id}`} className={estilos.tema} data-completo={completo}>
+                <Link to={`/aprender/${t.id}`} viewTransition onClick={marcarTitulo} className={estilos.tema} data-completo={completo}>
                   <div className={estilos.temaArriba}>
                     <span className={estilos.numero}>{String(t.orden).padStart(2, "0")}</span>
                     {/* Cuánto dominas el tema (el mismo cálculo del mapa de Progreso); el símbolo acompaña al color */}
@@ -99,7 +99,9 @@ export function Aprender() {
                       completo && <span className={estilos.completo}>✓ Completo</span>
                     )}
                   </div>
-                  <strong className={estilos.titulo}>{t.titulo}</strong>
+                  <strong className={estilos.titulo} data-titulo>
+                    {t.titulo}
+                  </strong>
                   <span className={estilos.descripcion}>{t.descripcion}</span>
                   <div className={estilos.avance}>
                     {/* Un punto por ejercicio guiado: lleno si lo resolviste */}
@@ -132,6 +134,16 @@ export function Aprender() {
       )}
     </section>
   );
+}
+
+/**
+ * Al tocar una tarjeta, su título recibe el nombre que comparte con el título de la página del
+ * tema: así el navegador lo mueve y lo agranda de un lugar al otro (View Transitions). Se pone
+ * justo antes de navegar para que solo lo lleve la tarjeta tocada.
+ */
+function marcarTitulo(evento) {
+  const titulo = evento.currentTarget.querySelector("[data-titulo]");
+  if (titulo) titulo.style.viewTransitionName = "titulo-tema";
 }
 
 // El estado de cada tema se lee por su símbolo, no solo por el color
