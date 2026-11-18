@@ -10,6 +10,7 @@
 import { ahoraIso } from "../../../server/fechas.js";
 import { limpiarCache, progreso } from "./api-movil.js";
 import { alCambiar as alCambiarConexion, BASE_LOCAL, conectada } from "./conexion-local.js";
+import { ES_VISITA } from "./visita.js";
 
 const CLAVE = "devprep-sync";
 const CLAVE_DISPOSITIVO = "devprep-dispositivo";
@@ -19,6 +20,8 @@ const ESPERA_CAMBIO_MS = 8_000; // sube a la nube 8 s después del último cambi
 const ESPERA_LOCAL_MS = 1_500; // con la laptop, casi al instante
 
 export function leerVinculo() {
+  // En modo visita este navegador se comporta como no vinculado: nada se sube ni se baja
+  if (ES_VISITA) return null;
   try {
     return JSON.parse(localStorage.getItem(CLAVE)) ?? null;
   } catch {
@@ -89,7 +92,7 @@ let localEnCurso = null;
 
 /** Intercambio directo con el dev-prep abierto en esta laptop (sin internet). */
 export function intercambiarLocal() {
-  if (!conectada()) return Promise.resolve(false);
+  if (ES_VISITA || !conectada()) return Promise.resolve(false);
   localEnCurso ??= (async () => {
     try {
       const r = await fetch(`${BASE_LOCAL}/api/sync/local`, {
@@ -118,6 +121,8 @@ export function intercambiarLocal() {
  * la app sube lo pendiente. Con la laptop conectada, intercambia también directo con ella.
  */
 export function iniciarSincronizacion() {
+  // El progreso de ejemplo del modo visita nunca sale de la pestaña
+  if (ES_VISITA) return () => {};
   let esperaNube = null;
   let esperaLocal = null;
   const enLaNube = () => leerVinculo() && sincronizar();

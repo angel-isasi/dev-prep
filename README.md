@@ -92,6 +92,8 @@ cd dev-prep
 npm install
 ```
 
+**Live demo with sample data (nothing is saved):** https://dev-prep.angel-isasi.com/?visita=1
+
 ## Daily use
 
 - **Desktop shortcut (recommended):** run `npm run acceso-directo` once. Double-click **dev-prep** on the desktop and the app opens in the browser in a few seconds, with no console window.

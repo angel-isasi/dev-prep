@@ -4,6 +4,8 @@
 // Solo lo intenta en un navegador que marcaste como "tu laptop" (botón de Ajustes o el enlace
 // "Vincular la versión web" de la app local). Así, en otra computadora o en el celular, Chrome
 // nunca pide permiso para buscar dispositivos de la red.
+import { ES_VISITA } from "./visita.js";
+
 export const BASE_LOCAL = "http://127.0.0.1:4321";
 const CLAVE = "devprep-laptop";
 const LIMITE_MS = 1500;
@@ -21,7 +23,7 @@ const avisar = (valor) => {
 export const conectada = () => activa;
 
 /** ¿Este navegador está marcado como tu laptop? */
-export const esMiLaptop = () => localStorage.getItem(CLAVE) === "1";
+export const esMiLaptop = () => !ES_VISITA && localStorage.getItem(CLAVE) === "1";
 
 export function marcarMiLaptop(si) {
   if (si) localStorage.setItem(CLAVE, "1");

@@ -33,8 +33,10 @@ import { crearApiMapache } from "../movil/mapache/api-mapache.js";
 import { rachaIngles } from "../movil/mapache/reglas.js";
 import { crearApi } from "./api-servidor.js";
 import { BASE_LOCAL, conectada } from "./conexion-local.js";
+import { ES_VISITA, crearAlmacenMemoria, progresoDeEjemplo } from "./visita.js";
 
-export const progreso = crearProgresoMovil(localStorage);
+// En modo visita el progreso es de ejemplo y vive en memoria: no se lee ni se toca el progreso real
+export const progreso = crearProgresoMovil(ES_VISITA ? crearAlmacenMemoria() : localStorage);
 
 // Pide a Android que no borre los datos de la app si se queda sin espacio.
 navigator.storage?.persist?.().catch(() => {});
@@ -396,6 +398,15 @@ const apiWeb = {
     });
     return { unidades, debiles: unidadesDebiles(unidades) };
   },
+  /** Modo visita: carga el contenido y arma con él un progreso de ejemplo (ver lib/visita.js). */
+  async prepararVisita() {
+    if (!ES_VISITA) return;
+    const [{ ejercicios }, datosItems, ap, entrevistas] = await Promise.all([indice(), json("items.json"), aprender(), json("entrevistas.json")]);
+    const ejemplo = progresoDeEjemplo({ hoy: progreso.hoy(), ejercicios, unidades: datosItems.unidades, items: datosItems.items, preguntas: entrevistas.preguntas, temas: ap.temas });
+    progreso.importar(JSON.stringify(ejemplo));
+    limpiarCache();
+  },
+
   /**
    * Todo lo de un tema en un solo lugar (página del tema): cuánto lo dominas y qué te falta, sus
    * lecciones, los demás ejercicios de la unidad, sus términos del glosario, sus métodos de la

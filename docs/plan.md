@@ -458,3 +458,9 @@ Pendiente de la tanda 2: unir las tres versiones de Ajustes y que la app local (
 - **Transición con sentido**: al abrir un tema desde Aprender, su título viaja de la tarjeta al encabezado de la página (View Transitions del navegador).
 - **Cierre de sesión**: al terminar la sesión de hoy, Hoy resume los puntos, los minutos y la racha.
 - La pantalla de Ejercicio con tests ya tenía dos columnas (enunciado y tests en vivo), así que no se rehízo; sus dos versiones siguen separadas por lo que cada una puede hacer (con tests en la laptop, modo estudio sin ella).
+
+### Tanda 6 (2026-11-18): modo visita y entrevistas en un solo lugar
+
+- **Modo visita** (`lib/visita.js`, `movil/Visita.jsx`): con `?visita=1` en la dirección, quien entra a ver el proyecto encuentra la app llena con un progreso de ejemplo (cinco semanas de estudio, racha, unidades dominadas y a medias, repasos para hoy) y una presentación corta con qué mirar, con qué está hecha y el enlace al código. Tres garantías: el progreso de ejemplo vive en memoria y no lee ni toca el progreso real; no sincroniza ni se conecta al motor de la laptop (no llama a AWS); y al salir o cerrar la pestaña no queda nada. Dirección para compartir: https://dev-prep.angel-isasi.com/?visita=1
+- **Entrevistas en un solo lugar**: la pestaña "Por etapa" de Entrevistas ordena todo según el proceso real (recursos humanos, técnica, proyecto y cierre). Cada etapa junta sus mazos de tarjetas con tu avance y los enlaces a lo que estaba repartido en otras secciones: pitch y STAR, roleplays y entrevista en inglés, preguntas reales de tus postulaciones, retos con tests, Lee y predice, Glosario y portafolio.
+- Pendiente: la evaluación con IA en todos los textos libres. Se construye cuando esté puesta la clave (ver `docs/ia.md`), porque no se puede probar sin ella.

@@ -49,7 +49,7 @@ export function armarSesion({ meta = {}, dia = {}, repaso = {}, nuevo = {}, ingl
       detalle: "Di la respuesta en voz alta y luego revela",
       minutos: Math.min(10, tarjetas),
       puntos: tarjetas >= 10 ? puntosPor("tandasTarjetas") : 0,
-      a: "/entrevistas",
+      a: "/entrevistas?pestana=tarjetas",
       hecho: tarjetas === 0,
     });
   }

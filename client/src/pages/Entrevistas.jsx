@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router";
+import { ES_MOVIL } from "../lib/modo.js";
 import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { api } from "../lib/api.js";
 import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
@@ -19,7 +20,7 @@ import { IconoChispa } from "../components/Iconos.jsx";
 
 export function Entrevistas() {
   const [resumen, setResumen] = useState(api.entrevistas.guardado);
-  const [pestana, setPestana] = usePestanaUrl(["tarjetas", "simulacro", "personal", "guia"]);
+  const [pestana, setPestana] = usePestanaUrl(["etapas", "tarjetas", "simulacro", "personal", "guia"]);
   const [params] = useSearchParams();
   const preguntaPedida = params.get("pregunta");
   const [sesion, setSesion] = useState(null); // { titulo, tarjetas, indice, notas }
@@ -57,6 +58,7 @@ export function Entrevistas() {
   if (!resumen) return <Esqueleto variante="tarjetas" />;
 
   const pestanas = [
+    { id: "etapas", texto: "Por etapa" },
     { id: "tarjetas", texto: "Tarjetas", extra: resumen.pendientesHoy ? `${resumen.pendientesHoy} hoy` : undefined },
     { id: "simulacro", texto: "Simulacro" },
     { id: "personal", texto: "Pitch y STAR" },
@@ -75,6 +77,12 @@ export function Entrevistas() {
       <Pestanas pestanas={pestanas} activa={pestana} alCambiar={(p) => (setPestana(p), setSesion(null))} />
 
       <ContenidoPestanas activa={pestana} orden={pestanas.map((p) => p.id)} className={estilos.contenido}>
+        {pestana === "etapas" &&
+          (sesion ? (
+            <SesionTarjetas sesion={sesion} alCalificar={calificar} alTerminar={terminar} />
+          ) : (
+            <PorEtapa resumen={resumen} alEmpezar={empezar} alIr={setPestana} />
+          ))}
         {pestana === "tarjetas" &&
           (sesion ? (
             <SesionTarjetas sesion={sesion} alCalificar={calificar} alTerminar={terminar} />
@@ -97,6 +105,117 @@ export function Entrevistas() {
         )}
       </ContenidoPestanas>
     </section>
+  );
+}
+
+/**
+ * Todo lo que sirve para practicar entrevistas, ordenado por las etapas del proceso. Antes estaba
+ * repartido en seis secciones (Entrevistas, Trabajo, los roleplays y el mapache de Inglés, el
+ * Glosario y las chuletas); aquí cada etapa junta sus tarjetas y los enlaces a lo demás.
+ * Lo marcado con `web` solo existe en la versión publicada.
+ */
+const PRACTICA_POR_ETAPA = {
+  rrhh: [
+    { pestana: "personal", titulo: "Tu pitch y tus historias STAR", texto: "Escríbelos una vez, con tus proyectos reales" },
+    { a: "/ingles/historias", titulo: "Roleplays en inglés", texto: "Entrevistas y llamadas de trabajo, por turnos", web: true },
+    { a: "/ingles/mapache?pestana=jugar", titulo: "Entrevista en inglés con el mapache", texto: "Preguntas de trabajo en B2 y C1", web: true },
+    { a: "/trabajo?pestana=postulaciones", titulo: "Preguntas reales de tus postulaciones", texto: "Las que ya te hicieron, con tu respuesta", web: true },
+  ],
+  tecnica: [
+    { a: "/practicar/lista?coleccion=javascript%2Fretos", titulo: "Retos de entrevista con tests", texto: "Debounce, memoize, deep clone: lo que piden en vivo" },
+    { a: "/leccion?modo=predice", titulo: "Lee y predice", texto: "¿Qué imprime este código? Trampas clásicas", web: true },
+    { a: "/glosario", titulo: "Glosario", texto: "Cada término con una frase lista para decir", web: true },
+    { pestana: "guia", titulo: "Cómo pensar en voz alta", texto: "Entender, ejemplos, plan, código y probar" },
+  ],
+  proyecto: [
+    { pestana: "personal", titulo: "Tu pitch de un minuto", texto: "Lo primero que te van a pedir" },
+    { a: "/trabajo?pestana=portafolio", titulo: "Tu portafolio", texto: "Fichas listas para publicar de lo que construiste", web: true },
+  ],
+  cierre: [
+    { pestana: "simulacro", titulo: "Tus preguntas al entrevistador", texto: "Se practican en el cierre del simulacro" },
+    { a: "/trabajo?pestana=postulaciones", titulo: "Seguimiento de tus postulaciones", texto: "A quién escribirle y cuándo", web: true },
+  ],
+};
+
+function PorEtapa({ resumen, alEmpezar, alIr }) {
+  const etapas = resumen.proceso?.etapas ?? [];
+  const hoy = resumen.pendientesHoy;
+  return (
+    <>
+      {hoy > 0 && (
+        <button type="button" className={`${estilos.mazo} ${estilos.destacado} ${estilos.repasoEtapas}`} onClick={() => alEmpezar("Repaso de hoy", { modo: "repaso" })}>
+          <span className={estilos.numeroGrande}>
+            <SlidingNumber number={hoy} />
+          </span>
+          <span className={estilos.mazoTexto}>
+            <strong>Repaso de hoy</strong>
+            <span>{hoy === 1 ? "tarjeta te toca hoy" : "tarjetas te tocan hoy"}, de todas las etapas</span>
+          </span>
+          <span className={estilos.ir}>Empezar →</span>
+        </button>
+      )}
+
+      <div className={estilos.etapas}>
+        {etapas.map((etapa, i) => {
+          const categorias = resumen.categorias.filter((c) => c.etapa === etapa.id);
+          const total = categorias.reduce((s, c) => s + c.total, 0);
+          const dominadas = categorias.reduce((s, c) => s + c.dominadas, 0);
+          const practicas = (PRACTICA_POR_ETAPA[etapa.id] ?? []).filter((p) => ES_MOVIL || !p.web);
+          return (
+            <section key={etapa.id} className={`tarjeta ${estilos.etapa}`}>
+              <header>
+                <span className={estilos.etapaNumero}>{i + 1}</span>
+                <div>
+                  <h2>{etapa.titulo}</h2>
+                  <p>
+                    {etapa.minutos} min · {etapa.descripcion}
+                  </p>
+                </div>
+              </header>
+
+              {categorias.length > 0 && (
+                <div className={estilos.etapaMazos}>
+                  <span className="etiqueta">
+                    Tarjetas · {dominadas} de {total} dominadas
+                  </span>
+                  {categorias.map((c) => (
+                    <button key={c.nombre} type="button" className={estilos.etapaMazo} onClick={() => alEmpezar(c.nombre, { categoria: c.nombre })}>
+                      <strong>{c.nombre}</strong>
+                      <span>
+                        {c.dominadas}/{c.total}
+                        {c.pendientes > 0 && ` · ${c.pendientes} para hoy`}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              <ul className={estilos.etapaEnlaces}>
+                {practicas.map((p) => (
+                  <li key={p.titulo}>
+                    {p.pestana ? (
+                      <button type="button" onClick={() => alIr(p.pestana)}>
+                        <strong>{p.titulo} →</strong>
+                        <span>{p.texto}</span>
+                      </button>
+                    ) : (
+                      <Link to={p.a}>
+                        <strong>{p.titulo} →</strong>
+                        <span>{p.texto}</span>
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+
+              <button type="button" className={`boton ${estilos.simular}`} onClick={() => alIr("simulacro")}>
+                Simular esta etapa
+              </button>
+            </section>
+          );
+        })}
+      </div>
+    </>
   );
 }
 

@@ -291,3 +291,139 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+/* ---------- Por etapa: todo lo de entrevistas ordenado según el proceso real ---------- */
+.repasoEtapas {
+  width: 100%;
+  margin-bottom: var(--espacio-3);
+}
+
+.etapas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--espacio-3);
+  align-items: start;
+}
+
+.etapa {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  padding: var(--espacio-5);
+}
+
+.etapa header {
+  display: flex;
+  gap: var(--espacio-3);
+}
+
+.etapaNumero {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--acento-suave);
+  color: var(--acento);
+  font-family: var(--fuente-titulos);
+  font-weight: var(--peso-negrita);
+}
+
+.etapa h2 {
+  font-size: var(--titulo-1);
+}
+
+.etapa header p {
+  margin: var(--espacio-1) 0 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.etapaMazos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+}
+
+.etapaMazos > :global(.etiqueta) {
+  margin-bottom: var(--espacio-1);
+}
+
+.etapaMazo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  min-height: 40px;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--hundido);
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--letra-4);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transicion);
+}
+
+.etapaMazo:hover {
+  border-color: color-mix(in srgb, var(--acento) 45%, transparent);
+}
+
+.etapaMazo strong {
+  font-weight: var(--peso-semi);
+}
+
+.etapaMazo span {
+  flex-shrink: 0;
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.etapaEnlaces {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.etapaEnlaces a,
+.etapaEnlaces button {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: none;
+  border-radius: var(--radio);
+  background: none;
+  color: var(--texto);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.etapaEnlaces a:hover,
+.etapaEnlaces button:hover {
+  background: var(--superficie-2);
+}
+
+.etapaEnlaces strong {
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
+}
+
+.etapaEnlaces span {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.simular {
+  align-self: flex-start;
+  margin-top: auto;
+}

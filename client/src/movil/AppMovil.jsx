@@ -8,7 +8,7 @@
 // - En las dos: los ejercicios se abren en modo estudio, y hay lecciones y chuletas.
 // - En tu laptop con dev-prep abierto: exactamente la app local (VS Code, tests en vivo, resuelto),
 //   más lecciones y chuletas. Ver lib/conexion-local.js.
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, Route, Routes } from "react-router";
 import { usePantallaGrande } from "../hooks/usePantallaGrande.js";
 import { useConexionLocal } from "../hooks/useConexionLocal.js";
@@ -23,6 +23,10 @@ import { SeccionWeb } from "./SeccionWeb.jsx";
 import { SeccionRutina } from "../components/SeccionRutina.jsx";
 import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
 import { perezoso } from "../lib/perezoso.js";
+import { api } from "../lib/api.js";
+import { ES_VISITA } from "../lib/visita.js";
+import { Esqueleto } from "../components/Esqueleto.jsx";
+import { MarcoVisita } from "./Visita.jsx";
 
 // Cada pantalla se descarga cuando se abre (ver lib/perezoso.js)
 const EjercicioMovil = perezoso(() => import("./EjercicioMovil.jsx"), "EjercicioMovil");
@@ -64,6 +68,12 @@ export function App() {
   // Une el progreso con la laptop cuando hay internet (si este dispositivo está vinculado).
   useEffect(() => iniciarSincronizacion(), []);
 
+  // Modo visita (?visita=1): antes de mostrar nada se arma el progreso de ejemplo, en memoria
+  const [visitaLista, setVisitaLista] = useState(!ES_VISITA);
+  useEffect(() => {
+    if (ES_VISITA) api.prepararVisita().finally(() => setVisitaLista(true));
+  }, []);
+
   // Lo que la web tiene además de la app local
   const soloWeb = (
     <>
@@ -92,6 +102,8 @@ export function App() {
     </>
   );
 
+  if (!visitaLista) return <Esqueleto variante="tarjetas" />;
+
   if (enMiLaptop) {
     return (
       <>
@@ -113,7 +125,7 @@ export function App() {
     );
   }
 
-  return (
+  const rutas = (
     <>
       <Routes key="web">
         <Route element={grande ? <Layout /> : <LayoutMovil />}>
@@ -131,7 +143,10 @@ export function App() {
           <Route path="*" element={<Proximamente titulo="Página no encontrada" texto="Esta ruta no existe." />} />
         </Route>
       </Routes>
-      <AvisoPWA />
+      {/* A una visita no se le ofrece instalar la app */}
+      {!ES_VISITA && <AvisoPWA />}
     </>
   );
+
+  return ES_VISITA ? <MarcoVisita>{rutas}</MarcoVisita> : rutas;
 }
