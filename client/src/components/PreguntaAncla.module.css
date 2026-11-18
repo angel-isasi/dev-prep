@@ -10,7 +10,7 @@
   gap: var(--espacio-3);
   margin-top: var(--espacio-5);
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .tarjeta {
@@ -29,8 +29,8 @@
 
 .etiqueta {
   color: var(--acento);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }

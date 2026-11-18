@@ -15,7 +15,7 @@ body,
 body {
   margin: 0;
   font-family: var(--fuente);
-  font-size: 15px;
+  font-size: var(--letra-5);
   line-height: 1.6;
   color: var(--texto);
   background: var(--ambiente), var(--fondo);
@@ -30,7 +30,7 @@ h3 {
   line-height: 1.25;
   margin: 0;
   font-family: var(--fuente-titulos);
-  font-weight: 650;
+  font-weight: var(--peso-titulo);
   letter-spacing: -0.025em;
 }
 
@@ -78,20 +78,27 @@ option {
   padding: 0 14px;
   border: 1px solid var(--borde-fuerte);
   border-radius: var(--radio);
-  background: var(--superficie);
+  background: var(--superficie-2);
   color: var(--texto);
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: var(--peso-medio);
+  font-size: var(--letra-4);
   cursor: pointer;
   transition:
     background var(--transicion),
     border-color var(--transicion),
     opacity var(--transicion),
-    transform 120ms ease;
+    transform var(--dur-rapida) ease;
 }
 
 .boton:hover:not(:disabled) {
-  background: var(--superficie-2);
+  background: var(--superficie-3);
+}
+
+/* Con el dedo, todo botón mide al menos 44 px de alto */
+@media (pointer: coarse) {
+  .boton {
+    min-height: var(--toque);
+  }
 }
 
 /* Un botón con subtítulo (<small>) crece lo que necesite en vez de desbordarse */
@@ -146,12 +153,86 @@ option {
   color: var(--texto);
 }
 
-/* Tarjeta: superficie translúcida con borde fino */
+/* ---------- Tarjetas: tres niveles de importancia ----------
+   Normal: la de siempre. Protagonista: lo que hay que mirar primero (una por pantalla, o muy
+   pocas); se tiñe con el color del área si el contenedor tiene data-area. Silenciosa: dato de
+   apoyo, solo borde. Hundida: un hueco dentro de otra tarjeta (filas, pasos, código). */
 .tarjeta {
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
   background: var(--superficie);
   box-shadow: var(--brillo-borde);
+}
+
+.tarjeta-protagonista {
+  --tinte: var(--color-area, var(--acento));
+  border: 1px solid color-mix(in srgb, var(--tinte) 32%, var(--borde));
+  border-radius: var(--radio-xl);
+  background:
+    radial-gradient(120% 150% at 0% 0%, color-mix(in srgb, var(--tinte) 14%, transparent), transparent 62%),
+    var(--superficie);
+  box-shadow: var(--brillo-borde), var(--sombra-2);
+}
+
+.tarjeta-silenciosa {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: none;
+}
+
+.tarjeta-hundida {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--hundido);
+}
+
+/* Chip: etiqueta corta (estado, nivel, área). Con data-tono cambia de color. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-1);
+  padding: 2px 9px;
+  border-radius: var(--radio-pildora);
+  background: var(--superficie-2);
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.chip[data-tono="acento"] {
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
+.chip[data-tono="exito"] {
+  background: var(--exito-suave);
+  color: var(--exito);
+}
+
+.chip[data-tono="aviso"] {
+  background: var(--aviso-suave);
+  color: var(--aviso);
+}
+
+.chip[data-tono="error"] {
+  background: var(--error-suave);
+  color: var(--error);
+}
+
+.chip[data-tono="area"] {
+  background: var(--color-area-suave, var(--acento-suave));
+  color: var(--color-area, var(--acento));
+}
+
+/* Etiqueta en mayúsculas que encabeza un bloque ("TU PLAN DE HOY") */
+.etiqueta {
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-tenue);
 }
 
 /* Colores del resaltado de código (highlight.js) */
@@ -362,8 +443,8 @@ option {
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, var(--texto) 10%, transparent),
     inset 0 0 0 1px color-mix(in srgb, var(--texto) 3%, transparent),
-    inset 0 -1px 0 rgb(0 0 0 / 0.35),
-    0 1px 0 rgb(0 0 0 / 0.4),
+    inset 0 -1px 0 var(--sombra-hundida),
+    0 1px 0 var(--sombra-hundida),
     var(--sombra) !important;
 }
 

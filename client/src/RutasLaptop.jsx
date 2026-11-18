@@ -1,16 +1,19 @@
 import { Route, Routes } from "react-router";
 import { Layout } from "./components/Layout.jsx";
-import { Practicar } from "./pages/Practicar.jsx";
-import { ListaEjercicios } from "./pages/ListaEjercicios.jsx";
-import { Ejercicio } from "./pages/Ejercicio.jsx";
-import { Proximamente } from "./pages/Proximamente.jsx";
-import { Inicio } from "./pages/Inicio.jsx";
-import { Progreso } from "./pages/Progreso.jsx";
-import { Ajustes } from "./pages/Ajustes.jsx";
-import { Entrevistas } from "./pages/Entrevistas.jsx";
-import { Aprender } from "./pages/Aprender.jsx";
-import { Tema } from "./pages/Tema.jsx";
-import { Referencia } from "./pages/Referencia.jsx";
+import { perezoso } from "./lib/perezoso.js";
+
+// Cada pantalla se descarga cuando se abre (ver lib/perezoso.js)
+const Practicar = perezoso(() => import("./pages/Practicar.jsx"), "Practicar");
+const ListaEjercicios = perezoso(() => import("./pages/ListaEjercicios.jsx"), "ListaEjercicios");
+const Ejercicio = perezoso(() => import("./pages/Ejercicio.jsx"), "Ejercicio");
+const Proximamente = perezoso(() => import("./pages/Proximamente.jsx"), "Proximamente");
+const Inicio = perezoso(() => import("./pages/Inicio.jsx"), "Inicio");
+const Progreso = perezoso(() => import("./pages/Progreso.jsx"), "Progreso");
+const Ajustes = perezoso(() => import("./pages/Ajustes.jsx"), "Ajustes");
+const Entrevistas = perezoso(() => import("./pages/Entrevistas.jsx"), "Entrevistas");
+const Aprender = perezoso(() => import("./pages/Aprender.jsx"), "Aprender");
+const Tema = perezoso(() => import("./pages/Tema.jsx"), "Tema");
+const Referencia = perezoso(() => import("./pages/Referencia.jsx"), "Referencia");
 
 /** Las pantallas de la app local. La versión web las usa tal cual cuando está conectada a tu laptop. */
 export function RutasLaptop({ ajustesExtra, children } = {}) {

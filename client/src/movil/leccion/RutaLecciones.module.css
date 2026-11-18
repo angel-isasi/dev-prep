@@ -73,8 +73,8 @@
 
 .etiqueta {
   color: var(--acento);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-negrita);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -82,7 +82,7 @@
 .suave {
   margin: 0;
   color: var(--texto-suave);
-  font-size: 13.5px;
+  font-size: var(--letra-3);
   line-height: 1.5;
 }
 
@@ -99,7 +99,7 @@
 
 .sigueTitulo {
   font-family: var(--fuente-titulos);
-  font-size: 21px;
+  font-size: var(--titulo-1);
   line-height: 1.25;
   letter-spacing: -0.01em;
 }
@@ -125,7 +125,7 @@
 
 .cifras strong {
   font-family: var(--fuente-titulos);
-  font-size: 26px;
+  font-size: var(--titulo-3);
   font-variant-numeric: tabular-nums;
 }
 
@@ -135,7 +135,7 @@
 
 .cifras span {
   color: var(--texto-suave);
-  font-size: 12.5px;
+  font-size: var(--letra-2);
 }
 
 .botones {
@@ -145,7 +145,7 @@
 }
 
 .mide summary {
-  font-weight: 650;
+  font-weight: var(--peso-titulo);
   cursor: pointer;
 }
 
@@ -156,14 +156,14 @@
 }
 
 .mide dt {
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-negrita);
 }
 
 .mide dd {
   margin: 2px 0 0;
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
   line-height: 1.5;
 }
 
@@ -178,7 +178,7 @@
   flex: 1;
   max-width: 64px;
   height: 7px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
 }
 
@@ -204,7 +204,7 @@
 .resumenArea {
   margin: var(--espacio-3) 0 var(--espacio-4);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 /* --- La ruta: una línea vertical con una marca por unidad --- */
@@ -245,12 +245,12 @@
   height: 40px;
   margin-top: 14px;
   border: 2px solid color-mix(in srgb, var(--color-area) 45%, var(--borde));
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: var(--fondo-solido);
   color: var(--color-area);
   font-family: var(--fuente-titulos);
-  font-size: 14px;
-  font-weight: 800;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-extra);
 }
 
 .unidad[data-estado="completa"] .marca,
@@ -300,16 +300,16 @@
 
 .tituloFila strong {
   font-family: var(--fuente-titulos);
-  font-size: 17px;
+  font-size: var(--letra-7);
 }
 
 .chip {
   padding: 2px 8px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   color: var(--texto-suave);
-  font-size: 11.5px;
-  font-weight: 650;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-titulo);
 }
 
 .chip[data-estado="empezada"] {
@@ -338,7 +338,7 @@
   flex-wrap: wrap;
   gap: var(--espacio-1) var(--espacio-4);
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .datos strong {
@@ -350,7 +350,7 @@
   top: var(--espacio-3);
   right: var(--espacio-4);
   color: var(--texto-suave);
-  font-size: 22px;
+  font-size: var(--titulo-2);
   line-height: 1;
   transition: transform 0.2s;
 }
@@ -411,19 +411,19 @@
 
 .grupo h3 {
   margin: 0;
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .grupo header span {
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
   font-variant-numeric: tabular-nums;
 }
 
 .grupo[data-opcional="true"] h3::after {
   content: " · opcional";
   color: var(--texto-suave);
-  font-weight: 500;
+  font-weight: var(--peso-medio);
 }
 
 .lecciones {
@@ -462,11 +462,11 @@
   place-items: center;
   width: 30px;
   height: 30px;
-  border-radius: 9px;
+  border-radius: var(--radio);
   background: var(--superficie-2);
   color: var(--texto-suave);
-  font-size: 13px;
-  font-weight: 750;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-extra);
 }
 
 .leccion[data-estado="empezada"] .icono {
@@ -489,14 +489,14 @@
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
   line-height: 1.35;
 }
 
 .leccionTexto small {
   color: var(--texto-suave);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .miniBarra {
@@ -525,7 +525,7 @@
   background: none;
   color: var(--acento);
   font: inherit;
-  font-size: 13.5px;
+  font-size: var(--letra-3);
   cursor: pointer;
 }
 

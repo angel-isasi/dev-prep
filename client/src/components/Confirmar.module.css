@@ -37,13 +37,13 @@
 
 .titulo {
   margin: 0 0 var(--espacio-2);
-  font-size: 18px;
+  font-size: var(--letra-8);
 }
 
 .descripcion {
   margin: 0 0 var(--espacio-5);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.6;
 }
 

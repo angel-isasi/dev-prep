@@ -117,8 +117,8 @@ export default defineConfig(({ mode }) => {
     root: "client",
     publicDir: movil ? "public-movil" : "public",
     plugins: [...(movil ? [guardaNavegador(), reemplazosMovil(), htmlMovil(), pwa()] : []), react(), tailwindcss()],
-    // La app se carga desde tu disco, no por internet: un archivo de ~1 MB no es problema.
-    build: { outDir: movil ? "dist-movil" : "dist", emptyOutDir: true, chunkSizeWarningLimit: 1500 },
+    // Cada pantalla va en su propio trozo (ver client/src/lib/perezoso.js), así la primera carga es liviana.
+    build: { outDir: movil ? "dist-movil" : "dist", emptyOutDir: true },
     server: {
       port: 5173,
       // El cliente importa funciones puras de server/ (vistas, reglas de progreso).

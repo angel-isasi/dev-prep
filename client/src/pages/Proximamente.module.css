@@ -6,7 +6,7 @@
 }
 
 .contenedor h1 {
-  font-size: 26px;
+  font-size: var(--titulo-3);
   margin-bottom: var(--espacio-3);
 }
 
@@ -18,10 +18,10 @@
 .etiqueta {
   display: inline-block;
   padding: 4px 12px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--acento-suave);
   border: 1px solid color-mix(in srgb, var(--acento) 30%, transparent);
   color: var(--acento);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
 }

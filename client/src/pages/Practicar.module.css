@@ -29,8 +29,8 @@
   display: flex;
   color: var(--aviso);
   font-family: var(--fuente-titulos);
-  font-size: 44px;
-  font-weight: 700;
+  font-size: var(--titulo-5);
+  font-weight: var(--peso-negrita);
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -40,11 +40,11 @@
   flex: 1;
   flex-direction: column;
   min-width: 0;
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .repasosTexto strong {
-  font-size: 17px;
+  font-size: var(--letra-7);
 }
 
 .repasosTexto span {
@@ -72,14 +72,14 @@
   display: flex;
   align-items: center;
   gap: var(--espacio-3);
-  font-size: 30px;
+  font-size: var(--titulo-4);
   letter-spacing: -0.03em;
 }
 
 .punto {
   width: 10px;
   height: 10px;
-  border-radius: 3px;
+  border-radius: var(--radio-xs);
   background: var(--color-area);
   box-shadow: 0 0 14px var(--color-area);
 }
@@ -87,7 +87,7 @@
 .areaCabecera p {
   margin: var(--espacio-1) 0 0;
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .areaDatos {
@@ -99,13 +99,13 @@
 
 .areaCuenta {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .areaCuenta strong {
   color: var(--texto);
   font-family: var(--fuente-titulos);
-  font-size: 18px;
+  font-size: var(--letra-8);
 }
 
 .colecciones {
@@ -114,7 +114,7 @@
   gap: var(--espacio-3);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .colecciones {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -159,7 +159,7 @@
 }
 
 .coleccionCabeza h3 {
-  font-size: 20px;
+  font-size: var(--titulo-1);
   letter-spacing: -0.02em;
 }
 
@@ -169,21 +169,21 @@
 }
 
 .cuenta strong {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: var(--titulo-3);
+  font-weight: var(--peso-negrita);
   letter-spacing: -0.03em;
 }
 
 .cuenta small {
   color: var(--texto-tenue);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .enlace p {
   flex: 1;
   margin: 0;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.5;
 }
 
@@ -201,7 +201,7 @@
 }
 
 .tramos span {
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   opacity: 0.85;
 }
 
@@ -225,7 +225,7 @@
   flex-wrap: wrap;
   gap: var(--espacio-3);
   color: var(--texto-suave);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .leyenda span {
@@ -248,7 +248,7 @@
 /* Avance de la colección: línea fina del color del área */
 .avance {
   height: 3px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   overflow: hidden;
 }
@@ -270,7 +270,7 @@
   border-top: 1px solid var(--borde);
   background: none;
   color: var(--texto);
-  font-size: 14px;
+  font-size: var(--letra-4);
   text-align: left;
   cursor: pointer;
   transition: background var(--transicion), color var(--transicion);
@@ -279,15 +279,15 @@
 .siguiente span {
   grid-column: 1;
   color: var(--texto-tenue);
-  font-size: 11px;
-  font-weight: 650;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
 .siguiente strong {
   grid-column: 1;
-  font-weight: 600;
+  font-weight: var(--peso-semi);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -311,7 +311,7 @@
 
 .siguiente:disabled {
   color: var(--exito);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
   cursor: default;
 }
 
@@ -324,7 +324,7 @@
   padding: var(--espacio-5);
   border: 1px dashed var(--borde-fuerte);
   border-radius: var(--radio-grande);
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .mezcla > div {
@@ -335,7 +335,7 @@
 
 .mezcla strong {
   font-family: var(--fuente-titulos);
-  font-size: 20px;
+  font-size: var(--titulo-1);
   letter-spacing: -0.02em;
 }
 
@@ -367,7 +367,7 @@
     gap: var(--espacio-2);
   }
   .areaCabecera h2 {
-    font-size: 24px;
+    font-size: var(--titulo-2);
   }
   .colecciones {
     grid-template-columns: 1fr;
@@ -383,7 +383,7 @@
 }
 
 /* Pantalla muy ancha: una columna más de colecciones */
-@media (min-width: 1700px) {
+@media (min-width: 1600px) {
   .colecciones {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }

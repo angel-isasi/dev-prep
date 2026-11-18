@@ -5,7 +5,7 @@
   align-items: center;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .mazo {
     grid-template-columns: 1fr;
   }
@@ -27,7 +27,7 @@
   height: 100%;
   padding: 16px 18px;
   border: 1px solid var(--borde-fuerte);
-  border-radius: 16px;
+  border-radius: var(--radio-xl);
   background:
     radial-gradient(240px 140px at 100% 0%, var(--color-carta-suave), transparent 70%),
     linear-gradient(160deg, color-mix(in srgb, var(--fondo-solido) 95%, #fff), var(--fondo-solido));
@@ -72,8 +72,8 @@
 
 .tipo {
   color: var(--color-carta);
-  font-size: 11px;
-  font-weight: 700;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-negrita);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -85,7 +85,7 @@
 .numero {
   color: var(--texto-tenue);
   font-family: var(--fuente-codigo);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .cartaTitulo {
@@ -93,8 +93,8 @@
   padding: var(--espacio-2) 0;
   color: var(--texto);
   font-family: var(--fuente-titulos);
-  font-size: 22px;
-  font-weight: 700;
+  font-size: var(--titulo-2);
+  font-weight: var(--peso-negrita);
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
@@ -111,7 +111,7 @@
   overflow: hidden;
   color: var(--texto-suave);
   font-family: var(--fuente-codigo);
-  font-size: 12px;
+  font-size: var(--letra-2);
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -140,8 +140,8 @@
 .nivel span {
   margin-left: 4px;
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
 }
 
 /* ---------- Panel de la derecha ---------- */
@@ -162,8 +162,8 @@
 
 .tipoPanel {
   color: var(--acento);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-negrita);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -175,8 +175,8 @@
 .titulo {
   margin: 0;
   font-family: var(--fuente-titulos);
-  font-size: 28px;
-  font-weight: 700;
+  font-size: var(--titulo-3);
+  font-weight: var(--peso-negrita);
   line-height: 1.15;
   letter-spacing: -0.025em;
 }
@@ -184,7 +184,7 @@
 .detalle {
   margin: 0;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .pie {
@@ -197,7 +197,7 @@
 
 .pista {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .azar {
@@ -206,11 +206,11 @@
   gap: 6px;
   padding: 4px 10px;
   border: 1px solid var(--borde-fuerte);
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: none;
   color: var(--texto-suave);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
   cursor: pointer;
   transition: color var(--transicion), border-color var(--transicion), background var(--transicion);
 }

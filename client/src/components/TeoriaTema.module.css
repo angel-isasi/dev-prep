@@ -11,8 +11,8 @@
 
 .etiqueta {
   color: var(--color-area);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-negrita);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -29,7 +29,7 @@
 
 .frase > div:first-of-type {
   margin-top: var(--espacio-2);
-  font-size: 19px;
+  font-size: var(--letra-8);
 }
 
 .frase p {
@@ -92,13 +92,13 @@
 
 .cuenta {
   color: var(--texto-tenue);
-  font-size: 12px;
+  font-size: var(--letra-2);
   white-space: nowrap;
 }
 
 .barra {
   height: 4px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   overflow: hidden;
 }
@@ -127,11 +127,11 @@
   width: 100%;
   padding: 7px 8px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radio);
   background: none;
   color: var(--texto-suave);
   font: inherit;
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.35;
   text-align: left;
   cursor: pointer;
@@ -145,7 +145,7 @@
 .indice li button[data-activo="true"] {
   background: var(--color-area-suave);
   color: var(--texto);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .indice code {
@@ -161,8 +161,8 @@
   margin-top: 0;
   border: 1px solid var(--borde-fuerte);
   border-radius: 50%;
-  font-size: 11px;
-  font-weight: 700;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-negrita);
 }
 
 .indice li button[data-leido="true"] .marca {
@@ -181,7 +181,7 @@
   grid-template-columns: 1fr 1fr;
   padding: 3px;
   border: 1px solid var(--borde);
-  border-radius: 10px;
+  border-radius: var(--radio-md);
   background: var(--fondo-solido);
 }
 
@@ -189,12 +189,12 @@
   padding: 6px 2px;
   white-space: nowrap;
   border: 0;
-  border-radius: 7px;
+  border-radius: var(--radio-sm);
   background: none;
   color: var(--texto-tenue);
   font: inherit;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
   cursor: pointer;
 }
 
@@ -214,11 +214,11 @@
 .saltos button {
   padding: 5px 8px;
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--radio);
   background: none;
   color: var(--texto-suave);
   font: inherit;
-  font-size: 13px;
+  font-size: var(--letra-3);
   text-align: left;
   cursor: pointer;
 }
@@ -253,15 +253,15 @@
 
 .paso {
   color: var(--texto-tenue);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .concepto > h2 {
   margin: var(--espacio-1) 0 var(--espacio-4);
-  font-size: 26px;
+  font-size: var(--titulo-3);
   line-height: 1.2;
   letter-spacing: -0.025em;
 }
@@ -305,7 +305,7 @@
 .atajo {
   margin: 0;
   color: var(--texto-tenue);
-  font-size: 12px;
+  font-size: var(--letra-2);
   text-align: right;
 }
 
@@ -321,18 +321,18 @@
 .chuletaNota {
   margin: var(--espacio-1) 0 var(--espacio-3);
   color: var(--texto-tenue);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .chuleta > div {
-  font-size: 13px;
+  font-size: var(--letra-3);
   line-height: 1.5;
 }
 
 .chuleta table {
   display: block;
   overflow-x: auto;
-  font-size: 12.5px;
+  font-size: var(--letra-2);
 }
 
 .chuleta th,
@@ -342,7 +342,7 @@
 
 .chuleta pre {
   padding: var(--espacio-3);
-  font-size: 12px;
+  font-size: var(--letra-2);
   line-height: 1.55;
 }
 
@@ -374,13 +374,13 @@
 }
 
 .seccionCabecera h2 {
-  font-size: 24px;
+  font-size: var(--titulo-2);
   letter-spacing: -0.02em;
 }
 
 .seccionCabecera span {
   color: var(--texto-tenue);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 
@@ -413,7 +413,7 @@
   align-items: flex-start;
   gap: var(--espacio-2);
   margin-bottom: var(--espacio-3);
-  font-size: 16px;
+  font-size: var(--letra-6);
   line-height: 1.4;
 }
 
@@ -424,20 +424,20 @@
   width: 22px;
   height: 22px;
   margin-top: 1px;
-  border-radius: 6px;
+  border-radius: var(--radio-sm);
   background: color-mix(in srgb, var(--error) 18%, transparent);
   color: var(--error);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-negrita);
 }
 
 .error > div {
-  font-size: 15px;
+  font-size: var(--letra-5);
   line-height: 1.6;
 }
 
 .error pre {
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .error > div > :last-child {
@@ -449,7 +449,7 @@
 
 
 /* Ventana mediana (laptop): la chuleta pasa debajo del concepto para que este no quede angosto */
-@media (max-width: 1560px) {
+@media (max-width: 1600px) {
   .lectura,
   .lectura[data-chuleta="false"] {
     grid-template-columns: 210px minmax(0, 1fr);
@@ -465,7 +465,7 @@
 }
 
 /* Pantalla angosta: una sola columna y el índice como fila de botones */
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .lectura,
   .lectura[data-chuleta="false"] {
     grid-template-columns: minmax(0, 1fr);
@@ -495,8 +495,8 @@
     width: auto;
     padding: 5px 10px 5px 6px;
     border: 1px solid var(--borde);
-    border-radius: 999px;
-    font-size: 13px;
+    border-radius: var(--radio-pildora);
+    font-size: var(--letra-3);
   }
 
   .frase,

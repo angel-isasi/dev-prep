@@ -2,9 +2,9 @@
   display: inline-flex;
   align-items: center;
   padding: 1px 9px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
+  border-radius: var(--radio-pildora);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
   line-height: 20px;
   white-space: nowrap;
   background: var(--superficie-2);

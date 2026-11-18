@@ -20,27 +20,27 @@
 .cabecera small,
 .nota {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
   line-height: 1.5;
 }
 
 .nota {
   margin: 0;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .etiqueta {
   color: var(--acento);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .titulo {
   font-family: var(--fuente-titulos);
-  font-size: 20px;
+  font-size: var(--titulo-1);
   line-height: 1.25;
 }
 
@@ -51,20 +51,20 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 15px;
+  font-size: var(--letra-5);
   line-height: 1.55;
 }
 
 .frases li::before {
   content: "↑ ";
   color: var(--exito);
-  font-weight: 700;
+  font-weight: var(--peso-negrita);
 }
 
 .tabla {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: var(--letra-4);
   font-variant-numeric: tabular-nums;
 }
 
@@ -77,19 +77,19 @@
 
 .tabla thead th {
   color: var(--texto-tenue);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
 }
 
 .tabla tbody th {
   color: var(--texto-suave);
-  font-weight: 500;
+  font-weight: var(--peso-medio);
   text-align: left;
 }
 
 .tabla td:nth-child(2) {
   color: var(--texto);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .reto {
@@ -114,8 +114,8 @@
 .reloj,
 .puntos {
   font-family: var(--fuente-codigo);
-  font-size: 26px;
-  font-weight: 700;
+  font-size: var(--titulo-3);
+  font-weight: var(--peso-negrita);
   font-variant-numeric: tabular-nums;
 }
 
@@ -162,8 +162,8 @@
   border-radius: 50%;
   background: var(--acento-suave);
   color: var(--acento);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-negrita);
 }
 
 .plan a:hover {
@@ -172,12 +172,12 @@
 }
 
 .plan strong {
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .plan small {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 /* Tu día en números */
@@ -212,7 +212,7 @@
 
 .cifraDia strong {
   font-family: var(--fuente-titulos);
-  font-size: 36px;
+  font-size: var(--titulo-5);
   line-height: 1.1;
 }
 
@@ -222,7 +222,7 @@
 
 .cifraDia span {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 @media (prefers-reduced-motion: reduce) {

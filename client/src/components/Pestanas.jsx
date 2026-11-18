@@ -9,14 +9,35 @@ import estilos from "./Pestanas.module.css";
  */
 export function Pestanas({ pestanas, activa, alCambiar }) {
   const id = useId();
+  const lista = useRef(null);
+
+  // Con el teclado: flechas para moverse entre pestañas, Inicio y Fin para ir a los extremos.
+  // Solo la pestaña activa entra en el orden del tabulador (tabIndex 0), como pide el patrón de pestañas.
+  const alTeclear = (evento) => {
+    const disponibles = pestanas.filter((p) => !p.deshabilitada);
+    const actual = disponibles.findIndex((p) => p.id === activa);
+    const destino = {
+      ArrowRight: disponibles[(actual + 1) % disponibles.length],
+      ArrowLeft: disponibles[(actual - 1 + disponibles.length) % disponibles.length],
+      Home: disponibles[0],
+      End: disponibles.at(-1),
+    }[evento.key];
+    if (!destino) return;
+    evento.preventDefault();
+    alCambiar(destino.id);
+    lista.current?.querySelector(`[data-pestana="${CSS.escape(destino.id)}"]`)?.focus();
+  };
+
   return (
-    <div className={estilos.pestanas} role="tablist">
+    <div className={estilos.pestanas} role="tablist" ref={lista} onKeyDown={alTeclear}>
       {pestanas.map((p) => (
         <button
           key={p.id}
           type="button"
           role="tab"
+          data-pestana={p.id}
           aria-selected={p.id === activa}
+          tabIndex={p.id === activa ? 0 : -1}
           disabled={p.deshabilitada}
           className={estilos.pestana}
           onClick={() => alCambiar(p.id)}
@@ -55,6 +76,7 @@ export function ContenidoPestanas({ activa, orden, children, className }) {
       <AnimatePresence mode="wait" initial={false} custom={direccion}>
         <motion.div
           key={activa}
+          role="tabpanel"
           custom={direccion}
           variants={variantes}
           initial="entrar"

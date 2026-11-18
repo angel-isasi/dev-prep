@@ -29,7 +29,7 @@
 
 .reproductor small {
   color: var(--texto-tenue);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .error {

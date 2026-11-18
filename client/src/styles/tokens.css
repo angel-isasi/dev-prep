@@ -1,11 +1,43 @@
-/* Variables de diseño: colores, espacios, radios y fuentes.
-   Los componentes solo usan estas variables, así el modo claro/oscuro
-   se cambia en un solo lugar (el atributo data-tema de <html>). */
+/* Sistema de diseño de dev-prep: todos los valores viven aquí.
+   Los componentes solo usan estas variables, así un cambio de escala, de color o de tema
+   se hace en un solo lugar (el tema lo decide el atributo data-tema de <html>).
+
+   Puntos de corte (las media queries no aceptan variables, así que es una convención):
+     600px   celular
+     900px   cambia el armazón: barra inferior debajo, barra lateral desde aquí
+     1200px  escritorio cómodo (más columnas)
+     1600px  pantalla muy ancha */
 
 :root {
   --fuente: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
   --fuente-titulos: "Bricolage Grotesque Variable", var(--fuente);
   --fuente-codigo: "JetBrains Mono Variable", ui-monospace, Consolas, monospace;
+
+  /* Letra: 8 tamaños de texto y 6 de título. Los títulos grandes se achican solos en el celular. */
+  --letra-1: 11px; /* etiquetas mínimas */
+  --letra-2: 12px; /* etiquetas en mayúsculas, notas */
+  --letra-3: 13px; /* texto secundario */
+  --letra-4: 14px; /* interfaz: botones, campos, listas */
+  --letra-5: 15px; /* texto base */
+  --letra-6: 16px;
+  --letra-7: 17px; /* lectura: teoría y enunciados */
+  --letra-8: 18px;
+  --titulo-1: 20px;
+  --titulo-2: 22px;
+  --titulo-3: 26px;
+  --titulo-4: clamp(30px, 26px + 0.6vw, 34px);
+  --titulo-5: clamp(36px, 28px + 1.1vw, 44px);
+  --titulo-6: clamp(40px, 30px + 1.3vw, 52px);
+
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-semi: 600;
+  --peso-titulo: 650;
+  --peso-negrita: 700;
+  --peso-extra: 800;
+
+  --linea-ajustada: 1.25; /* títulos */
+  --linea-base: 1.6; /* texto */
 
   --espacio-1: 4px;
   --espacio-2: 8px;
@@ -14,28 +46,60 @@
   --espacio-5: 24px;
   --espacio-6: 32px;
   --espacio-7: 48px;
+  --espacio-8: 64px;
 
+  --radio-xs: 4px;
+  --radio-sm: 6px;
   --radio: 8px;
+  --radio-md: 10px;
+  --radio-lg: 12px;
   --radio-grande: 14px;
+  --radio-xl: 16px;
+  --radio-pildora: 999px;
+
   --ancho-barra: 232px;
   --ancho-pagina: 1560px; /* páginas de listas y tableros: en pantallas grandes usan los costados */
-  --transicion: 160ms ease;
+  --ancho-lectura: 72ch;
+
+  /* Movimiento: tres duraciones y dos curvas */
+  --dur-rapida: 120ms;
+  --dur: 160ms;
+  --dur-lenta: 260ms;
+  --curva: cubic-bezier(0.2, 0.8, 0.2, 1); /* entra rápido y frena suave */
+  --curva-salida: cubic-bezier(0.4, 0, 1, 1);
+  --transicion: var(--dur) ease;
+
+  /* Capas */
+  --z-pegado: 10;
+  --z-barra: 20;
+  --z-hoja: 40;
+  --z-dialogo: 50;
+  --z-aviso: 60;
+
+  /* Zona táctil mínima (dedo) */
+  --toque: 44px;
 }
 
-/* Oscuro: negro profundo, superficies translúcidas y una luz ambiental muy suave. */
+/* Oscuro: negro profundo, tarjetas sólidas en tres alturas y una luz ambiental muy suave.
+   Alturas: --fondo (página) < --superficie (tarjeta) < --superficie-2 (dentro de una tarjeta,
+   hover) < --superficie-3 (lo activo). --hundido es un hueco más oscuro que la tarjeta. */
 :root[data-tema="oscuro"] {
   color-scheme: dark;
   --fondo: #07070a;
-  --fondo-solido: #0d0d11;
-  --barra-fondo: rgb(0 0 0 / 0.22);
-  --superficie: rgb(255 255 255 / 0.028);
-  --superficie-2: rgb(255 255 255 / 0.055);
-  --borde: rgb(255 255 255 / 0.07);
-  --borde-fuerte: rgb(255 255 255 / 0.13);
+  --fondo-solido: #101014;
+  --barra-fondo: #0a0a0d;
+  --superficie: #101014;
+  --superficie-2: #18181e;
+  --superficie-3: #212129;
+  --hundido: #0a0a0d;
+  --velo: rgb(255 255 255 / 0.04); /* translúcido, solo para ir encima de un fondo de color */
+  --velo-2: rgb(255 255 255 / 0.08);
+  --borde: rgb(255 255 255 / 0.075);
+  --borde-fuerte: rgb(255 255 255 / 0.14);
   --brillo-borde: inset 0 1px 0 rgb(255 255 255 / 0.04);
   --texto: #f2f2f5;
   --texto-suave: #b9b9c3;
-  --texto-tenue: #85858f;
+  --texto-tenue: #8b8b96;
   --acento: #b3a8ff;
   --acento-suave: rgb(179 168 255 / 0.12);
   --sobre-acento: #0b0a12;
@@ -48,7 +112,11 @@
   --aviso: #e7b96c;
   --aviso-suave: rgb(231 185 108 / 0.12);
   --codigo-fondo: rgb(0 0 0 / 0.35);
-  --sombra: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 32px rgb(0 0 0 / 0.35);
+  --sombra-1: 0 1px 2px rgb(0 0 0 / 0.4);
+  --sombra-2: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 32px rgb(0 0 0 / 0.35);
+  --sombra-3: 0 2px 4px rgb(0 0 0 / 0.5), 0 24px 64px rgb(0 0 0 / 0.5);
+  --sombra: var(--sombra-2);
+  --sombra-hundida: rgb(0 0 0 / 0.35);
   --ambiente:
     radial-gradient(1100px 520px at 18% -12%, rgb(179 168 255 / 0.09), transparent 62%),
     radial-gradient(900px 460px at 105% 4%, rgb(95 211 190 / 0.05), transparent 60%),
@@ -57,17 +125,21 @@
 
 :root[data-tema="claro"] {
   color-scheme: light;
-  --fondo: #f7f7f8;
+  --fondo: #f6f6f8;
   --fondo-solido: #ffffff;
-  --barra-fondo: rgb(255 255 255 / 0.55);
-  --superficie: rgb(255 255 255 / 0.75);
-  --superficie-2: rgb(0 0 0 / 0.035);
-  --borde: rgb(0 0 0 / 0.08);
-  --borde-fuerte: rgb(0 0 0 / 0.14);
+  --barra-fondo: #fbfbfc;
+  --superficie: #ffffff;
+  --superficie-2: #f1f1f4;
+  --superficie-3: #e8e8ed;
+  --hundido: #f3f3f6;
+  --velo: rgb(0 0 0 / 0.03);
+  --velo-2: rgb(0 0 0 / 0.06);
+  --borde: rgb(0 0 0 / 0.09);
+  --borde-fuerte: rgb(0 0 0 / 0.16);
   --brillo-borde: 0 1px 2px rgb(0 0 0 / 0.03);
   --texto: #121216;
   --texto-suave: #4a4a54;
-  --texto-tenue: #72727c;
+  --texto-tenue: #686873; /* 5:1 sobre el fondo: pasa AA también en letra chica */
   --acento: #6a5ad9;
   --acento-suave: rgb(106 90 217 / 0.09);
   --sobre-acento: #ffffff;
@@ -79,8 +151,12 @@
   --error-suave: rgb(200 54 61 / 0.08);
   --aviso: #a26a00;
   --aviso-suave: rgb(162 106 0 / 0.09);
-  --codigo-fondo: rgb(0 0 0 / 0.03);
-  --sombra: 0 1px 2px rgb(0 0 0 / 0.05), 0 12px 32px rgb(0 0 0 / 0.06);
+  --codigo-fondo: rgb(0 0 0 / 0.035);
+  --sombra-1: 0 1px 2px rgb(0 0 0 / 0.05);
+  --sombra-2: 0 1px 2px rgb(0 0 0 / 0.05), 0 12px 32px rgb(0 0 0 / 0.06);
+  --sombra-3: 0 2px 4px rgb(0 0 0 / 0.06), 0 24px 64px rgb(0 0 0 / 0.12);
+  --sombra: var(--sombra-2);
+  --sombra-hundida: rgb(0 0 0 / 0.06);
   --ambiente:
     radial-gradient(1100px 520px at 18% -12%, rgb(106 90 217 / 0.07), transparent 62%),
     radial-gradient(900px 460px at 105% 4%, rgb(22 160 140 / 0.05), transparent 60%);

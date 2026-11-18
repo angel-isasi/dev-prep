@@ -8,7 +8,7 @@
   margin: 0;
   max-width: 80ch;
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
   line-height: 1.6;
 }
 
@@ -34,7 +34,7 @@
 
 .estado {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .lista {
@@ -66,10 +66,10 @@
   place-items: center;
   width: 56px;
   height: 56px;
-  border-radius: 16px;
+  border-radius: var(--radio-xl);
   font-family: var(--fuente-titulos);
-  font-size: 22px;
-  font-weight: 700;
+  font-size: var(--titulo-2);
+  font-weight: var(--peso-negrita);
   font-variant-numeric: tabular-nums;
 }
 
@@ -97,8 +97,8 @@
 
 .titulo {
   color: var(--texto);
-  font-size: 17px;
-  font-weight: 600;
+  font-size: var(--letra-7);
+  font-weight: var(--peso-semi);
   line-height: 1.35;
   text-decoration: none;
 }
@@ -110,7 +110,7 @@
 
 .meta {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .razones {
@@ -120,7 +120,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.5;
 }
 
@@ -141,8 +141,8 @@
 .tecnologias span {
   padding: 2px 10px;
   border: 1px solid var(--borde);
-  border-radius: 999px;
-  font-size: 12px;
+  border-radius: var(--radio-pildora);
+  font-size: var(--letra-2);
 }
 
 .tecnologias [data-estado="dominas"] {
@@ -186,10 +186,10 @@ details.ayuda[open] summary {
   max-width: 80ch;
   padding: var(--espacio-2) var(--espacio-3);
   border-left: 3px solid var(--aviso);
-  border-radius: 6px;
+  border-radius: var(--radio-sm);
   background: var(--aviso-suave);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.55;
 }
 
@@ -197,11 +197,11 @@ details.ayuda[open] summary {
   align-self: flex-start;
   padding: 6px 14px;
   border: 1px solid var(--acento);
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--acento-suave);
   color: var(--texto);
   font: inherit;
-  font-size: 14px;
+  font-size: var(--letra-4);
   cursor: pointer;
 }
 
@@ -223,9 +223,9 @@ details.ayuda[open] summary {
 .insignias span {
   padding: 1px 9px;
   border: 1px solid var(--borde);
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   color: var(--texto-tenue);
-  font-size: 12px;
+  font-size: var(--letra-2);
   line-height: 1.6;
 }
 
@@ -233,7 +233,7 @@ details.ayuda[open] summary {
   border-color: var(--acento);
   background: var(--acento-suave);
   color: var(--acento);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .insignias [data-nivel="alta"] {
@@ -250,7 +250,7 @@ details.ayuda[open] summary {
   border-color: var(--error);
   background: var(--error-suave);
   color: var(--error);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .acciones [data-activo="true"] {
@@ -266,7 +266,7 @@ details.ayuda[open] summary {
   margin-top: var(--espacio-2);
   padding-top: var(--espacio-3);
   border-top: 1px solid var(--borde);
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.55;
 }
 
@@ -278,7 +278,7 @@ details.ayuda[open] summary {
 
 .detalle h4 {
   margin: 0;
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .detalle p {
@@ -357,11 +357,11 @@ details.ayuda[open] summary {
   width: 100%;
   padding: var(--espacio-3);
   border: 1px solid var(--borde);
-  border-radius: 10px;
+  border-radius: var(--radio-md);
   background: var(--superficie-2);
   color: var(--texto);
   font: inherit;
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.55;
   resize: vertical;
 }

@@ -21,8 +21,8 @@
 .categoria,
 .etiqueta {
   color: var(--texto-tenue);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-semi);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -42,17 +42,17 @@
 .posicion {
   color: var(--texto-tenue);
   font-family: var(--fuente-codigo);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .idioma {
   padding: 2px 10px;
   border: 1px solid var(--borde-fuerte);
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: none;
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
   cursor: pointer;
 }
 
@@ -64,7 +64,7 @@
 
 .pregunta {
   font-family: var(--fuente-titulos);
-  font-size: 28px;
+  font-size: var(--titulo-3);
   letter-spacing: -0.02em;
   line-height: 1.35;
 }
@@ -111,7 +111,7 @@
 .notas > span {
   margin-right: var(--espacio-2);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .nota[data-tipo="error"]:hover {
@@ -142,7 +142,7 @@
     padding: var(--espacio-5) var(--espacio-4);
   }
   .pregunta {
-    font-size: 22px;
+    font-size: var(--titulo-2);
   }
   .notas {
     flex-wrap: wrap;

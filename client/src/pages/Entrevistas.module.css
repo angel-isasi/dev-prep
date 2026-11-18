@@ -63,7 +63,7 @@
   color: var(--acento);
   font-family: var(--fuente-titulos);
   font-size: 64px;
-  font-weight: 700;
+  font-weight: var(--peso-negrita);
   line-height: 1;
   letter-spacing: -0.04em;
 }
@@ -74,10 +74,10 @@
   place-items: center;
   width: 54px;
   height: 54px;
-  border-radius: 14px;
+  border-radius: var(--radio-grande);
   background: var(--acento-suave);
   color: var(--acento);
-  font-size: 22px;
+  font-size: var(--titulo-2);
 }
 
 .mazoTexto {
@@ -90,24 +90,24 @@
 
 .mazoTexto strong {
   font-family: var(--fuente-titulos);
-  font-size: 20px;
+  font-size: var(--titulo-1);
   letter-spacing: -0.02em;
 }
 
 .mazoTexto span {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .ir {
   color: var(--acento);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
 }
 
 .subtitulo {
   margin: var(--espacio-6) 0 var(--espacio-3);
-  font-size: 22px;
+  font-size: var(--titulo-2);
   letter-spacing: -0.02em;
 }
 
@@ -117,7 +117,7 @@
   gap: var(--espacio-3);
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1200px) {
   .categorias,
   .principales {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -153,28 +153,28 @@
 }
 
 .categoria .mazoTexto strong {
-  font-size: 17px;
+  font-size: var(--letra-7);
 }
 
 .categoria .mazoTexto span {
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .anilloTexto {
   font-family: var(--fuente-titulos);
-  font-size: 17px;
-  font-weight: 700;
+  font-size: var(--letra-7);
+  font-weight: var(--peso-negrita);
 }
 
 .categoria .mazoTexto .paraHoy {
   align-self: flex-start;
   margin-top: 4px;
   padding: 0 8px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--acento-suave);
   color: var(--acento);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
 }
 
 .sesion {
@@ -188,7 +188,7 @@
   align-items: center;
   justify-content: space-between;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .final {
@@ -203,14 +203,14 @@
 }
 
 .final h2 {
-  font-size: 34px;
+  font-size: var(--titulo-4);
   letter-spacing: -0.03em;
 }
 
 .finalEtiqueta {
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -223,14 +223,14 @@
 
 .cuentas dt {
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .cuentas dd {
   margin: 0;
   font-family: var(--fuente-titulos);
-  font-size: 44px;
-  font-weight: 700;
+  font-size: var(--titulo-5);
+  font-weight: var(--peso-negrita);
   line-height: 1.1;
 }
 
@@ -252,7 +252,7 @@
 
 .nota {
   color: var(--texto-tenue);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .guia {
@@ -272,7 +272,7 @@
     padding: var(--espacio-4);
   }
   .numeroGrande {
-    font-size: 48px;
+    font-size: var(--titulo-6);
   }
   .final {
     padding: var(--espacio-5) var(--espacio-4);
@@ -281,12 +281,12 @@
     gap: var(--espacio-4);
   }
   .cuentas dd {
-    font-size: 34px;
+    font-size: var(--titulo-4);
   }
 }
 
 /* Pantalla muy ancha: una columna más de categorías */
-@media (min-width: 1700px) {
+@media (min-width: 1600px) {
   .categorias {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }

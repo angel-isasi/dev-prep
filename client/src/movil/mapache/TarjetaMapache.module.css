@@ -32,25 +32,25 @@
 
 .cabecera strong {
   font-family: var(--fuente-titulos);
-  font-size: 20px;
+  font-size: var(--titulo-1);
 }
 
 .cabecera span {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .globo {
   margin: 0;
   padding: 8px 12px;
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: color-mix(in srgb, var(--color-area) 10%, var(--fondo-solido));
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .barra {
   height: 8px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   overflow: hidden;
 }
@@ -71,8 +71,8 @@
 
 .robos {
   color: var(--aviso);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
 }
 
 .aviso {
@@ -82,17 +82,17 @@
   margin: var(--espacio-3) 0;
   padding: 6px var(--espacio-4) 6px var(--espacio-2);
   border: 1px solid color-mix(in srgb, var(--aviso) 35%, var(--borde));
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--aviso-suave);
   color: var(--texto);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .aviso span:nth-child(2) {
   flex: 1;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .tarjeta {
     align-items: flex-start;
     gap: var(--espacio-3);

@@ -386,3 +386,26 @@ Pedido de Angel: el inglés se sentía repetitivo y "0 de 227 dominados" no ten�
 - **Contenido nuevo**: 47 historias (la serie de Ana), 24 roleplays, 199 calcos, 194 frases de trabajo y 40 pares mínimos.
 - **Modos nuevos**: historias, roleplays, parejas contrarreloj, repaso mezclado y oído fino.
 - **Peso**: los ítems de inglés se guardan compactos y se expanden al cargar (`expandirIngles`): 2,5 MB en total, todo disponible sin internet. Sin cambios en AWS.
+
+## Plan v5 (2026-11-18): mejoras grandes a toda la app
+
+Pedido de Angel: dejar de mejorar apartado por apartado y hacer cambios que atraviesen toda la app. Aceptó 14 mejoras, que se construyen por tandas (cada una queda publicada antes de empezar la siguiente):
+
+1. **Cimientos**: sistema de diseño v2 y abrir al instante.
+2. **Estructura**: una sola app (hoy la app local, la web grande y el celular muestran pantallas distintas), menú de 17 a 6 entradas y buscador global con Ctrl+K.
+3. **El día**: una sola medida, una sola racha y una meta que cuente también el celular; sesión de hoy con una cola única de repaso.
+4. **Contenido y avance**: el tema como centro (Aprender, Lecciones, Chuletas, Referencia y Glosario en una página por tema), ruta semana a semana hasta la fecha meta (2027-01-31) y Progreso nuevo, también en el celular.
+5. **Acabado**: pantallas rehechas (Ejercicio como banco de trabajo, Inglés con el camino primero) y movimiento y respuesta en toda la app.
+6. **Extras**: modo visita para reclutadores, entrevistas en un solo lugar y evaluación con IA en todos los textos libres (cuando haya clave).
+
+Reglas: el progreso guardado no cambia (las medidas nuevas se calculan al leer), ningún recurso nuevo de AWS y captura de antes y después antes de publicar.
+
+### Tanda 1, primera parte (2026-11-18)
+
+- **Tokens completos** en `client/src/styles/tokens.css`: 8 tamaños de texto y 6 de título (`--letra-1..8`, `--titulo-1..6`; los títulos grandes se achican solos en el celular), pesos, radios, sombras en tres alturas, duraciones y curvas de movimiento, capas y zona táctil mínima. Los 614 tamaños de letra, 233 pesos y 145 radios escritos a mano en 69 archivos CSS pasaron a usar tokens.
+- **Tarjetas sólidas en tres alturas**: `--superficie`, `--superficie-2` y `--superficie-3` ahora son colores opacos, más `--hundido` para huecos dentro de una tarjeta y `--velo` para lo que va sobre un fondo de color.
+- **Niveles de tarjeta** en `base.css`: `.tarjeta`, `.tarjeta-protagonista`, `.tarjeta-silenciosa` y `.tarjeta-hundida`, más `.chip` y `.etiqueta` globales. Se aplican a medida que se rehace cada pantalla.
+- **Puntos de corte**: de 14 anchos distintos a 4 (600, 900, 1200 y 1600 px).
+- **Tema claro**: el gris tenue ya pasa el contraste AA, el confeti toma los colores del tema y la barra del sistema cambia de color con el tema.
+- **Accesibilidad**: pestañas con flechas, Inicio y Fin; botones de 44 px de alto con el dedo; las animaciones se apagan en toda la app si el sistema pide menos movimiento.
+- **Abrir al instante**: cada pantalla se descarga cuando se abre (`client/src/lib/perezoso.js`). El primer archivo de la web bajó de 1.621 KB a 493 KB (de 520 a 162 KB comprimido). Sin internet abre igual: el service worker guarda todos los trozos.

@@ -15,7 +15,7 @@
   gap: var(--espacio-1);
   margin-bottom: var(--espacio-4);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .volver:hover {
@@ -43,16 +43,16 @@
   display: flex;
   align-items: baseline;
   font-family: var(--fuente-titulos);
-  font-size: 44px;
-  font-weight: 700;
+  font-size: var(--titulo-5);
+  font-weight: var(--peso-negrita);
   line-height: 1;
   letter-spacing: -0.03em;
 }
 
 .avanceNumero small {
   color: var(--texto-tenue);
-  font-size: 20px;
-  font-weight: 500;
+  font-size: var(--titulo-1);
+  font-weight: var(--peso-medio);
 }
 
 .avanceTexto {
@@ -61,15 +61,15 @@
   flex-direction: column;
   gap: var(--espacio-2);
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
 .barraProgreso {
   height: 6px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   overflow: hidden;
 }
@@ -84,8 +84,8 @@
 .avancePct {
   color: var(--color-area);
   font-family: var(--fuente-codigo);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
 }
 
 .filtros {
@@ -102,7 +102,7 @@
   border: none;
   background: none;
   color: var(--acento);
-  font-size: 14px;
+  font-size: var(--letra-4);
   cursor: pointer;
 }
 
@@ -121,15 +121,15 @@
   align-items: baseline;
   gap: var(--espacio-3);
   margin-bottom: var(--espacio-3);
-  font-size: 22px;
+  font-size: var(--titulo-2);
   letter-spacing: -0.02em;
 }
 
 .tituloGrupo span {
   color: var(--texto-tenue);
   font-family: var(--fuente-codigo);
-  font-size: 13px;
-  font-weight: 400;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-normal);
   letter-spacing: 0;
 }
 
@@ -216,7 +216,7 @@
 .numero {
   color: var(--texto-tenue);
   font-family: var(--fuente-codigo);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .ficha:hover .numero {
@@ -263,14 +263,14 @@
 
 .titulo {
   flex: 1;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
   line-height: 1.35;
 }
 
 .coleccion {
   color: var(--texto-tenue);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .fichaAbajo {
@@ -285,7 +285,7 @@
   align-items: center;
   gap: 6px;
   color: var(--texto-suave);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .punto {
@@ -322,7 +322,7 @@
 .tests {
   color: var(--texto-suave);
   font-family: var(--fuente-codigo);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 /* Celular: pantallas de 600 px o menos */
@@ -335,7 +335,7 @@
     padding: var(--espacio-3) var(--espacio-4);
   }
   .avanceNumero {
-    font-size: 34px;
+    font-size: var(--titulo-4);
   }
   .filtros {
     margin-bottom: var(--espacio-5);
@@ -348,6 +348,6 @@
     padding: var(--espacio-3);
   }
   .titulo {
-    font-size: 14px;
+    font-size: var(--letra-4);
   }
 }

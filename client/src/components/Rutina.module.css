@@ -23,20 +23,20 @@
 
 .cabecera strong {
   font-family: var(--fuente-titulos);
-  font-size: 20px;
+  font-size: var(--titulo-1);
 }
 
 .etiqueta {
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .listo {
   color: var(--exito);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .pasos {
@@ -54,7 +54,7 @@
   align-items: center;
   padding: 10px 12px;
   border: 1px solid var(--borde);
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: var(--fondo-solido);
   color: var(--texto);
 }
@@ -66,7 +66,7 @@
 
 .pasos small {
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .pasos li[data-hecho="true"] a {
@@ -86,7 +86,7 @@
   border: 2px solid var(--borde-fuerte);
   border-radius: 50%;
   color: var(--exito);
-  font-weight: 700;
+  font-weight: var(--peso-negrita);
 }
 
 .pasos li[data-hecho="true"] .check {
@@ -110,17 +110,17 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .formulario input {
   padding: 12px 14px;
   border: 1px solid var(--borde-fuerte);
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: var(--superficie);
   color: var(--texto);
-  font-size: 15px;
-  font-weight: 400;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-normal);
 }
 
 .entradas {
@@ -135,7 +135,7 @@
 .entradas li {
   padding: var(--espacio-3) var(--espacio-4);
   border: 1px solid var(--borde);
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: var(--superficie);
 }
 
@@ -170,7 +170,7 @@
 .barra {
   height: 8px;
   overflow: hidden;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--borde);
 }
 
@@ -204,7 +204,7 @@
 
 .cifras strong {
   font-family: var(--fuente-titulos);
-  font-size: 26px;
+  font-size: var(--titulo-3);
 }
 
 .cifras small {
@@ -213,7 +213,7 @@
 
 .cifras em {
   color: var(--error);
-  font-size: 12px;
+  font-size: var(--letra-2);
   font-style: normal;
 }
 
@@ -261,7 +261,7 @@
   margin: var(--espacio-3) 0 0;
   padding-left: 20px;
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
   line-height: 1.6;
 }
 

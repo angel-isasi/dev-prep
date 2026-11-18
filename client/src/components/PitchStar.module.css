@@ -13,7 +13,7 @@
   justify-content: flex-end;
   gap: var(--espacio-3);
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .bloque {
@@ -28,13 +28,13 @@
 }
 
 .bloque h2 {
-  font-size: 17px;
+  font-size: var(--letra-7);
 }
 
 .ayuda {
   margin: 0;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .texto,
@@ -47,7 +47,7 @@
   background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
   color: var(--texto);
   font: inherit;
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.6;
   resize: vertical;
 }
@@ -55,7 +55,7 @@
 .medidor {
   margin: 0;
   color: var(--aviso);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .medidor[data-ok="true"] {
@@ -64,7 +64,7 @@
 
 .guia summary {
   color: var(--acento);
-  font-size: 14px;
+  font-size: var(--letra-4);
   cursor: pointer;
 }
 
@@ -85,7 +85,7 @@
   border: none;
   background: none;
   color: var(--texto);
-  font-weight: 500;
+  font-weight: var(--peso-medio);
   text-align: left;
   cursor: pointer;
 }
@@ -93,7 +93,7 @@
 .completo {
   color: var(--texto-tenue);
   font-family: var(--fuente-codigo);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .historiaCuerpo {
@@ -109,13 +109,13 @@
   flex-direction: column;
   gap: var(--espacio-1);
   width: 100%;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
 }
 
 .historiaCuerpo small {
   color: var(--texto-tenue);
-  font-weight: 400;
+  font-weight: var(--peso-normal);
 }
 
 .sugerencias {

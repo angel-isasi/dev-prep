@@ -18,7 +18,7 @@
 .cabecera span,
 .vacio {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .leyenda {
@@ -27,7 +27,7 @@
   gap: var(--espacio-3);
   margin-bottom: var(--espacio-3);
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .leyenda i {
@@ -35,7 +35,7 @@
   width: 10px;
   height: 10px;
   margin-right: 4px;
-  border-radius: 3px;
+  border-radius: var(--radio-xs);
 }
 
 .area {
@@ -45,7 +45,7 @@
 .area h3 {
   margin-bottom: var(--espacio-2);
   color: var(--color-area);
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .celdas {
@@ -63,7 +63,7 @@
   padding: 10px 12px;
   border: 1px solid var(--borde);
   border-left: 4px solid var(--estado);
-  border-radius: 10px;
+  border-radius: var(--radio-md);
   background: var(--fondo-solido);
   color: var(--texto);
   text-align: left;
@@ -71,14 +71,14 @@
 }
 
 .celda span {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
   line-height: 1.25;
 }
 
 .celda small {
   color: var(--texto-suave);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .celda[data-abierta="true"] {
@@ -115,7 +115,7 @@
   margin-top: var(--espacio-2);
   padding: var(--espacio-3) var(--espacio-4);
   border: 1px solid var(--borde-fuerte);
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
 }
 
 .detalle ul {
@@ -143,7 +143,7 @@
 
 .subtitulo {
   margin: var(--espacio-4) 0 var(--espacio-2);
-  font-size: 16px;
+  font-size: var(--letra-6);
 }
 
 .errores {

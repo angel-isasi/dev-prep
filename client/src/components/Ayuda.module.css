@@ -3,11 +3,11 @@
   max-width: 260px;
   padding: 6px 10px;
   border: 1px solid var(--borde-fuerte);
-  border-radius: 6px;
+  border-radius: var(--radio-sm);
   background: var(--fondo-solido);
   box-shadow: var(--sombra);
   color: var(--texto);
-  font-size: 12px;
+  font-size: var(--letra-2);
   line-height: 1.5;
   animation: aparecer 120ms ease-out;
 }

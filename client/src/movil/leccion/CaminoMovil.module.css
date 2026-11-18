@@ -30,7 +30,7 @@
 
 .etapa small {
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .areaTitulo {
@@ -38,20 +38,20 @@
   align-items: center;
   gap: var(--espacio-2);
   margin: 0 0 2px;
-  font-size: 19px;
+  font-size: var(--letra-8);
 }
 
 .punto {
   width: 10px;
   height: 10px;
-  border-radius: 3px;
+  border-radius: var(--radio-xs);
   background: var(--color-area);
   box-shadow: 0 0 12px var(--color-area);
 }
 
 .barraEtapa {
   height: 6px;
-  border-radius: 99px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   overflow: hidden;
 }
@@ -162,15 +162,15 @@
 .numero {
   color: transparent;
   font-family: var(--fuente-titulos);
-  font-size: 24px;
-  font-weight: 800;
+  font-size: var(--titulo-2);
+  font-weight: var(--peso-extra);
   -webkit-text-stroke: 1.2px var(--color-area);
 }
 
 .nombre {
   max-width: 150px;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
   line-height: 1.25;
   text-align: center;
 }
@@ -180,11 +180,11 @@
   top: -8px;
   z-index: 1;
   padding: 2px 9px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--color-area);
   color: var(--sobre-acento);
-  font-size: 10px;
-  font-weight: 800;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-extra);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -213,22 +213,22 @@
 
 .panelCabecera strong {
   font-family: var(--fuente-titulos);
-  font-size: 16px;
+  font-size: var(--letra-6);
 }
 
 .panelCabecera span {
   padding: 1px 8px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: color-mix(in srgb, var(--color-area) 18%, transparent);
   color: var(--color-area);
-  font-size: 11px;
-  font-weight: 700;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-negrita);
 }
 
 .panel p {
   margin: 0 0 var(--espacio-3);
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .aprobada {
@@ -263,7 +263,7 @@
     transform: translateY(-2px);
   }
   .nombre {
-    font-size: 14px;
+    font-size: var(--letra-4);
   }
 }
 
@@ -299,7 +299,7 @@
   display: grid;
   gap: 0.6rem;
   margin-bottom: var(--espacio-3);
-  font-size: 0.9rem;
+  font-size: var(--letra-4);
 }
 .barras small {
   color: var(--texto-tenue);
@@ -307,7 +307,7 @@
 .barra {
   height: 8px;
   margin-top: 4px;
-  border-radius: 99px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   overflow: hidden;
 }

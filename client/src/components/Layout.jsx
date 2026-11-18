@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Outlet, useLocation } from "react-router";
 import { motion, useReducedMotion } from "motion/react";
 import { BarraLateral } from "./BarraLateral.jsx";
@@ -7,6 +7,7 @@ import Noise from "./reactbits/Noise.jsx";
 import { useColorTema, usePorTema } from "../hooks/useColorTema.js";
 import { useScrollSuave } from "../hooks/useScrollSuave.js";
 import { useBrillo } from "../hooks/useBrillo.js";
+import { Esqueleto } from "./Esqueleto.jsx";
 import estilos from "./Layout.module.css";
 
 export function Layout() {
@@ -33,7 +34,10 @@ export function Layout() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
             >
-              <Outlet />
+              {/* Mientras se descarga el código de la pantalla, se ve su silueta */}
+              <Suspense fallback={<Esqueleto variante="tarjetas" />}>
+                <Outlet />
+              </Suspense>
             </motion.div>
           </div>
         </main>

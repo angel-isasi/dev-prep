@@ -12,8 +12,8 @@
   align-items: center;
   gap: var(--espacio-3);
   padding: 0 var(--espacio-3);
-  font-weight: 700;
-  font-size: 17px;
+  font-weight: var(--peso-negrita);
+  font-size: var(--letra-7);
   letter-spacing: -0.01em;
 }
 
@@ -27,8 +27,8 @@
   color: var(--sobre-acento);
   box-shadow: 0 0 24px var(--acento-suave);
   font-family: var(--fuente-codigo);
-  font-size: 11px;
-  font-weight: 700;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-negrita);
 }
 
 .nav {
@@ -67,8 +67,8 @@
   background: none;
   color: var(--texto-tenue);
   font: inherit;
-  font-size: 11px;
-  font-weight: 600;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-semi);
   letter-spacing: 0.08em;
   text-align: left;
   text-transform: uppercase;
@@ -76,7 +76,7 @@
 
 button.tituloGrupo {
   cursor: pointer;
-  border-radius: 6px;
+  border-radius: var(--radio-sm);
   transition: color var(--transicion);
 }
 
@@ -104,10 +104,10 @@ button.tituloGrupo:disabled {
   align-items: center;
   gap: var(--espacio-3);
   padding: 7px var(--espacio-3);
-  font-size: 14.5px;
+  font-size: var(--letra-4);
   border-radius: var(--radio);
   color: var(--texto-suave);
-  font-weight: 500;
+  font-weight: var(--peso-medio);
   transition: background var(--transicion), color var(--transicion);
 }
 
@@ -121,7 +121,7 @@ button.tituloGrupo:disabled {
 .activo:hover {
   background: none;
   color: var(--acento);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .indicador {
@@ -141,7 +141,7 @@ button.tituloGrupo:disabled {
   top: 22%;
   bottom: 22%;
   width: 3px;
-  border-radius: 3px;
+  border-radius: var(--radio-xs);
   background: var(--acento);
   box-shadow: 0 0 10px var(--acento);
 }
@@ -160,7 +160,7 @@ button.tituloGrupo:disabled {
   border-radius: var(--radio);
   background: none;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   cursor: pointer;
 }
 
@@ -178,12 +178,12 @@ button.tituloGrupo:disabled {
   border: 1px solid var(--borde);
   border-radius: var(--radio);
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .racha strong {
   color: var(--texto);
-  font-size: 16px;
+  font-size: var(--letra-6);
 }
 
 .racha[data-activa="true"] {
@@ -216,7 +216,7 @@ button.tituloGrupo:disabled {
 
 .cerrada strong {
   font-family: var(--fuente-titulos);
-  font-size: 26px;
+  font-size: var(--titulo-3);
 }
 
 .cerrada span {

@@ -50,14 +50,14 @@
   display: flex;
   align-items: baseline;
   font-family: var(--fuente-titulos);
-  font-size: 44px;
-  font-weight: 700;
+  font-size: var(--titulo-5);
+  font-weight: var(--peso-negrita);
   letter-spacing: -0.04em;
 }
 
 .porcentaje small {
   color: var(--texto-suave);
-  font-size: 20px;
+  font-size: var(--titulo-1);
 }
 
 .etiqueta {
@@ -65,8 +65,8 @@
   align-items: center;
   gap: 6px;
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -74,14 +74,14 @@
 .nota {
   margin: var(--espacio-2) 0 0;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.55;
 }
 
 .barra {
   flex: 1;
   height: 8px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   overflow: hidden;
 }
@@ -120,16 +120,16 @@
   display: flex;
   align-items: baseline;
   font-family: var(--fuente-titulos);
-  font-size: 40px;
-  font-weight: 700;
+  font-size: var(--titulo-5);
+  font-weight: var(--peso-negrita);
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
 
 .numero small {
   color: var(--texto-tenue);
-  font-size: 16px;
-  font-weight: 500;
+  font-size: var(--letra-6);
+  font-weight: var(--peso-medio);
 }
 
 .numero[data-tipo="aviso"] {
@@ -146,7 +146,7 @@
 
 .detalle {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .bloqueCabecera {
@@ -158,13 +158,13 @@
 }
 
 .bloqueCabecera h2 {
-  font-size: 22px;
+  font-size: var(--titulo-2);
   letter-spacing: -0.02em;
 }
 
 .bloqueCabecera span {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .calendario {
@@ -183,7 +183,7 @@
 .diasSemana span {
   width: 16px;
   color: var(--texto-tenue);
-  font-size: 10px;
+  font-size: var(--letra-1);
   line-height: 16px;
 }
 
@@ -191,7 +191,7 @@
   display: inline-block;
   width: 16px;
   height: 16px;
-  border-radius: 4px;
+  border-radius: var(--radio-xs);
   background: var(--superficie-2);
 }
 
@@ -219,7 +219,7 @@
   gap: 4px;
   margin-top: var(--espacio-3);
   color: var(--texto-tenue);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .temas {
@@ -243,18 +243,18 @@
   grid-template-columns: 170px 1fr 52px;
   align-items: center;
   gap: var(--espacio-4);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .cifra {
   color: var(--texto-suave);
   font-family: var(--fuente-codigo);
-  font-size: 13px;
+  font-size: var(--letra-3);
   text-align: right;
 }
 
 .tema {
-  font-weight: 500;
+  font-weight: var(--peso-medio);
 }
 
 .temas li[data-completo="true"] .barra > div {
@@ -338,7 +338,7 @@
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .datos {
     grid-template-columns: 1fr 1fr;
   }

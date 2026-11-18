@@ -17,8 +17,8 @@
 .bloque h2 {
   color: var(--texto-suave);
   font-family: var(--fuente);
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -30,8 +30,8 @@
 }
 
 .bloque label span {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
 }
 
 .bloque input,
@@ -42,7 +42,7 @@
   background: var(--codigo-fondo);
   color: var(--texto);
   font: inherit;
-  font-size: 16px; /* 16 px o más: así el celular no hace zoom al escribir */
+  font-size: var(--letra-6); /* 16 px o más: así el celular no hace zoom al escribir */
 }
 
 .bloque textarea {
@@ -69,14 +69,14 @@
 .ayuda {
   margin: 0;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .aviso {
   padding: var(--espacio-3) var(--espacio-4);
   border-radius: var(--radio);
   background: var(--acento-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .aviso[data-tipo="exito"] {
@@ -103,7 +103,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--espacio-2);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .reportados code {

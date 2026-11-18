@@ -36,27 +36,27 @@
 
 .cabecera strong {
   font-family: var(--fuente-titulos);
-  font-size: 20px;
+  font-size: var(--titulo-1);
 }
 
 .etiqueta {
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .ganado {
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .barra {
   display: flex;
   height: 12px;
   overflow: hidden;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--borde);
 }
 
@@ -77,7 +77,7 @@
   margin: 0;
   padding: 0;
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
   list-style: none;
 }
 
@@ -102,7 +102,7 @@
   padding-top: var(--espacio-2);
   border-top: 1px solid var(--borde);
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .jefe {
@@ -113,13 +113,13 @@
   gap: var(--espacio-2);
   padding: 10px 14px;
   border: 1px solid var(--borde-fuerte);
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: var(--fondo-solido);
   color: var(--texto);
 }
 
 .jefe span {
   color: var(--aviso);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
 }

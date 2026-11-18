@@ -7,7 +7,7 @@
   padding: var(--espacio-5) var(--espacio-6) var(--espacio-7);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .pagina {
     grid-template-columns: 1fr;
   }
@@ -24,7 +24,7 @@
   gap: var(--espacio-1);
   margin-bottom: var(--espacio-4);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .volver:hover {
@@ -37,15 +37,15 @@
   gap: var(--espacio-2);
   margin: 0 0 var(--espacio-2);
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
 .numero {
   padding: 1px 7px;
-  border-radius: 6px;
+  border-radius: var(--radio-sm);
   background: var(--color-area-suave);
   color: var(--color-area);
   font-family: var(--fuente-codigo);
@@ -53,8 +53,8 @@
 }
 
 .cabecera h1 {
-  font-size: 42px;
-  font-weight: 700;
+  font-size: var(--titulo-5);
+  font-weight: var(--peso-negrita);
   line-height: 1.08;
   letter-spacing: -0.035em;
 }
@@ -66,7 +66,7 @@
   gap: var(--espacio-2);
   margin-top: var(--espacio-2);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .dato {
@@ -86,14 +86,14 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--espacio-2);
-  font-size: 14px;
+  font-size: var(--letra-4);
   color: var(--texto-suave);
 }
 
 .archivo {
   margin: var(--espacio-3) 0 0;
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .aviso {
@@ -101,7 +101,7 @@
   padding: var(--espacio-3) var(--espacio-4);
   border-radius: var(--radio);
   background: var(--acento-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .aviso[data-tipo="error"] {
@@ -112,7 +112,7 @@
 .aviso[data-tipo="exito"] {
   background: var(--exito-suave);
   color: var(--exito);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .pestanas {
@@ -130,7 +130,7 @@
   border: none;
   background: none;
   color: inherit;
-  font-weight: 600;
+  font-weight: var(--peso-semi);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
@@ -146,7 +146,7 @@
   overscroll-behavior: contain;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .lateral {
     position: static;
     max-height: none;
@@ -164,7 +164,7 @@
   border: 1px solid color-mix(in srgb, var(--aviso) 35%, transparent);
   border-radius: var(--radio);
   background: var(--aviso-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .repaso div {

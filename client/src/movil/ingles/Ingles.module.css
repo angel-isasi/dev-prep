@@ -12,35 +12,35 @@
 .etiqueta {
   margin: 0 0 4px;
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .titulo {
   margin: 0 0 var(--espacio-2);
-  font-size: 32px;
+  font-size: var(--titulo-4);
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
 
 .ayuda {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.55;
 }
 
 .exito {
   color: var(--exito);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .volver {
   display: inline-block;
   margin-bottom: var(--espacio-3);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 /* Meta de hoy y racha */
@@ -74,17 +74,17 @@
 .meta small,
 .racha small {
   color: var(--texto-suave);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .minutos {
   font-family: var(--fuente-titulos);
-  font-size: 28px;
+  font-size: var(--titulo-3);
 }
 
 .racha strong {
   font-family: var(--fuente-titulos);
-  font-size: 26px;
+  font-size: var(--titulo-3);
 }
 
 /* Barras de los últimos 7 días */
@@ -107,7 +107,7 @@
 .semana span {
   width: 100%;
   min-height: 3px;
-  border-radius: 6px;
+  border-radius: var(--radio-sm);
   background: var(--borde-fuerte);
 }
 
@@ -117,7 +117,7 @@
 
 .semana small {
   color: var(--texto-tenue);
-  font-size: 11px;
+  font-size: var(--letra-1);
   text-transform: uppercase;
 }
 
@@ -138,7 +138,7 @@
 .nivel p {
   margin: 4px 0 0;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 /* Botones de lecciones */
@@ -159,8 +159,8 @@
 }
 
 .acciones small {
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-normal);
   opacity: 0.75;
 }
 
@@ -174,7 +174,7 @@
   gap: 8px;
   margin-bottom: var(--espacio-3);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   cursor: pointer;
 }
 
@@ -185,7 +185,7 @@
 
 .bloque h2 {
   margin-bottom: var(--espacio-2);
-  font-size: 22px;
+  font-size: var(--titulo-2);
 }
 
 .chips {
@@ -197,7 +197,7 @@
 .chip {
   padding: 8px 16px;
   border: 1px solid var(--borde-fuerte);
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie);
   color: var(--texto);
   cursor: pointer;
@@ -219,7 +219,7 @@
   flex: 1 1 220px;
   padding: 10px 12px;
   border: 1px solid var(--borde-fuerte);
-  border-radius: 10px;
+  border-radius: var(--radio-md);
   background: var(--fondo-solido);
   color: var(--texto);
 }
@@ -227,7 +227,7 @@
 .recomendados {
   margin-top: var(--espacio-3);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .recomendados summary {
@@ -263,7 +263,7 @@
   align-items: flex-start;
   padding: 10px 12px;
   border: 1px solid var(--borde);
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: var(--superficie);
 }
 
@@ -275,7 +275,7 @@
 
 .palabras small {
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .palabras em {
@@ -284,7 +284,7 @@
 
 .pron {
   color: var(--color-area);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .es {
@@ -296,7 +296,7 @@
   min-width: 40px;
   min-height: 40px;
   border: 1px solid var(--borde-fuerte);
-  border-radius: 10px;
+  border-radius: var(--radio-md);
   background: var(--fondo-solido);
   cursor: pointer;
 }
@@ -327,7 +327,7 @@
 }
 
 /* En el celular, hoy y la racha en una sola fila compacta */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .resumen .meta,
   .resumen .racha {
     gap: var(--espacio-2);
@@ -343,7 +343,7 @@
   margin: 0 0 var(--espacio-3);
   padding-left: 20px;
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
   line-height: 1.6;
 }
 
@@ -364,7 +364,7 @@
 .fraseShadowing {
   margin: 0;
   font-family: var(--fuente-titulos);
-  font-size: 24px;
+  font-size: var(--titulo-2);
   line-height: 1.35;
 }
 
@@ -403,7 +403,7 @@
 
 .tarjetaLateral h2 {
   margin: 0 0 var(--espacio-3);
-  font-size: 18px;
+  font-size: var(--letra-8);
 }
 
 .tarjetaLateral .cabeceraBloque {
@@ -458,12 +458,12 @@
 
 .continuar strong {
   font-family: var(--fuente-titulos);
-  font-size: 20px;
+  font-size: var(--titulo-1);
 }
 
 .continuar small {
-  font-size: 13px;
-  font-weight: 400;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-normal);
   opacity: 0.85;
 }
 
@@ -475,7 +475,7 @@
 
 .tituloCamino {
   margin: 0 0 var(--espacio-3);
-  font-size: 22px;
+  font-size: var(--titulo-2);
 }
 
 .acciones > a {
@@ -495,7 +495,7 @@
 }
 
 .acciones > a strong {
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .iconoFicha {
@@ -504,10 +504,10 @@
   width: 32px;
   height: 32px;
   margin-bottom: var(--espacio-2);
-  border-radius: 10px;
+  border-radius: var(--radio-md);
   background: var(--acento-suave);
   color: var(--acento);
-  font-size: 16px;
+  font-size: var(--letra-6);
 }
 
 .acciones > a.principal {
@@ -521,12 +521,12 @@
 
 .acciones > a.principal small {
   opacity: 0.85;
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .acciones > a.principal strong {
   font-family: var(--fuente-titulos);
-  font-size: 20px;
+  font-size: var(--titulo-1);
 }
 
 .acciones > a.principal .iconoFicha {
@@ -544,7 +544,7 @@
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1200px) {
   .tablero {
     grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
     align-items: start;
@@ -602,7 +602,7 @@
 }
 .cabeceraBloque h2 {
   margin: 0;
-  font-size: 18px;
+  font-size: var(--letra-8);
 }
 .cabeceraBloque small {
   color: var(--texto-tenue);
@@ -622,14 +622,14 @@
 }
 .misiones li p {
   margin: 0 0 4px;
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 .misiones li > span {
   color: var(--texto-tenue);
 }
 .misiones li[data-hecha="true"] > span {
   color: var(--exito);
-  font-weight: 800;
+  font-weight: var(--peso-extra);
 }
 .misiones li small {
   color: var(--texto-suave);
@@ -637,7 +637,7 @@
 }
 .barraMision {
   height: 6px;
-  border-radius: 99px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   overflow: hidden;
 }
@@ -674,7 +674,7 @@
 .ligaDias small {
   position: absolute;
   bottom: 0;
-  font-size: 11px;
+  font-size: var(--letra-1);
   color: var(--texto-tenue);
 }
 
@@ -724,19 +724,19 @@
   gap: 1px;
 }
 .modo strong {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
 }
 .modo small {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 .flecha {
   color: var(--texto-tenue);
 }
 
 /* Unidad en pantalla grande: usa el ancho; palabras en columnas; shadowing y diálogos lado a lado */
-@media (min-width: 1100px) {
+@media (min-width: 1200px) {
   .paginaUnidad {
     max-width: 1480px;
   }

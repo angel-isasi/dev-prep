@@ -14,8 +14,8 @@
 .fecha {
   margin: 0 0 var(--espacio-1);
   color: var(--texto-suave);
-  font-size: 13px;
-  font-weight: 500;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-medio);
 }
 
 .fecha::first-letter {
@@ -23,8 +23,8 @@
 }
 
 .saludo {
-  font-size: 38px;
-  font-weight: 700;
+  font-size: var(--titulo-5);
+  font-weight: var(--peso-negrita);
   line-height: 1.05;
   letter-spacing: -0.035em;
 }
@@ -32,7 +32,7 @@
 .frase {
   margin: var(--espacio-2) 0 0;
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
   font-style: italic;
 }
 
@@ -59,15 +59,15 @@
 
 .racha > div > span {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .rachaNumero {
   display: flex;
   color: var(--aviso);
   font-family: var(--fuente-titulos);
-  font-size: 40px;
-  font-weight: 700;
+  font-size: var(--titulo-5);
+  font-weight: var(--peso-negrita);
   line-height: 1;
   letter-spacing: -0.03em;
 }
@@ -85,14 +85,14 @@
   border: 1px solid color-mix(in srgb, var(--acento) 30%, transparent);
   border-radius: var(--radio-grande);
   background: linear-gradient(120deg, var(--acento-suave), transparent 70%);
-  font-size: 15px;
-  font-weight: 500;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-medio);
 }
 
 .objetivo span {
   color: var(--texto-suave);
-  font-size: 11px;
-  font-weight: 650;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -102,14 +102,14 @@
   align-items: baseline;
   justify-content: space-between;
   margin: var(--espacio-5) 0 var(--espacio-3);
-  font-size: 22px;
+  font-size: var(--titulo-2);
   letter-spacing: -0.02em;
 }
 
 .enlaceTitulo {
   font-family: var(--fuente);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
   letter-spacing: 0;
 }
 
@@ -119,7 +119,7 @@
   border: 1px dashed var(--borde-fuerte);
   border-radius: var(--radio-grande);
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .lista {
@@ -161,12 +161,12 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: var(--acento-suave);
   color: var(--acento);
   font-family: var(--fuente-titulos);
-  font-size: 20px;
-  font-weight: 700;
+  font-size: var(--titulo-1);
+  font-weight: var(--peso-negrita);
 }
 
 .tarjeta[data-tipo="ejercicio"] .numero {
@@ -182,15 +182,15 @@
 }
 
 .texto strong {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: var(--letra-6);
+  font-weight: var(--peso-semi);
   line-height: 1.3;
 }
 
 .texto small {
   overflow: hidden;
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -202,8 +202,8 @@
 
 .verMas {
   padding: var(--espacio-2) var(--espacio-1);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
 }
 
 /* Siguiente tema: con el número de contorno del área */
@@ -225,8 +225,8 @@
   flex: none;
   color: transparent;
   font-family: var(--fuente-titulos);
-  font-size: 44px;
-  font-weight: 800;
+  font-size: var(--titulo-5);
+  font-weight: var(--peso-extra);
   line-height: 1;
   letter-spacing: -0.04em;
   -webkit-text-stroke: 1.5px var(--color-area);
@@ -245,8 +245,8 @@
   display: inline-block;
   margin-bottom: var(--espacio-2);
   color: var(--color-area);
-  font-size: 13px;
-  font-weight: 650;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -275,29 +275,29 @@
 
 .leccionCabeza small {
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .leccionCabeza strong {
   font-family: var(--fuente-titulos);
-  font-size: 20px;
+  font-size: var(--titulo-1);
 }
 
 .leccionPct {
   font-family: var(--fuente-titulos);
-  font-size: 15px;
-  font-weight: 700;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-negrita);
 }
 
 .empezar {
   justify-content: center;
   min-height: 52px;
-  border-radius: 14px;
-  font-size: 16px;
-  font-weight: 700;
+  border-radius: var(--radio-grande);
+  font-size: var(--letra-6);
+  font-weight: var(--peso-negrita);
 }
 
 .leccionEnlaces {
@@ -305,8 +305,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: var(--espacio-2);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
 }
 
 /* Pantalla grande (laptop): columna centrada y cómoda de leer */

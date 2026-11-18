@@ -89,7 +89,7 @@
   bottom: 2px;
   color: var(--aviso);
   font-family: var(--fuente-codigo);
-  font-size: 10px;
+  font-size: var(--letra-1);
   opacity: 0.85;
 }
 
@@ -99,13 +99,13 @@
   gap: var(--espacio-2);
   color: var(--texto-tenue);
   font-family: var(--fuente-codigo);
-  font-size: 11px;
+  font-size: var(--letra-1);
   text-align: center;
 }
 
 .letras span[data-hoy="true"] {
   color: var(--acento);
-  font-weight: 700;
+  font-weight: var(--peso-negrita);
 }
 
 @media (prefers-reduced-motion: reduce) {

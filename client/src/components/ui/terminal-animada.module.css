@@ -16,7 +16,7 @@
   border-bottom: 1px solid var(--borde);
   color: var(--texto-tenue);
   font-family: var(--fuente-codigo);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .barra i {
@@ -45,14 +45,14 @@
   padding: 14px 16px;
   color: var(--texto);
   font-family: var(--fuente-codigo);
-  font-size: 13px;
+  font-size: var(--letra-3);
   line-height: 1.7;
   white-space: pre-wrap;
 }
 
 .prompt {
   color: var(--exito);
-  font-weight: 700;
+  font-weight: var(--peso-negrita);
 }
 
 .salida {

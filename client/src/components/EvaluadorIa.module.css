@@ -14,7 +14,7 @@
 .apagado {
   margin: 0;
   color: var(--texto-suave);
-  font-size: 12.5px;
+  font-size: var(--letra-2);
 }
 
 .cabecera {
@@ -26,8 +26,8 @@
 
 .etiqueta {
   color: var(--acento);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-negrita);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -35,7 +35,7 @@
 .suave {
   margin: 0;
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .fila {
@@ -77,19 +77,19 @@
   background: none;
   color: var(--acento);
   font: inherit;
-  font-size: 13px;
+  font-size: var(--letra-3);
   cursor: pointer;
 }
 
 .error {
   margin: 0;
   color: var(--error);
-  font-size: 13.5px;
+  font-size: var(--letra-3);
 }
 
 .repreguntaTexto {
   margin: 0;
-  font-weight: 650;
+  font-weight: var(--peso-titulo);
 }
 
 .resultado {
@@ -110,7 +110,7 @@
 
 .puntaje strong {
   font-family: var(--fuente-titulos);
-  font-size: 26px;
+  font-size: var(--titulo-3);
 }
 
 .puntaje[data-veredicto="sabia"] strong {
@@ -127,7 +127,7 @@
 
 .puntaje span {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .columnas {
@@ -143,8 +143,8 @@
 }
 
 .subtitulo {
-  font-size: 12.5px;
-  font-weight: 700;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-negrita);
 }
 
 .subtitulo[data-tipo="bien"] {
@@ -187,7 +187,7 @@
 .correcciones ins {
   color: var(--exito);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .correcciones small {

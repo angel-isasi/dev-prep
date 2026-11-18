@@ -11,7 +11,7 @@
 }
 
 .panel h2 {
-  font-size: 20px;
+  font-size: var(--titulo-1);
 }
 
 .panel p,
@@ -26,8 +26,8 @@
 
 .etiqueta {
   color: var(--acento);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-semi);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: space-between;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .acciones {
@@ -72,7 +72,7 @@
   float: right;
   margin-left: var(--espacio-3);
   color: var(--error);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .resumen strong[data-ok="true"] {
@@ -80,7 +80,7 @@
 }
 
 .nota {
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 /* Celular: pantallas de 600 px o menos */
@@ -112,19 +112,19 @@
 
 .completo h2 {
   font-family: var(--fuente-titulos);
-  font-size: 28px;
+  font-size: var(--titulo-3);
   line-height: 1.2;
 }
 
 .panel p {
   max-width: 68ch;
-  font-size: 16px;
+  font-size: var(--letra-6);
   line-height: 1.65;
 }
 
 .subtitulo {
   margin: 0;
-  font-size: 16px;
+  font-size: var(--letra-6);
   color: var(--texto-suave);
 }
 
@@ -159,7 +159,7 @@
 
 .etapa strong {
   font-family: var(--fuente-titulos);
-  font-size: 18px;
+  font-size: var(--letra-8);
 }
 
 .etapaNumero {
@@ -167,23 +167,23 @@
   place-items: center;
   width: 40px;
   height: 40px;
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: var(--acento-suave);
   color: var(--acento);
   font-family: var(--fuente-codigo);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-negrita);
 }
 
 .etapaMinutos {
   color: var(--acento);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
 }
 
 .etapaTexto {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.55;
 }
 
@@ -199,9 +199,9 @@
 .etapas li {
   padding: 4px 12px;
   border: 1px solid var(--borde);
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
   transition:
     background var(--transicion),
     color var(--transicion);
@@ -211,7 +211,7 @@
   border-color: var(--acento);
   background: var(--acento-suave);
   color: var(--texto);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .etapas li[data-estado="hecha"] {
@@ -230,7 +230,7 @@
 
 .portadaEtapa h2 {
   font-family: var(--fuente-titulos);
-  font-size: 34px;
+  font-size: var(--titulo-4);
 }
 
 .portadaEtapa p {
@@ -260,7 +260,7 @@
   gap: var(--espacio-2);
   align-items: baseline;
   color: var(--texto);
-  font-size: 15px;
+  font-size: var(--letra-5);
   line-height: 1.5;
   cursor: pointer;
 }
@@ -281,7 +281,7 @@
   background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
   color: var(--texto);
   font: inherit;
-  font-size: 15px;
+  font-size: var(--letra-5);
   line-height: 1.55;
   resize: vertical;
 }
@@ -304,14 +304,14 @@
 
 .cifras strong {
   font-family: var(--fuente-titulos);
-  font-size: 40px;
+  font-size: var(--titulo-5);
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
 
 .cifras span {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .columnas {
@@ -324,7 +324,7 @@
 .columnas h3,
 .plan h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: var(--letra-8);
 }
 
 .grupo {
@@ -337,7 +337,7 @@
   gap: var(--espacio-1);
   width: 100%;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .plan ol {

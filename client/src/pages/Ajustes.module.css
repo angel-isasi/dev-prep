@@ -30,16 +30,16 @@
 }
 
 .formulario label > span {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
 }
 
 .seccion {
   margin-bottom: calc(var(--espacio-2) * -1);
   color: var(--texto-suave);
   font-family: var(--fuente);
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -51,7 +51,7 @@
 
 .formulario small {
   color: var(--texto-tenue);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .formulario input,
@@ -63,7 +63,7 @@
   background: var(--codigo-fondo);
   color: var(--texto);
   font: inherit;
-  font-size: 15px;
+  font-size: var(--letra-5);
   transition: border-color var(--transicion), box-shadow var(--transicion);
 }
 
@@ -84,7 +84,7 @@
   gap: var(--espacio-4);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .fila {
     grid-template-columns: 1fr;
   }
@@ -98,12 +98,12 @@
 
 .ok {
   color: var(--exito);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .error {
   color: var(--error);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 /* Los tres campos de la fila quedan alineados abajo aunque su ayuda ocupe dos líneas */

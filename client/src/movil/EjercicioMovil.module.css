@@ -12,7 +12,7 @@
   gap: var(--espacio-1);
   min-height: 40px;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .cabecera {
@@ -26,15 +26,15 @@
   gap: var(--espacio-2);
   margin: 0 0 var(--espacio-2);
   color: var(--texto-suave);
-  font-size: 11px;
-  font-weight: 650;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
 
 .numero {
   padding: 1px 7px;
-  border-radius: 6px;
+  border-radius: var(--radio-sm);
   background: var(--color-area-suave);
   color: var(--color-area);
   font-family: var(--fuente-codigo);
@@ -42,8 +42,8 @@
 }
 
 .cabecera h1 {
-  font-size: 30px;
-  font-weight: 700;
+  font-size: var(--titulo-4);
+  font-weight: var(--peso-negrita);
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
@@ -78,7 +78,7 @@
 .consejo {
   margin: var(--espacio-4) 0 var(--espacio-3);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 /* Botones de ancho completo, fáciles de tocar */
@@ -86,7 +86,7 @@
   justify-content: center;
   width: 100%;
   min-height: 48px;
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .revelar,
@@ -98,7 +98,7 @@
   border: 1px dashed var(--borde-fuerte);
   border-radius: var(--radio-grande);
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .revelar p,
@@ -115,7 +115,7 @@
 .laptop strong {
   color: var(--texto);
   font-family: var(--fuente-titulos);
-  font-size: 19px;
+  font-size: var(--letra-8);
 }
 
 /* Autoevaluación: tres botones grandes */
@@ -132,7 +132,7 @@
 
 .autoevaluacion > strong {
   font-family: var(--fuente-titulos);
-  font-size: 19px;
+  font-size: var(--letra-8);
 }
 
 .notas {
@@ -149,11 +149,11 @@
   min-height: 64px;
   padding: var(--espacio-2);
   border: 1px solid var(--borde-fuerte);
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: none;
   color: var(--texto);
-  font-size: 17px;
-  font-weight: 700;
+  font-size: var(--letra-7);
+  font-weight: var(--peso-negrita);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: transform 120ms ease, background var(--transicion), border-color var(--transicion);
@@ -161,8 +161,8 @@
 
 .nota small {
   color: var(--texto-suave);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-medio);
   text-align: center;
 }
 
@@ -202,7 +202,7 @@
   padding: var(--espacio-3) var(--espacio-4);
   border-radius: var(--radio);
   background: var(--acento-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .aviso[data-tipo="exito"] {
@@ -231,7 +231,7 @@
 }
 
 /* Pantalla ancha: código fijo a la izquierda y la explicación a la derecha */
-@media (min-width: 1500px) {
+@media (min-width: 1600px) {
   .pagina:has(.solucionLado) {
     max-width: 1600px;
   }

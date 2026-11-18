@@ -1,6 +1,6 @@
 /* Texto de lectura larga (teoría, enunciados, explicaciones): letra cómoda y código legible */
 .markdown {
-  font-size: 17px;
+  font-size: var(--letra-7);
   line-height: 1.75;
   text-wrap: pretty; /* evita palabras sueltas al final de un párrafo */
 }
@@ -27,21 +27,21 @@
 
 .markdown h2 {
   margin: var(--espacio-7) 0 var(--espacio-4);
-  font-size: 26px;
+  font-size: var(--titulo-3);
   line-height: 1.2;
   letter-spacing: -0.025em;
 }
 
 .markdown h3 {
   margin: var(--espacio-6) 0 var(--espacio-3);
-  font-size: 20px;
+  font-size: var(--titulo-1);
   line-height: 1.3;
   letter-spacing: -0.015em;
 }
 
 .markdown h4 {
   margin: var(--espacio-5) 0 var(--espacio-2);
-  font-size: 17px;
+  font-size: var(--letra-7);
 }
 
 .markdown p,
@@ -56,7 +56,7 @@
 
 .markdown :not(pre) > code {
   padding: 2px 6px;
-  border-radius: 5px;
+  border-radius: var(--radio-xs);
   background: var(--superficie-2);
   border: 1px solid var(--borde);
   font-size: 0.88em;
@@ -69,7 +69,7 @@
   background: var(--codigo-fondo);
   border: 1px solid var(--borde);
   overflow-x: auto;
-  font-size: 14.5px;
+  font-size: var(--letra-4);
   line-height: 1.65;
 }
 
@@ -77,7 +77,7 @@
   width: 100%;
   margin: 0 0 var(--espacio-4);
   border-collapse: collapse;
-  font-size: 15.5px;
+  font-size: var(--letra-5);
 }
 
 .markdown th,
@@ -90,7 +90,7 @@
 
 .markdown th {
   background: var(--superficie-2);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .markdown blockquote {
@@ -113,27 +113,27 @@
 /* Celular: pantallas de 600 px o menos */
 @media (max-width: 600px) {
   .markdown {
-    font-size: 16px;
+    font-size: var(--letra-6);
     line-height: 1.7;
   }
   .markdown h2 {
-    font-size: 22px;
+    font-size: var(--titulo-2);
   }
   .markdown h3 {
-    font-size: 18px;
+    font-size: var(--letra-8);
   }
   /* En el celular nada se desliza de costado: el código y las tablas se acomodan al ancho.
      Si no, al deslizar el dedo sobre ellos (que llenan casi toda la pantalla) la página no bajaba. */
   .markdown pre {
     margin-inline: calc(var(--espacio-2) * -1);
     padding: var(--espacio-3);
-    font-size: 13px;
+    font-size: var(--letra-3);
     white-space: pre-wrap;
     overflow-wrap: anywhere;
     overflow-x: visible;
   }
   .markdown table {
-    font-size: 13.5px;
+    font-size: var(--letra-3);
   }
   .markdown th,
   .markdown td {

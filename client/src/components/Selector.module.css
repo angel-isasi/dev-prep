@@ -11,7 +11,7 @@
   background: var(--superficie);
   color: var(--texto-suave);
   font: inherit;
-  font-size: 14px;
+  font-size: var(--letra-4);
   cursor: pointer;
   transition: border-color var(--transicion), color var(--transicion);
 }
@@ -64,9 +64,9 @@
   justify-content: space-between;
   gap: var(--espacio-3);
   padding: 7px 10px;
-  border-radius: 6px;
+  border-radius: var(--radio-sm);
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   outline: none;
   cursor: pointer;
   user-select: none;
@@ -83,5 +83,5 @@
 
 .check {
   color: var(--acento);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }

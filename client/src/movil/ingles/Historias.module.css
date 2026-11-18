@@ -29,23 +29,23 @@
 .sugerida small {
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  font-size: 0.72rem;
+  font-size: var(--letra-2);
   color: var(--texto-suave);
 }
 .sugerida strong {
-  font-size: 1.15rem;
+  font-size: var(--letra-8);
 }
 .sugerida span {
   color: var(--texto-suave);
-  font-size: 0.92rem;
+  font-size: var(--letra-5);
 }
 
 .etapa h2 {
-  font-size: 1.15rem;
+  font-size: var(--letra-8);
   margin-bottom: var(--espacio-3);
 }
 .etapa h3 {
-  font-size: 0.95rem;
+  font-size: var(--letra-5);
   color: var(--texto-suave);
   margin: var(--espacio-4) 0 var(--espacio-2);
 }
@@ -77,7 +77,7 @@
 }
 .fila small {
   color: var(--texto-tenue);
-  font-size: 0.82rem;
+  font-size: var(--letra-3);
 }
 .fila[data-hecha="true"] {
   opacity: 0.72;
@@ -90,8 +90,8 @@
   flex-shrink: 0;
   border-radius: 50%;
   background: var(--superficie-2);
-  font-weight: 700;
-  font-size: 0.85rem;
+  font-weight: var(--peso-negrita);
+  font-size: var(--letra-4);
 }
 .fila[data-hecha="true"] .numero {
   background: var(--exito-suave);
@@ -125,13 +125,13 @@
   border: none;
   background: none;
   color: var(--texto-suave);
-  font-size: 20px;
+  font-size: var(--titulo-1);
   cursor: pointer;
 }
 .avance {
   flex: 1;
   height: 12px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   overflow: hidden;
 }
@@ -144,7 +144,7 @@
   display: flex;
   gap: 0.35rem;
   align-items: center;
-  font-size: 0.85rem;
+  font-size: var(--letra-4);
   color: var(--texto-suave);
 }
 .tituloHistoria,
@@ -157,7 +157,7 @@
   padding-inline: var(--espacio-4);
 }
 .tituloHistoria {
-  font-size: 1.5rem;
+  font-size: var(--titulo-2);
   margin-top: var(--espacio-2);
 }
 .situacion {
@@ -185,21 +185,21 @@
   border-color: color-mix(in srgb, var(--acento) 40%, transparent);
 }
 .quien {
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-negrita);
   color: var(--texto-suave);
 }
 .texto {
   all: unset;
   cursor: pointer;
-  font-size: 1.05rem;
+  font-size: var(--letra-7);
   line-height: 1.4;
 }
 .burbuja small {
   color: var(--texto-tenue);
 }
 .lineaRespondida {
-  font-size: 0.9rem;
+  font-size: var(--letra-4);
   color: var(--texto-suave);
   padding-left: var(--espacio-2);
   border-left: 3px solid var(--exito);
@@ -213,10 +213,10 @@
   background: var(--superficie);
 }
 .linea {
-  font-size: 1.05rem;
+  font-size: var(--letra-7);
 }
 .pregunta {
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 .ayuda {
   color: var(--texto-suave);
@@ -280,7 +280,7 @@
   text-align: center;
 }
 .xp {
-  font-size: 2.4rem;
+  font-size: var(--titulo-5);
   color: var(--acento);
 }
 .acciones {
@@ -292,7 +292,7 @@
 
 /* Parejas contrarreloj */
 .reloj {
-  font-weight: 800;
+  font-weight: var(--peso-extra);
   font-variant-numeric: tabular-nums;
   min-width: 3ch;
   text-align: right;
@@ -350,12 +350,12 @@
   display: flex;
   justify-content: center;
   gap: var(--espacio-5);
-  font-size: 0.95rem;
+  font-size: var(--letra-5);
   color: var(--texto-suave);
 }
 .marcador strong {
   color: var(--texto);
-  font-size: 1.3rem;
+  font-size: var(--titulo-1);
 }
 .inicioParejas {
   display: grid;

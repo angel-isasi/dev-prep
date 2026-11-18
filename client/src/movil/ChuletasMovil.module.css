@@ -19,11 +19,11 @@
   height: 40px;
   padding: 0 var(--espacio-4);
   border: 1px solid var(--borde-fuerte);
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: none;
   color: var(--texto-suave);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
   cursor: pointer;
 }
 
@@ -36,7 +36,7 @@
 .punto {
   width: 8px;
   height: 8px;
-  border-radius: 3px;
+  border-radius: var(--radio-xs);
   background: var(--color-area);
 }
 
@@ -67,7 +67,7 @@
   border: none;
   background: none;
   color: var(--texto);
-  font-size: 16px;
+  font-size: var(--letra-6);
   text-align: left;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
@@ -76,20 +76,20 @@
 .cabeza strong {
   flex: 1;
   font-family: var(--fuente-titulos);
-  font-weight: 650;
+  font-weight: var(--peso-titulo);
 }
 
 .cabeza i {
   color: var(--texto-tenue);
-  font-size: 22px;
+  font-size: var(--titulo-2);
   font-style: normal;
 }
 
 .numero {
   color: transparent;
   font-family: var(--fuente-titulos);
-  font-size: 26px;
-  font-weight: 800;
+  font-size: var(--titulo-3);
+  font-weight: var(--peso-extra);
   -webkit-text-stroke: 1.2px var(--color-area);
 }
 
@@ -108,8 +108,8 @@
   display: block;
   margin-bottom: var(--espacio-1);
   color: var(--acento);
-  font-size: 11px;
-  font-weight: 650;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -117,8 +117,8 @@
 .enlace {
   display: inline-block;
   margin-top: var(--espacio-3);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
 }
 
 /* Pantalla grande (laptop): índice de temas a la izquierda y la chuleta elegida a lo ancho */
@@ -155,11 +155,11 @@
   gap: var(--espacio-3);
   padding: 8px 10px;
   border: 0;
-  border-radius: 10px;
+  border-radius: var(--radio-md);
   background: none;
   color: var(--texto-suave);
   font: inherit;
-  font-size: 14px;
+  font-size: var(--letra-4);
   text-align: left;
   cursor: pointer;
 }
@@ -172,11 +172,11 @@
 .indice button[aria-current="true"] {
   background: var(--color-area-suave);
   color: var(--texto);
-  font-weight: 600;
+  font-weight: var(--peso-semi);
 }
 
 .indice .numero {
-  font-size: 18px;
+  font-size: var(--letra-8);
 }
 
 .detalle {
@@ -194,15 +194,15 @@
 
 .detalleCabecera h2 {
   flex: 1;
-  font-size: 30px;
+  font-size: var(--titulo-4);
   letter-spacing: -0.03em;
 }
 
 .numeroGrande {
   color: transparent;
   font-family: var(--fuente-titulos);
-  font-size: 52px;
-  font-weight: 800;
+  font-size: var(--titulo-6);
+  font-weight: var(--peso-extra);
   line-height: 1;
   -webkit-text-stroke: 1.5px var(--color-area);
 }
@@ -216,7 +216,7 @@
 }
 
 .hoja > div {
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .hoja > div > :last-child {
@@ -224,7 +224,7 @@
 }
 
 /* Si la chuleta trae varios bloques (tabla, código, lista), se reparten en columnas */
-@media (min-width: 1400px) {
+@media (min-width: 1200px) {
   .hoja > div:has(> :nth-child(3)) {
     columns: 2;
     column-gap: var(--espacio-5);
@@ -237,6 +237,6 @@
 
 .preguntasGrande h3 {
   margin-bottom: var(--espacio-3);
-  font-size: 22px;
+  font-size: var(--titulo-2);
   letter-spacing: -0.02em;
 }

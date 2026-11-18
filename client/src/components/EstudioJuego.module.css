@@ -17,7 +17,7 @@
 
 .cabecera span {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .barras {
@@ -36,7 +36,7 @@
 
 .barras small {
   color: var(--texto-tenue);
-  font-size: 11px;
+  font-size: var(--letra-1);
   text-transform: uppercase;
 }
 
@@ -68,14 +68,14 @@
   gap: var(--espacio-3);
   margin-top: var(--espacio-2);
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .leyenda i {
   display: inline-block;
   width: 10px;
   height: 10px;
-  border-radius: 3px;
+  border-radius: var(--radio-xs);
 }
 
 .proyeccion {

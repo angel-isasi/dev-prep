@@ -32,8 +32,8 @@
 .fecha {
   margin: 0 0 var(--espacio-1);
   color: var(--texto-suave);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-medio);
 }
 
 .fecha::first-letter {
@@ -41,14 +41,14 @@
 }
 
 .cabecera h1 {
-  font-size: 54px;
-  font-weight: 700;
+  font-size: var(--titulo-6);
+  font-weight: var(--peso-negrita);
   line-height: 1.05;
   letter-spacing: -0.035em;
 }
 
 .frase {
-  font-size: 17px;
+  font-size: var(--letra-7);
   max-width: 62ch;
   margin: var(--espacio-2) 0 0;
   color: var(--texto-suave);
@@ -64,16 +64,16 @@
   border: 1px solid color-mix(in srgb, var(--acento) 30%, transparent);
   border-radius: var(--radio-grande);
   background: linear-gradient(120deg, var(--acento-suave), transparent 70%);
-  font-size: 17px;
-  font-weight: 500;
+  font-size: var(--letra-7);
+  font-weight: var(--peso-medio);
   line-height: 1.5;
 }
 
 .objetivo span,
 .etiqueta {
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -85,7 +85,7 @@
   border: 1px dashed var(--borde-fuerte);
   border-radius: var(--radio-grande);
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .objetivoVacio:hover {
@@ -100,8 +100,8 @@
   margin: 0 0 var(--espacio-5);
   padding: var(--espacio-3) var(--espacio-4);
   border-radius: var(--radio);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
 }
 
 .aviso[data-tipo="exito"] {
@@ -121,7 +121,7 @@
   margin-bottom: var(--espacio-5);
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .tarjetas {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -167,20 +167,20 @@
 
 .numeroGrande {
   font-family: var(--fuente-titulos);
-  font-size: 34px;
-  font-weight: 700;
+  font-size: var(--titulo-4);
+  font-weight: var(--peso-negrita);
   line-height: 1.1;
   letter-spacing: -0.03em;
 }
 
 .numeroGrande {
-  font-size: 52px;
+  font-size: var(--titulo-6);
   color: var(--aviso);
 }
 
 .detalle {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .chip {
@@ -189,9 +189,9 @@
   gap: 6px;
   align-self: flex-start;
   padding: 1px 9px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
+  border-radius: var(--radio-pildora);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
 }
 
 .chip[data-tipo="exito"] {
@@ -231,7 +231,7 @@
 
 .bloque h2 {
   margin-bottom: var(--espacio-4);
-  font-size: 20px;
+  font-size: var(--titulo-1);
   letter-spacing: -0.02em;
 }
 
@@ -240,7 +240,7 @@
   align-items: center;
   gap: var(--espacio-2);
   margin: var(--espacio-5) 0 var(--espacio-3);
-  font-size: 15px;
+  font-size: var(--letra-5);
   color: var(--texto);
 }
 
@@ -254,22 +254,22 @@
 
 .semana dt {
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .semana dd {
   display: flex;
   margin: 0;
   font-family: var(--fuente-titulos);
-  font-size: 30px;
-  font-weight: 700;
+  font-size: var(--titulo-4);
+  font-weight: var(--peso-negrita);
   letter-spacing: -0.02em;
 }
 
 .verMas {
   display: inline-block;
   margin-top: var(--espacio-5);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 /* Tarjetas con anillo de progreso */
@@ -281,15 +281,15 @@
 
 .numeroAnillo {
   font-family: var(--fuente-titulos);
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--titulo-2);
+  font-weight: var(--peso-negrita);
   letter-spacing: -0.02em;
 }
 
 .numeroAnillo small {
   color: var(--texto-suave);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: var(--letra-4);
+  font-weight: var(--peso-medio);
 }
 
 .textoAnillo {
@@ -387,7 +387,7 @@
 
 .tablero small {
   color: var(--texto-tenue);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 /* Llama junto a la etiqueta "Racha" */
@@ -421,8 +421,8 @@
 .cuenta {
   color: var(--texto-tenue);
   font-family: var(--fuente-codigo);
-  font-size: 12px;
-  font-weight: 400;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-normal);
   letter-spacing: 0;
 }
 

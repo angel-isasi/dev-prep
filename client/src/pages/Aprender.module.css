@@ -25,19 +25,19 @@
   height: 42px;
   padding: 0 var(--espacio-4);
   border: 1px solid var(--borde-fuerte);
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: none;
   color: var(--texto-suave);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
   cursor: pointer;
   transition: color var(--transicion), border-color var(--transicion), background var(--transicion);
 }
 
 .areaBoton small {
   color: var(--texto-tenue);
-  font-size: 12px;
-  font-weight: 500;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-medio);
 }
 
 .areaBoton:hover {
@@ -53,7 +53,7 @@
 .areaPunto {
   width: 8px;
   height: 8px;
-  border-radius: 3px;
+  border-radius: var(--radio-xs);
   background: var(--color-area);
 }
 
@@ -64,7 +64,7 @@
 .intro {
   margin: 0 0 0 var(--espacio-3);
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 /* Rejilla de temas */
@@ -77,7 +77,7 @@
   list-style: none;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1200px) {
   .temas {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -117,8 +117,8 @@
 .numero {
   color: transparent;
   font-family: var(--fuente-titulos);
-  font-size: 46px;
-  font-weight: 800;
+  font-size: var(--titulo-6);
+  font-weight: var(--peso-extra);
   line-height: 1;
   letter-spacing: -0.04em;
   -webkit-text-stroke: 1.5px var(--color-area);
@@ -135,24 +135,24 @@
 
 .completo {
   padding: 2px 9px;
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   background: var(--exito-suave);
   color: var(--exito);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
 }
 
 .titulo {
   margin-top: var(--espacio-2);
   font-family: var(--fuente-titulos);
-  font-size: 21px;
+  font-size: var(--titulo-1);
   letter-spacing: -0.02em;
 }
 
 .descripcion {
   flex: 1;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   line-height: 1.5;
 }
 
@@ -189,13 +189,13 @@
   margin-left: var(--espacio-1);
   color: var(--texto-tenue);
   font-family: var(--fuente-codigo);
-  font-size: 12px;
+  font-size: var(--letra-2);
 }
 
 .quiz {
   color: var(--texto-tenue);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
 }
 
 .quiz[data-hecho="true"] {
@@ -227,7 +227,7 @@
     padding: var(--espacio-4);
   }
   .numero {
-    font-size: 38px;
+    font-size: var(--titulo-5);
   }
 }
 
@@ -238,7 +238,7 @@
 }
 
 /* Pantalla muy ancha: una columna más de temas */
-@media (min-width: 1700px) {
+@media (min-width: 1600px) {
   .temas {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }

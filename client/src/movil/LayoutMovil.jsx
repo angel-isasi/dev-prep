@@ -4,7 +4,8 @@
 // Sin efectos de canvas de pantalla completa (en el celular gastan batería y traban).
 import { NavLink, Outlet, useLocation } from "react-router";
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
+import { Esqueleto } from "../components/Esqueleto.jsx";
 import { IconoAprender, IconoIngles, IconoInicio, IconoMas, IconoPracticar } from "../components/Iconos.jsx";
 import estilos from "./LayoutMovil.module.css";
 
@@ -35,7 +36,9 @@ export function LayoutMovil() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2, ease: [0.2, 0.8, 0.2, 1] }}
         >
-          <Outlet />
+          <Suspense fallback={<Esqueleto variante="tarjetas" />}>
+            <Outlet />
+          </Suspense>
         </motion.div>
       </main>
 

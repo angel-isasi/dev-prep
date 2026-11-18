@@ -37,7 +37,7 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: var(--radio-lg);
   background: var(--acento-suave);
   color: var(--acento);
 }
@@ -55,12 +55,12 @@
 
 .texto strong {
   font-family: var(--fuente-titulos);
-  font-size: 18px;
+  font-size: var(--letra-8);
 }
 
 .texto small {
   color: var(--texto-suave);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .opcion i {

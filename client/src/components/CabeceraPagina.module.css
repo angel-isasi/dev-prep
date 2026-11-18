@@ -16,8 +16,8 @@
   gap: var(--espacio-2);
   margin: 0 0 var(--espacio-2);
   color: var(--texto-suave);
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -33,8 +33,8 @@
 }
 
 .titulo {
-  font-size: 48px;
-  font-weight: 700;
+  font-size: var(--titulo-6);
+  font-weight: var(--peso-negrita);
   line-height: 1.05;
   letter-spacing: -0.035em;
 }
@@ -43,7 +43,7 @@
   max-width: 62ch;
   margin: var(--espacio-2) 0 0;
   color: var(--texto-suave);
-  font-size: 17px;
+  font-size: var(--letra-7);
 }
 
 .acciones {
@@ -66,10 +66,10 @@
     margin-bottom: var(--espacio-5);
   }
   .titulo {
-    font-size: 34px;
+    font-size: var(--titulo-4);
   }
   .subtitulo {
-    font-size: 15px;
+    font-size: var(--letra-5);
   }
   .acciones {
     flex-wrap: wrap;

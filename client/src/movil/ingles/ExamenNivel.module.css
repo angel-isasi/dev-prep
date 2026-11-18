@@ -3,7 +3,7 @@
   gap: var(--espacio-2);
   max-width: 44ch;
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
   line-height: 1.5;
 }
 
@@ -14,7 +14,7 @@
 .contador {
   min-width: 28px;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
@@ -23,8 +23,8 @@
   align-self: flex-start;
   color: var(--acento);
   font-family: var(--fuente);
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-negrita);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -38,7 +38,7 @@
 .nose {
   min-height: 52px;
   padding-inline: var(--espacio-4);
-  border-radius: 14px;
+  border-radius: var(--radio-grande);
 }
 
 /* Resultado: se puede bajar para ver lo que fallaste */
@@ -53,7 +53,7 @@
 .nivel {
   font-family: var(--fuente-titulos);
   font-size: 72px;
-  font-weight: 800;
+  font-weight: var(--peso-extra);
   line-height: 1;
   letter-spacing: -0.04em;
   background: linear-gradient(135deg, var(--acento), var(--exito));
@@ -76,10 +76,10 @@
 .escala span {
   padding: 4px 10px;
   border: 1px solid var(--borde);
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   color: var(--texto-tenue);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-negrita);
 }
 
 .escala span[data-pasado="true"] {
@@ -115,7 +115,7 @@
   grid-template-columns: 28px 1fr 34px;
   align-items: center;
   gap: var(--espacio-2);
-  font-size: 13px;
+  font-size: var(--letra-3);
 }
 
 .porNivel small {
@@ -126,7 +126,7 @@
 
 .barra {
   height: 8px;
-  border-radius: 99px;
+  border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   overflow: hidden;
 }
@@ -157,7 +157,7 @@
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
   background: var(--superficie);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }
 
 .fallo p {

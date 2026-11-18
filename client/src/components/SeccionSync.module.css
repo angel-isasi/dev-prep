@@ -13,8 +13,8 @@
 .seccion h2 {
   color: var(--texto-suave);
   font-family: var(--fuente);
-  font-size: 12px;
-  font-weight: 650;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -22,7 +22,7 @@
 .ayuda {
   margin: 0;
   color: var(--texto-suave);
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .ayuda strong {
@@ -57,5 +57,5 @@
   min-width: 220px;
   margin: 0;
   color: var(--texto-suave);
-  font-size: 14px;
+  font-size: var(--letra-4);
 }

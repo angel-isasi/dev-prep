@@ -11,8 +11,8 @@
 
 .etiqueta {
   color: var(--color-area, var(--acento));
-  font-size: 12px;
-  font-weight: 700;
+  font-size: var(--letra-2);
+  font-weight: var(--peso-negrita);
   letter-spacing: 0.09em;
   text-transform: uppercase;
 }
@@ -60,12 +60,12 @@
 
 .seccion > h2 {
   margin-bottom: var(--espacio-3);
-  font-size: 18px;
+  font-size: var(--letra-8);
   letter-spacing: -0.015em;
 }
 
 .seccion > div {
-  font-size: 16px;
+  font-size: var(--letra-6);
 }
 
 /* Una sola sección suelta ocupa todo el ancho */
@@ -95,7 +95,7 @@
 
 .conPasos > h2 {
   margin: var(--espacio-2) 0 var(--espacio-3);
-  font-size: 20px;
+  font-size: var(--titulo-1);
   letter-spacing: -0.02em;
 }
 
@@ -119,12 +119,12 @@
 
 .pasos > li > h3 {
   margin-bottom: var(--espacio-2);
-  font-size: 16px;
+  font-size: var(--letra-6);
   line-height: 1.35;
 }
 
 .pasos > li > div {
-  font-size: 15px;
+  font-size: var(--letra-5);
 }
 
 .pasos > li > div > :last-child {
