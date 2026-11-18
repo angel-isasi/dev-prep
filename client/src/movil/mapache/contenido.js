@@ -1,5 +1,5 @@
-// Lo que dice y tiene el mapache: preguntas del día por nivel, postales de sus viajes, sueños,
-// frases según cómo se siente, la tienda y los muebles que gana tu casa. Todo en inglés con su traducción.
+// Lo que tiene el mapache: preguntas del día por nivel, postales de sus viajes, sueños, la tienda y
+// los muebles que gana tu casa (lo que dice y su diario, por nivel, están en contenido-nivel.js). Todo en inglés con su traducción.
 
 /** Pregunta del día por nivel: pregunta, traducción, mínimo de palabras y una forma de responder. */
 export const PREGUNTAS = {
@@ -142,45 +142,6 @@ export const SUENOS = [
   { en: "Five more minutes... I was about to finish my code review.", es: "Cinco minutitos más... estaba por terminar mi code review." },
 ];
 
-/**
- * Lo que dice según cómo se siente. {w} es una palabra que aprendiste; {n}, un número.
- * Las frases "faciles" son para A1 y A2; las otras, desde B1.
- */
-export const FRASES = {
-  nuevo: [
-    { en: "Hi! I'm your raccoon. I eat English words. Feed me, please!", es: "¡Hola! Soy tu mapache. Como palabras en inglés. ¡Dame de comer, por favor!" },
-  ],
-  feliz: [
-    { en: "Yummy! \"{w}\" was delicious.", es: "¡Rico! \"{w}\" estuvo delicioso." },
-    { en: "I'm so happy! We learned a lot today.", es: "¡Estoy tan feliz! Hoy aprendimos un montón." },
-    { en: "Full tummy, happy raccoon. Great job today!", es: "Pancita llena, mapache feliz. ¡Buen trabajo hoy!", dificil: true },
-    { en: "Honestly, \"{w}\" was the best snack I've had all week.", es: "La verdad, \"{w}\" fue el mejor bocado de toda la semana.", dificil: true },
-  ],
-  normal: [
-    { en: "Hi! Are you ready for some English?", es: "¡Hola! ¿Listo para un poco de inglés?" },
-    { en: "What does \"{w}\" mean? Just kidding, I know!", es: "¿Qué significa \"{w}\"? ¡Es broma, ya lo sé!" },
-    { en: "I could eat a few more words before dinner.", es: "Podría comerme unas cuantas palabras más antes de la cena.", dificil: true },
-    { en: "Let's keep going. \"{w}\" won't practice itself.", es: "Sigamos. \"{w}\" no se va a practicar solo.", dificil: true },
-  ],
-  hambriento: [
-    { en: "I'm hungry... One lesson, please?", es: "Tengo hambre... ¿Una lección, por favor?" },
-    { en: "My tummy is empty. Can we practice \"{w}\" again?", es: "Tengo la pancita vacía. ¿Practicamos \"{w}\" otra vez?" },
-    { en: "I haven't eaten a single word today. Not one!", es: "No he comido ni una sola palabra hoy. ¡Ni una!", dificil: true },
-  ],
-  triste: [
-    { en: "You didn't come yesterday... I missed you.", es: "Ayer no viniste... Te extrañé." },
-    { en: "I took {n} of your words. I'm sorry... Do you want them back?", es: "Me llevé {n} de tus palabras. Perdón... ¿Las quieres de vuelta?" },
-    { en: "Our streak is gone, but we can start a new one today.", es: "Se nos fue la racha, pero hoy podemos empezar otra.", dificil: true },
-  ],
-  robos: [
-    { en: "Oops... I hid {n} of your words. Find them and they're yours again!", es: "Ups... Escondí {n} de tus palabras. ¡Encuéntralas y vuelven a ser tuyas!" },
-  ],
-  dormido: [{ en: "Zzz...", es: "Zzz... (está dormido; tócalo para despertarlo)" }],
-  escapado: [
-    { en: "Gone to find food. Come back with some English!", es: "Salí a buscar comida. ¡Vuelve con un poco de inglés!" },
-  ],
-};
-
 /** Ropa y muebles de la tienda. Se pagan con tu XP de inglés. `parte`: dónde va en el mapache. */
 export const TIENDA = [
   { id: "gorra", en: "cap", es: "gorra", precio: 80, tipo: "ropa", parte: "cabeza" },
@@ -223,23 +184,6 @@ export const MUEBLES_GANADOS = [
 
 /** Trofeo por cada página del álbum completa (una etapa entera de unidades). */
 export const TROFEO = { id: "trofeo", en: "trophy", es: "trofeo" };
-
-/** Una línea de su diario por día, según lo que hiciste. */
-export function lineaDiario({ minutos, palabras, lecciones, historias, nivel }) {
-  const facil = nivel === "A1" || nivel === "A2";
-  const partes = [];
-  if (minutos > 0) partes.push(facil ? `We studied ${minutos} minutes.` : `We put in ${minutos} minutes of English.`);
-  if (palabras > 0) partes.push(facil ? `I ate ${palabras} new ${palabras === 1 ? "word" : "words"}.` : `I gobbled up ${palabras} new ${palabras === 1 ? "word" : "words"}.`);
-  if (lecciones > 0) partes.push(`${lecciones} ${lecciones === 1 ? "lesson" : "lessons"} done.`);
-  if (historias > 0) partes.push(facil ? "We read a story!" : "We even got through a story.");
-  if (!partes.length) return facil ? { en: "No English today. I was very hungry.", es: "Hoy no hubo inglés. Tuve mucha hambre." } : { en: "No English today. I spent the day staring at an empty plate.", es: "Hoy no hubo inglés. Pasé el día mirando un plato vacío." };
-  const es = [];
-  if (minutos > 0) es.push(`Estudiamos ${minutos} minutos.`);
-  if (palabras > 0) es.push(`Me comí ${palabras} ${palabras === 1 ? "palabra nueva" : "palabras nuevas"}.`);
-  if (lecciones > 0) es.push(`${lecciones} ${lecciones === 1 ? "lección hecha" : "lecciones hechas"}.`);
-  if (historias > 0) es.push("¡Leímos una historia!");
-  return { en: partes.join(" ") + (facil ? " Yummy!" : " Not bad at all."), es: es.join(" ") + (facil ? " ¡Rico!" : " Nada mal.") };
-}
 
 /** Roleplay de entrevista que te propone según tu nivel (desde B1). */
 export const ENTREVISTAS = {

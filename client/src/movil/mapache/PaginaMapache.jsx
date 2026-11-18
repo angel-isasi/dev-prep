@@ -96,6 +96,11 @@ export function PaginaMapache() {
             <div className={estilos.globo}>
               <p lang="en">{dice.en}</p>
               {traduccion && <small>{dice.es}</small>}
+              {dice.expresion && (
+                <span className={estilos.expresion}>
+                  <strong lang="en">{dice.expresion.en}</strong> = {dice.expresion.es}
+                </span>
+              )}
               <div className={estilos.globoAcciones}>
                 {voz && (
                   <button type="button" className={estilos.enlace} onClick={() => hablar(dice.en)}>
@@ -125,6 +130,10 @@ export function PaginaMapache() {
               </span>
               <span>
                 Nivel <strong>{datos.nivel}</strong> · vive en {datos.casa.texto}
+              </span>
+              <span>
+                Te habla en <strong>{datos.nivelMapache}</strong>
+                {datos.nivelMapache !== datos.nivel ? ", un nivel arriba del tuyo" : ""}
               </span>
             </div>
           </div>

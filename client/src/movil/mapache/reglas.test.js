@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { clavesRobadas, comidaDelDia, estadoMapache, META_COMIDA, nivelIngles, rachaIngles, regalosDeNivel, revisarRespuesta, rondaNueva, xpDisponible } from "./reglas.js";
-import { lineaDiario, POSTALES, PREGUNTAS } from "./contenido.js";
+import { POSTALES, PREGUNTAS } from "./contenido.js";
+import { cumpleReto, EXPRESIONES, franjaDe, FRASES_NIVEL, lineaDiario, RETOS } from "./contenido-nivel.js";
 
 const hoy = "2026-11-17";
 const lleno = { ingles: 3, inglesNuevos: 6, inglesAciertos: 20 }; // 12 + 12 + 10 = 34
@@ -82,10 +83,32 @@ describe("mapache", () => {
     for (const p of POSTALES) for (const q of p.preguntas) expect(q.opciones[q.correcta]).toBeTruthy();
   });
 
-  test("el diario cuenta el día en inglés", () => {
-    expect(lineaDiario({ minutos: 15, palabras: 1, lecciones: 2, historias: 0, nivel: "A1" }).en).toBe("We studied 15 minutes. I ate 1 new word. 2 lessons done. Yummy!");
-    expect(lineaDiario({ minutos: 0, palabras: 0, lecciones: 0, historias: 0, nivel: "B2" }).en).toContain("No English today");
+  test("el diario cuenta el día en inglés, más rico en cada franja", () => {
+    const dia = { minutos: 15, palabras: 1, lecciones: 2, historias: 0 };
+    expect(lineaDiario({ ...dia, franja: "A", semilla: 0 }).en).toBe("We studied for 15 minutes. I ate 1 new word. We finished 2 lessons. It was a good day!");
+    expect(lineaDiario({ ...dia, franja: "B", semilla: 0 }).en).toContain("I've picked up 1 new word.");
+    expect(lineaDiario({ ...dia, franja: "C", semilla: 1 }).en).toBe("We clocked 15 minutes of English, added 1 word to the collection and saw off 2 lessons. That's more than most people manage on a Monday.");
+    expect(lineaDiario({ minutos: 0, palabras: 0, lecciones: 0, historias: 0, franja: "B", semilla: 0 }).en).toContain("No English today");
   });
+
+  test("te habla un nivel arriba: cada franja tiene frases para todos sus estados, con su expresión", () => {
+    expect(["A1", "A2", "B1", "B2", "C1", "C2"].map(franjaDe)).toEqual(["A", "A", "B", "B", "C", "C"]);
+    for (const franja of ["A", "B", "C"]) {
+      for (const estado of ["nuevo", "feliz", "normal", "hambriento", "triste", "robos", "dormido", "escapado"]) {
+        expect(FRASES_NIVEL[franja][estado]?.length, franja + estado).toBeGreaterThan(0);
+        for (const frase of FRASES_NIVEL[franja][estado]) if (estado !== "dormido") expect(frase.expresion?.en, frase.en).toBeTruthy();
+      }
+      expect(EXPRESIONES[franja].length).toBeGreaterThanOrEqual(6);
+    }
+  });
+
+  test("el reto de gramática de cada nivel reconoce su estructura", () => {
+    for (const [nivel, reto] of Object.entries(RETOS)) expect(cumpleReto(nivel, reto.ejemplo), nivel).toBe(true);
+    expect(cumpleReto("B1", "I like coffee.")).toBe(false);
+    expect(cumpleReto("B2", "I would like a coffee.")).toBe(false);
+    expect(cumpleReto("C1", "I study every day.")).toBe(false);
+  });
+
 });
 
 describe("Trash panda", () => {

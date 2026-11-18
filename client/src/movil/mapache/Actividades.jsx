@@ -85,6 +85,9 @@ export function PreguntaDelDia({ datos, alCambiar }) {
           {ver ? p.es : "¿Qué pregunta?"}
         </button>
       </div>
+      <p className={estilos.reto}>
+        <strong>Reto extra (+5 XP):</strong> {p.reto.texto} <em lang="en">Ej.: {p.reto.ejemplo}</em>
+      </p>
       {p.respondida && !resultado ? (
         <div className={estilos.respondida}>
           <span>Tu respuesta</span>
@@ -112,6 +115,7 @@ export function PreguntaDelDia({ datos, alCambiar }) {
           {resultado.ok ? (
             <p>
               ¡Bien! {resultado.xp ? `+${resultado.xp} XP y comida para ${datos.nombre}.` : "Ya habías respondido hoy."}
+              {resultado.reto ? " Cumpliste el reto extra." : " El reto extra no lo vi esta vez: pruébalo mañana."}
               {resultado.usadas.length > 0 && ` Usaste palabras de tus unidades: ${resultado.usadas.join(", ")}.`}
             </p>
           ) : resultado.corto ? (
@@ -296,7 +300,7 @@ export function PalabraDelDia({ datos }) {
   const w = datos.palabraDelDia;
   if (!w) return null;
   return (
-    <Tarjeta titulo="Hoy te enseño" detalle="De tu unidad actual">
+    <Tarjeta titulo="Hoy te enseño" detalle="Una palabra de tu unidad y una expresión">
       <p className={estilos.palabraGrande} lang="en">
         {w.en} <span>{w.pron}</span>
       </p>
@@ -309,6 +313,20 @@ export function PalabraDelDia({ datos }) {
       <div className={estilos.fila}>
         <BotonOir texto={w.ej?.en ? `${w.en}. ${w.ej.en}` : w.en} />
       </div>
+      {datos.expresionDelDia && (
+        <div className={estilos.expresionDia}>
+          <span>Expresión del día · nivel {datos.nivelMapache}</span>
+          <p lang="en">
+            <strong>{datos.expresionDelDia.en}</strong> = {datos.expresionDelDia.es}
+          </p>
+          <p className={estilos.ejemplo}>
+            <span lang="en">{datos.expresionDelDia.ej.en}</span> <em>{datos.expresionDelDia.ej.es}</em>
+          </p>
+          <div className={estilos.fila}>
+            <BotonOir texto={`${datos.expresionDelDia.en}. ${datos.expresionDelDia.ej.en}`} />
+          </div>
+        </div>
+      )}
     </Tarjeta>
   );
 }
@@ -424,7 +442,7 @@ const formatoDia = (fecha) => {
 export function Diario({ datos }) {
   const [traducir, setTraducir] = useState(false);
   return (
-    <Tarjeta titulo={`El diario de ${datos.nombre}`} detalle="Escrito en inglés, a tu nivel">
+    <Tarjeta titulo={`El diario de ${datos.nombre}`} detalle="En inglés, un nivel arriba del tuyo">
       <button type="button" className={estilos.enlace} onClick={() => setTraducir((t) => !t)}>
         {traducir ? "Ocultar traducción" : "Ver traducción"}
       </button>
