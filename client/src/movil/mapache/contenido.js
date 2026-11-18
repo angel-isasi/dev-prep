@@ -68,40 +68,44 @@ export const PREGUNTAS = {
 /** Palabras mínimas de la respuesta según tu nivel. */
 export const MINIMO_PALABRAS = { A1: 3, A2: 5, B1: 8, B2: 12, C1: 15, C2: 15 };
 
-/** Postales de sus viajes: una por nivel, se desbloquea al llegar a ese nivel. */
+/** Postales de sus viajes, todas en B2 o C1 y abiertas desde el inicio. `nivel` es solo su id (postal:A1...). */
 export const POSTALES = [
   {
     nivel: "A1",
+    etiqueta: "B2",
     ciudad: "London",
     texto:
-      "Hi! I'm in London. It's cold and it's raining, but I'm happy. The buses are red and very big. Today I ate fish and chips. It was good! Tomorrow I want to see Big Ben. See you soon!",
+      "Greetings from London, where it has been drizzling non-stop since I arrived. Locals don't seem to mind; they just turn up their collars and carry on. Yesterday I wandered into a tech meetup near King's Cross, where a speaker argued that most bugs aren't caused by bad code, but by unclear requirements. I'd never thought of it that way, but it rang true. Tomorrow I'm planning to visit the British Museum, provided the rain eases off a little.",
     preguntas: [
-      { pregunta: "How is the weather in London?", opciones: ["Hot and sunny", "Cold and rainy", "Warm and windy"], correcta: 1, explicacion: "Dice \"It's cold and it's raining\": hace frío y llueve." },
-      { pregunta: "What does he want to see tomorrow?", opciones: ["Big Ben", "A red bus", "The beach"], correcta: 0, explicacion: "\"Tomorrow I want to see Big Ben.\"" },
+      { pregunta: "According to the speaker, what causes most bugs?", opciones: ["Bad code", "Unclear requirements", "Slow computers"], correcta: 1, explicacion: "\"Most bugs aren't caused by bad code, but by unclear requirements.\"" },
+      { pregunta: "What does \"provided the rain eases off\" mean?", opciones: ["Only if it rains less", "Because it is raining", "Even though it rains"], correcta: 0, explicacion: "Provided (that) = siempre y cuando. Ease off = disminuir: irá si la lluvia baja un poco." },
     ],
   },
   {
     nivel: "A2",
+    etiqueta: "B2",
     ciudad: "New York",
     texto:
-      "Hello from New York! Yesterday I walked in Central Park for three hours. I saw a lot of dogs, but no raccoons. In the evening I went to a small restaurant and ordered a huge pizza. The city is very noisy, and people walk really fast. I'm going to visit a museum tomorrow.",
+      "Hello from New York! I've been here for three days and I've already walked more than I usually do in a month. The city never really slows down: even at midnight, the streets were packed. I spent this morning in a co-working space where everyone seemed to be either pitching an idea or fixing a production issue. One developer told me that the most valuable skill she'd learned wasn't a framework, but knowing when to ask for help. I'm off to Central Park now, assuming I can find my way out of the subway.",
     preguntas: [
-      { pregunta: "What did he do yesterday?", opciones: ["He visited a museum", "He walked in Central Park", "He stayed in the hotel"], correcta: 1, explicacion: "\"Yesterday I walked in Central Park for three hours.\"" },
-      { pregunta: "What is he going to do tomorrow?", opciones: ["Eat pizza", "Visit a museum", "Go to the park"], correcta: 1, explicacion: "\"I'm going to visit a museum tomorrow\": going to habla de un plan." },
+      { pregunta: "What was the developer's most valuable skill?", opciones: ["A JavaScript framework", "Knowing when to ask for help", "Pitching ideas"], correcta: 1, explicacion: "\"The most valuable skill she'd learned wasn't a framework, but knowing when to ask for help.\"" },
+      { pregunta: "What does \"assuming I can find my way out\" suggest?", opciones: ["He knows the subway perfectly", "He might get lost", "He doesn't want to leave"], correcta: 1, explicacion: "Assuming = suponiendo que: no está seguro de poder salir del metro, así que podría perderse." },
     ],
   },
   {
     nivel: "B1",
+    etiqueta: "C1",
     ciudad: "Sydney",
     texto:
-      "G'day from Sydney! I've been here for a week and I've already been to the beach four times. The ocean is cold, but the surfers don't seem to care. Yesterday I tried to get on a ferry without a ticket, which wasn't a great idea. If I had more time, I'd stay another month. Don't forget to practice your English while I'm away!",
+      "G'day from Sydney, where the sun is relentless and the surfers are, frankly, unbothered by it. I've spent the week shadowing a small dev team that works almost entirely asynchronously, given that half of them live in other time zones. What struck me was how much they rely on writing: every decision is documented, every pull request explained. Had they not been so disciplined about it, I suspect the whole thing would have fallen apart within a month. Something to bear in mind if you ever work remotely.",
     preguntas: [
-      { pregunta: "How long has he been in Sydney?", opciones: ["A day", "A week", "A month"], correcta: 1, explicacion: "\"I've been here for a week\": present perfect con for = desde hace una semana." },
-      { pregunta: "What does \"If I had more time, I'd stay another month\" mean?", opciones: ["He is staying another month", "He would like to stay, but he can't", "He stayed for a month"], correcta: 1, explicacion: "Es una condición imaginaria: no tiene más tiempo, así que no se queda." },
+      { pregunta: "Why does the team work asynchronously?", opciones: ["They don't like meetings", "Half of them live in other time zones", "Their manager told them to"], correcta: 1, explicacion: "\"Given that half of them live in other time zones\": given that = dado que." },
+      { pregunta: "What does \"Had they not been so disciplined\" mean?", opciones: ["They were not disciplined", "If they hadn't been so disciplined", "They will be disciplined"], correcta: 1, explicacion: "Es una inversión: Had they not been = If they hadn't been. Como sí lo fueron, todo funcionó." },
     ],
   },
   {
     nivel: "B2",
+    etiqueta: "B2",
     ciudad: "Toronto",
     texto:
       "Greetings from Toronto! I managed to sneak into a tech meetup last night, and honestly, it was eye-opening. A junior developer gave a talk about her first year at work, and she said the hardest part wasn't the code, it was asking for help without feeling embarrassed. By the end, half the room was nodding. I should have taken notes, but I was too busy eating the free snacks.",
@@ -112,6 +116,7 @@ export const POSTALES = [
   },
   {
     nivel: "C1",
+    etiqueta: "C1",
     ciudad: "Dublin",
     texto:
       "Hello from Dublin, where it has rained, by my count, every single day. Not that anyone here seems bothered: people simply carry on, umbrella or no umbrella. I spent the afternoon in a café near a big tech office, eavesdropping on engineers debating whether to rewrite an old system. The more senior ones kept asking the same question: what problem would the rewrite actually solve? It struck me that the best engineers weren't the ones with the flashiest ideas, but the ones who asked the most uncomfortable questions.",
@@ -122,6 +127,7 @@ export const POSTALES = [
   },
   {
     nivel: "C2",
+    etiqueta: "C1",
     ciudad: "San Francisco",
     texto:
       "Dispatch from San Francisco, the city where every coffee shop doubles as a pitch meeting. I overheard a founder insisting that his product was 'disrupting' the sandwich, which, frankly, has held up remarkably well for a few centuries. Still, beneath the hype, there's something worth taking seriously: people here aren't afraid to look foolish. They ship half-finished ideas, get torn apart, and come back the following week with something better. Perhaps that's the real lesson, and it applies to your English as much as to any start-up: perfection is overrated, momentum isn't.",
@@ -134,12 +140,12 @@ export const POSTALES = [
 
 /** Lo que sueña cuando lo despiertas de noche. */
 export const SUENOS = [
-  { en: "I dreamed I was a JavaScript function... but nobody called me.", es: "Soñé que era una función de JavaScript... pero nadie me llamaba." },
-  { en: "I dreamed about a mountain of cookies. And the cookies spoke English.", es: "Soñé con una montaña de galletas. Y las galletas hablaban inglés." },
-  { en: "In my dream, you passed an interview in English. Everybody clapped.", es: "En mi sueño pasabas una entrevista en inglés. Todos aplaudían." },
-  { en: "I was chasing a bug through the city... and it was wearing my scarf.", es: "Perseguía un bug por la ciudad... y llevaba puesta mi bufanda." },
-  { en: "I dreamed I could fly, but only if I said the past tense correctly.", es: "Soñé que podía volar, pero solo si decía bien el pasado." },
-  { en: "Five more minutes... I was about to finish my code review.", es: "Cinco minutitos más... estaba por terminar mi code review." },
+  { en: "I dreamed I'd been promoted to tech lead, only to discover the whole team was made of rubber ducks.", es: "Soñé que me habían ascendido a tech lead, solo para descubrir que todo el equipo eran patitos de hule." },
+  { en: "In my dream, a cookie kept insisting it was a cache. Oddly enough, it had a point.", es: "En mi sueño, una galleta insistía en que era una caché. Curiosamente, tenía razón." },
+  { en: "I dreamed you aced an interview in English, and the interviewer asked for your autograph.", es: "Soñé que la rompías en una entrevista en inglés y el entrevistador te pedía un autógrafo." },
+  { en: "I was chasing a bug across the city, and it turned out to be wearing my scarf. The nerve!", es: "Perseguía un bug por la ciudad y resultó que llevaba puesta mi bufanda. ¡Qué descaro!" },
+  { en: "I dreamed I could only fly if I got my phrasal verbs right. I didn't get very far off the ground.", es: "Soñé que solo podía volar si usaba bien los phrasal verbs. No llegué muy alto." },
+  { en: "Five more minutes, please. I was just about to wrap up a rather heated code review.", es: "Cinco minutitos más, por favor. Estaba a punto de cerrar un code review bastante acalorado." },
 ];
 
 /** Ropa y muebles de la tienda. Se pagan con tu XP de inglés. `parte`: dónde va en el mapache. */
@@ -185,10 +191,10 @@ export const MUEBLES_GANADOS = [
 /** Trofeo por cada página del álbum completa (una etapa entera de unidades). */
 export const TROFEO = { id: "trofeo", en: "trophy", es: "trofeo" };
 
-/** Roleplay de entrevista que te propone según tu nivel (desde B1). */
-export const ENTREVISTAS = {
-  B1: "en-trabajo-06-r01",
-  B2: "en-avanzado-07-r01",
-  C1: "en-superior-08-r01",
-  C2: "en-dominio-04-r01",
-};
+/** Entrevistas de trabajo en inglés (roleplays de las unidades B2 y C1) que te propone el mapache. */
+export const ENTREVISTAS = [
+  { id: "en-avanzado-04-r01", nivel: "B2", titulo: "Tu forma de trabajar" },
+  { id: "en-avanzado-07-r01", nivel: "B2", titulo: "Cuéntame de una vez que algo salió mal" },
+  { id: "en-superior-01-r01", nivel: "C1", titulo: "Defender tu propuesta" },
+  { id: "en-superior-08-r01", nivel: "C1", titulo: "Un proyecto del que estés orgulloso" },
+];

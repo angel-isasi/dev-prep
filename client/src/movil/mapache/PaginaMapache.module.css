@@ -760,3 +760,30 @@
 .expresionDia strong {
   color: var(--color-area);
 }
+
+/* Entrevistas que propone */
+.entrevistas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--espacio-2);
+}
+
+.entrevistaOpcion {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  background: var(--fondo-solido);
+  color: var(--texto);
+}
+
+.entrevistaOpcion:hover {
+  border-color: var(--color-area);
+}
+
+.entrevistaOpcion small {
+  color: var(--texto-tenue);
+  font-size: 12px;
+}

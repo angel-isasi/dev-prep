@@ -75,7 +75,7 @@ export function PreguntaDelDia({ datos, alCambiar }) {
   }
 
   return (
-    <Tarjeta titulo="La pregunta del día" detalle={p.respondida ? "Respondida hoy" : `Al menos ${p.minimo} palabras`}>
+    <Tarjeta titulo="La pregunta del día" detalle={p.respondida ? `Nivel ${p.nivel} · respondida hoy` : `Nivel ${p.nivel} · al menos ${p.minimo} palabras`}>
       <p className={estilos.preguntaEn} lang="en">
         {p.en}
       </p>
@@ -275,7 +275,7 @@ export function TusErrores({ datos }) {
   return (
     <Tarjeta titulo="Tus errores" detalle="Lo que fallaste la última vez">
       <p className={estilos.ayuda} lang="en">
-        {datos.nombre} says: "I'm a raccoon and even I know these!"
+        {datos.nombre} says: "Even a raccoon wouldn't let these slip through. Let's iron them out."
       </p>
       <ul className={estilos.errores}>
         {datos.errores.map((e) => (
@@ -300,7 +300,7 @@ export function PalabraDelDia({ datos }) {
   const w = datos.palabraDelDia;
   if (!w) return null;
   return (
-    <Tarjeta titulo="Hoy te enseño" detalle="Una palabra de tu unidad y una expresión">
+    <Tarjeta titulo="Hoy te enseño" detalle="Palabra y expresión de B2 y C1">
       <p className={estilos.palabraGrande} lang="en">
         {w.en} <span>{w.pron}</span>
       </p>
@@ -442,7 +442,7 @@ const formatoDia = (fecha) => {
 export function Diario({ datos }) {
   const [traducir, setTraducir] = useState(false);
   return (
-    <Tarjeta titulo={`El diario de ${datos.nombre}`} detalle="En inglés, un nivel arriba del tuyo">
+    <Tarjeta titulo={`El diario de ${datos.nombre}`} detalle="En inglés de nivel C1">
       <button type="button" className={estilos.enlace} onClick={() => setTraducir((t) => !t)}>
         {traducir ? "Ocultar traducción" : "Ver traducción"}
       </button>
@@ -478,7 +478,7 @@ export function Postales({ datos, alCambiar }) {
   }
 
   return (
-    <Tarjeta titulo="Postales de sus viajes" detalle="Una nueva por cada nivel">
+    <Tarjeta titulo="Postales de sus viajes" detalle="Seis ciudades, en B2 y C1">
       <div className={estilos.postales}>
         {datos.postales.map((p) => (
           <button
@@ -494,7 +494,7 @@ export function Postales({ datos, alCambiar }) {
             }}
           >
             <strong>{p.ciudad}</strong>
-            <small>{p.abierta ? (p.leida ? `Leída · ${p.leida.aciertos}/2` : `Nivel ${p.nivel} · nueva`) : `Se abre en ${p.nivel}`}</small>
+            <small>{p.abierta ? (p.leida ? `Leída · ${p.leida.aciertos}/2` : `Nivel ${p.etiqueta} · nueva`) : `Se abre en ${p.nivel}`}</small>
           </button>
         ))}
       </div>
@@ -632,19 +632,18 @@ export function TrashPanda({ datos, alCambiar }) {
 
 export function Entrevista({ datos }) {
   return (
-    <Tarjeta titulo="Practice a job interview with me">
-      {datos.entrevista ? (
-        <>
-          <p className={estilos.ayuda}>
-            Desde tu nivel ({datos.nivel}), {datos.nombre} hace de entrevistador. Es un roleplay de entrevista de trabajo: eliges qué responder y te explica por qué.
-          </p>
-          <Link to={`/ingles/roleplay/${datos.entrevista}`} className="boton boton-primario">
-            Empezar la entrevista
+    <Tarjeta titulo="Practice a job interview with me" detalle="Roleplays de B2 y C1">
+      <p className={estilos.ayuda}>
+        {datos.nombre} hace de entrevistador: eliges qué responder y te explica por qué una respuesta suena mejor que otra.
+      </p>
+      <div className={estilos.entrevistas}>
+        {datos.entrevistas.map((e) => (
+          <Link key={e.id} to={`/ingles/roleplay/${e.id}`} className={estilos.entrevistaOpcion}>
+            <strong>{e.titulo}</strong>
+            <small>Nivel {e.nivel}</small>
           </Link>
-        </>
-      ) : (
-        <p className={estilos.ayuda}>Se abre al llegar a B1. Mientras, completa unidades o haz el examen de nivel.</p>
-      )}
+        ))}
+      </div>
     </Tarjeta>
   );
 }

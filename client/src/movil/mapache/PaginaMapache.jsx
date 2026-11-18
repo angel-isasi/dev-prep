@@ -132,8 +132,7 @@ export function PaginaMapache() {
                 Nivel <strong>{datos.nivel}</strong> · vive en {datos.casa.texto}
               </span>
               <span>
-                Te habla en <strong>{datos.nivelMapache}</strong>
-                {datos.nivelMapache !== datos.nivel ? ", un nivel arriba del tuyo" : ""}
+                Te habla en <strong>{datos.nivelMapache}</strong>: todo lo suyo va en B2 y C1
               </span>
             </div>
           </div>

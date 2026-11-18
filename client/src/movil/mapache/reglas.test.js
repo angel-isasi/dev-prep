@@ -130,3 +130,12 @@ describe("Trash panda", () => {
     expect(t.correcto).toBe(1);
   });
 });
+
+describe("todo el mapache va en B2 y C1", () => {
+  test("las postales son B2 o C1 y las entrevistas son de B2 o C1", async () => {
+    const { ENTREVISTAS } = await import("./contenido.js");
+    expect(POSTALES.every((p) => ["B2", "C1"].includes(p.etiqueta))).toBe(true);
+    expect(ENTREVISTAS.every((e) => ["B2", "C1"].includes(e.nivel))).toBe(true);
+    expect(franjaDe("C1")).toBe("C");
+  });
+});

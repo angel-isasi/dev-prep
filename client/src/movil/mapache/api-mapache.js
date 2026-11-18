@@ -6,10 +6,17 @@ import { avanceConceptos } from "../leccion/variantes.js";
 import { COLECCION_EXTRA } from "../ingles/extra.js";
 import { hechaPorExamen } from "../ingles/examen.js";
 import { cumpleReto, EXPRESIONES, franjaDe, FRASES_NIVEL, lineaDiario, RETOS } from "./contenido-nivel.js";
-import { CASAS, clavesRobadas, elegir, estadoMapache, hash, NIVELES, nivelIngles, practico, regalosDeNivel, revisarRespuesta, xpDisponible } from "./reglas.js";
+import { CASAS, clavesRobadas, elegir, estadoMapache, hash, nivelIngles, practico, regalosDeNivel, revisarRespuesta, xpDisponible } from "./reglas.js";
 import { ENTREVISTAS, MINIMO_PALABRAS, MUEBLES_GANADOS, POSTALES, PREGUNTAS, ROPA_NIVEL, SUENOS, TIENDA, TROFEO } from "./contenido.js";
 
 const NOMBRE = "Mapi";
+
+// Todo lo del mapache va en B2 y C1, sin importar tu nivel (decisión de Angel, 2026-11-17):
+// habla en C1, la pregunta del día alterna B2 y C1 y las palabras salen de las unidades B2 y C1.
+const NIVEL_MAPACHE = "C1";
+const NIVELES_MAPACHE = ["B2", "C1"];
+/** Nivel de la pregunta del día: un día B2, otro C1. */
+const nivelPregunta = (hoy) => NIVELES_MAPACHE[hash(hoy + "pregunta") % 2];
 const ETAPAS = [
   ["basico", "Básico"],
   ["intermedio", "Intermedio"],
@@ -115,9 +122,10 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
       const palabras = new Map(datosIngles.unidades.flatMap((u) => u.palabras.map((w) => [w.id, w])));
       const robadas = clavesRobadas(registros, hoy);
       const estado = estadoMapache({ dias, hoy, hora: new Date().getHours(), robados: robadas.length });
-      // Te habla un nivel por encima del tuyo (si eres C2, en C2)
-      const nivelMapache = NIVELES[Math.min(NIVELES.length - 1, NIVELES.indexOf(nivel) + 1)];
+      const nivelMapache = NIVEL_MAPACHE;
       const franja = franjaDe(nivelMapache);
+      // Unidades B2 y C1: de ahí salen la palabra del día, Repeat after me y Trash panda
+      const altas = new Set(unidades.filter((u) => NIVELES_MAPACHE.includes(u.nivel)).map((u) => u.id));
 
       // Palabras que ya sabes (para que hable con tu vocabulario)
       const sabidas = items.filter((it) => it.concepto === "palabra" && aprendido(it));
@@ -177,25 +185,23 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
         .filter(Boolean)
         .slice(0, 5);
 
-      // Frases para "Repeat after me": las que ya aprendiste o, si no, las de tu unidad
-      const frasesSabidas = items.filter((it) => it.concepto === "frase" && aprendido(it));
-      const fuente = frasesSabidas.length >= 5 ? frasesSabidas : items.filter((it) => it.concepto === "frase" && (it.unidad === unidadActual || aprendido(it)));
-      const repetir = [...fuente]
+      // Frases para "Repeat after me": de las unidades B2 y C1
+      const repetir = items
+        .filter((it) => it.concepto === "frase" && altas.has(it.unidad))
         .sort((a, b) => (hashSimple(hoy + a.clave) % 997) - (hashSimple(hoy + b.clave) % 997))
         .slice(0, 8)
         .map((f) => ({ en: f.en, es: f.es }));
 
-      // Palabra del día: una de tu unidad actual que todavía no viste
-      const nueva = deActual.find((it) => !registros[it.clave]) ?? elegir(deActual, hoy);
+      // Palabra del día: una de las unidades B2 y C1 (si puede ser, una que todavía no viste)
+      const palabrasAltas = items.filter((it) => it.concepto === "palabra" && altas.has(it.unidad));
+      const nuevasAltas = palabrasAltas.filter((it) => !registros[it.clave]);
+      const nueva = elegir(nuevasAltas.length ? nuevasAltas : palabrasAltas, hoy + "palabra");
 
-      // Trash panda: palabras de las unidades que empezaste (o de las primeras)
-      const empezadas = new Set(Object.keys(registros).map((k) => porClave.get(k)?.unidad).filter(Boolean));
-      const fuenteJuego = datosIngles.unidades.filter((u) => empezadas.has(u.id));
-      const palabrasJuego = (fuenteJuego.length >= 2 ? fuenteJuego : datosIngles.unidades.slice(0, 6)).flatMap((u) => u.palabras);
+      // Trash panda: palabras de las unidades B2 y C1
+      const palabrasJuego = datosIngles.unidades.filter((u) => NIVELES_MAPACHE.includes(u.nivel)).flatMap((u) => u.palabras);
 
-      const nivelI = NIVELES.indexOf(nivel);
-      const entrevista = [...Object.entries(ENTREVISTAS)].reverse().find(([n]) => NIVELES.indexOf(n) <= nivelI)?.[1] ?? null;
-      const pregunta = elegir(PREGUNTAS[nivel], hoy);
+      const nivelP = nivelPregunta(hoy);
+      const pregunta = elegir(PREGUNTAS[nivelP], hoy);
       const respondida = p[`pregunta:${hoy}`] ?? null;
 
       return {
@@ -205,7 +211,7 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
         ...estado,
         nivelMapache,
         frase: frase ? { en: rellenar(frase.en), es: rellenar(frase.es), expresion: frase.expresion ?? null } : null,
-        expresionDelDia: elegir(EXPRESIONES[franja], hoy + "expresion"),
+        expresionDelDia: elegir([...EXPRESIONES.B, ...EXPRESIONES.C], hoy + "expresion"),
         sueno: elegir(SUENOS, hoy + "sueno"),
         casa: CASAS[nivel],
         robados: robadas.slice(0, 12).map((k) => acertijo(porClave.get(k), palabras)).filter(Boolean),
@@ -213,10 +219,10 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
         errores,
         repetir,
         repetidasHoy: p[`repetir:${hoy}`] ?? 0,
-        pregunta: { ...pregunta, minimo: MINIMO_PALABRAS[nivel], respondida, reto: { texto: RETOS[nivel].texto, ejemplo: RETOS[nivel].ejemplo } },
+        pregunta: { ...pregunta, nivel: nivelP, minimo: MINIMO_PALABRAS[nivelP], respondida, reto: { texto: RETOS[nivelP].texto, ejemplo: RETOS[nivelP].ejemplo } },
         palabraDelDia: nueva ? { en: nueva.en, es: nueva.es, pron: palabras.get(nueva.clave.slice(3))?.pron ?? "", ej: palabras.get(nueva.clave.slice(3))?.ejemplo ?? null } : null,
         diario,
-        postales: POSTALES.map((post) => ({ ...post, abierta: NIVELES.indexOf(post.nivel) <= nivelI, leida: p[`postal:${post.nivel}`] ?? null })),
+        postales: POSTALES.map((post) => ({ ...post, abierta: true, leida: p[`postal:${post.nivel}`] ?? null })),
         album,
         muebles,
         ropa,
@@ -224,7 +230,7 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
         tienda: TIENDA.map((t) => ({ ...t, comprado: compradas.includes(t.id) })),
         xp: xpDisponible(dias, compradas, TIENDA),
         trash: { record: p.trash ?? 0, palabras: palabrasJuego.map((w) => ({ en: w.en, es: w.es, tipo: w.tipo, pasado: w.formas?.pasado ?? null })) },
-        entrevista,
+        entrevistas: ENTREVISTAS,
         unidadesCompletas: completas.length,
       };
     },
@@ -246,7 +252,8 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
     /** La pregunta del día: revisa que sea inglés y del largo de tu nivel; si está bien, lo alimenta. */
     async mapacheResponder(texto) {
       const hoy = progreso.hoy();
-      const { items, datosIngles, nivel, aprendido } = await contexto();
+      const { items, datosIngles, aprendido } = await contexto();
+      const nivel = nivelPregunta(hoy);
       const palabrasDe = (t) => String(t ?? "").toLowerCase().match(/[a-z']+/g) ?? [];
       const vocabulario = new Set([
         ...datosIngles.unidades.flatMap((u) => u.palabras.flatMap((w) => palabrasDe(w.en))),
