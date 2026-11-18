@@ -1,0 +1,45 @@
+# Evaluación con IA
+
+La app puede evaluar tus respuestas de entrevista y corregir tu inglés con IA. Todo está listo en el
+código; solo falta que tú pongas tu API key en Vercel. Mientras no la pongas, la app muestra
+"Evaluación con IA: se activa cuando configures tu API key en Vercel" y no gasta nada.
+
+## Qué hace
+
+- **Entrevistas** (tarjetas y simulacro): escribes o dictas tu respuesta y la IA te da un puntaje de
+  0 a 10, lo que hiciste bien, lo que te faltó, tu misma respuesta mejorada (con tu pitch y tus
+  historias STAR, si las llenaste) y una repregunta que puedes responder ahí mismo. Al revelar la
+  respuesta modelo, marca la nota que sugiere.
+- **Mapache**: después de responder la pregunta del día, "Corregir mi inglés" te muestra cada error
+  con su corrección, tu respuesta en nivel C1 y el nivel que mostraste.
+
+## Cómo funciona (y por qué es seguro)
+
+- La app nunca habla directo con la IA: llama a una función de Vercel (`api/ia.js`, lógica en
+  `server/ia.js`). La API key vive solo en Vercel como variable secreta: no está en el código ni en
+  tu navegador, así que aunque el repositorio sea público nadie la ve.
+- Cada pedido lleva tu **contraseña de IA**. Sin ella, la función no llama a la IA, así que nadie más
+  puede gastar tu saldo. La escribes una vez en la app y queda guardada en ese navegador.
+- No usa AWS. Las funciones de Vercel están incluidas en el plan gratuito (Hobby).
+- Cada pedido tiene topes de tamaño. Una evaluación cuesta alrededor de 1 a 2 centavos de dólar con
+  el modelo por defecto.
+
+## Activarla (lo haces tú, una sola vez)
+
+1. Cuando tengas tu crédito, entra a la consola de la API (platform.claude.com), crea una API key y
+   cópiala. Recomendado: en Billing, pon un límite de gasto mensual.
+2. En Vercel: tu proyecto, **Settings**, **Environment Variables**. Agrega dos variables para
+   *Production*:
+   - `ANTHROPIC_API_KEY`: la key que copiaste.
+   - `DEVPREP_IA_CLAVE`: una contraseña que inventes (larga, por ejemplo 20 caracteres).
+   - Opcional: `IA_MODELO` si quieres otro modelo (por defecto `claude-opus-5-5`).
+3. En Vercel, **Deployments**, el último, **Redeploy** (las variables se leen al publicar).
+4. En la app, abre una tarjeta de entrevista: te pedirá la contraseña de IA. Escribe la misma de
+   `DEVPREP_IA_CLAVE`.
+
+## Si algo falla
+
+- "La IA todavía no está configurada": falta alguna de las dos variables o no hiciste Redeploy.
+- "La contraseña de IA no es correcta": no coincide con `DEVPREP_IA_CLAVE`; vuelve a escribirla.
+- "La API key de Vercel no es válida" o "no tiene saldo": revisa la key o el crédito en la consola.
+- Solo funciona en la web (dev-prep.angel-isasi.com), no en la app local de la laptop.

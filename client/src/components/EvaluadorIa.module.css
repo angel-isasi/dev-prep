@@ -1,0 +1,195 @@
+/* Panel "Evaluar con IA": dentro de la tarjeta de entrevista y de la pregunta del día del mapache. */
+.caja {
+  display: grid;
+  align-self: stretch;
+  width: 100%;
+  gap: var(--espacio-2);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid color-mix(in srgb, var(--acento) 30%, var(--borde));
+  border-radius: var(--radio-grande);
+  background: color-mix(in srgb, var(--acento) 5%, var(--superficie));
+  text-align: left;
+}
+
+.apagado {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 12.5px;
+}
+
+.cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.etiqueta {
+  color: var(--acento);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.suave {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 13px;
+}
+
+.fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
+}
+
+.fila :global(.boton)[data-activo="true"] {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.entrada,
+.texto {
+  flex: 1;
+  min-width: 0;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--fondo-solido);
+  color: var(--texto);
+  font: inherit;
+}
+
+.texto {
+  width: 100%;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--acento);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.error {
+  margin: 0;
+  color: var(--error);
+  font-size: 13.5px;
+}
+
+.repreguntaTexto {
+  margin: 0;
+  font-weight: 650;
+}
+
+.resultado {
+  display: grid;
+  gap: var(--espacio-3);
+}
+
+.resultado p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.puntaje {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espacio-2);
+}
+
+.puntaje strong {
+  font-family: var(--fuente-titulos);
+  font-size: 26px;
+}
+
+.puntaje[data-veredicto="sabia"] strong {
+  color: var(--exito);
+}
+
+.puntaje[data-veredicto="dude"] strong {
+  color: var(--aviso);
+}
+
+.puntaje[data-veredicto="no"] strong {
+  color: var(--error);
+}
+
+.puntaje span {
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.columnas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espacio-3);
+}
+
+.columnas ul {
+  margin: 4px 0 0;
+  padding-left: 1.1em;
+  line-height: 1.5;
+}
+
+.subtitulo {
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.subtitulo[data-tipo="bien"] {
+  color: var(--exito);
+}
+
+.subtitulo[data-tipo="falta"] {
+  color: var(--aviso);
+}
+
+.mejor :global(.boton) {
+  justify-self: start;
+}
+
+.mejor {
+  display: grid;
+  gap: var(--espacio-2);
+  padding: var(--espacio-3);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+}
+
+.correcciones {
+  display: grid;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.correcciones li {
+  display: grid;
+  gap: 2px;
+}
+
+.correcciones del {
+  color: var(--error);
+}
+
+.correcciones ins {
+  color: var(--exito);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.correcciones small {
+  color: var(--texto-suave);
+}

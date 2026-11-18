@@ -1,0 +1,121 @@
+// Tests de la evaluación con IA con un cliente FALSO: no hay internet ni se gasta saldo.
+import { describe, expect, it, vi } from "vitest";
+import { armarPedido, claveCorrecta, configurada, limpiarResultado, manejarGet, manejarPost } from "./ia.js";
+
+const ENV = { ANTHROPIC_API_KEY: "falsa", DEVPREP_IA_CLAVE: "mi-clave" };
+const pedidoEntrevista = {
+  tarea: "entrevista",
+  pregunta: "¿Prefieres trabajar solo o en equipo?",
+  claves: ["Equilibrio", "Un ejemplo concreto"],
+  modelo: "Me siento cómodo de las dos formas...",
+  respuesta: "Prefiero en equipo porque aprendo de otros y revisan mi código.",
+};
+const resultadoIa = { puntaje: 7, veredicto: "dude", resumen: "Bien, pero sin ejemplo.", bien: ["Valoras el equipo"], falta: ["Un ejemplo concreto"], mejor: "Me siento cómodo...", repregunta: "¿Un ejemplo?" };
+
+function request(cuerpo, clave = "mi-clave") {
+  return new Request("https://x/api/ia", { method: "POST", headers: { "content-type": "application/json", ...(clave ? { "x-clave": clave } : {}) }, body: typeof cuerpo === "string" ? cuerpo : JSON.stringify(cuerpo) });
+}
+
+/** Un cliente de IA falso que devuelve lo que le digamos y guarda con qué lo llamaron. */
+function clienteFalso(respuesta) {
+  const create = vi.fn(async () => respuesta);
+  return { create, crearCliente: () => ({ beta: { messages: { create } } }) };
+}
+const conTexto = (obj, extra = {}) => ({ stop_reason: "end_turn", content: [{ type: "text", text: JSON.stringify(obj) }], usage: { input_tokens: 900, output_tokens: 300 }, ...extra });
+
+describe("configuración y contraseña", () => {
+  it("sin las dos variables no está configurada y no llama a la IA", async () => {
+    expect(configurada({})).toBe(false);
+    expect(configurada({ ANTHROPIC_API_KEY: "x" })).toBe(false);
+    const falso = clienteFalso(conTexto(resultadoIa));
+    const r = await manejarPost(request(pedidoEntrevista), { env: {}, crearCliente: falso.crearCliente });
+    expect(r.status).toBe(503);
+    expect(falso.create).not.toHaveBeenCalled();
+    expect(await manejarGet({}).json()).toEqual({ configurada: false });
+  });
+
+  it("con contraseña incorrecta o sin ella no llama a la IA", async () => {
+    const falso = clienteFalso(conTexto(resultadoIa));
+    expect((await manejarPost(request(pedidoEntrevista, "otra"), { env: ENV, crearCliente: falso.crearCliente })).status).toBe(401);
+    expect((await manejarPost(request(pedidoEntrevista, null), { env: ENV, crearCliente: falso.crearCliente })).status).toBe(401);
+    expect(falso.create).not.toHaveBeenCalled();
+    expect(claveCorrecta("mi-clave", "mi-clave")).toBe(true);
+    expect(claveCorrecta("mi-clav", "mi-clave")).toBe(false);
+  });
+});
+
+describe("armarPedido", () => {
+  it("rechaza tareas desconocidas y respuestas vacías", () => {
+    expect(armarPedido({ tarea: "otra" }).error).toBeTruthy();
+    expect(armarPedido({ ...pedidoEntrevista, respuesta: "no sé" }).error).toMatch(/corta/);
+    expect(armarPedido({ ...pedidoEntrevista, pregunta: "" }).error).toBeTruthy();
+  });
+
+  it("incluye la lista del entrevistador, el modelo y tus datos", () => {
+    const p = armarPedido({ ...pedidoEntrevista, contexto: "Hice dev-prep, una app para practicar." });
+    expect(p.mensaje).toContain("- Equilibrio");
+    expect(p.mensaje).toContain("Respuesta modelo");
+    expect(p.mensaje).toContain("dev-prep");
+    expect(p.esquema.required).toContain("repregunta");
+  });
+
+  it("recorta textos enormes", () => {
+    const p = armarPedido({ ...pedidoEntrevista, respuesta: "palabra ".repeat(5000) });
+    expect(p.mensaje.length).toBeLessThan(9000);
+  });
+
+  it("inglés: usa el nivel pedido", () => {
+    const p = armarPedido({ tarea: "ingles", pregunta: "What would you do?", respuesta: "I will do many things for improve.", nivel: "C1" });
+    expect(p.mensaje).toContain("nivel C1");
+    expect(p.esquema.required).toContain("correcciones");
+  });
+});
+
+describe("manejarPost con la IA falsa", () => {
+  it("devuelve la evaluación limpia y pide formato JSON", async () => {
+    const falso = clienteFalso(conTexto({ ...resultadoIa, puntaje: 14 }));
+    const r = await manejarPost(request(pedidoEntrevista), { env: ENV, crearCliente: falso.crearCliente });
+    expect(r.status).toBe(200);
+    const { resultado, uso } = await r.json();
+    expect(resultado.puntaje).toBe(10); // fuera de rango: se recorta
+    expect(resultado.veredicto).toBe("dude");
+    expect(uso).toEqual({ entrada: 900, salida: 300 });
+    const params = falso.create.mock.calls[0][0];
+    expect(params.output_config.format.type).toBe("json_schema");
+    expect(params.max_tokens).toBeGreaterThan(1000);
+  });
+
+  it("usa el modelo de la variable IA_MODELO si existe", async () => {
+    const falso = clienteFalso(conTexto(resultadoIa));
+    await manejarPost(request(pedidoEntrevista), { env: { ...ENV, IA_MODELO: "otro-modelo" }, crearCliente: falso.crearCliente });
+    expect(falso.create.mock.calls[0][0].model).toBe("otro-modelo");
+  });
+
+  it("si la IA declina o se corta, avisa sin romperse", async () => {
+    const declina = clienteFalso({ stop_reason: "refusal", content: [] });
+    expect((await manejarPost(request(pedidoEntrevista), { env: ENV, crearCliente: declina.crearCliente })).status).toBe(502);
+    const cortada = clienteFalso({ stop_reason: "max_tokens", content: [] });
+    expect((await (await manejarPost(request(pedidoEntrevista), { env: ENV, crearCliente: cortada.crearCliente })).json()).error).toMatch(/incompleta/);
+  });
+
+  it("errores de la API (sin saldo, key inválida) se traducen", async () => {
+    const sinSaldo = { crearCliente: () => ({ beta: { messages: { create: async () => Promise.reject(Object.assign(new Error("credit balance too low"), { status: 400 })) } } }) };
+    expect((await (await manejarPost(request(pedidoEntrevista), { env: ENV, ...sinSaldo })).json()).error).toMatch(/saldo/);
+    const keyMala = { crearCliente: () => ({ beta: { messages: { create: async () => Promise.reject(Object.assign(new Error("x"), { status: 401 })) } } }) };
+    expect((await (await manejarPost(request(pedidoEntrevista), { env: ENV, ...keyMala })).json()).error).toMatch(/API key/);
+  });
+
+  it("un cuerpo que no es JSON es un 400", async () => {
+    const falso = clienteFalso(conTexto(resultadoIa));
+    expect((await manejarPost(request("{malo"), { env: ENV, crearCliente: falso.crearCliente })).status).toBe(400);
+  });
+});
+
+describe("limpiarResultado", () => {
+  it("inglés: normaliza nivel, puntaje y correcciones", () => {
+    const r = limpiarResultado("ingles", { nivel: "Z9", puntaje: -3, correcciones: [{ original: "for improve", corregido: "to improve" }], version: "v", comentario: "c" });
+    expect(r.nivel).toBe("B1");
+    expect(r.puntaje).toBe(0);
+    expect(r.correcciones[0]).toEqual({ original: "for improve", corregido: "to improve", explicacion: "" });
+  });
+});

@@ -4,7 +4,8 @@
   "installCommand": "npm ci",
   "buildCommand": "npm run build:movil",
   "outputDirectory": "client/dist-movil",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }],
+  "functions": { "api/ia.js": { "maxDuration": 60 } },
   "headers": [
     {
       "source": "/(.*)",

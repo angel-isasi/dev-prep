@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Grabadora } from "./Grabadora.jsx";
+import { EvaluadorIa } from "./EvaluadorIa.jsx";
 import { hablar, hayVoz } from "../lib/voz.js";
 
 // El idioma que elegiste la última vez (para practicar las entrevistas en inglés)
@@ -25,6 +26,7 @@ const NOTAS = [
  */
 export function Tarjeta({ pregunta, alCalificar, posicion, grabar = false, enIngles }) {
   const [revelada, setRevelada] = useState(false);
+  const [sugerida, setSugerida] = useState(null); // la nota que sugiere la IA, si la usaste
   const [ingles, setInglesEstado] = useState(() => enIngles ?? localStorage.getItem(CLAVE_IDIOMA) === "1");
   const setIngles = (cambiar) =>
     setInglesEstado((v) => {
@@ -66,6 +68,19 @@ export function Tarjeta({ pregunta, alCalificar, posicion, grabar = false, enIng
             revela la respuesta modelo y sé honesto contigo.
           </p>
           {grabar && <Grabadora clave={`tarjeta:${pregunta.id}`} texto={ingles ? "Record my answer" : "Grabar mi respuesta"} />}
+          <EvaluadorIa
+            key={`${pregunta.id}-${ingles}`}
+            tarea="entrevista"
+            idioma={ingles ? "en" : "es"}
+            pedido={{
+              pregunta: ingles && pregunta.preguntaEn ? pregunta.preguntaEn : pregunta.pregunta,
+              claves: pregunta.claves ?? [],
+              modelo: ingles && pregunta.respuestaEn ? pregunta.respuestaEn : pregunta.respuesta,
+              categoria: pregunta.categoria,
+              idioma: ingles ? "en" : "es",
+            }}
+            alResultado={(r) => setSugerida(r.veredicto)}
+          />
           <button type="button" className="boton boton-primario" onClick={() => setRevelada(true)}>
             Revelar respuesta
           </button>
@@ -96,13 +111,14 @@ export function Tarjeta({ pregunta, alCalificar, posicion, grabar = false, enIng
           )}
 
           <div className={estilos.notas}>
-            <span>¿Cómo te fue?</span>
+            <span>{sugerida ? "¿Cómo te fue? (la IA sugiere la marcada)" : "¿Cómo te fue?"}</span>
             {NOTAS.map((n) => (
               <button
                 key={n.valor}
                 type="button"
                 className={`boton ${estilos.nota}`}
                 data-tipo={n.tipo}
+                data-sugerida={sugerida === n.valor}
                 onClick={() => alCalificar(n.valor)}
               >
                 {n.texto}

@@ -8,6 +8,7 @@ import { escucharVoz, hablar, hayMicrofono, useHayVoz } from "../../lib/voz.js";
 import { hablaCorrecta } from "../../../../scripts/items/ingles.js";
 import { Markdown } from "../../components/Markdown.jsx";
 import { IconoAudio, IconoMicrofono } from "../../components/Iconos.jsx";
+import { EvaluadorIa } from "../../components/EvaluadorIa.jsx";
 import { rondaNueva } from "./reglas.js";
 import estilos from "./PaginaMapache.module.css";
 
@@ -129,6 +130,10 @@ export function PreguntaDelDia({ datos, alCambiar }) {
           <span>Una forma de responder</span>
           <p lang="en">{p.modelo}</p>
         </div>
+      )}
+      {/* Con tu respuesta ya enviada, la IA te la puede corregir frase por frase */}
+      {(resultado?.ok || (p.respondida && !resultado)) && (
+        <EvaluadorIa tarea="ingles" idioma="en" respuestaFija={resultado?.ok ? texto : p.respondida.texto} pedido={{ pregunta: p.en, nivel: p.nivel }} />
       )}
     </Tarjeta>
   );

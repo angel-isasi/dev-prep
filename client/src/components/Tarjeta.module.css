@@ -152,3 +152,9 @@
     min-height: 44px;
   }
 }
+
+/* La nota que sugiere la IA (si evaluaste tu respuesta con ella) */
+.nota[data-sugerida="true"] {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}

@@ -113,3 +113,26 @@ export function escucharVoz() {
   r.start();
   return { promesa, detener: () => r.stop() };
 }
+
+/**
+ * Dictado largo (respuestas de entrevista): escucha sin cortarse en las pausas hasta que llames a
+ * detener(), y va entregando el texto reconocido.
+ * @param {{ lang?: string, alTexto: (texto: string) => void, alTerminar?: (error?: Error) => void }} opciones
+ * @returns {{ detener: () => void } | null}  null si el navegador no reconoce voz
+ */
+export function dictar({ lang = "es-PE", alTexto, alTerminar }) {
+  const Clase = Reconocedor();
+  if (!Clase) return null;
+  const r = new Clase();
+  r.lang = lang;
+  r.continuous = true;
+  r.interimResults = false;
+  r.onresult = (e) => {
+    for (let i = e.resultIndex; i < e.results.length; i++) if (e.results[i].isFinal) alTexto(e.results[i][0].transcript.trim());
+  };
+  r.onerror = (e) =>
+    alTerminar?.(new Error(e.error === "network" ? "Dictar necesita internet en este navegador" : e.error === "not-allowed" ? "Permite el micrófono para dictar" : "No te escuché bien"));
+  r.onend = () => alTerminar?.();
+  r.start();
+  return { detener: () => r.stop() };
+}
