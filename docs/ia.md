@@ -10,8 +10,32 @@ código; solo falta que tú pongas tu API key en Vercel. Mientras no la pongas, 
   0 a 10, lo que hiciste bien, lo que te faltó, tu misma respuesta mejorada (con tu pitch y tus
   historias STAR, si las llenaste) y una repregunta que puedes responder ahí mismo. Al revelar la
   respuesta modelo, marca la nota que sugiere.
+- **Informe del simulacro**: al terminar un simulacro, "Pedir mi informe" mira toda la entrevista
+  junta (tus notas y las respuestas que evaluaste con IA) y te da una nota general, qué tan cerca
+  estás, tus fortalezas, lo que más te pesaría y un plan de pocos pasos.
+- **Entrevista por voz** (Entrevistas, pestaña "Por voz"): el entrevistador dice la pregunta en voz
+  alta, tú respondes hablando y él repregunta sobre lo que dijiste (1 o 2 veces). No corrige en
+  medio: al final ves cada respuesta evaluada y el informe. La voz y el micrófono son los del
+  navegador (gratis); sin micrófono puedes escribir. Funciona mejor en Chrome y con audífonos.
 - **Mapache**: después de responder la pregunta del día, "Corregir mi inglés" te muestra cada error
   con su corrección, tu respuesta en nivel C1 y el nivel que mostraste.
+
+## Modelos y costo
+
+Cada tarea usa el modelo más barato que la hace bien (tabla en `server/ia-precios.js`):
+
+| Tarea | Modelo | Costo aproximado |
+|---|---|---|
+| Evaluar una respuesta de entrevista | `claude-sonnet-5-5` | alrededor de 1 centavo de dólar |
+| Informe de una entrevista completa | `claude-sonnet-5-5` | de 1 a 2 centavos |
+| Corregir inglés | `claude-haiku-5-5` | menos de 0,1 centavos |
+
+Una entrevista por voz de 3 preguntas con 1 repregunta son 7 pedidos: unos 8 centavos.
+
+"Uso de IA este mes", debajo de cada panel de IA, muestra lo que llevas gastado y tu tope mensual
+(20 USD por defecto, lo cambias ahí mismo). Al llegar al tope la app deja de pedir evaluaciones. La
+cuenta se lleva en cada navegador con los tokens reales de cada pedido; el gasto exacto de toda tu
+cuenta está en la consola de la API.
 
 ## Cómo funciona (y por qué es seguro)
 
@@ -21,8 +45,7 @@ código; solo falta que tú pongas tu API key en Vercel. Mientras no la pongas, 
 - Cada pedido lleva tu **contraseña de IA**. Sin ella, la función no llama a la IA, así que nadie más
   puede gastar tu saldo. La escribes una vez en la app y queda guardada en ese navegador.
 - No usa AWS. Las funciones de Vercel están incluidas en el plan gratuito (Hobby).
-- Cada pedido tiene topes de tamaño. Una evaluación cuesta alrededor de 1 a 2 centavos de dólar con
-  el modelo por defecto.
+- Cada pedido tiene topes de tamaño, y la app tiene un tope de gasto mensual (ver "Modelos y costo").
 
 ## Activarla (lo haces tú, una sola vez)
 
@@ -32,7 +55,8 @@ código; solo falta que tú pongas tu API key en Vercel. Mientras no la pongas, 
    *Production*:
    - `ANTHROPIC_API_KEY`: la key que copiaste.
    - `DEVPREP_IA_CLAVE`: una contraseña que inventes (larga, por ejemplo 20 caracteres).
-   - Opcional: `IA_MODELO` si quieres otro modelo (por defecto `claude-opus-5-5`).
+   - Opcional: `IA_MODELO` si quieres forzar un solo modelo para todas las tareas (por defecto cada
+     tarea usa el suyo, ver "Modelos y costo").
 3. En Vercel, **Deployments**, el último, **Redeploy** (las variables se leen al publicar).
 4. En la app, abre una tarjeta de entrevista: te pedirá la contraseña de IA. Escribe la misma de
    `DEVPREP_IA_CLAVE`.

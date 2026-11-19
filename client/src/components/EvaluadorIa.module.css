@@ -193,3 +193,30 @@
 .correcciones small {
   color: var(--texto-suave);
 }
+
+/* "Uso de IA este mes": plegado, con el tope adentro */
+.uso {
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+}
+
+.uso summary {
+  cursor: pointer;
+}
+
+.uso label {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin: var(--espacio-2) 0;
+}
+
+.uso .entrada {
+  flex: 0 0 5.5em;
+}
+
+.pasos {
+  margin: 0;
+  padding-left: 1.3em;
+  line-height: 1.55;
+}

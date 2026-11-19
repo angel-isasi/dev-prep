@@ -24,10 +24,31 @@ export function mezclar(lista, azar = Math.random) {
  * Elige n preguntas: primero las que tocan repaso o nunca viste (las tarjetas ya vienen en ese
  * orden de prioridad), mezcladas entre sí para que cada simulacro sea distinto.
  */
-function elegir(preguntas, n, azar) {
+export function elegir(preguntas, n, azar = Math.random) {
   const importantes = preguntas.filter((p) => !p.progreso || (p.progreso.caja ?? 0) < 3);
   const resto = preguntas.filter((p) => !importantes.includes(p));
   return [...mezclar(importantes, azar), ...mezclar(resto, azar)].slice(0, n);
+}
+
+/** En la entrevista por voz: preguntas repartidas entre las etapas en vez de una sola. */
+export const TODAS_LAS_ETAPAS = "todo";
+
+/**
+ * Las preguntas de la entrevista por voz: de una etapa, o repartidas como en un proceso real
+ * (empieza recursos humanos, sigue lo técnico y cierra tu proyecto). En inglés se prefieren las
+ * que tienen traducción.
+ * @param {object[]} tarjetas
+ * @param {{ etapa: string, cantidad: number, ingles?: boolean }} opciones
+ */
+export function elegirPreguntas(tarjetas, { etapa, cantidad, ingles = false }, azar = Math.random) {
+  const deEtapa = (e) => {
+    const todas = tarjetas.filter((t) => (t.etapa ?? "tecnica") === e);
+    const traducidas = todas.filter((t) => t.preguntaEn);
+    return ingles && traducidas.length ? traducidas : todas;
+  };
+  if (etapa !== TODAS_LAS_ETAPAS) return elegir(deEtapa(etapa), cantidad, azar);
+  const tecnicas = Math.max(1, cantidad - 2);
+  return [...elegir(deEtapa("rrhh"), 1, azar), ...elegir(deEtapa("tecnica"), tecnicas, azar), ...elegir(deEtapa("proyecto"), 1, azar)].slice(0, cantidad);
 }
 
 /**

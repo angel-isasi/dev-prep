@@ -1,0 +1,276 @@
+/* Entrevista por voz: portada con opciones, la llamada (una pregunta a la vez) y el cierre. */
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  padding: var(--espacio-6);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
+  box-shadow: var(--brillo-borde);
+}
+
+.panel h2 {
+  font-size: var(--titulo-1);
+}
+
+.panel p {
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+.etiqueta {
+  color: var(--acento);
+  font-size: var(--letra-1);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nota {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.aviso,
+.error {
+  font-size: var(--letra-3);
+}
+
+.panel p.aviso {
+  color: var(--aviso);
+}
+
+.panel p.error {
+  color: var(--error);
+}
+
+/* Portada: los tres grupos de opciones en fila, y uno debajo de otro en el celular */
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-4) var(--espacio-6);
+  width: 100%;
+}
+
+.grupo {
+  display: grid;
+  gap: var(--espacio-2);
+}
+
+.grupoTitulo {
+  color: var(--texto-tenue);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
+}
+
+.grupoOpciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
+}
+
+.opcion {
+  min-height: 36px;
+  padding: 4px 14px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-pildora);
+  background: var(--superficie-2);
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
+  cursor: pointer;
+}
+
+.opcion[aria-pressed="true"] {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-2) var(--espacio-3);
+}
+
+.acciones :global(.boton)[data-activo="true"] {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+/* La llamada */
+.cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-3);
+  width: 100%;
+}
+
+.enlace {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: var(--letra-3);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.panel p.pregunta {
+  color: var(--texto);
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-2);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+.panel p.fase {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  font-size: var(--letra-3);
+}
+
+.panel p.fase[data-fase="escuchando"] {
+  color: var(--exito);
+}
+
+.panel p.fase[data-fase="hablando"] {
+  color: var(--acento);
+}
+
+.texto {
+  width: 100%;
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--fondo-solido);
+  color: var(--texto);
+  font: inherit;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/* El cierre */
+.final {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+}
+
+.cifras {
+  display: grid;
+  /* Siempre las tres cifras en una fila, también en el celular */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--espacio-3);
+}
+
+.cifras div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cifras strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-5);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.cifras span {
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+}
+
+/* Cada respuesta evaluada: dos columnas cuando hay ancho */
+.turnos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  align-items: start;
+  gap: var(--espacio-3);
+}
+
+.turno {
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.turno summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--espacio-3);
+  cursor: pointer;
+}
+
+.turnoPregunta {
+  display: grid;
+  gap: 2px;
+  font-weight: var(--peso-semi);
+}
+
+.turno small {
+  display: block;
+  color: var(--texto-tenue);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
+}
+
+.turno summary strong {
+  flex-shrink: 0;
+  font-size: var(--letra-3);
+}
+
+.turno summary strong[data-veredicto="sabia"] {
+  color: var(--exito);
+}
+
+.turno summary strong[data-veredicto="dude"] {
+  color: var(--aviso);
+}
+
+.turno summary strong[data-veredicto="no"] {
+  color: var(--error);
+}
+
+.turno p,
+.turno ul {
+  margin: var(--espacio-2) 0 0;
+  color: var(--texto-suave);
+  line-height: 1.5;
+}
+
+.turno ul {
+  padding-left: 1.2em;
+}
+
+.turno .dicho,
+.turno .mejor {
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+}
+
+/* Celular: pantallas de 600 px o menos */
+@media (max-width: 600px) {
+  .panel {
+    padding: var(--espacio-5) var(--espacio-4);
+  }
+  .panel p.pregunta {
+    font-size: var(--titulo-1);
+  }
+  .turno summary {
+    flex-direction: column;
+    gap: var(--espacio-1);
+  }
+}

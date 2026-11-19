@@ -166,3 +166,30 @@ describe("planRefuerzo", () => {
     expect(plan[0].tipo).toBe("repreguntas");
   });
 });
+
+describe("elegirPreguntas (entrevista por voz)", async () => {
+  const { elegirPreguntas, TODAS_LAS_ETAPAS } = await import("./simulacro.js");
+  const tarjetas = [
+    ...[1, 2, 3].map((n) => ({ id: `rh-${n}`, etapa: "rrhh", pregunta: `rh ${n}` })),
+    ...[1, 2, 3, 4].map((n) => ({ id: `tec-${n}`, pregunta: `tec ${n}`, ...(n === 1 ? { preguntaEn: "tec 1 en" } : {}) })), // sin etapa: técnica
+    ...[1, 2].map((n) => ({ id: `pro-${n}`, etapa: "proyecto", pregunta: `pro ${n}` })),
+  ];
+  const sinAzar = () => 0;
+
+  test("de una etapa trae solo esa etapa y la cantidad pedida", () => {
+    const r = elegirPreguntas(tarjetas, { etapa: "tecnica", cantidad: 3 }, sinAzar);
+    expect(r).toHaveLength(3);
+    expect(r.every((p) => p.id.startsWith("tec-"))).toBe(true);
+  });
+
+  test("un poco de todo: empieza recursos humanos, sigue lo técnico y cierra el proyecto", () => {
+    const r = elegirPreguntas(tarjetas, { etapa: TODAS_LAS_ETAPAS, cantidad: 5 }, sinAzar).map((p) => p.id.split("-")[0]);
+    expect(r).toEqual(["rh", "tec", "tec", "tec", "pro"]);
+    expect(elegirPreguntas(tarjetas, { etapa: TODAS_LAS_ETAPAS, cantidad: 3 }, sinAzar).map((p) => p.id.split("-")[0])).toEqual(["rh", "tec", "pro"]);
+  });
+
+  test("en inglés prefiere las traducidas, y si no hay usa las demás", () => {
+    expect(elegirPreguntas(tarjetas, { etapa: "tecnica", cantidad: 3, ingles: true }, sinAzar).map((p) => p.id)).toEqual(["tec-1"]);
+    expect(elegirPreguntas(tarjetas, { etapa: "rrhh", cantidad: 2, ingles: true }, sinAzar)).toHaveLength(2);
+  });
+});

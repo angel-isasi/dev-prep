@@ -8,6 +8,7 @@ import { Tarjeta } from "./Tarjeta.jsx";
 import { Grabadora } from "./Grabadora.jsx";
 import { Markdown } from "./Markdown.jsx";
 import { Cronometro, mmss } from "./Cronometro.jsx";
+import { InformeIa } from "./InformeIa.jsx";
 import estilos from "./Simulacro.module.css";
 import { IconoEntrevistas, IconoPracticar, IconoTrabajo } from "./Iconos.jsx";
 import { feedback } from "../lib/feedback.js";
@@ -70,6 +71,8 @@ export function Simulacro({ proceso, alRepasar, alIr }) {
   const [reflexion, setReflexion] = useState({});
   const [guardado, setGuardado] = useState(false);
   const [cargando, setCargando] = useState(false);
+  const [evaluaciones, setEvaluaciones] = useState({}); // paso -> { r, respuesta }: lo que evaluó la IA
+  const [informe, setInforme] = useState(null);
 
   async function empezar(elegidas) {
     setCargando(true);
@@ -82,6 +85,8 @@ export function Simulacro({ proceso, alRepasar, alIr }) {
       setChecks([]);
       setTusPreguntas([]);
       setReflexion({});
+      setEvaluaciones({});
+      setInforme(null);
       setGuardado(false);
       setInicio(Date.now());
       setEstado("curso");
@@ -114,9 +119,28 @@ export function Simulacro({ proceso, alRepasar, alIr }) {
   }
 
   if (estado === "fin") {
+    const tituloDe = (e) => proceso?.etapas?.find((x) => x.id === e)?.titulo ?? e;
+    // Lo que la IA necesita para el balance: cada paso con su nota y, si lo evaluaste con IA, tu respuesta
+    const itemsInforme = pasos
+      .map((p, i) => {
+        const ev = evaluaciones[i];
+        const pregunta =
+          p.tipo === "ejercicio" ? `Ejercicio en vivo: ${p.ej.titulo}` : p.tipo === "pitch" ? "Preséntate y cuéntanos de tu proyecto en un minuto" : p.p?.pregunta;
+        return { etapa: tituloDe(p.etapa), pregunta, nota: resultados[i], puntaje: ev?.r.puntaje, falta: ev?.r.falta, respuesta: ev?.respuesta };
+      })
+      .filter((x) => x.pregunta && x.nota);
+    const notasInforme = (proceso?.reflexion ?? [])
+      .filter((q) => reflexion[q.id]?.trim())
+      .map((q) => `${q.pregunta} ${reflexion[q.id].trim()}`)
+      .join(" | ");
     return (
       <Final
         {...{
+          itemsInforme,
+          notasInforme,
+          informe,
+          setInforme,
+          ingles,
           pasos,
           resultados,
           checks,
@@ -150,6 +174,8 @@ export function Simulacro({ proceso, alRepasar, alIr }) {
             tusPreguntas,
             reflexion,
             plan: plan.map((x) => x.texto),
+            // Del informe de la IA se guarda lo esencial, para no engordar el progreso
+            ...(informe ? { informe: { puntaje: informe.puntaje, nivel: informe.nivel, resumen: informe.resumen, plan: informe.plan } } : {}),
           });
           setGuardado(true);
         }}
@@ -187,6 +213,7 @@ export function Simulacro({ proceso, alRepasar, alIr }) {
           ingles={ingles}
           alCalificar={calificar}
           alAvanzar={avanzar}
+          alEvaluar={(r, respuesta) => setEvaluaciones((v) => ({ ...v, [paso]: { r, respuesta } }))}
           alElegirPreguntas={setTusPreguntas}
           tusPreguntas={tusPreguntas}
         />
@@ -232,7 +259,7 @@ function Portada({ proceso, ingles, setIngles, cargando, alEmpezar }) {
   );
 }
 
-function Paso({ actual, ingles, alCalificar, alAvanzar, alElegirPreguntas, tusPreguntas }) {
+function Paso({ actual, ingles, alCalificar, alAvanzar, alEvaluar, alElegirPreguntas, tusPreguntas }) {
   if (actual.tipo === "etapa") {
     return (
       <div className={`${estilos.panel} ${estilos.portadaEtapa}`}>
@@ -247,7 +274,7 @@ function Paso({ actual, ingles, alCalificar, alAvanzar, alElegirPreguntas, tusPr
   }
 
   if (actual.tipo === "pregunta") {
-    return <Tarjeta key={actual.p.id} pregunta={actual.p} alCalificar={alCalificar} grabar enIngles={ingles} />;
+    return <Tarjeta key={actual.p.id} pregunta={actual.p} alCalificar={alCalificar} alEvaluar={alEvaluar} grabar enIngles={ingles} />;
   }
 
   if (actual.tipo === "repregunta") {
@@ -255,7 +282,7 @@ function Paso({ actual, ingles, alCalificar, alAvanzar, alElegirPreguntas, tusPr
       ...actual.p,
       categoria: "El entrevistador repregunta sobre tu ejercicio",
     };
-    return <Tarjeta key={p.id} pregunta={p} alCalificar={alAvanzar} grabar enIngles={false} />;
+    return <Tarjeta key={p.id} pregunta={p} alCalificar={alAvanzar} alEvaluar={alEvaluar} grabar enIngles={false} />;
   }
 
   if (actual.tipo === "ejercicio") {
@@ -381,6 +408,11 @@ function PasoTusPreguntas({ sugeridas, elegidas, alElegir, alTerminar }) {
 }
 
 function Final({
+  itemsInforme,
+  notasInforme,
+  informe,
+  setInforme,
+  ingles,
   preguntasReflexion,
   pasos,
   resultados,
@@ -517,6 +549,8 @@ function Final({
           ))}
         </div>
       </div>
+
+      <InformeIa items={itemsInforme} notas={notasInforme} idioma={ingles ? "en" : "es"} informe={informe} alInforme={setInforme} />
 
       <div className={`${estilos.panel} ${estilos.plan}`}>
         <h3>Tu plan de refuerzo</h3>

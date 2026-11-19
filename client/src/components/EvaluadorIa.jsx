@@ -3,7 +3,7 @@
 // Habla con la función de Vercel (lib/ia.js). Si la IA no está configurada, solo muestra un aviso.
 import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api.js";
-import { claveIa, estadoIa, guardarClaveIa, pedirIa } from "../lib/ia.js";
+import { claveIa, estadoIa, guardarClaveIa, guardarTopeIa, pedirIa, topeIa, usoIa } from "../lib/ia.js";
 import { dictar, hablar, hayVoz, microDisponible } from "../lib/voz.js";
 import { IconoAudio, IconoMicrofono } from "./Iconos.jsx";
 import estilos from "./EvaluadorIa.module.css";
@@ -12,7 +12,7 @@ const VEREDICTOS = { sabia: "Lo sabías", dude: "Te faltó algo", no: "No lo res
 const contarPalabras = (t) => t.trim().split(/\s+/).filter(Boolean).length;
 
 /** Tu pitch y tus historias STAR, para que la IA use tus proyectos reales en "así lo diría mejor". */
-async function contextoPersonal() {
+export async function contextoPersonal() {
   try {
     const mis = await api.misRespuestas?.();
     if (!mis) return "";
@@ -27,27 +27,16 @@ async function contextoPersonal() {
 }
 
 /**
- * @param {object} props
- * @param {"entrevista"|"ingles"} props.tarea
- * @param {object} props.pedido          lo que se manda además de la respuesta (pregunta, claves, modelo, nivel...)
- * @param {string} [props.respuestaFija] si ya respondiste en otro lado (mapache): solo el botón para corregirla
- * @param {(resultado: object) => void} [props.alResultado]
- * @param {"es"|"en"} [props.idioma]     idioma en que respondes (para el dictado)
+ * La puerta de todo lo que usa IA: mientras no esté configurada en Vercel muestra un aviso, y si falta
+ * tu contraseña la pide. Cuando todo está listo dibuja lo de adentro.
+ * @param {{ children: (olvidarClave: () => void) => import("react").ReactNode }} props
  */
-export function EvaluadorIa({ tarea, pedido, respuestaFija, alResultado, idioma = "es" }) {
+export function PuertaIa({ children }) {
   const [listo, setListo] = useState(null); // null: averiguando
   const [clave, setClave] = useState(claveIa);
-  const [texto, setTexto] = useState("");
-  const [dictando, setDictando] = useState(false);
-  const [cargando, setCargando] = useState(false);
-  const [error, setError] = useState(null);
-  const [resultado, setResultado] = useState(null);
-  const [repregunta, setRepregunta] = useState(null); // seguir con la repregunta de la IA
-  const dictado = useRef(null);
 
   useEffect(() => {
     estadoIa().then((e) => setListo(e.configurada));
-    return () => dictado.current?.detener();
   }, []);
 
   if (listo === null) return null;
@@ -80,6 +69,64 @@ export function EvaluadorIa({ tarea, pedido, respuestaFija, alResultado, idioma 
     );
   }
 
+  return children(() => {
+    guardarClaveIa("");
+    setClave("");
+  });
+}
+
+/** Cuánto llevas gastado este mes y tu tope (la cuenta vive en este navegador). */
+export function UsoIa() {
+  const [tope, setTope] = useState(topeIa);
+  const uso = usoIa();
+  return (
+    <details className={estilos.uso}>
+      <summary>
+        Uso de IA este mes: {uso.usd.toFixed(2)} de {tope} USD ({uso.pedidos} {uso.pedidos === 1 ? "pedido" : "pedidos"})
+      </summary>
+      <label>
+        Tope mensual en dólares{" "}
+        <input
+          type="number"
+          min="1"
+          max="100"
+          value={tope}
+          className={estilos.entrada}
+          onChange={(e) => {
+            const valor = Math.min(100, Math.max(1, Math.round(Number(e.target.value) || 1)));
+            guardarTopeIa(valor);
+            setTope(valor);
+          }}
+        />
+      </label>
+      <small>Al llegar al tope la app deja de pedir evaluaciones. La cuenta es de este navegador: el gasto exacto está en la consola de la API.</small>
+    </details>
+  );
+}
+
+/**
+ * @param {object} props
+ * @param {"entrevista"|"ingles"} props.tarea
+ * @param {object} props.pedido          lo que se manda además de la respuesta (pregunta, claves, modelo, nivel...)
+ * @param {string} [props.respuestaFija] si ya respondiste en otro lado (mapache): solo el botón para corregirla
+ * @param {(resultado: object, respuesta: string) => void} [props.alResultado]
+ * @param {"es"|"en"} [props.idioma]     idioma en que respondes (para el dictado)
+ */
+export function EvaluadorIa(props) {
+  return <PuertaIa>{(olvidarClave) => <Evaluador {...props} alOlvidarClave={olvidarClave} />}</PuertaIa>;
+}
+
+function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", alOlvidarClave }) {
+  const [texto, setTexto] = useState("");
+  const [dictando, setDictando] = useState(false);
+  const [cargando, setCargando] = useState(false);
+  const [error, setError] = useState(null);
+  const [resultado, setResultado] = useState(null);
+  const [repregunta, setRepregunta] = useState(null); // seguir con la repregunta de la IA
+  const dictado = useRef(null);
+
+  useEffect(() => () => dictado.current?.detener(), []);
+
   const respuesta = respuestaFija ?? texto;
   const preguntaActual = repregunta ?? pedido.pregunta;
 
@@ -110,9 +157,9 @@ export function EvaluadorIa({ tarea, pedido, respuestaFija, alResultado, idioma 
       const base = repregunta ? { tarea, pregunta: repregunta, idioma: pedido.idioma, categoria: pedido.categoria } : { tarea, ...pedido };
       const r = await pedirIa({ ...base, ...extra, respuesta });
       setResultado(r);
-      if (!repregunta) alResultado?.(r);
+      if (!repregunta) alResultado?.(r, respuesta);
     } catch (e) {
-      if (e.clave) setClave("");
+      if (e.clave) alOlvidarClave();
       setError(e.message);
     } finally {
       setCargando(false);
@@ -132,10 +179,7 @@ export function EvaluadorIa({ tarea, pedido, respuestaFija, alResultado, idioma 
         <button
           type="button"
           className={estilos.enlace}
-          onClick={() => {
-            guardarClaveIa("");
-            setClave("");
-          }}
+          onClick={alOlvidarClave}
         >
           Cambiar contraseña
         </button>
@@ -179,6 +223,7 @@ export function EvaluadorIa({ tarea, pedido, respuestaFija, alResultado, idioma 
           Intentar otra respuesta
         </button>
       )}
+      <UsoIa />
     </div>
   );
 }

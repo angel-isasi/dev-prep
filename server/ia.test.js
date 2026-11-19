@@ -79,10 +79,47 @@ describe("manejarPost con la IA falsa", () => {
     const { resultado, uso } = await r.json();
     expect(resultado.puntaje).toBe(10); // fuera de rango: se recorta
     expect(resultado.veredicto).toBe("dude");
-    expect(uso).toEqual({ entrada: 900, salida: 300 });
+    expect(uso).toEqual({ modelo: "claude-sonnet-5-5", entrada: 900, salida: 300 });
     const params = falso.create.mock.calls[0][0];
     expect(params.output_config.format.type).toBe("json_schema");
+    expect(params.output_config.effort).toBe("medium");
     expect(params.max_tokens).toBeGreaterThan(1000);
+  });
+
+  it("cada tarea usa su modelo: entrevista e informe el mediano, inglés el pequeño (sin respaldo)", async () => {
+    const entrevista = clienteFalso(conTexto(resultadoIa));
+    await manejarPost(request(pedidoEntrevista), { env: ENV, crearCliente: entrevista.crearCliente });
+    expect(entrevista.create.mock.calls[0][0].model).toBe("claude-sonnet-5-5");
+    expect(entrevista.create.mock.calls[0][0].fallbacks).toBe("default");
+
+    const ingles = clienteFalso(conTexto({ nivel: "B2", puntaje: 7, correcciones: [], version: "v", comentario: "c" }));
+    await manejarPost(request({ tarea: "ingles", pregunta: "What would you do?", respuesta: "I will do many things for improve." }), { env: ENV, crearCliente: ingles.crearCliente });
+    const params = ingles.create.mock.calls[0][0];
+    expect(params.model).toBe("claude-haiku-5-5");
+    expect(params.fallbacks).toBeUndefined();
+    expect(params.betas).toEqual(["structured-outputs-2025-12-15"]);
+  });
+
+  it("informe: arma el balance con las preguntas, sus notas y lo que respondiste", async () => {
+    const items = [
+      { etapa: "Recursos humanos", pregunta: "Cuéntame sobre ti.", nota: "sabia", puntaje: 8, respuesta: "Soy estudiante de sistemas y construí una app." },
+      { etapa: "Entrevista técnica", pregunta: "¿Qué es un closure?", nota: "no", falta: ["Dar un ejemplo"] },
+      { pregunta: "", nota: "sabia" }, // sin pregunta: se descarta
+    ];
+    const p = armarPedido({ tarea: "informe", items, notas: "Me puse nervioso.", voz: true });
+    expect(p.mensaje).toContain("1. [Recursos humanos] Cuéntame sobre ti.");
+    expect(p.mensaje).toContain("8/10, bien");
+    expect(p.mensaje).toContain("Le faltó: Dar un ejemplo");
+    expect(p.mensaje).toContain("Me puse nervioso");
+    expect(p.mensaje).not.toContain("3. ");
+    expect(armarPedido({ tarea: "informe", items: items.slice(0, 1) }).error).toMatch(/al menos 2/);
+
+    const falso = clienteFalso(conTexto({ puntaje: 6, nivel: "otro", resumen: "Vas bien.", fortalezas: ["a", "b", "c", "d"], mejoras: ["x"], plan: ["1", "2", "3", "4", "5", "6"] }));
+    const r = await manejarPost(request({ tarea: "informe", items }), { env: ENV, crearCliente: falso.crearCliente });
+    const { resultado } = await r.json();
+    expect(resultado.nivel).toBe("casi"); // un nivel desconocido cae al del medio
+    expect(resultado.fortalezas).toHaveLength(3);
+    expect(resultado.plan).toHaveLength(5);
   });
 
   it("usa el modelo de la variable IA_MODELO si existe", async () => {

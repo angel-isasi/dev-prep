@@ -64,6 +64,55 @@ export function hablar(texto, { lento, alTerminar } = {}) {
   sintesis.speak(frase);
 }
 
+/** La mejor voz en español de América que tenga el dispositivo (para el entrevistador). */
+function vozEspanol() {
+  const lista = voces().filter((v) => /^es[-_]/i.test(v.lang));
+  const america = lista.filter((v) => /es[-_](PE|MX|US|419|CO|CL|AR)/i.test(v.lang));
+  return america.find((v) => /google|natural|neural|dalia|paulina|sabina/i.test(v.name)) ?? america[0] ?? lista[0] ?? null;
+}
+
+/** ¿Hay una voz para leer en ese idioma? ("es" o "en") */
+export const hayVozEn = (idioma) => !!globalThis.speechSynthesis && !!(idioma === "en" ? vozIngles() : vozEspanol());
+
+/**
+ * Dice un texto en español o en inglés y avisa al terminar (el entrevistador por voz). Avisa una
+ * sola vez, también si no hay voz o si el navegador nunca dispara el final (pasa con textos largos).
+ * @param {string} texto
+ * @param {{ idioma?: "es"|"en", alTerminar?: () => void }} [opciones]
+ * @returns {() => void} cancelar: calla y no avisa
+ */
+export function decir(texto, { idioma = "es", alTerminar } = {}) {
+  const sintesis = globalThis.speechSynthesis;
+  const voz = idioma === "en" ? vozIngles() : vozEspanol();
+  let pendiente = true;
+  let reloj = null;
+  const terminar = () => {
+    if (!pendiente) return;
+    pendiente = false;
+    clearTimeout(reloj);
+    alTerminar?.();
+  };
+  if (!sintesis || !voz || !texto) {
+    reloj = setTimeout(terminar, 0);
+    return () => (pendiente = false);
+  }
+  sintesis.cancel();
+  const frase = new SpeechSynthesisUtterance(texto);
+  frase.voice = voz;
+  frase.lang = voz.lang;
+  frase.rate = 1;
+  frase.onend = terminar;
+  frase.onerror = terminar;
+  // Tope por si el final nunca llega: unas 2,5 palabras por segundo, más un margen
+  reloj = setTimeout(terminar, 4000 + texto.split(/\s+/).length * 600);
+  sintesis.speak(frase);
+  return () => {
+    pendiente = false;
+    clearTimeout(reloj);
+    sintesis.cancel();
+  };
+}
+
 /** Lee varias frases seguidas (un diálogo). */
 export function hablarVarias(textos) {
   const [primero, ...resto] = textos;

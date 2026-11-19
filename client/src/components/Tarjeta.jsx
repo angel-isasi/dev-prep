@@ -24,7 +24,7 @@ const NOTAS = [
  * @param {{ pregunta: object, alCalificar: Function, posicion?: string, grabar?: boolean, enIngles?: boolean }} props
  *   grabar: muestra la grabadora para responder en voz alta y escucharte (simulacro, inglés).
  */
-export function Tarjeta({ pregunta, alCalificar, posicion, grabar = false, enIngles }) {
+export function Tarjeta({ pregunta, alCalificar, posicion, grabar = false, enIngles, alEvaluar }) {
   const [revelada, setRevelada] = useState(false);
   const [sugerida, setSugerida] = useState(null); // la nota que sugiere la IA, si la usaste
   const [ingles, setInglesEstado] = useState(() => enIngles ?? localStorage.getItem(CLAVE_IDIOMA) === "1");
@@ -79,7 +79,10 @@ export function Tarjeta({ pregunta, alCalificar, posicion, grabar = false, enIng
               categoria: pregunta.categoria,
               idioma: ingles ? "en" : "es",
             }}
-            alResultado={(r) => setSugerida(r.veredicto)}
+            alResultado={(r, respuesta) => {
+              setSugerida(r.veredicto);
+              alEvaluar?.(r, respuesta);
+            }}
           />
           <button type="button" className="boton boton-primario" onClick={() => setRevelada(true)}>
             Revelar respuesta

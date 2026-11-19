@@ -7,6 +7,7 @@ import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
 import { EnunciadoOrganizado } from "../components/EnunciadoOrganizado.jsx";
 import { Tarjeta } from "../components/Tarjeta.jsx";
 import { Simulacro } from "../components/Simulacro.jsx";
+import { EntrevistaVoz } from "../components/EntrevistaVoz.jsx";
 import { PitchStar } from "../components/PitchStar.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
@@ -20,7 +21,7 @@ import { IconoChispa } from "../components/Iconos.jsx";
 
 export function Entrevistas() {
   const [resumen, setResumen] = useState(api.entrevistas.guardado);
-  const [pestana, setPestana] = usePestanaUrl(["etapas", "tarjetas", "simulacro", "personal", "guia"]);
+  const [pestana, setPestana] = usePestanaUrl(["etapas", "tarjetas", "simulacro", "voz", "personal", "guia"]);
   const [params] = useSearchParams();
   const preguntaPedida = params.get("pregunta");
   const [sesion, setSesion] = useState(null); // { titulo, tarjetas, indice, notas }
@@ -61,6 +62,7 @@ export function Entrevistas() {
     { id: "etapas", texto: "Por etapa" },
     { id: "tarjetas", texto: "Tarjetas", extra: resumen.pendientesHoy ? `${resumen.pendientesHoy} hoy` : undefined },
     { id: "simulacro", texto: "Simulacro" },
+    { id: "voz", texto: "Por voz" },
     { id: "personal", texto: "Pitch y STAR" },
     { id: "guia", texto: "Cómo pensar en voz alta" },
   ];
@@ -99,6 +101,7 @@ export function Entrevistas() {
             }}
           />
         )}
+        {pestana === "voz" && <EntrevistaVoz proceso={resumen.proceso} />}
         {pestana === "personal" && <PitchStar guias={resumen.guias} />}
         {pestana === "guia" && (
           <EnunciadoOrganizado markdown={resumen.guias.vozAlta} primeraDestacada />
@@ -122,6 +125,7 @@ const PRACTICA_POR_ETAPA = {
     { a: "/trabajo?pestana=postulaciones", titulo: "Preguntas reales de tus postulaciones", texto: "Las que ya te hicieron, con tu respuesta", web: true },
   ],
   tecnica: [
+    { pestana: "voz", titulo: "Entrevista por voz", texto: "El entrevistador pregunta y repregunta en voz alta", web: true },
     { a: "/practicar/lista?coleccion=javascript%2Fretos", titulo: "Retos de entrevista con tests", texto: "Debounce, memoize, deep clone: lo que piden en vivo" },
     { a: "/leccion?modo=predice", titulo: "Lee y predice", texto: "¿Qué imprime este código? Trampas clásicas", web: true },
     { a: "/glosario", titulo: "Glosario", texto: "Cada término con una frase lista para decir", web: true },
