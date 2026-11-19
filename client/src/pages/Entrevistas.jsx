@@ -5,6 +5,7 @@ import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { api } from "../lib/api.js";
 import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
 import { EnunciadoOrganizado } from "../components/EnunciadoOrganizado.jsx";
+import { Markdown } from "../components/Markdown.jsx";
 import { Tarjeta } from "../components/Tarjeta.jsx";
 import { Simulacro } from "../components/Simulacro.jsx";
 import { EntrevistaVoz } from "../components/EntrevistaVoz.jsx";
@@ -103,9 +104,7 @@ export function Entrevistas() {
         )}
         {pestana === "voz" && <EntrevistaVoz proceso={resumen.proceso} />}
         {pestana === "personal" && <PitchStar guias={resumen.guias} />}
-        {pestana === "guia" && (
-          <EnunciadoOrganizado markdown={resumen.guias.vozAlta} primeraDestacada />
-        )}
+        {pestana === "guia" && <GuiaVozAlta markdown={resumen.guias.vozAlta} />}
       </ContenidoPestanas>
     </section>
   );
@@ -119,14 +118,14 @@ export function Entrevistas() {
  */
 const PRACTICA_POR_ETAPA = {
   rrhh: [
-    { pestana: "personal", titulo: "Tu pitch y tus historias STAR", texto: "Escríbelos una vez, con tus proyectos reales" },
+    { pestana: "personal", titulo: "Pitch e historias STAR", texto: "Escríbelos una vez, con tus proyectos reales" },
     { a: "/ingles/historias", titulo: "Roleplays en inglés", texto: "Entrevistas y llamadas de trabajo, por turnos", web: true },
-    { a: "/ingles/mapache?pestana=jugar", titulo: "Entrevista en inglés con el mapache", texto: "Preguntas de trabajo en B2 y C1", web: true },
-    { a: "/trabajo?pestana=postulaciones", titulo: "Preguntas reales de tus postulaciones", texto: "Las que ya te hicieron, con tu respuesta", web: true },
+    { a: "/ingles/mapache?pestana=jugar", titulo: "Entrevista con el mapache", texto: "En inglés: preguntas de trabajo en B2 y C1", web: true },
+    { a: "/trabajo?pestana=postulaciones", titulo: "Tus preguntas reales", texto: "Las que ya te hicieron en tus postulaciones, con tu respuesta", web: true },
   ],
   tecnica: [
     { pestana: "voz", titulo: "Entrevista por voz", texto: "El entrevistador pregunta y repregunta en voz alta", web: true },
-    { a: "/practicar/lista?coleccion=javascript%2Fretos", titulo: "Retos de entrevista con tests", texto: "Debounce, memoize, deep clone: lo que piden en vivo" },
+    { a: "/practicar/lista?coleccion=javascript%2Fretos", titulo: "Retos con tests", texto: "Debounce, memoize, deep clone: lo que piden en vivo" },
     { a: "/leccion?modo=predice", titulo: "Lee y predice", texto: "¿Qué imprime este código? Trampas clásicas", web: true },
     { a: "/glosario", titulo: "Glosario", texto: "Cada término con una frase lista para decir", web: true },
     { pestana: "guia", titulo: "Cómo pensar en voz alta", texto: "Entender, ejemplos, plan, código y probar" },
@@ -136,10 +135,44 @@ const PRACTICA_POR_ETAPA = {
     { a: "/trabajo?pestana=portafolio", titulo: "Tu portafolio", texto: "Fichas listas para publicar de lo que construiste", web: true },
   ],
   cierre: [
-    { pestana: "simulacro", titulo: "Tus preguntas al entrevistador", texto: "Se practican en el cierre del simulacro" },
-    { a: "/trabajo?pestana=postulaciones", titulo: "Seguimiento de tus postulaciones", texto: "A quién escribirle y cuándo", web: true },
+    { pestana: "simulacro", titulo: "Preguntas al entrevistador", texto: "Se practican en el cierre del simulacro" },
+    { a: "/trabajo?pestana=postulaciones", titulo: "Seguimiento de postulaciones", texto: "A quién escribirle y cuándo", web: true },
   ],
 };
+
+/** Cada etapa en una línea; la descripción completa (del contenido) queda en "Qué esperar". */
+const RESUMEN_ETAPA = {
+  rrhh: "quién eres, sueldo, disponibilidad",
+  tecnica: "teoría, ejercicio en vivo y repreguntas",
+  proyecto: "tu pitch y preguntas sobre tu proyecto",
+  cierre: "tus preguntas y plan de refuerzo",
+};
+
+/**
+ * La guía sale de un Markdown. "Errores que más restan" se separa aquí y se pliega al final, para
+ * que la pantalla muestre primero los 5 pasos y las frases; el resto lo ordena EnunciadoOrganizado.
+ */
+function GuiaVozAlta({ markdown }) {
+  // Parte el texto en secciones "## Título" y aparta las que se pliegan
+  const partes = markdown.split(/^(?=## )/m);
+  const esPlegada = (p) => /^## Errores que más restan/i.test(p);
+  const visible = partes.filter((p) => !esPlegada(p)).join("");
+  const plegadas = partes.filter(esPlegada);
+  return (
+    <div className={estilos.guia}>
+      <EnunciadoOrganizado markdown={visible} primeraDestacada />
+      {plegadas.map((p) => {
+        const [titulo, ...cuerpo] = p.split("\n");
+        return (
+          <details key={titulo} className={estilos.guiaPlegada}>
+            <summary>{titulo.replace(/^##\s*/, "").trim()}</summary>
+            <Markdown>{cuerpo.join("\n")}</Markdown>
+          </details>
+        );
+      })}
+    </div>
+  );
+}
 
 function PorEtapa({ resumen, alEmpezar, alIr }) {
   const etapas = resumen.proceso?.etapas ?? [];
@@ -172,10 +205,16 @@ function PorEtapa({ resumen, alEmpezar, alIr }) {
                 <div>
                   <h2>{etapa.titulo}</h2>
                   <p>
-                    {etapa.minutos} min · {etapa.descripcion}
+                    {etapa.minutos} min{RESUMEN_ETAPA[etapa.id] && ` · ${RESUMEN_ETAPA[etapa.id]}`}
                   </p>
                 </div>
               </header>
+              {etapa.descripcion && (
+                <details className={estilos.etapaDetalle}>
+                  <summary>Qué esperar</summary>
+                  <p>{etapa.descripcion}</p>
+                </details>
+              )}
 
               {categorias.length > 0 && (
                 <div className={estilos.etapaMazos}>
@@ -186,8 +225,12 @@ function PorEtapa({ resumen, alEmpezar, alIr }) {
                     <button key={c.nombre} type="button" className={estilos.etapaMazo} onClick={() => alEmpezar(c.nombre, { categoria: c.nombre })}>
                       <strong>{c.nombre}</strong>
                       <span>
+                        {c.pendientes > 0 && <em>{c.pendientes} hoy · </em>}
                         {c.dominadas}/{c.total}
-                        {c.pendientes > 0 && ` · ${c.pendientes} para hoy`}
+                      </span>
+                      {/* Mini barra: cuánto del mazo dominas, de un vistazo */}
+                      <span className={estilos.etapaBarra} aria-hidden>
+                        <span style={{ width: `${c.total ? (c.dominadas / c.total) * 100 : 0}%` }} />
                       </span>
                     </button>
                   ))}
@@ -195,17 +238,16 @@ function PorEtapa({ resumen, alEmpezar, alIr }) {
               )}
 
               <ul className={estilos.etapaEnlaces}>
+                {/* Chips de una línea: el subtítulo queda como title (se ve al pasar el mouse) */}
                 {practicas.map((p) => (
                   <li key={p.titulo}>
                     {p.pestana ? (
-                      <button type="button" onClick={() => alIr(p.pestana)}>
-                        <strong>{p.titulo} →</strong>
-                        <span>{p.texto}</span>
+                      <button type="button" title={p.texto} onClick={() => alIr(p.pestana)}>
+                        {p.titulo} →
                       </button>
                     ) : (
-                      <Link to={p.a}>
-                        <strong>{p.titulo} →</strong>
-                        <span>{p.texto}</span>
+                      <Link to={p.a} title={p.texto}>
+                        {p.titulo} →
                       </Link>
                     )}
                   </li>

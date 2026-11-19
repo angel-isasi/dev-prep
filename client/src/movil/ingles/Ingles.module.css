@@ -773,3 +773,144 @@
     align-self: stretch;
   }
 }
+
+/* ---------- Portada de Inglés con menos letra ---------- */
+/* Hoy: anillo y, debajo, "7/15 min" en una sola línea */
+.metaHoy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background:
+    radial-gradient(240px 120px at 0% 50%, var(--color-area-suave), transparent 70%),
+    var(--superficie);
+}
+
+.metaHoy small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
+  white-space: nowrap;
+}
+
+/* Hoy y la racha del mismo ancho en el celular; en pantalla ancha solo lo que necesitan */
+.resumenCompacto {
+  grid-template-columns: 1fr 1fr;
+}
+
+.resumenCompacto .racha {
+  justify-content: center;
+}
+
+@media (min-width: 1200px) {
+  .resumenCompacto {
+    grid-template-columns: auto auto minmax(280px, 1fr);
+  }
+}
+
+/* Examen de nivel: una línea con su botón */
+.nivelLinea {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-2) var(--espacio-3);
+  margin-bottom: var(--espacio-4);
+  padding: var(--espacio-2) var(--espacio-2) var(--espacio-2) var(--espacio-4);
+  border: 1px solid var(--color-area);
+  border-radius: var(--radio-grande);
+  background: var(--color-area-suave);
+}
+
+/* Más práctica: accesos con icono y título (2 por fila en el celular, 4 en pantallas anchas) */
+.modosRejilla {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.modoChip {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  height: 100%;
+  min-height: 48px;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-md);
+  background: var(--superficie);
+  color: var(--texto);
+  text-decoration: none;
+  transition:
+    border-color var(--transicion),
+    background var(--transicion);
+}
+
+.modoChip svg {
+  flex: none;
+  color: var(--texto-suave);
+}
+
+.modoChip strong {
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
+  line-height: 1.2;
+}
+
+.modoChip:hover {
+  border-color: var(--acento);
+  background: var(--superficie-2);
+}
+
+.modoChip:hover svg {
+  color: var(--acento);
+}
+
+@media (min-width: 900px) {
+  .modosRejilla {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  /* En 4 columnas el icono va arriba y el título centrado debajo */
+  .modoChip {
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--espacio-3) var(--espacio-1);
+    text-align: center;
+  }
+}
+
+/* Opciones (vidas, hablar, audio lento): plegadas */
+.opcionesPlegadas {
+  margin-top: var(--espacio-3);
+}
+
+.opcionesPlegadas summary {
+  padding: var(--espacio-2) 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  cursor: pointer;
+}
+
+.opcionesPlegadas .velocidad {
+  display: flex;
+  min-height: 36px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .opcionesPlegadas summary {
+    padding: 12px 0;
+  }
+
+  .opcionesPlegadas .velocidad {
+    min-height: 44px;
+  }
+}

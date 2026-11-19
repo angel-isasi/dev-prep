@@ -25,6 +25,9 @@ export function TiempoLibre({ juego: inicial, meta, salvados, jefe }) {
   const total = Math.max(juego.disponible, juego.jugado, 1);
   const pJugado = Math.min(100, (juego.jugado / total) * 100);
   const pRestante = Math.min(100 - pJugado, (juego.restante / total) * 100);
+  // "1/2": días salvados esta semana de los que se permiten
+  const cuenta = salvados ? ` · ${salvados.semana}/${salvados.maximo}` : "";
+  const ayudaSalvar = `¿Día pesado? Haz al menos algo y tu racha no se rompe${salvados ? `. Días salvados esta semana: ${salvados.semana} de ${salvados.maximo}` : ""}.`;
 
   return (
     <div className={estilos.tarjeta} data-bloqueado={juego.bloqueado} data-jugando={jugando}>
@@ -59,16 +62,15 @@ export function TiempoLibre({ juego: inicial, meta, salvados, jefe }) {
         {juego.finDeSemanaLargo && <li data-tipo="exito">Semana perfecta: hoy el tope sube a {horas(juego.tope)}.</li>}
       </ul>
 
+      {/* Día pesado: una línea corta; la explicación completa va en title */}
       {meta && !meta.cumplio && !meta.pausa && (
-        <div className={estilos.salvar}>
-          <span>
-            ¿Día pesado? Haz al menos algo y tu racha no se rompe
-            {salvados ? ` (días salvados esta semana: ${salvados.semana} de ${salvados.maximo})` : ""}.
-          </span>
-          {ES_MOVIL && (
-            <Link to="/leccion?modo=rapida" className="boton">
-              Solo 10 minutos
+        <div className={estilos.salvar} title={ayudaSalvar}>
+          {ES_MOVIL ? (
+            <Link to="/leccion?modo=rapida" className="boton" aria-label={`Solo 10 minutos. ${ayudaSalvar}`}>
+              Solo 10 minutos{cuenta}
             </Link>
+          ) : (
+            <span>Día pesado: haz algo corto y salvas la racha{cuenta}</span>
           )}
         </div>
       )}

@@ -8,7 +8,6 @@ import { api } from "../lib/api.js";
 import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { TeoriaTema } from "../components/TeoriaTema.jsx";
 import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
-import { Insignia } from "../components/Insignia.jsx";
 import { Quiz } from "../components/Quiz.jsx";
 import { PreguntaAncla } from "../components/PreguntaAncla.jsx";
 import { PreguntasEntrevista } from "../components/PreguntasEntrevista.jsx";
@@ -21,6 +20,31 @@ import estilos from "./Tema.module.css";
 const NOMBRE_AREA = { javascript: "JavaScript", react: "React", typescript: "TypeScript", node: "Node.js y SQL" };
 const ESTADO = { verde: "Lo dominas", amarillo: "A medias", rojo: "Flojo", "sin-empezar": "Sin empezar" };
 const TONO = { verde: "exito", amarillo: "aviso", rojo: "error", "sin-empezar": undefined };
+// En la lista de ejercicios el nivel es un punto de color y el estado un icono: así el título no se
+// parte en varias líneas por culpa de dos etiquetas. El texto queda en el title (y para lectores de pantalla).
+const NIVEL = { 1: "Básico", 2: "Intermedio", 3: "Difícil" };
+const ESTADO_EJERCICIO = {
+  resuelto: { icono: "✓", texto: "Resuelto" },
+  "en-progreso": { icono: "◐", texto: "En progreso" },
+  repasar: { icono: "↻", texto: "Para repasar" },
+  estudiado: { icono: "✓", texto: "Estudiado" },
+};
+
+/** Título de un ejercicio con su nivel (punto de color) y su estado (icono; pendiente no lleva nada). */
+function FilaEjercicio({ ej }) {
+  const estado = ESTADO_EJERCICIO[ej.estado];
+  return (
+    <>
+      <span className={estilos.puntoNivel} data-nivel={ej.nivel} role="img" aria-label={`Nivel: ${NIVEL[ej.nivel] ?? ej.nivel}`} title={NIVEL[ej.nivel]} />
+      <span className={estilos.tituloEjercicio}>{ej.titulo}</span>
+      {estado && (
+        <span className={estilos.iconoEstado} data-estado={ej.estado} role="img" aria-label={estado.texto} title={estado.texto}>
+          {estado.icono}
+        </span>
+      )}
+    </>
+  );
+}
 
 export function Tema() {
   const { id } = useParams();
@@ -91,7 +115,8 @@ export function Tema() {
           </span>
           {/* Comparte nombre con el título de la tarjeta de Aprender: el navegador anima el paso de uno a otro */}
           <h1 style={{ viewTransitionName: "titulo-tema" }}>{tema.titulo}</h1>
-          <p>{tema.descripcion}</p>
+          {/* La descripción repite el índice "Lo esencial": solo acompaña a la teoría */}
+          {activa === "teoria" && <p>{tema.descripcion}</p>}
         </div>
 
         {/* Cuánto dominas este tema y qué te falta (el mismo cálculo del mapa de Progreso) */}
@@ -161,9 +186,6 @@ export function Tema() {
 
         {activa === "ejercicios" && (
           <div className={estilos.ejercicios}>
-            <p className={estilos.intro}>
-              Hazlos en orden: van de más fácil a más difícil. Cuando los termines, comprueba lo aprendido con el quiz.
-            </p>
             <ol className={estilos.pasos}>
               {tema.ejercicios.map((ej, i) => (
                 <li key={ej.id} data-estado={ej.estado} data-hecho={ej.resuelto ? "solo" : ej.conAyuda ? "ayuda" : undefined}>
@@ -171,18 +193,13 @@ export function Tema() {
                     {ej.resuelto || ej.conAyuda ? "✓" : i + 1}
                   </span>
                   <Link to={`/practicar/${ej.id}`} className={estilos.ejercicio}>
-                    <span>{ej.titulo}</span>
-                    <Insignia nivel={ej.nivel} />
-                    <Insignia estado={ej.estado} />
+                    <FilaEjercicio ej={ej} />
                   </Link>
                 </li>
               ))}
             </ol>
             {tema.ejercicios.some((ej) => ej.conAyuda) && (
-              <p className={estilos.notaAyuda}>
-                Los marcados en ámbar los hiciste viendo la solución: no cuentan como resueltos todavía. Vuelven en tu repaso (desde mañana)
-                y, si los resuelves sin mirarla, se ponen en verde.
-              </p>
+              <p className={estilos.notaAyuda}>En ámbar: los hiciste viendo la solución. Vuelven en tu repaso y, sin mirarla, pasan a verde.</p>
             )}
 
             {/* Los demás ejercicios de Practicar que son de este tema */}
@@ -194,9 +211,7 @@ export function Tema() {
                 <div className={estilos.rejilla}>
                   {centro.otrosEjercicios.map((ej) => (
                     <Link key={ej.id} to={`/practicar/${ej.id}`} className={`brillo ${estilos.ejercicio}`}>
-                      <span>{ej.titulo}</span>
-                      <Insignia nivel={ej.nivel} />
-                      <Insignia estado={ej.estado} />
+                      <FilaEjercicio ej={ej} />
                     </Link>
                   ))}
                 </div>
@@ -232,7 +247,11 @@ export function Tema() {
                           {t.en && t.en.toLowerCase() !== t.termino.toLowerCase() && <small> · {t.en}</small>}
                         </dt>
                         <dd>{t.definicion}</dd>
-                        {t.entrevista && <dd className={estilos.frase}>En la entrevista: {t.entrevista}</dd>}
+                        {t.entrevista && (
+                          <dd className={estilos.frase}>
+                            <span className={estilos.chipEntrevista}>En la entrevista</span> {t.entrevista}
+                          </dd>
+                        )}
                       </div>
                     ))}
                   </dl>

@@ -142,14 +142,13 @@ export function PlanSemana() {
     <div className={estilos.tarjeta}>
       <div className={estilos.cabecera}>
         <span className={estilos.etiqueta}>Plan de la semana</span>
-        <small>Armado con tu mapa, tus errores y las ofertas que analizaste</small>
       </div>
       <ol className={estilos.plan}>
         {plan.objetivos.map((o) => (
           <li key={o.id}>
-            <Link to={o.a}>
+            {/* Una sola línea: el detalle sale al pasar el mouse (title) */}
+            <Link to={o.a} title={o.detalle}>
               <strong>{o.texto}</strong>
-              <small>{o.detalle}</small>
             </Link>
           </li>
         ))}

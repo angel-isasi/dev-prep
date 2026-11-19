@@ -13,13 +13,12 @@ import { ShineBorder } from "../components/ui/shine-border.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { RetoSemana } from "../components/Avance.jsx";
 import estilos from "./Practicar.module.css";
-import practica from "../movil/practica/Practica.module.css";
 import selector from "./Aprender.module.css";
 
 /** "Aprender mejor" (solo en la versión web): sesiones cortas que no son ejercicios de VS Code. */
 const HERRAMIENTAS = [
-  { a: "/leccion?modo=predice", titulo: "Lee y predice", texto: "¿Qué imprime este código? 10 trampas clásicas de entrevista" },
-  { a: "/practicar/lista?coleccion=javascript%2Fdepurar", titulo: "Depurar código roto", texto: "Encuentra el error a partir del síntoma" },
+  { a: "/leccion?modo=predice", titulo: "Lee y predice", texto: "¿Qué imprime este código?" },
+  { a: "/practicar/lista?coleccion=javascript%2Fdepurar", titulo: "Depurar código roto", texto: "Encuentra el error por su síntoma" },
 ];
 
 const NIVELES = [
@@ -77,9 +76,8 @@ export function Practicar() {
           />
         }
       >
-        {ES_MOVIL
-          ? "Estudia los ejercicios: enunciado, pistas y solución explicada. Resolverlos con tests es en la laptop."
-          : "Elige un área y una colección. Cada ejercicio se abre en VS Code y los tests corren solos al guardar."}
+        {/* En la web no hay subtítulo: la pantalla se explica sola */}
+        {ES_MOVIL ? null : "Elige un área y una colección. Cada ejercicio se abre en VS Code y los tests corren solos al guardar."}
       </CabeceraPagina>
 
       {repasos.length > 0 && (
@@ -90,7 +88,6 @@ export function Practicar() {
           </span>
           <div className={estilos.repasosTexto}>
             <strong>{repasos.length === 1 ? "ejercicio para repasar" : "ejercicios para repasar"}</strong>
-            <span>Resolverlos de nuevo es lo que hace que no se te olviden.</span>
           </div>
           <div className={estilos.repasosAcciones}>
             {repasos.length > 1 && (
@@ -105,20 +102,19 @@ export function Practicar() {
         </div>
       )}
 
-      {ES_MOVIL && (
-        <div className={practica.herramientas}>
-          {HERRAMIENTAS.map((h) => (
-            <Link key={h.a} to={h.a} className={`brillo ${practica.herramienta}`}>
+      {/* Atajos en una sola fila en la laptop: Lee y predice, Depurar y el reto de la semana (versión web).
+          En el celular se apilan. Si no hay reto, su celda vacía no ocupa lugar. */}
+      <div className={estilos.atajos}>
+        {ES_MOVIL &&
+          HERRAMIENTAS.map((h) => (
+            <Link key={h.a} to={h.a} className={`brillo ${estilos.atajo}`}>
               <strong>{h.titulo} →</strong>
               <small>{h.texto}</small>
             </Link>
           ))}
+        <div className={estilos.retoSemana}>
+          <RetoSemana />
         </div>
-      )}
-
-      {/* Un reto con tiempo cada semana (versión web) */}
-      <div className={estilos.retoSemana}>
-        <RetoSemana />
       </div>
 
       <div className={selector.areas} role="tablist" aria-label="Área">
@@ -235,7 +231,7 @@ export function Practicar() {
       <div className={estilos.mezcla}>
         <div>
           <strong>Práctica mezclada</strong>
-          <span>En la entrevista no sabes qué te van a pedir. Te toca un ejercicio sin resolver al azar, de cualquier área.</span>
+          <span>Un ejercicio sin resolver al azar, de cualquier área.</span>
         </div>
         <BotonAzar onClick={() => ir(ejercicioAlAzar(ejercicios))}>Sorpréndeme</BotonAzar>
       </div>

@@ -130,3 +130,77 @@
 .pasos > li > div > :last-child {
   margin-bottom: 0;
 }
+
+/* Lo que amplía: cerrado, varios títulos por fila; al abrir uno ocupa todo el ancho */
+.plegadas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: var(--espacio-2);
+  align-items: start;
+}
+
+.plegada {
+  min-width: 0;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--superficie);
+}
+
+.plegada[open] {
+  grid-column: 1 / -1;
+  border-radius: var(--radio-grande);
+}
+
+.plegada > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  min-height: 44px;
+  padding: var(--espacio-2) var(--espacio-4);
+  font-size: var(--letra-5);
+  font-weight: var(--peso-negrita);
+  cursor: pointer;
+  list-style: none;
+}
+
+.plegada > summary::-webkit-details-marker {
+  display: none;
+}
+
+.plegada > summary::before {
+  content: "+";
+  flex: none;
+  width: 1.2em;
+  color: var(--color-area, var(--acento));
+  font-size: var(--letra-7);
+  line-height: 1;
+}
+
+.plegada[open] > summary::before {
+  content: "−";
+}
+
+.plegada > summary > span {
+  flex: 1;
+}
+
+.plegada > summary > small {
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-normal);
+}
+
+.plegada > summary:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+.plegada > div {
+  padding: 0 var(--espacio-5) var(--espacio-4);
+  font-size: var(--letra-6);
+}
+
+.plegada > div > :last-child {
+  margin-bottom: 0;
+}

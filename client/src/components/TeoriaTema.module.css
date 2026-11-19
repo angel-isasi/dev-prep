@@ -508,3 +508,91 @@
     display: none;
   }
 }
+
+/* ---------- Menos letra: chuleta, errores y entrevista plegables ---------- */
+/* El título de la chuleta es el summary: se toca para plegarla (en el celular empieza cerrada) */
+.chuleta > summary {
+  cursor: pointer;
+}
+
+.chuleta[open] > summary {
+  margin-bottom: var(--espacio-3);
+}
+
+/* Errores típicos y En la entrevista: cerrados, con la cuenta en el título */
+.plegable {
+  scroll-margin-top: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.plegable > summary {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espacio-2);
+  min-height: 44px;
+  padding: var(--espacio-3) var(--espacio-4);
+  border-radius: var(--radio-grande);
+  cursor: pointer;
+  list-style: none;
+}
+
+.plegable > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Flecha propia: apunta a la derecha cerrado y hacia abajo abierto */
+.plegable > summary::before {
+  content: "▸";
+  color: var(--texto-tenue);
+  transition: transform var(--transicion);
+}
+
+.plegable[open] > summary::before {
+  transform: rotate(90deg);
+}
+
+.plegable > summary:hover {
+  background: var(--superficie-2);
+}
+
+.plegable > summary h2 {
+  margin: 0;
+  font-size: var(--titulo-1);
+  letter-spacing: -0.02em;
+}
+
+.plegable > summary span {
+  color: var(--texto-tenue);
+  font-size: var(--letra-4);
+}
+
+.plegable > :not(summary) {
+  margin: 0 var(--espacio-4) var(--espacio-4);
+}
+
+/* Al abrir, los errores van en 2 columnas en la laptop y en 1 en pantallas angostas */
+.plegable .errores {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .plegable .errores {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .chuleta > summary {
+    padding: 10px 0;
+  }
+
+  .chuleta[open] > summary {
+    margin-bottom: 0;
+  }
+
+  .plegable > :not(summary) {
+    margin: 0 var(--espacio-3) var(--espacio-3);
+  }
+}

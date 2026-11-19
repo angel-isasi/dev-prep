@@ -4,7 +4,7 @@ import { api } from "../lib/api.js";
 import { ES_MOVIL } from "../lib/modo.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { filtrarEjercicios } from "../lib/filtrarEjercicios.js";
-import { nombreColeccion, nombreTema, numeroEjercicio } from "../lib/etiquetas.js";
+import { nombreColeccion, nombreTema } from "../lib/etiquetas.js";
 import { buscarColeccion, ejercicioAlAzar, siguienteEjercicio } from "../lib/areas.js";
 import { Selector } from "../components/Selector.jsx";
 import { ListaAnimada } from "../components/ListaAnimada.jsx";
@@ -32,6 +32,18 @@ const ESTADOS = ES_MOVIL
 
 const TEXTO_ESTADO = Object.fromEntries(ESTADOS);
 const NIVEL = { 1: "Básico", 2: "Intermedio", 3: "Difícil" };
+/** El estado de cada fila se ve como un icono (el texto queda para lectores de pantalla y el title). */
+const ICONO_ESTADO = { pendiente: "○", "en-progreso": "◐", resuelto: "✓", estudiado: "✓", repasar: "↻" };
+
+/**
+ * Nombre legible de la colección de un ejercicio. Si etiquetas.js no la conoce devuelve la ruta
+ * cruda ("Javascript/depurar"): en ese caso se usa el nombre que tiene en areas.js ("Depurar código roto").
+ */
+function coleccionLegible(id) {
+  const nombre = nombreColeccion(id);
+  if (!nombre.includes("/")) return nombre;
+  return buscarColeccion(id)?.coleccion.nombre ?? "";
+}
 
 
 /** Agrupa por tema, respetando el orden en que aparecen. */
@@ -50,6 +62,9 @@ export function ListaEjercicios() {
   const [error, setError] = useState(null);
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
+  // Grupos que abriste o cerraste a mano. Se guarda junto al "modo" (con o sin filtros) para que
+  // lo que tocaste buscando no cambie cómo se ve la lista normal, y al revés.
+  const [manual, setManual] = useState({ modo: "", temas: {} });
   const filtros = {
     texto: params.get("texto") ?? "",
     tema: params.get("tema") ?? "",
@@ -103,6 +118,14 @@ export function ListaEjercicios() {
   const subtitulo = encontrada ? encontrada.area.titulo : "Búsqueda en todas las colecciones";
 
   const pct = (resueltos / Math.max(deColeccion.length, 1)) * 100;
+
+  // Qué grupos se ven abiertos: con búsqueda o filtros, todos; si no, solo el del siguiente
+  // ejercicio pendiente (o el primero). Lo que abras o cierres a mano manda sobre eso.
+  const grupos = agruparPorTema(visibles);
+  const modo = hayFiltros ? "filtros" : "normal";
+  const temaSiguiente = siguiente && grupos.some(([t]) => t === siguiente.tema) ? siguiente.tema : grupos[0]?.[0];
+  const estaAbierto = (tema) => (manual.modo === modo ? manual.temas[tema] : undefined) ?? (hayFiltros ? true : tema === temaSiguiente);
+  const alternar = (tema, abrir) => setManual((m) => ({ modo, temas: { ...(m.modo === modo ? m.temas : {}), [tema]: abrir } }));
   const irA = (ej) => ej && navigate(`/practicar/${ej.id}`);
 
   return (
@@ -186,46 +209,53 @@ export function ListaEjercicios() {
       {visibles.length === 0 ? (
         <p className={estilos.vacio}>Ningún ejercicio coincide con los filtros.</p>
       ) : (
-        agruparPorTema(visibles).map(([tema, lista]) => (
-          <div key={tema} className={estilos.grupo}>
-            <h2 className={estilos.tituloGrupo}>
-              {nombreTema(tema)}
-              <span>
-                {lista.filter(hecho).length}/{lista.length}
-              </span>
-            </h2>
-            {/* Cada ejercicio es una ficha: número, nivel en rayitas, título y estado */}
-            <ListaAnimada className={estilos.fichas}>
-              {lista.map((e) => (
-                <li key={e.id}>
-                  <Link to={`/practicar/${e.id}`} className={estilos.ficha} data-estado={e.estado}>
-                    <div className={estilos.fichaArriba}>
-                      <span className={estilos.numero}>{numeroEjercicio(e.id)}</span>
-                      <span className={estilos.nivel} data-nivel={e.nivel} title={NIVEL[e.nivel]} aria-label={`Nivel ${NIVEL[e.nivel]}`}>
-                        <i />
-                        <i />
-                        <i />
-                      </span>
-                    </div>
-                    <strong className={estilos.titulo}>{e.titulo}</strong>
-                    {!encontrada && <span className={estilos.coleccion}>{nombreColeccion(e.coleccion)}</span>}
-                    <div className={estilos.fichaAbajo}>
-                      <span className={estilos.estado}>
-                        <span className={estilos.punto} aria-hidden />
-                        {TEXTO_ESTADO[e.estado] ?? e.estado}
-                      </span>
-                      {e.ultimoResultado && (
-                        <span className={estilos.tests} title="Tests que pasan en tu último intento">
-                          {e.ultimoResultado.pasan}/{e.ultimoResultado.total}
+        grupos.map(([tema, lista]) => {
+          const abierto = estaAbierto(tema);
+          return (
+            // Cada tema es un <details> plegable. Lo controla React (open + clic en el summary) para
+            // poder abrir por defecto el tema del siguiente ejercicio, o todos si hay filtros.
+            <details key={tema} className={estilos.grupo} open={abierto}>
+              <summary
+                className={estilos.tituloGrupo}
+                onClick={(evento) => {
+                  evento.preventDefault(); // el navegador no cambia "open": lo decide el estado
+                  alternar(tema, !abierto);
+                }}
+              >
+                <span className={estilos.flecha} aria-hidden>
+                  ›
+                </span>
+                <span className={estilos.nombreGrupo}>{nombreTema(tema)}</span>
+                <span className={estilos.cuentaGrupo}>
+                  {lista.filter(hecho).length}/{lista.length}
+                </span>
+              </summary>
+              {/* Solo se pintan las filas del grupo abierto: con 390 ejercicios, la página queda liviana */}
+              {abierto && (
+                <ListaAnimada className={estilos.filas}>
+                  {lista.map((e) => (
+                    <li key={e.id}>
+                      {/* Una línea por ejercicio: estado (icono), título, colección, tests y nivel (punto de color) */}
+                      <Link to={`/practicar/${e.id}`} className={estilos.filaEj} data-estado={e.estado}>
+                        <span className={estilos.icono} role="img" aria-label={TEXTO_ESTADO[e.estado] ?? e.estado} title={TEXTO_ESTADO[e.estado] ?? e.estado}>
+                          {ICONO_ESTADO[e.estado] ?? "○"}
                         </span>
-                      )}
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ListaAnimada>
-          </div>
-        ))
+                        <strong className={estilos.titulo}>{e.titulo}</strong>
+                        {!encontrada && coleccionLegible(e.coleccion) && <span className={estilos.coleccion}>{coleccionLegible(e.coleccion)}</span>}
+                        {e.ultimoResultado && (
+                          <span className={estilos.tests} title="Tests que pasan en tu último intento">
+                            {e.ultimoResultado.pasan}/{e.ultimoResultado.total}
+                          </span>
+                        )}
+                        <span className={estilos.nivel} data-nivel={e.nivel} role="img" aria-label={`Nivel ${NIVEL[e.nivel]}`} title={NIVEL[e.nivel]} />
+                      </Link>
+                    </li>
+                  ))}
+                </ListaAnimada>
+              )}
+            </details>
+          );
+        })
       )}
     </section>
   );

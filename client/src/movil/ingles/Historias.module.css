@@ -364,3 +364,25 @@
   padding: var(--espacio-6) var(--espacio-4);
   text-align: center;
 }
+
+/* La lista de historias en pantallas anchas: 2 o 3 columnas en vez de una columna angosta */
+@media (min-width: 900px) {
+  .paginaLista {
+    max-width: var(--ancho-pagina);
+    padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+  }
+
+  .paginaLista .lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .paginaLista .fila {
+    height: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .paginaLista .lista {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

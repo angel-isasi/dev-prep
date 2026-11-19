@@ -255,8 +255,67 @@
   font-size: var(--letra-4);
 }
 
+/* ---------- Cómo pensar en voz alta ---------- */
 .guia {
-  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+/* Laptop: los 5 pasos en 3 + 2, sin tarjetas a medio llenar ni una suelta al final.
+   La lista de pasos la dibuja EnunciadoOrganizado (es el único <ol> hijo directo de una sección);
+   se reparte en 6 columnas: los tres primeros ocupan 2 cada uno y los dos últimos, 3. */
+@media (min-width: 1200px) {
+  .guia section > ol {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .guia section > ol > li {
+    grid-column: span 2;
+  }
+  .guia section > ol > li:nth-child(n + 4) {
+    grid-column: span 3;
+  }
+}
+
+.guiaPlegada,
+.etapaDetalle {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+}
+
+.guiaPlegada {
+  padding: 0 var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.guiaPlegada > summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--texto);
+  font-size: var(--letra-5);
+  font-weight: var(--peso-negrita);
+  cursor: pointer;
+}
+
+.guiaPlegada > summary::before {
+  content: "+";
+  width: 1.2em;
+  color: var(--acento);
+}
+
+.guiaPlegada[open] > summary::before {
+  content: "−";
+}
+
+.guiaPlegada > summary::-webkit-details-marker {
+  display: none;
+}
+
+.guiaPlegada[open] {
+  padding-bottom: var(--espacio-3);
 }
 
 /* Celular: pantallas de 600 px o menos */
@@ -340,23 +399,51 @@
   font-size: var(--letra-3);
 }
 
+/* "Qué esperar": la descripción completa de la etapa, plegada */
+.etapaDetalle {
+  margin-top: calc(var(--espacio-3) * -1);
+}
+
+.etapaDetalle > summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+  cursor: pointer;
+}
+
+.etapaDetalle > summary:hover {
+  color: var(--texto);
+}
+
+.etapaDetalle > p {
+  margin: var(--espacio-1) 0 0;
+  font-size: var(--letra-3);
+  line-height: 1.55;
+}
+
+/* Los mazos se reparten en las columnas que quepan: 2 en la etapa técnica (ancha), 1 en el resto */
 .etapaMazos {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espacio-1);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
+  gap: var(--espacio-1) var(--espacio-2);
 }
 
 .etapaMazos > :global(.etiqueta) {
+  grid-column: 1 / -1;
   margin-bottom: var(--espacio-1);
 }
 
 .etapaMazo {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--espacio-3);
-  min-height: 40px;
-  padding: var(--espacio-2) var(--espacio-3);
+  min-height: 44px;
+  overflow: hidden;
+  padding: var(--espacio-2) var(--espacio-3) calc(var(--espacio-2) + 3px);
   border: 1px solid var(--borde);
   border-radius: var(--radio);
   background: var(--hundido);
@@ -383,10 +470,31 @@
   font-variant-numeric: tabular-nums;
 }
 
+.etapaMazo em {
+  color: var(--acento);
+  font-style: normal;
+}
+
+/* Mini barra de progreso pegada al borde de abajo del mazo */
+.etapaMazo .etapaBarra {
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background: var(--borde);
+}
+
+.etapaMazo .etapaBarra > span {
+  display: block;
+  height: 100%;
+  border-radius: 0 2px 2px 0;
+  background: var(--acento);
+}
+
+/* Enlaces a lo demás de la etapa: chips de una línea que se acomodan en filas */
 .etapaEnlaces {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -394,33 +502,37 @@
 
 .etapaEnlaces a,
 .etapaEnlaces button {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: var(--espacio-2) var(--espacio-3);
-  border: none;
-  border-radius: var(--radio);
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-pildora);
   background: none;
   color: var(--texto);
   font: inherit;
-  text-align: left;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
   text-decoration: none;
   cursor: pointer;
+  transition:
+    border-color var(--transicion),
+    background var(--transicion);
 }
 
 .etapaEnlaces a:hover,
 .etapaEnlaces button:hover {
+  border-color: color-mix(in srgb, var(--acento) 45%, transparent);
   background: var(--superficie-2);
 }
 
-.etapaEnlaces strong {
-  font-size: var(--letra-4);
-  font-weight: var(--peso-semi);
-}
-
-.etapaEnlaces span {
-  color: var(--texto-suave);
-  font-size: var(--letra-3);
+/* Con el dedo, cada chip y el "Qué esperar" miden 44 px de alto */
+@media (pointer: coarse) {
+  .etapaEnlaces a,
+  .etapaEnlaces button,
+  .etapaDetalle > summary {
+    min-height: var(--toque);
+  }
 }
 
 .simular {
@@ -428,14 +540,21 @@
   margin-top: auto;
 }
 
-/* Laptop: tres columnas sin huecos. La etapa técnica es la más larga y ocupa dos filas; así el
-   cierre sube justo debajo de recursos humanos en vez de quedar suelto al final */
+/* Laptop: dos filas sin huecos. Arriba, recursos humanos (1/3) y la técnica (2/3), que es la que
+   tiene más mazos y así los muestra en dos columnas; abajo, proyecto y cierre a medias.
+   Se logra con 6 columnas: 2 + 4 en la primera fila y 3 + 3 en la segunda. */
 @media (min-width: 1200px) {
   .etapas {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-auto-flow: row dense;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    align-items: stretch;
+  }
+  .etapas > * {
+    grid-column: span 3;
+  }
+  .etapas > :nth-child(1) {
+    grid-column: span 2;
   }
   .etapas > :nth-child(2) {
-    grid-row: span 2;
+    grid-column: span 4;
   }
 }

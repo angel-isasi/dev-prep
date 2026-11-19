@@ -241,13 +241,14 @@ export function ObjetosPerdidos({ datos, alCambiar }) {
     alCambiar();
   }
 
+  // Sin nada escondido la tarjeta no aparece: no explica algo que todavía no existe.
+  // Solo se queda si acabas de recuperar algo, para que veas el resultado.
+  if (!o && !recuperadas) return null;
+
   return (
     <Tarjeta titulo="Objetos perdidos" detalle={datos.totalRobados ? `${datos.totalRobados} por recuperar` : "Nada perdido"}>
       {!o ? (
-        <p className={estilos.ayuda}>
-          {recuperadas ? `¡Recuperaste ${recuperadas} hoy! ` : ""}
-          {datos.nombre} no tiene nada tuyo escondido. Cuando una palabra te toque repasar, la va a esconder y aparecerá aquí.
-        </p>
+        <p className={estilos.ayuda}>¡Recuperaste {recuperadas} hoy!</p>
       ) : (
         <>
           <p className={estilos.ayuda}>
@@ -295,14 +296,8 @@ export function ObjetosPerdidos({ datos, alCambiar }) {
 }
 
 export function TusErrores({ datos }) {
-  if (!datos.errores.length)
-    return (
-      <Tarjeta titulo="Tus errores">
-        <p className={estilos.ayuda}>
-          Cuando falles un calco o una regla en una lección, {datos.nombre} te lo recordará aquí con lo que sí se dice.
-        </p>
-      </Tarjeta>
-    );
+  // Sin errores guardados la tarjeta no aparece
+  if (!datos.errores.length) return null;
   const claves = datos.errores.map((e) => e.clave).join(",");
   return (
     <Tarjeta titulo="Tus errores" detalle="Lo que fallaste la última vez">

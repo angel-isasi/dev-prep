@@ -79,3 +79,42 @@
     flex: 1 1 100%;
   }
 }
+
+/* El "?" que abre la explicación de la pantalla */
+.botonAyuda {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin-left: var(--espacio-2);
+  border: 1px solid var(--borde);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--texto-suave);
+  font-family: inherit;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-negrita);
+  letter-spacing: 0;
+  line-height: 1;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+/* Zona de toque de 44 px sin agrandar el círculo */
+.botonAyuda::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+}
+
+.botonAyuda:hover,
+.botonAyuda[aria-expanded="true"] {
+  border-color: var(--acento);
+  color: var(--acento);
+}
+
+.botonAyuda:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}

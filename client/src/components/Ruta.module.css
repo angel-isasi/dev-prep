@@ -195,10 +195,35 @@
   font-size: var(--letra-3);
 }
 
+/* Pie: el botón que despliega todas las semanas y la regla plegada */
+.pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
 .leyenda {
-  margin: 0;
+  flex: 1 1 260px;
   color: var(--texto-tenue);
   font-size: var(--letra-3);
+}
+
+.leyenda summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  cursor: pointer;
+  color: var(--texto-suave);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+
+.leyenda p {
+  margin: var(--espacio-1) 0 0;
+  max-width: 80ch;
+  line-height: 1.55;
 }
 
 @media (max-width: 900px) {
@@ -220,9 +245,15 @@
   .semanas {
     grid-template-columns: 1fr;
   }
-}
 
-/* En Progreso va entre el resumen y las demás filas */
-.ruta {
-  margin-bottom: var(--espacio-3);
+  /* Zonas de toque de 44 px */
+  .pie :global(.boton),
+  .leyenda summary {
+    min-height: 44px;
+  }
+
+  .pie :global(.boton) {
+    justify-content: center;
+    width: 100%;
+  }
 }

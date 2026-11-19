@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api.js";
 import { claveIa, estadoIa, guardarClaveIa, guardarTopeIa, pedirIa, topeIa, usoIa } from "../lib/ia.js";
 import { dictar, hablar, hayVoz, microDisponible } from "../lib/voz.js";
-import { IconoAudio, IconoMicrofono } from "./Iconos.jsx";
+import { IconoAudio, IconoChispa, IconoMicrofono } from "./Iconos.jsx";
 import estilos from "./EvaluadorIa.module.css";
 
 const VEREDICTOS = { sabia: "Lo sabías", dude: "Te faltó algo", no: "No lo respondiste bien" };
@@ -31,9 +31,10 @@ export async function contextoPersonal() {
 /**
  * La puerta de todo lo que usa IA: mientras no esté configurada en Vercel muestra un aviso, y si falta
  * tu contraseña la pide. Cuando todo está listo dibuja lo de adentro.
- * @param {{ children: (olvidarClave: () => void) => import("react").ReactNode }} props
+ * `vacio` (opcional) reemplaza el aviso de "IA apagada" por otro contenido.
+ * @param {{ children: (olvidarClave: () => void) => import("react").ReactNode, vacio?: import("react").ReactNode }} props
  */
-export function PuertaIa({ children }) {
+export function PuertaIa({ children, vacio }) {
   const [listo, setListo] = useState(null); // null: averiguando
   const [clave, setClave] = useState(claveIa);
 
@@ -43,7 +44,21 @@ export function PuertaIa({ children }) {
 
   if (listo === null) return null;
   if (!listo) {
-    return <p className={estilos.apagado}>Evaluación con IA: se activa cuando configures tu API key en Vercel.</p>;
+    if (vacio !== undefined) return vacio;
+    // Una cajita de una línea: cabe dentro de una tarjeta chica y no se ve perdida sola en una pestaña
+    return (
+      <p className={estilos.apagado} role="note">
+        <span className={estilos.apagadoIcono} aria-hidden>
+          <IconoChispa tamano={16} />
+        </span>
+        <span>
+          <strong>IA apagada</strong>
+          <span>
+            Falta la API key en Vercel. Pasos en <code>docs/ia.md</code>.
+          </span>
+        </span>
+      </p>
+    );
   }
 
   if (!clave) {

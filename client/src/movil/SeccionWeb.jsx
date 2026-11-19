@@ -4,10 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api.js";
 import { desvincular, leerVinculo, sincronizar } from "../lib/sync-movil.js";
 import estilos from "../components/SeccionSync.module.css";
+import propios from "./SeccionWeb.module.css";
 import { SeccionRutina } from "../components/SeccionRutina.jsx";
 import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
 import { SeccionLaptop } from "./SeccionLaptop.jsx";
-import { HoldButton } from "../components/ui/hold-button.jsx";
+import { Confirmar } from "../components/Confirmar.jsx";
 import { usePantallaGrande } from "../hooks/usePantallaGrande.js";
 
 const fecha = (iso) =>
@@ -94,19 +95,23 @@ export function SeccionWeb() {
             </div>
           </>
         ) : (
-          <p className={estilos.ayuda}>
-            Para unir este navegador con tu laptop: abre la app de la laptop (el acceso directo del escritorio), ve a Ajustes y toca
-            "Vincular la versión web". Se abre esta página ya vinculada. En el celular, escanea el QR de "Vincular el celular (QR)".
-          </p>
+          <>
+            <p className={estilos.ayuda}>Sin vincular: tu progreso vive solo en este navegador.</p>
+            <details className={propios.como}>
+              <summary>Cómo vincular</summary>
+              <ol>
+                <li>Abre dev-prep en tu laptop (el acceso directo del escritorio).</li>
+                <li>Ve a Ajustes, pestaña Dispositivos.</li>
+                <li>Toca "Vincular la versión web"; en el celular, escanea el QR de "Vincular el celular (QR)".</li>
+              </ol>
+            </details>
+          </>
         )}
       </section>
 
       <section className={estilos.seccion}>
         <h2>Tu progreso en este navegador</h2>
-        <p className={estilos.ayuda}>
-          Se guarda en este navegador y no se pierde al apagar la computadora. Si borras los datos de navegación, lo recuperas sincronizando
-          o con un respaldo.
-        </p>
+        <p className={estilos.ayuda}>Se guarda en este navegador. Si borras sus datos, lo recuperas sincronizando o con un respaldo.</p>
         <div className={estilos.acciones}>
           <button type="button" className="boton" onClick={descargar}>
             Descargar respaldo
@@ -117,22 +122,26 @@ export function SeccionWeb() {
           <input ref={archivo} type="file" accept="application/json,.json" hidden onChange={restaurar} />
         </div>
         <p className={estilos.ayuda}>
-          <strong>Empezar de cero:</strong> borra tu progreso en TODOS tus dispositivos (ejercicios, racha, repasos, tarjetas, lecciones,
-          inglés, exámenes, simulacros, logros, postulaciones y diario). Se quedan tus ajustes, tu pitch, tus historias STAR y tu CV.
-          Descarga un respaldo antes si quieres guardarlo. No se puede deshacer.
+          <strong>Empezar de cero:</strong> borra tu progreso en todos tus dispositivos. No se puede deshacer.
         </p>
         <div className={estilos.acciones}>
-          <HoldButton
+          {/* El detalle de qué se borra y qué se queda va en el diálogo, que es donde se decide */}
+          <Confirmar
+            disparador={
+              <button type="button" className="boton boton-peligro">
+                Empezar de cero
+              </button>
+            }
+            titulo="¿Empezar de cero?"
+            descripcion="Se borra tu progreso en TODOS tus dispositivos: ejercicios, racha, repasos, tarjetas, lecciones, inglés, exámenes, simulacros, logros, postulaciones y diario. Se quedan tus ajustes, tu pitch, tus historias STAR y tu CV. Descarga un respaldo antes si quieres guardarlo. No se puede deshacer."
+            textoConfirmar="Sí, borrar todo"
             peligro
-            textoListo="Empezando de cero…"
-            alCompletar={async () => {
+            alConfirmar={async () => {
               await api.empezarDeCero();
               await sincronizar().catch(() => {});
               location.assign("/");
             }}
-          >
-            Mantén presionado para empezar de cero
-          </HoldButton>
+          />
         </div>
         {aviso && <p className={estilos.ayuda}>{aviso}</p>}
       </section>

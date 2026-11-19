@@ -1,13 +1,27 @@
+/* Mi semana: 7 días en una fila en la laptop, 4 por fila en pantallas medianas y 2 en el celular */
 .semana {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--espacio-2);
+}
+
+@media (min-width: 900px) {
+  .semana {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .semana {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .semana label {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
   font-size: var(--letra-3);
   font-weight: var(--peso-semi);
 }
@@ -15,6 +29,7 @@
 .semana select,
 .fila input,
 .fila select {
+  min-width: 0;
   padding: 8px 10px;
   border: 1px solid var(--borde-fuerte);
   border-radius: var(--radio-md);
@@ -51,6 +66,65 @@
   font-size: var(--letra-4);
 }
 
-.lista li strong {
+/* Tabla de puntos: cada fila es "qué hiciste ..... +puntos" */
+.puntos {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 var(--espacio-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+}
+
+@media (min-width: 900px) {
+  .puntos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.puntos li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--borde);
+}
+
+.puntos strong {
+  flex: none;
   color: var(--exito);
+  font-variant-numeric: tabular-nums;
+}
+
+/* "Cómo funciona": la explicación larga, plegada */
+.como summary {
+  width: fit-content;
+  color: var(--acento);
+  font-size: var(--letra-4);
+  cursor: pointer;
+}
+
+.como p {
+  max-width: 70ch;
+  margin: var(--espacio-2) 0 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  line-height: 1.5;
+}
+
+/* Celular: zonas de toque de 44 px */
+@media (max-width: 600px) {
+  .semana select,
+  .fila input,
+  .fila select,
+  .fila :global(.boton) {
+    min-height: 44px;
+  }
+
+  .como summary {
+    padding: 12px 0;
+  }
 }

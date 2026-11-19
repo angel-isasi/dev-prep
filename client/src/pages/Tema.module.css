@@ -442,3 +442,92 @@ p.falta {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- Menos letra en el tema ---------- */
+/* Ejercicio: punto de nivel, título y un icono de estado (antes eran dos etiquetas con texto) */
+.puntoNivel {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--texto-tenue);
+}
+
+.puntoNivel[data-nivel="1"] {
+  background: var(--exito);
+}
+
+.puntoNivel[data-nivel="2"] {
+  background: var(--aviso);
+}
+
+.puntoNivel[data-nivel="3"] {
+  background: var(--error);
+}
+
+/* Gana a ".ejercicio span:first-child": el que crece es el título, no el punto */
+.ejercicio span.puntoNivel {
+  flex: none;
+}
+
+.tituloEjercicio {
+  flex: 1;
+  min-width: 0;
+}
+
+.iconoEstado {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-negrita);
+  background: var(--superficie-2);
+  color: var(--texto-suave);
+}
+
+.iconoEstado[data-estado="resuelto"],
+.iconoEstado[data-estado="estudiado"] {
+  background: var(--exito-suave);
+  color: var(--exito);
+}
+
+.iconoEstado[data-estado="en-progreso"] {
+  color: var(--aviso);
+}
+
+.iconoEstado[data-estado="repasar"] {
+  color: var(--error);
+}
+
+/* Pestaña de entrevista: en la laptop los términos ocupan el ancho en 2 columnas */
+@media (min-width: 900px) {
+  .terminos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  /* Los términos toman toda la fila; los métodos van debajo, también en columnas */
+  .dosColumnas {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .metodos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+.chipEntrevista {
+  display: inline-block;
+  margin-right: 4px;
+  padding: 1px 8px;
+  border: 1px solid color-mix(in srgb, var(--color-area, var(--acento)) 45%, transparent);
+  border-radius: var(--radio-pildora);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
+  white-space: nowrap;
+}

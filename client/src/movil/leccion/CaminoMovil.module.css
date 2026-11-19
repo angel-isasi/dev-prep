@@ -344,3 +344,35 @@
 .nodo[data-actual="true"] {
   margin-top: 14px;
 }
+
+/* Etapas plegables: el botón cubre toda la cabecera para que se pueda tocar en cualquier parte */
+.plegar {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: var(--color-area, var(--acento));
+  font-size: var(--letra-8);
+  font-weight: var(--peso-negrita);
+  line-height: 1;
+  cursor: pointer;
+}
+
+.plegar:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+.etapa[data-plegada="true"] {
+  position: relative;
+  margin-bottom: 0;
+}
+
+.area:has(> .etapa[data-plegada="true"]) {
+  margin-bottom: var(--espacio-3);
+}

@@ -123,3 +123,12 @@
   font-size: var(--letra-3);
   font-weight: var(--peso-semi);
 }
+
+@media (max-width: 600px) {
+  /* El botón "Solo 10 minutos" a todo el ancho y cómodo para el pulgar */
+  .salvar :global(.boton) {
+    justify-content: center;
+    width: 100%;
+    min-height: 44px;
+  }
+}

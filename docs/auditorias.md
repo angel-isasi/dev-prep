@@ -27,6 +27,33 @@ Propuesto (sin construir):
 6. Unidades que no llegan a "completa" sin voz o con ítems reportados (en-basico-22).
 7. Contenido: verbos repetidos entre basico-05, 16 y 22, unas 25 frases idénticas entre unidades, personajes que cambian de rol (Tom, Sarah), log out / sign out como sinónimos aceptados, roleplays donde decide el tono y no la gramática, y un validador de pronunciación.
 
+## 2026-11-19: toda la app (menos letra)
+
+Base: commit 7e3edc3. Tres revisiones (código e IA, diseño con capturas de 36 pantallas a 1280 y 400, contenido completo salvo inglés) y cuatro tandas de arreglos.
+
+Arreglado:
+- IA: la entrevista por voz descarta la respuesta que llega después de terminar o salir; contraseña rechazada a mitad sin perder lo respondido; tiempo límite y mensaje sin conexión; el gasto cuenta los pedidos fallidos y usa el mes de Perú.
+- El modo visita ya no deja nada en el navegador (teoría leída, ofertas vistas, etapa de proyecto).
+- Laptop: la sesión de hoy enlazaba a /diario, que no existe, y nunca se completaba.
+- Contenido: 20 correcciones (isNaN, valores falsy, ejemplo de any, reduce, 304, this, GROUP BY, CORS, AWS, tope de tiempo libre y otras).
+- El quiz de cada tema no barajaba: la correcta era la B en más de la mitad. Ahora baraja en cada intento.
+
+Nuevo (menos letra en toda la app):
+- El subtítulo de cada pantalla vive detrás de un "?" junto al título.
+- Explicaciones y enunciados: a la vista lo necesario; "Por qué funciona", "Errores comunes", "Otra forma", "Cómo explicarlo", "Conceptos", "Por qué importa" y "Reto extra" quedan plegados.
+- Progreso y Ajustes en tres pestañas; la ruta muestra 3 semanas; Hoy con cifras cortas y la semana bajo las cifras.
+- Lecciones, Todos los ejercicios (por tema, plegado), Entrevistas por etapa, Simulacro, Ofertas (chips en vez de frases), Inglés (camino plegado por etapa, Más práctica en rejilla), Teoría, Glosario, Referencia, Insignias (filtro) y Mapache reorganizados.
+- La IA responde más corto (2 aciertos, 3 faltas, 5 correcciones, plan de 3 pasos) y en la voz no escribe lo que no se muestra.
+
+Propuesto (sin construir):
+1. Partir los temas largos (react-03, react-08, 09-promesas, 05-objetos): tope de 5 conceptos por tema.
+2. Una sola fuente por concepto: "Conceptos" de las explicaciones y "En la entrevista" de las teorías como enlaces al glosario y al banco (unas 40.000 palabras menos).
+3. Quizzes: alargar los distractores (la correcta es la opción más larga en 107 de 210).
+4. Pistas: la 2 regala más que la 3 en varios ejercicios; que la 2 solo nombre las herramientas.
+5. Preguntas de entrevista duplicadas con respuestas distintas (ent-073/112, 072/113, 088/126, 082/128, 098/201, 099/204, 095/206, 100/208).
+6. Tope de gasto de IA en el servidor (hoy solo vive en el navegador) y guardar la entrevista por voz por si se recarga.
+7. Un test que falle si la parte visible de un contenido nuevo pasa de un tope de palabras.
+
 ## Última auditoría
 
-2026-11-17, inglés (ver arriba). Siguiente: priorizar lo cambiado después de este commit.
+2026-11-19, toda la app (ver arriba). Siguiente: priorizar lo cambiado después de este commit.

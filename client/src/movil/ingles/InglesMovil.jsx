@@ -13,8 +13,9 @@ import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { Llama } from "../../components/Llama.jsx";
 import { SlidingNumber } from "../../components/ui/sliding-number.jsx";
 import { CaminoMovil } from "../leccion/CaminoMovil.jsx";
+import { avanceConceptos } from "../leccion/variantes.js";
 import { TarjetaMapache } from "../mapache/TarjetaMapache.jsx";
-import { IconoAudifonos, IconoEstrella, IconoFlechaDer, IconoLibro, IconoMezclar, IconoOido, IconoPlay, IconoRayo, IconoRegalo, IconoReloj, IconoRepetir } from "../../components/Iconos.jsx";
+import { IconoAudifonos, IconoEstrella, IconoLibro, IconoMezclar, IconoOido, IconoPlay, IconoRayo, IconoRegalo, IconoReloj, IconoRepetir } from "../../components/Iconos.jsx";
 import estilos from "./Ingles.module.css";
 
 /** Inglés real para escuchar fuera de la app, por nivel. Lo que escuches lo anotas en "Inmersión". */
@@ -57,6 +58,8 @@ export function InglesMovil() {
   const [motivacion, setMotivacion] = useState(null);
   const [micro, setMicro] = useState(!microApagado());
   const conVoz = useHayVoz();
+  // null mientras no se sabe: así el aviso del examen de nivel no parpadea al abrir
+  const [hayUnidadesHechas, setHayUnidadesHechas] = useState(null);
 
   const cargar = () => {
     api.inglesMotivacion?.({ conMicro: hayMicrofono() }).then(setMotivacion);
@@ -64,6 +67,11 @@ export function InglesMovil() {
   };
   useEffect(() => {
     cargar();
+    // El examen de nivel solo se ofrece a quien todavía no completó ninguna unidad
+    api
+      .lecciones("ingles")
+      .then((d) => setHayUnidadesHechas(d.unidades.some((u) => avanceConceptos(d.items, d.registros, u.id).completa)))
+      .catch(() => setHayUnidadesHechas(false));
   }, []);
 
   if (error) return <p className={estilos.mensaje}>{error}</p>;
@@ -98,22 +106,20 @@ export function InglesMovil() {
 
       <div className={estilos.tablero}>
         <div className={estilos.columnaPrincipal}>
-          <div className={estilos.resumen}>
-            <div className={estilos.meta}>
+          <div className={`${estilos.resumen} ${estilos.resumenCompacto}`}>
+            {/* Hoy: el anillo y debajo "7/15 min" en una sola línea; el detalle queda en el title */}
+            <div
+              className={estilos.metaHoy}
+              title={`Hoy: ${hoy.leccionesHoy} ${hoy.leccionesHoy === 1 ? "lección" : "lecciones"} · ${hoy.inmersionHoy} min de inglés real`}
+            >
               <AnilloProgreso valor={avanceHoy} tamano={60} grosor={6} completo={avanceHoy >= 1}>
                 <strong className={estilos.minutos}>
                   <SlidingNumber number={Math.floor(hoy.minutosHoy)} />
                 </strong>
               </AnilloProgreso>
-              <div>
-                <span className={estilos.etiqueta}>Hoy</span>
-                <strong>
-                  {Math.floor(hoy.minutosHoy)} de {hoy.meta} min
-                </strong>
-                <small>
-                  {hoy.leccionesHoy} {hoy.leccionesHoy === 1 ? "lección" : "lecciones"} · {hoy.inmersionHoy} min de inglés real
-                </small>
-              </div>
+              <small>
+                {Math.floor(hoy.minutosHoy)}/{hoy.meta} min
+              </small>
             </div>
             <div className={estilos.racha}>
               <Llama encendida={hoy.racha > 0} tamano={28} />
@@ -138,12 +144,9 @@ export function InglesMovil() {
 
           <TarjetaMapache />
 
-          {!hoy.nivelHecho && (
-            <div className={estilos.nivel}>
-              <div>
-                <strong>¿Ya sabes algo de inglés?</strong>
-                <p>El examen de nivel se adapta a ti (de A1 a C2) y marca como hechas las unidades que ya dominas.</p>
-              </div>
+          {!hoy.nivelHecho && hayUnidadesHechas === false && (
+            <div className={estilos.nivelLinea} title="El examen se adapta a ti (de A1 a C2) y marca como hechas las unidades que ya dominas.">
+              <strong>¿Ya sabes algo de inglés?</strong>
               <Link to="/ingles/examen" className="boton boton-primario">
                 Hacer el examen
               </Link>
@@ -177,7 +180,8 @@ export function InglesMovil() {
 
           <div className={`textura ${estilos.tarjetaLateral}`}>
             <h2>Más práctica</h2>
-            <ul className={estilos.modos}>
+            {/* Rejilla de accesos: icono y título; el subtítulo queda como title */}
+            <ul className={estilos.modosRejilla}>
               {[
                 { a: leccion("rapida"), Icono: IconoRayo, titulo: "Inglés rápido", sub: "5 ejercicios" },
                 conVoz && { a: leccion("escuchar"), Icono: IconoAudifonos, titulo: "Solo escuchar", sub: "oído y dictado" },
@@ -191,18 +195,15 @@ export function InglesMovil() {
                 .filter(Boolean)
                 .map(({ a, Icono, titulo, sub }) => (
                   <li key={titulo}>
-                    <Link to={a} className={estilos.modo}>
+                    <Link to={a} className={estilos.modoChip} title={sub}>
                       <Icono tamano={20} />
-                      <span>
-                        <strong>{titulo}</strong>
-                        <small>{sub}</small>
-                      </span>
-                      <IconoFlechaDer tamano={16} className={estilos.flecha} />
+                      <strong>{titulo}</strong>
                     </Link>
                   </li>
                 ))}
             </ul>
-            <div className={estilos.opcionesIngles}>
+            <details className={estilos.opcionesPlegadas}>
+              <summary>Opciones</summary>
               {motivacion && (
                 <label className={estilos.velocidad}>
                   <input
@@ -213,7 +214,7 @@ export function InglesMovil() {
                       cargar();
                     }}
                   />
-                  Jugar con vidas (5 por lección: si las pierdes, termina)
+                  Jugar con vidas (5 por lección)
                 </label>
               )}
               {microDisponible() && (
@@ -226,12 +227,10 @@ export function InglesMovil() {
                       cambiarMicro(e.target.checked);
                     }}
                   />
-                  Ejercicios de hablar (usan el micrófono y necesitan internet)
+                  Ejercicios de hablar (micrófono e internet)
                 </label>
               )}
-            </div>
-
-            {conVoz ? (
+              {conVoz ? (
               <label className={estilos.velocidad}>
                 <input
                   type="checkbox"
@@ -249,14 +248,14 @@ export function InglesMovil() {
                 Configuración, Hora e idioma, Voz, agrega una voz en inglés (Estados Unidos). En Android viene con Google.
               </p>
             )}
+            </details>
           </div>
 
           <div className={`textura ${estilos.tarjetaLateral}`}>
-            <h2>Inmersión: inglés real</h2>
-          <p className={estilos.ayuda}>
-            La app te da la base; el oído se entrena escuchando mucho inglés de verdad. Anota lo que viste o escuchaste hoy en inglés y
-            cuenta para tu meta.
-          </p>
+            <div className={estilos.cabeceraBloque}>
+              <h2>Inmersión</h2>
+              <small>Anota tu inglés real de hoy</small>
+            </div>
           <div className={estilos.chips}>
             {MINUTOS_RAPIDOS.map((m) => (
               <button key={m} type="button" className={estilos.chip} data-elegido={inmersion === m} onClick={() => setInmersion(m)}>

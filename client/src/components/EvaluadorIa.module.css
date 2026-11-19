@@ -11,10 +11,45 @@
   text-align: left;
 }
 
+/* IA sin configurar: caja compacta con icono, título y qué hace falta */
 .apagado {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  align-self: stretch;
+  max-width: 560px;
   margin: 0;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px dashed var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
   color: var(--texto-suave);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
+  line-height: 1.45;
+  text-align: left;
+}
+
+.apagado > span:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--espacio-2);
+  min-width: 0;
+}
+
+.apagado strong {
+  color: var(--texto);
+  font-weight: var(--peso-semi);
+}
+
+.apagadoIcono {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radio);
+  background: var(--acento-suave);
+  color: var(--acento);
 }
 
 .cabecera {

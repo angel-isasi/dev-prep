@@ -9,7 +9,12 @@
   color: var(--texto-suave);
 }
 
-/* Las secciones en dos columnas cuando hay ancho; cada tarjeta entera en una columna */
+/* Espacio entre las pestañas y su contenido */
+.contenido {
+  margin-top: var(--espacio-4);
+}
+
+/* "Dispositivos": las secciones en dos columnas cuando hay ancho; cada tarjeta entera en una columna */
 .columnas {
   max-width: 880px;
 }
@@ -38,10 +43,31 @@
   box-shadow: var(--brillo-borde);
 }
 
+/* "Sobre ti" y "Tu ritmo": uno al lado del otro en la laptop, apilados en el celular */
+.bloques {
+  display: grid;
+  gap: var(--espacio-5);
+}
+
+.bloque {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .bloques {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--espacio-6);
+  }
+}
+
 .formulario label {
   display: flex;
   flex-direction: column;
   gap: var(--espacio-1);
+  min-width: 0;
 }
 
 .formulario label > span {
@@ -50,7 +76,6 @@
 }
 
 .seccion {
-  margin-bottom: calc(var(--espacio-2) * -1);
   color: var(--texto-suave);
   font-family: var(--fuente);
   font-size: var(--letra-2);
@@ -59,14 +84,13 @@
   text-transform: uppercase;
 }
 
-.seccion:not(:first-child) {
-  padding-top: var(--espacio-5);
-  border-top: 1px solid var(--borde);
-}
-
+/* Ayuda de una sola línea bajo la etiqueta (si no entra, se corta con puntos) */
 .formulario small {
+  overflow: hidden;
   color: var(--texto-tenue);
   font-size: var(--letra-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .formulario input,
@@ -99,10 +123,9 @@
   gap: var(--espacio-4);
 }
 
-@media (max-width: 900px) {
-  .fila {
-    grid-template-columns: 1fr;
-  }
+.fila input {
+  width: 100%;
+  min-width: 0;
 }
 
 .acciones {
@@ -121,12 +144,7 @@
   font-size: var(--letra-4);
 }
 
-/* Los tres campos de la fila quedan alineados abajo aunque su ayuda ocupe dos líneas */
-.fila input {
-  margin-top: auto;
-}
-
-/* Celular: menos margen y menos relleno en las tarjetas */
+/* Celular: menos margen, menos relleno y los campos del ritmo apilados */
 @media (max-width: 600px) {
   .pagina {
     padding: var(--espacio-4) var(--espacio-4) var(--espacio-6);
@@ -134,5 +152,13 @@
 
   .formulario {
     padding: var(--espacio-4);
+  }
+
+  .fila {
+    grid-template-columns: 1fr;
+  }
+
+  .acciones :global(.boton) {
+    min-height: 44px;
   }
 }

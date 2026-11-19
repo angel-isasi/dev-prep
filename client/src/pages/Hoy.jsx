@@ -79,6 +79,13 @@ export function Hoy() {
   const ritmoInfo = ruta ? ESTADO_RUTA[ruta.estado] : RITMO[ritmo.estado];
   const estaSemana = ruta?.estaSemana ?? [];
   const falloAyer = ayer && !ayer.cumplio && ayer.estado !== "salvado" && !meta.cumplio;
+  // Lo que antes llenaba la tarjeta de la fecha meta, ahora en una sola frase para su title
+  const detalleMeta = [
+    `Tu fecha meta: ${fecha(config.fechaMeta, { day: "numeric", month: "long", year: "numeric" })}`,
+    estaSemana.length > 0 && `Esta semana: ${estaSemana.map((u) => u.titulo).join(", ")}`,
+  ]
+    .filter(Boolean)
+    .join(". ");
 
   return (
     <section className={estilos.pagina}>
@@ -132,9 +139,12 @@ export function Hoy() {
       <div className={estilos.principal}>
         <Sesion sesion={sesion} frase={datos.frase} resumen={`Hoy sumaste ${meta.hecho} puntos${semana.dias ? ` en ${semana.dias.find((d) => d.fecha === datos.hoy)?.minutos ?? 0} min` : ""}. Racha: ${racha} ${racha === 1 ? "día" : "días"}.`} />
 
+        {/* Columna derecha: las cuatro cifras y, debajo, la semana */}
+        <div className={estilos.lado}>
         <div className={estilos.numeros}>
           {/* Puntos de hoy: el tanque se llena hacia el objetivo (meta más deuda); cada marca son 25 puntos */}
-          <div className={`tarjeta ${estilos.numero} ${estilos.puntos}`}>
+          {/* El desglose (meta + deuda) ya lo dice el aviso de arriba: aquí solo la cifra, y el detalle en title */}
+          <div className={`tarjeta ${estilos.numero} ${estilos.puntos}`} title={meta.deuda > 0 ? `${meta.meta} de meta + ${meta.deuda} de deuda` : "Tu meta de hoy"}>
             <SloshGauge
               className={estilos.tanque}
               value={meta.objetivo ? Math.min(100, (meta.hecho / meta.objetivo) * 100) : 100}
@@ -153,11 +163,11 @@ export function Hoy() {
                 <SlidingNumber number={meta.hecho} />
                 <small> / {meta.objetivo}</small>
               </strong>
-              <span className={estilos.detalle}>{meta.cumplio ? "¡Cumplida!" : meta.deuda > 0 ? `${meta.meta} de meta + ${meta.deuda} de deuda` : "Tu meta de hoy"}</span>
+              {meta.cumplio && <span className={estilos.detalle}>¡Cumplida!</span>}
             </div>
           </div>
 
-          <div className={`tarjeta ${estilos.numero}`} data-encendida={racha > 0}>
+          <div className={`tarjeta ${estilos.numero}`} data-encendida={racha > 0} title={!meta.cumplio && racha > 0 ? "Cumple tu meta de hoy para mantenerla" : undefined}>
             <span className="etiqueta">
               <Llama encendida={racha > 0} tamano={16} /> Racha
             </span>
@@ -166,12 +176,12 @@ export function Hoy() {
             </strong>
             <span className={estilos.detalle}>
               {racha === 1 ? "día seguido" : "días seguidos"}
-              {!meta.cumplio && racha > 0 && " · cumple hoy para mantenerla"}
             </span>
           </div>
 
-          <Link to="/progreso#ruta" className={`tarjeta ${estilos.numero}`}>
-            <span className="etiqueta">Faltan para tu meta</span>
+          {/* La fecha exacta y lo que toca esta semana van en title; el enlace abre la pestaña Ruta */}
+          <Link to="/progreso?pestana=ruta" className={`tarjeta ${estilos.numero}`} title={detalleMeta}>
+            <span className="etiqueta">Tu meta</span>
             {/* Los días que faltan, en un tablero de fichas */}
             <span className={estilos.tablero}>
               <SplitFlapText
@@ -192,31 +202,19 @@ export function Hoy() {
             <span className={estilos.detalle}>
               <span className="chip" data-tono={ritmoInfo.tono}>
                 {ritmoInfo.texto}
-              </span>{" "}
-              {fecha(config.fechaMeta, { day: "numeric", month: "short", year: "numeric" })}
-            </span>
-            {estaSemana.length > 0 && (
-              <span className={estilos.detalle}>
-                Esta semana: {estaSemana.slice(0, 2).map((u) => u.titulo).join(", ")}
-                {estaSemana.length > 2 && ` y ${estaSemana.length - 2} más`}
               </span>
-            )}
+            </span>
           </Link>
 
-          <Link to="/progreso" className={`tarjeta ${estilos.numero}`}>
+          <Link to="/progreso" className={`tarjeta ${estilos.numero}`} title="Ver tu progreso">
             <span className="etiqueta">Cuánto dominas</span>
             <strong className={estilos.cifra}>
               {ruta ? ruta.dominio : datos.preparacion}
               <small> %</small>
             </strong>
-            <span className={estilos.detalle}>{ruta ? `${ruta.listas} de ${ruta.total} unidades listas` : "Lo que dominas de verdad"} · ver progreso →</span>
+            <span className={estilos.detalle}>{ruta ? `${ruta.listas}/${ruta.total} unidades` : "Ver progreso"} →</span>
           </Link>
         </div>
-      </div>
-
-      <div className={estilos.abajo}>
-        {datos.juego && <TiempoLibre juego={datos.juego} meta={meta} salvados={datos.salvados} jefe={datos.jefe} />}
-
         <div className={`tarjeta ${estilos.semana}`}>
           <div className={estilos.semanaCabeza}>
             <h2>Esta semana</h2>
@@ -226,6 +224,12 @@ export function Hoy() {
           </div>
           {semana.dias && <GraficoSemana dias={semana.dias} meta={meta.meta || config.metaDiaria * 25} hoy={datos.hoy} />}
         </div>
+        </div>
+      </div>
+
+      <div className={estilos.abajo}>
+        {datos.juego && <TiempoLibre juego={datos.juego} meta={meta} salvados={datos.salvados} jefe={datos.jefe} />}
+
       </div>
     </section>
   );

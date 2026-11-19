@@ -190,11 +190,18 @@
   gap: var(--espacio-2);
 }
 
+/* Resumen del mes: 7 cifras en 4 + 3 (laptop) y de a 2 en el celular */
 .cifras {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--espacio-3);
   margin-top: var(--espacio-2);
+}
+
+@media (max-width: 600px) {
+  .cifras {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .cifras > div {

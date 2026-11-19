@@ -174,3 +174,41 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* ---------- Entradas compactas: el ejemplo y los detalles se abren al tocar ---------- */
+/* Como ahora son cortas, 2 columnas ya desde 900 px (3 desde 1600, definido arriba) */
+@media (min-width: 900px) and (max-width: 1200px) {
+  .entradas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.entrada {
+  padding: var(--espacio-4);
+}
+
+.entrada .descripcion p:last-child {
+  margin-bottom: var(--espacio-2);
+}
+
+.mas summary {
+  width: fit-content;
+  padding: 4px 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  cursor: pointer;
+}
+
+.mas summary:hover {
+  color: var(--color-cat);
+}
+
+.mas[open] summary {
+  margin-bottom: var(--espacio-2);
+}
+
+@media (max-width: 600px) {
+  .mas summary {
+    padding: 12px 0;
+  }
+}

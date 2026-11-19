@@ -248,16 +248,15 @@ function Postulaciones() {
       {resumen?.numeros.total > 0 && <Numeros numeros={resumen.numeros} />}
 
       <div className={estilos.fila}>
-        <h2>Me preguntaron esto</h2>
+        <h2 title="Las preguntas reales de tus entrevistas valen oro: anótalas apenas salgas y entran a tu repaso como tarjetas.">
+          Me preguntaron esto
+        </h2>
         {pendientes.length > 0 && (
           <button type="button" className="boton boton-primario" onClick={() => setRepaso({ lista: pendientes, i: 0 })}>
             Repasar {pendientes.length}
           </button>
         )}
       </div>
-      <p className={estilos.ayuda}>
-        Las preguntas reales de tus entrevistas valen oro: anótalas apenas salgas y entran a tu repaso como tarjetas.
-      </p>
       <form
         className={estilos.fila}
         onSubmit={async (e) => {
@@ -272,7 +271,7 @@ function Postulaciones() {
           className={estilos.crece}
           value={nueva.pregunta}
           onChange={(e) => setNueva({ ...nueva, pregunta: e.target.value })}
-          placeholder="¿Qué diferencia hay entre..."
+          placeholder="Anótala apenas salgas: entra a tu repaso"
         />
         <input value={nueva.empresa} onChange={(e) => setNueva({ ...nueva, empresa: e.target.value })} placeholder="Empresa" />
         <button type="submit" className="boton">
@@ -382,21 +381,21 @@ function MetaSemanal({ meta, alCambiar }) {
             ? meta.cumplida
               ? `✓ Meta de la semana cumplida: ${meta.hechas} de ${meta.meta} postulaciones`
               : `Esta semana: ${meta.hechas} de ${meta.meta} postulaciones (te ${meta.faltan === 1 ? "falta 1" : `faltan ${meta.faltan}`})`
-            : "Meta semanal de postulaciones: apagada"}
+            : "Meta semanal: apagada"}
         </strong>
-        <label className={estilos.metaCampo}>
+        <label
+          className={estilos.metaCampo}
+          title={'Actívala cuando empieces a postular de verdad (por ejemplo, 3 por semana). Cuenta las que pasas de "Por postular" a "Enviada". 0 la apaga.'}
+        >
           Por semana
           <input type="number" min={0} max={20} value={valor} onChange={(e) => setValor(e.target.value)} onBlur={guardar} />
         </label>
       </div>
-      {meta.meta > 0 ? (
+      {/* Apagada no muestra nada más: cómo activarla está en el title del campo "Por semana" */}
+      {meta.meta > 0 && (
         <div className={estilos.barraMeta} role="progressbar" aria-valuemin={0} aria-valuemax={meta.meta} aria-valuenow={meta.hechas}>
           <span style={{ width: `${Math.min(100, (meta.hechas / meta.meta) * 100)}%` }} />
         </div>
-      ) : (
-        <small className={estilos.tenue}>
-          Actívala cuando empieces a postular de verdad (por ejemplo, 3 por semana). Cuenta las que pasas de "Por postular" a "Enviada".
-        </small>
       )}
     </div>
   );

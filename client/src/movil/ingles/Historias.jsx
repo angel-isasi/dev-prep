@@ -31,7 +31,7 @@ export function ListaHistorias() {
   const sugerida = datos.historias.find((h) => h.unidad === datos.unidad && !datos.hechas[h.id]) ?? datos.historias.find((h) => !datos.hechas[h.id]);
 
   return (
-    <section className={estilos.pagina} data-area="ingles">
+    <section className={`${estilos.pagina} ${estilos.paginaLista}`} data-area="ingles">
       <CabeceraPagina etiqueta="Inglés" titulo="Historias" resaltado="y roleplays">
         La serie de Ana: estudia, postula, entra a trabajar y crece. Escucha, entiende y responde. En los roleplays tú eliges qué decir.
       </CabeceraPagina>

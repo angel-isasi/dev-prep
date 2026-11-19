@@ -134,12 +134,13 @@
   gap: var(--espacio-3);
 }
 
+/* Tarjeta de etapa suelta, en una fila: icono, título con minutos y "Empezar" */
 .etapa {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--espacio-2);
-  padding: var(--espacio-5);
+  align-items: center;
+  gap: var(--espacio-3);
+  min-height: 64px;
+  padding: var(--espacio-3) var(--espacio-4);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
   background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
@@ -164,6 +165,7 @@
 
 .etapaNumero {
   display: grid;
+  flex: none;
   place-items: center;
   width: 40px;
   height: 40px;
@@ -181,10 +183,18 @@
   font-weight: var(--peso-semi);
 }
 
-.etapaTexto {
-  color: var(--texto-suave);
-  font-size: var(--letra-4);
-  line-height: 1.55;
+.etapaNombre {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.etapaIr {
+  flex: none;
+  color: var(--acento);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
 }
 
 .etapas {

@@ -31,6 +31,41 @@ const FILTROS = {
   nuevas: (o) => o.nueva,
 };
 
+/**
+ * Las razones del puntaje llegan como frases (server/ofertas-auto.js). En la tarjeta cerrada se
+ * muestran como chips cortos; la frase completa queda de title y se lee entera en "Ver detalle".
+ * Cada regla: [patrón de la frase, texto del chip]. Las de estafa no van: ya hay una insignia roja.
+ */
+const CHIPS = [
+  [/^Es un puesto de frontend/, "Frontend"],
+  [/^Es full stack/, "Full stack"],
+  [/^Busca junior/, "Junior"],
+  [/^Pide nivel senior/, "Senior"],
+  [/^Pide nivel semi/, "Semi senior"],
+  [/^Pide (\d+) o más años/, (m) => `${m[1]}+ años`],
+  [/^Pide poca experiencia \((.+)\)/, (m) => `${m[1]} de experiencia`],
+  [/^Solo para personas en otro país/, "Solo otro país"],
+  [/^Es en Perú/, "Perú"],
+  [/^Remoto y abierto a Latinoamérica/, "Remoto LATAM"],
+  [/^Presencial en otro país/, "Presencial fuera"],
+  [/^Tecnologías: .*te faltan (\d+) de (\d+)/, (m) => (m[1] === "0" ? "Tienes el stack" : `Te faltan ${m[1]}/${m[2]}`)],
+  [/^Está en inglés/, "Pide inglés"],
+  [/^Publicada hace poco/, "Reciente"],
+  [/^Tiene (\d+) meses publicada/, (m) => `${m[1]} meses publicada`],
+  [/^Tiene más de mes y medio/, "Más de 45 días"],
+  [/^Tiene más de un mes/, "Más de un mes"],
+  [/^No es un puesto de desarrollo web/, "No es desarrollo web"],
+];
+
+function chipDe(texto) {
+  for (const [patron, corto] of CHIPS) {
+    const m = patron.exec(texto);
+    if (m) return typeof corto === "function" ? corto(m) : corto;
+  }
+  // Frase que no conozco: lo que va antes de los dos puntos
+  return texto.split(":")[0];
+}
+
 export function OfertasParaTi() {
   const [datos, setDatos] = useState(null);
   const [error, setError] = useState(null);
@@ -103,15 +138,32 @@ export function OfertasParaTi() {
 
   return (
     <div className={estilos.ofertas}>
-      <p className={estilos.seguridad}>
-        <IconoCandado tamano={14} /> Nunca pagues por postular ni des datos bancarios antes de un contrato. Ante la duda, abre "Ver detalle" y verifica la empresa.
-      </p>
-      <details className={estilos.ayuda}>
-        <summary>De dónde salen estas ofertas</summary>
-        Ofertas reales de Get on Board, Remotive, We Work Remotely, Himalayas, RemoteOK y Arbeitnow, ordenadas por cuánto te convienen: que
-        sean de frontend, para junior, abiertas a Perú o Latinoamérica, con lo que ya dominas y recientes. Cada una dice qué tan confiable es
-        su bolsa y si tiene señales de estafa. LinkedIn y Computrabajo no permiten leerlas automáticamente: para esas, usa "¿Estoy listo?".
-      </details>
+      {/* Una sola fila de avisos: el de estafas en una línea y el origen de las ofertas, los dos plegados */}
+      <div className={estilos.avisos}>
+        <details className={estilos.seguridad}>
+          <summary>
+            <IconoCandado tamano={14} /> Nunca pagues por postular
+          </summary>
+          Tampoco des datos bancarios antes de un contrato. Ante la duda, abre "Ver detalle" y verifica la empresa.
+        </details>
+        <details className={estilos.ayuda}>
+          <summary>De dónde salen estas ofertas</summary>
+          Ofertas reales de Get on Board, Remotive, We Work Remotely, Himalayas, RemoteOK y Arbeitnow, ordenadas por cuánto te convienen: que
+          sean de frontend, para junior, abiertas a Perú o Latinoamérica, con lo que ya dominas y recientes. Cada una dice qué tan confiable
+          es su bolsa y si tiene señales de estafa. LinkedIn y Computrabajo no permiten leerlas automáticamente: para esas, usa "¿Estoy
+          listo?".
+          {datos && (
+            <small className={estilos.estado}>
+              Buscado {hace(datos.buscadoEn)} en{" "}
+              {datos.fuentes
+                .filter((f) => f.ok)
+                .map((f) => f.nombre)
+                .join(", ") || "ninguna fuente"}
+              {!datos.conLaptop && " · Get on Board (la de Latinoamérica) y Himalayas aparecen cuando abres la web en tu laptop con dev-prep abierto"}
+            </small>
+          )}
+        </details>
+      </div>
 
       <div className={estilos.barra}>
         <div className={estilos.filtros} role="group" aria-label="Filtrar ofertas">
@@ -126,17 +178,8 @@ export function OfertasParaTi() {
         </button>
       </div>
 
-      {datos && (
-        <small className={estilos.estado}>
-          {datos.sinConexion ? "Sin internet: es tu última búsqueda. " : ""}
-          Buscado {hace(datos.buscadoEn)} en{" "}
-          {datos.fuentes
-            .filter((f) => f.ok)
-            .map((f) => f.nombre)
-            .join(", ") || "ninguna fuente"}
-          {!datos.conLaptop && " · Get on Board (la de Latinoamérica) y Himalayas aparecen cuando abres la web en tu laptop con dev-prep abierto"}
-        </small>
-      )}
+      {/* Dónde y cuándo se buscó vive en "De dónde salen"; aquí solo lo que cambia lo que ves */}
+      {datos?.sinConexion && <small className={estilos.estado}>Sin internet: es tu última búsqueda, de {hace(datos.buscadoEn)}.</small>}
       {datos && cuenta.nuevas > 0 && filtro !== "nuevas" && (
         <button type="button" className={estilos.avisoNuevas} onClick={() => elegir("nuevas")}>
           {cuenta.nuevas === 1 ? "Hay 1 oferta nueva" : `Hay ${cuenta.nuevas} ofertas nuevas`} desde tu última visita. Verlas
@@ -210,6 +253,7 @@ const CHECKLIST = [
 
 function Oferta({ oferta: o, marca, alMarcar, cv }) {
   const [abierta, setAbierta] = useState(false);
+  const [mas, setMas] = useState(false); // las acciones de menos uso, detrás de "Más"
   const [enPostulaciones, setEnPostulaciones] = useState(o.guardada);
   const tono = o.puntaje >= 65 ? "alto" : o.puntaje >= 45 ? "medio" : "bajo";
   const alertas = o.alertas ?? [];
@@ -239,18 +283,31 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
         <small className={estilos.meta}>
           {[o.empresa, o.remoto ? "Remoto" : null, o.ubicacion, salario(o.salario), hace(o.fecha)].filter(Boolean).join(" · ")}
         </small>
-        <ul className={estilos.razones}>
-          {o.razones.slice(0, abierta ? undefined : 3).map((r) => (
-            <li key={r.texto} data-tipo={r.tipo}>
-              {r.tipo === "a-favor" ? "+" : "−"} {r.texto}
-            </li>
-          ))}
-        </ul>
+        {abierta ? (
+          <ul className={estilos.razones}>
+            {o.razones.map((r) => (
+              <li key={r.texto} data-tipo={r.tipo}>
+                {r.tipo === "a-favor" ? "+" : "−"} {r.texto}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul className={estilos.chips}>
+            {o.razones
+              .filter((r) => !r.texto.startsWith("Posible estafa"))
+              .slice(0, 4)
+              .map((r) => (
+                <li key={r.texto} data-tipo={r.tipo} title={r.texto}>
+                  {chipDe(r.texto)}
+                </li>
+              ))}
+          </ul>
+        )}
 
         {abierta && <Detalle oferta={o} cv={cv} />}
 
         <div className={estilos.acciones}>
-          <button type="button" className="boton boton-fantasma" onClick={() => setAbierta((v) => !v)} aria-expanded={abierta}>
+          <button type="button" className="boton" onClick={() => setAbierta((v) => !v)} aria-expanded={abierta}>
             {abierta ? "Ver menos" : "Ver detalle"}
           </button>
           {marca !== "oculta" && (
@@ -258,20 +315,36 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
               <IconoEstrella tamano={14} llena={marca === "guardada"} /> {marca === "guardada" ? "Guardada" : "Guardar"}
             </button>
           )}
-          <button type="button" className="boton boton-fantasma" onClick={() => alMarcar(marca === "oculta" ? null : "oculta")}>
-            {marca === "oculta" ? "Volver a mostrar" : "No me interesa"}
+          {/* Una oferta oculta no tiene "Guardar": ahí el segundo botón es volver a mostrarla */}
+          {marca === "oculta" && (
+            <button type="button" className="boton boton-fantasma" onClick={() => alMarcar(null)}>
+              Volver a mostrar
+            </button>
+          )}
+          <button type="button" className="boton boton-fantasma" onClick={() => setMas((v) => !v)} aria-expanded={mas}>
+            {mas ? "Menos" : "Más"}
           </button>
-          <button
-            type="button"
-            className="boton"
-            disabled={enPostulaciones}
-            onClick={async () => {
-              await api.guardarOfertaComoPostulacion(o);
-              setEnPostulaciones(true);
-            }}
-          >
-            {enPostulaciones ? "✓ En tus postulaciones" : "Agregar a postulaciones"}
-          </button>
+          {enPostulaciones && !mas && <small className={estilos.tenue}>✓ En tus postulaciones</small>}
+          {mas && (
+            <>
+              {marca !== "oculta" && (
+                <button type="button" className="boton boton-fantasma" onClick={() => alMarcar("oculta")}>
+                  No me interesa
+                </button>
+              )}
+              <button
+                type="button"
+                className="boton"
+                disabled={enPostulaciones}
+                onClick={async () => {
+                  await api.guardarOfertaComoPostulacion(o);
+                  setEnPostulaciones(true);
+                }}
+              >
+                {enPostulaciones ? "✓ En tus postulaciones" : "Agregar a postulaciones"}
+              </button>
+            </>
+          )}
         </div>
       </div>
     </article>

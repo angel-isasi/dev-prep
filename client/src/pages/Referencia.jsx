@@ -28,7 +28,7 @@ function puntaje(entrada, palabras) {
 
 // Se dibujan por tandas: dibujar las ~200 entradas de golpe (cada una con su Markdown
 // y su código resaltado) congelaba la app más de un segundo.
-const TANDA = 10;
+const TANDA = 24;
 
 export function Referencia() {
   const [datos, setDatos] = useState(api.referencia.guardado);
@@ -124,8 +124,13 @@ export function Referencia() {
   );
 }
 
-/** Una entrada de la referencia. memo: al escribir en el buscador no se vuelven a dibujar las que no cambian. */
+/**
+ * Una entrada de la referencia. memo: al escribir en el buscador no se vuelven a dibujar las que no cambian.
+ * A la vista quedan el nombre, la firma y la descripción; el ejemplo, qué devuelve y el error típico
+ * están en un <details> y recién se dibujan al abrirlo (el código resaltado es lo que más cuesta).
+ */
 const Entrada = memo(function Entrada({ e }) {
+  const [abierta, setAbierta] = useState(false);
   return (
     <article className={estilos.entrada} data-categoria={e.categoria}>
       <header>
@@ -136,17 +141,24 @@ const Entrada = memo(function Entrada({ e }) {
       <div className={estilos.descripcion}>
         <Markdown>{e.descripcion}</Markdown>
       </div>
-      <Markdown>{"```" + (e.categoria === "React" ? "jsx" : "js") + "\n" + e.ejemplo + "\n```"}</Markdown>
-      <dl className={estilos.detalles}>
-        <dt>Devuelve</dt>
-        <dd>
-          <Markdown>{e.devuelve}</Markdown>
-        </dd>
-        <dt>Error típico</dt>
-        <dd className={estilos.error}>
-          <Markdown>{e.errorTipico}</Markdown>
-        </dd>
-      </dl>
+      <details className={estilos.mas} onToggle={(ev) => setAbierta(ev.currentTarget.open)}>
+        <summary>Ejemplo, qué devuelve y error típico</summary>
+        {abierta && (
+          <>
+            <Markdown>{"```" + (e.categoria === "React" ? "jsx" : "js") + "\n" + e.ejemplo + "\n```"}</Markdown>
+            <dl className={estilos.detalles}>
+              <dt>Devuelve</dt>
+              <dd>
+                <Markdown>{e.devuelve}</Markdown>
+              </dd>
+              <dt>Error típico</dt>
+              <dd className={estilos.error}>
+                <Markdown>{e.errorTipico}</Markdown>
+              </dd>
+            </dl>
+          </>
+        )}
+      </details>
     </article>
   );
 });

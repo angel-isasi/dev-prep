@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { Markdown } from "./Markdown.jsx";
 import { feedback } from "../lib/feedback.js";
@@ -8,7 +8,22 @@ import estilos from "./Quiz.module.css";
  * Quiz de opción múltiple: eliges, ves si acertaste y por qué, y sigues.
  * @param {{ preguntas: { pregunta: string, opciones: string[], correcta: number, explicacion: string }[], alTerminar: (aciertos: number) => void, mejor?: number }} props
  */
-export function Quiz({ preguntas, alTerminar, mejor }) {
+/** Baraja las opciones de cada pregunta y recalcula cuál es la correcta. */
+function barajar(preguntas) {
+  return preguntas.map((p) => {
+    const orden = p.opciones.map((_, i) => i);
+    for (let i = orden.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [orden[i], orden[j]] = [orden[j], orden[i]];
+    }
+    return { ...p, opciones: orden.map((i) => p.opciones[i]), correcta: orden.indexOf(p.correcta) };
+  });
+}
+
+export function Quiz({ preguntas: originales, alTerminar, mejor }) {
+  const [intento, setIntento] = useState(0);
+  // En el contenido la correcta casi siempre está en la misma letra: aquí cambia en cada intento
+  const preguntas = useMemo(() => barajar(originales), [originales, intento]);
   const [indice, setIndice] = useState(0);
   const [elegida, setElegida] = useState(null);
   const [aciertos, setAciertos] = useState(0);
@@ -36,6 +51,7 @@ export function Quiz({ preguntas, alTerminar, mejor }) {
             setElegida(null);
             setAciertos(0);
             setTerminado(false);
+            setIntento((n) => n + 1);
           }}
         >
           Intentar de nuevo

@@ -1,8 +1,9 @@
 // Teoría de un tema de Aprender, organizada para leer sin bajar tanto:
 // - Arriba, "En una frase" a todo el ancho.
 // - Al medio, tres columnas: el índice de conceptos (vas en el orden que quieras y marca los que leíste),
-//   un concepto a la vez (o todos seguidos, si lo prefieres) y la chuleta siempre a la vista.
-// - Abajo, los errores típicos en tarjetas y las preguntas de entrevista para pensar antes de ver la respuesta.
+//   un concepto a la vez (o todos seguidos, si lo prefieres) y la chuleta (plegada en el celular).
+// - Abajo, plegados, los errores típicos en tarjetas y las preguntas de entrevista: se abren al tocarlos
+//   o desde los botones del índice.
 // Si un tema no tiene las secciones de siempre, se muestra el texto completo como antes.
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Markdown } from "./Markdown.jsx";
@@ -53,6 +54,16 @@ function TeoriaOrganizada({ id, frase, introduccion, conceptos, errores, errores
   const erroresRef = useRef(null);
   const entrevistaRef = useRef(null);
   const n = conceptos.length;
+  // La chuleta es un <details>: abierta en pantallas anchas, plegada en el celular. Solo es el valor
+  // inicial; después manda el usuario al tocar el título.
+  const [chuletaAbierta] = useState(() => !window.matchMedia?.("(max-width: 600px)").matches);
+
+  // Errores y entrevista están plegados: para saltar a ellos primero se abren y luego se baja
+  function saltarA(ref) {
+    if (!ref.current) return;
+    ref.current.open = true;
+    irA(ref.current);
+  }
 
   // Lo que ves cuenta como leído (se recuerda en este dispositivo)
   useEffect(() => {
@@ -177,12 +188,12 @@ function TeoriaOrganizada({ id, frase, introduccion, conceptos, errores, errores
           </div>
           <div className={estilos.saltos}>
             {hayErrores && (
-              <button type="button" onClick={() => irA(erroresRef.current)}>
+              <button type="button" onClick={() => saltarA(erroresRef)}>
                 Errores típicos
               </button>
             )}
             {hayEntrevista && (
-              <button type="button" onClick={() => irA(entrevistaRef.current)}>
+              <button type="button" onClick={() => saltarA(entrevistaRef)}>
                 En la entrevista
               </button>
             )}
@@ -206,13 +217,12 @@ function TeoriaOrganizada({ id, frase, introduccion, conceptos, errores, errores
                   </button>
                 ) : (
                   hayErrores && (
-                    <button type="button" className="boton boton-primario" onClick={() => irA(erroresRef.current)}>
+                    <button type="button" className="boton boton-primario" onClick={() => saltarA(erroresRef)}>
                       Ahora: errores típicos <IconoFlechaDer />
                     </button>
                   )
                 )}
               </div>
-              <p className={estilos.atajo}>También puedes usar las flechas ← → del teclado.</p>
             </div>
           ) : (
             conceptos.map(concepto)
@@ -220,20 +230,19 @@ function TeoriaOrganizada({ id, frase, introduccion, conceptos, errores, errores
         </div>
 
         {chuleta && (
-          <aside className={estilos.chuleta} aria-label="Chuleta">
-            <span className={estilos.etiqueta}>Chuleta</span>
-            <p className={estilos.chuletaNota}>Lo mínimo para recordar, siempre a la vista.</p>
+          <details className={estilos.chuleta} open={chuletaAbierta}>
+            <summary className={estilos.etiqueta}>Chuleta</summary>
             <Markdown>{chuleta}</Markdown>
-          </aside>
+          </details>
         )}
       </div>
 
       {hayErrores && (
-        <section ref={erroresRef} className={estilos.seccion}>
-          <div className={estilos.seccionCabecera}>
+        <details ref={erroresRef} className={estilos.plegable}>
+          <summary title="Lo que más falla con este tema y cómo evitarlo">
             <h2>Errores típicos</h2>
-            <span>Lo que más falla con este tema y cómo evitarlo</span>
-          </div>
+            {errores.length > 0 && <span>· {errores.length}</span>}
+          </summary>
           {errores.length ? (
             <div className={estilos.errores}>
               {errores.map((e, i) => (
@@ -251,16 +260,17 @@ function TeoriaOrganizada({ id, frase, introduccion, conceptos, errores, errores
           ) : (
             <Markdown>{erroresTexto}</Markdown>
           )}
-        </section>
+        </details>
       )}
 
       {hayEntrevista && (
-        <section ref={entrevistaRef} className={estilos.seccion}>
-          <div className={estilos.seccionCabecera}>
+        <details ref={entrevistaRef} className={estilos.plegable}>
+          <summary>
             <h2>En la entrevista</h2>
-          </div>
+            {entrevista.length > 0 && <span>· {entrevista.length}</span>}
+          </summary>
           {entrevista.length ? <PreguntasEntrevista preguntas={entrevista} /> : <Markdown>{entrevistaTexto}</Markdown>}
-        </section>
+        </details>
       )}
     </div>
   );

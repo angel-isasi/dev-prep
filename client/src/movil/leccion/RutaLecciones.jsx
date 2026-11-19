@@ -2,7 +2,7 @@
 // agrupadas en Lo esencial, Con código real y Métodos a fondo. Arriba (o a la derecha en pantallas
 // grandes) "Sigue aquí" te deja en la siguiente lección que toca, el repaso del día y cómo se mide el
 // avance. Nada se bloquea: el orden solo se sugiere.
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { api } from "../../lib/api.js";
@@ -14,10 +14,27 @@ import { terminada } from "./motor.js";
 import { clavePrueba, planUnidad, PRUEBA, pruebaAprobada } from "./plan.js";
 import estilos from "./RutaLecciones.module.css";
 
-const AREAS = { javascript: "JavaScript", algoritmos: "Algoritmos", react: "React", typescript: "TypeScript", node: "Node.js y SQL" };
+const AREAS = { javascript: "JavaScript", algoritmos: "Algoritmos", react: "React", typescript: "TypeScript", node: "Node y SQL" };
 const ESTADOS = { nueva: "Sin empezar", empezada: "En curso", completa: "Completa", dominada: "Dominada" };
 /** Lecciones que se ven de cada grupo antes de "Ver todas". */
 const VISIBLES = 6;
+
+/**
+ * Los nombres de lección juntan varios títulos ("A · B y 2 más") y se cortaban en la tarjeta.
+ * Aquí se muestra solo el primero y cuántos más trae: "A +3". El nombre completo queda en el title.
+ */
+export function nombreCorto(nombre = "") {
+  const partes = nombre.split(" · ");
+  if (partes.length === 1) return nombre;
+  const resto = partes.at(-1).match(/ y (\d+) más$/); // "B y 2 más": B cuenta 1 y además vienen 2
+  const extra = partes.length - 1 + (resto ? Number(resto[1]) : 0);
+  return `${partes[0]} +${extra}`;
+}
+
+/** La unidad de la que sale "Sigue aquí": la tuya o, si ya la terminaste, la próxima sin completar. */
+function unidadQueSigue(datos, planes, actual) {
+  return planes.get(actual?.id)?.siguiente ? actual : datos.unidades.find((u) => !planes.get(u.id).completa && planes.get(u.id).siguiente);
+}
 
 const enlaceParte = (unidad, parte) => `/leccion?unidad=${encodeURIComponent(unidad)}&parte=${parte}`;
 
@@ -56,6 +73,9 @@ export function RutaLecciones() {
   const delArea = areas.find((a) => a.id === areaActiva)?.unidades ?? [];
   const completas = (lista) => lista.filter((u) => planes.get(u.id)?.completa).length;
   const leccionesHechas = [...planes.values()].reduce((t, p) => t + p.hechas, 0);
+  // Si "Sigue aquí" ya ofrece la siguiente lección de una unidad, esa unidad no repite el botón
+  const hayAMedias = datos.enCurso && !terminada(datos.enCurso);
+  const idSigue = hayAMedias ? null : unidadQueSigue(datos, planes, actual)?.id;
 
   async function hacerActual(id) {
     await api.elegirUnidad(id);
@@ -76,7 +96,7 @@ export function RutaLecciones() {
         </div>
 
         <div className={estilos.principal} data-area={areaActiva}>
-          <div className={estilos.pestanas}>
+          <PestanasArea activa={areaActiva}>
             <Pestanas
               pestanas={areas.map((a) => ({ id: a.id, texto: a.titulo, extra: `${completas(a.unidades)}/${a.unidades.length}` }))}
               activa={areaActiva}
@@ -85,10 +105,10 @@ export function RutaLecciones() {
                 setAbierta(null);
               }}
             />
-          </div>
+          </PestanasArea>
           <p className={estilos.resumenArea}>
-            {completas(delArea)} de {delArea.length} {delArea.length === 1 ? "unidad completa" : "unidades completas"} ·{" "}
-            {delArea.reduce((t, u) => t + planes.get(u.id).hechas, 0)} de {delArea.reduce((t, u) => t + planes.get(u.id).total, 0)} lecciones
+            {completas(delArea)}/{delArea.length} unidades · {delArea.reduce((t, u) => t + planes.get(u.id).hechas, 0)}/
+            {delArea.reduce((t, u) => t + planes.get(u.id).total, 0)} lecciones
           </p>
 
           <ol className={estilos.ruta}>
@@ -102,6 +122,7 @@ export function RutaLecciones() {
                 abierta={unidadAbierta === u.id}
                 alAbrir={() => setAbierta(unidadAbierta === u.id ? null : u.id)}
                 alHacerActual={() => hacerActual(u.id)}
+                enSigueAqui={u.id === idSigue}
                 teoria={datos.teoria?.[u.id] ?? 0}
                 prueba={datos.quizzes?.[clavePrueba(u.id)]}
               />
@@ -113,10 +134,26 @@ export function RutaLecciones() {
   );
 }
 
+/**
+ * Las pestañas de área no entran todas en el celular: la fila se desliza hacia los lados (ninguna se
+ * corta a la mitad sin poder verla) y, al cambiar de área, la pestaña activa se trae a la vista.
+ */
+function PestanasArea({ activa, children }) {
+  const caja = useRef(null);
+  useEffect(() => {
+    caja.current?.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }, [activa]);
+  return (
+    <div className={estilos.pestanas} ref={caja}>
+      {children}
+    </div>
+  );
+}
+
 /** La siguiente lección que toca: de tu unidad o, si ya la terminaste, de la próxima sin completar. */
 function SigueAqui({ datos, planes, actual }) {
   const enCurso = datos.enCurso && !terminada(datos.enCurso) ? datos.enCurso : null;
-  const unidad = planes.get(actual?.id)?.siguiente ? actual : datos.unidades.find((u) => !planes.get(u.id).completa && planes.get(u.id).siguiente);
+  const unidad = unidadQueSigue(datos, planes, actual);
   const plan = unidad ? planes.get(unidad.id) : null;
   const leccion = plan?.siguiente;
   const requeridas = plan ? plan.grupos.filter((g) => !g.opcional).flatMap((g) => g.lecciones) : [];
@@ -127,7 +164,6 @@ function SigueAqui({ datos, planes, actual }) {
       {enCurso ? (
         <>
           <strong className={estilos.sigueTitulo}>Tienes una lección a medias</strong>
-          <p className={estilos.suave}>Retómala donde la dejaste: tu avance está guardado.</p>
           <Link to="/leccion?retomar=1" className={`boton boton-primario ${estilos.grande}`}>
             Continuar la lección
           </Link>
@@ -137,10 +173,11 @@ function SigueAqui({ datos, planes, actual }) {
           <small className={estilos.suave}>
             {AREAS[unidad.area] ?? unidad.area} · {unidad.titulo}
           </small>
-          <strong className={estilos.sigueTitulo}>{leccion.nombre}</strong>
+          <strong className={estilos.sigueTitulo} title={leccion.nombre}>
+            {nombreCorto(leccion.nombre)}
+          </strong>
           <p className={estilos.suave}>
-            {leccion.preguntas} preguntas · unos {leccion.minutos} min
-            {leccion.vistos > 0 ? ` · ya hiciste ${leccion.vistos}` : ""}
+            {leccion.vistos > 0 ? `${leccion.vistos}/${leccion.preguntas}` : `${leccion.preguntas} preguntas`} · {leccion.minutos} min
           </p>
           {requeridas.length > 0 && (
             <div className={estilos.segmentos} aria-label={`${plan.hechas} de ${plan.total} lecciones de la unidad`}>
@@ -156,7 +193,7 @@ function SigueAqui({ datos, planes, actual }) {
       ) : (
         <>
           <strong className={estilos.sigueTitulo}>Completaste todas las unidades</strong>
-          <p className={estilos.suave}>Ahora toca fijarlo: haz el repaso del día y las pruebas de unidad que te falten.</p>
+          <p className={estilos.suave}>Ahora fíjalo: repaso del día y pruebas de unidad.</p>
         </>
       )}
     </article>
@@ -194,7 +231,6 @@ function Repaso({ datos }) {
           Rápida: 5 preguntas
         </Link>
       </div>
-      <small className={estilos.suave}>El repaso del día mezcla lo que toca recordar con algo nuevo de tu unidad y preguntas de entrevista.</small>
     </article>
   );
 }
@@ -204,6 +240,17 @@ function ComoSeMide() {
     <details className={`${estilos.caja} ${estilos.mide}`}>
       <summary>Cómo se mide tu avance</summary>
       <dl>
+        <div>
+          <dt>Grupos de lecciones</dt>
+          <dd>
+            Lo esencial: las ideas del tema, su vocabulario y predecir qué hace el código. Con código real: completar, ordenar y encontrar
+            errores en código de los ejercicios. Métodos a fondo es opcional: no hace falta para completar la unidad.
+          </dd>
+        </div>
+        <div>
+          <dt>Repaso del día</dt>
+          <dd>Mezcla lo que toca recordar con algo nuevo de tu unidad y preguntas de entrevista.</dd>
+        </div>
         <div>
           <dt>Lección hecha</dt>
           <dd>Respondiste todas sus preguntas al menos una vez. Se marca apenas la terminas.</dd>
@@ -231,7 +278,7 @@ function ComoSeMide() {
   );
 }
 
-function Unidad({ unidad, numero, plan, actual, abierta, alAbrir, alHacerActual, teoria, prueba }) {
+function Unidad({ unidad, numero, plan, actual, abierta, alAbrir, alHacerActual, enSigueAqui, teoria, prueba }) {
   const requeridas = plan.grupos.filter((g) => !g.opcional).flatMap((g) => g.lecciones);
   const aprobada = pruebaAprobada(prueba);
   return (
@@ -254,23 +301,19 @@ function Unidad({ unidad, numero, plan, actual, abierta, alAbrir, alHacerActual,
               <i key={l.id} data-estado={l.hecha ? "hecha" : l.vistos ? "empezada" : "nueva"} />
             ))}
           </span>
+          {/* Cerrada: solo lo justo. El detalle (aprendidas, fijadas, métodos) sale al abrirla. */}
           <span className={estilos.datos}>
             <span>
-              <strong>{plan.hechas}</strong> de {plan.total} lecciones
+              <strong>
+                {plan.hechas}/{plan.total}
+              </strong>{" "}
+              lecciones
             </span>
-            <span>
-              <strong>{plan.preguntas.aprendidos}</strong> de {plan.preguntas.total} preguntas aprendidas
+            <span title="Preguntas aprendidas">
+              <strong>
+                {plan.preguntas.aprendidos}/{plan.preguntas.total}
+              </strong>
             </span>
-            {plan.preguntas.fijados > 0 && (
-              <span>
-                <strong>{plan.preguntas.fijados}</strong> fijadas
-              </span>
-            )}
-            {plan.opcionales.total > 0 && (
-              <span>
-                Métodos: {plan.opcionales.hechas} de {plan.opcionales.total}
-              </span>
-            )}
           </span>
           <span className={estilos.flecha} aria-hidden>
             ›
@@ -286,10 +329,20 @@ function Unidad({ unidad, numero, plan, actual, abierta, alAbrir, alHacerActual,
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.2 }}
             >
+              <p className={estilos.detalleDatos}>
+                {plan.preguntas.aprendidos} de {plan.preguntas.total} preguntas aprendidas · {plan.preguntas.fijados} fijadas
+                {plan.opcionales.total > 0 ? ` · Métodos: ${plan.opcionales.hechas} de ${plan.opcionales.total}` : ""}
+              </p>
               <div className={estilos.accionesUnidad}>
-                {plan.siguiente && (
-                  <Link to={enlaceParte(unidad.id, plan.siguiente.id)} className="boton boton-primario" onClick={() => api.elegirUnidad(unidad.id)}>
-                    {plan.siguiente.vistos ? "Seguir" : "Empezar"}: {plan.siguiente.nombre}
+                {/* Si "Sigue aquí" ya lleva a esta misma lección, el botón sería un duplicado */}
+                {plan.siguiente && !enSigueAqui && (
+                  <Link
+                    to={enlaceParte(unidad.id, plan.siguiente.id)}
+                    className="boton boton-primario"
+                    title={plan.siguiente.nombre}
+                    onClick={() => api.elegirUnidad(unidad.id)}
+                  >
+                    {plan.siguiente.vistos ? "Seguir" : "Empezar"}
                   </Link>
                 )}
                 {unidad.conTeoria && (
@@ -336,12 +389,12 @@ export function Grupo({ grupo, unidad }) {
   return (
     <section className={estilos.grupo} data-opcional={grupo.opcional}>
       <header>
-        <h3>{grupo.titulo}</h3>
+        {/* La descripción del grupo ya no ocupa una línea: queda como title y en "Cómo se mide tu avance" */}
+        <h3 title={grupo.texto}>{grupo.titulo}</h3>
         <span>
           {grupo.hechas}/{grupo.lecciones.length}
         </span>
       </header>
-      <p className={estilos.suave}>{grupo.texto}</p>
       <ol className={estilos.lecciones}>
         {visibles.map((l) => {
           const estado = l.hecha ? "hecha" : l.vistos ? "empezada" : "nueva";
@@ -352,10 +405,9 @@ export function Grupo({ grupo, unidad }) {
                   {l.hecha ? "✓" : l.numero}
                 </span>
                 <span className={estilos.leccionTexto}>
-                  <strong>{l.nombre}</strong>
+                  <strong title={l.nombre}>{nombreCorto(l.nombre)}</strong>
                   <small>
-                    {l.preguntas} preguntas · {l.minutos} min
-                    {estado === "empezada" ? ` · vas ${l.vistos} de ${l.preguntas}` : ""}
+                    {estado === "empezada" ? `${l.vistos}/${l.preguntas}` : `${l.preguntas} preguntas`} · {l.minutos} min
                     {l.errores ? ` · ${l.errores} por corregir` : ""}
                   </small>
                 </span>

@@ -165,7 +165,9 @@ function Entrevista({ proceso }) {
       const base = principal
         ? { pregunta: textoPregunta, claves: p.claves ?? [], modelo: config.ingles && p.respuestaEn ? p.respuestaEn : p.respuesta }
         : { pregunta: textoPregunta }; // en la repregunta no hay lista ni modelo: la IA evalúa con su criterio
-      const r = await pedirIa({ tarea: "entrevista", ...base, categoria: p.categoria, idioma, contexto: contexto.current ?? "", respuesta: dicho });
+      // Solo se pide lo que se va a mostrar: la versión mejorada va en la pregunta principal y la repregunta solo si queda turno
+      const omitir = [...(principal ? [] : ["mejor"]), ...(vuelta < config.repreguntas ? [] : ["repregunta"])];
+      const r = await pedirIa({ tarea: "entrevista", ...base, omitir, categoria: p.categoria, idioma, contexto: contexto.current ?? "", respuesta: dicho });
       // Si mientras tanto terminaste, saltaste o saliste, la respuesta se descarta: nada de voz ni micrófono fuera de lugar
       if (ronda.current !== estaRonda) return;
       setTurnos((t) => [...t, { id: p.id, etapa: p.etapa ?? "tecnica", principal, pregunta: textoPregunta, respuesta: dicho, r }]);

@@ -120,15 +120,16 @@ export function PaginaMapache() {
             <div className={estilos.barra} data-lleno={comida >= 1}>
               <i style={{ width: `${comida * 100}%` }} />
             </div>
-            <div className={estilos.datosFila}>
-              <span>
-                Racha de inglés: <strong>{datos.racha}</strong> {datos.racha === 1 ? "día" : "días"}
+            {/* Tres datos cortos en una fila; el detalle de cada uno queda en el title */}
+            <div className={estilos.datosChips}>
+              <span title="Racha de inglés">
+                Racha <strong>{datos.racha}</strong> {datos.racha === 1 ? "día" : "días"}
               </span>
-              <span>
-                Nivel <strong>{datos.nivel}</strong> · vive en {datos.casa.texto}
+              <span title={`Vive en ${datos.casa.texto}`}>
+                Nivel <strong>{datos.nivel}</strong>
               </span>
-              <span>
-                Te habla en <strong>{datos.nivelMapache}</strong>: todo lo suyo va en B2 y C1
+              <span title="Todo lo suyo va en B2 y C1">
+                Te habla en <strong>{datos.nivelMapache}</strong>
               </span>
             </div>
           </div>
@@ -143,9 +144,12 @@ export function PaginaMapache() {
               </button>
             )}
           </div>
-          <p className={estilos.nota}>
-            Come lo que aprendes en inglés: palabras nuevas, aciertos, lecciones, historias y lo que hagas aquí. Abrir la app no lo alimenta.
-          </p>
+          <details className={estilos.notaPlegada}>
+            <summary>¿Qué come?</summary>
+            <p className={estilos.nota}>
+              Lo que aprendes en inglés: palabras nuevas, aciertos, lecciones, historias y lo que hagas aquí. Abrir la app no lo alimenta.
+            </p>
+          </details>
         </div>
       </div>
 

@@ -132,6 +132,36 @@
   color: var(--texto-tenue);
 }
 
+/* Tarjeta cerrada: las razones como chips cortos (la frase completa, en "Ver detalle") */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  padding: 2px 10px;
+  border-radius: var(--radio-pildora);
+  background: var(--superficie-2);
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+.chips [data-tipo="a-favor"]::before {
+  content: "+ ";
+  color: var(--exito);
+}
+
+.chips [data-tipo="en-contra"]::before {
+  content: "− ";
+  color: var(--aviso);
+}
+
 .tecnologias {
   display: flex;
   flex-wrap: wrap;
@@ -158,6 +188,7 @@
 .acciones {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: var(--espacio-2);
 }
 
@@ -172,25 +203,74 @@
   align-self: center;
 }
 
-details.ayuda summary {
+/* Fila de avisos plegados: cerrados van uno al lado del otro; el que se abre ocupa todo el ancho */
+.avisos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--espacio-1) var(--espacio-4);
+}
+
+.avisos > details {
+  font-size: var(--letra-4);
+}
+
+.avisos > details[open] {
+  flex-basis: 100%;
+}
+
+.avisos summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
   cursor: pointer;
+}
+
+.avisos summary::after {
+  content: "+";
   color: var(--texto-tenue);
 }
 
-details.ayuda[open] summary {
-  margin-bottom: 4px;
+.avisos details[open] > summary::after {
+  content: "−";
+}
+
+.avisos summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .avisos summary {
+    min-height: var(--toque);
+  }
+}
+
+details.ayuda summary {
+  color: var(--texto-tenue);
+}
+
+details.ayuda .estado {
+  display: block;
+  margin-top: var(--espacio-2);
 }
 
 .seguridad {
-  margin: 0;
   max-width: 80ch;
-  padding: var(--espacio-2) var(--espacio-3);
+  color: var(--texto-suave);
+  line-height: 1.55;
+}
+
+.seguridad > summary {
+  padding: 0 var(--espacio-3);
   border-left: 3px solid var(--aviso);
   border-radius: var(--radio-sm);
   background: var(--aviso-suave);
-  color: var(--texto-suave);
-  font-size: var(--letra-4);
-  line-height: 1.55;
+  color: var(--texto);
+}
+
+.seguridad[open] > summary {
+  margin-bottom: 4px;
 }
 
 .avisoNuevas {

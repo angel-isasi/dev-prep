@@ -361,3 +361,58 @@
     padding: var(--espacio-4);
   }
 }
+
+/* ---------- Pestañas (Resumen, Ruta, Plan) ---------- */
+.contenido {
+  margin-top: var(--espacio-4);
+}
+
+.preparacionTexto {
+  min-width: 0;
+}
+
+/* "Cómo se calcula": la explicación del porcentaje, plegada */
+.como {
+  margin-top: var(--espacio-2);
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.como summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--acento);
+  font-weight: var(--peso-medio);
+  list-style: none;
+}
+
+.como summary::-webkit-details-marker {
+  display: none;
+}
+
+.como summary::before {
+  content: "?";
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: var(--letra-1);
+  font-weight: var(--peso-negrita);
+}
+
+.como p {
+  margin: var(--espacio-2) 0 0;
+  max-width: 52ch;
+  line-height: 1.55;
+}
+
+@media (max-width: 600px) {
+  /* Zona de toque cómoda para el pulgar */
+  .como summary {
+    min-height: 44px;
+  }
+}

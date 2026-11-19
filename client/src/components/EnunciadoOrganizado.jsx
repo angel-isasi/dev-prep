@@ -2,12 +2,20 @@
 // ("Reglas", "Ejemplos", "Por qué importa", "Reto extra"...) en su propia tarjeta, dos por fila en
 // pantalla grande. Las que traen código largo o tablas ocupan todo el ancho para leerse sin desplazar,
 // y las que tienen 3 o más subsecciones "###" (por ejemplo, pasos) muestran cada una en su tarjeta.
+//
+// Menos letra a la vista: lo que hace falta para actuar se ve de entrada; lo que amplía (por qué
+// importa, errores comunes, otra forma, conceptos, reto extra) queda plegado con su título, y se
+// abre con un toque. Nada se borra: la app sigue siendo la única fuente sin internet.
 import { useMemo } from "react";
 import { Markdown } from "./Markdown.jsx";
 import { seccionesDe, subseccionesDe } from "../lib/teoria.js";
 import estilos from "./EnunciadoOrganizado.module.css";
 
 // Secciones que, si el enunciado no tiene texto inicial, hacen de "qué tienes que hacer"
+// Secciones que amplían: se muestran cerradas, al final
+const PLEGADAS = /^(por qué importa|por qué funciona|errores comunes|otra forma|cómo explicarlo|conceptos|reto extra|pistas?( de diseño)?$|lo que se valora)/i;
+const palabras = (texto) => texto.trim().split(/s+/).filter(Boolean).length;
+
 const PRINCIPALES = /^(el problema|tu tarea|qué hacer|qué debe hacer|la función que vas a probar|enunciado|idea clave)$|^ticket/i;
 
 /**
@@ -32,6 +40,9 @@ export function EnunciadoOrganizado({ markdown, etiqueta = "Qué tienes que hace
     resto = secciones.slice(1);
   }
 
+  const visibles = resto.filter((s) => !PLEGADAS.test(s.titulo));
+  const plegadas = resto.filter((s) => PLEGADAS.test(s.titulo));
+
   return (
     <div className={estilos.enunciado}>
       {principal && (
@@ -41,7 +52,7 @@ export function EnunciadoOrganizado({ markdown, etiqueta = "Qué tienes que hace
         </section>
       )}
       <div className={estilos.secciones}>
-        {resto.map((s, i) => {
+        {visibles.map((s, i) => {
           const sub = subseccionesDe(s.cuerpo);
           if (sub.partes.length >= 3)
             return (
@@ -66,6 +77,19 @@ export function EnunciadoOrganizado({ markdown, etiqueta = "Qué tienes que hace
           );
         })}
       </div>
+      {plegadas.length > 0 && (
+        <div className={estilos.plegadas}>
+          {plegadas.map((s, i) => (
+            <details key={i} className={estilos.plegada}>
+              <summary>
+                <span>{s.titulo}</span>
+                <small>{Math.max(1, Math.round(palabras(s.cuerpo) / 200))} min</small>
+              </summary>
+              <Markdown>{s.cuerpo}</Markdown>
+            </details>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

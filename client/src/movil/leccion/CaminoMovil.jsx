@@ -28,6 +28,8 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
   const [datos, setDatos] = useState(null);
   const [abierta, setAbierta] = useState(null);
   const [cofre, setCofre] = useState(null); // premio del cofre recién abierto
+  // Etapas que abriste o cerraste a mano: { [clave]: true | false }. Las demás siguen la regla de abajo
+  const [etapas, setEtapas] = useState({});
   const ingles = ambito === "ingles";
 
   const cargar = () => api.lecciones(ambito).then(setDatos);
@@ -71,9 +73,23 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
         const avances = new Map(unidades.map((u) => [u.id, ingles ? avanceConceptos(datos.items, datos.registros, u.id) : avanceUnidad(datos.items, datos.registros, u.id)]));
         const hechaDe = (u) => (ingles ? avances.get(u.id).completa || porExamen(u.id) : avances.get(u.id).dominada);
         const hechas = unidades.filter(hechaDe).length;
+        // Solo se despliega la etapa donde vas (o la primera sin terminar): el camino completo medía 10.000 px
+        const enCurso = unidades.some((u) => u.id === datos.unidadActual) || (!conUnidades.some((g) => g.unidades.some((u) => u.id === datos.unidadActual)) && clave === conUnidades[0].clave);
+        const desplegada = conUnidades.length === 1 || (etapas[clave] ?? enCurso);
         return (
         <div key={clave} className={estilos.area} data-area={area}>
-          <header className={estilos.etapa}>
+          <header className={estilos.etapa} data-plegada={!desplegada}>
+            {conUnidades.length > 1 && (
+              <button
+                type="button"
+                className={estilos.plegar}
+                aria-expanded={desplegada}
+                aria-label={`${desplegada ? "Ocultar" : "Mostrar"} ${titulo}`}
+                onClick={() => setEtapas((e) => ({ ...e, [clave]: !desplegada }))}
+              >
+                {desplegada ? "−" : "+"}
+              </button>
+            )}
             <div>
               <h2 className={estilos.areaTitulo}>
                 <span aria-hidden className={estilos.punto} />
@@ -87,6 +103,7 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
               <i style={{ width: `${(hechas / unidades.length) * 100}%` }} />
             </div>
           </header>
+          {desplegada && (
           <ol className={estilos.nodos}>
             {unidades.map((u, i) => {
               const av = avances.get(u.id);
@@ -214,6 +231,7 @@ export function CaminoMovil({ ambito = "programacion", sinCabecera = false }) {
               );
             })}
           </ol>
+          )}
         </div>
         );
       })}

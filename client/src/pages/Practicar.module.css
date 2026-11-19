@@ -378,8 +378,53 @@
   }
 }
 
-.retoSemana:not(:empty) {
+/* Atajos (Lee y predice, Depurar, Reto de la semana): una fila de 3 en la laptop, apilados en el celular.
+   auto-fit reparte el ancho entre los que haya (si no hay reto, quedan 2 columnas). */
+.atajos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--espacio-3);
+}
+
+/* El margen solo existe si hay algo que mostrar */
+.atajos:has(> a),
+.atajos:has(> .retoSemana:not(:empty)) {
   margin-bottom: var(--espacio-6);
+}
+
+.atajo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  min-height: 44px;
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  color: var(--texto);
+}
+
+.atajo:hover {
+  text-decoration: none;
+}
+
+.atajo strong {
+  font-size: var(--letra-6);
+}
+
+.atajo small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.retoSemana:empty {
+  display: none;
+}
+
+/* La tarjeta del reto llena su celda para quedar a la altura de las otras dos */
+.retoSemana > * {
+  height: 100%;
 }
 
 /* Pantalla muy ancha: una columna más de colecciones */

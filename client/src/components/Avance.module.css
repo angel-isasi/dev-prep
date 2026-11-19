@@ -141,8 +141,10 @@
 .plan a {
   display: grid;
   grid-template-columns: 28px 1fr;
+  align-items: center;
   column-gap: var(--espacio-3);
-  padding: var(--espacio-3);
+  min-height: 44px;
+  padding: var(--espacio-2) var(--espacio-3);
   border: 1px solid var(--borde);
   border-radius: var(--radio);
   color: var(--texto);
@@ -154,7 +156,6 @@
 
 .plan a::before {
   content: counter(paso);
-  grid-row: span 2;
   display: grid;
   place-items: center;
   width: 28px;
@@ -175,10 +176,6 @@
   font-size: var(--letra-5);
 }
 
-.plan small {
-  color: var(--texto-tenue);
-  font-size: var(--letra-3);
-}
 
 /* Tu día en números */
 .dia {

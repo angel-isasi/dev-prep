@@ -245,13 +245,23 @@ function Portada({ proceso, ingles, setIngles, cargando, alEmpezar }) {
       <h3 className={estilos.subtitulo}>O practica una etapa suelta</h3>
       <div className={estilos.gridEtapas}>
         {etapas.map((e, i) => (
-          <button key={e.id} type="button" className={`brillo ${estilos.etapa}`} disabled={cargando} onClick={() => alEmpezar([e.id])}>
+          // La descripción larga ya se lee en "Por etapa" y al empezar la etapa: aquí va solo como title
+          <button
+            key={e.id}
+            type="button"
+            className={`brillo ${estilos.etapa}`}
+            disabled={cargando}
+            title={e.descripcion}
+            onClick={() => alEmpezar([e.id])}
+          >
             <span className={estilos.etapaNumero} aria-hidden>
               {ICONOS[e.id] ?? i + 1}
             </span>
-            <strong>{e.titulo}</strong>
-            <span className={estilos.etapaMinutos}>{e.minutos} min</span>
-            <span className={estilos.etapaTexto}>{e.descripcion}</span>
+            <span className={estilos.etapaNombre}>
+              <strong>{e.titulo}</strong>
+              <span className={estilos.etapaMinutos}>{e.minutos} min</span>
+            </span>
+            <span className={estilos.etapaIr}>Empezar →</span>
           </button>
         ))}
       </div>

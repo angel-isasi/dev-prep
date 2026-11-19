@@ -1,5 +1,7 @@
 .tarjeta {
   position: relative;
+  /* El confeti de "¡Lo ganaste!" no sale de la tarjeta */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: var(--espacio-3);
@@ -96,8 +98,24 @@
   background: var(--aviso-suave);
 }
 
-.nuevos span {
+.nuevos span,
+.nuevos a {
   font-weight: var(--peso-semi);
+}
+
+.nuevos a {
+  color: var(--texto);
+  text-decoration: underline;
+}
+
+/* Canvas del confeti: cubre la tarjeta y no estorba los clics */
+.confeti {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
 /* Página de insignias */
@@ -193,5 +211,62 @@
 @media (min-width: 900px) {
   .pagina {
     padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+  }
+}
+
+/* Filtro de insignias: Ganadas / Cerca / Todas */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
+  margin-bottom: var(--espacio-4);
+}
+
+.filtros button {
+  padding: 5px 13px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-pildora);
+  background: none;
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  cursor: pointer;
+}
+
+.filtros button span {
+  color: var(--texto-tenue);
+}
+
+.filtros button[data-activa="true"] {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
+/* Las bloqueadas son botones: al tocarlas muestran su descripción */
+button.insignia {
+  align-items: flex-start;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+button.insignia:hover,
+button.insignia[aria-expanded="true"] {
+  opacity: 0.9;
+}
+
+button.insignia .barra {
+  width: 100%;
+}
+
+.vacio {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+}
+
+@media (max-width: 600px) {
+  .filtros button {
+    min-height: 44px;
   }
 }

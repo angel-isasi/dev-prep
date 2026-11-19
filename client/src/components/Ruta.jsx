@@ -44,9 +44,19 @@ export function explicacionRuta(r) {
   return r.estado === "atrasado" ? `${llevas} Lo que falta ya se repartió en las semanas que quedan.` : llevas;
 }
 
+// Cuántas semanas se ven de entrada: la actual y las dos siguientes
+const SEMANAS_A_LA_VISTA = 3;
+
 export function Ruta({ ruta }) {
+  const [todas, setTodas] = useState(false);
   if (!ruta) return null;
   const info = ESTADO_RUTA[ruta.estado];
+  // Al día o adelantado, la frase solo repetiría el chip ("13 de 36 unidades listas"): va como title
+  const repiteChip = ruta.estado === "al-dia" || ruta.estado === "adelantado";
+  // De entrada, solo esta semana y las 2 que siguen; el botón despliega el resto
+  const actual = Math.max(0, ruta.semanas.findIndex((s) => s.actual));
+  const semanas = todas ? ruta.semanas : ruta.semanas.slice(actual, actual + SEMANAS_A_LA_VISTA);
+  const hayMas = ruta.semanas.length > SEMANAS_A_LA_VISTA;
 
   return (
     <section className={`tarjeta ${estilos.ruta}`} id="ruta">
@@ -55,11 +65,11 @@ export function Ruta({ ruta }) {
           <span className="etiqueta">Tu ruta hasta el {fecha(ruta.fechaMeta, { day: "numeric", month: "long", year: "numeric" })}</span>
           <h2>
             {info.texto}
-            <span className="chip" data-tono={info.tono}>
+            <span className="chip" data-tono={info.tono} title={repiteChip ? explicacionRuta(ruta) : undefined}>
               {ruta.listas} de {ruta.total} unidades listas
             </span>
           </h2>
-          <p>{explicacionRuta(ruta)}</p>
+          {!repiteChip && <p>{explicacionRuta(ruta)}</p>}
         </div>
         <dl className={estilos.datos}>
           <div>
@@ -87,7 +97,7 @@ export function Ruta({ ruta }) {
       )}
 
       <ol className={estilos.semanas}>
-        {ruta.semanas.map((s) => (
+        {semanas.map((s) => (
           <li key={s.desde} className={estilos.semana} data-actual={s.actual} data-hito={!!s.hito}>
             <div className={estilos.semanaCabeza}>
               <strong>{s.actual ? "Esta semana" : `Semana ${s.numero}`}</strong>
@@ -120,10 +130,21 @@ export function Ruta({ ruta }) {
         ))}
       </ol>
 
-      <p className={estilos.leyenda}>
-        Una unidad cuenta como lista cuando llega a amarillo en tu mapa: lecciones hechas, quiz aprobado o ejercicios resueltos. Si te atrasas, lo pendiente se
-        reparte solo entre las semanas que quedan.
-      </p>
+      <div className={estilos.pie}>
+        {hayMas && (
+          <button type="button" className="boton" aria-expanded={todas} onClick={() => setTodas(!todas)}>
+            {todas ? "Ver menos" : `Ver las ${ruta.semanas.length} semanas`}
+          </button>
+        )}
+        {/* La regla queda plegada: se abre solo si quieres saber cómo se cuenta */}
+        <details className={estilos.leyenda}>
+          <summary>¿Cuándo cuenta una unidad?</summary>
+          <p>
+            Cuenta como lista cuando llega a amarillo en tu mapa: lecciones hechas, quiz aprobado o ejercicios resueltos. Si te atrasas, lo pendiente se
+            reparte solo entre las semanas que quedan.
+          </p>
+        </details>
+      </div>
     </section>
   );
 }
