@@ -274,3 +274,16 @@
     gap: var(--espacio-1);
   }
 }
+
+/* Contraseña de IA pedida a mitad de la entrevista */
+.clave {
+  flex: 1;
+  min-width: 12rem;
+  min-height: 44px;
+  padding: 0 var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--fondo-solido);
+  color: var(--texto);
+  font: inherit;
+}

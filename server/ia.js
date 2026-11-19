@@ -264,11 +264,19 @@ export async function manejarPost(request, { env, crearCliente }) {
       system: pedido.sistema,
       messages: [{ role: "user", content: pedido.mensaje }],
     });
-    if (respuesta.stop_reason === "refusal") return json({ error: "La IA no quiso evaluar esta respuesta. Prueba reformulándola." }, 502);
-    if (respuesta.stop_reason === "max_tokens") return json({ error: "La evaluación salió incompleta. Inténtalo otra vez." }, 502);
+    // El uso viaja también en los errores: un pedido cortado o rechazado igual se cobró y la app lo cuenta
+    const uso = { modelo: respuesta.model ?? modelo, entrada: respuesta.usage?.input_tokens ?? 0, salida: respuesta.usage?.output_tokens ?? 0 };
+    if (respuesta.stop_reason === "refusal") return json({ error: "La IA no quiso evaluar esta respuesta. Prueba reformulándola.", uso }, 502);
+    if (respuesta.stop_reason === "max_tokens") return json({ error: "La evaluación salió incompleta. Inténtalo otra vez.", uso }, 502);
     const texto = respuesta.content.find((b) => b.type === "text")?.text;
-    if (!texto) return json({ error: "La IA no devolvió nada" }, 502);
-    return json({ resultado: limpiarResultado(pedido.tarea, JSON.parse(texto)), uso: { modelo: respuesta.model ?? modelo, entrada: respuesta.usage?.input_tokens ?? 0, salida: respuesta.usage?.output_tokens ?? 0 } });
+    if (!texto) return json({ error: "La IA no devolvió nada", uso }, 502);
+    let crudo;
+    try {
+      crudo = JSON.parse(texto);
+    } catch {
+      return json({ error: "La IA respondió con un formato que no se pudo leer. Inténtalo otra vez.", uso }, 502);
+    }
+    return json({ resultado: limpiarResultado(pedido.tarea, crudo), uso });
   } catch (e) {
     const status = e?.status;
     const mensaje =

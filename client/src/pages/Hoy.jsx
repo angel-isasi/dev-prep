@@ -39,6 +39,9 @@ const sesionLocal = (inicio) =>
     repaso: { ejercicios: inicio.repasos },
     nuevo: { ejercicio: inicio.continuar ?? inicio.siguiente, continuar: !!inicio.continuar },
     conMotor: true,
+    conDiario: false,
+    // Aquí los puntos de hoy salen de ejercicios: con 25 o más ya resolviste al menos uno
+    dia: { resueltos: (inicio.meta?.hecho ?? 0) >= 25 ? 1 : 0 },
   });
 
 export function Hoy() {

@@ -11,6 +11,7 @@ import { PreguntasEntrevista } from "./PreguntasEntrevista.jsx";
 import { IconoFlechaDer, IconoFlechaIzq } from "./Iconos.jsx";
 import { partesTeoria } from "../lib/teoria.js";
 import { irA } from "../hooks/useScrollSuave.js";
+import { almacen } from "../lib/visita.js";
 import estilos from "./TeoriaTema.module.css";
 
 const CLAVE_MODO = "devprep.teoriaModo";
@@ -18,7 +19,7 @@ const CLAVE_LEIDOS = "devprep.teoriaLeidos";
 
 function leer(clave, defecto) {
   try {
-    return JSON.parse(localStorage.getItem(clave)) ?? defecto;
+    return JSON.parse(almacen.getItem(clave)) ?? defecto;
   } catch {
     return defecto;
   }
@@ -26,7 +27,7 @@ function leer(clave, defecto) {
 
 function guardar(clave, valor) {
   try {
-    localStorage.setItem(clave, JSON.stringify(valor));
+    almacen.setItem(clave, JSON.stringify(valor));
   } catch {
     // sin espacio o en modo privado: no pasa nada, solo no se recuerda
   }

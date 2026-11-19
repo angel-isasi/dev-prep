@@ -29,10 +29,10 @@ export function InformeIa(props) {
   if (itemsValidos(props.items).length < 2) {
     return <p className={estilos.suave}>El informe con IA necesita al menos 2 preguntas respondidas.</p>;
   }
-  return <PuertaIa>{() => <Pedir {...props} />}</PuertaIa>;
+  return <PuertaIa>{(olvidarClave) => <Pedir {...props} alOlvidarClave={olvidarClave} />}</PuertaIa>;
 }
 
-function Pedir({ items, notas, idioma, voz, alInforme, automatico }) {
+function Pedir({ items, notas, idioma, voz, alInforme, automatico, alOlvidarClave }) {
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState(null);
   const pedido = useRef(false);
@@ -44,6 +44,8 @@ function Pedir({ items, notas, idioma, voz, alInforme, automatico }) {
       alInforme(await pedirIa({ tarea: "informe", items: itemsValidos(items), notas, idioma, voz, contexto: await contextoPersonal() }));
     } catch (e) {
       setError(e.message);
+      // Contraseña rechazada: vuelve el formulario de la contraseña (las respuestas no se pierden)
+      if (e.clave) alOlvidarClave?.();
     } finally {
       setCargando(false);
     }

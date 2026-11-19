@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
+import { almacen } from "../../lib/visita.js";
 import { celebrar } from "../../lib/celebrar.js";
 import { Markdown } from "../../components/Markdown.jsx";
 import estilos from "./Trabajo.module.css";
@@ -150,7 +151,7 @@ const CLAVE_ETAPA = (id) => `devprep-etapa-${id}`;
 
 function DetalleProyecto({ proyecto, alVolver }) {
   const guiado = proyecto.tipo === "proyectos";
-  const [etapa, setEtapa] = useState(() => Number(localStorage.getItem(CLAVE_ETAPA(proyecto.id))) || 1);
+  const [etapa, setEtapa] = useState(() => Number(almacen.getItem(CLAVE_ETAPA(proyecto.id))) || 1);
   const [resultado, setResultado] = useState(null);
   const [ocupado, setOcupado] = useState(false);
   const [aviso, setAviso] = useState(null);
@@ -177,7 +178,7 @@ function DetalleProyecto({ proyecto, alVolver }) {
       if (r.total && r.pasan === r.total) {
         celebrar("logro");
         if (guiado && etapa < proyecto.etapas.length) {
-          localStorage.setItem(CLAVE_ETAPA(proyecto.id), String(etapa + 1));
+          almacen.setItem(CLAVE_ETAPA(proyecto.id), String(etapa + 1));
         }
       }
     } catch (e) {

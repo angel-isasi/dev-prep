@@ -12,7 +12,11 @@ export const TOPE_POR_DEFECTO = 20;
 export const claveIa = () => localStorage.getItem(CLAVE) ?? "";
 export const guardarClaveIa = (clave) => (clave ? localStorage.setItem(CLAVE, clave) : localStorage.removeItem(CLAVE));
 
-const mesActual = () => new Date().toISOString().slice(0, 7);
+// Mes en hora local: con toISOString (UTC) la cuenta se reiniciaba el último día del mes a las 7 p. m. de Perú
+const mesActual = () => {
+  const hoy = new Date();
+  return `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, "0")}`;
+};
 
 /** Lo gastado este mes en este navegador: { mes, pedidos, usd }. Al cambiar el mes vuelve a cero. */
 export function usoIa() {
@@ -45,7 +49,11 @@ export function estadoIa() {
   estado ??= fetch("/api/ia", { headers: { accept: "application/json" } })
     .then((r) => (r.ok ? r.json() : { configurada: false }))
     .then((d) => ({ configurada: d?.configurada === true }))
-    .catch(() => ({ configurada: false }));
+    .catch(() => {
+      // Sin red no se guarda la respuesta: al volver la conexión se pregunta otra vez
+      estado = null;
+      return { configurada: false };
+    });
   return estado;
 }
 
@@ -60,6 +68,9 @@ export async function pedirIa(pedido) {
     method: "POST",
     headers: { "content-type": "application/json", "x-clave": claveIa() },
     body: JSON.stringify(pedido),
+    signal: AbortSignal.timeout(65_000),
+  }).catch((e) => {
+    throw new Error(e?.name === "TimeoutError" ? "La IA tardó demasiado. Inténtalo otra vez." : "Sin conexión: la IA necesita internet.");
   });
   const datos = await r.json().catch(() => ({}));
   if (r.status === 401) {
@@ -67,7 +78,8 @@ export async function pedirIa(pedido) {
     throw Object.assign(new Error("La contraseña de IA no es correcta"), { clave: true });
   }
   if (r.status === 503) throw new Error("La IA todavía no está configurada en Vercel");
-  if (!r.ok) throw new Error(datos.error ?? "No se pudo evaluar. Inténtalo otra vez.");
+  // El gasto se anota también cuando la respuesta no sirvió (cortada o mal formada): ese pedido igual se cobró
   if (datos.uso) registrarUso(datos.uso);
+  if (!r.ok) throw new Error(datos.error ?? "No se pudo evaluar. Inténtalo otra vez.");
   return datos.resultado;
 }

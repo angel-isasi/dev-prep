@@ -19,9 +19,10 @@ const plural = (n, uno, varios) => (n === 1 ? uno : varios);
  * @param {{ leccion?: { titulo: string, unidad: string, a: string } | null, ejercicio?: { id: string, titulo: string } | null, continuar?: boolean }} [p.nuevo]
  * @param {{ meta: number, minutosHoy: number } | null} [p.ingles]
  * @param {boolean} [p.conMotor]  ¿aquí se pueden resolver ejercicios con tests (laptop)?
+ * @param {boolean} [p.conDiario]  ¿hay pantalla de diario? (la app local de la laptop no la tiene)
  * @returns {{ pasos: object[], siguiente: object | null, hechos: number, minutos: number, completa: boolean, pausa: boolean }}
  */
-export function armarSesion({ meta = {}, dia = {}, repaso = {}, nuevo = {}, ingles = null, finDeSemana = false, examenHecho = false, diarioHecho = false, conMotor = false }) {
+export function armarSesion({ meta = {}, dia = {}, repaso = {}, nuevo = {}, ingles = null, finDeSemana = false, examenHecho = false, diarioHecho = false, conMotor = false, conDiario = true }) {
   const { preguntas = 0, tarjetas = 0, ejercicios = [] } = repaso;
   const pasos = [];
 
@@ -101,7 +102,7 @@ export function armarSesion({ meta = {}, dia = {}, repaso = {}, nuevo = {}, ingl
   if (finDeSemana) {
     pasos.push({ id: "examen", tipo: "cierre", titulo: "Examen semanal", detalle: "20 preguntas de lo que viste esta semana", minutos: 7, puntos: 0, a: "/leccion?modo=examen", hecho: examenHecho });
   }
-  if (meta.cumplioMeta) {
+  if (meta.cumplioMeta && conDiario) {
     pasos.push({ id: "diario", tipo: "cierre", titulo: "Tu diario de una línea", detalle: "¿Qué aprendiste hoy? ¿Qué te trabó?", minutos: 1, puntos: 0, a: "/diario", hecho: diarioHecho });
   }
 

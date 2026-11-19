@@ -6,7 +6,7 @@
 // (dictar) y cada respuesta se evalúa con la misma tarea "entrevista" de las tarjetas (lib/ia.js).
 import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api.js";
-import { pedirIa } from "../lib/ia.js";
+import { guardarClaveIa, pedirIa } from "../lib/ia.js";
 import { feedback } from "../lib/feedback.js";
 import { decir, dictar, hayVozEn, microDisponible } from "../lib/voz.js";
 import { elegirPreguntas, TODAS_LAS_ETAPAS as TODO } from "../../../server/simulacro.js";
@@ -45,6 +45,9 @@ function Entrevista({ proceso }) {
   const dictado = useRef(null);
   const textoActual = useRef(""); // la respuesta al día, también para lo que llega justo al detener el dictado
   const contexto = useRef(null);
+  // Cambia al terminar o salir: una respuesta de la IA que llega tarde ya no sigue la entrevista
+  const ronda = useRef(0);
+  const [pideClave, setPideClave] = useState(false);
 
   const idioma = config.ingles ? "en" : "es";
   const tituloEtapa = (id) => proceso?.etapas?.find((e) => e.id === id)?.titulo ?? id;
@@ -55,7 +58,13 @@ function Entrevista({ proceso }) {
     dictado.current?.detener();
     dictado.current = null;
   }
-  useEffect(() => silencio, []);
+  useEffect(
+    () => () => {
+      ronda.current++;
+      silencio();
+    },
+    [],
+  );
 
   function cambiarRespuesta(valor) {
     textoActual.current = valor;
@@ -128,11 +137,13 @@ function Entrevista({ proceso }) {
   }
 
   function terminar() {
+    ronda.current++;
     silencio();
     setEstado("fin");
   }
 
   function siguiente() {
+    ronda.current++; // saltar también descarta la respuesta que estuviera en camino
     if (indice + 1 >= preguntas.length) return terminar();
     setIndice(indice + 1);
     setVuelta(0);
@@ -141,6 +152,7 @@ function Entrevista({ proceso }) {
 
   async function enviar() {
     const estabaDictando = dictando;
+    const estaRonda = ++ronda.current;
     dictado.current?.detener();
     setFase("pensando");
     setError(null);
@@ -154,6 +166,8 @@ function Entrevista({ proceso }) {
         ? { pregunta: textoPregunta, claves: p.claves ?? [], modelo: config.ingles && p.respuestaEn ? p.respuestaEn : p.respuesta }
         : { pregunta: textoPregunta }; // en la repregunta no hay lista ni modelo: la IA evalúa con su criterio
       const r = await pedirIa({ tarea: "entrevista", ...base, categoria: p.categoria, idioma, contexto: contexto.current ?? "", respuesta: dicho });
+      // Si mientras tanto terminaste, saltaste o saliste, la respuesta se descarta: nada de voz ni micrófono fuera de lugar
+      if (ronda.current !== estaRonda) return;
       setTurnos((t) => [...t, { id: p.id, etapa: p.etapa ?? "tecnica", principal, pregunta: textoPregunta, respuesta: dicho, r }]);
       // La nota de la pregunta (no la de las repreguntas) entra a tu repaso de tarjetas
       if (principal) await api.calificar(p.id, r.veredicto).catch(() => {});
@@ -164,9 +178,21 @@ function Entrevista({ proceso }) {
         siguiente();
       }
     } catch (e) {
+      if (ronda.current !== estaRonda) return;
       setError(e.message);
+      // Contraseña rechazada a mitad de la entrevista: se pide aquí mismo, sin perder lo ya respondido
+      if (e.clave) setPideClave(true);
       setFase("escuchando");
     }
+  }
+
+  function guardarClave(evento) {
+    evento.preventDefault();
+    const clave = new FormData(evento.currentTarget).get("clave")?.toString().trim();
+    if (!clave) return;
+    guardarClaveIa(clave);
+    setPideClave(false);
+    enviar();
   }
 
   async function guardar(nuevoInforme) {
@@ -352,6 +378,14 @@ function Entrevista({ proceso }) {
         />
       )}
       {error && <p className={estilos.error}>{error}</p>}
+      {pideClave && (
+        <form className={estilos.acciones} onSubmit={guardarClave}>
+          <input name="clave" type="password" autoComplete="off" aria-label="Contraseña de IA" placeholder="Contraseña de IA" className={estilos.clave} />
+          <button type="submit" className="boton">
+            Guardar y reenviar
+          </button>
+        </form>
+      )}
 
       <div className={estilos.acciones}>
         {fase === "hablando" ? (

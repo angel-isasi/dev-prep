@@ -74,3 +74,9 @@ describe("sesión de hoy", () => {
     expect(armarSesion({ meta: { pausa: true } }).pausa).toBe(true);
   });
 });
+
+test("sin pantalla de diario (app local) no se agrega el paso del diario", () => {
+  const sesion = armarSesion({ meta: { cumplioMeta: true }, conDiario: false });
+  expect(sesion.pasos.some((p) => p.id === "diario")).toBe(false);
+  expect(armarSesion({ meta: { cumplioMeta: true } }).pasos.some((p) => p.id === "diario")).toBe(true);
+});

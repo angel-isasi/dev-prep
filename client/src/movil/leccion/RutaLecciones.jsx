@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { api } from "../../lib/api.js";
+import { almacen } from "../../lib/visita.js";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { Pestanas } from "../../components/Pestanas.jsx";
@@ -23,7 +24,7 @@ const enlaceParte = (unidad, parte) => `/leccion?unidad=${encodeURIComponent(uni
 /** Conceptos de la teoría que marcaste como leídos (los guarda TeoriaTema en este navegador). */
 function leidosDe(id) {
   try {
-    return (JSON.parse(localStorage.getItem("devprep.teoriaLeidos")) ?? {})[id]?.length ?? 0;
+    return (JSON.parse(almacen.getItem("devprep.teoriaLeidos")) ?? {})[id]?.length ?? 0;
   } catch {
     return 0;
   }

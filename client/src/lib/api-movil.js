@@ -33,7 +33,7 @@ import { crearApiMapache } from "../movil/mapache/api-mapache.js";
 import { rachaIngles } from "../movil/mapache/reglas.js";
 import { crearApi } from "./api-servidor.js";
 import { BASE_LOCAL, conectada } from "./conexion-local.js";
-import { ES_VISITA, crearAlmacenMemoria, progresoDeEjemplo } from "./visita.js";
+import { ES_VISITA, almacen, crearAlmacenMemoria, progresoDeEjemplo } from "./visita.js";
 
 // En modo visita el progreso es de ejemplo y vive en memoria: no se lee ni se toca el progreso real
 export const progreso = crearProgresoMovil(ES_VISITA ? crearAlmacenMemoria() : localStorage);
@@ -42,6 +42,15 @@ export const progreso = crearProgresoMovil(ES_VISITA ? crearAlmacenMemoria() : l
 navigator.storage?.persist?.().catch(() => {});
 
 const SECCION_MODELO = "Cómo explicarlo en la entrevista";
+
+/** Lee un JSON guardado en este dispositivo; un valor dañado cuenta como "no hay nada". */
+function leerJson(clave) {
+  try {
+    return JSON.parse(almacen.getItem(clave) ?? "null");
+  } catch {
+    return null;
+  }
+}
 
 /** Ofertas que viste la última vez (por dispositivo) y las de la visita anterior a esta. */
 const CLAVE_VISTAS = "devprep-ofertas-vistas";
@@ -724,7 +733,7 @@ const apiWeb = {
    */
   async ofertasParaTi({ nuevo = false } = {}) {
     const CLAVE = "devprep-ofertas";
-    const guardada = JSON.parse(localStorage.getItem(CLAVE) ?? "null");
+    const guardada = leerJson(CLAVE);
     const fresca = guardada && Date.now() - Date.parse(guardada.buscadoEn) < 3 * 60 * 60 * 1000;
     let busqueda = !nuevo && fresca ? guardada : null;
     if (!busqueda) {
@@ -732,7 +741,7 @@ const apiWeb = {
         busqueda = conectada()
           ? await apiLocal.buscarOfertasMotor(nuevo)
           : { ...(await buscarOfertas(fetch, { soloNavegador: true })), buscadoEn: new Date().toISOString() };
-        localStorage.setItem(CLAVE, JSON.stringify(busqueda));
+        almacen.setItem(CLAVE, JSON.stringify(busqueda));
       } catch (error) {
         if (!guardada) throw error;
         busqueda = { ...guardada, sinConexion: true };
@@ -747,10 +756,10 @@ const apiWeb = {
     // "Nuevas desde tu última visita": se compara con lo que había la vez anterior que abriste la app
     // (se lee una vez por visita, así guardar u ocultar no borra las marcas de "Nueva").
     const ids = ordenadas.map((o) => o.id);
-    const vistas = JSON.parse(localStorage.getItem(CLAVE_VISTAS) ?? "null");
+    const vistas = leerJson(CLAVE_VISTAS);
     if (vistasAlAbrir === undefined) vistasAlAbrir = vistas;
     const nuevas = new Set(nuevasDesde(ids, vistasAlAbrir));
-    localStorage.setItem(CLAVE_VISTAS, JSON.stringify([...new Set([...ids, ...(vistas ?? [])])].slice(0, 2000)));
+    almacen.setItem(CLAVE_VISTAS, JSON.stringify([...new Set([...ids, ...(vistas ?? [])])].slice(0, 2000)));
 
     // Palabras clave para tu CV: lo que pide la oferta y no aparece en tu CV
     const textoCv = [

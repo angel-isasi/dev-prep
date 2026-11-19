@@ -38,10 +38,18 @@ export function Tema() {
       anterior.current = id;
       setPestana("teoria");
     }
-    setTema(null);
+    let cancelado = false;
+    setTema(api.tema.guardado(id));
     setCentro(null);
-    api.tema(id).then(setTema, (e) => setError(e.message));
-    cargarCentro();
+    setError(null);
+    api.tema(id).then(
+      (t) => !cancelado && setTema(t),
+      (e) => !cancelado && setError(e.message),
+    );
+    api.centroDelTema?.(id).then((c) => !cancelado && setCentro(c), () => {});
+    return () => {
+      cancelado = true;
+    };
   }, [id]);
 
   if (error) return <p className={estilos.mensaje}>{error}</p>;

@@ -43,6 +43,13 @@ export function crearAlmacenMemoria() {
 }
 
 /**
+ * Donde guardan sus preferencias las pantallas que no pasan por el progreso (teoría leída, ofertas
+ * vistas, etapa de un proyecto): el navegador de verdad o, en modo visita, la memoria. Así la
+ * garantía 3 se cumple también fuera del progreso.
+ */
+export const almacen = ES_VISITA ? crearAlmacenMemoria() : (globalThis.localStorage ?? crearAlmacenMemoria());
+
+/**
  * Arma un progreso de ejemplo creíble: unas cinco semanas de estudio constante, las primeras
  * unidades dominadas o a medias (va al día con su ruta), repasos que vencen hoy y una racha en curso. Es una función
  * pura y sin azar: con los mismos datos devuelve siempre lo mismo.
