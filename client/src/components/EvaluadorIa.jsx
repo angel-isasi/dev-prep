@@ -20,7 +20,9 @@ export async function contextoPersonal() {
       .filter((h) => h.situacion || h.accion)
       .slice(0, 4)
       .map((h) => `- ${h.titulo}: ${[h.situacion, h.tarea, h.accion, h.resultado].filter(Boolean).join(" ")}`);
-    return [mis.pitch?.trim() ? `Pitch: ${mis.pitch.trim()}` : "", historias.length ? `Historias:\n${historias.join("\n")}` : ""].filter(Boolean).join("\n\n");
+    return [mis.pitch?.trim() ? `Pitch: ${mis.pitch.trim()}` : "", historias.length ? `Historias:\n${historias.join("\n")}` : ""]
+      .filter(Boolean)
+      .join("\n\n");
   } catch {
     return "";
   }
@@ -99,7 +101,9 @@ export function UsoIa() {
           }}
         />
       </label>
-      <small>Al llegar al tope la app deja de pedir evaluaciones. La cuenta es de este navegador: el gasto exacto está en la consola de la API.</small>
+      <small>
+        Al llegar al tope la app deja de pedir evaluaciones. La cuenta es de este navegador: el gasto exacto está en la consola de la API.
+      </small>
     </details>
   );
 }
@@ -176,11 +180,7 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", a
     <div className={estilos.caja}>
       <div className={estilos.cabecera}>
         <span className={estilos.etiqueta}>{tarea === "ingles" ? "Corregir con IA" : repregunta ? "Repregunta" : "Evaluar con IA"}</span>
-        <button
-          type="button"
-          className={estilos.enlace}
-          onClick={alOlvidarClave}
-        >
+        <button type="button" className={estilos.enlace} onClick={alOlvidarClave}>
           Cambiar contraseña
         </button>
       </div>
@@ -196,7 +196,9 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", a
                 onChange={(e) => setTexto(e.target.value)}
                 rows={4}
                 lang={idioma}
-                placeholder={idioma === "en" ? "Write or dictate your answer..." : "Escribe o dicta tu respuesta, como la dirías en la entrevista..."}
+                placeholder={
+                  idioma === "en" ? "Write or dictate your answer..." : "Escribe o dicta tu respuesta, como la dirías en la entrevista..."
+                }
               />
               <small className={estilos.suave}>{contarPalabras(texto)} palabras</small>
             </>
@@ -216,7 +218,9 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", a
 
       {error && <p className={estilos.error}>{error}</p>}
 
-      {resultado && tarea === "entrevista" && <ResultadoEntrevista r={resultado} alSeguir={resultado.repregunta ? seguirConRepregunta : null} />}
+      {resultado && tarea === "entrevista" && (
+        <ResultadoEntrevista r={resultado} alSeguir={resultado.repregunta ? seguirConRepregunta : null} />
+      )}
       {resultado && tarea === "ingles" && <ResultadoIngles r={resultado} />}
       {resultado && (
         <button type="button" className={estilos.enlace} onClick={() => setResultado(null)}>
@@ -262,23 +266,25 @@ function ResultadoEntrevista({ r, alSeguir }) {
           </div>
         )}
       </div>
-      {r.mejor && (
-        <div className={estilos.mejor}>
-          <span className={estilos.subtitulo}>Así lo dirías mejor</span>
-          <p>{r.mejor}</p>
-        </div>
-      )}
-      {r.repregunta && (
-        <div className={estilos.mejor}>
-          <span className={estilos.subtitulo}>El entrevistador seguiría con</span>
-          <p>{r.repregunta}</p>
-          {alSeguir && (
-            <button type="button" className="boton" onClick={alSeguir}>
-              Responder la repregunta
-            </button>
-          )}
-        </div>
-      )}
+      <div className={estilos.pareja}>
+        {r.mejor && (
+          <div className={estilos.mejor}>
+            <span className={estilos.subtitulo}>Así lo dirías mejor</span>
+            <p>{r.mejor}</p>
+          </div>
+        )}
+        {r.repregunta && (
+          <div className={estilos.mejor}>
+            <span className={estilos.subtitulo}>El entrevistador seguiría con</span>
+            <p>{r.repregunta}</p>
+            {alSeguir && (
+              <button type="button" className="boton" onClick={alSeguir}>
+                Responder la repregunta
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -291,31 +297,33 @@ function ResultadoIngles({ r }) {
         <span>Tu respuesta muestra un nivel {r.nivel}</span>
       </div>
       {r.comentario && <p>{r.comentario}</p>}
-      {r.correcciones.length > 0 ? (
-        <ul className={estilos.correcciones}>
-          {r.correcciones.map((c, i) => (
-            <li key={i}>
-              <span lang="en">
-                <del>{c.original}</del> → <ins>{c.corregido}</ins>
-              </span>
-              {c.explicacion && <small>{c.explicacion}</small>}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className={estilos.suave}>Sin errores que corregir.</p>
-      )}
-      {r.version && (
-        <div className={estilos.mejor}>
-          <span className={estilos.subtitulo}>Como lo diría alguien con nivel C1</span>
-          <p lang="en">{r.version}</p>
-          {hayVoz() && (
-            <button type="button" className={estilos.enlace} onClick={() => hablar(r.version)}>
-              <IconoAudio tamano={15} /> Escuchar
-            </button>
-          )}
-        </div>
-      )}
+      <div className={estilos.pareja}>
+        {r.correcciones.length > 0 ? (
+          <ul className={estilos.correcciones}>
+            {r.correcciones.map((c, i) => (
+              <li key={i}>
+                <span lang="en">
+                  <del>{c.original}</del> → <ins>{c.corregido}</ins>
+                </span>
+                {c.explicacion && <small>{c.explicacion}</small>}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className={estilos.suave}>Sin errores que corregir.</p>
+        )}
+        {r.version && (
+          <div className={estilos.mejor}>
+            <span className={estilos.subtitulo}>Como lo diría alguien con nivel C1</span>
+            <p lang="en">{r.version}</p>
+            {hayVoz() && (
+              <button type="button" className={estilos.enlace} onClick={() => hablar(r.version)}>
+                <IconoAudio tamano={15} /> Escuchar
+              </button>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

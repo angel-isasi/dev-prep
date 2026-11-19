@@ -220,3 +220,28 @@
   padding-left: 1.3em;
   line-height: 1.55;
 }
+
+/* El panel mide su propio ancho: en la laptop pone lado a lado lo que en el celular va apilado */
+.caja {
+  container-type: inline-size;
+}
+
+.cabecera {
+  flex-wrap: wrap;
+}
+
+.etiqueta {
+  white-space: nowrap;
+}
+
+.pareja {
+  display: grid;
+  gap: var(--espacio-3);
+  align-items: start;
+}
+
+@container (min-width: 640px) {
+  .pareja {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}

@@ -427,3 +427,15 @@
   align-self: flex-start;
   margin-top: auto;
 }
+
+/* Laptop: tres columnas sin huecos. La etapa técnica es la más larga y ocupa dos filas; así el
+   cierre sube justo debajo de recursos humanos en vez de quedar suelto al final */
+@media (min-width: 1200px) {
+  .etapas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-flow: row dense;
+  }
+  .etapas > :nth-child(2) {
+    grid-row: span 2;
+  }
+}

@@ -795,3 +795,25 @@
 @media (prefers-reduced-motion: no-preference) {
   .globo p { animation: aparecer 0.25s ease-out; }
 }
+
+/* La pregunta del día ya respondida: pregunta y respuesta a la izquierda, corrección con IA a la derecha */
+.unaColumna,
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  min-width: 0;
+}
+
+.dosColumnas {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  align-items: start;
+  gap: var(--espacio-4) var(--espacio-5);
+}
+
+@media (max-width: 900px) {
+  .dosColumnas {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

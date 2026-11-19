@@ -422,3 +422,18 @@ a.numero:hover {
     padding: var(--espacio-4);
   }
 }
+
+/* Laptop: las cuatro cifras llenan el alto de la sesión de hoy, sin hueco debajo */
+@media (min-width: 1201px) {
+  .numeros {
+    grid-auto-rows: 1fr;
+    align-content: stretch;
+  }
+}
+
+/* Con las cifras estiradas, la del tanque arriba como las demás (no centrada a media tarjeta) */
+@media (min-width: 1201px) {
+  .puntos {
+    align-items: flex-start;
+  }
+}

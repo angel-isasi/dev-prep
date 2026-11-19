@@ -188,3 +188,10 @@
 .semaforo li[data-listo="true"] {
   color: var(--exito);
 }
+
+/* Laptop: el mismo margen que las demás páginas */
+@media (min-width: 900px) {
+  .pagina {
+    padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+  }
+}

@@ -75,66 +75,82 @@ export function PreguntaDelDia({ datos, alCambiar }) {
     if (r.opciones?.[0]) setTexto((t) => (t ? `${t} ${r.opciones[0]}` : r.opciones[0]));
   }
 
+  // Con la respuesta enviada aparece la corrección con IA: la tarjeta ocupa todo el ancho y la
+  // corrección va al lado de la pregunta, en vez de alargar la tarjeta hacia abajo
+  const conIa = !!(resultado?.ok || (p.respondida && !resultado));
   return (
-    <Tarjeta titulo="La pregunta del día" detalle={p.respondida ? `Nivel ${p.nivel} · respondida hoy` : `Nivel ${p.nivel} · al menos ${p.minimo} palabras`}>
-      <p className={estilos.preguntaEn} lang="en">
-        {p.en}
-      </p>
-      <div className={estilos.fila}>
-        <BotonOir texto={p.en} />
-        <button type="button" className={estilos.enlace} onClick={() => setVer((v) => !v)}>
-          {ver ? p.es : "¿Qué pregunta?"}
-        </button>
-      </div>
-      <p className={estilos.reto}>
-        <strong>Reto extra (+5 XP):</strong> {p.reto.texto} <em lang="en">Ej.: {p.reto.ejemplo}</em>
-      </p>
-      {p.respondida && !resultado ? (
-        <div className={estilos.respondida}>
-          <span>Tu respuesta</span>
-          <p lang="en">{p.respondida.texto}</p>
-          <span>Una forma de responder</span>
-          <p lang="en">{p.modelo}</p>
-        </div>
-      ) : (
-        <form onSubmit={enviar} className={estilos.formulario}>
-          <textarea value={texto} onChange={(e) => setTexto(e.target.value)} rows={3} placeholder="Answer in English..." lang="en" />
+    <Tarjeta
+      titulo="La pregunta del día"
+      ancho={conIa}
+      detalle={p.respondida ? `Nivel ${p.nivel} · respondida hoy` : `Nivel ${p.nivel} · al menos ${p.minimo} palabras`}
+    >
+      <div className={conIa ? estilos.dosColumnas : estilos.unaColumna}>
+        <div className={estilos.columna}>
+          <p className={estilos.preguntaEn} lang="en">
+            {p.en}
+          </p>
           <div className={estilos.fila}>
-            {micro.hay && (
-              <button type="button" className="boton" onClick={dictar} disabled={micro.escuchando}>
-                <IconoMicrofono tamano={16} /> {micro.escuchando ? "Te escucho…" : "Decirlo en voz alta"}
-              </button>
-            )}
-            <button type="submit" className="boton boton-primario" disabled={!texto.trim()}>
-              Responder
+            <BotonOir texto={p.en} />
+            <button type="button" className={estilos.enlace} onClick={() => setVer((v) => !v)}>
+              {ver ? p.es : "¿Qué pregunta?"}
             </button>
           </div>
-        </form>
-      )}
-      {resultado && (
-        <div className={estilos.resultado} data-ok={resultado.ok}>
-          {resultado.ok ? (
-            <p>
-              ¡Bien! {resultado.xp ? `+${resultado.xp} XP y comida para ${datos.nombre}.` : "Ya habías respondido hoy."}
-              {resultado.reto ? " Cumpliste el reto extra." : " El reto extra no lo vi esta vez: pruébalo mañana."}
-              {resultado.usadas.length > 0 && ` Usaste palabras de tus unidades: ${resultado.usadas.join(", ")}.`}
-            </p>
-          ) : resultado.corto ? (
-            <p>
-              Muy corto para tu nivel: escribiste {resultado.palabras} {resultado.palabras === 1 ? "palabra" : "palabras"} y se piden {resultado.minimo}. Agrega un detalle o un
-              porqué.
-            </p>
+          <p className={estilos.reto}>
+            <strong>Reto extra (+5 XP):</strong> {p.reto.texto} <em lang="en">Ej.: {p.reto.ejemplo}</em>
+          </p>
+          {p.respondida && !resultado ? (
+            <div className={estilos.respondida}>
+              <span>Tu respuesta</span>
+              <p lang="en">{p.respondida.texto}</p>
+              <span>Una forma de responder</span>
+              <p lang="en">{p.modelo}</p>
+            </div>
           ) : (
-            <p>Parece que no está en inglés. Inténtalo en inglés, aunque sea simple.</p>
+            <form onSubmit={enviar} className={estilos.formulario}>
+              <textarea value={texto} onChange={(e) => setTexto(e.target.value)} rows={3} placeholder="Answer in English..." lang="en" />
+              <div className={estilos.fila}>
+                {micro.hay && (
+                  <button type="button" className="boton" onClick={dictar} disabled={micro.escuchando}>
+                    <IconoMicrofono tamano={16} /> {micro.escuchando ? "Te escucho…" : "Decirlo en voz alta"}
+                  </button>
+                )}
+                <button type="submit" className="boton boton-primario" disabled={!texto.trim()}>
+                  Responder
+                </button>
+              </div>
+            </form>
           )}
-          <span>Una forma de responder</span>
-          <p lang="en">{p.modelo}</p>
+          {resultado && (
+            <div className={estilos.resultado} data-ok={resultado.ok}>
+              {resultado.ok ? (
+                <p>
+                  ¡Bien! {resultado.xp ? `+${resultado.xp} XP y comida para ${datos.nombre}.` : "Ya habías respondido hoy."}
+                  {resultado.reto ? " Cumpliste el reto extra." : " El reto extra no lo vi esta vez: pruébalo mañana."}
+                  {resultado.usadas.length > 0 && ` Usaste palabras de tus unidades: ${resultado.usadas.join(", ")}.`}
+                </p>
+              ) : resultado.corto ? (
+                <p>
+                  Muy corto para tu nivel: escribiste {resultado.palabras} {resultado.palabras === 1 ? "palabra" : "palabras"} y se piden{" "}
+                  {resultado.minimo}. Agrega un detalle o un porqué.
+                </p>
+              ) : (
+                <p>Parece que no está en inglés. Inténtalo en inglés, aunque sea simple.</p>
+              )}
+              <span>Una forma de responder</span>
+              <p lang="en">{p.modelo}</p>
+            </div>
+          )}
         </div>
-      )}
-      {/* Con tu respuesta ya enviada, la IA te la puede corregir frase por frase */}
-      {(resultado?.ok || (p.respondida && !resultado)) && (
-        <EvaluadorIa tarea="ingles" idioma="en" respuestaFija={resultado?.ok ? texto : p.respondida.texto} pedido={{ pregunta: p.en, nivel: p.nivel }} />
-      )}
+        {/* Con tu respuesta ya enviada, la IA te la puede corregir frase por frase */}
+        {conIa && (
+          <EvaluadorIa
+            tarea="ingles"
+            idioma="en"
+            respuestaFija={resultado?.ok ? texto : p.respondida.texto}
+            pedido={{ pregunta: p.en, nivel: p.nivel }}
+          />
+        )}
+      </div>
     </Tarjeta>
   );
 }
@@ -163,7 +179,9 @@ export function RepiteConmigo({ datos, alCambiar }) {
   return (
     <Tarjeta titulo="Repeat after me" detalle={`${datos.repetidasHoy} bien dichas hoy`}>
       {!voz || !micro.hay ? (
-        <p className={estilos.ayuda}>Para esto hace falta voz y micrófono (Chrome en el celular o la laptop). Mientras, léela en voz alta:</p>
+        <p className={estilos.ayuda}>
+          Para esto hace falta voz y micrófono (Chrome en el celular o la laptop). Mientras, léela en voz alta:
+        </p>
       ) : (
         <p className={estilos.ayuda}>Escúchala, repítela imitando el ritmo y {datos.nombre} te dice si te entendió.</p>
       )}
@@ -182,7 +200,13 @@ export function RepiteConmigo({ datos, alCambiar }) {
       </div>
       {resultado && (
         <div className={estilos.resultado} data-ok={!!resultado.bien}>
-          {resultado.error ? <p>{resultado.error}</p> : <p>{resultado.bien ? `¡Te entendí! "${resultado.dicho}"` : `Entendí: "${resultado.dicho}". Inténtalo otra vez, más despacio.`}</p>}
+          {resultado.error ? (
+            <p>{resultado.error}</p>
+          ) : (
+            <p>
+              {resultado.bien ? `¡Te entendí! "${resultado.dicho}"` : `Entendí: "${resultado.dicho}". Inténtalo otra vez, más despacio.`}
+            </p>
+          )}
         </div>
       )}
       <div className={estilos.fila}>
@@ -227,7 +251,8 @@ export function ObjetosPerdidos({ datos, alCambiar }) {
       ) : (
         <>
           <p className={estilos.ayuda}>
-            {datos.nombre} escondió esta {o.tipo === "palabra" ? "palabra" : "frase"}. Adivina cuál falta y vuelve a ser tuya (cuenta como su repaso).
+            {datos.nombre} escondió esta {o.tipo === "palabra" ? "palabra" : "frase"}. Adivina cuál falta y vuelve a ser tuya (cuenta como
+            su repaso).
           </p>
           <p className={estilos.fraseGrande} lang="en">
             {o.pista}
@@ -273,7 +298,9 @@ export function TusErrores({ datos }) {
   if (!datos.errores.length)
     return (
       <Tarjeta titulo="Tus errores">
-        <p className={estilos.ayuda}>Cuando falles un calco o una regla en una lección, {datos.nombre} te lo recordará aquí con lo que sí se dice.</p>
+        <p className={estilos.ayuda}>
+          Cuando falles un calco o una regla en una lección, {datos.nombre} te lo recordará aquí con lo que sí se dice.
+        </p>
       </Tarjeta>
     );
   const claves = datos.errores.map((e) => e.clave).join(",");
@@ -381,7 +408,10 @@ export function Ropa({ datos, alCambiar }) {
   if (!datos.ropa.length)
     return (
       <Tarjeta titulo="Su ropa">
-        <p className={estilos.ayuda}>Todavía no tiene ropa. Cómprala en la tienda o sube de nivel: en B1 gana una mochila, en B2 lentes, en C1 corbata y en C2 un birrete.</p>
+        <p className={estilos.ayuda}>
+          Todavía no tiene ropa. Cómprala en la tienda o sube de nivel: en B1 gana una mochila, en B2 lentes, en C1 corbata y en C2 un
+          birrete.
+        </p>
       </Tarjeta>
     );
   return (
@@ -416,7 +446,9 @@ export function Ropa({ datos, alCambiar }) {
 export function Album({ datos }) {
   return (
     <Tarjeta titulo="Álbum de stickers" detalle={`${datos.unidadesCompletas} unidades completas`} ancho>
-      <p className={estilos.ayuda}>Un sticker por cada unidad que completas. Cada página entera le da un trofeo a su casa, y cada unidad, un mueble nuevo.</p>
+      <p className={estilos.ayuda}>
+        Un sticker por cada unidad que completas. Cada página entera le da un trofeo a su casa, y cada unidad, un mueble nuevo.
+      </p>
       {datos.album.map((pagina) => (
         <div key={pagina.id} className={estilos.paginaAlbum}>
           <h3>
@@ -499,7 +531,9 @@ export function Postales({ datos, alCambiar }) {
             }}
           >
             <strong>{p.ciudad}</strong>
-            <small>{p.abierta ? (p.leida ? `Leída · ${p.leida.aciertos}/2` : `Nivel ${p.etiqueta} · nueva`) : `Se abre en ${p.nivel}`}</small>
+            <small>
+              {p.abierta ? (p.leida ? `Leída · ${p.leida.aciertos}/2` : `Nivel ${p.etiqueta} · nueva`) : `Se abre en ${p.nivel}`}
+            </small>
           </button>
         ))}
       </div>
@@ -652,4 +686,3 @@ export function Entrevista({ datos }) {
     </Tarjeta>
   );
 }
-
