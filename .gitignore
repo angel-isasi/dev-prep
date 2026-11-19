@@ -24,3 +24,7 @@ data-*/
 client/public-movil/datos/
 client/dist-movil/
 aws/lambda/dist/
+
+# Secretos locales: nunca al repositorio (las keys viven solo en Vercel)
+.env
+.env.*
