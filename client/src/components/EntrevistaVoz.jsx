@@ -382,7 +382,7 @@ function Entrevista({ proceso }) {
       {error && <p className={estilos.error}>{error}</p>}
       {pideClave && (
         <form className={estilos.acciones} onSubmit={guardarClave}>
-          <input name="clave" type="password" autoComplete="off" aria-label="Contraseña de IA" placeholder="Contraseña de IA" className={estilos.clave} />
+          <input name="clave" type="password" autoComplete="off" aria-label="Código de acceso a la IA" placeholder="Código de acceso" className={estilos.clave} />
           <button type="submit" className="boton">
             Guardar y reenviar
           </button>

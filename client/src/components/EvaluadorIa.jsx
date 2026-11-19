@@ -3,7 +3,7 @@
 // Habla con la función de Vercel (lib/ia.js). Si la IA no está configurada, solo muestra un aviso.
 import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api.js";
-import { claveIa, estadoIa, guardarClaveIa, guardarTopeIa, pedirIa, topeIa, usoIa } from "../lib/ia.js";
+import { claveIa, estadoIa, guardarClaveIa, guardarTopeIa, pedirIa, quienSoyIa, topeIa, usoIa } from "../lib/ia.js";
 import { dictar, hablar, hayVoz, microDisponible } from "../lib/voz.js";
 import { IconoAudio, IconoChispa, IconoMicrofono } from "./Iconos.jsx";
 import estilos from "./EvaluadorIa.module.css";
@@ -93,9 +93,21 @@ export function PuertaIa({ children, vacio }) {
   });
 }
 
-/** Cuánto llevas gastado este mes y tu tope (la cuenta vive en este navegador). */
+/**
+ * Cuánto llevas gastado este mes y tu tope (la cuenta vive en este navegador). Solo lo ve el dueño:
+ * el invitado tiene su propio tope en la consola de la API y esta cuenta lo confundiría.
+ */
 export function UsoIa() {
   const [tope, setTope] = useState(topeIa);
+  const [rol, setRol] = useState(null);
+  useEffect(() => {
+    let vivo = true;
+    quienSoyIa().then((r) => vivo && setRol(r.rol));
+    return () => {
+      vivo = false;
+    };
+  }, []);
+  if (rol !== "dueno") return null;
   const uso = usoIa();
   return (
     <details className={estilos.uso}>
@@ -197,7 +209,7 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", a
       <div className={estilos.cabecera}>
         <span className={estilos.etiqueta}>{tarea === "ingles" ? "Corregir con IA" : repregunta ? "Repregunta" : "Evaluar con IA"}</span>
         <button type="button" className={estilos.enlace} onClick={alOlvidarClave}>
-          Cambiar contraseña
+          Cambiar código
         </button>
       </div>
       {repregunta && <p className={estilos.repreguntaTexto}>{repregunta}</p>}

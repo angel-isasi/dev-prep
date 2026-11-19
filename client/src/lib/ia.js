@@ -61,16 +61,23 @@ export function estadoIa() {
  * ¿Quién eres para la IA? Con tu contraseña: { rol: "dueno", invitado: { codigo } | null }; con el
  * código de invitado: { rol: "invitado" }. Sin contraseña guardada o sin internet: { rol: null }.
  */
-export async function quienSoyIa() {
+let quien = null; // { clave, promesa }: se pregunta una vez por contraseña, no en cada pantalla
+export function quienSoyIa() {
   const clave = claveIa();
-  if (!clave) return { rol: null };
-  try {
-    const r = await fetch("/api/ia", { headers: { accept: "application/json", "x-clave": clave } });
-    const d = r.ok ? await r.json() : {};
-    return { rol: d.rol ?? null, invitado: d.invitado ?? null };
-  } catch {
-    return { rol: null };
-  }
+  if (!clave) return Promise.resolve({ rol: null });
+  if (quien?.clave === clave) return quien.promesa;
+  const promesa = fetch("/api/ia", { headers: { accept: "application/json", "x-clave": clave } })
+    .then(async (r) => {
+      const d = r.ok ? await r.json() : {};
+      return { rol: d.rol ?? null, invitado: d.invitado ?? null };
+    })
+    .catch(() => ({ rol: null }))
+    .then((res) => {
+      if (!res.rol) quien = null; // sin red o rechazada: se vuelve a preguntar la próxima vez
+      return res;
+    });
+  quien = { clave, promesa };
+  return promesa;
 }
 
 /**
