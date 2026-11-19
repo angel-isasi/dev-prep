@@ -58,6 +58,22 @@ export function estadoIa() {
 }
 
 /**
+ * ¿Quién eres para la IA? Con tu contraseña: { rol: "dueno", invitado: { codigo } | null }; con el
+ * código de invitado: { rol: "invitado" }. Sin contraseña guardada o sin internet: { rol: null }.
+ */
+export async function quienSoyIa() {
+  const clave = claveIa();
+  if (!clave) return { rol: null };
+  try {
+    const r = await fetch("/api/ia", { headers: { accept: "application/json", "x-clave": clave } });
+    const d = r.ok ? await r.json() : {};
+    return { rol: d.rol ?? null, invitado: d.invitado ?? null };
+  } catch {
+    return { rol: null };
+  }
+}
+
+/**
  * Pide una evaluación.
  * @param {object} pedido  { tarea: "entrevista"|"informe"|"ingles", ... } (ver server/ia.js)
  * @returns {Promise<object>} el resultado de la IA

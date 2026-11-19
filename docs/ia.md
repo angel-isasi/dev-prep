@@ -61,6 +61,17 @@ cuenta está en la consola de la API.
 4. En la app, abre una tarjeta de entrevista: te pedirá la contraseña de IA. Escribe la misma de
    `DEVPREP_IA_CLAVE`.
 
+## Código de invitado (opcional)
+
+Para que otra persona pruebe la IA sin usar tu contraseña ni tu saldo:
+
+1. En la consola de la API crea un espacio de trabajo nuevo (por ejemplo "Invitados") y ponle un límite de gasto mensual bajo (por ejemplo 1 USD). Ese límite lo aplica la consola: no se puede saltar desde la app.
+2. Crea una API key dentro de ese espacio de trabajo.
+3. En Vercel agrega dos variables: ANTHROPIC_API_KEY_INVITADO (esa key) y DEVPREP_IA_INVITADO (el código que compartirás; uno largo y aleatorio). Vuelve a desplegar.
+4. En la app, Ajustes > Dispositivos > "IA para invitados" te muestra el código para copiarlo (solo lo ves tú).
+
+Quien no tiene código ve los botones de IA, pero la app le pide un código de acceso. Para cortar el acceso al instante, desactiva la key del invitado en la consola. Para cambiar el código, cambia DEVPREP_IA_INVITADO en Vercel.
+
 ## Si algo falla
 
 - "La IA todavía no está configurada": falta alguna de las dos variables o no hiciste Redeploy.

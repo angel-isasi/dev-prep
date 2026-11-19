@@ -162,3 +162,39 @@ it("omitir: la entrevista por voz pide que no se escriba lo que no va a usar", (
   expect(armarPedido({ ...base, omitir: ["mejor", "otra-cosa"] }).mensaje).toContain('No escribas "mejor"');
   expect(armarPedido(base).mensaje).not.toContain("No escribas");
 });
+
+describe("código de invitado", () => {
+  const ENV_INV = { ...ENV, DEVPREP_IA_INVITADO: "codigo-invitado", ANTHROPIC_API_KEY_INVITADO: "key-invitado" };
+
+  it("el invitado entra con su código y la IA se crea con su rol (su propia key)", async () => {
+    const falso = clienteFalso(conTexto(resultadoIa));
+    const crearCliente = vi.fn(falso.crearCliente);
+    const r = await manejarPost(request(pedidoEntrevista, "codigo-invitado"), { env: ENV_INV, crearCliente });
+    expect(r.status).toBe(200);
+    expect(crearCliente).toHaveBeenCalledWith("invitado");
+    await manejarPost(request(pedidoEntrevista), { env: ENV_INV, crearCliente });
+    expect(crearCliente).toHaveBeenLastCalledWith("dueno");
+  });
+
+  it("sin su API key propia, el código de invitado no sirve (nunca gasta de la tuya)", async () => {
+    const falso = clienteFalso(conTexto(resultadoIa));
+    const env = { ...ENV, DEVPREP_IA_INVITADO: "codigo-invitado" };
+    expect((await manejarPost(request(pedidoEntrevista, "codigo-invitado"), { env, crearCliente: falso.crearCliente })).status).toBe(401);
+    expect(falso.create).not.toHaveBeenCalled();
+  });
+
+  it("GET: solo el dueño ve el código de invitado", async () => {
+    const get = (clave) => manejarGet(ENV_INV, new Request("https://x/api/ia", { headers: clave ? { "x-clave": clave } : {} })).json();
+    expect(await get()).toEqual({ configurada: true });
+    expect(await get("mi-clave")).toEqual({ configurada: true, rol: "dueno", invitado: { codigo: "codigo-invitado" } });
+    expect(await get("codigo-invitado")).toEqual({ configurada: true, rol: "invitado" });
+    expect(await get("otra")).toEqual({ configurada: true, rol: null });
+  });
+
+  it("al llegar al límite del espacio de trabajo, el invitado ve un mensaje claro", async () => {
+    const error = Object.assign(new Error("You have reached your specified workspace API usage limits"), { status: 400 });
+    const crearCliente = () => ({ beta: { messages: { create: async () => { throw error; } } } });
+    const r = await manejarPost(request(pedidoEntrevista, "codigo-invitado"), { env: ENV_INV, crearCliente });
+    expect((await r.json()).error).toMatch(/invitado.*tope/);
+  });
+});

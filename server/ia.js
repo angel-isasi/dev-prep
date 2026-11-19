@@ -8,6 +8,10 @@
 // - Tres tareas: "entrevista" (evalúa tu respuesta contra lo que quiere escuchar el entrevistador),
 //   "informe" (el balance de una entrevista completa: simulacro o entrevista por voz) e "ingles"
 //   (corrige tu respuesta en inglés del mapache). La IA responde un JSON con forma fija.
+// - Código de invitado (opcional): DEVPREP_IA_INVITADO es un segundo código para quien tú invites, y sus
+//   pedidos usan otra API key (ANTHROPIC_API_KEY_INVITADO) de un espacio de trabajo aparte con su propio
+//   límite de gasto en la consola de la API. Así el tope del invitado lo pone la consola: no se puede
+//   saltar desde el navegador y no gasta del tuyo. Sin esas dos variables, no hay acceso de invitado.
 // - Cada tarea usa el modelo más barato que la hace bien (ia-precios.js). La variable IA_MODELO de
 //   Vercel, si existe, manda sobre todas.
 import { createHash, timingSafeEqual } from "node:crypto";
@@ -221,6 +225,19 @@ export function limpiarResultado(tarea, r) {
   };
 }
 
+/** ¿Está configurado el acceso de invitado? (su código y su propia API key) */
+export const conInvitado = (env) => !!env.DEVPREP_IA_INVITADO && !!env.ANTHROPIC_API_KEY_INVITADO;
+
+/**
+ * Quién pide: "dueno" con tu contraseña, "invitado" con el código de invitado, null si no coincide.
+ * @returns {"dueno" | "invitado" | null}
+ */
+export function rolDe(clave, env) {
+  if (claveCorrecta(clave, env.DEVPREP_IA_CLAVE)) return "dueno";
+  if (conInvitado(env) && claveCorrecta(clave, env.DEVPREP_IA_INVITADO)) return "invitado";
+  return null;
+}
+
 /** ¿Están puestas las dos variables secretas en Vercel? */
 export const configurada = (env) => !!env.ANTHROPIC_API_KEY && !!env.DEVPREP_IA_CLAVE;
 
@@ -237,11 +254,13 @@ const json = (cuerpo, status = 200) => Response.json(cuerpo, { status, headers: 
 /**
  * Atiende un POST: contraseña, validación, llamada a la IA y respuesta limpia.
  * @param {Request} request
- * @param {{ env: object, crearCliente: () => object }} deps  crearCliente: el cliente de la IA (en tests, uno falso)
+ * @param {{ env: object, crearCliente: (rol: "dueno" | "invitado") => object }} deps  crearCliente: el cliente de la IA
+ *   (en tests, uno falso). Recibe el rol para usar la API key que toca.
  */
 export async function manejarPost(request, { env, crearCliente }) {
   if (!configurada(env)) return json({ error: "no-configurada" }, 503);
-  if (!claveCorrecta(request.headers.get("x-clave"), env.DEVPREP_IA_CLAVE)) return json({ error: "clave" }, 401);
+  const rol = rolDe(request.headers.get("x-clave"), env);
+  if (!rol) return json({ error: "clave" }, 401);
 
   let cuerpo;
   try {
@@ -257,7 +276,7 @@ export async function manejarPost(request, { env, crearCliente }) {
   // El modelo pequeño (haiku) no tiene ese respaldo: ahí no se pide.
   const conRespaldo = !modelo.includes("haiku");
   try {
-    const respuesta = await crearCliente().beta.messages.create({
+    const respuesta = await crearCliente(rol).beta.messages.create({
       model: modelo,
       max_tokens: 8000,
       // structured-outputs: el mismo encabezado que pone la librería para respuestas con formato JSON
@@ -289,10 +308,26 @@ export async function manejarPost(request, { env, crearCliente }) {
           ? "Demasiados pedidos seguidos o sin saldo: espera un momento"
           : status === 400 && /credit|balance/i.test(e?.message ?? "")
             ? "Tu cuenta de la API no tiene saldo"
+            : /usage limit|spend limit|workspace.*limit|limit.*reached/i.test(e?.message ?? "")
+              ? rol === "invitado"
+                ? "El código de invitado llegó a su tope de este mes"
+                : "Llegaste al límite de gasto que pusiste en la consola de la API"
             : "No se pudo hablar con la IA. Inténtalo otra vez.";
     return json({ error: mensaje }, 502);
   }
 }
 
-/** GET: solo dice si la IA está lista (no revela nada más). */
-export const manejarGet = (env) => json({ configurada: configurada(env) });
+/**
+ * GET: dice si la IA está lista. Si trae tu contraseña (x-clave), también quién eres y, solo a ti,
+ * el código de invitado para que lo compartas. Sin contraseña no revela nada más.
+ */
+export function manejarGet(env, request) {
+  const clave = request?.headers?.get?.("x-clave");
+  if (!clave || !configurada(env)) return json({ configurada: configurada(env) });
+  const rol = rolDe(clave, env);
+  return json({
+    configurada: true,
+    rol,
+    ...(rol === "dueno" ? { invitado: conInvitado(env) ? { codigo: env.DEVPREP_IA_INVITADO } : null } : {}),
+  });
+}

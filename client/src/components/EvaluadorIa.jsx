@@ -75,9 +75,10 @@ export function PuertaIa({ children, vacio }) {
         }}
       >
         <span className={estilos.etiqueta}>Evaluar con IA</span>
-        <p className={estilos.suave}>Escribe tu contraseña de IA (la que pusiste en Vercel). Se guarda solo en este navegador.</p>
+        {/* Sirve tu contraseña o el código de invitado: el servidor decide quién eres */}
+        <p className={estilos.suave}>La IA es solo con invitación. Si tienes un código de acceso, escríbelo aquí: se guarda solo en este navegador.</p>
         <div className={estilos.fila}>
-          <input name="clave" type="password" autoComplete="off" aria-label="Contraseña de IA" className={estilos.entrada} />
+          <input name="clave" type="password" autoComplete="off" aria-label="Código de acceso a la IA" placeholder="Código de acceso" className={estilos.entrada} />
           <button type="submit" className="boton">
             Guardar
           </button>

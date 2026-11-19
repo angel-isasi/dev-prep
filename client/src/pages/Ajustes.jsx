@@ -8,6 +8,7 @@ import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
 import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { useTema } from "../hooks/useTema.js";
 import { IconoLuna, IconoSol } from "../components/Iconos.jsx";
+import { PanelInvitado } from "../components/PanelInvitado.jsx";
 import seccion from "../components/SeccionSync.module.css";
 import estilos from "./Ajustes.module.css";
 
@@ -147,6 +148,8 @@ export function Ajustes({ seccionExtra }) {
                 </button>
               </div>
             </section>
+
+            <PanelInvitado />
 
             {/* Con este contexto, la SeccionRutina que venga dentro de seccionExtra solo pinta lo que
                 no se mostró ya en las otras pestañas (inglés y sonidos). */}
