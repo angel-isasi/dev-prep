@@ -1,0 +1,143 @@
+.pagina {
+  display: grid;
+  gap: var(--espacio-4);
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--espacio-5) var(--espacio-4) 120px;
+}
+
+.volver {
+  justify-self: start;
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  text-decoration: none;
+}
+
+/* Escenarios: tarjetas de una línea con título y subtítulo, en 2 columnas si hay ancho */
+.escenarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.escenario {
+  display: grid;
+  gap: var(--espacio-1);
+  width: 100%;
+  min-height: 72px;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.escenario:hover {
+  border-color: var(--acento);
+}
+
+.escenario span {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+}
+
+.charla {
+  display: grid;
+  gap: var(--espacio-3);
+}
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
+}
+
+.mensajes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Burbujas: la IA a la izquierda, tú a la derecha */
+.mensaje {
+  position: relative;
+  max-width: 85%;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  line-height: 1.5;
+}
+
+.mensaje[data-de="ia"] {
+  align-self: flex-start;
+  padding-right: var(--espacio-6, 2.5rem);
+}
+
+.mensaje[data-de="yo"] {
+  align-self: flex-end;
+  border-color: color-mix(in srgb, var(--acento) 40%, var(--borde));
+  background: color-mix(in srgb, var(--acento) 12%, var(--superficie));
+}
+
+.mensaje[data-esperando] {
+  color: var(--texto-suave);
+}
+
+.repetir {
+  position: absolute;
+  top: var(--espacio-2);
+  right: var(--espacio-2);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: var(--radio);
+  background: transparent;
+  color: var(--texto-suave);
+  cursor: pointer;
+}
+
+.entrada {
+  display: grid;
+  gap: var(--espacio-2);
+}
+
+.entrada textarea {
+  width: 100%;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--fondo-solido);
+  color: var(--texto);
+  font: inherit;
+  resize: vertical;
+}
+
+.error {
+  margin: 0;
+  color: var(--peligro, #e5484d);
+}
+
+.correccion {
+  display: grid;
+  gap: var(--espacio-3);
+}

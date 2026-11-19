@@ -4,8 +4,17 @@ import { api } from "../lib/api.js";
 import { useAhora } from "../hooks/useAhora.js";
 import estilos from "./Secciones.module.css";
 import { IconoReloj } from "./Iconos.jsx";
+import { EvaluadorIa } from "./EvaluadorIa.jsx";
 
 const SEGUNDOS = 60;
+// Lo que la IA mira al evaluar cómo explicas tu solución
+const CLAVES_EXPLICAR = [
+  "La idea principal en una frase",
+  "Los pasos en orden, sin leer el código línea por línea",
+  "Por qué funciona",
+  "La complejidad o un caso borde",
+];
+
 const NOTAS = [
   { valor: "no", texto: "Me trabé" },
   { valor: "dude", texto: "Más o menos" },
@@ -15,9 +24,10 @@ const NOTAS = [
 /**
  * "Explícalo con tus palabras": escribes cómo lo explicarías en una entrevista
  * y luego lo comparas con la explicación modelo.
- * @param {{ resuelto: boolean, textoGuardado: string, modelo: string|null, alGuardar: (texto: string) => Promise<void> }} props
+ * Con IA: evalúa tu explicación (con tu código a la vista) y un senior revisa tu código.
+ * @param {{ id: string, titulo?: string, enunciado?: string, resuelto: boolean, textoGuardado: string, modelo: string|null, alGuardar: (texto: string) => Promise<void> }} props
  */
-export function SeccionExplicar({ id, resuelto, textoGuardado, modelo, alGuardar }) {
+export function SeccionExplicar({ id, titulo = "", enunciado = "", resuelto, textoGuardado, modelo, alGuardar }) {
   const [texto, setTexto] = useState(textoGuardado);
   const [estado, setEstado] = useState("listo"); // listo | guardando | guardado
   // "Explícalo en 60 segundos": como en la entrevista, con reloj. Al terminar te comparas con el modelo.
@@ -26,6 +36,18 @@ export function SeccionExplicar({ id, resuelto, textoGuardado, modelo, alGuardar
   const ahora = useAhora(250);
   const restantes = reloj?.inicio ? Math.max(0, SEGUNDOS - Math.floor((ahora - reloj.inicio) / 1000)) : null;
   const corriendo = restantes !== null && !reloj?.fin;
+  // Tu código de workspace/ (solo en la laptop): la IA lo ve al evaluar y lo revisa como un senior
+  const [codigo, setCodigo] = useState(null);
+  useEffect(() => {
+    if (!resuelto) return;
+    let vivo = true;
+    api.miCodigo?.(id)
+      .then((d) => vivo && setCodigo(d?.codigo ?? null))
+      .catch(() => {});
+    return () => {
+      vivo = false;
+    };
+  }, [id, resuelto]);
 
   useEffect(() => {
     if (corriendo && restantes === 0) terminarReloj();
@@ -144,6 +166,24 @@ export function SeccionExplicar({ id, resuelto, textoGuardado, modelo, alGuardar
             </div>
           )}
         </div>
+      )}
+      {(yaEscribio || reloj?.fin) && !corriendo && texto.trim() && (
+        <EvaluadorIa
+          tarea="entrevista"
+          respuestaFija={texto.trim()}
+          textoBoton="Evaluar mi explicación"
+          pedido={{
+            pregunta: `Cuéntame cómo resolviste el ejercicio "${titulo}".`,
+            categoria: "Explicar tu solución",
+            claves: CLAVES_EXPLICAR,
+            modelo: modelo ?? "",
+            codigo: codigo ?? "",
+          }}
+        />
+      )}
+
+      {codigo && !corriendo && (
+        <EvaluadorIa tarea="codigo" respuestaFija={codigo} pedido={{ pregunta: enunciado, categoria: titulo }} />
       )}
     </div>
   );

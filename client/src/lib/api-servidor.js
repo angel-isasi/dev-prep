@@ -40,6 +40,8 @@ export function crearApi(base = "") {
     verPista: (id, n) => post(`${ruta(id)}/pistas/${n}`),
     verSolucion: (id) => post(`${ruta(id)}/solucion`),
     guardarExplicacion: (id, texto) => put(`${ruta(id)}/explicacion`, { texto }),
+    /** Tu código de workspace/ (para la IA). { codigo: null } si aún no lo abriste. */
+    miCodigo: (id) => pedir(`${ruta(id)}/mi-codigo`, { headers: { accept: "application/json" } }),
     repasar: (id) => post(`${ruta(id)}/repasar`),
     inicio: get("/api/inicio"),
     progreso: get("/api/progreso"),

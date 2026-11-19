@@ -52,6 +52,28 @@ export function crearApp(deps) {
   if (deps.config && deps.vscode) app.use("/api", rutasGit(deps));
   if (deps.config) app.use("/api", rutasOfertasAuto());
 
+  // IA: la laptop no tiene la API key. Le pasa el pedido tal cual a la función de Vercel (con tu
+  // contraseña en x-clave) y devuelve su respuesta. Sin internet responde "no configurada".
+  const web = deps.webIa ?? process.env.DEVPREP_WEB ?? "https://dev-prep.angel-isasi.com";
+  app.all("/api/ia", async (req, res) => {
+    if (req.method !== "GET" && req.method !== "POST") return res.status(405).json({ error: "Método no permitido" });
+    try {
+      const headers = { accept: "application/json" };
+      if (req.get("x-clave")) headers["x-clave"] = req.get("x-clave");
+      if (req.method === "POST") headers["content-type"] = "application/json";
+      const r = await fetch(`${web}/api/ia`, {
+        method: req.method,
+        headers,
+        body: req.method === "POST" ? JSON.stringify(req.body ?? {}) : undefined,
+        signal: AbortSignal.timeout(60_000),
+      });
+      res.status(r.status).set("Cache-Control", "no-store").json(await r.json().catch(() => ({})));
+    } catch {
+      if (req.method === "GET") return res.json({ configurada: false });
+      res.status(502).json({ error: "Sin conexión a internet: la IA necesita internet." });
+    }
+  });
+
   // Botón "Cerrar dev-prep": responde y luego apaga el servidor.
   if (deps.alApagar) {
     app.post("/api/apagar", (req, res) => {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
 import { Markdown } from "./Markdown.jsx";
 import { Grabadora } from "./Grabadora.jsx";
+import { EvaluadorIa } from "./EvaluadorIa.jsx";
 import estilos from "./PitchStar.module.css";
 import { Esqueleto } from "./Esqueleto.jsx";
 
@@ -21,6 +22,21 @@ const SUGERENCIAS = [
   "Algo que aprendí rápido y solo",
   "El proyecto del que estoy más orgulloso",
 ];
+
+// Lo que la IA mira en tu pitch y en tus historias
+const CLAVES_PITCH = [
+  "Quién es hoy en una frase (estudio, enfoque en frontend)",
+  "Algo concreto que construyó, con tecnologías y un resultado",
+  "Qué busca y por qué encaja con un puesto junior",
+  "Dura entre 45 y 75 segundos dicho en voz alta",
+];
+const CLAVES_STAR = [
+  "Situación y tarea breves, con contexto claro",
+  "La acción es lo más largo y habla de lo que hizo él (yo, no nosotros)",
+  "Un resultado concreto, con números si se puede",
+  "Qué aprendió o qué haría distinto",
+];
+const historiaComoTexto = (h) => PARTES.filter((p) => h[p.campo].trim()).map((p) => `${p.nombre}: ${h[p.campo].trim()}`).join("\n");
 
 const contarPalabras = (texto) => texto.trim().split(/\s+/).filter(Boolean).length;
 
@@ -94,6 +110,14 @@ export function PitchStar({ guias }) {
           {segundos > 75 && " · demasiado largo, recórtalo"}
         </p>
         <Grabadora clave="pitch" maxSegundos={90} texto="Grabarme diciendo mi pitch" />
+        {palabras >= 20 && (
+          <EvaluadorIa
+            tarea="entrevista"
+            respuestaFija={datos.pitch}
+            textoBoton="Evaluar mi pitch"
+            pedido={{ pregunta: "Háblame de ti.", categoria: "Pitch de presentación", claves: CLAVES_PITCH, omitir: ["repregunta"] }}
+          />
+        )}
         <details className={estilos.guia}>
           <summary>Cómo armar tu pitch</summary>
           <Markdown>{guias.pitch}</Markdown>
@@ -137,6 +161,19 @@ export function PitchStar({ guias }) {
                     />
                   </label>
                 ))}
+                {contarPalabras(historiaComoTexto(h)) >= 25 && (
+                  <EvaluadorIa
+                    key={h.id}
+                    tarea="entrevista"
+                    respuestaFija={historiaComoTexto(h)}
+                    textoBoton="Evaluar mi historia"
+                    pedido={{
+                      pregunta: `Cuéntame de una vez: ${h.titulo || "una situación difícil"}.`,
+                      categoria: "Historia STAR",
+                      claves: CLAVES_STAR,
+                    }}
+                  />
+                )}
                 <button
                   type="button"
                   className="boton boton-fantasma boton-peligro"

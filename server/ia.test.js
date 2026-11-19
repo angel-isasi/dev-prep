@@ -198,3 +198,35 @@ describe("código de invitado", () => {
     expect((await r.json()).error).toMatch(/invitado.*tope/);
   });
 });
+
+describe("revisión de código, explicación y charla en inglés", () => {
+  it("la revisión de código manda el enunciado y la solución, y limpia lo que vuelve", () => {
+    const p = armarPedido({ tarea: "codigo", categoria: "Suma", pregunta: "Suma dos números", respuesta: "export const suma = (a, b) => a + b;" });
+    expect(p.mensaje).toContain("Suma dos números");
+    expect(p.mensaje).toContain("a + b");
+    expect(armarPedido({ tarea: "codigo", pregunta: "x", respuesta: "" }).error).toBeTruthy();
+    const r = limpiarResultado("codigo", { puntaje: 14, resumen: "Bien", bien: ["a"], mejoras: ["b", "c", "d", "e", "f"], preguntas: ["p"] });
+    expect(r.puntaje).toBe(10);
+    expect(r.mejoras).toHaveLength(4);
+  });
+
+  it("la explicación de un ejercicio puede llevar el código del alumno", () => {
+    const p = armarPedido({ ...pedidoEntrevista, codigo: "const x = 1;" });
+    expect(p.mensaje).toContain("Su código");
+    expect(armarPedido(pedidoEntrevista).mensaje).not.toContain("Su código");
+  });
+
+  it("la charla arma el historial y el cierre pide al menos 2 intervenciones del alumno", () => {
+    const historial = [
+      { de: "ia", texto: "Hi! Tell me about yourself." },
+      { de: "yo", texto: "I am student of systems engineering." },
+    ];
+    const turno = armarPedido({ tarea: "conversacion", escenario: "Job interview", historial });
+    expect(turno.mensaje).toContain("Student: I am student");
+    expect(armarPedido({ tarea: "conversacion", escenario: "", historial }).error).toBeTruthy();
+    expect(armarPedido({ tarea: "conversacion-cierre", escenario: "x", historial }).error).toBeTruthy();
+    const cierre = armarPedido({ tarea: "conversacion-cierre", escenario: "x", historial: [...historial, { de: "yo", texto: "I like React." }] });
+    expect(cierre.esquema).toBe(armarPedido({ tarea: "ingles", pregunta: "q", respuesta: "una dos tres" }).esquema);
+    expect(limpiarResultado("conversacion", { respuesta: "Bye!", fin: "si" })).toEqual({ respuesta: "Bye!", fin: false });
+  });
+});

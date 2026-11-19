@@ -5,9 +5,11 @@
 //   (ANTHROPIC_API_KEY). Sin ella, la función responde "no configurada" y la app lo avisa.
 // - Para que nadie más gaste tu saldo, cada pedido trae una contraseña tuya (variable DEVPREP_IA_CLAVE
 //   en Vercel; en la app la escribes una vez y queda en tu navegador).
-// - Tres tareas: "entrevista" (evalúa tu respuesta contra lo que quiere escuchar el entrevistador),
-//   "informe" (el balance de una entrevista completa: simulacro o entrevista por voz) e "ingles"
-//   (corrige tu respuesta en inglés del mapache). La IA responde un JSON con forma fija.
+// - Tareas: "entrevista" (evalúa tu respuesta contra lo que quiere escuchar el entrevistador; también
+//   tu pitch, tus historias STAR y cómo explicas un ejercicio resuelto), "informe" (el balance de una
+//   entrevista completa), "ingles" (corrige tu respuesta en inglés del mapache), "codigo" (revisa tu
+//   solución como un senior), "conversacion" (un turno de charla en inglés) y "conversacion-cierre"
+//   (las correcciones de esa charla). La IA responde un JSON con forma fija.
 // - Código de invitado (opcional): DEVPREP_IA_INVITADO es un segundo código para quien tú invites, y sus
 //   pedidos usan otra API key (ANTHROPIC_API_KEY_INVITADO) de un espacio de trabajo aparte con su propio
 //   límite de gasto en la consola de la API. Así el tope del invitado lo pone la consola: no se puede
@@ -18,7 +20,22 @@ import { createHash, timingSafeEqual } from "node:crypto";
 import { MODELOS } from "./ia-precios.js";
 
 /** Topes de lo que se acepta en cada pedido (en caracteres), para no gastar de más. */
-export const LIMITES = { respuesta: 6000, pregunta: 1000, modelo: 4000, clave: 500, claves: 12, contexto: 4000, items: 24, respuestaItem: 1500, notas: 1500 };
+export const LIMITES = {
+  respuesta: 6000,
+  pregunta: 1000,
+  modelo: 4000,
+  clave: 500,
+  claves: 12,
+  contexto: 4000,
+  items: 24,
+  respuestaItem: 1500,
+  notas: 1500,
+  codigo: 8000,
+  enunciado: 4000,
+  escenario: 800,
+  turnos: 30,
+  turno: 600,
+};
 
 const NOTAS = ["sabia", "dude", "no"];
 const NIVELES = ["A1", "A2", "B1", "B2", "C1", "C2"];
@@ -75,6 +92,27 @@ export const ESQUEMAS = {
   },
 };
 
+ESQUEMAS.codigo = {
+  type: "object",
+  additionalProperties: false,
+  required: ["puntaje", "resumen", "bien", "mejoras", "preguntas"],
+  properties: {
+    puntaje: { type: "integer", description: "De 0 a 10" },
+    resumen: { type: "string" },
+    bien: { type: "array", items: { type: "string" } },
+    mejoras: { type: "array", items: { type: "string" } },
+    preguntas: { type: "array", items: { type: "string" } },
+  },
+};
+ESQUEMAS.conversacion = {
+  type: "object",
+  additionalProperties: false,
+  required: ["respuesta", "fin"],
+  properties: { respuesta: { type: "string" }, fin: { type: "boolean" } },
+};
+// El cierre de la charla corrige igual que el mapache
+ESQUEMAS["conversacion-cierre"] = ESQUEMAS.ingles;
+
 const ESTILO =
   "Escribe en español de Perú, con tuteo neutro (sin voseo), directo y concreto, sin relleno ni frases motivacionales vacías. No uses rayas largas; usa dos puntos o comas. Sé breve: quien lo lee se abruma con textos largos. Cada punto de una lista es una sola frase de 20 palabras como máximo, y es mejor dar pocos puntos que pesen que muchos.";
 
@@ -110,6 +148,32 @@ Cómo corregir:
 - "nivel": el nivel CEFR que muestra la respuesta. "puntaje" de 0 a 10 para ese nivel objetivo.
 - "comentario": una sola frase en español con lo más importante que debe mejorar.
 ${ESTILO}`,
+  codigo: `Eres un desarrollador senior que revisa el código de un estudiante que se prepara para su primer trabajo como frontend junior. Su solución ya pasa todos los tests: no busques si funciona, sino cómo está escrita.
+
+Cómo revisar:
+- "puntaje" de 0 a 10 según cómo lo vería un entrevistador: claridad, nombres, casos borde, complejidad y uso idiomático de JavaScript moderno.
+- "resumen": una sola frase con tu impresión.
+- "bien": hasta 2 cosas concretas que están bien hechas (puede estar vacío).
+- "mejoras": hasta 3 cambios que más subirían el nivel, cada uno con el qué y el porqué; si sirve, un fragmento de código corto entre comillas invertidas.
+- "preguntas": 2 preguntas que le haría un entrevistador sobre este código (complejidad, un caso borde, una alternativa).
+- No reescribas toda la solución ni propongas lo que el enunciado no pide.
+${ESTILO}`,
+  conversacion: `You are a friendly English conversation partner for a Peruvian student who is preparing to work in English as a junior frontend developer. Their level is around B1-B2.
+
+How to talk:
+- Stay in the role and scenario you are given. Reply in English only, in 1 to 3 short sentences, like a real person would in that situation, and usually end with a question so the conversation keeps going.
+- Use natural, everyday English at a B2 level: clear, not too formal, no rare idioms.
+- Do not correct mistakes during the conversation (that happens at the end). If you truly cannot understand them, ask them to rephrase.
+- "fin": true only when the conversation has reached a natural end (around 8 to 12 exchanges) or the student says goodbye; then say goodbye in "respuesta".`,
+  "conversacion-cierre": `Eres un profesor de inglés que prepara a un estudiante peruano para trabajar en inglés como desarrollador. Acaba de tener una conversación por escrito o por voz y le das la corrección final.
+
+Cómo corregir:
+- Corrige solo lo que dijo el estudiante (las líneas "Student"), nunca las del otro lado.
+- "correcciones": los errores reales de gramática, vocabulario o naturalidad que más pesan en toda la conversación (5 como máximo, sin repetir el mismo tipo de error), con el fragmento original, el corregido y una explicación en español de 15 palabras como máximo. Si viene dictado por voz, ignora la puntuación.
+- "version": su intervención más floja reescrita como la diría alguien con nivel C1.
+- "nivel": el nivel CEFR que mostró. "puntaje" de 0 a 10 para ese nivel objetivo (B2).
+- "comentario": una sola frase en español con lo más importante que debe mejorar.
+${ESTILO}`,
 };
 
 const recortar = (texto, max) => String(texto ?? "").trim().slice(0, max);
@@ -122,6 +186,8 @@ export function armarPedido(cuerpo) {
   const tarea = cuerpo?.tarea;
   if (!ESQUEMAS[tarea]) return { error: "Tarea desconocida" };
   if (tarea === "informe") return armarInforme(cuerpo);
+  if (tarea === "codigo") return armarCodigo(cuerpo);
+  if (tarea === "conversacion" || tarea === "conversacion-cierre") return armarConversacion(tarea, cuerpo);
   const respuesta = recortar(cuerpo.respuesta, LIMITES.respuesta);
   const pregunta = recortar(cuerpo.pregunta, LIMITES.pregunta);
   if (!pregunta) return { error: "Falta la pregunta" };
@@ -131,6 +197,7 @@ export function armarPedido(cuerpo) {
     const claves = (Array.isArray(cuerpo.claves) ? cuerpo.claves : []).slice(0, LIMITES.claves).map((c) => recortar(c, LIMITES.clave)).filter(Boolean);
     const modelo = recortar(cuerpo.modelo, LIMITES.modelo);
     const contexto = recortar(cuerpo.contexto, LIMITES.contexto);
+    const codigo = recortar(cuerpo.codigo, LIMITES.codigo);
     const enIngles = cuerpo.idioma === "en";
     // En la entrevista por voz la versión mejorada de una repregunta o la repregunta del último turno no se usan
     const omitir = (Array.isArray(cuerpo.omitir) ? cuerpo.omitir : []).filter((c) => c === "mejor" || c === "repregunta");
@@ -139,6 +206,7 @@ export function armarPedido(cuerpo) {
       claves.length ? `Lo que el entrevistador quiere escuchar:\n${claves.map((c) => `- ${c}`).join("\n")}` : "",
       modelo ? `Respuesta modelo (solo referencia):\n${modelo}` : "",
       contexto ? `Datos reales del candidato (su pitch y sus proyectos, para personalizar "mejor"):\n${contexto}` : "",
+      codigo ? `Su código (lo que está explicando; juzga si su explicación coincide con lo que hizo):\n${codigo}` : "",
       omitir.length ? `No escribas ${omitir.map((c) => `"${c}"`).join(" ni ")}: déjalo como texto vacío, no se va a usar.` : "",
       `Respuesta del candidato${enIngles ? " (respondió en inglés: evalúa también si se entiende bien; escribe \"mejor\" y \"repregunta\" en inglés y lo demás en español)" : ""}:\n${respuesta}`,
     ];
@@ -148,6 +216,35 @@ export function armarPedido(cuerpo) {
   const nivel = NIVELES.includes(cuerpo.nivel) ? cuerpo.nivel : "B2";
   const mensaje = `Pregunta (nivel ${nivel}):\n${pregunta}\n\nRespuesta del estudiante:\n${respuesta}`;
   return { tarea, sistema: SISTEMA.ingles, mensaje, esquema: ESQUEMAS.ingles };
+}
+
+/** Revisión de código: el enunciado y tu solución. */
+function armarCodigo(cuerpo) {
+  const enunciado = recortar(cuerpo.pregunta, LIMITES.enunciado);
+  const codigo = recortar(cuerpo.respuesta, LIMITES.codigo);
+  if (!enunciado) return { error: "Falta el enunciado" };
+  if (codigo.length < 20) return { error: "No hay código para revisar" };
+  const titulo = recortar(cuerpo.categoria, 120);
+  const mensaje = [`Ejercicio${titulo ? ` "${titulo}"` : ""}:\n${enunciado}`, `Su solución (ya pasa los tests):\n${codigo}`].join("\n\n");
+  return { tarea: "codigo", sistema: SISTEMA.codigo, mensaje, esquema: ESQUEMAS.codigo };
+}
+
+/** Charla en inglés: el escenario y lo que se dijo hasta ahora. */
+function armarConversacion(tarea, cuerpo) {
+  const escenario = recortar(cuerpo.escenario, LIMITES.escenario);
+  if (!escenario) return { error: "Falta el escenario" };
+  const turnos = (Array.isArray(cuerpo.historial) ? cuerpo.historial : [])
+    .slice(-LIMITES.turnos)
+    .map((t) => ({ yo: t?.de === "yo", texto: recortar(t?.texto, LIMITES.turno) }))
+    .filter((t) => t.texto);
+  const delAlumno = turnos.filter((t) => t.yo);
+  if (tarea === "conversacion-cierre" && delAlumno.length < 2) return { error: "Conversa un poco más antes de pedir la corrección" };
+  const lineas = turnos.map((t) => `${t.yo ? "Student" : "You"}: ${t.texto}`).join("\n");
+  const mensaje =
+    tarea === "conversacion"
+      ? [`Scenario and your role:\n${escenario}`, lineas ? `Conversation so far:\n${lineas}` : "Start the conversation with your first line."].join("\n\n")
+      : [`Escenario:\n${escenario}`, `Conversación (Student es el estudiante):\n${lineas}`].join("\n\n");
+  return { tarea, sistema: SISTEMA[tarea], mensaje, esquema: ESQUEMAS[tarea] };
 }
 
 const TEXTO_NOTA = { sabia: "bien", dude: "regular", no: "mal", hecho: "lo resolvió", "no-llegue": "no llegó a resolverlo" };
@@ -203,6 +300,16 @@ export function limpiarResultado(tarea, r) {
       plan: textos(r.plan).slice(0, 5),
     };
   }
+  if (tarea === "codigo") {
+    return {
+      puntaje: entre(r.puntaje, 0, 10),
+      resumen: String(r.resumen ?? ""),
+      bien: textos(r.bien).slice(0, 3),
+      mejoras: textos(r.mejoras).slice(0, 4),
+      preguntas: textos(r.preguntas).slice(0, 3),
+    };
+  }
+  if (tarea === "conversacion") return { respuesta: String(r.respuesta ?? "").slice(0, 1200), fin: r.fin === true };
   if (tarea === "entrevista") {
     return {
       puntaje: entre(r.puntaje, 0, 10),

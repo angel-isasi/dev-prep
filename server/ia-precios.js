@@ -13,6 +13,10 @@ export const MODELOS = {
   entrevista: "claude-sonnet-5-5",
   informe: "claude-sonnet-5-5",
   ingles: "claude-haiku-5-5",
+  codigo: "claude-sonnet-5-5",
+  // Charla en inglés: cada turno con el modelo barato; las correcciones del final con uno mejor
+  conversacion: "claude-haiku-5-5",
+  "conversacion-cierre": "claude-sonnet-5-5",
 };
 
 /**

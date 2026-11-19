@@ -6,6 +6,7 @@ import { api } from "../lib/api.js";
 import { claveIa, estadoIa, guardarClaveIa, guardarTopeIa, pedirIa, quienSoyIa, topeIa, usoIa } from "../lib/ia.js";
 import { dictar, hablar, hayVoz, microDisponible } from "../lib/voz.js";
 import { IconoAudio, IconoChispa, IconoMicrofono } from "./Iconos.jsx";
+import { TextoConCodigo } from "./TextoConCodigo.jsx";
 import estilos from "./EvaluadorIa.module.css";
 
 const VEREDICTOS = { sabia: "Lo sabías", dude: "Te faltó algo", no: "No lo respondiste bien" };
@@ -138,17 +139,18 @@ export function UsoIa() {
 
 /**
  * @param {object} props
- * @param {"entrevista"|"ingles"} props.tarea
+ * @param {"entrevista"|"ingles"|"codigo"} props.tarea
  * @param {object} props.pedido          lo que se manda además de la respuesta (pregunta, claves, modelo, nivel...)
  * @param {string} [props.respuestaFija] si ya respondiste en otro lado (mapache): solo el botón para corregirla
  * @param {(resultado: object, respuesta: string) => void} [props.alResultado]
  * @param {"es"|"en"} [props.idioma]     idioma en que respondes (para el dictado)
+ * @param {string} [props.textoBoton]     texto del botón de evaluar (por ejemplo "Evaluar mi pitch")
  */
 export function EvaluadorIa(props) {
   return <PuertaIa>{(olvidarClave) => <Evaluador {...props} alOlvidarClave={olvidarClave} />}</PuertaIa>;
 }
 
-function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", alOlvidarClave }) {
+function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", textoBoton, alOlvidarClave }) {
   const [texto, setTexto] = useState("");
   const [dictando, setDictando] = useState(false);
   const [cargando, setCargando] = useState(false);
@@ -207,7 +209,7 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", a
   return (
     <div className={estilos.caja}>
       <div className={estilos.cabecera}>
-        <span className={estilos.etiqueta}>{tarea === "ingles" ? "Corregir con IA" : repregunta ? "Repregunta" : "Evaluar con IA"}</span>
+        <span className={estilos.etiqueta}>{tarea === "ingles" ? "Corregir con IA" : tarea === "codigo" ? "Revisión de un senior" : repregunta ? "Repregunta" : "Evaluar con IA"}</span>
         <button type="button" className={estilos.enlace} onClick={alOlvidarClave}>
           Cambiar código
         </button>
@@ -238,7 +240,13 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", a
               </button>
             )}
             <button type="button" className="boton boton-primario" onClick={evaluar} disabled={cargando || contarPalabras(respuesta) < 3}>
-              {cargando ? "Evaluando… (unos segundos)" : tarea === "ingles" ? "Corregir mi inglés" : "Evaluar mi respuesta"}
+              {cargando
+                ? "Evaluando… (unos segundos)"
+                : tarea === "ingles"
+                  ? "Corregir mi inglés"
+                  : tarea === "codigo"
+                    ? "Revisar mi código"
+                    : (textoBoton ?? "Evaluar mi respuesta")}
             </button>
           </div>
         </>
@@ -250,9 +258,10 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", a
         <ResultadoEntrevista r={resultado} alSeguir={resultado.repregunta ? seguirConRepregunta : null} />
       )}
       {resultado && tarea === "ingles" && <ResultadoIngles r={resultado} />}
+      {resultado && tarea === "codigo" && <ResultadoCodigo r={resultado} />}
       {resultado && (
         <button type="button" className={estilos.enlace} onClick={() => setResultado(null)}>
-          Intentar otra respuesta
+          {respuestaFija === undefined ? "Intentar otra respuesta" : "Cerrar"}
         </button>
       )}
       <UsoIa />
@@ -317,7 +326,57 @@ function ResultadoEntrevista({ r, alSeguir }) {
   );
 }
 
-function ResultadoIngles({ r }) {
+function ResultadoCodigo({ r }) {
+  return (
+    <div className={estilos.resultado}>
+      <div className={estilos.puntaje} data-veredicto={r.puntaje >= 8 ? "sabia" : r.puntaje >= 5 ? "dude" : "no"}>
+        <strong>{r.puntaje}/10</strong>
+        <span>Así lo vería un entrevistador</span>
+      </div>
+      {r.resumen && <p>{r.resumen}</p>}
+      <div className={estilos.columnas}>
+        {r.bien.length > 0 && (
+          <div>
+            <span className={estilos.subtitulo} data-tipo="bien">
+              Bien
+            </span>
+            <ul>
+              {r.bien.map((x, i) => (
+                <li key={i}>{x}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {r.mejoras.length > 0 && (
+          <div>
+            <span className={estilos.subtitulo} data-tipo="falta">
+              Para subir de nivel
+            </span>
+            <ul>
+              {r.mejoras.map((x, i) => (
+                <li key={i}>
+                  <TextoConCodigo>{x}</TextoConCodigo>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      {r.preguntas.length > 0 && (
+        <div className={estilos.mejor}>
+          <span className={estilos.subtitulo}>Lo que te preguntaría el entrevistador</span>
+          <ul>
+            {r.preguntas.map((x, i) => (
+              <li key={i}>{x}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function ResultadoIngles({ r }) {
   return (
     <div className={estilos.resultado}>
       <div className={estilos.puntaje} data-veredicto={r.puntaje >= 8 ? "sabia" : r.puntaje >= 5 ? "dude" : "no"}>

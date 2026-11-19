@@ -39,6 +39,7 @@ const InglesUnidad = perezoso(() => import("./ingles/InglesUnidad.jsx"), "Ingles
 const HistoriaMovil = perezoso(() => import("./ingles/Historias.jsx"), "HistoriaMovil");
 const ListaHistorias = perezoso(() => import("./ingles/Historias.jsx"), "ListaHistorias");
 const RoleplayMovil = perezoso(() => import("./ingles/Historias.jsx"), "RoleplayMovil");
+const ConversaMovil = perezoso(() => import("./ingles/Conversa.jsx"), "ConversaMovil");
 const ParejasMovil = perezoso(() => import("./ingles/Parejas.jsx"), "ParejasMovil");
 const ExamenNivel = perezoso(() => import("./ingles/ExamenNivel.jsx"), "ExamenNivel");
 const PaginaMapache = perezoso(() => import("./mapache/PaginaMapache.jsx"), "PaginaMapache");
@@ -84,6 +85,7 @@ export function App() {
       <Route path="ingles/historia/:id" element={<HistoriaMovil />} />
       <Route path="ingles/roleplay/:id" element={<RoleplayMovil />} />
       <Route path="ingles/parejas" element={<ParejasMovil />} />
+      <Route path="ingles/conversa" element={<ConversaMovil />} />
       <Route path="ingles/examen" element={<ExamenNivel />} />
       <Route path="ingles/mapache" element={<PaginaMapache />} />
       <Route path="revision" element={<ListaRevision />} />

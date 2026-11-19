@@ -955,6 +955,12 @@ const apiWeb = {
     if (xp) progreso.sumarXp(xp);
     cache.clear();
   },
+  /** Charla con IA terminada: el tiempo cuenta para tus minutos de inglés de hoy. */
+  async terminarConversacion({ xp = 0, segundos = 0 } = {}) {
+    progreso.sumarContadores({ inglesSegundos: Math.round(Math.max(0, Math.min(segundos, 3600))) });
+    if (xp) progreso.sumarXp(xp);
+    cache.clear();
+  },
   /** Lección de inglés terminada: contadores para misiones y liga. */
   async registrarLeccionIngles(sesion, final) {
     progreso.sumarContadores(contadoresDeLeccion(sesion, final));

@@ -15,7 +15,7 @@ import { SlidingNumber } from "../../components/ui/sliding-number.jsx";
 import { CaminoMovil } from "../leccion/CaminoMovil.jsx";
 import { avanceConceptos } from "../leccion/variantes.js";
 import { TarjetaMapache } from "../mapache/TarjetaMapache.jsx";
-import { IconoAudifonos, IconoEstrella, IconoLibro, IconoMezclar, IconoOido, IconoPlay, IconoRayo, IconoRegalo, IconoReloj, IconoRepetir } from "../../components/Iconos.jsx";
+import { IconoAudifonos, IconoEstrella, IconoLibro, IconoMezclar, IconoOido, IconoPlay, IconoRayo, IconoRegalo, IconoReloj, IconoRepetir, IconoChispa } from "../../components/Iconos.jsx";
 import estilos from "./Ingles.module.css";
 
 /** Inglés real para escuchar fuera de la app, por nivel. Lo que escuches lo anotas en "Inmersión". */
@@ -187,6 +187,7 @@ export function InglesMovil() {
                 conVoz && { a: leccion("escuchar"), Icono: IconoAudifonos, titulo: "Solo escuchar", sub: "oído y dictado" },
                 { a: "/ingles/historias", Icono: IconoLibro, titulo: "Historias", sub: "la serie de Ana y roleplays" },
                 { a: "/ingles/parejas", Icono: IconoReloj, titulo: "Parejas", sub: "60 segundos contrarreloj" },
+                { a: "/ingles/conversa", Icono: IconoChispa, titulo: "Conversa con IA", sub: "charla de trabajo y tus errores corregidos" },
                 { a: leccion("mezcla"), Icono: IconoMezclar, titulo: "Repaso mezclado", sub: "de todas tus unidades" },
                 conVoz && { a: leccion("oido"), Icono: IconoOido, titulo: "Oído fino", sub: "ship o sheep" },
                 { a: leccion("errores"), Icono: IconoRepetir, titulo: "Mis errores", sub: "lo que fallaste" },

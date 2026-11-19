@@ -144,6 +144,15 @@ export function rutasEjercicios({ indice, progreso, workspace, corredor, vscode,
     res.json({ respaldo: respaldo && path.relative(workspace.raiz, respaldo) });
   });
 
+  // Tu código de workspace/, para que la IA lo revise o lo tenga a la vista al evaluar tu explicación.
+  // Solo el archivo de ese ejercicio (la ruta sale del índice, no del pedido).
+  router.get("/:id/mi-codigo", async (req, res) => {
+    const ej = req.ejercicio;
+    if (!workspace || !(await workspace.existe(ej))) return res.json({ codigo: null });
+    const codigo = await readFile(workspace.archivoDe(ej), "utf8").catch(() => null);
+    res.json({ codigo, lenguaje: ej.ext });
+  });
+
   // Vuelve a correr los tests sin guardar (botón "Correr tests").
   router.post("/:id/correr", async (req, res) => {
     const ej = req.ejercicio;

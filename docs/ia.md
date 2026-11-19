@@ -19,6 +19,17 @@ código; solo falta que tú pongas tu API key en Vercel. Mientras no la pongas, 
   navegador (gratis); sin micrófono puedes escribir. Funciona mejor en Chrome y con audífonos.
 - **Mapache**: después de responder la pregunta del día, "Corregir mi inglés" te muestra cada error
   con su corrección, tu respuesta en nivel C1 y el nivel que mostraste.
+- **Ejercicios** (pestaña "Explícalo", al resolver): "Evaluar mi explicación" juzga cómo explicas tu
+  solución con tu código a la vista, y "Revisar mi código" te da la revisión de un senior: qué está
+  bien, qué subiría tu nivel y qué te preguntaría el entrevistador. Tu código sale de workspace/, así
+  que la revisión solo aparece en la laptop (en localhost o en la web con dev-prep abierto).
+- **Pitch y STAR**: "Evaluar mi pitch" y "Evaluar mi historia" con lo que pide el entrevistador.
+- **Conversa con IA** (Inglés, Más práctica): una charla de trabajo en inglés (entrevista, daily,
+  explicar tu código, pedir ayuda, primer día). Respondes escribiendo o dictando; al terminar te da
+  tus errores corregidos. El tiempo cuenta para tus minutos de inglés.
+
+La app de la laptop no tiene la API key: su servidor le pasa los pedidos de IA a la función de
+Vercel (`/api/ia` en `server/app.js`). Sin internet, la IA aparece apagada.
 
 ## Modelos y costo
 
@@ -29,8 +40,12 @@ Cada tarea usa el modelo más barato que la hace bien (tabla en `server/ia-preci
 | Evaluar una respuesta de entrevista | `claude-sonnet-5-5` | alrededor de 1 centavo de dólar |
 | Informe de una entrevista completa | `claude-sonnet-5-5` | de 1 a 2 centavos |
 | Corregir inglés | `claude-haiku-5-5` | menos de 0,1 centavos |
+| Revisar tu código | `claude-sonnet-5-5` | de 1 a 2 centavos |
+| Un turno de Conversa | `claude-haiku-5-5` | menos de 0,1 centavos |
+| Corrección final de Conversa | `claude-sonnet-5-5` | alrededor de 1 centavo |
 
-Una entrevista por voz de 3 preguntas con 1 repregunta son 7 pedidos: unos 8 centavos.
+Una entrevista por voz de 3 preguntas con 1 repregunta son 7 pedidos: unos 8 centavos. Una charla
+de Conversa de 10 turnos con su corrección: unos 2 centavos.
 
 "Uso de IA este mes", debajo de cada panel de IA, muestra lo que llevas gastado y tu tope mensual
 (20 USD por defecto, lo cambias ahí mismo). Al llegar al tope la app deja de pedir evaluaciones. La

@@ -294,6 +294,8 @@ export function Ejercicio() {
             key={ejercicio.id}
             id={ejercicio.id}
             resuelto={resuelto}
+            titulo={ejercicio.titulo}
+            enunciado={ejercicio.enunciado}
             textoGuardado={progreso?.explicacion ?? ""}
             modelo={ejercicio.modelo}
             alGuardar={guardarExplicacion}
