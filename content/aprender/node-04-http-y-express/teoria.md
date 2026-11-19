@@ -39,7 +39,7 @@ El primer dígito te dice la familia:
 | Familia | Significa | Ejemplos |
 |---|---|---|
 | 2xx | Salió bien | `200 OK`, `201 Created`, `204 No Content` |
-| 3xx | Ve a otro lado | `301` / `304` |
+| 3xx | Redirección o "no cambió" | `301` (ve a otra URL), `304` (no cambió, usa tu copia) |
 | 4xx | **El cliente** se equivocó | `400 Bad Request`, `401 Unauthorized`, `403 Forbidden`, `404 Not Found` |
 | 5xx | **El servidor** falló | `500 Internal Server Error` |
 

@@ -156,3 +156,9 @@ describe("limpiarResultado", () => {
     expect(r.correcciones[0]).toEqual({ original: "for improve", corregido: "to improve", explicacion: "" });
   });
 });
+
+it("omitir: la entrevista por voz pide que no se escriba lo que no va a usar", () => {
+  const base = { tarea: "entrevista", pregunta: "¿Qué es un closure?", respuesta: "Una función que recuerda su entorno" };
+  expect(armarPedido({ ...base, omitir: ["mejor", "otra-cosa"] }).mensaje).toContain('No escribas "mejor"');
+  expect(armarPedido(base).mensaje).not.toContain("No escribas");
+});

@@ -50,6 +50,7 @@ const equipo = {
 
   listarMal() {
     // una function normal tiene su propio this: aquí es undefined
+    // (en un módulo o en modo estricto; sin eso sería el objeto global)
     return this.jugadores.map(function (j) {
       return `${j} de ${this.nombre}`;   // TypeError
     });
@@ -162,7 +163,7 @@ setTimeout(usuario.saludar, 1000);   // this no será usuario
 
 Envuélvelo: `setTimeout(() => usuario.saludar(), 1000)`, o usa `usuario.saludar.bind(usuario)`.
 
-**4. Usar `function` dentro de un método.** La función interna tiene su propio `this`.
+**4. Usar `function` dentro de un método.** La función interna tiene su propio `this`. En un módulo o en modo estricto es `undefined` y lanza TypeError; sin modo estricto es el objeto global y sale `undefined` en el texto.
 
 ```js
 const tienda = {

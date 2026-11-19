@@ -56,7 +56,8 @@ Luis   │ 120
 ```sql
 SELECT c.nombre, p.total
 FROM clientes AS c
-LEFT JOIN pedidos AS p ON p.cliente_id = c.id;
+LEFT JOIN pedidos AS p ON p.cliente_id = c.id
+ORDER BY c.id, p.id;
 ```
 
 ```
@@ -110,7 +111,7 @@ Rosa   │ 0       │ 0
 ```
 
 - Cada grupo se vuelve **una fila** del resultado.
-- En el `SELECT` pon solo columnas del `GROUP BY` o agregaciones.
+- En el `SELECT` pon solo columnas del `GROUP BY` o agregaciones. `c.nombre` vale porque se agrupa por `c.id`, la clave primaria: cada grupo tiene un solo nombre.
 - `COUNT(p.id)` y no `COUNT(*)`: con LEFT JOIN, Rosa tiene una fila (con `NULL`) y `COUNT(*)` contaría 1.
 - `COALESCE(x, 0)` devuelve `0` si `x` es `NULL` (la suma de nada es `NULL`).
 

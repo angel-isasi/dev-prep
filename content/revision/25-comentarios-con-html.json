@@ -18,7 +18,7 @@
       "linea": 17,
       "tipo": "seguridad",
       "titulo": "Enlace con URL del usuario sin validar",
-      "detalle": "Si alguien pone 'javascript:alert(document.cookie)' como su web, al hacer clic se ejecuta ese código. Acepta solo URLs http o https.",
+      "detalle": "Si alguien pone 'javascript:alert(document.cookie)' como su web, las versiones de React anteriores a la 19 ejecutan ese código al hacer clic. React 19 bloquea las URLs javascript:, pero no dependas de la versión: acepta solo URLs http o https.",
       "arreglo": "const web = /^https?:\\/\\//.test(c.autorWeb) ? c.autorWeb : undefined;\n<a href={web} rel=\"noopener noreferrer nofollow\">{c.autor}</a>"
     },
     {

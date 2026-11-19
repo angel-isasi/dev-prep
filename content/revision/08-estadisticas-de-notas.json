@@ -18,7 +18,7 @@
       "linea": 4,
       "tipo": "caso-borde",
       "titulo": "Curso sin notas",
-      "detalle": "Con un arreglo vacío, 0 / 0 da NaN, la mediana es undefined y Math.max() devuelve -Infinity. La pantalla mostraría 'NaN' e '-Infinity'. Maneja ese caso al inicio.",
+      "detalle": "Con un arreglo vacío, 0 / 0 da NaN, la mediana también da NaN y Math.max() devuelve -Infinity. La pantalla mostraría 'NaN' e '-Infinity'. Maneja ese caso al inicio.",
       "arreglo": "if (notas.length === 0) return null;"
     },
     {

@@ -306,7 +306,7 @@
       "pistas": [
         "Haz el merge desde `main`: `git merge feature/titulo`. Git avisará CONFLICT y te dirá en qué archivo.",
         "Abre `index.html`: verás las marcas `<<<<<<<`, `=======` y `>>>>>>>` con las dos versiones. Borra las marcas y deja la línea como debe quedar.",
-        "Deja `<h1>Tienda Ica online</h1>` sin marcas, guarda, y luego `git add index.html` y `git commit` (sin mensaje, Git ya trae uno; o con `-m \"Une feature/titulo\"`)."
+        "Deja `<h1>Tienda Ica online</h1>` sin marcas, guarda, y luego `git add index.html` y `git commit --no-edit` (usa el mensaje que Git ya trae, sin abrir el editor; o con `-m \"Une feature/titulo\"`)."
       ],
       "explicacion": "Un conflicto pasa cuando dos ramas cambian **la misma parte** de un archivo y Git no puede decidir cuál vale. Te marca las dos versiones:\n\n```\n<<<<<<< HEAD\n<h1>Tienda Ica</h1>\n=======\n<h1>Tienda online</h1>\n>>>>>>> feature/titulo\n```\n\nArriba está lo de tu rama actual (`HEAD`, aquí `main`) y abajo lo que llega. Tú decides el resultado (puede ser una, la otra o una mezcla), borras las marcas, haces `git add` y `git commit` para cerrar el merge. VS Code también muestra botones \"Accept Current / Incoming / Both\". Si te enredas, `git merge --abort` cancela todo y vuelves a empezar.",
       "preparar": [

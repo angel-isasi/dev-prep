@@ -68,7 +68,7 @@
       "id": "num-isnan",
       "nombre": "Number.isNaN() vs isNaN()",
       "firma": "Number.isNaN(valor)",
-      "descripcion": "`Number.isNaN` indica si el valor es exactamente `NaN`. El `isNaN` global primero convierte a número, por eso da `true` con cualquier texto.",
+      "descripcion": "`Number.isNaN` indica si el valor es exactamente `NaN`. El `isNaN` global primero convierte a número, por eso da `true` con textos que no son números, como `\"hola\"`.",
       "ejemplo": "NaN === NaN; // false\nNumber.isNaN(NaN); // true\nisNaN(\"hola\"); // true\nNumber.isNaN(\"hola\"); // false\nNumber.isNaN(Number(\"hola\")); // true",
       "devuelve": "`true` o `false`.",
       "errorTipico": "Comparar `x === NaN`: siempre es `false`, porque NaN no es igual ni a sí mismo.",

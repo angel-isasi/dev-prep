@@ -32,8 +32,8 @@
       "linea": 23,
       "tipo": "error",
       "titulo": "Ignora la elección del usuario",
-      "detalle": "Si el sistema está en modo oscuro, la función devuelve true aunque el usuario haya elegido 'claro' a propósito. La preferencia del sistema solo debería usarse cuando el usuario no eligió nada.",
-      "arreglo": "if (prefs.tema) return prefs.tema === 'oscuro';\nreturn window.matchMedia('(prefers-color-scheme: dark)').matches;"
+      "detalle": "Si el sistema está en modo oscuro, la función devuelve true aunque el usuario haya elegido 'claro' a propósito. La preferencia del sistema solo debería usarse cuando el usuario no eligió nada. Para eso el valor por defecto de tema debe ser null: con 'claro' siempre parecería que eligió.",
+      "arreglo": "// en porDefecto: tema: null (todavía no eligió)\nif (prefs.tema) return prefs.tema === 'oscuro';\nreturn window.matchMedia('(prefers-color-scheme: dark)').matches;"
     },
     {
       "linea": 27,

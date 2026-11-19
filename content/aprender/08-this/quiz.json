@@ -14,7 +14,7 @@
       "[undefined, undefined]"
     ],
     "correcta": 2,
-    "explicacion": "La flecha del `map` no tiene `this` propio: usa el de `listar`, que es `equipo` porque se llamó como `equipo.listar()`. Si en vez de la flecha hubieras usado `function (j) { ... }`, esa función tendría su propio `this` (`undefined`) y lanzaría TypeError."
+    "explicacion": "La flecha del `map` no tiene `this` propio: usa el de `listar`, que es `equipo` porque se llamó como `equipo.listar()`. Si en vez de la flecha hubieras usado `function (j) { ... }`, esa función tendría su propio `this` (`undefined` en un módulo o en modo estricto) y lanzaría TypeError."
   },
   {
     "pregunta": "¿Qué imprime este código?\n\n```js\nfunction sumar(a, b) {\n  return this.base + a + b;\n}\nconst obj = { base: 10 };\n\nconst f = sumar.bind(obj, 1);\nconsole.log(f(2), sumar.call(obj, 1, 2), sumar.apply(obj, [5, 5]));\n```",

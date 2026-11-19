@@ -58,7 +58,7 @@ module.exports = { conIgv };
 const { conIgv } = require("./precios.cjs");
 ```
 
-¿Cómo sabe Node cuál usar? Si el `package.json` dice `"type": "module"`, los `.js` son ESM. Si no, son CommonJS. También puedes forzarlo con la extensión: `.mjs` siempre es ESM y `.cjs` siempre es CommonJS.
+¿Cómo sabe Node cuál usar? Si el `package.json` dice `"type": "module"`, los `.js` son ESM. Si no, son CommonJS (salvedad: el Node actual detecta un `.js` que usa `import`/`export` y lo corre como ESM igual). También puedes forzarlo con la extensión: `.mjs` siempre es ESM y `.cjs` siempre es CommonJS.
 
 ### Módulos internos con `node:`
 

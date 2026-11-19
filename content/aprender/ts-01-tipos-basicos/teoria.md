@@ -111,8 +111,8 @@ El navegador y Node ejecutan JavaScript. Por eso los tipos **no validan nada en 
 **1. Usar `any` para "que deje de quejarse"**
 
 ```ts
-function total(items: any) {
-  return items.reduce((s, i) => s + i.precio, 0);
+function primerPrecio(items: any) {
+  return items[0].precio.toFixed(2);
 }
 ```
 Compila, pero perdiste toda la ayuda. Describe el tipo real (`{ precio: number }[]`) o usa `unknown` y comprueba.

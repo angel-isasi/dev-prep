@@ -47,7 +47,7 @@ export function GitPractico() {
   const portada = (
     <div className={estilos.portada}>
       {cabecera}
-      <TerminalAnimada lineas={DEMO} titulo="tu-proyecto — git" />
+      <TerminalAnimada lineas={DEMO} titulo="tu-proyecto: git" />
     </div>
   );
 

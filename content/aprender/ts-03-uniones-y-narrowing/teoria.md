@@ -154,7 +154,7 @@ Si `tipo` es `string`, el `switch` no puede distinguir. El discriminante debe se
 
 **5. Olvidar un caso del switch**
 
-Sin la comprobación con `never`, un caso nuevo cae al vacío y la función devuelve `undefined` sin aviso. Agrega el `default` con `never` en los switch sobre uniones.
+Sin la comprobación con `never`, un caso nuevo cae al vacío: si no anotaste el tipo de retorno, la función devuelve `undefined` sin aviso (con el retorno anotado, TypeScript sí avisa). Agrega el `default` con `never` en los switch sobre uniones.
 
 ## Chuleta
 

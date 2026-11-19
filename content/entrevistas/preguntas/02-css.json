@@ -122,8 +122,8 @@
       "id": "ent-020",
       "pregunta": "¿Qué es el `z-index` y por qué a veces \"no funciona\"?",
       "preguntaEn": "What is z-index and why does it sometimes not work?",
-      "respuesta": "Controla qué elemento queda encima, pero solo en elementos posicionados y dentro de su contexto de apilamiento. Si un padre crea un contexto nuevo, por ejemplo con `transform` u `opacity`, el hijo no puede salir de ahí aunque le ponga `z-index: 9999`. Cuando falla, reviso los ancestros.",
-      "respuestaEn": "It controls which element sits on top, but only for positioned elements and within their stacking context. If a parent creates a new context, for example with `transform` or `opacity`, the child cannot escape it even with `z-index: 9999`. When it fails, I check the ancestors.",
+      "respuesta": "Controla qué elemento queda encima, pero solo en elementos posicionados (o en hijos de flex o grid) y dentro de su contexto de apilamiento. Si un padre crea un contexto nuevo, por ejemplo con `transform` u `opacity`, el hijo no puede salir de ahí aunque le ponga `z-index: 9999`. Cuando falla, reviso los ancestros.",
+      "respuestaEn": "It controls which element sits on top, but only for positioned elements (or flex or grid children) and within their stacking context. If a parent creates a new context, for example with `transform` or `opacity`, the child cannot escape it even with `z-index: 9999`. When it fails, I check the ancestors.",
       "claves": [
         "Crean contexto de apilamiento: `position` con `z-index` distinto de `auto`, `opacity` menor que 1, `transform`, `filter` e `isolation: isolate`, entre otros.",
         "Dentro de un contexto, los `z-index` solo compiten entre sí; el padre entero se apila como una sola unidad frente a los demás.",

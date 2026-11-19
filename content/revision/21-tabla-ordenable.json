@@ -18,7 +18,7 @@
       "linea": 13,
       "tipo": "caso-borde",
       "titulo": "Comparador frágil para textos",
-      "detalle": "Nunca devuelve 0 para valores iguales y con > los textos se comparan por código de carácter: 'álvaro' y 'Zoe' quedan después de las minúsculas y en orden raro. Para strings usa localeCompare y para números la resta.",
+      "detalle": "Nunca devuelve 0 para valores iguales y con > los textos se comparan por código de carácter: 'Zoe' queda antes que todas las minúsculas y 'álvaro' después de todas, en orden raro. Para strings usa localeCompare y para números la resta.",
       "arreglo": "typeof a[orden] === 'number' ? a[orden] - b[orden] : a[orden].localeCompare(b[orden], 'es')"
     },
     {

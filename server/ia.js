@@ -72,7 +72,7 @@ export const ESQUEMAS = {
 };
 
 const ESTILO =
-  "Escribe en español de Perú, con tuteo neutro (sin voseo), directo y concreto, sin relleno ni frases motivacionales vacías. No uses rayas largas; usa dos puntos o comas.";
+  "Escribe en español de Perú, con tuteo neutro (sin voseo), directo y concreto, sin relleno ni frases motivacionales vacías. No uses rayas largas; usa dos puntos o comas. Sé breve: quien lo lee se abruma con textos largos. Cada punto de una lista es una sola frase de 20 palabras como máximo, y es mejor dar pocos puntos que pesen que muchos.";
 
 const SISTEMA = {
   informe: `Eres un entrevistador senior de desarrollo frontend que contrata practicantes y juniors en Perú. Acabas de terminar una entrevista de práctica con un estudiante de Ingeniería de Sistemas y le das tu balance, como se lo darías a alguien que quieres que mejore.
@@ -81,9 +81,9 @@ Qué recibes: cada pregunta con la etapa, la nota (la tuya si evaluaste la respu
 
 Cómo escribir el balance:
 - "puntaje" de 0 a 10 para toda la entrevista. "nivel": "listo" si hoy pasaría una entrevista junior real, "casi" si está cerca y le faltan cosas puntuales, "falta" si todavía no.
-- "resumen": dos o tres frases con tu impresión general, sin rodeos.
+- "resumen": dos frases como máximo con tu impresión general, sin rodeos.
 - "fortalezas": hasta 3, concretas y apoyadas en lo que respondió. "mejoras": hasta 3, las que más pesarían en una entrevista real, cada una con el porqué.
-- "plan": de 3 a 5 pasos para los próximos días, cada uno una acción que se puede hacer hoy (qué tema repasar, qué respuesta reescribir, qué practicar en voz alta). Ordénalos por impacto.
+- "plan": 3 pasos (4 solo si hace falta) para los próximos días, cada uno una acción que se puede hacer hoy (qué tema repasar, qué respuesta reescribir, qué practicar en voz alta). Ordénalos por impacto.
 - Busca patrones entre respuestas (por ejemplo: no da ejemplos, se va por las ramas, define pero no explica cuándo se usa), no repitas pregunta por pregunta.
 ${ESTILO}`,
   entrevista: `Eres un entrevistador senior de desarrollo frontend que contrata practicantes y juniors en Perú. Evalúas la respuesta de un estudiante de Ingeniería de Sistemas que practica para su primera entrevista.
@@ -93,18 +93,18 @@ Cómo evaluar:
 - La respuesta puede venir dictada por voz: ignora errores de puntuación o de transcripción y juzga el contenido.
 - Sé exigente pero justo, como en una entrevista real para un puesto junior. Si dijo algo incorrecto, dilo claramente.
 - "puntaje" de 0 a 10. "veredicto": "sabia" si cubrió lo esencial sin errores, "dude" si le faltó algo importante o fue impreciso, "no" si no respondió lo que se pregunta o se equivocó en lo central.
-- "resumen": una o dos frases con tu impresión, como se la dirías al candidato.
-- "bien": lo que hizo bien (puede estar vacío). "falta": lo que faltó o estuvo mal, cada punto accionable.
-- "mejor": su misma respuesta mejorada, en primera persona y lista para decir en voz alta (unos 30 a 90 segundos hablando). Conserva sus ideas y, si hay datos sobre sus proyectos, úsalos en vez de ejemplos inventados.
+- "resumen": una sola frase con tu impresión, como se la dirías al candidato.
+- "bien": hasta 2 cosas que hizo bien (puede estar vacío). "falta": hasta 3 cosas que faltaron o estuvieron mal, las que más pesan, cada una accionable.
+- "mejor": su misma respuesta mejorada, en primera persona y lista para decir en voz alta (de 30 a 60 segundos hablando, 130 palabras como máximo). Conserva sus ideas y, si hay datos sobre sus proyectos, úsalos en vez de ejemplos inventados.
 - "repregunta": la siguiente pregunta que le harías a partir de lo que dijo, como en una entrevista real.
 ${ESTILO}`,
   ingles: `Eres un profesor de inglés que prepara a un estudiante peruano para trabajar en inglés como desarrollador. El estudiante respondió por escrito o por voz una pregunta de nivel B2 o C1.
 
 Cómo corregir:
-- "correcciones": cada error real de gramática, vocabulario o naturalidad, con el fragmento original, el corregido y una explicación breve en español. No corrijas lo que ya es correcto y natural. Si viene dictado por voz, ignora la puntuación.
+- "correcciones": los errores reales de gramática, vocabulario o naturalidad que más pesan (5 como máximo, sin repetir el mismo tipo de error), con el fragmento original, el corregido y una explicación en español de 15 palabras como máximo. No corrijas lo que ya es correcto y natural. Si viene dictado por voz, ignora la puntuación.
 - "version": su respuesta reescrita como la diría un hablante con nivel C1, conservando sus ideas.
 - "nivel": el nivel CEFR que muestra la respuesta. "puntaje" de 0 a 10 para ese nivel objetivo.
-- "comentario": una o dos frases en español con lo más importante que debe mejorar.
+- "comentario": una sola frase en español con lo más importante que debe mejorar.
 ${ESTILO}`,
 };
 
@@ -128,11 +128,14 @@ export function armarPedido(cuerpo) {
     const modelo = recortar(cuerpo.modelo, LIMITES.modelo);
     const contexto = recortar(cuerpo.contexto, LIMITES.contexto);
     const enIngles = cuerpo.idioma === "en";
+    // En la entrevista por voz la versión mejorada de una repregunta o la repregunta del último turno no se usan
+    const omitir = (Array.isArray(cuerpo.omitir) ? cuerpo.omitir : []).filter((c) => c === "mejor" || c === "repregunta");
     const partes = [
       `Pregunta${cuerpo.categoria ? ` (${recortar(cuerpo.categoria, 120)})` : ""}:\n${pregunta}`,
       claves.length ? `Lo que el entrevistador quiere escuchar:\n${claves.map((c) => `- ${c}`).join("\n")}` : "",
       modelo ? `Respuesta modelo (solo referencia):\n${modelo}` : "",
       contexto ? `Datos reales del candidato (su pitch y sus proyectos, para personalizar "mejor"):\n${contexto}` : "",
+      omitir.length ? `No escribas ${omitir.map((c) => `"${c}"`).join(" ni ")}: déjalo como texto vacío, no se va a usar.` : "",
       `Respuesta del candidato${enIngles ? " (respondió en inglés: evalúa también si se entiende bien; escribe \"mejor\" y \"repregunta\" en inglés y lo demás en español)" : ""}:\n${respuesta}`,
     ];
     return { tarea, sistema: SISTEMA.entrevista, mensaje: partes.filter(Boolean).join("\n\n"), esquema: ESQUEMAS.entrevista };
@@ -201,8 +204,8 @@ export function limpiarResultado(tarea, r) {
       puntaje: entre(r.puntaje, 0, 10),
       veredicto: NOTAS.includes(r.veredicto) ? r.veredicto : "dude",
       resumen: String(r.resumen ?? ""),
-      bien: textos(r.bien),
-      falta: textos(r.falta),
+      bien: textos(r.bien).slice(0, 3),
+      falta: textos(r.falta).slice(0, 4),
       mejor: String(r.mejor ?? ""),
       repregunta: String(r.repregunta ?? ""),
     };
@@ -211,7 +214,7 @@ export function limpiarResultado(tarea, r) {
     nivel: NIVELES.includes(r.nivel) ? r.nivel : "B1",
     puntaje: entre(r.puntaje, 0, 10),
     correcciones: (Array.isArray(r.correcciones) ? r.correcciones : [])
-      .slice(0, 12)
+      .slice(0, 6)
       .map((c) => ({ original: String(c?.original ?? ""), corregido: String(c?.corregido ?? ""), explicacion: String(c?.explicacion ?? "") })),
     version: String(r.version ?? ""),
     comentario: String(r.comentario ?? ""),

@@ -30,7 +30,7 @@
       "`undefined`"
     ],
     "correcta": 1,
-    "explicacion": "Los valores de `process.env` siempre son texto. `\"4000\" + 1` concatena y da `\"40001\"`. Para sumar hay que convertir: `Number(process.env.PUERTO) + 1`. Daría `NaN` solo si la variable no existiera y la convirtieras a número."
+    "explicacion": "Los valores de `process.env` siempre son texto. `\"4000\" + 1` concatena y da `\"40001\"`. Para sumar hay que convertir: `Number(process.env.PUERTO) + 1`. Daría `NaN` si la variable no existiera: `undefined + 1` ya es `NaN`."
   },
   {
     "pregunta": "Vas a usar Vitest solo para correr tus tests mientras desarrollas. ¿Cómo lo instalas?",

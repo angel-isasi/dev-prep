@@ -86,7 +86,7 @@
       "termino": "CORS",
       "en": "Cross-Origin Resource Sharing",
       "pron": "cors",
-      "definicion": "La regla del navegador que bloquea las peticiones a otro dominio salvo que ese servidor responda con cabeceras que lo permitan.",
+      "definicion": "La regla del navegador que bloquea las peticiones a otro origen (dominio, protocolo o puerto distinto) salvo que ese servidor responda con cabeceras que lo permitan.",
       "ejemplo": "Access-Control-Allow-Origin: https://miapp.com",
       "entrevista": "Se arregla en el servidor, no en el frontend; desde Postman no aparece porque la restricción la aplica el navegador.",
       "unidad": "node-http-y-express"

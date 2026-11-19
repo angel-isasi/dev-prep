@@ -11,8 +11,8 @@
       "linea": 8,
       "tipo": "caso-borde",
       "titulo": "Iniciar dos veces crea dos intervalos",
-      "detalle": "Si el usuario pulsa Iniciar dos veces, se crean dos intervalos, el tiempo baja al doble de velocidad y this.intervalo solo guarda el último, así que pausar ya no puede detener el primero. Evita iniciar si ya está corriendo.",
-      "arreglo": "iniciar() {\n  if (this.intervalo) return;"
+      "detalle": "Si el usuario pulsa Iniciar dos veces, se crean dos intervalos, el tiempo baja al doble de velocidad y this.intervalo solo guarda el último, así que pausar ya no puede detener el primero. Evita iniciar si ya está corriendo, y deja intervalo en null al pausar para poder reanudar.",
+      "arreglo": "iniciar() {\n  if (this.intervalo) return;\n  // ...\n}\n\npausar() {\n  clearInterval(this.intervalo);\n  this.intervalo = null;\n}"
     },
     {
       "linea": 9,

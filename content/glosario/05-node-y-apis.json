@@ -57,7 +57,7 @@
       "en": "HTTP method",
       "pron": "éich ti ti pi mézod",
       "definicion": "El verbo de una petición que indica qué quieres hacer: GET leer, POST crear, PUT o PATCH actualizar y DELETE borrar.",
-      "ejemplo": "fetch('/api/tasks', { method: 'POST', body: JSON.stringify(tarea) });",
+      "ejemplo": "fetch('/api/tasks', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(tarea) });",
       "entrevista": "PUT reemplaza el recurso entero y PATCH cambia solo algunos campos; GET nunca debería modificar datos.",
       "unidad": "node-http-y-express"
     },

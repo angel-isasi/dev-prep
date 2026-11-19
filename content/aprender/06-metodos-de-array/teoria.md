@@ -13,7 +13,7 @@
 | `reduce(fn, inicial)` | "¿Qué resumen saco de todos?" | **Un solo valor** (número, texto, objeto, array...) | No aplica |
 | `forEach(fn)` | "Haz algo con cada uno" | `undefined` | No aplica |
 
-Todos llaman a tu función con `(elemento, indice, array)`. Casi siempre solo usas el primero.
+`map`, `filter` y `forEach` llaman a tu función con `(elemento, indice, array)`; `reduce` pone el acumulador adelante: `(acumulador, elemento, indice, array)`. Casi siempre solo usas el elemento.
 
 ### map: transformar
 

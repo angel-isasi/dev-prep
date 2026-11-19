@@ -56,7 +56,7 @@
     "codigo": "const valores = [0, \"0\", \"\", [], {}, null, NaN, \" \"];\nlet verdaderos = 0;\nfor (const v of valores) {\n  if (v) verdaderos++;\n}\nconsole.log(verdaderos);",
     "opciones": ["5", "2", "3", "4"],
     "correcta": 3,
-    "explicacion": "Solo hay 6 valores falsy en JavaScript: false, 0, \"\", null, undefined y NaN. Todo lo demás es truthy. En la lista, los truthy son \"0\" (un string con un carácter, no el número), [] y {} (todo objeto es truthy, aunque esté vacío) y \" \" (tiene un espacio, no está vacío). Son 4. La trampa más tentadora es creer que [] o {} vacíos son falsy, como en Python: en JavaScript no lo son, por eso para saber si un arreglo está vacío se revisa .length.",
+    "explicacion": "Solo hay 8 valores falsy en JavaScript: false, 0, -0, 0n, \"\", null, undefined y NaN. Todo lo demás es truthy. En la lista, los truthy son \"0\" (un string con un carácter, no el número), [] y {} (todo objeto es truthy, aunque esté vacío) y \" \" (tiene un espacio, no está vacío). Son 4. La trampa más tentadora es creer que [] o {} vacíos son falsy, como en Python: en JavaScript no lo son, por eso para saber si un arreglo está vacío se revisa .length.",
     "verificar": true
   },
   {

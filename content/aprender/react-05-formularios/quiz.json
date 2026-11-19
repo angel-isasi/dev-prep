@@ -30,7 +30,7 @@
       "`{ nombre: \"Ana\", promo: true }`"
     ],
     "correcta": 0,
-    "explicacion": "`FormData` funciona como el envío normal de HTML: un checkbox marcado sin atributo `value` envía el texto `\"on\"`, y uno **desmarcado no se envía**. Por eso `factura` no aparece. `FormData` nunca da booleanos: todo son textos. Para saber si está marcado puedes usar `datos.has(\"factura\")` o `datos.get(\"factura\") === \"on\"`."
+    "explicacion": "`FormData` funciona como el envío normal de HTML: un checkbox marcado sin atributo `value` envía el texto `\"on\"`, y uno **desmarcado no se envía**. Por eso `factura` no aparece. `FormData` nunca da booleanos: todo son textos. Para saber si está marcado como `datos` es un objeto plano (por `Object.fromEntries`), puedes usar `\"factura\" in datos` o `datos.factura === \"on\"`."
   },
   {
     "pregunta": "El usuario cambia la cantidad a 2. ¿Qué muestra el párrafo?\n\n```jsx\nconst [cantidad, setCantidad] = useState(1);\n\n<input\n  type=\"number\"\n  value={cantidad}\n  onChange={(e) => setCantidad(e.target.value)}\n/>\n<p>{cantidad + 1}</p>\n```",
