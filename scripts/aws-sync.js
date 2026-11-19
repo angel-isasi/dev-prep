@@ -3,6 +3,7 @@
 //   npm run aws:borrar   borra todo (la tabla con tus datos incluida)
 //   npm run aws:estado   muestra la URL y si responde
 //   npm run aws:rotar    cambia el token secreto (si se filtró el QR): luego vuelve a vincular el celular
+//   npm run aws:reactivar  vuelve a encender la Lambda si el freno de emergencia la apagó (ver la plantilla)
 // El token secreto y las claves de los avisos se generan la primera vez y se guardan en
 // data/sync.json (no va al repo). El código de la Lambda (aws/lambda/index.js) se empaqueta con
 // Vite en un solo archivo y se sube después de desplegar la plantilla.
@@ -92,6 +93,7 @@ async function estado() {
   console.log(`URL: ${sync.url}\nRespuesta: ${r.status} · dispositivos guardados: ${(cuerpo.documentos ?? []).map((d) => d.dispositivo).join(", ") || "ninguno"}`);
   const sinToken = await fetch(sync.url);
   console.log(`Sin token responde ${sinToken.status} (debe ser 401).`);
+  console.log(frenada() ? "FRENADA: el freno de emergencia la apagó por demasiadas llamadas. Usa: npm run aws:reactivar" : "Freno de emergencia: sin activar.");
 }
 
 /** Cambia el token: el viejo deja de funcionar al instante. Hay que volver a escanear el QR. */
@@ -104,10 +106,23 @@ async function rotar() {
   console.log("Listo: reinicia dev-prep y vuelve a vincular el celular con el QR de Ajustes.");
 }
 
-const comandos = { crear, borrar, estado, rotar };
+/** ¿El freno de emergencia dejó la Lambda en concurrencia 0? */
+function frenada() {
+  const r = aws("lambda", "get-function-concurrency", "--function-name", "devprep-sincronizar", "--output", "json");
+  return JSON.parse(r || "{}").ReservedConcurrentExecutions === 0;
+}
+
+/** Quita el freno: la Lambda vuelve a usar la concurrencia normal de la cuenta. */
+async function reactivar() {
+  if (!frenada()) return console.log("La Lambda no estaba frenada.");
+  aws("lambda", "delete-function-concurrency", "--function-name", "devprep-sincronizar");
+  console.log("Lambda reactivada. Si el freno saltó sin motivo, revisa quién llama (npm run aws:rotar cambia el token).");
+}
+
+const comandos = { crear, borrar, estado, rotar, reactivar };
 const comando = comandos[process.argv[2]];
 if (!comando) {
-  console.log("Uso: node scripts/aws-sync.js crear | borrar | estado");
+  console.log("Uso: node scripts/aws-sync.js crear | borrar | estado | rotar | reactivar");
   process.exit(1);
 }
 await comando();

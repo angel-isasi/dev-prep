@@ -130,6 +130,105 @@ Resources:
       Principal: events.amazonaws.com
       SourceArn: !GetAtt Reloj.Arn
 
+  # ---------- Freno de emergencia (gratis) ----------
+  # La URL de la Lambda es pública: quien la conozca puede llamarla sin parar, y cada llamada cuenta
+  # aunque el token sea falso. Si hay demasiadas llamadas, una alarma despierta a una Lambda chica
+  # que pone la concurrencia de la Lambda principal en 0: queda apagada, AWS rechaza las llamadas
+  # antes de ejecutarlas y esas no se cobran. Se reactiva con "npm run aws:reactivar".
+  # Costo: 0. Dos alarmas de las 10 gratis, métricas básicas gratis y la Lambda de freno solo corre
+  # cuando salta una alarma. Con los dos topes, lo máximo que pasa sin frenar son 1.000 llamadas por
+  # hora (720.000 al mes), por debajo del millón gratis de Lambda.
+  RegistrosFreno:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/devprep-freno
+      RetentionInDays: 7
+
+  RolFreno:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - { Effect: Allow, Principal: { Service: lambda.amazonaws.com }, Action: sts:AssumeRole }
+      Policies:
+        - PolicyName: devprep-freno
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              # Solo puede cambiar la concurrencia de la Lambda principal, nada más
+              - Effect: Allow
+                Action: lambda:PutFunctionConcurrency
+                Resource: !GetAtt Funcion.Arn
+              - Effect: Allow
+                Action: [logs:CreateLogStream, logs:PutLogEvents]
+                Resource: !Sub "${RegistrosFreno.Arn}:*"
+
+  Freno:
+    Type: AWS::Lambda::Function
+    DependsOn: RegistrosFreno
+    Properties:
+      FunctionName: devprep-freno
+      Runtime: nodejs22.x
+      Handler: index.handler
+      Role: !GetAtt RolFreno.Arn
+      Timeout: 10
+      MemorySize: 128
+      Environment:
+        Variables:
+          FUNCION: !Ref Funcion
+      Code:
+        ZipFile: |
+          // La llama una alarma de CloudWatch. Solo actúa cuando la alarma entra en ALARM.
+          const { LambdaClient, PutFunctionConcurrencyCommand } = require("@aws-sdk/client-lambda");
+          exports.handler = async (evento) => {
+            const estado = evento?.alarmData?.state?.value;
+            if (estado !== "ALARM") return { frenada: false, estado };
+            await new LambdaClient({}).send(new PutFunctionConcurrencyCommand({ FunctionName: process.env.FUNCION, ReservedConcurrentExecutions: 0 }));
+            console.log("Lambda frenada por la alarma", evento?.alarmData?.alarmName);
+            return { frenada: true };
+          };
+
+  # Ataque rápido: más de 300 llamadas en 5 minutos (lo normal son menos de 20)
+  AlarmaRapida:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: devprep-demasiadas-llamadas-5min
+      Namespace: AWS/Lambda
+      MetricName: Invocations
+      Dimensions: [{ Name: FunctionName, Value: !Ref Funcion }]
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 300
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!GetAtt Freno.Arn]
+
+  # Ataque lento y constante: más de 1.000 llamadas en una hora (lo normal son menos de 100)
+  AlarmaLenta:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: devprep-demasiadas-llamadas-1h
+      Namespace: AWS/Lambda
+      MetricName: Invocations
+      Dimensions: [{ Name: FunctionName, Value: !Ref Funcion }]
+      Statistic: Sum
+      Period: 3600
+      EvaluationPeriods: 1
+      Threshold: 1000
+      ComparisonOperator: GreaterThanThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!GetAtt Freno.Arn]
+
+  PermisoAlarmas:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref Freno
+      Action: lambda:InvokeFunction
+      Principal: lambda.alarms.cloudwatch.amazonaws.com
+      SourceAccount: !Ref AWS::AccountId
+
 Outputs:
   Url:
     Description: URL de la función (va en data/sync.json y en el QR para el celular)
