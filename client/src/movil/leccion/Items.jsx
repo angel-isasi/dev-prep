@@ -243,7 +243,9 @@ export function ItemArmar({ item, elegidas, alCambiar, bloqueado }) {
       </div>
       {item.audio && <BotonAudio texto={item.audio} auto grande />}
       {item.soloAudio && !hayVoz() && (
-        <p className={estilos.ayuda}>Este dispositivo no tiene voz en inglés. Arma la frase: *{item.respuesta.join(" ")}* aparece al comprobar.</p>
+        <p className={estilos.ayuda}>
+          Este dispositivo no tiene voz en inglés. {item.es ? `Arma la frase que significa: "${item.es}"` : "Arma la frase con las palabras de abajo."}
+        </p>
       )}
       <div className={estilos.fraseArmada}>
         {elegidas.length === 0 && <span className={estilos.vacia}>Toca las palabras en orden</span>}

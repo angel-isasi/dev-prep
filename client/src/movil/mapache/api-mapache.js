@@ -9,7 +9,9 @@ import { CHARLA, cumpleReto, EXPRESIONES, franjaDe, FRASES_NIVEL, lineaDiario, R
 import { CASAS, clavesRobadas, elegir, estadoMapache, hash, nivelIngles, practico, regalosDeNivel, revisarRespuesta, xpDisponible } from "./reglas.js";
 import { ENTREVISTAS, MINIMO_PALABRAS, MUEBLES_GANADOS, POSTALES, PREGUNTAS, ROPA_NIVEL, SUENOS, TIENDA, TROFEO } from "./contenido.js";
 
-const NOMBRE = "Mapi";
+const NOMBRE = "Map";
+// Antes se llamaba "Mapi": si quedó guardado ese nombre viejo por defecto, cuenta como "sin nombre propio"
+const nombreDe = (p) => (!p?.nombre || p.nombre === "Mapi" ? NOMBRE : p.nombre);
 
 // Todo lo del mapache va en B2 y C1, sin importar tu nivel (decisión de Angel, 2026-11-17):
 // habla en C1, la pregunta del día alterna B2 y C1 y las palabras salen de las unidades B2 y C1.
@@ -219,7 +221,7 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
 
       return {
         hoy,
-        nombre: p.nombre || NOMBRE,
+        nombre: nombreDe(p),
         nivel,
         ...estado,
         nivelMapache,
@@ -255,7 +257,7 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
       const hoy = progreso.hoy();
       const robadas = clavesRobadas(progreso.datos().items ?? {}, hoy);
       const estado = estadoMapache({ dias: progreso.dias(), hoy, hora: new Date().getHours(), robados: robadas.length });
-      return { nombre: propios().nombre || NOMBRE, ...estado, robados: robadas.length };
+      return { nombre: nombreDe(propios()), ...estado, robados: robadas.length };
     },
 
     async mapacheRenombrar(nombre) {

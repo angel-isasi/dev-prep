@@ -1,6 +1,8 @@
-// La casa del mapache (/ingles/mapache): su escena, lo que dice y todo lo que puedes hacer con él,
-// en cuatro pestañas: Hoy (pregunta del día, repite conmigo, objetos perdidos, tus errores, palabra del día),
-// Su casa (tienda, ropa, álbum), Leer (su diario y sus postales) y Jugar (Trash panda y la entrevista).
+// Map (/ingles/mapache): tu práctica diaria de inglés con el mapache. Arriba, una franja corta con lo
+// que dice hoy y tu meta del día; debajo, cuatro pestañas: Hoy (pregunta del día, repite conmigo,
+// palabra del día, repasos pendientes y tus errores), Leer (postales y su diario), Jugar (Trash panda
+// y la entrevista) y Su casa (la escena, la ropa, la tienda y el álbum). Lo de mascota va al final:
+// primero lo que enseña.
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
@@ -10,32 +12,32 @@ import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { ContenidoPestanas, Pestanas } from "../../components/Pestanas.jsx";
 import { IconoAudio, IconoFlechaIzq } from "../../components/Iconos.jsx";
 import { Casa } from "./Casa.jsx";
+import { CajaVacia, Mapache } from "./Mapache.jsx";
 import { useCharlaMapache } from "./TarjetaMapache.jsx";
 import { Album, Diario, Entrevista, ObjetosPerdidos, PalabraDelDia, Postales, PreguntaDelDia, RepiteConmigo, Ropa, Tienda, TrashPanda, TusErrores } from "./Actividades.jsx";
 import estilos from "./PaginaMapache.module.css";
 
 export const TEXTO_ESTADO = {
-  nuevo: "Acaba de llegar. Come palabras en inglés: haz tu primera lección.",
-  feliz: "Está feliz y lleno. Hoy comió bien.",
-  normal: "Está bien, pero le cabe un poco más.",
-  hambriento: "Tiene hambre: hoy casi no hubo inglés.",
-  triste: "Está triste: se rompió la racha o te robó muchas palabras.",
+  nuevo: "Acaba de llegar. Haz tu primera lección y empieza la racha.",
+  feliz: "Meta de hoy cumplida.",
+  normal: "Vas bien: te falta un poco para la meta de hoy.",
+  hambriento: "Hoy casi no hubo inglés.",
+  triste: "Se rompió la racha o tienes muchos repasos atrasados.",
   dormido: "Está dormido. Tócalo si quieres saber qué sueña.",
-  escapado: "Se escapó a buscar comida. Vuelve apenas practiques inglés hoy.",
+  escapado: "Llevas días sin inglés. Vuelve con una lección corta.",
 };
 
 const PESTANAS = [
   { id: "hoy", texto: "Hoy" },
-  { id: "casa", texto: "Su casa" },
   { id: "leer", texto: "Leer" },
   { id: "jugar", texto: "Jugar" },
+  { id: "casa", texto: "Su casa" },
 ];
 
 export function PaginaMapache() {
   const [datos, setDatos] = useState(null);
   const [error, setError] = useState(null);
   const [pestana, setPestana] = usePestanaUrl(PESTANAS.map((p) => p.id));
-  const [traduccion, setTraduccion] = useState(false);
   const [editando, setEditando] = useState(false);
   const { dice: charla, tocar: tocarMapache, voz } = useCharlaMapache(datos);
 
@@ -65,91 +67,91 @@ export function PaginaMapache() {
         <IconoFlechaIzq /> Inglés
       </Link>
 
-      <div className={estilos.arriba}>
-        <Casa datos={datos} alTocarMapache={tocarMapache} />
-
-        <div className={estilos.panel}>
-          <div className={estilos.nombre}>
-            {editando ? (
-              <form onSubmit={renombrar} className={estilos.formNombre}>
-                <input name="nombre" defaultValue={datos.nombre} maxLength={20} autoFocus aria-label="Nombre del mapache" />
-                <button type="submit" className="boton boton-primario">
-                  Guardar
-                </button>
-              </form>
+      {/* Franja de arriba: quién es y qué dice | tu meta de hoy */}
+      <div className={estilos.cabeza}>
+        <div className={`textura ${estilos.quien}`}>
+          <div className={estilos.retrato}>
+            {datos.estado === "escapado" ? (
+              <CajaVacia tamano={112} />
             ) : (
-              <>
-                <h1>{datos.nombre}</h1>
-                <button type="button" className={estilos.enlace} onClick={() => setEditando(true)}>
-                  Cambiar nombre
-                </button>
-              </>
+              <Mapache estado={datos.estado === "nuevo" ? "normal" : datos.estado} equipo={datos.equipo} tamano={112} alTocar={tocarMapache} />
             )}
           </div>
-          <p className={estilos.estado}>{TEXTO_ESTADO[datos.estado]}</p>
-
-          {dice && (
-            <div className={estilos.globo}>
-              <p key={dice.en} lang="en">{dice.en}</p>
-              {traduccion && <small>{dice.es}</small>}
-              {dice.expresion && (
-                <span className={estilos.expresion}>
-                  <strong lang="en">{dice.expresion.en}</strong> = {dice.expresion.es}
-                </span>
-              )}
-              <div className={estilos.globoAcciones}>
-                {voz && (
-                  <button type="button" className={estilos.enlace} onClick={() => hablar(dice.en)}>
-                    <IconoAudio tamano={15} /> Escuchar
+          <div className={estilos.quienTexto}>
+            <div className={estilos.nombre}>
+              {editando ? (
+                <form onSubmit={renombrar} className={estilos.formNombre}>
+                  <input name="nombre" defaultValue={datos.nombre} maxLength={20} autoFocus aria-label="Nombre de tu mapache" />
+                  <button type="submit" className="boton boton-primario">
+                    Guardar
                   </button>
+                </form>
+              ) : (
+                <>
+                  <h1>{datos.nombre}</h1>
+                  <span className={estilos.estado}>{TEXTO_ESTADO[datos.estado]}</span>
+                </>
+              )}
+            </div>
+            {dice && (
+              <div className={estilos.globo}>
+                <p key={dice.en} lang="en">
+                  {dice.en}
+                </p>
+                {/* Habla en B2 y C1: la traducción va siempre a la vista */}
+                <small>{dice.es}</small>
+                {dice.expresion && (
+                  <span className={estilos.expresion}>
+                    <strong lang="en">{dice.expresion.en}</strong> = {dice.expresion.es}
+                  </span>
                 )}
-                <button type="button" className={estilos.enlace} onClick={() => setTraduccion((t) => !t)}>
-                  {traduccion ? "Ocultar traducción" : "¿Qué dijo?"}
-                </button>
               </div>
-            </div>
-          )}
-
-          <div className={estilos.barras}>
-            <div>
-              <span>Pancita de hoy</span>
-              <strong>
-                {Math.floor(datos.comidaHoy)} de {datos.meta}
-              </strong>
-            </div>
-            <div className={estilos.barra} data-lleno={comida >= 1}>
-              <i style={{ width: `${comida * 100}%` }} />
-            </div>
-            {/* Tres datos cortos en una fila; el detalle de cada uno queda en el title */}
-            <div className={estilos.datosChips}>
-              <span title="Racha de inglés">
-                Racha <strong>{datos.racha}</strong> {datos.racha === 1 ? "día" : "días"}
-              </span>
-              <span title={`Vive en ${datos.casa.texto}`}>
-                Nivel <strong>{datos.nivel}</strong>
-              </span>
-              <span title="Todo lo suyo va en B2 y C1">
-                Te habla en <strong>{datos.nivelMapache}</strong>
-              </span>
+            )}
+            <div className={estilos.globoAcciones}>
+              {voz && dice && (
+                <button type="button" className={estilos.enlace} onClick={() => hablar(dice.en)}>
+                  <IconoAudio tamano={15} /> Escuchar
+                </button>
+              )}
+              <button type="button" className={estilos.enlace} onClick={tocarMapache}>
+                Otra frase
+              </button>
+              {!editando && (
+                <button type="button" className={estilos.enlaceSuave} onClick={() => setEditando(true)}>
+                  Cambiar nombre
+                </button>
+              )}
             </div>
           </div>
+        </div>
 
+        <div className={`textura ${estilos.meta}`}>
+          <div className={estilos.metaCifras}>
+            <div title="Sube con lo que aprendes: palabras nuevas, aciertos, lecciones, historias y lo que hagas aquí">
+              <strong>
+                {Math.floor(datos.comidaHoy)}
+                <small> de {datos.meta}</small>
+              </strong>
+              <span>Meta de hoy</span>
+            </div>
+            <div>
+              <strong>{datos.racha}</strong>
+              <span>{datos.racha === 1 ? "día de racha" : "días de racha"}</span>
+            </div>
+          </div>
+          <div className={estilos.barra} data-lleno={comida >= 1}>
+            <i style={{ width: `${comida * 100}%` }} />
+          </div>
           <div className={estilos.acciones}>
             <Link to="/leccion?ambito=ingles" className="boton boton-primario">
-              Darle de comer: rutina de hoy
+              Hacer la lección de hoy
             </Link>
-            {datos.totalRobados > 0 && (
+            {datos.totalRobados > 0 && pestana !== "hoy" && (
               <button type="button" className="boton" onClick={() => setPestana("hoy")}>
-                Recuperar {datos.totalRobados} {datos.totalRobados === 1 ? "palabra" : "palabras"}
+                {datos.totalRobados} {datos.totalRobados === 1 ? "repaso pendiente" : "repasos pendientes"}
               </button>
             )}
           </div>
-          <details className={estilos.notaPlegada}>
-            <summary>¿Qué come?</summary>
-            <p className={estilos.nota}>
-              Lo que aprendes en inglés: palabras nuevas, aciertos, lecciones, historias y lo que hagas aquí. Abrir la app no lo alimenta.
-            </p>
-          </details>
         </div>
       </div>
 
@@ -161,14 +163,18 @@ export function PaginaMapache() {
         {pestana === "hoy" && (
           <div className={estilos.rejilla}>
             <PreguntaDelDia datos={datos} alCambiar={cargar} />
-            <ObjetosPerdidos datos={datos} alCambiar={cargar} />
             <RepiteConmigo datos={datos} alCambiar={cargar} />
-            <TusErrores datos={datos} />
             <PalabraDelDia datos={datos} />
+            <ObjetosPerdidos datos={datos} alCambiar={cargar} />
+            <TusErrores datos={datos} />
           </div>
         )}
         {pestana === "casa" && (
           <div className={estilos.rejilla}>
+            <div className={estilos.escenaCasa}>
+              <Casa datos={datos} alTocarMapache={tocarMapache} />
+              <p className={estilos.nota}>Vive en {datos.casa.texto}. Cada unidad completa le da un mueble: toca uno para oír cómo se dice.</p>
+            </div>
             <Tienda datos={datos} alCambiar={cargar} />
             <Ropa datos={datos} alCambiar={cargar} />
             <Album datos={datos} />

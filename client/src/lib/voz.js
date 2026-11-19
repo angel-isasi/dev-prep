@@ -1,6 +1,8 @@
 // Voz en inglés del propio dispositivo (speechSynthesis): funciona sin internet si el sistema
 // tiene una voz en inglés instalada. Si no hay ninguna, los botones de audio no aparecen.
 import { useEffect, useState } from "react";
+// Las preferencias de voz se guardan en `almacen`: en modo visita vive en memoria y no toca el navegador real
+import { almacen } from "./visita.js";
 
 const CLAVE_VELOCIDAD = "devprep-voz-velocidad";
 export const VELOCIDADES = { lento: 0.72, normal: 0.95 };
@@ -30,6 +32,30 @@ export function useHayVoz() {
   return conVoz;
 }
 
+let yaEspero = false;
+/**
+ * Espera a que el navegador entregue sus voces (Chrome las carga tarde, sobre todo al abrir la app
+ * directo en una pantalla). Como mucho `tope` ms y una sola vez: en un dispositivo sin voces no
+ * se vuelve a esperar. Sirve para decidir algo una sola vez, por ejemplo armar una lección.
+ * @param {number} [tope]
+ * @returns {Promise<void>}
+ */
+export function vocesListas(tope = 1000) {
+  const sintesis = globalThis.speechSynthesis;
+  if (yaEspero || !sintesis?.addEventListener || voces().length) return Promise.resolve();
+  yaEspero = true;
+  return new Promise((resolver) => {
+    const listo = () => {
+      clearTimeout(reloj);
+      sintesis.removeEventListener("voiceschanged", listo);
+      voces();
+      resolver();
+    };
+    const reloj = setTimeout(listo, tope);
+    sintesis.addEventListener("voiceschanged", listo);
+  });
+}
+
 /** La mejor voz en inglés de Estados Unidos que tenga el dispositivo. */
 function vozIngles() {
   const lista = voces().filter((v) => /^en[-_]/i.test(v.lang));
@@ -43,8 +69,8 @@ function vozIngles() {
 
 export const hayVoz = () => !!globalThis.speechSynthesis && voces().some((v) => /^en[-_]/i.test(v.lang));
 
-export const velocidad = () => (localStorage.getItem(CLAVE_VELOCIDAD) === "lento" ? "lento" : "normal");
-export const cambiarVelocidad = (valor) => localStorage.setItem(CLAVE_VELOCIDAD, valor);
+export const velocidad = () => (almacen.getItem(CLAVE_VELOCIDAD) === "lento" ? "lento" : "normal");
+export const cambiarVelocidad = (valor) => almacen.setItem(CLAVE_VELOCIDAD, valor);
 
 /**
  * Lee un texto en inglés. Corta lo que se estaba leyendo.
@@ -129,9 +155,9 @@ const Reconocedor = () => globalThis.SpeechRecognition ?? globalThis.webkitSpeec
 const CLAVE_MICRO = "devprep-hablar";
 
 /** ¿Este navegador puede escucharte? (y no lo apagaste en Inglés) */
-export const hayMicrofono = () => !!Reconocedor() && localStorage.getItem(CLAVE_MICRO) !== "no";
-export const microApagado = () => localStorage.getItem(CLAVE_MICRO) === "no";
-export const cambiarMicro = (activo) => localStorage.setItem(CLAVE_MICRO, activo ? "si" : "no");
+export const hayMicrofono = () => !!Reconocedor() && almacen.getItem(CLAVE_MICRO) !== "no";
+export const microApagado = () => almacen.getItem(CLAVE_MICRO) === "no";
+export const cambiarMicro = (activo) => almacen.setItem(CLAVE_MICRO, activo ? "si" : "no");
 export const microDisponible = () => !!Reconocedor();
 
 /**

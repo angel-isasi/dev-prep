@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { armadoCorrecto, comparable, conceptoDeClave, escrituraCorrecta, expandirIngles, fichasDe, generarItemsIngles, hablaCorrecta, nucleos, registrosPorConcepto } from "./ingles.js";
+import { armadoCorrecto, comparable, conceptoDeClave, escrituraCorrecta, expandirIngles, fichasDe, generarItemsIngles, hablaCorrecta, nucleos, registrosPorConcepto, unidadesParaLeer } from "./ingles.js";
 
 const unidad = {
   id: "en-basico-05",
@@ -146,5 +146,13 @@ describe("ítems de inglés", () => {
     expect(fichasDe("I don't like coffee.")).toEqual(["I", "don't", "like", "coffee"]);
     expect(armadoCorrecto({ respuesta: ["She", "works", "at", "a", "bank"] }, ["she", "works", "at", "a", "bank"])).toBe(true);
     expect(armadoCorrecto({ respuesta: ["She", "works", "at", "a", "bank"] }, ["works", "she", "at", "a", "bank"])).toBe(false);
+  });
+
+  test("la unidad para leer trae sus frases (las usa el shadowing)", () => {
+    const [leer] = unidadesParaLeer([unidad]);
+    expect(leer.frases).toHaveLength(4);
+    expect(leer.frases[0]).toEqual({ id: "f1", en: "She works at a bank.", es: "Ella trabaja en un banco." });
+    // una unidad sin frases no rompe la exportación
+    expect(unidadesParaLeer([{ ...unidad, frases: undefined }])[0].frases).toEqual([]);
   });
 });

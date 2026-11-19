@@ -120,7 +120,7 @@ const PRACTICA_POR_ETAPA = {
   rrhh: [
     { pestana: "personal", titulo: "Pitch e historias STAR", texto: "Escríbelos una vez, con tus proyectos reales" },
     { a: "/ingles/historias", titulo: "Roleplays en inglés", texto: "Entrevistas y llamadas de trabajo, por turnos", web: true },
-    { a: "/ingles/mapache?pestana=jugar", titulo: "Entrevista con el mapache", texto: "En inglés: preguntas de trabajo en B2 y C1", web: true },
+    { a: "/ingles/mapache?pestana=jugar", titulo: "Entrevista con Map", texto: "En inglés: preguntas de trabajo en B2 y C1", web: true },
     { a: "/trabajo?pestana=postulaciones", titulo: "Tus preguntas reales", texto: "Las que ya te hicieron en tus postulaciones, con tu respuesta", web: true },
   ],
   tecnica: [

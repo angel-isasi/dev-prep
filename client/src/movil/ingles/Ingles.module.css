@@ -31,11 +31,6 @@
   line-height: 1.55;
 }
 
-.exito {
-  color: var(--exito);
-  font-weight: var(--peso-semi);
-}
-
 .volver {
   display: inline-block;
   margin-bottom: var(--espacio-3);
@@ -44,129 +39,12 @@
 }
 
 /* Meta de hoy y racha */
-.resumen {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--espacio-3);
-  margin-bottom: var(--espacio-3);
-}
-
-.meta,
-.racha {
-  display: flex;
-  align-items: center;
-  gap: var(--espacio-3);
-  padding: var(--espacio-3) var(--espacio-4);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-grande);
-  background:
-    radial-gradient(240px 120px at 0% 50%, var(--color-area-suave), transparent 70%),
-    var(--superficie);
-}
-
-.meta > div:last-child,
-.racha > div {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.meta small,
-.racha small {
-  color: var(--texto-suave);
-  font-size: var(--letra-2);
-}
-
-.minutos {
-  font-family: var(--fuente-titulos);
-  font-size: var(--titulo-3);
-}
-
-.racha strong {
-  font-family: var(--fuente-titulos);
-  font-size: var(--titulo-3);
-}
 
 /* Barras de los últimos 7 días */
-.semana {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  height: 70px;
-  margin-bottom: var(--espacio-4);
-}
-
-.semana > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 4px;
-}
-
-.semana span {
-  width: 100%;
-  min-height: 3px;
-  border-radius: var(--radio-sm);
-  background: var(--borde-fuerte);
-}
-
-.semana span[data-cumplio="true"] {
-  background: var(--color-area);
-}
-
-.semana small {
-  color: var(--texto-tenue);
-  font-size: var(--letra-1);
-  text-transform: uppercase;
-}
 
 /* Prueba de nivel */
-.nivel {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espacio-3);
-  margin-bottom: var(--espacio-4);
-  padding: var(--espacio-4);
-  border: 1px solid var(--color-area);
-  border-radius: var(--radio-grande);
-  background: var(--color-area-suave);
-}
-
-.nivel p {
-  margin: 4px 0 0;
-  color: var(--texto-suave);
-  font-size: var(--letra-4);
-}
 
 /* Botones de lecciones */
-.acciones {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: var(--espacio-2);
-  margin: var(--espacio-3) 0;
-}
-
-.acciones > a {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  min-height: 56px;
-  text-align: left;
-}
-
-.acciones small {
-  font-size: var(--letra-2);
-  font-weight: var(--peso-normal);
-  opacity: 0.75;
-}
-
-.principal {
-  grid-column: 1 / -1;
-}
 
 .velocidad {
   display: inline-flex;
@@ -188,65 +66,7 @@
   font-size: var(--titulo-2);
 }
 
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.chip {
-  padding: 8px 16px;
-  border: 1px solid var(--borde-fuerte);
-  border-radius: var(--radio-pildora);
-  background: var(--superficie);
-  color: var(--texto);
-  cursor: pointer;
-}
-
-.chip[data-elegido="true"] {
-  border-color: var(--color-area);
-  background: var(--color-area-suave);
-}
-
-.inmersion {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: var(--espacio-2);
-}
-
-.inmersion input {
-  flex: 1 1 220px;
-  padding: 10px 12px;
-  border: 1px solid var(--borde-fuerte);
-  border-radius: var(--radio-md);
-  background: var(--fondo-solido);
-  color: var(--texto);
-}
-
-.recomendados {
-  margin-top: var(--espacio-3);
-  color: var(--texto-suave);
-  font-size: var(--letra-4);
-}
-
-.recomendados summary {
-  cursor: pointer;
-  color: var(--texto);
-}
-
-.recomendados ul {
-  margin: 4px 0 var(--espacio-2);
-}
-
 /* Unidad: teoría, palabras, diálogos */
-.teoria {
-  margin: var(--espacio-4) 0;
-  padding: var(--espacio-4);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-grande);
-  background: var(--superficie);
-}
 
 .palabras {
   display: flex;
@@ -327,16 +147,6 @@
 }
 
 /* En el celular, hoy y la racha en una sola fila compacta */
-@media (max-width: 600px) {
-  .resumen .meta,
-  .resumen .racha {
-    gap: var(--espacio-2);
-    padding: var(--espacio-2) var(--espacio-3);
-  }
-  .resumen .meta small {
-    display: none;
-  }
-}
 
 /* Shadowing */
 .pasosShadowing {
@@ -369,189 +179,15 @@
 }
 
 /* ---------- Pantalla grande: más ancho, dos columnas y lecciones como fichas ---------- */
-.tablero {
-  display: grid;
-  gap: var(--espacio-4);
-}
-
-.columnaPrincipal {
-  min-width: 0;
-}
 
 /* Columna lateral: misiones, semana, más práctica e inmersión (en el celular va debajo del camino) */
-.columnaLateral {
-  display: grid;
-  gap: var(--espacio-3);
-  align-content: start;
-  min-width: 0;
-}
-
-.columnaLateral .motivacion {
-  grid-template-columns: 1fr;
-  margin-bottom: 0;
-}
-
-.tarjetaLateral {
-  padding: var(--espacio-4);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-grande);
-  background:
-    radial-gradient(420px 200px at 100% 0%, var(--acento-suave), transparent 70%),
-    linear-gradient(var(--superficie), var(--superficie)),
-    var(--fondo-solido);
-}
-
-.tarjetaLateral h2 {
-  margin: 0 0 var(--espacio-3);
-  font-size: var(--letra-8);
-}
-
-.tarjetaLateral .cabeceraBloque {
-  margin-bottom: var(--espacio-3);
-}
-
-.tarjetaLateral .semana {
-  margin-bottom: 0;
-}
-
-.columnaLateral .acciones {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 0;
-}
-
-.columnaLateral .acciones > a {
-  padding: var(--espacio-3);
-}
-
-.repetirExamen {
-  width: 100%;
-  margin-top: var(--espacio-3);
-  justify-content: center;
-}
 
 /* Lo principal: seguir con la rutina y el camino */
-.continuar {
-  display: flex;
-  align-items: center;
-  gap: var(--espacio-3);
-  width: 100%;
-  min-height: 84px;
-  margin-bottom: var(--espacio-5);
-  padding: var(--espacio-4);
-  border-color: transparent;
-  border-radius: var(--radio-grande);
-  background: var(--acento);
-  color: var(--sobre-acento);
-  text-align: left;
-  transition: transform var(--transicion), box-shadow var(--transicion);
-}
-
-.continuar:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--sombra);
-}
-
-.continuar > span:last-child {
-  display: grid;
-  gap: 2px;
-}
-
-.continuar strong {
-  font-family: var(--fuente-titulos);
-  font-size: var(--titulo-1);
-}
-
-.continuar small {
-  font-size: var(--letra-3);
-  font-weight: var(--peso-normal);
-  opacity: 0.85;
-}
-
-.continuar .iconoFicha {
-  margin: 0;
-  background: color-mix(in srgb, var(--sobre-acento) 18%, transparent);
-  color: var(--sobre-acento);
-}
-
-.tituloCamino {
-  margin: 0 0 var(--espacio-3);
-  font-size: var(--titulo-2);
-}
-
-.acciones > a {
-  position: relative;
-  height: auto;
-  padding: var(--espacio-4);
-  border-radius: var(--radio-grande);
-  transition:
-    transform var(--transicion),
-    border-color var(--transicion),
-    box-shadow var(--transicion);
-}
-
-.acciones > a:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--sombra);
-}
-
-.acciones > a strong {
-  font-size: var(--letra-5);
-}
-
-.iconoFicha {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  margin-bottom: var(--espacio-2);
-  border-radius: var(--radio-md);
-  background: var(--acento-suave);
-  color: var(--acento);
-  font-size: var(--letra-6);
-}
-
-.acciones > a.principal {
-  min-height: 96px;
-  border-color: transparent;
-  background:
-    radial-gradient(360px 160px at 0% 0%, color-mix(in srgb, var(--sobre-acento) 18%, transparent), transparent 70%),
-    linear-gradient(135deg, var(--acento), color-mix(in srgb, var(--acento) 60%, var(--exito)));
-  color: var(--sobre-acento);
-}
-
-.acciones > a.principal small {
-  opacity: 0.85;
-  font-size: var(--letra-3);
-}
-
-.acciones > a.principal strong {
-  font-family: var(--fuente-titulos);
-  font-size: var(--titulo-1);
-}
-
-.acciones > a.principal .iconoFicha {
-  background: color-mix(in srgb, var(--sobre-acento) 18%, transparent);
-  color: var(--sobre-acento);
-}
 
 @media (min-width: 900px) {
   .pagina {
     max-width: 1280px;
     padding: var(--espacio-7) var(--espacio-6);
-  }
-  .acciones {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1200px) {
-  .tablero {
-    grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
-    align-items: start;
-  }
-  /* Sin sticky ni scroll propio: un scroll dentro de otro traba la rueda con el scroll suave */
-  .columnaLateral {
-    position: static;
   }
 }
 
@@ -572,168 +208,10 @@
 }
 
 /* Misiones, liga y opciones */
-.opcionesIngles {
-  display: grid;
-  margin-top: var(--espacio-3);
-}
-.opcionesIngles .velocidad {
-  margin-bottom: var(--espacio-2);
-}
-.motivacion {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--espacio-3);
-  margin-bottom: var(--espacio-4);
-}
-.motivacion .bloque {
-  margin-top: 0;
-  padding: var(--espacio-4);
-  border-radius: var(--radio-grande);
-  border: 1px solid var(--borde);
-  background: var(--superficie);
-  display: grid;
-  gap: var(--espacio-3);
-  align-content: start;
-}
-.cabeceraBloque {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-.cabeceraBloque h2 {
-  margin: 0;
-  font-size: var(--letra-8);
-}
-.cabeceraBloque small {
-  color: var(--texto-tenue);
-}
-.misiones ul {
-  display: grid;
-  gap: var(--espacio-3);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.misiones li {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: var(--espacio-2);
-  align-items: center;
-}
-.misiones li p {
-  margin: 0 0 4px;
-  font-size: var(--letra-4);
-}
-.misiones li > span {
-  color: var(--texto-tenue);
-}
-.misiones li[data-hecha="true"] > span {
-  color: var(--exito);
-  font-weight: var(--peso-extra);
-}
-.misiones li small {
-  color: var(--texto-suave);
-  font-variant-numeric: tabular-nums;
-}
-.barraMision {
-  height: 6px;
-  border-radius: var(--radio-pildora);
-  background: var(--superficie-2);
-  overflow: hidden;
-}
-.barraMision i {
-  display: block;
-  height: 100%;
-  background: linear-gradient(90deg, #ff9f43, #f0c850);
-  border-radius: inherit;
-  transition: width 0.5s ease;
-}
-.ligaDias {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  height: 90px;
-}
-.ligaDias div {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 2px;
-  padding-bottom: 16px;
-}
-.ligaDias span {
-  width: 40%;
-  min-height: 2px;
-  border-radius: 3px 3px 0 0;
-  background: var(--acento);
-}
-.ligaDias span[data-tipo="pasada"] {
-  background: var(--borde-fuerte);
-}
-.ligaDias small {
-  position: absolute;
-  bottom: 0;
-  font-size: var(--letra-1);
-  color: var(--texto-tenue);
-}
 
 /* Rutina: botón de empezar */
-.play {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--sobre-acento) 14%, transparent);
-}
 
 /* Más práctica: una lista sobria, no fichas */
-.modos {
-  display: grid;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.modos li + li {
-  border-top: 1px solid var(--borde);
-}
-.modo {
-  display: grid;
-  grid-template-columns: 20px 1fr auto;
-  align-items: center;
-  gap: var(--espacio-3);
-  padding: var(--espacio-3) var(--espacio-1);
-  color: var(--texto);
-  text-decoration: none;
-  border-radius: var(--radio);
-  transition: background var(--transicion);
-}
-.modo > svg:first-child {
-  color: var(--texto-suave);
-}
-.modo:hover {
-  background: var(--superficie-2);
-}
-.modo:hover > svg:first-child {
-  color: var(--acento);
-}
-.modo > span {
-  display: grid;
-  gap: 1px;
-}
-.modo strong {
-  font-size: var(--letra-5);
-  font-weight: var(--peso-semi);
-}
-.modo small {
-  color: var(--texto-tenue);
-  font-size: var(--letra-3);
-}
-.flecha {
-  color: var(--texto-tenue);
-}
 
 /* Unidad en pantalla grande: usa el ancho; palabras en columnas; shadowing y diálogos lado a lado */
 @media (min-width: 1200px) {
@@ -755,162 +233,14 @@
 }
 
 /* La rutina de hoy dentro del resumen: debajo en el celular, al costado en pantallas anchas */
-.resumen .continuar {
-  grid-column: 1 / -1;
-  margin-bottom: 0;
-}
-
-@media (min-width: 1200px) {
-  .resumen {
-    grid-template-columns: minmax(0, 1fr) auto minmax(280px, 1.1fr);
-  }
-
-  /* Mismo alto que las tarjetas de al lado (el alto fijo de .boton no aplica aquí) */
-  .resumen .continuar {
-    grid-column: auto;
-    height: auto;
-    min-height: 0;
-    align-self: stretch;
-  }
-}
 
 /* ---------- Portada de Inglés con menos letra ---------- */
 /* Hoy: anillo y, debajo, "7/15 min" en una sola línea */
-.metaHoy {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding: var(--espacio-3) var(--espacio-4);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-grande);
-  background:
-    radial-gradient(240px 120px at 0% 50%, var(--color-area-suave), transparent 70%),
-    var(--superficie);
-}
-
-.metaHoy small {
-  color: var(--texto-suave);
-  font-size: var(--letra-3);
-  font-weight: var(--peso-semi);
-  white-space: nowrap;
-}
 
 /* Hoy y la racha del mismo ancho en el celular; en pantalla ancha solo lo que necesitan */
-.resumenCompacto {
-  grid-template-columns: 1fr 1fr;
-}
-
-.resumenCompacto .racha {
-  justify-content: center;
-}
-
-@media (min-width: 1200px) {
-  .resumenCompacto {
-    grid-template-columns: auto auto minmax(280px, 1fr);
-  }
-}
 
 /* Examen de nivel: una línea con su botón */
-.nivelLinea {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espacio-2) var(--espacio-3);
-  margin-bottom: var(--espacio-4);
-  padding: var(--espacio-2) var(--espacio-2) var(--espacio-2) var(--espacio-4);
-  border: 1px solid var(--color-area);
-  border-radius: var(--radio-grande);
-  background: var(--color-area-suave);
-}
 
 /* Más práctica: accesos con icono y título (2 por fila en el celular, 4 en pantallas anchas) */
-.modosRejilla {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--espacio-2);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.modoChip {
-  display: flex;
-  align-items: center;
-  gap: var(--espacio-2);
-  height: 100%;
-  min-height: 48px;
-  padding: var(--espacio-2) var(--espacio-3);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-md);
-  background: var(--superficie);
-  color: var(--texto);
-  text-decoration: none;
-  transition:
-    border-color var(--transicion),
-    background var(--transicion);
-}
-
-.modoChip svg {
-  flex: none;
-  color: var(--texto-suave);
-}
-
-.modoChip strong {
-  font-size: var(--letra-3);
-  font-weight: var(--peso-semi);
-  line-height: 1.2;
-}
-
-.modoChip:hover {
-  border-color: var(--acento);
-  background: var(--superficie-2);
-}
-
-.modoChip:hover svg {
-  color: var(--acento);
-}
-
-@media (min-width: 900px) {
-  .modosRejilla {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  /* En 4 columnas el icono va arriba y el título centrado debajo */
-  .modoChip {
-    flex-direction: column;
-    justify-content: center;
-    padding: var(--espacio-3) var(--espacio-1);
-    text-align: center;
-  }
-}
 
 /* Opciones (vidas, hablar, audio lento): plegadas */
-.opcionesPlegadas {
-  margin-top: var(--espacio-3);
-}
-
-.opcionesPlegadas summary {
-  padding: var(--espacio-2) 0;
-  color: var(--texto-suave);
-  font-size: var(--letra-4);
-  cursor: pointer;
-}
-
-.opcionesPlegadas .velocidad {
-  display: flex;
-  min-height: 36px;
-  margin-bottom: 0;
-}
-
-@media (max-width: 600px) {
-  .opcionesPlegadas summary {
-    padding: 12px 0;
-  }
-
-  .opcionesPlegadas .velocidad {
-    min-height: 44px;
-  }
-}

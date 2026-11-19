@@ -40,9 +40,9 @@ const TODAS = [
     Icono: IconoIngles,
     web: true,
     sub: [
-      { a: "/ingles", texto: "Camino", exacto: true, tambien: ["/ingles/unidad", "/ingles/parejas", "/ingles/examen"] },
+      { a: "/ingles", texto: "Temario", exacto: true, tambien: ["/ingles/unidad", "/ingles/parejas", "/ingles/examen", "/ingles/conversa"] },
       { a: "/ingles/historias", texto: "Historias", tambien: ["/ingles/historia", "/ingles/roleplay"] },
-      { a: "/ingles/mapache", texto: "Mapache" },
+      { a: "/ingles/mapache", texto: "Map" },
     ],
   },
   {

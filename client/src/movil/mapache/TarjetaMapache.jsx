@@ -1,20 +1,10 @@
-// El mapache en la pantalla de Inglés (versión corta) y el aviso de una línea para Inicio y Hoy.
+// Map (el mapache de inglés) en la portada de Inglés y el aviso de una línea para Inicio y Hoy.
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
 import { hablar, useHayVoz } from "../../lib/voz.js";
 import { CajaVacia, Mapache } from "./Mapache.jsx";
 import estilos from "./TarjetaMapache.module.css";
-
-const CORTO = {
-  nuevo: "Acaba de llegar y tiene hambre de palabras.",
-  feliz: "Está lleno y feliz.",
-  normal: "Está bien, pero le cabe un poco más.",
-  hambriento: "Tiene hambre.",
-  triste: "Está triste.",
-  dormido: "Está dormido.",
-  escapado: "Se escapó a buscar comida.",
-};
 
 /**
  * Lo que dice el mapache y qué pasa al tocarlo: despierto empieza con la frase del día y cada
@@ -36,49 +26,49 @@ export function useCharlaMapache(datos) {
   return { dice, tocar, voz };
 }
 
-/** Versión corta para la pantalla de Inglés: el mapache, lo que dice y su pancita. */
-export function TarjetaMapache() {
+/**
+ * Map en la portada de Inglés: lo que dice hoy (con su traducción a la vista) y la práctica del día
+ * con él. Aquí no hay barra de hambre ni avisos: es un acceso a practicar, no una tarea más.
+ */
+export function TarjetaMap() {
   const [datos, setDatos] = useState(null);
   const { dice, tocar } = useCharlaMapache(datos);
   useEffect(() => {
     api.mapache?.().then(setDatos, () => {});
   }, []);
   if (!datos) return null;
-  const comida = Math.min(1, datos.comidaHoy / datos.meta);
+  const frase = dice ?? datos.frase;
+  const pendiente = !datos.pregunta.respondida;
   return (
-    <div className={estilos.tarjeta}>
+    <div className={`textura ${estilos.tarjeta}`}>
       <div className={estilos.dibujo}>
         {datos.estado === "escapado" ? (
-          <CajaVacia tamano={104} />
+          <CajaVacia tamano={92} />
         ) : (
-          <Mapache estado={datos.estado === "nuevo" ? "normal" : datos.estado} equipo={datos.equipo} tamano={104} alTocar={tocar} />
+          <Mapache estado={datos.estado === "nuevo" ? "normal" : datos.estado} equipo={datos.equipo} tamano={92} alTocar={tocar} />
         )}
       </div>
       <div className={estilos.texto}>
         <div className={estilos.cabecera}>
           <strong>{datos.nombre}</strong>
-          <span>{CORTO[datos.estado]}</span>
+          <span>práctica de hoy</span>
         </div>
-        {dice && (
-          <p key={dice.en} className={estilos.globo} lang="en" title={dice.es}>
-            {dice.en}
+        {frase && (
+          <p key={frase.en} className={estilos.globo}>
+            <span lang="en">{frase.en}</span>
+            <small>{frase.es}</small>
           </p>
         )}
-        <div className={estilos.barra} aria-label={`Comió ${Math.floor(datos.comidaHoy)} de ${datos.meta} hoy`}>
-          <i style={{ width: `${comida * 100}%` }} />
-        </div>
         <div className={estilos.acciones}>
           <Link to="/ingles/mapache" className="boton">
-            Su casa
+            {pendiente ? "Pregunta de hoy" : "Practicar con " + datos.nombre}
           </Link>
+          <span className={estilos.dato} title="Frases de Repite conmigo dichas hoy">
+            Repite conmigo <strong>{datos.repetidasHoy}</strong>
+          </span>
           {datos.totalRobados > 0 && (
             <Link to="/ingles/mapache" className={estilos.robos}>
-              Te escondió {datos.totalRobados} {datos.totalRobados === 1 ? "palabra" : "palabras"}
-            </Link>
-          )}
-          {!datos.pregunta.respondida && (
-            <Link to="/ingles/mapache" className={estilos.robos}>
-              Pregunta del día sin responder
+              {datos.totalRobados} {datos.totalRobados === 1 ? "palabra" : "palabras"} por recuperar
             </Link>
           )}
         </div>
@@ -96,10 +86,10 @@ export function AvisoMapache() {
   if (!r || !["hambriento", "triste", "escapado"].includes(r.estado)) return null;
   const texto =
     r.estado === "escapado"
-      ? `${r.nombre} se escapó a buscar comida: vuelve con un poco de inglés.`
+      ? "Llevas días sin inglés: vuelve con una lección corta."
       : r.robados > 0
-        ? `${r.nombre} tiene hambre y te escondió ${r.robados} ${r.robados === 1 ? "palabra" : "palabras"}.`
-        : `${r.nombre} tiene hambre: hoy casi no hubo inglés.`;
+        ? `Inglés: tienes ${r.robados} ${r.robados === 1 ? "repaso pendiente" : "repasos pendientes"} y hoy casi no practicaste.`
+        : "Hoy casi no hubo inglés: 5 minutos bastan para no romper la racha.";
   return (
     <Link to="/ingles" className={estilos.aviso}>
       <Mapache estado={r.estado === "escapado" ? "triste" : r.estado} tamano={34} quieto />

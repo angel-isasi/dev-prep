@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { semilla } from "../leccion/motor.js";
-import { bancoExamen, certeza, crearExamen, EXAMEN, examenTerminado, hechaPorExamen, resultadoExamen, responderExamen, siguientePregunta } from "./examen.js";
+import { bancoExamen, certeza, crearExamen, EXAMEN, examenTerminado, hechaPorExamen, resultadoExamen, responderExamen, siguientePregunta, unidadTrasExamen } from "./examen.js";
 
 // Un camino de 60 unidades con 6 preguntas de 4 opciones cada una
 const unidades = Array.from({ length: 60 }, (_, i) => ({ id: `u${i}`, nivel: ["A1", "A2", "B1", "B2", "C1", "C2"][Math.floor(i / 10)] }));
@@ -71,5 +71,15 @@ describe("examen de nivel adaptativo", () => {
     expect(b[0].map((p) => p.clave)).toEqual(["gra:1"]);
     expect(b[0][0].opciones[0]).toBe("a");
     expect(b[1].map((p) => p.tipo)).toEqual(["natural", "palabra"]);
+  });
+
+  test("repetir el examen no te retrocede: la unidad actual solo avanza", () => {
+    const orden = ["u0", "u1", "u2", "u3"];
+    expect(unidadTrasExamen(orden, "u1", "u3")).toBe("u3"); // el examen te lleva más adelante
+    expect(unidadTrasExamen(orden, "u3", "u1")).toBe("u3"); // salió más bajo: te quedas donde ibas
+    expect(unidadTrasExamen(orden, "u2", "u2")).toBe("u2");
+    expect(unidadTrasExamen(orden, undefined, "u1")).toBe("u1"); // primer examen, sin unidad elegida
+    expect(unidadTrasExamen(orden, "vieja", "u1")).toBe("u1"); // una unidad que ya no existe no cuenta
+    expect(unidadTrasExamen(orden, "u2", null)).toBe("u2"); // examen sin resultado: no toca nada
   });
 });

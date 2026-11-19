@@ -397,7 +397,7 @@ export function historiasParaLeer(unidades) {
   };
 }
 
-/** Lo que necesita la pantalla de cada unidad (teoría, palabras y diálogos), sin lo que ya va en los ítems. */
+/** Lo que necesita la pantalla de cada unidad (teoría, palabras, frases para el shadowing y diálogos). */
 export function unidadesParaLeer(unidades) {
   return unidades.map((u) => ({
     id: u.id,
@@ -407,6 +407,7 @@ export function unidadesParaLeer(unidades) {
     descripcion: u.descripcion ?? "",
     teoria: u.teoria,
     palabras: u.palabras.map(({ id, en, es, pron, tipo, formas, ejemplo }) => ({ id, en, es, pron, tipo, formas, ejemplo })),
+    frases: (u.frases ?? []).map(({ id, en, es }) => ({ id, en, es })),
     dialogos: u.dialogos.map(({ id, titulo, situacion, lineas }) => ({ id, titulo, situacion, lineas })),
   }));
 }

@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { api } from "../../lib/api.js";
 import { celebrar } from "../../lib/celebrar.js";
 import { feedback } from "../../lib/feedback.js";
-import { hablar, hayVoz } from "../../lib/voz.js";
+import { callar, hablar, hayVoz } from "../../lib/voz.js";
 import { Markdown } from "../../components/Markdown.jsx";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
@@ -24,16 +24,18 @@ const XP_HISTORIA = { base: 20, porAcierto: 5 };
 /** Lista de historias y roleplays por etapa; marca las hechas y sugiere la de tu unidad. */
 export function ListaHistorias() {
   const [datos, setDatos] = useState(null);
+  const [error, setError] = useState(false);
   useEffect(() => {
-    api.historiasIngles().then(setDatos);
+    api.historiasIngles().then(setDatos, () => setError(true));
   }, []);
+  if (error) return <p className={estilos.mensaje}>No se pudieron cargar las historias. Vuelve a intentarlo.</p>;
   if (!datos) return <Esqueleto variante="lista" />;
   const sugerida = datos.historias.find((h) => h.unidad === datos.unidad && !datos.hechas[h.id]) ?? datos.historias.find((h) => !datos.hechas[h.id]);
 
   return (
     <section className={`${estilos.pagina} ${estilos.paginaLista}`} data-area="ingles">
       <CabeceraPagina etiqueta="Inglés" titulo="Historias" resaltado="y roleplays">
-        La serie de Ana: estudia, postula, entra a trabajar y crece. Escucha, entiende y responde. En los roleplays tú eliges qué decir.
+        Historias cortas con audio. En los roleplays tú eliges qué decir.
       </CabeceraPagina>
       {sugerida && (
         <Link to={`/ingles/historia/${sugerida.id}`} className={estilos.sugerida}>
@@ -160,13 +162,18 @@ function useHistoria(tipo, id) {
   const [item, setItem] = useState(null);
   const [error, setError] = useState(null);
   useEffect(() => {
-    api.historiasIngles().then((d) => {
-      const lista = tipo === "historia" ? d.historias : d.roleplays;
-      const encontrada = lista.find((h) => h.id === id);
-      if (encontrada) setItem(encontrada);
-      else setError("No encontré esa historia.");
-    });
+    api.historiasIngles().then(
+      (d) => {
+        const lista = tipo === "historia" ? d.historias : d.roleplays;
+        const encontrada = lista.find((h) => h.id === id);
+        if (encontrada) setItem(encontrada);
+        else setError("No encontré esa historia.");
+      },
+      () => setError("No se pudo cargar. Vuelve a intentarlo."),
+    );
   }, [tipo, id]);
+  // Al salir de la historia o del roleplay la voz se corta (si no, sigue leyendo en la otra pantalla)
+  useEffect(() => () => callar(), []);
   return { item, error };
 }
 
@@ -178,6 +185,7 @@ export function HistoriaMovil() {
   const [aciertos, setAciertos] = useState(0);
   const [verTraduccion, setVerTraduccion] = useState(false);
   const [final, setFinal] = useState(null);
+  const [resultados, setResultados] = useState({}); // posición del reto -> si lo acertaste
   const inicio = useRef(Date.now());
   const abajo = useRef(null);
   const navegar = useNavigate();
@@ -194,6 +202,7 @@ export function HistoriaMovil() {
   async function avanzar(acerto) {
     const nuevos = aciertos + (acerto ? 1 : 0);
     setAciertos(nuevos);
+    if (actual?.tipo) setResultados((r) => ({ ...r, [posicion]: !!acerto }));
     if (posicion + 1 >= pasos.length) {
       const xp = XP_HISTORIA.base + nuevos * XP_HISTORIA.porAcierto;
       await api.terminarHistoria(item.id, { xp, segundos: (Date.now() - inicio.current) / 1000 });
@@ -235,7 +244,9 @@ export function HistoriaMovil() {
                       <strong>{p.quien}:</strong> {p.en.replace("___", p.opciones[p.correcta])}
                     </>
                   ) : (
-                    <>✓ {p.pregunta.replace(/[*_]/g, "")}</>
+                    <>
+                      {resultados[i] ? "✓" : "✗"} {p.pregunta.replace(/[*_]/g, "")}
+                    </>
                   )}
                 </p>
               )

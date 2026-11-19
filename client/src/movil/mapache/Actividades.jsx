@@ -1,5 +1,5 @@
-// Lo que puedes hacer con el mapache. Cada actividad usa tu inglés de verdad y lo alimenta:
-// pregunta del día, repite conmigo, objetos perdidos (tus repasos vencidos), tus errores reales,
+// Lo que puedes hacer con Map. Cada actividad usa tu inglés de verdad y suma a tu meta del día:
+// pregunta del día, repite conmigo, repasos pendientes (los vencidos), tus errores reales,
 // palabra del día, tienda, ropa, álbum de unidades, diario, postales, Trash panda y la entrevista.
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
@@ -60,7 +60,7 @@ export function PreguntaDelDia({ datos, alCambiar }) {
   const p = datos.pregunta;
   const [texto, setTexto] = useState("");
   const [resultado, setResultado] = useState(null);
-  const [ver, setVer] = useState(false);
+  const [errorMicro, setErrorMicro] = useState(null);
   const micro = useMicrofono();
 
   async function enviar(e) {
@@ -71,7 +71,10 @@ export function PreguntaDelDia({ datos, alCambiar }) {
   }
 
   async function dictar() {
+    setErrorMicro(null);
     const r = await micro.escuchar();
+    // Sin permiso de micrófono o sin internet el dictado falla: se dice, en vez de no hacer nada
+    if (r.error) return setErrorMicro(r.error);
     if (r.opciones?.[0]) setTexto((t) => (t ? `${t} ${r.opciones[0]}` : r.opciones[0]));
   }
 
@@ -89,21 +92,24 @@ export function PreguntaDelDia({ datos, alCambiar }) {
           <p className={estilos.preguntaEn} lang="en">
             {p.en}
           </p>
+          <small className={estilos.traduccion}>{p.es}</small>
           <div className={estilos.fila}>
             <BotonOir texto={p.en} />
-            <button type="button" className={estilos.enlace} onClick={() => setVer((v) => !v)}>
-              {ver ? p.es : "¿Qué pregunta?"}
-            </button>
           </div>
           <p className={estilos.reto}>
             <strong>Reto extra (+5 XP):</strong> {p.reto.texto} <em lang="en">Ej.: {p.reto.ejemplo}</em>
           </p>
-          {p.respondida && !resultado ? (
+          {(p.respondida && !resultado) || resultado?.ok ? (
+            // Ya respondiste: se ve lo que enviaste (es lo que corrige la IA) y el formulario se cierra
             <div className={estilos.respondida}>
               <span>Tu respuesta</span>
-              <p lang="en">{p.respondida.texto}</p>
-              <span>Una forma de responder</span>
-              <p lang="en">{p.modelo}</p>
+              <p lang="en">{resultado?.ok ? texto : p.respondida.texto}</p>
+              {!resultado && (
+                <>
+                  <span>Una forma de responder</span>
+                  <p lang="en">{p.modelo}</p>
+                </>
+              )}
             </div>
           ) : (
             <form onSubmit={enviar} className={estilos.formulario}>
@@ -118,20 +124,21 @@ export function PreguntaDelDia({ datos, alCambiar }) {
                   Responder
                 </button>
               </div>
+              {errorMicro && <p className={estilos.ayuda}>{errorMicro}</p>}
             </form>
           )}
           {resultado && (
             <div className={estilos.resultado} data-ok={resultado.ok}>
               {resultado.ok ? (
                 <p>
-                  ¡Bien! {resultado.xp ? `+${resultado.xp} XP y comida para ${datos.nombre}.` : "Ya habías respondido hoy."}
-                  {resultado.reto ? " Cumpliste el reto extra." : " El reto extra no lo vi esta vez: pruébalo mañana."}
+                  {/* No felicita: solo confirma. La corrección de verdad es la de la IA, al lado */}
+                  Respuesta guardada. {resultado.xp ? `+${resultado.xp} XP.` : "Ya habías respondido hoy."}
+                  {resultado.reto ? " Cumpliste el reto extra." : " Sin reto extra esta vez."}
                   {resultado.usadas.length > 0 && ` Usaste palabras de tus unidades: ${resultado.usadas.join(", ")}.`}
                 </p>
               ) : resultado.corto ? (
                 <p>
-                  Muy corto para tu nivel: escribiste {resultado.palabras} {resultado.palabras === 1 ? "palabra" : "palabras"} y se piden{" "}
-                  {resultado.minimo}. Agrega un detalle o un porqué.
+                  Muy corto: van {resultado.palabras} de {resultado.minimo} palabras. Agrega un detalle o un porqué.
                 </p>
               ) : (
                 <p>Parece que no está en inglés. Inténtalo en inglés, aunque sea simple.</p>
@@ -177,13 +184,13 @@ export function RepiteConmigo({ datos, alCambiar }) {
   }
 
   return (
-    <Tarjeta titulo="Repeat after me" detalle={`${datos.repetidasHoy} bien dichas hoy`}>
+    <Tarjeta titulo="Repite conmigo" detalle={`${datos.repetidasHoy} bien dichas hoy`}>
       {!voz || !micro.hay ? (
         <p className={estilos.ayuda}>
-          Para esto hace falta voz y micrófono (Chrome en el celular o la laptop). Mientras, léela en voz alta:
+          Sin voz o sin micrófono en este navegador (usa Chrome). Mientras, léela en voz alta:
         </p>
       ) : (
-        <p className={estilos.ayuda}>Escúchala, repítela imitando el ritmo y {datos.nombre} te dice si te entendió.</p>
+        <p className={estilos.ayuda}>Escucha y repite imitando el ritmo: te digo si se entendió.</p>
       )}
       <p className={estilos.fraseGrande} lang="en">
         {f.en}
@@ -246,14 +253,13 @@ export function ObjetosPerdidos({ datos, alCambiar }) {
   if (!o && !recuperadas) return null;
 
   return (
-    <Tarjeta titulo="Objetos perdidos" detalle={datos.totalRobados ? `${datos.totalRobados} por recuperar` : "Nada perdido"}>
+    <Tarjeta titulo="Repasos pendientes" detalle={datos.totalRobados ? `${datos.totalRobados} por repasar` : "Al día"}>
       {!o ? (
-        <p className={estilos.ayuda}>¡Recuperaste {recuperadas} hoy!</p>
+        <p className={estilos.ayuda}>Repasaste {recuperadas} aquí hoy.</p>
       ) : (
         <>
           <p className={estilos.ayuda}>
-            {datos.nombre} escondió esta {o.tipo === "palabra" ? "palabra" : "frase"}. Adivina cuál falta y vuelve a ser tuya (cuenta como
-            su repaso).
+            Te toca repasar esta {o.tipo === "palabra" ? "palabra" : "frase"}: elige lo que falta.
           </p>
           <p className={estilos.fraseGrande} lang="en">
             {o.pista}
@@ -281,7 +287,7 @@ export function ObjetosPerdidos({ datos, alCambiar }) {
           {elegida != null && (
             <div className={estilos.resultado} data-ok={elegida === o.correcta}>
               <p>
-                {elegida === o.correcta ? "¡La recuperaste! " : "Esa no. Vuelve a tus repasos para que no se te escape. "}
+                {elegida === o.correcta ? "Correcto. " : "Esa no: volverá en tu próximo repaso. "}
                 <strong lang="en">{o.en}</strong> = {o.es}
               </p>
               <button type="button" className="boton boton-primario" onClick={siguiente}>
@@ -301,9 +307,6 @@ export function TusErrores({ datos }) {
   const claves = datos.errores.map((e) => e.clave).join(",");
   return (
     <Tarjeta titulo="Tus errores" detalle="Lo que fallaste la última vez">
-      <p className={estilos.ayuda} lang="en">
-        {datos.nombre} says: "Even a raccoon wouldn't let these slip through. Let's iron them out."
-      </p>
       <ul className={estilos.errores}>
         {datos.errores.map((e) => (
           <li key={e.clave}>
@@ -327,7 +330,7 @@ export function PalabraDelDia({ datos }) {
   const w = datos.palabraDelDia;
   if (!w) return null;
   return (
-    <Tarjeta titulo="Hoy te enseño" detalle="Palabra y expresión de B2 y C1">
+    <Tarjeta titulo="Palabra del día" detalle="Nivel B2 y C1">
       <p className={estilos.palabraGrande} lang="en">
         {w.en} <span>{w.pron}</span>
       </p>
@@ -620,7 +623,7 @@ export function TrashPanda({ datos, alCambiar }) {
 
   return (
     <Tarjeta titulo="Trash panda" detalle={`Récord: ${datos.trash.record}`}>
-      <p className={estilos.ayuda}>Un minuto: tira cada palabra al tacho correcto. Verbo o sustantivo; presente o pasado.</p>
+      <p className={estilos.ayuda}>1 minuto: ¿verbo o sustantivo?, ¿presente o pasado? Tira cada palabra a su tacho.</p>
       {jugando && ronda ? (
         <div className={estilos.juego}>
           <div className={estilos.marcador}>
@@ -666,9 +669,9 @@ export function TrashPanda({ datos, alCambiar }) {
 
 export function Entrevista({ datos }) {
   return (
-    <Tarjeta titulo="Practice a job interview with me" detalle="Roleplays de B2 y C1">
+    <Tarjeta titulo="Entrevista en inglés" detalle="Roleplays de B2 y C1">
       <p className={estilos.ayuda}>
-        {datos.nombre} hace de entrevistador: eliges qué responder y te explica por qué una respuesta suena mejor que otra.
+        {datos.nombre} hace de entrevistador: eliges qué responder y ves por qué una respuesta suena mejor que otra.
       </p>
       <div className={estilos.entrevistas}>
         {datos.entrevistas.map((e) => (

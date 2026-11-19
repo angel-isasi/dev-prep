@@ -86,6 +86,7 @@ function Charla({ escenario, alSalir, alOlvidarClave }) {
   const [texto, setTexto] = useState("");
   const [esperando, setEsperando] = useState(false);
   const [error, setError] = useState(null);
+  const [fallo, setFallo] = useState(false); // el último turno de la IA no llegó: se puede reintentar
   const [fin, setFin] = useState(false);
   const [correccion, setCorreccion] = useState(null);
   const [corrigiendo, setCorrigiendo] = useState(false);
@@ -96,11 +97,16 @@ function Charla({ escenario, alSalir, alOlvidarClave }) {
   const inicio = useRef(Date.now());
   const guardado = useRef(false);
   const vivo = useRef(true);
+  const iniciado = useRef(false);
   const abajo = useRef(null);
 
   useEffect(() => {
     vivo.current = true;
-    turno([]);
+    // En desarrollo React monta dos veces (StrictMode): el primer turno se pide una sola vez
+    if (!iniciado.current) {
+      iniciado.current = true;
+      turno([]);
+    }
     return () => {
       vivo.current = false;
       dictado.current?.detener();
@@ -112,10 +118,15 @@ function Charla({ escenario, alSalir, alOlvidarClave }) {
     abajo.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }, [historial.length, esperando, correccion]);
 
-  /** Pide la siguiente línea de la IA a partir de lo dicho hasta ahora. */
+  /**
+   * Pide la siguiente línea de la IA a partir de lo dicho hasta ahora. Tu turno queda en el
+   * historial antes de pedir: si la IA falla, tu mensaje no se pierde y puedes reintentar.
+   */
   async function turno(lista) {
+    setHistorial(lista);
     setEsperando(true);
     setError(null);
+    setFallo(false);
     try {
       const r = await pedirIa({ tarea: "conversacion", escenario: escenario.rol, historial: lista });
       if (!vivo.current) return;
@@ -126,6 +137,7 @@ function Charla({ escenario, alSalir, alOlvidarClave }) {
       if (!vivo.current) return;
       if (e.clave) alOlvidarClave();
       setError(e.message);
+      setFallo(true);
     } finally {
       if (vivo.current) setEsperando(false);
     }
@@ -134,7 +146,8 @@ function Charla({ escenario, alSalir, alOlvidarClave }) {
   function enviar(evento) {
     evento?.preventDefault();
     const dicho = texto.trim();
-    if (!dicho || esperando) return;
+    // Con un turno sin respuesta primero se reintenta: así no quedan dos mensajes tuyos seguidos
+    if (!dicho || esperando || fallo) return;
     dictado.current?.detener();
     setTexto("");
     turno([...historial, { de: "yo", texto: dicho }]);
@@ -217,6 +230,11 @@ function Charla({ escenario, alSalir, alOlvidarClave }) {
       </ol>
 
       {error && <p className={estilos.error}>{error}</p>}
+      {fallo && !esperando && !correccion && (
+        <button type="button" className="boton boton-primario" onClick={() => turno(historial)}>
+          Reintentar
+        </button>
+      )}
 
       {!fin && !correccion && (
         <form className={estilos.entrada} onSubmit={enviar}>
@@ -237,7 +255,7 @@ function Charla({ escenario, alSalir, alOlvidarClave }) {
                 <IconoMicrofono tamano={16} /> {dictando ? "Detener" : "Dictar"}
               </button>
             )}
-            <button type="submit" className="boton boton-primario" disabled={!texto.trim() || esperando}>
+            <button type="submit" className="boton boton-primario" disabled={!texto.trim() || esperando || fallo}>
               Enviar
             </button>
           </div>

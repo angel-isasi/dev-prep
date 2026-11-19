@@ -177,14 +177,23 @@ En las unidades solo de vocabulario, `## Cómo se forma` puede explicar cómo ag
 
 Una frase puede llevar `"trabajo": true` cuando usa la gramática de la unidad en una situación de trabajo en tecnología (por ejemplo, en *there is / there are*: "There's a bug in line 12."). En las etapas básica e intermedia, cada unidad tiene 4 a 6.
 
-## El mapache (Inglés > Su casa)
+## La portada de Inglés (`/ingles`)
 
-Una mascota que vive de tu inglés. Código en `client/src/movil/mapache/`.
+Cuatro franjas que usan todo el ancho (`client/src/movil/ingles/InglesMovil.jsx`):
 
-- **Come lo que aprendes:** palabras nuevas, aciertos, lecciones, historias, inmersión y sus actividades (`comidaDelDia` en `reglas.js`). Necesita 30 puntos al día. Abrir la app no lo alimenta.
+1. **Hoy:** tus minutos frente a la meta, la racha y el botón de la rutina del día; al lado, Map con su frase y la pregunta de hoy.
+2. **Temario** (`Temario.jsx`, datos en `temario.js`): las 6 etapas son pestañas y a la vez el mapa de niveles (A1 a C2), cada una con su avance. La etapa elegida muestra sus unidades en fichas; al tocar una se ve su detalle (qué aprendes, aprendidos y fijados, lección, teoría, cofre, legendario): al costado en pantallas anchas y debajo de la ficha en el celular, donde se ven 5 unidades alrededor de donde vas y un botón para ver la etapa completa. Nada se bloquea. Reemplazó al camino de círculos.
+3. **Practica por habilidad:** hablar, escuchar, leer, vocabulario y repasar, cada una con sus accesos (`practicaPorHabilidad`).
+4. **Tu progreso:** misiones del día, tu semana (minutos por día y tu XP contra la semana pasada), inglés real fuera de la app y opciones.
+
+## Map, el mapache (`/ingles/mapache`)
+
+El compañero de práctica diaria (antes "Mapi"; puedes cambiarle el nombre). Código en `client/src/movil/mapache/`. Arriba, una franja corta con lo que dice hoy (con su traducción a la vista) y tu meta del día. Debajo, cuatro pestañas en este orden: **Hoy** (pregunta del día, repite conmigo, palabra del día, repasos pendientes y tus errores), **Leer** (postales y diario), **Jugar** (Trash panda y la entrevista) y **Su casa** (la escena, la ropa, la tienda y el álbum). Lo de mascota va al final: primero lo que enseña. Los textos hablan de tu práctica ("meta de hoy", "repasos pendientes"), no de hambre ni de palabras escondidas.
+
+- **Meta de hoy (su comida):** palabras nuevas, aciertos, lecciones, historias, inmersión y sus actividades (`comidaDelDia` en `reglas.js`). Necesita 30 puntos al día. Abrir la app no suma.
 - **Estados:** nuevo, feliz, normal, hambriento, triste (se rompió la racha o te robó 15 o más palabras), dormido (de 23:00 a 6:00) y escapado (3 días sin inglés; vuelve apenas practicas). Nada se guarda: se calcula de tus contadores del día.
-- **Objetos perdidos:** los repasos vencidos de palabras y frases. Recuperarlos es un repaso de verdad (`calificarItem`).
+- **Repasos pendientes** (antes "objetos perdidos"): los repasos vencidos de palabras y frases. Hacerlos ahí es un repaso de verdad (`calificarItem`).
 - **Lo que guarda:** registros `mapache:...` dentro de `inglesExtra` (nombre, compras, ropa puesta, pregunta del día, postales, récord de Trash panda). Se sincronizan como el resto; no hay nada nuevo en AWS.
-- **Su inglés va siempre en B2 y C1**, sin importar tu nivel (pedido de Angel): habla en C1 (`contenido-nivel.js`, franja C) y marca una expresión útil en cada frase; la pregunta del día alterna B2 y C1 con su reto de gramática (+5 XP); la palabra del día, Repeat after me y Trash panda usan las unidades B2 y C1; las 6 postales y los sueños están en B2 o C1; y propone 4 entrevistas de B2 y C1. Lo que te esconde y tus errores sí son tuyos, de tu nivel.
+- **Su inglés va siempre en B2 y C1**, sin importar tu nivel (pedido de Angel): habla en C1 (`contenido-nivel.js`, franja C) y marca una expresión útil en cada frase; la pregunta del día alterna B2 y C1 con su reto de gramática (+5 XP); la palabra del día, Repite conmigo y Trash panda usan las unidades B2 y C1; las 6 postales y los sueños están en B2 o C1; y propone 4 entrevistas de B2 y C1. Lo que te esconde y tus errores sí son tuyos, de tu nivel.
 - **Contenido** en `contenido.js`: 8 preguntas del día por nivel (con una respuesta modelo), una postal por nivel con 2 preguntas, sueños, frases según su estado, tienda (se paga con XP de inglés), muebles que gana por unidad completada y las entrevistas (roleplays) que propone desde B1.
 - **Casa por nivel:** caja (A1), rincón (A2), cuarto (B1), cuarto con ventana (B2), departamento (C1), departamento con vista (C2). Regalos de nivel: mochila (B1), lentes (B2), corbata (C1), birrete (C2).

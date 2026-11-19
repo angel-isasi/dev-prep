@@ -26,28 +26,6 @@
 }
 
 /* Arriba: la casa y, al lado, cómo está */
-.arriba {
-  display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(300px, 1fr);
-  gap: var(--espacio-4);
-  align-items: start;
-}
-
-@media (max-width: 1200px) {
-  .arriba {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-.panel {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espacio-3);
-  padding: var(--espacio-4) var(--espacio-5);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-grande);
-  background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
-}
 
 .nombre {
   display: flex;
@@ -125,19 +103,6 @@
   margin-top: var(--espacio-2);
 }
 
-.barras {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.barras > div:first-child {
-  display: flex;
-  justify-content: space-between;
-  color: var(--texto-suave);
-  font-size: var(--letra-3);
-}
-
 .barra {
   height: 10px;
   border-radius: var(--radio-pildora);
@@ -151,19 +116,6 @@
   border-radius: inherit;
   background: linear-gradient(90deg, var(--aviso), var(--exito));
   transition: width 0.5s ease;
-}
-
-.datosFila {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: var(--espacio-2);
-  color: var(--texto-tenue);
-  font-size: var(--letra-3);
-}
-
-.datosFila strong {
-  color: var(--texto);
 }
 
 .acciones {
@@ -819,42 +771,8 @@
 }
 
 /* Racha, nivel y nivel de habla: tres chips en una fila */
-.datosChips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--espacio-2);
-}
-
-.datosChips span {
-  padding: 4px 10px;
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-pildora);
-  color: var(--texto-suave);
-  font-size: var(--letra-3);
-  white-space: nowrap;
-}
-
-.datosChips strong {
-  color: var(--texto);
-}
 
 /* "¿Qué come?": la explicación queda plegada */
-.notaPlegada summary {
-  width: fit-content;
-  color: var(--texto-tenue);
-  font-size: var(--letra-3);
-  cursor: pointer;
-}
-
-.notaPlegada p {
-  margin-top: var(--espacio-2);
-}
-
-@media (max-width: 600px) {
-  .notaPlegada summary {
-    padding: 12px 0;
-  }
-}
 
 /* Palabra del día: la pronunciación va entera en su renglón, sin heredar el interlineado del título */
 .palabraGrande {
@@ -867,4 +785,149 @@
 
 .palabraGrande span {
   line-height: 1.3;
+}
+
+/* ---------- Franja de arriba (rediseño): quién es y qué dice | tu meta de hoy ---------- */
+.cabeza {
+  display: grid;
+  gap: var(--espacio-3);
+}
+
+.quien,
+.meta {
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.quien {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-4);
+  border-color: color-mix(in srgb, var(--color-area) 30%, var(--borde));
+  background:
+    radial-gradient(320px 160px at 0% 100%, var(--color-area-suave), transparent 75%),
+    var(--superficie);
+}
+
+.retrato {
+  flex: none;
+}
+
+.quienTexto {
+  display: grid;
+  flex: 1;
+  gap: var(--espacio-2);
+  min-width: 0;
+}
+
+.quienTexto .nombre {
+  align-items: baseline;
+  gap: var(--espacio-1) var(--espacio-3);
+}
+
+.quienTexto .nombre h1 {
+  margin: 0;
+  font-size: var(--titulo-3);
+}
+
+.quienTexto .estado {
+  font-size: var(--letra-4);
+}
+
+.quienTexto .globo small {
+  font-size: var(--letra-3);
+}
+
+.quienTexto .globoAcciones {
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 0;
+}
+
+.enlaceSuave {
+  margin-left: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--texto-tenue);
+  font: inherit;
+  font-size: var(--letra-3);
+  cursor: pointer;
+}
+
+.enlaceSuave:hover {
+  color: var(--texto);
+}
+
+.meta {
+  display: grid;
+  align-content: center;
+  gap: var(--espacio-3);
+}
+
+.metaCifras {
+  display: flex;
+  gap: var(--espacio-6);
+}
+
+.metaCifras > div {
+  display: grid;
+  gap: 2px;
+}
+
+.metaCifras strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-3);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.metaCifras strong small {
+  color: var(--texto-tenue);
+  font-family: var(--fuente-base, inherit);
+  font-size: var(--letra-4);
+  font-weight: var(--peso-normal, 400);
+}
+
+.metaCifras span {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+/* La escena de su casa, ahora dentro de la pestaña "Su casa" */
+.escenaCasa {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: var(--espacio-2);
+  max-width: 860px;
+}
+
+@media (min-width: 900px) {
+  .cabeza {
+    grid-template-columns: minmax(0, 1.7fr) minmax(280px, 1fr);
+    align-items: stretch;
+  }
+
+  .quien,
+  .meta {
+    padding: var(--espacio-5);
+  }
+}
+
+@media (max-width: 600px) {
+  .quien {
+    gap: var(--espacio-3);
+  }
+
+  /* En el celular el retrato es más chico: el texto necesita el ancho */
+  .retrato > * {
+    width: 76px !important;
+    height: auto !important;
+  }
+
+  .enlaceSuave {
+    min-height: 44px;
+  }
 }

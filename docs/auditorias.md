@@ -54,6 +54,27 @@ Propuesto (sin construir):
 6. Tope de gasto de IA en el servidor (hoy solo vive en el navegador) y guardar la entrevista por voz por si se recarga.
 7. Un test que falle si la parte visible de un contenido nuevo pasa de un tope de palabras.
 
+## 2026-11-19 (noche): Inglés rediseñado
+
+Pedido de Angel: que Inglés se entienda mucho mejor, que deje de parecerse al camino de círculos, que use los costados y que el mapache (ahora Map) no estorbe. Un agente auditó la lógica y las demás pantallas; lo confirmado se arregló.
+
+**Rediseño**
+- Portada en 4 franjas a todo el ancho: Hoy y Map, Temario, Practica por habilidad y Tu progreso. De unos 4.000 px de alto a unos 2.000 en la laptop.
+- Temario en lugar del camino: etapas como pestañas con su avance, unidades en fichas y el detalle de la unidad al costado (en el celular, debajo de la ficha, con 5 unidades a la vista).
+- Map: nombre nuevo, franja corta arriba (frase con traducción a la vista y meta de hoy), pestañas reordenadas (Hoy, Leer, Jugar, Su casa) y la escena de su casa dentro de "Su casa". Textos sobre tu práctica en vez de hambre y palabras escondidas. La pregunta del día muestra su traducción y ya no dice "¡Bien!": la corrección es la de la IA.
+
+**Arreglado**
+- El shadowing de cada unidad nunca aparecía: el exportador no incluía las frases.
+- Conversa con IA perdía tu mensaje si la IA fallaba (ahora queda y hay "Reintentar").
+- Repetir el examen de nivel con peor resultado te hacía retroceder de unidad.
+- El dictado de la pregunta del día fallaba en silencio; tras responder, el formulario seguía activo.
+- Botones de audio que faltaban al abrir en frío (la voz se revisaba una sola vez); la voz seguía hablando al salir de una historia; "✓" aunque hubieras fallado; cargas sin mensaje de error en Historias y Parejas; un ejercicio de armar que mostraba la respuesta.
+- La velocidad del audio y el micrófono ya no se guardan en el navegador en modo visita.
+
+**Se mantiene por decisión de Angel:** Map habla en B2 y C1 sin importar tu nivel.
+
+**Propuesto, sin hacer:** que Map se adapte a tu nivel real (el contenido por nivel ya existe); que los repasos vencidos no lo pongan "triste"; quitar tienda, ropa y álbum si no los usas; que repetir el examen con peor resultado no reduzca las unidades aprobadas.
+
 ## Última auditoría
 
 2026-11-19, toda la app (ver arriba). Siguiente: priorizar lo cambiado después de este commit.

@@ -13,7 +13,7 @@ import { SlidingNumber } from "../../components/ui/sliding-number.jsx";
 import { armarLeccion, avance, crearSesion, HITOS_COMBO, ordenCorrecto, pasoActual, responder, resultadoNivel, resumen, semilla, terminada, VIDAS } from "./motor.js";
 import { BotonAudio, ItemArmar, ItemEmparejar, ItemEntrevista, ItemEscribir, ItemHablar, ItemOpcion, ItemOrdenar, ItemTarjeta, tituloDe } from "./Items.jsx";
 import { armadoCorrecto, escrituraCorrecta } from "../../../../scripts/items/ingles.js";
-import { hablar, hayMicrofono, hayVoz } from "../../lib/voz.js";
+import { hablar, hayMicrofono, hayVoz, useHayVoz, vocesListas } from "../../lib/voz.js";
 import { elegirVariante, emparejarDe, variarPasos } from "./variantes.js";
 import { Bit, fraseDeBit } from "../../components/Bit.jsx";
 import { despuesDe, leccionDe, planUnidad, PRUEBA, pruebaAprobada } from "./plan.js";
@@ -86,6 +86,8 @@ export function LeccionMovil() {
   const ambito = params.get("ambito") === "ingles" ? "ingles" : "programacion";
   // Programación: si vienes de una unidad (Lecciones), vuelves ahí
   const inicio = ambito === "ingles" ? "/ingles" : params.get("unidad") ? "/camino" : "/";
+  // Si las voces llegan con la lección ya abierta, la pantalla se vuelve a pintar y aparecen los botones de audio
+  useHayVoz();
 
   // Arma la lección (o retoma la que quedó a medias)
   useEffect(() => {
@@ -93,7 +95,11 @@ export function LeccionMovil() {
     setFinal(null);
     setSesion(null);
     setError(null);
+    // Si cambian los parámetros (o React monta dos veces en desarrollo), la lección vieja no pisa a la nueva
+    let vigente = true;
     api.lecciones(ambito).then(async (d) => {
+      // Inglés: Chrome entrega las voces tarde. Se esperan un momento para que la lección no salga sin ejercicios de escuchar
+      if (ambito === "ingles") await vocesListas();
       setUnidades(d.unidades);
       if (params.get("modo") === "debiles" && api.mapa) d = { ...d, unidades: (await api.mapa()).debiles };
       if (params.get("modo") === "mispalabras") {
@@ -104,6 +110,7 @@ export function LeccionMovil() {
         const estas = new Set(params.get("claves").split(","));
         d = { ...d, items: d.items.filter((it) => estas.has(it.clave)) };
       }
+      if (!vigente) return;
       if (params.get("retomar") && d.enCurso && !terminada(d.enCurso)) return setSesion(d.enCurso);
       const unidad = params.get("unidad") ?? d.unidadActual;
       // Una lección fija de la unidad (plan.js): solo sus preguntas
@@ -116,10 +123,11 @@ export function LeccionMovil() {
       const azar = semilla(`${d.hoy}-${unidad}-${modo}-${Date.now()}`);
       const ingles = ambito === "ingles";
       // En inglés cada concepto se pregunta según cuánto lo dominas (ver variantes.js)
-      const variante = ingles ? (it, op) => elegirVariante(it, d.registros[it.clave], { conVoz: hayVoz(), conMicro: hayMicrofono(), azar, ...op }) : undefined;
-      let pasos = armarLeccion({ ...d, unidad, modo, conVoz: hayVoz(), azar, variante });
+      const conVoz = hayVoz();
+      const variante = ingles ? (it, op) => elegirVariante(it, d.registros[it.clave], { conVoz, conMicro: hayMicrofono(), azar, ...op }) : undefined;
+      let pasos = armarLeccion({ ...d, unidad, modo, conVoz, azar, variante });
       if (ingles && modo === "normal") pasos = conEmparejar(pasos, d, unidad, azar);
-      if (ingles && (modo === "normal" || modo === "rapida")) pasos = variarPasos(pasos, new Map(d.items.map((it) => [it.clave, it])), { conVoz: hayVoz() });
+      if (ingles && (modo === "normal" || modo === "rapida")) pasos = variarPasos(pasos, new Map(d.items.map((it) => [it.clave, it])), { conVoz });
       if (pasos.length === 0)
         return setError(
           modo === "errores" ? "No tienes errores pendientes. ¡Bien!" : modo === "examen" ? "Todavía no practicaste suficiente esta semana para un examen: haz unas lecciones primero." : "No hay ítems para esta unidad todavía.",
@@ -127,7 +135,10 @@ export function LeccionMovil() {
       const nueva = crearSesion(pasos, { unidad, modo, hoy: d.hoy, ambito, parte: parte?.id ?? null, vidas: ingles && d.extra?.vidas && modo !== "nivel" ? VIDAS : null });
       api.guardarLeccionEnCurso(nueva);
       setSesion(nueva);
-    }, (e) => setError(e.message));
+    }, (e) => vigente && setError(e.message));
+    return () => {
+      vigente = false;
+    };
   }, [params, ambito]);
 
   const paso = sesion ? pasoActual(sesion) : null;

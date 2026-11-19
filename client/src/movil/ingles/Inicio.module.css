@@ -1,0 +1,516 @@
+/* Portada de Inglés: franjas que usan todo el ancho (hoy, temario, práctica y progreso). */
+.pagina {
+  display: grid;
+  gap: var(--espacio-5);
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
+}
+
+/* La cabecera trae su propio margen inferior: con el gap de la página sobra */
+.pagina > header:first-child {
+  margin-bottom: calc(var(--espacio-3) * -1);
+}
+
+.mensaje {
+  padding: var(--espacio-5);
+  color: var(--texto-suave);
+}
+
+.ayuda {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  line-height: 1.5;
+}
+
+.exito {
+  color: var(--exito);
+  font-weight: var(--peso-semi);
+}
+
+/* ---------- 1. Hoy ---------- */
+.franja {
+  display: grid;
+  gap: var(--espacio-3);
+}
+
+.hoy {
+  display: grid;
+  gap: var(--espacio-3);
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background:
+    radial-gradient(360px 180px at 0% 0%, var(--color-area-suave), transparent 70%),
+    var(--superficie);
+}
+
+.hoyDatos {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-4);
+}
+
+.minutos {
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-2);
+  line-height: 1;
+}
+
+.hoyTexto {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.hoyTexto > strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-1);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.hoyTexto small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.racha {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
+}
+
+/* El botón grande de la rutina (el alto fijo de .boton no aplica aquí) */
+.rutina {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--espacio-3);
+  height: auto;
+  min-height: 64px;
+  padding: var(--espacio-3) var(--espacio-4);
+  border-color: transparent;
+  border-radius: var(--radio-grande);
+  background: var(--acento);
+  color: var(--sobre-acento);
+  text-align: left;
+}
+
+.rutina:hover {
+  background: color-mix(in srgb, var(--acento) 88%, white);
+  color: var(--sobre-acento);
+}
+
+.rutina > span:last-child {
+  display: grid;
+  gap: 2px;
+}
+
+.rutina strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-1);
+  line-height: 1.1;
+}
+
+.rutina small {
+  opacity: 0.85;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-normal, 400);
+}
+
+.play {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--sobre-acento) 14%, transparent);
+}
+
+/* ---------- Bloques con título (práctica y progreso) ---------- */
+.bloque {
+  display: grid;
+  gap: var(--espacio-3);
+  min-width: 0;
+}
+
+.cabeceraBloque {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--espacio-1) var(--espacio-3);
+}
+
+.cabeceraBloque h2 {
+  margin: 0;
+  font-size: var(--titulo-2);
+  letter-spacing: -0.02em;
+}
+
+.cabeceraBloque small {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+}
+
+/* ---------- 3. Practica por habilidad ---------- */
+.habilidades {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--espacio-3);
+}
+
+.habilidad {
+  display: grid;
+  align-content: start;
+  gap: var(--espacio-2);
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.habilidad h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: var(--espacio-1) var(--espacio-2);
+  color: var(--color-area, var(--acento));
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.habilidad ul {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.habilidad a {
+  display: grid;
+  gap: 1px;
+  min-height: 48px;
+  align-content: center;
+  padding: var(--espacio-2);
+  border-radius: var(--radio-md);
+  color: var(--texto);
+  text-decoration: none;
+  transition: background var(--transicion);
+}
+
+.habilidad a:hover {
+  background: var(--superficie-2);
+}
+
+.habilidad a strong {
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
+}
+
+.habilidad a small {
+  color: var(--texto-tenue);
+  font-size: var(--letra-2);
+  line-height: 1.35;
+}
+
+.habilidad .ayuda {
+  padding: var(--espacio-2);
+}
+
+/* ---------- 4. Tu progreso ---------- */
+.progreso {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--espacio-3);
+  align-items: start;
+}
+
+.tarjeta {
+  display: grid;
+  align-content: start;
+  gap: var(--espacio-3);
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.tarjetaCabecera {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+}
+
+.tarjetaCabecera h3 {
+  margin: 0;
+  font-size: var(--letra-7);
+}
+
+.tarjetaCabecera small {
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+}
+
+/* Misiones */
+.misiones {
+  display: grid;
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.misiones li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.misiones li p {
+  margin: 0 0 4px;
+  font-size: var(--letra-4);
+}
+
+.misiones li > span {
+  color: var(--texto-tenue);
+}
+
+.misiones li[data-hecha="true"] > span {
+  color: var(--exito);
+  font-weight: var(--peso-extra);
+}
+
+.misiones li small {
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+.barraMision {
+  height: 6px;
+  border-radius: var(--radio-pildora);
+  background: var(--superficie-2);
+  overflow: hidden;
+}
+
+.barraMision i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff9f43, #f0c850);
+  transition: width 0.5s ease;
+}
+
+/* Tu semana: una barra por día; llena si cumpliste la meta */
+.semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  height: 84px;
+}
+
+.semana > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.semana span {
+  width: 100%;
+  min-height: 3px;
+  border-radius: var(--radio-sm);
+  background: var(--borde-fuerte);
+}
+
+.semana span[data-cumplio="true"] {
+  background: var(--color-area);
+}
+
+.semana small {
+  color: var(--texto-tenue);
+  font-size: var(--letra-1);
+  text-transform: uppercase;
+}
+
+.liga {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  line-height: 1.5;
+}
+
+.liga strong {
+  color: var(--texto);
+}
+
+.liga[data-ganando="true"] strong {
+  color: var(--exito);
+}
+
+/* Inglés real */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
+}
+
+.chip {
+  min-height: 36px;
+  padding: 0 var(--espacio-4);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-pildora);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--letra-4);
+  cursor: pointer;
+}
+
+.chip[data-elegido="true"] {
+  border-color: var(--color-area);
+  background: var(--color-area-suave);
+}
+
+.inmersion {
+  display: grid;
+  gap: var(--espacio-2);
+}
+
+.inmersion input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 var(--espacio-3);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-md);
+  background: var(--fondo-solido);
+  color: var(--texto);
+  font: inherit;
+}
+
+.plegado {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  line-height: 1.5;
+}
+
+.plegado summary {
+  min-height: 32px;
+  color: var(--texto-suave);
+  cursor: pointer;
+}
+
+.plegado ul {
+  margin: 4px 0 var(--espacio-2);
+  padding-left: var(--espacio-5);
+}
+
+.plegado p {
+  margin: var(--espacio-1) 0 0;
+}
+
+/* Opciones */
+.opcion {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  min-height: 32px;
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  cursor: pointer;
+}
+
+.enlace {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.enlace:hover {
+  color: var(--texto);
+}
+
+/* ---------- Pantallas anchas ---------- */
+@media (min-width: 900px) {
+  .pagina {
+    max-width: 1480px;
+    gap: var(--espacio-6);
+    padding: var(--espacio-7) var(--espacio-6);
+  }
+
+  .pagina > header:first-child {
+    margin-bottom: calc(var(--espacio-4) * -1);
+  }
+
+  /* Hoy y Map lado a lado, del mismo alto */
+  .franja {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .hoy {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 1fr);
+    align-items: center;
+    padding: var(--espacio-5);
+  }
+
+  .rutina {
+    align-self: stretch;
+  }
+
+  .habilidades {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .progreso {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1250px) {
+  /* Laptop angosta o tablet: Hoy y Map uno debajo del otro, para que cada uno tenga su ancho */
+  .franja {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .habilidades {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .progreso {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .habilidades {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* La última, si queda sola en su fila, ocupa todo el ancho */
+  .habilidad:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .opcion,
+  .plegado summary {
+    min-height: 44px;
+  }
+
+  .chip {
+    min-height: 44px;
+  }
+}

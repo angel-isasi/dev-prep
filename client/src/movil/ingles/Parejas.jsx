@@ -31,6 +31,7 @@ export function palabrasParaParejas(datos) {
 export function ParejasMovil() {
   const navegar = useNavigate();
   const [mazo, setMazo] = useState(null);
+  const [errorCarga, setErrorCarga] = useState(false);
   const [record, setRecord] = useState(0);
   const [estado, setEstado] = useState("inicio"); // inicio | jugando | fin
   const [tablero, setTablero] = useState([]); // palabras en juego
@@ -49,10 +50,13 @@ export function ParejasMovil() {
   enJuego.current = new Set(tablero.map((p) => p.clave));
 
   useEffect(() => {
-    Promise.all([api.lecciones("ingles"), api.inglesMotivacion()]).then(([d, m]) => {
-      setMazo(barajar(palabrasParaParejas(d)));
-      setRecord(m.parejasRecord);
-    });
+    Promise.all([api.lecciones("ingles"), api.inglesMotivacion()]).then(
+      ([d, m]) => {
+        setMazo(barajar(palabrasParaParejas(d)));
+        setRecord(m.parejasRecord);
+      },
+      () => setErrorCarga(true),
+    );
   }, []);
 
   useEffect(() => {
@@ -136,6 +140,16 @@ export function ParejasMovil() {
     }
   }
 
+  if (errorCarga) {
+    return (
+      <div className={estilos.inicioParejas}>
+        <p>No se pudieron cargar las palabras. Vuelve a intentarlo.</p>
+        <Link to="/ingles" className="boton">
+          Volver
+        </Link>
+      </div>
+    );
+  }
   if (!mazo) return <p className={estilos.mensaje}>Preparando palabras…</p>;
   if (mazo.length < EN_TABLERO) {
     return (

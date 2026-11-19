@@ -26,6 +26,7 @@ import { partesTeoria } from "./teoria.js";
 import { expandirIngles, registrosPorConcepto } from "../../../scripts/items/ingles.js";
 import { contadoresDeLeccion, ligaSemanal, misionesDelDia, premioDeCofre, XP_COFRE_DIARIO } from "../movil/ingles/misiones.js";
 import { COLECCION_EXTRA, extraDesdeRegistros, registrosDesdeViejo } from "../movil/ingles/extra.js";
+import { unidadTrasExamen } from "../movil/ingles/examen.js";
 import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaSemana } from "../../../server/avance.js";
 import { buscarOfertas, nuevasDesde, ordenarOfertas } from "../../../server/ofertas-auto.js";
 import { conFechaDeEnvio, metaSemanal, numerosPostulaciones, seguimientosPendientes } from "../../../server/postulaciones.js";
@@ -1003,7 +1004,10 @@ const apiWeb = {
   /** Examen de nivel terminado: las unidades anteriores quedan hechas y tu unidad actual pasa a donde llegaste. */
   async guardarExamenIngles(r, segundos = 0) {
     marcarExtra("examen", { hasta: r.hasta, todas: r.todas, nivel: r.nivel, dominadas: r.dominadas, aciertos: r.aciertos, total: r.total, fecha: progreso.hoy() });
-    progreso.cambiarAjuste("ingles", { ...progreso.ajuste("ingles", {}), unidad: r.hasta, nivelHecho: true });
+    // Repetir el examen no te retrocede: si ya ibas más adelante estudiando, te quedas ahí
+    const ajuste = progreso.ajuste("ingles", {});
+    const orden = (await itemsIngles()).unidades.map((u) => u.id);
+    progreso.cambiarAjuste("ingles", { ...ajuste, unidad: unidadTrasExamen(orden, ajuste.unidad, r.hasta), nivelHecho: true });
     progreso.sumarContadores({ inglesSegundos: Math.round(Math.min(segundos, 3600)) });
     cache.clear();
   },

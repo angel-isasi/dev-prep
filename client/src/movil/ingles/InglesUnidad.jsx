@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { api } from "../../lib/api.js";
-import { hablar, hablarVarias, hayVoz } from "../../lib/voz.js";
+import { hablar, hablarVarias, useHayVoz } from "../../lib/voz.js";
 import { TeoriaIngles } from "./TeoriaIngles.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { Grabadora } from "../../components/Grabadora.jsx";
@@ -18,7 +18,8 @@ export function InglesUnidad() {
   useEffect(() => {
     api.misPalabras().then(setMias);
   }, []);
-  const voz = hayVoz();
+  // Reactivo: Chrome entrega las voces tarde y, si no, los botones de audio y el shadowing no aparecen
+  const voz = useHayVoz();
 
   useEffect(() => {
     setUnidad(null);

@@ -75,13 +75,15 @@ export function ExamenNivel() {
         <h1 className={leccion.finalTitulo}>Examen de nivel</h1>
         <div className={estilos.reglas}>
           <p>
-            Unas <strong>20 a 30 preguntas</strong> de gramática, vocabulario y qué suena natural, de A1 a C2. Se adapta a ti: si aciertas,
-            sube; si fallas, baja.
+            <strong>
+              {EXAMEN.minimo} a {EXAMEN.maximo} preguntas
+            </strong>
+            , de A1 a C2. Se adapta a ti.
           </p>
           <p>
-            Si no sabes una, toca <strong>No lo sé</strong>: adivinar ensucia el resultado.
+            Si no sabes, toca <strong>No lo sé</strong>.
           </p>
-          <p>Al final, las unidades que ya dominas quedan marcadas como hechas y empiezas donde de verdad te toca.</p>
+          <p>Lo que ya dominas queda como hecho.</p>
         </div>
         <div className={leccion.acciones}>
           <button type="button" className="boton boton-primario" onClick={empezar}>

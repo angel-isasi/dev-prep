@@ -133,6 +133,20 @@ export function resultadoExamen(examen, unidades) {
   return { dominadas, hasta, todas, nivel, porNivel, aciertos, total: examen.respuestas.length };
 }
 
+/**
+ * Tu unidad actual después de un examen: solo se mueve hacia adelante. Si repites el examen y sale
+ * más bajo que donde ya ibas estudiando, te quedas donde estabas.
+ * @param {string[]} ordenIds  ids de las unidades, en el orden del camino
+ * @param {string|null|undefined} actual  la unidad donde ibas
+ * @param {string|null|undefined} hasta  la unidad donde te dejó el examen
+ */
+export function unidadTrasExamen(ordenIds, actual, hasta) {
+  const iActual = ordenIds.indexOf(actual);
+  const iHasta = ordenIds.indexOf(hasta);
+  if (iHasta < 0) return actual ?? hasta ?? null;
+  return iActual > iHasta ? actual : hasta;
+}
+
 /** ¿La unidad cuenta como hecha por el examen? (las anteriores a donde llegaste; todas si las dominaste todas) */
 export function hechaPorExamen(examen, ordenIds, id) {
   if (!examen?.hasta) return false;
