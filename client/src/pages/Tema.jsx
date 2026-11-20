@@ -3,6 +3,7 @@
 // las preguntas en Entrevistas. Ahora cada cosa es una pestaña de esta página, y arriba se ve
 // cuánto dominas el tema y qué te falta para ponerlo en verde.
 import { useEffect, useRef, useState } from "react";
+import { Markdown } from "../components/Markdown.jsx";
 import { Link, useParams } from "react-router";
 import { api } from "../lib/api.js";
 import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
@@ -150,6 +151,27 @@ export function Tema() {
         {activa === "teoria" && (
           <>
             <TeoriaTema id={tema.id} markdown={tema.teoria} />
+            {centro?.metodos.length > 0 && (
+              <section className={estilos.metodosTeoria}>
+                <h2 className={estilos.subtitulo}>
+                  Métodos de este tema <small>son los que preguntan las lecciones de Métodos a fondo: léelos antes</small>
+                </h2>
+                <div className={estilos.metodosFichas}>
+                  {centro.metodos.map((m) => (
+                    <details key={m.id} className={estilos.metodoFicha}>
+                      <summary>
+                        <code>{m.nombre.replace("String.prototype.", "").replace("Array.prototype.", "").replace("Number.prototype.", "").replace("Object.prototype.", "")}</code>
+                        <span>{m.descripcion}</span>
+                      </summary>
+                      <Markdown>{["```js", m.ejemplo, "```"].join(String.fromCharCode(10))}</Markdown>
+                      <p>
+                        <strong>Error típico:</strong> {m.errorTipico}
+                      </p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            )}
             <AprenderIa tema={tema.titulo} teoria={tema.teoria} />
             <PreguntaAncla key={tema.id} preguntas={tema.quiz} alSeguir={() => setPestana(plan?.total ? "lecciones" : "ejercicios")} />
           </>

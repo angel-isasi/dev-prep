@@ -531,3 +531,49 @@ p.falta {
   font-weight: var(--peso-semi);
   white-space: nowrap;
 }
+
+/* Teoría: los métodos del tema en fichas que se abren (nombre y qué hace a la vista; ejemplo al abrir) */
+.metodosTeoria {
+  display: grid;
+  gap: var(--espacio-3);
+  margin: var(--espacio-5) 0;
+}
+
+.metodosFichas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--espacio-2);
+  align-items: start;
+}
+
+.metodoFicha {
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--superficie);
+}
+
+.metodoFicha summary {
+  display: grid;
+  gap: 4px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.metodoFicha summary code {
+  justify-self: start;
+  color: var(--color-area, var(--acento));
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
+}
+
+.metodoFicha summary span,
+.metodoFicha p {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  line-height: 1.45;
+}
+
+.metodoFicha[open] {
+  grid-column: 1 / -1;
+}

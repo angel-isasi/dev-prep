@@ -2,7 +2,7 @@
 //
 // Una unidad tiene cientos de ítems (preguntas de su tema, de los ejercicios y de la referencia de
 // métodos). En vez de soltarlos de a pocos sin que se note el avance, se reparten en lecciones fijas de
-// unas 8 preguntas, agrupadas por de dónde salen, y cada una tiene nombre:
+// unas 5 preguntas (2 minutos: son para repasar, no para agotarte), agrupadas por de dónde salen, y cada una tiene nombre:
 //   - Lo esencial: las ideas del tema, su vocabulario y "lee y predice".
 //   - Con código real: huecos, orden y errores sacados de los ejercicios.
 //   - Métodos a fondo (opcional): qué hace y qué devuelve cada método de la referencia.
@@ -11,8 +11,8 @@
 // registros de cada ítem, así que funciona con el progreso que ya tienes.
 
 /** Tamaño ideal de una lección y el máximo para no partir un grupo (un método, un ejercicio). */
-export const TAMANO_PARTE = 8;
-export const MAXIMO_PARTE = 10;
+export const TAMANO_PARTE = 5;
+export const MAXIMO_PARTE = 6;
 /** Unos 20 segundos por pregunta. */
 export const minutosDe = (preguntas) => Math.max(1, Math.round((preguntas * 20) / 60));
 /** La prueba de la unidad: preguntas y nota para aprobarla. */

@@ -18,9 +18,9 @@ const items = [
 describe("empaquetar", () => {
   it("no parte los grupos chicos y no pasa del máximo", () => {
     const partes = empaquetar(items.filter((it) => it.fuente.tipo === "referencia"));
-    expect(partes.map((p) => p.length)).toEqual([10, 5]);
+    expect(partes.map((p) => p.length)).toEqual([5, 5, 5]);
     expect(partes.every((p) => p.length <= MAXIMO_PARTE)).toBe(true);
-    expect(new Set(partes[0].map((it) => it.fuente.id))).toEqual(new Set(["slice", "split"]));
+    expect(new Set(partes[0].map((it) => it.fuente.id))).toEqual(new Set(["slice"]));
   });
 
   it("corta un grupo grande en trozos", () => {
@@ -55,9 +55,9 @@ describe("planUnidad", () => {
     const plan = planUnidad(items, registros, "u1");
     const esencial = plan.grupos[0].lecciones[0];
     expect(esencial.hecha).toBe(true);
-    expect(esencial.aprendidos).toBe(8);
+    expect(esencial.aprendidos).toBe(4);
     expect(esencial.errores).toBe(1);
-    expect(plan.hechas).toBe(1);
+    expect(plan.hechas).toBe(2);
     expect(plan.estado).toBe("empezada");
     expect(plan.siguiente.grupo).toBe("codigo");
   });
