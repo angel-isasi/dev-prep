@@ -283,3 +283,50 @@
   color: var(--acento);
   font-size: var(--letra-3);
 }
+
+/* Recorrido numerado: el título de cada ficha es el paso, con su número y una flecha hacia el siguiente */
+.paso {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  margin: 0 0 var(--espacio-1);
+  font-size: var(--letra-6);
+}
+
+.paso b {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--acento);
+  color: var(--sobre-acento);
+  font-size: var(--letra-4);
+}
+
+.bloques[data-numerado="true"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.bloques[data-numerado="true"] > * {
+  position: relative;
+}
+
+.bloques[data-numerado="true"] > *:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: var(--espacio-4);
+  right: var(--espacio-4);
+  color: var(--texto-tenue);
+  font-size: var(--letra-6);
+}
+
+@media (max-width: 900px) {
+  .bloques[data-numerado="true"] {
+    grid-template-columns: 1fr;
+  }
+  .bloques[data-numerado="true"] > *:not(:last-child)::after {
+    content: "↓";
+  }
+}

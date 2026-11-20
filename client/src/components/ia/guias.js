@@ -1,32 +1,31 @@
-// Lo que se muestra DEBAJO de cada herramienta de IA para que se entienda sin leer párrafos:
-// tres fichas con ejemplos dibujados (qué recibes al final, errores típicos y qué decir o recordar).
-// Cada línea usa los mismos tipos que "Así se ve" (ver Ejemplo en MenuPanel.jsx):
-// ia, tu, cambio, bien, mal, nota, codigo, puntaje y dato (una insignia corta + texto).
+// El recorrido de cada herramienta de IA en 3 fichas numeradas: cada ficha ES un paso (qué haces,
+// qué pasa, qué te llevas) y trae su propio ejemplo dibujado. Nada se repite entre fichas: juntas
+// cuentan una sola historia de izquierda a derecha.
+// Tipos de línea (ver Ejemplo en MenuPanel.jsx): ia, tu, cambio, bien, mal, nota, codigo, puntaje, dato.
 
 const entrevistaIngles = [
   {
-    titulo: "Al final recibes",
+    titulo: "Eliges cuánta ayuda",
+    lineas: [
+      { tipo: "dato", clave: "A", texto: "Respuesta completa: la lees en voz alta." },
+      { tipo: "dato", clave: "B", texto: "Palabras clave: armas la frase tú." },
+      { tipo: "dato", clave: "C", texto: "Sin ayuda: como en la entrevista real." },
+    ],
+  },
+  {
+    titulo: "Respondes en inglés",
+    lineas: [
+      { tipo: "ia", texto: "Tell me about a project you built." },
+      { tipo: "tu", texto: "I builded an app to practice interviews." },
+      { tipo: "ia", texto: "What was the hardest part?" },
+    ],
+  },
+  {
+    titulo: "Te corrige al final",
     lineas: [
       { tipo: "puntaje", texto: "Nivel B1 · 6/10" },
-      { tipo: "cambio", mal: "I have 20 years", bien: "I am 20 years old" },
-      { tipo: "cambio", mal: "I am agree", bien: "I agree" },
+      { tipo: "cambio", mal: "I builded", bien: "I built" },
       { tipo: "bien", texto: "Tu respuesta más floja, reescrita de forma natural." },
-    ],
-  },
-  {
-    titulo: "Las 3 ayudas",
-    lineas: [
-      { tipo: "dato", clave: "1", texto: "Respuesta completa: la lees en voz alta." },
-      { tipo: "dato", clave: "2", texto: "Palabras clave: armas la frase tú." },
-      { tipo: "dato", clave: "3", texto: "Sin ayuda: como en la entrevista real." },
-    ],
-  },
-  {
-    titulo: "Te van a preguntar",
-    lineas: [
-      { tipo: "ia", texto: "Tell me about yourself." },
-      { tipo: "ia", texto: "What was the hardest part of your project?" },
-      { tipo: "ia", texto: "Why do you want this job?" },
     ],
   },
 ];
@@ -35,54 +34,49 @@ export const MAS = {
   // ---------- Practicar > Entrena con IA ----------
   imprime: [
     {
-      titulo: "Al final ves",
+      titulo: "Te toca un código",
       lineas: [
-        { tipo: "puntaje", texto: "Casi" },
+        { tipo: "codigo", texto: "for (var i = 0; i < 2; i++) {\n  setTimeout(() => console.log(i));\n}" },
+        { tipo: "nota", texto: "Del tema que elijas: closures, this, promesas..." },
+      ],
+    },
+    {
+      titulo: "Predices y explicas",
+      lineas: [
+        { tipo: "tu", texto: "Imprime 0 y 1, porque i va subiendo." },
+        { tipo: "nota", texto: "Explicar el porqué vale más que acertar." },
+      ],
+    },
+    {
+      titulo: "Ves la salida real",
+      lineas: [
         { tipo: "codigo", texto: "2\n2" },
         { tipo: "bien", texto: "var se comparte: cuando corre el timeout, i ya vale 2." },
-      ],
-    },
-    {
-      titulo: "Trampas que más salen",
-      lineas: [
-        { tipo: "dato", clave: "1", texto: "var dentro de un bucle con setTimeout" },
-        { tipo: "dato", clave: "2", texto: "Promesas antes que setTimeout" },
-        { tipo: "dato", clave: "3", texto: "this dentro de una función suelta" },
-        { tipo: "dato", clave: "4", texto: "Copiar un objeto copia la referencia" },
-      ],
-    },
-    {
-      titulo: "Dilo así en la entrevista",
-      lineas: [
-        { tipo: "tu", texto: "Primero corre lo síncrono, luego las promesas y al final los timeouts." },
-        { tipo: "nota", texto: "Explicar el porqué vale más que acertar la salida." },
+        { tipo: "nota", texto: "El código se corre de verdad: la salida nunca es inventada." },
       ],
     },
   ],
   review: [
     {
-      titulo: "Al final ves",
+      titulo: "Te llega un pull request",
       lineas: [
-        { tipo: "puntaje", texto: "7/10 · encontraste 2 de 3" },
-        { tipo: "bien", texto: "Viste: map usado para sumar." },
-        { tipo: "mal", texto: "Se te pasó: muta el array original." },
+        { tipo: "codigo", texto: "let t = 0;\nitems.map((i) => (t += i.price));\nreturn t;" },
+        { tipo: "nota", texto: "Funciona, pero esconde 3 o 4 problemas." },
       ],
     },
     {
-      titulo: "Qué buscar",
-      lineas: [
-        { tipo: "dato", clave: "1", texto: "Casos borde: vacío, null, un solo elemento" },
-        { tipo: "dato", clave: "2", texto: "Nombres que no dicen nada" },
-        { tipo: "dato", clave: "3", texto: "Datos que se modifican sin querer" },
-        { tipo: "dato", clave: "4", texto: "Código repetido o de más" },
-      ],
-    },
-    {
-      titulo: "Escríbelo así",
+      titulo: "Lo revisas como senior",
       lineas: [
         { tipo: "mal", texto: "Esto está mal." },
-        { tipo: "bien", texto: "Línea 4: si items viene vacío falla. ¿Agregamos un valor inicial?" },
-        { tipo: "nota", texto: "Línea, porqué y propuesta: así se revisa en un equipo." },
+        { tipo: "bien", texto: "Línea 2: map no es para sumar. ¿Usamos reduce?" },
+        { tipo: "nota", texto: "Línea, porqué y propuesta." },
+      ],
+    },
+    {
+      titulo: "Ves qué se te pasó",
+      lineas: [
+        { tipo: "puntaje", texto: "7/10 · encontraste 2 de 3" },
+        { tipo: "mal", texto: "Se te pasó: falla si items viene vacío." },
       ],
     },
   ],
@@ -92,80 +86,83 @@ export const MAS = {
   ingles: entrevistaIngles,
   daily: [
     {
-      titulo: "La fórmula",
+      titulo: "Dices tu actualización",
       lineas: [
-        { tipo: "dato", clave: "1", texto: "Yesterday I fixed / finished / worked on..." },
-        { tipo: "dato", clave: "2", texto: "Today I'm going to..." },
-        { tipo: "dato", clave: "3", texto: "I'm blocked by... / No blockers." },
+        { tipo: "dato", clave: "Ayer", texto: "Yesterday I fixed / finished..." },
+        { tipo: "dato", clave: "Hoy", texto: "Today I'm going to..." },
+        { tipo: "dato", clave: "Traba", texto: "I'm blocked by... / No blockers." },
       ],
     },
     {
-      titulo: "Errores típicos",
+      titulo: "Ves cada error corregido",
       lineas: [
-        { tipo: "cambio", mal: "Yesterday I work", bien: "Yesterday I worked" },
-        { tipo: "cambio", mal: "I will to fix", bien: "I'm going to fix" },
-        { tipo: "cambio", mal: "I have a doubt", bien: "I have a question" },
+        { tipo: "tu", texto: "Yesterday I fix a bug in the login." },
+        { tipo: "cambio", mal: "I fix", bien: "I fixed" },
+        { tipo: "nota", texto: "Cada corrección trae su porqué en español." },
       ],
     },
     {
-      titulo: "Al final recibes",
+      titulo: "Te llevas la versión natural",
       lineas: [
         { tipo: "puntaje", texto: "Nivel B1 · 7/10" },
-        { tipo: "bien", texto: "Tu daily reescrito, listo para decirlo y escucharlo." },
-        { tipo: "nota", texto: "Dura 30 segundos en una reunión real." },
+        { tipo: "bien", texto: "Yesterday I fixed a login bug. Today I'm going to add tests." },
+        { tipo: "nota", texto: "La puedes escuchar y repetir." },
       ],
     },
   ],
   dice: [
     {
-      titulo: "Pregunta cosas como",
+      titulo: "Lo escribes en español",
       lineas: [
-        { tipo: "tu", texto: "me quedé trabado con esto" },
+        { tipo: "tu", texto: "ya casi lo termino" },
         { tipo: "tu", texto: "¿me das una mano?" },
-        { tipo: "tu", texto: "lo subo en un rato" },
+        { tipo: "nota", texto: "Frases completas del trabajo, no palabras sueltas." },
       ],
     },
     {
-      titulo: "Y recibes",
+      titulo: "Recibes 2 o 3 formas",
       lineas: [
-        { tipo: "bien", texto: "I'm stuck on this." },
-        { tipo: "bien", texto: "Could you give me a hand?" },
-        { tipo: "bien", texto: "I'll push it in a bit." },
+        { tipo: "bien", texto: "I'm almost done." },
+        { tipo: "bien", texto: "I'm nearly finished with it." },
+        { tipo: "nota", texto: "Cada una dice cuándo usarla." },
       ],
     },
     {
-      titulo: "Ojo con los falsos amigos",
+      titulo: "Guardas la que te sirve",
       lineas: [
+        { tipo: "dato", clave: "+", texto: "Con + Tarjeta entra a tus tarjetas de memoria." },
         { tipo: "cambio", mal: "actually = actualmente", bien: "actually = en realidad" },
-        { tipo: "cambio", mal: "assist = asistir", bien: "attend = asistir" },
-        { tipo: "nota", texto: "Guarda con + Tarjeta las que vas a usar seguido." },
+        { tipo: "nota", texto: "También te avisa de falsos amigos como ese." },
       ],
     },
   ],
   escrito: [
     {
-      titulo: "Pedir ayuda por Slack",
-      lineas: [{ tipo: "bien", texto: "Hi! I'm stuck on a bug in the login form. Could you take a look when you have a minute?" }],
-    },
-    {
-      titulo: "Descripción de un PR",
+      titulo: "Eliges la situación",
       lineas: [
-        { tipo: "dato", clave: "1", texto: "What: adds a search filter to the list." },
-        { tipo: "dato", clave: "2", texto: "Why: users couldn't find products." },
-        { tipo: "dato", clave: "3", texto: "How to test: type in the search box." },
+        { tipo: "dato", clave: "1", texto: "Pedir ayuda por Slack" },
+        { tipo: "dato", clave: "2", texto: "Descripción de un pull request" },
+        { tipo: "dato", clave: "3", texto: "Avisar un retraso o escribir a un reclutador" },
       ],
     },
     {
-      titulo: "Avisar un retraso",
+      titulo: "Lo escribes como te salga",
       lineas: [
-        { tipo: "mal", texto: "Sorry, I can't finish." },
-        { tipo: "bien", texto: "Quick update: this will take one more day because of a bug in the API." },
+        { tipo: "tu", texto: "hola, necesito ayuda con un bug del login" },
+        { tipo: "nota", texto: "En español o en inglés a medias: vale igual." },
+      ],
+    },
+    {
+      titulo: "Queda listo para enviar",
+      lineas: [
+        { tipo: "bien", texto: "Hi! I'm stuck on a bug in the login form. Could you take a look when you have a minute?" },
+        { tipo: "nota", texto: "Con cada cambio explicado." },
       ],
     },
   ],
   errores: [
     {
-      titulo: "De dónde salen",
+      titulo: "La app guarda tus errores",
       lineas: [
         { tipo: "dato", clave: "1", texto: "La pregunta del día de Map" },
         { tipo: "dato", clave: "2", texto: "Conversa y la entrevista en inglés" },
@@ -173,7 +170,7 @@ export const MAS = {
       ],
     },
     {
-      titulo: "Una mini lección",
+      titulo: "Se agrupan por patrón",
       lineas: [
         { tipo: "puntaje", texto: "La edad va con to be" },
         { tipo: "cambio", mal: "I have 20 years", bien: "I am 20 years old" },
@@ -181,7 +178,7 @@ export const MAS = {
       ],
     },
     {
-      titulo: "Y la practicas",
+      titulo: "Practicas cada regla",
       lineas: [
         { tipo: "ia", texto: "Dilo en inglés: Mi hermano tiene 15 años." },
         { tipo: "tu", texto: "My brother is 15 years old." },
@@ -191,27 +188,26 @@ export const MAS = {
   ],
   conversa: [
     {
-      titulo: "Así se ve",
+      titulo: "Eliges la reunión",
       lineas: [
-        { tipo: "ia", texto: "What did you work on yesterday?" },
-        { tipo: "tu", texto: "I fixed a bug in the login form." },
-        { tipo: "ia", texto: "Nice. Anything blocking you today?" },
+        { tipo: "dato", clave: "8", texto: "Daily, revisión de código, planning, demo con un cliente..." },
+        { tipo: "nota", texto: "Cada una empieza con la frase que ves en su ficha." },
       ],
     },
     {
-      titulo: "Al final recibes",
+      titulo: "Conversas en inglés",
+      lineas: [
+        { tipo: "ia", texto: "What did you work on yesterday?" },
+        { tipo: "tu", texto: "I fixed a bug in the login form." },
+        { tipo: "nota", texto: "No te corrige en medio: sigue aunque dudes." },
+      ],
+    },
+    {
+      titulo: "Te corrige al final",
       lineas: [
         { tipo: "puntaje", texto: "Nivel B1 · 7/10" },
         { tipo: "cambio", mal: "I didn't went", bien: "I didn't go" },
         { tipo: "bien", texto: "Tu frase más floja, reescrita de forma natural." },
-      ],
-    },
-    {
-      titulo: "Para que rinda",
-      lineas: [
-        { tipo: "dato", clave: "1", texto: "Responde con frases completas, no con una palabra." },
-        { tipo: "dato", clave: "2", texto: "Usa el micrófono: hablar es lo que más cuesta." },
-        { tipo: "dato", clave: "3", texto: "No te corrige en medio: sigue aunque dudes." },
       ],
     },
   ],
@@ -219,7 +215,7 @@ export const MAS = {
   // ---------- Entrevistas > Simular ----------
   simulacro: [
     {
-      titulo: "Las 4 etapas",
+      titulo: "Eliges todo o una etapa",
       lineas: [
         { tipo: "dato", clave: "1", texto: "Recursos humanos · 15 min" },
         { tipo: "dato", clave: "2", texto: "Entrevista técnica · 45 min" },
@@ -228,53 +224,51 @@ export const MAS = {
       ],
     },
     {
-      titulo: "Así se ve",
+      titulo: "Respondes en voz alta",
       lineas: [
         { tipo: "ia", texto: "¿Qué diferencia hay entre let y const?" },
-        { tipo: "tu", texto: "La respondes en voz alta y te pones nota." },
+        { tipo: "tu", texto: "La dices en voz alta y te pones nota." },
         { tipo: "puntaje", texto: "Lo sabía · Dudé · No lo sabía" },
       ],
     },
     {
-      titulo: "Al final recibes",
+      titulo: "Ves tu plan de refuerzo",
       lineas: [
-        { tipo: "puntaje", texto: "7/10 · casi listo" },
         { tipo: "bien", texto: "Fuerte en: JavaScript, tu pitch." },
         { tipo: "mal", texto: "Refuerza: React y el cierre." },
-        { tipo: "nota", texto: "Con un plan de 3 pasos para los próximos días." },
+        { tipo: "nota", texto: "Y, si quieres, un informe con IA." },
       ],
     },
   ],
   voz: [
     {
-      titulo: "Elige al entrevistador",
+      titulo: "Eliges tema y entrevistador",
       lineas: [
-        { tipo: "dato", clave: "1", texto: "Amable: reconoce lo bueno primero." },
-        { tipo: "dato", clave: "2", texto: "Exigente: no deja pasar respuestas vagas." },
-        { tipo: "dato", clave: "3", texto: "Apurado: quiere respuestas cortas." },
+        { tipo: "dato", clave: "A", texto: "Amable: reconoce lo bueno primero." },
+        { tipo: "dato", clave: "B", texto: "Exigente: no deja pasar respuestas vagas." },
+        { tipo: "dato", clave: "C", texto: "Apurado: quiere respuestas cortas." },
       ],
     },
     {
-      titulo: "Al final recibes",
+      titulo: "Respondes hablando",
+      lineas: [
+        { tipo: "ia", texto: "¿Qué es un closure?" },
+        { tipo: "tu", texto: "Una función que recuerda las variables de donde nació." },
+        { tipo: "ia", texto: "¿Y para qué lo usarías?" },
+      ],
+    },
+    {
+      titulo: "Ves tu informe",
       lineas: [
         { tipo: "puntaje", texto: "6/10 · casi listo" },
-        { tipo: "bien", texto: "Explicas con tus palabras." },
         { tipo: "mal", texto: "No das ejemplos concretos." },
-        { tipo: "nota", texto: "Y tu respuesta mejorada, lista para decirla." },
-      ],
-    },
-    {
-      titulo: "Para que salga bien",
-      lineas: [
-        { tipo: "dato", clave: "1", texto: "Usa audífonos y Chrome." },
-        { tipo: "dato", clave: "2", texto: "Responde en 30 a 60 segundos." },
-        { tipo: "dato", clave: "3", texto: "Cierra cada respuesta con un ejemplo." },
+        { tipo: "bien", texto: "Y tu respuesta mejorada, lista para decirla." },
       ],
     },
   ],
   examen: [
     {
-      titulo: "Las 4 preguntas",
+      titulo: "4 preguntas sin ayuda",
       lineas: [
         { tipo: "dato", clave: "1", texto: "Un concepto de JavaScript o React" },
         { tipo: "dato", clave: "2", texto: "¿Qué imprime este código?" },
@@ -283,16 +277,15 @@ export const MAS = {
       ],
     },
     {
-      titulo: "Tu informe",
+      titulo: "Ves tu informe",
       lineas: [
         { tipo: "puntaje", texto: "7/10 · casi listo" },
         { tipo: "bien", texto: "Fortalezas: conceptos claros." },
         { tipo: "mal", texto: "Mejorar: inglés hablado." },
-        { tipo: "nota", texto: "Y un plan de 3 pasos." },
       ],
     },
     {
-      titulo: "Mes a mes",
+      titulo: "Te comparas mes a mes",
       lineas: [
         { tipo: "dato", clave: "Oct", texto: "5/10 · falta" },
         { tipo: "dato", clave: "Nov", texto: "7/10 · casi listo" },
@@ -302,26 +295,25 @@ export const MAS = {
   ],
   proyecto: [
     {
-      titulo: "Te va a preguntar por",
+      titulo: "Te pregunta por tu proyecto",
       lineas: [
         { tipo: "dato", clave: "1", texto: "Por qué elegiste cada tecnología" },
-        { tipo: "dato", clave: "2", texto: "Cómo funciona una parte por dentro" },
-        { tipo: "dato", clave: "3", texto: "Un bug que tuviste y cómo lo resolviste" },
-        { tipo: "dato", clave: "4", texto: "Qué harías distinto hoy" },
+        { tipo: "dato", clave: "2", texto: "Un bug que tuviste y cómo lo resolviste" },
+        { tipo: "dato", clave: "3", texto: "Qué harías distinto hoy" },
       ],
     },
     {
-      titulo: "Responde así",
+      titulo: "Respondes con un porqué",
       lineas: [
-        { tipo: "mal", texto: "Usé React porque es lo que se usa." },
-        { tipo: "bien", texto: "Usé React porque la pantalla cambia mucho y los componentes me ordenan." },
+        { tipo: "ia", texto: "¿Por qué elegiste React?" },
+        { tipo: "mal", texto: "Porque es lo que se usa." },
+        { tipo: "bien", texto: "Porque la pantalla cambia mucho y los componentes me ordenan." },
       ],
     },
     {
-      titulo: "Tu balance",
+      titulo: "Pides tu balance",
       lineas: [
         { tipo: "puntaje", texto: "7/10" },
-        { tipo: "bien", texto: "Explicas decisiones con un porqué." },
         { tipo: "mal", texto: "Te falta hablar de cómo lo probaste." },
         { tipo: "nota", texto: "Con 3 frases listas para la próxima." },
       ],
@@ -329,33 +321,31 @@ export const MAS = {
   ],
   preguntas: [
     {
-      titulo: "Suman",
+      titulo: "Escribes 2 o 3 preguntas",
+      lineas: [
+        { tipo: "tu", texto: "¿Cómo acompañan a un junior?" },
+        { tipo: "tu", texto: "¿Cuánto pagan?" },
+      ],
+    },
+    {
+      titulo: "Ves cuáles suman",
+      lineas: [
+        { tipo: "bien", texto: "Acompañar a un junior: muestra ganas de aprender." },
+        { tipo: "mal", texto: "El sueldo: mejor para otra etapa." },
+      ],
+    },
+    {
+      titulo: "Te llevas 3 mejores",
       lineas: [
         { tipo: "bien", texto: "¿Cómo es un día normal de alguien junior?" },
         { tipo: "bien", texto: "¿Cómo revisan el código en el equipo?" },
         { tipo: "bien", texto: "¿Qué esperan de mí en 3 meses?" },
       ],
     },
-    {
-      titulo: "Restan",
-      lineas: [
-        { tipo: "mal", texto: "¿Cuánto pagan? (en la primera entrevista)" },
-        { tipo: "mal", texto: "¿Qué hace la empresa?" },
-        { tipo: "mal", texto: "No, ninguna pregunta." },
-      ],
-    },
-    {
-      titulo: "Al final recibes",
-      lineas: [
-        { tipo: "puntaje", texto: "8/10" },
-        { tipo: "nota", texto: "Un comentario por cada pregunta tuya." },
-        { tipo: "bien", texto: "Y 3 preguntas mejores para llevar." },
-      ],
-    },
   ],
   sueldo: [
     {
-      titulo: "Las 3 situaciones",
+      titulo: "Eliges la situación",
       lineas: [
         { tipo: "dato", clave: "1", texto: "Prácticas en Lima" },
         { tipo: "dato", clave: "2", texto: "Junior en Lima, híbrido" },
@@ -363,15 +353,15 @@ export const MAS = {
       ],
     },
     {
-      titulo: "Dilo así",
+      titulo: "Conversas con la reclutadora",
       lineas: [
-        { tipo: "mal", texto: "Lo que ustedes paguen está bien." },
-        { tipo: "bien", texto: "Por lo que investigué, busco entre 3000 y 3500 soles." },
-        { tipo: "bien", texto: "¿Me das un día para pensarlo?" },
+        { tipo: "ia", texto: "¿Cuál es tu expectativa salarial?" },
+        { tipo: "tu", texto: "Por lo que investigué, entre 3000 y 3500 soles." },
+        { tipo: "ia", texto: "Podemos ofrecer 2800." },
       ],
     },
     {
-      titulo: "Tu balance",
+      titulo: "Pides tu balance",
       lineas: [
         { tipo: "puntaje", texto: "6/10" },
         { tipo: "bien", texto: "Diste una cifra con argumentos." },
@@ -380,7 +370,7 @@ export const MAS = {
     },
   ],
 
-  // ---------- Entrevistas > Estudiar > Pitch y STAR ----------
+  // ---------- Entrevistas > Estudiar > Pitch y STAR (dos fichas de ejemplo, sin numerar) ----------
   pitch: [
     {
       titulo: "Tu pitch en 3 partes",

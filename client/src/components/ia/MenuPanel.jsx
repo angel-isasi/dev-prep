@@ -1,7 +1,7 @@
 // Una pantalla de herramientas que se entiende de un vistazo, de arriba abajo:
 // 1) una fila de fichas chicas (icono, nombre y duración) para elegir la herramienta;
-// 2) los 3 pasos en una tira, con pocas palabras;
-// 3) la herramienta a la izquierda y, a la derecha, un ejemplo de lo que vas a recibir.
+// 2) la herramienta a todo el ancho;
+// 3) el recorrido en 3 fichas numeradas (cada paso con su ejemplo dibujado, ver guias.js).
 // Lo usan Entrevistas > Simular, Inglés > Con IA y Practicar > Entrena con IA.
 import { Link } from "react-router";
 import { IconoFlechaDer } from "../Iconos.jsx";
@@ -12,10 +12,17 @@ import estilos from "./MenuPanel.module.css";
  * Un ejemplo dibujado: en vez de explicar con texto qué hace la herramienta, se muestra cómo se ve.
  * @param {{ lineas: { tipo: "ia"|"tu"|"cambio"|"bien"|"nota"|"codigo"|"puntaje", texto?: string, mal?: string, bien?: string }[] }} props
  */
-function Ejemplo({ lineas, titulo = "Así se ve" }) {
+function Ejemplo({ lineas, titulo = "Así se ve", numero }) {
   return (
     <aside className={estilos.ejemplo} aria-label={titulo}>
-      <span className="etiqueta">{titulo}</span>
+      {numero ? (
+        <h3 className={estilos.paso}>
+          <b>{numero}</b>
+          {titulo}
+        </h3>
+      ) : (
+        <span className="etiqueta">{titulo}</span>
+      )}
       {lineas.map((l, i) => {
         if (l.tipo === "dato") {
           return (
@@ -49,13 +56,13 @@ function Ejemplo({ lineas, titulo = "Así se ve" }) {
  * Las fichas con ejemplos que van debajo de una herramienta (ver guias.js). `columna`: una debajo de otra.
  * @param {{ id: string, columna?: boolean }} props
  */
-export function Bloques({ id, columna = false }) {
+export function Bloques({ id, columna = false, numerado = false }) {
   const bloques = MAS[id];
   if (!bloques) return null;
   return (
-    <div className={estilos.bloques} data-columna={columna}>
-      {bloques.map((b) => (
-        <Ejemplo key={b.titulo} titulo={b.titulo} lineas={b.lineas} />
+    <div className={estilos.bloques} data-columna={columna} data-numerado={numerado}>
+      {bloques.map((b, i) => (
+        <Ejemplo key={b.titulo} titulo={b.titulo} lineas={b.lineas} numero={numerado ? i + 1 : undefined} />
       ))}
     </div>
   );
@@ -111,20 +118,12 @@ export function MenuPanel({ items, elegida, alElegir, etiqueta, enlaces = [], ch
         ))}
       </nav>
 
-      <ol className={estilos.pasos} aria-label="Cómo funciona">
-        {actual.pasos.map((p) => (
-          <li key={p}>{p}</li>
-        ))}
-      </ol>
-
-      <div className={estilos.panel} data-con-ejemplo={!!actual.ejemplo}>
-        <div className={estilos.principal} key={actual.id}>
-          {children}
-        </div>
-        {actual.ejemplo && <Ejemplo key={`e-${actual.id}`} lineas={actual.ejemplo} />}
+      <div className={estilos.principal} key={actual.id}>
+        {children}
       </div>
 
-      <Bloques key={`m-${actual.id}`} id={actual.id} />
+      {/* El recorrido en 3 fichas numeradas: cada una es un paso con su ejemplo */}
+      <Bloques key={`m-${actual.id}`} id={actual.id} numerado />
     </div>
   );
 }

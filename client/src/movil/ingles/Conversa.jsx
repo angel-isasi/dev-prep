@@ -3,7 +3,7 @@
 // charla no te corrige (como una persona real); al terminar te da tus errores corregidos.
 // Cada turno usa el modelo barato: una charla completa cuesta menos de un centavo.
 import { useEffect, useRef, useState } from "react";
-import { Bloques, TiraPasos } from "../../components/ia/MenuPanel.jsx";
+import { Bloques } from "../../components/ia/MenuPanel.jsx";
 import { guardarErroresIngles } from "../../lib/errores-ingles.js";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
@@ -93,7 +93,6 @@ export function ConversaMovil() {
             <Charla key={escenario.id} escenario={escenario} alSalir={() => setEscenario(null)} alOlvidarClave={olvidarClave} />
           ) : (
             <>
-              <TiraPasos pasos={["Eliges la reunión", "Conversas en inglés", "Te corrige al final"]} />
               <ul className={estilos.escenarios}>
                 {ESCENARIOS.map((e, i) => (
                   <li key={e.id}>
@@ -109,7 +108,7 @@ export function ConversaMovil() {
                   </li>
                 ))}
               </ul>
-              <Bloques id="conversa" />
+              <Bloques id="conversa" numerado />
             </>
           )
         }
