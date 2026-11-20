@@ -31,8 +31,15 @@
           }),
         );
       }
-      var recargar = function () { location.reload(); };
+      var hecho = false;
+      var recargar = function () {
+        if (hecho) return;
+        hecho = true;
+        location.reload();
+      };
       Promise.all(borrar).then(recargar, recargar);
+      // Borrar la copia puede tardar (o quedarse esperando si se está guardando otra): a los 2 segundos se recarga igual
+      setTimeout(recargar, 2000);
     },
     true, // en captura: los errores de carga de <script> y <link> no suben como los demás
   );
