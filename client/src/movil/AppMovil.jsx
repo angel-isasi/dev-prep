@@ -32,6 +32,7 @@ import { MarcoVisita } from "./Visita.jsx";
 const InglesConIa = perezoso(() => import("../pages/InglesConIa.jsx"), "InglesConIa");
 const Tarjetas = perezoso(() => import("../pages/Tarjetas.jsx"), "Tarjetas");
 const EntrenaIa = perezoso(() => import("../pages/EntrenaIa.jsx"), "EntrenaIa");
+const Plan = perezoso(() => import("../pages/Plan.jsx"), "Plan");
 const EjercicioMovil = perezoso(() => import("./EjercicioMovil.jsx"), "EjercicioMovil");
 const ChuletasMovil = perezoso(() => import("./ChuletasMovil.jsx"), "ChuletasMovil");
 const VincularMovil = perezoso(() => import("./VincularMovil.jsx"), "VincularMovil");
@@ -137,6 +138,7 @@ export function App() {
       <Routes key="web">
         <Route element={grande ? <Layout /> : <LayoutMovil />}>
           <Route index element={<Hoy />} />
+          <Route path="plan" element={<Plan />} />
           <Route path="aprender" element={<Aprender />} />
           <Route path="aprender/:id" element={<Tema />} />
           <Route path="practicar" element={<Practicar />} />

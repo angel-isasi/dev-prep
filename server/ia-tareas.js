@@ -422,6 +422,42 @@ ${ESTILO}`,
     },
   },
 
+  // El mentor del plan junior: ve el plan completo y lo que el estudiante acaba de hacer, y le dice
+  // qué sigue, qué saltarse y qué está haciendo mal. Usa el modelo de más criterio porque decide, no repite.
+  mentor: {
+    modelo: SONNET,
+    esquema: objeto({
+      titular: texto("El veredicto de este momento en una frase corta, sin saludo"),
+      mensaje: texto("De 2 a 4 frases: qué ves en sus datos y qué debe hacer"),
+      pasos: lista(objeto({ texto: texto("Una acción concreta, en una frase"), tarea: texto("La clave exacta de la tarea a la que se refiere (lo que sigue a clave= en la lista), o vacío si no es una tarea de la lista") })),
+      alerta: texto("Un riesgo que ves en cómo está estudiando, en una frase, o vacío si no hay ninguno"),
+    }),
+    sistema: `Eres el mentor de un estudiante que tiene pocos días para llegar al nivel de una entrevista de frontend junior (JavaScript y React). Eres un desarrollador senior que ya entrevistó a muchos juniors: directo, honesto y de su lado. No lo felicitas por todo ni lo asustas: le dices la verdad y qué hacer.
+Tienes su plan con los datos reales: qué día es, si va al día, qué le toca hoy y qué ya hizo.
+- Usa solo los datos que te pasan. No inventes temas, ejercicios ni números. Si falta un dato, no lo supongas.
+- "titular": el veredicto de este momento (por ejemplo "Vas bien, pero estás corriendo" o "Hoy toca cerrar closures").
+- "mensaje": lo que ves y lo que debe hacer ahora. Si va atrasado, dile qué recortar o cómo recuperar sin trasnochar. Si va adelantado, que no se confíe: que explique en voz alta lo que resolvió. Si vio muchas soluciones o usó muchas pistas, dilo sin rodeos: resolver mirando no cuenta en una entrevista.
+- "pasos": de 1 a 3 acciones para ahora mismo, en orden. Cuando una acción es una tarea de la lista, copia su clave exacta en "tarea"; si no, deja "tarea" vacío.
+- "alerta": solo si ves un riesgo real (va muy atrasado, está saltando la teoría de React, acumula ejercicios para repasar, estudia demasiadas horas sin parar). Si no, vacío.
+- Lo que no está en el plan (algoritmos, TypeScript, Node, retos difíciles, métodos a fondo) es para después: si pregunta por eso, dile que ahora no.
+- Si te hace una pregunta, respóndela primero en "mensaje", corta y concreta, y luego conecta con su plan. Si pregunta algo técnico, explícalo como a un junior, con un ejemplo de una línea si ayuda.
+- Si acaba de terminar un ejercicio, comenta cómo le fue con los datos que hay (intentos, tiempo, pistas, si vio la solución) y dile qué sigue.
+${ESTILO}`,
+    armar(c) {
+      const datos = recortar(c.datos, 5000);
+      if (!datos) return { error: "Falta tu plan" };
+      const pregunta = recortar(c.pregunta, 800);
+      const hecho = recortar(c.hecho, 1200);
+      const charla = historialEnTexto(c.historial, "Estudiante", "Tú").slice(-3000);
+      return unir(
+        bloque("Su plan y sus datos de ahora", datos),
+        bloque("Lo que acaba de terminar", hecho),
+        bloque("Lo que ya conversaron hoy", charla),
+        pregunta ? bloque("Su pregunta", pregunta) : hecho ? "Coméntale cómo le fue en lo que acaba de terminar y dile qué sigue." : "Dile cómo va hoy y qué hacer ahora.",
+      );
+    },
+  },
+
   "plan-semana": {
     modelo: HAIKU,
     esquema: objeto({

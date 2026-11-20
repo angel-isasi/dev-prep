@@ -16,7 +16,8 @@ import { armadoCorrecto, escrituraCorrecta } from "../../../../scripts/items/ing
 import { callar, hablar, hayMicrofono, hayVoz, useHayVoz, vocesListas } from "../../lib/voz.js";
 import { elegirVariante, emparejarDe, variarPasos } from "./variantes.js";
 import { Bit, fraseDeBit } from "../../components/Bit.jsx";
-import { despuesDe, leccionDe, planUnidad, PRUEBA, pruebaAprobada } from "./plan.js";
+import { despuesDe, GRUPOS, leccionDe, planUnidad, PRUEBA, pruebaAprobada } from "./plan.js";
+import { unidadesDeEtapa } from "../../../../server/plan-junior.js";
 import estilos from "./LeccionMovil.module.css";
 import { IconoCorazon, IconoLlamita, IconoRepetir } from "../../components/Iconos.jsx";
 import { feedback } from "../../lib/feedback.js";
@@ -85,7 +86,7 @@ export function LeccionMovil() {
   const [hito, setHito] = useState(null); // combo que se celebra
   const ambito = params.get("ambito") === "ingles" ? "ingles" : "programacion";
   // Programación: si vienes de una unidad (Lecciones), vuelves ahí
-  const inicio = ambito === "ingles" ? "/ingles" : params.get("unidad") ? "/camino" : "/";
+  const inicio = params.get("modo") === "control" ? "/plan" : ambito === "ingles" ? "/ingles" : params.get("unidad") ? "/camino" : "/";
   // Si las voces llegan con la lección ya abierta, la pantalla se vuelve a pintar y aparecen los botones de audio
   useHayVoz();
 
@@ -112,14 +113,19 @@ export function LeccionMovil() {
       }
       if (!vigente) return;
       if (params.get("retomar") && d.enCurso && !terminada(d.enCurso)) return setSesion(d.enCurso);
-      const unidad = params.get("unidad") ?? d.unidadActual;
+      const etapaControl = params.get("modo") === "control" ? params.get("etapa") : null;
+      if (etapaControl) {
+        const suyas = new Set(unidadesDeEtapa(etapaControl));
+        d = { ...d, items: d.items.filter((it) => suyas.has(it.unidad) && GRUPOS[0].de(it)).map((it) => ({ ...it, unidad: `control-${etapaControl}` })) };
+      }
+      const unidad = etapaControl ? `control-${etapaControl}` : (params.get("unidad") ?? d.unidadActual);
       // Una lección fija de la unidad (plan.js): solo sus preguntas
       const parte = params.get("parte") && ambito === "programacion" ? leccionDe(planUnidad(d.items, d.registros, unidad, d.reportados, d.bloqueadas?.[unidad]), params.get("parte")) : null;
       if (parte) {
         const estas = new Set(parte.claves);
         d = { ...d, items: d.items.filter((it) => estas.has(it.clave)) };
       }
-      const modo = parte ? "parte" : params.get("modo") === "mispalabras" || params.get("claves") ? "todos" : (params.get("modo") ?? "normal");
+      const modo = etapaControl ? "prueba" : parte ? "parte" : params.get("modo") === "mispalabras" || params.get("claves") ? "todos" : (params.get("modo") ?? "normal");
       const azar = semilla(`${d.hoy}-${unidad}-${modo}-${Date.now()}`);
       const ingles = ambito === "ingles";
       // En inglés cada concepto se pregunta según cuánto lo dominas (ver variantes.js)
@@ -186,7 +192,7 @@ export function LeccionMovil() {
           }
         }
         // Programación: cómo quedó la unidad y qué lección sigue
-        if (ambito === "programacion" && siguiente.unidad) {
+        if (ambito === "programacion" && siguiente.unidad && !siguiente.unidad.startsWith("control-")) {
           const d = await api.lecciones("programacion");
           const plan = planUnidad(d.items, d.registros, siguiente.unidad, d.reportados, d.bloqueadas?.[siguiente.unidad]);
           const titulo = d.unidades.find((u) => u.id === siguiente.unidad)?.titulo ?? siguiente.unidad;
@@ -344,7 +350,9 @@ export function LeccionMovil() {
         {final.prueba && (
           <p className={estilos.nivel}>
             {final.prueba.aprobada
-              ? ambito === "ingles"
+              ? sesion?.unidad?.startsWith("control-")
+                ? "Control aprobado: esa etapa de tu plan queda cerrada."
+                : ambito === "ingles"
                 ? `Unidad superada.${final.prueba.sigue ? ` Ahora vas en: ${final.prueba.sigue}.` : ""}`
                 : "Aprobaste la unidad: queda marcada en Lecciones."
               : `Necesitas ${Math.ceil(PRUEBA.aprobar * final.total)} de ${final.total} para aprobarla.${final.prueba.yaAprobada ? " Igual ya la tenías aprobada de antes." : " Repasa lo que fallaste y vuelve a intentarlo."}`}

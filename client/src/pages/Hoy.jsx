@@ -3,6 +3,7 @@
 // números (puntos, racha, tiempo libre y fecha meta) y la semana. Todo lo demás vive en Progreso.
 import { useEffect, useState } from "react";
 import { TutorHoy } from "../components/ia/TutorHoy.jsx";
+import { PlanHoy, usePlan } from "../components/plan/Plan.jsx";
 import { Link } from "react-router";
 import { api } from "../lib/api.js";
 import { armarSesion } from "../../../server/sesion.js";
@@ -47,6 +48,9 @@ const sesionLocal = (inicio) =>
 
 export function Hoy() {
   const [datos, setDatos] = useState(api.inicio.guardado);
+  // Plan junior: activo va arriba de todo y su mentor reemplaza al tutor del día; sin empezar, se ofrece más abajo
+  const [plan, recargarPlan] = usePlan();
+  const conPlan = !!plan?.activo;
   const [sesion, setSesion] = useState(null);
   const [error, setError] = useState(null);
   const ruta = useRuta();
@@ -136,6 +140,8 @@ export function Hoy() {
         </p>
       ) : null}
       <AvisoMapache />
+
+      {conPlan && <PlanHoy plan={plan} recargar={recargarPlan} />}
 
       <div className={estilos.principal}>
         <Sesion sesion={sesion} frase={datos.frase} resumen={`Hoy sumaste ${meta.hecho} puntos${semana.dias ? ` en ${semana.dias.find((d) => d.fecha === datos.hoy)?.minutos ?? 0} min` : ""}. Racha: ${racha} ${racha === 1 ? "día" : "días"}.`} />
@@ -228,7 +234,8 @@ export function Hoy() {
         </div>
       </div>
 
-      <TutorHoy hoy={datos.hoy} semana={semana} />
+      {!conPlan && <PlanHoy plan={plan} recargar={recargarPlan} />}
+      {!conPlan && <TutorHoy hoy={datos.hoy} semana={semana} />}
 
       <div className={estilos.abajo}>
         {datos.juego && <TiempoLibre juego={datos.juego} meta={meta} salvados={datos.salvados} jefe={datos.jefe} />}

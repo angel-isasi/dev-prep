@@ -477,3 +477,13 @@ Tandas (cada una publicada y usable):
 
 Fuera por ahora: carta para postular, diario de entrevistas reales, pronunciación técnica, primer día en la empresa, leer documentación.
 Tanda 0 (probar con IA real lo existente) la hace Angel después.
+
+## Plan junior en 15 días (2026-11-21)
+
+La app tiene más contenido del que pide una entrevista junior. El plan junior separa lo esencial y lo reparte por día.
+
+- **Qué entra** (`server/plan-junior.js`, lista `TEMAS`): los 10 temas de JavaScript y los 8 de React, 121 ejercicios elegidos a mano y 40 preguntas de entrevista. Lo demás (algoritmos, TypeScript, Node, métodos a fondo, retos difíciles) queda "para crecer": no se oculta, solo no entra al plan.
+- **Cómo se reparte** (`armarPlan`, función pura con tests): JavaScript ocupa 5 de los 13 días de estudio y React 8; el penúltimo día es repaso y el último un simulacro. No guarda un calendario: cada vez reparte lo que falta entre los días que quedan, así que se reacomoda solo. "Vas al día" sale de comparar lo hecho con el reparto ideal.
+- **De dónde sale el avance** (`client/src/lib/plan-junior.js`): ejercicios resueltos, lecciones de "Lo esencial" hechas, teoría leída, preguntas vistas, el control de cada etapa (12 preguntas, se aprueba con 10) y el simulacro. Solo se guarda cuándo empieza el plan y cuántos días dura.
+- **Dónde se ve**: arriba en Hoy (día, lo que toca y el mentor) y completo en `/plan`. En las listas de ejercicios, la etiqueta "Junior" y el filtro "Para qué".
+- **Mentor**: la tarea de IA `mentor` recibe el plan en texto y responde con un veredicto, hasta 3 pasos y, si hace falta, una alerta. Habla una vez al día, cuando resuelves un ejercicio y cuando le preguntas.

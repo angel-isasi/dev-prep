@@ -10,6 +10,7 @@ import { buscarColeccion, ejercicioAlAzar, siguienteEjercicio } from "../lib/are
 import { Selector } from "../components/Selector.jsx";
 import { ListaAnimada } from "../components/ListaAnimada.jsx";
 import { IconoFlechaIzq } from "../components/Iconos.jsx";
+import { esEsencial } from "../../../server/plan-junior.js";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
 import { Buscador } from "../components/Buscador.jsx";
@@ -67,6 +68,8 @@ export function ListaEjercicios() {
     estado: params.get("estado") ?? "",
     coleccion: params.get("coleccion") ?? "",
   };
+  // "Plan junior": solo lo esencial para una entrevista junior; "crecer": lo que queda para después
+  const filtroPlan = params.get("plan") ?? "";
   const encontrada = buscarColeccion(filtros.coleccion);
 
   useEffect(() => {
@@ -105,11 +108,11 @@ export function ListaEjercicios() {
   if (error) return <p className={estilos.mensaje}>No se pudo cargar la lista: {error}</p>;
   if (!ejercicios) return <Esqueleto variante="lista" />;
 
-  const visibles = filtrarEjercicios(ejercicios, filtros);
+  const visibles = filtrarEjercicios(ejercicios, filtros).filter((e) => !filtroPlan || esEsencial(e.id) === (filtroPlan === "junior"));
   // En el celular se cuenta lo estudiado (resolver con tests es en la laptop).
   const hecho = (e) => (ES_MOVIL ? e.estado !== "pendiente" : e.estado === "resuelto");
   const resueltos = deColeccion.filter(hecho).length;
-  const hayFiltros = filtros.texto || filtros.tema || filtros.patron || filtros.nivel || filtros.estado;
+  const hayFiltros = filtros.texto || filtros.tema || filtros.patron || filtros.nivel || filtros.estado || filtroPlan;
   const siguiente = siguienteEjercicio(deColeccion);
 
   const titulo = encontrada ? encontrada.coleccion.nombre : "Todos los ejercicios";
@@ -209,6 +212,16 @@ export function ListaEjercicios() {
           textoTodos="Todos los estados"
           opciones={ESTADOS.map(([valor, texto]) => ({ valor, texto }))}
         />
+        <Selector
+          etiqueta="Para qué"
+          valor={filtroPlan}
+          alCambiar={(v) => cambiarFiltro("plan", v)}
+          textoTodos="Todo"
+          opciones={[
+            { valor: "junior", texto: "Plan junior" },
+            { valor: "crecer", texto: "Para crecer" },
+          ]}
+        />
         {hayFiltros && (
           <button type="button" className={estilos.limpiar} onClick={limpiar}>
             Limpiar
@@ -251,6 +264,11 @@ export function ListaEjercicios() {
                           {ICONO_ESTADO[e.estado] ?? "○"}
                         </span>
                         <strong className={estilos.titulo}>{e.titulo}</strong>
+                        {esEsencial(e.id) && (
+                          <span className="chip" data-tono="acento" title="Es parte de lo esencial para una entrevista junior">
+                            Junior
+                          </span>
+                        )}
                         {!encontrada && coleccionLegible(e.coleccion) && <span className={estilos.coleccion}>{coleccionLegible(e.coleccion)}</span>}
                         {e.ultimoResultado && (
                           <span className={estilos.tests} title="Tests que pasan en tu último intento">

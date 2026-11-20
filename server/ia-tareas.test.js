@@ -61,3 +61,32 @@ describe("registro de tareas del plan v6", () => {
     expect(armarPedido({ tarea: "toString" }).error).toBe("Tarea desconocida");
   });
 });
+
+describe("mentor del plan junior", () => {
+  it("sin el plan no hay pedido", () => {
+    expect(armarPedido({ tarea: "mentor", datos: "" }).error).toBeTruthy();
+  });
+
+  it("del día: manda el plan y pide el estado de hoy", () => {
+    const p = armarPedido({ tarea: "mentor", datos: "Plan junior de 15 días. Hoy es el día 3. Estado: Al día." });
+    expect(p.error).toBeUndefined();
+    expect(p.mensaje).toContain("día 3");
+    expect(p.mensaje).toContain("Dile cómo va hoy");
+  });
+
+  it("al terminar un ejercicio y al preguntar, lo incluye", () => {
+    const paso = armarPedido({ tarea: "mentor", datos: "Plan", hecho: "Resolvió Two Sum en 3 intentos" });
+    expect(paso.mensaje).toContain("Two Sum");
+    expect(paso.mensaje).toContain("qué sigue");
+    const pregunta = armarPedido({ tarea: "mentor", datos: "Plan", pregunta: "¿Me salto closures?", historial: [{ de: "yo", texto: "hola" }, { de: "mentor", texto: "Sigue con arrays" }] });
+    expect(pregunta.mensaje).toContain("¿Me salto closures?");
+    expect(pregunta.mensaje).toContain("Estudiante: hola");
+    expect(pregunta.mensaje).toContain("Tú: Sigue con arrays");
+  });
+
+  it("usa el modelo de más criterio y devuelve pasos con su tarea", () => {
+    expect(TAREAS.mentor.modelo).toBe("claude-sonnet-5-5");
+    const limpio = limpiarPorEsquema(TAREAS.mentor.esquema, { titular: "Vas bien", mensaje: "Sigue", pasos: [{ texto: "Haz esto", tarea: "ej:js-gu-001", extra: 1 }], alerta: "" });
+    expect(limpio.pasos).toEqual([{ texto: "Haz esto", tarea: "ej:js-gu-001" }]);
+  });
+});

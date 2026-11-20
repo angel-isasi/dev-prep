@@ -400,6 +400,13 @@ const apiWeb = {
   reportados: async () => progreso.datos().reportados,
   elegirUnidad: async (id) => progreso.elegirUnidad(id),
 
+  // --- Plan junior (server/plan-junior.js): solo se guarda cuándo empieza y cuántos días dura ---
+  plan15: async () => progreso.ajuste("plan15", null),
+  guardarPlan15: async (config) => {
+    progreso.cambiarAjuste("plan15", config ? { inicio: config.inicio, dias: config.dias } : { inicio: null });
+    cache.clear();
+  },
+
   // --- Aprender mejor ---
   /** Mapa de lo que dominas por unidad y tus unidades más flojas. */
   async mapa() {

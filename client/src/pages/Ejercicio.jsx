@@ -17,6 +17,8 @@ import { celebrar } from "../lib/celebrar.js";
 import { Ayuda } from "../components/Ayuda.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import { buscarColeccion } from "../lib/areas.js";
+import { MentorPaso } from "../components/plan/Plan.jsx";
+import { esEsencial } from "../../../server/plan-junior.js";
 import { Markdown } from "../components/Markdown.jsx";
 import estilos from "./Ejercicio.module.css";
 
@@ -192,6 +194,11 @@ export function Ejercicio() {
           <div className={estilos.meta}>
             <Insignia nivel={ejercicio.nivel} />
             <Insignia estado={ejercicio.estado} />
+            {esEsencial(ejercicio.id) && (
+              <span className="chip" data-tono="acento" title="Es parte de lo esencial para una entrevista junior">
+                Plan junior
+              </span>
+            )}
             {ejercicio.preparado && (
               <code className={estilos.archivo} title="Tu archivo de trabajo">
                 workspace/{ejercicio.id}/{ejercicio.archivo}
@@ -269,6 +276,7 @@ export function Ejercicio() {
             )}
           </p>
         )}
+        {aviso?.tipo === "exito" && resuelto && <MentorPaso key={ejercicio.id} ejercicio={ejercicio} />}
 
         <div className={estilos.pestanas}>
           <Pestanas pestanas={pestanas} activa={pestana} alCambiar={setPestana} />

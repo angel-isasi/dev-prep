@@ -116,7 +116,7 @@ export async function pedirIa(pedido) {
 }
 
 // Tareas que deben salir distintas cada vez (crean algo nuevo o siguen una charla): nunca se guardan
-const SIN_GUARDAR = /crear$|^variante$|^conversacion$|^plan-semana$|^tarjeta-|^defensa$|^negociacion$|^reunion$|^entrevista-en$/;
+const SIN_GUARDAR = /crear$|^mentor$|^variante$|^conversacion$|^plan-semana$|^tarjeta-|^defensa$|^negociacion$|^reunion$|^entrevista-en$/;
 const CLAVE_GUARDADAS = "devprep.iaGuardadas";
 const MAX_GUARDADAS = 40;
 
