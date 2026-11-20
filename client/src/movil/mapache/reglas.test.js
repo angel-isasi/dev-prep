@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { clavesRobadas, comidaDelDia, estadoMapache, META_COMIDA, nivelIngles, rachaIngles, regalosDeNivel, revisarRespuesta, rondaNueva, xpDisponible } from "./reglas.js";
+import { clavesRobadas, comidaDelDia, estadoMapache, META_COMIDA, nivelIngles, rachaIngles, regalosDeNivel, revisarRespuesta, rondaNueva } from "./reglas.js";
 import { POSTALES, PREGUNTAS } from "./contenido.js";
 import { cumpleReto, EXPRESIONES, franjaDe, FRASES_NIVEL, lineaDiario, RETOS } from "./contenido-nivel.js";
 
@@ -28,9 +28,9 @@ describe("mapache", () => {
     expect(estadoMapache({ dias: { ...viejo, [hoy]: { inglesSegundos: 120 } }, hoy }).estado).not.toBe("escapado");
   });
 
-  test("se pone triste si se rompió la racha o si te robó muchas palabras", () => {
+  test("se pone triste solo si se rompió la racha: los repasos pendientes no cuentan", () => {
     expect(estadoMapache({ dias: { "2026-11-15": { ingles: 1 } }, hoy }).estado).toBe("triste");
-    expect(estadoMapache({ dias: { "2026-11-16": { ingles: 2 } }, hoy, robados: 20 }).estado).toBe("triste");
+    expect(estadoMapache({ dias: { "2026-11-16": { ingles: 2 } }, hoy, robados: 20 }).estado).not.toBe("triste");
   });
 
   test("racha de inglés", () => {
@@ -58,11 +58,6 @@ describe("mapache", () => {
       "gra:g1": { proximo: "2026-11-01" },
     };
     expect(clavesRobadas(registros, hoy)).toEqual(["fr:f1", "en:w1"]);
-  });
-
-  test("el XP de la tienda es lo ganado en inglés menos lo comprado", () => {
-    const dias = { a: { inglesXp: 100 }, b: { inglesXp: 50, xp: 999 } };
-    expect(xpDisponible(dias, ["gorra"], [{ id: "gorra", precio: 80 }])).toBe(70);
   });
 
   test("la respuesta libre tiene que ser inglés y del largo de tu nivel", () => {
@@ -131,11 +126,22 @@ describe("Trash panda", () => {
   });
 });
 
-describe("todo el mapache va en B2 y C1", () => {
+describe("lecturas y entrevistas de Map", () => {
   test("las postales son B2 o C1 y las entrevistas son de B2 o C1", async () => {
     const { ENTREVISTAS } = await import("./contenido.js");
     expect(POSTALES.every((p) => ["B2", "C1"].includes(p.etiqueta))).toBe(true);
     expect(ENTREVISTAS.every((e) => ["B2", "C1"].includes(e.nivel))).toBe(true);
-    expect(franjaDe("C1")).toBe("C");
+    expect(franjaDe("B2")).toBe("B");
+  });
+});
+
+describe("tus errores reales", () => {
+  test("la frase con hueco se arma con la opción mala y con la buena, sin restos de formato", async () => {
+    const { errorReal } = await import("./api-mapache.js");
+    const item = { clave: "gra:g1", pregunta: "Completa:\n**I fixed the bug ___ the login form.**", opciones: ["in", "at"], correcta: 0, explicacion: "" };
+    expect(errorReal(item)).toMatchObject({ mal: "I fixed the bug at the login form.", bien: "I fixed the bug in the login form." });
+    // Un calco no tiene hueco: se comparan las dos opciones tal cual
+    expect(errorReal({ clave: "cal:c1", opciones: ["I have 20 years", "I'm 20 years old"], correcta: 1 })).toMatchObject({ mal: "I have 20 years", bien: "I'm 20 years old" });
+    expect(errorReal({ clave: "gra:g2", pregunta: "Sin hueco", opciones: ["a", "b"], correcta: 0 })).toBeNull();
   });
 });

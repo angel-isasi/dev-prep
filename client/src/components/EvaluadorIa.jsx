@@ -401,7 +401,7 @@ export function ResultadoIngles({ r }) {
         )}
         {r.version && (
           <div className={estilos.mejor}>
-            <span className={estilos.subtitulo}>Como lo diría alguien con nivel C1</span>
+            <span className={estilos.subtitulo}>Así sonaría más natural</span>
             <p lang="en">{r.version}</p>
             {hayVoz() && (
               <button type="button" className={estilos.enlace} onClick={() => hablar(r.version)}>

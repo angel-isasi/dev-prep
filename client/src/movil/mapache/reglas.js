@@ -8,17 +8,7 @@ export const META_COMIDA = 30;
 
 export const NIVELES = ["A1", "A2", "B1", "B2", "C1", "C2"];
 
-/** Dónde vive según tu nivel: empieza en una caja y termina en un departamento con vista. */
-export const CASAS = {
-  A1: { id: "caja", texto: "una caja de cartón", en: "a cardboard box" },
-  A2: { id: "rincon", texto: "un rincón con alfombra", en: "a cozy corner" },
-  B1: { id: "cuarto", texto: "un cuarto", en: "a small room" },
-  B2: { id: "ventana", texto: "un cuarto con ventana", en: "a room with a window" },
-  C1: { id: "depa", texto: "un departamento", en: "an apartment" },
-  C2: { id: "vista", texto: "un departamento con vista", en: "an apartment with a view" },
-};
-
-/** Lo que se gana solo al subir de nivel (además de lo que compres en la tienda). */
+/** Lo que se pone solo al subir de nivel. */
 export const REGALOS_NIVEL = { B1: "mochila", B2: "lentes", C1: "corbata", C2: "birrete" };
 
 /**
@@ -54,10 +44,11 @@ export function rachaIngles(dias, hoy) {
 
 /**
  * Cómo está el mapache hoy.
- * @param {{ dias: Record<string, object>, hoy: string, hora?: number, robados?: number }} datos
+ * Solo depende de tu práctica: los repasos pendientes no lo ponen triste (pedido de Angel, 2026-11-19).
+ * @param {{ dias: Record<string, object>, hoy: string, hora?: number }} datos
  * @returns {{ estado: "nuevo"|"escapado"|"dormido"|"triste"|"hambriento"|"feliz"|"normal", hambre: number, comidaHoy: number, meta: number, racha: number, rachaRota: boolean }}
  */
-export function estadoMapache({ dias = {}, hoy, hora = 12, robados = 0 }) {
+export function estadoMapache({ dias = {}, hoy, hora = 12 }) {
   const dia = (k) => dias[sumarDias(hoy, -k)] ?? {};
   const comidaHoy = comidaDelDia(dia(0));
   const saciedad = comidaHoy + comidaDelDia(dia(1)) * 0.5 + comidaDelDia(dia(2)) * 0.25;
@@ -72,7 +63,7 @@ export function estadoMapache({ dias = {}, hoy, hora = 12, robados = 0 }) {
   if (![0, 1, 2].some((k) => practico(dia(k)))) return { ...base, estado: "escapado" };
   if (hora >= 23 || hora < 6) return { ...base, estado: "dormido" };
   if (comidaHoy >= META_COMIDA) return { ...base, estado: "feliz" };
-  if (rachaRota || robados >= 15) return { ...base, estado: "triste" };
+  if (rachaRota) return { ...base, estado: "triste" };
   if (hambre >= 60) return { ...base, estado: "hambriento" };
   return { ...base, estado: "normal" };
 }
@@ -93,7 +84,7 @@ export function regalosDeNivel(nivel) {
 }
 
 /**
- * Lo que te robó: los repasos de inglés que ya vencieron (palabras y frases), los más atrasados primero.
+ * Tus repasos pendientes: los repasos de inglés que ya vencieron (palabras y frases), los más atrasados primero.
  * @param {Record<string, { proximo?: string }>} registros  datos.items
  */
 export function clavesRobadas(registros = {}, hoy) {
@@ -111,13 +102,6 @@ export function hash(texto) {
 }
 
 export const elegir = (lista, semilla) => (lista.length ? lista[hash(String(semilla)) % lista.length] : null);
-
-/** XP de inglés que puedes gastar en la tienda: lo ganado menos lo comprado. */
-export function xpDisponible(dias = {}, compras = [], catalogo = []) {
-  const ganado = Object.values(dias).reduce((s, d) => s + (Number(d?.inglesXp) || 0), 0);
-  const gastado = compras.reduce((s, id) => s + (catalogo.find((c) => c.id === id)?.precio ?? 0), 0);
-  return Math.max(0, ganado - gastado);
-}
 
 /** Palabras que sabe el corrector de respuestas libres (para ver si escribiste en inglés). */
 const COMUNES =

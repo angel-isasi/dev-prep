@@ -1,6 +1,6 @@
 // Lo que puedes hacer con Map. Cada actividad usa tu inglés de verdad y suma a tu meta del día:
 // pregunta del día, repite conmigo, repasos pendientes (los vencidos), tus errores reales,
-// palabra del día, tienda, ropa, álbum de unidades, diario, postales, Trash panda y la entrevista.
+// palabra del día, diario, postales, Trash panda y la entrevista.
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
@@ -78,16 +78,16 @@ export function PreguntaDelDia({ datos, alCambiar }) {
     if (r.opciones?.[0]) setTexto((t) => (t ? `${t} ${r.opciones[0]}` : r.opciones[0]));
   }
 
-  // Con la respuesta enviada aparece la corrección con IA: la tarjeta ocupa todo el ancho y la
-  // corrección va al lado de la pregunta, en vez de alargar la tarjeta hacia abajo
-  const conIa = !!(resultado?.ok || (p.respondida && !resultado));
+  // Siempre a todo el ancho y en dos columnas: a la izquierda la pregunta (y, ya respondida, tu
+  // respuesta); a la derecha, donde escribes y, después, la corrección de la IA.
+  const respondida = !!(resultado?.ok || (p.respondida && !resultado));
   return (
     <Tarjeta
       titulo="La pregunta del día"
-      ancho={conIa}
-      detalle={p.respondida ? `Nivel ${p.nivel} · respondida hoy` : `Nivel ${p.nivel} · al menos ${p.minimo} palabras`}
+      ancho
+      detalle={respondida ? `Nivel ${p.nivel} · respondida hoy` : `Nivel ${p.nivel} · al menos ${p.minimo} palabras`}
     >
-      <div className={conIa ? estilos.dosColumnas : estilos.unaColumna}>
+      <div className={estilos.dosColumnas}>
         <div className={estilos.columna}>
           <p className={estilos.preguntaEn} lang="en">
             {p.en}
@@ -99,21 +99,33 @@ export function PreguntaDelDia({ datos, alCambiar }) {
           <p className={estilos.reto}>
             <strong>Reto extra (+5 XP):</strong> {p.reto.texto} <em lang="en">Ej.: {p.reto.ejemplo}</em>
           </p>
-          {(p.respondida && !resultado) || resultado?.ok ? (
-            // Ya respondiste: se ve lo que enviaste (es lo que corrige la IA) y el formulario se cierra
+          {respondida && (
+            // Ya respondiste: se ve lo que enviaste (es lo que corrige la IA) y una forma de responder
             <div className={estilos.respondida}>
               <span>Tu respuesta</span>
               <p lang="en">{resultado?.ok ? texto : p.respondida.texto}</p>
-              {!resultado && (
-                <>
-                  <span>Una forma de responder</span>
-                  <p lang="en">{p.modelo}</p>
-                </>
-              )}
+              <span>Una forma de responder</span>
+              <p lang="en">{p.modelo}</p>
             </div>
+          )}
+          {resultado?.ok && (
+            <div className={estilos.resultado} data-ok>
+              <p>
+                {/* No felicita: solo confirma. La corrección de verdad es la de la IA, al lado */}
+                Respuesta guardada. {resultado.xp ? `+${resultado.xp} XP.` : "Ya habías respondido hoy."}
+                {resultado.reto ? " Cumpliste el reto extra." : " Sin reto extra esta vez."}
+                {resultado.usadas.length > 0 && ` Usaste palabras de tus unidades: ${resultado.usadas.join(", ")}.`}
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className={estilos.columna}>
+          {respondida ? (
+            <EvaluadorIa tarea="ingles" idioma="en" respuestaFija={resultado?.ok ? texto : p.respondida.texto} pedido={{ pregunta: p.en, nivel: p.nivel }} />
           ) : (
             <form onSubmit={enviar} className={estilos.formulario}>
-              <textarea value={texto} onChange={(e) => setTexto(e.target.value)} rows={3} placeholder="Answer in English..." lang="en" />
+              <textarea value={texto} onChange={(e) => setTexto(e.target.value)} rows={5} placeholder="Answer in English..." lang="en" />
               <div className={estilos.fila}>
                 {micro.hay && (
                   <button type="button" className="boton" onClick={dictar} disabled={micro.escuchando}>
@@ -125,38 +137,18 @@ export function PreguntaDelDia({ datos, alCambiar }) {
                 </button>
               </div>
               {errorMicro && <p className={estilos.ayuda}>{errorMicro}</p>}
+              {resultado && !resultado.ok && (
+                <div className={estilos.resultado} data-ok={false}>
+                  <p>
+                    {resultado.corto
+                      ? `Muy corto: van ${resultado.palabras} de ${resultado.minimo} palabras. Agrega un detalle o un porqué.`
+                      : "Parece que no está en inglés. Inténtalo en inglés, aunque sea simple."}
+                  </p>
+                </div>
+              )}
             </form>
           )}
-          {resultado && (
-            <div className={estilos.resultado} data-ok={resultado.ok}>
-              {resultado.ok ? (
-                <p>
-                  {/* No felicita: solo confirma. La corrección de verdad es la de la IA, al lado */}
-                  Respuesta guardada. {resultado.xp ? `+${resultado.xp} XP.` : "Ya habías respondido hoy."}
-                  {resultado.reto ? " Cumpliste el reto extra." : " Sin reto extra esta vez."}
-                  {resultado.usadas.length > 0 && ` Usaste palabras de tus unidades: ${resultado.usadas.join(", ")}.`}
-                </p>
-              ) : resultado.corto ? (
-                <p>
-                  Muy corto: van {resultado.palabras} de {resultado.minimo} palabras. Agrega un detalle o un porqué.
-                </p>
-              ) : (
-                <p>Parece que no está en inglés. Inténtalo en inglés, aunque sea simple.</p>
-              )}
-              <span>Una forma de responder</span>
-              <p lang="en">{p.modelo}</p>
-            </div>
-          )}
         </div>
-        {/* Con tu respuesta ya enviada, la IA te la puede corregir frase por frase */}
-        {conIa && (
-          <EvaluadorIa
-            tarea="ingles"
-            idioma="en"
-            respuestaFija={resultado?.ok ? texto : p.respondida.texto}
-            pedido={{ pregunta: p.en, nivel: p.nivel }}
-          />
-        )}
       </div>
     </Tarjeta>
   );
@@ -330,7 +322,7 @@ export function PalabraDelDia({ datos }) {
   const w = datos.palabraDelDia;
   if (!w) return null;
   return (
-    <Tarjeta titulo="Palabra del día" detalle="Nivel B2 y C1">
+    <Tarjeta titulo="Palabra del día" detalle="Nivel B1 y B2">
       <p className={estilos.palabraGrande} lang="en">
         {w.en} <span>{w.pron}</span>
       </p>
@@ -361,112 +353,6 @@ export function PalabraDelDia({ datos }) {
   );
 }
 
-/* ---------- Su casa ---------- */
-
-export function Tienda({ datos, alCambiar }) {
-  const [aviso, setAviso] = useState(null);
-  async function comprar(t) {
-    const r = await api.mapacheComprar(t.id);
-    if (r.ok) {
-      setAviso(`¡Listo! ${t.tipo === "ropa" ? `${datos.nombre} ya tiene` : "Ya está en su casa:"} ${t.en} (${t.es}).`);
-      hablar(t.en);
-    } else if (r.falta) setAviso("Te falta XP de inglés: lo ganas con lecciones, historias y cofres.");
-    alCambiar();
-  }
-  return (
-    <Tarjeta titulo="Tienda" detalle={`Tienes ${datos.xp} XP de inglés`} ancho>
-      <p className={estilos.ayuda}>Se paga con el XP que ganas en inglés. Cada cosa tiene su nombre en inglés: tócalo para oírlo.</p>
-      <div className={estilos.tienda}>
-        {datos.tienda.map((t) => (
-          <div key={t.id} className={estilos.producto} data-comprado={t.comprado}>
-            <button type="button" className={estilos.nombreProducto} onClick={() => hablar(t.en)} lang="en">
-              {t.en}
-            </button>
-            <small>
-              {t.es} · {t.tipo === "ropa" ? "ropa" : "mueble"}
-            </small>
-            {t.comprado ? (
-              <span className={estilos.comprado}>Ya es suyo</span>
-            ) : (
-              <button type="button" className="boton" disabled={datos.xp < t.precio} onClick={() => comprar(t)}>
-                {t.precio} XP
-              </button>
-            )}
-          </div>
-        ))}
-      </div>
-      {aviso && <p className={estilos.aviso}>{aviso}</p>}
-    </Tarjeta>
-  );
-}
-
-const PARTES = { cabeza: "Cabeza", ojos: "Ojos", cuello: "Cuello", orejas: "Orejas", espalda: "Espalda" };
-
-export function Ropa({ datos, alCambiar }) {
-  if (!datos.ropa.length)
-    return (
-      <Tarjeta titulo="Su ropa">
-        <p className={estilos.ayuda}>
-          Todavía no tiene ropa. Cómprala en la tienda o sube de nivel: en B1 gana una mochila, en B2 lentes, en C1 corbata y en C2 un
-          birrete.
-        </p>
-      </Tarjeta>
-    );
-  return (
-    <Tarjeta titulo="Su ropa" detalle="Toca para ponérsela o quitársela">
-      <div className={estilos.ropa}>
-        {datos.ropa.map((r) => {
-          const puesta = datos.equipo?.[r.parte] === r.id;
-          return (
-            <button
-              key={r.id}
-              type="button"
-              className={estilos.prenda}
-              aria-pressed={puesta}
-              onClick={async () => {
-                await api.mapacheEquipar(r.parte, puesta ? null : r.id);
-                alCambiar();
-              }}
-            >
-              <strong lang="en">{r.en}</strong>
-              <small>
-                {r.es} · {PARTES[r.parte]}
-                {r.regalo ? " · regalo de nivel" : ""}
-              </small>
-            </button>
-          );
-        })}
-      </div>
-    </Tarjeta>
-  );
-}
-
-export function Album({ datos }) {
-  return (
-    <Tarjeta titulo="Álbum de stickers" detalle={`${datos.unidadesCompletas} unidades completas`} ancho>
-      <p className={estilos.ayuda}>
-        Un sticker por cada unidad que completas. Cada página entera le da un trofeo a su casa, y cada unidad, un mueble nuevo.
-      </p>
-      {datos.album.map((pagina) => (
-        <div key={pagina.id} className={estilos.paginaAlbum}>
-          <h3>
-            {pagina.titulo} {pagina.completa && <span className={estilos.completa}>Página completa</span>}
-          </h3>
-          <div className={estilos.stickers}>
-            {pagina.stickers.map((s) => (
-              <div key={s.id} className={estilos.sticker} data-tiene={s.tiene} title={`${s.titulo}: ${s.porcentaje}%`}>
-                <strong>{String(s.orden).padStart(2, "0")}</strong>
-                <span>{s.titulo}</span>
-                {!s.tiene && <small>{s.porcentaje}%</small>}
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </Tarjeta>
-  );
-}
-
 /* ---------- Leer ---------- */
 
 const formatoDia = (fecha) => {
@@ -477,12 +363,12 @@ const formatoDia = (fecha) => {
 export function Diario({ datos }) {
   const [traducir, setTraducir] = useState(false);
   return (
-    <Tarjeta titulo={`El diario de ${datos.nombre}`} detalle="En inglés de nivel C1">
+    <Tarjeta titulo={`El diario de ${datos.nombre}`} detalle="Lo que hiciste, contado en inglés">
       <button type="button" className={estilos.enlace} onClick={() => setTraducir((t) => !t)}>
         {traducir ? "Ocultar traducción" : "Ver traducción"}
       </button>
       <ol className={estilos.diario}>
-        {datos.diario.map((d) => (
+        {datos.diario.slice(0, 4).map((d) => (
           <li key={d.fecha}>
             <span>{formatoDia(d.fecha)}</span>
             <p lang="en">{d.en}</p>

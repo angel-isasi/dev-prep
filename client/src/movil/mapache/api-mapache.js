@@ -1,32 +1,24 @@
 // Datos del mapache para las pantallas: lee tu progreso de inglés (contadores del día, repasos, unidades)
-// y guarda lo suyo (nombre, compras, postales, pregunta del día...) como registros "mapache:..." dentro de
+// y guarda lo suyo (nombre, postales, pregunta del día...) como registros "mapache:..." dentro de
 // "inglesExtra", que ya se sincroniza entre tus dispositivos. No crea nada nuevo en AWS.
 import { sumarDias } from "../../../../server/progreso-reglas.js";
 import { avanceConceptos } from "../leccion/variantes.js";
 import { COLECCION_EXTRA } from "../ingles/extra.js";
 import { hechaPorExamen } from "../ingles/examen.js";
 import { CHARLA, cumpleReto, EXPRESIONES, franjaDe, FRASES_NIVEL, lineaDiario, RETOS } from "./contenido-nivel.js";
-import { CASAS, clavesRobadas, elegir, estadoMapache, hash, nivelIngles, practico, regalosDeNivel, revisarRespuesta, xpDisponible } from "./reglas.js";
-import { ENTREVISTAS, MINIMO_PALABRAS, MUEBLES_GANADOS, POSTALES, PREGUNTAS, ROPA_NIVEL, SUENOS, TIENDA, TROFEO } from "./contenido.js";
+import { clavesRobadas, elegir, estadoMapache, hash, nivelIngles, practico, regalosDeNivel, revisarRespuesta } from "./reglas.js";
+import { ENTREVISTAS, MINIMO_PALABRAS, POSTALES, PREGUNTAS, ROPA_NIVEL, SUENOS } from "./contenido.js";
 
 const NOMBRE = "Map";
 // Antes se llamaba "Mapi": si quedó guardado ese nombre viejo por defecto, cuenta como "sin nombre propio"
 const nombreDe = (p) => (!p?.nombre || p.nombre === "Mapi" ? NOMBRE : p.nombre);
 
-// Todo lo del mapache va en B2 y C1, sin importar tu nivel (decisión de Angel, 2026-11-17):
-// habla en C1, la pregunta del día alterna B2 y C1 y las palabras salen de las unidades B2 y C1.
-const NIVEL_MAPACHE = "C1";
-const NIVELES_MAPACHE = ["B2", "C1"];
-/** Nivel de la pregunta del día: un día B2, otro C1. */
+// Map trabaja en B1 y B2, que es el nivel real de Angel (lo dijo el 2026-11-19; antes iba en B2 y C1):
+// habla en la franja B, la pregunta del día alterna B1 y B2 y las palabras salen de las unidades B1 y B2.
+const NIVEL_MAPACHE = "B2";
+const NIVELES_MAPACHE = ["B1", "B2"];
+/** Nivel de la pregunta del día: un día B1, otro B2. */
 const nivelPregunta = (hoy) => NIVELES_MAPACHE[hash(hoy + "pregunta") % 2];
-const ETAPAS = [
-  ["basico", "Básico"],
-  ["intermedio", "Intermedio"],
-  ["trabajo", "Inglés para el trabajo"],
-  ["avanzado", "Avanzado (B2)"],
-  ["superior", "Superior (C1)"],
-  ["dominio", "Dominio (C2)"],
-];
 
 /** Hueco: cambia la palabra por ___ en el ejemplo (si aparece tal cual). */
 function conHueco(texto, palabra) {
@@ -68,15 +60,18 @@ function acertijo(item, palabras) {
 }
 
 /** Un error real tuyo (calco o gramática que fallaste la última vez): lo que no y lo que sí. */
-function errorReal(item) {
+export function errorReal(item) {
   if (!Array.isArray(item?.opciones) || item.correcta == null) return null;
   const bien = item.opciones[item.correcta];
   const mal = item.opciones.find((_, i) => i !== item.correcta);
   if (item.clave.startsWith("cal:")) return { clave: item.clave, mal, bien, explicacion: item.explicacion ?? "" };
   if (item.pregunta?.includes("___")) {
     const frase = item.pregunta.split("\n").find((l) => l.includes("___")) ?? item.pregunta;
-    const limpia = frase.replace(/[*_]{1,2}(?!_)/g, "").trim();
-    return { clave: item.clave, mal: limpia.replace("___", mal), bien: limpia.replace("___", bien), explicacion: item.explicacion ?? "" };
+    // Primero se parte por el hueco y recién después se quita el formato (** y _): si se limpiaba antes,
+    // el hueco "___" quedaba en "_" y las dos frases salían iguales, sin la palabra
+    const partes = frase.split("___").map((parte) => parte.replace(/\*\*|__|[*_]/g, ""));
+    const armar = (palabra) => partes.join(palabra).replace(/\s+/g, " ").trim();
+    return { clave: item.clave, mal: armar(mal), bien: armar(bien), explicacion: item.explicacion ?? "" };
   }
   return null;
 }
@@ -92,11 +87,6 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
     return salida;
   };
   const guardar = (id, v) => progreso.guardarRegistro(COLECCION_EXTRA, `mapache:${id}`, { v });
-  const compras = (p) =>
-    Object.keys(p)
-      .filter((k) => k.startsWith("compra:"))
-      .map((k) => k.slice(7));
-
   /** Cálculos comunes: unidades completas, nivel, palabras que sabes. */
   async function contexto() {
     const [{ unidades, items }, datosIngles] = await Promise.all([itemsIngles(), json("ingles.json")]);
@@ -123,10 +113,10 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
       const porClave = new Map(items.map((it) => [it.clave, it]));
       const palabras = new Map(datosIngles.unidades.flatMap((u) => u.palabras.map((w) => [w.id, w])));
       const robadas = clavesRobadas(registros, hoy);
-      const estado = estadoMapache({ dias, hoy, hora: new Date().getHours(), robados: robadas.length });
+      const estado = estadoMapache({ dias, hoy, hora: new Date().getHours() });
       const nivelMapache = NIVEL_MAPACHE;
       const franja = franjaDe(nivelMapache);
-      // Unidades B2 y C1: de ahí salen la palabra del día, Repeat after me y Trash panda
+      // Unidades B1 y B2: de ahí salen la palabra del día, Repeat after me y Trash panda
       const altas = new Set(unidades.filter((u) => NIVELES_MAPACHE.includes(u.nivel)).map((u) => u.id));
 
       // Palabras que ya sabes (para que hable con tu vocabulario)
@@ -136,7 +126,8 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
       const palabra = elegir(sabidas.length ? sabidas : deActual, hoy + estado.estado)?.en ?? "hello";
 
       // Lo que dice
-      const clave = robadas.length >= 3 && estado.estado !== "escapado" && estado.estado !== "dormido" && estado.estado !== "feliz" ? "robos" : estado.estado;
+      // Los repasos pendientes ya no cambian lo que dice ni cómo está: solo se ofrecen en su tarjeta
+      const clave = estado.estado;
       const delEstado = FRASES_NIVEL[franja][clave] ?? FRASES_NIVEL[franja].normal;
       const frase = elegir(delEstado, hoy + clave + palabra);
       const rellenar = (t) => t.replaceAll("{w}", palabra).replaceAll("{n}", String(robadas.length));
@@ -153,27 +144,8 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
       const sueno = elegir(SUENOS, hoy + "sueno");
       const suenos = [sueno, ...porDia(SUENOS.filter((x) => x !== sueno), "sueno")];
 
-      // Ropa: lo comprado y los regalos de nivel; lo que tiene puesto
-      const compradas = compras(p);
-      const ropa = [
-        ...regalosDeNivel(nivel).map((id) => ({ ...ROPA_NIVEL[id], regalo: true })),
-        ...TIENDA.filter((t) => t.tipo === "ropa" && compradas.includes(t.id)),
-      ];
+      // Lo que lleva puesto: los regalos de su nivel (mochila, lentes...)
       const equipo = p.equipo ?? Object.fromEntries(regalosDeNivel(nivel).map((id) => [ROPA_NIVEL[id].parte, id]));
-
-      // Casa: un mueble por unidad completa, lo comprado y un trofeo por etapa terminada
-      const completas = unidades.filter((u) => completa(u.id));
-      const album = ETAPAS.map(([id, titulo]) => {
-        const deEtapa = unidades.filter((u) => u.etapa === id);
-        const stickers = deEtapa.map((u) => ({ id: u.id, titulo: u.titulo, nivel: u.nivel, orden: u.orden, tiene: completa(u.id), porcentaje: Math.round((avance.get(u.id)?.porcentaje ?? 0) * 100) }));
-        return { id, titulo, stickers, completa: stickers.length > 0 && stickers.every((s) => s.tiene) };
-      }).filter((pagina) => pagina.stickers.length);
-      const trofeos = album.filter((a) => a.completa).length;
-      const muebles = [
-        ...MUEBLES_GANADOS.slice(0, Math.min(MUEBLES_GANADOS.length, completas.length)).map((m) => ({ ...m, ganado: true })),
-        ...TIENDA.filter((t) => t.tipo === "mueble" && compradas.includes(t.id)),
-        ...(trofeos ? [{ ...TROFEO, cantidad: trofeos }] : []),
-      ];
 
       // Diario: los días con inglés de las últimas 2 semanas (si no hubo ninguno, solo hoy)
       const conIngles = Array.from({ length: 14 }, (_, i) => sumarDias(hoy, -i)).filter((fecha, i) => i === 0 || practico(dias[fecha]));
@@ -200,19 +172,19 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
         .filter(Boolean)
         .slice(0, 5);
 
-      // Frases para "Repeat after me": de las unidades B2 y C1
+      // Frases para "Repite conmigo": de las unidades B1 y B2
       const repetir = items
         .filter((it) => it.concepto === "frase" && altas.has(it.unidad))
         .sort((a, b) => (hashSimple(hoy + a.clave) % 997) - (hashSimple(hoy + b.clave) % 997))
         .slice(0, 8)
         .map((f) => ({ en: f.en, es: f.es }));
 
-      // Palabra del día: una de las unidades B2 y C1 (si puede ser, una que todavía no viste)
+      // Palabra del día: una de las unidades B1 y B2 (si puede ser, una que todavía no viste)
       const palabrasAltas = items.filter((it) => it.concepto === "palabra" && altas.has(it.unidad));
       const nuevasAltas = palabrasAltas.filter((it) => !registros[it.clave]);
       const nueva = elegir(nuevasAltas.length ? nuevasAltas : palabrasAltas, hoy + "palabra");
 
-      // Trash panda: palabras de las unidades B2 y C1
+      // Trash panda: palabras de las unidades B1 y B2
       const palabrasJuego = datosIngles.unidades.filter((u) => NIVELES_MAPACHE.includes(u.nivel)).flatMap((u) => u.palabras);
 
       const nivelP = nivelPregunta(hoy);
@@ -227,10 +199,9 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
         nivelMapache,
         frase: frase ? formato(frase) : null,
         frases: frases.map(formato),
-        expresionDelDia: elegir([...EXPRESIONES.B, ...EXPRESIONES.C], hoy + "expresion"),
+        expresionDelDia: elegir(EXPRESIONES.B, hoy + "expresion"),
         sueno,
         suenos,
-        casa: CASAS[nivel],
         robados: robadas.slice(0, 12).map((k) => acertijo(porClave.get(k), palabras)).filter(Boolean),
         totalRobados: robadas.length,
         errores,
@@ -240,15 +211,9 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
         palabraDelDia: nueva ? { en: nueva.en, es: nueva.es, pron: palabras.get(nueva.clave.slice(3))?.pron ?? "", ej: palabras.get(nueva.clave.slice(3))?.ejemplo ?? null } : null,
         diario,
         postales: POSTALES.map((post) => ({ ...post, abierta: true, leida: p[`postal:${post.nivel}`] ?? null })),
-        album,
-        muebles,
-        ropa,
         equipo,
-        tienda: TIENDA.map((t) => ({ ...t, comprado: compradas.includes(t.id) })),
-        xp: xpDisponible(dias, compradas, TIENDA),
         trash: { record: p.trash ?? 0, palabras: palabrasJuego.map((w) => ({ en: w.en, es: w.es, tipo: w.tipo, pasado: w.formas?.pasado ?? null })) },
         entrevistas: ENTREVISTAS,
-        unidadesCompletas: completas.length,
       };
     },
 
@@ -256,7 +221,7 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
     async mapacheResumen() {
       const hoy = progreso.hoy();
       const robadas = clavesRobadas(progreso.datos().items ?? {}, hoy);
-      const estado = estadoMapache({ dias: progreso.dias(), hoy, hora: new Date().getHours(), robados: robadas.length });
+      const estado = estadoMapache({ dias: progreso.dias(), hoy, hora: new Date().getHours() });
       return { nombre: nombreDe(propios()), ...estado, robados: robadas.length };
     },
 
@@ -304,26 +269,6 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
     async mapacheRecuperar(clave, acierto) {
       progreso.calificarItem(clave, acierto ? "sabia" : "no");
       progreso.sumarContadores(acierto ? { mapache: 2, inglesAciertos: 1, inglesSegundos: 10 } : { inglesSegundos: 10 });
-      limpiar();
-    },
-
-    async mapacheComprar(id) {
-      const item = TIENDA.find((t) => t.id === id);
-      const p = propios();
-      const compradas = compras(p);
-      if (!item || compradas.includes(id)) return { ok: false };
-      if (xpDisponible(progreso.dias(), compradas, TIENDA) < item.precio) return { ok: false, falta: true };
-      guardar(`compra:${id}`, progreso.hoy());
-      if (item.tipo === "ropa") guardar("equipo", { ...(p.equipo ?? {}), [item.parte]: id });
-      limpiar();
-      return { ok: true };
-    },
-
-    /** Ponerle o quitarle una prenda (null la quita). */
-    async mapacheEquipar(parte, id) {
-      const p = propios();
-      const actual = p.equipo ?? {};
-      guardar("equipo", { ...actual, [parte]: id });
       limpiar();
     },
 

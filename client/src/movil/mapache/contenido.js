@@ -148,48 +148,13 @@ export const SUENOS = [
   { en: "Five more minutes, please. I was just about to wrap up a rather heated code review.", es: "Cinco minutitos más, por favor. Estaba a punto de cerrar un code review bastante acalorado." },
 ];
 
-/** Ropa y muebles de la tienda. Se pagan con tu XP de inglés. `parte`: dónde va en el mapache. */
-export const TIENDA = [
-  { id: "gorra", en: "cap", es: "gorra", precio: 80, tipo: "ropa", parte: "cabeza" },
-  { id: "sombrero", en: "hat", es: "sombrero", precio: 120, tipo: "ropa", parte: "cabeza" },
-  { id: "lentesSol", en: "sunglasses", es: "lentes de sol", precio: 120, tipo: "ropa", parte: "ojos" },
-  { id: "bufanda", en: "scarf", es: "bufanda", precio: 100, tipo: "ropa", parte: "cuello" },
-  { id: "corbatin", en: "bow tie", es: "corbatín", precio: 90, tipo: "ropa", parte: "cuello" },
-  { id: "audifonos", en: "headphones", es: "audífonos", precio: 150, tipo: "ropa", parte: "orejas" },
-  { id: "planta", en: "plant", es: "planta", precio: 60, tipo: "mueble" },
-  { id: "lampara", en: "lamp", es: "lámpara", precio: 70, tipo: "mueble" },
-  { id: "afiche", en: "poster", es: "afiche", precio: 50, tipo: "mueble" },
-  { id: "estante", en: "bookshelf", es: "estante de libros", precio: 140, tipo: "mueble" },
-  { id: "guitarra", en: "guitar", es: "guitarra", precio: 160, tipo: "mueble" },
-  { id: "pecera", en: "fish tank", es: "pecera", precio: 200, tipo: "mueble" },
-];
-
-/** Regalos de nivel: también son ropa. */
+/** Lo que se pone al subir de nivel. `parte`: dónde va en el dibujo. */
 export const ROPA_NIVEL = {
   mochila: { id: "mochila", en: "backpack", es: "mochila", parte: "espalda" },
   lentes: { id: "lentes", en: "glasses", es: "lentes", parte: "ojos" },
   corbata: { id: "corbata", en: "tie", es: "corbata", parte: "cuello" },
   birrete: { id: "birrete", en: "graduation cap", es: "birrete", parte: "cabeza" },
 };
-
-/** Muebles que gana su casa: uno por cada unidad de inglés que completas, en este orden. */
-export const MUEBLES_GANADOS = [
-  { id: "cojin", en: "cushion", es: "cojín" },
-  { id: "taza", en: "mug", es: "taza" },
-  { id: "libro", en: "book", es: "libro" },
-  { id: "reloj", en: "clock", es: "reloj" },
-  { id: "silla", en: "chair", es: "silla" },
-  { id: "mesa", en: "desk", es: "escritorio" },
-  { id: "laptop", en: "laptop", es: "laptop" },
-  { id: "cama", en: "bed", es: "cama" },
-  { id: "cuadro", en: "picture", es: "cuadro" },
-  { id: "alfombra", en: "rug", es: "alfombra" },
-  { id: "radio", en: "radio", es: "radio" },
-  { id: "cactus", en: "cactus", es: "cactus" },
-];
-
-/** Trofeo por cada página del álbum completa (una etapa entera de unidades). */
-export const TROFEO = { id: "trofeo", en: "trophy", es: "trofeo" };
 
 /** Entrevistas de trabajo en inglés (roleplays de las unidades B2 y C1) que te propone el mapache. */
 export const ENTREVISTAS = [

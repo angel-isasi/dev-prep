@@ -1,8 +1,7 @@
 // Map (/ingles/mapache): tu práctica diaria de inglés con el mapache. Arriba, una franja corta con lo
-// que dice hoy y tu meta del día; debajo, cuatro pestañas: Hoy (pregunta del día, repite conmigo,
-// palabra del día, repasos pendientes y tus errores), Leer (postales y su diario), Jugar (Trash panda
-// y la entrevista) y Su casa (la escena, la ropa, la tienda y el álbum). Lo de mascota va al final:
-// primero lo que enseña.
+// que dice hoy y tu meta del día; debajo, tres pestañas: Hoy (pregunta del día, repite conmigo,
+// palabra del día, repasos pendientes y tus errores), Leer (postales y su diario) y Jugar (Trash panda
+// y la entrevista). La tienda, la ropa, el álbum y la escena de su casa se quitaron: no enseñaban.
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
@@ -11,10 +10,9 @@ import { hablar } from "../../lib/voz.js";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { ContenidoPestanas, Pestanas } from "../../components/Pestanas.jsx";
 import { IconoAudio, IconoFlechaIzq } from "../../components/Iconos.jsx";
-import { Casa } from "./Casa.jsx";
 import { CajaVacia, Mapache } from "./Mapache.jsx";
 import { useCharlaMapache } from "./TarjetaMapache.jsx";
-import { Album, Diario, Entrevista, ObjetosPerdidos, PalabraDelDia, Postales, PreguntaDelDia, RepiteConmigo, Ropa, Tienda, TrashPanda, TusErrores } from "./Actividades.jsx";
+import { Diario, Entrevista, ObjetosPerdidos, PalabraDelDia, Postales, PreguntaDelDia, RepiteConmigo, TrashPanda, TusErrores } from "./Actividades.jsx";
 import estilos from "./PaginaMapache.module.css";
 
 export const TEXTO_ESTADO = {
@@ -22,7 +20,7 @@ export const TEXTO_ESTADO = {
   feliz: "Meta de hoy cumplida.",
   normal: "Vas bien: te falta un poco para la meta de hoy.",
   hambriento: "Hoy casi no hubo inglés.",
-  triste: "Se rompió la racha o tienes muchos repasos atrasados.",
+  triste: "Se rompió la racha. Hoy empieza otra.",
   dormido: "Está dormido. Tócalo si quieres saber qué sueña.",
   escapado: "Llevas días sin inglés. Vuelve con una lección corta.",
 };
@@ -31,7 +29,6 @@ const PESTANAS = [
   { id: "hoy", texto: "Hoy" },
   { id: "leer", texto: "Leer" },
   { id: "jugar", texto: "Jugar" },
-  { id: "casa", texto: "Su casa" },
 ];
 
 export function PaginaMapache() {
@@ -98,7 +95,7 @@ export function PaginaMapache() {
                 <p key={dice.en} lang="en">
                   {dice.en}
                 </p>
-                {/* Habla en B2 y C1: la traducción va siempre a la vista */}
+                {/* La traducción va siempre a la vista */}
                 <small>{dice.es}</small>
                 {dice.expresion && (
                   <span className={estilos.expresion}>
@@ -167,17 +164,6 @@ export function PaginaMapache() {
             <PalabraDelDia datos={datos} />
             <ObjetosPerdidos datos={datos} alCambiar={cargar} />
             <TusErrores datos={datos} />
-          </div>
-        )}
-        {pestana === "casa" && (
-          <div className={estilos.rejilla}>
-            <div className={estilos.escenaCasa}>
-              <Casa datos={datos} alTocarMapache={tocarMapache} />
-              <p className={estilos.nota}>Vive en {datos.casa.texto}. Cada unidad completa le da un mueble: toca uno para oír cómo se dice.</p>
-            </div>
-            <Tienda datos={datos} alCambiar={cargar} />
-            <Ropa datos={datos} alCambiar={cargar} />
-            <Album datos={datos} />
           </div>
         )}
         {pestana === "leer" && (

@@ -124,26 +124,23 @@
   gap: var(--espacio-2);
 }
 
-.nota {
-  margin: 0;
-  color: var(--texto-tenue);
-  font-size: var(--letra-2);
-}
-
 .pestanas {
   margin: var(--espacio-5) 0 var(--espacio-4);
 }
 
 /* Tarjetas de actividades: varias por fila */
+/* Las tarjetas de cada fila se reparten todo el ancho y miden lo mismo de alto: sin huecos.
+   Con flex (y no una rejilla fija) da igual si hoy hay 2, 3 o 4 tarjetas: siempre llenan la fila. */
 .rejilla {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(380px, 100%), 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
   gap: var(--espacio-3);
-  align-items: start;
 }
 
 .tarjeta {
   display: flex;
+  flex: 1 1 280px;
   flex-direction: column;
   gap: var(--espacio-3);
   min-width: 0;
@@ -154,7 +151,7 @@
 }
 
 .tarjeta[data-ancho="true"] {
-  grid-column: 1 / -1;
+  flex-basis: 100%;
 }
 
 .tarjeta > header {
@@ -340,70 +337,6 @@
 }
 
 /* Tienda y ropa */
-.tienda,
-.ropa {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: var(--espacio-2);
-}
-
-.producto {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  padding: var(--espacio-3);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-lg);
-  background: var(--fondo-solido);
-}
-
-.producto[data-comprado="true"] {
-  border-color: color-mix(in srgb, var(--exito) 40%, var(--borde));
-}
-
-.nombreProducto {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: var(--texto);
-  font: inherit;
-  font-size: var(--letra-7);
-  font-weight: var(--peso-negrita);
-  cursor: pointer;
-}
-
-.producto small,
-.prenda small {
-  color: var(--texto-tenue);
-  font-size: var(--letra-2);
-}
-
-.comprado {
-  color: var(--exito);
-  font-size: var(--letra-3);
-  font-weight: var(--peso-semi);
-}
-
-.prenda {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  padding: var(--espacio-3);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-lg);
-  background: var(--fondo-solido);
-  color: var(--texto);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.prenda[aria-pressed="true"] {
-  border-color: var(--color-area);
-  background: color-mix(in srgb, var(--color-area) 12%, var(--fondo-solido));
-}
 
 .aviso {
   margin: 0;
@@ -412,72 +345,6 @@
 }
 
 /* Álbum */
-.paginaAlbum h3 {
-  display: flex;
-  align-items: center;
-  gap: var(--espacio-2);
-  margin: var(--espacio-2) 0;
-  font-size: var(--letra-5);
-}
-
-.completa {
-  padding: 2px 8px;
-  border-radius: var(--radio-pildora);
-  background: var(--exito-suave);
-  color: var(--exito);
-  font-size: var(--letra-1);
-}
-
-.stickers {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
-  gap: var(--espacio-2);
-}
-
-.sticker {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  padding: var(--espacio-3) var(--espacio-2);
-  border: 1px dashed var(--borde-fuerte);
-  border-radius: var(--radio-grande);
-  color: var(--texto-tenue);
-  text-align: center;
-}
-
-.sticker strong {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--superficie-2);
-  font-family: var(--fuente-titulos);
-  font-size: var(--letra-6);
-}
-
-.sticker span {
-  font-size: var(--letra-2);
-  line-height: 1.3;
-}
-
-.sticker small {
-  font-size: var(--letra-1);
-}
-
-.sticker[data-tiene="true"] {
-  border-style: solid;
-  border-color: color-mix(in srgb, var(--color-area) 50%, var(--borde));
-  background: color-mix(in srgb, var(--color-area) 10%, var(--superficie));
-  color: var(--texto);
-  transform: rotate(-2deg);
-}
-
-.sticker[data-tiene="true"] strong {
-  background: var(--color-area);
-  color: var(--fondo-solido);
-}
 
 /* Diario */
 .diario {
@@ -749,7 +616,6 @@
 }
 
 /* La pregunta del día ya respondida: pregunta y respuesta a la izquierda, corrección con IA a la derecha */
-.unaColumna,
 .columna {
   display: flex;
   flex-direction: column;
@@ -897,12 +763,6 @@
 }
 
 /* La escena de su casa, ahora dentro de la pestaña "Su casa" */
-.escenaCasa {
-  display: grid;
-  grid-column: 1 / -1;
-  gap: var(--espacio-2);
-  max-width: 860px;
-}
 
 @media (min-width: 900px) {
   .cabeza {

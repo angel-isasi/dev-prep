@@ -71,9 +71,14 @@ Pedido de Angel: que Inglés se entienda mucho mejor, que deje de parecerse al c
 - Botones de audio que faltaban al abrir en frío (la voz se revisaba una sola vez); la voz seguía hablando al salir de una historia; "✓" aunque hubieras fallado; cargas sin mensaje de error en Historias y Parejas; un ejercicio de armar que mostraba la respuesta.
 - La velocidad del audio y el micrófono ya no se guardan en el navegador en modo visita.
 
-**Se mantiene por decisión de Angel:** Map habla en B2 y C1 sin importar tu nivel.
+**Después, el mismo día (segundo commit), con las respuestas de Angel:**
+- Map pasa a B1 y B2, el nivel real de Angel (antes B2 y C1). La IA corrige pensando en ese nivel.
+- Los repasos pendientes ya no lo ponen triste ni cambian lo que dice.
+- Fuera la tienda, la ropa, el álbum y la escena de su casa: quedan 3 pestañas (Hoy, Leer, Jugar).
+- "Tus errores" mostraba la misma frase dos veces, con un guion en lugar de la palabra: al quitar el formato se rompía el hueco.
+- La pestaña Hoy se ordena: la pregunta del día va a todo el ancho en dos columnas y las demás tarjetas llenan la fila con el mismo alto, sin huecos.
 
-**Propuesto, sin hacer:** que Map se adapte a tu nivel real (el contenido por nivel ya existe); que los repasos vencidos no lo pongan "triste"; quitar tienda, ropa y álbum si no los usas; que repetir el examen con peor resultado no reduzca las unidades aprobadas.
+**Propuesto, sin hacer:** que repetir el examen con peor resultado no reduzca las unidades aprobadas; que fallar un repaso no mantenga la racha.
 
 ## Última auditoría
 
