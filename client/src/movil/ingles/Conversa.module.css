@@ -147,3 +147,79 @@
   display: grid;
   gap: var(--espacio-3);
 }
+
+/* Lista de reuniones como tablero a todo el ancho */
+.pagina:has(.escenarios) {
+  max-width: var(--ancho-pagina);
+  padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+}
+
+.escenarios {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.escenarios li {
+  display: grid;
+}
+
+.escenario {
+  align-content: start;
+  gap: var(--espacio-2);
+  padding: var(--espacio-4);
+}
+
+.escenario strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-6);
+}
+
+.escenarioCabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.escenarioCabeza b {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radio-lg);
+  background: color-mix(in srgb, var(--acento) 14%, var(--superficie-2));
+  color: var(--acento);
+  font-family: var(--fuente-codigo);
+  font-size: var(--letra-3);
+}
+
+.escenarioCabeza small {
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+}
+
+/* Cómo empieza la reunión, como un globo de chat */
+.escenario q {
+  justify-self: start;
+  margin-top: auto;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--superficie-2);
+  color: var(--texto);
+  font-size: var(--letra-4);
+  quotes: none;
+}
+
+@media (max-width: 1100px) {
+  .escenarios {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .pagina:has(.escenarios) {
+    padding: var(--espacio-4);
+  }
+  .escenarios {
+    grid-template-columns: 1fr;
+  }
+}

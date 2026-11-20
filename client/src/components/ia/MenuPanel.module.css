@@ -240,3 +240,46 @@
     content: none;
   }
 }
+
+/* ---------- Fichas con ejemplos debajo de la herramienta ---------- */
+.bloques {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--espacio-3);
+  align-items: stretch;
+}
+
+.bloques[data-columna="true"] {
+  grid-template-columns: 1fr;
+  align-content: start;
+}
+
+.linea[data-tipo="mal"] {
+  padding: var(--espacio-2) var(--espacio-3);
+  border-left: 3px solid var(--error);
+  border-radius: var(--radio);
+  background: var(--error-suave);
+}
+
+/* Una insignia corta (número o letra) y su texto */
+.dato {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--espacio-3);
+  margin: 0;
+  font-size: var(--letra-4);
+  line-height: 1.4;
+}
+
+.dato b {
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: var(--radio);
+  background: color-mix(in srgb, var(--acento) 18%, var(--superficie-2));
+  color: var(--acento);
+  font-size: var(--letra-3);
+}

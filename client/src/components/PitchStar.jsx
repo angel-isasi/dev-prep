@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../lib/api.js";
+import { Bloques } from "./ia/MenuPanel.jsx";
 import { Markdown } from "./Markdown.jsx";
 import { Grabadora } from "./Grabadora.jsx";
 import { EvaluadorIa } from "./EvaluadorIa.jsx";
@@ -82,6 +83,7 @@ export function PitchStar({ guias }) {
         <span>
           {estado === "cambios" && "Tienes cambios sin guardar"}
           {estado === "guardado" && "Guardado en tu PC"}
+          {estado === "listo" && "Se guarda en tu PC"}
         </span>
         <button
           type="button"
@@ -202,6 +204,8 @@ export function PitchStar({ guias }) {
           <Markdown>{guias.star}</Markdown>
         </details>
       </section>
+
+      <Bloques id="pitch" columna />
     </div>
   );
 }

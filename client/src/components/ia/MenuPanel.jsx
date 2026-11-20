@@ -5,17 +5,26 @@
 // Lo usan Entrevistas > Simular, Inglés > Con IA y Practicar > Entrena con IA.
 import { Link } from "react-router";
 import { IconoFlechaDer } from "../Iconos.jsx";
+import { MAS } from "./guias.js";
 import estilos from "./MenuPanel.module.css";
 
 /**
  * Un ejemplo dibujado: en vez de explicar con texto qué hace la herramienta, se muestra cómo se ve.
  * @param {{ lineas: { tipo: "ia"|"tu"|"cambio"|"bien"|"nota"|"codigo"|"puntaje", texto?: string, mal?: string, bien?: string }[] }} props
  */
-function Ejemplo({ lineas }) {
+function Ejemplo({ lineas, titulo = "Así se ve" }) {
   return (
-    <aside className={estilos.ejemplo} aria-label="Ejemplo">
-      <span className="etiqueta">Así se ve</span>
+    <aside className={estilos.ejemplo} aria-label={titulo}>
+      <span className="etiqueta">{titulo}</span>
       {lineas.map((l, i) => {
+        if (l.tipo === "dato") {
+          return (
+            <p key={i} className={estilos.dato}>
+              <b>{l.clave}</b>
+              <span>{l.texto}</span>
+            </p>
+          );
+        }
         if (l.tipo === "cambio") {
           return (
             <p key={i} className={estilos.cambio}>
@@ -33,6 +42,33 @@ function Ejemplo({ lineas }) {
         );
       })}
     </aside>
+  );
+}
+
+/**
+ * Las fichas con ejemplos que van debajo de una herramienta (ver guias.js). `columna`: una debajo de otra.
+ * @param {{ id: string, columna?: boolean }} props
+ */
+export function Bloques({ id, columna = false }) {
+  const bloques = MAS[id];
+  if (!bloques) return null;
+  return (
+    <div className={estilos.bloques} data-columna={columna}>
+      {bloques.map((b) => (
+        <Ejemplo key={b.titulo} titulo={b.titulo} lineas={b.lineas} />
+      ))}
+    </div>
+  );
+}
+
+/** La tira de pasos numerados. */
+export function TiraPasos({ pasos }) {
+  return (
+    <ol className={estilos.pasos} aria-label="Cómo funciona">
+      {pasos.map((p) => (
+        <li key={p}>{p}</li>
+      ))}
+    </ol>
   );
 }
 
@@ -87,6 +123,8 @@ export function MenuPanel({ items, elegida, alElegir, etiqueta, enlaces = [], ch
         </div>
         {actual.ejemplo && <Ejemplo key={`e-${actual.id}`} lineas={actual.ejemplo} />}
       </div>
+
+      <Bloques key={`m-${actual.id}`} id={actual.id} />
     </div>
   );
 }

@@ -793,3 +793,59 @@
     min-height: 44px;
   }
 }
+
+/* Escala de letra unificada: título de ficha, texto grande en inglés, texto normal y etiqueta chica */
+.tarjeta > header h2 {
+  font-size: var(--letra-7);
+}
+
+/* Todo texto grande en inglés (frase, pregunta, palabra, expresión) mide lo mismo */
+.fraseGrande,
+.palabraGrande,
+.globo p {
+  font-size: var(--titulo-2);
+  line-height: 1.3;
+}
+
+.palabraGrande span,
+.traduccion,
+.ayuda,
+.aviso,
+.reto,
+.globo small,
+.quienTexto .globo small {
+  font-size: var(--letra-4);
+}
+
+.tarjeta > header span,
+.enlace,
+.enlaceSuave,
+.expresion,
+.resultado span,
+.diario span,
+.postal small,
+.entrevistaOpcion small,
+.metaCifras span {
+  font-size: var(--letra-3);
+}
+
+/* La pregunta, la frase, la palabra y la expresión: misma letra, mismo tamaño y mismo peso */
+.tarjeta p.preguntaEn,
+.tarjeta p.fraseGrande,
+.tarjeta p.palabraGrande {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-2);
+  font-weight: var(--peso-negrita);
+  line-height: 1.3;
+}
+
+.tarjeta p.palabraGrande span {
+  font-family: var(--fuente);
+  font-size: var(--letra-4);
+  font-weight: var(--peso-normal);
+}
+
+.metaCifras strong {
+  font-size: var(--titulo-2);
+}
