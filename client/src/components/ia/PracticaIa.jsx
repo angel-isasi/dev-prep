@@ -1,6 +1,8 @@
 // IA dentro de un ejercicio: pista que mira tu código, "¿Por qué falla?" en cada test en rojo y la
 // pestaña "Entrénalo" (revisión de senior con comparación, di la complejidad, detecta el error y variante).
 import { useEffect, useState } from "react";
+import { MenuPanel } from "./MenuPanel.jsx";
+import { IconoChispa, IconoEntrevistas, IconoMicrofono, IconoReloj, IconoRepetir } from "../Iconos.jsx";
 import { api } from "../../lib/api.js";
 import { EvaluadorIa } from "../EvaluadorIa.jsx";
 import { TextoConCodigo } from "../TextoConCodigo.jsx";
@@ -138,20 +140,27 @@ function PorQueFallaContenido({ id, enunciado, caso, olvidar }) {
  */
 export function Entrenar({ id, titulo, enunciado }) {
   const datos = useMiCodigo(id);
+  const [elegida, setElegida] = useState(null);
   const codigo = datos?.codigo ?? "";
   if (datos && !codigo) {
     return <p className={base.suave}>No se encontró tu archivo en workspace/. Ábrelo en VS Code desde la laptop para entrenarlo.</p>;
   }
+  const ITEMS = [
+    ...(codigo ? [{ id: "senior", titulo: "Revisión de un senior", detalle: "Tu código, comentado como en un pull request", minutos: "2 min", Icono: IconoEntrevistas }] : []),
+    { id: "complejidad", titulo: "Di la complejidad", detalle: "Cuánto cuesta en tiempo y en espacio", minutos: "1 min", Icono: IconoReloj },
+    { id: "error", titulo: "Detecta el error", detalle: "Hay un error escondido en la solución", minutos: "3 min", Icono: IconoChispa },
+    { id: "variante", titulo: "Variante", detalle: "El mismo ejercicio con un giro", minutos: "10 min", Icono: IconoRepetir },
+    { id: "ingles", titulo: "Explícalo en inglés", detalle: "Walk me through your solution", minutos: "3 min", Icono: IconoMicrofono },
+  ].map((i) => ({ ...i, ia: true, sinRecorrido: true }));
+  const actual = ITEMS.find((i) => i.id === elegida)?.id ?? ITEMS[0].id;
   return (
-    <div className={estilos.rejilla}>
-      {codigo && (
-        <EvaluadorIa tarea="codigo" respuestaFija={codigo} pedido={{ pregunta: enunciado, categoria: titulo, oficial: datos?.oficial ?? "" }} />
-      )}
-      <Complejidad enunciado={enunciado} codigo={codigo} />
-      <DetectaError enunciado={enunciado} codigo={datos?.oficial || codigo} />
-      <Variante id={id} titulo={titulo} enunciado={enunciado} codigo={codigo} />
-      <ExplicaloIngles titulo={titulo} codigo={codigo} />
-    </div>
+    <MenuPanel items={ITEMS} elegida={actual} alElegir={setElegida} etiqueta="Entrenamientos con IA">
+      {actual === "senior" && <EvaluadorIa tarea="codigo" respuestaFija={codigo} pedido={{ pregunta: enunciado, categoria: titulo, oficial: datos?.oficial ?? "" }} />}
+      {actual === "complejidad" && <Complejidad enunciado={enunciado} codigo={codigo} />}
+      {actual === "error" && <DetectaError enunciado={enunciado} codigo={datos?.oficial || codigo} />}
+      {actual === "variante" && <Variante id={id} titulo={titulo} enunciado={enunciado} codigo={codigo} />}
+      {actual === "ingles" && <ExplicaloIngles titulo={titulo} codigo={codigo} />}
+    </MenuPanel>
   );
 }
 

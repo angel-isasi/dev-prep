@@ -1,6 +1,7 @@
 import { Markdown } from "./Markdown.jsx";
 import { EnunciadoOrganizado } from "./EnunciadoOrganizado.jsx";
 import { Confirmar } from "./Confirmar.jsx";
+import { IconoCandado } from "./Iconos.jsx";
 import estilos from "./Secciones.module.css";
 
 /**
@@ -14,19 +15,19 @@ export function SeccionSolucion({ solucion, resuelto, alVer, ocupado }) {
     return (
       <div className={estilos.seccion}>
         <div className={estilos.bloqueada}>
+          <IconoCandado tamano={22} />
           {resuelto ? (
             <>
-              <p>Ya lo resolviste. Compara tu código con la solución oficial y lee por qué funciona.</p>
+              <strong>Ya lo resolviste</strong>
+              <p>Compara tu código con la solución oficial.</p>
               <button type="button" className="boton boton-primario" onClick={alVer} disabled={ocupado}>
                 Ver solución y explicación
               </button>
             </>
           ) : (
             <>
-              <p>
-                La solución está bloqueada hasta que lo resuelvas. Antes de verla, prueba con las pistas: aprendes
-                mucho más destrabándote tú.
-              </p>
+              <strong>Solución bloqueada</strong>
+              <p>Prueba primero con las pistas. Si la ves ahora, el ejercicio queda para repasar.</p>
               <Confirmar
                 titulo="¿Ver la solución?"
                 descripcion="Si la ves antes de resolverlo, el ejercicio queda para repasar y no cuenta como resuelto. Volverá en tus repasos."
@@ -51,11 +52,17 @@ export function SeccionSolucion({ solucion, resuelto, alVer, ocupado }) {
 
   return (
     <div className={estilos.seccion}>
-      <div className={estilos.tarjeta}>
-        <span className={estilos.etiqueta}>Solución oficial</span>
-        <Markdown>{bloque}</Markdown>
-      </div>
-      <EnunciadoOrganizado markdown={solucion.explicacion} etiqueta="Por qué funciona" />
+      <EnunciadoOrganizado
+        markdown={solucion.explicacion}
+        etiqueta="Por qué funciona"
+        parejo
+        junto={
+          <div className={`${estilos.tarjeta} ${estilos.codigoSolucion}`}>
+            <span className={estilos.etiqueta}>Solución oficial</span>
+            <Markdown>{bloque}</Markdown>
+          </div>
+        }
+      />
     </div>
   );
 }

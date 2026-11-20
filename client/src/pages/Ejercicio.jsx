@@ -7,18 +7,20 @@ import { Insignia } from "../components/Insignia.jsx";
 import { EnunciadoOrganizado } from "../components/EnunciadoOrganizado.jsx";
 import { PanelTests } from "../components/PanelTests.jsx";
 import { Pestanas } from "../components/Pestanas.jsx";
-import { SeccionPistas } from "../components/SeccionPistas.jsx";
 import { SeccionSolucion } from "../components/SeccionSolucion.jsx";
 import { SeccionExplicar } from "../components/SeccionExplicar.jsx";
 import { Entrenar, PistaIa } from "../components/ia/PracticaIa.jsx";
-import { IconoFlechaIzq, IconoVSCode } from "../components/Iconos.jsx";
+import { IconoCandado, IconoFlechaIzq, IconoVSCode } from "../components/Iconos.jsx";
 import { Cronometro } from "../components/Cronometro.jsx";
 import { Confirmar } from "../components/Confirmar.jsx";
 import { celebrar } from "../lib/celebrar.js";
 import { Ayuda } from "../components/Ayuda.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import { buscarColeccion } from "../lib/areas.js";
+import { Markdown } from "../components/Markdown.jsx";
 import estilos from "./Ejercicio.module.css";
+
+const NOMBRES_PISTA = ["Hacia dónde mirar", "Qué herramienta usar", "Esqueleto de la solución"];
 
 function fechaCorta(fecha) {
   const [a, m, d] = fecha.split("-").map(Number);
@@ -40,6 +42,7 @@ export function Ejercicio() {
   const [aviso, setAviso] = useState(null); // { tipo: "info" | "error" | "exito", texto }
   const [ocupado, setOcupado] = useState(false);
   const [pestana, setPestana] = useState("enunciado");
+
   const [cronometro, setCronometro] = useState(null); // Date.now() al empezar el modo entrevista
 
   async function cargar() {
@@ -164,13 +167,9 @@ export function Ejercicio() {
   const progreso = ejercicio.progreso;
   const tiempo = minutos(progreso?.segundosActivos);
 
+
   const pestanas = [
     { id: "enunciado", texto: "Enunciado" },
-    {
-      id: "pistas",
-      texto: "Pistas",
-      extra: ejercicio.totalPistas ? `${ejercicio.pistas.length}/${ejercicio.totalPistas}` : undefined,
-    },
     { id: "solucion", texto: "Solución", extra: ejercicio.solucion ? undefined : "bloqueada" },
     { id: "explicar", texto: "Explícalo", extra: progreso?.explicacion ? "✓" : undefined },
     ...(resuelto ? [{ id: "entrenar", texto: "Entrénalo", extra: "IA" }] : []),
@@ -183,6 +182,7 @@ export function Ejercicio() {
           <IconoFlechaIzq /> {nombreColeccion(ejercicio.coleccion)}
         </Link>
 
+        <div className={estilos.encabezado}>
         <header className={estilos.cabecera}>
           <p className={estilos.etiqueta}>
             <span className={estilos.numero}>#{numeroEjercicio(ejercicio.id)}</span>
@@ -192,12 +192,11 @@ export function Ejercicio() {
           <div className={estilos.meta}>
             <Insignia nivel={ejercicio.nivel} />
             <Insignia estado={ejercicio.estado} />
-            {progreso?.intentos > 0 && (
-              <span className={estilos.dato}>
-                {progreso.intentos} {progreso.intentos === 1 ? "intento" : "intentos"}
-              </span>
+            {ejercicio.preparado && (
+              <code className={estilos.archivo} title="Tu archivo de trabajo">
+                workspace/{ejercicio.id}/{ejercicio.archivo}
+              </code>
             )}
-            {tiempo && <span className={estilos.dato}>{tiempo}</span>}
           </div>
         </header>
 
@@ -239,6 +238,7 @@ export function Ejercicio() {
             />
           )}
         </div>
+        </div>
 
         {progreso?.repasando ? (
           <p className={estilos.aviso} data-tipo="info">
@@ -259,12 +259,6 @@ export function Ejercicio() {
           )
         )}
 
-        {ejercicio.preparado && (
-          <p className={estilos.archivo}>
-            Tu archivo: <code>workspace/{ejercicio.id}/{ejercicio.archivo}</code>
-          </p>
-        )}
-
         {aviso && (
           <p className={estilos.aviso} data-tipo={aviso.tipo} role="status">
             {aviso.texto}
@@ -282,18 +276,55 @@ export function Ejercicio() {
 
         {pestana === "enunciado" && (
           <div className={estilos.enunciado}>
-            <EnunciadoOrganizado markdown={ejercicio.enunciado} />
+            <EnunciadoOrganizado
+              markdown={ejercicio.enunciado}
+              parejo
+              extra={
+                <section className={`tarjeta ${estilos.pistas}`}>
+                  <header>
+                    <span className="etiqueta">Pistas</span>
+                    <small>
+                      {ejercicio.pistas.length} de {ejercicio.totalPistas ?? 0} vistas
+                    </small>
+                  </header>
+                  {ejercicio.totalPistas ? (
+                    <ol>
+                      {Array.from({ length: ejercicio.totalPistas }, (_, i) => {
+                        const vista = ejercicio.pistas[i];
+                        const toca = i === ejercicio.pistas.length;
+                        return (
+                          <li key={i} data-estado={vista ? "vista" : toca ? "toca" : "cerrada"}>
+                            <b>{i + 1}</b>
+                            <div>
+                              <strong>{NOMBRES_PISTA[i] ?? `Pista ${i + 1}`}</strong>
+                              {vista && <Markdown>{vista}</Markdown>}
+                            </div>
+                            {toca && (
+                              <button type="button" className="boton" onClick={() => verPista(i + 1)} disabled={ocupado}>
+                                Ver
+                              </button>
+                            )}
+                            {!vista && !toca && <IconoCandado tamano={14} />}
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  ) : (
+                    <p className={estilos.dato}>Este ejercicio no tiene pistas.</p>
+                  )}
+                  {ejercicio.preparado && !resuelto && (
+                    <PistaIa key={ejercicio.id} id={ejercicio.id} enunciado={ejercicio.enunciado} resultado={resultado} pistasVistas={ejercicio.pistas} />
+                  )}
+                </section>
+              }
+            />
           </div>
         )}
-        {pestana === "pistas" && (
-          <>
-            <SeccionPistas pistas={ejercicio.pistas} total={ejercicio.totalPistas} alVer={verPista} ocupado={ocupado} />
-            {ejercicio.preparado && !resuelto && (
-              <PistaIa key={ejercicio.id} id={ejercicio.id} enunciado={ejercicio.enunciado} resultado={resultado} pistasVistas={ejercicio.pistas} />
-            )}
-          </>
+        {pestana === "entrenar" && resuelto && (
+          <div className={estilos.seccionTablero}>
+            <Entrenar key={ejercicio.id} id={ejercicio.id} titulo={ejercicio.titulo} enunciado={ejercicio.enunciado} />
+          </div>
         )}
-        {pestana === "entrenar" && resuelto && <Entrenar key={ejercicio.id} id={ejercicio.id} titulo={ejercicio.titulo} enunciado={ejercicio.enunciado} />}
         {pestana === "solucion" && (
           <SeccionSolucion solucion={ejercicio.solucion} resuelto={resuelto} alVer={verSolucion} ocupado={ocupado} />
         )}
@@ -319,6 +350,44 @@ export function Ejercicio() {
           ultimaCorrida={ultimaCorrida}
           conIa={ejercicio.preparado && !resuelto ? { id: ejercicio.id, enunciado: ejercicio.enunciado } : undefined}
         />
+
+        <section className={`tarjeta ${estilos.recorrido}`}>
+          <span className="etiqueta">Tu recorrido</span>
+          <ol>
+            {[
+              { id: "enunciado", texto: "Enunciado", detalle: resuelto ? "Resuelto: tests en verde" : "Qué hay que hacer", hecho: resuelto },
+              { id: "solucion", texto: "Solución", detalle: ejercicio.solucion ? "Con su explicación" : "Bloqueada hasta que la pidas" },
+              { id: "explicar", texto: "Explícalo", detalle: progreso?.explicacion ? "Guardado" : "Con tus palabras, como en la entrevista", hecho: !!progreso?.explicacion },
+              { id: "entrenar", texto: "Entrénalo con IA", detalle: resuelto ? "Variante, error escondido, complejidad" : "Se abre al resolverlo", bloqueado: !resuelto },
+            ].map((p, i) => (
+              <li key={p.id}>
+                <button type="button" data-hecho={!!p.hecho} data-activo={pestana === p.id} disabled={p.bloqueado} onClick={() => setPestana(p.id)}>
+                  <b>{p.hecho ? "✓" : i + 1}</b>
+                  <span>
+                    <strong>{p.texto}</strong>
+                    <small>{p.detalle}</small>
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ol>
+          <dl className={estilos.cifras}>
+            <div>
+              <dt>Intentos</dt>
+              <dd>{progreso?.intentos ?? 0}</dd>
+            </div>
+            <div>
+              <dt>Tiempo</dt>
+              <dd>{tiempo || "–"}</dd>
+            </div>
+            <div>
+              <dt>Pistas</dt>
+              <dd>
+                {ejercicio.pistas.length}/{ejercicio.totalPistas ?? 0}
+              </dd>
+            </div>
+          </dl>
+        </section>
       </div>
     </div>
   );

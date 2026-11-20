@@ -204,3 +204,434 @@
 .plegada > div > :last-child {
   margin-bottom: 0;
 }
+
+/* Escala pareja (página del ejercicio): la tarea un punto más grande; títulos, texto y código de las
+   fichas iguales entre sí; y lo plegado ocupa todo el ancho */
+.enunciado[data-parejo="true"] .principal > div {
+  font-size: var(--letra-7);
+  line-height: 1.6;
+}
+
+.enunciado[data-parejo="true"] .seccion > h2,
+.enunciado[data-parejo="true"] .conPasos > h2 {
+  margin-bottom: var(--espacio-2);
+  color: var(--texto-suave);
+  font-family: var(--fuente);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-negrita);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.enunciado[data-parejo="true"] .seccion > div,
+.enunciado[data-parejo="true"] .plegada > div {
+  font-size: var(--letra-5);
+  line-height: 1.6;
+}
+
+.enunciado[data-parejo="true"] pre,
+.enunciado[data-parejo="true"] pre code {
+  font-size: var(--letra-4);
+}
+
+.enunciado[data-parejo="true"] .plegadas {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+
+.enunciado[data-parejo="true"] .plegada summary {
+  font-size: var(--letra-5);
+}
+
+/* La tarea y, a su lado, las reglas numeradas */
+.arriba {
+  display: grid;
+  gap: var(--espacio-3);
+}
+
+@container (min-width: 900px) {
+  .arriba[data-con-reglas="true"] {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  }
+}
+
+.reglas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.reglas ol {
+  display: grid;
+  flex: 1;
+  align-content: space-around;
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reglas li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--espacio-3);
+  font-size: var(--letra-5);
+  line-height: 1.5;
+}
+
+.reglas li b {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radio);
+  background: var(--color-area-suave, var(--acento-suave));
+  color: var(--color-area, var(--acento));
+  font-size: var(--letra-3);
+}
+
+.reglas li p {
+  margin: 0;
+}
+
+/* Ejemplos como tabla: lo que llamas y lo que devuelve */
+.casos {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 var(--espacio-2);
+}
+
+.casos th {
+  padding: 0 var(--espacio-3);
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-normal);
+  text-align: left;
+}
+
+.casos td {
+  padding: var(--espacio-3);
+  background: var(--superficie-2);
+  vertical-align: middle;
+}
+
+.casos td:first-child {
+  border-radius: var(--radio-lg) 0 0 var(--radio-lg);
+}
+
+.casos td:last-child {
+  border-radius: 0 var(--radio-lg) var(--radio-lg) 0;
+}
+
+.casos td:nth-child(2) {
+  width: 32px;
+  color: var(--texto-tenue);
+  text-align: center;
+}
+
+.casos code {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: var(--letra-4);
+  white-space: pre-wrap;
+}
+
+.casos td:last-child code {
+  color: var(--exito);
+}
+
+/* Jerarquía de letra: la tarea es lo más grande; reglas, ejemplos y lo demás, un punto menos */
+.enunciado[data-parejo="true"] .reglas li,
+.enunciado[data-parejo="true"] .seccion > div,
+.enunciado[data-parejo="true"] .plegada > div {
+  font-size: var(--letra-4);
+}
+
+.enunciado[data-parejo="true"] .casos code {
+  font-size: var(--letra-3);
+}
+
+.enunciado[data-parejo="true"] .casos td {
+  padding: var(--espacio-2) var(--espacio-3);
+}
+
+.enunciado[data-parejo="true"] .plegada[open] {
+  padding-bottom: var(--espacio-4);
+}
+
+/* Fila de abajo: lo que amplía y, al lado, un bloque de apoyo (mismas columnas que la fila de arriba) */
+.abajo {
+  display: grid;
+  gap: var(--espacio-3);
+  align-items: start;
+}
+
+.abajo .plegadas {
+  grid-template-columns: 1fr;
+}
+
+@container (min-width: 900px) {
+  .abajo {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  }
+}
+
+/* ---------- Distribución v3 de la página del ejercicio ----------
+   1) Una ficha grande: la tarea a la izquierda y sus ejemplos a la derecha.
+   2) Las reglas en una fila de fichas chicas, cada una con su número.
+   3) Abajo, lo que amplía y el bloque de apoyo. */
+.enunciado[data-parejo="true"] .principal[data-con-ejemplos="true"] {
+  display: grid;
+  gap: var(--espacio-5);
+}
+
+@container (min-width: 900px) {
+  .enunciado[data-parejo="true"] .principal[data-con-ejemplos="true"] {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: var(--espacio-6);
+  }
+  .enunciado[data-parejo="true"] .ejemplos {
+    padding-left: var(--espacio-6);
+    border-left: 1px solid var(--borde);
+  }
+}
+
+.tarea > div {
+  margin-top: var(--espacio-2);
+  font-size: var(--letra-7);
+  line-height: 1.6;
+}
+
+.tarea > div > :last-child {
+  margin-bottom: 0;
+}
+
+.ejemplos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.caso {
+  display: grid;
+  gap: 6px;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--fondo-solido, var(--superficie-2));
+}
+
+.caso code {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: var(--letra-3);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.caso code:last-child {
+  color: var(--exito);
+}
+
+/* Reglas: sin caja alrededor, una ficha por regla */
+.enunciado[data-parejo="true"] .reglas {
+  gap: var(--espacio-2);
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.enunciado[data-parejo="true"] .reglas .etiqueta {
+  color: var(--texto-suave);
+}
+
+.enunciado[data-parejo="true"] .reglas ol {
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  align-content: stretch;
+}
+
+.enunciado[data-parejo="true"] .reglas li {
+  grid-template-columns: 1fr;
+  align-content: start;
+  gap: var(--espacio-2);
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.enunciado[data-parejo="true"] .reglas li b {
+  width: 32px;
+  height: 32px;
+  font-family: var(--fuente-codigo);
+}
+
+/* ---------- Distribución v4 (página del ejercicio) ----------
+   Escala de letra de TODA la pantalla, de mayor a menor:
+     tarea: letra-6 · texto de apoyo (reglas, por qué importa): letra-4 · código: letra-3 · etiquetas: letra-2
+   La ficha grande lleva la tarea a la izquierda y, a la derecha, las reglas como lista fina. */
+.enunciado[data-parejo="true"] .principal[data-con-reglas="true"] {
+  display: grid;
+  gap: var(--espacio-5);
+}
+
+@container (min-width: 900px) {
+  .enunciado[data-parejo="true"] .principal[data-con-reglas="true"] {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: var(--espacio-6);
+  }
+  .enunciado[data-parejo="true"] .principal .reglas {
+    padding-left: var(--espacio-6);
+    border-left: 1px solid var(--borde);
+  }
+}
+
+.enunciado[data-parejo="true"] .tarea > div {
+  font-size: var(--letra-6);
+  line-height: 1.6;
+}
+
+.enunciado[data-parejo="true"] .principal .reglas {
+  gap: var(--espacio-2);
+  padding-top: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 0;
+  background: none;
+}
+
+.enunciado[data-parejo="true"] .principal .reglas .etiqueta {
+  color: var(--texto-suave);
+}
+
+.enunciado[data-parejo="true"] .principal .reglas ol {
+  grid-template-columns: 1fr;
+  align-content: start;
+  gap: 0;
+}
+
+.enunciado[data-parejo="true"] .principal .reglas li {
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: start;
+  gap: var(--espacio-3);
+  padding: var(--espacio-2) 0;
+  border: 0;
+  border-bottom: 1px solid var(--borde);
+  border-radius: 0;
+  background: none;
+}
+
+.enunciado[data-parejo="true"] .principal .reglas li:last-child {
+  border-bottom: 0;
+}
+
+.enunciado[data-parejo="true"] .principal .reglas li b {
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: 50%;
+  font-family: var(--fuente);
+  font-size: var(--letra-2);
+}
+
+.enunciado[data-parejo="true"] .reglas li > div,
+.enunciado[data-parejo="true"] .plegada > div,
+.enunciado[data-parejo="true"] .seccion > div {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  line-height: 1.5;
+}
+
+.enunciado[data-parejo="true"] pre,
+.enunciado[data-parejo="true"] pre code,
+.enunciado[data-parejo="true"] .casos code {
+  font-size: var(--letra-3);
+}
+
+.enunciado[data-parejo="true"] .plegada summary {
+  font-size: var(--letra-4);
+}
+
+/* Fila de abajo en tres: lo que amplía, qué hacer si te trabas y el siguiente ejercicio */
+@container (min-width: 900px) {
+  .enunciado[data-parejo="true"] .abajo {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr);
+    align-items: stretch;
+  }
+}
+
+/* "Por qué importa" como lectura: la idea principal resalta y lo demás la acompaña */
+.porque {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  height: 100%;
+  padding: var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-left: 3px solid var(--color-area, var(--acento));
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.porque .etiqueta {
+  color: var(--texto-suave);
+}
+
+.porque .idea > div {
+  color: var(--texto);
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-6);
+  font-weight: var(--peso-semi);
+  line-height: 1.4;
+}
+
+.porque > div:last-child:not(.idea) {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  line-height: 1.6;
+}
+
+.porque p {
+  margin: 0;
+}
+
+@container (min-width: 900px) {
+  .enunciado[data-parejo="true"] .abajo {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* Algo junto a la ficha principal (por ejemplo, el código de la solución y, al lado, la idea clave) */
+.solo {
+  display: contents;
+}
+
+.duo {
+  display: grid;
+  gap: var(--espacio-3);
+  align-items: stretch;
+}
+
+@container (min-width: 900px) {
+  .duo {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  }
+}
+
+/* Si no hay nada que ampliar, el bloque de apoyo ocupa toda la fila */
+.enunciado[data-parejo="true"] .abajo:has(> .plegadas:empty) {
+  grid-template-columns: 1fr;
+}
+
+.abajo > .plegadas:empty {
+  display: none;
+}

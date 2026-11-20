@@ -72,7 +72,8 @@ export function SeccionExplicar({ id, titulo = "", enunciado = "", resuelto, tex
     return (
       <div className={estilos.seccion}>
         <div className={estilos.bloqueada}>
-          <p>Resuelve el ejercicio primero. Después aquí escribirás cómo lo explicarías en una entrevista.</p>
+          <strong>Primero resuélvelo</strong>
+          <p>Después lo explicas aquí, como en una entrevista.</p>
         </div>
       </div>
     );
@@ -89,60 +90,86 @@ export function SeccionExplicar({ id, titulo = "", enunciado = "", resuelto, tex
 
   return (
     <div className={estilos.seccion}>
-      <p className={estilos.intro}>
-        Imagina que el entrevistador te dice "cuéntame cómo lo resolviste". Escríbelo como lo dirías en voz alta: la
-        idea, los pasos y por qué funciona. Explicarlo es lo que de verdad te evalúan.
-      </p>
-      {!reloj && (
-        <div className={estilos.fila}>
-          <button
-            type="button"
-            className="boton"
-            onClick={() => {
-              setTexto("");
-              setNota(null);
-              setReloj({ inicio: Date.now() });
+      <div className={estilos.explicar}>
+        <form onSubmit={guardar} className={`${estilos.tarjeta} ${estilos.escribir}`}>
+          <header>
+            <span className={estilos.etiqueta}>"Cuéntame cómo lo resolviste"</span>
+            {corriendo ? (
+              <strong className={estilos.reloj} data-poco={restantes <= 10}>
+                0:{String(restantes).padStart(2, "0")}
+              </strong>
+            ) : (
+              !reloj && (
+                <button
+                  type="button"
+                  className="boton"
+                  title="Como en la entrevista: sin pensarlo demasiado"
+                  onClick={() => {
+                    setTexto("");
+                    setNota(null);
+                    setReloj({ inicio: Date.now() });
+                  }}
+                >
+                  <IconoReloj tamano={16} /> En {SEGUNDOS} segundos
+                </button>
+              )
+            )}
+          </header>
+          <textarea
+            readOnly={!!reloj?.fin}
+            autoFocus={corriendo}
+            className={estilos.texto}
+            aria-label="Tu explicación"
+            placeholder="Primero... luego... funciona porque..."
+            value={texto}
+            onChange={(e) => {
+              setTexto(e.target.value);
+              setEstado("listo");
             }}
-          >
-            <IconoReloj tamano={16} /> Explícalo en {SEGUNDOS} segundos
-          </button>
-          <span className={estilos.intro}>Como en la entrevista: sin pensarlo demasiado.</span>
-        </div>
-      )}
-      {corriendo && (
-        <div className={estilos.fila}>
-          <strong className={estilos.reloj} data-poco={restantes <= 10}>
-            0:{String(restantes).padStart(2, "0")}
-          </strong>
-          <button type="button" className="boton boton-primario" onClick={terminarReloj}>
-            Terminé
-          </button>
-        </div>
-      )}
-      <form onSubmit={guardar} className={estilos.seccion} style={{ paddingTop: 0 }}>
-        <textarea
-          readOnly={!!reloj?.fin}
-          autoFocus={corriendo}
-          className={estilos.texto}
-          aria-label="Tu explicación"
-          placeholder="Primero... luego... funciona porque..."
-          value={texto}
-          onChange={(e) => {
-            setTexto(e.target.value);
-            setEstado("listo");
-          }}
-        />
-        <div className={estilos.fila}>
-          <button
-            type="submit"
-            className="boton boton-primario"
-            disabled={!texto.trim() || estado === "guardando"}
-          >
-            {yaEscribio ? "Guardar cambios" : "Guardar y comparar"}
-          </button>
-          {estado === "guardado" && <span className={estilos.guardado}>Guardado</span>}
-        </div>
-      </form>
+          />
+          <div className={estilos.fila}>
+            {corriendo ? (
+              <button type="button" className="boton boton-primario" onClick={terminarReloj}>
+                Terminé
+              </button>
+            ) : (
+              <button type="submit" className="boton boton-primario" disabled={!texto.trim() || estado === "guardando"}>
+                {yaEscribio ? "Guardar cambios" : "Guardar y comparar"}
+              </button>
+            )}
+            {estado === "guardado" && <span className={estilos.guardado}>Guardado</span>}
+            <span className={estilos.intro}>{texto.trim() ? texto.trim().split(/\s+/).length : 0} palabras</span>
+          </div>
+        </form>
+
+        <aside className={`${estilos.tarjeta} ${estilos.guion}`}>
+          <span className={estilos.etiqueta}>Qué decir, en orden</span>
+          <ol>
+            <li>
+              <b>1</b>
+              <span>
+                <strong>La idea</strong>
+                <small>En una frase, qué haces</small>
+              </span>
+            </li>
+            <li>
+              <b>2</b>
+              <span>
+                <strong>Los pasos</strong>
+                <small>Primero, luego, al final</small>
+              </span>
+            </li>
+            <li>
+              <b>3</b>
+              <span>
+                <strong>Por qué funciona</strong>
+                <small>Y un caso raro que cubres</small>
+              </span>
+            </li>
+          </ol>
+          <p className={estilos.intro}>Al guardar lo comparas con la respuesta de un candidato fuerte.</p>
+        </aside>
+      </div>
 
       {(yaEscribio || reloj?.fin) && modelo && !corriendo && (
         <div className={`${estilos.tarjeta} ${estilos.modelo}`}>

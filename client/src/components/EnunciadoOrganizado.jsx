@@ -16,13 +16,46 @@ import estilos from "./EnunciadoOrganizado.module.css";
 const PLEGADAS = /^(por qué importa|por qué funciona|errores comunes|otra forma|cómo explicarlo|conceptos|reto extra|pistas?( de diseño)?$|lo que se valora)/i;
 const palabras = (texto) => texto.trim().split(/s+/).filter(Boolean).length;
 
+/** Parte un texto en su primera oración (la idea) y el resto. Si no se puede partir limpio, todo es la idea. */
+export function ideaPrincipal(cuerpo) {
+  const texto = cuerpo.trim();
+  const m = texto.match(/^([^\n]+?[.:!?])\s+(?=[A-ZÁÉÍÓÚÑ¿¡])([\s\S]+)$/);
+  const pares = (t) => (t.match(/`/g) ?? []).length % 2 === 0 && (t.match(/\*\*/g) ?? []).length % 2 === 0;
+  if (!m || !pares(m[1])) return { idea: texto, resto: "" };
+  return { idea: m[1], resto: m[2].trim() };
+}
+
+const REGLAS = /^(reglas|requisitos|condiciones|restricciones|ten en cuenta)/i;
+
+/** Si el texto es solo una lista de Markdown, sus elementos; si no, null. */
+export function listaDe(cuerpo) {
+  const lineas = cuerpo.trim().split("\n");
+  if (!lineas.every((l) => !l.trim() || /^[-*] /.test(l) || /^\s+\S/.test(l))) return null;
+  const items = [];
+  for (const l of lineas) {
+    if (/^[-*] /.test(l)) items.push(l.slice(2));
+    else if (l.trim() && items.length) items[items.length - 1] += " " + l.trim();
+  }
+  return items.length >= 2 ? items : null;
+}
+
+/** Si el texto es un solo bloque de código con líneas "llamada; // resultado", esas parejas; si no, null. */
+export function casosDe(cuerpo) {
+  const m = cuerpo.trim().match(/^```\w*\n([\s\S]*?)\n```$/);
+  if (!m) return null;
+  const lineas = m[1].split("\n").filter((l) => l.trim());
+  const casos = lineas.map((l) => l.match(/^(.+?);?\s*\/\/\s*(.+)$/));
+  if (casos.length === 0 || casos.some((c) => !c)) return null;
+  return casos.map((c) => ({ llamada: c[1].trim(), resultado: c[2].trim() }));
+}
+
 const PRINCIPALES = /^(el problema|tu tarea|qué hacer|qué debe hacer|la función que vas a probar|enunciado|idea clave)$|^ticket/i;
 
 /**
  * @param {{ markdown: string, etiqueta?: string, primeraDestacada?: boolean }} props
  * primeraDestacada: si no hay texto inicial, la primera sección va destacada arriba (para guías).
  */
-export function EnunciadoOrganizado({ markdown, etiqueta = "Qué tienes que hacer", primeraDestacada = false }) {
+export function EnunciadoOrganizado({ markdown, etiqueta = "Qué tienes que hacer", primeraDestacada = false, parejo = false, extra = null, junto = null }) {
   const { antes, secciones } = useMemo(() => seccionesDe(markdown), [markdown]);
   if (secciones.length === 0)
     return (
@@ -40,17 +73,42 @@ export function EnunciadoOrganizado({ markdown, etiqueta = "Qué tienes que hace
     resto = secciones.slice(1);
   }
 
-  const visibles = resto.filter((s) => !PLEGADAS.test(s.titulo));
+  // En la página del ejercicio, las reglas (si son una lista) van al lado de la tarea, numeradas
+  const reglas = parejo && principal ? resto.find((s) => REGLAS.test(s.titulo) && listaDe(s.cuerpo)) : null;
+  // Y los ejemplos "llamada → resultado" van dentro de la ficha de la tarea, a su derecha
+  const ejemplos = null;
+  const visibles = resto.filter((s) => !PLEGADAS.test(s.titulo) && s !== reglas && s !== ejemplos);
   const plegadas = resto.filter((s) => PLEGADAS.test(s.titulo));
+  // Las fichas angostas van de a dos; si sobra una, ocupa toda la fila en vez de dejar media fila vacía
+  const angostas = visibles.filter((s) => !s.ancho && subseccionesDe(s.cuerpo).partes.length < 3);
+  const suelta = angostas.length % 2 === 1 ? angostas.at(-1) : null;
 
   return (
-    <div className={estilos.enunciado}>
+    <div className={estilos.enunciado} data-parejo={parejo}>
+      <div className={junto ? estilos.duo : estilos.solo}>
+      {junto}
       {principal && (
-        <section className={estilos.principal}>
-          <span className={estilos.etiqueta}>{titulo}</span>
-          <Markdown>{principal}</Markdown>
+        <section className={estilos.principal} data-con-reglas={!!reglas}>
+          <div className={estilos.tarea}>
+            <span className={estilos.etiqueta}>{titulo}</span>
+            <Markdown>{principal}</Markdown>
+          </div>
+          {reglas && (
+            <div className={estilos.reglas}>
+              <span className={estilos.etiqueta}>{reglas.titulo}</span>
+              <ol>
+                {listaDe(reglas.cuerpo).map((r, i) => (
+                  <li key={i}>
+                    <b>{i + 1}</b>
+                    <Markdown>{r}</Markdown>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
         </section>
       )}
+      </div>
       <div className={estilos.secciones}>
         {visibles.map((s, i) => {
           const sub = subseccionesDe(s.cuerpo);
@@ -69,17 +127,58 @@ export function EnunciadoOrganizado({ markdown, etiqueta = "Qué tienes que hace
                 </ol>
               </section>
             );
+          const casos = parejo && /^ejemplos?/i.test(s.titulo) ? casosDe(s.cuerpo) : null;
           return (
-            <section key={i} className={estilos.seccion} data-ancho={s.ancho}>
+            <section key={i} className={estilos.seccion} data-ancho={s.ancho || s === suelta || !!casos}>
               <h2>{s.titulo}</h2>
-              <Markdown>{s.cuerpo}</Markdown>
+              {casos ? (
+                <table className={estilos.casos}>
+                  <thead>
+                    <tr>
+                      <th>Si llamas</th>
+                      <th aria-hidden />
+                      <th>Devuelve</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {casos.map((c, j) => (
+                      <tr key={j}>
+                        <td>
+                          <code>{c.llamada}</code>
+                        </td>
+                        <td aria-hidden>→</td>
+                        <td>
+                          <code>{c.resultado}</code>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <Markdown>{s.cuerpo}</Markdown>
+              )}
             </section>
           );
         })}
       </div>
-      {plegadas.length > 0 && (
+      {(plegadas.length > 0 || extra) && (
+        <div className={extra ? estilos.abajo : undefined}>
         <div className={estilos.plegadas}>
-          {plegadas.map((s, i) => (
+          {parejo &&
+            plegadas.length <= 2 &&
+            plegadas.map((s, i) => {
+              const { idea, resto: demas } = ideaPrincipal(s.cuerpo);
+              return (
+                <section key={i} className={estilos.porque}>
+                  <span className={estilos.etiqueta}>{s.titulo}</span>
+                  <div className={estilos.idea}>
+                    <Markdown>{idea}</Markdown>
+                  </div>
+                  {demas && <Markdown>{demas}</Markdown>}
+                </section>
+              );
+            })}
+          {!(parejo && plegadas.length <= 2) && plegadas.map((s, i) => (
             <details key={i} className={estilos.plegada}>
               <summary>
                 <span>{s.titulo}</span>
@@ -88,6 +187,8 @@ export function EnunciadoOrganizado({ markdown, etiqueta = "Qué tienes que hace
               <Markdown>{s.cuerpo}</Markdown>
             </details>
           ))}
+        </div>
+        {extra}
         </div>
       )}
     </div>

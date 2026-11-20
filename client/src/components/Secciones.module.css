@@ -95,3 +95,105 @@
 .reloj[data-poco="true"] {
   color: var(--error);
 }
+
+/* ---------- Tablero de Solución y Explícalo ---------- */
+.bloqueada {
+  align-items: center;
+  padding: var(--espacio-7) var(--espacio-5);
+  color: var(--texto-suave);
+  text-align: center;
+}
+
+.bloqueada strong {
+  color: var(--texto);
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-1);
+}
+
+.codigoSolucion {
+  display: flex;
+  flex-direction: column;
+}
+
+.codigoSolucion pre,
+.codigoSolucion pre code {
+  font-size: var(--letra-4);
+}
+
+.explicar {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: var(--espacio-3);
+  align-items: stretch;
+}
+
+.escribir {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.escribir header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+.escribir header .etiqueta {
+  margin: 0;
+}
+
+.escribir .texto {
+  flex: 1;
+  min-height: 220px;
+}
+
+.guion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.guion ol {
+  display: grid;
+  flex: 1;
+  align-content: space-around;
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guion li {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+.guion li b {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radio-lg);
+  background: var(--acento-suave);
+  color: var(--acento);
+  font-family: var(--fuente-titulos);
+}
+
+.guion li span {
+  display: grid;
+}
+
+.guion li small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+@media (max-width: 900px) {
+  .explicar {
+    grid-template-columns: 1fr;
+  }
+}
