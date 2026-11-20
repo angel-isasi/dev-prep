@@ -176,7 +176,7 @@ function DetalleUnidad({ u, cofre, alCofre, alHacerActual }) {
       <div className={estilos.medidas}>
         <div title="Los que ya respondiste bien">
           <span>
-            Aprendidos <strong>{av.aprendidos}</strong> de {av.total}
+            Aprendidos <strong>{Math.min(av.aprendidos, av.meta)}</strong> de {av.meta}
           </span>
           <span className={estilos.barra} aria-hidden>
             <i style={{ width: `${av.porcentaje * 100}%` }} />
@@ -193,7 +193,7 @@ function DetalleUnidad({ u, cofre, alCofre, alHacerActual }) {
       </div>
       {av.leccionesFaltan > 0 && (
         <p className={estilos.nota}>
-          Te faltan unas {av.leccionesFaltan} {av.leccionesFaltan === 1 ? "lección" : "lecciones"} para verla completa.
+          Te faltan unas {av.leccionesFaltan} {av.leccionesFaltan === 1 ? "lección" : "lecciones"} para completarla.
         </p>
       )}
 

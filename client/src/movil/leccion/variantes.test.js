@@ -51,7 +51,7 @@ describe("avance por conceptos", () => {
   const items = Array.from({ length: 10 }, (_, i) => concepto(`fr:${i}`));
   test("aprendidos, fijados, nivel de 0 a 5 y lecciones que faltan", () => {
     const registros = { "fr:0": { caja: 1 }, "fr:1": { caja: 1 }, "fr:2": { caja: 3 }, "fr:3": { caja: 0 } };
-    expect(avanceConceptos(items, registros, "u1")).toMatchObject({ total: 10, vistos: 4, aprendidos: 3, fijados: 1, nivel: 1, leccionesFaltan: 1, completa: false });
+    expect(avanceConceptos(items, registros, "u1")).toMatchObject({ total: 10, vistos: 4, aprendidos: 3, fijados: 1, meta: 6, nivel: 2, leccionesFaltan: 1, completa: false });
   });
 
   test("fallar un concepto no lo cuenta como aprendido ni sube su dificultad", () => {
@@ -69,10 +69,10 @@ describe("lección de inglés", () => {
   const items = [...Array.from({ length: 20 }, (_, i) => concepto(`fr:${i}`)), ...Array.from({ length: 6 }, (_, i) => concepto(`fr:v${i}`, "u0"))];
   const variante = (it, op) => elegirVariante(it, undefined, { ...op, azar: () => 0 });
 
-  test("12 pasos con hasta 6 conceptos nuevos aunque haya muchos repasos", () => {
+  test("7 pasos con al menos 5 conceptos nuevos aunque haya muchos repasos", () => {
     const registros = Object.fromEntries(Array.from({ length: 6 }, (_, i) => [`fr:v${i}`, { caja: 1, proximo: "2026-11-10" }]));
     const pasos = armarLeccion({ items, registros, hoy: HOY, unidad: "u1", variante, azar: semilla("a") });
-    expect(pasos).toHaveLength(12);
+    expect(pasos).toHaveLength(7);
     expect(pasos.filter((p) => p.item.unidad === "u1").length).toBeGreaterThanOrEqual(5);
     expect(pasos.every((p) => p.item.forma)).toBe(true);
   });

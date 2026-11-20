@@ -9,7 +9,8 @@ export const TAMANO = { normal: 10, rapida: 5, errores: 10, quiz: 5, escuchar: 1
 export const MAX_NUEVOS = 4;
 export const MAX_ENTREVISTA = 2;
 /** En inglés cada concepto es una palabra o frase entera: lecciones de 12 con hasta 6 nuevos. */
-export const INGLES = { tamano: 12, nuevos: 6, reservaNuevos: 5 };
+// Lecciones cortas (unos 3 minutos): 7 preguntas, casi todas nuevas mientras queden
+export const INGLES = { tamano: 7, nuevos: 6, reservaNuevos: 5 };
 export const XP = { primera: 10, reintento: 5, leccion: 20, perfecta: 10, combo: 2 };
 /** Vidas (opcional, en inglés): cada error resta una; sin vidas, la lección termina. */
 export const VIDAS = 5;

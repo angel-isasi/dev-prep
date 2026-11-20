@@ -196,7 +196,7 @@ export function InglesMovil() {
             </span>
             <span>
               <strong>Rutina de hoy</strong>
-              <small>12 ejercicios: tu repaso y hasta 6 nuevos</small>
+              <small>7 ejercicios, unos 3 minutos</small>
             </span>
           </Link>
         </div>

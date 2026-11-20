@@ -65,8 +65,11 @@ export function emparejarDe(items, azar = Math.random) {
  * - aprendidos: los acertaste al menos una vez (caja 2 o más, o caja 1 sin haberlo fallado la última vez)
  * - fijados: los recordaste días después (caja 3 o más)
  * - nivel: de 0 a 5, cada nivel es un 20% de aprendidos (como las coronas de un nodo)
- * - leccionesFaltan: cuántas lecciones de unos 6 nuevos faltan para verlos todos
+ * - meta: cuántos conceptos hay que aprender para dar la unidad por completa (el 60%: unas 15 lecciones
+ *   en una unidad grande; el resto sigue saliendo en tus repasos y puedes seguir la unidad si quieres)
+ * - leccionesFaltan: cuántas lecciones de unos 6 nuevos faltan para llegar a la meta
  */
+export const META_UNIDAD = 0.6;
 export function avanceConceptos(items, registros, unidad) {
   const deUnidad = items.filter((it) => it.unidad === unidad);
   const total = deUnidad.length;
@@ -76,19 +79,22 @@ export function avanceConceptos(items, registros, unidad) {
   const aprendido = (it) => caja(it) >= 2 || (caja(it) === 1 && registros[it.clave]?.ultima !== "no");
   const aprendidos = deUnidad.filter(aprendido).length;
   const fijados = deUnidad.filter((it) => caja(it) >= 3).length;
-  const nivel = total ? Math.floor((aprendidos / total) * 5 + 1e-9) : 0;
+  const meta = Math.ceil(total * META_UNIDAD);
+  const hacia = meta ? Math.min(1, aprendidos / meta) : 0;
+  const nivel = Math.floor(hacia * 5 + 1e-9);
   return {
     total,
+    meta,
     vistos,
     aprendidos,
     fijados,
     dominados: fijados,
     nivel,
-    porcentaje: total ? aprendidos / total : 0,
+    porcentaje: hacia,
     porcentajeFijados: total ? fijados / total : 0,
-    completa: total > 0 && aprendidos === total,
+    completa: total > 0 && aprendidos >= meta,
     dominada: total > 0 && fijados / total >= 0.8,
-    leccionesFaltan: Math.ceil((total - vistos) / 6),
+    leccionesFaltan: Math.ceil(Math.max(0, meta - aprendidos) / 6),
   };
 }
 
