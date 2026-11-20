@@ -17,6 +17,7 @@ describe("lo extra de inglés en registros sueltos", () => {
       cofres: { "en-basico-01": "2026-11-17" },
       legendarias: { "en-basico-01": "2026-11-18" },
       historias: { "en-basico-01-h01": "2026-11-17" },
+      saltadas: {},
       cofreDiario: "2026-11-17",
       vidas: true,
       parejasRecord: 12,
@@ -29,5 +30,11 @@ describe("lo extra de inglés en registros sueltos", () => {
     const pares = registrosDesdeViejo(viejo);
     const registros = Object.fromEntries(pares.map(([id, v]) => [id, { v }]));
     expect(extraDesdeRegistros(registros)).toMatchObject(viejo);
+  });
+});
+
+describe("unidades saltadas con prueba", () => {
+  test("se leen de sus registros sueltos", () => {
+    expect(extraDesdeRegistros({ "saltada:en-basico-21": { v: "2026-11-21" } }).saltadas).toEqual({ "en-basico-21": "2026-11-21" });
   });
 });

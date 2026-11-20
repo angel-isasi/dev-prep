@@ -221,6 +221,11 @@ function DetalleUnidad({ u, cofre, alCofre, alHacerActual }) {
             Teoría y palabras
           </Link>
         )}
+        {!u.hecha && (
+          <Link to={leccion("&modo=prueba")} className="boton" title="12 preguntas de toda la unidad. Con 10 bien, la unidad queda hecha y pasas a la siguiente." onClick={() => api.elegirUnidadIngles(u.id)}>
+            Ya me la sé: saltar con prueba
+          </Link>
+        )}
         {av.completa && !u.cofreAbierto && (
           <button type="button" className="boton" onClick={alCofre}>
             <IconoRegalo tamano={16} /> Abrir cofre

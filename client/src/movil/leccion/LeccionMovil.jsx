@@ -13,7 +13,7 @@ import { SlidingNumber } from "../../components/ui/sliding-number.jsx";
 import { armarLeccion, avance, crearSesion, HITOS_COMBO, ordenCorrecto, pasoActual, responder, resultadoNivel, resumen, semilla, terminada, VIDAS } from "./motor.js";
 import { BotonAudio, ItemArmar, ItemEmparejar, ItemEntrevista, ItemEscribir, ItemHablar, ItemOpcion, ItemOrdenar, ItemTarjeta, tituloDe } from "./Items.jsx";
 import { armadoCorrecto, escrituraCorrecta } from "../../../../scripts/items/ingles.js";
-import { hablar, hayMicrofono, hayVoz, useHayVoz, vocesListas } from "../../lib/voz.js";
+import { callar, hablar, hayMicrofono, hayVoz, useHayVoz, vocesListas } from "../../lib/voz.js";
 import { elegirVariante, emparejarDe, variarPasos } from "./variantes.js";
 import { Bit, fraseDeBit } from "../../components/Bit.jsx";
 import { despuesDe, leccionDe, planUnidad, PRUEBA, pruebaAprobada } from "./plan.js";
@@ -132,7 +132,7 @@ export function LeccionMovil() {
         return setError(
           modo === "errores" ? "No tienes errores pendientes. ¡Bien!" : modo === "examen" ? "Todavía no practicaste suficiente esta semana para un examen: haz unas lecciones primero." : "No hay ítems para esta unidad todavía.",
         );
-      const nueva = crearSesion(pasos, { unidad, modo, hoy: d.hoy, ambito, parte: parte?.id ?? null, vidas: ingles && d.extra?.vidas && modo !== "nivel" ? VIDAS : null });
+      const nueva = crearSesion(pasos, { unidad, modo, hoy: d.hoy, ambito, parte: parte?.id ?? null, vidas: ingles && d.extra?.vidas && modo !== "nivel" && modo !== "prueba" ? VIDAS : null });
       api.guardarLeccionEnCurso(nueva);
       setSesion(nueva);
     }, (e) => vigente && setError(e.message));
@@ -153,6 +153,7 @@ export function LeccionMovil() {
   /** Registra la nota final del ítem (si quedó decidida) y avanza. */
   const avanzar = useCallback(
     async (respuesta) => {
+      callar(); // al pasar de pregunta, el audio de la anterior no sigue sonando
       const { sesion: siguiente, nota } = responder(sesion, respuesta);
       if (nota && !paso.item?.extra) {
         if (paso.tipo === "entrevista") await api.calificar(paso.pregunta.id, nota);
@@ -178,6 +179,11 @@ export function LeccionMovil() {
         if (siguiente.modo === "prueba") {
           const registro = await api.guardarPrueba(siguiente.unidad, r.aciertos, r.total);
           r.prueba = { aprobada: r.total > 0 && r.aciertos / r.total >= PRUEBA.aprobar, yaAprobada: pruebaAprobada(registro) };
+          // En inglés, aprobar la prueba salta la unidad: queda hecha y pasas a la siguiente
+          if (ambito === "ingles" && r.prueba.aprobada) {
+            const sigue = await api.saltarUnidadIngles(siguiente.unidad);
+            r.prueba.sigue = unidades.find((u) => u.id === sigue)?.titulo ?? null;
+          }
         }
         // Programación: cómo quedó la unidad y qué lección sigue
         if (ambito === "programacion" && siguiente.unidad) {
@@ -211,6 +217,7 @@ export function LeccionMovil() {
     else correcto = elegida === item.correcta;
     const casi = correcto === "casi";
     correcto = !!correcto;
+    callar(); // ya respondiste: se corta el diálogo o el audio de la pregunta
     // En inglés, oír la respuesta correcta ayuda a fijarla
     if (item.audioRespuesta || (item.tipo === "armar" && item.audio)) hablar(item.audioRespuesta ?? item.audio);
     (correcto ? feedback.acierto : feedback.fallo)();
@@ -337,7 +344,9 @@ export function LeccionMovil() {
         {final.prueba && (
           <p className={estilos.nivel}>
             {final.prueba.aprobada
-              ? "Aprobaste la unidad: queda marcada en Lecciones."
+              ? ambito === "ingles"
+                ? `Unidad superada.${final.prueba.sigue ? ` Ahora vas en: ${final.prueba.sigue}.` : ""}`
+                : "Aprobaste la unidad: queda marcada en Lecciones."
               : `Necesitas ${Math.ceil(PRUEBA.aprobar * final.total)} de ${final.total} para aprobarla.${final.prueba.yaAprobada ? " Igual ya la tenías aprobada de antes." : " Repasa lo que fallaste y vuelve a intentarlo."}`}
           </p>
         )}

@@ -1088,6 +1088,17 @@ const apiWeb = {
     if (progreso.registros("misPalabras")[id]) progreso.borrarRegistro("misPalabras", id);
     else progreso.guardarRegistro("misPalabras", id, { fecha: progreso.hoy() });
   },
+  /** Aprobaste la prueba de una unidad de inglés: queda hecha y, si era la tuya, pasas a la siguiente. */
+  async saltarUnidadIngles(unidad) {
+    marcarExtra(`saltada:${unidad}`, progreso.hoy());
+    const ajuste = progreso.ajuste("ingles", {});
+    const orden = (await itemsIngles()).unidades.map((u) => u.id);
+    const actual = ajuste.unidad ?? orden[0];
+    const sigue = orden[orden.indexOf(unidad) + 1];
+    if (actual === unidad && sigue) progreso.cambiarAjuste("ingles", { ...ajuste, unidad: sigue });
+    cache.clear();
+    return sigue ?? null;
+  },
   elegirUnidadIngles: async (id) => progreso.cambiarAjuste("ingles", { ...progreso.ajuste("ingles", {}), unidad: id }),
   /** Después de la prueba de nivel: empiezas en la primera unidad donde fallaste. */
   guardarNivelIngles: async (empiezaEn) => {

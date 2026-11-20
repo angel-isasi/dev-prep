@@ -77,7 +77,16 @@ export const cambiarVelocidad = (valor) => almacen.setItem(CLAVE_VELOCIDAD, valo
  * @param {string} texto
  * @param {{ lento?: boolean, alTerminar?: () => void }} [opciones]
  */
-export function hablar(texto, { lento, alTerminar } = {}) {
+export function hablar(texto, opciones = {}) {
+  serie++; // cualquier lectura nueva corta el diálogo que estuviera sonando
+  leer(texto, opciones);
+}
+
+// Cada diálogo (varias frases seguidas) tiene su número: si empieza otra lectura o se calla la voz,
+// el número cambia y el diálogo viejo no sigue con su siguiente frase.
+let serie = 0;
+
+function leer(texto, { lento, alTerminar } = {}) {
   const sintesis = globalThis.speechSynthesis;
   if (!sintesis || !texto) return;
   sintesis.cancel();
@@ -141,12 +150,19 @@ export function decir(texto, { idioma = "es", alTerminar } = {}) {
 
 /** Lee varias frases seguidas (un diálogo). */
 export function hablarVarias(textos) {
-  const [primero, ...resto] = textos;
-  if (!primero) return;
-  hablar(primero, { alTerminar: () => setTimeout(() => hablarVarias(resto), 250) });
+  const mia = ++serie;
+  const seguir = ([primero, ...resto]) => {
+    if (!primero || mia !== serie) return;
+    leer(primero, { alTerminar: () => setTimeout(() => seguir(resto), 250) });
+  };
+  seguir(textos);
 }
 
-export const callar = () => globalThis.speechSynthesis?.cancel();
+/** Calla la voz y corta el diálogo que estuviera en curso. */
+export const callar = () => {
+  serie++;
+  globalThis.speechSynthesis?.cancel();
+};
 
 // --- Reconocimiento de voz (ejercicios de hablar) ---
 // Usa el reconocimiento del navegador (Chrome y Edge). Ojo: en Chrome necesita internet, porque

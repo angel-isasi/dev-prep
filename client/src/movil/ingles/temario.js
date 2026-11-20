@@ -25,7 +25,9 @@ export function armarTemario(datos) {
     const avance = avanceConceptos(datos.items, datos.registros, u.id);
     // El examen de nivel deja como hechas las unidades anteriores a donde llegaste
     const porExamen = !!hechaPorExamen(datos.extra?.examen, orden, u.id);
-    const hecha = avance.completa || porExamen;
+    // "Ya me la sé": aprobaste la prueba de la unidad y la saltaste
+    const saltada = !!datos.extra?.saltadas?.[u.id];
+    const hecha = avance.completa || porExamen || saltada;
     const actual = u.id === datos.unidadActual;
     return {
       ...u,
@@ -33,7 +35,7 @@ export function armarTemario(datos) {
       avance,
       hecha,
       actual,
-      aprobada: porExamen && !avance.completa,
+      aprobada: (porExamen || saltada) && !avance.completa,
       legendaria: !!datos.extra?.legendarias?.[u.id],
       cofreAbierto: !!datos.extra?.cofres?.[u.id],
       estado: hecha ? "hecha" : actual ? "actual" : avance.vistos > 0 ? "empezada" : "pendiente",

@@ -5,7 +5,7 @@
 // y "Empezar de cero" lo borra junto con el resto del progreso. Funciones puras: se prueban en extra.test.js.
 
 export const COLECCION_EXTRA = "inglesExtra";
-const GRUPOS = { cofre: "cofres", legendaria: "legendarias", historia: "historias" };
+const GRUPOS = { cofre: "cofres", legendaria: "legendarias", historia: "historias", saltada: "saltadas" };
 const SUELTOS = ["cofreDiario", "vidas", "parejasRecord", "examen"];
 
 /**
@@ -14,7 +14,7 @@ const SUELTOS = ["cofreDiario", "vidas", "parejasRecord", "examen"];
  * @param {Record<string, { v: unknown }>} registros  registros vivos (sin borrados)
  */
 export function extraDesdeRegistros(registros = {}) {
-  const extra = { cofres: {}, legendarias: {}, historias: {}, cofreDiario: null, vidas: false, parejasRecord: 0, examen: null };
+  const extra = { cofres: {}, legendarias: {}, historias: {}, saltadas: {}, cofreDiario: null, vidas: false, parejasRecord: 0, examen: null };
   for (const [id, r] of Object.entries(registros)) {
     const dos = id.indexOf(":");
     if (dos > 0 && GRUPOS[id.slice(0, dos)]) extra[GRUPOS[id.slice(0, dos)]][id.slice(dos + 1)] = r.v;
