@@ -119,3 +119,45 @@
   color: var(--texto-suave);
   font-size: var(--letra-3);
 }
+
+/* Temas de los retos: botones grandes y fáciles de tocar, en rejilla */
+.temasBloque {
+  display: grid;
+  gap: var(--espacio-2);
+}
+
+.temasTitulo {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
+}
+
+.temas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: var(--espacio-2);
+}
+
+.tema {
+  min-height: 46px;
+  padding: var(--espacio-2) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--superficie-2);
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--letra-5);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transicion), background var(--transicion);
+}
+
+.tema:hover {
+  border-color: color-mix(in srgb, var(--acento) 55%, var(--borde));
+}
+
+.tema[data-activo="true"] {
+  border-color: var(--acento);
+  background: color-mix(in srgb, var(--acento) 14%, var(--superficie-2));
+  font-weight: var(--peso-semi);
+}

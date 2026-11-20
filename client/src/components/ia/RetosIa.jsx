@@ -29,12 +29,15 @@ function useRecientes(clave) {
 
 function Temas({ temas, activo, alElegir }) {
   return (
-    <div className={estilos.chips} role="radiogroup" aria-label="Tema">
-      {temas.map((t) => (
-        <button key={t} type="button" className={estilos.chip} data-activo={t === activo} aria-pressed={t === activo} onClick={() => alElegir(t)}>
-          {t}
-        </button>
-      ))}
+    <div className={estilos.temasBloque}>
+      <span className={estilos.temasTitulo}>Elige un tema</span>
+      <div className={estilos.temas} role="radiogroup" aria-label="Tema">
+        {temas.map((t) => (
+          <button key={t} type="button" className={estilos.tema} data-activo={t === activo} aria-pressed={t === activo} onClick={() => alElegir(t)}>
+            {t === "sorpréndeme" ? "Sorpréndeme" : t}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
