@@ -447,6 +447,154 @@ ${ESTILO}`,
   },
 });
 
+// ---------- Entrevistas y trabajo ----------
+/** Una charla por turnos en texto: "Candidato" es el estudiante. */
+function historialEnTexto(historial, yo = "Candidato", otro = "Tú") {
+  return (Array.isArray(historial) ? historial : [])
+    .slice(-30)
+    .map((t) => ({ yo: t?.de === "yo", texto: recortar(t?.texto, 1500) }))
+    .filter((t) => t.texto)
+    .map((t) => `${t.yo ? yo : otro}: ${t.texto}`)
+    .join("\n");
+}
+const BALANCE = objeto({
+  puntaje: entero(),
+  resumen: texto(),
+  bien: lista(),
+  mejoras: lista(),
+  frases: lista(texto("Una frase lista para usar la próxima vez")),
+});
+
+Object.assign(TAREAS, {
+  defensa: {
+    modelo: HAIKU,
+    esquema: objeto({ comentario: texto("Reacción breve a su última respuesta, o vacío al empezar"), pregunta: texto(), fin: booleano() }),
+    sistema: `Eres un entrevistador técnico que le pide a un candidato junior que defienda un proyecto de su portafolio. Quieres saber si lo entiende de verdad o si solo lo copió (por ejemplo, de una IA).
+- Haz UNA pregunta a la vez, concreta y sobre ESTE proyecto: por qué eligió esa tecnología, cómo funciona una parte, qué haría distinto, un bug que tuvo, cómo escalaría, cómo lo probó, qué parte no hizo él.
+- Si su respuesta fue vaga, repregunta sobre lo mismo pidiendo un detalle. Si fue buena, pasa a otra parte del proyecto.
+- "comentario": una frase de reacción natural (como un entrevistador real, sin dar nota), vacío en la primera pregunta.
+- "fin": true después de 6 a 8 preguntas; entonces "pregunta" es una despedida.
+${ESTILO}`,
+    armar(c) {
+      const proyecto = recortar(c.proyecto, 7000);
+      if (proyecto.length < 30) return { error: "Describe tu proyecto (o pega su README) para que te entreviste" };
+      const charla = historialEnTexto(c.historial);
+      return unir(bloque("El proyecto", proyecto), charla ? bloque("La entrevista hasta ahora", charla) : "Empieza con tu primera pregunta.");
+    },
+  },
+
+  "defensa-cierre": {
+    modelo: SONNET,
+    esquema: BALANCE,
+    sistema: `Acabas de entrevistar a un candidato junior sobre un proyecto de su portafolio. Dale tu balance, como se lo darías a alguien que quieres que mejore.
+- "puntaje" de 0 a 10: ¿se nota que lo entiende y lo hizo él? ¿Explica decisiones con razones?
+- "resumen": dos frases, sin rodeos. "bien": hasta 3. "mejoras": hasta 3, las que más pesarían en una entrevista real.
+- "frases": 2 o 3 frases que podría decir la próxima vez para explicar mejor su proyecto (en primera persona, concretas).
+${ESTILO}`,
+    armar(c) {
+      const charla = historialEnTexto(c.historial);
+      if (charla.split("\n").filter((l) => l.startsWith("Candidato")).length < 2) return { error: "Responde al menos 2 preguntas antes del balance" };
+      return unir(bloque("El proyecto", recortar(c.proyecto, 4000)), bloque("La entrevista", charla));
+    },
+  },
+
+  negociacion: {
+    modelo: HAIKU,
+    esquema: objeto({ respuesta: texto(), fin: booleano() }),
+    sistema: `Eres una reclutadora de una empresa de software en Perú que ya decidió hacerle una oferta a un candidato junior de frontend. Ahora conversan sobre sueldo y condiciones. Es una práctica: sé realista, cordial y un poco firme (tienes un rango y no lo dices de entrada).
+- Responde en español, de 1 a 3 frases, como en una llamada real. Haz preguntas como "¿cuál es tu expectativa salarial?" y reacciona a lo que él diga.
+- Si pide algo razonable con buenos argumentos, cede un poco; si pide de más sin razones, mantente.
+- "fin": true cuando se llegue a un acuerdo o él cierre la conversación; entonces despídete.`,
+    armar(c) {
+      const charla = historialEnTexto(c.historial, "Candidato", "Reclutadora");
+      return unir(bloque("La situación", recortar(c.escenario, 800)), charla ? bloque("La conversación hasta ahora", charla) : "Empieza tú: felicítalo por pasar las entrevistas y pregúntale su expectativa salarial.");
+    },
+  },
+
+  "negociacion-cierre": {
+    modelo: SONNET,
+    esquema: BALANCE,
+    sistema: `Eres un mentor que escuchó a un candidato junior negociar su primer sueldo de frontend en Perú. Dale su balance.
+- "puntaje" de 0 a 10: ¿investigó un rango, dio una cifra con argumentos, preguntó por el paquete completo (beneficios, modalidad, horario), fue cordial y firme sin aceptar lo primero?
+- "resumen": dos frases. "bien": hasta 3. "mejoras": hasta 3.
+- "frases": 3 frases que podría usar la próxima vez (por ejemplo, para dar su rango o pedir tiempo para pensarlo).
+${ESTILO}`,
+    armar(c) {
+      const charla = historialEnTexto(c.historial, "Candidato", "Reclutadora");
+      if (charla.split("\n").filter((l) => l.startsWith("Candidato")).length < 2) return { error: "Conversa un poco más antes del balance" };
+      return unir(bloque("La situación", recortar(c.escenario, 800)), bloque("La conversación", charla));
+    },
+  },
+
+  "preguntas-entrevistador": {
+    modelo: HAIKU,
+    esquema: objeto({
+      puntaje: entero(),
+      comentarios: lista(objeto({ pregunta: texto(), comentario: texto() })),
+      sugeridas: lista(texto("Una pregunta mejor que podría hacer")),
+    }),
+    sistema: `Al final de una entrevista, el entrevistador dice "¿tienes alguna pregunta para nosotros?". Un candidato junior de frontend escribió las que haría. Evalúalas.
+- Buenas preguntas muestran interés real en el trabajo y el equipo (cómo es un día normal, cómo revisan el código, cómo acompañan a un junior, qué esperan en los primeros 3 meses). Malas: sueldo o vacaciones en la primera entrevista, cosas que están en la web de la empresa, o ninguna pregunta.
+- "comentarios": una frase por cada pregunta suya. "puntaje" de 0 a 10. "sugeridas": 3 preguntas mejores o complementarias.
+${ESTILO}`,
+    armar(c) {
+      const respuesta = recortar(c.respuesta, 2000);
+      if (respuesta.length < 10) return { error: "Escribe las preguntas que harías" };
+      return unir(c.empresa ? `Empresa o puesto: ${recortar(c.empresa, 300)}` : "", bloque("Sus preguntas", respuesta));
+    },
+  },
+
+  oferta: {
+    modelo: HAIKU,
+    esquema: objeto({
+      encaje: opcion(["alto", "medio", "bajo"]),
+      resumen: texto(),
+      destacar: lista(texto("Algo de su CV o sus proyectos que debe destacar para esta oferta")),
+      preguntas: lista(texto("Una pregunta probable en la entrevista de esta empresa")),
+      brechas: lista(texto("Algo que piden y le falta, con qué hacer para cubrirlo")),
+    }),
+    sistema: `Ayudas a un estudiante que busca su primer trabajo de frontend junior a prepararse para una oferta concreta. Cruzas la oferta con su perfil real.
+- "encaje": alto, medio o bajo, siendo honesto. "resumen": una o dos frases.
+- "destacar": hasta 4 cosas de SU perfil (no inventes) que conviene poner primero en el CV o decir en la entrevista para esta oferta.
+- "preguntas": 4 o 5 preguntas técnicas o de comportamiento probables según lo que pide la oferta.
+- "brechas": hasta 3 cosas que piden y le faltan, cada una con una acción concreta para cubrirla antes de la entrevista.
+${ESTILO}`,
+    armar(c) {
+      const oferta = recortar(c.oferta, 5000);
+      if (oferta.length < 40) return { error: "Pega el texto de la oferta" };
+      return unir(bloque("La oferta", oferta), bloque("Su perfil (CV y lo que domina)", recortar(c.datos, 4000)));
+    },
+  },
+
+  cv: {
+    modelo: SONNET,
+    esquema: objeto({
+      puntaje: entero(),
+      resumen: texto(),
+      bien: lista(),
+      mejoras: lista(),
+      reescrituras: lista(objeto({ original: texto(), mejor: texto() })),
+    }),
+    sistema: `Eres una reclutadora técnica que revisa el CV de un estudiante que busca prácticas o su primer trabajo de frontend junior en Perú (o remoto). Revísalo como lo harías en los 30 segundos que le dedicas a un CV real.
+- "puntaje" de 0 a 10. "resumen": una frase con tu impresión.
+- "bien": hasta 2 cosas. "mejoras": hasta 4, las que más pesan (proyectos con resultados y tecnologías, enlaces a GitHub y demo, orden, longitud, palabras clave de las ofertas junior).
+- "reescrituras": hasta 3 partes concretas de su CV reescritas mejor (texto original y versión mejorada), sin inventar datos que no estén.
+${ESTILO}`,
+    armar(c) {
+      const cv = recortar(c.cv, 6000);
+      if (cv.length < 60) return { error: "Completa tu CV antes de revisarlo" };
+      return unir(bloque("Su CV", cv), bloque("Oferta a la que apunta (opcional)", recortar(c.oferta, 2000)));
+    },
+  },
+});
+
+/** Cómo suena el entrevistador según la personalidad que elegiste (se agrega a la evaluación). */
+export const PERSONALIDADES = {
+  amable: "Eres un entrevistador amable y paciente: reconoce lo bueno primero y repregunta con calma.",
+  exigente: "Eres un entrevistador exigente y directo: no dejas pasar respuestas vagas, pides precisión y tu repregunta va al punto débil.",
+  apurado: "Eres un entrevistador con poco tiempo: valoras respuestas cortas y al grano; si se extiende, lo notas, y tu repregunta es breve.",
+};
+
 /** Deja lo que devolvió la IA con la forma del esquema (textos recortados, números en rango, listas cortas). */
 export function limpiarPorEsquema(esquema, valor) {
   if (!esquema) return valor;

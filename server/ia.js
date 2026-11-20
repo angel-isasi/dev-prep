@@ -18,7 +18,7 @@
 //   Vercel, si existe, manda sobre todas.
 import { createHash, timingSafeEqual } from "node:crypto";
 import { MODELOS } from "./ia-precios.js";
-import { ESTILO, TAREAS, limpiarPorEsquema } from "./ia-tareas.js";
+import { ESTILO, PERSONALIDADES, TAREAS, limpiarPorEsquema } from "./ia-tareas.js";
 
 /** Topes de lo que se acepta en cada pedido (en caracteres), para no gastar de más. */
 export const LIMITES = {
@@ -226,6 +226,7 @@ function armarSinPerfil(cuerpo) {
       modelo ? `Respuesta modelo (solo referencia):\n${modelo}` : "",
       contexto ? `Datos reales del candidato (su pitch y sus proyectos, para personalizar "mejor"):\n${contexto}` : "",
       codigo ? `Su código (lo que está explicando; juzga si su explicación coincide con lo que hizo):\n${codigo}` : "",
+      PERSONALIDADES[cuerpo.personalidad] && Object.hasOwn(PERSONALIDADES, cuerpo.personalidad) ? `Tu estilo: ${PERSONALIDADES[cuerpo.personalidad]}` : "",
       omitir.length ? `No escribas ${omitir.map((c) => `"${c}"`).join(" ni ")}: déjalo como texto vacío, no se va a usar.` : "",
       `Respuesta del candidato${enIngles ? " (respondió en inglés: evalúa también si se entiende bien; escribe \"mejor\" y \"repregunta\" en inglés y lo demás en español)" : ""}:\n${respuesta}`,
     ];

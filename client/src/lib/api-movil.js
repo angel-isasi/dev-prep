@@ -634,6 +634,9 @@ const apiWeb = {
     metaDiaria: progreso.datos().config.metaDiaria,
   }),
   /** Tu plan de la semana armado con la IA (Hoy > Tu semana). */
+  /** Examen mensual de preparación (Entrevistas > Con IA): { "YYYY-MM": { puntaje, nivel, resumen, fecha } }. */
+  examenesMes: async () => progreso.ajuste("examenesMes", {}),
+  guardarExamenMes: async (mes, r) => progreso.cambiarAjuste("examenesMes", { ...progreso.ajuste("examenesMes", {}), [mes]: r }),
   planSemanaIa: async () => progreso.ajuste("planSemanaIa", null),
   guardarPlanSemanaIa: async (plan) => progreso.cambiarAjuste("planSemanaIa", plan),
   guardarHorario: async (horario) => {

@@ -261,7 +261,7 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", t
         <ResultadoEntrevista r={resultado} pregunta={preguntaActual} alSeguir={resultado.repregunta ? seguirConRepregunta : null} />
       )}
       {resultado && tarea === "ingles" && <ResultadoIngles r={resultado} />}
-      {resultado && tarea === "codigo" && <ResultadoCodigo r={resultado} />}
+      {resultado && tarea === "codigo" && <ResultadoCodigo r={resultado} codigo={respuesta} />}
       {resultado && (
         <button type="button" className={estilos.enlace} onClick={() => setResultado(null)}>
           {respuestaFija === undefined ? "Intentar otra respuesta" : "Cerrar"}
@@ -332,7 +332,9 @@ Respuesta mejorada: ${r.mejor}`} />
   );
 }
 
-function ResultadoCodigo({ r }) {
+function ResultadoCodigo({ r, codigo }) {
+  // Repregunta sobre tu código: eliges una pregunta del entrevistador y la respondes
+  const [elegida, setElegida] = useState(null);
   return (
     <div className={estilos.resultado}>
       <div className={estilos.puntaje} data-veredicto={r.puntaje >= 8 ? "sabia" : r.puntaje >= 5 ? "dude" : "no"}>
@@ -373,11 +375,29 @@ function ResultadoCodigo({ r }) {
           <span className={estilos.subtitulo}>Lo que te preguntaría el entrevistador</span>
           <ul>
             {r.preguntas.map((x, i) => (
-              <li key={i}>{x}</li>
+              <li key={i}>
+                {x}{" "}
+                <button type="button" className={estilos.enlace} onClick={() => setElegida(x)}>
+                  Responder
+                </button>
+              </li>
             ))}
           </ul>
         </div>
       )}
+      {r.comparacion?.length > 0 && (
+        <div className={estilos.mejor}>
+          <span className={estilos.subtitulo}>Tu solución y la oficial</span>
+          <ul>
+            {r.comparacion.map((x, i) => (
+              <li key={i}>
+                <TextoConCodigo>{x}</TextoConCodigo>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {elegida && <EvaluadorIa key={elegida} tarea="entrevista" textoBoton="Evaluar mi respuesta" pedido={{ pregunta: elegida, categoria: "Preguntas sobre tu código", codigo }} />}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 // Portafolio, pruebas técnicas para casa y el proyecto guiado. Necesitan el disco de tu laptop:
 // funcionan cuando la web está conectada con dev-prep (o en la app local).
 import { useEffect, useState } from "react";
+import { RevisarEntrega } from "../../components/ia/TrabajoIa.jsx";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
 import { almacen } from "../../lib/visita.js";
@@ -40,6 +41,7 @@ export function Portafolio() {
         README que incluye tu explicación. Luego lo subes a tu GitHub (instrucciones abajo).
       </p>
       {aviso && <p className={estilos.ayuda}>{aviso}</p>}
+      <RevisarEntrega key={`${proyecto.id}-${etapa}`} proyecto={proyecto} enunciado={guiado ? (actual?.enunciado ?? "") : (proyecto.enunciado ?? "")} />
       <ul className={estilos.lista}>
         {fichas.map((f) => {
           const publicado = publicados[f.ejercicio];

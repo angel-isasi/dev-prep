@@ -1,6 +1,7 @@
 // "Conseguir trabajo": todo lo que va más allá de practicar. Pestañas: postulaciones (con las preguntas
 // reales que te hicieron), ¿estoy listo para esta oferta?, tu CV, portafolio, y pruebas técnicas y proyecto.
 import { useEffect, useState } from "react";
+import { PrepararOferta } from "../../components/ia/TrabajoIa.jsx";
 import { usePestanaUrl } from "../../hooks/usePestanaUrl.js";
 import { api } from "../../lib/api.js";
 import { ETAPAS, mensajeSeguimiento } from "../../../../server/postulaciones.js";
@@ -521,6 +522,7 @@ function Oferta() {
       >
         Analizar
       </button>
+      <PrepararOferta oferta={texto} />
       {r && (
         <div className={estilos.panel}>
           <strong>

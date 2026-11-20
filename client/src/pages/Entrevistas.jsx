@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
+import { EntrevistasIa } from "../components/ia/EntrevistasIa.jsx";
 import { ES_MOVIL } from "../lib/modo.js";
 import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { api } from "../lib/api.js";
@@ -22,7 +23,7 @@ import { IconoChispa } from "../components/Iconos.jsx";
 
 export function Entrevistas() {
   const [resumen, setResumen] = useState(api.entrevistas.guardado);
-  const [pestana, setPestana] = usePestanaUrl(["etapas", "tarjetas", "simulacro", "voz", "personal", "guia"]);
+  const [pestana, setPestana] = usePestanaUrl(["etapas", "tarjetas", "simulacro", "voz", "ia", "personal", "guia"]);
   const [params] = useSearchParams();
   const preguntaPedida = params.get("pregunta");
   const [sesion, setSesion] = useState(null); // { titulo, tarjetas, indice, notas }
@@ -64,6 +65,7 @@ export function Entrevistas() {
     { id: "tarjetas", texto: "Tarjetas", extra: resumen.pendientesHoy ? `${resumen.pendientesHoy} hoy` : undefined },
     { id: "simulacro", texto: "Simulacro" },
     { id: "voz", texto: "Por voz" },
+    { id: "ia", texto: "Con IA" },
     { id: "personal", texto: "Pitch y STAR" },
     { id: "guia", texto: "Cómo pensar en voz alta" },
   ];
@@ -103,6 +105,7 @@ export function Entrevistas() {
           />
         )}
         {pestana === "voz" && <EntrevistaVoz proceso={resumen.proceso} />}
+        {pestana === "ia" && <EntrevistasIa />}
         {pestana === "personal" && <PitchStar guias={resumen.guias} />}
         {pestana === "guia" && <GuiaVozAlta markdown={resumen.guias.vozAlta} />}
       </ContenidoPestanas>

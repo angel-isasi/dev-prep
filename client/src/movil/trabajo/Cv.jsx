@@ -1,6 +1,7 @@
 // Tu CV de una columna, simple y legible por los filtros automáticos de las empresas (ATS).
 // Las habilidades salen de lo que de verdad dominas (temas en verde). Se exporta a PDF con "Imprimir".
 import { useEffect, useState } from "react";
+import { RevisarCv } from "../../components/ia/TrabajoIa.jsx";
 import { api } from "../../lib/api.js";
 import estilos from "./Trabajo.module.css";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
@@ -164,6 +165,7 @@ export function Cv() {
           </details>
         ))}
       </div>
+      <RevisarCv />
     </div>
   );
 }

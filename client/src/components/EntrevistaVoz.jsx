@@ -26,7 +26,7 @@ export function EntrevistaVoz({ proceso }) {
 
 function Entrevista({ proceso }) {
   const [estado, setEstado] = useState("inicio"); // inicio | curso | fin
-  const [config, setConfig] = useState({ etapa: TODO, cantidad: 3, repreguntas: 1, ingles: false });
+  const [config, setConfig] = useState({ etapa: TODO, cantidad: 3, repreguntas: 1, ingles: false, personalidad: "amable" });
   const [preguntas, setPreguntas] = useState([]);
   const [indice, setIndice] = useState(0);
   const [vuelta, setVuelta] = useState(0); // 0: la pregunta; 1 en adelante: repreguntas
@@ -167,7 +167,7 @@ function Entrevista({ proceso }) {
         : { pregunta: textoPregunta }; // en la repregunta no hay lista ni modelo: la IA evalúa con su criterio
       // Solo se pide lo que se va a mostrar: la versión mejorada va en la pregunta principal y la repregunta solo si queda turno
       const omitir = [...(principal ? [] : ["mejor"]), ...(vuelta < config.repreguntas ? [] : ["repregunta"])];
-      const r = await pedirIa({ tarea: "entrevista", ...base, omitir, categoria: p.categoria, idioma, contexto: contexto.current ?? "", respuesta: dicho });
+      const r = await pedirIa({ tarea: "entrevista", ...base, omitir, personalidad: config.personalidad, categoria: p.categoria, idioma, contexto: contexto.current ?? "", respuesta: dicho });
       // Si mientras tanto terminaste, saltaste o saliste, la respuesta se descarta: nada de voz ni micrófono fuera de lugar
       if (ronda.current !== estaRonda) return;
       setTurnos((t) => [...t, { id: p.id, etapa: p.etapa ?? "tecnica", principal, pregunta: textoPregunta, respuesta: dicho, r }]);
@@ -237,6 +237,17 @@ function Entrevista({ proceso }) {
             {[3, 5].map((n) => (
               <Opcion key={n} activa={config.cantidad === n} alElegir={() => setConfig({ ...config, cantidad: n })}>
                 {n}
+              </Opcion>
+            ))}
+          </Grupo>
+          <Grupo titulo="Entrevistador">
+            {[
+              ["amable", "Amable"],
+              ["exigente", "Exigente"],
+              ["apurado", "Apurado"],
+            ].map(([id, nombre]) => (
+              <Opcion key={id} activa={config.personalidad === id} alElegir={() => setConfig({ ...config, personalidad: id })}>
+                {nombre}
               </Opcion>
             ))}
           </Grupo>

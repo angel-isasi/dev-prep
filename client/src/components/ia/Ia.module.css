@@ -88,3 +88,34 @@
   border-radius: var(--radio);
   background: color-mix(in srgb, var(--acento) 8%, transparent);
 }
+
+/* Charla por turnos (ChatIa) */
+.chat {
+  display: grid;
+  gap: var(--espacio-2);
+  max-height: 420px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.chat li {
+  display: grid;
+  gap: 2px;
+  max-width: 85%;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.chat li[data-de="yo"] {
+  justify-self: end;
+  background: color-mix(in srgb, var(--acento) 10%, var(--superficie));
+}
+
+.chat li small {
+  color: var(--texto-suave);
+  font-size: var(--letra-1);
+}

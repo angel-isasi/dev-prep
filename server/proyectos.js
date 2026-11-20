@@ -89,3 +89,34 @@ export async function correrTestsDe(raiz, carpeta) {
 
 /** Borra una carpeta de proyecto (para empezar de nuevo). */
 export const borrarProyecto = (workspaceDir, id) => rm(path.join(workspaceDir, "proyectos", id), { recursive: true, force: true });
+
+const EXTENSIONES_CODIGO = new Set([".js", ".jsx", ".ts", ".tsx", ".css", ".html"]);
+const CARPETAS_FUERA = new Set(["node_modules", "tests", "dist", ".git", "coverage"]);
+
+/**
+ * Tu código de un proyecto (para que la IA revise la entrega): los archivos fuente de tu carpeta de
+ * trabajo, sin dependencias ni tests, juntos y con un tope de caracteres.
+ * @returns {Promise<string>} "// archivo: ruta\n<contenido>" por archivo ("" si no hay carpeta)
+ */
+export async function codigoDeProyecto(proyecto, workspaceDir, tope = 14000) {
+  const raiz = path.join(workspaceDir, "proyectos", proyecto.id);
+  if (!existsSync(raiz)) return "";
+  const archivos = [];
+  async function recorrer(dir) {
+    for (const e of await readdir(dir, { withFileTypes: true })) {
+      const ruta = path.join(dir, e.name);
+      if (e.isDirectory()) {
+        if (!CARPETAS_FUERA.has(e.name)) await recorrer(ruta);
+      } else if (EXTENSIONES_CODIGO.has(path.extname(e.name)) && !/\.test\./.test(e.name) && !/config\./.test(e.name)) archivos.push(ruta);
+    }
+  }
+  await recorrer(raiz);
+  let total = "";
+  for (const archivo of archivos.sort()) {
+    const contenido = await readFile(archivo, "utf8").catch(() => "");
+    const bloque = `// archivo: ${path.relative(raiz, archivo).replaceAll("\\", "/")}\n${contenido}\n\n`;
+    if (total.length + bloque.length > tope) break;
+    total += bloque;
+  }
+  return total.trim();
+}

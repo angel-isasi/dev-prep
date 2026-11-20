@@ -7,7 +7,7 @@
 import { Router } from "express";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { cargarProyectos, correrTestsDe, prepararProyecto } from "../proyectos.js";
+import { cargarProyectos, codigoDeProyecto, correrTestsDe, prepararProyecto } from "../proyectos.js";
 import { cargarPortafolio, exportarPortafolio, yaExportado } from "../portafolio.js";
 
 export function rutasProyectos({ config, indice, progreso, workspace, vscode }) {
@@ -39,6 +39,13 @@ export function rutasProyectos({ config, indice, progreso, workspace, vscode }) 
     const etapa = Number(req.body?.etapa) || p.etapas.length || Infinity;
     const carpeta = await prepararProyecto(p, workspace.raiz, etapa);
     res.json(await correrTestsDe(config.raiz, carpeta));
+  });
+
+  // Tu código del proyecto, para que la IA revise la entrega como un senior
+  router.get("/proyectos/:id/codigo", async (req, res) => {
+    const p = await buscar(req.params.id);
+    if (!p) return res.status(404).json({ error: "No existe ese proyecto." });
+    res.json({ codigo: await codigoDeProyecto(p, workspace.raiz) });
   });
 
   router.get("/portafolio", async (req, res) => {
