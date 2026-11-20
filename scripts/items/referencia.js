@@ -398,7 +398,9 @@ export function generarDevuelve(entradas) {
         ...mezcla,
         explicacion:
           `${enCodigo(caso.expr)} ${resultado}${caso.aclaracion ? ` (${caso.aclaracion})` : ""}.\n\n` +
-          explicacionDe(e),
+          // Si la entrada trae el porqué de ESTA línea (campo "porques", por número de línea), va ese;
+          // si no, la descripción general del método
+          (e.porques?.[caso.idx] ?? explicacionDe(e)),
       });
     }
   }

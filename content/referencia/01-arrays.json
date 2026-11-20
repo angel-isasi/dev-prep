@@ -9,6 +9,12 @@
       "ejemplo": "Array.isArray([1, 2]); // true\nArray.isArray(\"hola\"); // false\nArray.isArray({ length: 2 }); // false\ntypeof [1, 2]; // \"object\"",
       "devuelve": "`true` o `false`.",
       "errorTipico": "Usar `typeof x === \"array\"`: nunca es verdad, porque `typeof` de un arreglo devuelve \"object\".",
+      "porques": {
+        "0": "`[1, 2]` es un arreglo de verdad, creado con corchetes, y eso es justo lo que comprueba `Array.isArray`.",
+        "1": "Un string tiene `length` e índices, pero no es un arreglo: es un valor primitivo de tipo texto.",
+        "2": "Tener una propiedad `length` no convierte a un objeto en arreglo. Solo se parece por fuera; por dentro sigue siendo un objeto común.",
+        "3": "`typeof` no distingue arreglos: para él todo arreglo es un `\"object\"`. Por eso se usa `Array.isArray` cuando quieres saber si algo es un arreglo."
+      },
       "tags": [
         "comprobar",
         "tipo",
@@ -25,6 +31,12 @@
       "ejemplo": "Array.from(\"hola\"); // [\"h\", \"o\", \"l\", \"a\"]\nArray.from(new Set([1, 1, 2])); // [1, 2]\nArray.from({ length: 3 }, (_, i) => i * 2); // [0, 2, 4]\nArray.from({ length: 2 }, () => []); // [[], []]",
       "devuelve": "Un arreglo nuevo.",
       "errorTipico": "En `Array.from({ length: n }, fn)` usar el primer parámetro: es `undefined`. El índice llega como segundo parámetro `(_, i)`.",
+      "porques": {
+        "0": "Un string se puede recorrer letra por letra, así que `Array.from` crea un elemento por cada carácter de `\"hola\"`.",
+        "1": "El `Set` ya descartó el `1` repetido al crearse; `Array.from` solo pasa a un arreglo los dos valores que quedaron.",
+        "2": "`{ length: 3 }` pide 3 posiciones y la función recibe el índice `i` (0, 1 y 2). Cada posición guarda `i * 2`.",
+        "3": "La función se ejecuta una vez por posición, así que cada `[]` es un arreglo nuevo y distinto, no el mismo repetido dos veces."
+      },
       "tags": [
         "crear",
         "convertir",
@@ -42,6 +54,11 @@
       "ejemplo": "Array.of(7); // [7]\nArray.of(1, 2, 3); // [1, 2, 3]\nnew Array(7).length; // 7 (7 huecos vacíos)",
       "devuelve": "Un arreglo nuevo.",
       "errorTipico": "Escribir `new Array(3)` esperando `[3]`: con un solo número crea un arreglo vacío de 3 posiciones. Lo más simple es usar el literal `[3]`.",
+      "porques": {
+        "0": "`Array.of` siempre toma sus argumentos como elementos: con un solo `7` crea un arreglo que contiene ese `7`.",
+        "1": "Cada argumento pasa a ser un elemento, en el mismo orden en que los escribiste.",
+        "2": "Con un solo número, `new Array(7)` no guarda el `7`: lo toma como tamaño y crea 7 huecos vacíos. Esa es la diferencia con `Array.of(7)`."
+      },
       "tags": [
         "crear",
         "nuevo arreglo",
@@ -56,6 +73,12 @@
       "ejemplo": "const a = [10, 20, 30];\na.at(0); // 10\na.at(-1); // 30\na[-1]; // undefined\na.at(5); // undefined",
       "devuelve": "El elemento, o `undefined` si el índice está fuera de rango.",
       "errorTipico": "Escribir `a[-1]` para obtener el último: los corchetes no cuentan desde el final y devuelven `undefined`. Usa `a.at(-1)` o `a[a.length - 1]`.",
+      "porques": {
+        "1": "El índice `0` es la primera posición, donde está el `10`.",
+        "2": "En `at`, un índice negativo cuenta desde el final: `-1` es el último elemento, el `30`.",
+        "3": "Los corchetes no cuentan desde el final: `a[-1]` busca una propiedad llamada `\"-1\"`, que no existe.",
+        "4": "El arreglo solo tiene las posiciones 0, 1 y 2. La 5 no existe, y `at` devuelve `undefined` en vez de lanzar error."
+      },
       "tags": [
         "último",
         "índice",
@@ -72,6 +95,10 @@
       "ejemplo": "const a = [1, 2];\na.push(3, 4); // 4\na; // [1, 2, 3, 4]",
       "devuelve": "La nueva longitud del arreglo (un número).",
       "errorTipico": "Hacer `const b = a.push(3)` creyendo que `b` es el arreglo: es la longitud. En React no uses `push` sobre el estado: crea uno nuevo con `[...a, 3]`.",
+      "porques": {
+        "1": "`push` no devuelve el arreglo, devuelve su nuevo largo: había 2 elementos y se agregaron 2 más.",
+        "2": "`push` modificó el arreglo original: el `3` y el `4` quedaron agregados al final, en ese orden."
+      },
       "tags": [
         "agregar",
         "añadir",
@@ -88,6 +115,11 @@
       "ejemplo": "const a = [1, 2, 3];\na.pop(); // 3\na; // [1, 2]\n[].pop(); // undefined",
       "devuelve": "El elemento eliminado, o `undefined` si el arreglo estaba vacío.",
       "errorTipico": "Usarlo solo para leer el último elemento: lo borra. Para leer sin borrar usa `a.at(-1)`.",
+      "porques": {
+        "1": "`pop` saca el último elemento y lo devuelve; el último era el `3`.",
+        "2": "El `pop` de la línea anterior modificó el arreglo original: ya no tiene el `3`.",
+        "3": "Un arreglo vacío no tiene nada que sacar, así que `pop` devuelve `undefined` sin lanzar error."
+      },
       "tags": [
         "eliminar",
         "quitar último",
@@ -104,6 +136,11 @@
       "ejemplo": "const a = [1, 2, 3];\na.shift(); // 1\na; // [2, 3]\n[].shift(); // undefined",
       "devuelve": "El elemento eliminado, o `undefined` si estaba vacío.",
       "errorTipico": "Confundirlo con `unshift` (que agrega). Además en arreglos muy grandes es lento, porque reacomoda todos los índices.",
+      "porques": {
+        "1": "`shift` saca el primer elemento y lo devuelve; el primero era el `1`.",
+        "2": "El `shift` anterior quitó el `1` del arreglo original, y los demás se corrieron una posición hacia el inicio.",
+        "3": "En un arreglo vacío no hay primer elemento, así que `shift` devuelve `undefined` sin lanzar error."
+      },
       "tags": [
         "eliminar",
         "quitar primero",
@@ -120,6 +157,11 @@
       "ejemplo": "const a = [2, 3];\na.unshift(0, 1); // 4\na; // [0, 1, 2, 3]\n[...a].length; // 4",
       "devuelve": "La nueva longitud del arreglo.",
       "errorTipico": "Esperar que devuelva el arreglo: devuelve la longitud. Sin mutar, usa `[nuevo, ...a]`.",
+      "porques": {
+        "1": "`unshift` devuelve el nuevo largo del arreglo, no el arreglo: había 2 elementos y se agregaron 2 al inicio.",
+        "2": "El `0` y el `1` entraron juntos al inicio y conservan el orden en que los pasaste; el arreglo original cambió.",
+        "3": "`[...a]` copia los 4 elementos que tiene `a` después del `unshift`, y `length` cuenta esos 4."
+      },
       "tags": [
         "agregar",
         "añadir",
@@ -135,6 +177,12 @@
       "ejemplo": "const a = [1, 2, 3, 4];\na.slice(1, 3); // [2, 3]\na.slice(-2); // [3, 4]\na.slice(); // [1, 2, 3, 4] (copia)\na; // [1, 2, 3, 4] (intacto)",
       "devuelve": "Un arreglo nuevo.",
       "errorTipico": "Confundirlo con `splice`, que sí modifica el original. El índice `fin` no se incluye.",
+      "porques": {
+        "1": "Va del índice 1 hasta antes del 3: el final no se incluye, así que toma las posiciones 1 y 2.",
+        "2": "Un inicio negativo cuenta desde el final: `-2` empieza en el penúltimo elemento y sigue hasta el último.",
+        "3": "Sin argumentos, `slice` toma desde el inicio hasta el final: devuelve un arreglo nuevo con los mismos elementos.",
+        "4": "Ninguno de los `slice` anteriores tocó el original: `slice` siempre devuelve un arreglo nuevo."
+      },
       "tags": [
         "copiar",
         "subarreglo",
@@ -151,6 +199,12 @@
       "ejemplo": "const a = [\"a\", \"b\", \"c\", \"d\"];\na.splice(1, 2); // [\"b\", \"c\"]\na; // [\"a\", \"d\"]\na.splice(1, 0, \"x\"); // []\na; // [\"a\", \"x\", \"d\"]",
       "devuelve": "Un arreglo con los elementos eliminados (vacío si no borró nada).",
       "errorTipico": "Esperar que devuelva el arreglo resultante: devuelve lo que borró. Y olvidar que muta el original: en React usa `filter` o `toSpliced`.",
+      "porques": {
+        "1": "Desde el índice 1 borra 2 elementos y devuelve los que borró: `\"b\"` y `\"c\"`.",
+        "2": "`splice` modifica el arreglo original: después de quitar `\"b\"` y `\"c\"` solo quedan `\"a\"` y `\"d\"`.",
+        "3": "El `0` significa que no borra nada, solo inserta `\"x\"` en el índice 1. Como no borró nada, devuelve un arreglo vacío.",
+        "4": "El `splice` anterior insertó `\"x\"` en el índice 1 y empujó `\"d\"` una posición a la derecha."
+      },
       "tags": [
         "eliminar",
         "insertar",
@@ -167,6 +221,12 @@
       "ejemplo": "const a = [1, 2];\na.concat([3, 4], 5); // [1, 2, 3, 4, 5]\na; // [1, 2]\n[...a, ...[3, 4]]; // [1, 2, 3, 4]\n[1] + [2]; // \"12\"",
       "devuelve": "Un arreglo nuevo.",
       "errorTipico": "Usar `+` para unir arreglos: los convierte a texto y da `\"12\"`. Usa `concat` o spread.",
+      "porques": {
+        "1": "`concat` aplana un nivel los arreglos que recibe (`[3, 4]` entra como 3 y 4) y agrega tal cual los valores sueltos, como el `5`.",
+        "2": "`concat` no modifica el original: devolvió un arreglo nuevo y `a` sigue con sus dos elementos.",
+        "3": "Cada `...` reparte los elementos de un arreglo dentro del arreglo nuevo: primero los de `a` y luego el 3 y el 4.",
+        "4": "El `+` no une arreglos: convierte cada uno a string (`\"1\"` y `\"2\"`) y pega los textos."
+      },
       "tags": [
         "unir",
         "juntar",
@@ -183,6 +243,12 @@
       "ejemplo": "[\"a\", \"b\", \"c\"].join(); // \"a,b,c\"\n[\"a\", \"b\", \"c\"].join(\"\"); // \"abc\"\n[\"2026\", \"11\", \"13\"].join(\"-\"); // \"2026-11-13\"\n[1, null, 3].join(\"-\"); // \"1--3\"",
       "devuelve": "Un string.",
       "errorTipico": "Olvidar que sin argumento usa coma: para pegar sin nada en medio pasa `\"\"`.",
+      "porques": {
+        "0": "Sin argumento, `join` usa la coma como separador por defecto.",
+        "1": "El separador es un string vacío, así que los elementos quedan pegados sin nada entre ellos.",
+        "2": "El guion va entre cada par de elementos, nunca al inicio ni al final.",
+        "3": "`null` (igual que `undefined`) se convierte en string vacío. Entre los dos guiones no queda nada, por eso salen seguidos."
+      },
       "tags": [
         "unir",
         "convertir a string",
@@ -199,6 +265,12 @@
       "ejemplo": "[1, 2, 3].includes(2); // true\n[\"a\", \"b\"].includes(\"A\"); // false\n[NaN].includes(NaN); // true\n[{ id: 1 }].includes({ id: 1 }); // false",
       "devuelve": "`true` o `false`.",
       "errorTipico": "Buscar objetos por su contenido: compara referencias, así que dos objetos iguales son distintos. Para eso usa `some((x) => x.id === 1)`.",
+      "porques": {
+        "0": "El `2` está en el arreglo y `includes` lo compara de forma estricta: mismo tipo y mismo valor.",
+        "1": "La comparación distingue mayúsculas de minúsculas: `\"A\"` y `\"a\"` son strings distintos.",
+        "2": "`includes` sí sabe encontrar `NaN`, aunque `NaN === NaN` sea `false`. Con `indexOf` no lo encontrarías.",
+        "3": "Los objetos se comparan por referencia. El `{ id: 1 }` que buscas es un objeto nuevo, distinto del que está dentro del arreglo aunque se vean iguales."
+      },
       "tags": [
         "buscar",
         "contiene",
@@ -215,6 +287,11 @@
       "ejemplo": "const a = [\"a\", \"b\", \"a\"];\na.indexOf(\"a\"); // 0\na.lastIndexOf(\"a\"); // 2\na.indexOf(\"z\"); // -1",
       "devuelve": "Un índice, o `-1` si no lo encuentra.",
       "errorTipico": "Escribir `if (a.indexOf(x))`: si `x` está en la posición 0 da 0, que es falsy. Compara con `!== -1` o usa `includes`.",
+      "porques": {
+        "1": "`indexOf` busca desde el inicio y se queda con la primera `\"a\"`, que está en el índice 0.",
+        "2": "`lastIndexOf` busca desde el final: la última `\"a\"` está en el índice 2.",
+        "3": "`\"z\"` no está en el arreglo, y `indexOf` avisa de eso devolviendo `-1`."
+      },
       "tags": [
         "buscar",
         "posición",
@@ -230,6 +307,9 @@
       "ejemplo": "const users = [{ id: 1, n: \"Ana\" }, { id: 2, n: \"Luis\" }];\nusers.find((u) => u.id === 2); // { id: 2, n: \"Luis\" }\nusers.find((u) => u.id === 9); // undefined\nusers.find((u) => u.id === 9)?.n; // undefined",
       "devuelve": "El elemento encontrado, o `undefined`.",
       "errorTipico": "Leer una propiedad sin verificar: `users.find(...).n` lanza TypeError si no lo encontró. Usa `?.` o un `if`.",
+      "porques": {
+        "1": "`find` devuelve el elemento completo, no un `true` ni un índice: el primer objeto cuyo `id` es 2."
+      },
       "tags": [
         "buscar",
         "encontrar",
@@ -245,6 +325,10 @@
       "ejemplo": "const a = [5, 12, 8];\na.findIndex((n) => n > 10); // 1\na.findIndex((n) => n > 50); // -1",
       "devuelve": "Un índice, o `-1` si ninguno cumple.",
       "errorTipico": "Confundirlo con `find`: devuelve la posición, no el elemento. Y olvidar revisar el `-1` antes de usar el índice.",
+      "porques": {
+        "1": "El primer número mayor que 10 es el `12`, y `findIndex` devuelve su posición (1), no el valor.",
+        "2": "Ningún elemento es mayor que 50. Cuando no encuentra nada, `findIndex` devuelve `-1`."
+      },
       "tags": [
         "buscar",
         "posición",
@@ -260,6 +344,11 @@
       "ejemplo": "const a = [1, 8, 3, 9, 2];\na.findLast((n) => n > 5); // 9\na.findLastIndex((n) => n > 5); // 3\na.findLast((n) => n > 50); // undefined",
       "devuelve": "El último elemento que cumple (o `undefined`); `findLastIndex` devuelve su índice (o `-1`).",
       "errorTipico": "Hacer `a.reverse().find(...)`: funciona, pero `reverse` invierte el arreglo original y te lo deja al revés.",
+      "porques": {
+        "1": "`findLast` recorre desde el final. Hay dos números mayores que 5 (el 8 y el 9), y el primero que encuentra viniendo desde atrás es el `9`.",
+        "2": "Es la misma búsqueda desde el final, pero devuelve la posición: el `9` está en el índice 3.",
+        "3": "Ningún número es mayor que 50, y `findLast` devuelve `undefined` cuando no encuentra nada."
+      },
       "tags": [
         "buscar",
         "último que cumple",
@@ -275,6 +364,10 @@
       "ejemplo": "const a = [1, 2, 3, 4];\na.filter((n) => n % 2 === 0); // [2, 4]\na.filter((n) => n > 10); // []\na.filter((n) => { n > 2; }); // [] (falta return)",
       "devuelve": "Un arreglo nuevo (puede estar vacío).",
       "errorTipico": "Usar llaves sin `return`: la función devuelve `undefined` y no pasa ningún elemento. Con llaves escribe `return n > 2`.",
+      "porques": {
+        "1": "La condición `n % 2 === 0` solo es verdadera para los pares, así que quedan el 2 y el 4.",
+        "2": "Ningún elemento es mayor que 10. `filter` siempre devuelve un arreglo, y aquí sale vacío."
+      },
       "tags": [
         "filtrar",
         "quitar",
@@ -292,6 +385,11 @@
       "ejemplo": "const a = [1, 2, 3];\na.map((n) => n * 2); // [2, 4, 6]\na.map((n) => ({ valor: n }))[0]; // { valor: 1 }\na.map((n) => { n * 2; }); // [undefined, undefined, undefined]\na; // [1, 2, 3]",
       "devuelve": "Un arreglo nuevo con la misma cantidad de elementos.",
       "errorTipico": "Olvidar `return` cuando usas llaves, o devolver un objeto sin paréntesis: `n => { valor: n }` no devuelve un objeto, escribe `n => ({ valor: n })`.",
+      "porques": {
+        "1": "`map` aplica la función a cada elemento y arma un arreglo nuevo con los resultados: 1, 2 y 3 multiplicados por 2.",
+        "2": "Los paréntesis hacen que la flecha devuelva un objeto. `map` crea uno por elemento y `[0]` toma el primero, el del `1`.",
+        "4": "`map` nunca modifica el arreglo original: cada llamada anterior devolvió un arreglo nuevo."
+      },
       "tags": [
         "transformar",
         "convertir",
@@ -323,6 +421,12 @@
       "ejemplo": "const a = [1, 2, 3, 4];\na.reduce((acc, n) => acc + n, 0); // 10\n[\"a\", \"b\", \"a\"].reduce((c, x) => ({ ...c, [x]: (c[x] ?? 0) + 1 }), {}); // { a: 2, b: 1 }\n[].reduce((acc, n) => acc + n, 0); // 0\n[].reduce((acc, n) => acc + n); // TypeError",
       "devuelve": "El valor final del acumulador (de cualquier tipo).",
       "errorTipico": "Olvidar el valor inicial: con un arreglo vacío lanza TypeError y con objetos el primer acumulador es el primer elemento. También olvidar `return acc` cuando usas llaves.",
+      "porques": {
+        "1": "El acumulador empieza en `0` y va sumando cada número: 0 + 1 + 2 + 3 + 4.",
+        "2": "El acumulador empieza como objeto vacío y por cada letra suma 1 a su contador. `\"a\"` aparece dos veces y `\"b\"` una.",
+        "3": "Con el arreglo vacío la función nunca se ejecuta, y `reduce` devuelve tal cual el valor inicial.",
+        "4": "Arreglo vacío y sin valor inicial: `reduce` no tiene nada que devolver y lanza un error. Por eso conviene pasar siempre el valor inicial."
+      },
       "tags": [
         "sumar",
         "acumular",
@@ -340,6 +444,12 @@
       "ejemplo": "[1, 5, 8].some((n) => n > 7); // true\n[1, 5].some((n) => n > 7); // false\n[].some((n) => n > 7); // false\n[{ id: 1 }].some((u) => u.id === 1); // true",
       "devuelve": "`true` o `false`.",
       "errorTipico": "Usar `filter(...).length > 0`: funciona, pero recorre todo y crea un arreglo que no usas.",
+      "porques": {
+        "0": "Basta con que un elemento cumpla: el `8` es mayor que 7.",
+        "1": "Ni el 1 ni el 5 son mayores que 7, y `some` necesita al menos uno que cumpla.",
+        "2": "En un arreglo vacío no hay ningún elemento que pueda cumplir, así que `some` siempre da `false`.",
+        "3": "La condición mira una propiedad, no compara objetos: el único usuario tiene `id` igual a 1."
+      },
       "tags": [
         "alguno",
         "existe",
@@ -356,6 +466,11 @@
       "ejemplo": "[2, 4, 6].every((n) => n % 2 === 0); // true\n[2, 3].every((n) => n % 2 === 0); // false\n[].every((n) => n > 100); // true",
       "devuelve": "`true` o `false`.",
       "errorTipico": "No saber que con un arreglo vacío devuelve `true`. Si un arreglo vacío no debe pasar la validación, revisa también `length > 0`.",
+      "porques": {
+        "0": "Los tres números son pares, y `every` exige que todos cumplan la condición.",
+        "1": "El `3` es impar. Con uno solo que falle, `every` da `false`.",
+        "2": "En un arreglo vacío no hay ningún elemento que incumpla la condición, así que `every` da `true`, sea cual sea la condición."
+      },
       "tags": [
         "todos",
         "validar",
@@ -371,6 +486,12 @@
       "ejemplo": "const n = [10, 1, 5, 100];\nn.sort(); // [1, 10, 100, 5]\nn.sort((a, b) => a - b); // [1, 5, 10, 100]\nn.sort((a, b) => b - a); // [100, 10, 5, 1]\n[\"pera\", \"ábaco\", \"uva\"].sort((a, b) => a.localeCompare(b)); // [\"ábaco\", \"pera\", \"uva\"]",
       "devuelve": "El mismo arreglo, ya ordenado (misma referencia).",
       "errorTipico": "Ordenar números sin comparador (los compara como texto) y olvidar que muta el original. Para no mutar usa `toSorted` o `[...a].sort()`.",
+      "porques": {
+        "1": "Sin función de comparación, `sort` convierte los números a texto y ordena como en un diccionario: `\"100\"` va antes que `\"5\"` porque `\"1\"` va antes que `\"5\"`.",
+        "2": "Con `a - b` la comparación es numérica: si el resultado es negativo, `a` va primero. Así quedan de menor a mayor.",
+        "3": "`b - a` invierte la resta, y con eso el orden: de mayor a menor.",
+        "4": "`localeCompare` ordena como un diccionario en español y pone `\"ábaco\"` junto a la `a`. Un `sort()` sin función dejaría la `á` al final."
+      },
       "tags": [
         "ordenar",
         "ascendente",
@@ -387,6 +508,13 @@
       "ejemplo": "const a = [3, 1, 2];\na.toSorted((x, y) => x - y); // [1, 2, 3]\na.toReversed(); // [2, 1, 3]\na.with(0, 9); // [9, 1, 2]\na.toSpliced(0, 1); // [1, 2]\na; // [3, 1, 2] (intacto)",
       "devuelve": "Un arreglo nuevo.",
       "errorTipico": "Usarlos en un navegador o Node muy antiguo (anterior a 2023), donde no existen. La alternativa clásica es copiar primero: `[...a].sort()`.",
+      "porques": {
+        "1": "`toSorted` devuelve una copia ordenada de menor a mayor y deja el original como estaba.",
+        "2": "Invierte el orden de `a`, que sigue siendo `[3, 1, 2]` porque `toSorted` no lo cambió.",
+        "3": "`with(0, 9)` devuelve una copia donde la posición 0 vale `9`; el resto queda igual.",
+        "4": "Devuelve una copia a la que le quita 1 elemento desde el índice 0, es decir, sin el `3`.",
+        "5": "Los cuatro métodos anteriores devuelven copias. Ninguno modifica el arreglo original, a diferencia de `sort`, `reverse` y `splice`."
+      },
       "tags": [
         "ordenar",
         "invertir",
@@ -404,6 +532,12 @@
       "ejemplo": "const a = [1, 2, 3];\na.reverse(); // [3, 2, 1]\na; // [3, 2, 1] (cambió)\n[...a].reverse(); // [1, 2, 3]\n\"hola\".split(\"\").reverse().join(\"\"); // \"aloh\"",
       "devuelve": "El mismo arreglo, invertido.",
       "errorTipico": "Escribir `\"hola\".reverse()`: los strings no tienen `reverse`. Conviértelo a arreglo, inviértelo y únelo de nuevo.",
+      "porques": {
+        "1": "`reverse` invierte el orden de los elementos y devuelve el mismo arreglo ya invertido.",
+        "2": "`reverse` modificó el arreglo original: no creó una copia.",
+        "3": "`[...a]` copia primero el arreglo, que ya estaba invertido (`[3, 2, 1]`), y `reverse` da vuelta solo a esa copia.",
+        "4": "Un string no tiene `reverse`, así que se hace en tres pasos: `split(\"\")` lo separa en letras, `reverse` las invierte y `join(\"\")` las vuelve a pegar."
+      },
       "tags": [
         "invertir",
         "voltear",
@@ -419,6 +553,11 @@
       "ejemplo": "[1, [2, [3, [4]]]].flat(); // [1, 2, [3, [4]]]\n[1, [2, [3, [4]]]].flat(2); // [1, 2, 3, [4]]\n[1, [2, [3, [4]]]].flat(Infinity); // [1, 2, 3, 4]",
       "devuelve": "Un arreglo nuevo.",
       "errorTipico": "Esperar que aplane todo con `flat()`: solo baja un nivel. Para todos usa `flat(Infinity)`.",
+      "porques": {
+        "0": "Sin argumento, `flat` aplana un solo nivel: saca el `2` de su arreglo, pero `[3, [4]]` sigue anidado.",
+        "1": "Con `2` aplana dos niveles: el `3` ya queda suelto, pero el `[4]` estaba a tres niveles y sigue anidado.",
+        "2": "`Infinity` aplana todos los niveles que haya, sin importar la profundidad."
+      },
       "tags": [
         "aplanar",
         "anidado",
@@ -434,6 +573,11 @@
       "ejemplo": "const frases = [\"hola mundo\", \"chau\"];\nfrases.map((f) => f.split(\" \")); // [[\"hola\", \"mundo\"], [\"chau\"]]\nfrases.flatMap((f) => f.split(\" \")); // [\"hola\", \"mundo\", \"chau\"]\n[1, 2, 3].flatMap((n) => (n % 2 ? [n] : [])); // [1, 3]",
       "devuelve": "Un arreglo nuevo.",
       "errorTipico": "Esperar que aplane más de un nivel: `flatMap` solo aplana uno.",
+      "porques": {
+        "1": "`map` guarda lo que devuelve la función tal cual. Como `split` devuelve un arreglo, queda un arreglo de arreglos.",
+        "2": "`flatMap` hace lo mismo que `map` y después aplana un nivel, así que todas las palabras quedan en un solo arreglo.",
+        "3": "Para los impares devuelve `[n]` y para los pares `[]`. Al aplanar, los arreglos vacíos desaparecen: sirve para filtrar y transformar a la vez."
+      },
       "tags": [
         "aplanar",
         "transformar",
@@ -449,6 +593,11 @@
       "ejemplo": "new Array(3).fill(0); // [0, 0, 0]\nconst m = new Array(2).fill([]);\nm[0].push(1);\nm; // [[1], [1]] (comparten el mismo arreglo)\nArray.from({ length: 2 }, () => []); // [[], []]",
       "devuelve": "El mismo arreglo, ya relleno.",
       "errorTipico": "Rellenar con un objeto o arreglo: todas las posiciones apuntan al mismo, así que cambiar uno cambia todos. Usa `Array.from` con una función.",
+      "porques": {
+        "0": "`new Array(3)` crea 3 huecos y `fill(0)` pone un `0` en cada uno.",
+        "3": "`fill([])` pone el mismo arreglo en las dos posiciones, no dos arreglos. Al hacer `push` en `m[0]` también cambia `m[1]`, porque son el mismo.",
+        "4": "Aquí la función se ejecuta una vez por posición y crea un `[]` nuevo cada vez: los dos arreglos son independientes."
+      },
       "tags": [
         "rellenar",
         "inicializar",
@@ -465,6 +614,10 @@
       "ejemplo": "const a = [\"x\", \"y\"];\n[...a.keys()]; // [0, 1]\n[...a.entries()]; // [[0, \"x\"], [1, \"y\"]]\nfor (const [i, letra] of a.entries()) console.log(i, letra); // 0 x, luego 1 y",
       "devuelve": "Un iterador (no un arreglo).",
       "errorTipico": "Esperar un arreglo: `a.entries().length` es `undefined`. Conviértelo con `[...a.entries()]`. No lo confundas con `Object.entries(obj)`.",
+      "porques": {
+        "1": "`keys()` recorre los índices, no los valores. Hay dos elementos, así que salen el 0 y el 1.",
+        "2": "`entries()` entrega pares `[índice, valor]`, uno por cada elemento del arreglo."
+      },
       "tags": [
         "recorrer",
         "índice",
@@ -481,6 +634,11 @@
       "ejemplo": "const a = [1, 2];\n[...a, 3]; // [1, 2, 3]\nMath.max(...a); // 2\nconst m = [[1]];\nconst c = [...m]; c[0].push(9);\nm; // [[1, 9]] (la copia es superficial)",
       "devuelve": "Un arreglo nuevo (o los argumentos separados, si lo usas en una llamada).",
       "errorTipico": "Creer que copia en profundidad: solo copia el primer nivel y los objetos internos se comparten. Para copia profunda usa `structuredClone`.",
+      "porques": {
+        "1": "`...a` reparte los elementos de `a` dentro del arreglo nuevo, y después se agrega el `3`.",
+        "2": "`Math.max` espera números sueltos, no un arreglo. El `...` convierte la llamada en `Math.max(1, 2)`.",
+        "5": "`[...m]` copia solo el primer nivel: `c[0]` y `m[0]` son el mismo arreglo interno. Por eso el `push` hecho en `c` también se ve en `m`."
+      },
       "tags": [
         "copiar",
         "unir",

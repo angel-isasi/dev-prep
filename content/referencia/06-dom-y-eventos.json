@@ -133,6 +133,9 @@
       "ejemplo": "const menu = document.querySelector(\".menu\");\nmenu.classList.add(\"abierto\");\nmenu.classList.remove(\"oculto\");\nmenu.classList.toggle(\"activo\");       // la pone si no está, la quita si está\nmenu.classList.toggle(\"oscuro\", true); // fuerza ponerla\nconsole.log(menu.classList.contains(\"abierto\")); // true",
       "devuelve": "`contains` devuelve un boolean; `toggle` devuelve true si la clase quedó puesta; `add` y `remove` devuelven undefined.",
       "errorTipico": "Escribir el punto del selector: `classList.add(\".activo\")` agrega la clase \".activo\", que tu CSS no reconoce. Y usar `el.className = \"activo\"`, que borra todas las otras clases del elemento.",
+      "porques": {
+        "5": "`contains` pregunta si el elemento tiene esa clase, y `\"abierto\"` se agregó con `add` en la segunda línea."
+      },
       "tags": [
         "clases css",
         "agregar clase",
@@ -150,6 +153,9 @@
       "ejemplo": "// <button data-producto-id=\"42\">Comprar</button>\nconst btn = document.querySelector(\"button\");\nconsole.log(btn.dataset.productoId); // \"42\" (siempre string)\nbtn.dataset.estado = \"listo\";       // crea data-estado=\"listo\"\nbtn.setAttribute(\"aria-label\", \"Comprar producto\");\nbtn.removeAttribute(\"disabled\");",
       "devuelve": "`getAttribute` y `dataset.x` devuelven un string (o null / undefined si no existe); `setAttribute` devuelve undefined.",
       "errorTipico": "Olvidar que todo es texto: `btn.dataset.productoId === 42` da false (usa `Number(...)`), y `setAttribute(\"disabled\", false)` igual deshabilita el botón, porque basta con que el atributo exista. Usa `removeAttribute(\"disabled\")` o `btn.disabled = false`.",
+      "porques": {
+        "2": "El atributo `data-producto-id` se lee en `dataset` como `productoId`, en camelCase. Los atributos HTML siempre llegan como string, aunque parezcan números."
+      },
       "tags": [
         "atributos",
         "data atributos",

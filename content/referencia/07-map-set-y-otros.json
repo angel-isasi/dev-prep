@@ -9,6 +9,11 @@
       "ejemplo": "const stock = new Map();\nstock.set(\"pan\", 10).set(\"leche\", 5);\nconsole.log(stock.get(\"pan\"));   // 10\nconsole.log(stock.has(\"queso\")); // false\nstock.delete(\"leche\");\nconsole.log(stock.size);         // 1",
       "devuelve": "`set` devuelve el mismo Map (se puede encadenar); `get` el valor o undefined; `has` y `delete` un boolean.",
       "errorTipico": "Usar corchetes como en un objeto: `stock[\"pan\"] = 10` no agrega nada al Map (`stock.get(\"pan\")` da undefined). Y `size` es una propiedad, no una función: `stock.size()` da error.",
+      "porques": {
+        "2": "`get` devuelve el valor guardado con la clave `\"pan\"`, que se puso con `set` en la línea anterior.",
+        "3": "Solo se guardaron `\"pan\"` y `\"leche\"`. `has` responde si la clave existe, y `\"queso\"` no está.",
+        "5": "Había 2 entradas y `delete` quitó `\"leche\"`. En un `Map` es `size`, una propiedad, no `length`."
+      },
       "tags": [
         "diccionario",
         "clave valor",
@@ -26,6 +31,10 @@
       "ejemplo": "const notas = new Map([[\"Ana\", 18], [\"Luis\", 14]]);\nfor (const [nombre, nota] of notas) {\n  console.log(nombre, nota); // Ana 18, luego Luis 14\n}\nconsole.log([...notas.values()]);       // [18, 14]\nconsole.log(Object.fromEntries(notas)); // { Ana: 18, Luis: 14 }",
       "devuelve": "`keys`, `values` y `entries` devuelven iteradores (no arreglos); usa `[...it]` o `Array.from(it)` para tener un arreglo.",
       "errorTipico": "Hacer `JSON.stringify(mapa)`: da \"{}\" y pierdes los datos. Conviértelo antes con `Object.fromEntries(mapa)`. Ojo también con `forEach`: el orden de los parámetros es (valor, clave), al revés de lo que muchos esperan.",
+      "porques": {
+        "4": "`values()` recorre solo los valores, sin las claves, y el spread los pasa a un arreglo.",
+        "5": "Un `Map` se recorre como pares `[clave, valor]`, justo lo que `Object.fromEntries` necesita para armar un objeto."
+      },
       "tags": [
         "recorrer map",
         "for of",
@@ -42,6 +51,9 @@
       "ejemplo": "const nums = [1, 2, 2, 3, 3, 3];\nconsole.log([...new Set(nums)]); // [1, 2, 3]\n\nconst vistos = new Set([\"ana\"]);\nvistos.add(\"luis\").add(\"ana\"); // \"ana\" no se repite\nconsole.log(vistos.size, vistos.has(\"luis\")); // 2 true",
       "devuelve": "Un Set. `add` devuelve el mismo Set; `has` y `delete` un boolean.",
       "errorTipico": "Esperar que quite objetos \"iguales\": `new Set([{ id: 1 }, { id: 1 }]).size` es 2, porque compara por referencia, no por contenido. Para objetos usa un Map con el id como clave.",
+      "porques": {
+        "1": "Un `Set` no guarda valores repetidos. Al crearlo desde `nums` queda un solo 1, un solo 2 y un solo 3, y el spread lo vuelve arreglo."
+      },
       "tags": [
         "unicos",
         "sin duplicados",
@@ -58,6 +70,9 @@
       "ejemplo": "const clics = new WeakMap();\nconst boton = { id: \"guardar\" }; // en la web sería un elemento del DOM\nclics.set(boton, 1);\nconsole.log(clics.get(boton)); // 1",
       "devuelve": "Un WeakMap: igual que Map, pero sin `size` ni forma de recorrerlo.",
       "errorTipico": "Usar un string o un número como clave: lanza un TypeError (\"Invalid value used as weak map key\"). Y querer recorrerlo: no tiene `size`, `keys` ni `forEach`.",
+      "porques": {
+        "3": "La clave es el objeto `boton` mismo. Como `get` recibe esa misma referencia, encuentra el valor guardado con `set`."
+      },
       "tags": [
         "memoria",
         "claves objeto",
@@ -73,6 +88,9 @@
       "ejemplo": "const meta = new Date(2027, 2, 1); // 1 de marzo de 2027 (mes 2 = marzo)\nconsole.log(meta.getFullYear()); // 2027\nconsole.log(meta.toLocaleDateString(\"es-PE\")); // 1/3/2027\nconst opciones = { weekday: \"long\", day: \"numeric\", month: \"long\" };\nconsole.log(meta.toLocaleDateString(\"es-PE\", opciones)); // lunes, 1 de marzo\nconst faltan = Math.ceil((meta - new Date()) / 86_400_000); // días que faltan",
       "devuelve": "Un objeto Date. Restar dos fechas da la diferencia en milisegundos (un día son 86 400 000 ms).",
       "errorTipico": "Olvidar que los meses van de 0 a 11 (`new Date(2027, 3, 1)` es ABRIL) y crear fechas con `new Date(\"2027-03-01\")`: ese formato se lee como hora UTC y en Perú (UTC-5) se muestra como 28 de febrero. Usa `new Date(2027, 2, 1)` o agrega la hora: `\"2027-03-01T00:00:00\"`.",
+      "porques": {
+        "1": "`getFullYear` devuelve el año de la fecha con sus 4 dígitos, el mismo que se pasó como primer argumento a `new Date`."
+      },
       "tags": [
         "fecha",
         "hora",
@@ -109,6 +127,9 @@
       "ejemplo": "const rango = {\n  desde: 1,\n  hasta: 3,\n  *[Symbol.iterator]() {\n    for (let i = this.desde; i <= this.hasta; i++) yield i;\n  },\n};\nconsole.log([...rango]); // [1, 2, 3]",
       "devuelve": "Un iterador: un objeto con un método `next()` que devuelve `{ value, done }`.",
       "errorTipico": "Usar `for...of` sobre un objeto literal normal: lanza \"TypeError: obj is not iterable\". Para recorrer un objeto usa `Object.entries(obj)` o `for...in`.",
+      "porques": {
+        "7": "El spread llama a `[Symbol.iterator]` para recorrer el objeto. El generador hace `yield` de cada número desde `desde` (1) hasta `hasta` (3)."
+      },
       "tags": [
         "iterable",
         "iterador",
@@ -125,6 +146,11 @@
       "ejemplo": "function* contador() {\n  let n = 1;\n  while (true) yield n++;\n}\nconst gen = contador();\nconsole.log(gen.next().value); // 1\nconsole.log(gen.next().value); // 2\nconsole.log(gen.next());       // { value: 3, done: false }",
       "devuelve": "Llamar a la función no ejecuta su código: devuelve un objeto generador, que es iterable y tiene `next()`.",
       "errorTipico": "Hacer `[...contador()]` con un generador infinito: el programa se cuelga. Y llamar a `contador().next()` cada vez: creas un generador nuevo y siempre obtienes 1. Guarda el generador en una variable.",
+      "porques": {
+        "5": "El primer `next()` ejecuta hasta el primer `yield`, que entrega `n` (1). El `++` va después, así que sube a 2 recién luego de entregarlo.",
+        "6": "El generador recuerda dónde se quedó: sigue con `n` en 2, lo entrega y se vuelve a pausar.",
+        "7": "Sin `.value` se ve el objeto completo. `done` es `false` porque el `while (true)` nunca termina: siempre hay un valor más."
+      },
       "tags": [
         "generador",
         "yield",
@@ -195,6 +221,11 @@
       "ejemplo": "console.log(typeof \"hola\", typeof 42); // string number\nconsole.log(typeof undefined);         // undefined\nconsole.log(typeof null, typeof []);   // object object  (¡ojo!)\nconsole.log(Array.isArray([]));        // true\nconsole.log(new Date() instanceof Date); // true\nconsole.log([] instanceof Object);       // true (un arreglo también es objeto)",
       "devuelve": "`typeof`: un string (\"string\", \"number\", \"boolean\", \"undefined\", \"object\", \"function\", \"bigint\" o \"symbol\"). `instanceof`: un boolean.",
       "errorTipico": "Usar `typeof` para detectar arreglos o null: ambos dan \"object\". Usa `Array.isArray(x)` y `x === null`. Y `instanceof` no sirve con primitivos: `\"hola\" instanceof String` es false.",
+      "porques": {
+        "3": "`Array.isArray` es la forma confiable de detectar un arreglo, porque `typeof []` solo dice `\"object\"`.",
+        "4": "`instanceof` pregunta si el objeto fue creado con esa clase, y `new Date()` crea justamente un `Date`.",
+        "5": "Todo arreglo hereda de `Array` y también de `Object`, así que `instanceof Object` es verdadero."
+      },
       "tags": [
         "tipo de dato",
         "comprobar tipo",

@@ -147,6 +147,9 @@
       "ejemplo": "async function doble(n) {\n  return n * 2;\n}\nconsole.log(doble(4)); // Promise { 8 }\ndoble(4).then((v) => console.log(v)); // 8\nconsole.log(await doble(4)); // 8",
       "devuelve": "Una promesa con el valor del `return` (o rechazada con el error que se lance).",
       "errorTipico": "Usar el resultado sin `await`: `const total = doble(4)` guarda una promesa, no 8, y `total + 1` da \"[object Promise]1\".",
+      "porques": {
+        "5": "`doble(4)` devuelve una promesa, no el 8. `await` espera a que se cumpla y entrega el valor que trae adentro."
+      },
       "tags": [
         "funcion asincrona",
         "asincrono",
