@@ -1,0 +1,8 @@
+{
+  "id": "alg-big-o",
+  "titulo": "Big O: cómo medir una solución",
+  "area": "algoritmos",
+  "orden": 1,
+  "descripcion": "Cuánto crece el tiempo y la memoria de tu código cuando crecen los datos: contar pasos, bucles anidados, el costo escondido de los métodos y cómo pasar de O(n²) a O(n).",
+  "ejercicios": ["alg-reto-023", "alg-reto-020", "alg-reto-036", "alg-reto-015"]
+}

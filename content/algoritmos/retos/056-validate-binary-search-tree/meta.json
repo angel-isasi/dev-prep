@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 2,
-  "tags": ["arboles", "recursion", "dfs", "leetcode"]
+  "tags": ["arboles", "recursion", "dfs", "leetcode"],
+  "patron": "recursion"
 }

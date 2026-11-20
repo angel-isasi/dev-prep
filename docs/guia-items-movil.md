@@ -4,11 +4,12 @@ Las lecciones del celular no tienen contenido propio: sus ítems se **generan** 
 
 ## Unidades
 
-Cada unidad es un tema de Aprender (35) más una unidad extra **`algoritmos`** (sin teoría). `scripts/items/unidades.js` decide a qué unidad va cada cosa:
+Cada unidad es un tema de Aprender (43, incluidos los 8 de Algoritmos). `scripts/items/unidades.js` decide a qué unidad va cada cosa:
 
 1. Un ejercicio que aparece en `ejercicios` del `meta.json` de un tema va a ese tema.
-2. Si no, se usa su `tema` con la tabla `TEMA_A_UNIDAD` (por ejemplo `react-estado` → `react-estado-y-eventos`, `strings` → `variables-y-tipos`, `algoritmos` → `algoritmos`).
-3. Las entradas de Referencia van por categoría con `CATEGORIA_A_UNIDAD` ("Arrays" → `arrays`, "Promesas y async" → `promesas-y-async`, "React" → `react-hooks-avanzados`...).
+2. Si no, y es un reto de algoritmos, va al tema de su `patron` con la tabla `PATRONES` (por ejemplo `hash` → `alg-tabla-hash`, `ventana` → `alg-ventana-deslizante`).
+3. Si no, se usa su `tema` con la tabla `TEMA_A_UNIDAD` (por ejemplo `react-estado` → `react-estado-y-eventos`, `strings` → `variables-y-tipos`).
+4. Las entradas de Referencia van por categoría con `CATEGORIA_A_UNIDAD` ("Arrays" → `arrays`, "Promesas y async" → `promesas-y-async`, "React" → `react-hooks-avanzados`...).
 
 Un test falla si algún tema de ejercicio o categoría de Referencia queda sin unidad.
 

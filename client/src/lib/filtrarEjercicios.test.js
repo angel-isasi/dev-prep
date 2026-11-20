@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { filtrarEjercicios } from "./filtrarEjercicios.js";
+import { agruparEjercicios, filtrarEjercicios } from "./filtrarEjercicios.js";
 
 const LISTA = [
   { id: "a", titulo: "Frecuencia de palabras", tema: "objetos", nivel: 1, estado: "resuelto", tags: ["contador"] },
@@ -57,5 +57,30 @@ describe("filtrarEjercicios", () => {
     const copia = structuredClone(LISTA);
     filtrarEjercicios(LISTA, { ...SIN_FILTROS, tema: "objetos" });
     expect(LISTA).toEqual(copia);
+  });
+});
+
+describe("filtrar y agrupar por patrón (retos de algoritmos)", () => {
+  const RETOS = [
+    { id: "r1", titulo: "Two Sum", tema: "algoritmos", patron: "hash", nivel: 2, estado: "pendiente" },
+    { id: "r2", titulo: "Paréntesis", tema: "algoritmos", patron: "pila", nivel: 2, estado: "pendiente" },
+    { id: "r3", titulo: "Anagrama", tema: "algoritmos", patron: "hash", nivel: 1, estado: "resuelto" },
+    { id: "r4", titulo: "FizzBuzz", tema: "algoritmos", patron: "matematica", nivel: 1, estado: "pendiente" },
+  ];
+
+  test("filtra por patrón", () => {
+    expect(ids(filtrarEjercicios(RETOS, { ...SIN_FILTROS, patron: "hash" }))).toEqual(["r1", "r3"]);
+  });
+
+  test("agrupa por patrón en el orden de estudio, sin cambiar el orden dentro de cada grupo", () => {
+    const grupos = agruparEjercicios(RETOS, { porPatron: true });
+    expect(grupos.map((g) => g.patron)).toEqual(["matematica", "hash", "pila"]);
+    expect(ids(grupos[1].lista)).toEqual(["r1", "r3"]);
+  });
+
+  test("sin porPatron agrupa por tema, en el orden en que aparecen", () => {
+    const grupos = agruparEjercicios([...LISTA, ...RETOS]);
+    expect(grupos.map((g) => g.clave)).toEqual(["objetos", "algoritmos", "react-estado"]);
+    expect(grupos.every((g) => g.patron === null)).toBe(true);
   });
 });

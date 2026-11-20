@@ -82,6 +82,7 @@ async function main() {
       tema: ej.tema,
       nivel: ej.nivel,
       tags: ej.tags,
+      ...(ej.patron ? { patron: ej.patron } : {}),
       coleccion: ej.coleccion,
       ext: ej.ext,
       totalPistas: pistas.length,

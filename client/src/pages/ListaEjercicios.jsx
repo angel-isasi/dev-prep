@@ -3,7 +3,8 @@ import { Link, useNavigate, useSearchParams } from "react-router";
 import { api } from "../lib/api.js";
 import { ES_MOVIL } from "../lib/modo.js";
 import { useEvento } from "../hooks/useEvento.js";
-import { filtrarEjercicios } from "../lib/filtrarEjercicios.js";
+import { agruparEjercicios, claveGrupo, filtrarEjercicios } from "../lib/filtrarEjercicios.js";
+import { PATRONES, nombrePatron } from "../../../scripts/items/unidades.js";
 import { nombreColeccion, nombreTema } from "../lib/etiquetas.js";
 import { buscarColeccion, ejercicioAlAzar, siguienteEjercicio } from "../lib/areas.js";
 import { Selector } from "../components/Selector.jsx";
@@ -46,17 +47,10 @@ function coleccionLegible(id) {
 }
 
 
-/** Agrupa por tema, respetando el orden en que aparecen. */
-function agruparPorTema(lista) {
-  const grupos = new Map();
-  for (const ej of lista) {
-    if (!grupos.has(ej.tema)) grupos.set(ej.tema, []);
-    grupos.get(ej.tema).push(ej);
-  }
-  return [...grupos.entries()];
-}
-
-/** Los ejercicios de una colección (o de todas), agrupados por tema y con filtros. */
+/**
+ * Los ejercicios de una colección (o de todas), agrupados por tema y con filtros.
+ * Los retos de algoritmos traen `patron`: en su colección se agrupan y filtran por patrón.
+ */
 export function ListaEjercicios() {
   const [ejercicios, setEjercicios] = useState(api.ejercicios.guardado);
   const [error, setError] = useState(null);
@@ -68,6 +62,7 @@ export function ListaEjercicios() {
   const filtros = {
     texto: params.get("texto") ?? "",
     tema: params.get("tema") ?? "",
+    patron: params.get("patron") ?? "",
     nivel: params.get("nivel") ?? "",
     estado: params.get("estado") ?? "",
     coleccion: params.get("coleccion") ?? "",
@@ -92,6 +87,9 @@ export function ListaEjercicios() {
     [ejercicios, filtros.coleccion],
   );
   const temas = useMemo(() => [...new Set(deColeccion.map((e) => e.tema))], [deColeccion]);
+  // Solo dentro de una colección con patrones (los retos de algoritmos); en "Todos" se agrupa por tema
+  const porPatron = !!filtros.coleccion && deColeccion.some((e) => e.patron);
+  const patrones = useMemo(() => PATRONES.filter((p) => deColeccion.some((e) => e.patron === p.id)), [deColeccion]);
 
   function cambiarFiltro(nombre, valor) {
     const nuevos = new URLSearchParams(params);
@@ -111,7 +109,7 @@ export function ListaEjercicios() {
   // En el celular se cuenta lo estudiado (resolver con tests es en la laptop).
   const hecho = (e) => (ES_MOVIL ? e.estado !== "pendiente" : e.estado === "resuelto");
   const resueltos = deColeccion.filter(hecho).length;
-  const hayFiltros = filtros.texto || filtros.tema || filtros.nivel || filtros.estado;
+  const hayFiltros = filtros.texto || filtros.tema || filtros.patron || filtros.nivel || filtros.estado;
   const siguiente = siguienteEjercicio(deColeccion);
 
   const titulo = encontrada ? encontrada.coleccion.nombre : "Todos los ejercicios";
@@ -121,11 +119,13 @@ export function ListaEjercicios() {
 
   // Qué grupos se ven abiertos: con búsqueda o filtros, todos; si no, solo el del siguiente
   // ejercicio pendiente (o el primero). Lo que abras o cierres a mano manda sobre eso.
-  const grupos = agruparPorTema(visibles);
+  const grupos = agruparEjercicios(visibles, { porPatron });
+  const nombreGrupo = (g) => (g.patron ? nombrePatron(g.patron) : nombreTema(g.tema));
   const modo = hayFiltros ? "filtros" : "normal";
-  const temaSiguiente = siguiente && grupos.some(([t]) => t === siguiente.tema) ? siguiente.tema : grupos[0]?.[0];
-  const estaAbierto = (tema) => (manual.modo === modo ? manual.temas[tema] : undefined) ?? (hayFiltros ? true : tema === temaSiguiente);
-  const alternar = (tema, abrir) => setManual((m) => ({ modo, temas: { ...(m.modo === modo ? m.temas : {}), [tema]: abrir } }));
+  const claveSiguiente = siguiente && claveGrupo(siguiente, porPatron);
+  const grupoSiguiente = grupos.some((g) => g.clave === claveSiguiente) ? claveSiguiente : grupos[0]?.clave;
+  const estaAbierto = (clave) => (manual.modo === modo ? manual.temas[clave] : undefined) ?? (hayFiltros ? true : clave === grupoSiguiente);
+  const alternar = (clave, abrir) => setManual((m) => ({ modo, temas: { ...(m.modo === modo ? m.temas : {}), [clave]: abrir } }));
   const irA = (ej) => ej && navigate(`/practicar/${ej.id}`);
 
   return (
@@ -174,13 +174,23 @@ export function ListaEjercicios() {
           placeholder="Buscar por título o tag…"
           ancho="300px"
         />
-        <Selector
-          etiqueta="Tema"
-          valor={filtros.tema}
-          alCambiar={(v) => cambiarFiltro("tema", v)}
-          textoTodos="Todos los temas"
-          opciones={temas.map((t) => ({ valor: t, texto: nombreTema(t) }))}
-        />
+        {porPatron ? (
+          <Selector
+            etiqueta="Patrón"
+            valor={filtros.patron}
+            alCambiar={(v) => cambiarFiltro("patron", v)}
+            textoTodos="Todos los patrones"
+            opciones={patrones.map((p) => ({ valor: p.id, texto: p.nombre }))}
+          />
+        ) : (
+          <Selector
+            etiqueta="Tema"
+            valor={filtros.tema}
+            alCambiar={(v) => cambiarFiltro("tema", v)}
+            textoTodos="Todos los temas"
+            opciones={temas.map((t) => ({ valor: t, texto: nombreTema(t) }))}
+          />
+        )}
         <Selector
           etiqueta="Nivel"
           valor={filtros.nivel}
@@ -209,23 +219,23 @@ export function ListaEjercicios() {
       {visibles.length === 0 ? (
         <p className={estilos.vacio}>Ningún ejercicio coincide con los filtros.</p>
       ) : (
-        grupos.map(([tema, lista]) => {
-          const abierto = estaAbierto(tema);
+        grupos.map(({ clave, lista, ...grupo }) => {
+          const abierto = estaAbierto(clave);
           return (
-            // Cada tema es un <details> plegable. Lo controla React (open + clic en el summary) para
-            // poder abrir por defecto el tema del siguiente ejercicio, o todos si hay filtros.
-            <details key={tema} className={estilos.grupo} open={abierto}>
+            // Cada grupo (tema o patrón) es un <details> plegable. Lo controla React (open + clic en el
+            // summary) para poder abrir por defecto el grupo del siguiente ejercicio, o todos si hay filtros.
+            <details key={clave} className={estilos.grupo} open={abierto}>
               <summary
                 className={estilos.tituloGrupo}
                 onClick={(evento) => {
                   evento.preventDefault(); // el navegador no cambia "open": lo decide el estado
-                  alternar(tema, !abierto);
+                  alternar(clave, !abierto);
                 }}
               >
                 <span className={estilos.flecha} aria-hidden>
                   ›
                 </span>
-                <span className={estilos.nombreGrupo}>{nombreTema(tema)}</span>
+                <span className={estilos.nombreGrupo}>{nombreGrupo(grupo)}</span>
                 <span className={estilos.cuentaGrupo}>
                   {lista.filter(hecho).length}/{lista.length}
                 </span>

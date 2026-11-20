@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 2,
-  "tags": ["backtracking", "recursion", "strings", "leetcode"]
+  "tags": ["backtracking", "recursion", "strings", "leetcode"],
+  "patron": "recursion"
 }

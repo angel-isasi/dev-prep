@@ -1,0 +1,48 @@
+[
+  {
+    "pregunta": "¿Qué devuelve `cuenta.get(\"a\")` al final?\n\n```js\nconst cuenta = new Map();\nfor (const l of \"aba\") {\n  cuenta.set(l, cuenta.get(l) + 1);\n}\n```",
+    "opciones": ["2", "1", "NaN", "undefined"],
+    "correcta": 2,
+    "explicacion": "La primera vez `cuenta.get(\"a\")` es `undefined`, y `undefined + 1` es `NaN`. Después `NaN + 1` sigue siendo `NaN`. Falta el valor inicial: `(cuenta.get(l) ?? 0) + 1`."
+  },
+  {
+    "pregunta": "Quieres saber si un número ya apareció y guardaste en un Map `número -> índice`. ¿Cuál es la forma segura de preguntarlo?",
+    "opciones": ["`if (vistos.get(n))`", "`if (vistos.has(n))`", "`if (vistos[n])`", "`if (vistos.size > 0)`"],
+    "correcta": 1,
+    "explicacion": "Si el número apareció en el índice 0, `vistos.get(n)` devuelve 0, que es falso, y el `if` falla. `has` responde solo si la clave existe. `vistos[n]` no lee lo que guardaste con `set`."
+  },
+  {
+    "pregunta": "¿Qué complejidad tiene contar las frecuencias de un array de n elementos con un Map?",
+    "opciones": ["O(n²) de tiempo", "O(n) de tiempo y hasta O(n) de memoria", "O(n log n) de tiempo", "O(1) de tiempo"],
+    "correcta": 1,
+    "explicacion": "Es un solo recorrido y cada `get` y `set` cuesta O(1): O(n) de tiempo. En el peor caso todos son distintos y el Map tiene n claves: O(n) de memoria."
+  },
+  {
+    "pregunta": "¿Qué imprime esto?\n\n```js\nconst o = {};\no[1] = \"uno\";\no[\"1\"] = \"texto\";\nconsole.log(Object.keys(o).length);\n```",
+    "opciones": ["2", "1", "0", "TypeError"],
+    "correcta": 1,
+    "explicacion": "En un objeto las claves se convierten a string: `1` y `\"1\"` son la misma clave, así que la segunda asignación reemplaza a la primera. Con un `Map`, `1` y `\"1\"` serían dos claves distintas."
+  },
+  {
+    "pregunta": "Para agrupar palabras que son anagramas entre sí (\"amor\", \"roma\", \"mora\"), ¿qué clave conviene usar en el Map?",
+    "opciones": [
+      "La primera letra de cada palabra",
+      "El largo de la palabra",
+      "Las letras de la palabra ordenadas, por ejemplo \"amor\" -> \"amor\" y \"roma\" -> \"amor\"",
+      "La palabra al revés"
+    ],
+    "correcta": 2,
+    "explicacion": "Dos anagramas tienen las mismas letras, así que ordenadas dan el mismo texto: `[...p].sort().join(\"\")`. La inicial o el largo juntan palabras que no son anagramas, y al revés \"amor\" da \"roma\" pero \"mora\" da \"arom\"."
+  },
+  {
+    "pregunta": "En el patrón \"¿ya vi lo que me falta?\", ¿por qué se pregunta al Map **antes** de guardar el elemento actual?",
+    "opciones": [
+      "Porque `set` borra el Map",
+      "Para no emparejar un elemento consigo mismo",
+      "Porque es más rápido",
+      "No importa el orden"
+    ],
+    "correcta": 1,
+    "explicacion": "Si buscas dos números que sumen 10 y llega un 5, guardarlo primero haría que encuentre su propio 5 y responda un par falso. Preguntando antes, solo encuentra elementos de posiciones anteriores."
+  }
+]

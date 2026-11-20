@@ -24,7 +24,7 @@ const fecha = (iso, opciones = { day: "numeric", month: "short" }) => {
 };
 
 /** Los temas de Aprender tienen su página; Algoritmos solo tiene ejercicios. */
-const enlaceUnidad = (u) => (u.area === "algoritmos" ? "/practicar/lista?coleccion=algoritmos%2Fretos" : `/aprender/${u.id}`);
+const enlaceUnidad = (u) => `/aprender/${u.id}`;
 
 /** Carga la ruta una vez. Devuelve null mientras carga o si esta versión de la app no la tiene. */
 export function useRuta() {

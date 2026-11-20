@@ -1,0 +1,52 @@
+[
+  {
+    "pregunta": "Con una ventana de tamaño fijo `k = 3`, la ventana actual va de la posición 2 a la 4 y avanzas una posición. ¿Cómo actualizas la suma sin recalcularla?",
+    "opciones": [
+      "Sumas `nums[5]` y restas `nums[2]`",
+      "Sumas `nums[5]` y restas `nums[4]`",
+      "Vuelves a sumar de la posición 3 a la 5",
+      "Sumas `nums[5]` y restas `nums[3]`"
+    ],
+    "correcta": 0,
+    "explicacion": "La nueva ventana va de 3 a 5: entra el 5 y sale el 2, que es el que quedó atrás. Volver a sumar funciona, pero hace la solución O(n · k) en vez de O(n)."
+  },
+  {
+    "pregunta": "La ventana va de `izq = 2` a `der = 6`, los dos incluidos. ¿Cuántos elementos tiene?",
+    "opciones": ["4", "5", "6", "7"],
+    "correcta": 1,
+    "explicacion": "Son las posiciones 2, 3, 4, 5 y 6: cinco elementos. La fórmula es `der - izq + 1`. Olvidar el `+ 1` es el error más común en estos problemas."
+  },
+  {
+    "pregunta": "¿Por qué al encoger la ventana se usa `while` y no `if`?",
+    "opciones": [
+      "Porque `if` no funciona dentro de un `for`",
+      "Porque puede hacer falta sacar varios elementos de la izquierda para que la ventana vuelva a cumplir la condición",
+      "Por estilo, los dos dan lo mismo",
+      "Para que sea O(n²)"
+    ],
+    "correcta": 1,
+    "explicacion": "Un solo elemento nuevo puede romper la condición de tal forma que sacar uno no alcanza. Por ejemplo, en \"sin repetidos\" con `\"abcb\"`, al entrar la segunda `b` hay que sacar la `a` y la primera `b`."
+  },
+  {
+    "pregunta": "¿En cuál de estos problemas sirve una ventana deslizante?",
+    "opciones": [
+      "La subsecuencia creciente más larga (puede saltarse elementos)",
+      "La subcadena más larga sin caracteres repetidos",
+      "Ordenar un array",
+      "Saber si dos palabras son anagramas"
+    ],
+    "correcta": 1,
+    "explicacion": "La ventana trabaja con tramos seguidos, y una subcadena lo es. La subsecuencia puede saltarse elementos, así que no forma un tramo. Los anagramas se resuelven contando con un `Map`."
+  },
+  {
+    "pregunta": "Buscas cuántos tramos suman exactamente `k` y el array tiene números negativos. ¿Por qué falla la ventana?",
+    "opciones": [
+      "Porque con negativos, agregar un elemento puede bajar la suma: ya no sabes si agrandar o encoger",
+      "Porque la ventana no acepta números negativos",
+      "Porque es O(n²)",
+      "No falla, funciona igual"
+    ],
+    "correcta": 0,
+    "explicacion": "La ventana decide moviendo `izq` cuando la suma se pasa, suponiendo que encoger siempre la baja. Con negativos eso no es cierto. La solución es sumas de prefijos con un `Map` que cuenta cuántas veces viste cada prefijo."
+  }
+]

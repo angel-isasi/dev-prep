@@ -3,6 +3,7 @@
 // vengan del navegador: busca el ejercicio por su `id` en este índice.
 import { readdir, readFile, access } from "node:fs/promises";
 import path from "node:path";
+import { PATRONES } from "../scripts/items/unidades.js";
 
 /** Extensión de los archivos según el tipo de ejercicio. */
 // "funcion-ts" y "componente-ts" son los ejercicios de TypeScript.
@@ -53,6 +54,7 @@ export const SECCIONES_EXPLICACION = [
  * @property {string} tema
  * @property {1|2|3} nivel
  * @property {string[]} tags
+ * @property {string} [patron]   solo retos de algoritmos: "hash", "dos-punteros"... (ver PATRONES)
  * @property {string} coleccion  p. ej. "javascript/ejercicios"
  * @property {string} carpeta    ruta absoluta de la carpeta del ejercicio
  * @property {string} ext        "js" o "jsx"
@@ -98,6 +100,7 @@ export async function escanearContenido(contenidoDir) {
         tema: meta.tema ?? "general",
         nivel: meta.nivel ?? 1,
         tags: meta.tags ?? [],
+        ...(meta.patron ? { patron: meta.patron } : {}),
         coleccion: path.posix.dirname(relativa),
         carpeta,
         ext,
@@ -137,6 +140,9 @@ export async function revisarEjercicio(ej) {
     if (!(await existe(path.join(ej.carpeta, archivo)))) problemas.push(`falta ${archivo}`);
   }
   if (![1, 2, 3].includes(ej.nivel)) problemas.push("nivel debe ser 1, 2 o 3");
+  if (ej.coleccion === "algoritmos/retos" && !PATRONES.some((p) => p.id === ej.patron)) {
+    problemas.push(`patron debe ser uno de: ${PATRONES.map((p) => p.id).join(", ")}`);
+  }
 
   if (await existe(path.join(ej.carpeta, "pistas.json"))) {
     try {

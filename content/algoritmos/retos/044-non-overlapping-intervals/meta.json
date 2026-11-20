@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 2,
-  "tags": ["arrays", "intervalos", "greedy", "ordenamiento", "leetcode"]
+  "tags": ["arrays", "intervalos", "greedy", "ordenamiento", "leetcode"],
+  "patron": "ordenamiento"
 }

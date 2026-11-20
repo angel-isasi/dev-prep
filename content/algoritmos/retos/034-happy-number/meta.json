@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 1,
-  "tags": ["matematica", "set", "hash", "ciclos", "leetcode"]
+  "tags": ["matematica", "set", "hash", "ciclos", "leetcode"],
+  "patron": "matematica"
 }

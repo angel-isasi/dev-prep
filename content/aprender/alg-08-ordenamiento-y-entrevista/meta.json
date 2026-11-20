@@ -1,0 +1,8 @@
+{
+  "id": "alg-ordenamiento-y-entrevista",
+  "titulo": "Ordenamiento y cómo pensar un problema",
+  "area": "algoritmos",
+  "orden": 8,
+  "descripcion": "sort con comparador sin sorpresas, cuándo ordenar primero simplifica todo (intervalos, dos punteros) y el método para cualquier problema de entrevista: entender, ejemplos, plan, código y probar.",
+  "ejercicios": ["alg-reto-019", "alg-reto-044", "alg-reto-018", "alg-reto-042"]
+}

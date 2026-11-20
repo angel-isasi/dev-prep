@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 2,
-  "tags": ["arrays", "matrices", "simulacion", "leetcode"]
+  "tags": ["arrays", "matrices", "simulacion", "leetcode"],
+  "patron": "otros"
 }

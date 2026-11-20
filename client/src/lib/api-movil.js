@@ -634,8 +634,8 @@ const apiWeb = {
     metaDiaria: progreso.datos().config.metaDiaria,
   }),
   /** Tu plan de la semana armado con la IA (Hoy > Tu semana). */
-  planSemana: async () => progreso.ajuste("planSemana", null),
-  guardarPlanSemana: async (plan) => progreso.cambiarAjuste("planSemana", plan),
+  planSemanaIa: async () => progreso.ajuste("planSemanaIa", null),
+  guardarPlanSemanaIa: async (plan) => progreso.cambiarAjuste("planSemanaIa", plan),
   guardarHorario: async (horario) => {
     progreso.cambiarAjuste("horario", horario);
     cache.clear();
@@ -1030,7 +1030,7 @@ const apiWeb = {
   ...crearApiMapache({ progreso, itemsIngles, json, extraIngles, limpiar: () => cache.clear() }),
   // --- Tarjetas de memoria (estilo Anki, ver server/tarjetas-reglas.js) ---
   /** Todas tus tarjetas, de la más nueva a la más vieja. */
-  tarjetas: async () =>
+  misTarjetas: async () =>
     Object.entries(progreso.registros("tarjetas"))
       .map(([id, t]) => ({ ...t, id }))
       .sort((a, b) => String(b.creada).localeCompare(String(a.creada))),

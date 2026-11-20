@@ -1,0 +1,8 @@
+{
+  "id": "alg-arrays-y-strings",
+  "titulo": "Arrays y strings: recorridos y dos punteros",
+  "area": "algoritmos",
+  "orden": 2,
+  "descripcion": "Recorrer con índice, construir strings sin copiar de más y la técnica de dos punteros: desde los extremos, o uno lento y uno rápido para trabajar en el mismo array.",
+  "ejercicios": ["alg-reto-004", "alg-reto-012", "alg-reto-031", "alg-reto-011", "alg-reto-017"]
+}

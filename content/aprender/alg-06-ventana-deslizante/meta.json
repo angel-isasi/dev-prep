@@ -1,0 +1,8 @@
+{
+  "id": "alg-ventana-deslizante",
+  "titulo": "Ventana deslizante",
+  "area": "algoritmos",
+  "orden": 6,
+  "descripcion": "Para tramos seguidos de un array o un string: una ventana que avanza sin recalcular todo. Ventana fija, ventana que crece y se encoge, y qué hacer cuando la ventana no sirve (sumas de prefijos).",
+  "ejercicios": ["alg-reto-003", "alg-reto-016", "alg-reto-007", "alg-reto-038"]
+}

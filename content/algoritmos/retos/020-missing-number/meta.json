@@ -5,5 +5,6 @@
   "tema": "algoritmos",
   "nivel": 1,
   "tags": ["arrays", "matematica", "suma-de-gauss", "leetcode"],
+  "patron": "matematica",
   "origen": "definitivo/03-retos/01-tipo-leetcode/20"
 }

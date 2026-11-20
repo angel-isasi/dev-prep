@@ -5,5 +5,6 @@
   "tema": "algoritmos",
   "nivel": 1,
   "tags": ["strings", "hash", "leetcode"],
+  "patron": "strings",
   "origen": "definitivo/03-retos/01-tipo-leetcode/22"
 }

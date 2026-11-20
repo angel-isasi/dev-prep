@@ -17,6 +17,7 @@ function resumen(ej, progreso) {
     tema: ej.tema,
     nivel: ej.nivel,
     tags: ej.tags,
+    patron: ej.patron,
     coleccion: ej.coleccion,
     estado: p ? estadoVisible(p, fechaLocal()) : "pendiente",
     ultimoResultado: p?.ultimoResultado ?? null,

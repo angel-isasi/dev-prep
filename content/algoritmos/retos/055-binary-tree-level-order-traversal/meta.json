@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 2,
-  "tags": ["arboles", "bfs", "colas", "leetcode"]
+  "tags": ["arboles", "bfs", "colas", "leetcode"],
+  "patron": "pila"
 }

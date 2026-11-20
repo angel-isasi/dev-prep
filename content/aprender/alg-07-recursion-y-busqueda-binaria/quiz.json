@@ -1,0 +1,58 @@
+[
+  {
+    "pregunta": "¿Qué devuelve `cuenta(3)`?\n\n```js\nfunction cuenta(n) {\n  if (n === 0) return 0;\n  cuenta(n - 1) + 1;\n}\n```",
+    "opciones": ["3", "0", "undefined", "RangeError"],
+    "correcta": 2,
+    "explicacion": "Al caso recursivo le falta el `return`. La llamada a `cuenta(3)` calcula `cuenta(2) + 1` y lo bota, y como no llega a ningún `return`, devuelve `undefined`. Debía ser `return cuenta(n - 1) + 1`."
+  },
+  {
+    "pregunta": "¿Qué pasa al llamar `baja(5)`?\n\n```js\nfunction baja(n) {\n  if (n === 0) return \"listo\";\n  return baja(n - 2);\n}\n```",
+    "opciones": [
+      "Devuelve \"listo\"",
+      "Pasa por 5, 3, 1, -1... nunca llega a 0 y sale RangeError: Maximum call stack size exceeded",
+      "Devuelve undefined",
+      "Devuelve 0"
+    ],
+    "correcta": 1,
+    "explicacion": "Con un número impar, restando de 2 en 2 se salta el 0. El caso base nunca se cumple y la pila de llamadas se llena. Un caso base más seguro sería `if (n <= 0)`."
+  },
+  {
+    "pregunta": "¿Por qué `fib(n)` sin memoización es tan lento?\n\n```js\nconst fib = (n) => (n <= 1 ? n : fib(n - 1) + fib(n - 2));\n```",
+    "opciones": [
+      "Porque la recursión siempre es lenta",
+      "Porque calcula los mismos valores una y otra vez: cada llamada abre dos más y el total crece como 2ⁿ",
+      "Porque usa una función flecha",
+      "No es lento, es O(n)"
+    ],
+    "correcta": 1,
+    "explicacion": "`fib(5)` llama a `fib(4)` y `fib(3)`, pero `fib(4)` vuelve a llamar a `fib(3)`, y así. Guardando cada resultado en un `Map` (memoización) cada `n` se calcula una sola vez y queda O(n)."
+  },
+  {
+    "pregunta": "En `[2, 4, 6, 8, 10, 12, 14]` buscas el 12 con búsqueda binaria. ¿Qué posiciones revisa como `medio`?",
+    "opciones": ["3 y luego 5", "0, 1, 2, 3, 4 y 5", "3, 4 y 5", "6 y luego 5"],
+    "correcta": 0,
+    "explicacion": "Primero `medio = floor((0 + 6) / 2) = 3`, que vale 8: el 12 es mayor, así que `izq = 4`. Luego `medio = floor((4 + 6) / 2) = 5`, que vale 12: encontrado. Dos pasos en vez de seis."
+  },
+  {
+    "pregunta": "¿Cuál es el requisito para usar la búsqueda binaria tal cual?",
+    "opciones": [
+      "Que el array no tenga repetidos",
+      "Que el array esté ordenado",
+      "Que el array tenga una cantidad par de elementos",
+      "Que los elementos sean números enteros"
+    ],
+    "correcta": 1,
+    "explicacion": "La regla \"si el medio es menor, el objetivo está a la derecha\" solo es cierta si los datos están ordenados. Los repetidos, la cantidad de elementos o el tipo no la impiden."
+  },
+  {
+    "pregunta": "En un backtracking escribes `res.push(actual)` y luego haces `actual.pop()` para deshacer. Al final, `res` tiene puros arrays vacíos. ¿Por qué?",
+    "opciones": [
+      "Porque `pop` borra `res`",
+      "Porque guardaste la misma referencia de `actual` cada vez, y después la vaciaste; hay que guardar una copia con `[...actual]`",
+      "Porque falta el caso base",
+      "Porque `push` no funciona dentro de una recursión"
+    ],
+    "correcta": 1,
+    "explicacion": "Todos los elementos de `res` apuntan al mismo array `actual`. Cuando el backtracking termina, `actual` quedó vacío, y eso es lo que ves en cada posición. Con `res.push([...actual])` cada resultado es una foto independiente."
+  }
+]

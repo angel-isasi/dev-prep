@@ -5,5 +5,6 @@
   "tema": "algoritmos",
   "nivel": 2,
   "tags": ["arrays", "map", "hash", "leetcode"],
+  "patron": "hash",
   "origen": "definitivo/03-retos/01-tipo-leetcode/01"
 }

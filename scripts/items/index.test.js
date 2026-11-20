@@ -28,7 +28,7 @@ const indice = {
   ejercicios: [
     ejercicio("js-1", "javascript/ejercicios", "arrays"),
     ejercicio("js-reto-1", "javascript/retos", "arrays"),
-    ejercicio("alg-1", "algoritmos/retos", "algoritmos"),
+    { ...ejercicio("alg-1", "algoritmos/retos", "algoritmos"), patron: "hash" },
     ejercicio("raro-1", "javascript/ejercicios", "cobol"),
   ],
 };
@@ -41,6 +41,14 @@ const temas = [
     ejercicios: ["js-1", "js-reto-1"],
     quiz: [{ pregunta: "¿?", opciones: ["a", "b", "c"], correcta: 1, explicacion: "b." }],
   },
+  {
+    id: "alg-tabla-hash",
+    titulo: "Tabla hash",
+    area: "algoritmos",
+    orden: 3,
+    ejercicios: [],
+    quiz: [{ pregunta: "¿Map?", opciones: ["a", "b", "c"], correcta: 0, explicacion: "a." }],
+  },
 ];
 const referencia = { entradas: [] };
 const leerArchivo = async (ej, archivo) => ARCHIVOS[archivo] ?? null;
@@ -48,7 +56,7 @@ const leerArchivo = async (ej, archivo) => ARCHIVOS[archivo] ?? null;
 test("arma unidades, ítems y resumen; los retos de entrevista no dan hueco, ordenar ni tarjeta", async () => {
   const r = await generarItems({ indice, temas, referencia, leerArchivo });
   expect(r.version).toBe(1);
-  expect(r.unidades.map((u) => u.id)).toEqual(["arrays", "algoritmos"]);
+  expect(r.unidades.map((u) => u.id)).toEqual(["arrays", "alg-tabla-hash"]);
   const claves = r.items.map((i) => i.clave);
   expect(claves).toContain("quiz:arrays:0");
   expect(claves).toContain("ej:js-1");
@@ -60,11 +68,12 @@ test("arma unidades, ítems y resumen; los retos de entrevista no dan hueco, ord
   // el ejercicio sin unidad se avisa en el resumen
   expect(r.resumen.sinUnidad).toEqual(["raro-1"]);
   expect(r.resumen.total).toBe(r.items.length);
-  expect(r.resumen.porTipo).toMatchObject({ "opcion/quiz": 1, tarjeta: 2, ordenar: 2 });
-  expect(r.resumen.porUnidad).toEqual({ arrays: r.items.filter((i) => i.unidad === "arrays").length, algoritmos: 3 });
+  expect(r.resumen.porTipo).toMatchObject({ "opcion/quiz": 2, tarjeta: 2, ordenar: 2 });
+  // el reto sin tema que lo liste va al tema de su patrón (hash): sus 3 ítems más el quiz del tema
+  expect(r.resumen.porUnidad).toEqual({ arrays: r.items.filter((i) => i.unidad === "arrays").length, "alg-tabla-hash": 4 });
   // ordenados por unidad
   const ultimaArrays = r.items.map((i) => i.unidad).lastIndexOf("arrays");
-  expect(r.items.slice(ultimaArrays + 1).every((i) => i.unidad === "algoritmos")).toBe(true);
+  expect(r.items.slice(ultimaArrays + 1).every((i) => i.unidad === "alg-tabla-hash")).toBe(true);
 });
 
 test("la misma entrada da exactamente la misma salida", async () => {

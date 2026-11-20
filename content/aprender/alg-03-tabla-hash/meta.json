@@ -1,0 +1,8 @@
+{
+  "id": "alg-tabla-hash",
+  "titulo": "Objetos y Map como tabla hash",
+  "area": "algoritmos",
+  "orden": 3,
+  "descripcion": "El patrón que más se repite en entrevistas: guardar lo que ya viste para buscarlo en O(1). Contar frecuencias, buscar el complemento y agrupar por una clave, con Map o con un objeto.",
+  "ejercicios": ["alg-reto-001", "alg-reto-005", "alg-reto-021", "alg-reto-032", "alg-reto-013"]
+}

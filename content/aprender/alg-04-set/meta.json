@@ -1,0 +1,8 @@
+{
+  "id": "alg-set",
+  "titulo": "Set y eliminar duplicados",
+  "area": "algoritmos",
+  "orden": 4,
+  "descripcion": "Un conjunto de valores sin repetir con búsqueda en O(1): quitar duplicados en una línea, detectar si algo ya pasó (incluso un ciclo), intersecciones y diferencias.",
+  "ejercicios": ["alg-reto-006", "alg-reto-034", "alg-reto-037", "alg-reto-041"]
+}

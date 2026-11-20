@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 2,
-  "tags": ["pila", "strings", "matematica", "leetcode"]
+  "tags": ["pila", "strings", "matematica", "leetcode"],
+  "patron": "pila"
 }

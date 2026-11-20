@@ -31,6 +31,15 @@ describe("ítems del contenido real", () => {
     expect(categorias).toEqual([]);
   });
 
+  test("algoritmos: cada reto tiene patrón y cae en uno de sus temas de Aprender", () => {
+    const deAlgoritmos = new Set(temas.filter((t) => t.area === "algoritmos").map((t) => t.id));
+    expect(deAlgoritmos.size).toBeGreaterThanOrEqual(8);
+    const retos = indice.ejercicios.filter((ej) => ej.coleccion === "algoritmos/retos");
+    expect(retos.filter((ej) => !ej.patron).map((ej) => ej.id)).toEqual([]);
+    expect(retos.filter((ej) => !deAlgoritmos.has(unidadDeEjercicio(ej, temas))).map((ej) => ej.id)).toEqual([]);
+    expect(resultado.unidades.some((u) => u.id === "algoritmos")).toBe(false);
+  });
+
   test("claves únicas y unidades que existen", () => {
     const claves = resultado.items.map((i) => i.clave);
     expect(new Set(claves).size).toBe(claves.length);

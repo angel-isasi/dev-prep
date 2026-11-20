@@ -330,7 +330,7 @@ function MisTarjetas({ mazo, alCambiar }) {
   const [todas, setTodas] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const [editando, setEditando] = useState(null);
-  const recargar = () => api.tarjetas().then(setTodas);
+  const recargar = () => api.misTarjetas().then(setTodas);
   useEffect(() => {
     recargar();
   }, []);

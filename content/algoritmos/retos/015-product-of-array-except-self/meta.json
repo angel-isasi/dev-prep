@@ -5,5 +5,6 @@
   "tema": "algoritmos",
   "nivel": 3,
   "tags": ["arrays", "prefijos", "sufijos", "leetcode"],
+  "patron": "otros",
   "origen": "definitivo/03-retos/01-tipo-leetcode/15"
 }

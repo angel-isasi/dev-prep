@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 2,
-  "tags": ["arrays", "set", "hash", "leetcode"]
+  "tags": ["arrays", "set", "hash", "leetcode"],
+  "patron": "hash"
 }

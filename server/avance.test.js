@@ -128,7 +128,7 @@ describe("plan de la semana", () => {
       "tarjetas",
       "simulacro",
     ]);
-    expect(plan.find((p) => p.id === "unidad-alg-x").a).toContain("algoritmos");
+    expect(plan.find((p) => p.id === "unidad-alg-x").a).toBe("/aprender/alg-x"); // los temas de Algoritmos tienen su página
     expect(plan.find((p) => p.id === "oferta-TypeScript").detalle).toContain("2 ofertas");
   });
 

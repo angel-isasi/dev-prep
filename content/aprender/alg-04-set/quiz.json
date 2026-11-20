@@ -1,0 +1,42 @@
+[
+  {
+    "pregunta": "¿Qué imprime esto?\n\n```js\nconst s = new Set([2, 2, \"2\", 3]);\nconsole.log(s.size);\n```",
+    "opciones": ["2", "3", "4", "1"],
+    "correcta": 1,
+    "explicacion": "El segundo `2` se ignora, pero el texto `\"2\"` es otro valor distinto del número `2`. Quedan 2, \"2\" y 3: tamaño 3. A diferencia de las claves de un objeto, el `Set` no convierte a string."
+  },
+  {
+    "pregunta": "¿Qué devuelve `s.has([1, 2])`?\n\n```js\nconst s = new Set();\ns.add([1, 2]);\n```",
+    "opciones": ["true", "false", "TypeError", "undefined"],
+    "correcta": 1,
+    "explicacion": "Cada `[1, 2]` que escribes es un array nuevo, con otra referencia. `Set` compara objetos y arrays por referencia, así que no lo encuentra. Para guardar pares se usa una clave de texto como `\"1,2\"`."
+  },
+  {
+    "pregunta": "¿Cuál es la forma más eficiente de quitar los duplicados de `nums`?",
+    "opciones": [
+      "`nums.filter((x, i) => nums.indexOf(x) === i)`",
+      "`[...new Set(nums)]`",
+      "Ordenar y comparar cada uno con el siguiente",
+      "Dos bucles anidados que borran con `splice`"
+    ],
+    "correcta": 1,
+    "explicacion": "`new Set` recorre una vez y cada inserción es O(1): O(n) en total. `filter` con `indexOf` es O(n²), ordenar es O(n log n) y además pierde el orden original, y `splice` dentro de bucles es O(n²) o peor."
+  },
+  {
+    "pregunta": "Tienes `a` (n elementos) y `b` (m elementos) y quieres los de `a` que también están en `b`. ¿Qué haces para que sea O(n + m)?",
+    "opciones": [
+      "`a.filter((x) => b.includes(x))`",
+      "Convertir `b` en un Set y hacer `a.filter((x) => setB.has(x))`",
+      "Convertir `a` en un Set y recorrer `a`",
+      "Ordenar los dos arrays con `sort`"
+    ],
+    "correcta": 1,
+    "explicacion": "Crear el Set de `b` cuesta O(m) y luego cada `has` es O(1) mientras recorres `a`: O(n + m). Con `includes` cada búsqueda recorre `b`, O(n · m). Ordenar sirve, pero cuesta O(n log n + m log m)."
+  },
+  {
+    "pregunta": "Necesitas saber cuántas veces aparece cada palabra en un texto. ¿Qué estructura usas?",
+    "opciones": ["Un Set", "Un Map de palabra a cantidad", "Un array con `includes`", "Un string"],
+    "correcta": 1,
+    "explicacion": "Un `Set` solo dice si una palabra existe: pierde cuántas veces apareció. Para contar necesitas guardar un dato junto a cada clave, y eso es un `Map` (o un objeto)."
+  }
+]

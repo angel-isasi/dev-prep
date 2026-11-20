@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 1,
-  "tags": ["arrays", "dos-punteros", "leetcode"]
+  "tags": ["arrays", "dos-punteros", "leetcode"],
+  "patron": "dos-punteros"
 }

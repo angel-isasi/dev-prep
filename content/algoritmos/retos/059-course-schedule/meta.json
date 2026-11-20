@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 3,
-  "tags": ["grafos", "orden-topologico", "bfs", "colas", "leetcode"]
+  "tags": ["grafos", "orden-topologico", "bfs", "colas", "leetcode"],
+  "patron": "pila"
 }

@@ -9,6 +9,7 @@ import estilos from "./Aprender.module.css";
 
 const AREAS = [
   { id: "javascript", texto: "JavaScript", intro: "La base de todo: sin esto, React no se entiende." },
+  { id: "algoritmos", texto: "Algoritmos", intro: "Los patrones de la parte de lógica de las entrevistas: Big O, tabla hash, dos punteros, ventana, pilas y más." },
   { id: "react", texto: "React", intro: "Cuando ya domines JavaScript: componentes, estado, efectos y hooks." },
   { id: "typescript", texto: "TypeScript", intro: "JavaScript con tipos: el error aparece mientras escribes, no en producción." },
   { id: "node", texto: "Node.js y SQL", intro: "JavaScript fuera del navegador: servidores, APIs y bases de datos." },

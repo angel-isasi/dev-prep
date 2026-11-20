@@ -1,0 +1,43 @@
+[
+  {
+    "pregunta": "¿Qué complejidad de tiempo tiene esta función?\n\n```js\nfunction unicos(nums) {\n  const res = [];\n  for (const n of nums) {\n    if (!res.includes(n)) res.push(n);\n  }\n  return res;\n}\n```",
+    "opciones": ["O(n)", "O(n log n)", "O(n²)", "O(1)"],
+    "correcta": 2,
+    "explicacion": "Hay un solo `for` a la vista, pero `res.includes(n)` recorre `res` en cada vuelta: es un bucle anidado escondido. En el peor caso (todos distintos) son n vueltas por hasta n comparaciones: O(n²). Con un `Set` bajaría a O(n)."
+  },
+  {
+    "pregunta": "Una función recorre el array una vez para hallar el máximo y otra vez, aparte, para hallar el mínimo. ¿Cuál es su complejidad?",
+    "opciones": ["O(n²)", "O(n)", "O(2n), que no se simplifica", "O(log n)"],
+    "correcta": 1,
+    "explicacion": "Los bucles seguidos se suman: O(n) + O(n) = O(2n). Las constantes se botan, así que queda O(n). Solo se multiplican cuando uno está dentro del otro."
+  },
+  {
+    "pregunta": "¿Qué complejidad tiene `vistos.has(x)` si `vistos` es un `Set`?",
+    "opciones": ["O(n), porque revisa todos los elementos", "O(log n), porque está ordenado", "O(1) en promedio", "Depende del tamaño de x"],
+    "correcta": 2,
+    "explicacion": "`Set` y `Map` son tablas hash: calculan directamente dónde está la clave, sin recorrer. Por eso `has`, `get`, `set` y `add` son O(1) en promedio. Un `Set` no guarda los valores ordenados."
+  },
+  {
+    "pregunta": "Una búsqueda descarta la mitad de los datos en cada paso. Con 1 000 000 de elementos, ¿cuántos pasos da como máximo, aproximadamente?",
+    "opciones": ["Unos 20", "Unos 1 000", "Unos 500 000", "1 000 000"],
+    "correcta": 0,
+    "explicacion": "Partir a la mitad en cada paso es O(log n). 2 elevado a 20 es más o menos un millón, así que bastan unos 20 pasos. Esa es la fuerza de la búsqueda binaria."
+  },
+  {
+    "pregunta": "¿Qué complejidad de **espacio** tiene esta función?\n\n```js\nconst cuadrados = (nums) => nums.map((n) => n * n);\n```",
+    "opciones": ["O(1), porque no usa variables", "O(n), porque crea un array nuevo del mismo tamaño", "O(n²), porque multiplica", "O(log n)"],
+    "correcta": 1,
+    "explicacion": "`map` devuelve un array nuevo con un elemento por cada uno de la entrada: la memoria extra crece con n, es O(n). Multiplicar `n * n` es una operación O(1), no tiene que ver con la complejidad."
+  },
+  {
+    "pregunta": "El entrevistador pregunta la complejidad de tu búsqueda lineal y respondes \"O(1), porque si el valor está primero termino al toque\". ¿Qué está mal?",
+    "opciones": [
+      "Nada, es correcto",
+      "Big O se da para el peor caso: si el valor está al final o no está, son n pasos, O(n)",
+      "Debía decir O(log n)",
+      "Debía decir O(n²)"
+    ],
+    "correcta": 1,
+    "explicacion": "Lo que describiste es el mejor caso. Cuando dicen \"la complejidad\" se refieren al peor caso (o al promedio, que aquí también es O(n)). Decir solo el mejor caso da la impresión de que no sabes medir."
+  }
+]

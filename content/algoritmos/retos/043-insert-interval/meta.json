@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 2,
-  "tags": ["arrays", "intervalos", "una-pasada", "leetcode"]
+  "tags": ["arrays", "intervalos", "una-pasada", "leetcode"],
+  "patron": "ordenamiento"
 }

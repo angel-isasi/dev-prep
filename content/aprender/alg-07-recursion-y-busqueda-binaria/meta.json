@@ -1,0 +1,8 @@
+{
+  "id": "alg-recursion-y-busqueda-binaria",
+  "titulo": "Recursión y búsqueda binaria",
+  "area": "algoritmos",
+  "orden": 7,
+  "descripcion": "Funciones que se llaman a sí mismas con un problema más chico (caso base, árboles, memoización y backtracking) y la búsqueda binaria, que parte a la mitad en cada paso: O(log n).",
+  "ejercicios": ["alg-reto-009", "alg-reto-030", "alg-reto-008", "alg-reto-026", "alg-reto-048"]
+}

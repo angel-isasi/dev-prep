@@ -21,7 +21,7 @@ async function datosTutor(semana) {
   const [mapa, errores, tarjetas] = await Promise.all([
     api.mapa?.().catch(() => null),
     api.erroresFrecuentes?.().catch(() => []),
-    api.tarjetas?.().catch(() => []),
+    api.misTarjetas?.().catch(() => []),
   ]);
   const unidades = mapa?.unidades ?? [];
   const flojas = unidades.filter((u) => u.estado === "rojo" || u.estado === "amarillo").sort((a, b) => a.valor - b.valor);
@@ -128,7 +128,7 @@ function PlanSemana({ hoy, semana }) {
   const [editando, setEditando] = useState(false);
 
   useEffect(() => {
-    api.planSemana?.().then((p) => {
+    api.planSemanaIa?.().then((p) => {
       setPlan(p?.lunes === lunes ? p : null);
       setCargado(true);
     });
@@ -148,14 +148,14 @@ function PlanSemana({ hoy, semana }) {
     const r = await pedir({ tarea: "plan-semana", universidad: texto, datos });
     if (!r) return;
     const nuevo = { lunes, texto, ...r };
-    await api.guardarPlanSemana?.(nuevo);
+    await api.guardarPlanSemanaIa?.(nuevo);
     // El horario manda en tu meta de cada día (ver Ajustes > Tu rutina)
     await api.guardarHorario?.(r.horario);
     setPlan(nuevo);
     setEditando(false);
   }
 
-  if (!cargado || !api.planSemana) return null;
+  if (!cargado || !api.planSemanaIa) return null;
   const diaHoy = ["dom", "lun", "mar", "mie", "jue", "vie", "sab"][new Date(`${hoy}T12:00:00`).getDay()];
 
   return (

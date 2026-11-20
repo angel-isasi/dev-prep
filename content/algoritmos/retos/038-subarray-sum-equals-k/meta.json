@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 2,
-  "tags": ["arrays", "sumas-de-prefijos", "hash", "map", "leetcode"]
+  "tags": ["arrays", "sumas-de-prefijos", "hash", "map", "leetcode"],
+  "patron": "hash"
 }

@@ -1,0 +1,53 @@
+[
+  {
+    "pregunta": "¿Qué devuelve esto?\n\n```js\n[25, 100, 3].sort();\n```",
+    "opciones": ["[3, 25, 100]", "[100, 25, 3]", "[100, 25, 3] o [3, 25, 100], depende del navegador", "[25, 100, 3]"],
+    "correcta": 1,
+    "explicacion": "Sin comparador, `sort` compara como texto: \"100\" empieza con \"1\", \"25\" con \"2\" y \"3\" con \"3\", así que queda [100, 25, 3]. Para números: `sort((a, b) => a - b)`."
+  },
+  {
+    "pregunta": "¿Qué pasa con `original`?\n\n```js\nconst original = [3, 1, 2];\nconst ordenado = original.sort((a, b) => a - b);\n```",
+    "opciones": [
+      "Sigue siendo [3, 1, 2]",
+      "También queda [1, 2, 3]: `sort` modifica el array y devuelve el mismo",
+      "Queda vacío",
+      "Lanza un error porque es `const`"
+    ],
+    "correcta": 1,
+    "explicacion": "`sort` ordena en el lugar y devuelve el mismo array, así que `ordenado` y `original` son la misma referencia. `const` impide reasignar la variable, no cambiar el contenido. Para no tocarlo: `[...original].sort(...)` o `original.toSorted(...)`."
+  },
+  {
+    "pregunta": "Tienes reuniones `[inicio, fin]` desordenadas y quieres saber si alguna se cruza. ¿Qué plan es mejor?",
+    "opciones": [
+      "Comparar cada reunión con todas las demás: O(n²)",
+      "Ordenar por inicio y comparar cada una con la anterior: O(n log n)",
+      "Usar una pila",
+      "Búsqueda binaria sin ordenar"
+    ],
+    "correcta": 1,
+    "explicacion": "Al ordenar por inicio, si una reunión se cruza con otra, también se cruza con la que tiene justo antes. Basta mirar al vecino. La comparación de todos los pares funciona, pero es O(n²)."
+  },
+  {
+    "pregunta": "Te dan un problema y lo primero que haces es preguntar \"¿el array puede venir vacío? ¿puede tener negativos?\". ¿En qué paso del método estás?",
+    "opciones": ["Plan", "Entender", "Probar", "Código"],
+    "correcta": 1,
+    "explicacion": "Las preguntas sobre la entrada y los casos borde son parte de entender el problema, antes de escribir nada. Te ahorran reescribir el código cuando descubres un caso que no viste."
+  },
+  {
+    "pregunta": "El enunciado dice: \"devuelve el largo del subarreglo seguido más corto cuya suma sea al menos X\" (solo positivos). ¿Qué patrón te sugiere?",
+    "opciones": ["Pila", "Búsqueda binaria", "Ventana deslizante", "Backtracking"],
+    "correcta": 2,
+    "explicacion": "\"Subarreglo seguido\" y \"el más corto que cumpla\" son las señales de la ventana deslizante: crece por la derecha hasta cumplir y se encoge por la izquierda mientras siga cumpliendo. Con solo positivos, encoger siempre baja la suma."
+  },
+  {
+    "pregunta": "Terminaste de escribir tu solución en la entrevista. ¿Qué haces después?",
+    "opciones": [
+      "Dices \"listo\" y esperas la siguiente pregunta",
+      "Recorres el código con un ejemplo y valores reales, pruebas casos borde y dices la complejidad",
+      "La reescribes desde cero para que sea más corta",
+      "Le pides al entrevistador que la pruebe"
+    ],
+    "correcta": 1,
+    "explicacion": "El último paso es probar: seguir el código línea por línea con un ejemplo, revisar vacío o un solo elemento, y cerrar con el Big O de tiempo y espacio. Muchas veces encuentras tú el error antes que el entrevistador."
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "id": "alg-pilas-y-colas",
+  "titulo": "Pilas y colas",
+  "area": "algoritmos",
+  "orden": 5,
+  "descripcion": "Pila: el último en entrar es el primero en salir (paréntesis, deshacer, la siguiente temperatura más alta). Cola: el primero en entrar es el primero en salir (recorrer por niveles). Las dos con un array.",
+  "ejercicios": ["alg-reto-002", "alg-reto-029", "alg-reto-046", "alg-reto-045", "alg-reto-055"]
+}

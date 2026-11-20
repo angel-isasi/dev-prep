@@ -165,7 +165,7 @@ export function planDeLaSemana({ debiles = [], errores = [], ofertas = [], reto 
       id: `unidad-${u.id}`,
       texto: `Refuerza ${u.titulo}`,
       detalle: `Está en ${u.estado === "rojo" ? "rojo" : "amarillo"} en tu mapa: 2 ejercicios y su lección`,
-      a: u.area === "algoritmos" ? "/practicar/lista?coleccion=algoritmos%2Fretos" : `/aprender/${u.id}`,
+      a: `/aprender/${u.id}`, // todas las unidades, también las de Algoritmos, son temas de Aprender
     });
   }
   if (errores[0])

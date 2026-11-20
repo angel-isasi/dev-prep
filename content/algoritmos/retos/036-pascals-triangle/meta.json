@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 1,
-  "tags": ["arrays", "matrices", "programacion-dinamica", "leetcode"]
+  "tags": ["arrays", "matrices", "programacion-dinamica", "leetcode"],
+  "patron": "matematica"
 }

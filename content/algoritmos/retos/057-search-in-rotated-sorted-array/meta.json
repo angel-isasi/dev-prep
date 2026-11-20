@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 3,
-  "tags": ["busqueda-binaria", "arrays", "leetcode"]
+  "tags": ["busqueda-binaria", "arrays", "leetcode"],
+  "patron": "busqueda-binaria"
 }

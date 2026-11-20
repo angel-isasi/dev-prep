@@ -4,5 +4,6 @@
   "tipo": "funcion",
   "tema": "algoritmos",
   "nivel": 2,
-  "tags": ["programacion-dinamica", "recursion", "arrays", "leetcode"]
+  "tags": ["programacion-dinamica", "recursion", "arrays", "leetcode"],
+  "patron": "recursion"
 }
