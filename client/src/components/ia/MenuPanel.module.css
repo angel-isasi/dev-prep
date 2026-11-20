@@ -1,33 +1,26 @@
-/* Menú de herramientas a la izquierda, la elegida al centro y su guía a la derecha (ver MenuPanel.jsx).
-   Lo usan Entrevistas > Simular e Inglés > Con IA. */
+/* Tablero de herramientas (ver MenuPanel.jsx): fichas arriba a todo el ancho; debajo, la herramienta
+   elegida y su guía. Todo usa el ancho y cada bloque mide lo que su contenido. */
 .marco {
-  display: grid;
-  grid-template-columns: minmax(300px, 400px) minmax(0, 1fr);
-  gap: var(--espacio-5);
-  align-items: start;
-}
-
-.menu {
-  position: sticky;
-  top: var(--espacio-4);
   display: grid;
   gap: var(--espacio-4);
 }
 
-.grupo {
+/* ---------- Fila de fichas ---------- */
+.menu {
   display: grid;
-  gap: var(--espacio-2);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--espacio-3);
 }
 
 .item {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--espacio-3);
-  padding: var(--espacio-3) var(--espacio-4);
+  align-content: start;
+  gap: 4px;
+  padding: var(--espacio-4);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
   background: var(--superficie);
+  box-shadow: var(--brillo-borde);
   color: var(--texto);
   font: inherit;
   text-align: left;
@@ -37,57 +30,48 @@
 }
 
 .item:hover {
-  border-color: color-mix(in srgb, var(--acento) 50%, var(--borde));
+  border-color: color-mix(in srgb, var(--acento) 55%, var(--borde));
   text-decoration: none;
-  transform: translateX(2px);
+  transform: translateY(-2px);
 }
 
 .item[data-activo="true"] {
   border-color: var(--acento);
   background: color-mix(in srgb, var(--acento) 12%, var(--superficie));
-  box-shadow: inset 4px 0 0 var(--acento);
+  box-shadow: inset 0 3px 0 var(--acento);
+}
+
+.item[data-enlace] {
+  border-style: dashed;
+}
+
+.arriba {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--espacio-2);
 }
 
 .icono {
   display: inline-grid;
   place-items: center;
-  flex: none;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: var(--radio-lg);
   background: color-mix(in srgb, var(--acento) 14%, var(--superficie-2));
   color: var(--acento);
 }
 
-.texto {
-  display: grid;
-  gap: 2px;
-  min-width: 0;
-}
-
-.texto strong {
-  font-size: var(--letra-5);
-  font-weight: var(--peso-semi);
-  line-height: 1.3;
-}
-
-.texto small {
-  color: var(--texto-suave);
-  font-size: var(--letra-3);
-  line-height: 1.4;
-}
-
 .meta {
-  display: grid;
-  justify-items: end;
-  gap: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
   color: var(--texto-tenue);
   font-size: var(--letra-3);
   white-space: nowrap;
 }
 
-.meta em,
-.pie em {
+.meta em {
   padding: 1px 8px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--acento) 20%, transparent);
@@ -97,50 +81,57 @@
   font-weight: var(--peso-semi);
 }
 
-/* La herramienta y su guía */
+.grupo {
+  color: var(--texto-tenue);
+  font-size: var(--letra-1);
+  font-weight: var(--peso-titulo);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.item strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-6);
+  line-height: 1.25;
+}
+
+.item small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  line-height: 1.4;
+}
+
+/* ---------- La herramienta y su guía ---------- */
 .panel {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
-  gap: var(--espacio-5);
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  gap: var(--espacio-4);
+  align-items: stretch;
   min-width: 0;
 }
 
 .principal {
   display: grid;
-  align-content: start;
   min-width: 0;
 }
 
-/* En pantalla ancha la herramienta llega al alto de su guía: se ve como un espacio de trabajo */
-@media (min-width: 1501px) {
-  .panel {
-    align-items: stretch;
-  }
-  .principal {
-    align-content: stretch;
-  }
-  .principal > * {
-    align-content: start;
-  }
-  .guia {
-    align-self: start;
-  }
+.principal > * {
+  align-content: start;
 }
 
 .guia {
-  position: sticky;
-  top: var(--espacio-4);
   display: grid;
-  gap: var(--espacio-4);
+  align-content: start;
+  gap: var(--espacio-3);
   padding: var(--espacio-5);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
   background: var(--superficie);
+  box-shadow: var(--brillo-borde);
 }
 
 .guia h3 {
-  margin: 0 0 var(--espacio-3);
+  margin: 0;
   font-size: var(--letra-6);
 }
 
@@ -177,80 +168,42 @@
 }
 
 .consejos {
-  padding-top: var(--espacio-4);
-  border-top: 1px solid var(--borde);
-}
-
-.consejos ul {
   display: grid;
   gap: var(--espacio-2);
   margin: 0;
-  padding-left: 1.1em;
+  padding: var(--espacio-3) 0 0 1.1em;
+  border-top: 1px solid var(--borde);
   color: var(--texto-suave);
-  font-size: var(--letra-4);
+  font-size: var(--letra-3);
   line-height: 1.45;
 }
 
-.pie {
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: var(--espacio-3);
-  border-top: 1px solid var(--borde);
-  align-items: center;
-  gap: var(--espacio-2);
-  color: var(--texto-tenue);
-  font-size: var(--letra-3);
-}
-
-/* Pantalla mediana: la guía baja y se pone en dos columnas */
-@media (max-width: 1500px) {
+/* Pantalla mediana: la guía baja y pone sus pasos en fila */
+@media (max-width: 1250px) {
   .panel {
     grid-template-columns: 1fr;
   }
-  .guia {
-    position: static;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  }
-  .consejos {
-    padding-top: 0;
-    border-top: 0;
-  }
-  .pie {
-    grid-column: 1 / -1;
+  .pasos {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
 
-/* Pantalla angosta: el menú es una fila que se desliza y la herramienta queda a la vista */
-@media (max-width: 1100px) {
-  .marco {
-    grid-template-columns: 1fr;
-    gap: var(--espacio-3);
-  }
+/* Celular: las fichas son una fila que se desliza, compactas */
+@media (max-width: 700px) {
   .menu {
-    position: static;
     display: flex;
-    gap: var(--espacio-2);
     margin: 0 calc(-1 * var(--espacio-2));
     padding: 2px var(--espacio-2) var(--espacio-2);
     overflow-x: auto;
     scroll-snap-type: x proximity;
   }
-  .grupo {
-    display: contents;
-  }
-  .grupo > :global(.etiqueta),
-  .texto small,
-  .meta {
-    display: none;
-  }
   .item {
     flex: none;
-    grid-template-columns: auto auto;
-    padding: var(--espacio-2) var(--espacio-3);
+    width: 190px;
+    padding: var(--espacio-3);
     scroll-snap-align: start;
   }
-  .icono {
-    width: 32px;
-    height: 32px;
+  .item small {
+    display: none;
   }
 }

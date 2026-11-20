@@ -4,14 +4,14 @@ import { Link } from "react-router";
 import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
 import { QueImprime, ReviewAlReves } from "../components/ia/RetosIa.jsx";
-import { MenuPanel, estilosMenu } from "../components/ia/MenuPanel.jsx";
-import { IconoAlerta, IconoFlechaDer, IconoFlechaIzq, IconoLibro, IconoPracticar, IconoRevision } from "../components/Iconos.jsx";
+import { MenuPanel } from "../components/ia/MenuPanel.jsx";
+import { IconoAlerta, IconoFlechaIzq, IconoLibro, IconoPracticar, IconoRevision } from "../components/Iconos.jsx";
 import pagina from "./Entrevistas.module.css";
 
 const RETOS = [
   {
     id: "imprime",
-    grupo: "Con IA, distinto cada vez",
+    grupo: "Distinto cada vez",
     titulo: "¿Qué imprime este código?",
     detalle: "La pregunta trampa más común en entrevistas",
     minutos: "3 min",
@@ -23,7 +23,7 @@ const RETOS = [
   },
   {
     id: "review",
-    grupo: "Con IA, distinto cada vez",
+    grupo: "Distinto cada vez",
     titulo: "Code review al revés",
     detalle: "Revisa el pull request de un compañero",
     minutos: "8 min",
@@ -37,8 +37,8 @@ const RETOS = [
 
 /** Otras prácticas de lectura de código que no usan IA, como acceso directo en el menú. */
 const SIN_IA = [
-  { a: "/leccion?modo=predice", titulo: "Lee y predice", detalle: "Las trampas clásicas, sin IA", Icono: IconoLibro },
-  { a: "/practicar/lista?coleccion=javascript%2Fdepurar", titulo: "Depurar código roto", detalle: "Encuentra el error por su síntoma", Icono: IconoAlerta },
+  { a: "/leccion?modo=predice", grupo: "Sin IA", titulo: "Lee y predice", detalle: "Las trampas clásicas de siempre", Icono: IconoLibro },
+  { a: "/practicar/lista?coleccion=javascript%2Fdepurar", grupo: "Sin IA", titulo: "Depurar código roto", detalle: "Encuentra el error por su síntoma", Icono: IconoAlerta },
 ];
 
 export function EntrenaIa() {
@@ -59,25 +59,7 @@ export function EntrenaIa() {
         elegida={elegida}
         alElegir={setElegida}
         etiqueta="Retos"
-        extraMenu={
-          <div className={estilosMenu.grupo}>
-            <span className="etiqueta">Sin IA</span>
-            {SIN_IA.map(({ a, titulo, detalle, Icono }) => (
-              <Link key={a} to={a} className={estilosMenu.item}>
-                <span className={estilosMenu.icono} aria-hidden>
-                  <Icono />
-                </span>
-                <span className={estilosMenu.texto}>
-                  <strong>{titulo}</strong>
-                  <small>{detalle}</small>
-                </span>
-                <span className={estilosMenu.meta}>
-                  <IconoFlechaDer />
-                </span>
-              </Link>
-            ))}
-          </div>
-        }
+        enlaces={SIN_IA}
       >
         <Vista />
       </MenuPanel>

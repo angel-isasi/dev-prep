@@ -1,11 +1,10 @@
 // Inglés > Con IA: las herramientas en un menú agrupado (hablar, escribir, repasar), la elegida al
 // centro y su guía al lado. Mismo orden que Entrevistas > Simular (components/ia/MenuPanel.jsx).
-import { Link } from "react-router";
 import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { CabeceraPagina } from "../components/CabeceraPagina.jsx";
 import { ComoSeDice, DailyIngles, EntrevistaIngles, ErroresDeSiempre, EscritoGuiado } from "../components/ia/InglesIa.jsx";
-import { MenuPanel, estilosMenu } from "../components/ia/MenuPanel.jsx";
-import { IconoChispa, IconoEntrevistas, IconoFlechaDer, IconoLibro, IconoMicrofono, IconoRepetir, IconoReloj } from "../components/Iconos.jsx";
+import { MenuPanel } from "../components/ia/MenuPanel.jsx";
+import { IconoChispa, IconoEntrevistas, IconoLibro, IconoMicrofono, IconoRepetir, IconoReloj } from "../components/Iconos.jsx";
 import pagina from "./Entrevistas.module.css";
 
 const HERRAMIENTAS = [
@@ -88,24 +87,7 @@ export function InglesConIa() {
           elegida={elegidaId}
           alElegir={setElegida}
           etiqueta="Herramientas"
-          extraMenu={
-            // Las reuniones de trabajo viven en Conversa: aquí solo el acceso
-            <div className={estilosMenu.grupo}>
-              <span className="etiqueta">Reuniones</span>
-              <Link to="/ingles/conversa" className={estilosMenu.item}>
-                <span className={estilosMenu.icono} aria-hidden>
-                  <IconoReloj />
-                </span>
-                <span className={estilosMenu.texto}>
-                  <strong>Conversa</strong>
-                  <small>Daily, revisión de código, planning, demo con un cliente</small>
-                </span>
-                <span className={estilosMenu.meta}>
-                  <IconoFlechaDer />
-                </span>
-              </Link>
-            </div>
-          }
+          enlaces={[{ a: "/ingles/conversa", grupo: "Reuniones", titulo: "Conversa", detalle: "Daily, revisión de código, planning, demo con un cliente", Icono: IconoReloj }]}
         >
           <Vista />
         </MenuPanel>
