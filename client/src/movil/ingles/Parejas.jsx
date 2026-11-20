@@ -242,7 +242,7 @@ export function ParejasMovil() {
             const p = tablero.find((x) => x.clave === clave);
             if (!p) return null;
             return (
-              <button key={clave} type="button" className={estilos.ficha} data-estado={hechas.has(clave) ? "bien" : mal === clave ? "mal" : ""} onClick={() => elegirDer(clave)}>
+              <button key={clave} type="button" className={estilos.ficha} data-sin-inmersion data-estado={hechas.has(clave) ? "bien" : mal === clave ? "mal" : ""} onClick={() => elegirDer(clave)}>
                 {p.es}
               </button>
             );

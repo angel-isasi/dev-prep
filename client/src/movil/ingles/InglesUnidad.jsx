@@ -86,10 +86,10 @@ export function InglesUnidad() {
                     · {p.formas.pasado} · {p.formas.participio}
                   </span>
                 )}
-                <span className={estilos.es}>{p.es}</span>
+                <span className={estilos.es} data-sin-inmersion>{p.es}</span>
                 {p.ejemplo && (
                   <small>
-                    {p.ejemplo.en} <em>{p.ejemplo.es}</em>
+                    {p.ejemplo.en} <em data-sin-inmersion>{p.ejemplo.es}</em>
                   </small>
                 )}
               </div>
@@ -123,7 +123,7 @@ export function InglesUnidad() {
               {d.lineas.map((l, i) => (
                 <p key={i} className={estilos.linea}>
                   <strong>{l.quien}:</strong> {l.en}
-                  {traducir && <small>{l.es}</small>}
+                  {traducir && <small data-sin-inmersion>{l.es}</small>}
                 </p>
               ))}
             </div>
@@ -158,7 +158,7 @@ function Shadowing({ frases }) {
           Frase {indice + 1} de {frases.length}
         </span>
         <p className={estilos.fraseShadowing}>{frase.en}</p>
-        <small className={estilos.es}>{frase.es}</small>
+        <small className={estilos.es} data-sin-inmersion>{frase.es}</small>
         <div className={estilos.accionesFila}>
           <button type="button" className="boton boton-primario" onClick={() => hablar(frase.en, { lento })}>
             <IconoAudio tamano={16} /> Escuchar

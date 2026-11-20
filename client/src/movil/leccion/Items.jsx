@@ -100,7 +100,7 @@ function Dialogo({ dialogo, traducir }) {
           <strong>{l.quien}</strong>
           <span>
             {oculto ? <span className={estilos.oculto}>Escucha la línea</span> : l.en}
-            {traducir && <small>{l.es}</small>}
+            {traducir && <small data-sin-inmersion>{l.es}</small>}
           </span>
           {hayVoz() && (
             <button type="button" className={estilos.audio} onClick={() => hablar(l.en)} aria-label="Escuchar esta línea">

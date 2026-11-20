@@ -10,6 +10,10 @@ import "./styles/base.css";
 import "./styles/tailwind.css";
 import { App } from "./App.jsx";
 import { ProveedorAyuda } from "./components/Ayuda.jsx";
+import { iniciarInmersion } from "./lib/inmersion.js";
+
+// Modo inmersión (Ajustes): si quedó activo, la interfaz sale en inglés desde el primer render
+iniciarInmersion();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

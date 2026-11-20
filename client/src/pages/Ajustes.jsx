@@ -9,6 +9,7 @@ import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { useTema } from "../hooks/useTema.js";
 import { IconoLuna, IconoSol } from "../components/Iconos.jsx";
 import { PanelInvitado } from "../components/PanelInvitado.jsx";
+import { ponerInmersion, useInmersion } from "../lib/inmersion.js";
 import seccion from "../components/SeccionSync.module.css";
 import estilos from "./Ajustes.module.css";
 
@@ -23,6 +24,7 @@ import estilos from "./Ajustes.module.css";
  */
 export function Ajustes({ seccionExtra }) {
   const { tema, alternar } = useTema();
+  const inmersion = useInmersion();
   // El formulario vive aquí arriba: aunque cambies de pestaña, lo escrito sin guardar no se pierde.
   const [form, setForm] = useState(null);
   const [estado, setEstado] = useState("listo"); // listo | guardando | guardado | error
@@ -145,6 +147,24 @@ export function Ajustes({ seccionExtra }) {
                 <button type="button" className="boton" onClick={alternar}>
                   {tema === "oscuro" ? <IconoSol /> : <IconoLuna />}
                   {tema === "oscuro" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+                </button>
+              </div>
+            </section>
+
+            {/* Modo inmersión: solo la interfaz pasa a inglés (lib/inmersion.js); se guarda en este navegador */}
+            <section className={seccion.seccion}>
+              <h2>Modo inmersión</h2>
+              <p className={seccion.ayuda}>
+                Pasa a inglés los menús, títulos y botones. La teoría, los ejercicios y las preguntas siguen en español.
+              </p>
+              <div className={seccion.acciones}>
+                <button
+                  type="button"
+                  className={inmersion ? "boton boton-primario" : "boton"}
+                  aria-pressed={inmersion}
+                  onClick={() => ponerInmersion(!inmersion)}
+                >
+                  {inmersion ? "Volver la interfaz al español" : "Poner la interfaz en inglés"}
                 </button>
               </div>
             </section>

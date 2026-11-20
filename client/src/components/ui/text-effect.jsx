@@ -4,6 +4,7 @@
 import { memo } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { cn } from "../../lib/cn.js";
+import { useTraducido } from "../../lib/inmersion.js";
 
 const ESCALONADO = { char: 0.03, word: 0.05, line: 0.1 };
 
@@ -77,7 +78,7 @@ const Segmento = memo(function Segmento({ segmento, variantes, per }) {
 });
 
 export function TextEffect({
-  children,
+  children: original,
   per = "word",
   as = "p",
   className,
@@ -89,11 +90,14 @@ export function TextEffect({
   style,
 }) {
   const reducido = useReducedMotion();
+  // Modo inmersión: el texto se parte en palabras, así que se traduce entero antes de partirlo
+  // (y data-sin-inmersion evita que lib/inmersion.js traduzca palabra por palabra).
+  const children = useTraducido(original);
   const Etiqueta = motion[as] ?? motion.p;
 
   if (reducido) {
     return (
-      <Etiqueta className={cn("tw", className)} style={style}>
+      <Etiqueta className={cn("tw", className)} style={style} data-sin-inmersion>
         {children}
       </Etiqueta>
     );
@@ -109,7 +113,7 @@ export function TextEffect({
   return (
     <AnimatePresence mode="popLayout">
       {trigger && (
-        <Etiqueta initial="hidden" animate="visible" exit="exit" variants={contenedor} className={cn("tw", className)} style={style}>
+        <Etiqueta initial="hidden" animate="visible" exit="exit" variants={contenedor} className={cn("tw", className)} style={style} data-sin-inmersion>
           {per !== "line" && <span className="sr-only">{children}</span>}
           {segmentos.map((segmento, i) => (
             <Segmento key={`${per}-${i}-${segmento}`} segmento={segmento} variantes={item} per={per} />

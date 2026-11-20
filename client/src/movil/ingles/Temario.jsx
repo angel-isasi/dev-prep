@@ -206,7 +206,7 @@ function DetalleUnidad({ u, cofre, alCofre, alHacerActual }) {
             <p>
               Frase para el trabajo: <em lang="en">{cofre.frase.en}</em>
               <br />
-              <small>{cofre.frase.es}</small>
+              <small data-sin-inmersion>{cofre.frase.es}</small>
             </p>
           )}
         </div>

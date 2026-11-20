@@ -130,7 +130,7 @@ function Reto({ paso, alTerminar }) {
       {listo && (
         <motion.div className={estilos.explicacion} data-correcto={correcto} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>
           <Markdown>{paso.explicacion}</Markdown>
-          {paso.es && <small>{paso.es}</small>}
+          {paso.es && <small data-sin-inmersion>{paso.es}</small>}
           <button type="button" className="boton boton-primario" onClick={() => alTerminar(correcto)}>
             Continuar
           </button>
@@ -256,7 +256,7 @@ export function HistoriaMovil() {
                 <button type="button" className={estilos.texto} onClick={() => hablar(p.en)} lang="en">
                   {p.en}
                 </button>
-                {(verTraduccion || i < posicion) && <small>{p.es}</small>}
+                {(verTraduccion || i < posicion) && <small data-sin-inmersion>{p.es}</small>}
               </motion.div>
             ),
           )}
@@ -351,7 +351,7 @@ export function RoleplayMovil() {
               <button type="button" className={estilos.texto} onClick={() => hablar(linea.en)} lang="en">
                 {linea.en}
               </button>
-              {linea.es && <small>{linea.es}</small>}
+              {linea.es && <small data-sin-inmersion>{linea.es}</small>}
             </div>
           );
         })}
@@ -361,7 +361,7 @@ export function RoleplayMovil() {
             <button type="button" className={estilos.texto} onClick={() => hablar(actual.en)} lang="en">
               {actual.en}
             </button>
-            <small>{actual.es}</small>
+            <small data-sin-inmersion>{actual.es}</small>
           </motion.div>
         )}
         {actual?.opciones && (
