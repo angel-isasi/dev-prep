@@ -464,3 +464,16 @@ Pendiente de la tanda 2: unir las tres versiones de Ajustes y que la app local (
 - **Modo visita** (`lib/visita.js`, `movil/Visita.jsx`): con `?visita=1` en la dirección, quien entra a ver el proyecto encuentra la app llena con un progreso de ejemplo (cinco semanas de estudio, racha, unidades dominadas y a medias, repasos para hoy) y una presentación corta con qué mirar, con qué está hecha y el enlace al código. Tres garantías: el progreso de ejemplo vive en memoria y no lee ni toca el progreso real; no sincroniza ni se conecta al motor de la laptop (no llama a AWS); y al salir o cerrar la pestaña no queda nada. Dirección para compartir: https://dev-prep.angel-isasi.com/?visita=1
 - **Entrevistas en un solo lugar**: la pestaña "Por etapa" de Entrevistas ordena todo según el proceso real (recursos humanos, técnica, proyecto y cierre). Cada etapa junta sus mazos de tarjetas con tu avance y los enlaces a lo que estaba repartido en otras secciones: pitch y STAR, roleplays y entrevista en inglés, preguntas reales de tus postulaciones, retos con tests, Lee y predice, Glosario y portafolio.
 - Pendiente: la evaluación con IA en todos los textos libres. Se construye cuando esté puesta la clave (ver `docs/ia.md`), porque no se puede probar sin ella.
+
+## Plan v6 (2026-11-19): la IA como tutor en toda la app
+
+Aprobado por Angel. Regla: el algoritmo calcula, la IA explica, corrige y genera. Modelos: Haiku para lo repetido y acotado, Sonnet para lo que necesita criterio. Gasto estimado: unos 20 USD al mes con uso intenso (subir en la consola Default a 25 y la organización a 27).
+
+Tandas (cada una publicada y usable):
+1. Base y Practicar: memoria del tutor (perfil corto que acompaña cada pedido), pista personalizada, ¿Por qué falla?, comparar con la solución oficial (dentro de la revisión de senior), variantes, detecta el error, di la complejidad, code review al revés, ¿qué imprime este código?
+2. Aprender y repaso: explícamelo distinto, quiz de tus fallos, explícalo en 30 segundos por voz, unidad de Algoritmos (8 lecciones), 60 retos por patrón, Anki (FSRS sin IA; la IA crea tarjetas de tus errores con aprobación, explica al fallar, reformula la pregunta, sugiere el botón y da ejemplos en contexto; tope diario de nuevas y repasos, una tarjeta a la vez), detector diario de puntos débiles, plan y resumen de la semana con su horario de la universidad.
+3. Entrevistas y trabajo: repregunta sobre tu código, entrevistador con personalidad, preguntas para el entrevistador, prueba técnica para llevar a casa, defiende tu proyecto (empezando con dev-prep), examen mensual de preparación, adaptar perfil a una oferta, revisar CV, ensayo de negociación de sueldo, proyecto guiado de portafolio.
+4. Inglés: explícalo en inglés, daily en inglés, entrevistas técnicas en inglés, entrevistas en inglés con ayudas que se van quitando, ¿cómo se dice?, inglés escrito guiado, tus errores de siempre con mini lecciones, simulador de reuniones, 200 frases nuevas de Map sin repetirse, modo inmersión (solo la interfaz en inglés, sin IA).
+
+Fuera por ahora: carta para postular, diario de entrevistas reales, pronunciación técnica, primer día en la empresa, leer documentación.
+Tanda 0 (probar con IA real lo existente) la hace Angel después.

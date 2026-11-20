@@ -86,11 +86,17 @@ export function quienSoyIa() {
  * @returns {Promise<object>} el resultado de la IA
  */
 export async function pedirIa(pedido) {
+  // Lo mismo dos veces no se cobra dos veces: una evaluación igual a una reciente se devuelve guardada
+  const huella = SIN_GUARDAR.test(pedido.tarea) ? null : JSON.stringify(pedido);
+  const repetido = huella && leerGuardadas()[huella];
+  if (repetido) return repetido;
   if (usoIa().usd >= topeIa()) throw new Error(`Llegaste a tu tope de IA de este mes (${topeIa()} USD). Puedes subirlo en "Uso de IA".`);
+  // Memoria del tutor: lo que la app sabe de ti viaja con el pedido
+  const perfil = await import("./perfil-tutor.js").then((m) => m.perfilTutor()).catch(() => "");
   const r = await fetch("/api/ia", {
     method: "POST",
     headers: { "content-type": "application/json", "x-clave": claveIa() },
-    body: JSON.stringify(pedido),
+    body: JSON.stringify(perfil ? { ...pedido, perfil } : pedido),
     signal: AbortSignal.timeout(65_000),
   }).catch((e) => {
     throw new Error(e?.name === "TimeoutError" ? "La IA tardó demasiado. Inténtalo otra vez." : "Sin conexión: la IA necesita internet.");
@@ -104,5 +110,29 @@ export async function pedirIa(pedido) {
   // El gasto se anota también cuando la respuesta no sirvió (cortada o mal formada): ese pedido igual se cobró
   if (datos.uso) registrarUso(datos.uso);
   if (!r.ok) throw new Error(datos.error ?? "No se pudo evaluar. Inténtalo otra vez.");
+  if (huella) guardarRespuesta(huella, datos.resultado);
   return datos.resultado;
+}
+
+// Tareas que deben salir distintas cada vez (crean algo nuevo o siguen una charla): nunca se guardan
+const SIN_GUARDAR = /crear$|^variante$|^conversacion$|^plan-semana$|^tarjeta-/;
+const CLAVE_GUARDADAS = "devprep.iaGuardadas";
+const MAX_GUARDADAS = 40;
+
+function leerGuardadas() {
+  try {
+    return JSON.parse(localStorage.getItem(CLAVE_GUARDADAS) ?? "{}") ?? {};
+  } catch {
+    return {};
+  }
+}
+
+function guardarRespuesta(huella, resultado) {
+  const todas = Object.entries(leerGuardadas()).slice(-(MAX_GUARDADAS - 1));
+  try {
+    localStorage.setItem(CLAVE_GUARDADAS, JSON.stringify(Object.fromEntries([...todas, [huella, resultado]])));
+  } catch {
+    // sin espacio: se borra la memoria de respuestas y se sigue
+    localStorage.removeItem(CLAVE_GUARDADAS);
+  }
 }

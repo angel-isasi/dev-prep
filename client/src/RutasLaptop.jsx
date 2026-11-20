@@ -6,6 +6,7 @@ import { perezoso } from "./lib/perezoso.js";
 const Practicar = perezoso(() => import("./pages/Practicar.jsx"), "Practicar");
 const ListaEjercicios = perezoso(() => import("./pages/ListaEjercicios.jsx"), "ListaEjercicios");
 const Ejercicio = perezoso(() => import("./pages/Ejercicio.jsx"), "Ejercicio");
+const EntrenaIa = perezoso(() => import("./pages/EntrenaIa.jsx"), "EntrenaIa");
 const Proximamente = perezoso(() => import("./pages/Proximamente.jsx"), "Proximamente");
 const Hoy = perezoso(() => import("./pages/Hoy.jsx"), "Hoy");
 const Progreso = perezoso(() => import("./pages/Progreso.jsx"), "Progreso");
@@ -23,6 +24,7 @@ export function RutasLaptop({ ajustesExtra, children } = {}) {
         <Route index element={<Hoy />} />
         <Route path="practicar" element={<Practicar />} />
         <Route path="practicar/lista" element={<ListaEjercicios />} />
+        <Route path="practicar/ia" element={<EntrenaIa />} />
         <Route path="practicar/:id" element={<Ejercicio />} />
         <Route path="aprender" element={<Aprender />} />
         <Route path="aprender/:id" element={<Tema />} />

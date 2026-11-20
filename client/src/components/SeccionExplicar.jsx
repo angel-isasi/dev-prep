@@ -24,7 +24,7 @@ const NOTAS = [
 /**
  * "Explícalo con tus palabras": escribes cómo lo explicarías en una entrevista
  * y luego lo comparas con la explicación modelo.
- * Con IA: evalúa tu explicación (con tu código a la vista) y un senior revisa tu código.
+ * Con IA: evalúa tu explicación (con tu código a la vista). La revisión de senior está en "Entrénalo".
  * @param {{ id: string, titulo?: string, enunciado?: string, resuelto: boolean, textoGuardado: string, modelo: string|null, alGuardar: (texto: string) => Promise<void> }} props
  */
 export function SeccionExplicar({ id, titulo = "", enunciado = "", resuelto, textoGuardado, modelo, alGuardar }) {
@@ -182,9 +182,6 @@ export function SeccionExplicar({ id, titulo = "", enunciado = "", resuelto, tex
         />
       )}
 
-      {codigo && !corriendo && (
-        <EvaluadorIa tarea="codigo" respuestaFija={codigo} pedido={{ pregunta: enunciado, categoria: titulo }} />
-      )}
     </div>
   );
 }

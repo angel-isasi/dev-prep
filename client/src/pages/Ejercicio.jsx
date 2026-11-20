@@ -10,6 +10,7 @@ import { Pestanas } from "../components/Pestanas.jsx";
 import { SeccionPistas } from "../components/SeccionPistas.jsx";
 import { SeccionSolucion } from "../components/SeccionSolucion.jsx";
 import { SeccionExplicar } from "../components/SeccionExplicar.jsx";
+import { Entrenar, PistaIa } from "../components/ia/PracticaIa.jsx";
 import { IconoFlechaIzq, IconoVSCode } from "../components/Iconos.jsx";
 import { Cronometro } from "../components/Cronometro.jsx";
 import { Confirmar } from "../components/Confirmar.jsx";
@@ -172,6 +173,7 @@ export function Ejercicio() {
     },
     { id: "solucion", texto: "Solución", extra: ejercicio.solucion ? undefined : "bloqueada" },
     { id: "explicar", texto: "Explícalo", extra: progreso?.explicacion ? "✓" : undefined },
+    ...(resuelto ? [{ id: "entrenar", texto: "Entrénalo", extra: "IA" }] : []),
   ];
 
   return (
@@ -284,8 +286,14 @@ export function Ejercicio() {
           </div>
         )}
         {pestana === "pistas" && (
-          <SeccionPistas pistas={ejercicio.pistas} total={ejercicio.totalPistas} alVer={verPista} ocupado={ocupado} />
+          <>
+            <SeccionPistas pistas={ejercicio.pistas} total={ejercicio.totalPistas} alVer={verPista} ocupado={ocupado} />
+            {ejercicio.preparado && !resuelto && (
+              <PistaIa key={ejercicio.id} id={ejercicio.id} enunciado={ejercicio.enunciado} resultado={resultado} pistasVistas={ejercicio.pistas} />
+            )}
+          </>
         )}
+        {pestana === "entrenar" && resuelto && <Entrenar key={ejercicio.id} id={ejercicio.id} titulo={ejercicio.titulo} enunciado={ejercicio.enunciado} />}
         {pestana === "solucion" && (
           <SeccionSolucion solucion={ejercicio.solucion} resuelto={resuelto} alVer={verSolucion} ocupado={ocupado} />
         )}
@@ -309,6 +317,7 @@ export function Ejercicio() {
           corriendo={corriendo}
           preparado={ejercicio.preparado}
           ultimaCorrida={ultimaCorrida}
+          conIa={ejercicio.preparado && !resuelto ? { id: ejercicio.id, enunciado: ejercicio.enunciado } : undefined}
         />
       </div>
     </div>

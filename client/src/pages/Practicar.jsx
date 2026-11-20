@@ -112,6 +112,10 @@ export function Practicar() {
               <small>{h.texto}</small>
             </Link>
           ))}
+        <Link to="/practicar/ia" className={`brillo ${estilos.atajo}`}>
+          <strong>Entrena con IA →</strong>
+          <small>¿Qué imprime? y code review al revés, distintos cada vez</small>
+        </Link>
         <div className={estilos.retoSemana}>
           <RetoSemana />
         </div>

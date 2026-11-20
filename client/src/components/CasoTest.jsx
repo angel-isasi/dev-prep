@@ -1,13 +1,14 @@
 import { motion } from "motion/react";
 import { compactar } from "../lib/compactar.js";
 import { TextoConCodigo } from "./TextoConCodigo.jsx";
+import { PorQueFalla } from "./ia/PracticaIa.jsx";
 import estilos from "./PanelTests.module.css";
 
 /**
  * Un caso de test: ✓ o ✕, y si falla, qué se esperaba y qué recibió.
  * `pista` es la explicación en español del error (o null).
  */
-export function CasoTest({ caso, pista, indice = 0 }) {
+export function CasoTest({ caso, pista, indice = 0, conIa }) {
   // Cada caso entra un poco después del anterior
   const entrada = {
     initial: { opacity: 0, x: -6 },
@@ -54,6 +55,7 @@ export function CasoTest({ caso, pista, indice = 0 }) {
         ) : (
           caso.mensaje && <pre className={estilos.mensaje}>{caso.mensaje}</pre>
         )}
+        {conIa && <PorQueFalla key={JSON.stringify(caso)} id={conIa.id} enunciado={conIa.enunciado} caso={caso} />}
       </div>
     </motion.li>
   );

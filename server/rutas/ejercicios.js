@@ -150,7 +150,10 @@ export function rutasEjercicios({ indice, progreso, workspace, corredor, vscode,
     const ej = req.ejercicio;
     if (!workspace || !(await workspace.existe(ej))) return res.json({ codigo: null });
     const codigo = await readFile(workspace.archivoDe(ej), "utf8").catch(() => null);
-    res.json({ codigo, lenguaje: ej.ext });
+    // Con el ejercicio resuelto (o la solución ya vista), la IA compara tu código con el oficial
+    const registro = progreso?.deEjercicio(ej.id);
+    const oficial = registro && solucionDesbloqueada(registro) ? await leer(ej, ej.archivos.solucion).catch(() => null) : null;
+    res.json({ codigo, lenguaje: ej.ext, oficial });
   });
 
   // Vuelve a correr los tests sin guardar (botón "Correr tests").

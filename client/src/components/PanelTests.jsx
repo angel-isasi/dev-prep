@@ -18,9 +18,9 @@ function haceCuanto(desde, ahora) {
 
 /**
  * Resultado de los tests en vivo: "3/5", la barra, cada caso y tu consola.
- * @param {{ resultado: object|null, corriendo: boolean, preparado: boolean, ultimaCorrida: number|null }} props
+ * @param {{ resultado: object|null, corriendo: boolean, preparado: boolean, ultimaCorrida: number|null, conIa?: { id: string, enunciado: string } }} props
  */
-export function PanelTests({ resultado, corriendo, preparado, ultimaCorrida }) {
+export function PanelTests({ resultado, corriendo, preparado, ultimaCorrida, conIa }) {
   const ahora = useAhora();
 
   if (!resultado) {
@@ -118,7 +118,7 @@ export function PanelTests({ resultado, corriendo, preparado, ultimaCorrida }) {
 
       <ul className={`${estilos.casos} ${corriendo ? estilos.atenuado : ""}`}>
         {casos.map((caso, i) => (
-          <CasoTest key={caso.nombre} caso={caso} pista={pistaDe(caso)} indice={i} />
+          <CasoTest key={caso.nombre} caso={caso} pista={pistaDe(caso)} indice={i} conIa={conIa} />
         ))}
       </ul>
 

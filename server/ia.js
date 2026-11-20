@@ -18,6 +18,7 @@
 //   Vercel, si existe, manda sobre todas.
 import { createHash, timingSafeEqual } from "node:crypto";
 import { MODELOS } from "./ia-precios.js";
+import { ESTILO, TAREAS, limpiarPorEsquema } from "./ia-tareas.js";
 
 /** Topes de lo que se acepta en cada pedido (en caracteres), para no gastar de más. */
 export const LIMITES = {
@@ -31,6 +32,7 @@ export const LIMITES = {
   respuestaItem: 1500,
   notas: 1500,
   codigo: 8000,
+  perfil: 1500,
   enunciado: 4000,
   escenario: 800,
   turnos: 30,
@@ -102,8 +104,10 @@ ESQUEMAS.codigo = {
     bien: { type: "array", items: { type: "string" } },
     mejoras: { type: "array", items: { type: "string" } },
     preguntas: { type: "array", items: { type: "string" } },
+    comparacion: { type: "array", items: { type: "string" } },
   },
 };
+ESQUEMAS.codigo.required.push("comparacion");
 ESQUEMAS.conversacion = {
   type: "object",
   additionalProperties: false,
@@ -112,9 +116,6 @@ ESQUEMAS.conversacion = {
 };
 // El cierre de la charla corrige igual que el mapache
 ESQUEMAS["conversacion-cierre"] = ESQUEMAS.ingles;
-
-const ESTILO =
-  "Escribe en español de Perú, con tuteo neutro (sin voseo), directo y concreto, sin relleno ni frases motivacionales vacías. No uses rayas largas; usa dos puntos o comas. Sé breve: quien lo lee se abruma con textos largos. Cada punto de una lista es una sola frase de 20 palabras como máximo, y es mejor dar pocos puntos que pesen que muchos.";
 
 const SISTEMA = {
   informe: `Eres un entrevistador senior de desarrollo frontend que contrata practicantes y juniors en Perú. Acabas de terminar una entrevista de práctica con un estudiante de Ingeniería de Sistemas y le das tu balance, como se lo darías a alguien que quieres que mejore.
@@ -156,6 +157,7 @@ Cómo revisar:
 - "bien": hasta 2 cosas concretas que están bien hechas (puede estar vacío).
 - "mejoras": hasta 3 cambios que más subirían el nivel, cada uno con el qué y el porqué; si sirve, un fragmento de código corto entre comillas invertidas.
 - "preguntas": 2 preguntas que le haría un entrevistador sobre este código (complejidad, un caso borde, una alternativa).
+- "comparacion": si te pasan la solución oficial, hasta 3 diferencias que importan entre la suya y la oficial (complejidad, legibilidad, casos borde) y cuál elegiría un entrevistador y por qué. Si no hay solución oficial, déjalo vacío.
 - No reescribas toda la solución ni propongas lo que el enunciado no pide.
 ${ESTILO}`,
   conversacion: `You are a friendly English conversation partner for a Peruvian student who is preparing to work in English as a junior frontend developer. Their level is around B1-B2.
@@ -183,8 +185,25 @@ const recortar = (texto, max) => String(texto ?? "").trim().slice(0, max);
  * @returns {{ error: string } | { tarea: string, sistema: string, mensaje: string, esquema: object }}
  */
 export function armarPedido(cuerpo) {
+  const pedido = armarSinPerfil(cuerpo);
+  // Memoria del tutor: lo que la app sabe de ti viaja con cada pedido, así la IA no te trata como a un desconocido
+  const perfil = recortar(cuerpo?.perfil, LIMITES.perfil);
+  if (pedido.error || !perfil) return pedido;
+  return {
+    ...pedido,
+    mensaje: `${pedido.mensaje}\n\nLo que sabes de este estudiante (úsalo para personalizar tu respuesta, sin repetírselo):\n${perfil}`,
+  };
+}
+
+function armarSinPerfil(cuerpo) {
   const tarea = cuerpo?.tarea;
-  if (!ESQUEMAS[tarea]) return { error: "Tarea desconocida" };
+  if (Object.hasOwn(TAREAS, tarea ?? "")) {
+    const t = TAREAS[tarea];
+    const mensaje = t.armar(cuerpo);
+    if (mensaje?.error) return mensaje;
+    return { tarea, sistema: t.sistema, mensaje, esquema: t.esquema };
+  }
+  if (!Object.hasOwn(ESQUEMAS, tarea ?? "")) return { error: "Tarea desconocida" };
   if (tarea === "informe") return armarInforme(cuerpo);
   if (tarea === "codigo") return armarCodigo(cuerpo);
   if (tarea === "conversacion" || tarea === "conversacion-cierre") return armarConversacion(tarea, cuerpo);
@@ -225,7 +244,14 @@ function armarCodigo(cuerpo) {
   if (!enunciado) return { error: "Falta el enunciado" };
   if (codigo.length < 20) return { error: "No hay código para revisar" };
   const titulo = recortar(cuerpo.categoria, 120);
-  const mensaje = [`Ejercicio${titulo ? ` "${titulo}"` : ""}:\n${enunciado}`, `Su solución (ya pasa los tests):\n${codigo}`].join("\n\n");
+  const oficial = recortar(cuerpo.oficial, LIMITES.codigo);
+  const mensaje = [
+    `Ejercicio${titulo ? ` "${titulo}"` : ""}:\n${enunciado}`,
+    `Su solución (ya pasa los tests):\n${codigo}`,
+    oficial ? `Solución oficial (para la comparación):\n${oficial}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
   return { tarea: "codigo", sistema: SISTEMA.codigo, mensaje, esquema: ESQUEMAS.codigo };
 }
 
@@ -290,6 +316,7 @@ const textos = (lista) => (Array.isArray(lista) ? lista.map(String).filter(Boole
 
 /** Limpia lo que devolvió la IA (por si algo viene fuera de rango). */
 export function limpiarResultado(tarea, r) {
+  if (Object.hasOwn(TAREAS, tarea)) return limpiarPorEsquema(TAREAS[tarea].esquema, r);
   if (tarea === "informe") {
     return {
       puntaje: entre(r.puntaje, 0, 10),
@@ -307,6 +334,7 @@ export function limpiarResultado(tarea, r) {
       bien: textos(r.bien).slice(0, 3),
       mejoras: textos(r.mejoras).slice(0, 4),
       preguntas: textos(r.preguntas).slice(0, 3),
+      comparacion: textos(r.comparacion).slice(0, 3),
     };
   }
   if (tarea === "conversacion") return { respuesta: String(r.respuesta ?? "").slice(0, 1200), fin: r.fin === true };
@@ -378,7 +406,7 @@ export async function manejarPost(request, { env, crearCliente }) {
   const pedido = armarPedido(cuerpo);
   if (pedido.error) return json({ error: pedido.error }, 400);
 
-  const modelo = env.IA_MODELO || MODELOS[pedido.tarea];
+  const modelo = env.IA_MODELO || TAREAS[pedido.tarea]?.modelo || MODELOS[pedido.tarea];
   // Si el modelo declina por sus filtros de seguridad, el servidor reintenta con otro modelo.
   // El modelo pequeño (haiku) no tiene ese respaldo: ahí no se pide.
   const conRespaldo = !modelo.includes("haiku");
