@@ -83,17 +83,16 @@ function ComoSeDiceContenido({ olvidar }) {
 
 // ---------------------------------------------------------------------------------------------
 export function DailyIngles() {
+  // Una sola caja: el evaluador ya pasa por la puerta de la IA
   return (
-    <CajaIa titulo="Tu daily en inglés" detalle="Di o escribe tu actualización: qué hiciste ayer, qué harás hoy y si algo te bloquea.">
-      {() => (
-        <EvaluadorIa
-          tarea="ingles"
-          idioma="en"
-          textoBoton="Corregir mi daily"
-          pedido={{ pregunta: "Give your daily stand-up update to your team: what you did yesterday, what you will do today, and if anything is blocking you.", nivel: "B2" }}
-        />
-      )}
-    </CajaIa>
+    <EvaluadorIa
+      tarea="ingles"
+      idioma="en"
+      titulo="Tu daily en inglés"
+      detalle="Di o escribe tu actualización: qué hiciste ayer, qué harás hoy y si algo te bloquea."
+      textoBoton="Corregir mi daily"
+      pedido={{ pregunta: "Give your daily stand-up update to your team: what you did yesterday, what you will do today, and if anything is blocking you.", nivel: "B2" }}
+    />
   );
 }
 

@@ -13,6 +13,8 @@
 
 export const DICCIONARIO = {
   // ---------- Entrevistas y Buscar trabajo (rediseño del 2026-11-20) ----------
+
+  // ---------- Entrevistas y Buscar trabajo (rediseño del 2026-11-20) ----------
   "Buscar trabajo": "Job search",
   "Tu preparación": "Your readiness",
   "Simular": "Mock interviews",

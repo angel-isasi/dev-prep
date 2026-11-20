@@ -147,12 +147,14 @@ export function UsoIa() {
  * @param {(resultado: object, respuesta: string) => void} [props.alResultado]
  * @param {"es"|"en"} [props.idioma]     idioma en que respondes (para el dictado)
  * @param {string} [props.textoBoton]     texto del botón de evaluar (por ejemplo "Evaluar mi pitch")
+ * @param {string} [props.titulo]         título de la caja (si no, uno según la tarea)
+ * @param {string} [props.detalle]        una línea de qué hacer, bajo el título
  */
 export function EvaluadorIa(props) {
   return <PuertaIa>{(olvidarClave) => <Evaluador {...props} alOlvidarClave={olvidarClave} />}</PuertaIa>;
 }
 
-function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", textoBoton, alOlvidarClave }) {
+function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", textoBoton, titulo, detalle, alOlvidarClave }) {
   const [texto, setTexto] = useState("");
   const [dictando, setDictando] = useState(false);
   const [cargando, setCargando] = useState(false);
@@ -212,11 +214,12 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", t
   return (
     <div className={estilos.caja}>
       <div className={estilos.cabecera}>
-        <span className={estilos.etiqueta}>{tarea === "ingles" ? "Corregir con IA" : tarea === "codigo" ? "Revisión de un senior" : repregunta ? "Repregunta" : "Evaluar con IA"}</span>
+        <span className={estilos.etiqueta}>{repregunta ? "Repregunta" : titulo ? titulo : tarea === "ingles" ? "Corregir con IA" : tarea === "codigo" ? "Revisión de un senior" : repregunta ? "Repregunta" : "Evaluar con IA"}</span>
         <button type="button" className={estilos.enlace} onClick={alOlvidarClave}>
           Cambiar código
         </button>
       </div>
+      {detalle && !repregunta && !resultado && <p className={estilos.suave}>{detalle}</p>}
       {repregunta && <p className={estilos.repreguntaTexto}>{repregunta}</p>}
 
       {!resultado && (
