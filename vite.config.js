@@ -99,6 +99,9 @@ const pwa = () =>
       ],
     },
     workbox: {
+      // Nombre de la copia guardada: al cambiarlo, cada navegador descarta la anterior y baja todo de nuevo
+      // (sirve si una copia quedó dañada tras varias publicaciones seguidas)
+      cacheId: "devprep-2",
       // Avisos (Web Push): el service worker carga public-movil/push-sw.js
       importScripts: ["/push-sw.js"],
       // Todo lo necesario para usarla sin internet: la app, los datos y las fuentes en alfabeto latino.
