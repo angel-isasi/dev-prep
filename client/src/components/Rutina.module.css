@@ -100,53 +100,6 @@
   padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
 }
 
-.formulario {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espacio-3);
-}
-
-.formulario label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-weight: var(--peso-semi);
-}
-
-.formulario input {
-  padding: 12px 14px;
-  border: 1px solid var(--borde-fuerte);
-  border-radius: var(--radio-lg);
-  background: var(--superficie);
-  color: var(--texto);
-  font-size: var(--letra-5);
-  font-weight: var(--peso-normal);
-}
-
-.entradas {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espacio-2);
-  margin: var(--espacio-5) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.entradas li {
-  padding: var(--espacio-3) var(--espacio-4);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-lg);
-  background: var(--superficie);
-}
-
-.entradas small {
-  color: var(--texto-suave);
-}
-
-.entradas p {
-  margin: 4px 0 0;
-}
-
 .reloj {
   display: flex;
   flex-direction: column;
@@ -228,14 +181,12 @@
   color: var(--exito);
 }
 
-/* ---------- Diario y Enfoque en pantalla grande ---------- */
-.diario,
+/* ---------- Enfoque en pantalla grande ---------- */
 .enfoque {
   display: grid;
   gap: var(--espacio-5);
 }
 
-.diario .formulario,
 .consejos {
   padding: var(--espacio-5);
   border: 1px solid var(--borde);
@@ -246,15 +197,6 @@
     var(--fondo-solido);
   box-shadow: var(--brillo-borde);
   align-self: start;
-}
-
-.diario .entradas {
-  margin: 0;
-}
-
-.vacio {
-  color: var(--texto-tenue);
-  border-style: dashed !important;
 }
 
 .reloj strong {
@@ -276,10 +218,6 @@
   .pagina {
     max-width: 1100px;
     padding: var(--espacio-7) var(--espacio-6);
-  }
-  .diario {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    align-items: start;
   }
   .enfoque {
     grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);

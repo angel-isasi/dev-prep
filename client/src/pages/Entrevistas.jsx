@@ -110,7 +110,7 @@ const PRACTICAS = [
     id: "preguntas",
     pasos: ["Escribes las 2 o 3 preguntas que le harías al entrevistador.","La IA comenta cada una: si suma o si resta.","Te sugiere 3 preguntas mejores para llevar."],
     grupo: "Partes clave",
-    titulo: "Tus preguntas para ellos",
+    titulo: "Tus preguntas",
     detalle: "El \"¿tienes alguna pregunta?\" del final",
     minutos: "3 min",
     ia: true,
@@ -129,6 +129,62 @@ const PRACTICAS = [
     consejos: ["Investiga un rango antes y da una cifra con argumentos.", "Pregunta por el paquete completo: modalidad, horario, beneficios."],
   },
 ];
+
+/** Los 3 pasos (cortos) y un ejemplo dibujado de cada práctica: se entiende mirando, sin párrafos. */
+const GUIA = {
+  simulacro: { pasos: ["Eliges todo o una etapa", "Respondes en voz alta", "Ves tu plan de refuerzo"] },
+  voz: {
+    pasos: ["Eliges tema y entrevistador", "Respondes hablando", "Ves tu informe"],
+    ejemplo: [
+      { tipo: "ia", texto: "¿Qué es un closure?" },
+      { tipo: "tu", texto: "Una función que recuerda las variables de donde nació." },
+      { tipo: "ia", texto: "¿Y para qué lo usarías?" },
+      { tipo: "puntaje", texto: "7/10 · te faltó un ejemplo" },
+    ],
+  },
+  examen: {
+    pasos: ["4 preguntas sin ayuda", "Respondes por escrito", "Ves tu nota del mes"],
+    ejemplo: [
+      { tipo: "nota", texto: "Concepto · Código · Inglés · Comportamiento" },
+      { tipo: "puntaje", texto: "7/10 · casi listo" },
+      { tipo: "bien", texto: "Subiste 2 puntos respecto al mes pasado." },
+    ],
+  },
+  proyecto: {
+    pasos: ["Revisas la descripción", "Respondes 6 a 8 preguntas", "Pides tu balance"],
+    ejemplo: [
+      { tipo: "ia", texto: "¿Por qué elegiste Vite?" },
+      { tipo: "tu", texto: "Porque arranca al instante y el proyecto es chico." },
+      { tipo: "ia", texto: "¿Qué harías distinto hoy?" },
+    ],
+  },
+  ingles: {
+    pasos: ["Eliges la ayuda", "Respondes en inglés", "Te corrige al final"],
+    ejemplo: [
+      { tipo: "ia", texto: "Tell me about a project you built." },
+      { tipo: "tu", texto: "I builded an app to practice interviews." },
+      { tipo: "cambio", mal: "I builded", bien: "I built" },
+    ],
+  },
+  preguntas: {
+    pasos: ["Escribes 2 o 3 preguntas", "Ves cuáles suman", "Te llevas 3 mejores"],
+    ejemplo: [
+      { tipo: "tu", texto: "¿Cómo acompañan a un junior?" },
+      { tipo: "bien", texto: "Buena: muestra ganas de aprender." },
+      { tipo: "tu", texto: "¿Cuánto pagan?" },
+      { tipo: "nota", texto: "Mejor para otra etapa." },
+    ],
+  },
+  sueldo: {
+    pasos: ["Eliges la situación", "Conversas con la reclutadora", "Pides tu balance"],
+    ejemplo: [
+      { tipo: "ia", texto: "¿Cuál es tu expectativa salarial?" },
+      { tipo: "tu", texto: "Entre 3000 y 3500 soles, por mi proyecto y mi inglés." },
+      { tipo: "ia", texto: "Podemos ofrecer 2800." },
+    ],
+  },
+};
+const PRACTICAS_CON_GUIA = PRACTICAS.map((p) => ({ ...p, ...GUIA[p.id] }));
 
 /** Lo que también sirve para entrevistas pero vive en otras secciones. */
 const ATAJOS = [
@@ -515,7 +571,7 @@ function TarjetasPorEtapa({ resumen, alEmpezar }) {
                 <div>
                   <h3>{e.titulo}</h3>
                   <small className={nuevo.suave}>
-                    {dom} de {total} dominadas · {e.minutos} min en una entrevista real
+                    {dom}/{total} dominadas · {e.minutos} min
                   </small>
                 </div>
               </header>
@@ -598,7 +654,7 @@ function GuiaVozAlta({ markdown }) {
 function Simular({ resumen, practica, alPractica, alIr, alRepasar }) {
   const elegida = PRACTICAS.find((p) => p.id === practica) ?? PRACTICAS[0];
   return (
-    <MenuPanel items={PRACTICAS} elegida={elegida.id} alElegir={alPractica} etiqueta="Prácticas">
+    <MenuPanel items={PRACTICAS_CON_GUIA} elegida={elegida.id} alElegir={alPractica} etiqueta="Prácticas">
       {elegida.id === "simulacro" && <Simulacro proceso={resumen.proceso} alIr={alIr} alRepasar={alRepasar} />}
       {elegida.id === "voz" && <EntrevistaVoz proceso={resumen.proceso} />}
       {elegida.id === "examen" && <ExamenMensual />}

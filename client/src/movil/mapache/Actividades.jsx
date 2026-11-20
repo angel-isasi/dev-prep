@@ -12,11 +12,12 @@ import { EvaluadorIa } from "../../components/EvaluadorIa.jsx";
 import { rondaNueva } from "./reglas.js";
 import estilos from "./PaginaMapache.module.css";
 
-function Tarjeta({ titulo, detalle, ancho, children }) {
+/** Ficha de una actividad. `ayuda` explica cómo se usa: no ocupa lugar, sale al pasar el cursor por el título. */
+function Tarjeta({ titulo, detalle, ancho, ayuda, children }) {
   return (
     <section className={estilos.tarjeta} data-ancho={ancho}>
       <header>
-        <h2>{titulo}</h2>
+        <h2 title={ayuda}>{titulo}</h2>
         {detalle && <span>{detalle}</span>}
       </header>
       {children}
@@ -176,13 +177,11 @@ export function RepiteConmigo({ datos, alCambiar }) {
   }
 
   return (
-    <Tarjeta titulo="Repite conmigo" detalle={`${datos.repetidasHoy} bien dichas hoy`}>
-      {!voz || !micro.hay ? (
-        <p className={estilos.ayuda}>
-          Sin voz o sin micrófono en este navegador (usa Chrome). Mientras, léela en voz alta:
+    <Tarjeta titulo="Repite conmigo" detalle={`${datos.repetidasHoy} bien dichas hoy`} ayuda="Escucha y repite imitando el ritmo: te digo si se entendió.">
+      {(!voz || !micro.hay) && (
+        <p className={estilos.ayuda} title="Este navegador no tiene voz o micrófono. Con Chrome sí funciona.">
+          Sin micrófono aquí: léela en voz alta.
         </p>
-      ) : (
-        <p className={estilos.ayuda}>Escucha y repite imitando el ritmo: te digo si se entendió.</p>
       )}
       <p className={estilos.fraseGrande} lang="en">
         {f.en}
@@ -208,7 +207,7 @@ export function RepiteConmigo({ datos, alCambiar }) {
           )}
         </div>
       )}
-      <div className={estilos.fila}>
+      <div className={`${estilos.fila} ${estilos.pie}`}>
         <button type="button" className="boton boton-fantasma" disabled={i === 0} onClick={() => (setI(i - 1), setResultado(null))}>
           ← Anterior
         </button>
@@ -245,14 +244,11 @@ export function ObjetosPerdidos({ datos, alCambiar }) {
   if (!o && !recuperadas) return null;
 
   return (
-    <Tarjeta titulo="Repasos pendientes" detalle={datos.totalRobados ? `${datos.totalRobados} por repasar` : "Al día"}>
+    <Tarjeta titulo="Repasos pendientes" detalle={datos.totalRobados ? `${datos.totalRobados} por repasar` : "Al día"} ayuda="Lo que te toca repasar hoy: elige lo que falta en cada frase.">
       {!o ? (
         <p className={estilos.ayuda}>Repasaste {recuperadas} aquí hoy.</p>
       ) : (
         <>
-          <p className={estilos.ayuda}>
-            Te toca repasar esta {o.tipo === "palabra" ? "palabra" : "frase"}: elige lo que falta.
-          </p>
           <p className={estilos.fraseGrande} lang="en">
             {o.pista}
           </p>
@@ -311,9 +307,11 @@ export function TusErrores({ datos }) {
           </li>
         ))}
       </ul>
-      <Link to={`/leccion?ambito=ingles&claves=${encodeURIComponent(claves)}`} className="boton boton-primario">
-        Repasar estos ahora
-      </Link>
+      <div className={`${estilos.fila} ${estilos.pie}`}>
+        <Link to={`/leccion?ambito=ingles&claves=${encodeURIComponent(claves)}`} className="boton boton-primario">
+          Repasar estos ahora
+        </Link>
+      </div>
     </Tarjeta>
   );
 }
@@ -332,23 +330,29 @@ export function PalabraDelDia({ datos }) {
           <span lang="en">{w.ej.en}</span> <em>{w.ej.es}</em>
         </p>
       )}
-      <div className={estilos.fila}>
+      <div className={`${estilos.fila} ${estilos.pie}`}>
         <BotonOir texto={w.ej?.en ? `${w.en}. ${w.ej.en}` : w.en} />
       </div>
-      {datos.expresionDelDia && (
-        <div className={estilos.expresionDia}>
-          <span>Expresión del día · nivel {datos.nivelMapache}</span>
-          <p lang="en">
-            <strong>{datos.expresionDelDia.en}</strong> = {datos.expresionDelDia.es}
-          </p>
-          <p className={estilos.ejemplo}>
-            <span lang="en">{datos.expresionDelDia.ej.en}</span> <em>{datos.expresionDelDia.ej.es}</em>
-          </p>
-          <div className={estilos.fila}>
-            <BotonOir texto={`${datos.expresionDelDia.en}. ${datos.expresionDelDia.ej.en}`} />
-          </div>
-        </div>
-      )}
+    </Tarjeta>
+  );
+}
+
+/** La expresión del día, con la misma forma que la palabra del día (van una al lado de la otra). */
+export function ExpresionDelDia({ datos }) {
+  const x = datos.expresionDelDia;
+  if (!x) return null;
+  return (
+    <Tarjeta titulo="Expresión del día" detalle={`Nivel ${datos.nivelMapache}`}>
+      <p className={estilos.palabraGrande} lang="en">
+        {x.en}
+      </p>
+      <p className={estilos.traduccion}>{x.es}</p>
+      <p className={estilos.ejemplo}>
+        <span lang="en">{x.ej.en}</span> <em>{x.ej.es}</em>
+      </p>
+      <div className={`${estilos.fila} ${estilos.pie}`}>
+        <BotonOir texto={`${x.en}. ${x.ej.en}`} />
+      </div>
     </Tarjeta>
   );
 }
@@ -508,8 +512,8 @@ export function TrashPanda({ datos, alCambiar }) {
   }
 
   return (
-    <Tarjeta titulo="Trash panda" detalle={`Récord: ${datos.trash.record}`}>
-      <p className={estilos.ayuda}>1 minuto: ¿verbo o sustantivo?, ¿presente o pasado? Tira cada palabra a su tacho.</p>
+    <Tarjeta titulo="Trash panda" detalle={`Récord: ${datos.trash.record}`} ayuda="¿Verbo o sustantivo? ¿Presente o pasado? Tienes 1 minuto para tirar cada palabra a su tacho.">
+
       {jugando && ronda ? (
         <div className={estilos.juego}>
           <div className={estilos.marcador}>
@@ -535,19 +539,17 @@ export function TrashPanda({ datos, alCambiar }) {
           )}
         </div>
       ) : (
-        <>
-          {final && (
-            <div className={estilos.resultado} data-ok>
-              <p>
-                {puntos} {puntos === 1 ? "punto" : "puntos"}
-                {final.nuevoRecord ? " · ¡nuevo récord!" : ""} {final.xp ? `· +${final.xp} XP` : ""}
-              </p>
-            </div>
-          )}
+        <div className={estilos.juego}>
+          <p className={estilos.palabraJuego}>{final ? puntos : "1:00"}</p>
+          <small className={estilos.traduccion}>
+            {final
+              ? `${puntos === 1 ? "punto" : "puntos"}${final.nuevoRecord ? " · ¡nuevo récord!" : ""}${final.xp ? ` · +${final.xp} XP` : ""}`
+              : "Cada palabra a su tacho"}
+          </small>
           <button type="button" className="boton boton-primario" onClick={empezar} disabled={!palabras.length}>
             {final ? "Jugar otra vez" : "Jugar"}
           </button>
-        </>
+        </div>
       )}
     </Tarjeta>
   );
@@ -555,10 +557,11 @@ export function TrashPanda({ datos, alCambiar }) {
 
 export function Entrevista({ datos }) {
   return (
-    <Tarjeta titulo="Entrevista en inglés" detalle="Roleplays de B2 y C1">
-      <p className={estilos.ayuda}>
-        {datos.nombre} hace de entrevistador: eliges qué responder y ves por qué una respuesta suena mejor que otra.
-      </p>
+    <Tarjeta
+      titulo="Entrevista en inglés"
+      detalle="Roleplays de B2 y C1"
+      ayuda={`${datos.nombre} hace de entrevistador: eliges qué responder y ves por qué una respuesta suena mejor que otra.`}
+    >
       <div className={estilos.entrevistas}>
         {datos.entrevistas.map((e) => (
           <Link key={e.id} to={`/ingles/roleplay/${e.id}`} className={estilos.entrevistaOpcion}>

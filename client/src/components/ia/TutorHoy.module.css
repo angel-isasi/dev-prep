@@ -1,0 +1,194 @@
+/* Hoy: "Tu tutor hoy" y "Tu semana" como tableros a todo el ancho (ver TutorHoy.jsx). */
+.bloque {
+  display: grid;
+  gap: var(--espacio-4);
+  margin-top: var(--espacio-4);
+}
+
+.tablero {
+  display: grid;
+  gap: var(--espacio-4);
+  padding: var(--espacio-5);
+}
+
+.cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+.cabeza h2 {
+  margin: 2px 0 0;
+  font-size: var(--titulo-1);
+}
+
+/* ---------- Tutor: una ficha por enfoque ---------- */
+.focos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--espacio-3);
+}
+
+.foco {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--espacio-2) var(--espacio-3);
+  align-content: start;
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie-2);
+  color: var(--texto);
+  text-decoration: none;
+  transition: border-color var(--transicion), transform var(--transicion);
+}
+
+.foco:hover {
+  border-color: var(--acento);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.numero {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radio-lg);
+  background: color-mix(in srgb, var(--acento) 16%, var(--superficie));
+  color: var(--acento);
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-6);
+  font-weight: var(--peso-negrita);
+}
+
+.focoTexto {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.focoTexto strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-6);
+}
+
+/* La acción, en dos líneas como mucho: lo demás sobra */
+.focoTexto span {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.ir {
+  grid-column: 2;
+  color: var(--acento);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
+}
+
+/* ---------- Semana: una ficha por día ---------- */
+.dias {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dia {
+  display: grid;
+  align-content: start;
+  gap: var(--espacio-2);
+  min-height: 84px;
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--superficie-2);
+}
+
+.dia[data-hoy="true"] {
+  border-color: var(--acento);
+  background: color-mix(in srgb, var(--acento) 10%, var(--superficie-2));
+}
+
+.dia[data-libre="true"] {
+  background: none;
+  border-style: dashed;
+}
+
+.diaCabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+}
+
+.diaCabeza strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-5);
+}
+
+/* Tres barritas: cuánto puedes estudiar ese día */
+.medidor {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+
+.medidor i {
+  width: 5px;
+  border-radius: 2px;
+  background: var(--borde-fuerte);
+}
+
+.medidor i:nth-child(1) {
+  height: 6px;
+}
+.medidor i:nth-child(2) {
+  height: 11px;
+}
+.medidor i:nth-child(3) {
+  height: 16px;
+}
+
+.medidor i[data-lleno="true"] {
+  background: var(--acento);
+}
+
+.diaEnfoque {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.pedir {
+  display: flex;
+  gap: var(--espacio-2);
+}
+
+.pedir input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--espacio-3) var(--espacio-4);
+}
+
+@media (max-width: 900px) {
+  .dias {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+  .pedir {
+    flex-direction: column;
+  }
+}

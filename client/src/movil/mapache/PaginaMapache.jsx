@@ -12,7 +12,7 @@ import { ContenidoPestanas, Pestanas } from "../../components/Pestanas.jsx";
 import { IconoAudio, IconoFlechaIzq } from "../../components/Iconos.jsx";
 import { CajaVacia, Mapache } from "./Mapache.jsx";
 import { useCharlaMapache } from "./TarjetaMapache.jsx";
-import { Diario, Entrevista, ObjetosPerdidos, PalabraDelDia, Postales, PreguntaDelDia, RepiteConmigo, TrashPanda, TusErrores } from "./Actividades.jsx";
+import { Diario, Entrevista, ExpresionDelDia, ObjetosPerdidos, PalabraDelDia, Postales, PreguntaDelDia, RepiteConmigo, TrashPanda, TusErrores } from "./Actividades.jsx";
 import estilos from "./PaginaMapache.module.css";
 
 export const TEXTO_ESTADO = {
@@ -23,6 +23,17 @@ export const TEXTO_ESTADO = {
   triste: "Se rompió la racha. Hoy empieza otra.",
   dormido: "Está dormido. Tócalo si quieres saber qué sueña.",
   escapado: "Llevas días sin inglés. Vuelve con una lección corta.",
+};
+
+/** El estado en una o dos palabras (la frase completa de arriba queda como ayuda al pasar el cursor). */
+const ESTADO_CORTO = {
+  nuevo: "Recién llegado",
+  feliz: "Meta cumplida",
+  normal: "Va bien",
+  hambriento: "Con hambre",
+  triste: "Racha rota",
+  dormido: "Dormido",
+  escapado: "Se fue",
 };
 
 const PESTANAS = [
@@ -86,7 +97,9 @@ export function PaginaMapache() {
               ) : (
                 <>
                   <h1>{datos.nombre}</h1>
-                  <span className={estilos.estado}>{TEXTO_ESTADO[datos.estado]}</span>
+                  <span className="chip" data-tono="area" title={TEXTO_ESTADO[datos.estado]}>
+                    {ESTADO_CORTO[datos.estado] ?? datos.estado}
+                  </span>
                 </>
               )}
             </div>
@@ -158,12 +171,21 @@ export function PaginaMapache() {
 
       <ContenidoPestanas activa={pestana} orden={PESTANAS.map((p) => p.id)}>
         {pestana === "hoy" && (
-          <div className={estilos.rejilla}>
-            <PreguntaDelDia datos={datos} alCambiar={cargar} />
-            <RepiteConmigo datos={datos} alCambiar={cargar} />
-            <PalabraDelDia datos={datos} />
-            <ObjetosPerdidos datos={datos} alCambiar={cargar} />
-            <TusErrores datos={datos} />
+          // Tres filas, cada una con fichas del mismo alto que llenan el ancho:
+          // la pregunta | repetir, palabra y expresión | repasos y errores (solo si hay)
+          <div className={estilos.filas}>
+            <div className={estilos.rejilla}>
+              <PreguntaDelDia datos={datos} alCambiar={cargar} />
+            </div>
+            <div className={estilos.rejilla}>
+              <RepiteConmigo datos={datos} alCambiar={cargar} />
+              <PalabraDelDia datos={datos} />
+              <ExpresionDelDia datos={datos} />
+            </div>
+            <div className={estilos.rejilla}>
+              <ObjetosPerdidos datos={datos} alCambiar={cargar} />
+              <TusErrores datos={datos} />
+            </div>
           </div>
         )}
         {pestana === "leer" && (

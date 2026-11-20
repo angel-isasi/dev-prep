@@ -53,7 +53,7 @@ const GitPractico = perezoso(() => import("./practica/GitPractico.jsx"), "GitPra
 const PaginaLogros = perezoso(() => import("../components/Logros.jsx"), "PaginaLogros");
 const Trabajo = perezoso(() => import("./trabajo/Trabajo.jsx"), "Trabajo");
 const Enfoque = perezoso(() => import("../components/Rutina.jsx"), "Enfoque");
-const PaginaDiario = perezoso(() => import("../components/Rutina.jsx"), "PaginaDiario");
+const PaginaDiario = perezoso(() => import("../components/PaginaDiario.jsx"), "PaginaDiario");
 const Hoy = perezoso(() => import("../pages/Hoy.jsx"), "Hoy");
 const Progreso = perezoso(() => import("../pages/Progreso.jsx"), "Progreso");
 const Ajustes = perezoso(() => import("../pages/Ajustes.jsx"), "Ajustes");

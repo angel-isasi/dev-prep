@@ -1,10 +1,14 @@
+/* Git práctico. La portada es un tablero: un resumen a todo el ancho (total, niveles y el que te
+   toca) y, debajo, un bloque por nivel con sus fichas llenando la fila. Sin laptop conectada, el
+   mismo tablero explica cómo funciona y qué se practica. */
 .pagina {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   gap: var(--espacio-4);
   max-width: var(--ancho-pagina);
   margin: 0 auto;
-  padding: var(--espacio-7) var(--espacio-6);
+  padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
 }
 
 .ayuda {
@@ -14,13 +18,167 @@
   line-height: 1.6;
 }
 
-.lista {
+/* Cuadro con número (o ✓): en las fichas, en "Te toca" y en los pasos */
+.numero {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  flex-shrink: 0;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radio-lg);
+  background: var(--acento-suave);
+  color: var(--acento);
+  font-family: var(--fuente-codigo);
+  font-weight: var(--peso-negrita);
+}
+
+.barra {
+  display: block;
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--radio-pildora);
+  background: var(--superficie-3);
+}
+
+.barra > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--acento);
+  transition: width var(--dur-lenta) var(--curva);
+}
+
+/* ---------- Resumen ---------- */
+.resumen {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(260px, 0.6fr);
+  align-items: center;
+  gap: var(--espacio-5) var(--espacio-6);
+  padding: var(--espacio-5);
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-4);
+}
+
+.total > span {
+  display: grid;
+}
+
+.total > span strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-3);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.total small {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+}
+
+.niveles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--espacio-3);
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.niveles li {
+  display: grid;
+  gap: var(--espacio-2);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+}
+
+.niveles li > span:first-child {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+}
+
+.niveles small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.siguiente {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  min-width: 0;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid color-mix(in srgb, var(--acento) 35%, var(--borde));
+  border-radius: var(--radio-grande);
+  background: color-mix(in srgb, var(--acento) 8%, var(--superficie));
+  color: var(--texto);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--transicion),
+    transform var(--transicion);
+}
+
+.siguiente:hover {
+  border-color: var(--acento);
+  transform: translateY(-1px);
+}
+
+.siguiente > span:nth-child(2) {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+
+.siguiente small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.siguiente > svg {
+  flex: none;
+  color: var(--acento);
+}
+
+/* ---------- Un bloque por nivel ---------- */
+.grupo {
+  display: grid;
+  gap: var(--espacio-3);
+  margin-top: var(--espacio-2);
+}
+
+.grupoCabeza {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+.grupoCabeza h2 {
+  margin: 0;
+  font-size: var(--titulo-1);
+}
+
+/* auto-fit: las fichas del nivel se reparten toda la fila, sean 2 o 4 */
+.lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista li {
+  display: flex;
 }
 
 .ficha {
@@ -51,19 +209,6 @@
   color: var(--exito);
 }
 
-.numero {
-  display: grid;
-  flex-shrink: 0;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radio-lg);
-  background: var(--acento-suave);
-  color: var(--acento);
-  font-family: var(--fuente-codigo);
-  font-weight: var(--peso-negrita);
-}
-
 .fichaTexto {
   display: flex;
   flex-direction: column;
@@ -73,17 +218,171 @@
 
 .fichaTexto strong {
   font-size: var(--letra-6);
+  line-height: 1.3;
 }
 
 .fichaTexto small {
-  overflow: hidden;
   color: var(--texto-tenue);
-  font-family: var(--fuente-codigo);
-  font-size: var(--letra-2);
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: var(--letra-3);
 }
 
+.ficha[data-resuelto="true"] .fichaTexto small {
+  color: var(--exito);
+}
+
+/* ---------- Sin laptop: aviso, cómo funciona y qué se practica ---------- */
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--espacio-4);
+}
+
+.tablero > section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  min-width: 0;
+  padding: var(--espacio-5);
+}
+
+.aviso {
+  grid-column: span 5;
+  justify-content: space-between;
+}
+
+.aviso h2 {
+  margin: 0 0 4px;
+  font-size: var(--titulo-2);
+}
+
+.aviso p {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-5);
+}
+
+.aviso :global(.boton) {
+  align-self: flex-start;
+}
+
+.iconoGrande {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radio-lg);
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
+.como {
+  grid-column: span 7;
+}
+
+.pasos {
+  display: grid;
+  flex: 1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pasos li {
+  display: grid;
+  align-content: start;
+  gap: var(--espacio-2);
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie-2);
+}
+
+.pasos strong {
+  font-size: var(--letra-6);
+}
+
+.pasos small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  line-height: 1.4;
+}
+
+.temario {
+  grid-column: span 4;
+}
+
+.temario .grupoCabeza {
+  justify-content: space-between;
+}
+
+.temas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.temas li {
+  padding: 6px 12px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+  font-size: var(--letra-4);
+}
+
+@container (max-width: 1000px) {
+  .resumen {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .siguiente {
+    grid-column: 1 / -1;
+  }
+
+  .aviso,
+  .como {
+    grid-column: 1 / -1;
+  }
+}
+
+@container (max-width: 640px) {
+  .resumen {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .niveles,
+  .pasos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .temario {
+    grid-column: 1 / -1;
+  }
+
+  /* Los pasos, en renglones: el número a la izquierda y el texto al lado */
+  .pasos li {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--espacio-3);
+    row-gap: 2px;
+    padding: var(--espacio-3);
+  }
+
+  .pasos .numero {
+    grid-row: span 2;
+  }
+
+  .tablero > section,
+  .resumen {
+    padding: var(--espacio-4);
+  }
+}
+
+/* ---------- Un escenario abierto ---------- */
 .volver {
   align-self: flex-start;
 }
@@ -208,17 +507,5 @@
   }
   .titulo {
     font-size: var(--titulo-4);
-  }
-}
-
-.portada {
-  display: grid;
-  gap: var(--espacio-5);
-  align-items: center;
-}
-
-@media (min-width: 1200px) {
-  .portada {
-    grid-template-columns: minmax(0, 1fr) minmax(380px, 520px);
   }
 }

@@ -1,5 +1,4 @@
 // Piezas de la rutina diaria (versión web):
-// - TarjetaDiario y PaginaDiario: tu diario de una línea.
 // - Enfoque: sesiones de 25 minutos (en la laptop, si abres el juego durante la sesión, se anula).
 // - RetoMes y ResumenMes: el reto del mes y lo que lograste el mes pasado.
 import { useEffect, useState } from "react";
@@ -11,83 +10,6 @@ import { useEvento } from "../hooks/useEvento.js";
 import { CabeceraPagina } from "./CabeceraPagina.jsx";
 import { AnilloProgreso } from "./AnilloProgreso.jsx";
 import estilos from "./Rutina.module.css";
-import { IconoAlerta } from "./Iconos.jsx";
-
-export function PaginaDiario() {
-  const [entradas, setEntradas] = useState([]);
-  const [aprendi, setAprendi] = useState("");
-  const [trabe, setTrabe] = useState("");
-  const [guardado, setGuardado] = useState(false);
-
-  const cargar = () =>
-    api.diario().then((lista) => {
-      setEntradas(lista);
-      const hoy = lista.find((e) => e.fecha === new Date().toLocaleDateString("en-CA"));
-      if (hoy) {
-        setAprendi(hoy.aprendi);
-        setTrabe(hoy.trabe);
-      }
-    });
-  useEffect(() => {
-    cargar();
-  }, []);
-
-  async function guardar(e) {
-    e.preventDefault();
-    await api.guardarDiario({ aprendi, trabe });
-    setGuardado(true);
-    cargar();
-  }
-
-  return (
-    <section className={estilos.pagina}>
-      <CabeceraPagina etiqueta="Una línea al día" titulo="Tu diario">
-        Escribir lo que aprendiste lo fija en la memoria, y lo que te trabó te dice qué repasar mañana.
-      </CabeceraPagina>
-      <div className={estilos.diario}>
-        <form onSubmit={guardar} className={estilos.formulario}>
-          <label>
-            ¿Qué aprendiste hoy?
-            <input
-              value={aprendi}
-              onChange={(e) => setAprendi(e.target.value)}
-              maxLength={280}
-              placeholder="Por ejemplo: que map devuelve un arreglo nuevo"
-            />
-          </label>
-          <label>
-            ¿Qué te trabó?
-            <input
-              value={trabe}
-              onChange={(e) => setTrabe(e.target.value)}
-              maxLength={280}
-              placeholder="Por ejemplo: el orden de las promesas"
-            />
-          </label>
-          <div>
-            <button type="submit" className="boton boton-primario" disabled={!aprendi.trim() && !trabe.trim()}>
-              Guardar
-            </button>
-            {guardado && <span className={estilos.listo}> Guardado</span>}
-          </div>
-        </form>
-        <ol className={estilos.entradas}>
-          {entradas.map((e) => (
-            <li key={e.fecha} className="aparecer">
-              <small>
-                {new Date(`${e.fecha}T12:00:00`).toLocaleDateString("es-PE", { weekday: "long", day: "numeric", month: "long" })}
-              </small>
-              {e.aprendi && <p>✓ {e.aprendi}</p>}
-              {e.trabe && <p>
-<IconoAlerta tamano={14} /> {e.trabe}</p>}
-            </li>
-          ))}
-          {entradas.length === 0 && <li className={estilos.vacio}>Aquí aparecerán tus días. La primera línea es la más difícil.</li>}
-        </ol>
-      </div>
-    </section>
-  );
-}
 
 const CLAVE_ENFOQUE = "devprep-enfoque";
 const MINUTOS = 25;

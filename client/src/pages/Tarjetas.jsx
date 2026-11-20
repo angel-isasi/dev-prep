@@ -96,10 +96,10 @@ export function Tarjetas() {
                 <h2>{cola.cola.length ? (cola.cola.length === 1 ? "tarjeta te toca hoy" : "tarjetas te tocan hoy") : cola.total ? "Estás al día" : "Todavía no tienes tarjetas"}</h2>
                 <p className={base.suave}>
                   {cola.cola.length
-                    ? `Unos ${minutosCola(cola.cola.length)} min. Una a la vez, sin nada alrededor.`
+                    ? `Unos ${minutosCola(cola.cola.length)} min.`
                     : cola.total
                       ? "Terminaste las de hoy. Vuelven cuando estén por olvidarse."
-                      : "Crea la primera a mano o deja que la IA te la proponga cuando falles algo."}
+                      : "Crea la primera o deja que la IA te la proponga."}
                   {cola.esperando > 0 && ` ${cola.esperando} más esperan a mañana por el tope del día.`}
                 </p>
               </div>
@@ -157,30 +157,37 @@ export function Tarjetas() {
             <span className="etiqueta">Cómo funcionan</span>
             <ol className={estilos.pasos}>
               <li>
-                <strong>Ves la pregunta</strong>
-                <span>Intenta recordar la respuesta antes de voltear. Puedes responder escribiendo o hablando.</span>
+                <strong>Recuerdas la respuesta</strong>
               </li>
               <li>
-                <strong>Volteas y te calificas</strong>
-                <span>Otra vez, Difícil, Bien o Fácil. Con el teclado: Espacio voltea y del 1 al 4 calificas.</span>
+                <strong>Volteas la tarjeta</strong>
               </li>
               <li>
-                <strong>Vuelve justo antes de que la olvides</strong>
-                <span>Las que cuestan regresan pronto; las fáciles, en días o semanas.</span>
+                <strong>Te calificas</strong>
               </li>
             </ol>
-            <p className={estilos.notaTope}>Como máximo 10 nuevas y 30 repasos al día: lo demás espera, no se te acumula encima.</p>
+            {/* Los 4 botones, tal como los verás: cada uno dice cuándo vuelve la tarjeta */}
+            <div className={estilos.notas} aria-hidden>
+              {[
+                ["otra", "Otra vez", "hoy"],
+                ["dificil", "Difícil", "mañana"],
+                ["bien", "Bien", "en días"],
+                ["facil", "Fácil", "en semanas"],
+              ].map(([id, nombre, cuando]) => (
+                <span key={id} className={estilos.nota} data-nota={id}>
+                  <strong>{nombre}</strong>
+                  <small>{cuando}</small>
+                </span>
+              ))}
+            </div>
             <div className={estilos.origenes}>
-              <span className={base.suave}>Se crean solas con el botón + Tarjeta en:</span>
-              <span className="chip">correcciones de inglés</span>
-              <span className="chip">entrevistas</span>
-              <span className="chip">¿Qué imprime?</span>
-              <span className="chip">quiz fallado</span>
+              <span className="chip">Máx. 10 nuevas y 30 repasos al día</span>
+              <span className="chip">Se crean con el botón + Tarjeta</span>
             </div>
           </section>
         </div>
       )}
-      {pestana === "mias" && <MisTarjetas mazo={mazo} alCambiar={cargar} />}
+      {pestana === "mias" && <MisTarjetas mazo={mazo} alCambiar={cargar} alCrear={() => setPestana("nueva")} />}
       {pestana === "nueva" && <NuevaTarjeta mazo={mazo || "js"} alGuardar={cargar} />}
     </section>
   );
@@ -395,7 +402,7 @@ function ExplicarIa({ tarjeta, ayuda, setAyuda }) {
 }
 
 // ---------------------------------------------------------------------------------------------
-function MisTarjetas({ mazo, alCambiar }) {
+function MisTarjetas({ mazo, alCambiar, alCrear }) {
   const [todas, setTodas] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const [editando, setEditando] = useState(null);
@@ -409,7 +416,9 @@ function MisTarjetas({ mazo, alCambiar }) {
 
   return (
     <>
-      <input className={base.entrada} type="search" placeholder="Buscar en tus tarjetas" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} style={{ maxWidth: 360 }} />
+      {todas.length > 0 && (
+        <input className={base.entrada} type="search" placeholder="Buscar en tus tarjetas" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} style={{ maxWidth: 360 }} />
+      )}
       {editando && (
         <EditorTarjeta
           inicial={editando}
@@ -423,7 +432,18 @@ function MisTarjetas({ mazo, alCambiar }) {
         />
       )}
       {!visibles.length ? (
-        <p className={base.suave}>{todas.length ? "Ninguna coincide." : "Todavía no tienes tarjetas."}</p>
+        todas.length ? (
+          <p className={base.suave}>Ninguna coincide.</p>
+        ) : (
+          <div className={`tarjeta ${estilos.vacio}`}>
+            <span className={estilos.vacioNumero}>0</span>
+            <strong>Todavía no tienes tarjetas</strong>
+            <span>Crea la primera a mano o deja que la IA te la proponga.</span>
+            <button type="button" className="boton boton-primario" onClick={alCrear}>
+              Crear una tarjeta
+            </button>
+          </div>
+        )
       ) : (
         <div className={estilos.lista}>
           {visibles.map((t) => (
@@ -463,7 +483,7 @@ function MisTarjetas({ mazo, alCambiar }) {
   );
 }
 
-function EditorTarjeta({ inicial, alGuardar, alCancelar }) {
+function EditorTarjeta({ inicial, alGuardar, alCancelar, titulo }) {
   const [t, setT] = useState(inicial);
   const [error, setError] = useState(null);
   const campo = (clave) => ({ value: t[clave] ?? "", onChange: (e) => setT({ ...t, [clave]: e.target.value }) });
@@ -479,19 +499,28 @@ function EditorTarjeta({ inicial, alGuardar, alCancelar }) {
         }
       }}
     >
-      <label className={base.suave}>
-        Mazo{" "}
-        <select className={base.entrada} {...campo("mazo")}>
+      <div className={base.cabecera}>
+        {titulo && <span className={base.etiqueta}>{titulo}</span>}
+        <div className={extra.chips} role="radiogroup" aria-label="Mazo">
           {Object.entries(MAZOS).map(([id, nombre]) => (
-            <option key={id} value={id}>
+            <button key={id} type="button" className={extra.chip} data-activo={t.mazo === id} aria-pressed={t.mazo === id} onClick={() => setT({ ...t, mazo: id })}>
               {nombre}
-            </option>
+            </button>
           ))}
-        </select>
-      </label>
-      <textarea className={base.texto} rows={2} placeholder="Pregunta (frente)" {...campo("frente")} />
-      <textarea className={base.texto} rows={3} placeholder="Respuesta (reverso)" {...campo("reverso")} />
-      <textarea className={base.texto} rows={2} placeholder="Ejemplo (opcional)" {...campo("ejemplo")} />
+        </div>
+      </div>
+      {/* Las dos caras, como la tarjeta de verdad: adelante la pregunta, atrás la respuesta */}
+      <div className={estilos.caras}>
+        <label className={estilos.cara}>
+          <span>Adelante</span>
+          <textarea rows={4} placeholder="La pregunta" {...campo("frente")} />
+        </label>
+        <label className={estilos.cara}>
+          <span>Atrás</span>
+          <textarea rows={4} placeholder="La respuesta" {...campo("reverso")} />
+        </label>
+      </div>
+      <input className={base.entrada} placeholder="Ejemplo (opcional): una línea de código o una frase" {...campo("ejemplo")} />
       <div className={base.fila}>
         <button type="submit" className="boton boton-primario">
           Guardar
@@ -513,8 +542,8 @@ function NuevaTarjeta({ mazo, alGuardar }) {
   return (
     <div className={estilos.formulario}>
       <div>
-        <span className={base.etiqueta}>A mano</span>
         <EditorTarjeta
+          titulo="A mano"
           key={clave}
           inicial={{ mazo, frente: "", reverso: "", ejemplo: "", origen: "a mano" }}
           alGuardar={async (t) => {
@@ -526,7 +555,7 @@ function NuevaTarjeta({ mazo, alGuardar }) {
         />
         {hecho && <small className={base.suave}>Guardada. Aparece en Estudiar como nueva.</small>}
       </div>
-      <CajaIa titulo="Con IA" detalle="Pega lo que quieres recordar (un error, una explicación, una frase en inglés) y te propone tarjetas.">
+      <CajaIa titulo="Con IA" detalle="Pega lo que quieres recordar y te propone las tarjetas.">
         {(olvidar) => <CrearConIa olvidar={olvidar} alGuardar={alGuardar} />}
       </CajaIa>
     </div>

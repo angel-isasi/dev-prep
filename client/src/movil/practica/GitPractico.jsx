@@ -9,20 +9,27 @@ import { celebrar } from "../../lib/celebrar.js";
 import { Markdown } from "../../components/Markdown.jsx";
 import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
-import { TerminalAnimada } from "../../components/ui/terminal-animada.jsx";
+import { AnilloProgreso } from "../../components/AnilloProgreso.jsx";
+import { IconoFlechaDer, IconoGit } from "../../components/Iconos.jsx";
 import estilos from "./GitPractico.module.css";
 
 const NIVEL = { 1: "básico", 2: "intermedio", 3: "difícil" };
 
-/** Lo que escribe la terminal de la portada: un flujo de trabajo típico con ramas. */
-const DEMO = [
-  { cmd: "git switch -c feature/buscador" },
-  { out: "Switched to a new branch 'feature/buscador'" },
-  { cmd: 'git commit -am "Agrega el buscador"' },
-  { out: "[feature/buscador 3f2a9c1] Agrega el buscador" },
-  { cmd: "git push -u origin feature/buscador" },
-  { out: "✓ Rama subida: ya puedes abrir tu pull request" },
+/** Los tres niveles, en el orden en que se muestran, y lo que se practica en cada uno. */
+const NIVELES = [
+  { nivel: 1, titulo: "Básico", temas: ["Primer commit", "Ramas", "Deshacer cambios", ".gitignore"] },
+  { nivel: 2, titulo: "Intermedio", temas: ["Corregir un commit", "Conflictos", "Pull", "Push"] },
+  { nivel: 3, titulo: "Difícil", temas: ["Revert", "Stash"] },
 ];
+
+/** Cómo se trabaja cada escenario (se muestra cuando todavía no hay laptop conectada). */
+const PASOS = [
+  { titulo: "Preparas", detalle: "Se crea el repositorio y se abre en VS Code" },
+  { titulo: "Resuelves", detalle: "En la terminal, con Git de verdad" },
+  { titulo: "Verificas", detalle: "La app revisa cómo quedó" },
+];
+
+const porciento = (parte, total) => (total ? Math.round((parte / total) * 100) : 0);
 
 export function GitPractico() {
   const [escenarios, setEscenarios] = useState(null);
@@ -36,29 +43,58 @@ export function GitPractico() {
   }, []);
 
   const cabecera = (
-    <CabeceraPagina
-      etiqueta={escenarios ? `${Object.keys(resueltos).length} de ${escenarios.length} resueltos` : "Git"}
-      titulo="Git práctico"
-    >
+    <CabeceraPagina etiqueta="Repositorios de verdad" titulo="Git práctico">
       Situaciones que te van a pasar en tu primer trabajo, con un repositorio de verdad. Lo resuelves en la terminal y la app revisa si
       quedó bien.
     </CabeceraPagina>
   );
-  const portada = (
-    <div className={estilos.portada}>
-      {cabecera}
-      <TerminalAnimada lineas={DEMO} titulo="tu-proyecto: git" />
-    </div>
-  );
 
+  // Sin la laptop no hay escenarios que abrir: se explica cómo funciona y qué se practica
   if (!api.escenariosGit) {
     return (
       <section className={estilos.pagina}>
-        {portada}
-        <p className={estilos.ayuda}>
-          Esto crea repositorios en tu laptop y los abre en VS Code, así que funciona con dev-prep abierto en tu laptop. Ábrela ahí (la web
-          se conecta sola) o ve a <Link to="/ajustes">Ajustes</Link> → "Conectar con dev-prep de esta laptop".
-        </p>
+        {cabecera}
+        <div className={estilos.tablero}>
+          <section className={`tarjeta ${estilos.aviso}`}>
+            <span className={estilos.iconoGrande} aria-hidden>
+              <IconoGit />
+            </span>
+            <div>
+              <h2>Funciona en tu laptop</h2>
+              <p>Abre dev-prep en tu laptop y la web se conecta sola.</p>
+            </div>
+            <Link to="/ajustes" className="boton boton-primario" title='En Ajustes: "Conectar con dev-prep de esta laptop"'>
+              Conectar en Ajustes
+            </Link>
+          </section>
+
+          <section className={`tarjeta ${estilos.como}`}>
+            <span className="etiqueta">Cómo funciona</span>
+            <ol className={estilos.pasos}>
+              {PASOS.map((p, i) => (
+                <li key={p.titulo}>
+                  <span className={estilos.numero}>{i + 1}</span>
+                  <strong>{p.titulo}</strong>
+                  <small>{p.detalle}</small>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          {NIVELES.map((n) => (
+            <section key={n.nivel} className={`tarjeta ${estilos.temario}`}>
+              <header className={estilos.grupoCabeza}>
+                <h2>{n.titulo}</h2>
+                <span className="chip">{n.temas.length} temas</span>
+              </header>
+              <ul className={estilos.temas}>
+                {n.temas.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
       </section>
     );
   }
@@ -83,24 +119,89 @@ export function GitPractico() {
     );
   }
 
+  // El número de cada escenario es su lugar en la lista completa, no dentro de su nivel
+  const numerados = escenarios.map((e, i) => ({ ...e, numero: String(i + 1).padStart(2, "0"), resuelto: !!resueltos[e.id] }));
+  const hechos = numerados.filter((e) => e.resuelto).length;
+  const siguiente = numerados.find((e) => !e.resuelto);
+  const grupos = NIVELES.map((n) => {
+    const lista = numerados.filter((e) => e.nivel === n.nivel);
+    return { ...n, lista, hechos: lista.filter((e) => e.resuelto).length };
+  }).filter((g) => g.lista.length);
+
   return (
     <section className={estilos.pagina}>
-      {portada}
-      <ol className={estilos.lista}>
-        {escenarios.map((e, i) => (
-          <li key={e.id}>
-            <button type="button" className={`brillo ${estilos.ficha}`} data-resuelto={!!resueltos[e.id]} onClick={() => setAbierto(e.id)}>
-              <span className={estilos.numero}>{resueltos[e.id] ? "✓" : String(i + 1).padStart(2, "0")}</span>
-              <span className={estilos.fichaTexto}>
-                <strong>{e.titulo}</strong>
+      {cabecera}
+
+      {/* Resumen: cuánto llevas en total, por nivel, y el que te toca */}
+      <section className={`tarjeta ${estilos.resumen}`}>
+        <div className={estilos.total}>
+          <AnilloProgreso valor={numerados.length ? hechos / numerados.length : 0} tamano={84} grosor={8} completo={hechos > 0 && hechos === numerados.length}>
+            <strong>{porciento(hechos, numerados.length)}%</strong>
+          </AnilloProgreso>
+          <span>
+            <strong>
+              {hechos} de {numerados.length}
+            </strong>
+            <small>resueltos</small>
+          </span>
+        </div>
+        <ol className={estilos.niveles}>
+          {grupos.map((g) => (
+            <li key={g.nivel}>
+              <span>
+                <strong>{g.titulo}</strong>
                 <small>
-                  {NIVEL[e.nivel]} · {e.comandos.slice(0, 3).join(" · ")}
+                  {g.hechos}/{g.lista.length}
                 </small>
               </span>
-            </button>
-          </li>
-        ))}
-      </ol>
+              <span className={estilos.barra} aria-hidden>
+                <span style={{ width: `${porciento(g.hechos, g.lista.length)}%` }} />
+              </span>
+            </li>
+          ))}
+        </ol>
+        {siguiente ? (
+          <button type="button" className={estilos.siguiente} onClick={() => setAbierto(siguiente.id)}>
+            <span className={estilos.numero}>{siguiente.numero}</span>
+            <span>
+              <small>Te toca</small>
+              <strong>{siguiente.titulo}</strong>
+            </span>
+            <IconoFlechaDer />
+          </button>
+        ) : (
+          <span className="chip" data-tono="exito">
+            Todo resuelto
+          </span>
+        )}
+      </section>
+
+      {/* Un bloque por nivel; las fichas de cada nivel llenan su fila */}
+      {grupos.map((g) => (
+        <section key={g.nivel} className={estilos.grupo}>
+          <header className={estilos.grupoCabeza}>
+            <h2>{g.titulo}</h2>
+            <span className="chip" data-tono={g.hechos === g.lista.length ? "exito" : undefined}>
+              {g.hechos} de {g.lista.length}
+            </span>
+          </header>
+          <ol className={estilos.lista}>
+            {g.lista.map((e) => (
+              <li key={e.id}>
+                <button type="button" className={`brillo ${estilos.ficha}`} data-resuelto={e.resuelto} onClick={() => setAbierto(e.id)}>
+                  <span className={estilos.numero}>{e.resuelto ? "✓" : e.numero}</span>
+                  <span className={estilos.fichaTexto}>
+                    <strong>{e.titulo}</strong>
+                    <small>
+                      {e.comandos.length} comandos · {e.resuelto ? "resuelto" : "pendiente"}
+                    </small>
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ))}
     </section>
   );
 }

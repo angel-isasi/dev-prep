@@ -1,0 +1,379 @@
+/* Diario (/diario): un tablero que usa el ancho de la página.
+   Fila 1: la entrada de hoy | tu constancia. Fila 2: tus entradas, cada día en su ficha. */
+
+.pagina {
+  max-width: var(--ancho-pagina);
+  margin: 0 auto;
+  padding: var(--espacio-6) var(--espacio-6) var(--espacio-7);
+}
+
+.tablero {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--espacio-4);
+  padding-top: var(--espacio-5);
+}
+
+.tablero > * {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  min-width: 0;
+  padding: var(--espacio-5);
+}
+
+.hoy {
+  grid-column: span 7;
+}
+
+.constancia {
+  grid-column: span 5;
+}
+
+.historial {
+  grid-column: 1 / -1;
+}
+
+.cabeza {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+/* Día grande y, al lado, dos renglones cortos */
+.fecha {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  min-width: 0;
+}
+
+.fecha > strong {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radio-lg);
+  background: var(--acento-suave);
+  color: var(--acento);
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-2);
+  font-weight: var(--peso-extra);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.fecha > span {
+  display: grid;
+  min-width: 0;
+}
+
+.fecha b {
+  font-size: var(--letra-6);
+  font-weight: var(--peso-semi);
+}
+
+.fecha b::first-letter,
+.fecha small::first-letter {
+  text-transform: uppercase;
+}
+
+.fecha small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+/* Cada pregunta de hoy: su icono a la izquierda y el campo ocupando el resto */
+.campo {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie-2);
+}
+
+.campo:focus-within {
+  border-color: var(--borde-fuerte);
+}
+
+.icono {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radio);
+  font-weight: var(--peso-negrita);
+}
+
+.icono[data-tono="exito"],
+.marca[data-tono="exito"] {
+  background: var(--exito-suave);
+  color: var(--exito);
+}
+
+.icono[data-tono="aviso"],
+.marca[data-tono="aviso"] {
+  background: var(--aviso-suave);
+  color: var(--aviso);
+}
+
+.campoTexto {
+  display: grid;
+  flex: 1;
+  gap: 6px;
+  min-width: 0;
+}
+
+.campoTexto strong {
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
+}
+
+.campoTexto input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio);
+  background: var(--fondo-solido);
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--letra-5);
+}
+
+.pie {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  margin-top: auto;
+}
+
+.listo {
+  color: var(--exito);
+  font-size: var(--letra-4);
+  font-weight: var(--peso-semi);
+}
+
+/* Cifras en 2 x 2 */
+.cifras {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-2);
+  margin: 0;
+}
+
+.cifras > div {
+  display: grid;
+  gap: 2px;
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+}
+
+.cifras dt {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.cifras dd {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-2);
+  font-weight: var(--peso-negrita);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+
+.cifras small {
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+}
+
+/* Últimos 14 días: un cuadro por día, lleno si escribiste */
+.tiraCabeza {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: var(--espacio-2);
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.tiraCabeza strong {
+  color: var(--texto);
+  font-weight: var(--peso-semi);
+}
+
+.tira {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tira li {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tira small {
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+  text-transform: uppercase;
+}
+
+.tira li > span {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 34px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--superficie-2);
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.tira li[data-escrito="true"] > span {
+  border-color: transparent;
+  background: var(--acento);
+  color: var(--sobre-acento);
+  font-weight: var(--peso-negrita);
+}
+
+.tira li[data-hoy="true"] > span {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+.tira li[data-hoy="true"] small {
+  color: var(--acento);
+  font-weight: var(--peso-negrita);
+}
+
+/* Tus entradas: fichas del mismo ancho, varias por fila */
+.entradas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.entrada {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  min-width: 0;
+  padding: var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie-2);
+}
+
+.entrada .fecha {
+  margin-bottom: var(--espacio-1);
+}
+
+.entrada .fecha > strong {
+  width: 40px;
+  height: 40px;
+  font-size: var(--titulo-1);
+}
+
+.entrada p {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-2);
+  margin: 0;
+  font-size: var(--letra-5);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.marca {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radio-sm);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-negrita);
+}
+
+/* Diario vacío: las fichas que se van a ir llenando */
+.fantasma {
+  border-style: dashed;
+  background: none;
+}
+
+.fantasma .fecha > strong {
+  background: var(--superficie-2);
+  color: var(--texto-tenue);
+}
+
+.fantasma .fecha b {
+  color: var(--texto-suave);
+}
+
+.fantasma > i {
+  display: block;
+  height: 10px;
+  border-radius: var(--radio-pildora);
+  background: var(--superficie-2);
+}
+
+.fantasma > i:last-child {
+  width: 60%;
+}
+
+.fantasma:not(:first-child) {
+  opacity: 0.55;
+}
+
+@container (max-width: 900px) {
+  .hoy,
+  .constancia {
+    grid-column: 1 / -1;
+  }
+}
+
+@container (max-width: 520px) {
+  /* En el celular los 14 días van en dos filas de 7 (una semana cada una) */
+  .tira {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .entradas {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Vacío: basta con una ficha de muestra */
+  .fantasma:nth-child(n + 3) {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .pagina {
+    padding: var(--espacio-5) var(--espacio-4) var(--espacio-6);
+  }
+
+  .tablero > * {
+    padding: var(--espacio-4);
+  }
+}
