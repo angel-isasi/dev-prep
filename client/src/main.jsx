@@ -10,6 +10,7 @@ import "./styles/base.css";
 import "./styles/tailwind.css";
 import { App } from "./App.jsx";
 import { ProveedorAyuda } from "./components/Ayuda.jsx";
+import { RedDeSeguridad } from "./components/RedDeSeguridad.jsx";
 import { iniciarInmersion } from "./lib/inmersion.js";
 
 // Modo inmersión (Ajustes): si quedó activo, la interfaz sale en inglés desde el primer render
@@ -21,7 +22,9 @@ createRoot(document.getElementById("root")).render(
     <MotionConfig reducedMotion="user">
       <BrowserRouter>
         <ProveedorAyuda delayDuration={300}>
-          <App />
+          <RedDeSeguridad>
+            <App />
+          </RedDeSeguridad>
         </ProveedorAyuda>
       </BrowserRouter>
     </MotionConfig>

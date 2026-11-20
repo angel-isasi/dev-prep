@@ -29,12 +29,23 @@
 }
 
 .analizador {
+  padding: var(--espacio-4) var(--espacio-5);
+}
+
+.analizadorCuerpo {
   display: grid;
   gap: var(--espacio-3);
-  padding: var(--espacio-4);
+  padding-top: var(--espacio-3);
+}
+
+.analizadorCuerpo > :global(.boton) {
+  justify-self: start;
 }
 
 .analizador summary {
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-7);
+  font-weight: var(--peso-titulo);
   cursor: pointer;
 }
 
@@ -47,9 +58,6 @@
   gap: var(--espacio-4);
 }
 
-.analizador:not([open]) {
-  gap: 0;
-}
 
 /* Postulaciones en dos columnas */
 .postulaciones {

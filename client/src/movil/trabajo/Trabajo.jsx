@@ -84,8 +84,10 @@ export function Trabajo() {
             <aside className={partes.ofertasLado}>
               {/* En la laptop está abierto al lado de la lista; en el celular, plegado arriba */}
               <details className={`tarjeta ${partes.analizador}`} open={!angosta}>
-                <summary className="etiqueta">¿Encontraste una oferta? Analízala</summary>
-                <Oferta />
+                <summary>¿Encontraste una oferta?</summary>
+                <div className={partes.analizadorCuerpo}>
+                  <Oferta />
+                </div>
               </details>
             </aside>
           </div>
@@ -563,8 +565,8 @@ function Oferta() {
   const [r, setR] = useState(null);
   return (
     <>
-      <p className={estilos.ayuda}>
-        Pega el texto de una oferta. Detecto las tecnologías que pide y las cruzo con lo que de verdad dominas (tu mapa).
+      <p className={estilos.ayuda} style={{ margin: 0 }}>
+        Pega su texto: detecto lo que pide y lo cruzo con lo que de verdad dominas.
       </p>
       <textarea
         className={estilos.oferta}
@@ -579,7 +581,7 @@ function Oferta() {
         disabled={!texto.trim()}
         onClick={async () => setR(await api.analizarOferta(texto))}
       >
-        Analizar
+        Analizar lo que pide
       </button>
       <PrepararOferta oferta={texto} />
       {r && (
