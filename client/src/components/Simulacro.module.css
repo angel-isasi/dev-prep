@@ -128,17 +128,19 @@
   color: var(--texto-suave);
 }
 
+/* Las 4 etapas sueltas en una fila (2 x 2 en pantallas angostas) */
 .gridEtapas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: var(--espacio-3);
 }
 
-/* Tarjeta de etapa suelta, en una fila: icono, título con minutos y "Empezar" */
+/* Ficha de etapa suelta, en vertical: icono arriba, título con minutos y "Empezar" abajo */
 .etapa {
   display: flex;
-  align-items: center;
-  gap: var(--espacio-3);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-2);
   min-height: 64px;
   padding: var(--espacio-3) var(--espacio-4);
   border: 1px solid var(--borde);
@@ -160,7 +162,8 @@
 
 .etapa strong {
   font-family: var(--fuente-titulos);
-  font-size: var(--letra-8);
+  font-size: var(--letra-5);
+  line-height: 1.25;
 }
 
 .etapaNumero {

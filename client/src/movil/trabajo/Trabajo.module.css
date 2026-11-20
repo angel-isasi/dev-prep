@@ -254,10 +254,29 @@
 }
 
 /* CV: la hoja se ve como papel y es lo único que se imprime */
+/* El formulario arriba; debajo, la hoja del CV a la izquierda y, a su lado, los mensajes y la revisión */
 .cv {
-  display: flex;
-  flex-direction: column;
-  gap: var(--espacio-3);
+  display: grid;
+  grid-template-columns: minmax(0, 780px) minmax(280px, 1fr);
+  gap: var(--espacio-3) var(--espacio-4);
+  align-items: start;
+}
+
+.cv > form {
+  grid-column: 1 / -1;
+}
+
+.cv > .hoja {
+  grid-row: span 2;
+}
+
+@media (max-width: 1200px) {
+  .cv {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cv > .hoja {
+    grid-row: auto;
+  }
 }
 
 .hoja {

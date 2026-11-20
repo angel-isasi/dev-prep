@@ -16,8 +16,8 @@ const ACCIONES = [
   { titulo: "Repasar mis errores", detalle: "Lo que fallaste la última vez", a: "/leccion?modo=errores", claves: "corregir fallos", web: true },
   { titulo: "Inglés rápido", detalle: "5 ejercicios de inglés", a: "/leccion?ambito=ingles&modo=rapida", claves: "english", web: true },
   { titulo: "Modo enfoque", detalle: "25 minutos de una sola cosa", a: "/enfoque", claves: "pomodoro concentrarme temporizador", web: true },
-  { titulo: "Simulacro de entrevista", detalle: "Entrevistas", a: "/entrevistas?pestana=simulacro", claves: "practicar entrevista etapas" },
-  { titulo: "Mi pitch y mis historias STAR", detalle: "Entrevistas", a: "/entrevistas?pestana=personal", claves: "presentacion hablame de ti" },
+  { titulo: "Simulacro de entrevista", detalle: "Entrevistas", a: "/entrevistas?pestana=simular", claves: "practicar entrevista etapas" },
+  { titulo: "Mi pitch y mis historias STAR", detalle: "Entrevistas", a: "/entrevistas?pestana=estudiar&ver=pitch", claves: "presentacion hablame de ti" },
   { titulo: "Ajustes", detalle: "Meta diaria, fecha meta, respaldo", a: "/ajustes", claves: "configuracion nombre objetivo" },
   { titulo: "Cambiar entre modo claro y oscuro", detalle: "Acción", accion: "tema", claves: "tema dark light" },
 ].filter((x) => ES_MOVIL || !x.web);

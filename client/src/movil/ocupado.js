@@ -9,5 +9,7 @@ export function estaOcupado({ pathname, search = "" }) {
   if (pathname === "/ingles/parejas" || pathname === "/ingles/examen" || pathname === "/ingles/conversa") return true;
   if (/^\/revision\/[^/]+$/.test(pathname)) return true;
   const pestana = new URLSearchParams(search).get("pestana");
-  return pathname === "/entrevistas" && ["simulacro", "voz", "tarjetas"].includes(pestana);
+  // Entrevistas: estudiando tarjetas o en una práctica (las direcciones viejas también cuentan)
+  if (pathname === "/tarjetas" || pathname === "/ingles/ia") return true;
+  return pathname === "/entrevistas" && ["estudiar", "simular", "simulacro", "voz", "tarjetas"].includes(pestana);
 }

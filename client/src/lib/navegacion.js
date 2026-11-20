@@ -56,7 +56,7 @@ const TODAS = [
     Icono: IconoTrabajo,
     sub: [
       { a: "/entrevistas", texto: "Entrevistas" },
-      { a: "/trabajo", texto: "Ofertas y postulaciones", web: true },
+      { a: "/trabajo", texto: "Buscar trabajo", web: true },
     ],
   },
   {

@@ -1,6 +1,7 @@
-// "Conseguir trabajo": todo lo que va más allá de practicar. Pestañas: postulaciones (con las preguntas
-// reales que te hicieron), ¿estoy listo para esta oferta?, tu CV, portafolio, y pruebas técnicas y proyecto.
+// "Buscar trabajo": ofertas (con el analizador de una oferta al lado), tus postulaciones (con las preguntas
+// reales que te hicieron) y tu perfil (CV, portafolio, y pruebas técnicas y proyecto).
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
 import { PrepararOferta } from "../../components/ia/TrabajoIa.jsx";
 import { usePestanaUrl } from "../../hooks/usePestanaUrl.js";
 import { api } from "../../lib/api.js";
@@ -13,6 +14,8 @@ import { Portafolio, PruebasYProyecto } from "./Proyectos.jsx";
 import { ListaAnimada } from "../../components/ListaAnimada.jsx";
 import { OfertasParaTi } from "./Ofertas.jsx";
 import estilos from "./Trabajo.module.css";
+import partes from "./TrabajoPartes.module.css";
+import nuevo from "../../pages/EntrevistasPartes.module.css";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 
 const nombreEtapa = Object.fromEntries(ETAPAS);
@@ -26,30 +29,82 @@ const PREGUNTAS_PARA_ELLOS = [
   "¿Qué tendría que lograr en mis primeros 3 meses para que digan que fue un buen ingreso?",
 ];
 
+/** Direcciones de antes (?pestana=cv...) → [pestaña nueva, vista de "Tu perfil"]. */
+const VIEJAS = { oferta: ["ofertas"], cv: ["perfil", "cv"], portafolio: ["perfil", "portafolio"], pruebas: ["perfil", "pruebas"] };
+const VISTAS_PERFIL = [
+  ["cv", "Mi CV"],
+  ["portafolio", "Portafolio"],
+  ["pruebas", "Pruebas técnicas y proyecto"],
+];
+
+/** Buscar trabajo en 3 partes: ofertas (con el analizador al lado), tus postulaciones y tu perfil. */
 export function Trabajo() {
   // ?pestana=postulaciones: el aviso de seguimiento abre directo en tus postulaciones
-  const [pestana, setPestana] = usePestanaUrl(["ofertas", "postulaciones", "oferta", "cv", "portafolio", "pruebas"]);
+  const [pestana, setPestana] = usePestanaUrl(["ofertas", "postulaciones", "perfil"]);
+  const [vista, setVista] = usePestanaUrl(
+    VISTAS_PERFIL.map(([id]) => id),
+    "cv",
+    "ver",
+  );
+  const [params, setParams] = useSearchParams();
+  // Las direcciones viejas llevan a su lugar nuevo, en un solo paso
+  useEffect(() => {
+    const vieja = VIEJAS[params.get("pestana")];
+    if (!vieja) return;
+    setParams(
+      (previos) => {
+        const p = new URLSearchParams(previos);
+        if (vieja[0] === "ofertas") p.delete("pestana");
+        else p.set("pestana", vieja[0]);
+        if (vieja[1]) p.set("ver", vieja[1]);
+        return p;
+      },
+      { replace: true },
+    );
+  }, [params, setParams]);
+
+  const [angosta] = useState(() => globalThis.matchMedia?.("(max-width: 1150px)").matches ?? false);
   const pestanas = [
-    { id: "ofertas", texto: "Ofertas para ti" },
+    { id: "ofertas", texto: "Ofertas" },
     { id: "postulaciones", texto: "Postulaciones" },
-    { id: "oferta", texto: "¿Estoy listo?" },
-    { id: "cv", texto: "Mi CV" },
-    { id: "portafolio", texto: "Portafolio" },
-    { id: "pruebas", texto: "Pruebas y proyecto" },
+    { id: "perfil", texto: "Tu perfil" },
   ];
   return (
     <section className={estilos.pagina}>
-      <CabeceraPagina etiqueta="Del estudio al trabajo" titulo="Conseguir trabajo">
-        Tus postulaciones, qué te falta para una oferta, tu CV, tu portafolio y pruebas técnicas como las de las empresas.
+      <CabeceraPagina etiqueta="Del estudio al trabajo" titulo="Buscar trabajo">
+        Ofertas que encajan contigo, tus postulaciones, y tu CV, portafolio y pruebas técnicas como las de las empresas.
       </CabeceraPagina>
       <Pestanas pestanas={pestanas} activa={pestana} alCambiar={setPestana} />
       <ContenidoPestanas activa={pestana} orden={pestanas.map((p) => p.id)} className={estilos.contenido}>
-        {pestana === "ofertas" && <OfertasParaTi />}
+        {pestana === "ofertas" && (
+          <div className={partes.ofertas}>
+            <div className={partes.ofertasLista}>
+              <OfertasParaTi />
+            </div>
+            <aside className={partes.ofertasLado}>
+              {/* En la laptop está abierto al lado de la lista; en el celular, plegado arriba */}
+              <details className={`tarjeta ${partes.analizador}`} open={!angosta}>
+                <summary className="etiqueta">¿Encontraste una oferta? Analízala</summary>
+                <Oferta />
+              </details>
+            </aside>
+          </div>
+        )}
         {pestana === "postulaciones" && <Postulaciones />}
-        {pestana === "oferta" && <Oferta />}
-        {pestana === "cv" && <Cv />}
-        {pestana === "portafolio" && <Portafolio />}
-        {pestana === "pruebas" && <PruebasYProyecto />}
+        {pestana === "perfil" && (
+          <div className={partes.perfil}>
+            <div className={nuevo.segmentos} role="tablist" aria-label="Tu perfil">
+              {VISTAS_PERFIL.map(([id, texto]) => (
+                <button key={id} type="button" role="tab" aria-selected={vista === id} data-activo={vista === id} onClick={() => setVista(id)}>
+                  {texto}
+                </button>
+              ))}
+            </div>
+            {vista === "cv" && <Cv />}
+            {vista === "portafolio" && <Portafolio />}
+            {vista === "pruebas" && <PruebasYProyecto />}
+          </div>
+        )}
       </ContenidoPestanas>
     </section>
   );

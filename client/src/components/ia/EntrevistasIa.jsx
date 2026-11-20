@@ -22,7 +22,7 @@ export function EntrevistasIa() {
   );
 }
 
-function DefiendeProyecto() {
+export function DefiendeProyecto() {
   const [proyecto, setProyecto] = useState(() => localStorage.getItem("devprep.defensaProyecto") ?? DEV_PREP);
   const [empezado, setEmpezado] = useState(false);
   return (
@@ -61,7 +61,7 @@ const ESCENARIOS = {
   remoto: "Puesto junior frontend remoto para una empresa de Estados Unidos que contrata en Latinoamérica como contratista. Rango interno: 1200 a 1800 dólares al mes.",
 };
 
-function Negociacion() {
+export function Negociacion() {
   const [escenario, setEscenario] = useState("junior");
   const [clave, setClave] = useState(0);
   return (
@@ -86,7 +86,7 @@ function Negociacion() {
   );
 }
 
-function PreguntasEntrevistador() {
+export function PreguntasEntrevistador() {
   return (
     <CajaIa titulo="¿Tienes preguntas para nosotros?" detalle="Así termina casi toda entrevista. Escribe las 2 o 3 preguntas que harías y te digo cómo suenan.">
       {(olvidar) => <PreguntasContenido olvidar={olvidar} />}
@@ -142,7 +142,7 @@ const azar = (lista) => lista[Math.floor(Math.random() * lista.length)];
 const mesActual = () => new Date().toISOString().slice(0, 7);
 
 /** Una entrevista corta y completa una vez al mes: concepto, código, inglés y comportamiento. */
-function ExamenMensual() {
+export function ExamenMensual() {
   const [historial, setHistorial] = useState(null);
   useEffect(() => {
     api.examenesMes?.().then(setHistorial, () => setHistorial({}));

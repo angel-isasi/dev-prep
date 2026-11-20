@@ -1,0 +1,52 @@
+/* Buscar trabajo: las ofertas con el analizador al lado y "Tu perfil" con sus tres vistas. */
+.ofertas {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 360px);
+  gap: var(--espacio-4);
+  align-items: start;
+}
+
+@media (max-width: 1150px) {
+  .ofertas {
+    grid-template-columns: 1fr;
+  }
+  .ofertasLado {
+    position: static;
+    order: -1;
+  }
+}
+
+.ofertasLista {
+  min-width: 0;
+}
+
+/* El analizador queda a la vista mientras recorres las ofertas */
+.ofertasLado {
+  position: sticky;
+  top: var(--espacio-4);
+  display: grid;
+  gap: var(--espacio-3);
+}
+
+.analizador {
+  display: grid;
+  gap: var(--espacio-3);
+  padding: var(--espacio-4);
+}
+
+.analizador summary {
+  cursor: pointer;
+}
+
+.analizador textarea {
+  min-height: 140px;
+}
+
+.perfil {
+  display: grid;
+  gap: var(--espacio-4);
+}
+
+.analizador:not([open]) {
+  gap: 0;
+}
