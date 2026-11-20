@@ -9,6 +9,7 @@ import estilos from "./TarjetaMapache.module.css";
 /**
  * Lo que dice el mapache y qué pasa al tocarlo: despierto empieza con la frase del día y cada
  * toque pasa a la siguiente (y la dice en voz alta); dormido, cada toque cuenta otro sueño.
+ * La lista llega con las no vistas primero (ver sin-repetir.js), así que tocarlo no repite.
  */
 export function useCharlaMapache(datos) {
   const voz = useHayVoz();
@@ -17,6 +18,10 @@ export function useCharlaMapache(datos) {
   const lista = (dormido ? datos?.suenos : datos?.frases) ?? [];
   const indice = dormido ? toques - 1 : toques;
   const dice = indice >= 0 && lista.length ? lista[indice % lista.length] : null;
+  // Lo que ya dijo se anota para que no vuelva hasta que salgan las demás de su grupo
+  useEffect(() => {
+    if (dice?.grupo && dice?.id) api.mapacheVista?.(dice.grupo, dice.id)?.catch(() => {});
+  }, [dice?.grupo, dice?.id]);
   const tocar = () => {
     if (!lista.length) return;
     const siguiente = lista[(dormido ? toques : toques + 1) % lista.length];

@@ -28,6 +28,31 @@ código; solo falta que tú pongas tu API key en Vercel. Mientras no la pongas, 
   explicar tu código, pedir ayuda, primer día). Respondes escribiendo o dictando; al terminar te da
   tus errores corregidos. El tiempo cuenta para tus minutos de inglés.
 
+### La IA como tutor (plan v6)
+
+Las tareas nuevas viven en `server/ia-tareas.js` (un registro con modelo, instrucciones, forma del JSON
+y cómo se arma cada pedido). Todas reciben la **memoria del tutor** (`client/src/lib/perfil-tutor.js`):
+un perfil corto con tus temas flojos, lo que dominas, tus errores frecuentes y tu pitch. Una evaluación
+idéntica a una reciente no se vuelve a cobrar (se guarda en el navegador).
+
+- **Practicar**: pista que mira tu código, "¿Por qué falla?" en cada test en rojo, pestaña Entrénalo
+  (revisión de senior comparada con la oficial, di la complejidad, detecta el error, variante y
+  explícalo en inglés) y Entrena con IA (¿Qué imprime?, que corre el código de verdad en un Worker,
+  y code review al revés).
+- **Aprender**: explícamelo distinto, explícalo en 30 segundos por voz y quiz nuevo con lo que fallaste.
+- **Tarjetas** (estilo Anki): FSRS calcula los repasos sin IA; la IA crea tarjetas de tus errores (tú
+  apruebas), te pregunta de otra forma, sugiere el botón y te explica la que fallas.
+- **Hoy**: tu tutor del día (una vez al día, solo si hiciste algo nuevo) y tu semana (horario de estudio
+  según tu semana en la universidad).
+- **Entrevistas, pestaña Con IA**: examen mensual, defiende tu proyecto, negociación de sueldo y tus
+  preguntas para el entrevistador. Entrevista por voz con entrevistador amable, exigente o apurado.
+- **Trabajo**: prepárame para esta oferta, revisión del CV y revisión de tus entregas.
+- **Inglés, Con IA**: ¿cómo se dice?, entrevista en inglés con ayudas, inglés escrito del trabajo, daily
+  y tus errores de siempre. Conversa suma sprint planning, demo con un cliente y retrospectiva.
+
+Modelos: Haiku para lo repetido y acotado (pistas, tarjetas, turnos de charla, ¿cómo se dice?, tutor),
+Sonnet para lo que necesita criterio (revisión de código, variantes, detecta el error, balances, CV).
+
 La app de la laptop no tiene la API key: su servidor le pasa los pedidos de IA a la función de
 Vercel (`/api/ia` en `server/app.js`). Sin internet, la IA aparece apagada.
 

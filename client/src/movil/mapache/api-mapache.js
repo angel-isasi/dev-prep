@@ -8,6 +8,8 @@ import { hechaPorExamen } from "../ingles/examen.js";
 import { CHARLA, cumpleReto, EXPRESIONES, franjaDe, FRASES_NIVEL, lineaDiario, RETOS } from "./contenido-nivel.js";
 import { clavesRobadas, elegir, estadoMapache, hash, nivelIngles, practico, regalosDeNivel, revisarRespuesta } from "./reglas.js";
 import { ENTREVISTAS, MINIMO_PALABRAS, POSTALES, PREGUNTAS, ROPA_NIVEL, SUENOS } from "./contenido.js";
+import { crearMemoriaFrases, idFrase } from "./sin-repetir.js";
+import { almacen as almacenDelNavegador } from "../../lib/visita.js";
 
 const NOMBRE = "Map";
 // Antes se llamaba "Mapi": si quedó guardado ese nombre viejo por defecto, cuenta como "sin nombre propio"
@@ -77,9 +79,11 @@ export function errorReal(item) {
 }
 
 /**
- * @param {{ progreso: object, itemsIngles: () => Promise<{unidades: object[], items: object[]}>, json: (ruta: string) => Promise<any>, extraIngles: () => object, limpiar: () => void }} dep
+ * @param {{ progreso: object, itemsIngles: () => Promise<{unidades: object[], items: object[]}>, json: (ruta: string) => Promise<any>, extraIngles: () => object, limpiar: () => void, almacen?: Storage }} dep
+ *   almacen: dónde recuerda qué frases ya dijo (localStorage; en modo visita, memoria)
  */
-export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limpiar }) {
+export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limpiar, almacen = almacenDelNavegador }) {
+  const memoria = crearMemoriaFrases(almacen);
   const propios = () => {
     const regs = progreso.registros(COLECCION_EXTRA);
     const salida = {};
@@ -129,20 +133,23 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
       // Los repasos pendientes ya no cambian lo que dice ni cómo está: solo se ofrecen en su tarjeta
       const clave = estado.estado;
       const delEstado = FRASES_NIVEL[franja][clave] ?? FRASES_NIVEL[franja].normal;
-      const frase = elegir(delEstado, hoy + clave + palabra);
+      // Sin repetir (ver sin-repetir.js): cada frase lleva su grupo y su id; al mostrarla, la pantalla
+      // avisa con mapacheVista y no vuelve hasta que salgan las demás de su grupo
+      const grupoEstado = `${franja}:${clave}`;
+      const frase = memoria.delDia(grupoEstado, hoy, delEstado);
       const rellenar = (t) => t.replaceAll("{w}", palabra).replaceAll("{n}", String(robadas.length));
-      const formato = (f) => ({ en: rellenar(f.en), es: rellenar(f.es), expresion: f.expresion ?? null });
+      const formato = (f) => ({ en: rellenar(f.en), es: rellenar(f.es), expresion: f.expresion ?? null, grupo: f.grupo, id: idFrase(f) });
+      const conGrupo = (grupo) => (f) => ({ ...f, grupo });
       // Cada vez que lo tocas dice otra: primero la del día, luego las de su estado alternadas con consejos
-      const porDia = (lista, sal) => [...lista].sort((x, y) => hash(hoy + sal + x.en) - hash(hoy + sal + y.en));
-      const restoEstado = porDia(delEstado.filter((f) => f !== frase), "estado");
-      const charla = ["dormido", "escapado"].includes(clave) ? [] : porDia(CHARLA, "charla");
-      const frases = frase ? [frase] : [];
+      const restoEstado = memoria.ordenar(grupoEstado, delEstado.filter((f) => f !== frase), hoy).map(conGrupo(grupoEstado));
+      const charla = ["dormido", "escapado"].includes(clave) ? [] : memoria.ordenar("charla", CHARLA, hoy).map(conGrupo("charla"));
+      const frases = frase ? [{ ...frase, grupo: grupoEstado }] : [];
       for (let i = 0; i < Math.max(restoEstado.length, charla.length); i++) {
         if (restoEstado[i]) frases.push(restoEstado[i]);
         if (charla[i]) frases.push(charla[i]);
       }
-      const sueno = elegir(SUENOS, hoy + "sueno");
-      const suenos = [sueno, ...porDia(SUENOS.filter((x) => x !== sueno), "sueno")];
+      const suenos = memoria.ordenar("suenos", SUENOS, hoy).map((s) => ({ ...s, grupo: "suenos", id: idFrase(s) }));
+      const sueno = suenos[0] ?? null;
 
       // Lo que lleva puesto: los regalos de su nivel (mochila, lentes...)
       const equipo = p.equipo ?? Object.fromEntries(regalosDeNivel(nivel).map((id) => [ROPA_NIVEL[id].parte, id]));
@@ -199,7 +206,7 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
         nivelMapache,
         frase: frase ? formato(frase) : null,
         frases: frases.map(formato),
-        expresionDelDia: elegir(EXPRESIONES.B, hoy + "expresion"),
+        expresionDelDia: memoria.delDia("expresion", hoy, EXPRESIONES.B),
         sueno,
         suenos,
         robados: robadas.slice(0, 12).map((k) => acertijo(porClave.get(k), palabras)).filter(Boolean),
@@ -223,6 +230,11 @@ export function crearApiMapache({ progreso, itemsIngles, json, extraIngles, limp
       const robadas = clavesRobadas(progreso.datos().items ?? {}, hoy);
       const estado = estadoMapache({ dias: progreso.dias(), hoy, hora: new Date().getHours() });
       return { nombre: nombreDe(propios()), ...estado, robados: robadas.length };
+    },
+
+    /** Map ya dijo esta frase: no vuelve hasta que salgan las demás de su grupo (solo en este dispositivo). */
+    async mapacheVista(grupo, id) {
+      memoria.marcar(grupo, id);
     },
 
     async mapacheRenombrar(nombre) {
