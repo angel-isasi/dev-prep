@@ -267,7 +267,18 @@ export function Jarvis() {
   };
   const cambiarAvisos = async () => {
     if (e.avisos) return cambiar({ avisos: false });
-    cambiar({ avisos: await pedirAvisos() });
+    const ok = await pedirAvisos();
+    cambiar({ avisos: ok });
+    // Si no se pudo, dice por qué y cómo arreglarlo (antes el botón no hacía nada y no explicaba)
+    if (ok) return hablar({ texto: "Avisos encendidos. Te escribo aquí aunque estés en otra ventana." });
+    const permiso = globalThis.Notification?.permission;
+    hablar({
+      texto: !("Notification" in globalThis)
+        ? "Este navegador no permite avisos. Usa la voz para oírme cuando no mires la app."
+        : permiso === "denied"
+          ? "El navegador tiene bloqueados los avisos de esta página. Haz clic en el candado o en el ícono a la izquierda de la dirección, busca Notificaciones, ponlo en Permitir y vuelve a pulsar Avisos."
+          : "No aceptaste el permiso. Pulsa Avisos otra vez y elige Permitir cuando el navegador pregunte.",
+    });
   };
 
   if (!e.abierto) {
