@@ -57,6 +57,8 @@ function htmlMovil() {
   return {
     name: "devprep-html-movil",
     transformIndexHtml: () => [
+      // Va primero: si la app no llega a cargar, repara la copia guardada (ver public-movil/salvavidas.js)
+      { tag: "script", attrs: { src: "/salvavidas.js" }, injectTo: "head-prepend" },
       { tag: "link", attrs: { rel: "apple-touch-icon", href: "/apple-touch-icon-180x180.png" }, injectTo: "head" },
       { tag: "meta", attrs: { name: "robots", content: "noindex, nofollow" }, injectTo: "head" },
     ],
