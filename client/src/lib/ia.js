@@ -111,6 +111,7 @@ export async function pedirIa(pedido) {
   if (datos.uso) registrarUso(datos.uso);
   if (!r.ok) throw new Error(datos.error ?? "No se pudo evaluar. Inténtalo otra vez.");
   if (huella) guardarRespuesta(huella, datos.resultado);
+  anotarHerramienta();
   return datos.resultado;
 }
 
@@ -135,4 +136,37 @@ function guardarRespuesta(huella, resultado) {
     // sin espacio: se borra la memoria de respuestas y se sigue
     localStorage.removeItem(CLAVE_GUARDADAS);
   }
+}
+
+// --- Uso por herramienta: qué días la usaste y cuántos pedidos (lo muestran los tableros de IA) ---
+const CLAVE_HERRAMIENTAS = "devprep.iaHerramientas";
+let herramientaActual = null;
+/** La pantalla dice qué herramienta está abierta; los pedidos que salgan se anotan a su nombre. */
+export const abrirHerramientaIa = (id) => {
+  herramientaActual = id;
+};
+const leerHerramientas = () => {
+  try {
+    return JSON.parse(localStorage.getItem(CLAVE_HERRAMIENTAS) ?? "{}") ?? {};
+  } catch {
+    return {};
+  }
+};
+function anotarHerramienta() {
+  if (!herramientaActual) return;
+  const hoy = new Date();
+  const fecha = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, "0")}-${String(hoy.getDate()).padStart(2, "0")}`;
+  const todas = leerHerramientas();
+  const h = todas[herramientaActual] ?? { pedidos: 0, dias: [] };
+  todas[herramientaActual] = { pedidos: h.pedidos + 1, dias: [...new Set([...h.dias, fecha])].slice(-400), ultima: fecha };
+  try {
+    localStorage.setItem(CLAVE_HERRAMIENTAS, JSON.stringify(todas));
+  } catch {
+    // sin espacio: es solo un dato informativo
+  }
+}
+/** @returns {{ pedidos: number, dias: number, ultima: string|null }} */
+export function usoHerramienta(id) {
+  const h = leerHerramientas()[id];
+  return { pedidos: h?.pedidos ?? 0, dias: h?.dias?.length ?? 0, ultima: h?.ultima ?? null };
 }

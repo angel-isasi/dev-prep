@@ -577,3 +577,13 @@
     transition: none;
   }
 }
+
+/* Preguntas con candado: se abren al resolver su ejercicio */
+.leccion[data-estado="candado"] {
+  border-style: dashed;
+  background: none;
+}
+
+.leccion[data-estado="candado"] .icono {
+  color: var(--texto-suave);
+}

@@ -330,3 +330,183 @@
     content: "↓";
   }
 }
+
+/* ---------- Tablero de una herramienta (ver Tablero en MenuPanel.jsx) ---------- */
+.tablero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: var(--espacio-4);
+}
+
+.entera,
+.asi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  padding: var(--espacio-6);
+}
+
+.enteraCabeza {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-5);
+}
+
+.enteraCabeza h2 {
+  margin: 0 0 4px;
+  font-size: var(--titulo-3);
+  line-height: 1.15;
+}
+
+.enteraCabeza p {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: var(--letra-5);
+}
+
+.minutos {
+  flex: none;
+  font-family: var(--fuente-titulos);
+  font-size: clamp(56px, 5vw, 88px);
+  font-weight: var(--peso-extra);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+}
+
+.minutos small {
+  margin-left: 6px;
+  color: var(--texto-suave);
+  font-size: var(--letra-7);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0;
+}
+
+/* La herramienta va "aplanada": sin su caja ni su título, que ya los pone el tablero */
+.herramienta {
+  display: grid;
+  flex: 1;
+  align-content: start;
+  padding-top: var(--espacio-4);
+  border-top: 1px solid var(--borde);
+}
+
+.herramienta [data-caja-ia] {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.herramienta [data-caja-titulo] {
+  display: none;
+}
+
+.herramienta textarea {
+  min-height: 150px;
+}
+
+.plano {
+  display: grid;
+  gap: var(--espacio-2);
+}
+
+.separador {
+  margin-top: var(--espacio-2);
+  padding-top: var(--espacio-3);
+  border-top: 1px solid var(--borde);
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-titulo);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.abajo {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: 240px minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: var(--espacio-4);
+  align-items: stretch;
+}
+
+.cifras {
+  display: grid;
+  gap: var(--espacio-3);
+  margin: 0;
+}
+
+.cifras > div {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: var(--espacio-4) var(--espacio-5);
+}
+
+.cifras dt {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.cifras dd {
+  margin: 0;
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-3);
+  font-weight: var(--peso-negrita);
+}
+
+.bloqueAbajo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: var(--espacio-5);
+}
+
+.bloqueAbajo .plano {
+  flex: 1;
+  align-content: space-around;
+}
+
+.relacionados {
+  display: grid;
+  flex: 1;
+  gap: var(--espacio-2);
+}
+
+.relacionados a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--superficie-2);
+  color: var(--texto);
+  font-weight: var(--peso-semi);
+  text-decoration: none;
+  transition: border-color var(--transicion);
+}
+
+.relacionados a:hover {
+  border-color: var(--acento);
+}
+
+@media (max-width: 1100px) {
+  .tablero,
+  .abajo {
+    grid-template-columns: 1fr;
+  }
+  .cifras {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .entera,
+  .asi {
+    padding: var(--espacio-4);
+  }
+  .enteraCabeza {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--espacio-2);
+  }
+}

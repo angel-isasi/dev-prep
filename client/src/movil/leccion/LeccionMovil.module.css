@@ -439,17 +439,17 @@
    y opciones todo el rato. Se cambian las variables en este contenedor, así el resto de la app no se toca. */
 @media (min-width: 900px) {
   .leccion {
-    --letra-1: 13px;
-    --letra-2: 14px;
-    --letra-3: 15px;
-    --letra-4: 16px;
-    --letra-5: 17px;
-    --letra-6: 18px;
-    --letra-7: 20px;
-    --letra-8: 21px;
-    --titulo-1: 23px;
-    --titulo-2: 26px;
-    --titulo-3: 30px;
+    --letra-1: 12px;
+    --letra-2: 13px;
+    --letra-3: 14px;
+    --letra-4: 15px;
+    --letra-5: 16px;
+    --letra-6: 17px;
+    --letra-7: 18px;
+    --letra-8: 19px;
+    --titulo-1: 21px;
+    --titulo-2: 24px;
+    --titulo-3: 27px;
     font-size: var(--letra-5);
   }
 

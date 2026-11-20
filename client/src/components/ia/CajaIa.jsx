@@ -20,11 +20,15 @@ export function CajaIa({ titulo, detalle, children, vacio }) {
   return (
     <PuertaIa vacio={vacio}>
       {(olvidarClave) => (
-        <section className={`${base.caja} ${estilos.caja}`}>
-          <div className={base.cabecera}>
+        <section className={`${base.caja} ${estilos.caja}`} data-caja-ia>
+          <div className={base.cabecera} data-caja-titulo>
             <span className={base.etiqueta}>{titulo}</span>
           </div>
-          {detalle && <p className={base.suave}>{detalle}</p>}
+          {detalle && (
+            <p className={base.suave} data-caja-titulo>
+              {detalle}
+            </p>
+          )}
           {children(olvidarClave)}
         </section>
       )}

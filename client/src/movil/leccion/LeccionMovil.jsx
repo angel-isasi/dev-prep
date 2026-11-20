@@ -114,7 +114,7 @@ export function LeccionMovil() {
       if (params.get("retomar") && d.enCurso && !terminada(d.enCurso)) return setSesion(d.enCurso);
       const unidad = params.get("unidad") ?? d.unidadActual;
       // Una lección fija de la unidad (plan.js): solo sus preguntas
-      const parte = params.get("parte") && ambito === "programacion" ? leccionDe(planUnidad(d.items, d.registros, unidad, d.reportados), params.get("parte")) : null;
+      const parte = params.get("parte") && ambito === "programacion" ? leccionDe(planUnidad(d.items, d.registros, unidad, d.reportados, d.bloqueadas?.[unidad]), params.get("parte")) : null;
       if (parte) {
         const estas = new Set(parte.claves);
         d = { ...d, items: d.items.filter((it) => estas.has(it.clave)) };
@@ -182,7 +182,7 @@ export function LeccionMovil() {
         // Programación: cómo quedó la unidad y qué lección sigue
         if (ambito === "programacion" && siguiente.unidad) {
           const d = await api.lecciones("programacion");
-          const plan = planUnidad(d.items, d.registros, siguiente.unidad, d.reportados);
+          const plan = planUnidad(d.items, d.registros, siguiente.unidad, d.reportados, d.bloqueadas?.[siguiente.unidad]);
           const titulo = d.unidades.find((u) => u.id === siguiente.unidad)?.titulo ?? siguiente.unidad;
           r.unidad = { id: siguiente.unidad, titulo, plan, hecha: siguiente.parte ? leccionDe(plan, siguiente.parte) : null, siguiente: (siguiente.parte && despuesDe(plan, siguiente.parte)) || plan.siguiente };
         }

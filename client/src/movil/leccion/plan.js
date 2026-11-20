@@ -6,6 +6,8 @@
 //   - Lo esencial: las ideas del tema, su vocabulario y "lee y predice".
 //   - Con código real: huecos, orden y errores sacados de los ejercicios.
 //   - Métodos a fondo (opcional): qué hace y qué devuelve cada método de la referencia.
+// Las de "Con código real" preguntan sobre el código de un ejercicio: solo entran las de ejercicios que
+// ya resolviste (ver separarBloqueadas). Así son repaso de algo que hiciste, no adivinanzas.
 // Una lección está hecha cuando respondiste todas sus preguntas al menos una vez; la unidad está
 // completa con todas las de Lo esencial y Con código real. Nada se guarda aparte: todo sale de los
 // registros de cada ítem, así que funciona con el progreso que ya tienes.
@@ -104,7 +106,7 @@ export function estadoDe(items, registros, reportados = {}) {
  * @param {string} unidad
  * @param {object} [reportados]
  */
-export function planUnidad(items, registros, unidad, reportados = {}) {
+export function planUnidad(items, registros, unidad, reportados = {}, bloqueadas = null) {
   const deUnidad = items.filter((it) => it.unidad === unidad);
   const grupos = GRUPOS.map((g) => {
     const suyos = deUnidad.filter(g.de);
@@ -118,8 +120,10 @@ export function planUnidad(items, registros, unidad, reportados = {}) {
       minutos: minutosDe(lista.length),
       ...estadoDe(lista, registros, reportados),
     }));
-    return { id: g.id, titulo: g.titulo, texto: g.texto, opcional: !!g.opcional, lecciones, hechas: lecciones.filter((l) => l.hecha).length };
-  }).filter((g) => g.lecciones.length);
+    // "Con código real" puede tener preguntas con candado: se abren al resolver su ejercicio
+    const candado = g.id === "codigo" ? bloqueadas : null;
+    return { id: g.id, titulo: g.titulo, texto: g.texto, opcional: !!g.opcional, lecciones, hechas: lecciones.filter((l) => l.hecha).length, bloqueadas: candado };
+  }).filter((g) => g.lecciones.length || g.bloqueadas);
 
   const todas = grupos.flatMap((g) => g.lecciones);
   const requeridas = grupos.filter((g) => !g.opcional).flatMap((g) => g.lecciones);
@@ -160,3 +164,25 @@ export function despuesDe(plan, id) {
 
 /** ¿Aprobó la prueba de la unidad? (registro de quizzes: { mejor, total }) */
 export const pruebaAprobada = (registro) => !!registro && registro.total > 0 && registro.mejor / registro.total >= PRUEBA.aprobar;
+
+/**
+ * Quita las preguntas de ejercicios que todavía no resolviste (las que ya respondiste antes se quedan,
+ * para no perder su repaso) y cuenta, por unidad, qué queda con candado.
+ * @param {object[]} items
+ * @param {(idEjercicio: string) => boolean} resuelto
+ * @param {object} registros  progreso por clave
+ * @returns {{ items: object[], bloqueadas: Record<string, { ejercicios: number, preguntas: number, siguiente: { id: string, titulo: string } }> }}
+ */
+export function separarBloqueadas(items, resuelto, registros = {}) {
+  const porUnidad = new Map();
+  const libres = items.filter((it) => {
+    if (it.fuente?.tipo !== "ejercicio" || resuelto(it.fuente.id) || registros[it.clave]) return true;
+    if (!porUnidad.has(it.unidad)) porUnidad.set(it.unidad, { ids: new Set(), preguntas: 0, siguiente: { id: it.fuente.id, titulo: it.fuente.titulo ?? it.fuente.id } });
+    const u = porUnidad.get(it.unidad);
+    u.ids.add(it.fuente.id);
+    u.preguntas += 1;
+    return false;
+  });
+  const bloqueadas = Object.fromEntries([...porUnidad].map(([unidad, u]) => [unidad, { ejercicios: u.ids.size, preguntas: u.preguntas, siguiente: u.siguiente }]));
+  return { items: libres, bloqueadas };
+}

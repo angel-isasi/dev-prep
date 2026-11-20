@@ -218,10 +218,12 @@ function Entrevista({ proceso }) {
     const etapas = [{ id: TODO, titulo: "Un poco de todo" }, ...(proceso?.etapas ?? []).filter((e) => e.id !== "cierre")];
     const pedidos = config.cantidad * (1 + config.repreguntas) + 1;
     return (
-      <div className={`textura ${estilos.panel}`}>
-        <span className={estilos.etiqueta}>Entrevista por voz</span>
-        <h2>Una llamada con el entrevistador</h2>
-        <p>
+      <div className={`textura ${estilos.panel}`} data-caja-ia>
+        <span className={estilos.etiqueta} data-caja-titulo>
+          Entrevista por voz
+        </span>
+        <h2 data-caja-titulo>Una llamada con el entrevistador</h2>
+        <p data-caja-titulo>
           Él pregunta en voz alta, tú respondes hablando y repregunta sobre lo que dijiste. No te corrige en medio: al final ves cada
           respuesta evaluada y un informe con tu plan.
         </p>

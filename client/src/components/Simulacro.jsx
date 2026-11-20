@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { api } from "../lib/api.js";
 import { ES_MOVIL } from "../lib/modo.js";
@@ -57,7 +57,7 @@ const ICONOS = { rrhh: <IconoEntrevistas />, tecnica: <IconoPracticar />, proyec
  * o una etapa suelta. Las reglas (qué preguntas, plan de refuerzo) están en server/simulacro.js.
  * @param {{ proceso: object, alRepasar?: (categoria: string) => void, alIr?: (pestana: string) => void }} props
  */
-export function Simulacro({ proceso, alRepasar, alIr }) {
+export function Simulacro({ proceso, categorias = [], alRepasar, alIr }) {
   const [estado, setEstado] = useState("inicio"); // inicio | curso | fin
   const [etapas, setEtapas] = useState(ORDEN_ETAPAS);
   const [pasos, setPasos] = useState([]);
@@ -115,7 +115,7 @@ export function Simulacro({ proceso, alRepasar, alIr }) {
   const minutos = minutosProceso(proceso, etapas);
 
   if (estado === "inicio") {
-    return <Portada proceso={proceso} ingles={ingles} setIngles={setIngles} cargando={cargando} alEmpezar={empezar} />;
+    return <Portada proceso={proceso} categorias={categorias} ingles={ingles} setIngles={setIngles} cargando={cargando} alEmpezar={empezar} />;
   }
 
   if (estado === "fin") {
@@ -222,48 +222,150 @@ export function Simulacro({ proceso, alRepasar, alIr }) {
   );
 }
 
-function Portada({ proceso, ingles, setIngles, cargando, alEmpezar }) {
+/** Portada como tablero: a la izquierda la entrevista completa (número grande y línea de tiempo), a la derecha las etapas sueltas y abajo tus cifras. */
+function Portada({ proceso, categorias = [], ingles, setIngles, cargando, alEmpezar }) {
   const etapas = proceso?.etapas ?? [];
+  const total = minutosProceso(proceso);
+  const [hechos, setHechos] = useState(null);
+  useEffect(() => {
+    api.simulacros?.().then(setHechos, () => setHechos([]));
+  }, []);
+  const ultimo = hechos?.[0];
+  const mejor = Math.max(0, ...(hechos ?? []).map((x) => x.informe?.puntaje ?? 0));
+  // Cuánto dominas de cada etapa (sus tarjetas): la más floja es la que conviene simular
+  const porEtapa = etapas.map((e) => {
+    const cats = categorias.filter((c) => c.etapa === e.id);
+    const total = cats.reduce((n, c) => n + c.total, 0);
+    const dominadas = cats.reduce((n, c) => n + c.dominadas, 0);
+    return { ...e, total, dominadas, pct: total ? Math.round((dominadas / total) * 100) : null };
+  });
+  const floja = porEtapa.filter((e) => e.pct !== null).sort((x, y) => x.pct - y.pct)[0];
+  const nombreEtapa = (id) => etapas.find((e) => e.id === id)?.titulo ?? id;
   return (
-    <div className={estilos.portada}>
-      <div className={`textura ${estilos.panel} ${estilos.completo}`}>
-        <span className={estilos.etiqueta}>Proceso completo · {minutosProceso(proceso)} minutos</span>
-        <h2>Como una entrevista de verdad, de principio a fin</h2>
-        <p>
-          Recursos humanos, entrevista técnica con un ejercicio en vivo, presentación de tu proyecto y cierre. Responde todo{" "}
-          <strong>en voz alta</strong> y grábate: es la forma más rápida de mejorar cómo suenas.
-        </p>
-        <label className={estilos.nota}>
-          <input type="checkbox" checked={ingles} onChange={(e) => setIngles(e.target.checked)} /> Hacerlo en inglés (las preguntas y tus
-          respuestas)
-        </label>
-        <button type="button" className="boton boton-primario" disabled={cargando} onClick={() => alEmpezar(ORDEN_ETAPAS)}>
-          Empezar el proceso completo
-        </button>
-      </div>
+    <div className={estilos.tablero}>
+      <section className={`tarjeta-protagonista ${estilos.entera}`}>
+        <span className="etiqueta">Entrevista completa</span>
+        <div className={estilos.enteraCabeza}>
+          <strong className={estilos.minutos}>
+            {total}
+            <small>min</small>
+          </strong>
+          <div className={estilos.enteraAcciones}>
+            <button type="button" className="boton boton-primario" disabled={cargando} onClick={() => alEmpezar(ORDEN_ETAPAS)}>
+              Empezar →
+            </button>
+            <div className={estilos.idioma} role="radiogroup" aria-label="Idioma">
+              <button type="button" data-activo={!ingles} onClick={() => setIngles(false)}>
+                Español
+              </button>
+              <button type="button" data-activo={ingles} onClick={() => setIngles(true)}>
+                English
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* Línea de tiempo: cada tramo mide lo que dura su etapa */}
+        <ol className={estilos.linea}>
+          {etapas.map((e, i) => (
+            <li key={e.id} style={{ flexGrow: e.minutos }} title={e.descripcion}>
+              <span className={estilos.tramo} />
+              <strong>
+                {i + 1}. {e.titulo}
+              </strong>
+              <small>{e.minutos} min</small>
+            </li>
+          ))}
+        </ol>
+        <div className={estilos.sellos}>
+          <span className="chip">En voz alta</span>
+          <span className="chip">Te pones nota</span>
+          <span className="chip">Plan de refuerzo al final</span>
+        </div>
+      </section>
 
-      <h3 className={estilos.subtitulo}>O practica una etapa suelta</h3>
-      <div className={estilos.gridEtapas}>
-        {etapas.map((e, i) => (
-          // La descripción larga ya se lee en "Por etapa" y al empezar la etapa: aquí va solo como title
-          <button
-            key={e.id}
-            type="button"
-            className={`brillo ${estilos.etapa}`}
-            disabled={cargando}
-            title={e.descripcion}
-            onClick={() => alEmpezar([e.id])}
-          >
-            <span className={estilos.etapaNumero} aria-hidden>
-              {ICONOS[e.id] ?? i + 1}
-            </span>
-            <span className={estilos.etapaNombre}>
-              <strong>{e.titulo}</strong>
-              <span className={estilos.etapaMinutos}>{e.minutos} min</span>
-            </span>
-            <span className={estilos.etapaIr}>Empezar →</span>
-          </button>
-        ))}
+      <section className={`tarjeta ${estilos.sueltas}`}>
+        <span className="etiqueta">O una sola etapa</span>
+        <div className={estilos.gridEtapas}>
+          {etapas.map((e, i) => (
+            <button key={e.id} type="button" className={`brillo ${estilos.etapa}`} disabled={cargando} title={e.descripcion} onClick={() => alEmpezar([e.id])}>
+              <span className={estilos.etapaNumero} aria-hidden>
+                {ICONOS[e.id] ?? i + 1}
+              </span>
+              <span className={estilos.etapaNombre}>
+                <strong>{e.titulo}</strong>
+                <span className={estilos.etapaMinutos}>{e.minutos} min</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Fila de abajo: tus cifras en columna, qué etapa te conviene y tu historial */}
+      <div className={estilos.abajo}>
+        <dl className={estilos.cifras}>
+          <div className="tarjeta">
+            <dt>Simulacros hechos</dt>
+            <dd>{hechos?.length ?? "–"}</dd>
+          </div>
+          <div className="tarjeta">
+            <dt>Último</dt>
+            <dd>{ultimo?.fecha ?? "–"}</dd>
+          </div>
+          <div className="tarjeta">
+            <dt>Mejor nota</dt>
+            <dd>{mejor ? `${mejor}/10` : "–"}</dd>
+          </div>
+        </dl>
+
+        <section className={`tarjeta ${estilos.bloque}`}>
+          <span className="etiqueta">Qué etapa te conviene</span>
+          <ol className={estilos.dominio}>
+            {porEtapa.map((e, i) => (
+              <li key={e.id} data-floja={e.id === floja?.id}>
+                <span className={estilos.dominioNombre}>
+                  <strong>
+                    {i + 1}. {e.titulo}
+                  </strong>
+                  <small>{e.pct === null ? "sin tarjetas" : `${e.dominadas}/${e.total} · ${e.pct}%`}</small>
+                </span>
+                <span className={estilos.barra} aria-hidden>
+                  <span style={{ width: `${e.pct ?? 0}%` }} />
+                </span>
+                {e.id === floja?.id && (
+                  <button type="button" className="boton" disabled={cargando} onClick={() => alEmpezar([e.id])}>
+                    Simular esta
+                  </button>
+                )}
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className={`tarjeta ${estilos.bloque}`}>
+          <span className="etiqueta">Tus últimos simulacros</span>
+          {hechos?.length ? (
+            <ul className={estilos.historial}>
+              {hechos.slice(0, 4).map((h) => (
+                <li key={h.id}>
+                  <span>
+                    <strong>{h.fecha}</strong>
+                    <small>
+                      {(h.etapas ?? []).length >= etapas.length ? "Completo" : (h.etapas ?? []).map(nombreEtapa).join(", ")}
+                      {h.voz && " · por voz"}
+                      {h.segundos ? ` · ${Math.round(h.segundos / 60)} min` : ""}
+                    </small>
+                  </span>
+                  <b>{h.informe?.puntaje != null ? `${h.informe.puntaje}/10` : "–"}</b>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className={estilos.sinHistorial}>
+              <strong>Todavía ninguno</strong>
+              <small>Aquí verás fecha, etapas y nota de cada uno.</small>
+            </div>
+          )}
+        </section>
       </div>
     </div>
   );

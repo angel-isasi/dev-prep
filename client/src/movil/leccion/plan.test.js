@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { armarLeccion, crearSesion, responder } from "./motor.js";
-import { despuesDe, empaquetar, MAXIMO_PARTE, nombreDe, planUnidad, pruebaAprobada } from "./plan.js";
+import { despuesDe, empaquetar, MAXIMO_PARTE, nombreDe, planUnidad, pruebaAprobada, separarBloqueadas } from "./plan.js";
 
 const item = (clave, fuente, extra = {}) => ({ clave, unidad: "u1", tipo: "opcion", subtipo: "quiz", fuente, ...extra });
 const tema = { tipo: "tema", id: "u1", titulo: "Variables" };
@@ -112,5 +112,32 @@ describe("modos parte y prueba del motor", () => {
     expect(pruebaAprobada({ mejor: 10, total: 12 })).toBe(true);
     expect(pruebaAprobada({ mejor: 9, total: 12 })).toBe(false);
     expect(pruebaAprobada(undefined)).toBe(false);
+  });
+});
+
+describe("separarBloqueadas", () => {
+  const preguntas = [
+    { clave: "ej:a:0", unidad: "u1", fuente: { tipo: "ejercicio", id: "a", titulo: "A" } },
+    { clave: "ej:a:1", unidad: "u1", fuente: { tipo: "ejercicio", id: "a", titulo: "A" } },
+    { clave: "ej:b:0", unidad: "u1", fuente: { tipo: "ejercicio", id: "b", titulo: "B" } },
+    { clave: "tema:0", unidad: "u1", fuente: { tipo: "tema", id: "t" } },
+  ];
+
+  it("deja fuera las preguntas de ejercicios sin resolver y las cuenta por unidad", () => {
+    const r = separarBloqueadas(preguntas, (id) => id === "b");
+    expect(r.items.map((it) => it.clave)).toEqual(["ej:b:0", "tema:0"]);
+    expect(r.bloqueadas.u1).toEqual({ ejercicios: 1, preguntas: 2, siguiente: { id: "a", titulo: "A" } });
+  });
+
+  it("no quita una pregunta que ya respondiste", () => {
+    const r = separarBloqueadas(preguntas, () => false, { "ej:a:0": { caja: 1 } });
+    expect(r.items.map((it) => it.clave)).toEqual(["ej:a:0", "tema:0"]);
+    expect(r.bloqueadas.u1.ejercicios).toBe(2);
+  });
+
+  it("el grupo de código sigue en el plan aunque todo esté con candado", () => {
+    const r = separarBloqueadas(preguntas, () => false);
+    const plan = planUnidad(r.items, {}, "u1", {}, r.bloqueadas.u1);
+    expect(plan.grupos.find((g) => g.id === "codigo").bloqueadas.preguntas).toBe(3);
   });
 });

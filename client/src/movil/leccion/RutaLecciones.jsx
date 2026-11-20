@@ -3,6 +3,7 @@
 // grandes) "Sigue aquí" te deja en la siguiente lección que toca, el repaso del día y cómo se mide el
 // avance. Nada se bloquea: el orden solo se sugiere.
 import { useEffect, useMemo, useRef, useState } from "react";
+import { IconoCandado } from "../../components/Iconos.jsx";
 import { Link } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { api } from "../../lib/api.js";
@@ -59,7 +60,7 @@ export function RutaLecciones() {
   // El plan de cada unidad (lecciones, avance y la siguiente que toca)
   const planes = useMemo(() => {
     if (!datos) return new Map();
-    return new Map(datos.unidades.map((u) => [u.id, planUnidad(datos.items, datos.registros, u.id, datos.reportados)]));
+    return new Map(datos.unidades.map((u) => [u.id, planUnidad(datos.items, datos.registros, u.id, datos.reportados, datos.bloqueadas?.[u.id])]));
   }, [datos]);
 
   if (!datos) return <Esqueleto variante="lista" />;
@@ -418,6 +419,22 @@ export function Grupo({ grupo, unidad }) {
             </li>
           );
         })}
+        {grupo.bloqueadas && (
+          <li>
+            {/* Con candado: se abren al resolver el ejercicio del que salen */}
+            <Link to={`/practicar/${grupo.bloqueadas.siguiente.id}`} className={estilos.leccion} data-estado="candado" title={`Resuelve "${grupo.bloqueadas.siguiente.titulo}" para abrir sus preguntas`}>
+              <span className={estilos.icono} aria-hidden>
+                <IconoCandado tamano={14} />
+              </span>
+              <span className={estilos.leccionTexto}>
+                <strong>
+                  {grupo.bloqueadas.ejercicios} {grupo.bloqueadas.ejercicios === 1 ? "ejercicio" : "ejercicios"} por resolver
+                </strong>
+                <small>Abren {grupo.bloqueadas.preguntas} preguntas · Ir al siguiente →</small>
+              </span>
+            </Link>
+          </li>
+        )}
       </ol>
       {grupo.lecciones.length > VISIBLES && (
         <button type="button" className={estilos.verTodas} onClick={() => setTodas((t) => !t)}>

@@ -17,7 +17,7 @@ import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
 import { analizarOferta, palabrasParaCv } from "../../../server/ofertas.js";
 import { diaSemana, lunesDe } from "../../../server/metricas.js";
 import { avanceUnidad, terminada } from "../movil/leccion/motor.js";
-import { clavePrueba, planUnidad } from "../movil/leccion/plan.js";
+import { clavePrueba, planUnidad, separarBloqueadas } from "../movil/leccion/plan.js";
 import { armarSesion } from "../../../server/sesion.js";
 import { armarRuta } from "../../../server/ruta.js";
 import { huboEstudio } from "../../../server/puntos.js";
@@ -345,10 +345,18 @@ const apiWeb = {
     const elegida = ingles ? progreso.ajuste("ingles", {}).unidad : d.unidadActual;
     const actual = unidades.find((u) => u.id === elegida) ?? unidades[0];
     const enCurso = d.leccionEnCurso && (d.leccionEnCurso.ambito ?? "programacion") === ambito ? d.leccionEnCurso : null;
+    // Las preguntas sobre el código de un ejercicio se abren cuando lo resuelves (con la laptop
+    // conectada, el estado sale de ella; si no, del progreso sincronizado)
+    let libres = { items: datosItems.items, bloqueadas: {} };
+    if (!ingles) {
+      const resueltos = new Set((await api.ejercicios().catch(() => [])).filter((e) => e.estado === "resuelto").map((e) => e.id));
+      libres = separarBloqueadas(datosItems.items, (id) => resueltos.has(id), d.items);
+    }
     return {
       ambito,
       unidades,
-      items: datosItems.items,
+      items: libres.items,
+      bloqueadas: libres.bloqueadas,
       preguntas: entrevistas?.preguntas ?? [],
       // En inglés, el progreso viejo (una clave por forma de preguntar) se junta en su concepto
       registros: ingles ? registrosPorConcepto(d.items) : d.items,
@@ -440,7 +448,7 @@ const apiWeb = {
     const idsReferencia = new Set(lecc.items.filter((it) => it.unidad === id && it.fuente?.tipo === "referencia").map((it) => it.fuente.id));
     return {
       dominio: unidades.find((u) => u.id === id) ?? null,
-      plan: planUnidad(lecc.items, lecc.registros, id, lecc.reportados),
+      plan: planUnidad(lecc.items, lecc.registros, id, lecc.reportados, lecc.bloqueadas?.[id]),
       prueba: lecc.quizzes?.[clavePrueba(id)] ?? null,
       otrosEjercicios: ejercicios.filter((e) => !guiados.has(e.id) && unidadDeEjercicio(e, ap.temas) === id).map(resumenEj),
       terminos,
@@ -509,7 +517,7 @@ const apiWeb = {
 
     // Lo nuevo: tu siguiente lección (o la que dejaste a medias) y tu siguiente ejercicio
     const unidad = lecc.unidades.find((u) => u.id === lecc.unidadActual) ?? lecc.unidades[0];
-    const plan = unidad ? planUnidad(lecc.items, lecc.registros, unidad.id, lecc.reportados) : null;
+    const plan = unidad ? planUnidad(lecc.items, lecc.registros, unidad.id, lecc.reportados, lecc.bloqueadas?.[unidad.id]) : null;
     const leccion =
       lecc.enCurso && !terminada(lecc.enCurso)
         ? { titulo: "la que dejaste a medias", unidad: unidad?.titulo ?? "", a: "/leccion?retomar=1" }

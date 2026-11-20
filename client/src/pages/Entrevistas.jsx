@@ -54,6 +54,7 @@ const VIEJAS = {
 const PRACTICAS = [
   {
     id: "simulacro",
+    sinRecorrido: true,
     pasos: ["Eliges el proceso completo o una sola etapa.","Respondes cada pregunta en voz alta y te pones nota.","Al final ves tu plan de refuerzo y, si quieres, el informe con IA."],
     grupo: "Entrevista completa",
     titulo: "Simulacro",
@@ -654,8 +655,13 @@ function GuiaVozAlta({ markdown }) {
 function Simular({ resumen, practica, alPractica, alIr, alRepasar }) {
   const elegida = PRACTICAS.find((p) => p.id === practica) ?? PRACTICAS[0];
   return (
-    <MenuPanel items={PRACTICAS_CON_GUIA} elegida={elegida.id} alElegir={alPractica} etiqueta="Prácticas">
-      {elegida.id === "simulacro" && <Simulacro proceso={resumen.proceso} alIr={alIr} alRepasar={alRepasar} />}
+    <MenuPanel items={PRACTICAS_CON_GUIA} elegida={elegida.id} alElegir={alPractica} etiqueta="Prácticas" relacionados={[
+      { a: "/entrevistas?pestana=estudiar", texto: "Tarjetas por etapa" },
+      { a: "/entrevistas?pestana=estudiar&ver=pitch", texto: "Pitch y STAR" },
+      { a: "/glosario", texto: "Glosario para decirlo bien" },
+      { a: "/trabajo", texto: "Ofertas y postulaciones" },
+    ]}>
+      {elegida.id === "simulacro" && <Simulacro proceso={resumen.proceso} categorias={resumen.categorias} alIr={alIr} alRepasar={alRepasar} />}
       {elegida.id === "voz" && <EntrevistaVoz proceso={resumen.proceso} />}
       {elegida.id === "examen" && <ExamenMensual />}
       {elegida.id === "proyecto" && <DefiendeProyecto />}

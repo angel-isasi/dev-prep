@@ -96,8 +96,7 @@ export function PitchStar({ guias }) {
       </div>
 
       <section className={estilos.bloque}>
-        <h2>Tu pitch de 1 minuto</h2>
-        <p className={estilos.ayuda}>Tu respuesta a "háblame de ti": quién eres hoy, qué has hecho y qué buscas.</p>
+        <h2 title='Tu respuesta a "háblame de ti": quién eres hoy, qué has hecho y qué buscas.'>Tu pitch de 1 minuto</h2>
         <textarea
           className={estilos.texto}
           rows={7}
@@ -127,10 +126,7 @@ export function PitchStar({ guias }) {
       </section>
 
       <section className={estilos.bloque}>
-        <h2>Tus historias STAR</h2>
-        <p className={estilos.ayuda}>
-          Prepara 4 o 5 historias reales y adáptalas a cualquier pregunta de comportamiento.
-        </p>
+        <h2 title="Prepara 4 o 5 historias reales y adáptalas a cualquier pregunta de comportamiento.">Tus historias STAR</h2>
 
         {datos.historias.map((h) => (
           <div key={h.id} className={estilos.historia}>

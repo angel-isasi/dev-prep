@@ -101,7 +101,14 @@ export function InglesConIa() {
     <section className={pagina.pagina}>
       <CabeceraPagina etiqueta="Inglés para el trabajo" titulo="Inglés con IA" />
       <div className={pagina.contenido}>
-        <MenuPanel items={HERRAMIENTAS} elegida={elegidaId} alElegir={setElegida} etiqueta="Herramientas" enlaces={ENLACES}>
+        <MenuPanel items={HERRAMIENTAS} elegida={elegidaId} alElegir={setElegida} etiqueta="Herramientas" enlaces={ENLACES}
+          relacionados={[
+            { a: "/ingles/conversa", texto: "Conversa: reuniones de trabajo" },
+            { a: "/ingles/mapache", texto: "Map: la pregunta del día" },
+            { a: "/tarjetas", texto: "Tus tarjetas de inglés" },
+            { a: "/ingles", texto: "Temario de inglés" },
+          ]}
+        >
           <Vista />
         </MenuPanel>
       </div>

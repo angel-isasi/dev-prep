@@ -212,14 +212,18 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", t
   }
 
   return (
-    <div className={estilos.caja}>
-      <div className={estilos.cabecera}>
+    <div className={estilos.caja} data-caja-ia>
+      <div className={estilos.cabecera} data-caja-titulo>
         <span className={estilos.etiqueta}>{repregunta ? "Repregunta" : titulo ? titulo : tarea === "ingles" ? "Corregir con IA" : tarea === "codigo" ? "Revisión de un senior" : repregunta ? "Repregunta" : "Evaluar con IA"}</span>
         <button type="button" className={estilos.enlace} onClick={alOlvidarClave}>
           Cambiar código
         </button>
       </div>
-      {detalle && !repregunta && !resultado && <p className={estilos.suave}>{detalle}</p>}
+      {detalle && !repregunta && !resultado && (
+        <p className={estilos.suave} data-caja-titulo>
+          {detalle}
+        </p>
+      )}
       {repregunta && <p className={estilos.repreguntaTexto}>{repregunta}</p>}
 
       {!resultado && (

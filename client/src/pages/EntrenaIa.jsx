@@ -61,7 +61,14 @@ export function EntrenaIa() {
         <IconoFlechaIzq /> Practicar
       </Link>
       <CabeceraPagina etiqueta="Distinto cada vez" titulo="Entrena con IA" />
-      <MenuPanel items={RETOS} elegida={elegida} alElegir={setElegida} etiqueta="Retos" enlaces={SIN_IA}>
+      <MenuPanel items={RETOS} elegida={elegida} alElegir={setElegida} etiqueta="Retos" enlaces={SIN_IA}
+        relacionados={[
+          { a: "/leccion?modo=predice", texto: "Lee y predice (sin IA)" },
+          { a: "/revision", texto: "Revisión de código" },
+          { a: "/tarjetas", texto: "Tus tarjetas de JavaScript" },
+          { a: "/practicar", texto: "Ejercicios con tests" },
+        ]}
+      >
         <Vista />
       </MenuPanel>
     </section>
