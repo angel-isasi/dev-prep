@@ -2,6 +2,7 @@
 // Una sola cosa manda: tu sesión de hoy, con un único botón para seguir. Alrededor, cuatro
 // números (puntos, racha, tiempo libre y fecha meta) y la semana. Todo lo demás vive en Progreso.
 import { useEffect, useState } from "react";
+import { TutorHoy } from "../components/ia/TutorHoy.jsx";
 import { Link } from "react-router";
 import { api } from "../lib/api.js";
 import { armarSesion } from "../../../server/sesion.js";
@@ -226,6 +227,8 @@ export function Hoy() {
         </div>
         </div>
       </div>
+
+      <TutorHoy hoy={datos.hoy} semana={semana} />
 
       <div className={estilos.abajo}>
         {datos.juego && <TiempoLibre juego={datos.juego} meta={meta} salvados={datos.salvados} jefe={datos.jefe} />}

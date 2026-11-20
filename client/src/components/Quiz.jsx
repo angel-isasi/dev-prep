@@ -20,7 +20,7 @@ function barajar(preguntas) {
   });
 }
 
-export function Quiz({ preguntas: originales, alTerminar, mejor }) {
+export function Quiz({ preguntas: originales, alTerminar, mejor, extraFinal }) {
   const [intento, setIntento] = useState(0);
   // En el contenido la correcta casi siempre está en la misma letra: aquí cambia en cada intento
   const preguntas = useMemo(() => barajar(originales), [originales, intento]);
@@ -28,6 +28,8 @@ export function Quiz({ preguntas: originales, alTerminar, mejor }) {
   const [elegida, setElegida] = useState(null);
   const [aciertos, setAciertos] = useState(0);
   const [terminado, setTerminado] = useState(false);
+  // Lo que fallaste en este intento: el final puede ofrecer un quiz nuevo con esos conceptos (extraFinal)
+  const [fallos, setFallos] = useState([]);
 
   if (terminado) {
     const todo = aciertos === preguntas.length;
@@ -51,11 +53,13 @@ export function Quiz({ preguntas: originales, alTerminar, mejor }) {
             setElegida(null);
             setAciertos(0);
             setTerminado(false);
+            setFallos([]);
             setIntento((n) => n + 1);
           }}
         >
           Intentar de nuevo
         </button>
+        {fallos.length > 0 && extraFinal?.(fallos)}
       </div>
     );
   }
@@ -69,7 +73,10 @@ export function Quiz({ preguntas: originales, alTerminar, mejor }) {
     if (i === p.correcta) {
       setAciertos((a) => a + 1);
       feedback.acierto();
-    } else feedback.fallo();
+    } else {
+      feedback.fallo();
+      setFallos((f) => [...f, { pregunta: p.pregunta, correcta: p.opciones[p.correcta], explicacion: p.explicacion ?? "" }]);
+    }
   }
 
   function siguiente() {

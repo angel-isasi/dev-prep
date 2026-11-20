@@ -337,6 +337,116 @@ ${ESTILO}`,
   },
 });
 
+// ---------- Aprender ----------
+Object.assign(TAREAS, {
+  "explicar-distinto": {
+    modelo: HAIKU,
+    esquema: objeto({
+      explicacion: texto(),
+      analogia: texto("Una comparación con algo de la vida diaria"),
+      ejemplo: texto("Código corto de JavaScript que lo muestra, con comentarios de lo que imprime"),
+      pregunta: texto("Una pregunta corta para comprobar que lo entendió"),
+    }),
+    sistema: `Eres un profesor paciente de programación. Un estudiante leyó la teoría de un tema y no le quedó clara. Explícasela de OTRA forma, no repitas el texto original.
+- Si dice qué parte no entendió, céntrate solo en eso.
+- "explicacion": de 3 a 5 frases simples, de lo concreto a lo abstracto.
+- "analogia": una comparación con algo cotidiano (en Perú, si encaja), en una o dos frases.
+- "ejemplo": de 3 a 10 líneas de código que lo muestren, con comentarios de lo que imprime.
+- "pregunta": una pregunta corta para que compruebe si lo entendió (sin la respuesta).
+${ESTILO}`,
+    armar(c) {
+      const tema = recortar(c.tema, 200);
+      if (!tema) return { error: "Falta el tema" };
+      return unir(`Tema: ${tema}`, bloque("Teoría que leyó (resumen)", recortar(c.teoria, 5000)), bloque("Lo que no entendió", recortar(c.duda, 800) || "No lo dijo: explica la idea central del tema."));
+    },
+  },
+
+  "quiz-fallos": {
+    modelo: HAIKU,
+    esquema: objeto({
+      preguntas: lista(objeto({ pregunta: texto(), opciones: lista(), correcta: entero("Índice de la opción correcta, de 0 a 3"), explicacion: texto() })),
+    }),
+    sistema: `Creas un quiz corto de repaso con preguntas NUEVAS sobre lo que un estudiante falló en un quiz de programación. Que no sean las mismas preguntas: el mismo concepto, desde otro ángulo (otro código, otro caso).
+- Una pregunta por cada concepto fallado (máximo 4).
+- Cada una con exactamente 4 opciones, una sola correcta ("correcta" es su índice, de 0 a 3), y distractores creíbles (los errores típicos).
+- Si la pregunta lleva código, ponlo en un bloque de markdown con \`\`\`js.
+- "explicacion": por qué la correcta es la correcta, en 2 frases.
+${ESTILO}`,
+    armar(c) {
+      const fallos = (Array.isArray(c.fallos) ? c.fallos : [])
+        .slice(0, 4)
+        .map((f) => `- Pregunta: ${recortar(f?.pregunta, 800)}\n  Respuesta correcta: ${recortar(f?.correcta, 300)}\n  Explicación: ${recortar(f?.explicacion, 500)}`)
+        .join("\n");
+      if (!fallos) return { error: "No hay preguntas falladas" };
+      return unir(`Tema: ${recortar(c.tema, 200)}`, bloque("Lo que falló", fallos));
+    },
+  },
+
+  "explicar-concepto": {
+    modelo: HAIKU,
+    esquema: objeto({ puntaje: entero(), bien: lista(), falta: lista(), mejor: texto() }),
+    sistema: `Un estudiante explicó un concepto de programación en voz alta en 30 segundos, como si se lo preguntaran en una entrevista junior. Evalúa su explicación.
+- Viene dictada por voz: ignora la puntuación y los errores de transcripción.
+- "puntaje" de 0 a 10: si es correcta, clara y con un ejemplo o un "para qué sirve".
+- "bien": hasta 2 cosas. "falta": hasta 3 cosas que le faltaron o estuvieron mal (si dijo algo incorrecto, dilo claramente).
+- "mejor": su explicación mejorada, en primera persona, para decirla en 30 segundos (70 palabras como máximo).
+${ESTILO}`,
+    armar(c) {
+      const respuesta = recortar(c.respuesta, 2000);
+      if (respuesta.split(/\s+/).filter(Boolean).length < 5) return { error: "Tu explicación es muy corta" };
+      return unir(`Concepto: ${recortar(c.tema, 200)}`, bloque("Su explicación", respuesta));
+    },
+  },
+});
+
+// ---------- Repaso: tutor del día y plan de la semana ----------
+const DIAS = ["lun", "mar", "mie", "jue", "vie", "sab", "dom"];
+const CARGAS = ["libre", "poco", "normal", "mucho"];
+
+Object.assign(TAREAS, {
+  "tutor-dia": {
+    modelo: HAIKU,
+    esquema: objeto({
+      resumen: texto("Una frase con su situación de hoy"),
+      focos: lista(objeto({ tema: texto(), porque: texto(), accion: texto(), donde: opcion(["aprender", "practicar", "tarjetas", "ingles", "entrevistas"]) })),
+    }),
+    sistema: `Eres el tutor personal de un estudiante que se prepara para su primer trabajo como frontend junior. Cada día miras sus datos reales y le dices en qué enfocarse hoy.
+- Solo usa los datos que te pasan: no inventes temas que no aparecen. Si casi no hay datos, dile que empiece por su sesión de hoy.
+- "resumen": una frase honesta y concreta (por ejemplo: "Vas bien en arrays, pero los closures se te siguen cayendo").
+- "focos": de 1 a 3, ordenados por impacto. Cada uno: "tema", "porque" (el dato que lo muestra, con números si los hay), "accion" (algo concreto para hoy, de 10 a 20 minutos) y "donde" (la sección de la app donde se hace).
+${ESTILO}`,
+    armar(c) {
+      const datos = recortar(c.datos, 4000);
+      if (!datos) return { error: "Faltan tus datos" };
+      return bloque("Sus datos de hoy", datos);
+    },
+  },
+
+  "plan-semana": {
+    modelo: HAIKU,
+    esquema: objeto({
+      resumen: texto("Cómo le fue la semana pasada, en dos frases"),
+      horario: objeto(Object.fromEntries(DIAS.map((d) => [d, opcion(CARGAS)]))),
+      dias: lista(objeto({ dia: opcion(DIAS), enfoque: texto() })),
+      consejo: texto(),
+    }),
+    sistema: `Eres el tutor de un estudiante de Ingeniería de Sistemas en Perú que estudia para conseguir prácticas de frontend. Su semana en la universidad es desordenada. Con lo que te cuenta de esta semana, armas su plan de estudio.
+- "horario": para cada día, cuánto puede estudiar: "libre" (no estudia: examen o entrega fuerte), "poco" (día cargado), "normal" o "mucho" (día tranquilo). La app reparte su meta semanal según esto, así que sé realista: mejor poco y cumplido que mucho y fallado. Si no dice nada de un día, "normal".
+- "dias": un enfoque corto para cada día que estudia (por ejemplo "Closures: teoría y 2 ejercicios", "Tarjetas y una entrevista de práctica"), basado en sus temas flojos y en su fecha meta.
+- "resumen": cómo le fue la semana pasada según los datos (puntos, minutos, días cumplidos). Si no hay datos, dilo.
+- "consejo": una frase para esta semana.
+${ESTILO}`,
+    armar(c) {
+      const universidad = recortar(c.universidad, 1500);
+      if (universidad.length < 3) return { error: "Cuéntame cómo viene tu semana en la universidad" };
+      return unir(
+        bloque("Lo que cuenta de su semana", universidad),
+        bloque("Sus datos", recortar(c.datos, 3000)),
+      );
+    },
+  },
+});
+
 /** Deja lo que devolvió la IA con la forma del esquema (textos recortados, números en rango, listas cortas). */
 export function limpiarPorEsquema(esquema, valor) {
   if (!esquema) return valor;

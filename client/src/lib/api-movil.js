@@ -633,6 +633,9 @@ const apiWeb = {
     metaIngles: progreso.datos().config.metaIngles ?? 15,
     metaDiaria: progreso.datos().config.metaDiaria,
   }),
+  /** Tu plan de la semana armado con la IA (Hoy > Tu semana). */
+  planSemana: async () => progreso.ajuste("planSemana", null),
+  guardarPlanSemana: async (plan) => progreso.cambiarAjuste("planSemana", plan),
   guardarHorario: async (horario) => {
     progreso.cambiarAjuste("horario", horario);
     cache.clear();

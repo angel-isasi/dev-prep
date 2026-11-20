@@ -9,6 +9,7 @@ import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
 import { TeoriaTema } from "../components/TeoriaTema.jsx";
 import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
 import { Quiz } from "../components/Quiz.jsx";
+import { AprenderIa, QuizFallos } from "../components/ia/AprenderIa.jsx";
 import { PreguntaAncla } from "../components/PreguntaAncla.jsx";
 import { PreguntasEntrevista } from "../components/PreguntasEntrevista.jsx";
 import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
@@ -17,7 +18,7 @@ import { Esqueleto } from "../components/Esqueleto.jsx";
 import { Grupo } from "../movil/leccion/RutaLecciones.jsx";
 import estilos from "./Tema.module.css";
 
-const NOMBRE_AREA = { javascript: "JavaScript", react: "React", typescript: "TypeScript", node: "Node.js y SQL" };
+const NOMBRE_AREA = { javascript: "JavaScript", algoritmos: "Algoritmos", react: "React", typescript: "TypeScript", node: "Node.js y SQL" };
 const ESTADO = { verde: "Lo dominas", amarillo: "A medias", rojo: "Flojo", "sin-empezar": "Sin empezar" };
 const TONO = { verde: "exito", amarillo: "aviso", rojo: "error", "sin-empezar": undefined };
 // En la lista de ejercicios el nivel es un punto de color y el estado un icono: así el título no se
@@ -149,6 +150,7 @@ export function Tema() {
         {activa === "teoria" && (
           <>
             <TeoriaTema id={tema.id} markdown={tema.teoria} />
+            <AprenderIa tema={tema.titulo} teoria={tema.teoria} />
             <PreguntaAncla key={tema.id} preguntas={tema.quiz} alSeguir={() => setPestana(plan?.total ? "lecciones" : "ejercicios")} />
           </>
         )}
@@ -220,7 +222,7 @@ export function Tema() {
           </div>
         )}
 
-        {activa === "quiz" && <Quiz key={tema.id} preguntas={tema.quiz} alTerminar={terminarQuiz} mejor={mejor} />}
+        {activa === "quiz" && <Quiz key={tema.id} preguntas={tema.quiz} alTerminar={terminarQuiz} mejor={mejor} extraFinal={(fallos) => <QuizFallos tema={tema.titulo} fallos={fallos} />} />}
 
         {activa === "entrevista" && centro && (
           <div className={estilos.entrevista}>
