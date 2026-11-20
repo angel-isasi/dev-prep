@@ -50,6 +50,7 @@ export const REGISTROS = [
   "logrosVistos",
   "inmersion",
   "misPalabras",
+  "tarjetas",
   "revisiones",
   "explicaciones",
   "retosSemana",

@@ -17,6 +17,7 @@ const TODAS = [
     sub: [
       { a: "/aprender", texto: "Temas" },
       { a: "/camino", texto: "Lecciones", web: true },
+      { a: "/tarjetas", texto: "Tarjetas", web: true },
       { a: "/chuletas", texto: "Chuletas", web: true },
       { a: "/referencia", texto: "Referencia" },
       { a: "/glosario", texto: "Glosario", web: true },
@@ -29,6 +30,7 @@ const TODAS = [
     Icono: IconoPracticar,
     sub: [
       { a: "/practicar", texto: "Ejercicios" },
+      { a: "/practicar/ia", texto: "Entrena con IA" },
       { a: "/revision", texto: "Revisión de código", web: true },
       { a: "/git", texto: "Git práctico", web: true },
     ],

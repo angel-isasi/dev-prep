@@ -7,6 +7,8 @@ import { claveIa, estadoIa, guardarClaveIa, guardarTopeIa, pedirIa, quienSoyIa, 
 import { dictar, hablar, hayVoz, microDisponible } from "../lib/voz.js";
 import { IconoAudio, IconoChispa, IconoMicrofono } from "./Iconos.jsx";
 import { TextoConCodigo } from "./TextoConCodigo.jsx";
+import { CrearTarjeta } from "./ia/CrearTarjeta.jsx";
+import { guardarErroresIngles } from "../lib/errores-ingles.js";
 import estilos from "./EvaluadorIa.module.css";
 
 const VEREDICTOS = { sabia: "Lo sabías", dude: "Te faltó algo", no: "No lo respondiste bien" };
@@ -191,6 +193,7 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", t
       const base = repregunta ? { tarea, pregunta: repregunta, idioma: pedido.idioma, categoria: pedido.categoria } : { tarea, ...pedido };
       const r = await pedirIa({ ...base, ...extra, respuesta });
       setResultado(r);
+      if (tarea === "ingles") guardarErroresIngles(r.correcciones, "Map");
       if (!repregunta) alResultado?.(r, respuesta);
     } catch (e) {
       if (e.clave) alOlvidarClave();
@@ -255,7 +258,7 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", t
       {error && <p className={estilos.error}>{error}</p>}
 
       {resultado && tarea === "entrevista" && (
-        <ResultadoEntrevista r={resultado} alSeguir={resultado.repregunta ? seguirConRepregunta : null} />
+        <ResultadoEntrevista r={resultado} pregunta={preguntaActual} alSeguir={resultado.repregunta ? seguirConRepregunta : null} />
       )}
       {resultado && tarea === "ingles" && <ResultadoIngles r={resultado} />}
       {resultado && tarea === "codigo" && <ResultadoCodigo r={resultado} />}
@@ -269,7 +272,7 @@ function Evaluador({ tarea, pedido, respuestaFija, alResultado, idioma = "es", t
   );
 }
 
-function ResultadoEntrevista({ r, alSeguir }) {
+function ResultadoEntrevista({ r, pregunta, alSeguir }) {
   return (
     <div className={estilos.resultado}>
       <div className={estilos.puntaje} data-veredicto={r.veredicto}>
@@ -300,6 +303,9 @@ function ResultadoEntrevista({ r, alSeguir }) {
                 <li key={i}>{x}</li>
               ))}
             </ul>
+            <CrearTarjeta origen="entrevista" texto="+ Tarjeta de lo que te faltó" contenido={`Pregunta de entrevista: ${pregunta}
+Lo que le faltó: ${r.falta.join("; ")}
+Respuesta mejorada: ${r.mejor}`} />
           </div>
         )}
       </div>
@@ -395,6 +401,9 @@ export function ResultadoIngles({ r }) {
                 {c.explicacion && <small>{c.explicacion}</small>}
               </li>
             ))}
+            <li>
+              <CrearTarjeta origen="corrección de inglés" texto="+ Tarjetas de estos errores" contenido={r.correcciones.map((c) => `${c.original} → ${c.corregido} (${c.explicacion})`).join("\n")} />
+            </li>
           </ul>
         ) : (
           <p className={estilos.suave}>Sin errores que corregir.</p>

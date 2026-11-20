@@ -1,0 +1,250 @@
+/* Tarjetas de memoria (estilo Anki): pantalla limpia, una tarjeta a la vez. */
+.pagina {
+  display: grid;
+  gap: var(--espacio-4);
+}
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+/* Resumen de hoy: tres cifras grandes en fila */
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--espacio-3);
+}
+
+.cifra {
+  display: grid;
+  gap: 2px;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.cifra strong {
+  font-size: var(--letra-6);
+  line-height: 1.1;
+}
+
+.cifra span {
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+}
+
+.empezar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+/* La sesión: la tarjeta centrada, grande, sin nada alrededor */
+.sesion {
+  display: grid;
+  justify-items: center;
+  gap: var(--espacio-3);
+  min-height: 60vh;
+  align-content: center;
+}
+
+.avance {
+  width: min(680px, 100%);
+  height: 4px;
+  border-radius: 999px;
+  background: var(--superficie-2);
+  overflow: hidden;
+}
+
+.avance span {
+  display: block;
+  height: 100%;
+  background: var(--acento);
+  transition: width var(--dur) var(--curva);
+}
+
+.tarjeta {
+  display: grid;
+  gap: var(--espacio-3);
+  width: min(680px, 100%);
+  min-height: 280px;
+  align-content: start;
+  padding: var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-xl, var(--radio-grande));
+  background: var(--superficie);
+  box-shadow: var(--sombra-2);
+}
+
+.frente {
+  margin: 0;
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
+  line-height: 1.35;
+  white-space: pre-wrap;
+}
+
+.original {
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+}
+
+.reverso {
+  display: grid;
+  gap: var(--espacio-2);
+  padding-top: var(--espacio-3);
+  border-top: 1px solid var(--borde);
+  font-size: var(--letra-4);
+  white-space: pre-wrap;
+}
+
+.ejemplo {
+  display: block;
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio);
+  background: var(--codigo-fondo);
+  font-family: var(--fuente-codigo);
+  font-size: var(--letra-2);
+  white-space: pre-wrap;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--espacio-2);
+  width: min(680px, 100%);
+}
+
+/* Los 4 botones de Anki, del mismo ancho */
+.notas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--espacio-2);
+  width: min(680px, 100%);
+}
+
+.nota {
+  display: grid;
+  gap: 2px;
+  justify-items: center;
+  padding: var(--espacio-3) var(--espacio-2);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  cursor: pointer;
+}
+
+.nota small {
+  color: var(--texto-suave);
+  font-size: var(--letra-1);
+}
+
+.nota[data-nota="otra"] {
+  border-color: color-mix(in srgb, var(--error) 50%, var(--borde));
+}
+.nota[data-nota="dificil"] {
+  border-color: color-mix(in srgb, var(--aviso) 50%, var(--borde));
+}
+.nota[data-nota="bien"] {
+  border-color: color-mix(in srgb, var(--exito) 50%, var(--borde));
+}
+.nota[data-nota="facil"] {
+  border-color: color-mix(in srgb, var(--acento) 50%, var(--borde));
+}
+.nota[data-sugerida="true"] {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+.teclas {
+  color: var(--texto-tenue);
+  font-size: var(--letra-1);
+}
+
+/* Lista de tus tarjetas, en filas que usan el ancho */
+.lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: var(--espacio-2);
+}
+
+.fila {
+  display: grid;
+  gap: var(--espacio-1);
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.fila strong {
+  font-weight: var(--peso-semi);
+}
+
+.fila > span {
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+}
+
+.pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+  color: var(--texto-tenue);
+  font-size: var(--letra-1);
+}
+
+.mazo {
+  justify-self: start;
+  padding: 1px var(--espacio-2);
+  border-radius: 999px;
+  background: var(--superficie-2);
+  color: var(--texto-suave);
+  font-size: var(--letra-1);
+}
+
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: var(--espacio-3);
+  align-items: start;
+}
+
+.propuestas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: var(--espacio-2);
+}
+
+.propuesta {
+  display: grid;
+  gap: var(--espacio-1);
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.propuesta[data-estado="descartada"] {
+  opacity: 0.5;
+}
+
+@media (max-width: 560px) {
+  .notas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tarjeta {
+    padding: var(--espacio-4);
+  }
+}

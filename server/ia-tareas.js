@@ -273,6 +273,70 @@ ${ESTILO}`,
   },
 };
 
+// ---------- Tarjetas de memoria (Anki) ----------
+const MAZOS_IA = ["js", "ingles", "entrevistas"];
+const tarjetaEnTexto = (c) => unir(bloque("Pregunta de la tarjeta", recortar(c.frente, 600)), bloque("Respuesta de la tarjeta", recortar(c.reverso, 1200)));
+
+Object.assign(TAREAS, {
+  "tarjeta-crear": {
+    modelo: HAIKU,
+    esquema: objeto({
+      tarjetas: lista(objeto({ mazo: opcion(MAZOS_IA), frente: texto(), reverso: texto(), ejemplo: texto() })),
+    }),
+    sistema: `Creas tarjetas de memoria (estilo Anki) para un estudiante que se prepara para entrevistas de frontend junior y para trabajar en inglés. Recibes algo que falló o que quiere recordar.
+- De 1 a 3 tarjetas, cada una sobre UNA sola idea. Si el error es uno solo, una tarjeta basta.
+- "frente": una pregunta concreta que obligue a recordar (no a reconocer), de una o dos líneas. Nada de "¿qué es X?" genérico: mejor "¿Qué imprime...?", "¿Cuándo usarías...?", "¿Cómo se dice en inglés...?".
+- "reverso": la respuesta en 1 a 3 frases, exacta.
+- "ejemplo": un ejemplo corto (código de una línea o una frase en inglés de trabajo); vacío si no aporta.
+- "mazo": "js" para JavaScript y programación, "ingles" para inglés, "entrevistas" para preguntas de entrevista y habilidades blandas.
+- Las tarjetas de inglés llevan el frente en español y el reverso en inglés.
+${ESTILO}`,
+    armar(c) {
+      const contenido = recortar(c.contenido, 3000);
+      if (contenido.length < 5) return { error: "Falta de qué hacer la tarjeta" };
+      return unir(c.origen ? `Viene de: ${recortar(c.origen, 120)}` : "", bloque("Lo que debe recordar", contenido));
+    },
+  },
+
+  "tarjeta-explicar": {
+    modelo: HAIKU,
+    esquema: objeto({ explicacion: texto(), ejemplo: texto() }),
+    sistema: `Un estudiante falló una tarjeta de memoria. Explícale la respuesta de otra forma para que se le quede.
+- "explicacion": 2 o 3 frases con una idea nueva (una analogía, el porqué, el error típico), sin repetir la respuesta tal cual.
+- "ejemplo": un ejemplo concreto y corto (código o una frase de trabajo en inglés, según la tarjeta).
+${ESTILO}`,
+    armar(c) {
+      if (!recortar(c.frente, 10)) return { error: "Falta la tarjeta" };
+      return unir(tarjetaEnTexto(c), bloque("Lo que respondió (si respondió)", recortar(c.respuesta, 1000)));
+    },
+  },
+
+  "tarjeta-reformular": {
+    modelo: HAIKU,
+    esquema: objeto({ pregunta: texto() }),
+    sistema: `Reformulas la pregunta de una tarjeta de memoria para que el estudiante recuerde el concepto y no la frase exacta. Misma respuesta, otra forma de preguntar: otro ejemplo, otro contexto o al revés. Una o dos líneas, en el mismo idioma que la pregunta original. Si te pasan reformulaciones anteriores, no las repitas.`,
+    armar(c) {
+      if (!recortar(c.frente, 10)) return { error: "Falta la tarjeta" };
+      return unir(tarjetaEnTexto(c), bloque("Reformulaciones anteriores", textos(c.anteriores, 5, 300).map((t) => `- ${t}`).join("\n")));
+    },
+  },
+
+  "tarjeta-calificar": {
+    modelo: HAIKU,
+    esquema: objeto({ sugerencia: opcion(["otra", "dificil", "bien", "facil"]), comentario: texto() }),
+    sistema: `Un estudiante respondió una tarjeta de memoria escribiendo o hablando. Compara su respuesta con la de la tarjeta y sugiere cómo calificarla:
+- "otra" si no la sabía o se equivocó en lo central; "dificil" si llegó a medias o con errores; "bien" si la sabía; "facil" solo si la respuesta fue completa, exacta y segura.
+- Si viene dictada por voz, ignora la puntuación y errores de transcripción.
+- "comentario": una frase con lo que le faltó o lo que tuvo mal (o qué hizo bien).
+${ESTILO}`,
+    armar(c) {
+      const respuesta = recortar(c.respuesta, 1500);
+      if (!respuesta) return { error: "Escribe o di tu respuesta" };
+      return unir(tarjetaEnTexto(c), bloque("Su respuesta", respuesta));
+    },
+  },
+});
+
 /** Deja lo que devolvió la IA con la forma del esquema (textos recortados, números en rango, listas cortas). */
 export function limpiarPorEsquema(esquema, valor) {
   if (!esquema) return valor;

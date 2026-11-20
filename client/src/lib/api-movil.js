@@ -12,6 +12,7 @@ import { preparacion } from "../../../server/metricas.js";
 import { crearProgresoMovil } from "./progreso-movil.js";
 import { mapaDominio, unidadesDebiles } from "../../../server/dominio.js";
 import { erroresFrecuentes } from "../../../server/errores.js";
+import { MAZOS, calificar as calificarTarjetaFsrs, colaDeHoy } from "../../../server/tarjetas-reglas.js";
 import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
 import { analizarOferta, palabrasParaCv } from "../../../server/ofertas.js";
 import { diaSemana, lunesDe } from "../../../server/metricas.js";
@@ -527,6 +528,7 @@ const apiWeb = {
       examenHecho: !!progreso.registros("examenes")[lunesDe(hoy)],
       diarioHecho: !!progreso.registros("diario")[hoy],
       conMotor,
+      memoria: colaDeHoy(Object.values(progreso.registros("tarjetas")), { hoy, hechasHoy: { nuevas: dia.tarjetasNuevas ?? 0, repasos: dia.tarjetasRepasos ?? 0 } }).cola.length,
     });
   },
 
@@ -1023,6 +1025,49 @@ const apiWeb = {
   },
   // El mapache de inglés (ver movil/mapache/): lee tu progreso de inglés y guarda lo suyo en inglesExtra
   ...crearApiMapache({ progreso, itemsIngles, json, extraIngles, limpiar: () => cache.clear() }),
+  // --- Tarjetas de memoria (estilo Anki, ver server/tarjetas-reglas.js) ---
+  /** Todas tus tarjetas, de la más nueva a la más vieja. */
+  tarjetas: async () =>
+    Object.entries(progreso.registros("tarjetas"))
+      .map(([id, t]) => ({ ...t, id }))
+      .sort((a, b) => String(b.creada).localeCompare(String(a.creada))),
+  /** La cola de hoy (con topes) y cuántas hiciste. @param {string} [mazo] */
+  colaTarjetas: async (mazo) => {
+    const hoy = progreso.hoy();
+    const dia = progreso.dias()[hoy] ?? {};
+    const hechasHoy = { nuevas: dia.tarjetasNuevas ?? 0, repasos: dia.tarjetasRepasos ?? 0 };
+    const todas = Object.entries(progreso.registros("tarjetas")).map(([id, t]) => ({ ...t, id }));
+    return { ...colaDeHoy(todas, { hoy, mazo, hechasHoy }), hechasHoy, total: todas.length, hoy };
+  },
+  /** Crea o edita una tarjeta: { id?, mazo, frente, reverso, ejemplo?, origen? }. */
+  guardarTarjeta: async (t) => {
+    const id = t.id ?? `t-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
+    const previa = progreso.registros("tarjetas")[id];
+    const limpia = {
+      mazo: MAZOS[t.mazo] ? t.mazo : "js",
+      frente: String(t.frente ?? "").trim().slice(0, 600),
+      reverso: String(t.reverso ?? "").trim().slice(0, 1200),
+      ejemplo: String(t.ejemplo ?? "").trim().slice(0, 600),
+      origen: String(t.origen ?? previa?.origen ?? "").slice(0, 80),
+      creada: previa?.creada ?? new Date().toISOString(),
+      rep: previa?.rep ?? null,
+    };
+    if (!limpia.frente || !limpia.reverso) throw new Error("La tarjeta necesita pregunta y respuesta.");
+    progreso.guardarRegistro("tarjetas", id, limpia);
+    return { ...limpia, id };
+  },
+  borrarTarjeta: async (id) => progreso.borrarRegistro("tarjetas", id),
+  /** Calificas una tarjeta (1 a 4): FSRS decide cuándo vuelve. */
+  calificarTarjeta: async (id, nota) => {
+    const t = progreso.registros("tarjetas")[id];
+    if (!t) throw new Error("Esa tarjeta ya no existe.");
+    const { en: _en, ...resto } = t;
+    const rep = calificarTarjetaFsrs(t.rep, nota, progreso.hoy());
+    progreso.guardarRegistro("tarjetas", id, { ...resto, rep });
+    progreso.sumarDia(t.rep ? "tarjetasRepasos" : "tarjetasNuevas");
+    cache.clear();
+    return rep;
+  },
   /** Mis palabras: las que marcaste con estrella para repasarlas aparte. */
   misPalabras: async () => progreso.registros("misPalabras"),
   alternarMiPalabra: async (id) => {

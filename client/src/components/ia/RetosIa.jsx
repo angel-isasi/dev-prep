@@ -6,6 +6,7 @@ import { correrJs } from "../../lib/correr-js.js";
 import { TextoConCodigo } from "../TextoConCodigo.jsx";
 import { CajaIa, CodigoIa, ListaIa, Veredicto, estilosIa as base } from "./CajaIa.jsx";
 import { useIa } from "./useIa.js";
+import { CrearTarjeta } from "./CrearTarjeta.jsx";
 import estilos from "./Ia.module.css";
 
 const TEMAS_IMPRIME = ["closures", "hoisting", "var, let y const en bucles", "this", "event loop y setTimeout", "promesas y async/await", "coerción de tipos", "referencias de objetos y arrays", "sorpréndeme"];
@@ -111,6 +112,9 @@ function QueImprimeContenido({ olvidar }) {
                   <TextoConCodigo>{r.comentario}</TextoConCodigo>
                 </p>
               )}
+              {r.veredicto !== "acerto" && (
+                <CrearTarjeta origen="¿Qué imprime?" contenido={["Código:", reto.codigo, "Imprime:", reto.salida, "Por qué:", r.explicacion].join("\n")} />
+              )}
             </div>
           )}
         </>
@@ -189,6 +193,7 @@ function ReviewContenido({ olvidar }) {
                 <ListaIa titulo="Se te pasó" items={r.faltaron} tipo="falta" />
               </div>
               {r.comentario && <p className={estilos.nota}>{r.comentario}</p>}
+              {r.faltaron.length > 0 && <CrearTarjeta origen="code review" contenido={`Problemas de código que no vi en una revisión: ${r.faltaron.join("; ")}`} />}
             </div>
           )}
         </>

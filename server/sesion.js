@@ -22,7 +22,7 @@ const plural = (n, uno, varios) => (n === 1 ? uno : varios);
  * @param {boolean} [p.conDiario]  ¿hay pantalla de diario? (la app local de la laptop no la tiene)
  * @returns {{ pasos: object[], siguiente: object | null, hechos: number, minutos: number, completa: boolean, pausa: boolean }}
  */
-export function armarSesion({ meta = {}, dia = {}, repaso = {}, nuevo = {}, ingles = null, finDeSemana = false, examenHecho = false, diarioHecho = false, conMotor = false, conDiario = true }) {
+export function armarSesion({ meta = {}, dia = {}, repaso = {}, nuevo = {}, ingles = null, finDeSemana = false, examenHecho = false, diarioHecho = false, conMotor = false, conDiario = true, memoria = 0 }) {
   const { preguntas = 0, tarjetas = 0, ejercicios = [] } = repaso;
   const pasos = [];
 
@@ -52,6 +52,21 @@ export function armarSesion({ meta = {}, dia = {}, repaso = {}, nuevo = {}, ingl
       puntos: tarjetas >= 10 ? puntosPor("tandasTarjetas") : 0,
       a: "/entrevistas?pestana=tarjetas",
       hecho: tarjetas === 0,
+    });
+  }
+
+  // 2b. Tus tarjetas de memoria (estilo Anki): la cola de hoy ya trae los topes del día
+  const memoriaHechas = (dia.tarjetasNuevas ?? 0) + (dia.tarjetasRepasos ?? 0);
+  if (memoria > 0 || memoriaHechas > 0) {
+    pasos.push({
+      id: "memoria",
+      tipo: "repaso",
+      titulo: memoria > 0 ? `${memoria} ${plural(memoria, "tarjeta de memoria", "tarjetas de memoria")}` : "Tarjetas de memoria al día",
+      detalle: "Las que estás por olvidar, una a la vez",
+      minutos: Math.max(1, Math.round((memoria * 12) / 60)),
+      puntos: 0,
+      a: "/tarjetas",
+      hecho: memoria === 0,
     });
   }
 

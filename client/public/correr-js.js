@@ -1,3 +1,4 @@
+// Copia de client/public-movil/correr-js.js para la app local (mantener las dos iguales).
 // Corre un código corto de JavaScript y devuelve lo que imprime con console.log (para "¿Qué imprime?").
 // Vive en un Worker: no ve la página, ni tus datos, ni el DOM. Su política de seguridad (vercel.json)
 // le permite evaluar código y le prohíbe conectarse a internet.

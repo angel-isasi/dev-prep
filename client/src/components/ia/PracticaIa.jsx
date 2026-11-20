@@ -6,6 +6,7 @@ import { EvaluadorIa } from "../EvaluadorIa.jsx";
 import { TextoConCodigo } from "../TextoConCodigo.jsx";
 import { CajaIa, CodigoIa, ListaIa, Veredicto, estilosIa as base } from "./CajaIa.jsx";
 import { useIa } from "./useIa.js";
+import { CrearTarjeta } from "./CrearTarjeta.jsx";
 import estilos from "./Ia.module.css";
 
 /** Tu código de workspace/ (y la solución oficial si ya lo resolviste). */
@@ -183,6 +184,7 @@ function ComplejidadContenido({ enunciado, codigo, olvidar }) {
         <p>
           <TextoConCodigo>{r.comentario}</TextoConCodigo>
         </p>
+        {r.veredicto !== "bien" && <CrearTarjeta origen="complejidad" contenido={`Complejidad de mi solución: tiempo ${r.tiempo}, espacio ${r.espacio}. ${r.comentario}`} />}
         <button type="button" className={base.enlace} onClick={() => setR(null)}>
           Intentar otra vez
         </button>
