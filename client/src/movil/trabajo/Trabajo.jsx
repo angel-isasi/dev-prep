@@ -163,7 +163,8 @@ function Postulaciones() {
   }
 
   return (
-    <>
+    <div className={partes.postulaciones}>
+      <div className={partes.columna}>
       <div className={estilos.fila}>
         <h2>Tus postulaciones</h2>
         <button type="button" className="boton boton-primario" onClick={() => setEditando({ ...vacia })}>
@@ -303,6 +304,8 @@ function Postulaciones() {
 
       {resumen?.numeros.total > 0 && <Numeros numeros={resumen.numeros} />}
 
+      </div>
+      <div className={partes.columna}>
       <div className={estilos.fila}>
         <h2 title="Las preguntas reales de tus entrevistas valen oro: anótalas apenas salgas y entran a tu repaso como tarjetas.">
           Me preguntaron esto
@@ -339,7 +342,8 @@ function Postulaciones() {
           <PreguntaPropia key={p.id} pregunta={p} alCambiar={cargar} />
         ))}
       </ul>
-    </>
+      </div>
+    </div>
   );
 }
 

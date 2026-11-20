@@ -350,3 +350,54 @@
   gap: var(--espacio-2);
   margin-top: auto;
 }
+
+/* Tus mazos en la portada */
+.mazos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espacio-3);
+}
+
+.mazos > :global(.etiqueta) {
+  grid-column: 1 / -1;
+}
+
+.mazoFicha {
+  display: grid;
+  gap: 4px;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie-2);
+  color: var(--texto);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--transicion), border-color var(--transicion);
+}
+
+.mazoFicha:hover {
+  border-color: var(--acento);
+  transform: translateY(-2px);
+}
+
+.mazoFicha[data-activo="true"] {
+  border-color: var(--acento);
+  background: color-mix(in srgb, var(--acento) 10%, var(--superficie-2));
+}
+
+.mazoFicha strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-6);
+}
+
+.mazoFicha span {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+@media (max-width: 560px) {
+  .mazos {
+    grid-template-columns: 1fr;
+  }
+}

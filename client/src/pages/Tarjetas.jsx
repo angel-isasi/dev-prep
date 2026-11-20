@@ -41,7 +41,11 @@ export function Tarjetas() {
   const [cola, setCola] = useState(null);
   const [sesion, setSesion] = useState(null); // { lista, indice, hechas }
 
-  const cargar = useCallback(() => api.colaTarjetas?.(mazo || undefined).then(setCola), [mazo]);
+  const [todas, setTodas] = useState(null); // para contar cada mazo en la portada
+  const cargar = useCallback(() => {
+    api.misTarjetas?.().then(setTodas);
+    return api.colaTarjetas?.(mazo || undefined).then(setCola);
+  }, [mazo]);
   useEffect(() => {
     cargar();
   }, [cargar]);
@@ -115,6 +119,22 @@ export function Tarjetas() {
                   Ver mis {cola.total} tarjetas
                 </button>
               )}
+            </div>
+            <div className={estilos.mazos}>
+              <span className="etiqueta">Tus mazos</span>
+              {Object.entries(MAZOS).map(([id, nombre]) => {
+                const delMazo = (todas ?? []).filter((t) => t.mazo === id);
+                const paraHoy = delMazo.filter((t) => !t.rep || t.rep.proxima <= cola.hoy).length;
+                return (
+                  <button key={id} type="button" className={estilos.mazoFicha} data-activo={mazo === id} onClick={() => setMazo(mazo === id ? "" : id)}>
+                    <strong>{nombre}</strong>
+                    <span>
+                      {delMazo.length} {delMazo.length === 1 ? "tarjeta" : "tarjetas"}
+                      {paraHoy > 0 && ` · ${paraHoy} por ver`}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
             <div className={estilos.resumen}>
               <div className={estilos.cifra}>
