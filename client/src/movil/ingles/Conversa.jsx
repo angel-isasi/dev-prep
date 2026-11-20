@@ -3,6 +3,7 @@
 // charla no te corrige (como una persona real); al terminar te da tus errores corregidos.
 // Cada turno usa el modelo barato: una charla completa cuesta menos de un centavo.
 import { useEffect, useRef, useState } from "react";
+import { guardarErroresIngles } from "../../lib/errores-ingles.js";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
 import { pedirIa } from "../../lib/ia.js";
@@ -43,6 +44,24 @@ export const ESCENARIOS = [
     titulo: "Primer día",
     sub: "Charla con tu nuevo equipo",
     rol: "You are a friendly teammate welcoming the student on their first day as a junior frontend developer. Make small talk: where they are from, what they studied, what they like to build, the tools the team uses, and plans for the first week.",
+  },
+  {
+    id: "planning",
+    titulo: "Sprint planning",
+    sub: "Estimas y te comprometes con tareas",
+    rol: "You are the product owner running a sprint planning meeting with a small web team. The student is the junior frontend developer. Present 2 or 3 small tickets (for example: add a search filter, fix a layout bug on mobile, add form validation), ask them to estimate one, what they need to start, possible risks and questions about the requirements. Keep it realistic and friendly.",
+  },
+  {
+    id: "cliente",
+    titulo: "Demo con un cliente",
+    sub: "Muestras lo que hiciste y respondes dudas",
+    rol: "You are a non-technical client in a short demo call. The student, a junior frontend developer, shows you a new feature of your web app (a product list with filters). Ask simple business questions, ask for a small change, mention a bug you saw and ask when it will be ready. Be polite but a bit demanding.",
+  },
+  {
+    id: "retro",
+    titulo: "Retrospectiva",
+    sub: "Qué salió bien, qué mejorar",
+    rol: "You are the scrum master running a sprint retrospective with a remote web team. Ask the student, the junior frontend developer, what went well this sprint, what didn't go well, and one thing to improve. Ask follow-up questions and suggest an action item together.",
   },
 ];
 
@@ -178,6 +197,8 @@ function Charla({ escenario, alSalir, alOlvidarClave }) {
       if (!vivo.current) return;
       setCorreccion(r);
       setFin(true);
+      // Tus errores quedan guardados para "Tus errores de siempre" y la memoria del tutor
+      guardarErroresIngles(r.correcciones, "Conversa");
       // El tiempo hablando cuenta para tus minutos de inglés de hoy (una sola vez por charla)
       if (!guardado.current) {
         guardado.current = true;

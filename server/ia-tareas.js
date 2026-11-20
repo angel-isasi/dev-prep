@@ -588,6 +588,98 @@ ${ESTILO}`,
   },
 });
 
+// ---------- Inglés ----------
+const CORRECCIONES = lista(objeto({ original: texto(), corregido: texto(), explicacion: texto() }));
+
+Object.assign(TAREAS, {
+  "como-se-dice": {
+    modelo: HAIKU,
+    esquema: objeto({
+      opciones: lista(objeto({ en: texto(), cuando: texto("Cuándo usar esta forma, en español, una frase corta") })),
+      nota: texto("Un detalle útil (falso amigo, error típico de hispanohablantes), o vacío"),
+    }),
+    sistema: `Un estudiante peruano de nivel B1-B2 que se prepara para trabajar en inglés como desarrollador te pregunta cómo se dice algo.
+- "opciones": 2 o 3 formas naturales de decirlo en inglés, de la más común a la menos, cada una con cuándo usarla (por ejemplo: en una daily, por chat con el equipo, más formal con un cliente).
+- Inglés natural de trabajo, no traducción palabra por palabra. Si es una expresión peruana, busca el equivalente real.
+- "nota": un detalle que le ayude a no equivocarse (falso amigo, preposición, error típico); vacío si no hace falta.
+${ESTILO}`,
+    armar(c) {
+      const textoEs = recortar(c.texto, 600);
+      if (textoEs.length < 2) return { error: "Escribe lo que quieres decir" };
+      return unir(bloque("Lo que quiere decir", textoEs), c.contexto ? `Contexto: ${recortar(c.contexto, 300)}` : "");
+    },
+  },
+
+  escrito: {
+    modelo: HAIKU,
+    esquema: objeto({ nivel: opcion(["A1", "A2", "B1", "B2", "C1", "C2"]), puntaje: entero(), correcciones: CORRECCIONES, version: texto(), comentario: texto() }),
+    sistema: `Ayudas a un estudiante peruano (nivel B1-B2) a escribir en inglés mensajes de trabajo como desarrollador: Slack, descripciones de pull request, correos, actualizaciones.
+- Puede escribir en español (porque todavía no sabe cómo decirlo), en inglés a medias o mezclado.
+- "version": el mensaje listo para enviar, en inglés natural de trabajo, con el tono adecuado a la situación (ni muy formal ni muy informal), corto y claro.
+- "correcciones": solo de lo que escribió EN INGLÉS (5 como máximo, sin repetir el mismo tipo de error), con el fragmento original, el corregido y una explicación en español de 15 palabras como máximo. Si escribió todo en español, en vez de correcciones pon 2 o 3 expresiones clave de la versión con su explicación (original: la idea en español, corregido: cómo se dice).
+- "nivel": el nivel que muestra lo que escribió en inglés (si escribió en español, "A2"). "puntaje" de 0 a 10 para un mensaje de trabajo.
+- "comentario": una frase en español con lo más importante.
+${ESTILO}`,
+    armar(c) {
+      const borrador = recortar(c.respuesta, 3000);
+      if (borrador.length < 5) return { error: "Escribe tu mensaje (en español o en inglés)" };
+      return unir(bloque("Situación", recortar(c.situacion, 600)), bloque("Lo que escribió", borrador));
+    },
+  },
+
+  "errores-patrones": {
+    modelo: HAIKU,
+    esquema: objeto({
+      patrones: lista(
+        objeto({
+          nombre: texto("El error, en pocas palabras (por ejemplo: 'have' para la edad)"),
+          explicacion: texto(),
+          ejemplos: lista(objeto({ mal: texto(), bien: texto() })),
+          practica: texto("Una frase en español para que la diga en inglés usando la regla"),
+        }),
+      ),
+    }),
+    sistema: `Recibes los errores de inglés que un estudiante peruano (B1-B2) cometió en varias prácticas. Agrúpalos en los patrones que más se repiten y arma una mini lección de cada uno.
+- De 1 a 4 patrones, del más frecuente al menos. Ignora errores sueltos que no se repiten si hay patrones claros.
+- "explicacion": la regla en 2 frases simples, en español, pensando en cómo piensa un hispanohablante.
+- "ejemplos": 2 pares mal/bien, idealmente de sus propios errores.
+- "practica": una frase en español, de trabajo de desarrollador, para que la diga en inglés aplicando la regla.
+${ESTILO}`,
+    armar(c) {
+      const errores = (Array.isArray(c.errores) ? c.errores : [])
+        .slice(-40)
+        .map((e) => `- ${recortar(e?.original, 200)} → ${recortar(e?.corregido, 200)} (${recortar(e?.explicacion, 150)})`)
+        .join("\n");
+      if (!errores) return { error: "Todavía no hay errores guardados" };
+      return bloque("Sus errores", errores);
+    },
+  },
+
+  "entrevista-en": {
+    modelo: HAIKU,
+    esquema: objeto({
+      comentario: texto("Reacción breve en inglés a su última respuesta, o vacío al empezar"),
+      pregunta: texto(),
+      modelo: texto("Una respuesta modelo corta en inglés, en primera persona, que el estudiante podría decir (B1-B2)"),
+      claves: lista(texto("Palabra o expresión clave en inglés para responder")),
+      fin: booleano(),
+    }),
+    sistema: `You are a friendly recruiter at a software company interviewing a junior frontend developer from Peru, in English. The student's English is B1-B2, so speak clearly.
+- Ask ONE question at a time, different each time: about themselves, their projects, teamwork, learning, a mistake they made, basic frontend concepts, why the company, availability. Use what the student said to ask natural follow-ups. Avoid the questions listed as already asked.
+- "comentario": a short natural reaction to their last answer (empty at the start).
+- "modelo": a short sample answer (40 to 70 words) that this student could say, in first person, B1-B2, using what you know about them (projects, studies). It's a help card they may read aloud.
+- "claves": 4 to 6 key words or phrases to build their own answer.
+- "fin": true after 6 or 7 questions; then "pregunta" is a goodbye.`,
+    armar(c) {
+      const charla = historialEnTexto(c.historial, "Student", "You");
+      return unir(
+        bloque("Questions asked in previous interviews (do not repeat)", textos(c.anteriores, 12, 200).map((t) => `- ${t}`).join("\n")),
+        charla ? bloque("Interview so far", charla) : "Start with a greeting and your first question.",
+      );
+    },
+  },
+});
+
 /** Cómo suena el entrevistador según la personalidad que elegiste (se agrega a la evaluación). */
 export const PERSONALIDADES = {
   amable: "Eres un entrevistador amable y paciente: reconoce lo bueno primero y repregunta con calma.",

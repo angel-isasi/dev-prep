@@ -7,6 +7,7 @@ import { TextoConCodigo } from "../TextoConCodigo.jsx";
 import { CajaIa, CodigoIa, ListaIa, Veredicto, estilosIa as base } from "./CajaIa.jsx";
 import { useIa } from "./useIa.js";
 import { CrearTarjeta } from "./CrearTarjeta.jsx";
+import { ExplicaloIngles } from "./InglesIa.jsx";
 import estilos from "./Ia.module.css";
 
 /** Tu código de workspace/ (y la solución oficial si ya lo resolviste). */
@@ -149,6 +150,7 @@ export function Entrenar({ id, titulo, enunciado }) {
       <Complejidad enunciado={enunciado} codigo={codigo} />
       <DetectaError enunciado={enunciado} codigo={datos?.oficial || codigo} />
       <Variante id={id} titulo={titulo} enunciado={enunciado} codigo={codigo} />
+      <ExplicaloIngles titulo={titulo} codigo={codigo} />
     </div>
   );
 }

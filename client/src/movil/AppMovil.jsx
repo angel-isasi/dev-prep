@@ -29,6 +29,7 @@ import { Esqueleto } from "../components/Esqueleto.jsx";
 import { MarcoVisita } from "./Visita.jsx";
 
 // Cada pantalla se descarga cuando se abre (ver lib/perezoso.js)
+const InglesConIa = perezoso(() => import("../pages/InglesConIa.jsx"), "InglesConIa");
 const Tarjetas = perezoso(() => import("../pages/Tarjetas.jsx"), "Tarjetas");
 const EntrenaIa = perezoso(() => import("../pages/EntrenaIa.jsx"), "EntrenaIa");
 const EjercicioMovil = perezoso(() => import("./EjercicioMovil.jsx"), "EjercicioMovil");
@@ -99,6 +100,7 @@ export function App() {
       <Route path="enfoque" element={<Enfoque />} />
       <Route path="trabajo" element={<Trabajo />} />
       <Route path="tarjetas" element={<Tarjetas />} />
+      <Route path="ingles/ia" element={<InglesConIa />} />
       <Route path="camino" element={<RutaLecciones />} />
       <Route path="leccion" element={<LeccionMovil />} />
       <Route path="vincular" element={<VincularMovil />} />

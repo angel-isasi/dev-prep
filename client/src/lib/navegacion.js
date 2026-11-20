@@ -45,6 +45,7 @@ const TODAS = [
       { a: "/ingles", texto: "Temario", exacto: true, tambien: ["/ingles/unidad", "/ingles/parejas", "/ingles/examen", "/ingles/conversa"] },
       { a: "/ingles/historias", texto: "Historias", tambien: ["/ingles/historia", "/ingles/roleplay"] },
       { a: "/ingles/mapache", texto: "Map" },
+      { a: "/ingles/ia", texto: "Con IA" },
     ],
   },
   {

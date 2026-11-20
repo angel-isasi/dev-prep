@@ -44,13 +44,15 @@ export function Balance({ r }) {
  * @param {(r: object) => import("react").ReactNode} [p.verCierre]  cómo mostrar el balance
  * @param {() => void} [p.alOlvidarClave]
  * @param {(r: object, historial: object[]) => void} [p.alCerrar]
+ * @param {(ultimo: object|null) => import("react").ReactNode} [p.verAyuda]  ayuda bajo el último turno (por ejemplo, tarjetas de respuesta)
  */
-export function ChatIa({ tareaTurno, tareaCierre, datos, textoEmpezar = "Empezar", idioma = "es", verCierre, alOlvidarClave, alCerrar, nombreOtro = "Entrevistador" }) {
+export function ChatIa({ tareaTurno, tareaCierre, datos, textoEmpezar = "Empezar", idioma = "es", verCierre, alOlvidarClave, alCerrar, nombreOtro = "Entrevistador", verAyuda }) {
   const { cargando, error, pedir } = useIa(alOlvidarClave);
   const [historial, setHistorial] = useState([]);
   const [texto, setTexto] = useState("");
   const [fin, setFin] = useState(false);
   const [cierre, setCierre] = useState(null);
+  const [ultimo, setUltimo] = useState(null); // el último turno de la IA tal cual (para verAyuda)
   const [dictando, setDictando] = useState(false);
   const [conVoz, setConVoz] = useState(false);
   const dictado = useRef(null);
@@ -63,6 +65,7 @@ export function ChatIa({ tareaTurno, tareaCierre, datos, textoEmpezar = "Empezar
   async function turno(nuevoHistorial) {
     const r = await pedir({ tarea: tareaTurno, ...datos, historial: nuevoHistorial });
     if (!r) return;
+    setUltimo(r);
     const linea = textoDe(r);
     setHistorial([...nuevoHistorial, { de: "ia", texto: linea }]);
     if (r.fin) setFin(true);
@@ -124,6 +127,7 @@ export function ChatIa({ tareaTurno, tareaCierre, datos, textoEmpezar = "Empezar
         <>
           {!fin && (
             <>
+              {verAyuda?.(ultimo)}
               <textarea
                 className={base.texto}
                 rows={3}
