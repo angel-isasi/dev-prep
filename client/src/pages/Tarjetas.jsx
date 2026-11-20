@@ -18,6 +18,7 @@ import { IconoMicrofono } from "../components/Iconos.jsx";
 import base from "../components/EvaluadorIa.module.css";
 import extra from "../components/ia/Ia.module.css";
 import estilos from "../components/ia/Tarjetas.module.css";
+import pagina from "./Entrevistas.module.css";
 
 const NOMBRE_NOTA = { otra: "Otra vez", dificil: "Difícil", bien: "Bien", facil: "Fácil" };
 const MAZOS_FILTRO = [["", "Todas"], ...Object.entries(MAZOS)];
@@ -62,7 +63,7 @@ export function Tarjetas() {
   }
 
   return (
-    <section className={estilos.pagina}>
+    <section className={`${pagina.pagina} ${estilos.pagina}`}>
       <CabeceraPagina
         etiqueta={cola ? (cola.cola.length ? `${cola.cola.length} para hoy · unos ${minutosCola(cola.cola.length)} min` : "Al día") : ""}
         titulo="Tarjetas"
@@ -81,35 +82,83 @@ export function Tarjetas() {
       </div>
 
       {pestana === "estudiar" && cola && (
-        <>
-          <div className={estilos.resumen}>
-            <div className={estilos.cifra}>
-              <strong>{cola.repasos}</strong>
-              <span>repasos para hoy</span>
+        <div className={estilos.portada}>
+          {/* Lo de hoy: el número grande, el botón y las tres cifras */}
+          <section className={`tarjeta ${estilos.hoy}`}>
+            <span className="etiqueta">Hoy</span>
+            <div className={estilos.hoyCabeza}>
+              <strong className={estilos.numeroHoy}>{cola.cola.length}</strong>
+              <div>
+                <h2>{cola.cola.length ? (cola.cola.length === 1 ? "tarjeta te toca hoy" : "tarjetas te tocan hoy") : cola.total ? "Estás al día" : "Todavía no tienes tarjetas"}</h2>
+                <p className={base.suave}>
+                  {cola.cola.length
+                    ? `Unos ${minutosCola(cola.cola.length)} min. Una a la vez, sin nada alrededor.`
+                    : cola.total
+                      ? "Terminaste las de hoy. Vuelven cuando estén por olvidarse."
+                      : "Crea la primera a mano o deja que la IA te la proponga cuando falles algo."}
+                  {cola.esperando > 0 && ` ${cola.esperando} más esperan a mañana por el tope del día.`}
+                </p>
+              </div>
             </div>
-            <div className={estilos.cifra}>
-              <strong>{cola.nuevas}</strong>
-              <span>nuevas para hoy</span>
-            </div>
-            <div className={estilos.cifra}>
-              <strong>{cola.hechasHoy.nuevas + cola.hechasHoy.repasos}</strong>
-              <span>hechas hoy</span>
-            </div>
-          </div>
-          {cola.cola.length ? (
             <div className={estilos.empezar}>
-              <button type="button" className="boton boton-primario" onClick={() => setSesion({ lista: cola.cola, indice: 0, hechas: 0 })}>
-                Empezar ({cola.cola.length})
-              </button>
-              <span className={base.suave}>Como máximo 10 nuevas y 30 repasos al día: lo demás espera, no se te acumula encima.</span>
+              {cola.cola.length > 0 ? (
+                <button type="button" className="boton boton-primario" onClick={() => setSesion({ lista: cola.cola, indice: 0, hechas: 0 })}>
+                  Empezar a repasar
+                </button>
+              ) : (
+                <button type="button" className="boton boton-primario" onClick={() => setPestana("nueva")}>
+                  Crear una tarjeta
+                </button>
+              )}
+              {cola.total > 0 && (
+                <button type="button" className="boton boton-fantasma" onClick={() => setPestana("mias")}>
+                  Ver mis {cola.total} tarjetas
+                </button>
+              )}
             </div>
-          ) : (
-            <p className={base.suave}>
-              {cola.total ? "Terminaste las de hoy. Vuelven cuando estén por olvidarse." : "Todavía no tienes tarjetas. Créalas en Nueva, o con el botón + Tarjeta cuando fallas algo."}
-              {cola.esperando > 0 && ` (${cola.esperando} esperan a mañana por el tope del día).`}
-            </p>
-          )}
-        </>
+            <div className={estilos.resumen}>
+              <div className={estilos.cifra}>
+                <strong>{cola.repasos}</strong>
+                <span>repasos para hoy</span>
+              </div>
+              <div className={estilos.cifra}>
+                <strong>{cola.nuevas}</strong>
+                <span>nuevas para hoy</span>
+              </div>
+              <div className={estilos.cifra}>
+                <strong>{cola.hechasHoy.nuevas + cola.hechasHoy.repasos}</strong>
+                <span>hechas hoy</span>
+              </div>
+            </div>
+          </section>
+
+          {/* Cómo funcionan, siempre a la vista: así el espacio explica en vez de quedar vacío */}
+          <section className={`tarjeta ${estilos.como}`}>
+            <span className="etiqueta">Cómo funcionan</span>
+            <ol className={estilos.pasos}>
+              <li>
+                <strong>Ves la pregunta</strong>
+                <span>Intenta recordar la respuesta antes de voltear. Puedes responder escribiendo o hablando.</span>
+              </li>
+              <li>
+                <strong>Volteas y te calificas</strong>
+                <span>Otra vez, Difícil, Bien o Fácil. Con el teclado: Espacio voltea y del 1 al 4 calificas.</span>
+              </li>
+              <li>
+                <strong>Vuelve justo antes de que la olvides</strong>
+                <span>Las que cuestan regresan pronto; las fáciles, en días o semanas.</span>
+              </li>
+            </ol>
+            <p className={estilos.notaTope}>Como máximo 10 nuevas y 30 repasos al día: lo demás espera, no se te acumula encima.</p>
+            <div className={estilos.origenes}>
+              <span className={base.suave}>Se crean solas con el botón + Tarjeta en:</span>
+              <span className="chip">correcciones de inglés</span>
+              <span className="chip">entrevistas</span>
+              <span className="chip">¿Qué imprime?</span>
+              <span className="chip">quiz fallado</span>
+            </div>
+          </section>
+        </div>
       )}
       {pestana === "mias" && <MisTarjetas mazo={mazo} alCambiar={cargar} />}
       {pestana === "nueva" && <NuevaTarjeta mazo={mazo || "js"} alGuardar={cargar} />}

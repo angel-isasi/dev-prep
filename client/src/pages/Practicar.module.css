@@ -105,7 +105,7 @@
 .areaCuenta strong {
   color: var(--texto);
   font-family: var(--fuente-titulos);
-  font-size: var(--letra-8);
+  font-size: var(--letra-7);
 }
 
 .colecciones {
@@ -380,25 +380,46 @@
 
 /* Atajos (Lee y predice, Depurar, Reto de la semana): una fila de 3 en la laptop, apilados en el celular.
    auto-fit reparte el ancho entre los que haya (si no hay reto, quedan 2 columnas). */
+/* Los atajos en una lista (icono, título y texto en una fila) y, al lado, el reto de la semana */
 .atajos {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: var(--espacio-3);
 }
 
+.atajosLista {
+  display: grid;
+  gap: var(--espacio-3);
+}
+
+/* Sin reto: los atajos se reparten el ancho */
+.atajos:has(> .retoSemana:empty) {
+  grid-template-columns: 1fr;
+}
+
+.atajos:has(> .retoSemana:empty) .atajosLista {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+@media (max-width: 900px) {
+  .atajos {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* El margen solo existe si hay algo que mostrar */
-.atajos:has(> a),
+.atajos:has(.atajo),
 .atajos:has(> .retoSemana:not(:empty)) {
   margin-bottom: var(--espacio-6);
 }
 
+/* El icono arriba y el texto abajo: la ficha llena su alto aunque el reto de al lado sea más alto */
 .atajo {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
+  align-items: center;
+  gap: var(--espacio-4);
   min-height: 44px;
-  padding: var(--espacio-4);
+  padding: var(--espacio-4) var(--espacio-5);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
   background: var(--superficie);
@@ -409,13 +430,30 @@
   text-decoration: none;
 }
 
+.atajoIcono {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radio-lg);
+  background: color-mix(in srgb, var(--acento) 14%, var(--superficie-2));
+  color: var(--acento);
+}
+
+.atajoTexto {
+  display: grid;
+  gap: 4px;
+}
+
 .atajo strong {
-  font-size: var(--letra-6);
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-8);
 }
 
 .atajo small {
   color: var(--texto-suave);
-  font-size: var(--letra-3);
+  font-size: var(--letra-4);
 }
 
 .retoSemana:empty {

@@ -42,10 +42,10 @@ const TODAS = [
     Icono: IconoIngles,
     web: true,
     sub: [
-      { a: "/ingles", texto: "Temario", exacto: true, tambien: ["/ingles/unidad", "/ingles/parejas", "/ingles/examen", "/ingles/conversa"] },
+      { a: "/ingles", texto: "Temario", exacto: true, tambien: ["/ingles/unidad", "/ingles/parejas", "/ingles/examen"] },
       { a: "/ingles/historias", texto: "Historias", tambien: ["/ingles/historia", "/ingles/roleplay"] },
       { a: "/ingles/mapache", texto: "Map" },
-      { a: "/ingles/ia", texto: "Con IA" },
+      { a: "/ingles/ia", texto: "Con IA", tambien: ["/ingles/conversa"] },
     ],
   },
   {

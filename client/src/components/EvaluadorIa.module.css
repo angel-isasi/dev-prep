@@ -3,8 +3,8 @@
   display: grid;
   align-self: stretch;
   width: 100%;
-  gap: var(--espacio-2);
-  padding: var(--espacio-3) var(--espacio-4);
+  gap: var(--espacio-3);
+  padding: var(--espacio-4) var(--espacio-5);
   border: 1px solid color-mix(in srgb, var(--acento) 30%, var(--borde));
   border-radius: var(--radio-grande);
   background: color-mix(in srgb, var(--acento) 5%, var(--superficie));
@@ -59,18 +59,33 @@
   gap: var(--espacio-2);
 }
 
+/* El título de cada caja de IA: se lee como un título, con un punto de color delante */
 .etiqueta {
-  color: var(--acento);
-  font-size: var(--letra-2);
-  font-weight: var(--peso-negrita);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  color: var(--texto);
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-7);
+  font-weight: var(--peso-titulo);
+  line-height: var(--linea-ajustada);
+}
+
+.etiqueta::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--acento);
+  box-shadow: 0 0 10px var(--acento);
 }
 
 .suave {
   margin: 0;
   color: var(--texto-suave);
-  font-size: var(--letra-3);
+  font-size: var(--letra-4);
+  line-height: 1.5;
 }
 
 .fila {
@@ -98,8 +113,11 @@
 
 .texto {
   width: 100%;
+  min-height: 96px;
+  padding: var(--espacio-3) var(--espacio-4);
   resize: vertical;
-  line-height: 1.5;
+  font-size: var(--letra-5);
+  line-height: 1.55;
 }
 
 .enlace {
@@ -112,14 +130,14 @@
   background: none;
   color: var(--acento);
   font: inherit;
-  font-size: var(--letra-3);
+  font-size: var(--letra-4);
   cursor: pointer;
 }
 
 .error {
   margin: 0;
   color: var(--error);
-  font-size: var(--letra-3);
+  font-size: var(--letra-4);
 }
 
 .repreguntaTexto {

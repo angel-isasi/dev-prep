@@ -13,6 +13,15 @@
 
 export const DICCIONARIO = {
   // ---------- Entrevistas y Buscar trabajo (rediseño del 2026-11-20) ----------
+  "Cómo funcionan": "How they work",
+  "Usa IA": "Uses AI",
+  "Empezar a repasar": "Start reviewing",
+  "Crear una tarjeta": "Create a card",
+  "Ves la pregunta": "You see the question",
+  "Volteas y te calificas": "Flip and grade yourself",
+  "Escribir": "Write",
+  "Reuniones": "Meetings",
+  // ---------- Entrevistas y Buscar trabajo (rediseño del 2026-11-20) ----------
 
   // ---------- Entrevistas y Buscar trabajo (rediseño del 2026-11-20) ----------
   "Buscar trabajo": "Job search",

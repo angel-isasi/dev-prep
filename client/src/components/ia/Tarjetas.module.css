@@ -15,7 +15,7 @@
 /* Resumen de hoy: tres cifras grandes en fila */
 .resumen {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--espacio-3);
 }
 
@@ -29,13 +29,14 @@
 }
 
 .cifra strong {
-  font-size: var(--letra-6);
+  font-family: var(--fuente-titulos);
+  font-size: var(--titulo-2);
   line-height: 1.1;
 }
 
 .cifra span {
   color: var(--texto-suave);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
 }
 
 .empezar {
@@ -92,7 +93,7 @@
 
 .original {
   color: var(--texto-suave);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
 }
 
 .reverso {
@@ -110,7 +111,7 @@
   border-radius: var(--radio);
   background: var(--codigo-fondo);
   font-family: var(--fuente-codigo);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
   white-space: pre-wrap;
 }
 
@@ -145,7 +146,7 @@
 
 .nota small {
   color: var(--texto-suave);
-  font-size: var(--letra-1);
+  font-size: var(--letra-3);
 }
 
 .nota[data-nota="otra"] {
@@ -167,7 +168,7 @@
 
 .teclas {
   color: var(--texto-tenue);
-  font-size: var(--letra-1);
+  font-size: var(--letra-3);
 }
 
 /* Lista de tus tarjetas, en filas que usan el ancho */
@@ -192,7 +193,7 @@
 
 .fila > span {
   color: var(--texto-suave);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
 }
 
 .pie {
@@ -202,7 +203,7 @@
   justify-content: space-between;
   gap: var(--espacio-2);
   color: var(--texto-tenue);
-  font-size: var(--letra-1);
+  font-size: var(--letra-3);
 }
 
 .mazo {
@@ -211,7 +212,7 @@
   border-radius: 999px;
   background: var(--superficie-2);
   color: var(--texto-suave);
-  font-size: var(--letra-1);
+  font-size: var(--letra-3);
 }
 
 .formulario {
@@ -247,4 +248,105 @@
   .tarjeta {
     padding: var(--espacio-4);
   }
+}
+
+/* Portada de Estudiar: lo de hoy a la izquierda y cómo funcionan a la derecha */
+.portada {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: var(--espacio-4);
+  align-items: stretch;
+}
+
+@media (max-width: 1000px) {
+  .portada {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hoy,
+.como {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  padding: var(--espacio-5) var(--espacio-6);
+}
+
+.hoyCabeza {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-5);
+}
+
+.hoyCabeza h2 {
+  margin: 0 0 var(--espacio-1);
+  font-size: var(--titulo-2);
+}
+
+.numeroHoy {
+  font-family: var(--fuente-titulos);
+  font-size: clamp(64px, 6vw, 104px);
+  font-weight: var(--peso-extra);
+  line-height: 0.9;
+  color: var(--acento);
+}
+
+.hoy .resumen {
+  margin-top: auto;
+}
+
+.pasos {
+  display: grid;
+  gap: var(--espacio-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: paso;
+}
+
+.pasos li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: var(--espacio-3);
+  counter-increment: paso;
+}
+
+.pasos li::before {
+  content: counter(paso);
+  grid-row: span 2;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--acento) 18%, var(--superficie-2));
+  color: var(--acento);
+  font-weight: var(--peso-negrita);
+}
+
+.pasos strong {
+  font-size: var(--letra-5);
+}
+
+.pasos span {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  line-height: 1.45;
+}
+
+.notaTope {
+  margin: 0;
+  padding: var(--espacio-3) var(--espacio-4);
+  border-left: 3px solid var(--acento);
+  border-radius: var(--radio);
+  background: color-mix(in srgb, var(--acento) 8%, transparent);
+  font-size: var(--letra-4);
+}
+
+.origenes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin-top: auto;
 }

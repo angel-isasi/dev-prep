@@ -49,7 +49,7 @@
   border-radius: 50%;
   background: color-mix(in srgb, var(--acento) 18%, var(--superficie-2));
   color: var(--acento);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
   font-weight: var(--peso-negrita, 700);
 }
 
@@ -94,17 +94,17 @@
 
 .listoCabeza h2 {
   margin: 2px 0 4px;
-  font-size: var(--letra-6);
+  font-size: var(--titulo-2);
 }
 
 .listoCabeza p {
   margin: 0;
-  font-size: var(--letra-3);
+  font-size: var(--letra-5);
 }
 
 .porcentaje {
   font-family: var(--fuente-titulos);
-  font-size: var(--letra-6);
+  font-size: var(--titulo-2);
 }
 
 /* Las etapas se reparten el alto de la tarjeta, así no queda un hueco abajo */
@@ -133,7 +133,7 @@
 
 .etapaNombre small {
   color: var(--texto-suave);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
 }
 
 .repaso {
@@ -219,19 +219,19 @@
 
 .cifras dt {
   color: var(--texto-suave);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
 }
 
 .cifras dd {
   margin: 0;
   font-family: var(--fuente-titulos);
-  font-size: var(--letra-5);
+  font-size: var(--titulo-2);
   font-weight: var(--peso-negrita, 700);
 }
 
 .cifras small {
   color: var(--texto-tenue);
-  font-size: var(--letra-1);
+  font-size: var(--letra-3);
 }
 
 .filaBotones {
@@ -269,7 +269,7 @@
 
 .acceso small {
   color: var(--texto-suave);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
 }
 
 .atajos {
@@ -280,7 +280,7 @@
   margin-top: auto;
   padding-top: var(--espacio-3);
   border-top: 1px solid var(--borde);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
 }
 
 /* ================================= Estudiar ================================= */
@@ -308,7 +308,7 @@
   background: none;
   color: var(--texto-suave);
   font: inherit;
-  font-size: var(--letra-3);
+  font-size: var(--letra-4);
   cursor: pointer;
 }
 
@@ -360,7 +360,7 @@
 
 .mazo small {
   color: var(--texto-suave);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
 }
 
 .mazoHoy {
@@ -435,176 +435,17 @@
 }
 
 .categoriaFila strong {
-  font-size: var(--letra-3);
+  font-size: var(--letra-4);
   font-weight: var(--peso-semi, 600);
 }
 
 .categoriaFila small {
   flex: none;
   color: var(--texto-suave);
-  font-size: var(--letra-2);
+  font-size: var(--letra-3);
 }
 
 .categoriaFila em {
   color: var(--acento);
   font-style: normal;
-}
-
-/* ================================== Simular ================================= */
-.simular {
-  container-type: inline-size;
-  display: grid;
-  grid-template-columns: minmax(250px, 300px) minmax(0, 1fr);
-  gap: var(--espacio-4);
-  align-items: start;
-}
-
-/* Una consulta de contenedor no puede cambiar al mismo contenedor: aquí se mide la ventana */
-@media (max-width: 1100px) {
-  .simular {
-    grid-template-columns: 1fr;
-  }
-}
-
-.menu {
-  position: sticky;
-  top: var(--espacio-4);
-  display: grid;
-  gap: var(--espacio-4);
-}
-
-.menuGrupo {
-  display: grid;
-  gap: 6px;
-}
-
-/* En pantallas angostas el menú es una fila que se desliza, así la práctica queda a la vista */
-@media (max-width: 1100px) {
-  .menu {
-    position: static;
-    display: flex;
-    gap: var(--espacio-2);
-    margin: 0 calc(-1 * var(--espacio-2));
-    padding: 2px var(--espacio-2) var(--espacio-2);
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-  }
-  .menuGrupo {
-    display: contents;
-  }
-  .menuGrupo > :global(.etiqueta),
-  .menuTexto small,
-  .menuMeta {
-    display: none;
-  }
-  .menuItem {
-    flex: none;
-    grid-template-columns: auto auto;
-    padding: var(--espacio-2) var(--espacio-3);
-    scroll-snap-align: start;
-  }
-}
-
-.menuItem {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--espacio-3);
-  padding: var(--espacio-3);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-grande);
-  background: var(--superficie);
-  color: var(--texto);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition: border-color var(--transicion), background var(--transicion);
-}
-
-.menuItem:hover {
-  border-color: color-mix(in srgb, var(--acento) 50%, var(--borde));
-}
-
-.menuItem[data-activo="true"] {
-  border-color: var(--acento);
-  background: color-mix(in srgb, var(--acento) 10%, var(--superficie));
-  box-shadow: inset 3px 0 0 var(--acento);
-}
-
-.menuTexto {
-  display: grid;
-  min-width: 0;
-}
-
-.menuTexto strong {
-  font-size: var(--letra-3);
-}
-
-.menuTexto small {
-  overflow: hidden;
-  color: var(--texto-suave);
-  font-size: var(--letra-1);
-  line-height: 1.35;
-}
-
-.menuMeta {
-  display: grid;
-  justify-items: end;
-  gap: 4px;
-  color: var(--texto-tenue);
-  font-size: var(--letra-1);
-  white-space: nowrap;
-}
-
-.menuMeta em {
-  padding: 0 6px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--acento) 20%, transparent);
-  color: var(--acento);
-  font-style: normal;
-  font-weight: var(--peso-semi, 600);
-}
-
-.panelPractica {
-  display: grid;
-  gap: var(--espacio-3);
-  align-content: start;
-  min-width: 0;
-}
-
-.practicaPrincipal {
-  display: grid;
-  min-width: 0;
-}
-
-/* Franja de consejos: etiqueta, los consejos lado a lado y la duración */
-.consejos {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: var(--espacio-4);
-  padding: var(--espacio-3) var(--espacio-4);
-  border: 1px dashed var(--borde);
-  border-radius: var(--radio-grande);
-  font-size: var(--letra-3);
-}
-
-.consejos ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--espacio-2) var(--espacio-4);
-  margin: 0;
-  padding-left: 1.1em;
-  color: var(--texto-suave);
-}
-
-@container (max-width: 820px) {
-  .consejos {
-    grid-template-columns: 1fr;
-    gap: var(--espacio-2);
-  }
-}
-
-.consejos small {
-  font-size: var(--letra-2);
 }

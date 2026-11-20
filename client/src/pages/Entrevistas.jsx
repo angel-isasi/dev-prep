@@ -3,7 +3,7 @@
 // - Estudiar: las tarjetas (por etapa de la entrevista), tu pitch y tus historias STAR, y la guía.
 // - Simular: todas las prácticas en un menú; la elegida se abre al lado con sus opciones.
 // Las direcciones viejas (?pestana=tarjetas, voz, ia...) llevan a su lugar nuevo.
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { ES_MOVIL } from "../lib/modo.js";
 import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
@@ -21,6 +21,7 @@ import { AnilloProgreso } from "../components/AnilloProgreso.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { DefiendeProyecto, ExamenMensual, Negociacion, PreguntasEntrevistador } from "../components/ia/EntrevistasIa.jsx";
 import { EntrevistaIngles } from "../components/ia/InglesIa.jsx";
+import { MenuPanel } from "../components/ia/MenuPanel.jsx";
 import {
   IconoChispa,
   IconoEntrevistas,
@@ -53,6 +54,7 @@ const VIEJAS = {
 const PRACTICAS = [
   {
     id: "simulacro",
+    pasos: ["Eliges el proceso completo o una sola etapa.","Respondes cada pregunta en voz alta y te pones nota.","Al final ves tu plan de refuerzo y, si quieres, el informe con IA."],
     grupo: "Entrevista completa",
     titulo: "Simulacro",
     detalle: "Las 4 etapas de un proceso real, o una suelta",
@@ -62,6 +64,7 @@ const PRACTICAS = [
   },
   {
     id: "voz",
+    pasos: ["Eliges el tema, cuántas preguntas y cómo es el entrevistador.","Él pregunta en voz alta, tú respondes hablando y te repregunta.","Al final ves cada respuesta evaluada y un informe con tu plan."],
     grupo: "Entrevista completa",
     titulo: "Entrevista por voz",
     detalle: "Te pregunta en voz alta y repregunta sobre lo que dices",
@@ -72,6 +75,7 @@ const PRACTICAS = [
   },
   {
     id: "examen",
+    pasos: ["Son 4 preguntas: un concepto, un código, una en inglés y una de comportamiento.","Respondes cada una por escrito, sin ayudas.","Recibes tu nota y la comparación con el mes anterior."],
     grupo: "Entrevista completa",
     titulo: "Examen mensual",
     detalle: "Concepto, código, inglés y comportamiento, comparado con el mes pasado",
@@ -82,6 +86,7 @@ const PRACTICAS = [
   },
   {
     id: "proyecto",
+    pasos: ["Revisas la descripción del proyecto (viene con dev-prep).","El entrevistador te hace de 6 a 8 preguntas, una por una.","Pides tu balance: qué explicaste bien y frases para la próxima."],
     grupo: "Partes clave",
     titulo: "Defiende tu proyecto",
     detalle: "Preguntas sobre dev-prep (o el README que pegues)",
@@ -92,6 +97,7 @@ const PRACTICAS = [
   },
   {
     id: "ingles",
+    pasos: ["Eliges cuánta ayuda quieres en cada pregunta.","La reclutadora pregunta en inglés y tú respondes hablando o escribiendo.","Al final te corrige los errores que más pesan."],
     grupo: "Partes clave",
     titulo: "Entrevista en inglés",
     detalle: "Distinta cada vez, con ayudas que vas quitando",
@@ -102,6 +108,7 @@ const PRACTICAS = [
   },
   {
     id: "preguntas",
+    pasos: ["Escribes las 2 o 3 preguntas que le harías al entrevistador.","La IA comenta cada una: si suma o si resta.","Te sugiere 3 preguntas mejores para llevar."],
     grupo: "Partes clave",
     titulo: "Tus preguntas para ellos",
     detalle: "El \"¿tienes alguna pregunta?\" del final",
@@ -112,6 +119,7 @@ const PRACTICAS = [
   },
   {
     id: "sueldo",
+    pasos: ["Eliges la situación: prácticas, junior en Lima o remoto.","La reclutadora te llama y conversan sobre sueldo y condiciones.","Pides tu balance con frases para negociar mejor."],
     grupo: "Partes clave",
     titulo: "Negocia tu sueldo",
     detalle: "La llamada de la reclutadora cuando ya te quieren",
@@ -316,7 +324,7 @@ function Preparacion({ resumen, alEmpezar, alIr }) {
       {/* Fila 1: cuánto dominas (con las 4 etapas) y lo que toca hoy */}
       <section className={`tarjeta ${nuevo.listo}`}>
         <div className={nuevo.listoCabeza}>
-          <AnilloProgreso valor={total ? dominadas / total : 0} tamano={104} grosor={9} completo={total > 0 && dominadas === total}>
+          <AnilloProgreso valor={total ? dominadas / total : 0} tamano={128} grosor={11} completo={total > 0 && dominadas === total}>
             <strong className={nuevo.porcentaje}>{porciento(dominadas, total)}%</strong>
           </AnilloProgreso>
           <div>
@@ -589,58 +597,16 @@ function GuiaVozAlta({ markdown }) {
 
 function Simular({ resumen, practica, alPractica, alIr, alRepasar }) {
   const elegida = PRACTICAS.find((p) => p.id === practica) ?? PRACTICAS[0];
-  const grupos = useMemo(() => [...new Set(PRACTICAS.map((p) => p.grupo))], []);
-  // En pantallas angostas el menú es una fila deslizable: la práctica elegida queda a la vista
-  const elegir = (id) => alPractica(id);
   return (
-    <div className={nuevo.simular}>
-      <nav className={nuevo.menu} aria-label="Prácticas">
-        {grupos.map((g) => (
-          <div key={g} className={nuevo.menuGrupo}>
-            <span className="etiqueta">{g}</span>
-            {PRACTICAS.filter((p) => p.grupo === g).map(({ id, titulo, detalle, minutos, ia, Icono }) => (
-              <button key={id} type="button" className={nuevo.menuItem} data-activo={id === elegida.id} aria-current={id === elegida.id} onClick={() => elegir(id)}>
-                <span className={nuevo.accesoIcono} aria-hidden>
-                  <Icono />
-                </span>
-                <span className={nuevo.menuTexto}>
-                  <strong>{titulo}</strong>
-                  <small>{detalle}</small>
-                </span>
-                <span className={nuevo.menuMeta}>
-                  {minutos}
-                  {ia && <em>IA</em>}
-                </span>
-              </button>
-            ))}
-          </div>
-        ))}
-      </nav>
-
-      <div className={nuevo.panelPractica}>
-        <aside className={nuevo.consejos}>
-          <span className="etiqueta">Para sacarle provecho</span>
-          <ul>
-            {elegida.consejos.map((c) => (
-              <li key={c}>{c}</li>
-            ))}
-          </ul>
-          <small className={nuevo.suave}>
-            {elegida.minutos}
-            {elegida.ia ? " · con IA" : " · IA solo en el informe"}
-          </small>
-        </aside>
-        <div className={nuevo.practicaPrincipal} key={elegida.id}>
-          {elegida.id === "simulacro" && <Simulacro proceso={resumen.proceso} alIr={alIr} alRepasar={alRepasar} />}
-          {elegida.id === "voz" && <EntrevistaVoz proceso={resumen.proceso} />}
-          {elegida.id === "examen" && <ExamenMensual />}
-          {elegida.id === "proyecto" && <DefiendeProyecto />}
-          {elegida.id === "ingles" && <EntrevistaIngles />}
-          {elegida.id === "preguntas" && <PreguntasEntrevistador />}
-          {elegida.id === "sueldo" && <Negociacion />}
-        </div>
-      </div>
-    </div>
+    <MenuPanel items={PRACTICAS} elegida={elegida.id} alElegir={alPractica} etiqueta="Prácticas">
+      {elegida.id === "simulacro" && <Simulacro proceso={resumen.proceso} alIr={alIr} alRepasar={alRepasar} />}
+      {elegida.id === "voz" && <EntrevistaVoz proceso={resumen.proceso} />}
+      {elegida.id === "examen" && <ExamenMensual />}
+      {elegida.id === "proyecto" && <DefiendeProyecto />}
+      {elegida.id === "ingles" && <EntrevistaIngles />}
+      {elegida.id === "preguntas" && <PreguntasEntrevistador />}
+      {elegida.id === "sueldo" && <Negociacion />}
+    </MenuPanel>
   );
 }
 

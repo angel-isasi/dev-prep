@@ -12,13 +12,14 @@ import { MagicCard } from "../components/ui/magic-card.jsx";
 import { ShineBorder } from "../components/ui/shine-border.jsx";
 import { SlidingNumber } from "../components/ui/sliding-number.jsx";
 import { RetoSemana } from "../components/Avance.jsx";
+import { IconoAlerta, IconoChispa, IconoLibro } from "../components/Iconos.jsx";
 import estilos from "./Practicar.module.css";
 import selector from "./Aprender.module.css";
 
 /** "Aprender mejor" (solo en la versión web): sesiones cortas que no son ejercicios de VS Code. */
 const HERRAMIENTAS = [
-  { a: "/leccion?modo=predice", titulo: "Lee y predice", texto: "¿Qué imprime este código?" },
-  { a: "/practicar/lista?coleccion=javascript%2Fdepurar", titulo: "Depurar código roto", texto: "Encuentra el error por su síntoma" },
+  { a: "/leccion?modo=predice", titulo: "Lee y predice", texto: "¿Qué imprime este código?", Icono: IconoLibro },
+  { a: "/practicar/lista?coleccion=javascript%2Fdepurar", titulo: "Depurar código roto", texto: "Encuentra el error por su síntoma", Icono: IconoAlerta },
 ];
 
 const NIVELES = [
@@ -105,17 +106,29 @@ export function Practicar() {
       {/* Atajos en una sola fila en la laptop: Lee y predice, Depurar y el reto de la semana (versión web).
           En el celular se apilan. Si no hay reto, su celda vacía no ocupa lugar. */}
       <div className={estilos.atajos}>
+        <div className={estilos.atajosLista}>
         {ES_MOVIL &&
           HERRAMIENTAS.map((h) => (
             <Link key={h.a} to={h.a} className={`brillo ${estilos.atajo}`}>
-              <strong>{h.titulo} →</strong>
-              <small>{h.texto}</small>
+              <span className={estilos.atajoIcono} aria-hidden>
+                <h.Icono />
+              </span>
+              <span className={estilos.atajoTexto}>
+                <strong>{h.titulo} →</strong>
+                <small>{h.texto}</small>
+              </span>
             </Link>
           ))}
         <Link to="/practicar/ia" className={`brillo ${estilos.atajo}`}>
-          <strong>Entrena con IA →</strong>
-          <small>¿Qué imprime? y code review al revés, distintos cada vez</small>
+          <span className={estilos.atajoIcono} aria-hidden>
+            <IconoChispa />
+          </span>
+          <span className={estilos.atajoTexto}>
+            <strong>Entrena con IA →</strong>
+            <small>¿Qué imprime? y code review al revés, distintos cada vez</small>
+          </span>
         </Link>
+        </div>
         <div className={estilos.retoSemana}>
           <RetoSemana />
         </div>

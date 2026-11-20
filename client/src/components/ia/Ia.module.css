@@ -19,7 +19,7 @@
   border-radius: var(--radio);
   background: var(--codigo-fondo);
   font-family: var(--fuente-codigo, ui-monospace, monospace);
-  font-size: var(--letra-2, 0.85rem);
+  font-size: var(--letra-3);
   line-height: 1.55;
 }
 
@@ -45,7 +45,7 @@
   border-radius: var(--radio);
   background: var(--codigo-fondo);
   font-family: var(--fuente-codigo, ui-monospace, monospace);
-  font-size: var(--letra-2, 0.85rem);
+  font-size: var(--letra-3);
   white-space: pre-wrap;
 }
 
@@ -61,7 +61,7 @@
   border-radius: 999px;
   background: var(--superficie);
   color: var(--texto-suave);
-  font-size: var(--letra-2, 0.8rem);
+  font-size: var(--letra-3);
   cursor: pointer;
 }
 
@@ -76,7 +76,7 @@
   background: none;
   color: var(--acento);
   font: inherit;
-  font-size: var(--letra-2, 0.85rem);
+  font-size: var(--letra-3);
   text-decoration: underline;
   cursor: pointer;
 }
@@ -117,5 +117,5 @@
 
 .chat li small {
   color: var(--texto-suave);
-  font-size: var(--letra-1);
+  font-size: var(--letra-3);
 }

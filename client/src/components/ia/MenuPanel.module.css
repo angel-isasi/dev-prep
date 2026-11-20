@@ -1,0 +1,256 @@
+/* Menú de herramientas a la izquierda, la elegida al centro y su guía a la derecha (ver MenuPanel.jsx).
+   Lo usan Entrevistas > Simular e Inglés > Con IA. */
+.marco {
+  display: grid;
+  grid-template-columns: minmax(300px, 400px) minmax(0, 1fr);
+  gap: var(--espacio-5);
+  align-items: start;
+}
+
+.menu {
+  position: sticky;
+  top: var(--espacio-4);
+  display: grid;
+  gap: var(--espacio-4);
+}
+
+.grupo {
+  display: grid;
+  gap: var(--espacio-2);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color var(--transicion), background var(--transicion), transform var(--transicion);
+}
+
+.item:hover {
+  border-color: color-mix(in srgb, var(--acento) 50%, var(--borde));
+  text-decoration: none;
+  transform: translateX(2px);
+}
+
+.item[data-activo="true"] {
+  border-color: var(--acento);
+  background: color-mix(in srgb, var(--acento) 12%, var(--superficie));
+  box-shadow: inset 4px 0 0 var(--acento);
+}
+
+.icono {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radio-lg);
+  background: color-mix(in srgb, var(--acento) 14%, var(--superficie-2));
+  color: var(--acento);
+}
+
+.texto {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.texto strong {
+  font-size: var(--letra-5);
+  font-weight: var(--peso-semi);
+  line-height: 1.3;
+}
+
+.texto small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+  line-height: 1.4;
+}
+
+.meta {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+  white-space: nowrap;
+}
+
+.meta em,
+.pie em {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--acento) 20%, transparent);
+  color: var(--acento);
+  font-size: var(--letra-2);
+  font-style: normal;
+  font-weight: var(--peso-semi);
+}
+
+/* La herramienta y su guía */
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  gap: var(--espacio-5);
+  align-items: start;
+  min-width: 0;
+}
+
+.principal {
+  display: grid;
+  align-content: start;
+  min-width: 0;
+}
+
+/* En pantalla ancha la herramienta llega al alto de su guía: se ve como un espacio de trabajo */
+@media (min-width: 1501px) {
+  .panel {
+    align-items: stretch;
+  }
+  .principal {
+    align-content: stretch;
+  }
+  .principal > * {
+    align-content: start;
+  }
+  .guia {
+    align-self: start;
+  }
+}
+
+.guia {
+  position: sticky;
+  top: var(--espacio-4);
+  display: grid;
+  gap: var(--espacio-4);
+  padding: var(--espacio-5);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+}
+
+.guia h3 {
+  margin: 0 0 var(--espacio-3);
+  font-size: var(--letra-6);
+}
+
+.pasos {
+  display: grid;
+  gap: var(--espacio-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: paso;
+}
+
+.pasos li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--espacio-3);
+  align-items: start;
+  font-size: var(--letra-4);
+  line-height: 1.45;
+  counter-increment: paso;
+}
+
+.pasos li::before {
+  content: counter(paso);
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--acento) 18%, var(--superficie-2));
+  color: var(--acento);
+  font-size: var(--letra-3);
+  font-weight: var(--peso-negrita);
+}
+
+.consejos {
+  padding-top: var(--espacio-4);
+  border-top: 1px solid var(--borde);
+}
+
+.consejos ul {
+  display: grid;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding-left: 1.1em;
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  line-height: 1.45;
+}
+
+.pie {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: var(--espacio-3);
+  border-top: 1px solid var(--borde);
+  align-items: center;
+  gap: var(--espacio-2);
+  color: var(--texto-tenue);
+  font-size: var(--letra-3);
+}
+
+/* Pantalla mediana: la guía baja y se pone en dos columnas */
+@media (max-width: 1500px) {
+  .panel {
+    grid-template-columns: 1fr;
+  }
+  .guia {
+    position: static;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .consejos {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .pie {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Pantalla angosta: el menú es una fila que se desliza y la herramienta queda a la vista */
+@media (max-width: 1100px) {
+  .marco {
+    grid-template-columns: 1fr;
+    gap: var(--espacio-3);
+  }
+  .menu {
+    position: static;
+    display: flex;
+    gap: var(--espacio-2);
+    margin: 0 calc(-1 * var(--espacio-2));
+    padding: 2px var(--espacio-2) var(--espacio-2);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+  }
+  .grupo {
+    display: contents;
+  }
+  .grupo > :global(.etiqueta),
+  .texto small,
+  .meta {
+    display: none;
+  }
+  .item {
+    flex: none;
+    grid-template-columns: auto auto;
+    padding: var(--espacio-2) var(--espacio-3);
+    scroll-snap-align: start;
+  }
+  .icono {
+    width: 32px;
+    height: 32px;
+  }
+}
