@@ -50,11 +50,12 @@ function destinoDe(t, siguienteLeccion) {
  */
 export async function cargarPlan() {
   if (!hayPlan()) return null;
-  const [config, ejercicios, lecc, simulacros] = await Promise.all([
+  const [config, ejercicios, lecc, simulacros, ingles] = await Promise.all([
     api.plan15(),
     api.ejercicios(),
     api.lecciones("programacion"),
     api.simulacros?.().catch(() => []) ?? [],
+    api.inglesHoy?.().catch(() => null) ?? null,
   ]);
 
   // Lecciones de "Lo esencial" de cada unidad del plan
@@ -117,7 +118,9 @@ export async function cargarPlan() {
     }
   }
 
-  const plan = armarPlan({ tareas: catalogo, progreso, alEmpezar: foto.progreso, inicio: config.inicio, hoy, dias: config.dias ?? DIAS_PLAN });
+  const plan = armarPlan({ tareas: catalogo, progreso, alEmpezar: foto.progreso, inicio: config.inicio, hoy, dias: config.dias ?? DIAS_PLAN, minutosIngles: ingles?.minutosHoy ?? 0 });
+  // La tarea de inglés lleva a tu lección de inglés del día
+  for (const t of plan.hoy.tareas) if (t.tipo === "ingles") t.destino = "/leccion?ambito=ingles";
   const texto = planEnTexto(plan, {
     repasar: paraRepasar.map((e) => e.titulo),
     enProgreso: esenciales.filter((e) => e.estado === "en-progreso").map((e) => e.titulo),

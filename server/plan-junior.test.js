@@ -179,6 +179,18 @@ describe("armarPlan", () => {
   });
 });
 
+describe("inglés diario", () => {
+  it("suma una tarea de 20 minutos al final de hoy, sin tocar lo técnico ni el estado", () => {
+    const sin = armarPlan({ tareas, inicio: INICIO, hoy: INICIO });
+    const con = armarPlan({ tareas, inicio: INICIO, hoy: INICIO, minutosIngles: 5 });
+    expect(con.hoy.tareas.at(-1)).toMatchObject({ tipo: "ingles", minutos: 20, avance: 0.25, hecha: false });
+    expect(con.hoy.total).toBe(sin.hoy.total + 1);
+    expect(con.estado).toEqual(sin.estado);
+    expect(con.calendario[3].minutos).toBe(sin.calendario[3].minutos + 20);
+    expect(armarPlan({ tareas, inicio: INICIO, hoy: INICIO, minutosIngles: 25 }).hoy.tareas.at(-1).hecha).toBe(true);
+  });
+});
+
 describe("textos", () => {
   it("estado y duración", () => {
     expect(textoEstado({ tipo: "atrasado", dias: 1.5 })).toBe("Atrasado 1.5 días");

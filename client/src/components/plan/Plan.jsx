@@ -9,10 +9,10 @@ import { useEvento } from "../../hooks/useEvento.js";
 import { cargarPlan, empezarPlan, hayPlan, quitarPlan } from "../../lib/plan-junior.js";
 import { DIAS_PLAN, duracion, PARA_CRECER, sumarDias, textoEstado } from "../../../../server/plan-junior.js";
 import { FichaJarvis } from "../../jarvis/Jarvis.jsx";
-import { IconoAprender, IconoCandado, IconoChispa, IconoEntrevistas, IconoFlechaDer, IconoLecciones, IconoMicrofono, IconoPracticar, IconoRepetir, IconoTrofeo } from "../Iconos.jsx";
+import { IconoAprender, IconoIngles, IconoCandado, IconoChispa, IconoEntrevistas, IconoFlechaDer, IconoLecciones, IconoMicrofono, IconoPracticar, IconoRepetir, IconoTrofeo } from "../Iconos.jsx";
 import estilos from "./Plan.module.css";
 
-const ICONOS = { teoria: IconoAprender, lecciones: IconoLecciones, ejercicio: IconoPracticar, pregunta: IconoEntrevistas, control: IconoTrofeo, repaso: IconoRepetir, simulacro: IconoMicrofono };
+const ICONOS = { ingles: IconoIngles, teoria: IconoAprender, lecciones: IconoLecciones, ejercicio: IconoPracticar, pregunta: IconoEntrevistas, control: IconoTrofeo, repaso: IconoRepetir, simulacro: IconoMicrofono };
 const TONO = { "al-dia": "exito", adelantado: "exito", atrasado: "aviso", vencido: "error", "por-empezar": "acento" };
 const NOMBRE_ETAPA = { javascript: "JavaScript", react: "React", repaso: "Repaso", simulacro: "Simulacro" };
 const DIAS_SEMANA = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];

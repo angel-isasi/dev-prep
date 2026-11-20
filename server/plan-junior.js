@@ -27,6 +27,8 @@ export const ETAPAS = [
 
 export const DIAS_PLAN = 15;
 export const DIAS_MINIMO = 7;
+/** Inglés: una tarea fija cada día, aparte de lo de JavaScript y React (no les quita tiempo ni cuenta para "al día"). */
+export const MINUTOS_INGLES = 20;
 
 /** Los temas del plan, en orden. `unidad` es el tema de Aprender (teoría y lecciones); null si es solo práctica. */
 export const TEMAS = [
@@ -279,8 +281,9 @@ const medios = (dias) => Math.round(dias * 2) / 2;
  * @param {string} p.inicio  primer día del plan
  * @param {string} p.hoy
  * @param {number} [p.dias]  duración (los dos últimos son repaso y simulacro)
+ * @param {number | null} [p.minutosIngles]  minutos de inglés que llevas hoy; null si no se lleva la cuenta
  */
-export function armarPlan({ tareas, progreso = {}, alEmpezar = null, inicio, hoy, dias = DIAS_PLAN }) {
+export function armarPlan({ tareas, progreso = {}, alEmpezar = null, inicio, hoy, dias = DIAS_PLAN, minutosIngles = null }) {
   const n = Math.max(DIAS_MINIMO, Math.round(dias) || DIAS_PLAN);
   const diasEstudio = n - 2;
   const dia = diasDesde(inicio, hoy) + 1; // 1 = primer día; 0 o menos = todavía no empieza
@@ -328,6 +331,11 @@ export function armarPlan({ tareas, progreso = {}, alEmpezar = null, inicio, hoy
 
   const conEstado = (t) => ({ ...t, avance: avance(t), hecha: avance(t) >= 1 });
   const deHoy = dia >= 1 ? tareas.filter((t) => diaDe.get(t.clave) === diaReal).map(conEstado) : [];
+  // Inglés del día: va al final de la lista de hoy, cada día del plan
+  if (minutosIngles !== null && dia >= 1 && dia <= n) {
+    const avanceIngles = Math.min(1, Math.max(0, minutosIngles) / MINUTOS_INGLES);
+    deHoy.push({ clave: `ingles:${hoy}`, tipo: "ingles", etapa: "ingles", tema: "ingles", temaTitulo: "Inglés", id: "ingles", titulo: `Inglés: ${MINUTOS_INGLES} minutos`, minutos: MINUTOS_INGLES, avance: avanceIngles, hecha: avanceIngles >= 1 });
+  }
   const pendientesAhora = tareas.filter((t) => avance(t) < 1);
   const siguiente = deHoy.find((t) => !t.hecha) ?? null;
   // Si ya terminaste lo de hoy, lo primero que viene es para adelantar
@@ -352,7 +360,7 @@ export function armarPlan({ tareas, progreso = {}, alEmpezar = null, inicio, hoy
       etapa,
       tipo: d < diaReal || dia > n ? "pasado" : d === diaReal ? "hoy" : "futuro",
       // Para hoy y lo que viene, lo que de verdad te toca; para los días pasados, lo que tocaba
-      minutos: Math.round(d > diasEstudio && d > diaReal ? minutosIdeal : d >= diaReal && dia <= n ? suyas.reduce((s, t) => s + t.minutos * (1 - avanceInicio(t)), 0) : minutosIdeal),
+      minutos: (minutosIngles !== null ? MINUTOS_INGLES : 0) + Math.round(d > diasEstudio && d > diaReal ? minutosIdeal : d >= diaReal && dia <= n ? suyas.reduce((s, t) => s + t.minutos * (1 - avanceInicio(t)), 0) : minutosIdeal),
       tareas: d >= diaReal ? suyas.length : null,
       cubierto: d <= diasEstudio ? hecho + 1e-6 >= idealHasta(d) : tareas.filter((t) => t.etapa === etapa).every((t) => avance(t) >= 1),
     };
@@ -439,6 +447,7 @@ export function planEnTexto(plan, extra = {}) {
     `Hoy le tocan ${plan.hoy.total} tareas (${duracion(plan.hoy.minutosTotal)}), lleva ${plan.hoy.hechas}:`,
     ...plan.hoy.tareas.slice(0, 14).map((t) => `- [${t.hecha ? "hecha" : "pendiente"}] clave=${t.clave} · ${t.temaTitulo} · ${t.tipo}: ${t.titulo} (${t.minutos} min)`),
     plan.hoy.total > 14 ? `- y ${plan.hoy.total - 14} más` : "",
+    plan.hoy.tareas.some((t) => t.tipo === "ingles") ? `Además, cada día del plan: ${MINUTOS_INGLES} minutos de inglés (lecciones de la sección Inglés, Conversa o explicar un ejercicio en inglés).` : "",
     plan.adelanta ? `Ya terminó lo de hoy. Para adelantar sigue: clave=${plan.adelanta.clave} · ${plan.adelanta.temaTitulo}: ${plan.adelanta.titulo}` : "",
     temasEn("hecho").length ? `Temas terminados: ${temasEn("hecho").join(", ")}.` : "",
     temasEn("empezado").length ? `Temas a medias: ${temasEn("empezado").join(", ")}.` : "",
