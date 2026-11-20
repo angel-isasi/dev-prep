@@ -487,3 +487,16 @@ La app tiene más contenido del que pide una entrevista junior. El plan junior s
 - **De dónde sale el avance** (`client/src/lib/plan-junior.js`): ejercicios resueltos, lecciones de "Lo esencial" hechas, teoría leída, preguntas vistas, el control de cada etapa (12 preguntas, se aprueba con 10) y el simulacro. Solo se guarda cuándo empieza el plan y cuántos días dura.
 - **Dónde se ve**: arriba en Hoy (día, lo que toca y el mentor) y completo en `/plan`. En las listas de ejercicios, la etiqueta "Junior" y el filtro "Para qué".
 - **Mentor**: la tarea de IA `mentor` recibe el plan en texto y responde con un veredicto, hasta 3 pasos y, si hace falta, una alerta. Habla una vez al día, cuando resuelves un ejercicio y cuando le preguntas.
+
+## Jarvis: el asistente único (2026-11-21, fase 1)
+
+Jarvis es la única puerta a la IA: una burbuja fija en toda la app (Alt + J) con la que conversas por texto o por voz, y que además interviene sola mientras estudias.
+
+- **Cuándo habla** (`client/src/jarvis/reglas.js`, funciones puras con tests, sin IA): estás trabado (3 guardadas con los mismos tests fallando), pasó el tiempo razonable del ejercicio, llevas 50 minutos seguidos, 20 minutos sin actividad, vas corriendo (resuelves con pistas o mirando la solución), toca una pregunta de entrevista cada 3 ejercicios, y el arranque, el cierre y el informe de la semana.
+- **Qué dice** (`client/src/jarvis/jarvis.js`): junta lo que sabe (tu plan, la pantalla abierta, el ejercicio, tus tests y su cuaderno) y se lo pasa a la tarea de IA `jarvis` (modelo barato). Si hace falta leer tu código o juzgar una respuesta, usa `jarvis-pro` (modelo de más criterio).
+- **Tres niveles**: callado (solo responde), normal y encima de mí (además comenta cada test que falla, revisa lo que guardas y hace preguntas sorpresa, a veces en inglés).
+- **Presencia**: puede hablar en voz alta, escucharte por el micrófono y mandar avisos del sistema cuando la app está en otra pestaña.
+- **Cuaderno**: anota lo que observa de ti y lo usa después; lo puedes ver y borrar.
+- Puede llevarte a cualquier herramienta (simulacro, entrevista por voz, Conversa, pistas...). Lo que depende de tus tests y tu archivo solo funciona con la laptop conectada.
+
+Fase 2 (pendiente): programa de escritorio que arranca con Windows.

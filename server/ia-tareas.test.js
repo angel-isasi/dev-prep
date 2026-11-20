@@ -90,3 +90,36 @@ describe("mentor del plan junior", () => {
     expect(limpio.pasos).toEqual([{ texto: "Haz esto", tarea: "ej:js-gu-001" }]);
   });
 });
+
+describe("Jarvis", () => {
+  it("necesita un momento o una pregunta", () => {
+    expect(armarPedido({ tarea: "jarvis", datos: "Plan" }).error).toBeTruthy();
+    expect(armarPedido({ tarea: "jarvis", pregunta: "¿qué sigue?" }).error).toBeUndefined();
+  });
+
+  it("manda contexto, código, charla y momento", () => {
+    const p = armarPedido({
+      tarea: "jarvis-pro",
+      datos: "Día 3 del plan",
+      momento: "Lleva 3 guardadas fallando el mismo test: suma negativos",
+      codigo: "function sumar(a, b) { return a - b; }",
+      historial: [{ de: "yo", texto: "no me sale" }, { de: "jarvis", texto: "mira el signo" }],
+    });
+    expect(p.mensaje).toContain("Día 3 del plan");
+    expect(p.mensaje).toContain("return a - b");
+    expect(p.mensaje).toContain("Él: no me sale");
+    expect(p.mensaje).toContain("Tú: mira el signo");
+    expect(p.mensaje).toContain("suma negativos");
+  });
+
+  it("el barato conversa y el de más criterio lee código; mismo formato de respuesta", () => {
+    expect(TAREAS.jarvis.modelo).toBe("claude-haiku-5-5");
+    expect(TAREAS["jarvis-pro"].modelo).toBe("claude-sonnet-5-5");
+    const r = limpiarPorEsquema(TAREAS.jarvis.esquema, { mensaje: "Hola", pregunta: "", destino: "plan", nota: "", profundo: false, otro: 1 });
+    expect(r).toEqual({ mensaje: "Hola", pregunta: "", destino: "plan", nota: "", profundo: false });
+  });
+
+  it("puede pedir la respuesta en inglés", () => {
+    expect(armarPedido({ tarea: "jarvis", pregunta: "hola", ingles: true }).mensaje).toContain("en inglés");
+  });
+});

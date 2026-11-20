@@ -17,7 +17,6 @@ import { celebrar } from "../lib/celebrar.js";
 import { Ayuda } from "../components/Ayuda.jsx";
 import { Esqueleto } from "../components/Esqueleto.jsx";
 import { buscarColeccion } from "../lib/areas.js";
-import { MentorPaso } from "../components/plan/Plan.jsx";
 import { esEsencial } from "../../../server/plan-junior.js";
 import { Markdown } from "../components/Markdown.jsx";
 import estilos from "./Ejercicio.module.css";
@@ -276,7 +275,6 @@ export function Ejercicio() {
             )}
           </p>
         )}
-        {aviso?.tipo === "exito" && resuelto && <MentorPaso key={ejercicio.id} ejercicio={ejercicio} />}
 
         <div className={estilos.pestanas}>
           <Pestanas pestanas={pestanas} activa={pestana} alCambiar={setPestana} />

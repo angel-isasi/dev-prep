@@ -1,16 +1,14 @@
 // Plan junior en pantalla (el cálculo está en server/plan-junior.js y los datos en lib/plan-junior.js):
 // - PlanHoy: el bloque de la pantalla Hoy (día, lo que toca y el mentor).
 // - PlanCompleto: la página /plan con el calendario, las etapas y el temario.
-// - Mentor: la IA que mira tu plan y te dice qué hacer; MentorPaso comenta un ejercicio recién resuelto.
-import { useEffect, useRef, useState } from "react";
+// La voz del plan es Jarvis (jarvis/Jarvis.jsx): aquí solo se muestra lo último que dijo.
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
-import { claveIa, estadoIa } from "../../lib/ia.js";
-import { almacen } from "../../lib/visita.js";
 import { useEvento } from "../../hooks/useEvento.js";
 import { cargarPlan, empezarPlan, hayPlan, quitarPlan } from "../../lib/plan-junior.js";
 import { DIAS_PLAN, duracion, PARA_CRECER, sumarDias, textoEstado } from "../../../../server/plan-junior.js";
-import { useIa } from "../ia/useIa.js";
+import { FichaJarvis } from "../../jarvis/Jarvis.jsx";
 import { IconoAprender, IconoCandado, IconoChispa, IconoEntrevistas, IconoFlechaDer, IconoLecciones, IconoMicrofono, IconoPracticar, IconoRepetir, IconoTrofeo } from "../Iconos.jsx";
 import estilos from "./Plan.module.css";
 
@@ -140,211 +138,6 @@ function Empezar({ plan, alCambiar, hoy }) {
   );
 }
 
-// ---------- Mentor ----------
-const CLAVE_MENTOR = "devprep.mentor";
-const leerMentor = () => {
-  try {
-    return JSON.parse(almacen.getItem(CLAVE_MENTOR) ?? "null");
-  } catch {
-    return null;
-  }
-};
-const guardarMentor = (valor) => {
-  try {
-    almacen.setItem(CLAVE_MENTOR, JSON.stringify(valor));
-  } catch {
-    // sin espacio: el mensaje se pide otra vez la próxima
-  }
-};
-
-/** ¿La IA está configurada y tienes tu contraseña puesta en este navegador? */
-function useIaLista() {
-  const [lista, setLista] = useState(null);
-  useEffect(() => {
-    if (!claveIa()) return setLista(false);
-    estadoIa().then((e) => setLista(!!e.configurada));
-  }, []);
-  return lista;
-}
-
-function Pasos({ pasos, plan }) {
-  if (!pasos?.length) return null;
-  return (
-    <ol className={estilos.pasos}>
-      {pasos.slice(0, 3).map((p, i) => {
-        const destino = plan?.tareas?.find((t) => t.clave === p.tarea)?.destino;
-        const cuerpo = (
-          <>
-            <b>{i + 1}</b>
-            <span>{p.texto}</span>
-            {destino && <IconoFlechaDer tamano={14} />}
-          </>
-        );
-        return <li key={i}>{destino ? <Link to={destino}>{cuerpo}</Link> : <div>{cuerpo}</div>}</li>;
-      })}
-    </ol>
-  );
-}
-
-/**
- * El mentor: una vez al día mira tu plan y te dice cómo vas; después puedes preguntarle lo que sea.
- * @param {{ plan: object, compacto?: boolean }} props
- */
-export function Mentor({ plan, compacto = false }) {
-  const lista = useIaLista();
-  const { cargando, error, pedir } = useIa();
-  const [guardado, setGuardado] = useState(leerMentor);
-  const [texto, setTexto] = useState("");
-  const pidiendo = useRef(false);
-  const hoy = plan.hoyFecha;
-  const delDia = guardado?.fecha === hoy ? guardado : null;
-
-  async function consultar(pregunta = "") {
-    if (pidiendo.current) return;
-    pidiendo.current = true;
-    const charla = delDia?.charla ?? [];
-    const r = await pedir({ tarea: "mentor", datos: plan.texto, ...(pregunta ? { pregunta, historial: charla.slice(-8) } : {}) });
-    pidiendo.current = false;
-    if (!r) return;
-    const nuevo = { fecha: hoy, r, charla: pregunta ? [...charla, { de: "yo", texto: pregunta }, { de: "mentor", texto: r.mensaje }].slice(-12) : charla };
-    guardarMentor(nuevo);
-    setGuardado(nuevo);
-  }
-
-  // Una vez al día, solo, apenas hay plan e IA
-  useEffect(() => {
-    if (lista && plan.dia >= 1 && !delDia) consultar();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lista, hoy]);
-
-  function enviar(evento) {
-    evento.preventDefault();
-    const pregunta = texto.trim();
-    if (!pregunta || cargando) return;
-    setTexto("");
-    consultar(pregunta);
-  }
-
-  if (lista === false) {
-    return (
-      <section className={`tarjeta ${estilos.mentor}`} data-compacto={compacto}>
-        <span className="etiqueta">Tu mentor</span>
-        <strong className={estilos.titular}>Tu mentor usa la IA</strong>
-        <p className={estilos.mensaje}>Pon tu contraseña de IA en Ajustes y te dirá cada día cómo vas y qué hacer.</p>
-        <Link to="/ajustes" className="boton">
-          Ir a Ajustes
-        </Link>
-      </section>
-    );
-  }
-
-  const r = delDia?.r;
-  const ultimaPregunta = delDia?.charla?.findLast?.((c) => c.de === "yo")?.texto;
-  return (
-    <section className={`tarjeta ${estilos.mentor}`} data-compacto={compacto}>
-      <header>
-        <span className="etiqueta">Tu mentor</span>
-        {r && (
-          <button type="button" className={estilos.enlace} disabled={cargando} onClick={() => consultar()}>
-            Actualizar
-          </button>
-        )}
-      </header>
-      {!r && <p className={estilos.mensaje}>{cargando || lista === null ? "Mirando tu plan..." : (error ?? "Todavía no hay mensaje de hoy.")}</p>}
-      {r && (
-        <>
-          {ultimaPregunta && <p className={estilos.pregunta}>{ultimaPregunta}</p>}
-          <strong className={estilos.titular}>{r.titular}</strong>
-          <p className={estilos.mensaje}>{r.mensaje}</p>
-          {r.alerta && (
-            <p className={estilos.alerta}>
-              <span className="chip" data-tono="aviso">
-                Ojo
-              </span>
-              {r.alerta}
-            </p>
-          )}
-          <Pasos pasos={r.pasos} plan={plan} />
-        </>
-      )}
-      {error && r && <p className={estilos.error}>{error}</p>}
-      <form className={estilos.preguntar} onSubmit={enviar}>
-        <input value={texto} onChange={(e) => setTexto(e.target.value)} placeholder="Pregúntale lo que sea" aria-label="Pregunta para tu mentor" maxLength={600} />
-        <button type="submit" className="boton" disabled={!texto.trim() || cargando}>
-          {cargando ? "..." : "Preguntar"}
-        </button>
-      </form>
-    </section>
-  );
-}
-
-const CLAVE_PASOS = "devprep.mentorPasos";
-/**
- * El mentor comenta un ejercicio que acabas de resolver (solo con el plan activo, una vez por ejercicio).
- * @param {{ ejercicio: object }} props
- */
-export function MentorPaso({ ejercicio }) {
-  const lista = useIaLista();
-  const { cargando, pedir } = useIa();
-  const [dato, setDato] = useState(null); // { r, plan }
-  const pedido = useRef(false);
-
-  useEffect(() => {
-    if (!lista || pedido.current) return;
-    pedido.current = true;
-    let vivo = true;
-    (async () => {
-      const plan = await cargarPlan().catch(() => null);
-      if (!plan?.activo || !vivo) return;
-      let vistos = {};
-      try {
-        vistos = JSON.parse(almacen.getItem(CLAVE_PASOS) ?? "{}") ?? {};
-      } catch {
-        vistos = {};
-      }
-      if (vistos[ejercicio.id]) return setDato({ r: vistos[ejercicio.id], plan });
-      const p = ejercicio.progreso ?? {};
-      const minutos = Math.round((p.segundosActivos ?? 0) / 60);
-      const hecho = [
-        `Acaba de resolver el ejercicio "${ejercicio.titulo}" (nivel ${ejercicio.nivel} de 3; 1 es básico).`,
-        `Intentos: ${p.intentos ?? 0}.${minutos ? ` Tiempo de trabajo: ${minutos} min.` : ""} Pistas vistas: ${ejercicio.pistas?.length ?? 0} de ${ejercicio.totalPistas ?? 0}.${p.vioSolucion ? " Vio la solución antes de resolverlo." : " No vio la solución."}`,
-        plan.tareas.some((t) => t.clave === `ej:${ejercicio.id}`) ? "Es un ejercicio de su plan." : "Este ejercicio NO es de su plan (es de lo que queda para después).",
-      ].join("\n");
-      const r = await pedir({ tarea: "mentor", datos: plan.texto, hecho });
-      if (!r || !vivo) return;
-      try {
-        almacen.setItem(CLAVE_PASOS, JSON.stringify(Object.fromEntries([...Object.entries(vistos).slice(-40), [ejercicio.id, r]])));
-      } catch {
-        // sin espacio: no pasa nada
-      }
-      // Lo último que dijo queda también como su mensaje del día
-      const anterior = leerMentor();
-      guardarMentor({ fecha: plan.hoyFecha, r, charla: anterior?.fecha === plan.hoyFecha ? anterior.charla : [] });
-      setDato({ r, plan });
-    })();
-    return () => {
-      vivo = false;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lista, ejercicio.id]);
-
-  if (!dato && !cargando) return null;
-  return (
-    <section className={`tarjeta ${estilos.mentor} ${estilos.mentorPaso}`}>
-      <span className="etiqueta">Tu mentor</span>
-      {!dato ? (
-        <p className={estilos.mensaje}>Mirando cómo te fue...</p>
-      ) : (
-        <>
-          <strong className={estilos.titular}>{dato.r.titular}</strong>
-          <p className={estilos.mensaje}>{dato.r.mensaje}</p>
-          <Pasos pasos={dato.r.pasos} plan={dato.plan} />
-        </>
-      )}
-    </section>
-  );
-}
-
 // ---------- Bloque de la pantalla Hoy ----------
 
 /** @param {{ plan: object, recargar: () => void }} props el plan ya cargado con usePlan (Hoy decide dónde va el bloque) */
@@ -422,7 +215,7 @@ export function PlanHoy({ plan, recargar }) {
         </Link>
       </section>
 
-      <Mentor plan={plan} compacto />
+      <FichaJarvis />
     </div>
   );
 }
@@ -511,7 +304,7 @@ export function PlanCompleto() {
             </Link>
           )}
         </section>
-        <Mentor plan={plan} />
+        <FichaJarvis />
       </div>
 
       <section className={`tarjeta ${estilos.bloque}`}>

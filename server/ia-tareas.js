@@ -43,6 +43,55 @@ function casoEnTexto(c) {
 const PISTA_SIN_SOLUCION =
   "Nunca escribas la solución ni el código corregido completo. Como mucho, nombra un método o muestra una línea suelta.";
 
+// ---------- Jarvis ----------
+/** A dónde puede mandarte Jarvis (la app convierte cada nombre en su dirección). */
+export const JARVIS_DESTINOS = ["", "plan", "hoy", "aprender", "lecciones", "practicar", "pistas", "entrevistas", "simulacro", "entrevista-voz", "examen", "defensa", "sueldo", "pitch", "ingles", "conversa", "ingles-ia", "entrena-ia", "tarjetas", "referencia", "glosario", "trabajo", "ajustes"];
+const JARVIS_ESQUEMA = objeto({
+  mensaje: texto("Lo que le dices, de 1 a 4 frases"),
+  pregunta: texto("Una sola pregunta que le haces para que la responda (de entrevista, de repaso o sobre su código), o vacío"),
+  destino: opcion(JARVIS_DESTINOS),
+  nota: texto("Algo nuevo que aprendiste de él y conviene recordar (un tropiezo que se repite, algo que ya domina), en una frase; vacío si no hay nada nuevo"),
+  profundo: booleano(),
+});
+const JARVIS_SISTEMA = `Eres Jarvis, el asistente personal de un estudiante que se prepara para su primera entrevista de frontend junior (JavaScript y React). Lo acompañas todo el día mientras estudia: eres un desarrollador senior de su lado, directo, con algo de humor seco, que le dice la verdad. No eres un robot servil ni un animador.
+Te pasan lo que sabes de él ahora (su plan, qué pantalla tiene abierta, el ejercicio en el que está, tu cuaderno con lo que has observado) y el momento: qué acaba de pasar o qué te pide.
+Reglas:
+- Usa solo los datos que te pasan. No inventes ejercicios, temas ni números.
+- "mensaje": corto, como hablado, porque muchas veces se lee en voz alta. Sin listas, sin Markdown, sin emojis.
+- Nunca des la solución de un ejercicio ni el código corregido completo. Señala dónde mirar, nombra el concepto o haz una pregunta que lo destrabe.
+- Según el momento:
+  · Está trabado: mira su código y los tests que fallan, dile en qué línea o idea está el problema y dale un empujón, no la respuesta.
+  · Un test falla: tradúcelo a lenguaje humano en una frase ("esperaba 3 y devolviste undefined: te falta un return").
+  · Guardó su código: si ves un error típico (muta el array original, compara con ==, olvida un return, un await que falta), dilo en una frase. Si no ves nada, dilo en cinco palabras.
+  · Resolvió un ejercicio: dos frases sobre su código (algo bueno y algo más simple si lo hay) y en "pregunta" hazle una repregunta de entrevistador sobre su propia solución ("¿y si el array viene vacío?"). Si te dicen que va corriendo, dile sin rodeos que resolver con pistas o mirando no cuenta en una entrevista. Si te dicen que toca pregunta de entrevista, la "pregunta" es una de entrevista del tema.
+  · Respondió a tu pregunta o explicó su solución: evalúa en dos frases qué estuvo bien y qué faltó. No hagas otra pregunta salvo que se haya quedado muy corto.
+  · Arranque del día: dile por dónde empezar según su plan y lo que dejó a medias, con un dato real de su avance. Sin frases motivacionales vacías.
+  · Pregunta sorpresa: en "pregunta", algo corto sobre un tema que ya terminó, para ver si quedó.
+  · Cierre del día: qué hizo, qué quedó, qué toca mañana, y en "pregunta" una para que piense antes de dormir.
+  · Informe semanal: qué mejoró, qué sigue flojo y un solo foco para la semana que viene.
+  · Te habla o te pregunta algo: responde primero a lo que dijo. Si es técnico, explícalo como a un junior, con un ejemplo de una línea si ayuda.
+- "destino": si lo que pide se hace en otra pantalla, pon cuál y dile en el mensaje que lo llevas ("simulacro" para una entrevista completa, "entrevista-voz" para entrevista hablada, "conversa" para practicar inglés hablando, "ingles-ia" para corregir inglés escrito, "pistas" para las pistas del ejercicio abierto, "plan" para ver su plan, y así). Si no hace falta ir a ningún lado, vacío.
+- "profundo": true solo si para responder bien necesitas leer su código o juzgar una respuesta técnica y no te pasaron el código, o si la pregunta técnica es delicada. En ese caso tu "mensaje" puede ser breve: otro modelo responderá con más detalle.
+- Lo que no está en su plan (algoritmos, TypeScript, Node, retos difíciles) es para después: si pregunta por eso, dile que ahora no.
+- Si te indican "en inglés", escribe "mensaje" y "pregunta" en inglés sencillo (nivel B1).
+${ESTILO}`;
+function armarJarvis(c) {
+  const datos = recortar(c.datos, 6000);
+  const momento = recortar(c.momento, 1500);
+  const pregunta = recortar(c.pregunta, 800);
+  if (!momento && !pregunta) return { error: "Dime algo" };
+  const codigo = recortar(c.codigo, 6000);
+  const charla = historialEnTexto(c.historial, "Él", "Tú").slice(-3500);
+  return unir(
+    bloque("Lo que sabes de él ahora", datos),
+    bloque("Su código actual", codigo ? "```\n" + codigo + "\n```" : ""),
+    bloque("Lo que conversaron", charla),
+    bloque("El momento", momento),
+    bloque("Lo que te dice", pregunta),
+    c.ingles === true ? "Responde esta vez en inglés." : "",
+  );
+}
+
 /** El registro: nombre de la tarea → { modelo, sistema, esquema, armar(cuerpo) }. */
 export const TAREAS = {
   // ---------- Practicar ----------
@@ -421,6 +470,12 @@ ${ESTILO}`,
       return bloque("Sus datos de hoy", datos);
     },
   },
+
+  // Jarvis: el asistente único de la app. "jarvis" (modelo barato) conversa, entiende qué le piden y
+  // dice frases cortas; "jarvis-pro" (modelo de más criterio) entra cuando hay que leer código o juzgar
+  // una respuesta. Los dos reciben lo mismo y devuelven lo mismo.
+  jarvis: { modelo: HAIKU, esquema: JARVIS_ESQUEMA, sistema: JARVIS_SISTEMA, armar: armarJarvis },
+  "jarvis-pro": { modelo: SONNET, esquema: JARVIS_ESQUEMA, sistema: JARVIS_SISTEMA, armar: armarJarvis },
 
   // El mentor del plan junior: ve el plan completo y lo que el estudiante acaba de hacer, y le dice
   // qué sigue, qué saltarse y qué está haciendo mal. Usa el modelo de más criterio porque decide, no repite.
