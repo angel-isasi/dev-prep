@@ -53,7 +53,7 @@ export function TutorHoy({ hoy, semana }) {
   const lista = useIaLista();
   if (!lista) return null;
   return (
-    <div className={estilos.rejilla}>
+    <div className={estilos.rejilla} style={{ marginTop: "var(--espacio-4)", gap: "var(--espacio-4)" }}>
       <TutorDia hoy={hoy} semana={semana} />
       <PlanSemana hoy={hoy} semana={semana} />
     </div>
