@@ -363,9 +363,8 @@ function esContenido(el) {
 /** Cuánto taparía la figura puesta en ese punto: mira qué hay debajo en 9 puntos de su caja (0 = nada). */
 function tapa(p) {
   let n = 0;
-  // Un poco más que su caja: el dibujo la desborda
-  for (const fx of [-0.15, 0.5, 1.15]) {
-    for (const fy of [-0.05, 0.5, 1.05]) {
+  for (const fx of [0.05, 0.5, 0.95]) {
+    for (const fy of [0.05, 0.5, 0.95]) {
       const x = p.x + FIGURA.ancho * fx;
       const y = p.y + FIGURA.alto * fy;
       if (x < 0 || y < 0 || x >= window.innerWidth || y >= window.innerHeight) continue; // fuera de la ventana no tapa nada
@@ -385,15 +384,9 @@ function sitiosLibres() {
     todos.push(encajar({ x: x0 + ((ancho - x0) * i) / 8, y: alto }, ancho, alto));
     todos.push(encajar({ x: x0 + ((ancho - x0) * i) / 8, y: 0 }, ancho, alto));
   }
-  let medidos = todos.map((p) => ({ p, n: tapa(p) }));
-  let menos = Math.min(...medidos.map((m) => m.n));
-  // Pantalla llena, sin hueco limpio: se asoma a medias por el borde derecho, donde menos estorbe
-  if (menos >= 1) {
-    const asomados = Array.from({ length: 9 }, (_, i) => ({ x: Math.round(ancho - FIGURA.ancho * 0.5), y: Math.round(FIGURA.margen + ((alto - FIGURA.alto - 2 * FIGURA.margen) * i) / 8) }));
-    const medidosA = asomados.map((p) => ({ p, n: tapa(p) }));
-    const menosA = Math.min(...medidosA.map((m) => m.n));
-    if (menosA < menos) [medidos, menos] = [medidosA, menosA];
-  }
+  // Siempre entero y dentro de la ventana: si no hay hueco limpio, donde menos tape
+  const medidos = todos.map((p) => ({ p, n: tapa(p) }));
+  const menos = Math.min(...medidos.map((m) => m.n));
   return medidos.filter((m) => m.n === menos).map((m) => m.p);
 }
 
