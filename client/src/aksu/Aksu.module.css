@@ -374,6 +374,12 @@
   font-size: var(--letra-2);
 }
 
+.vozInstalada {
+  flex-basis: 100%;
+  color: var(--texto-tenue);
+  font-size: var(--letra-1);
+}
+
 /* Durante un bloque de concentración: el tiempo que queda, bajo la figura */
 .cuenta {
   display: block;

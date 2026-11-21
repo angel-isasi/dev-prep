@@ -108,7 +108,9 @@ const pwa = () =>
       importScripts: ["/push-sw.js"],
       // Todo lo necesario para usarla sin internet: la app, los datos y las fuentes en alfabeto latino.
       globPatterns: ["**/*.{js,css,html,svg,png,ico,json}", "**/*-latin-wght-normal-*.woff2"],
-      globIgnores: ["**/marco.html"],
+      // voz-web: el motor de la voz neuronal del celular (30 MB). No se baja con la app: se guarda la primera vez que se usa
+      globIgnores: ["**/marco.html", "voz-web/**"],
+      runtimeCaching: [{ urlPattern: /voz-web[/]/, handler: "CacheFirst", options: { cacheName: "voz-web" } }],
       navigateFallback: "/index.html",
       navigateFallbackDenylist: [/^\/datos\//, /^\/\.well-known\//],
       maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,

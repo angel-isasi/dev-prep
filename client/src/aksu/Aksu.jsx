@@ -14,10 +14,11 @@ import {
   TEXTOS, tocaCierre, tocaComentario, tocaDistraccion, tocaEntrevista, tocaInforme, tocaPausa, tocaPregunta, tocaRelampago, tocaSorpresa, vaCorriendo, yaHizo,
 } from "./reglas.js";
 import {
-  abrir, cambiar, cargarVocesLocales, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, NOMBRE, NOMBRE_DESTINO, olvidarPlan, palabraDeIngles, pedirAvisos, pensar, planActual,
+  abrir, cambiar, cargarVocesLocales, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, instalarVozWeb, NOMBRE, NOMBRE_DESTINO, olvidarPlan, palabraDeIngles, pedirAvisos, pensar, planActual,
   probarVoz, probarVozIngles, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
 } from "./aksu.js";
 import { Figura } from "./Figura.jsx";
+import { puedeVozWeb, VOCES_WEB } from "./voz-web.js";
 import estilos from "./Aksu.module.css";
 
 const useAksu = () => useSyncExternalStore(suscribir, verEstado);
@@ -831,7 +832,7 @@ export function Aksu() {
       {e.voz && (
         <div className={estilos.ajustes}>
           <select className={estilos.franja} value={e.vozNombre} aria-label="Voz de Aksu" onChange={(ev) => cambiar({ vozNombre: ev.target.value })}>
-            <option value="">Voz automática{e.vocesLocales.length ? " (neuronal)" : nombreVozGrave() ? ` (${nombreVozGrave().replace(/^Microsoft | - .*$/g, "")})` : ""}</option>
+            <option value="">Voz automática{[...e.vocesLocales, ...e.vocesWeb].some((v) => v.startsWith("es_")) ? " (neuronal)" : nombreVozGrave() ? ` (${nombreVozGrave().replace(/^Microsoft | - .*$/g, "")})` : ""}</option>
             {e.vocesLocales.filter((v) => v.startsWith("es_")).map((v) => (
               <option key={v} value={LOCAL + v}>
                 Neuronal: {v.split("-")[1]} ({v.slice(3, 5)}) · hombre
@@ -856,8 +857,23 @@ export function Aksu() {
           </button>
           {/* La voz en inglés no se elige: si la laptop tiene una neuronal en inglés, usa esa */}
           <button type="button" className={estilos.interruptor} onClick={probarVozIngles} title="Con esta voz dice las palabras de inglés y responde cuando le hablas en inglés">
-            Probar inglés{e.vocesLocales.some((v) => v.startsWith("en_")) ? ` (neuronal: ${e.vocesLocales.find((v) => v.startsWith("en_")).split("-")[1]})` : " (voz del navegador)"}
+            Probar inglés{[...e.vocesLocales, ...e.vocesWeb].some((v) => v.startsWith("en_")) ? ` (neuronal: ${[...e.vocesLocales, ...e.vocesWeb].find((v) => v.startsWith("en_")).split("-")[1]})` : " (voz del navegador)"}
           </button>
+          {/* Sin la laptop (en el celular): la misma voz neuronal se descarga una vez y corre en el propio dispositivo */}
+          {puedeVozWeb() &&
+            Object.entries(VOCES_WEB)
+              .filter(([, d]) => !e.vocesLocales.some((l) => l.startsWith(`${d.idioma}_`)))
+              .map(([v, d]) =>
+                e.vocesWeb.includes(v) ? (
+                  <small key={v} className={estilos.vozInstalada}>
+                    Voz neuronal {d.nombre}: guardada en este dispositivo
+                  </small>
+                ) : (
+                  <button key={v} type="button" className={estilos.interruptor} disabled={!!e.descargaVoz} onClick={() => instalarVozWeb(v)}>
+                    {e.descargaVoz?.voz === v ? (e.descargaVoz.error ?? `Descargando ${d.nombre}: ${e.descargaVoz.pct} %`) : `Descargar voz neuronal ${d.nombre} · ${d.mb} MB`}
+                  </button>
+                ),
+              )}
         </div>
       )}
 

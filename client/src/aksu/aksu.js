@@ -5,6 +5,7 @@ import { api } from "../lib/api.js";
 import { claveIa, estadoIa, pedirIa, topeIa, ultimoModeloIa, usoIa } from "../lib/ia.js";
 import { almacen } from "../lib/visita.js";
 import { callarLocal, decirLocal } from "./voz-local.js";
+import { descargarVozWeb, vocesWebGuardadas } from "./voz-web.js";
 import { callar, decir, dictar, hayVozEn, microDisponible, vocesListas } from "../lib/voz.js";
 import { cargarPlan } from "../lib/plan-junior.js";
 import {
@@ -47,7 +48,7 @@ function leer() {
 }
 
 // Lo que no se guarda: vive solo mientras la pestaña está abierta
-const PASAJERO = { abierto: false, vista: "charla", pensando: false, sinLeer: 0, sesion: null, pantalla: "", ejercicio: null, entrevista: null, oyendo: null, vocesLocales: [], reto: null, marca: null, frente: false, ir: null, uso: null, distraidoCon: null };
+const PASAJERO = { abierto: false, vista: "charla", pensando: false, sinLeer: 0, sesion: null, pantalla: "", ejercicio: null, entrevista: null, oyendo: null, vocesLocales: [], vocesWeb: [], descargaVoz: null, reto: null, marca: null, frente: false, ir: null, uso: null, distraidoCon: null };
 let estado = { ...leer(), ...PASAJERO };
 const oyentes = new Set();
 
@@ -161,22 +162,39 @@ export const silencio = () => {
 /** Marca de las voces neuronales en el ajuste vozNombre ("local:es_MX-ald-medium"). */
 export const LOCAL = "local:";
 /** Carga las voces neuronales de la laptop (si el motor está y las tiene). */
-export const cargarVocesLocales = () => api.vocesLocales?.().then((r) => cambiar({ vocesLocales: r?.voces ?? [] }), () => {});
+export const cargarVocesLocales = () => {
+  vocesWebGuardadas().then((vocesWeb) => cambiar({ vocesWeb }), () => {});
+  return api.vocesLocales?.().then((r) => cambiar({ vocesLocales: r?.voces ?? [] }), () => {});
+};
+/** Descarga una voz neuronal a este dispositivo (para el celular, o la laptop sin motor). */
+export async function instalarVozWeb(voz) {
+  if (estado.descargaVoz) return;
+  cambiar({ descargaVoz: { voz, pct: 0 } });
+  try {
+    await descargarVozWeb(voz, (pct) => pct !== estado.descargaVoz?.pct && cambiar({ descargaVoz: { voz, pct } }));
+    cambiar({ descargaVoz: null, vocesWeb: await vocesWebGuardadas() });
+  } catch (e) {
+    cambiar({ descargaVoz: { voz, pct: 0, error: e?.message || "No se pudo descargar" } });
+    setTimeout(() => estado.descargaVoz?.error && cambiar({ descargaVoz: null }), 6000);
+  }
+}
 /**
  * Dice algo en voz alta. En español, con la laptop conectada y una voz neuronal instalada, usa esa
  * (salvo que hayas elegido una del navegador); si falla o no hay, la voz del navegador.
  */
 function enVozAlta(texto, idioma) {
-  const { vozNombre, vozTono, vocesLocales } = estado;
+  const { vozNombre, vozTono, vocesLocales, vocesWeb } = estado;
   const delNavegador = () => hayVozEn(idioma) && decir(texto, { idioma, grave: true, voz: vozNombre.startsWith(LOCAL) ? "" : vozNombre, tono: vozTono });
   const quiereLocal = vozNombre.startsWith(LOCAL) || vozNombre === "";
   // Las voces neuronales se llaman por su idioma ("es_ES-...", "en_US-..."): cada idioma usa la suya
-  const delIdioma = vocesLocales.filter((v) => v.startsWith(`${idioma}_`));
+  // Primero las del motor de la laptop (más rápidas); si no hay, las guardadas en este dispositivo
+  const delMotor = vocesLocales.filter((v) => v.startsWith(`${idioma}_`));
+  const delIdioma = delMotor.length ? delMotor : vocesWeb.filter((v) => v.startsWith(`${idioma}_`));
   if (!delIdioma.length || !quiereLocal) return delNavegador();
   const pedida = vozNombre.slice(LOCAL.length);
   const voz = delIdioma.includes(pedida) ? pedida : (delIdioma.find((v) => /davefx/.test(v)) ?? delIdioma[0]);
   callar();
-  decirLocal(texto, { voz, tono: vozTono }).catch(delNavegador);
+  decirLocal(texto, { voz, tono: vozTono, enWeb: !delMotor.length }).catch(delNavegador);
 }
 /** Dice una frase de muestra con la voz y el tono elegidos (el botón Probar). */
 export const probarVoz = () => vocesListas().then(() => enVozAlta("Soy Aksu. Llevas tres ejercicios hoy y dos los resolviste mirando. Así no vale.", "es"));

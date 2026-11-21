@@ -22,6 +22,7 @@ data-*/
 
 # Versión celular: datos generados por npm run exportar:movil y su build
 client/public-movil/datos/
+client/public-movil/voz-web/
 client/dist-movil/
 aws/lambda/dist/
 

@@ -2,6 +2,7 @@
 // reproduce. Reproducirlo un poco más lento lo vuelve más grave de forma natural (como una cinta
 // a menos velocidad), y dos filtros le dan cuerpo y le quitan brillo.
 import { api } from "../lib/api.js";
+import { audioWeb } from "./voz-web.js";
 
 let contexto = null;
 let fuente = null;
@@ -25,15 +26,22 @@ export const velocidadDe = (tono) => (tono >= 1 ? 1 : tono >= 0.7 ? 0.9 : tono >
  * Dice un texto con la voz neuronal. Rechaza si el motor no está o no tiene voces (quien llama
  * usa entonces la voz del navegador).
  * @param {string} texto
- * @param {{ voz?: string, tono?: number }} [opciones]
+ * @param {{ voz?: string, tono?: number, enWeb?: boolean }} [opciones]  enWeb: la voz está guardada en este
+ *   dispositivo y el audio se calcula aquí mismo (voz-web.js), sin la laptop
  */
-export async function decirLocal(texto, { voz = "", tono = 0.7 } = {}) {
-  if (!api.audioDeVoz) throw new Error("Sin motor");
+export async function decirLocal(texto, { voz = "", tono = 0.7, enWeb = false } = {}) {
+  if (!enWeb && !api.audioDeVoz) throw new Error("Sin motor");
   const mio = ++turno;
-  const datos = await api.audioDeVoz(texto, voz);
   contexto ??= new AudioContext();
-  if (contexto.state === "suspended") await contexto.resume();
-  const audio = await contexto.decodeAudioData(datos);
+  if (contexto.state === "suspended") contexto.resume().catch(() => {});
+  let audio;
+  if (enWeb) {
+    const { pcm, frecuencia } = await audioWeb(texto, voz);
+    audio = contexto.createBuffer(1, pcm.length, frecuencia);
+    audio.copyToChannel(pcm, 0);
+  } else {
+    audio = await contexto.decodeAudioData(await api.audioDeVoz(texto, voz));
+  }
   if (mio !== turno) return; // mientras se generaba, llegó otra frase o lo callaron
   try {
     fuente?.stop();
