@@ -179,7 +179,8 @@ export const MODELOS = ["haiku", "sonnet", "opus"];
 export const subirA = (pedido, actual) => (MODELOS.indexOf(pedido) > MODELOS.indexOf(actual) ? pedido : null);
 
 // ---------- Moverse por la pantalla ----------
-export const FIGURA = { ancho: 96, alto: 108, margen: 18 };
+// margen: lo que se separa de los bordes; el dibujo desborda su caja unos 30 px por lado y no debe cortarse
+export const FIGURA = { ancho: 96, alto: 108, margen: 52 };
 /**
  * Paradas posibles: puntos sobre los bordes derecho e inferior y la esquina de arriba (nunca sobre el
  * menú de la izquierda ni en el centro, donde está lo que lees).
