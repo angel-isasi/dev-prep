@@ -344,6 +344,58 @@ function Mensaje({ m, alIr }) {
 const medidas = () => ({ ancho: window.innerWidth, alto: window.innerHeight, izquierda: window.innerWidth >= 900 ? 80 : 0 });
 const quieto = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
+// ---------- No tapar lo que lees ----------
+const ETIQUETAS_CONTENIDO = /^(P|H[1-6]|LI|TD|TH|TABLE|PRE|CODE|BUTTON|A|INPUT|TEXTAREA|SELECT|IMG|SVG|CANVAS|LABEL|SPAN|STRONG|B|EM|SMALL)$/i;
+/** ¿Ese elemento (o algo que lo contiene) es contenido: texto, un control o una tarjeta con fondo o borde? */
+function esContenido(el) {
+  for (let e = el; e && e !== document.body && e !== document.documentElement; e = e.parentElement) {
+    if (ETIQUETAS_CONTENIDO.test(e.tagName)) return true;
+    if ([...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) return true;
+    const r = e.getBoundingClientRect();
+    if (r.width < window.innerWidth * 0.9) {
+      const s = getComputedStyle(e);
+      if (parseFloat(s.borderTopWidth) > 0 || !/^(transparent|rgba(0, 0, 0, 0))$/.test(s.backgroundColor)) return true;
+    }
+  }
+  return false;
+}
+/** Cuánto taparía la figura puesta en ese punto: mira qué hay debajo en 9 puntos de su caja (0 = nada). */
+function tapa(p) {
+  let n = 0;
+  // Un poco más que su caja: el dibujo la desborda
+  for (const fx of [-0.15, 0.5, 1.15]) {
+    for (const fy of [-0.05, 0.5, 1.05]) {
+      const x = p.x + FIGURA.ancho * fx;
+      const y = p.y + FIGURA.alto * fy;
+      if (x < 0 || y < 0 || x >= window.innerWidth || y >= window.innerHeight) continue; // fuera de la ventana no tapa nada
+      const debajo = document.elementsFromPoint(x, y).find((el) => !el.closest("[data-aksu-raiz]"));
+      if (debajo && esContenido(debajo)) n++;
+    }
+  }
+  return n;
+}
+/** Los sitios donde menos estorba ahora mismo: las paradas de siempre más puntos repartidos por los bordes. */
+function sitiosLibres() {
+  const { ancho, alto, izquierda } = medidas();
+  const x0 = izquierda + FIGURA.margen;
+  const todos = [...paradas(ancho, alto, izquierda)];
+  for (let i = 0; i <= 8; i++) {
+    todos.push(encajar({ x: ancho, y: (alto * i) / 8 }, ancho, alto));
+    todos.push(encajar({ x: x0 + ((ancho - x0) * i) / 8, y: alto }, ancho, alto));
+    todos.push(encajar({ x: x0 + ((ancho - x0) * i) / 8, y: 0 }, ancho, alto));
+  }
+  let medidos = todos.map((p) => ({ p, n: tapa(p) }));
+  let menos = Math.min(...medidos.map((m) => m.n));
+  // Pantalla llena, sin hueco limpio: se asoma a medias por el borde derecho, donde menos estorbe
+  if (menos >= 1) {
+    const asomados = Array.from({ length: 9 }, (_, i) => ({ x: Math.round(ancho - FIGURA.ancho * 0.5), y: Math.round(FIGURA.margen + ((alto - FIGURA.alto - 2 * FIGURA.margen) * i) / 8) }));
+    const medidosA = asomados.map((p) => ({ p, n: tapa(p) }));
+    const menosA = Math.min(...medidosA.map((m) => m.n));
+    if (menosA < menos) [medidos, menos] = [medidosA, menosA];
+  }
+  return medidos.filter((m) => m.n === menos).map((m) => m.p);
+}
+
 /**
  * Por dónde anda la figura. Se desliza despacio entre paradas de los bordes; se acerca a lo que
  * importa, se pone delante cuando te pregunta, se aparta de donde escribes y se queda donde la sueltes.
@@ -400,12 +452,37 @@ function useMovimiento(e, enBloque) {
       t = setTimeout(paso, 7000 + Math.random() * 9000);
       const s = verEstado();
       if (s.abierto || s.frente || s.ir || s.reto || bloqueActivo(s.bloque, Date.now()) || Date.now() < sueltaHasta.current || quieto() || document.visibilityState !== "visible") return;
-      const { ancho, alto, izquierda } = medidas();
-      ir(siguienteParada(paradas(ancho, alto, izquierda), posRef.current, Math.random()));
+      const libres = sitiosLibres();
+      const otro = siguienteParada(libres, posRef.current, Math.random());
+      // Si el único sitio libre es donde ya está, se queda
+      if (Math.hypot(otro.x - posRef.current.x, otro.y - posRef.current.y) > 40 || tapa(posRef.current) > 0) ir(otro);
     };
     t = setTimeout(paso, 8000);
     return () => clearTimeout(t);
   }, []);
+
+  // Si al cambiar de pantalla o al bajar quedó encima de algo, se va al sitio libre más cercano
+  useEffect(() => {
+    let t;
+    const reubicar = () => {
+      const s = verEstado();
+      if (window.innerWidth < 900 || s.abierto || s.frente || s.ir || s.reto || arrastre.current || Date.now() < sueltaHasta.current || tapa(posRef.current) === 0) return;
+      const libres = sitiosLibres();
+      const p = posRef.current;
+      const cerca = libres.reduce((mejor, l) => (Math.hypot(l.x - p.x, l.y - p.y) < Math.hypot(mejor.x - p.x, mejor.y - p.y) ? l : mejor), libres[0]);
+      if (cerca && tapa(cerca) < tapa(p)) ir(cerca, true);
+    };
+    const pronto = () => {
+      clearTimeout(t);
+      t = setTimeout(reubicar, 700);
+    };
+    pronto();
+    document.addEventListener("scroll", pronto, true);
+    return () => {
+      clearTimeout(t);
+      document.removeEventListener("scroll", pronto, true);
+    };
+  }, [e.pantalla]);
 
   // Te sigue con la mirada: la luz de los ojos apunta hacia el cursor (sin volver a dibujar nada)
   const raiz = useRef(null);
