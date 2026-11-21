@@ -755,7 +755,7 @@ export function Aksu() {
         <div className={estilos.ajustes}>
           <select className={estilos.franja} value={e.vozNombre} aria-label="Voz de Aksu" onChange={(ev) => cambiar({ vozNombre: ev.target.value })}>
             <option value="">Voz automática{e.vocesLocales.length ? " (neuronal)" : nombreVozGrave() ? ` (${nombreVozGrave().replace(/^Microsoft | - .*$/g, "")})` : ""}</option>
-            {e.vocesLocales.map((v) => (
+            {e.vocesLocales.filter((v) => v.startsWith("es_")).map((v) => (
               <option key={v} value={LOCAL + v}>
                 Neuronal: {v.split("-")[1]} ({v.slice(3, 5)}) · hombre
               </option>

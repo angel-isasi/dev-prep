@@ -170,9 +170,11 @@ function enVozAlta(texto, idioma) {
   const { vozNombre, vozTono, vocesLocales } = estado;
   const delNavegador = () => hayVozEn(idioma) && decir(texto, { idioma, grave: true, voz: vozNombre.startsWith(LOCAL) ? "" : vozNombre, tono: vozTono });
   const quiereLocal = vozNombre.startsWith(LOCAL) || vozNombre === "";
-  if (idioma !== "es" || !vocesLocales.length || !quiereLocal) return delNavegador();
+  // Las voces neuronales se llaman por su idioma ("es_ES-...", "en_US-..."): cada idioma usa la suya
+  const delIdioma = vocesLocales.filter((v) => v.startsWith(`${idioma}_`));
+  if (!delIdioma.length || !quiereLocal) return delNavegador();
   const pedida = vozNombre.slice(LOCAL.length);
-  const voz = vocesLocales.includes(pedida) ? pedida : (vocesLocales.find((v) => /davefx/.test(v)) ?? vocesLocales[0]);
+  const voz = delIdioma.includes(pedida) ? pedida : (delIdioma.find((v) => /davefx/.test(v)) ?? delIdioma[0]);
   callar();
   decirLocal(texto, { voz, tono: vozTono }).catch(delNavegador);
 }

@@ -8,7 +8,7 @@ import { ALTO, ANCHO, CAPAS } from "./figura-trazo.js";
 import estilos from "./Aksu.module.css";
 
 // Las capas se apilan: cada una es blanco con un poco de opacidad, de la más tenue a la más clara
-const capas = CAPAS.map((c, i) => <path key={i} d={c.d} fill="#fff" fillOpacity={Math.min(1, c.o * 1.3)} />);
+const capas = CAPAS.map((c, i) => <path key={i} d={c.d} fill="#fff" fillOpacity={Math.min(1, c.o * 1.12)} />);
 
 // Estrellas que titilan sobre el cielo del dibujo: [x, y, radio, grupo]
 const ESTRELLAS = [

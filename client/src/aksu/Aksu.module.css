@@ -59,9 +59,9 @@
 
 .lienzo {
   position: absolute;
-  top: 46%;
-  left: -50%;
-  width: 200%;
+  top: 44%;
+  left: -38%;
+  width: 176%;
   aspect-ratio: 354 / 366;
   transform: translateY(-50%);
   pointer-events: none;
@@ -83,8 +83,8 @@
 
 /* Los bordes del dibujo se funden con la app */
 .fundido {
-  -webkit-mask-image: radial-gradient(ellipse 54% 56% at 50% 54%, #000 72%, transparent 100%);
-  mask-image: radial-gradient(ellipse 54% 56% at 50% 54%, #000 72%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 50% 52% at 50% 56%, #000 34%, rgb(0 0 0 / 0.82) 52%, rgb(0 0 0 / 0.4) 72%, rgb(0 0 0 / 0.12) 88%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 52% at 50% 56%, #000 34%, rgb(0 0 0 / 0.82) 52%, rgb(0 0 0 / 0.4) 72%, rgb(0 0 0 / 0.12) 88%, transparent 100%);
   opacity: 0.94;
   transition: opacity 0.4s ease;
 }
