@@ -46,8 +46,31 @@
 }
 
 .figura {
+  position: relative;
   display: block;
   overflow: visible;
+}
+
+/* La figura con su fondo: detrás, el humo gris (más grande que ella) */
+.marco {
+  position: relative;
+  display: block;
+}
+
+.nebulosa {
+  position: absolute;
+  top: -42%;
+  left: -42%;
+  width: 184%;
+  height: 184%;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+  animation: girar 160s linear infinite;
+}
+
+[data-cerca] .nebulosa {
+  opacity: 0.85;
 }
 
 /* El cuerpo flota y se mece apenas; al deslizarse se inclina hacia donde va */
@@ -115,20 +138,10 @@
   pointer-events: none;
 }
 
-.cielo {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: girar 90s linear infinite;
-}
-
 @keyframes girar {
   to {
     transform: rotate(360deg);
   }
-}
-
-.niebla {
-  animation: respirar 9s ease-in-out infinite;
 }
 
 .estrella {
@@ -305,9 +318,8 @@
   cursor: pointer;
 }
 
-.libro:hover path:nth-child(4),
-.libro:hover path:nth-child(5) {
-  fill: #d6d2c6;
+.libro:hover {
+  filter: brightness(1.18);
 }
 
 .sinLeer {
@@ -1050,11 +1062,15 @@
     transform: none !important;
     transition: none;
   }
+  .suelta .marco {
+    width: 50px !important;
+    height: 56px !important;
+  }
   .suelta .figura {
     width: 50px;
     height: 56px;
   }
-  .cielo,
+  .nebulosa,
   .cuerpoFigura,
   .humo ellipse {
     animation: none;
@@ -1083,6 +1099,7 @@
   }
   .figura,
   .figura *,
+  .nebulosa,
   .cuerpo2 {
     animation: none !important;
     transition: none !important;
