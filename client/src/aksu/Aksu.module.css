@@ -71,6 +71,19 @@
   animation: pulso 0.45s steps(2) infinite;
 }
 
+/* Escuchando: la luz queda fija y fuerte */
+[data-estado="escuchando"] .luz {
+  opacity: 1;
+  filter: drop-shadow(0 0 3px #fff);
+}
+
+.oyendo {
+  color: var(--texto-tenue);
+  font-family: var(--fuente-codigo);
+  font-size: var(--letra-1);
+  letter-spacing: 0.06em;
+}
+
 [data-estado="frena"] .luz {
   fill: var(--error);
   opacity: 1;

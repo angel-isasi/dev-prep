@@ -4,7 +4,7 @@
 import { api } from "../lib/api.js";
 import { claveIa, estadoIa, pedirIa, topeIa, ultimoModeloIa, usoIa } from "../lib/ia.js";
 import { almacen } from "../lib/visita.js";
-import { callar, decir, hayVozEn } from "../lib/voz.js";
+import { callar, decir, dictar, hayVozEn, microDisponible } from "../lib/voz.js";
 import { cargarPlan } from "../lib/plan-junior.js";
 import {
   anotar, bloqueActivo, BLOQUE_MIN, diaNuevo, enFranjaIngles, enSilencio, guardarVeredicto, marcarHecho, NIVELES, notaDelDia, PREGUNTAS_ENTREVISTA, restanteBloque, subirA, TEXTOS,
@@ -46,7 +46,7 @@ function leer() {
 }
 
 // Lo que no se guarda: vive solo mientras la pestaña está abierta
-const PASAJERO = { abierto: false, vista: "charla", pensando: false, sinLeer: 0, sesion: null, pantalla: "", ejercicio: null, entrevista: null, reto: null, marca: null, frente: false, ir: null, uso: null, distraidoCon: null };
+const PASAJERO = { abierto: false, vista: "charla", pensando: false, sinLeer: 0, sesion: null, pantalla: "", ejercicio: null, entrevista: null, oyendo: null, reto: null, marca: null, frente: false, ir: null, uso: null, distraidoCon: null };
 let estado = { ...leer(), ...PASAJERO };
 const oyentes = new Set();
 
@@ -127,6 +127,34 @@ export function hablar(m) {
   }
 }
 export const silencio = () => callar();
+
+// ---------- Hablarle por voz (Ctrl + Espacio) ----------
+let sesionVoz = null;
+/**
+ * Empieza a escucharte; al volver a llamarla (o al callarte) manda lo que dijiste. Sirve con el chat
+ * cerrado: lo que vas diciendo se ve junto a la figura y él responde en voz alta.
+ */
+export function escuchar() {
+  if (sesionVoz) return sesionVoz.detener();
+  if (!microDisponible()) return hablar({ texto: "Este navegador no permite dictado por voz. Usa Chrome o Edge.", frente: false });
+  callar();
+  let dicho = "";
+  // Si le hablas, te responde hablando: la voz queda encendida
+  cambiar({ oyendo: "", voz: true });
+  const ingles = enFranjaIngles(new Date().getHours(), estado.franjaIngles);
+  sesionVoz = dictar({
+    lang: ingles ? "en-US" : "es-PE",
+    alTexto: (t) => {
+      dicho = `${dicho} ${t}`.trim();
+      cambiar({ oyendo: dicho });
+    },
+    alTerminar: () => {
+      sesionVoz = null;
+      cambiar({ oyendo: null });
+      if (dicho) decirle(dicho);
+    },
+  });
+}
 
 // ---------- Silencio y bloque de concentración ----------
 export function silenciar(minutos = 30) {

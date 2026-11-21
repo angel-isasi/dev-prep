@@ -13,7 +13,7 @@ import {
   TEXTOS, tocaCierre, tocaComentario, tocaDistraccion, tocaEntrevista, tocaInforme, tocaPausa, tocaPregunta, tocaRelampago, tocaSorpresa, vaCorriendo, yaHizo,
 } from "./reglas.js";
 import {
-  abrir, cambiar, cerrar, cerrarDia, decirle, duracion, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, NOMBRE, NOMBRE_DESTINO, olvidarPlan, pedirAvisos, pensar, planActual,
+  abrir, cambiar, cerrar, cerrarDia, decirle, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, NOMBRE, NOMBRE_DESTINO, olvidarPlan, pedirAvisos, pensar, planActual,
   puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
 } from "./aksu.js";
 import { Figura } from "./Figura.jsx";
@@ -460,7 +460,7 @@ function Suelta({ e }) {
   }, [enBloque]);
 
   const g = gasto();
-  const estado = e.pensando ? "pensando" : enBloque ? "guardia" : enSilencio(e, ahora) ? "silencio" : globo?.tipo === "frena" ? "frena" : globo || e.reto ? "hablando" : "atento";
+  const estado = e.oyendo !== null ? "escuchando" : e.pensando ? "pensando" : enBloque ? "guardia" : enSilencio(e, ahora) ? "silencio" : globo?.tipo === "frena" ? "frena" : globo || e.reto ? "hablando" : "atento";
   const resta = enBloque ? Math.ceil(restanteBloque(e.bloque, ahora) / 1000) : 0;
   const alSoltar = (ev) => {
     if (soltar()) return;
@@ -485,15 +485,20 @@ function Suelta({ e }) {
         onPointerMove={mover}
         onPointerUp={alSoltar}
         onKeyDown={(ev) => (ev.key === "Enter" || ev.key === " ") && abrir()}
-        aria-label={`Abrir a ${NOMBRE} (Alt + A). Su libro abre lo que ha anotado de ti.`}
-        title={`${NOMBRE} · ${g.usd.toFixed(2)} de ${g.tope} USD este mes${g.modelo ? ` · respondió ${g.modelo}` : ""}`}
+        aria-label={`Abrir a ${NOMBRE} (Alt + A). Para hablarle por voz: Ctrl + Espacio. Su libro abre lo que ha anotado de ti.`}
+        title={`${NOMBRE} · Ctrl + Espacio para hablarle · ${g.usd.toFixed(2)} de ${g.tope} USD este mes${g.modelo ? ` · respondió ${g.modelo}` : ""}`}
       >
         <Figura estado={estado} />
         {e.sinLeer > 0 && <b className={estilos.sinLeer}>{e.sinLeer}</b>}
         {enBloque && <span className={estilos.cuenta}>{`${Math.floor(resta / 60)}:${String(resta % 60).padStart(2, "0")}`}</span>}
       </button>
       <div className={estilos.junto} data-lado={lado} data-alto={alto}>
-        {e.reto ? (
+        {e.oyendo !== null ? (
+          <button type="button" className={estilos.globo} onClick={escuchar}>
+            <small className={estilos.oyendo}>Te escucho. Ctrl + Espacio para enviar</small>
+            {e.oyendo || "..."}
+          </button>
+        ) : e.reto ? (
           <Reto key={e.reto.clave} reto={e.reto} />
         ) : globo && !enBloque ? (
           <button type="button" className={estilos.globo} onClick={() => (setGlobo(null), abrir())}>
@@ -532,6 +537,11 @@ export function Aksu() {
       if (ev.altKey && ["a", "j"].includes(ev.key.toLowerCase())) {
         ev.preventDefault();
         verEstado().abierto ? cerrar() : abrir();
+      }
+      // Ctrl + Espacio: hablarle por voz, con el chat abierto o cerrado
+      if (ev.ctrlKey && ev.code === "Space" && !ev.repeat) {
+        ev.preventDefault();
+        escuchar();
       }
     };
     window.addEventListener("keydown", alTeclear);
@@ -605,7 +615,7 @@ export function Aksu() {
         </span>
         <div>
           <strong>{NOMBRE}</strong>
-          <small>{e.pensando ? "pensando..." : oyendo ? "te escucho..." : enBloque ? "cuidando tu bloque" : callado ? "en silencio" : NOMBRE_NIVEL[e.nivel]}</small>
+          <small>{e.pensando ? "pensando..." : oyendo || e.oyendo !== null ? "te escucho..." : enBloque ? "cuidando tu bloque" : callado ? "en silencio" : NOMBRE_NIVEL[e.nivel]}</small>
         </div>
         <button type="button" className={estilos.enlace} onClick={() => cambiar({ vista: e.vista === "charla" ? "libro" : "charla" })}>
           {e.vista === "charla" ? "Su libro" : "Conversación"}
@@ -745,7 +755,7 @@ export function Aksu() {
             </div>
           )}
           <form className={estilos.escribir} onSubmit={enviar}>
-            <input value={texto} onChange={(ev) => setTexto(ev.target.value)} placeholder={e.entrevista ? "Tu respuesta" : "Escríbele o háblale"} aria-label={`Mensaje para ${NOMBRE}`} maxLength={800} autoFocus />
+            <input value={texto} onChange={(ev) => setTexto(ev.target.value)} placeholder={e.oyendo !== null ? e.oyendo || "Te escucho..." : e.entrevista ? "Tu respuesta" : "Escríbele o háblale (Ctrl + Espacio)"} aria-label={`Mensaje para ${NOMBRE}`} maxLength={800} autoFocus />
             {microDisponible() && (
               <button type="button" className={estilos.micro} data-activo={!!oyendo} onClick={microfono} aria-label={oyendo ? "Dejar de escuchar" : "Hablarle"}>
                 <IconoMicrofono tamano={16} />
