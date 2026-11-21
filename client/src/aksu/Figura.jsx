@@ -8,7 +8,7 @@ import estilos from "./Aksu.module.css";
  * @param {number} [p.tamano]  ancho en píxeles (el alto sale de la proporción 68 × 76)
  * @param {string} [p.estado]
  */
-export function Figura({ tamano = 84, estado = "atento" }) {
+export function Figura({ tamano = 96, estado = "atento" }) {
   return (
     <svg className={estilos.figura} data-estado={estado} width={tamano} height={(tamano * 76) / 68} viewBox="0 16 68 76" aria-hidden focusable="false">
       {/* Túnica: hombros rectos y caída en líneas, sin curvas */}

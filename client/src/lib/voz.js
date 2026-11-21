@@ -106,6 +106,16 @@ function vozEspanol() {
   return america.find((v) => /google|natural|neural|dalia|paulina|sabina/i.test(v.name)) ?? america[0] ?? lista[0] ?? null;
 }
 
+/** Voces de hombre en español que traen Windows, Edge, Chrome y Android (por su nombre). */
+const DE_HOMBRE = /pablo|ra[uú]l|jorge|[aá]lvaro|alex|gerardo|alonso|tom[aá]s|el[ií]as|diego|carlos|andr[eé]s|david|enrique|emilio|lorenzo|mateo|federico|luciano|male|hombre|masculin/i;
+/** La voz grave: una de hombre en español si el dispositivo la tiene (primero las de América); si no, la de siempre. */
+function vozGrave() {
+  const lista = voces().filter((v) => /^es[-_]/i.test(v.lang) && DE_HOMBRE.test(v.name));
+  return lista.find((v) => /es[-_](PE|MX|US|419|CO|CL|AR)/i.test(v.lang)) ?? lista[0] ?? vozEspanol();
+}
+/** ¿Este dispositivo tiene una voz de hombre en español? (si no, la grave es la de siempre con el tono bajo) */
+export const hayVozDeHombre = () => voces().some((v) => /^es[-_]/i.test(v.lang) && DE_HOMBRE.test(v.name));
+
 /** ¿Hay una voz para leer en ese idioma? ("es" o "en") */
 export const hayVozEn = (idioma) => !!globalThis.speechSynthesis && !!(idioma === "en" ? vozIngles() : vozEspanol());
 
@@ -113,12 +123,12 @@ export const hayVozEn = (idioma) => !!globalThis.speechSynthesis && !!(idioma ==
  * Dice un texto en español o en inglés y avisa al terminar (el entrevistador por voz). Avisa una
  * sola vez, también si no hay voz o si el navegador nunca dispara el final (pasa con textos largos).
  * @param {string} texto
- * @param {{ idioma?: "es"|"en", alTerminar?: () => void }} [opciones]
+ * @param {{ idioma?: "es"|"en", grave?: boolean, alTerminar?: () => void }} [opciones]  grave: voz de hombre, baja y lenta (Aksu)
  * @returns {() => void} cancelar: calla y no avisa
  */
-export function decir(texto, { idioma = "es", alTerminar } = {}) {
+export function decir(texto, { idioma = "es", grave = false, alTerminar } = {}) {
   const sintesis = globalThis.speechSynthesis;
-  const voz = idioma === "en" ? vozIngles() : vozEspanol();
+  const voz = idioma === "en" ? vozIngles() : grave ? vozGrave() : vozEspanol();
   let pendiente = true;
   let reloj = null;
   const terminar = () => {
@@ -135,7 +145,9 @@ export function decir(texto, { idioma = "es", alTerminar } = {}) {
   const frase = new SpeechSynthesisUtterance(texto);
   frase.voice = voz;
   frase.lang = voz.lang;
-  frase.rate = 1;
+  frase.rate = grave ? 0.86 : 1;
+  // El tono va de 0 a 2 (1 es el normal): lo más bajo que suena natural
+  if (grave) frase.pitch = 0.1;
   frase.onend = terminar;
   frase.onerror = terminar;
   // Tope por si el final nunca llega: unas 2,5 palabras por segundo, más un margen

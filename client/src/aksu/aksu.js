@@ -117,7 +117,7 @@ export function hablar(m) {
   }));
   const completo = [texto, mensaje.pregunta].filter(Boolean).join(" ");
   const idioma = m.ingles ? "en" : "es";
-  if (estado.voz && hayVozEn(idioma)) decir(completo, { idioma });
+  if (estado.voz && hayVozEn(idioma)) decir(completo, { idioma, grave: true });
   if (estado.avisos && document.visibilityState !== "visible" && globalThis.Notification?.permission === "granted") {
     try {
       new Notification(NOMBRE, { body: completo.slice(0, 220), tag: "aksu" });
