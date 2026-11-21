@@ -25,7 +25,7 @@ export function PanelTests({ resultado, corriendo, preparado, ultimaCorrida, con
 
   if (!resultado) {
     return (
-      <aside className={estilos.panel} aria-live="polite">
+      <aside className={estilos.panel} data-aksu="tests" aria-live="polite">
         <h2 className={estilos.titulo}>Tests en vivo</h2>
         {corriendo ? (
           <p className={estilos.vacio}>
@@ -58,7 +58,7 @@ export function PanelTests({ resultado, corriendo, preparado, ultimaCorrida, con
   };
 
   return (
-    <aside className={estilos.panel} data-ok={todoBien} aria-live="polite">
+    <aside className={estilos.panel} data-aksu="tests" data-ok={todoBien} aria-live="polite">
       {/* Cuando todo pasa, un haz verde recorre el borde del panel */}
       {todoBien && <BorderBeam colorFrom="var(--exito)" colorTo="var(--acento)" size={120} duration={5} />}
       <div className={estilos.cabecera}>

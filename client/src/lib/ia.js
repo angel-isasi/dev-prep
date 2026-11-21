@@ -7,7 +7,7 @@ const CLAVE = "devprep.iaClave";
 const CLAVE_USO = "devprep.iaUso";
 const CLAVE_TOPE = "devprep.iaTope";
 /** Tope mensual por defecto, en dólares. Se cambia desde el panel de la IA. */
-export const TOPE_POR_DEFECTO = 20;
+export const TOPE_POR_DEFECTO = 40;
 
 export const claveIa = () => localStorage.getItem(CLAVE) ?? "";
 export const guardarClaveIa = (clave) => (clave ? localStorage.setItem(CLAVE, clave) : localStorage.removeItem(CLAVE));
@@ -42,6 +42,10 @@ export function topeIa() {
   return valor > 0 ? valor : TOPE_POR_DEFECTO;
 }
 export const guardarTopeIa = (usd) => (usd > 0 ? localStorage.setItem(CLAVE_TOPE, String(usd)) : localStorage.removeItem(CLAVE_TOPE));
+
+/** El modelo que respondió el último pedido (lo muestra Aksu). */
+let ultimo = null;
+export const ultimoModeloIa = () => ultimo;
 
 let estado = null;
 /** ¿La IA está lista en el servidor? (en la laptop sin internet, o sin configurar, es false) */
@@ -108,7 +112,10 @@ export async function pedirIa(pedido) {
   }
   if (r.status === 503) throw new Error("La IA todavía no está configurada en Vercel");
   // El gasto se anota también cuando la respuesta no sirvió (cortada o mal formada): ese pedido igual se cobró
-  if (datos.uso) registrarUso(datos.uso);
+  if (datos.uso) {
+    registrarUso(datos.uso);
+    ultimo = datos.uso.modelo ?? null;
+  }
   if (!r.ok) throw new Error(datos.error ?? "No se pudo evaluar. Inténtalo otra vez.");
   if (huella) guardarRespuesta(huella, datos.resultado);
   anotarHerramienta();
@@ -116,7 +123,7 @@ export async function pedirIa(pedido) {
 }
 
 // Tareas que deben salir distintas cada vez (crean algo nuevo o siguen una charla): nunca se guardan
-const SIN_GUARDAR = /crear$|^jarvis|^mentor$|^variante$|^conversacion$|^plan-semana$|^tarjeta-|^defensa$|^negociacion$|^reunion$|^entrevista-en$/;
+const SIN_GUARDAR = /crear$|^jarvis|^aksu|^mentor$|^variante$|^conversacion$|^plan-semana$|^tarjeta-|^defensa$|^negociacion$|^reunion$|^entrevista-en$/;
 const CLAVE_GUARDADAS = "devprep.iaGuardadas";
 const MAX_GUARDADAS = 40;
 

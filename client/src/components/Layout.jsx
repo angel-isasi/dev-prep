@@ -1,6 +1,6 @@
 import { Suspense, useRef } from "react";
 import { Outlet, useLocation } from "react-router";
-import { Jarvis } from "../jarvis/Jarvis.jsx";
+import { Aksu } from "../aksu/Aksu.jsx";
 import { motion, useReducedMotion } from "motion/react";
 import { BarraLateral } from "./BarraLateral.jsx";
 import ClickSpark from "./reactbits/ClickSpark.jsx";
@@ -46,8 +46,8 @@ export function Layout() {
       </div>
       {/* Buscador global: se abre con Ctrl+K o con el botón Buscar de la barra */}
       <Paleta />
-      {/* Jarvis: el asistente, fijo en toda la app (Alt + J) */}
-      <Jarvis />
+      {/* Aksu: el asistente, fijo en toda la app (Alt + A) */}
+      <Aksu />
       {/* Grano de película muy suave (React Bits). Va DETRÁS del contenido (z-index -1):
           da textura al fondo sin ensuciar los textos ni las tarjetas. Es estático (fps 0):
           animado obligaba a repintar toda la pantalla 18 veces por segundo y trababa la app. */}

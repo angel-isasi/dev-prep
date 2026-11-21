@@ -493,6 +493,44 @@ const apiWeb = {
       vistas: ejercicios.filter((e) => (d.lecturas?.[e.id]?.vioSolucion || d.ejercicios?.[e.id]?.vioSolucion) && d.ejercicios?.[e.id]?.estado !== "resuelto").map((e) => e.titulo),
     });
   },
+  /** Reto relámpago de Aksu: una pregunta de opción de un tema que ya viste (con preferencia por las que fallaste). Sin IA. */
+  async retoRelampago() {
+    const { items } = await json("items.json");
+    const registros = progreso.datos().items ?? {};
+    const vistas = new Set(items.filter((it) => registros[it.clave]).map((it) => it.unidad));
+    // Solo preguntas que se entienden solas y caben en un globo (sin código aparte ni línea resaltada)
+    const sirve = (it) => it.tipo === "opcion" && ["quiz", "termino", "metodo"].includes(it.subtipo) && !it.codigo && it.opciones?.length >= 2 && it.pregunta.length < 420;
+    let candidatos = items.filter((it) => sirve(it) && vistas.has(it.unidad));
+    if (!candidatos.length) candidatos = items.filter((it) => sirve(it) && it.unidad === items[0]?.unidad);
+    const falladas = candidatos.filter((it) => registros[it.clave]?.ultima === "no");
+    if (falladas.length && Math.random() < 0.6) candidatos = falladas;
+    const it = candidatos[Math.floor(Math.random() * candidatos.length)];
+    return it ? { clave: it.clave, tema: it.fuente?.titulo ?? "", pregunta: it.pregunta, opciones: it.opciones, correcta: it.correcta, explicacion: it.explicacion ?? "" } : null;
+  },
+  /** La marca que Aksu deja en una pantalla: lo que te pasó ahí antes (o null). Sin IA. */
+  async marcaDePantalla(ruta) {
+    const d = progreso.datos();
+    let m = String(ruta).match(/^\/practicar\/([^/]+)$/);
+    if (m && m[1] !== "ia" && m[1] !== "lista") {
+      const r = d.ejercicios?.[m[1]];
+      const l = d.lecturas?.[m[1]];
+      if (r?.estado === "resuelto") return null;
+      if (l?.vioSolucion || r?.vioSolucion) return "Aquí viste la solución. Hazlo sin mirar.";
+      if ((r?.intentos ?? 0) >= 3) return `Llevas ${r.intentos} intentos aquí.`;
+      return null;
+    }
+    m = String(ruta).match(/^\/aprender\/([^/]+)$/);
+    if (!m) return null;
+    const { items } = await json("items.json");
+    const suyos = items.filter((it) => it.unidad === m[1]).map((it) => d.items?.[it.clave]).filter(Boolean);
+    const falladas = suyos.filter((r) => r.ultima === "no").length;
+    if (falladas) return `Aquí fallaste ${falladas} ${falladas === 1 ? "pregunta" : "preguntas"} la última vez.`;
+    const q = d.quizzes?.[m[1]];
+    if (q?.total && q.ultimo / q.total < 0.6) return `Tu último quiz aquí: ${q.ultimo} de ${q.total}.`;
+    const ultima = suyos.map((r) => r.en).filter(Boolean).sort().at(-1);
+    const dias = ultima ? Math.floor((Date.now() - new Date(ultima).getTime()) / 86_400_000) : 0;
+    return dias >= 5 ? `Llevas ${dias} días sin tocar este tema.` : null;
+  },
   glosario: () => json("glosario.json"),
   revision: () => json("revision.json"),
   revisionesHechas: async () => progreso.registros("revisiones"),

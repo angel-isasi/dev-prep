@@ -116,10 +116,20 @@ describe("Jarvis", () => {
     expect(TAREAS.jarvis.modelo).toBe("claude-haiku-5-5");
     expect(TAREAS["jarvis-pro"].modelo).toBe("claude-sonnet-5-5");
     const r = limpiarPorEsquema(TAREAS.jarvis.esquema, { mensaje: "Hola", pregunta: "", destino: "plan", nota: "", profundo: false, otro: 1 });
-    expect(r).toEqual({ mensaje: "Hola", pregunta: "", destino: "plan", nota: "", profundo: false });
+    expect(r).toMatchObject({ mensaje: "Hola", pregunta: "", destino: "plan", nota: "", profundo: false });
   });
 
   it("puede pedir la respuesta en inglés", () => {
     expect(armarPedido({ tarea: "jarvis", pregunta: "hola", ingles: true }).mensaje).toContain("en inglés");
+  });
+
+  it("Aksu elige el modelo: tres tareas iguales, una por modelo", () => {
+    expect(TAREAS.aksu.modelo).toBe("claude-haiku-5-5");
+    expect(TAREAS["aksu-sonnet"].modelo).toBe("claude-sonnet-5-5");
+    expect(TAREAS["aksu-opus"].modelo).toBe("claude-opus-5-5");
+    expect(TAREAS.aksu.sistema).toContain("Eres Aksu");
+    expect(limpiarPorEsquema(TAREAS.aksu.esquema, { mensaje: "Hola", pregunta: "", destino: "", nota: "", modelo: "opus", profundo: false }).modelo).toBe("opus");
+    expect(armarPedido({ tarea: "aksu-sonnet", pregunta: "hola", elegido: true }).mensaje).toContain("Ya te eligieron");
+    expect(armarPedido({ tarea: "aksu", pregunta: "hola" }).mensaje).not.toContain("Ya te eligieron");
   });
 });

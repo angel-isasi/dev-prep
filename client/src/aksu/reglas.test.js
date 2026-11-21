@@ -150,3 +150,105 @@ describe("cuaderno", () => {
     expect(c.at(-1).texto).toBe("nota 59");
   });
 });
+
+import {
+  bloqueActivo, enFranjaIngles, enSilencio, encajar, esDePaso, guardarVeredicto, juntoA, masLejana, notaDelDia, paradas, recibimiento, restanteBloque, siguienteParada, subirA, tocaDistraccion,
+  tocaEntrevista, tocaRelampago, FIGURA,
+} from "./reglas.js";
+
+describe("Aksu: reglas nuevas", () => {
+  const MINUTO = 60_000;
+
+  it("silencio y bloque de concentración", () => {
+    expect(enSilencio({ silencioHasta: 1000 }, 500)).toBe(true);
+    expect(enSilencio({}, 500)).toBe(false);
+    const bloque = { inicio: 0, minutos: 50 };
+    expect(bloqueActivo(bloque, 49 * MINUTO)).toBe(true);
+    expect(bloqueActivo(bloque, 50 * MINUTO)).toBe(false);
+    expect(bloqueActivo(null, 0)).toBe(false);
+    expect(restanteBloque(bloque, 20 * MINUTO)).toBe(30 * MINUTO);
+  });
+
+  it("distracción: 2 minutos en un bloque, 30 fuera, y una sola vez por cosa", () => {
+    const yt = (minutos) => ({ nombre: "YouTube", tipo: "distraccion", minutos });
+    expect(tocaDistraccion(yt(2), true, null)).toBe(true);
+    expect(tocaDistraccion(yt(2), false, null)).toBe(false);
+    expect(tocaDistraccion(yt(31), false, null)).toBe(true);
+    expect(tocaDistraccion(yt(31), false, "YouTube")).toBe(false);
+    expect(tocaDistraccion({ nombre: "VS Code", tipo: "estudio", minutos: 90 }, true, null)).toBe(false);
+    expect(tocaDistraccion(null, true, null)).toBe(false);
+  });
+
+  it("entrevista sorpresa: una vez al día, tras 45 minutos y solo si no estás ocupado", () => {
+    const dia = { activoDesde: 0, ultimaActividad: 46 * MINUTO, hechos: {} };
+    expect(tocaEntrevista(dia, 46 * MINUTO, false)).toBe(true);
+    expect(tocaEntrevista(dia, 46 * MINUTO, true)).toBe(false);
+    expect(tocaEntrevista({ ...dia, hechos: { entrevista: true } }, 46 * MINUTO, false)).toBe(false);
+    expect(tocaEntrevista({ ...dia, ultimaActividad: 0 }, 46 * MINUTO, false)).toBe(false);
+    expect(tocaEntrevista(dia, 30 * MINUTO, false)).toBe(false);
+  });
+
+  it("reto relámpago: 2 minutos paseando, con actividad, y no más de uno cada 40 minutos", () => {
+    const dia = { ultimaActividad: 10 * MINUTO };
+    expect(tocaRelampago(dia, 10 * MINUTO, 8 * MINUTO)).toBe(true);
+    expect(tocaRelampago(dia, 10 * MINUTO, 9 * MINUTO)).toBe(false);
+    expect(tocaRelampago(dia, 10 * MINUTO, null)).toBe(false);
+    expect(tocaRelampago({ ...dia, relampagoEn: 0 }, 10 * MINUTO, 8 * MINUTO)).toBe(false);
+    expect(esDePaso("/")).toBe(true);
+    expect(esDePaso("/practicar")).toBe(true);
+    expect(esDePaso("/practicar/lista")).toBe(true);
+    expect(esDePaso("/practicar/012-agrupar")).toBe(false);
+    expect(esDePaso("/aprender/closures")).toBe(false);
+    expect(esDePaso("/leccion")).toBe(false);
+  });
+
+  it("nota del día", () => {
+    expect(notaDelDia({ hechas: 6, tocaban: 6, resueltos: 3, limpios: 3 }).nota).toBe("A");
+    expect(notaDelDia({ hechas: 6, tocaban: 6, resueltos: 4, limpios: 1 }).nota).toBe("B");
+    expect(notaDelDia({ hechas: 3, tocaban: 6, resueltos: 2, limpios: 2 }).nota).toBe("C");
+    expect(notaDelDia({ hechas: 0, tocaban: 6 }).nota).toBe("F");
+    expect(notaDelDia({ hechas: 6, tocaban: 6, resueltos: 3, limpios: 3, atraso: 3 }).puntos).toBe(85);
+    expect(notaDelDia({ resueltos: 2, limpios: 2 }).nota).toBe("A");
+    expect(guardarVeredicto([{ fecha: "a", nota: "F" }], { fecha: "a", nota: "B" })).toEqual([{ fecha: "a", nota: "B" }]);
+  });
+
+  it("franja de inglés", () => {
+    expect(enFranjaIngles(20, { desde: 20, hasta: 22 })).toBe(true);
+    expect(enFranjaIngles(22, { desde: 20, hasta: 22 })).toBe(false);
+    expect(enFranjaIngles(1, { desde: 23, hasta: 2 })).toBe(true);
+    expect(enFranjaIngles(20, null)).toBe(false);
+  });
+
+  it("elegir modelo: solo se sube", () => {
+    expect(subirA("sonnet", "haiku")).toBe("sonnet");
+    expect(subirA("opus", "sonnet")).toBe("opus");
+    expect(subirA("haiku", "sonnet")).toBeNull();
+    expect(subirA("haiku", "haiku")).toBeNull();
+    expect(subirA(undefined, "haiku")).toBeNull();
+    expect(subirA("gpt", "haiku")).toBeNull();
+  });
+
+  it("moverse: paradas dentro de la ventana, fuera del menú, y nunca la misma dos veces", () => {
+    const lista = paradas(1900, 1000, 250);
+    for (const p of lista) {
+      expect(p.x).toBeGreaterThanOrEqual(250);
+      expect(p.x + FIGURA.ancho).toBeLessThanOrEqual(1900);
+      expect(p.y + FIGURA.alto).toBeLessThanOrEqual(1000);
+    }
+    for (const azar of [0, 0.3, 0.99]) expect(siguienteParada(lista, lista[0], azar)).not.toEqual(lista[0]);
+    expect(encajar({ x: 5000, y: -40 }, 1900, 1000)).toEqual({ x: 1900 - FIGURA.ancho - FIGURA.margen, y: FIGURA.margen });
+    expect(juntoA({ right: 1200, top: 300 }, 1900, 1000)).toEqual({ x: 1208, y: 290 });
+    expect(juntoA({ right: 1890, top: 300 }, 1900, 1000).x).toBeLessThan(1890 - FIGURA.ancho);
+    expect(masLejana(lista, lista[0])).not.toEqual(lista[0]);
+  });
+
+  it("recibimiento por pantalla según el plan de hoy", () => {
+    const plan = { activo: true, dia: 3, dias: 15, estado: { tipo: "atrasado", dias: 1 }, hoy: { tareas: [{ tipo: "ejercicio", titulo: "Sumar pares", hecha: false }, { tipo: "ejercicio", titulo: "Otro", hecha: true }, { tipo: "ingles", titulo: "Inglés", hecha: false }] } };
+    expect(recibimiento("/practicar", plan)).toBe('Hoy aquí: 1 ejercicio. Empieza por "Sumar pares".');
+    expect(recibimiento("/aprender", plan)).toBe("Lo de hoy en esta parte ya está hecho.");
+    expect(recibimiento("/ingles", plan)).toContain("20 minutos");
+    expect(recibimiento("/progreso", plan)).toBe("Día 3 de 15. Vas atrasado 1 día.");
+    expect(recibimiento("/practicar/012", plan)).toBeNull();
+    expect(recibimiento("/practicar", { activo: false })).toBeNull();
+  });
+});

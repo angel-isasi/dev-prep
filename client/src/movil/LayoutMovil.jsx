@@ -3,7 +3,7 @@
 // las mismas de la barra lateral (ver lib/navegacion.js).
 // Sin efectos de canvas de pantalla completa (en el celular gastan batería y traban).
 import { Suspense, useEffect } from "react";
-import { Jarvis } from "../jarvis/Jarvis.jsx";
+import { Aksu } from "../aksu/Aksu.jsx";
 import { Link, NavLink, Outlet, useLocation } from "react-router";
 import { motion, useReducedMotion } from "motion/react";
 import { Esqueleto } from "../components/Esqueleto.jsx";
@@ -53,7 +53,7 @@ export function LayoutMovil() {
         </motion.div>
       </main>
 
-      <Jarvis />
+      <Aksu />
 
       <nav className={estilos.nav} aria-label="Secciones" style={{ "--secciones": SECCIONES.length }}>
         {SECCIONES.map(({ id, a, texto, corto, Icono, exacto }) => {

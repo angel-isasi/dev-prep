@@ -13,6 +13,7 @@ import { exec } from "node:child_process";
 import { abrirEnVSCode } from "./vscode.js";
 import { crearApp } from "./app.js";
 import { crearVigilante, PROCESOS_POR_DEFECTO } from "./juego-vigilante.js";
+import { crearUsoLaptop } from "./uso-laptop.js";
 import { estadoGeneral } from "./vistas-progreso.js";
 import { fechaLocal } from "./fechas.js";
 import { vivos } from "./combinar.js";
@@ -48,6 +49,7 @@ const corredor = await crearCorredor({
 });
 
 const vscode = config.abrirVSCode ? abrirEnVSCode : async () => {};
+const usoLaptop = crearUsoLaptop({ datosDir: config.datosDir });
 const app = crearApp({
   indice,
   workspace,
@@ -62,6 +64,7 @@ const app = crearApp({
   vscode,
   config,
   clienteDir: config.clienteDir,
+  usoLaptop,
   alApagar: () => apagar(),
 });
 
@@ -73,6 +76,7 @@ const servidor = app.listen(config.puerto, config.host, () => {
   if (process.env.DEVPREP_ABRIR_NAVEGADOR === "1" && process.platform === "win32") exec(`start "" ${url}`);
   // Tiempo libre: mira cada minuto si el juego está abierto (solo cuando el servidor ya arrancó bien)
   if (process.env.DEVPREP_VIGILANTE !== "0") {
+    usoLaptop.iniciar().catch(() => {});
     crearVigilante({
       progreso,
       estado: () => estado().juego,

@@ -40,6 +40,9 @@ export function crearApp(deps) {
   // La versión web pregunta aquí si dev-prep está abierto en esta laptop.
   app.get("/api/hola", (req, res) => res.json({ app: "dev-prep" }));
 
+  // Qué programa tienes delante y tu día en la laptop (para Aksu). Solo nombres, nunca títulos ni pantalla.
+  if (deps.usoLaptop) app.get("/api/uso-laptop", (req, res) => res.json(deps.usoLaptop.estado()));
+
   app.use("/api/ejercicios", rutasEjercicios(deps));
   // API falsa que tarda y falla a propósito, para practicar (y para tus proyectos con Vite)
   app.use("/api/practica", rutasApiPractica());

@@ -1,14 +1,14 @@
 // Plan junior en pantalla (el cálculo está en server/plan-junior.js y los datos en lib/plan-junior.js):
 // - PlanHoy: el bloque de la pantalla Hoy (día, lo que toca y el mentor).
 // - PlanCompleto: la página /plan con el calendario, las etapas y el temario.
-// La voz del plan es Jarvis (jarvis/Jarvis.jsx): aquí solo se muestra lo último que dijo.
+// La voz del plan es Aksu (aksu/Aksu.jsx): aquí solo se muestra lo último que dijo.
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { api } from "../../lib/api.js";
 import { useEvento } from "../../hooks/useEvento.js";
 import { cargarPlan, empezarPlan, hayPlan, quitarPlan } from "../../lib/plan-junior.js";
 import { DIAS_PLAN, duracion, PARA_CRECER, sumarDias, textoEstado } from "../../../../server/plan-junior.js";
-import { FichaJarvis } from "../../jarvis/Jarvis.jsx";
+import { FichaAksu } from "../../aksu/Aksu.jsx";
 import { IconoAprender, IconoIngles, IconoCandado, IconoChispa, IconoEntrevistas, IconoFlechaDer, IconoLecciones, IconoMicrofono, IconoPracticar, IconoRepetir, IconoTrofeo } from "../Iconos.jsx";
 import estilos from "./Plan.module.css";
 
@@ -215,7 +215,7 @@ export function PlanHoy({ plan, recargar }) {
         </Link>
       </section>
 
-      <FichaJarvis />
+      <FichaAksu />
     </div>
   );
 }
@@ -304,7 +304,7 @@ export function PlanCompleto() {
             </Link>
           )}
         </section>
-        <FichaJarvis />
+        <FichaAksu />
       </div>
 
       <section className={`tarjeta ${estilos.bloque}`}>

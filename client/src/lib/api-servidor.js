@@ -42,6 +42,8 @@ export function crearApi(base = "") {
     guardarExplicacion: (id, texto) => put(`${ruta(id)}/explicacion`, { texto }),
     /** Tu código de workspace/ (para la IA). { codigo: null } si aún no lo abriste. */
     miCodigo: (id) => pedir(`${ruta(id)}/mi-codigo`, { headers: { accept: "application/json" } }),
+    /** Tu día en la laptop y el programa que tienes delante (solo nombres). */
+    usoLaptop: () => pedir("/api/uso-laptop", { headers: { accept: "application/json" } }),
     repasar: (id) => post(`${ruta(id)}/repasar`),
     inicio: get("/api/inicio"),
     progreso: get("/api/progreso"),

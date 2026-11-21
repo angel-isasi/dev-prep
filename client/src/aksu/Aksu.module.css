@@ -1,0 +1,775 @@
+/* Aksu: la figura que se mueve por la app y su panel de conversación. Sin colores nuevos: la figura es
+   en blanco y negro y lo demás usa el acento y las superficies de siempre. */
+
+.suelta {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  pointer-events: none;
+  /* El paseo es lento; acercarse o apartarse, más rápido; llevada con el mouse, sin transición */
+  transition: transform 7s cubic-bezier(0.45, 0.05, 0.3, 1);
+  will-change: transform;
+}
+
+.suelta[data-prisa="si"] {
+  transition-duration: 1.1s;
+}
+
+.suelta[data-prisa="llevada"] {
+  transition: none;
+}
+
+.suelta > * {
+  pointer-events: auto;
+}
+
+.cuerpo2 {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: grab;
+  touch-action: none;
+  filter: drop-shadow(0 6px 14px rgb(0 0 0 / 0.6)) drop-shadow(0 0 10px rgb(255 255 255 / 0.07));
+}
+
+.cuerpo2:active {
+  cursor: grabbing;
+}
+
+.cuerpo2:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 4px;
+  border-radius: var(--radio-grande);
+}
+
+.figura {
+  display: block;
+  animation: flotar 5.5s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* La luz de los ojos: lo único que cambia según el momento */
+.luz {
+  fill: #f4f4ef;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 1.5px #fff);
+}
+
+[data-estado="pensando"] .luz {
+  animation: pulso 1.1s ease-in-out infinite;
+}
+
+[data-estado="hablando"] .luz {
+  animation: pulso 0.45s steps(2) infinite;
+}
+
+[data-estado="frena"] .luz {
+  fill: var(--error);
+  opacity: 1;
+  filter: drop-shadow(0 0 2px var(--error));
+}
+
+[data-estado="guardia"] .luz {
+  opacity: 0.4;
+}
+
+[data-estado="silencio"] .luz {
+  opacity: 0.12;
+}
+
+@keyframes pulso {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+.libro {
+  cursor: pointer;
+}
+
+.libro:hover path:nth-child(2),
+.libro:hover path:nth-child(3) {
+  fill: #f1f1ec;
+}
+
+.sinLeer {
+  position: absolute;
+  top: -2px;
+  right: -6px;
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--acento);
+  color: var(--sobre-acento);
+  font-size: var(--letra-2);
+}
+
+/* Durante un bloque de concentración: el tiempo que queda, bajo la figura */
+.cuenta {
+  display: block;
+  margin-top: 2px;
+  color: var(--texto-suave);
+  font-family: var(--fuente-codigo, monospace);
+  font-size: var(--letra-3);
+  text-align: center;
+}
+
+/* Lo que dice, al lado de la figura (del lado donde haya espacio) */
+.junto {
+  position: absolute;
+  width: max-content;
+  max-width: min(360px, calc(100vw - 120px));
+}
+
+.junto[data-lado="derecha"] {
+  left: calc(100% + 10px);
+}
+
+.junto[data-lado="izquierda"] {
+  right: calc(100% + 10px);
+}
+
+.junto[data-alto="abajo"] {
+  top: 0;
+}
+
+.junto[data-alto="arriba"] {
+  bottom: 0;
+}
+
+.marca {
+  display: block;
+  padding: 6px var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-left: 2px solid var(--texto-suave);
+  border-radius: var(--radio);
+  background: var(--superficie);
+  color: var(--texto);
+  box-shadow: var(--sombra-2);
+  font: inherit;
+  font-size: var(--letra-3);
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Reto relámpago */
+.reto {
+  display: grid;
+  gap: var(--espacio-2);
+  width: min(360px, calc(100vw - 120px));
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  box-shadow: var(--sombra-2);
+  font-size: var(--letra-4);
+}
+
+.reto header {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+}
+
+.reto header span {
+  flex: 1;
+}
+
+.reto header b {
+  color: var(--texto);
+  font-family: var(--fuente-codigo, monospace);
+}
+
+.reto header button {
+  border: 0;
+  background: none;
+  color: var(--texto-suave);
+  font-size: var(--letra-5);
+  cursor: pointer;
+}
+
+.reto p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.reto pre {
+  overflow: hidden;
+  margin: 0;
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio);
+  background: var(--hundido, var(--fondo));
+  font-size: var(--letra-3);
+  white-space: pre-wrap;
+}
+
+.reto ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reto li button {
+  width: 100%;
+  padding: 6px var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: none;
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--letra-3);
+  text-align: left;
+  cursor: pointer;
+}
+
+.reto li button:hover:not(:disabled) {
+  border-color: var(--acento);
+}
+
+.reto li button[data-estado="bien"] {
+  border-color: var(--exito, var(--acento));
+}
+
+.reto li button[data-estado="mal"] {
+  border-color: var(--error);
+}
+
+.retoFin {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+/* Lo último que dijo, asomado unos segundos */
+.globo {
+  display: grid;
+  gap: 4px;
+  max-width: 100%;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+  background: var(--superficie);
+  color: var(--texto);
+  box-shadow: var(--sombra-2);
+  font: inherit;
+  font-size: var(--letra-4);
+  line-height: 1.45;
+  text-align: left;
+  cursor: pointer;
+}
+
+.globo strong {
+  color: var(--acento);
+  font-weight: var(--peso-semi);
+}
+
+/* ---------- Panel ---------- */
+.panel {
+  position: fixed;
+  right: var(--espacio-5);
+  bottom: var(--espacio-5);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  width: min(420px, calc(100vw - 2 * var(--espacio-4)));
+  height: min(640px, calc(100vh - 2 * var(--espacio-5)));
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-xl, var(--radio-grande));
+  background: var(--fondo-solido, var(--superficie));
+  box-shadow: var(--sombra-3, var(--sombra-2));
+}
+
+.cabeza {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  border-bottom: 1px solid var(--borde);
+}
+
+.cabeza > div {
+  display: grid;
+}
+
+.cabeza strong {
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-6);
+}
+
+.cabeza small {
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 44px;
+}
+
+.enlace {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--acento);
+  font: inherit;
+  font-size: var(--letra-3);
+  cursor: pointer;
+}
+
+.cerrar {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--texto-suave);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cerrar:hover {
+  background: var(--superficie-2);
+}
+
+.ajustes {
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  padding: var(--espacio-2) var(--espacio-4);
+  border-bottom: 1px solid var(--borde);
+}
+
+.niveles {
+  display: inline-flex;
+  flex: 1;
+  padding: 3px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+}
+
+.niveles button,
+.interruptor {
+  flex: 1;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: var(--letra-2);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.interruptor {
+  flex: none;
+  border: 1px solid var(--borde);
+}
+
+.niveles button[data-activo="true"],
+.interruptor[data-activo="true"] {
+  background: color-mix(in srgb, var(--acento) 22%, var(--superficie-2));
+  color: var(--texto);
+}
+
+.cuerpo {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--espacio-4);
+  overscroll-behavior: contain;
+}
+
+.vacio {
+  margin: 0 0 var(--espacio-3);
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+  line-height: 1.5;
+}
+
+.mensajes,
+.notas {
+  display: grid;
+  gap: var(--espacio-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mensaje {
+  display: grid;
+  justify-self: start;
+  gap: var(--espacio-2);
+  max-width: 88%;
+  padding: var(--espacio-3) var(--espacio-4);
+  border-radius: var(--radio-grande);
+  background: var(--superficie-2);
+  font-size: var(--letra-4);
+  line-height: 1.5;
+}
+
+.mensaje[data-de="yo"] {
+  justify-self: end;
+  background: color-mix(in srgb, var(--acento) 18%, var(--superficie-2));
+}
+
+.mensaje[data-pensando] {
+  color: var(--texto-suave);
+}
+
+.mensaje p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.suPregunta {
+  margin: 0;
+  padding-left: var(--espacio-3);
+  border-left: 3px solid var(--acento);
+  font-weight: var(--peso-semi);
+}
+
+.ir {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 6px;
+  padding: 6px var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--superficie);
+  color: var(--acento);
+  font: inherit;
+  font-size: var(--letra-3);
+  font-weight: var(--peso-semi);
+  cursor: pointer;
+}
+
+.ir:hover {
+  border-color: var(--acento);
+}
+
+.notas li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px var(--espacio-2);
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  font-size: var(--letra-4);
+  line-height: 1.45;
+}
+
+.notas small {
+  grid-column: 1 / -1;
+  color: var(--texto-tenue);
+  font-size: var(--letra-2);
+}
+
+.notas button {
+  border: 0;
+  background: none;
+  color: var(--texto-tenue);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.atajos {
+  display: flex;
+  gap: var(--espacio-2);
+  padding: var(--espacio-2) var(--espacio-4) 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.atajos button {
+  flex: none;
+  padding: 6px var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--letra-3);
+  cursor: pointer;
+}
+
+.atajos button:hover {
+  border-color: var(--acento);
+}
+
+.escribir {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: var(--espacio-2);
+  padding: var(--espacio-3) var(--espacio-4) var(--espacio-4);
+}
+
+.escribir input {
+  min-height: 42px;
+  padding: 0 var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--letra-4);
+}
+
+.escribir input:focus-visible {
+  border-color: var(--acento);
+  outline: none;
+}
+
+.micro {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-lg);
+  background: var(--superficie);
+  color: var(--texto);
+  cursor: pointer;
+}
+
+.micro[data-activo="true"] {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+  color: var(--acento);
+}
+
+/* ---------- Ficha (plan y Hoy) ---------- */
+.ficha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  min-width: 0;
+  padding: var(--espacio-5);
+}
+
+.ficha header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ficha header small {
+  color: var(--texto-suave);
+  font-size: var(--letra-3);
+}
+
+.fichaTexto {
+  margin: 0;
+  font-size: var(--letra-5);
+  line-height: 1.55;
+}
+
+.fichaTexto[data-suave] {
+  color: var(--texto-suave);
+  font-size: var(--letra-4);
+}
+
+.ficha :global(.boton) {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* Mandos nuevos del panel */
+.franja {
+  padding: 4px var(--espacio-2);
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: none;
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: var(--letra-2);
+}
+
+.gasto {
+  margin-left: auto;
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+  white-space: nowrap;
+}
+
+/* Reloj de la entrevista sorpresa */
+.reloj {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding: var(--espacio-2) var(--espacio-4);
+  border-bottom: 1px solid var(--borde);
+  font-size: var(--letra-3);
+}
+
+.reloj b {
+  font-family: var(--fuente-codigo, monospace);
+}
+
+.reloj i {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  background: var(--acento);
+  transition: width 1s linear;
+}
+
+.reloj[data-poco="true"] b {
+  color: var(--error);
+}
+
+.reloj[data-poco="true"] i {
+  background: var(--error);
+}
+
+/* Su libro */
+.seccion {
+  margin: var(--espacio-3) 0 var(--espacio-2);
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.seccion:first-child {
+  margin-top: 0;
+}
+
+.veredictos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.veredictos li {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  padding: 6px 0;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.veredictos b {
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-6);
+}
+
+.veredictos small {
+  color: var(--texto-suave);
+  font-size: var(--letra-1, 11px);
+}
+
+.veredictos li[data-nota="D"] b,
+.veredictos li[data-nota="F"] b {
+  color: var(--error);
+}
+
+.uso {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.uso li {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  padding: 5px var(--espacio-3);
+  overflow: hidden;
+  border-radius: var(--radio);
+  font-size: var(--letra-3);
+}
+
+.uso li i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: color-mix(in srgb, var(--texto) 9%, transparent);
+}
+
+.uso li[data-tipo="estudio"] i {
+  background: color-mix(in srgb, var(--acento) 22%, transparent);
+}
+
+.uso li span,
+.uso li b {
+  position: relative;
+}
+
+.uso li b {
+  font-weight: var(--peso-normal, 400);
+  color: var(--texto-suave);
+}
+
+.uso li[data-tipo="distraccion"] span {
+  color: var(--texto-suave);
+}
+
+/* En el celular: Aksu se queda quieto y más chico, encima de la barra de secciones; el panel, casi a pantalla completa */
+@media (max-width: 899px) {
+  .suelta {
+    top: auto;
+    right: var(--espacio-3);
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    left: auto;
+    transform: none !important;
+    transition: none;
+  }
+  .suelta .figura {
+    width: 46px;
+    height: 62px;
+  }
+  .junto {
+    right: calc(100% + 8px) !important;
+    bottom: 0 !important;
+    left: auto !important;
+    top: auto !important;
+    max-width: calc(100vw - 90px);
+  }
+  .reto {
+    width: calc(100vw - 90px);
+  }
+  .panel {
+    inset: var(--espacio-2);
+    bottom: calc(var(--espacio-2) + env(safe-area-inset-bottom, 0px));
+    width: auto;
+    height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suelta {
+    transition: none;
+  }
+  .figura,
+  .luz {
+    animation: none !important;
+  }
+}

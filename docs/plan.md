@@ -500,3 +500,15 @@ Jarvis es la única puerta a la IA: una burbuja fija en toda la app (Alt + J) co
 - Puede llevarte a cualquier herramienta (simulacro, entrevista por voz, Conversa, pistas...). Lo que depende de tus tests y tu archivo solo funciona con la laptop conectada.
 
 Fase 2 (pendiente): programa de escritorio que arranca con Windows.
+
+## Aksu (antes Jarvis)
+
+El asistente pasa a llamarse Aksu y deja de ser una burbuja quieta: es una figura encapuchada con máscara y libro, en blanco y negro, que se desliza por los bordes de la app. Código en `client/src/aksu/`.
+
+- **Figura** (`Figura.jsx`): dibujo propio en SVG. No tiene gestos: solo cambia la luz de los ojos (atento, pensando, hablando, frena, guardia, silencio).
+- **Movimiento** (`useMovimiento` en `Aksu.jsx`, cálculos puros en `reglas.js`): pasea entre paradas de los bordes, se acerca a lo que importa (`data-aksu="tests"`), se pone delante cuando pregunta, se aparta de donde escribes y se queda donde lo sueltes. En el celular se queda quieto y chico.
+- **Elige su modelo**: siempre lee primero el modelo rápido (tarea `aksu`), con todo el contexto y el presupuesto del mes, y en el campo `modelo` decide quién responde: él, `aksu-sonnet` o `aksu-opus`. No hay reglas fijas en el código: solo `subirA` (nunca se baja).
+- **Sin IA (gratis)**: reto relámpago con preguntas del contenido, marcas en las pantallas ("aquí fallaste"), recibimiento según el plan, nota del día de A a F, bloque de concentración, silencio.
+- **Con IA**: entrevista sorpresa de 3 preguntas con reloj, pregunta al terminar una teoría, cierre con veredicto, aviso de distracción.
+- **Su libro**: notas de tus días, tu día en la laptop y lo que ha observado.
+- **Uso de la laptop** (`server/uso-laptop.js` + `ventana-activa.ps1`): el motor mira cada 15 segundos qué programa está delante. El título de la ventana solo se usa para clasificar y no se guarda ni sale de la laptop; se guarda "VS Code: 2 h" en `data/uso-laptop.json` (30 días).
