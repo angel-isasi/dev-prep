@@ -18,19 +18,31 @@ export function Figura({ tamano = 84, estado = "atento" }) {
       {/* Capucha */}
       <path d="M13 37 C9 16 20 3 34 3 C48 3 59 16 55 37 C52 47 44 51 34 51 C24 51 16 47 13 37 Z" fill="#16161a" stroke="#6b6b76" strokeWidth="1.2" />
       <path d="M19 33 C17 18 24 9 34 9 C44 9 51 18 49 33 C47 42 41 46 34 46 C27 46 21 42 19 33 Z" fill="#040405" />
-      {/* Máscara */}
-      <path d="M23.5 25 C23.5 16 28 12 34 12 C40 12 44.5 16 44.5 25 C44.5 31.5 42.5 35 40 37.5 L40 42 L28 42 L28 37.5 C25.5 35 23.5 31.5 23.5 25 Z" fill="#dcdcd6" />
-      <path d="M23.5 25 C23.5 16 28 12 34 12 L34 42 L28 42 L28 37.5 C25.5 35 23.5 31.5 23.5 25 Z" fill="#c9c9c3" />
-      {/* Cuencas, con las marcas que bajan de los ojos */}
-      <ellipse cx="29.3" cy="25.5" rx="3.3" ry="3.9" fill="#070708" />
-      <ellipse cx="38.7" cy="25.5" rx="3.3" ry="3.9" fill="#070708" />
-      <path d="M29.3 29 V35.5 M38.7 29 V35.5" stroke="#070708" strokeWidth="1" strokeLinecap="round" />
+      {/* Pelo largo y oscuro a los lados de la máscara */}
+      <path d="M25 15 C20.5 24 20.5 37 22.5 49 L27.5 49 C25.5 39 25 28 26 19 Z" fill="#17171b" stroke="#303037" strokeWidth="0.5" />
+      <path d="M43 15 C47.5 24 47.5 37 45.5 49 L40.5 49 C42.5 39 43 28 42 19 Z" fill="#17171b" stroke="#303037" strokeWidth="0.5" />
+      {/* Máscara: larga, angulosa, de mentón estrecho */}
+      <path d="M34 10.5 C39.6 10.5 43.5 14 43.5 20 C43.5 24 42.6 27.5 41.5 31 C40.4 35.2 39 40 36.6 44.5 L31.4 44.5 C29 40 27.6 35.2 26.5 31 C25.4 27.5 24.5 24 24.5 20 C24.5 14 28.4 10.5 34 10.5 Z" fill="#d8d8d2" />
+      <path d="M34 10.5 C28.4 10.5 24.5 14 24.5 20 C24.5 24 25.4 27.5 26.5 31 C27.6 35.2 29 40 31.4 44.5 L34 44.5 Z" fill="#c2c2bc" />
+      <path d="M34 11.5 V18.5" stroke="#9c9c97" strokeWidth="0.6" />
+      {/* Sombra alrededor de los ojos */}
+      <path d="M24.9 19.6 L32.8 22.6 L32.4 28.2 C29.6 29.6 26.6 28.4 25.3 25.6 Z" fill="#000" opacity="0.38" />
+      <path d="M43.1 19.6 L35.2 22.6 L35.6 28.2 C38.4 29.6 41.4 28.4 42.7 25.6 Z" fill="#000" opacity="0.38" />
+      {/* Ojos: rasgados y severos */}
+      <path d="M26.2 21.2 L32 23.7 L31.6 26.5 C29.5 27.3 27.4 26.5 26.4 24.7 Z" fill="#050506" />
+      <path d="M41.8 21.2 L36 23.7 L36.4 26.5 C38.5 27.3 40.6 26.5 41.6 24.7 Z" fill="#050506" />
+      {/* Las marcas negras que bajan de los ojos hasta la mandíbula */}
+      <path d="M27.9 26.6 L27.5 38 M30.1 26.9 L29.9 34.5 M40.1 26.6 L40.5 38 M37.9 26.9 L38.1 34.5" stroke="#08080a" strokeWidth="0.9" strokeLinecap="round" />
+      {/* Pómulos hundidos */}
+      <path d="M26.9 31.5 C28.2 34 28.8 37 30.6 41 M41.1 31.5 C39.8 34 39.2 37 37.4 41" stroke="#8f8f8a" strokeWidth="0.7" fill="none" />
       {/* La luz de los ojos: lo único que se mueve en la cara */}
-      <circle className={estilos.luz} cx="29.3" cy="25.7" r="1.15" />
-      <circle className={estilos.luz} cx="38.7" cy="25.7" r="1.15" />
-      {/* Nariz y dientes */}
-      <path d="M34 29.5 L32.6 33.4 H35.4 Z" fill="#070708" />
-      <path d="M28.6 38 H39.4 M31 38 V42 M34 38 V42 M37 38 V42" stroke="#070708" strokeWidth="0.9" />
+      <circle className={estilos.luz} cx="29.7" cy="24.7" r="0.85" />
+      <circle className={estilos.luz} cx="38.3" cy="24.7" r="0.85" />
+      {/* Nariz: dos rendijas */}
+      <path d="M33.1 30 L32.7 32.8 M34.9 30 L35.3 32.8" stroke="#08080a" strokeWidth="0.8" strokeLinecap="round" />
+      {/* Boca cerrada y cosida */}
+      <path d="M29.8 38.1 C32 37.2 36 37.2 38.2 38.1" stroke="#08080a" strokeWidth="0.9" fill="none" strokeLinecap="round" />
+      <path d="M31.2 36.6 V39.3 M33.1 36.3 V39.1 M34.9 36.3 V39.1 M36.8 36.6 V39.3" stroke="#08080a" strokeWidth="0.6" />
       {/* El libro: se toca para abrir lo que ha anotado */}
       <g data-libro className={estilos.libro}>
         <path d="M34 62 C27 57 15 57 6 61 L6 82 C15 78 27 78 34 83 C41 78 53 78 62 82 L62 61 C53 57 41 57 34 62 Z" fill="#35353b" />

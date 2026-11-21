@@ -23,8 +23,8 @@ const MIN = 60_000;
  */
 const SOLO = {
   callado: [],
-  normal: ["arranque", "trabado", "tiempo", "resuelto", "pausa", "inactivo", "frena", "pregunta", "cierre", "informe", "entrevista", "relampago", "teoria", "distraccion", "recibe"],
-  encima: ["arranque", "trabado", "tiempo", "resuelto", "pausa", "inactivo", "frena", "pregunta", "cierre", "informe", "entrevista", "relampago", "teoria", "distraccion", "recibe", "test", "guardar", "sorpresa", "ingles"],
+  normal: ["arranque", "trabado", "tiempo", "resuelto", "pausa", "inactivo", "frena", "pregunta", "cierre", "informe", "entrevista", "relampago", "teoria", "distraccion", "recibe", "comenta"],
+  encima: ["arranque", "trabado", "tiempo", "resuelto", "pausa", "inactivo", "frena", "pregunta", "cierre", "informe", "entrevista", "relampago", "teoria", "distraccion", "recibe", "comenta", "test", "guardar", "sorpresa", "ingles"],
 };
 export const puede = (nivel, que) => (SOLO[nivel] ?? SOLO.normal).includes(que);
 
@@ -247,3 +247,10 @@ export function recibimiento(ruta, plan) {
   }
   return null;
 }
+
+// ---------- Comentarios por su cuenta ----------
+/** Cada cuántos minutos comenta algo si no ha dicho nada: más seguido en "encima de mí". */
+export const COMENTA_MIN = { normal: 12, encima: 6 };
+/** Toca un comentario: estás activo, y hace rato que no dice nada (ni comentario ni otro mensaje). */
+export const tocaComentario = (nivel, dia, ahora, ultimoDicho = 0) =>
+  ahora - dia.ultimaActividad < 2 * MIN && ahora - Math.max(dia.comentarioEn ?? dia.activoDesde, ultimoDicho) >= (COMENTA_MIN[nivel] ?? COMENTA_MIN.normal) * MIN;

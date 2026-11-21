@@ -252,3 +252,16 @@ describe("Aksu: reglas nuevas", () => {
     expect(recibimiento("/practicar", { activo: false })).toBeNull();
   });
 });
+
+import { tocaComentario } from "./reglas.js";
+describe("Aksu: comentarios por su cuenta", () => {
+  const MINUTO = 60_000;
+  it("cada 12 minutos en normal y cada 6 en encima, solo si estás activo y lleva rato callado", () => {
+    const dia = { activoDesde: 0, ultimaActividad: 12 * MINUTO };
+    expect(tocaComentario("normal", dia, 12 * MINUTO)).toBe(true);
+    expect(tocaComentario("normal", dia, 12 * MINUTO, 5 * MINUTO)).toBe(false);
+    expect(tocaComentario("encima", { ...dia, ultimaActividad: 7 * MINUTO }, 7 * MINUTO)).toBe(true);
+    expect(tocaComentario("normal", { ...dia, comentarioEn: 11 * MINUTO }, 12 * MINUTO)).toBe(false);
+    expect(tocaComentario("normal", { ...dia, ultimaActividad: 0 }, 12 * MINUTO)).toBe(false);
+  });
+});

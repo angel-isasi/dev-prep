@@ -10,7 +10,7 @@ import { IconoFlechaDer, IconoMicrofono } from "../components/Iconos.jsx";
 import {
   actividad, anotarGuardada, anotarResuelto, bloqueActivo, BLOQUE_MIN, encajar, enSilencio, esDePaso, estaTrabado, FIGURA, juntoA, marcar, marcarFrenado, marcarHecho, marcarPausa,
   marcarPregunta, marcarTrabado, masLejana, NIVELES, NOMBRE_NIVEL, paradas, pasoElTiempo, puede, recibimiento, restanteBloque, SEGUNDOS_RESPUESTA, sesionNueva, sigueAhi, siguienteParada,
-  TEXTOS, tocaCierre, tocaDistraccion, tocaEntrevista, tocaInforme, tocaPausa, tocaPregunta, tocaRelampago, tocaSorpresa, vaCorriendo, yaHizo,
+  TEXTOS, tocaCierre, tocaComentario, tocaDistraccion, tocaEntrevista, tocaInforme, tocaPausa, tocaPregunta, tocaRelampago, tocaSorpresa, vaCorriendo, yaHizo,
 } from "./reglas.js";
 import {
   abrir, cambiar, cerrar, cerrarDia, decirle, duracion, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, NOMBRE, NOMBRE_DESTINO, olvidarPlan, pedirAvisos, pensar, planActual,
@@ -203,6 +203,17 @@ function useObservador() {
         ocioDesde.current = ahora;
         if (reto) return cambiar((s) => ({ reto, dia: { ...s.dia, relampagoEn: ahora } }));
       }
+      // Un comentario corto por su cuenta, para que se note que está ahí (modelo rápido: casi gratis)
+      const ultimoDicho = e.mensajes.findLast?.((m) => m.de !== "yo")?.en ?? 0;
+      if (puede(e.nivel, "comenta") && !e.abierto && (await hayIa()) && tocaComentario(e.nivel, e.dia, ahora, ultimoDicho)) {
+        cambiar((s2) => ({ dia: { ...s2.dia, comentarioEn: ahora } }));
+        return pensar({
+          solo: true,
+          tipo: "comenta",
+          frente: false,
+          momento: "Comentario breve por tu cuenta (respóndelo tú mismo, modelo haiku): una sola frase corta sobre lo que está haciendo ahora mismo, con un dato real suyo (la pantalla que tiene abierta, su avance de hoy, su tiempo en la laptop o un tropiezo suyo que tenga que ver). Sin pregunta. No repitas nada de lo que ya dijiste en la conversación.",
+        });
+      }
       if (puede(e.nivel, "sorpresa") && tocaSorpresa(e.dia, ahora)) {
         cambiar({ dia: marcarHecho(e.dia, "sorpresa") });
         return pensar({ solo: true, tipo: "sorpresa", ingles: aVeces(e.nivel), momento: "Pregunta sorpresa: hazle una pregunta corta sobre un tema que ya terminó o que hizo ayer, para ver si quedó." });
@@ -348,12 +359,12 @@ function useMovimiento(e, enBloque) {
     const paso = () => {
       const s = verEstado();
       if (s.abierto || s.frente || s.ir || s.reto || bloqueActivo(s.bloque, Date.now()) || Date.now() < sueltaHasta.current || quieto() || document.visibilityState !== "visible") return;
-      if (Math.random() < 0.6) {
+      if (Math.random() < 0.8) {
         const { ancho, alto, izquierda } = medidas();
         ir(siguienteParada(paradas(ancho, alto, izquierda), posRef.current, Math.random()));
       }
     };
-    const t = setInterval(paso, 16_000);
+    const t = setInterval(paso, 9000);
     return () => clearInterval(t);
   }, []);
 

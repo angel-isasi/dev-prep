@@ -8,7 +8,7 @@
   z-index: 60;
   pointer-events: none;
   /* El paseo es lento; acercarse o apartarse, más rápido; llevada con el mouse, sin transición */
-  transition: transform 7s cubic-bezier(0.45, 0.05, 0.3, 1);
+  transition: transform 5s cubic-bezier(0.45, 0.05, 0.3, 1);
   will-change: transform;
 }
 
@@ -83,6 +83,28 @@
 
 [data-estado="silencio"] .luz {
   opacity: 0.12;
+}
+
+/* Atento: de vez en cuando mira a un lado y vuelve */
+[data-estado="atento"] .luz {
+  animation: mirar 11s ease-in-out infinite;
+}
+
+@keyframes mirar {
+  0%,
+  38%,
+  62%,
+  100% {
+    transform: translateX(0);
+  }
+  44%,
+  50% {
+    transform: translateX(-0.9px);
+  }
+  54%,
+  58% {
+    transform: translateX(0.9px);
+  }
 }
 
 @keyframes pulso {
