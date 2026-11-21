@@ -60,8 +60,8 @@
 .lienzo {
   position: absolute;
   top: 44%;
-  left: -38%;
-  width: 176%;
+  left: -31%;
+  width: 162%;
   aspect-ratio: 354 / 366;
   transform: translateY(-50%);
   pointer-events: none;
