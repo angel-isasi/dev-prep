@@ -602,8 +602,14 @@ function Suelta({ e }) {
   const g = gasto();
   const estado = e.oyendo !== null ? "escuchando" : e.pensando ? "pensando" : enBloque ? "guardia" : enSilencio(e, ahora) ? "silencio" : globo?.tipo === "frena" ? "frena" : globo || e.reto ? "hablando" : "atento";
   const resta = enBloque ? Math.ceil(restanteBloque(e.bloque, ahora) / 1000) : 0;
-  const alSoltar = (ev) => {
-    if (soltar()) return;
+  // Se abre con el clic, no al levantar el dedo: en el celular, si el panel aparece al levantar el dedo,
+  // el clic que llega justo después cae sobre el botón del panel que quedó debajo ("Cierra mi día")
+  const arrastrada = useRef(false);
+  const alSoltar = () => {
+    arrastrada.current = soltar();
+  };
+  const alTocar = (ev) => {
+    if (arrastrada.current) return (arrastrada.current = false);
     setGlobo(null);
     abrir(ev.target.closest?.("[data-libro]") ? "libro" : "charla");
   };
@@ -627,7 +633,8 @@ function Suelta({ e }) {
         onPointerDown={agarrar}
         onPointerMove={mover}
         onPointerUp={alSoltar}
-        onKeyDown={(ev) => (ev.key === "Enter" || ev.key === " ") && abrir()}
+        onPointerCancel={alSoltar}
+        onClick={alTocar}
         aria-label={`Abrir a ${NOMBRE} (Alt + A). Para hablarle por voz: Ctrl + Espacio. Su libro abre lo que ha anotado de ti.`}
         title={`${NOMBRE} · Ctrl + Espacio para hablarle · ${g.usd.toFixed(2)} de ${g.tope} USD este mes${g.modelo ? ` · respondió ${g.modelo}` : ""}`}
       >
