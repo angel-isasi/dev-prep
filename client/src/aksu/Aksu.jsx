@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { api } from "../lib/api.js";
+import { guardarTopeIa } from "../lib/ia.js";
 import { dictar, microDisponible, nombreVozGrave, useHayVoz, vocesEnEspanol } from "../lib/voz.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { IconoFlechaDer, IconoMicrofono } from "../components/Iconos.jsx";
@@ -673,8 +674,18 @@ export function Aksu() {
             </option>
           ))}
         </select>
-        <small className={estilos.gasto} title="Lo gastado en IA este mes en este navegador, y el modelo que respondió lo último">
-          {g.usd.toFixed(2)} / {g.tope} USD{g.modelo ? ` · ${g.modelo}` : ""}
+        <small className={estilos.gasto} title="Lo gastado en IA este mes en este navegador y tu tope mensual (puedes cambiarlo aquí), y el modelo que respondió lo último">
+          {g.usd.toFixed(2)} /{" "}
+          <input
+            type="number"
+            min="1"
+            max="500"
+            className={estilos.tope}
+            aria-label="Tope mensual de IA en dólares"
+            defaultValue={g.tope}
+            onChange={(ev) => Number(ev.target.value) >= 1 && (guardarTopeIa(Number(ev.target.value)), cambiar({}))}
+          />{" "}
+          USD{g.modelo ? ` · ${g.modelo}` : ""}
         </small>
       </div>
 

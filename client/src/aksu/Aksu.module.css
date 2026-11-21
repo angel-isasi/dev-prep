@@ -733,6 +733,17 @@
   white-space: nowrap;
 }
 
+.tope {
+  width: 52px;
+  padding: 2px 4px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-sm);
+  background: none;
+  color: var(--texto);
+  font: inherit;
+  text-align: right;
+}
+
 /* Reloj de la entrevista sorpresa */
 .reloj {
   position: relative;
