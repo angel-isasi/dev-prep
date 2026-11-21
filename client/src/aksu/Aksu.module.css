@@ -117,9 +117,9 @@
   cursor: pointer;
 }
 
-.libro:hover path:nth-child(2),
-.libro:hover path:nth-child(3) {
-  fill: #f1f1ec;
+.libro:hover path:nth-child(4),
+.libro:hover path:nth-child(5) {
+  fill: #d6d2c6;
 }
 
 .sinLeer {

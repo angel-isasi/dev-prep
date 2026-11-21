@@ -1,4 +1,4 @@
-// La figura de Aksu: un encapuchado con máscara pálida y un libro abierto, en blanco y negro.
+// La figura de Aksu: una figura de pelo largo y túnica, con máscara pálida y un libro viejo abierto, en blanco y negro.
 // Dibujo propio hecho en SVG. No tiene gestos: lo único que cambia es la luz de sus ojos
 // (data-estado en el contenedor: atento, pensando, hablando, frena, guardia, silencio).
 import estilos from "./Aksu.module.css";
@@ -11,16 +11,13 @@ import estilos from "./Aksu.module.css";
 export function Figura({ tamano = 84, estado = "atento" }) {
   return (
     <svg className={estilos.figura} data-estado={estado} width={tamano} height={(tamano * 92) / 68} viewBox="0 0 68 92" aria-hidden focusable="false">
-      {/* Manto */}
-      <path d="M6 82 C5 54 12 38 34 36 C56 38 63 54 62 82 Z" fill="#1a1a1f" stroke="#5a5a64" strokeWidth="1.1" />
-      <path d="M20 82 C21 62 26 50 34 46 C42 50 47 62 48 82 Z" fill="#0e0e11" />
-      <path d="M14 80 C15 60 19 48 25 42 M54 80 C53 60 49 48 43 42" stroke="#3a3a42" strokeWidth="0.8" fill="none" />
-      {/* Capucha */}
-      <path d="M13 37 C9 16 20 3 34 3 C48 3 59 16 55 37 C52 47 44 51 34 51 C24 51 16 47 13 37 Z" fill="#16161a" stroke="#6b6b76" strokeWidth="1.2" />
-      <path d="M19 33 C17 18 24 9 34 9 C44 9 51 18 49 33 C47 42 41 46 34 46 C27 46 21 42 19 33 Z" fill="#040405" />
-      {/* Pelo largo y oscuro a los lados de la máscara */}
-      <path d="M25 15 C20.5 24 20.5 37 22.5 49 L27.5 49 C25.5 39 25 28 26 19 Z" fill="#17171b" stroke="#303037" strokeWidth="0.5" />
-      <path d="M43 15 C47.5 24 47.5 37 45.5 49 L40.5 49 C42.5 39 43 28 42 19 Z" fill="#17171b" stroke="#303037" strokeWidth="0.5" />
+      {/* Túnica: hombros rectos y caída en líneas, sin curvas */}
+      <path d="M11 86 L6.5 61 L15.5 51 L27 46.5 L34 53 L41 46.5 L52.5 51 L61.5 61 L57 86 Z" fill="#141417" stroke="#565660" strokeWidth="1" strokeLinejoin="miter" />
+      <path d="M27 46.5 L34 60 L41 46.5" fill="#09090b" stroke="#3a3a42" strokeWidth="0.8" />
+      <path d="M19.5 53 L16.5 86 M24 56 L23 86 M48.5 53 L51.5 86 M44 56 L45 86 M15.5 51 L11.5 64 M52.5 51 L56.5 64" stroke="#2b2b31" strokeWidth="0.8" fill="none" />
+      {/* Pelo largo, lacio y oscuro, que cae sobre los hombros */}
+      <path d="M34 6 C26.5 6 21.5 11 21.2 18.5 L18.5 51 L22 56.5 L24.5 50 L26.5 55 L28.6 45.5 L39.4 45.5 L41.5 55 L43.5 50 L46 56.5 L49.5 51 L46.8 18.5 C46.5 11 41.5 6 34 6 Z" fill="#0c0c0f" stroke="#4d4d57" strokeWidth="0.9" strokeLinejoin="miter" />
+      <path d="M24 17 L21.5 49 M26.2 22 L24.8 47 M44 17 L46.5 49 M41.8 22 L43.2 47 M30 8 L27.5 13 M38 8 L40.5 13 M34 6.5 V10" stroke="#2f2f36" strokeWidth="0.7" fill="none" />
       {/* Máscara: larga, angulosa, de mentón estrecho */}
       <path d="M34 10.5 C39.6 10.5 43.5 14 43.5 20 C43.5 24 42.6 27.5 41.5 31 C40.4 35.2 39 40 36.6 44.5 L31.4 44.5 C29 40 27.6 35.2 26.5 31 C25.4 27.5 24.5 24 24.5 20 C24.5 14 28.4 10.5 34 10.5 Z" fill="#d8d8d2" />
       <path d="M34 10.5 C28.4 10.5 24.5 14 24.5 20 C24.5 24 25.4 27.5 26.5 31 C27.6 35.2 29 40 31.4 44.5 L34 44.5 Z" fill="#c2c2bc" />
@@ -43,17 +40,29 @@ export function Figura({ tamano = 84, estado = "atento" }) {
       {/* Boca cerrada y cosida */}
       <path d="M29.8 38.1 C32 37.2 36 37.2 38.2 38.1" stroke="#08080a" strokeWidth="0.9" fill="none" strokeLinecap="round" />
       <path d="M31.2 36.6 V39.3 M33.1 36.3 V39.1 M34.9 36.3 V39.1 M36.8 36.6 V39.3" stroke="#08080a" strokeWidth="0.6" />
-      {/* El libro: se toca para abrir lo que ha anotado */}
+      {/* El libro: viejo y gastado, abierto en perspectiva. Se toca para abrir lo que ha anotado */}
       <g data-libro className={estilos.libro}>
-        <path d="M34 62 C27 57 15 57 6 61 L6 82 C15 78 27 78 34 83 C41 78 53 78 62 82 L62 61 C53 57 41 57 34 62 Z" fill="#35353b" />
-        <path d="M34 60.5 C27.5 56 16.5 56 8 59.5 L8 79 C16.5 75.5 27.5 75.5 34 80 Z" fill="#d3d3cd" />
-        <path d="M34 60.5 C40.5 56 51.5 56 60 59.5 L60 79 C51.5 75.5 40.5 75.5 34 80 Z" fill="#e2e2dc" />
-        <path d="M34 60.5 V80" stroke="#6d6d70" strokeWidth="0.8" />
-        <path d="M12 63.5 C18 61.5 25 61.8 30.5 64.5 M12 67.5 C18 65.5 25 65.8 30.5 68.5 M12 71.5 C18 69.5 25 69.8 30.5 72.5 M37.5 64.5 C43 61.8 50 61.5 56 63.5 M37.5 68.5 C43 65.8 50 65.5 56 67.5 M37.5 72.5 C43 69.8 50 69.5 56 71.5" stroke="#8a8a88" strokeWidth="0.7" fill="none" />
+        {/* Tapa y lomo de hojas */}
+        <path d="M2.5 82.5 L34 88.5 L65.5 82.5 L65 85.5 L34 91.5 L3 85.5 Z" fill="#1d1d21" stroke="#3f3f47" strokeWidth="0.6" />
+        <path d="M4.5 79.5 L34 84.5 L63.5 79.5 L63.8 82.6 L34 88 L4.2 82.6 Z" fill="#6b685f" />
+        <path d="M4.4 80.6 L34 85.7 L63.6 80.6 M4.3 81.7 L34 86.9 L63.7 81.7" stroke="#3d3b35" strokeWidth="0.45" fill="none" />
+        {/* Hojas: bordes comidos y una esquina rota */}
+        <path d="M34 66 L13 63.2 L11.2 66.6 L12.1 67.5 L9.6 70.8 L10.5 71.9 L8 75 L8.9 76 L6.6 78.2 L4.5 79.5 L34 84.5 Z" fill="#b4b0a4" />
+        <path d="M34 66 L55 63.2 L56.6 66 L55.7 67.2 L58.4 70.6 L57.5 71.8 L60 75.2 L59.2 76.3 L61 77.6 L60.2 79 L63.5 79.5 L34 84.5 Z" fill="#c6c2b6" />
+        {/* El pliegue del centro, hundido */}
+        <path d="M34 66 L32.2 75 L34 84.5 L35.8 75 Z" fill="#3b3932" opacity="0.75" />
+        {/* Manchas de humedad y una rajadura */}
+        <path d="M14.5 70 C16 68.5 19 69 19.5 71 C20 73 17 74.5 15 73.5 C13.6 72.8 13.5 71 14.5 70 Z M47 74.5 C49 73.5 52.5 74.5 52 76.6 C51.5 78.4 47.5 78.4 46.4 77 C45.8 76 46 75 47 74.5 Z M25.5 78.5 C27 77.8 29 78.6 28.6 80 C28.2 81.2 25.6 81 25 80 C24.7 79.4 24.9 78.8 25.5 78.5 Z" fill="#5d594d" opacity="0.35" />
+        <path d="M52 64.5 L50.8 67.5 L52 69.4 L50.6 72" stroke="#4a473f" strokeWidth="0.5" fill="none" />
+        {/* Texto: renglones desiguales, medio borrados */}
+        <path d="M15.5 66.6 L30.5 68.6 M14.2 69.2 L24 70.5 M26 70.8 L30.4 71.4 M12.8 72.6 L29.5 75 M11.8 75.6 L21 77 M23.5 77.4 L30 78.4 M10.6 78.6 L26 81" stroke="#5b584f" strokeWidth="0.55" fill="none" opacity="0.8" />
+        <path d="M37.5 68.6 L52.5 66.6 M37.6 71.4 L45 70.4 M47.5 70 L54 69.2 M38.5 75 L55.2 72.6 M38 78.4 L49 76.8 M42 81 L57.4 78.6" stroke="#5b584f" strokeWidth="0.55" fill="none" opacity="0.7" />
       </g>
-      {/* Manos sobre el libro */}
-      <path d="M9 66 C6.5 66 5 68 5.5 70.5 C8 71.5 11 70.5 12 68 Z" fill="#bdbdb7" />
-      <path d="M59 66 C61.5 66 63 68 62.5 70.5 C60 71.5 57 70.5 56 68 Z" fill="#cfcfc9" />
+      {/* Manos huesudas apoyadas en las hojas */}
+      <path d="M8 69.5 L16.5 67.6 L20.5 69.2 L16.8 70.3 L21.5 71.3 L17 72.4 L20.5 73.6 L15.5 74.4 L9.5 73.8 Z" fill="#bcbcb6" stroke="#6f6f6b" strokeWidth="0.4" />
+      <path d="M60 69.5 L51.5 67.6 L47.5 69.2 L51.2 70.3 L46.5 71.3 L51 72.4 L47.5 73.6 L52.5 74.4 L58.5 73.8 Z" fill="#cdcdc7" stroke="#6f6f6b" strokeWidth="0.4" />
+      <path d="M16.5 67.6 L15 51.5 L10.5 60 L8 69.5 Z" fill="#101013" stroke="#3a3a42" strokeWidth="0.6" />
+      <path d="M51.5 67.6 L53 51.5 L57.5 60 L60 69.5 Z" fill="#101013" stroke="#3a3a42" strokeWidth="0.6" />
     </svg>
   );
 }
