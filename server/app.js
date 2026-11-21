@@ -43,6 +43,19 @@ export function crearApp(deps) {
   // Qué programa tienes delante y tu día en la laptop (para Aksu). Solo nombres, nunca títulos ni pantalla.
   if (deps.usoLaptop) app.get("/api/uso-laptop", (req, res) => res.json(deps.usoLaptop.estado()));
 
+  // Voz neuronal de Aksu, generada en esta laptop (server/voz.js). GET: qué voces hay; POST: el audio de un texto.
+  if (deps.voz) {
+    app.get("/api/voz", async (req, res) => res.json({ voces: await deps.voz.voces() }));
+    app.post("/api/voz", async (req, res) => {
+      try {
+        const audio = await deps.voz.sintetizar(req.body?.texto, req.body?.voz);
+        res.set({ "Content-Type": "audio/wav", "Cache-Control": "no-store" }).send(audio);
+      } catch (e) {
+        res.status(503).json({ error: e.message });
+      }
+    });
+  }
+
   app.use("/api/ejercicios", rutasEjercicios(deps));
   // API falsa que tarda y falla a propósito, para practicar (y para tus proyectos con Vite)
   app.use("/api/practica", rutasApiPractica());

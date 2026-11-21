@@ -44,6 +44,14 @@ export function crearApi(base = "") {
     miCodigo: (id) => pedir(`${ruta(id)}/mi-codigo`, { headers: { accept: "application/json" } }),
     /** Tu día en la laptop y el programa que tienes delante (solo nombres). */
     usoLaptop: () => pedir("/api/uso-laptop", { headers: { accept: "application/json" } }),
+    /** Las voces neuronales instaladas en la laptop: { voces: string[] }. */
+    vocesLocales: () => pedir("/api/voz", { headers: { accept: "application/json" } }),
+    /** El audio (WAV) de un texto, generado en la laptop. */
+    audioDeVoz: async (texto, voz) => {
+      const r = await fetch(base + "/api/voz", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ texto, voz }) });
+      if (!r.ok) throw new Error("Sin voz local");
+      return r.arrayBuffer();
+    },
     repasar: (id) => post(`${ruta(id)}/repasar`),
     inicio: get("/api/inicio"),
     progreso: get("/api/progreso"),

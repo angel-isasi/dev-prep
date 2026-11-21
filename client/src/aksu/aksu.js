@@ -4,6 +4,7 @@
 import { api } from "../lib/api.js";
 import { claveIa, estadoIa, pedirIa, topeIa, ultimoModeloIa, usoIa } from "../lib/ia.js";
 import { almacen } from "../lib/visita.js";
+import { callarLocal, decirLocal } from "./voz-local.js";
 import { callar, decir, dictar, hayVozEn, microDisponible, vocesListas } from "../lib/voz.js";
 import { cargarPlan } from "../lib/plan-junior.js";
 import {
@@ -46,7 +47,7 @@ function leer() {
 }
 
 // Lo que no se guarda: vive solo mientras la pestaña está abierta
-const PASAJERO = { abierto: false, vista: "charla", pensando: false, sinLeer: 0, sesion: null, pantalla: "", ejercicio: null, entrevista: null, oyendo: null, reto: null, marca: null, frente: false, ir: null, uso: null, distraidoCon: null };
+const PASAJERO = { abierto: false, vista: "charla", pensando: false, sinLeer: 0, sesion: null, pantalla: "", ejercicio: null, entrevista: null, oyendo: null, vocesLocales: [], reto: null, marca: null, frente: false, ir: null, uso: null, distraidoCon: null };
 let estado = { ...leer(), ...PASAJERO };
 const oyentes = new Set();
 
@@ -117,7 +118,7 @@ export function hablar(m) {
   }));
   const completo = [texto, mensaje.pregunta].filter(Boolean).join(" ");
   const idioma = m.ingles ? "en" : "es";
-  if (estado.voz && hayVozEn(idioma)) decir(completo, { idioma, grave: true, voz: estado.vozNombre, tono: estado.vozTono });
+  if (estado.voz) enVozAlta(completo, idioma);
   if (estado.avisos && document.visibilityState !== "visible" && globalThis.Notification?.permission === "granted") {
     try {
       new Notification(NOMBRE, { body: completo.slice(0, 220), tag: "aksu" });
@@ -126,9 +127,31 @@ export function hablar(m) {
     }
   }
 }
-export const silencio = () => callar();
+export const silencio = () => {
+  callar();
+  callarLocal();
+};
+
+/** Marca de las voces neuronales en el ajuste vozNombre ("local:es_MX-ald-medium"). */
+export const LOCAL = "local:";
+/** Carga las voces neuronales de la laptop (si el motor está y las tiene). */
+export const cargarVocesLocales = () => api.vocesLocales?.().then((r) => cambiar({ vocesLocales: r?.voces ?? [] }), () => {});
+/**
+ * Dice algo en voz alta. En español, con la laptop conectada y una voz neuronal instalada, usa esa
+ * (salvo que hayas elegido una del navegador); si falla o no hay, la voz del navegador.
+ */
+function enVozAlta(texto, idioma) {
+  const { vozNombre, vozTono, vocesLocales } = estado;
+  const delNavegador = () => hayVozEn(idioma) && decir(texto, { idioma, grave: true, voz: vozNombre.startsWith(LOCAL) ? "" : vozNombre, tono: vozTono });
+  const quiereLocal = vozNombre.startsWith(LOCAL) || vozNombre === "";
+  if (idioma !== "es" || !vocesLocales.length || !quiereLocal) return delNavegador();
+  const pedida = vozNombre.slice(LOCAL.length);
+  const voz = vocesLocales.includes(pedida) ? pedida : (vocesLocales.find((v) => /es_MX/.test(v)) ?? vocesLocales[0]);
+  callar();
+  decirLocal(texto, { voz, tono: vozTono }).catch(delNavegador);
+}
 /** Dice una frase de muestra con la voz y el tono elegidos (el botón Probar). */
-export const probarVoz = () => vocesListas().then(() => decir("Soy Aksu. Llevas tres ejercicios hoy. Sigue.", { grave: true, voz: estado.vozNombre, tono: estado.vozTono }));
+export const probarVoz = () => vocesListas().then(() => enVozAlta("Soy Aksu. Llevas tres ejercicios hoy y dos los resolviste mirando. Así no vale.", "es"));
 
 // ---------- Hablarle por voz (Ctrl + Espacio) ----------
 let sesionVoz = null;
@@ -139,7 +162,7 @@ let sesionVoz = null;
 export function escuchar() {
   if (sesionVoz) return sesionVoz.detener();
   if (!microDisponible()) return hablar({ texto: "Este navegador no permite dictado por voz. Usa Chrome o Edge.", frente: false });
-  callar();
+  silencio();
   let dicho = "";
   // Si le hablas, te responde hablando: la voz queda encendida
   cambiar({ oyendo: "", voz: true });

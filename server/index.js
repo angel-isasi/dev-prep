@@ -14,6 +14,7 @@ import { abrirEnVSCode } from "./vscode.js";
 import { crearApp } from "./app.js";
 import { crearVigilante, PROCESOS_POR_DEFECTO } from "./juego-vigilante.js";
 import { crearUsoLaptop } from "./uso-laptop.js";
+import { crearVoz } from "./voz.js";
 import { estadoGeneral } from "./vistas-progreso.js";
 import { fechaLocal } from "./fechas.js";
 import { vivos } from "./combinar.js";
@@ -65,6 +66,7 @@ const app = crearApp({
   config,
   clienteDir: config.clienteDir,
   usoLaptop,
+  voz: crearVoz({ datosDir: config.datosDir }),
   alApagar: () => apagar(),
 });
 

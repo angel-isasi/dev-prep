@@ -13,7 +13,7 @@ import {
   TEXTOS, tocaCierre, tocaComentario, tocaDistraccion, tocaEntrevista, tocaInforme, tocaPausa, tocaPregunta, tocaRelampago, tocaSorpresa, vaCorriendo, yaHizo,
 } from "./reglas.js";
 import {
-  abrir, cambiar, cerrar, cerrarDia, decirle, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, NOMBRE, NOMBRE_DESTINO, olvidarPlan, pedirAvisos, pensar, planActual,
+  abrir, cambiar, cargarVocesLocales, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, NOMBRE, NOMBRE_DESTINO, olvidarPlan, pedirAvisos, pensar, planActual,
   probarVoz, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
 } from "./aksu.js";
 import { Figura } from "./Figura.jsx";
@@ -236,6 +236,8 @@ function useObservador() {
   // Al abrir la app: arranque del día e informe de la semana
   useEffect(() => {
     let vivo = true;
+    cargarVocesLocales();
+    const masTarde = setTimeout(cargarVocesLocales, 6000); // la conexión con la laptop tarda un momento
     const empezar = async () => {
       if (!(await hayIa()) || !vivo) return;
       const e = verEstado();
@@ -253,6 +255,7 @@ function useObservador() {
     return () => {
       vivo = false;
       clearTimeout(espera);
+      clearTimeout(masTarde);
     };
   }, []);
 }
@@ -678,7 +681,12 @@ export function Aksu() {
       {e.voz && (
         <div className={estilos.ajustes}>
           <select className={estilos.franja} value={e.vozNombre} aria-label="Voz de Aksu" onChange={(ev) => cambiar({ vozNombre: ev.target.value })}>
-            <option value="">Voz automática{nombreVozGrave() ? ` (${nombreVozGrave().replace(/^Microsoft | - .*$/g, "")})` : ""}</option>
+            <option value="">Voz automática{e.vocesLocales.length ? " (neuronal)" : nombreVozGrave() ? ` (${nombreVozGrave().replace(/^Microsoft | - .*$/g, "")})` : ""}</option>
+            {e.vocesLocales.map((v) => (
+              <option key={v} value={LOCAL + v}>
+                Neuronal: {v.split("-")[1]} ({v.slice(3, 5)}) · hombre
+              </option>
+            ))}
             {vocesEs.map((v) => (
               <option key={v.nombre} value={v.nombre}>
                 {v.nombre.replace(/^Microsoft /, "")}
