@@ -118,7 +118,8 @@ export function hablar(m) {
   }));
   const completo = [texto, mensaje.pregunta].filter(Boolean).join(" ");
   const idioma = m.ingles ? "en" : "es";
-  if (estado.voz) enVozAlta(completo, idioma);
+  // "decir": lo que suena en voz alta cuando no conviene leer el texto entero (una palabra en inglés con su traducción)
+  if (estado.voz) enVozAlta(m.decir ?? completo, idioma);
   if (estado.avisos && document.visibilityState !== "visible" && globalThis.Notification?.permission === "granted") {
     try {
       new Notification(NOMBRE, { body: completo.slice(0, 220), tag: "aksu" });
@@ -127,6 +128,31 @@ export function hablar(m) {
     }
   }
 }
+/**
+ * Una palabra de inglés con su ejemplo, sacada de las unidades de la app (de intermedio hacia arriba y
+ * de inglés para el trabajo). Sin IA. No repite hasta haberlas dicho todas.
+ */
+const ETAPAS_PALABRA = ["intermedio", "superior", "avanzado", "trabajo"];
+export async function palabraDeIngles() {
+  const unidades = (await api.inglesUnidades?.().catch(() => null)) ?? [];
+  const todas = unidades.filter((u) => ETAPAS_PALABRA.includes(u.etapa)).flatMap((u) => u.palabras ?? []).filter((p) => p.en && p.es && p.ejemplo?.en);
+  if (!todas.length) return false;
+  const dichas = new Set(estado.palabrasDichas ?? []);
+  const nuevas = todas.filter((p) => !dichas.has(p.id));
+  const lista = nuevas.length ? nuevas : todas;
+  const p = lista[Math.floor(Math.random() * lista.length)];
+  cambiar({ palabrasDichas: nuevas.length ? [...dichas, p.id] : [p.id] });
+  hablar({
+    texto: `"${p.en}"${p.pron ? ` (${p.pron})` : ""}: ${p.es}.`,
+    pregunta: `${p.ejemplo.en}${p.ejemplo.es ? ` · ${p.ejemplo.es}` : ""}`,
+    tipo: "palabra",
+    frente: false,
+    ingles: true,
+    decir: `${p.en}. ${p.ejemplo.en}`,
+  });
+  return true;
+}
+
 export const silencio = () => {
   callar();
   callarLocal();

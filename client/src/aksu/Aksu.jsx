@@ -14,7 +14,7 @@ import {
   TEXTOS, tocaCierre, tocaComentario, tocaDistraccion, tocaEntrevista, tocaInforme, tocaPausa, tocaPregunta, tocaRelampago, tocaSorpresa, vaCorriendo, yaHizo,
 } from "./reglas.js";
 import {
-  abrir, cambiar, cargarVocesLocales, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, NOMBRE, NOMBRE_DESTINO, olvidarPlan, pedirAvisos, pensar, planActual,
+  abrir, cambiar, cargarVocesLocales, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, NOMBRE, NOMBRE_DESTINO, olvidarPlan, palabraDeIngles, pedirAvisos, pensar, planActual,
   probarVoz, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
 } from "./aksu.js";
 import { Figura } from "./Figura.jsx";
@@ -210,16 +210,11 @@ function useObservador() {
         ocioDesde.current = ahora;
         if (reto) return cambiar((s) => ({ reto, dia: { ...s.dia, relampagoEn: ahora } }));
       }
-      // Un comentario corto por su cuenta, para que se note que está ahí (modelo rápido: casi gratis)
+      // De rato en rato, en vez de un comentario: una palabra de inglés con su ejemplo (sin IA, gratis)
       const ultimoDicho = e.mensajes.findLast?.((m) => m.de !== "yo")?.en ?? 0;
-      if (puede(e.nivel, "comenta") && !e.abierto && (await hayIa()) && tocaComentario(e.nivel, e.dia, ahora, ultimoDicho)) {
+      if (puede(e.nivel, "comenta") && !e.abierto && tocaComentario(e.nivel, e.dia, ahora, ultimoDicho)) {
         cambiar((s2) => ({ dia: { ...s2.dia, comentarioEn: ahora } }));
-        return pensar({
-          solo: true,
-          tipo: "comenta",
-          frente: false,
-          momento: "Comentario breve por tu cuenta (respóndelo tú mismo, modelo haiku): una sola frase corta sobre lo que está haciendo ahora mismo, con un dato real suyo (la pantalla que tiene abierta, su avance de hoy, su tiempo en la laptop o un tropiezo suyo que tenga que ver). Sin pregunta. No repitas nada de lo que ya dijiste en la conversación.",
-        });
+        if (await palabraDeIngles()) return;
       }
       if (puede(e.nivel, "sorpresa") && tocaSorpresa(e.dia, ahora)) {
         cambiar({ dia: marcarHecho(e.dia, "sorpresa") });
@@ -356,26 +351,87 @@ const quieto = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").mat
 function useMovimiento(e, enBloque) {
   const [pos, setPos] = useState(() => paradas(...Object.values(medidas()))[0]);
   const [prisa, setPrisa] = useState(false); // viajes cortos (acercarse, apartarse) van más rápido que el paseo
+  const [fase, setFase] = useState(""); // "yendose" y "llegando": se deshace en humo y aparece en otro sitio
+  const [rumbo, setRumbo] = useState(""); // hacia dónde se inclina mientras se desliza
   const sueltaHasta = useRef(0);
   const posRef = useRef(pos);
   posRef.current = pos;
-  const ir = (p, rapido = false) => {
+  const relojes = useRef([]);
+  const luego = (f, ms) => relojes.current.push(setTimeout(f, ms));
+  const limpiar = () => {
+    relojes.current.forEach(clearTimeout);
+    relojes.current = [];
+  };
+  useEffect(() => limpiar, []);
+
+  /** Se desliza hasta un punto, inclinada hacia donde va. */
+  const deslizar = (p, rapido = false) => {
+    limpiar();
+    setFase("");
     setPrisa(rapido);
+    const dx = p.x - posRef.current.x;
+    setRumbo(Math.abs(dx) > 60 ? (dx > 0 ? "der" : "izq") : "");
     setPos(p);
+    luego(() => setRumbo(""), rapido ? 900 : 2600);
+  };
+  /** Se deshace en humo y aparece de golpe en otro punto. */
+  const desvanecer = (p) => {
+    limpiar();
+    setRumbo("");
+    setFase("yendose");
+    luego(() => {
+      setPrisa(null); // el salto no se anima
+      setPos(p);
+      setFase("llegando");
+      luego(() => setFase(""), 700);
+    }, 520);
+  };
+  /** Ir a un punto: los tramos largos, desapareciendo; los cortos, deslizándose. */
+  const ir = (p, rapido = false) => {
+    const lejos = Math.hypot(p.x - posRef.current.x, p.y - posRef.current.y) > 420;
+    if (!quieto() && window.innerWidth >= 900 && (rapido ? lejos : Math.random() < 0.45)) desvanecer(p);
+    else deslizar(p, rapido);
   };
 
-  // El paseo
+  // El paseo: cada tanto (nunca con el mismo ritmo) cambia de sitio
   useEffect(() => {
+    let t;
     const paso = () => {
+      t = setTimeout(paso, 7000 + Math.random() * 9000);
       const s = verEstado();
       if (s.abierto || s.frente || s.ir || s.reto || bloqueActivo(s.bloque, Date.now()) || Date.now() < sueltaHasta.current || quieto() || document.visibilityState !== "visible") return;
-      if (Math.random() < 0.8) {
-        const { ancho, alto, izquierda } = medidas();
-        ir(siguienteParada(paradas(ancho, alto, izquierda), posRef.current, Math.random()));
-      }
+      const { ancho, alto, izquierda } = medidas();
+      ir(siguienteParada(paradas(ancho, alto, izquierda), posRef.current, Math.random()));
     };
-    const t = setInterval(paso, 9000);
-    return () => clearInterval(t);
+    t = setTimeout(paso, 8000);
+    return () => clearTimeout(t);
+  }, []);
+
+  // Te sigue con la mirada: la luz de los ojos apunta hacia el cursor (sin volver a dibujar nada)
+  const raiz = useRef(null);
+  useEffect(() => {
+    if (quieto()) return;
+    let cuadro = 0;
+    const alMover = (ev) => {
+      if (cuadro) return;
+      cuadro = requestAnimationFrame(() => {
+        cuadro = 0;
+        const el = raiz.current;
+        if (!el) return;
+        const dx = ev.clientX - (posRef.current.x + FIGURA.ancho / 2);
+        const dy = ev.clientY - (posRef.current.y + FIGURA.alto * 0.3);
+        const d = Math.hypot(dx, dy) || 1;
+        const fuerza = Math.min(1, d / 160);
+        el.style.setProperty("--mx", ((dx / d) * 1.3 * fuerza).toFixed(2));
+        el.style.setProperty("--my", ((dy / d) * 0.8 * fuerza).toFixed(2));
+        el.toggleAttribute("data-cerca", d < 150);
+      });
+    };
+    window.addEventListener("pointermove", alMover, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", alMover);
+      cancelAnimationFrame(cuadro);
+    };
   }, []);
 
   // Delante cuando te pregunta; junto a lo que importa; en su esquina durante un bloque
@@ -427,6 +483,9 @@ function useMovimiento(e, enBloque) {
     const dy = ev.clientY - a.y;
     if (!a.movio && Math.hypot(dx, dy) < 6) return;
     a.movio = true;
+    limpiar();
+    setFase("");
+    setRumbo("");
     setPrisa(null); // sin transición mientras la llevas
     setPos(encajar({ x: a.px + dx, y: a.py + dy }, window.innerWidth, window.innerHeight));
   };
@@ -436,14 +495,14 @@ function useMovimiento(e, enBloque) {
     if (a?.movio) sueltaHasta.current = Date.now() + 10 * 60_000;
     return !!a?.movio;
   };
-  return { pos, prisa, agarrar, mover, soltar };
+  return { pos, prisa, fase, rumbo, raiz, agarrar, mover, soltar };
 }
 
 /** La figura suelta por la pantalla, con lo que dice al lado. */
 function Suelta({ e }) {
   const ahora = Date.now();
   const enBloque = bloqueActivo(e.bloque, ahora);
-  const { pos, prisa, agarrar, mover, soltar } = useMovimiento(e, enBloque);
+  const { pos, prisa, fase, rumbo, raiz, agarrar, mover, soltar } = useMovimiento(e, enBloque);
   const [globo, setGlobo] = useState(null);
   const [, tic] = useState(0);
   const ultimo = e.mensajes.findLast?.((m) => m.de !== "yo");
@@ -452,8 +511,8 @@ function Suelta({ e }) {
   useEffect(() => {
     if (!ultimo || Date.now() - ultimo.en > 4000) return;
     setGlobo(ultimo);
-    if (ultimo.pregunta) return;
-    const t = setTimeout(() => setGlobo(null), 14_000);
+    if (ultimo.pregunta && ultimo.tipo !== "palabra") return;
+    const t = setTimeout(() => setGlobo(null), ultimo.tipo === "palabra" ? 25_000 : 14_000);
     return () => clearTimeout(t);
   }, [ultimo?.en]);
   // La marca de la pantalla se va sola
@@ -482,8 +541,11 @@ function Suelta({ e }) {
 
   return (
     <div
+      ref={raiz}
       className={estilos.suelta}
       data-aksu-raiz
+      data-fase={fase || undefined}
+      data-rumbo={rumbo || undefined}
       data-prisa={prisa === null ? "llevada" : prisa ? "si" : "no"}
       data-estado={estado}
       style={{ transform: `translate3d(${pos.x}px, ${pos.y}px, 0)` }}
@@ -623,7 +685,7 @@ export function Aksu() {
     <aside className={estilos.panel} aria-label={NOMBRE} data-aksu-raiz>
       <header className={estilos.cabeza}>
         <span className={estilos.avatar} aria-hidden>
-          <Figura tamano={30} estado={e.pensando ? "pensando" : "atento"} />
+          <Figura tamano={30} fondo={false} estado={e.pensando ? "pensando" : "atento"} />
         </span>
         <div>
           <strong>{NOMBRE}</strong>
