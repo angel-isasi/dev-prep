@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 
 /** Color de la barra del sistema (celular) y de la ventana de la app instalada, por tema. */
-const COLOR_BARRA = { oscuro: "#07070a", claro: "#f6f6f8" };
+const COLOR_BARRA = { oscuro: "#060606", claro: "#f3f3f3" };
 
 // El tema vive en <html data-tema>. Varios componentes lo leen a la vez (barra lateral,
 // buscador, ajustes), así que comparten un solo valor y se avisan entre sí al cambiar.

@@ -1,10 +1,11 @@
 .layout {
-  display: grid;
-  grid-template-columns: var(--ancho-barra) 1fr;
+  /* La barra es fija y flota sobre el contenido al desplegarse: aquí solo se le deja su hueco */
   height: 100%;
+  padding-left: var(--ancho-barra);
 }
 
 .principal {
+  height: 100%;
   overflow-y: auto;
   min-width: 0;
   /* Al cambiar de sección solo se anima el contenido; la barra lateral queda quieta (ver base.css) */

@@ -6,7 +6,7 @@ import { cn } from "../../lib/cn.js";
 export const AuroraText = memo(function AuroraText({
   children,
   className,
-  colors = ["var(--acento)", "#8fdcd0", "var(--exito)", "#c4b5fd"],
+  colors = ["var(--acento)", "#cbcbcb", "var(--exito)", "#bdbdbd"],
   speed = 1,
 }) {
   const estilo = {

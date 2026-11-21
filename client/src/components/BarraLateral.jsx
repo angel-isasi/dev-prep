@@ -49,19 +49,19 @@ export function BarraLateral() {
   });
 
   return (
-    <aside className={estilos.barra}>
+    <aside className={estilos.barra} aria-label="Principal">
       <div className={estilos.marca}>
         <span className={estilos.logo} aria-hidden>
           {"</>"}
         </span>
-        dev-prep
+        <span className={estilos.rotulo}>dev-prep</span>
       </div>
 
       {/* Buscador global: también se abre con Ctrl+K */}
       <button type="button" className={estilos.buscar} onClick={abrirPaleta}>
         <IconoReferencia />
-        <span>Buscar</span>
-        <kbd>Ctrl K</kbd>
+        <span className={estilos.rotulo}>Buscar</span>
+        <kbd className={estilos.rotulo}>Ctrl K</kbd>
       </button>
 
       <nav className={estilos.nav} aria-label="Secciones">
@@ -73,7 +73,7 @@ export function BarraLateral() {
               <NavLink to={a} end={exacto} viewTransition className={`${estilos.enlace} ${activa ? estilos.activo : ""}`}>
                 {activa && <Indicador />}
                 <Icono />
-                {texto}
+                <span className={estilos.rotulo}>{texto}</span>
               </NavLink>
               {/* Los destinos de la sección se despliegan solo cuando estás en ella */}
               <AnimatePresence initial={false}>
@@ -114,7 +114,7 @@ export function BarraLateral() {
           >
             <Llama encendida={racha.dias > 0} tamano={20} />
             <strong>{racha.dias}</strong>
-            {racha.dias === 1 ? "día de racha" : "días de racha"}
+            <span className={estilos.rotulo}>{racha.dias === 1 ? "día de racha" : "días de racha"}</span>
           </div>
         )}
         {/* El modo enfoque siempre a la mano (solo en la versión publicada) */}
@@ -124,7 +124,7 @@ export function BarraLateral() {
               <>
                 {isActive && <Indicador />}
                 <IconoEnfoque />
-                Modo enfoque
+                <span className={estilos.rotulo}>Modo enfoque</span>
               </>
             )}
           </NavLink>
@@ -134,7 +134,7 @@ export function BarraLateral() {
             <>
               {isActive && <Indicador />}
               <IconoAjustes />
-              Ajustes
+              <span className={estilos.rotulo}>Ajustes</span>
             </>
           )}
         </NavLink>
@@ -148,14 +148,14 @@ export function BarraLateral() {
             disparador={
               <button type="button" className={estilos.tema}>
                 <IconoApagar />
-                Cerrar dev-prep
+                <span className={estilos.rotulo}>Cerrar dev-prep</span>
               </button>
             }
           />
         )}
         <button type="button" className={estilos.tema} onClick={alternar}>
           {tema === "oscuro" ? <IconoSol /> : <IconoLuna />}
-          {tema === "oscuro" ? "Modo claro" : "Modo oscuro"}
+          <span className={estilos.rotulo}>{tema === "oscuro" ? "Modo claro" : "Modo oscuro"}</span>
         </button>
       </div>
       {cerrada && (

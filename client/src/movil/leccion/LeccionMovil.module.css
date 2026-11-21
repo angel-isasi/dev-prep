@@ -309,10 +309,10 @@
   font-variant-numeric: tabular-nums;
 }
 .combo {
-  color: #ff9f43;
+  color: var(--acento);
 }
 .avance[data-combo="true"] > div {
-  background: linear-gradient(90deg, #ff9f43, #ff5e57) !important;
+  background: linear-gradient(90deg, var(--texto-suave), var(--acento)) !important;
 }
 .hito {
   position: fixed;
@@ -322,11 +322,11 @@
   z-index: 30;
   padding: 0.7rem 1.3rem;
   border-radius: var(--radio-pildora);
-  background: linear-gradient(90deg, #ff9f43, #ff5e57);
-  color: #fff;
+  background: linear-gradient(90deg, var(--texto-suave), var(--acento));
+  color: var(--sobre-acento);
   font-weight: var(--peso-extra);
   font-size: var(--letra-8);
-  box-shadow: 0 10px 30px rgb(255 94 87 / 0.35);
+  box-shadow: 0 10px 30px rgb(255 255 255 / 0.18);
   pointer-events: none;
 }
 

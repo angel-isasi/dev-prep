@@ -45,7 +45,7 @@ export function Llama({ encendida, tamano = 18, className }) {
       {/* Núcleo más claro */}
       <motion.path
         d="M12 21c2.3 0 4-1.6 4-3.9 0-2.1-1.4-3.5-2.5-4.8-.3 1.2-.9 1.9-1.7 2.2.2-1.8-.6-3.4-2.2-5.1-.2 2.2-3 3.8-3 6.9C6.6 19.3 9 21 12 21z"
-        fill={encendida ? "#ffe3a3" : "var(--fondo-solido)"}
+        fill={encendida ? "#e4e4e4" : "var(--fondo-solido)"}
         opacity={encendida ? 0.95 : 0.6}
         style={{ originX: 0.5, originY: 1 }}
         {...titilar(1.1, 0.2)}

@@ -261,15 +261,15 @@
 }
 
 .nivel[data-nivel="1"] {
-  background: var(--exito);
+  background: var(--texto-tenue);
 }
 
 .nivel[data-nivel="2"] {
-  background: var(--aviso);
+  background: var(--texto-suave);
 }
 
 .nivel[data-nivel="3"] {
-  background: var(--error);
+  background: var(--acento);
 }
 
 @media (prefers-reduced-motion: reduce) {

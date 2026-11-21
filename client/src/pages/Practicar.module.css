@@ -207,17 +207,17 @@
 
 .tramos [data-nivel="1"],
 .leyenda [data-nivel="1"]::before {
-  background: var(--exito);
+  background: var(--texto-tenue);
 }
 
 .tramos [data-nivel="2"],
 .leyenda [data-nivel="2"]::before {
-  background: var(--aviso);
+  background: var(--texto-suave);
 }
 
 .tramos [data-nivel="3"],
 .leyenda [data-nivel="3"]::before {
-  background: var(--error);
+  background: var(--acento);
 }
 
 .leyenda {

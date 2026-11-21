@@ -1,134 +1,87 @@
 .tarjeta {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-3);
-  padding: var(--espacio-4) var(--espacio-5);
-  border: 1px solid var(--borde);
-  border-radius: var(--radio-grande);
-  background:
-    radial-gradient(300px 120px at 100% 0%, var(--exito-suave), transparent 70%),
-    var(--superficie);
+  min-width: 0;
+  padding: 24px 26px;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-lg);
+  background: linear-gradient(160deg, var(--superficie-3), var(--superficie));
+  box-shadow: var(--brillo-borde);
 }
 
-.tarjeta[data-bloqueado="true"] {
-  background:
-    radial-gradient(300px 120px at 100% 0%, var(--aviso-suave), transparent 70%),
-    var(--superficie);
-}
-
-.tarjeta[data-jugando="true"] {
-  border-color: var(--acento);
-}
-
-.cabecera {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--espacio-2);
-}
-
-.cabecera > div {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.cabecera strong {
-  font-family: var(--fuente-titulos);
-  font-size: var(--titulo-1);
-}
-
-.etiqueta {
-  color: var(--texto-suave);
-  font-size: var(--letra-2);
-  font-weight: var(--peso-semi);
-  letter-spacing: 0.06em;
+.rotulo {
+  margin: 0;
+  color: var(--texto-tenue);
+  font-family: var(--fuente-codigo);
+  font-size: var(--letra-1);
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
-.ganado {
-  color: var(--texto-suave);
+.cifra {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin: var(--espacio-2) 0 0;
+  color: var(--texto);
+  font-family: var(--fuente-titulos);
+  font-size: 30px;
+  font-weight: var(--peso-negrita);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.tarjeta[data-bloqueado="true"] .cifra {
+  color: var(--texto-tenue);
+}
+
+/* La regla: marcas encendidas hasta lo ganado, apagadas hasta el tope */
+.regla {
+  display: flex;
+  margin-top: 14px;
+  border-bottom: 1px solid var(--borde-fuerte);
+}
+
+.regla span {
+  height: 16px;
+  background: repeating-linear-gradient(90deg, var(--acento) 0 2px, transparent 2px 7px);
+}
+
+.regla span:last-child {
+  flex: 1;
+  opacity: 0.2;
+}
+
+.tarjeta[data-bloqueado="true"] .regla span:first-child {
+  opacity: 0.5;
+}
+
+.escala {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  color: var(--texto-tenue);
+  font-family: var(--fuente-codigo);
+  font-size: 10px;
+}
+
+.pie {
+  display: grid;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 14px;
+  color: var(--texto-tenue);
   font-size: var(--letra-3);
 }
 
-.barra {
-  display: flex;
-  height: 12px;
-  overflow: hidden;
-  border-radius: var(--radio-pildora);
-  background: var(--borde);
-}
-
-.jugado {
-  background: var(--acento);
-  transition: width 0.6s ease;
-}
-
-.restante {
-  background: var(--exito);
-  transition: width 0.6s ease;
-}
-
-.notas {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.pie p {
   margin: 0;
-  padding: 0;
-  color: var(--texto-suave);
-  font-size: var(--letra-3);
-  list-style: none;
 }
 
-.notas li[data-tipo="error"] {
-  color: var(--error);
-}
-
-.notas li[data-tipo="aviso"] {
-  color: var(--aviso);
-}
-
-.notas li[data-tipo="exito"] {
-  color: var(--exito);
-}
-
-.salvar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espacio-2);
-  padding-top: var(--espacio-2);
-  border-top: 1px solid var(--borde);
-  color: var(--texto-suave);
-  font-size: var(--letra-3);
-}
-
-.jefe {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--espacio-2);
-  padding: 10px 14px;
-  border: 1px solid var(--borde-fuerte);
-  border-radius: var(--radio-lg);
-  background: var(--fondo-solido);
+.pie a {
   color: var(--texto);
 }
 
-.jefe span {
-  color: var(--aviso);
-  font-size: var(--letra-3);
-  font-weight: var(--peso-semi);
-}
-
-@media (max-width: 600px) {
-  /* El botón "Solo 10 minutos" a todo el ancho y cómodo para el pulgar */
-  .salvar :global(.boton) {
-    justify-content: center;
-    width: 100%;
-    min-height: 44px;
-  }
+.pie [data-tipo="error"] {
+  color: var(--error);
 }

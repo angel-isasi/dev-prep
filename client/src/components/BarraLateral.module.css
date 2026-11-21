@@ -23,7 +23,7 @@
   width: 30px;
   height: 30px;
   border-radius: var(--radio);
-  background: linear-gradient(135deg, var(--acento), color-mix(in srgb, var(--acento) 55%, #5fd3be));
+  background: linear-gradient(135deg, var(--acento), var(--texto-tenue));
   color: var(--sobre-acento);
   box-shadow: 0 0 24px var(--acento-suave);
   font-family: var(--fuente-codigo);
@@ -244,4 +244,145 @@
 
 .cerrada span {
   color: var(--texto-suave);
+}
+
+/* ---------- Barra de íconos que se despliega ----------
+   Cerrada mide --ancho-barra (72 px) y solo muestra los íconos. Al pasar el mouse (o al entrar con
+   el teclado) se abre a --ancho-barra-abierta por encima del contenido, sin empujarlo. */
+.barra {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: var(--z-barra);
+  width: var(--ancho-barra);
+  gap: var(--espacio-4);
+  padding: 22px 14px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--barra-fondo) 94%, transparent);
+  transition:
+    width var(--dur-lenta) ease,
+    box-shadow var(--dur-lenta) ease;
+}
+
+.barra:hover,
+.barra:has(:focus-visible) {
+  width: var(--ancho-barra-abierta);
+  box-shadow: 20px 0 60px rgb(0 0 0 / 0.5);
+}
+
+/* Todo lo que es texto se desvanece cuando está cerrada */
+.rotulo {
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity var(--dur) ease;
+}
+
+.barra:hover .rotulo,
+.barra:has(:focus-visible) .rotulo {
+  opacity: 1;
+}
+
+.barra:not(:hover):not(:has(:focus-visible)) .subs {
+  display: none;
+}
+
+.marca {
+  gap: 14px;
+  height: 44px;
+  padding: 0 7px;
+  font-family: var(--fuente-titulos);
+  font-size: var(--letra-8);
+}
+
+.logo {
+  flex: none;
+  background: none;
+  box-shadow: none;
+  color: var(--texto);
+  font-weight: var(--peso-semi);
+}
+
+.nav {
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.enlace,
+.tema {
+  gap: 14px;
+  height: 44px;
+  padding: 0 13px;
+  border-radius: var(--radio-md);
+  color: var(--texto-tenue);
+  white-space: nowrap;
+}
+
+.enlace svg,
+.tema svg,
+.buscar svg {
+  flex: none;
+}
+
+.enlace:hover,
+.tema:hover {
+  background: var(--velo-2);
+  color: var(--texto);
+}
+
+.activo,
+.activo:hover {
+  color: var(--texto);
+}
+
+.indicador {
+  border-radius: var(--radio-md);
+  background: var(--acento-suave);
+  box-shadow: none;
+}
+
+.indicador::before {
+  display: none;
+}
+
+.buscar {
+  gap: 14px;
+  height: 44px;
+  padding: 0 13px;
+  border-color: transparent;
+  border-radius: var(--radio-md);
+  background: none;
+  white-space: nowrap;
+}
+
+.barra:hover .buscar,
+.barra:has(:focus-visible) .buscar {
+  border-color: var(--borde);
+  background: var(--velo);
+}
+
+.racha {
+  gap: 12px;
+  height: 44px;
+  margin: 0 0 var(--espacio-2);
+  padding: 0 11px;
+  border-color: transparent;
+  white-space: nowrap;
+}
+
+.racha[data-activa="true"] {
+  background: none;
+}
+
+.racha[data-activa="true"] strong {
+  color: var(--texto);
+}
+
+.barra:hover .racha,
+.barra:has(:focus-visible) .racha {
+  border-color: var(--borde);
+}
+
+.sub:hover {
+  background: var(--velo-2);
 }

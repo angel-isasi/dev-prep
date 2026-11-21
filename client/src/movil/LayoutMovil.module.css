@@ -30,7 +30,7 @@
   width: 26px;
   height: 26px;
   border-radius: var(--radio-sm);
-  background: linear-gradient(135deg, var(--acento), color-mix(in srgb, var(--acento) 55%, #5fd3be));
+  background: linear-gradient(135deg, var(--acento), var(--texto-tenue));
   color: var(--sobre-acento);
   font-family: var(--fuente-codigo);
   font-size: 9px;

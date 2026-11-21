@@ -1,13 +1,15 @@
-// Tiempo libre ganado: barra con lo ganado hoy, lo jugado y lo que queda. Se desbloquea al cumplir la
-// meta del día. Si dev-prep está abierto en la laptop, el motor mide el juego y la barra se mueve en vivo.
+// Tiempo libre ganado: cuánto te queda para jugar, en una regla de marcas de 0 al tope del día.
+// Se desbloquea al cumplir la meta. Si dev-prep está abierto en la laptop, el motor mide el juego y
+// la regla se mueve en vivo.
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useEvento } from "../hooks/useEvento.js";
 import { ES_MOVIL } from "../lib/modo.js";
 import estilos from "./TiempoLibre.module.css";
-import { IconoCandado, IconoTrofeo } from "./Iconos.jsx";
+import { IconoCandado } from "./Iconos.jsx";
 
-const horas = (min) => (min >= 60 ? `${Math.floor(min / 60)} h ${min % 60 ? `${min % 60} min` : ""}`.trim() : `${min} min`);
+const horas = (min) => (min >= 60 ? `${Math.floor(min / 60)}h ${String(min % 60).padStart(2, "0")}m` : `${min} min`);
+const marca = (min) => (min === 0 ? "0" : min >= 60 ? `${Math.floor(min / 60)}h${min % 60 ? min % 60 : ""}` : String(min));
 
 /**
  * @param {{ juego: object, meta?: object, salvados?: { semana: number, maximo: number }, jefe?: object }} props
@@ -22,66 +24,65 @@ export function TiempoLibre({ juego: inicial, meta, salvados, jefe }) {
   });
   if (!juego) return null;
 
-  const total = Math.max(juego.disponible, juego.jugado, 1);
-  const pJugado = Math.min(100, (juego.jugado / total) * 100);
-  const pRestante = Math.min(100 - pJugado, (juego.restante / total) * 100);
+  const tope = Math.max(juego.tope, 1);
+  const pGanado = Math.min(100, (juego.ganado / tope) * 100);
   // "1/2": días salvados esta semana de los que se permiten
   const cuenta = salvados ? ` · ${salvados.semana}/${salvados.maximo}` : "";
   const ayudaSalvar = `¿Día pesado? Haz al menos algo y tu racha no se rompe${salvados ? `. Días salvados esta semana: ${salvados.semana} de ${salvados.maximo}` : ""}.`;
+  const notas = [
+    juego.jugado > 0 && { texto: `Jugaste ${horas(juego.jugado)} hoy.` },
+    juego.deuda > 0 && { texto: `Deuda de ayer: ${horas(juego.deuda)}.` },
+    juego.exceso > 0 && { texto: `Te pasaste ${horas(juego.exceso)}: mañana se descuenta.`, tipo: "error" },
+    juego.mitad && { texto: "Ayer no cumpliste tu meta: hoy ganas la mitad." },
+    juego.finDeSemanaLargo && { texto: `Semana perfecta: hoy el tope sube a ${horas(juego.tope)}.` },
+  ].filter(Boolean);
 
   return (
-    <div className={estilos.tarjeta} data-bloqueado={juego.bloqueado} data-jugando={jugando}>
-      <div className={estilos.cabecera}>
-        <div>
-          <span className={estilos.etiqueta}>{jugando ? "Jugando ahora" : "Tiempo libre de hoy"}</span>
-          {juego.bloqueado ? (
-            <strong>
-              <IconoCandado tamano={14} /> Bloqueado · te {juego.faltaParaDesbloquear === 1 ? "falta 1 punto" : `faltan ${juego.faltaParaDesbloquear} puntos`} para tu meta
-            </strong>
-          ) : (
-            <strong>
-              {horas(juego.restante)} {juego.restante > 0 ? "para jugar" : "· ya lo usaste"}
-            </strong>
-          )}
-        </div>
-        <span className={estilos.ganado}>
-          {juego.bloqueado && juego.ganado > 0 ? `${horas(juego.ganado)} esperando` : `${horas(juego.ganado)} de ${horas(juego.tope)}`}
-        </span>
+    <section className={estilos.tarjeta} data-bloqueado={juego.bloqueado} data-jugando={jugando}>
+      <p className={estilos.rotulo}>{jugando ? "Jugando ahora" : juego.bloqueado ? "Tiempo libre · bloqueado" : "Tiempo libre ganado"}</p>
+      <p className={estilos.cifra}>
+        {juego.bloqueado && <IconoCandado tamano={20} />}
+        {horas(juego.bloqueado ? juego.ganado : juego.restante)}
+      </p>
+      <div className={estilos.regla} role="img" aria-label={`Ganaste ${horas(juego.ganado)} de ${horas(juego.tope)}`}>
+        <span style={{ width: `${pGanado}%` }} />
+        <span />
+      </div>
+      <div className={estilos.escala} aria-hidden>
+        {[0, 0.25, 0.5, 0.75, 1].map((f) => (
+          <span key={f}>{marca(Math.round((tope * f) / 5) * 5)}</span>
+        ))}
       </div>
 
-      <div className={estilos.barra} aria-hidden>
-        <span className={estilos.jugado} style={{ width: `${pJugado}%` }} />
-        <span className={estilos.restante} style={{ width: `${pRestante}%` }} />
+      <div className={estilos.pie}>
+        {juego.bloqueado && (
+          <p>
+            Te {juego.faltaParaDesbloquear === 1 ? "falta 1 punto" : `faltan ${juego.faltaParaDesbloquear} puntos`} para tu meta: ahí se desbloquea.
+          </p>
+        )}
+        {notas.map((n) => (
+          <p key={n.texto} data-tipo={n.tipo}>
+            {n.texto}
+          </p>
+        ))}
+        {/* Día pesado: una línea corta; la explicación completa va en title */}
+        {meta && !meta.cumplio && !meta.pausa && (
+          <p title={ayudaSalvar}>
+            {ES_MOVIL ? (
+              <Link to="/leccion?modo=rapida" aria-label={`Solo 10 minutos. ${ayudaSalvar}`}>
+                Día pesado: solo 10 minutos{cuenta} →
+              </Link>
+            ) : (
+              <>Día pesado: haz algo corto y salvas la racha{cuenta}</>
+            )}
+          </p>
+        )}
+        {jefe && (
+          <p>
+            +45 min si vences al jefe de la semana: <Link to={`/practicar/${jefe.id}`}>{jefe.titulo}</Link>
+          </p>
+        )}
       </div>
-
-      <ul className={estilos.notas}>
-        {juego.jugado > 0 && <li>Jugaste {horas(juego.jugado)} hoy.</li>}
-        {juego.deuda > 0 && <li>Deuda de ayer: {horas(juego.deuda)} (se descuenta de lo que ganes).</li>}
-        {juego.exceso > 0 && <li data-tipo="error">Te pasaste {horas(juego.exceso)}: mañana se descuenta.</li>}
-        {juego.mitad && <li data-tipo="aviso">Ayer no cumpliste tu meta: hoy ganas la mitad.</li>}
-        {juego.finDeSemanaLargo && <li data-tipo="exito">Semana perfecta: hoy el tope sube a {horas(juego.tope)}.</li>}
-      </ul>
-
-      {/* Día pesado: una línea corta; la explicación completa va en title */}
-      {meta && !meta.cumplio && !meta.pausa && (
-        <div className={estilos.salvar} title={ayudaSalvar}>
-          {ES_MOVIL ? (
-            <Link to="/leccion?modo=rapida" className="boton" aria-label={`Solo 10 minutos. ${ayudaSalvar}`}>
-              Solo 10 minutos{cuenta}
-            </Link>
-          ) : (
-            <span>Día pesado: haz algo corto y salvas la racha{cuenta}</span>
-          )}
-        </div>
-      )}
-
-      {jefe && (
-        <Link to={`/practicar/${jefe.id}`} className={estilos.jefe}>
-          <span>
-<IconoTrofeo tamano={16} /> Jefe de la semana · +45 min</span>
-          <strong>{jefe.titulo} →</strong>
-        </Link>
-      )}
-    </div>
+    </section>
   );
 }

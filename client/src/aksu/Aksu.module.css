@@ -615,6 +615,93 @@
   margin-top: auto;
 }
 
+/* La ficha de Aksu: una terminal */
+.terminal {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 200px;
+  overflow: hidden;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-lg);
+  background: var(--hundido);
+  font-family: var(--fuente-codigo);
+}
+
+.terminal header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--borde);
+  color: var(--texto-tenue);
+  font-size: var(--letra-1);
+}
+
+.terminal header i {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--texto-tenue);
+  border-radius: 50%;
+}
+
+.terminal header i[data-encendido] {
+  border-color: var(--acento);
+  background: var(--acento);
+}
+
+.terminal header span {
+  margin-left: var(--espacio-2);
+}
+
+.terminal p {
+  display: -webkit-box;
+  margin: 0;
+  padding: var(--espacio-4) var(--espacio-4) 0;
+  overflow: hidden;
+  color: var(--texto);
+  font-size: var(--letra-3);
+  line-height: 1.6;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+}
+
+.terminal p b {
+  color: var(--texto-tenue);
+  font-weight: var(--peso-normal);
+}
+
+.cursorTerminal {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  margin-left: 6px;
+  background: var(--acento);
+  box-shadow: var(--brillo-suave);
+  vertical-align: -2px;
+  animation: pulso 1.1s steps(1) infinite;
+}
+
+.terminal button {
+  height: 44px;
+  margin: auto var(--espacio-4) var(--espacio-4);
+  border: 1px solid var(--borde-fuerte);
+  border-radius: var(--radio-sm);
+  background: none;
+  color: var(--texto);
+  font: inherit;
+  font-size: var(--letra-3);
+  cursor: pointer;
+}
+
+.terminal button:hover {
+  background: var(--velo-2);
+}
+
+.terminal p + button {
+  margin-top: var(--espacio-4);
+}
+
 /* Mandos nuevos del panel */
 .franja {
   padding: 4px var(--espacio-2);

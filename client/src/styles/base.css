@@ -77,8 +77,8 @@ option {
   height: 36px;
   padding: 0 14px;
   border: 1px solid var(--borde-fuerte);
-  border-radius: var(--radio);
-  background: var(--superficie-2);
+  border-radius: var(--radio-md);
+  background: var(--velo);
   color: var(--texto);
   font-weight: var(--peso-medio);
   font-size: var(--letra-4);
@@ -91,7 +91,7 @@ option {
 }
 
 .boton:hover:not(:disabled) {
-  background: var(--superficie-3);
+  background: var(--velo-2);
 }
 
 /* Con el dedo, todo botón mide al menos 44 px de alto */
@@ -121,6 +121,8 @@ option {
   background: var(--boton-principal);
   border-color: var(--boton-principal);
   color: var(--sobre-boton-principal);
+  font-weight: var(--peso-semi);
+  box-shadow: var(--brillo);
 }
 
 .boton-primario:hover:not(:disabled) {
@@ -166,12 +168,10 @@ option {
 
 .tarjeta-protagonista {
   --tinte: var(--color-area, var(--acento));
-  border: 1px solid color-mix(in srgb, var(--tinte) 32%, var(--borde));
+  border: 1px solid color-mix(in srgb, var(--tinte) 28%, transparent);
   border-radius: var(--radio-xl);
-  background:
-    radial-gradient(120% 150% at 0% 0%, color-mix(in srgb, var(--tinte) 14%, transparent), transparent 62%),
-    var(--superficie);
-  box-shadow: var(--brillo-borde), var(--sombra-2);
+  background: var(--degradado-protagonista) var(--superficie);
+  box-shadow: var(--brillo-tarjeta);
 }
 
 .tarjeta-silenciosa {
@@ -195,10 +195,17 @@ option {
   border-radius: var(--radio-pildora);
   background: var(--superficie-2);
   color: var(--texto-suave);
-  font-size: var(--letra-2);
-  font-weight: var(--peso-semi);
-  line-height: 1.5;
+  font-family: var(--fuente-codigo);
+  font-size: var(--letra-1);
+  font-weight: var(--peso-medio);
+  letter-spacing: 0.04em;
+  line-height: 1.6;
   white-space: nowrap;
+}
+
+/* Lo correcto: blanco brillante (no verde) */
+.chip[data-tono="exito"] {
+  box-shadow: var(--brillo-suave);
 }
 
 .chip[data-tono="acento"] {
@@ -228,25 +235,27 @@ option {
 
 /* Etiqueta en mayúsculas que encabeza un bloque ("TU PLAN DE HOY") */
 .etiqueta {
-  font-size: var(--letra-2);
-  font-weight: var(--peso-semi);
-  letter-spacing: 0.08em;
+  font-family: var(--fuente-codigo);
+  font-size: var(--letra-1);
+  font-weight: var(--peso-normal);
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--texto-tenue);
 }
 
-/* Colores del resaltado de código (highlight.js) */
+/* Resaltado de código (highlight.js): sin colores, se distingue por brillo, peso y cursiva */
 .hljs-keyword,
 .hljs-built_in,
 .hljs-literal {
-  color: #c4b5fd;
+  color: var(--codigo-clave);
+  font-weight: var(--peso-semi);
 }
 .hljs-string,
 .hljs-regexp {
-  color: #a7e3b8;
+  color: var(--codigo-texto);
 }
 .hljs-number {
-  color: #f5c08a;
+  color: var(--codigo-numero);
 }
 .hljs-comment {
   color: var(--texto-tenue);
@@ -254,99 +263,24 @@ option {
 }
 .hljs-title,
 .hljs-title.function_ {
-  color: #93c5fd;
+  color: var(--codigo-nombre);
+  font-weight: var(--peso-medio);
 }
 .hljs-attr,
 .hljs-property,
 .hljs-variable {
-  color: #8fdcd0;
+  color: var(--codigo-propiedad);
 }
 .hljs-tag,
 .hljs-name {
-  color: #f9a8b8;
+  color: var(--codigo-clave);
 }
 
-:root[data-tema="claro"] .hljs-keyword,
-:root[data-tema="claro"] .hljs-built_in,
-:root[data-tema="claro"] .hljs-literal {
-  color: #6d28d9;
-}
-:root[data-tema="claro"] .hljs-string,
-:root[data-tema="claro"] .hljs-regexp {
-  color: #15803d;
-}
-:root[data-tema="claro"] .hljs-number {
-  color: #c2410c;
-}
-:root[data-tema="claro"] .hljs-title,
-:root[data-tema="claro"] .hljs-title.function_ {
-  color: #1d4ed8;
-}
-:root[data-tema="claro"] .hljs-attr,
-:root[data-tema="claro"] .hljs-property,
-:root[data-tema="claro"] .hljs-variable {
-  color: #0f766e;
-}
-:root[data-tema="claro"] .hljs-tag,
-:root[data-tema="claro"] .hljs-name {
-  color: #be123c;
-}
-
-/* Color de cada área de Practicar: amarillo JavaScript, verde Algoritmos, celeste React.
-   Se usa con data-area="..." en el contenedor y var(--color-area) dentro. */
+/* Las áreas (JavaScript, React, inglés...) ya no tienen color propio: se distinguen por su ícono y
+   su etiqueta. Las variables siguen existiendo para que nada se rompa, pero todas valen lo mismo. */
 [data-area] {
   --color-area: var(--acento);
   --color-area-suave: var(--acento-suave);
-}
-
-[data-area="javascript"] {
-  --color-area: #f0d25a;
-  --color-area-suave: rgb(240 210 90 / 0.1);
-}
-
-[data-area="algoritmos"] {
-  --color-area: var(--exito);
-  --color-area-suave: var(--exito-suave);
-}
-
-[data-area="react"] {
-  --color-area: #61dafb;
-  --color-area-suave: rgb(97 218 251 / 0.1);
-}
-
-[data-area="typescript"] {
-  --color-area: #5b9df0;
-  --color-area-suave: rgb(91 157 240 / 0.11);
-}
-
-[data-area="ingles"] {
-  --color-area: #ff8a6b;
-  --color-area-suave: rgb(255 138 107 / 0.1);
-}
-
-:root[data-tema="claro"] [data-area="ingles"] {
-  --color-area: #c2410c;
-}
-
-[data-area="node"] {
-  --color-area: #9bd16a;
-  --color-area-suave: rgb(155 209 106 / 0.1);
-}
-
-:root[data-tema="claro"] [data-area="typescript"] {
-  --color-area: #2f6fc4;
-}
-
-:root[data-tema="claro"] [data-area="node"] {
-  --color-area: #4d8a1f;
-}
-
-:root[data-tema="claro"] [data-area="javascript"] {
-  --color-area: #b08900;
-}
-
-:root[data-tema="claro"] [data-area="react"] {
-  --color-area: #0e7490;
 }
 
 /* ---------- Transición entre pantallas (View Transitions del navegador) ----------

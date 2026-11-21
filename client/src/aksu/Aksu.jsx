@@ -336,7 +336,7 @@ function Mensaje({ m, alIr }) {
   );
 }
 
-const medidas = () => ({ ancho: window.innerWidth, alto: window.innerHeight, izquierda: window.innerWidth >= 900 ? 250 : 0 });
+const medidas = () => ({ ancho: window.innerWidth, alto: window.innerHeight, izquierda: window.innerWidth >= 900 ? 80 : 0 });
 const quieto = () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
 /**
@@ -761,28 +761,30 @@ export function Aksu() {
   );
 }
 
-/** Lo último que dijo Aksu, como ficha (va en el plan y en Hoy). */
-export function FichaAksu() {
+/** Lo último que dijo Aksu, como una terminal (va en Hoy y en el plan). */
+export function FichaAksu({ nombre }) {
   const e = useAksu();
   const ultimo = e.mensajes.findLast?.((m) => m.de !== "yo");
+  const tu = (nombre || "tú").split(" ")[0].toLowerCase();
   return (
-    <section className={`tarjeta ${estilos.ficha}`}>
+    <section className={estilos.terminal}>
       <header>
-        <span className="etiqueta">{NOMBRE}</span>
-        <small>{NOMBRE_NIVEL[e.nivel]}</small>
+        <i />
+        <i />
+        <i data-encendido />
+        <span>
+          {NOMBRE.toLowerCase()} · {e.pensando ? "pensando" : NOMBRE_NIVEL[e.nivel].toLowerCase()}
+        </span>
       </header>
-      {ultimo ? (
-        <>
-          <p className={estilos.fichaTexto}>{ultimo.texto}</p>
-          {ultimo.pregunta && <p className={estilos.suPregunta}>{ultimo.pregunta}</p>}
-        </>
-      ) : (
-        <p className={estilos.fichaTexto} data-suave>
-          {e.pensando ? "Mirando tu plan..." : "Te acompaño mientras estudias: te digo qué sigue, te destrabo y te pregunto como en una entrevista."}
-        </p>
-      )}
-      <button type="button" className="boton" onClick={() => abrir()}>
-        Hablar con {NOMBRE}
+      <p>
+        <b>{NOMBRE.toLowerCase()} &gt;</b>{" "}
+        {ultimo ? [ultimo.texto, ultimo.pregunta].filter(Boolean).join(" ") : e.pensando ? "Mirando tu plan..." : "Te acompaño mientras estudias: te digo qué sigue, te destrabo y te pregunto como en una entrevista."}
+        <br />
+        <b>{tu} &gt;</b>
+        <span className={estilos.cursorTerminal} aria-hidden />
+      </p>
+      <button type="button" onClick={() => abrir()}>
+        Responder ↵
       </button>
     </section>
   );

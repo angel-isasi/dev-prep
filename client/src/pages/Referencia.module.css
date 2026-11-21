@@ -69,11 +69,11 @@
 }
 
 .entrada[data-categoria="React"] {
-  --color-cat: #61dafb;
+  --color-cat: var(--acento);
 }
 
 :global(:root[data-tema="claro"]) .entrada[data-categoria="React"] {
-  --color-cat: #0e7490;
+  --color-cat: var(--acento);
 }
 
 .entrada header {

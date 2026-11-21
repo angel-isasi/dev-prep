@@ -17,6 +17,8 @@ import { CuantoAvance, DiaEnNumeros, PlanSemana } from "../components/Avance.jsx
 import { Ruta, useRuta } from "../components/Ruta.jsx";
 import { ContenidoPestanas, Pestanas } from "../components/Pestanas.jsx";
 import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
+import { PlanHoy, usePlan } from "../components/plan/Plan.jsx";
+import { TutorHoy } from "../components/ia/TutorHoy.jsx";
 import estilos from "./Progreso.module.css";
 
 const DIAS = ["L", "", "M", "", "V", "", "D"];
@@ -54,6 +56,7 @@ export function Progreso() {
   const { mapa, errores } = useMapaDominio();
   const ruta = useRuta();
   const [pestana, setPestana] = usePestanaUrl(ORDEN);
+  const [plan, recargarPlan] = usePlan();
 
   useEffect(() => {
     api.progreso().then(setDatos, (e) => setError(e.message));
@@ -261,6 +264,9 @@ export function Progreso() {
         {/* Plan: qué hacer esta semana, el mes, tu nivel y si ya conviene postular */}
         {pestana === "plan" && (
           <div className={estilos.cuerpo}>
+            {/* Tu plan junior de 15 días y el tutor de la semana (antes estaban en Hoy) */}
+            <PlanHoy plan={plan} recargar={recargarPlan} />
+            {!plan?.activo && <TutorHoy hoy={new Date().toLocaleDateString("sv")} semana={semana} />}
             <div className={estilos.fila}>
               {api.planSemana && (
                 <div className={estilos.hueco}>

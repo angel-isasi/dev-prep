@@ -84,8 +84,8 @@ const pwa = () =>
       scope: "/",
       display: "standalone",
       orientation: "portrait",
-      background_color: "#07070a",
-      theme_color: "#07070a",
+      background_color: "#060606",
+      theme_color: "#060606",
       icons: [
         { src: "pwa-64x64.png", sizes: "64x64", type: "image/png" },
         { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
