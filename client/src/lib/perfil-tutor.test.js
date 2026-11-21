@@ -8,7 +8,7 @@ describe("memoria del tutor", () => {
         unidades: [
           { titulo: "Closures", estado: "rojo", valor: 0.2 },
           { titulo: "Arrays", estado: "verde", valor: 0.9 },
-          { titulo: "React", estado: "sin-empezar", valor: 0 },
+          { titulo: "Hooks", estado: "sin-empezar", valor: 0 },
         ],
       },
       errores: [{ nombre: "Devuelve undefined", veces: 4 }],
@@ -17,7 +17,7 @@ describe("memoria del tutor", () => {
     });
     expect(texto).toContain("Temas flojos: Closures");
     expect(texto).toContain("Temas que ya domina: Arrays");
-    expect(texto).not.toContain("React");
+    expect(texto).not.toContain("Hooks");
     expect(texto).toContain("Devuelve undefined (4)");
     expect(texto).toContain("I am 20 years old");
     expect(texto).toContain("dev-prep");

@@ -32,7 +32,7 @@ export const LIMITES = {
   respuestaItem: 1500,
   notas: 1500,
   codigo: 8000,
-  perfil: 1500,
+  perfil: 3000,
   enunciado: 4000,
   escenario: 800,
   turnos: 30,

@@ -12,6 +12,7 @@ import { preparacion } from "../../../server/metricas.js";
 import { crearProgresoMovil } from "./progreso-movil.js";
 import { mapaDominio, unidadesDebiles } from "../../../server/dominio.js";
 import { erroresFrecuentes } from "../../../server/errores.js";
+import { tropiezosDe } from "../../../server/tropiezos.js";
 import { MAZOS, calificar as calificarTarjetaFsrs, colaDeHoy } from "../../../server/tarjetas-reglas.js";
 import { calcularLogros, semaforoPostular } from "../../../server/logros.js";
 import { analizarOferta, palabrasParaCv } from "../../../server/ofertas.js";
@@ -477,6 +478,21 @@ const apiWeb = {
   },
   /** Tus errores más comunes al correr los tests (los cuenta la laptop y llegan al sincronizar). */
   erroresFrecuentes: async () => erroresFrecuentes(progreso.dias()).slice(0, 5),
+  /** Tus tropiezos en toda la app (lecciones, quizzes, preguntas de entrevista, soluciones vistas), para la IA. */
+  async tropiezos() {
+    const [datosItems, ent, { ejercicios }] = await Promise.all([json("items.json"), json("entrevistas.json"), indice()]);
+    const d = progreso.datos();
+    const titulo = Object.fromEntries((datosItems.unidades ?? []).map((u) => [u.id, u.titulo]));
+    return tropiezosDe({
+      items: datosItems.items ?? [],
+      registrosItems: d.items ?? {},
+      titulo,
+      preguntas: ent.preguntas ?? [],
+      registrosPreguntas: d.preguntas ?? {},
+      quizzes: d.quizzes ?? {},
+      vistas: ejercicios.filter((e) => (d.lecturas?.[e.id]?.vioSolucion || d.ejercicios?.[e.id]?.vioSolucion) && d.ejercicios?.[e.id]?.estado !== "resuelto").map((e) => e.titulo),
+    });
+  },
   glosario: () => json("glosario.json"),
   revision: () => json("revision.json"),
   revisionesHechas: async () => progreso.registros("revisiones"),
