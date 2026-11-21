@@ -51,10 +51,46 @@
   overflow: visible;
 }
 
-/* La figura con su fondo: detrás, el humo gris (más grande que ella) */
+/* La figura suelta: su caja mide lo de siempre, pero el dibujo (con su cielo) la desborda */
 .marco {
   position: relative;
   display: block;
+}
+
+.lienzo {
+  position: absolute;
+  top: 46%;
+  left: -50%;
+  width: 200%;
+  aspect-ratio: 354 / 366;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.flotante {
+  position: absolute;
+  inset: 0;
+  animation: flotar 4.6s ease-in-out infinite;
+}
+
+.trazo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Los bordes del dibujo se funden con la app */
+.fundido {
+  -webkit-mask-image: radial-gradient(ellipse 54% 56% at 50% 54%, #000 72%, transparent 100%);
+  mask-image: radial-gradient(ellipse 54% 56% at 50% 54%, #000 72%, transparent 100%);
+  opacity: 0.94;
+  transition: opacity 0.4s ease;
+}
+
+[data-cerca] .fundido {
+  opacity: 1;
 }
 
 .nebulosa {
@@ -220,7 +256,7 @@
 }
 
 .resplandor {
-  opacity: 0.5;
+  opacity: 0.22;
   animation: respirar 5s ease-in-out infinite;
   pointer-events: none;
 }
@@ -234,13 +270,13 @@
 [data-cerca] .resplandor,
 [data-estado="hablando"] .resplandor,
 [data-estado="pensando"] .resplandor {
-  opacity: 1;
+  opacity: 0.6;
   animation-duration: 1.6s;
 }
 
 /* Los ojos siguen al cursor */
 .ojos {
-  transform: translate(calc(var(--mx, 0) * 1px), calc(var(--my, 0) * 1px));
+  transform: translate(calc(var(--mx, 0) * 2.6px), calc(var(--my, 0) * 2.6px));
   transition: transform 0.18s ease-out;
 }
 
@@ -300,11 +336,11 @@
   }
   44%,
   50% {
-    transform: translateX(-0.9px);
+    transform: translateX(-2.4px);
   }
   54%,
   58% {
-    transform: translateX(0.9px);
+    transform: translateX(2.4px);
   }
 }
 
@@ -316,6 +352,7 @@
 
 .libro {
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .libro:hover {
@@ -1070,6 +1107,7 @@
     width: 50px;
     height: 56px;
   }
+  .flotante,
   .nebulosa,
   .cuerpoFigura,
   .humo ellipse {
@@ -1099,6 +1137,8 @@
   }
   .figura,
   .figura *,
+  .trazo *,
+  .flotante,
   .nebulosa,
   .cuerpo2 {
     animation: none !important;
