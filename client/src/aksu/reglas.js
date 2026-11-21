@@ -179,7 +179,7 @@ export const MODELOS = ["haiku", "sonnet", "opus"];
 export const subirA = (pedido, actual) => (MODELOS.indexOf(pedido) > MODELOS.indexOf(actual) ? pedido : null);
 
 // ---------- Moverse por la pantalla ----------
-export const FIGURA = { ancho: 84, alto: 114, margen: 18 };
+export const FIGURA = { ancho: 84, alto: 94, margen: 18 };
 /**
  * Paradas posibles: puntos sobre los bordes derecho e inferior y la esquina de arriba (nunca sobre el
  * menú de la izquierda ni en el centro, donde está lo que lees).

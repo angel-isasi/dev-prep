@@ -5,16 +5,18 @@ import estilos from "./Aksu.module.css";
 
 /**
  * @param {object} p
- * @param {number} [p.tamano]  ancho en píxeles (el alto sale de la proporción 68 × 92)
+ * @param {number} [p.tamano]  ancho en píxeles (el alto sale de la proporción 68 × 76)
  * @param {string} [p.estado]
  */
 export function Figura({ tamano = 84, estado = "atento" }) {
   return (
-    <svg className={estilos.figura} data-estado={estado} width={tamano} height={(tamano * 92) / 68} viewBox="0 0 68 92" aria-hidden focusable="false">
+    <svg className={estilos.figura} data-estado={estado} width={tamano} height={(tamano * 76) / 68} viewBox="0 16 68 76" aria-hidden focusable="false">
       {/* Túnica: hombros rectos y caída en líneas, sin curvas */}
       <path d="M11 86 L6.5 61 L15.5 51 L27 46.5 L34 53 L41 46.5 L52.5 51 L61.5 61 L57 86 Z" fill="#141417" stroke="#565660" strokeWidth="1" strokeLinejoin="miter" />
       <path d="M27 46.5 L34 60 L41 46.5" fill="#09090b" stroke="#3a3a42" strokeWidth="0.8" />
       <path d="M19.5 53 L16.5 86 M24 56 L23 86 M48.5 53 L51.5 86 M44 56 L45 86 M15.5 51 L11.5 64 M52.5 51 L56.5 64" stroke="#2b2b31" strokeWidth="0.8" fill="none" />
+      {/* Cabeza (pelo y máscara), en proporción con los hombros */}
+      <g transform="translate(34 46) scale(0.8 0.68) translate(-34 -46)">
       {/* Pelo largo, lacio y oscuro, que cae sobre los hombros */}
       <path d="M34 6 C26.5 6 21.5 11 21.2 18.5 L18.5 51 L22 56.5 L24.5 50 L26.5 55 L28.6 45.5 L39.4 45.5 L41.5 55 L43.5 50 L46 56.5 L49.5 51 L46.8 18.5 C46.5 11 41.5 6 34 6 Z" fill="#0c0c0f" stroke="#4d4d57" strokeWidth="0.9" strokeLinejoin="miter" />
       <path d="M24 17 L21.5 49 M26.2 22 L24.8 47 M44 17 L46.5 49 M41.8 22 L43.2 47 M30 8 L27.5 13 M38 8 L40.5 13 M34 6.5 V10" stroke="#2f2f36" strokeWidth="0.7" fill="none" />
@@ -40,6 +42,7 @@ export function Figura({ tamano = 84, estado = "atento" }) {
       {/* Boca cerrada y cosida */}
       <path d="M29.8 38.1 C32 37.2 36 37.2 38.2 38.1" stroke="#08080a" strokeWidth="0.9" fill="none" strokeLinecap="round" />
       <path d="M31.2 36.6 V39.3 M33.1 36.3 V39.1 M34.9 36.3 V39.1 M36.8 36.6 V39.3" stroke="#08080a" strokeWidth="0.6" />
+      </g>
       {/* El libro: viejo y gastado, abierto en perspectiva. Se toca para abrir lo que ha anotado */}
       <g data-libro className={estilos.libro}>
         {/* Tapa y lomo de hojas */}

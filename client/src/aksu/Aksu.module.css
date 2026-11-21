@@ -343,7 +343,7 @@
   display: grid;
   place-items: center;
   width: 36px;
-  height: 44px;
+  height: 36px;
 }
 
 .enlace {
@@ -765,8 +765,8 @@
     transition: none;
   }
   .suelta .figura {
-    width: 46px;
-    height: 62px;
+    width: 50px;
+    height: 56px;
   }
   .junto {
     right: calc(100% + 8px) !important;
