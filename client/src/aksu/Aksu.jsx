@@ -15,7 +15,7 @@ import {
 } from "./reglas.js";
 import {
   abrir, cambiar, cargarVocesLocales, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, NOMBRE, NOMBRE_DESTINO, olvidarPlan, palabraDeIngles, pedirAvisos, pensar, planActual,
-  probarVoz, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
+  probarVoz, probarVozIngles, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
 } from "./aksu.js";
 import { Figura } from "./Figura.jsx";
 import estilos from "./Aksu.module.css";
@@ -776,6 +776,10 @@ export function Aksu() {
           </select>
           <button type="button" className={estilos.interruptor} onClick={probarVoz}>
             Probar
+          </button>
+          {/* La voz en inglés no se elige: si la laptop tiene una neuronal en inglés, usa esa */}
+          <button type="button" className={estilos.interruptor} onClick={probarVozIngles} title="Con esta voz dice las palabras de inglés y responde cuando le hablas en inglés">
+            Probar inglés{e.vocesLocales.some((v) => v.startsWith("en_")) ? ` (neuronal: ${e.vocesLocales.find((v) => v.startsWith("en_")).split("-")[1]})` : " (voz del navegador)"}
           </button>
         </div>
       )}

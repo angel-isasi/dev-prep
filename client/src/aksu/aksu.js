@@ -329,6 +329,18 @@ async function codigoActual() {
   return (await api.miCodigo(id).catch(() => null))?.codigo ?? "";
 }
 
+/** ¿El texto está en inglés? Para leerlo con la voz en inglés aunque nadie lo haya pedido de antemano. */
+export function pareceIngles(texto) {
+  const t = ` ${String(texto ?? "").toLowerCase()} `;
+  const cuenta = (re) => (t.match(re) ?? []).length;
+  const en = cuenta(/[^a-záéíóúñ](the|you|your|is|are|and|this|that|what|how|with|it|to|of|for|can|do|not)(?=[^a-záéíóúñ])/g);
+  const es = cuenta(/[^a-záéíóúñ](el|la|los|las|que|de|en|un|una|es|por|con|tu|no|se|lo|y)(?=[^a-záéíóúñ])/g) + cuenta(/[áéíóúñ¿¡]/g);
+  return en >= 2 && en > es * 2;
+}
+
+/** Dice una frase de muestra en inglés con la voz que toque (el botón Probar inglés). */
+export const probarVozIngles = () => vocesListas().then(() => enVozAlta("I am Aksu. You solved three exercises today, and two of them by looking at the answer. That does not count.", "en"));
+
 let enCurso = false;
 /**
  * Le pide a la IA qué decir y lo dice. Siempre lee primero el modelo rápido, con todo el contexto y el
@@ -367,7 +379,7 @@ export async function pensar({ momento = "", pregunta = "", tipo = "", ingles = 
     }
     if (!r?.mensaje) return null;
     if (r.nota) cambiar((e) => ({ cuaderno: anotar(e.cuaderno, r.nota, e.dia.fecha) }));
-    hablar({ texto: r.mensaje, pregunta: r.pregunta, destino: r.destino, tipo, ingles: enIngles, ir, frente });
+    hablar({ texto: r.mensaje, pregunta: r.pregunta, destino: r.destino, tipo, ingles: enIngles || pareceIngles(`${r.mensaje} ${r.pregunta ?? ""}`), ir, frente });
     return r;
   } catch (e) {
     if (pregunta) hablar({ texto: e.message ?? "No pude responder. Inténtalo otra vez." });
