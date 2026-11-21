@@ -145,9 +145,10 @@ export function decir(texto, { idioma = "es", grave = false, alTerminar } = {}) 
   const frase = new SpeechSynthesisUtterance(texto);
   frase.voice = voz;
   frase.lang = voz.lang;
-  frase.rate = grave ? 0.86 : 1;
-  // El tono va de 0 a 2 (1 es el normal): lo más bajo que suena natural
-  if (grave) frase.pitch = 0.1;
+  frase.rate = grave ? 0.92 : 1;
+  // El tono va de 0 a 2 (1 es el normal). Muy bajo deforma la voz: con una de hombre basta bajarla un poco,
+  // y una de mujer se deja casi igual (bajarla mucho suena artificial)
+  if (grave) frase.pitch = DE_HOMBRE.test(voz.name) ? 0.7 : 0.9;
   frase.onend = terminar;
   frase.onerror = terminar;
   // Tope por si el final nunca llega: unas 2,5 palabras por segundo, más un margen
