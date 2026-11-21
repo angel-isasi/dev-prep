@@ -146,7 +146,7 @@ function enVozAlta(texto, idioma) {
   const quiereLocal = vozNombre.startsWith(LOCAL) || vozNombre === "";
   if (idioma !== "es" || !vocesLocales.length || !quiereLocal) return delNavegador();
   const pedida = vozNombre.slice(LOCAL.length);
-  const voz = vocesLocales.includes(pedida) ? pedida : (vocesLocales.find((v) => /es_MX/.test(v)) ?? vocesLocales[0]);
+  const voz = vocesLocales.includes(pedida) ? pedida : (vocesLocales.find((v) => /davefx/.test(v)) ?? vocesLocales[0]);
   callar();
   decirLocal(texto, { voz, tono: vozTono }).catch(delNavegador);
 }
