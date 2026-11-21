@@ -4,7 +4,7 @@
 import { api } from "../lib/api.js";
 import { claveIa, estadoIa, pedirIa, topeIa, ultimoModeloIa, usoIa } from "../lib/ia.js";
 import { almacen } from "../lib/visita.js";
-import { callar, decir, dictar, hayVozEn, microDisponible } from "../lib/voz.js";
+import { callar, decir, dictar, hayVozEn, microDisponible, vocesListas } from "../lib/voz.js";
 import { cargarPlan } from "../lib/plan-junior.js";
 import {
   anotar, bloqueActivo, BLOQUE_MIN, diaNuevo, enFranjaIngles, enSilencio, guardarVeredicto, marcarHecho, NIVELES, notaDelDia, PREGUNTAS_ENTREVISTA, restanteBloque, subirA, TEXTOS,
@@ -29,7 +29,7 @@ function leer() {
   }
   const fecha = hoyLocal();
   const base = {
-    nivel: "normal", voz: false, avisos: false, cuaderno: [], veredictos: [], informe: null, mensajes: [], franjaIngles: null, silencioHasta: 0, bloque: null,
+    nivel: "normal", voz: false, avisos: false, cuaderno: [], veredictos: [], informe: null, mensajes: [], franjaIngles: null, silencioHasta: 0, bloque: null, vozNombre: "", vozTono: 0.7,
     dia: diaNuevo(fecha, Date.now()),
     ...(g ?? {}),
   };
@@ -117,7 +117,7 @@ export function hablar(m) {
   }));
   const completo = [texto, mensaje.pregunta].filter(Boolean).join(" ");
   const idioma = m.ingles ? "en" : "es";
-  if (estado.voz && hayVozEn(idioma)) decir(completo, { idioma, grave: true });
+  if (estado.voz && hayVozEn(idioma)) decir(completo, { idioma, grave: true, voz: estado.vozNombre, tono: estado.vozTono });
   if (estado.avisos && document.visibilityState !== "visible" && globalThis.Notification?.permission === "granted") {
     try {
       new Notification(NOMBRE, { body: completo.slice(0, 220), tag: "aksu" });
@@ -127,6 +127,8 @@ export function hablar(m) {
   }
 }
 export const silencio = () => callar();
+/** Dice una frase de muestra con la voz y el tono elegidos (el botón Probar). */
+export const probarVoz = () => vocesListas().then(() => decir("Soy Aksu. Llevas tres ejercicios hoy. Sigue.", { grave: true, voz: estado.vozNombre, tono: estado.vozTono }));
 
 // ---------- Hablarle por voz (Ctrl + Espacio) ----------
 let sesionVoz = null;

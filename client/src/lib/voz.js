@@ -113,6 +113,15 @@ function vozGrave() {
   const lista = voces().filter((v) => /^es[-_]/i.test(v.lang) && DE_HOMBRE.test(v.name));
   return lista.find((v) => /es[-_](PE|MX|US|419|CO|CL|AR)/i.test(v.lang)) ?? lista[0] ?? vozEspanol();
 }
+/** Las voces en español de este dispositivo, las de hombre primero: [{ nombre, idioma, hombre }]. */
+export const vocesEnEspanol = () =>
+  voces()
+    .filter((v) => /^es[-_]/i.test(v.lang))
+    .map((v) => ({ nombre: v.name, idioma: v.lang, hombre: DE_HOMBRE.test(v.name) }))
+    .sort((a, b) => Number(b.hombre) - Number(a.hombre));
+/** El nombre de la voz que se usaría sola para la voz grave (o null). */
+export const nombreVozGrave = () => vozGrave()?.name ?? null;
+
 /** ¿Este dispositivo tiene una voz de hombre en español? (si no, la grave es la de siempre con el tono bajo) */
 export const hayVozDeHombre = () => voces().some((v) => /^es[-_]/i.test(v.lang) && DE_HOMBRE.test(v.name));
 
@@ -123,12 +132,13 @@ export const hayVozEn = (idioma) => !!globalThis.speechSynthesis && !!(idioma ==
  * Dice un texto en español o en inglés y avisa al terminar (el entrevistador por voz). Avisa una
  * sola vez, también si no hay voz o si el navegador nunca dispara el final (pasa con textos largos).
  * @param {string} texto
- * @param {{ idioma?: "es"|"en", grave?: boolean, alTerminar?: () => void }} [opciones]  grave: voz de hombre, baja y lenta (Aksu)
+ * @param {{ idioma?: "es"|"en", grave?: boolean, voz?: string, tono?: number, alTerminar?: () => void }} [opciones]
+ *   grave: voz de hombre, baja y lenta (Aksu); voz: nombre exacto de la voz a usar; tono: de 0 a 2 (1 es el normal)
  * @returns {() => void} cancelar: calla y no avisa
  */
-export function decir(texto, { idioma = "es", grave = false, alTerminar } = {}) {
+export function decir(texto, { idioma = "es", grave = false, voz: elegida = "", tono = null, alTerminar } = {}) {
   const sintesis = globalThis.speechSynthesis;
-  const voz = idioma === "en" ? vozIngles() : grave ? vozGrave() : vozEspanol();
+  const voz = idioma === "en" ? vozIngles() : ((elegida && voces().find((v) => v.name === elegida)) || (grave ? vozGrave() : vozEspanol()));
   let pendiente = true;
   let reloj = null;
   const terminar = () => {
@@ -148,7 +158,8 @@ export function decir(texto, { idioma = "es", grave = false, alTerminar } = {}) 
   frase.rate = grave ? 0.92 : 1;
   // El tono va de 0 a 2 (1 es el normal). Muy bajo deforma la voz: con una de hombre basta bajarla un poco,
   // y una de mujer se deja casi igual (bajarla mucho suena artificial)
-  if (grave) frase.pitch = DE_HOMBRE.test(voz.name) ? 0.7 : 0.9;
+  if (tono !== null) frase.pitch = tono;
+  else if (grave) frase.pitch = DE_HOMBRE.test(voz.name) ? 0.7 : 0.9;
   frase.onend = terminar;
   frase.onerror = terminar;
   // Tope por si el final nunca llega: unas 2,5 palabras por segundo, más un margen

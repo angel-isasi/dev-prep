@@ -4,7 +4,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { api } from "../lib/api.js";
-import { dictar, microDisponible } from "../lib/voz.js";
+import { dictar, microDisponible, nombreVozGrave, useHayVoz, vocesEnEspanol } from "../lib/voz.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { IconoFlechaDer, IconoMicrofono } from "../components/Iconos.jsx";
 import {
@@ -14,13 +14,19 @@ import {
 } from "./reglas.js";
 import {
   abrir, cambiar, cerrar, cerrarDia, decirle, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, NOMBRE, NOMBRE_DESTINO, olvidarPlan, pedirAvisos, pensar, planActual,
-  puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
+  probarVoz, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
 } from "./aksu.js";
 import { Figura } from "./Figura.jsx";
 import estilos from "./Aksu.module.css";
 
 const useAksu = () => useSyncExternalStore(suscribir, verEstado);
 const aVeces = (nivel) => puede(nivel, "ingles") && Math.random() < 0.2;
+const TONOS = [
+  [1, "Tono normal"],
+  [0.7, "Grave"],
+  [0.4, "Más grave"],
+  [0.1, "Lo más grave"],
+];
 const FRANJAS = [
   ["", "Inglés: sin franja"],
   ["7-9", "Inglés de 7 a 9"],
@@ -526,6 +532,8 @@ export function Aksu() {
   const ahora = Date.now();
   const enBloque = bloqueActivo(e.bloque, ahora);
   const callado = enSilencio(e, ahora);
+  useHayVoz(); // vuelve a dibujar cuando el navegador termina de cargar sus voces
+  const vocesEs = vocesEnEspanol();
 
   useEffect(() => {
     if (e.abierto) fin.current?.scrollIntoView({ block: "end" });
@@ -666,6 +674,30 @@ export function Aksu() {
           {g.usd.toFixed(2)} / {g.tope} USD{g.modelo ? ` · ${g.modelo}` : ""}
         </small>
       </div>
+
+      {e.voz && (
+        <div className={estilos.ajustes}>
+          <select className={estilos.franja} value={e.vozNombre} aria-label="Voz de Aksu" onChange={(ev) => cambiar({ vozNombre: ev.target.value })}>
+            <option value="">Voz automática{nombreVozGrave() ? ` (${nombreVozGrave().replace(/^Microsoft | - .*$/g, "")})` : ""}</option>
+            {vocesEs.map((v) => (
+              <option key={v.nombre} value={v.nombre}>
+                {v.nombre.replace(/^Microsoft /, "")}
+                {v.hombre ? " · hombre" : ""}
+              </option>
+            ))}
+          </select>
+          <select className={estilos.franja} value={e.vozTono} aria-label="Tono de la voz" onChange={(ev) => cambiar({ vozTono: Number(ev.target.value) })}>
+            {TONOS.map(([v, t]) => (
+              <option key={v} value={v}>
+                {t}
+              </option>
+            ))}
+          </select>
+          <button type="button" className={estilos.interruptor} onClick={probarVoz}>
+            Probar
+          </button>
+        </div>
+      )}
 
       {e.entrevista && <RelojEntrevista entrevista={e.entrevista} />}
 
