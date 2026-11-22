@@ -30,7 +30,8 @@ import { contadoresDeLeccion, ligaSemanal, misionesDelDia, premioDeCofre, XP_COF
 import { COLECCION_EXTRA, extraDesdeRegistros, registrosDesdeViejo } from "../movil/ingles/extra.js";
 import { unidadTrasExamen } from "../movil/ingles/examen.js";
 import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaSemana } from "../../../server/avance.js";
-import { buscarOfertas, nuevasDesde, ordenarOfertas } from "../../../server/ofertas-auto.js";
+import { buscarOfertas, nuevasDesde, ordenarOfertas, sinRepetir } from "../../../server/ofertas-auto.js";
+import { ofertasDeCorreos } from "../../../server/ofertas-correo.js";
 import { CV_BASE_INICIAL, UMBRAL_CV_AUTO } from "../../../server/cv-oferta.js";
 import { conFechaDeEnvio, metaSemanal, numerosPostulaciones, seguimientosPendientes } from "../../../server/postulaciones.js";
 import { crearApiMapache } from "../movil/mapache/api-mapache.js";
@@ -48,6 +49,40 @@ navigator.storage?.persist?.().catch(() => {});
 const SECCION_MODELO = "Cómo explicarlo en la entrevista";
 
 /** Lee un JSON guardado en este dispositivo; un valor dañado cuenta como "no hay nada". */
+const CLAVE_CORREO = "devprep-ofertas-correo";
+
+/**
+ * Las ofertas de tus alertas de correo (LinkedIn, Glassdoor, Get on Board), a través del script de
+ * Google de tu cuenta. Se guardan una hora; sin conexión se usan las últimas.
+ * @returns {Promise<{ ofertas: object[], fuente: object|null }>}
+ */
+async function ofertasDelCorreo(nuevo) {
+  const { url, clave } = progreso.ajuste("correoOfertas", {});
+  if (!url || ES_VISITA) return { ofertas: [], fuente: null };
+  const guardada = leerJson(CLAVE_CORREO);
+  const fresca = guardada && Date.now() - Date.parse(guardada.buscadoEn) < 60 * 60 * 1000;
+  let correos = !nuevo && fresca ? guardada.correos : null;
+  let ok = true;
+  if (!correos) {
+    try {
+      const r = await fetch(`${url}?clave=${encodeURIComponent(clave ?? "")}`, { signal: AbortSignal.timeout(25_000) });
+      const datos = await r.json();
+      if (!Array.isArray(datos.correos)) throw new Error(datos.error ?? "respuesta rara");
+      correos = datos.correos;
+      try {
+        almacen.setItem(CLAVE_CORREO, JSON.stringify({ buscadoEn: new Date().toISOString(), correos }));
+      } catch {
+        // si no cabe en el almacenamiento, igual se usan esta vez
+      }
+    } catch {
+      ok = false;
+      correos = guardada?.correos ?? [];
+    }
+  }
+  const ofertas = ofertasDeCorreos(correos);
+  return { ofertas, fuente: { id: "correo", nombre: `tu correo (${ofertas.length})`, ok, cantidad: ofertas.length } };
+}
+
 function leerJson(clave) {
   try {
     return JSON.parse(almacen.getItem(clave) ?? "null");
@@ -810,6 +845,13 @@ const apiWeb = {
    * Con la laptop conectada usa las 4 fuentes; sin ella, las 3 que el navegador puede leer.
    * La última búsqueda queda en este dispositivo para verla sin internet.
    */
+  /** Conecta el script de Google que lee tus alertas de empleo del correo (ver scripts/apps-script-ofertas.gs). */
+  conectarCorreoOfertas: async ({ url, clave }) => {
+    progreso.cambiarAjuste("correoOfertas", { url: String(url).trim(), clave: String(clave).trim() });
+    almacen.removeItem(CLAVE_CORREO);
+  },
+  correoOfertasConectado: async () => !!progreso.ajuste("correoOfertas", {}).url,
+
   async ofertasParaTi({ nuevo = false } = {}) {
     const CLAVE = "devprep-ofertas";
     const guardada = leerJson(CLAVE);
@@ -830,7 +872,8 @@ const apiWeb = {
     const estado = await estadoLogros();
     const perfil = { mapa: unidades, ingles: { inglesDominadas: estado.inglesDominadas, inglesTotal: ingles.unidades.length }, hoy: progreso.hoy() };
     const yaGuardadas = new Set(Object.values(progreso.registros("postulaciones")).map((p) => p.enlace).filter(Boolean));
-    const ordenadas = ordenarOfertas(busqueda.ofertas ?? [], perfil, { limite: 300 });
+    const correo = await ofertasDelCorreo(nuevo);
+    const ordenadas = ordenarOfertas(sinRepetir([...(busqueda.ofertas ?? []), ...correo.ofertas]), perfil, { limite: 300 });
 
     // "Nuevas desde tu última visita": se compara con lo que había la vez anterior que abriste la app
     // (se lee una vez por visita, así guardar u ocultar no borra las marcas de "Nueva").
@@ -867,7 +910,7 @@ const apiWeb = {
         .filter(([id, m]) => m.estado === "guardada" && !enLista.has(id))
         .map(([id, m]) => ({ id, ...m })),
       cv,
-      fuentes: busqueda.fuentes ?? [],
+      fuentes: [...(busqueda.fuentes ?? []), ...(correo.fuente ? [correo.fuente] : [])],
       buscadoEn: busqueda.buscadoEn,
       sinConexion: !!busqueda.sinConexion,
       conLaptop: conectada(),

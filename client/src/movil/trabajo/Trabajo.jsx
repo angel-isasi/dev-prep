@@ -65,6 +65,14 @@ export function Trabajo() {
     );
   }, [params, setParams]);
 
+  // Conectar tus alertas de correo con un enlace (/trabajo#correo-ofertas=<url>|<clave>): se guarda y se borra
+  // de la barra de direcciones. Lo que va después de "#" nunca sale del navegador.
+  useEffect(() => {
+    const m = window.location.hash.match(/^#correo-ofertas=([^|]+)\|(.+)$/);
+    if (!m || !api.conectarCorreoOfertas) return;
+    api.conectarCorreoOfertas({ url: decodeURIComponent(m[1]), clave: decodeURIComponent(m[2]) }).then(() => window.location.replace("/trabajo"));
+  }, []);
+
   const [angosta] = useState(() => globalThis.matchMedia?.("(max-width: 1150px)").matches ?? false);
   const pestanas = [
     { id: "ofertas", texto: "Ofertas" },

@@ -153,8 +153,8 @@ export function OfertasParaTi() {
           <summary>De dónde salen estas ofertas</summary>
           Ofertas reales de Get on Board, Remotive, We Work Remotely, Himalayas, RemoteOK y Arbeitnow, ordenadas por cuánto te convienen: que
           sean de frontend, para junior, abiertas a Perú o Latinoamérica, con lo que ya dominas y recientes. Cada una dice qué tan confiable
-          es su bolsa y si tiene señales de estafa. LinkedIn y Computrabajo no permiten leerlas automáticamente: para esas, usa "¿Estoy
-          listo?".
+          es su bolsa y si tiene señales de estafa. Las de LinkedIn y Glassdoor salen de las alertas que te llegan al correo (etiqueta
+          "Ofertas de trabajo" de Gmail).
           {datos && (
             <small className={estilos.estado}>
               Buscado {hace(datos.buscadoEn)} en{" "}
