@@ -14,7 +14,7 @@ import estilos from "./EnunciadoOrganizado.module.css";
 // Secciones que, si el enunciado no tiene texto inicial, hacen de "qué tienes que hacer"
 // Secciones que amplían: se muestran cerradas, al final
 const PLEGADAS = /^(por qué importa|por qué funciona|errores comunes|otra forma|cómo explicarlo|conceptos|reto extra|pistas?( de diseño)?$|lo que se valora)/i;
-const palabras = (texto) => texto.trim().split(/s+/).filter(Boolean).length;
+const palabras = (texto) => texto.trim().split(/\s+/).filter(Boolean).length;
 
 /** Parte un texto en su primera oración (la idea) y el resto. Si no se puede partir limpio, todo es la idea. */
 export function ideaPrincipal(cuerpo) {

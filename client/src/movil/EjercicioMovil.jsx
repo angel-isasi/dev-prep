@@ -106,7 +106,7 @@ export function EjercicioMovil() {
 
       {pestana === "enunciado" && (
         <>
-          <EnunciadoOrganizado markdown={ej.enunciado} />
+          <EnunciadoOrganizado markdown={ej.enunciado} parejo />
           <p className={estilos.consejo}>
             Piensa cómo lo resolverías antes de mirar. Cuando tengas una idea, abre las pistas o la solución.
           </p>
