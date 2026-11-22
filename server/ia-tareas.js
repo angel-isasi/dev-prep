@@ -711,6 +711,49 @@ ${ESTILO}`,
       return unir(bloque("Su CV", cv), bloque("Oferta a la que apunta (opcional)", recortar(c.oferta, 2000)));
     },
   },
+
+  "cv-oferta": {
+    modelo: SONNET,
+    esquema: objeto({
+      puesto: texto("El puesto de la oferta, como lo escribe la empresa"),
+      empresa: texto("La empresa, o vacío si no se sabe"),
+      encaje: opcion(["alto", "medio", "bajo"]),
+      titular: texto("Una línea bajo su nombre, pensada para este puesto"),
+      perfil: texto("3 o 4 líneas"),
+      experiencia: lista(objeto({ puesto: texto(), lugar: texto(), periodo: texto(), puntos: lista() })),
+      proyectos: lista(objeto({ titulo: texto(), enlace: texto(), texto: texto() })),
+      educacion: lista(objeto({ titulo: texto(), periodo: texto(), detalle: texto() })),
+      habilidades: lista(objeto({ grupo: texto(), items: texto() })),
+      cursos: lista(),
+      idiomas: texto(),
+      palabras: lista(texto("Palabra clave de la oferta que quedó en el CV")),
+      faltan: lista(texto("Algo que la oferta pide y él no tiene, con qué hacer al respecto")),
+      cambios: lista(texto("Qué cambiaste del CV base y por qué")),
+      correo: objeto({ para: texto(), asunto: texto(), cuerpo: texto() }),
+    }),
+    sistema: `Adaptas el CV de un estudiante peruano de Ingeniería de Sistemas a una oferta de trabajo concreta (prácticas o puesto junior). Te dan su CV base y la oferta. Devuelves el CV completo ya adaptado, listo para enviar.
+Regla de oro: NO INVENTES NADA. Cada experiencia, proyecto, tecnología, curso, fecha, cifra y enlace del CV final tiene que estar en el CV base. Puedes reordenar, resumir, reescribir con otras palabras, quitar lo que no suma y usar el vocabulario de la oferta para describir lo que de verdad hizo. Nunca subas su nivel en una habilidad (si dice "básico", no pongas "intermedio"). Si la oferta pide algo que no tiene, NO lo agregues: va en "faltan".
+Cómo adaptarlo:
+- "titular" y "perfil": escritos para este puesto, con lo más relevante de su perfil para la oferta, en primera persona sin decir "yo". El perfil cierra con qué busca, conectado con la empresa o el puesto.
+- "experiencia" y "proyectos": lo que más se relaciona con la oferta va primero; dentro de cada uno, primero los puntos que muestran lo que piden. Máximo 4 proyectos; si alguno no aporta nada a esta oferta, quítalo. Puntos de una o dos líneas, empezando con un verbo.
+- "habilidades": agrupadas como en el base (con soltura, en aprendizaje, nivel básico...), pero poniendo primero en cada grupo lo que pide la oferta.
+- Usa las palabras exactas de la oferta cuando describan algo que sí tiene (si dicen "APIs REST" y él consumió una API, usa "APIs REST"), porque los filtros automáticos buscan esas palabras.
+- Debe caber en una página: perfil corto, pocos puntos por experiencia.
+- El CV va en el idioma de la oferta (si está en inglés, todo el CV en inglés).
+- "encaje": alto, medio o bajo, siendo honesto.
+- "palabras": las palabras clave de la oferta que quedaron en el CV (hasta 10).
+- "faltan": hasta 4 cosas que piden y le faltan, cada una con una acción concreta (por ejemplo: "SQL intermedio: practica consultas con JOIN y GROUP BY esta semana").
+- "cambios": hasta 4 cambios que hiciste respecto del base, cada uno con su razón.
+- "correo": solo si la oferta pide enviar el CV por correo (con una dirección o un asunto); "para" es la dirección, "asunto" el que piden (exacto, si lo indican) y "cuerpo" un correo corto de 5 a 7 líneas firmado con su nombre. Si no lo piden, deja los tres vacíos.
+No uses rayas largas; usa dos puntos o comas.`,
+    armar(c) {
+      const oferta = recortar(c.oferta, 6000);
+      const base = recortar(c.base, 8000);
+      if (oferta.length < 40) return { error: "Falta el texto de la oferta" };
+      if (base.length < 200) return { error: "Completa tu CV base antes de adaptarlo" };
+      return unir(bloque("Su CV base", base), c.nombre ? `Su nombre: ${recortar(c.nombre, 120)}` : "", bloque("La oferta", oferta));
+    },
+  },
 });
 
 // ---------- Inglés ----------

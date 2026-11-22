@@ -62,6 +62,7 @@ export function Cv() {
             ["telefono", "Teléfono"],
             ["github", "GitHub (enlace)"],
             ["linkedin", "LinkedIn (enlace)"],
+            ["portafolio", "Portafolio (enlace)"],
             ["idiomas", "Idiomas"],
           ].map(([campo, texto]) => (
             <label key={campo}>
@@ -104,7 +105,7 @@ export function Cv() {
       <article className={estilos.hoja}>
         <h1>{cv.nombre || "Tu nombre"}</h1>
         <p className={estilos.titular}>{cv.titular}</p>
-        <p className={estilos.contacto}>{[cv.ciudad, cv.correo, cv.telefono, cv.github, cv.linkedin].filter(Boolean).join(" · ")}</p>
+        <p className={estilos.contacto}>{[cv.ciudad, cv.correo, cv.telefono, cv.github, cv.linkedin, cv.portafolio].filter(Boolean).join(" · ")}</p>
         {cv.sobreMi && (
           <>
             <h2>Perfil</h2>

@@ -8,6 +8,7 @@ import { callarLocal, decirLocal } from "./voz-local.js";
 import { descargarVozWeb, vocesWebGuardadas } from "./voz-web.js";
 import { callar, decir, dictar, hayVozEn, microDisponible, vocesListas } from "../lib/voz.js";
 import { cargarPlan } from "../lib/plan-junior.js";
+import { resumenParaAksu } from "../lib/cv-oferta.js";
 import {
   anotar, bloqueActivo, BLOQUE_MIN, diaNuevo, enFranjaIngles, enSilencio, guardarVeredicto, marcarHecho, NIVELES, notaDelDia, PREGUNTAS_ENTREVISTA, restanteBloque, subirA, TEXTOS,
 } from "./reglas.js";
@@ -301,7 +302,7 @@ function usoEnTexto(uso) {
 
 async function contexto() {
   const e = estado;
-  const [plan, meta] = await Promise.all([planActual(), diasParaMeta()]);
+  const [plan, meta, busqueda] = await Promise.all([planActual(), diasParaMeta(), resumenParaAksu().catch(() => "")]);
   const ahora = new Date();
   const ej = e.ejercicio;
   const s = e.sesion;
@@ -325,6 +326,7 @@ async function contexto() {
           .join("\n")
       : "",
     usoEnTexto(e.uso),
+    busqueda ? `Su búsqueda de trabajo:\n${busqueda}` : "",
     bloqueActivo(e.bloque, Date.now()) ? `Está en un bloque de concentración: le quedan ${Math.ceil(restanteBloque(e.bloque, Date.now()) / 60_000)} min.` : "",
     `Hoy resolvió ${e.dia.resueltos.length} ejercicios.`,
     e.ayer?.fecha ? `Ayer (${e.ayer.fecha}) resolvió ${e.ayer.resueltos}.${e.ayer.cierre ? ` Tu cierre de ayer: ${e.ayer.cierre}` : ""}` : "",

@@ -58,6 +58,7 @@ export const REGISTROS = [
   "ofertasMarcadas",
   "git",
   "inglesExtra",
+  "cvsOferta",
 ];
 
 /** Mezcla dos colecciones de registros (ver REGISTROS). */

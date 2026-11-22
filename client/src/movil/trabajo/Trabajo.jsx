@@ -10,6 +10,8 @@ import { CabeceraPagina } from "../../components/CabeceraPagina.jsx";
 import { ContenidoPestanas, Pestanas } from "../../components/Pestanas.jsx";
 import { Tarjeta } from "../../components/Tarjeta.jsx";
 import { Cv } from "./Cv.jsx";
+import { BotonCvOferta, CvsPorOferta } from "./CvOferta.jsx";
+import { idOfertaPegada } from "../../../../server/cv-oferta.js";
 import { Portafolio, PruebasYProyecto } from "./Proyectos.jsx";
 import { ListaAnimada } from "../../components/ListaAnimada.jsx";
 import { OfertasParaTi } from "./Ofertas.jsx";
@@ -33,6 +35,7 @@ const PREGUNTAS_PARA_ELLOS = [
 const VIEJAS = { oferta: ["ofertas"], cv: ["perfil", "cv"], portafolio: ["perfil", "portafolio"], pruebas: ["perfil", "pruebas"] };
 const VISTAS_PERFIL = [
   ["cv", "Mi CV"],
+  ["cvs", "CV por oferta"],
   ["portafolio", "Portafolio"],
   ["pruebas", "Pruebas técnicas y proyecto"],
 ];
@@ -103,6 +106,7 @@ export function Trabajo() {
               ))}
             </div>
             {vista === "cv" && <Cv />}
+            {vista === "cvs" && <CvsPorOferta />}
             {vista === "portafolio" && <Portafolio />}
             {vista === "pruebas" && <PruebasYProyecto />}
           </div>
@@ -584,6 +588,7 @@ function Oferta() {
         Analizar lo que pide
       </button>
       <PrepararOferta oferta={texto} />
+      {texto.trim().length >= 40 && <BotonCvOferta key={idOfertaPegada(texto)} oferta={{ id: idOfertaPegada(texto), texto }} />}
       {r && (
         <div className={estilos.panel}>
           <strong>

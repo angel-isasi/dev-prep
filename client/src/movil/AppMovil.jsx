@@ -53,6 +53,7 @@ const Glosario = perezoso(() => import("./practica/Glosario.jsx"), "Glosario");
 const GitPractico = perezoso(() => import("./practica/GitPractico.jsx"), "GitPractico");
 const PaginaLogros = perezoso(() => import("../components/Logros.jsx"), "PaginaLogros");
 const Trabajo = perezoso(() => import("./trabajo/Trabajo.jsx"), "Trabajo");
+const PaginaCvOferta = perezoso(() => import("./trabajo/CvOferta.jsx"), "PaginaCvOferta");
 const Enfoque = perezoso(() => import("../components/Rutina.jsx"), "Enfoque");
 const PaginaDiario = perezoso(() => import("../components/PaginaDiario.jsx"), "PaginaDiario");
 const Hoy = perezoso(() => import("../pages/Hoy.jsx"), "Hoy");
@@ -100,6 +101,7 @@ export function App() {
       <Route path="diario" element={<PaginaDiario />} />
       <Route path="enfoque" element={<Enfoque />} />
       <Route path="trabajo" element={<Trabajo />} />
+      <Route path="trabajo/cv/:id" element={<PaginaCvOferta />} />
       <Route path="tarjetas" element={<Tarjetas />} />
       <Route path="ingles/ia" element={<InglesConIa />} />
       <Route path="camino" element={<RutaLecciones />} />

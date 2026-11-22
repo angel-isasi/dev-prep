@@ -18,6 +18,8 @@ import {
   probarVoz, probarVozIngles, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
 } from "./aksu.js";
 import { Figura } from "./Figura.jsx";
+import { cvsAutomaticos } from "../lib/cv-oferta.js";
+import { tocaResumenBusqueda } from "../../../server/cv-oferta.js";
 import { puedeVozWeb, VOCES_WEB } from "./voz-web.js";
 import estilos from "./Aksu.module.css";
 
@@ -246,6 +248,28 @@ function useObservador() {
       if (semana && vivo) {
         cambiar({ informe: semana });
         await pensar({ solo: true, tipo: "informe", frente: false, momento: `Informe semanal de la semana del ${semana}: qué mejoró, qué sigue flojo y un solo foco para la semana que viene. Usa tu libro, las notas de sus días, su tiempo en la laptop y su plan.` });
+      }
+      // Búsqueda de trabajo: los CV que se hicieron solos (ofertas de puntaje muy alto) y, cada 3 días, cómo va
+      const hechos = await cvsAutomaticos();
+      if (!vivo || !puede(verEstado().nivel, "trabajo")) return;
+      if (hechos.length) {
+        cambiar({ busquedaEn: verEstado().dia.fecha });
+        const lista = hechos.map((h) => `"${h.titulo}" en ${h.empresa || h.fuente} (${h.puntaje}/100, encaje ${h.cv.encaje})`).join("; ");
+        await pensar({
+          solo: true,
+          tipo: "trabajo",
+          frente: false,
+          momento: `Se hizo solo su CV para ${hechos.length === 1 ? "una oferta" : `${hechos.length} ofertas`} con puntaje muy alto: ${lista}. Avísale en una o dos frases y dile que lo revise y postule hoy (está en Buscar trabajo, Tu perfil, CV por oferta). Pon destino "trabajo".`,
+        });
+      } else if (tocaResumenBusqueda(verEstado().dia.fecha, verEstado().busquedaEn)) {
+        cambiar({ busquedaEn: verEstado().dia.fecha });
+        await pensar({
+          solo: true,
+          tipo: "trabajo",
+          frente: false,
+          momento:
+            'Cuéntale en dos frases cómo va su búsqueda de trabajo (usa "Su búsqueda de trabajo") y dale una sola acción concreta para hoy: postular a la mejor oferta, hacer su CV para ella o hacer seguimiento a una postulación. Si no hay datos de su búsqueda, solo dile que revise las ofertas. Pon destino "trabajo".',
+        });
       }
     };
     const espera = setTimeout(empezar, 2500);

@@ -10,6 +10,8 @@ import { api } from "../../lib/api.js";
 import { ListaAnimada } from "../../components/ListaAnimada.jsx";
 import { mensajePostulacion } from "../../../../server/postulaciones.js";
 import estilos from "./Ofertas.module.css";
+import { BotonCvOferta } from "./CvOferta.jsx";
+import { recordarOfertas } from "../../lib/cv-oferta.js";
 import { IconoAlerta, IconoCandado, IconoEstrella } from "../../components/Iconos.jsx";
 
 /** Cuántas ofertas se muestran de entrada y cuántas más con cada "Ver más". */
@@ -81,6 +83,7 @@ export function OfertasParaTi() {
     try {
       const d = await api.ofertasParaTi({ nuevo });
       setDatos(d);
+      recordarOfertas(d.ofertas);
       setMarcas(Object.fromEntries(d.ofertas.filter((o) => o.marca).map((o) => [o.id, o.marca])));
       setFuera(d.guardadasFuera ?? []);
     } catch (e) {
@@ -305,6 +308,7 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
         )}
 
         {abierta && <Detalle oferta={o} cv={cv} />}
+        {abierta && <BotonCvOferta oferta={o} />}
 
         <div className={estilos.acciones}>
           <button type="button" className="boton" onClick={() => setAbierta((v) => !v)} aria-expanded={abierta}>

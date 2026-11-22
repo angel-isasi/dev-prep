@@ -101,7 +101,8 @@ export async function pedirIa(pedido) {
     method: "POST",
     headers: { "content-type": "application/json", "x-clave": claveIa() },
     body: JSON.stringify(perfil ? { ...pedido, perfil } : pedido),
-    signal: AbortSignal.timeout(65_000),
+    // El CV de una oferta escribe mucho: se le da más tiempo (la función de Vercel espera hasta 120 s)
+    signal: AbortSignal.timeout(pedido.tarea === "cv-oferta" ? 118_000 : 65_000),
   }).catch((e) => {
     throw new Error(e?.name === "TimeoutError" ? "La IA tardó demasiado. Inténtalo otra vez." : "Sin conexión: la IA necesita internet.");
   });
@@ -123,7 +124,7 @@ export async function pedirIa(pedido) {
 }
 
 // Tareas que deben salir distintas cada vez (crean algo nuevo o siguen una charla): nunca se guardan
-const SIN_GUARDAR = /crear$|^jarvis|^aksu|^mentor$|^variante$|^conversacion$|^plan-semana$|^tarjeta-|^defensa$|^negociacion$|^reunion$|^entrevista-en$/;
+const SIN_GUARDAR = /crear$|^jarvis|^aksu|^mentor$|^variante$|^conversacion$|^plan-semana$|^tarjeta-|^defensa$|^negociacion$|^reunion$|^entrevista-en$|^cv-oferta$/;
 const CLAVE_GUARDADAS = "devprep.iaGuardadas";
 const MAX_GUARDADAS = 40;
 

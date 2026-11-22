@@ -5,7 +5,7 @@
   "buildCommand": "npm run build:movil",
   "outputDirectory": "client/dist-movil",
   "rewrites": [{ "source": "/((?!api/|assets/).*)", "destination": "/index.html" }],
-  "functions": { "api/ia.js": { "maxDuration": 60 } },
+  "functions": { "api/ia.js": { "maxDuration": 120 } },
   "headers": [
     {
       "source": "/(.*)",

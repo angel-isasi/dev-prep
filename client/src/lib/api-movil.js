@@ -31,6 +31,7 @@ import { COLECCION_EXTRA, extraDesdeRegistros, registrosDesdeViejo } from "../mo
 import { unidadTrasExamen } from "../movil/ingles/examen.js";
 import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaSemana } from "../../../server/avance.js";
 import { buscarOfertas, nuevasDesde, ordenarOfertas } from "../../../server/ofertas-auto.js";
+import { CV_BASE_INICIAL, UMBRAL_CV_AUTO } from "../../../server/cv-oferta.js";
 import { conFechaDeEnvio, metaSemanal, numerosPostulaciones, seguimientosPendientes } from "../../../server/postulaciones.js";
 import { crearApiMapache } from "../movil/mapache/api-mapache.js";
 import { rachaIngles } from "../movil/mapache/reglas.js";
@@ -848,10 +849,13 @@ const apiWeb = {
     ].join("\n");
 
     const marcas = progreso.registros("ofertasMarcadas");
+    const conCv = progreso.registros("cvsOferta");
     const enLista = new Set(ids);
     return {
-      ofertas: ordenadas.map(({ texto: _t, ...o }) => ({
+      ofertas: ordenadas.map(({ texto, ...o }) => ({
         ...o,
+        texto: String(texto ?? "").slice(0, 6000),
+        tieneCv: !!conCv[o.id],
         guardada: yaGuardadas.has(o.url),
         marca: marcas[o.id]?.estado ?? null,
         nueva: nuevas.has(o.id),
@@ -988,6 +992,20 @@ const apiWeb = {
     };
   },
   guardarCv: async (datos) => progreso.cambiarAjuste("cv", datos),
+  /** Tu CV base completo (texto): de aquí parte la IA para hacer el CV de cada oferta. */
+  cvBase: async () => progreso.ajuste("cvBase", { texto: CV_BASE_INICIAL, umbral: UMBRAL_CV_AUTO }),
+  guardarCvBase: async (cambios) => progreso.cambiarAjuste("cvBase", { ...(await apiWeb.cvBase()), ...cambios }),
+  /** Los CV hechos para una oferta, del más nuevo al más viejo. */
+  cvsOferta: async () =>
+    Object.entries(progreso.registros("cvsOferta"))
+      .map(([id, c]) => ({ id, ...c }))
+      .sort((a, b) => String(b.creado ?? "").localeCompare(String(a.creado ?? ""))),
+  cvOferta: async (id) => {
+    const c = progreso.registros("cvsOferta")[id];
+    return c ? { id, ...c } : null;
+  },
+  guardarCvOferta: async (id, datos) => progreso.guardarRegistro("cvsOferta", id, datos),
+  borrarCvOferta: async (id) => progreso.borrarRegistro("cvsOferta", id),
   /** Marca un proyecto de portafolio como publicado (con su enlace de GitHub o demo). */
   marcarPortafolio: async (ejercicio, datos) => progreso.guardarRegistro("portafolio", ejercicio, { exportado: true, ...datos }),
   portafolioPublicado: async () => progreso.registros("portafolio"),

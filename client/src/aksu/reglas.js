@@ -23,8 +23,8 @@ const MIN = 60_000;
  */
 const SOLO = {
   callado: [],
-  normal: ["arranque", "trabado", "tiempo", "resuelto", "pausa", "inactivo", "frena", "pregunta", "cierre", "informe", "entrevista", "relampago", "teoria", "distraccion", "recibe", "comenta"],
-  encima: ["arranque", "trabado", "tiempo", "resuelto", "pausa", "inactivo", "frena", "pregunta", "cierre", "informe", "entrevista", "relampago", "teoria", "distraccion", "recibe", "comenta", "test", "guardar", "sorpresa", "ingles"],
+  normal: ["trabajo", "arranque", "trabado", "tiempo", "resuelto", "pausa", "inactivo", "frena", "pregunta", "cierre", "informe", "entrevista", "relampago", "teoria", "distraccion", "recibe", "comenta"],
+  encima: ["trabajo", "arranque", "trabado", "tiempo", "resuelto", "pausa", "inactivo", "frena", "pregunta", "cierre", "informe", "entrevista", "relampago", "teoria", "distraccion", "recibe", "comenta", "test", "guardar", "sorpresa", "ingles"],
 };
 export const puede = (nivel, que) => (SOLO[nivel] ?? SOLO.normal).includes(que);
 
