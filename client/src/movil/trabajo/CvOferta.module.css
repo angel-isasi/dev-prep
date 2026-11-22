@@ -179,3 +179,58 @@
 .umbral input {
   width: 72px;
 }
+
+/* Mi CV: el formulario y la hoja lado a lado; debajo, tus CV por oferta, mensajes y la revisión */
+.miCv {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 780px);
+  align-items: start;
+  gap: var(--espacio-4);
+}
+
+.debajo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-items: start;
+  grid-column: 1 / -1;
+  gap: var(--espacio-4);
+}
+
+@media (max-width: 1200px) {
+  .miCv {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.contacto summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--espacio-2);
+  cursor: pointer;
+  font-weight: var(--peso-semi);
+}
+
+.contacto summary small {
+  color: var(--texto-suave);
+  font-weight: normal;
+}
+
+.contacto[open] summary {
+  margin-bottom: var(--espacio-3);
+}
+
+.hojaBase h3 {
+  margin: 10px 0 2px;
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--letra-4);
+}
+
+.hojaBase p {
+  margin: 0 0 4px;
+}
+
+.hojaBase ul {
+  margin: 0 0 6px;
+}

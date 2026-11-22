@@ -846,6 +846,7 @@ const apiWeb = {
       cv.sobreMi,
       ...habilidades.map((h) => `${h.nombre} ${h.temas.join(" ")}`),
       ...(cv.proyectos ?? []).map((p) => `${p.titulo} ${p.descripcion}`),
+      (await apiWeb.cvBase()).texto,
     ].join("\n");
 
     const marcas = progreso.registros("ofertasMarcadas");

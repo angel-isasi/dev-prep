@@ -5,7 +5,6 @@ import { Link, useNavigate, useParams } from "react-router";
 import { api } from "../../lib/api.js";
 import { generarCvOferta } from "../../lib/cv-oferta.js";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
-import { CV_BASE_INICIAL, MAX_CV_AUTO_DIA } from "../../../../server/cv-oferta.js";
 import base from "./Trabajo.module.css";
 import estilos from "./CvOferta.module.css";
 
@@ -82,8 +81,8 @@ export function PaginaCvOferta() {
     return (
       <section className={estilos.pagina}>
         <p>Este CV ya no existe.</p>
-        <Link to="/trabajo?pestana=perfil&ver=cvs" className="boton">
-          Ver mis CV por oferta
+        <Link to="/trabajo?pestana=perfil&ver=cv" className="boton">
+          Ir a Mi CV
         </Link>
       </section>
     );
@@ -107,8 +106,8 @@ export function PaginaCvOferta() {
   return (
     <section className={estilos.pagina}>
       <div className={`${estilos.barra} ${base.noImprimir}`}>
-        <Link to="/trabajo?pestana=perfil&ver=cvs" className="boton boton-fantasma">
-          ← Mis CV por oferta
+        <Link to="/trabajo?pestana=perfil&ver=cv" className="boton boton-fantasma">
+          ← Mi CV
         </Link>
         <button type="button" className="boton boton-primario" onClick={() => window.print()}>
           Descargar PDF
@@ -126,7 +125,7 @@ export function PaginaCvOferta() {
           className="boton boton-fantasma"
           onClick={async () => {
             await api.borrarCvOferta(id);
-            ir("/trabajo?pestana=perfil&ver=cvs");
+            ir("/trabajo?pestana=perfil&ver=cv");
           }}
         >
           Borrar
@@ -283,76 +282,30 @@ export function PaginaCvOferta() {
   );
 }
 
-/** En Tu perfil: los CV que ya hiciste para ofertas, tu CV base y cuándo se hacen solos. */
-export function CvsPorOferta() {
+/** En Mi CV: los CV que ya hiciste para ofertas, del más nuevo al más viejo. */
+export function ListaCvsOferta() {
   const [cvs, setCvs] = useState(null);
-  const [cvBase, setCvBase] = useState(null);
-  const [guardado, setGuardado] = useState(false);
-
   useEffect(() => {
-    api.cvsOferta().then(setCvs);
-    api.cvBase().then(setCvBase);
+    api.cvsOferta?.().then(setCvs);
   }, []);
-  if (!cvs || !cvBase) return <Esqueleto variante="texto" />;
-
-  const cambiar = (cambio) => {
-    setCvBase({ ...cvBase, ...cambio });
-    setGuardado(false);
-  };
-
+  if (!cvs) return null;
   return (
-    <div className={estilos.perfil}>
-      <section className={base.panel}>
-        <strong>Tus CV por oferta</strong>
-        {cvs.length === 0 ? (
-          <p className={base.tenue}>
-            Todavía ninguno. En cada oferta (Ver detalle) o en "¿Encontraste una oferta?" está el botón "Hacer mi CV para esta oferta".
-          </p>
-        ) : (
-          <ul className={estilos.lista}>
-            {cvs.map((c) => (
-              <li key={c.id}>
-                <Link to={`/trabajo/cv/${encodeURIComponent(c.id)}`}>
-                  <strong>{c.titulo}</strong>
-                  <small>{[c.empresa, c.fecha, c.cv?.encaje && ENCAJE[c.cv.encaje], c.auto && "hecho solo"].filter(Boolean).join(" · ")}</small>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      <form
-        className={base.panel}
-        onSubmit={async (e) => {
-          e.preventDefault();
-          await api.guardarCvBase(cvBase);
-          setGuardado(true);
-        }}
-      >
-        <strong>Tu CV base</strong>
-        <small className={base.tenue}>
-          De aquí parte cada CV: la IA lo reordena y lo reescribe para la oferta, pero no agrega nada que no esté aquí. Mantenlo completo y al
-          día. Tu nombre y tus datos de contacto salen de "Mi CV".
-        </small>
-        <textarea className={estilos.base} rows={18} value={cvBase.texto} onChange={(e) => cambiar({ texto: e.target.value })} />
-        <label className={estilos.umbral}>
-          Hacer el CV solo cuando una oferta tenga
-          <input type="number" min={50} max={100} value={cvBase.umbral} onChange={(e) => cambiar({ umbral: Math.max(50, Math.min(100, Number(e.target.value) || 80)) })} />
-          de 100 o más (como mucho {MAX_CV_AUTO_DIA} por día)
-        </label>
-        <div className={base.fila}>
-          <button type="submit" className="boton boton-primario">
-            Guardar
-          </button>
-          {cvBase.texto !== CV_BASE_INICIAL && (
-            <button type="button" className="boton boton-fantasma" onClick={() => cambiar({ texto: CV_BASE_INICIAL })}>
-              Volver al texto inicial
-            </button>
-          )}
-          {guardado && <span className={base.tenue}>Guardado</span>}
-        </div>
-      </form>
-    </div>
+    <section className={base.panel}>
+      <strong>Tus CV por oferta</strong>
+      {cvs.length === 0 ? (
+        <p className={base.tenue}>Todavía ninguno. Ábrelo desde una oferta (Ver detalle) o desde "¿Encontraste una oferta?" con "Hacer mi CV para esta oferta".</p>
+      ) : (
+        <ul className={estilos.lista}>
+          {cvs.map((c) => (
+            <li key={c.id}>
+              <Link to={`/trabajo/cv/${encodeURIComponent(c.id)}`}>
+                <strong>{c.titulo}</strong>
+                <small>{[c.empresa, c.fecha, c.cv?.encaje && ENCAJE[c.cv.encaje], c.auto && "hecho solo"].filter(Boolean).join(" · ")}</small>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }

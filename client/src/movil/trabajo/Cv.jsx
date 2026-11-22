@@ -1,9 +1,14 @@
-// Tu CV de una columna, simple y legible por los filtros automáticos de las empresas (ATS).
-// Las habilidades salen de lo que de verdad dominas (temas en verde). Se exporta a PDF con "Imprimir".
+// Mi CV, todo en un lugar: tus datos de contacto, tu CV base (de donde la IA hace el CV de cada oferta)
+// con su hoja lista para descargar en PDF, los CV que ya hiciste para ofertas, mensajes para copiar y la
+// revisión con IA. Una columna, simple y legible por los filtros automáticos de las empresas (ATS).
 import { useEffect, useState } from "react";
 import { RevisarCv } from "../../components/ia/TrabajoIa.jsx";
+import { Markdown } from "../../components/Markdown.jsx";
 import { api } from "../../lib/api.js";
+import { CV_BASE_INICIAL, MAX_CV_AUTO_DIA } from "../../../../server/cv-oferta.js";
+import { ListaCvsOferta } from "./CvOferta.jsx";
 import estilos from "./Trabajo.module.css";
+import propio from "./CvOferta.module.css";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
 
 const MENSAJES = [
@@ -24,149 +29,117 @@ const MENSAJES = [
   },
 ];
 
+const CONTACTO = [
+  ["nombre", "Nombre completo"],
+  ["titular", "Titular"],
+  ["ciudad", "Ciudad"],
+  ["telefono", "Teléfono"],
+  ["correo", "Correo"],
+  ["linkedin", "LinkedIn"],
+  ["github", "GitHub"],
+  ["portafolio", "Portafolio"],
+];
+
+/** En la hoja, cada "# Sección" del CV base es un subtítulo y cada "## Puesto" una línea en negrita. */
+const paraHoja = (texto) => texto.replace(/^## /gm, "### ").replace(/^# /gm, "## ");
+
 export function Cv() {
   const [cv, setCv] = useState(null);
-  const [habilidades, setHabilidades] = useState([]);
+  const [cvBase, setCvBase] = useState(null);
   const [guardado, setGuardado] = useState(false);
 
   useEffect(() => {
-    api.cv().then((r) => {
-      setCv(r.datos);
-      setHabilidades(r.habilidades);
-    });
+    api.cv().then((r) => setCv(r.datos));
+    api.cvBase().then(setCvBase);
   }, []);
-  if (!cv) return <Esqueleto variante="texto" />;
+  if (!cv || !cvBase) return <Esqueleto variante="texto" />;
 
-  const cambiar = (campo) => (e) => {
+  const cambiarDato = (campo) => (e) => {
     setCv({ ...cv, [campo]: e.target.value });
     setGuardado(false);
   };
-  const proyectos = cv.proyectos ?? [];
+  const cambiarBase = (cambio) => {
+    setCvBase({ ...cvBase, ...cambio });
+    setGuardado(false);
+  };
+  const faltanDatos = !cv.telefono || !cv.correo || !cv.linkedin;
 
   return (
-    <div className={estilos.cv}>
+    <div className={propio.miCv}>
       <form
         className={`${estilos.panel} ${estilos.noImprimir}`}
         onSubmit={async (e) => {
           e.preventDefault();
-          await api.guardarCv(cv);
+          await Promise.all([api.guardarCv(cv), api.guardarCvBase(cvBase)]);
           setGuardado(true);
         }}
       >
-        <div className={estilos.campos}>
-          {[
-            ["nombre", "Nombre completo"],
-            ["titular", "Titular"],
-            ["ciudad", "Ciudad"],
-            ["correo", "Correo"],
-            ["telefono", "Teléfono"],
-            ["github", "GitHub (enlace)"],
-            ["linkedin", "LinkedIn (enlace)"],
-            ["portafolio", "Portafolio (enlace)"],
-            ["idiomas", "Idiomas"],
-          ].map(([campo, texto]) => (
-            <label key={campo}>
-              {texto}
-              <input value={cv[campo] ?? ""} onChange={cambiar(campo)} />
-            </label>
-          ))}
-        </div>
-        <label className={estilos.ancho}>
-          Sobre mí (3 líneas: qué haces, con qué y qué buscas)
-          <textarea rows={3} value={cv.sobreMi ?? ""} onChange={cambiar("sobreMi")} />
-        </label>
-        <label className={estilos.ancho}>
-          Estudios
-          <input value={cv.estudios ?? ""} onChange={cambiar("estudios")} placeholder="Ingeniería de Sistemas, [universidad], 20XX a la fecha" />
-        </label>
-        <strong>Proyectos</strong>
-        {proyectos.map((p, i) => (
-          <div key={i} className={estilos.campos}>
-            <input value={p.titulo} placeholder="Título" onChange={(e) => setCv({ ...cv, proyectos: proyectos.map((x, j) => (j === i ? { ...x, titulo: e.target.value } : x)) })} />
-            <input value={p.enlace} placeholder="Enlace" onChange={(e) => setCv({ ...cv, proyectos: proyectos.map((x, j) => (j === i ? { ...x, enlace: e.target.value } : x)) })} />
-            <input value={p.descripcion} placeholder="Qué hace y con qué" onChange={(e) => setCv({ ...cv, proyectos: proyectos.map((x, j) => (j === i ? { ...x, descripcion: e.target.value } : x)) })} />
+        <details className={propio.contacto} open={faltanDatos}>
+          <summary>
+            Datos de contacto
+            <small>{[cv.nombre, cv.telefono, cv.correo].filter(Boolean).join(" · ") || "Sin completar"}</small>
+          </summary>
+          <div className={estilos.campos}>
+            {CONTACTO.map(([campo, texto]) => (
+              <label key={campo}>
+                {texto}
+                <input value={cv[campo] ?? ""} onChange={cambiarDato(campo)} />
+              </label>
+            ))}
           </div>
-        ))}
+        </details>
+
+        <strong>Tu CV base</strong>
+        <small className={estilos.tenue}>
+          De aquí parte el CV de cada oferta: la IA lo reordena y lo reescribe, pero no agrega nada que no esté aquí. Mantenlo completo y al día.
+        </small>
+        <textarea className={propio.base} rows={22} value={cvBase.texto} onChange={(e) => cambiarBase({ texto: e.target.value })} />
+        <label className={propio.umbral}>
+          Hacer el CV solo cuando una oferta tenga
+          <input type="number" min={50} max={100} value={cvBase.umbral} onChange={(e) => cambiarBase({ umbral: Math.max(50, Math.min(100, Number(e.target.value) || 80)) })} />
+          de 100 o más (como mucho {MAX_CV_AUTO_DIA} por día)
+        </label>
         <div className={estilos.fila}>
-          <button type="button" className="boton" onClick={() => setCv({ ...cv, proyectos: [...proyectos, { titulo: "", enlace: "", descripcion: "" }] })}>
-            + Proyecto
-          </button>
           <button type="submit" className="boton boton-primario">
             Guardar
           </button>
           <button type="button" className="boton" onClick={() => window.print()}>
-            Descargar PDF (Imprimir → Guardar como PDF)
+            Descargar PDF
           </button>
+          {cvBase.texto !== CV_BASE_INICIAL && (
+            <button type="button" className="boton boton-fantasma" onClick={() => cambiarBase({ texto: CV_BASE_INICIAL })}>
+              Volver al texto inicial
+            </button>
+          )}
           {guardado && <span className={estilos.tenue}>Guardado</span>}
         </div>
       </form>
 
-      {/* Vista previa: es lo que se imprime */}
-      <article className={estilos.hoja}>
+      {/* Vista previa: es lo que se imprime (tu CV general, sin adaptar a ninguna oferta) */}
+      <article className={`${estilos.hoja} ${propio.hojaBase}`}>
         <h1>{cv.nombre || "Tu nombre"}</h1>
-        <p className={estilos.titular}>{cv.titular}</p>
-        <p className={estilos.contacto}>{[cv.ciudad, cv.correo, cv.telefono, cv.github, cv.linkedin, cv.portafolio].filter(Boolean).join(" · ")}</p>
-        {cv.sobreMi && (
-          <>
-            <h2>Perfil</h2>
-            <p>{cv.sobreMi}</p>
-          </>
-        )}
-        <h2>Habilidades</h2>
-        {habilidades.length ? (
-          <ul>
-            {habilidades.map((h) => (
-              <li key={h.nombre}>
-                <strong>{h.nombre}:</strong> {h.temas.join(", ")}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className={estilos.noImprimir}>Cuando pongas temas en verde en tu mapa, aparecen aquí solos.</p>
-        )}
-        {proyectos.some((p) => p.titulo) && (
-          <>
-            <h2>Proyectos</h2>
-            <ul>
-              {proyectos
-                .filter((p) => p.titulo)
-                .map((p, i) => (
-                  <li key={i}>
-                    <strong>{p.titulo}</strong>
-                    {p.enlace && ` · ${p.enlace}`}
-                    {p.descripcion && `: ${p.descripcion}`}
-                  </li>
-                ))}
-            </ul>
-          </>
-        )}
-        {cv.estudios && (
-          <>
-            <h2>Estudios</h2>
-            <p>{cv.estudios}</p>
-          </>
-        )}
-        {cv.idiomas && (
-          <>
-            <h2>Idiomas</h2>
-            <p>{cv.idiomas}</p>
-          </>
-        )}
+        {cv.titular && <p className={estilos.titular}>{cv.titular}</p>}
+        <p className={estilos.contacto}>{[cv.ciudad, cv.telefono, cv.correo].filter(Boolean).join(" • ")}</p>
+        <p className={estilos.contacto}>{[cv.linkedin, cv.github, cv.portafolio].filter(Boolean).join(" • ")}</p>
+        <Markdown>{paraHoja(cvBase.texto)}</Markdown>
       </article>
 
-      <div className={`${estilos.panel} ${estilos.noImprimir}`}>
-        <strong>Mensajes listos para copiar</strong>
-        {MENSAJES.map((m) => (
-          <details key={m.titulo}>
-            <summary>{m.titulo}</summary>
-            <p className={estilos.tenue}>{m.texto}</p>
-            <button type="button" className="boton boton-fantasma" onClick={() => navigator.clipboard?.writeText(m.texto)}>
-              Copiar
-            </button>
-          </details>
-        ))}
+      <div className={`${propio.debajo} ${estilos.noImprimir}`}>
+        <ListaCvsOferta />
+        <div className={estilos.panel}>
+          <strong>Mensajes listos para copiar</strong>
+          {MENSAJES.map((m) => (
+            <details key={m.titulo}>
+              <summary>{m.titulo}</summary>
+              <p className={estilos.tenue}>{m.texto}</p>
+              <button type="button" className="boton boton-fantasma" onClick={() => navigator.clipboard?.writeText(m.texto)}>
+                Copiar
+              </button>
+            </details>
+          ))}
+        </div>
+        <RevisarCv />
       </div>
-      <RevisarCv />
     </div>
   );
 }

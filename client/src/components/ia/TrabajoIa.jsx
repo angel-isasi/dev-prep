@@ -8,11 +8,11 @@ import { useIa } from "./useIa.js";
 
 /** Tu perfil en texto (sin datos de contacto): CV y lo que dominas. */
 async function perfilTrabajo() {
-  const r = await api.cv?.().catch(() => null);
+  const [r, cvBase] = await Promise.all([api.cv?.().catch(() => null), api.cvBase?.().catch(() => null)]);
   if (!r) return "";
   const { correo: _c, telefono: _t, ...cv } = r.datos ?? {};
   return [
-    `CV: ${JSON.stringify(cv)}`,
+    cvBase?.texto ? `${cv.nombre ?? ""}\n${cv.titular ?? ""}\n\n${cvBase.texto}` : `CV: ${JSON.stringify(cv)}`,
     r.habilidades?.length ? `Lo que domina de verdad (temas en verde): ${r.habilidades.map((h) => h.nombre ?? h).join(", ")}` : "",
   ]
     .filter(Boolean)
