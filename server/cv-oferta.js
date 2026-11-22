@@ -94,7 +94,8 @@ export function ofertasParaCvAuto(ofertas, { conCv, hechosHoy = 0, umbral = UMBR
   const tienen = new Set(conCv);
   const quedan = Math.max(0, max - hechosHoy);
   return ofertas
-    .filter((o) => o.puntaje >= umbral && !tienen.has(o.id) && o.marca !== "oculta" && !(o.alertas ?? []).length)
+    // Sin la descripción (las del correo solo traen el título) no se puede adaptar bien un CV
+    .filter((o) => o.puntaje >= umbral && !tienen.has(o.id) && o.marca !== "oculta" && !(o.alertas ?? []).length && String(o.texto ?? "").length >= 300)
     .sort((a, b) => b.puntaje - a.puntaje)
     .slice(0, quedan);
 }

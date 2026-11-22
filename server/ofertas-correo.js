@@ -88,7 +88,8 @@ export function ofertasGlassdoor(html, fecha) {
       .replace(/&nbsp;|&#160;/g, " ")
       .split("\n")
       .map((l) => l.trim())
-      .filter((l) => l && !/^easy apply$/i.test(l) && !/^\d+[dh]\+?$/.test(l));
+      // fuera: "Easy Apply", la antigüedad ("5d") y la calificación de la empresa ("3.3 ★")
+      .filter((l) => l && !/^easy apply$/i.test(l) && !/^\d+[dh]\+?$/.test(l) && !/^\d([.,]\d)?\s*★?$/.test(l) && l !== "★");
     if (partes.length < 2) continue;
     const [empresa, titulo, lugar = ""] = partes;
     const url = urlSegura(m[1].replace(/&amp;/g, "&"), "https://www.glassdoor.com");

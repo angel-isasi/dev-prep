@@ -43,7 +43,7 @@ Ver anuncio de empleo: https://www.linkedin.com/comm/jobs/view/4493218827/?track
 `;
 
 const GLASSDOOR = `<table><tr><td><a href="https://www.glassdoor.com/partner/jobListing.htm?pos=101&amp;jobListingId=1010327446010&amp;utm_medium=email" style="x">
-<table><tr><td><span>Overskull</span></td></tr><tr><td><b>PROGRAMADOR JUNIOR - VILLA EL SALVADOR</b></td></tr>
+<table><tr><td><span>4.1 ★</span></td></tr><tr><td><span>Overskull</span></td></tr><tr><td><b>PROGRAMADOR JUNIOR - VILLA EL SALVADOR</b></td></tr>
 <tr><td>Villa El Salvador</td></tr><tr><td><span>Easy Apply</span></td><td>5d</td></tr></table></a></td></tr>
 <tr><td><a href="https://www.glassdoor.com/partner/jobListing.htm?pos=102&amp;jobListingId=1010265262027"><div>TEINOR SAC</div><div>Practicante de Inteligencia Artificial</div><div>Trabajo desde casa</div><div>Easy Apply</div></a></td></tr>
 <tr><td><a href="https://www.glassdoor.com/Job/villa-el-salvador-jobs.htm">See more</a></td></tr></table>`;

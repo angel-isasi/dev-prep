@@ -3,7 +3,7 @@ import { CV_BASE_INICIAL, encabezadoDe, idOfertaPegada, ofertasParaCvAuto, resum
 import { armarPedido } from "./ia.js";
 import { TAREAS } from "./ia-tareas.js";
 
-const oferta = (id, puntaje, extra = {}) => ({ id, titulo: `Puesto ${id}`, empresa: "Acme", fuente: "LinkedIn", puntaje, ...extra });
+const oferta = (id, puntaje, extra = {}) => ({ id, titulo: `Puesto ${id}`, empresa: "Acme", fuente: "LinkedIn", puntaje, texto: "x".repeat(400), ...extra });
 
 describe("CV para cada oferta", () => {
   it("el CV base no lleva teléfono ni correo (el repositorio es público)", () => {
@@ -22,6 +22,7 @@ describe("CV para cada oferta", () => {
     expect(ofertasParaCvAuto(ofertas, { conCv: [], hechosHoy: 1 }).map((o) => o.id)).toEqual(["a"]);
     expect(ofertasParaCvAuto(ofertas, { conCv: [], hechosHoy: 2 })).toEqual([]);
     expect(ofertasParaCvAuto(ofertas, { conCv: [], umbral: 60, max: 5 }).map((o) => o.id)).toEqual(["a", "f", "b", "e"]);
+    expect(ofertasParaCvAuto([oferta("g", 99, { texto: "Junior React" })], { conCv: [] })).toEqual([]);
   });
 
   it("el resumen para Aksu cuenta ofertas, CV y postulaciones", () => {
