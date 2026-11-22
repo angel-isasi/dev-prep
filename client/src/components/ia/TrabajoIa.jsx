@@ -2,6 +2,7 @@
 // prueba técnica o de una etapa del proyecto guiado como lo haría un senior.
 import { useState } from "react";
 import { api } from "../../lib/api.js";
+import { encabezadoDe } from "../../../../server/cv-oferta.js";
 import { EvaluadorIa } from "../EvaluadorIa.jsx";
 import { CajaIa, ListaIa, Veredicto, estilosIa as base } from "./CajaIa.jsx";
 import { useIa } from "./useIa.js";
@@ -12,7 +13,7 @@ async function perfilTrabajo() {
   if (!r) return "";
   const { correo: _c, telefono: _t, ...cv } = r.datos ?? {};
   return [
-    cvBase?.texto ? `${cv.nombre ?? ""}\n${cv.titular ?? ""}\n\n${cvBase.texto}` : `CV: ${JSON.stringify(cv)}`,
+    cvBase?.texto ? encabezadoDe(cvBase.texto).cuerpo : `CV: ${JSON.stringify(cv)}`,
     r.habilidades?.length ? `Lo que domina de verdad (temas en verde): ${r.habilidades.map((h) => h.nombre ?? h).join(", ")}` : "",
   ]
     .filter(Boolean)

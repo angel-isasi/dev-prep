@@ -1,7 +1,7 @@
 // Hacer el CV de una oferta (a pedido o solo) y guardarlo junto a ella. La IA adapta tu CV base sin
 // inventar (ver la tarea "cv-oferta" en server/ia-tareas.js); qué ofertas reciben su CV solas lo decide
 // ofertasParaCvAuto (server/cv-oferta.js), sin IA.
-import { ofertasParaCvAuto, resumenBusqueda } from "../../../server/cv-oferta.js";
+import { encabezadoDe, ofertasParaCvAuto, resumenBusqueda } from "../../../server/cv-oferta.js";
 import { api } from "./api.js";
 import { claveIa, pedirIa } from "./ia.js";
 import { ES_VISITA } from "./visita.js";
@@ -16,8 +16,10 @@ const hoy = () => {
  * @param {{ id: string, oferta: string, titulo?: string, empresa?: string, url?: string, puntaje?: number, fuente?: string, auto?: boolean }} o
  */
 export async function generarCvOferta(o) {
-  const [base, perfil] = await Promise.all([api.cvBase(), api.cv()]);
-  const cv = await pedirIa({ tarea: "cv-oferta", base: base.texto, nombre: perfil.datos?.nombre, oferta: o.oferta });
+  const base = await api.cvBase();
+  const { nombre, cuerpo } = encabezadoDe(base.texto);
+  // Solo el cuerpo: tus datos de contacto no viajan a la IA (el encabezado lo pone la app)
+  const cv = await pedirIa({ tarea: "cv-oferta", base: cuerpo, nombre, oferta: o.oferta });
   const registro = {
     creado: new Date().toISOString(),
     fecha: hoy(),

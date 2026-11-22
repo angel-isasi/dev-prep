@@ -13,7 +13,25 @@ export const MAX_CV_AUTO_DIA = 2;
 /** Puntaje desde el que una oferta cuenta como "buena" en el resumen para Aksu. */
 export const PUNTAJE_BUENA = 65;
 
-export const CV_BASE_INICIAL = `# PERFIL
+/**
+ * Formato del CV base: las primeras líneas (antes del primer "#") son el encabezado: tu nombre, tu
+ * titular y tus datos de contacto. Después, cada "# Sección" y, dentro, cada "## Puesto".
+ */
+export function encabezadoDe(texto = "") {
+  const corte = texto.search(/^# /m);
+  const lineas = (corte === -1 ? "" : texto.slice(0, corte))
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
+  return { nombre: lineas[0] ?? "", titular: lineas[1] ?? "", contacto: lineas.slice(2), cuerpo: corte === -1 ? texto : texto.slice(corte) };
+}
+
+export const CV_BASE_INICIAL = `Angel Fernando Isasi Oyolo
+Estudiante de Ingeniería de Sistemas | Desarrollo Frontend
+Ica, Perú
+LinkedIn: linkedin.com/in/angel-isasi-oyolo • GitHub: github.com/angel-isasi • Portafolio: angel-isasi.com
+
+# PERFIL
 Estudiante de 5.º ciclo de Ingeniería de Sistemas en la UNICA, orientado al desarrollo frontend. Entrego sitios web a clientes reales como freelance, trabajo en equipo en un portal universitario en producción y practico a diario con una app propia de preparación técnica. Busco mi primera experiencia práctica para aportar en el desarrollo y la mejora de plataformas web dentro de un equipo.
 
 # EXPERIENCIA

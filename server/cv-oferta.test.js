@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CV_BASE_INICIAL, idOfertaPegada, ofertasParaCvAuto, resumenBusqueda, tocaResumenBusqueda } from "./cv-oferta.js";
+import { CV_BASE_INICIAL, encabezadoDe, idOfertaPegada, ofertasParaCvAuto, resumenBusqueda, tocaResumenBusqueda } from "./cv-oferta.js";
 import { armarPedido } from "./ia.js";
 import { TAREAS } from "./ia-tareas.js";
 
@@ -51,5 +51,20 @@ describe("CV para cada oferta", () => {
     expect(p.mensaje).toContain("Su CV base");
     expect(p.mensaje).toContain("Practicante Full Stack");
     expect(p.sistema).toContain("NO INVENTES NADA");
+  });
+});
+
+describe("encabezado del CV base", () => {
+  it("separa nombre, titular y contacto del cuerpo", () => {
+    const e = encabezadoDe("Ana Pérez\nFrontend Jr\nLima • 999\nGitHub: x\n\n# PERFIL\nHola");
+    expect(e.nombre).toBe("Ana Pérez");
+    expect(e.titular).toBe("Frontend Jr");
+    expect(e.contacto).toEqual(["Lima • 999", "GitHub: x"]);
+    expect(e.cuerpo).toBe("# PERFIL\nHola");
+  });
+
+  it("sin encabezado, todo es cuerpo", () => {
+    expect(encabezadoDe("# PERFIL\nHola")).toMatchObject({ nombre: "", contacto: [], cuerpo: "# PERFIL\nHola" });
+    expect(encabezadoDe(CV_BASE_INICIAL).nombre).toBe("Angel Fernando Isasi Oyolo");
   });
 });

@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import { api } from "../../lib/api.js";
 import { generarCvOferta } from "../../lib/cv-oferta.js";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
+import { encabezadoDe } from "../../../../server/cv-oferta.js";
 import base from "./Trabajo.module.css";
 import estilos from "./CvOferta.module.css";
 
@@ -73,7 +74,7 @@ export function PaginaCvOferta() {
 
   useEffect(() => {
     api.cvOferta(id).then(setRegistro);
-    api.cv().then((r) => setPerfil(r.datos));
+    api.cvBase().then((b) => setPerfil(encabezadoDe(b.texto)));
   }, [id]);
 
   if (registro === undefined || !perfil) return <Esqueleto variante="texto" />;
@@ -137,8 +138,11 @@ export function PaginaCvOferta() {
         <article className={`${base.hoja} ${estilos.hoja}`}>
           <h1>{perfil.nombre || "Tu nombre"}</h1>
           <p className={base.titular}>{cv.titular}</p>
-          <p className={base.contacto}>{[perfil.ciudad, perfil.telefono, perfil.correo].filter(Boolean).join(" • ")}</p>
-          <p className={base.contacto}>{[perfil.linkedin, perfil.github, perfil.portafolio].filter(Boolean).join(" • ")}</p>
+          {perfil.contacto.map((l) => (
+            <p key={l} className={base.contacto}>
+              {l}
+            </p>
+          ))}
           {cv.perfil && (
             <>
               <h2>Perfil</h2>
