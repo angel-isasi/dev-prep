@@ -32,24 +32,31 @@ Ica, Perú
 LinkedIn: linkedin.com/in/angel-isasi-oyolo • GitHub: github.com/angel-isasi • Portafolio: angel-isasi.com
 
 # PERFIL
-Estudiante de 5.º ciclo de Ingeniería de Sistemas en la UNICA, orientado al desarrollo web. Formo parte del equipo de desarrollo del portal RIMAY de la universidad y he entregado sitios web a clientes reales como freelance. Complemento mi formación con cursos especializados y busco seguir creciendo dentro de un equipo, en modalidad remota.
+Estudiante de 5.º ciclo de Ingeniería de Sistemas en la UNICA, orientado al desarrollo web. Formo parte del equipo de desarrollo del portal RIMAY de la universidad, entrego sitios web a clientes reales como freelance y busco seguir creciendo dentro de un equipo, en modalidad remota.
 
 # EXPERIENCIA
 ## Practicante de Desarrollo Web: RIMAY, portal de la UNICA | Nov 2026 – Actualidad
 Facultad de Ciencias de la Comunicación, Turismo y Arqueología. Equipo de 3 estudiantes.
 - Desarrollo del módulo de votación del Festival de Cortos con Laravel, Filament y MariaDB: inicio de sesión con Google (OAuth / Socialite) y protección antibots con Cloudflare Turnstile en el endpoint de votos.
-- Configuración del proyecto de Google Cloud y de Cloudflare a nombre del portal, y pruebas de extremo a extremo del flujo de votación.
+- Configuración de Google Cloud y Cloudflare para el portal, y pruebas de extremo a extremo del flujo de votación.
 - Integración continua con GitHub Actions para ejecutar las pruebas (PHPUnit) en cada pull request. Trabajo con ramas por tarea, commits convencionales y revisión cruzada de código.
-- Propuesta de rediseño del portal con Next.js, TypeScript, Tailwind CSS y Sanity (CMS) en Vercel, con editor de páginas por bloques para personal no técnico.
+- Propuesta de rediseño del portal con Next.js, TypeScript, Tailwind CSS y Sanity (CMS) en Vercel.
 
 ## Desarrollador Web Freelance | 2026 – Actualidad
 Clientes en Guatemala, modalidad remota.
 - La Silenciosa (lasilenciosa.com): sitio web de un restaurante con catálogo de productos y pedidos vía WhatsApp, con Next.js y despliegue en Vercel. En producción, con mantenimiento mensual a mi cargo.
 
 # PROYECTOS
-- dev-prep (dev-prep.angel-isasi.com): app web propia para preparar entrevistas frontend, que uso a diario: ejercicios con pruebas automáticas (Vitest), instalable en el celular (PWA) y progreso sincronizado con AWS Lambda y DynamoDB. React, TypeScript y Node.js.
-- Mini OneDrive en AWS (en desarrollo): plataforma serverless de almacenamiento de archivos con Cognito, S3, API Gateway, Lambda (Node.js), DynamoDB y CloudFront. Participé en el diseño de la arquitectura y construí una versión de práctica propia con infraestructura como código (AWS CDK), despliegue automático con GitHub Actions y pruebas en CI.
-- Sistema de turnos UNICA (en desarrollo): aplicación web para la gestión de turnos con React y FastAPI + MySQL. Responsable de la arquitectura y del frontend.
+## dev-prep: plataforma propia para prepararme como desarrollador frontend | 2026 – Actualidad
+dev-prep.angel-isasi.com · React, TypeScript, Node.js, AWS Lambda y DynamoDB, Vercel, API de Claude
+- Más de 500 ejercicios (JavaScript, React, TypeScript, Node.js, algoritmos) con pruebas en Vitest que corren en vivo al guardar en VS Code, y repaso espaciado.
+- Tutor con IA (API de Claude en funciones serverless de Vercel): corrige ejercicios, simula entrevistas por voz y adapta mi CV a cada oferta sin inventar datos.
+- Buscador de ofertas que junta bolsas de empleo y alertas de LinkedIn y Glassdoor leídas de Gmail (Apps Script) y las puntúa según mi perfil.
+- PWA que funciona sin internet, progreso sincronizado en AWS, más de 650 pruebas automáticas y política de seguridad (CSP).
+
+## Otros proyectos
+- Mini OneDrive en AWS (en desarrollo): almacenamiento serverless con Cognito, S3, Lambda, DynamoDB y CloudFront; diseño de la arquitectura y versión propia con AWS CDK y CI en GitHub Actions.
+- Sistema de turnos UNICA (en desarrollo): React y FastAPI + MySQL; responsable de la arquitectura y del frontend.
 - Portafolio personal (angel-isasi.com): Next.js y Tailwind CSS en Vercel, con dominio propio en Cloudflare.
 
 # EDUCACIÓN
@@ -66,8 +73,7 @@ Idiomas: Español (nativo), Inglés (intermedio)
 
 # CURSOS Y CERTIFICADOS
 - AWS Cloud Practitioner Essentials (curso): AWS Skill Builder, 2026
-- JavaScript: The Hard Parts, v3: Frontend Masters, 2026
-- Complete Intro to Web Development v3: Frontend Masters, 2026
+- JavaScript: The Hard Parts, v3 y Complete Intro to Web Development v3: Frontend Masters, 2026
 - Scrum Fundamentals Certified (SFC): SCRUMstudy, 2026
 - Upper Intermediate English B2: Platzi, 2026
 `;

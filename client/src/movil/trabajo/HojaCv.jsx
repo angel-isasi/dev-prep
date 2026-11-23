@@ -8,14 +8,14 @@
 
 /** Estilos de la hoja: los mismos en pantalla y en el PDF. */
 export const CSS_HOJA = `
-.cv-hoja { box-sizing: border-box; width: 100%; max-width: 595pt; padding: 40pt 62.7pt 34pt; background: #fff; color: #1a1a1a;
+.cv-hoja { box-sizing: border-box; width: 100%; max-width: 595pt; padding: 30pt 62.7pt 20pt; background: #fff; color: #1a1a1a;
   font-family: Helvetica, Arial, sans-serif; font-size: 9pt; line-height: 12.2pt; text-align: left; }
 .cv-hoja * { box-sizing: border-box; font-family: inherit; letter-spacing: normal; }
 .cv-hoja h1 { margin: 0; color: #1a1a1a; font-size: 16pt; font-weight: 700; line-height: 19pt; }
 .cv-hoja .cv-titular { margin: 2pt 0 0; color: #444; font-size: 10.5pt; line-height: 13pt; }
 .cv-hoja .cv-contacto { margin: 0; color: #444; font-size: 8.5pt; line-height: 11.5pt; }
 .cv-hoja .cv-titular + .cv-contacto { margin-top: 2pt; }
-.cv-hoja h2 { margin: 8pt 0 4pt; padding-bottom: 2.6pt; border-bottom: 0.6pt solid #999; color: #1a1a1a; font-size: 10.5pt; font-weight: 700; line-height: 13pt; text-transform: uppercase; break-after: avoid; }
+.cv-hoja h2 { margin: 7pt 0 3.5pt; padding-bottom: 2.6pt; border-bottom: 0.6pt solid #999; color: #1a1a1a; font-size: 10.5pt; font-weight: 700; line-height: 13pt; text-transform: uppercase; break-after: avoid; }
 .cv-hoja p { margin: 0; }
 .cv-hoja .cv-texto { text-align: justify; }
 .cv-hoja .cv-puesto { margin: 5pt 0 0; font-size: 9.5pt; font-weight: 700; line-height: 12.5pt; break-after: avoid; }
@@ -23,10 +23,10 @@ export const CSS_HOJA = `
 .cv-hoja .cv-lugar { color: #444; font-size: 8.7pt; font-style: italic; line-height: 11.5pt; }
 .cv-hoja ul { margin: 2pt 0 0; padding: 0; list-style: none; }
 .cv-hoja h2 + ul { margin-top: 0; }
-.cv-hoja li { position: relative; margin: 0 0 1.5pt; padding-left: 10.5pt; line-height: 12pt; text-align: justify; break-inside: avoid; }
+.cv-hoja li { position: relative; margin: 0 0 1pt; padding-left: 10.5pt; line-height: 12pt; text-align: justify; break-inside: avoid; }
 .cv-hoja li::before { content: "•"; position: absolute; left: 1pt; top: 0; font-size: 10pt; }
 .cv-hoja table { margin-left: 1pt; border-collapse: collapse; }
-.cv-hoja td { padding: 0 0 3pt; font-size: 8.8pt; line-height: 11.5pt; vertical-align: top; }
+.cv-hoja td { padding: 0 0 2pt; font-size: 8.8pt; line-height: 11.5pt; vertical-align: top; }
 .cv-hoja td:first-child { width: 87.9pt; padding-right: 6pt; font-weight: 700; }
 `;
 
