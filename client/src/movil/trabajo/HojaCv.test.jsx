@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CV_BASE_INICIAL, encabezadoDe } from "../../../../server/cv-oferta.js";
-import { nombreArchivo, seccionesDeCv, seccionesDeTexto } from "./HojaCv.jsx";
+import { conNombre, nombreArchivo, seccionesDeCv, seccionesDeTexto } from "./HojaCv.jsx";
 
 describe("hoja del CV", () => {
   it("el CV base se arma en secciones con puestos, viñetas y la tabla de habilidades", () => {
@@ -38,5 +38,13 @@ describe("hoja del CV", () => {
   it("el nombre del PDF", () => {
     expect(nombreArchivo("Angel Fernando Isasi Oyolo")).toBe("CV_Angel_Isasi_Oyolo");
     expect(nombreArchivo("Angel Fernando Isasi Oyolo", "Seguros Falabella")).toBe("CV_Angel_Isasi_Oyolo_Seguros_Falabella");
+  });
+});
+
+describe("negrita del nombre en viñetas", () => {
+  it("pone en negrita el nombre corto antes de los dos puntos, no una oración", () => {
+    expect(conNombre("La Silenciosa (lasilenciosa.com): sitio web")).toBe("**La Silenciosa (lasilenciosa.com)**: sitio web");
+    expect(conNombre("Desarrollo del módulo de votación del Festival de Cortos con Laravel, Filament: x")).toMatch(/^Desarrollo/);
+    expect(conNombre("Integración continua con GitHub Actions para ejecutar las pruebas. Trabajo: x")).toMatch(/^Integración/);
   });
 });

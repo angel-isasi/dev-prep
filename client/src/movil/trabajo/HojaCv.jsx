@@ -8,23 +8,26 @@
 
 /** Estilos de la hoja: los mismos en pantalla y en el PDF. */
 export const CSS_HOJA = `
-.cv-hoja { box-sizing: border-box; width: 100%; max-width: 210mm; padding: 12mm 15mm; background: #fff; color: #000;
-  font-family: Arial, Helvetica, sans-serif; font-size: 9.5pt; line-height: 1.27; text-align: left; }
-.cv-hoja * { box-sizing: border-box; font-family: inherit; color: inherit; letter-spacing: normal; }
-.cv-hoja h1 { margin: 0; font-size: 20pt; font-weight: 700; line-height: 1.15; }
-.cv-hoja .cv-titular { margin: 2px 0 2px; color: #555; font-size: 12pt; }
-.cv-hoja .cv-contacto { margin: 0; color: #555; font-size: 8.5pt; }
-.cv-hoja h2 { margin: 9px 0 4px; padding-bottom: 1px; border-bottom: 1px solid #000; font-size: 11.5pt; font-weight: 700; text-transform: uppercase; break-after: avoid; }
-.cv-hoja p { margin: 0 0 3px; }
+.cv-hoja { box-sizing: border-box; width: 100%; max-width: 595pt; padding: 40pt 62.7pt 34pt; background: #fff; color: #1a1a1a;
+  font-family: Helvetica, Arial, sans-serif; font-size: 9pt; line-height: 12.2pt; text-align: left; }
+.cv-hoja * { box-sizing: border-box; font-family: inherit; letter-spacing: normal; }
+.cv-hoja h1 { margin: 0; color: #1a1a1a; font-size: 16pt; font-weight: 700; line-height: 19pt; }
+.cv-hoja .cv-titular { margin: 2pt 0 0; color: #444; font-size: 10.5pt; line-height: 13pt; }
+.cv-hoja .cv-contacto { margin: 0; color: #444; font-size: 8.5pt; line-height: 11.5pt; }
+.cv-hoja .cv-titular + .cv-contacto { margin-top: 2pt; }
+.cv-hoja h2 { margin: 8pt 0 4pt; padding-bottom: 2.6pt; border-bottom: 0.6pt solid #999; color: #1a1a1a; font-size: 10.5pt; font-weight: 700; line-height: 13pt; text-transform: uppercase; break-after: avoid; }
+.cv-hoja p { margin: 0; }
 .cv-hoja .cv-texto { text-align: justify; }
-.cv-hoja .cv-puesto { margin: 6px 0 0; font-weight: 700; break-after: avoid; }
-.cv-hoja h2 + .cv-puesto { margin-top: 0; }
-.cv-hoja .cv-lugar { margin: 0 0 2px; color: #555; font-style: italic; }
-.cv-hoja ul { margin: 0 0 3px; padding-left: 16px; }
-.cv-hoja li { margin: 0 0 1px; text-align: justify; break-inside: avoid; }
-.cv-hoja table { border-collapse: collapse; }
-.cv-hoja td { padding: 0 0 2px; vertical-align: top; }
-.cv-hoja td:first-child { width: 36mm; padding-right: 10px; font-weight: 700; white-space: nowrap; }
+.cv-hoja .cv-puesto { margin: 5pt 0 0; font-size: 9.5pt; font-weight: 700; line-height: 12.5pt; break-after: avoid; }
+.cv-hoja h2 + .cv-puesto { margin-top: 1pt; }
+.cv-hoja .cv-lugar { color: #444; font-size: 8.7pt; font-style: italic; line-height: 11.5pt; }
+.cv-hoja ul { margin: 2pt 0 0; padding: 0; list-style: none; }
+.cv-hoja h2 + ul { margin-top: 0; }
+.cv-hoja li { position: relative; margin: 0 0 1.5pt; padding-left: 10.5pt; line-height: 12pt; text-align: justify; break-inside: avoid; }
+.cv-hoja li::before { content: "•"; position: absolute; left: 1pt; top: 0; font-size: 10pt; }
+.cv-hoja table { margin-left: 1pt; border-collapse: collapse; }
+.cv-hoja td { padding: 0 0 3pt; font-size: 8.8pt; line-height: 11.5pt; vertical-align: top; }
+.cv-hoja td:first-child { width: 87.9pt; padding-right: 6pt; font-weight: 700; }
 `;
 
 // En el PDF: hoja A4 sin márgenes del navegador (así no salen la fecha ni la dirección); el margen lo
@@ -108,6 +111,13 @@ export function seccionesDeCv(cv) {
   return s;
 }
 
+/** En Experiencia y Proyectos, el nombre antes de los dos puntos va en negrita ("**La Silenciosa**: ..."). */
+const RESALTAR = /experiencia|proyecto/i;
+export function conNombre(texto) {
+  if (texto.includes("**")) return texto;
+  return texto.replace(/^([^:]{2,45}?):\s/, (todo, nombre) => (/[,.;]/.test(nombre.replace(/\([^)]*\)/g, "")) ? todo : `**${nombre}**: `));
+}
+
 /** "**así**" en negrita; lo demás, texto tal cual. */
 function Linea({ texto }) {
   return String(texto)
@@ -115,14 +125,14 @@ function Linea({ texto }) {
     .map((parte, i) => (/^\*\*[^*]+\*\*$/.test(parte) ? <strong key={i}>{parte.slice(2, -2)}</strong> : parte.replace(/\*\*/g, "")));
 }
 
-function Bloque({ b }) {
+function Bloque({ b, resaltar }) {
   if (b.tipo === "puesto") return <p className="cv-puesto"><Linea texto={b.texto} /></p>;
   if (b.tipo === "lugar") return <p className="cv-lugar"><Linea texto={b.texto} /></p>;
   if (b.tipo === "lista")
     return (
       <ul>
         {b.items.map((x, i) => (
-          <li key={i}><Linea texto={x} /></li>
+          <li key={i}><Linea texto={resaltar ? conNombre(x) : x} /></li>
         ))}
       </ul>
     );
@@ -160,7 +170,7 @@ export function HojaCv({ cabeza, secciones, hojaRef, className = "" }) {
           <section key={i}>
             {s.titulo && <h2>{s.titulo}</h2>}
             {s.bloques.map((b, j) => (
-              <Bloque key={j} b={b} />
+              <Bloque key={j} b={b} resaltar={RESALTAR.test(s.titulo)} />
             ))}
           </section>
         ))}
