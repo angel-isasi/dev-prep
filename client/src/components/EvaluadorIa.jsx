@@ -3,7 +3,7 @@
 // Habla con la función de Vercel (lib/ia.js). Si la IA no está configurada, solo muestra un aviso.
 import { useEffect, useRef, useState } from "react";
 import { api } from "../lib/api.js";
-import { claveIa, estadoIa, guardarClaveIa, guardarTopeIa, pedirIa, quienSoyIa, topeIa, usoIa } from "../lib/ia.js";
+import { claveIa, estadoIa, guardarClaveIa, guardarTopeIa, pedirIa, quienSoyIa, registroIa, topeIa, usoIa } from "../lib/ia.js";
 import { dictar, hablar, hayVoz, microDisponible } from "../lib/voz.js";
 import { IconoAudio, IconoChispa, IconoMicrofono } from "./Iconos.jsx";
 import { TextoConCodigo } from "./TextoConCodigo.jsx";
@@ -135,7 +135,39 @@ export function UsoIa() {
       <small>
         Al llegar al tope la app deja de pedir evaluaciones. La cuenta es de este navegador: el gasto exacto está en la consola de la API.
       </small>
+      <RegistroIa />
     </details>
+  );
+}
+
+const HORA = new Intl.DateTimeFormat("es-PE", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+
+/** En qué se gastó: los últimos pedidos con su hora (de Perú), para qué fueron, el modelo y el costo. */
+function RegistroIa() {
+  const filas = registroIa().slice(0, 20);
+  if (!filas.length) return <small>Todavía no hay pedidos anotados.</small>;
+  return (
+    <table className={estilos.registro}>
+      <caption>Últimos pedidos</caption>
+      <thead>
+        <tr>
+          <th>Cuándo</th>
+          <th>Para qué</th>
+          <th>Modelo</th>
+          <th>USD</th>
+        </tr>
+      </thead>
+      <tbody>
+        {filas.map((f, i) => (
+          <tr key={i}>
+            <td>{HORA.format(new Date(f.fecha))}</td>
+            <td>{f.tarea}</td>
+            <td>{f.modelo}</td>
+            <td>{f.usd.toFixed(3)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
 

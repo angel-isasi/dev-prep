@@ -37,6 +37,26 @@ export function registrarUso(uso) {
   return nuevo;
 }
 
+const CLAVE_REGISTRO = "devprep.iaRegistro";
+const MAX_REGISTRO = 60;
+
+/** Los últimos pedidos, del más nuevo al más viejo: { fecha, tarea, modelo, usd }. Así se sabe en qué se gastó. */
+export function registroIa() {
+  try {
+    const lista = JSON.parse(localStorage.getItem(CLAVE_REGISTRO) ?? "[]");
+    return Array.isArray(lista) ? lista : [];
+  } catch {
+    return [];
+  }
+}
+
+/** Anota un pedido en el registro (solo los últimos 60). */
+export function anotarPedido(tarea, uso, fecha = new Date()) {
+  const fila = { fecha: fecha.toISOString(), tarea: String(tarea ?? ""), modelo: (uso?.modelo ?? "").replace(/^claude-|-\d.*$/g, ""), usd: costoUsd(uso) };
+  localStorage.setItem(CLAVE_REGISTRO, JSON.stringify([fila, ...registroIa()].slice(0, MAX_REGISTRO)));
+  return fila;
+}
+
 export function topeIa() {
   const valor = Number(localStorage.getItem(CLAVE_TOPE));
   return valor > 0 ? valor : TOPE_POR_DEFECTO;
@@ -115,6 +135,7 @@ export async function pedirIa(pedido) {
   // El gasto se anota también cuando la respuesta no sirvió (cortada o mal formada): ese pedido igual se cobró
   if (datos.uso) {
     registrarUso(datos.uso);
+    anotarPedido(pedido.tarea, datos.uso);
     ultimo = datos.uso.modelo ?? null;
   }
   if (!r.ok) throw new Error(datos.error ?? "No se pudo evaluar. Inténtalo otra vez.");
