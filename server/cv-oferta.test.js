@@ -8,7 +8,7 @@ const oferta = (id, puntaje, extra = {}) => ({ id, titulo: `Puesto ${id}`, empre
 describe("CV para cada oferta", () => {
   it("el CV base no lleva teléfono ni correo (el repositorio es público)", () => {
     expect(CV_BASE_INICIAL).not.toMatch(/@gmail|\d{3} \d{3} \d{3}/);
-    expect(CV_BASE_INICIAL).toContain("Rimay");
+    expect(CV_BASE_INICIAL).toContain("RIMAY");
   });
 
   it("una oferta pegada tiene siempre el mismo id", () => {

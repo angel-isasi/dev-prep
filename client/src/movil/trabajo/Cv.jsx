@@ -1,12 +1,12 @@
 // Mi CV, todo en un lugar: tu CV base (con tu nombre y tus datos arriba) (de donde la IA hace el CV de cada oferta)
 // con su hoja lista para descargar en PDF, los CV que ya hiciste para ofertas, mensajes para copiar y la
 // revisión con IA. Una columna, simple y legible por los filtros automáticos de las empresas (ATS).
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RevisarCv } from "../../components/ia/TrabajoIa.jsx";
-import { Markdown } from "../../components/Markdown.jsx";
 import { api } from "../../lib/api.js";
 import { CV_BASE_INICIAL, encabezadoDe, MAX_CV_AUTO_DIA } from "../../../../server/cv-oferta.js";
 import { ListaCvsOferta } from "./CvOferta.jsx";
+import { descargarPdf, HojaCv, nombreArchivo, seccionesDeTexto } from "./HojaCv.jsx";
 import estilos from "./Trabajo.module.css";
 import propio from "./CvOferta.module.css";
 import { Esqueleto } from "../../components/Esqueleto.jsx";
@@ -29,12 +29,10 @@ const MENSAJES = [
   },
 ];
 
-/** En la hoja, cada "# Sección" del CV base es un subtítulo y cada "## Puesto" una línea en negrita. */
-const paraHoja = (texto) => texto.replace(/^## /gm, "### ").replace(/^# /gm, "## ");
-
 export function Cv() {
   const [cvBase, setCvBase] = useState(null);
   const [guardado, setGuardado] = useState(false);
+  const hoja = useRef(null);
 
   useEffect(() => {
     api.cvBase().then(setCvBase);
@@ -71,7 +69,7 @@ export function Cv() {
           <button type="submit" className="boton boton-primario">
             Guardar
           </button>
-          <button type="button" className="boton" onClick={() => window.print()}>
+          <button type="button" className="boton" onClick={() => descargarPdf(hoja.current, nombreArchivo(cabeza.nombre))}>
             Descargar PDF
           </button>
           {cvBase.texto !== CV_BASE_INICIAL && (
@@ -84,16 +82,7 @@ export function Cv() {
       </form>
 
       {/* Vista previa: es lo que se imprime (tu CV general, sin adaptar a ninguna oferta) */}
-      <article className={`${estilos.hoja} ${propio.hojaBase}`}>
-        <h1>{cabeza.nombre || "Tu nombre"}</h1>
-        {cabeza.titular && <p className={estilos.titular}>{cabeza.titular}</p>}
-        {cabeza.contacto.map((l) => (
-          <p key={l} className={estilos.contacto}>
-            {l}
-          </p>
-        ))}
-        <Markdown>{paraHoja(cabeza.cuerpo)}</Markdown>
-      </article>
+      <HojaCv hojaRef={hoja} cabeza={cabeza} secciones={seccionesDeTexto(cabeza.cuerpo)} />
 
       <div className={`${propio.debajo} ${estilos.noImprimir}`}>
         <ListaCvsOferta />

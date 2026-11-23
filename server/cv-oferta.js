@@ -27,54 +27,49 @@ export function encabezadoDe(texto = "") {
 }
 
 export const CV_BASE_INICIAL = `Angel Fernando Isasi Oyolo
-Estudiante de Ingeniería de Sistemas | Desarrollo Frontend
+Estudiante de Ingeniería de Sistemas | Desarrollo Web
 Ica, Perú
 LinkedIn: linkedin.com/in/angel-isasi-oyolo • GitHub: github.com/angel-isasi • Portafolio: angel-isasi.com
 
 # PERFIL
-Estudiante de 5.º ciclo de Ingeniería de Sistemas en la UNICA, orientado al desarrollo frontend. Entrego sitios web a clientes reales como freelance, trabajo en equipo en un portal universitario en producción y practico a diario con una app propia de preparación técnica. Busco mi primera experiencia práctica para aportar en el desarrollo y la mejora de plataformas web dentro de un equipo.
+Estudiante de 5.º ciclo de Ingeniería de Sistemas en la UNICA, orientado al desarrollo web. Formo parte del equipo de desarrollo del portal RIMAY de la universidad y he entregado sitios web a clientes reales como freelance. Complemento mi formación con cursos especializados y busco seguir creciendo dentro de un equipo, en modalidad remota.
 
 # EXPERIENCIA
-## Desarrollador web en equipo | Rimay, portal de la Facultad de Ciencias de la Comunicación, Turismo y Arqueología (UNICA) | 2026 – Actualidad
-rimay.lat · equipo de 3 desarrolladores
-- Módulo Festival de Cortometrajes UNICA 2026: publicación simultánea de los cortos, votación con cuenta de Google y estadísticas por video. En producción desde el 17/11/2026.
-- Responsable de votación, seguridad y pruebas: revisión del flujo de voto con Google OAuth, protección contra bots con Cloudflare Turnstile y límites por persona.
-- Integración continua con PHPUnit (pruebas automáticas en cada pull request) y revisión cruzada de código entre el equipo.
-- Stack: Laravel (PHP), MariaDB/MySQL, Alpine.js, Tailwind CSS, Docker; trabajo con ramas y pull requests en GitHub.
+## Practicante de Desarrollo Web: RIMAY, portal de la UNICA | Nov 2026 – Actualidad
+Facultad de Ciencias de la Comunicación, Turismo y Arqueología. Equipo de 3 estudiantes.
+- Desarrollo del módulo de votación del Festival de Cortos con Laravel, Filament y MariaDB: inicio de sesión con Google (OAuth / Socialite) y protección antibots con Cloudflare Turnstile en el endpoint de votos.
+- Configuración del proyecto de Google Cloud y de Cloudflare a nombre del portal, y pruebas de extremo a extremo del flujo de votación.
+- Integración continua con GitHub Actions para ejecutar las pruebas (PHPUnit) en cada pull request. Trabajo con ramas por tarea, commits convencionales y revisión cruzada de código.
+- Propuesta de rediseño del portal con Next.js, TypeScript, Tailwind CSS y Sanity (CMS) en Vercel, con editor de páginas por bloques para personal no técnico.
 
-## Desarrollador web freelance | Clientes en Guatemala, remoto | 2026 – Actualidad
-- La Silenciosa (lasilenciosa.com): sitio de un restaurante con catálogo de productos y pedidos por WhatsApp, con Next.js y CSS, desplegado en Vercel. En producción, con mantenimiento mensual a mi cargo.
-- Landing de productos para La Silenciosa (en desarrollo): nueva sección del sitio.
-- Landing page de un ebook: página de venta con Next.js y Tailwind CSS, animaciones al desplazarse con IntersectionObserver, desplegada en Vercel.
+## Desarrollador Web Freelance | 2026 – Actualidad
+Clientes en Guatemala, modalidad remota.
+- La Silenciosa (lasilenciosa.com): sitio web de un restaurante con catálogo de productos y pedidos vía WhatsApp, con Next.js y despliegue en Vercel. En producción, con mantenimiento mensual a mi cargo.
 
 # PROYECTOS
-- dev-prep (dev-prep.angel-isasi.com · github.com/angel-isasi/dev-prep): app que uso a diario para prepararme para entrevistas frontend: ejercicios con tests en vivo (Vitest) al guardar en VS Code, PWA instalable en el celular y progreso sincronizado con AWS Lambda y DynamoDB. React, Vite, Node.js/Express, TypeScript.
-- Portafolio personal (angel-isasi.com): Next.js y Tailwind CSS, desplegado en Vercel con dominio propio en Cloudflare.
-- Sistema de turnos UNICA: gestión de turnos para servicios administrativos de la universidad. Responsable de la arquitectura y el frontend (React, Vite, Tailwind CSS); backend con FastAPI y MySQL en desarrollo.
-- Mini OneDrive en AWS: almacenamiento de archivos serverless con autenticación, carpetas y papelera (Cognito, S3, API Gateway, Lambda, DynamoDB, CloudFront). Participé en el diseño de la arquitectura y los wireframes.
+- dev-prep (dev-prep.angel-isasi.com): app web propia para preparar entrevistas frontend, que uso a diario: ejercicios con pruebas automáticas (Vitest), instalable en el celular (PWA) y progreso sincronizado con AWS Lambda y DynamoDB. React, TypeScript y Node.js.
+- Mini OneDrive en AWS (en desarrollo): plataforma serverless de almacenamiento de archivos con Cognito, S3, API Gateway, Lambda (Node.js), DynamoDB y CloudFront. Participé en el diseño de la arquitectura y construí una versión de práctica propia con infraestructura como código (AWS CDK), despliegue automático con GitHub Actions y pruebas en CI.
+- Sistema de turnos UNICA (en desarrollo): aplicación web para la gestión de turnos con React y FastAPI + MySQL. Responsable de la arquitectura y del frontend.
+- Portafolio personal (angel-isasi.com): Next.js y Tailwind CSS en Vercel, con dominio propio en Cloudflare.
 
 # EDUCACIÓN
 ## Universidad Nacional San Luis Gonzaga (UNICA) | 2024 – Actualidad
 Ingeniería de Sistemas: 5.º ciclo
-## Formación complementaria | 2025 – Actualidad
-Cursos de desarrollo web en Frontend Masters y Platzi (JavaScript, React) y de cloud en AWS Skill Builder.
 
 # HABILIDADES
-- Con soltura: HTML, CSS, diseño responsivo, Git, GitHub, Vercel
-- En aprendizaje: JavaScript, React, Next.js, Tailwind CSS, TypeScript, Node.js
-- Nivel básico: Python, SQL, PHP (Laravel), pruebas con Vitest y PHPUnit, Docker, AWS (S3, Lambda), Cloudflare (DNS)
-- Herramientas: VS Code, Claude Code
-- Metodologías: Scrum, trabajo con ramas y pull requests
+Frontend: HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind CSS
+Backend y datos: PHP / Laravel, Node.js, Python / FastAPI, SQL (MySQL, SQL Server)
+Cloud: AWS (Lambda, S3, DynamoDB, Cognito, CDK), Vercel, Cloudflare
+Herramientas: Git, GitHub, GitHub Actions, VS Code, Claude Code
+Metodologías: Scrum, Jira
+Idiomas: Español (nativo), Inglés (intermedio)
 
 # CURSOS Y CERTIFICADOS
+- AWS Cloud Practitioner Essentials (curso): AWS Skill Builder, 2026
 - JavaScript: The Hard Parts, v3: Frontend Masters, 2026
 - Complete Intro to Web Development v3: Frontend Masters, 2026
-- AWS Cloud Practitioner Essentials (curso): AWS Skill Builder, 2026
 - Scrum Fundamentals Certified (SFC): SCRUMstudy, 2026
 - Upper Intermediate English B2: Platzi, 2026
-
-# IDIOMAS
-Español (nativo), Inglés (intermedio alto, B2)
 `;
 
 /** Un id corto y estable para una oferta pegada a mano (el mismo texto da el mismo id). */

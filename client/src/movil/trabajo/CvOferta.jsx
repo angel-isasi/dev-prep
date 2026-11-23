@@ -1,6 +1,6 @@
 // CV para cada oferta: el botón que lo hace (en cada oferta y en "¿Encontraste una oferta?"), la página
 // con el CV listo para descargar en PDF y, en Tu perfil, tu CV base y la lista de los que ya hiciste.
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
 import { api } from "../../lib/api.js";
 import { generarCvOferta } from "../../lib/cv-oferta.js";
@@ -8,6 +8,7 @@ import { Esqueleto } from "../../components/Esqueleto.jsx";
 import { encabezadoDe } from "../../../../server/cv-oferta.js";
 import base from "./Trabajo.module.css";
 import estilos from "./CvOferta.module.css";
+import { descargarPdf, HojaCv, nombreArchivo, seccionesDeCv } from "./HojaCv.jsx";
 
 /**
  * "Hacer mi CV para esta oferta" o, si ya existe, el enlace para verlo.
@@ -71,6 +72,7 @@ export function PaginaCvOferta() {
   const [rehaciendo, setRehaciendo] = useState(false);
   const [error, setError] = useState(null);
   const [copiado, setCopiado] = useState(false);
+  const hoja = useRef(null);
 
   useEffect(() => {
     api.cvOferta(id).then(setRegistro);
@@ -110,7 +112,7 @@ export function PaginaCvOferta() {
         <Link to="/trabajo?pestana=perfil&ver=cv" className="boton boton-fantasma">
           ← Mi CV
         </Link>
-        <button type="button" className="boton boton-primario" onClick={() => window.print()}>
+        <button type="button" className="boton boton-primario" onClick={() => descargarPdf(hoja.current, nombreArchivo(perfil.nombre, registro.empresa))}>
           Descargar PDF
         </button>
         <button type="button" className="boton" disabled={rehaciendo} onClick={rehacer}>
@@ -135,96 +137,7 @@ export function PaginaCvOferta() {
       </div>
 
       <div className={estilos.cuerpo}>
-        <article className={`${base.hoja} ${estilos.hoja}`}>
-          <h1>{perfil.nombre || "Tu nombre"}</h1>
-          <p className={base.titular}>{cv.titular}</p>
-          {perfil.contacto.map((l) => (
-            <p key={l} className={base.contacto}>
-              {l}
-            </p>
-          ))}
-          {cv.perfil && (
-            <>
-              <h2>Perfil</h2>
-              <p>{cv.perfil}</p>
-            </>
-          )}
-          {cv.experiencia?.length > 0 && (
-            <>
-              <h2>Experiencia</h2>
-              {cv.experiencia.map((x, i) => (
-                <div key={i} className={estilos.bloque}>
-                  <p className={estilos.cabeza}>
-                    <strong>{x.puesto}</strong>
-                    <span>{x.periodo}</span>
-                  </p>
-                  {x.lugar && <p className={estilos.lugar}>{x.lugar}</p>}
-                  <ul>
-                    {x.puntos.map((p, j) => (
-                      <li key={j}>{p}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </>
-          )}
-          {cv.proyectos?.length > 0 && (
-            <>
-              <h2>Proyectos</h2>
-              <ul>
-                {cv.proyectos.map((p, i) => (
-                  <li key={i}>
-                    <strong>{p.titulo}</strong>
-                    {p.enlace && ` (${p.enlace})`}: {p.texto}
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-          {cv.educacion?.length > 0 && (
-            <>
-              <h2>Educación</h2>
-              {cv.educacion.map((x, i) => (
-                <div key={i} className={estilos.bloque}>
-                  <p className={estilos.cabeza}>
-                    <strong>{x.titulo}</strong>
-                    <span>{x.periodo}</span>
-                  </p>
-                  {x.detalle && <p className={estilos.lugar}>{x.detalle}</p>}
-                </div>
-              ))}
-            </>
-          )}
-          {cv.habilidades?.length > 0 && (
-            <>
-              <h2>Habilidades</h2>
-              <dl className={estilos.habilidades}>
-                {cv.habilidades.map((h, i) => (
-                  <div key={i}>
-                    <dt>{h.grupo}</dt>
-                    <dd>{h.items}</dd>
-                  </div>
-                ))}
-                {cv.idiomas && (
-                  <div>
-                    <dt>Idiomas</dt>
-                    <dd>{cv.idiomas}</dd>
-                  </div>
-                )}
-              </dl>
-            </>
-          )}
-          {cv.cursos?.length > 0 && (
-            <>
-              <h2>Cursos y certificados</h2>
-              <ul>
-                {cv.cursos.map((c, i) => (
-                  <li key={i}>{c}</li>
-                ))}
-              </ul>
-            </>
-          )}
-        </article>
+        <HojaCv hojaRef={hoja} className={estilos.hoja} cabeza={{ nombre: perfil.nombre, titular: cv.titular || perfil.titular, contacto: perfil.contacto }} secciones={seccionesDeCv(cv)} />
 
         <aside className={`${estilos.lado} ${base.noImprimir}`}>
           <div className={base.panel}>
