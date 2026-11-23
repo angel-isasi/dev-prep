@@ -17,6 +17,7 @@ export const CSS_HOJA = `
 .cv-hoja .cv-titular + .cv-contacto { margin-top: 2pt; }
 .cv-hoja h2 { margin: 7pt 0 3.5pt; padding-bottom: 2.6pt; border-bottom: 0.6pt solid #999; color: #1a1a1a; font-size: 10.5pt; font-weight: 700; line-height: 13pt; text-transform: uppercase; break-after: avoid; }
 .cv-hoja p { margin: 0; }
+.cv-hoja a { color: inherit; text-decoration: underline; text-decoration-color: #999; text-underline-offset: 1.5pt; }
 .cv-hoja .cv-texto { text-align: justify; }
 .cv-hoja .cv-puesto { margin: 5pt 0 0; font-size: 9.5pt; font-weight: 700; line-height: 12.5pt; break-after: avoid; }
 .cv-hoja h2 + .cv-puesto { margin-top: 1pt; }
@@ -120,11 +121,29 @@ export function conNombre(texto) {
   return texto.replace(/^([^:]{2,45}?):\s/, (todo, nombre) => (/[,.;]/.test(nombre.replace(/\([^)]*\)/g, "")) ? todo : `**${nombre}**: `));
 }
 
-/** "**así**" en negrita; lo demás, texto tal cual. */
+/** Correos y direcciones web ("github.com/x", "lasilenciosa.com"), no "Next.js" ni "Node.js". */
+const ENLACE = /([\w.+-]+@[\w-]+(?:\.[\w-]+)+|(?:https?:\/\/)?(?:[\w-]+\.)+(?:com|pe|dev|io|app|me|net|org)(?:\/[^\s•|,;)]*)?)/;
+
+/** A dónde lleva cada enlace: los correos abren el correo, lo demás la web con https. */
+export function destinoDe(texto) {
+  if (texto.includes("@")) return `mailto:${texto}`;
+  return /^https?:\/\//.test(texto) ? texto : `https://${texto}`;
+}
+
+/** El texto con sus enlaces clicables: el reclutador llega de un clic, también desde el PDF. */
+function ConEnlaces({ texto }) {
+  return String(texto)
+    .split(new RegExp(ENLACE.source, "g"))
+    .map((parte, i) => (i % 2 ? <a key={i} href={destinoDe(parte)}>{parte}</a> : parte));
+}
+
+/** "**así**" en negrita; lo demás, texto tal cual (con sus enlaces). */
 function Linea({ texto }) {
   return String(texto)
     .split(/(\*\*[^*]+\*\*)/)
-    .map((parte, i) => (/^\*\*[^*]+\*\*$/.test(parte) ? <strong key={i}>{parte.slice(2, -2)}</strong> : parte.replace(/\*\*/g, "")));
+    .map((parte, i) =>
+      /^\*\*[^*]+\*\*$/.test(parte) ? <strong key={i}><ConEnlaces texto={parte.slice(2, -2)} /></strong> : <ConEnlaces key={i} texto={parte.replace(/\*\*/g, "")} />,
+    );
 }
 
 function Bloque({ b, resaltar }) {
@@ -166,7 +185,7 @@ export function HojaCv({ cabeza, secciones, hojaRef, className = "" }) {
         <h1>{cabeza.nombre || "Tu nombre"}</h1>
         {cabeza.titular && <p className="cv-titular">{cabeza.titular}</p>}
         {(cabeza.contacto ?? []).map((l) => (
-          <p key={l} className="cv-contacto">{l}</p>
+          <p key={l} className="cv-contacto"><ConEnlaces texto={l} /></p>
         ))}
         {secciones.map((s, i) => (
           <section key={i}>

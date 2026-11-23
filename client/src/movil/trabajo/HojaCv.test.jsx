@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CV_BASE_INICIAL, encabezadoDe } from "../../../../server/cv-oferta.js";
-import { conNombre, nombreArchivo, seccionesDeCv, seccionesDeTexto } from "./HojaCv.jsx";
+import { HojaCv, conNombre, nombreArchivo, seccionesDeCv, seccionesDeTexto } from "./HojaCv.jsx";
 
 describe("hoja del CV", () => {
   it("el CV base se arma en secciones con puestos, viñetas y la tabla de habilidades", () => {
@@ -39,6 +39,24 @@ describe("hoja del CV", () => {
   it("el nombre del PDF", () => {
     expect(nombreArchivo("Angel Fernando Isasi Oyolo")).toBe("CV_Angel_Isasi_Oyolo");
     expect(nombreArchivo("Angel Fernando Isasi Oyolo", "Seguros Falabella")).toBe("CV_Angel_Isasi_Oyolo_Seguros_Falabella");
+  });
+});
+
+describe("enlaces clicables del CV", () => {
+  it("LinkedIn, GitHub, la web y el correo llevan a su destino; Next.js no es enlace", async () => {
+    const { renderToStaticMarkup } = await import("react-dom/server");
+    const { createElement } = await import("react");
+    const html = renderToStaticMarkup(
+      createElement(HojaCv, {
+        cabeza: { nombre: "A", contacto: ["x@gmail.com • LinkedIn: linkedin.com/in/angel-isasi-oyolo • GitHub: github.com/angel-isasi"] },
+        secciones: [{ titulo: "Proyectos", bloques: [{ tipo: "lista", items: ["La Silenciosa (lasilenciosa.com): sitio con Next.js y Node.js"] }] }],
+      }),
+    );
+    expect(html).toContain('href="mailto:x@gmail.com"');
+    expect(html).toContain('href="https://linkedin.com/in/angel-isasi-oyolo"');
+    expect(html).toContain('href="https://github.com/angel-isasi"');
+    expect(html).toContain('href="https://lasilenciosa.com"');
+    expect(html).not.toMatch(/href="[^"]*\.js"/);
   });
 });
 
