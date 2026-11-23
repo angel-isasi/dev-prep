@@ -194,9 +194,14 @@ export function descargarPdf(hoja, nombre = "CV") {
   doc.write(`<!doctype html><html lang="es"><head><meta charset="utf-8"><title></title><style>${CSS_HOJA}${CSS_PDF}</style></head><body>${hoja.outerHTML}</body></html>`);
   doc.close();
   doc.title = nombre;
+  // Chrome toma el título de la pestaña (no el del iframe) como título del PDF y nombre del archivo:
+  // mientras se imprime, la pestaña se llama como el CV y después vuelve a su nombre.
+  const tituloAntes = document.title;
   const imprimir = () => {
+    document.title = nombre;
     marco.contentWindow.focus();
     marco.contentWindow.print();
+    document.title = tituloAntes;
     setTimeout(() => marco.remove(), 1000);
   };
   // Espera a que el documento tenga sus letras listas antes de imprimir
