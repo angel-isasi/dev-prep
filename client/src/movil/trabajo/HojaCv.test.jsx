@@ -9,8 +9,9 @@ describe("hoja del CV", () => {
     const exp = s[1].bloques.map((b) => b.tipo);
     expect(exp).toEqual(["puesto", "lugar", "lista", "puesto", "lugar", "lista"]);
     expect(s[1].bloques[2].items).toHaveLength(4);
-    expect(s[2].bloques[0].items[0]).toMatch(/^dev-prep/);
-    expect(s[2].bloques[0].items.join(" ")).not.toMatch(/ebook/i);
+    expect(s[2].bloques.map((b) => b.tipo)).toEqual(["puesto", "lugar", "lista", "puesto", "lista"]);
+    expect(s[2].bloques[0].texto).toMatch(/^dev-prep/);
+    expect(JSON.stringify(s)).not.toMatch(/ebook/i);
     const tabla = s[4].bloques[0];
     expect(tabla.tipo).toBe("tabla");
     expect(tabla.filas[0]).toEqual(["Frontend", "HTML, CSS, JavaScript, TypeScript, React, Next.js, Tailwind CSS"]);
