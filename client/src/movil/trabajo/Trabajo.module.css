@@ -313,6 +313,25 @@
   padding-left: 18px;
 }
 
+/* El texto del CV sale del componente Markdown, que está hecho para leer lecciones (líneas de 72
+   caracteres, letra grande y mucho interlineado): en la hoja usa todo el ancho y el tamaño de la hoja. */
+.hoja [data-sin-inmersion] {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.hoja [data-sin-inmersion] :is(p, li, h2, h3, h4, blockquote) {
+  max-width: none;
+}
+
+.hoja [data-sin-inmersion] :is(p, ul, ol) {
+  margin: 0 0 4px;
+}
+
+.hoja [data-sin-inmersion] li + li {
+  margin-top: 1px;
+}
+
 .titular {
   margin: 2px 0;
   font-weight: var(--peso-semi);
@@ -324,23 +343,64 @@
   font-size: var(--letra-3);
 }
 
+/* Al imprimir solo queda la hoja, a todo el ancho del papel. Lo demás se quita con display: none (con
+   visibility: hidden seguía ocupando espacio y Chrome achicaba la página entera para que entrara). */
+/* Solo las páginas con la hoja (página con nombre "cv"): las demás pantallas imprimen como siempre */
+@page cv {
+  size: A4;
+  margin: 0; /* sin márgenes del navegador: así no salen la fecha ni la dirección arriba y abajo */
+}
+
 @media print {
-  :global(body) * {
-    visibility: hidden;
+  :global(body) *:not(:has(.hoja)):not(.hoja):not(.hoja *) {
+    display: none !important;
   }
 
-  .hoja,
-  .hoja * {
-    visibility: visible;
+  /* Los contenedores de la hoja dejan de poner anchos, rejillas y rellenos */
+  :global(html),
+  :global(body),
+  :global(body) *:has(.hoja) {
+    display: block !important;
+    position: static !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    transform: none !important;
+    border: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
   }
 
   .hoja {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     max-width: none;
-    padding: 0;
+    margin: 0;
+    padding: 12mm 15mm;
+    border-radius: 0;
+    page: cv;
+    font-size: 10.5pt;
+    line-height: 1.38;
+    box-decoration-break: clone; /* el mismo margen en la segunda hoja, si la hay */
+  }
+
+  .hoja h1 {
+    font-size: 19pt;
+  }
+
+  .hoja h2,
+  .hoja h3 {
+    font-size: 11pt;
+    break-after: avoid;
+  }
+
+  .hoja li,
+  .hoja p {
+    margin-top: 0;
+    break-inside: avoid;
   }
 
   .noImprimir {
