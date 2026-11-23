@@ -23,8 +23,10 @@ export const CSS_HOJA = `
 .cv-hoja .cv-lugar { color: #444; font-size: 8.7pt; font-style: italic; line-height: 11.5pt; }
 .cv-hoja ul { margin: 2pt 0 0; padding: 0; list-style: none; }
 .cv-hoja h2 + ul { margin-top: 0; }
-.cv-hoja li { position: relative; margin: 0 0 1pt; padding-left: 10.5pt; line-height: 12pt; text-align: justify; break-inside: avoid; }
-.cv-hoja li::before { content: "•"; position: absolute; left: 1pt; top: 0; font-size: 10pt; }
+.cv-hoja li { margin: 0 0 1pt; padding-left: 10.5pt; line-height: 12pt; text-align: justify; break-inside: avoid; }
+/* La viñeta va en la misma línea del texto, sin "position": con position, Chrome escribe en el PDF el texto
+   de las viñetas al final de la página y los filtros de CV (ATS) lo leen desordenado. */
+.cv-hoja li::before { content: "•"; display: inline-block; width: 9.5pt; margin-left: -9.5pt; font-size: 10pt; }
 .cv-hoja table { margin-left: 1pt; border-collapse: collapse; }
 .cv-hoja td { padding: 0 0 2pt; font-size: 8.8pt; line-height: 11.5pt; vertical-align: top; }
 .cv-hoja td:first-child { width: 87.9pt; padding-right: 6pt; font-weight: 700; }
