@@ -259,7 +259,7 @@ function useObservador() {
           solo: true,
           tipo: "trabajo",
           frente: false,
-          momento: `Se hizo solo su CV para ${hechos.length === 1 ? "una oferta" : `${hechos.length} ofertas`} con puntaje muy alto: ${lista}. Avísale en una o dos frases y dile que lo revise y postule hoy (está en Buscar trabajo, Tu perfil, CV por oferta). Pon destino "trabajo".`,
+          momento: `Se hizo solo su CV para ${hechos.length === 1 ? "una oferta" : `${hechos.length} ofertas`} con puntaje muy alto: ${lista}. Avísale en una o dos frases. Deja claro que solo se preparó el CV: NO se envió nada ni se postuló a ninguna oferta; no digas "postulación". Dile que lo revise y, si le convence, postule él mismo hoy (está en Buscar trabajo, Tu perfil, Mi CV). Pon destino "trabajo".`,
         });
       } else if (tocaResumenBusqueda(verEstado().dia.fecha, verEstado().busquedaEn)) {
         cambiar({ busquedaEn: verEstado().dia.fecha });
