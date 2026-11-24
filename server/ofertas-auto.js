@@ -234,7 +234,7 @@ export const CONFIANZA = {
     texto: "Verifica la empresa",
     detalle: "En RemoteOK se han colado avisos falsos, incluso marcados como verificados. Busca la empresa antes de postular.",
   },
-  // Las dos llegan por tus alertas de correo (ver ofertas-correo.js)
+  // Estas llegan por tus alertas de correo (ver ofertas-correo.js)
   LinkedIn: {
     nivel: "media",
     texto: "De tu correo",
@@ -244,6 +244,11 @@ export const CONFIANZA = {
     nivel: "media",
     texto: "De tu correo",
     detalle: "Llegó en tu alerta de Glassdoor. Mira las opiniones de la empresa en Glassdoor antes de postular.",
+  },
+  Bumeran: {
+    nivel: "media",
+    texto: "De tu correo",
+    detalle: "Llegó en tu correo de Bumeran. El enlace abre la búsqueda del puesto: postula desde Bumeran y no pagues por postular.",
   },
 };
 const ORDEN_CONFIANZA = { alta: 0, media: 1, baja: 2 };

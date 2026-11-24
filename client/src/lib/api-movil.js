@@ -52,7 +52,7 @@ const SECCION_MODELO = "Cómo explicarlo en la entrevista";
 const CLAVE_CORREO = "devprep-ofertas-correo";
 
 /**
- * Las ofertas de tus alertas de correo (LinkedIn, Glassdoor, Get on Board), a través del script de
+ * Las ofertas de tus alertas de correo (LinkedIn, Glassdoor, Get on Board, Bumeran), a través del script de
  * Google de tu cuenta. Se guardan una hora; sin conexión se usan las últimas.
  * @returns {Promise<{ ofertas: object[], fuente: object|null }>}
  */

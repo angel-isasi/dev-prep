@@ -1,4 +1,4 @@
-// Ofertas que llegan a tu correo (alertas de LinkedIn, Glassdoor y Get on Board): LinkedIn y Glassdoor no
+// Ofertas que llegan a tu correo (alertas de LinkedIn, Glassdoor, Get on Board y Bumeran): LinkedIn y Glassdoor no
 // tienen API, pero sí mandan alertas. Un script de Google en tu cuenta (scripts/apps-script-ofertas.gs) lee
 // la etiqueta "Ofertas de trabajo" de Gmail y entrega los correos tal cual; aquí se convierten en ofertas
 // con la misma forma que las de las bolsas (ver ofertas-auto.js), para puntuarlas y ordenarlas igual.
@@ -9,6 +9,7 @@ export const REMITENTES = {
   "jobalerts-noreply@linkedin.com": "LinkedIn",
   "noreply@glassdoor.com": "Glassdoor",
   "no-reply@getonbrd.com": "Get on Board",
+  "no_reply@bumeran.com": "Bumeran",
 };
 
 export const fuenteDe = (de = "") => {
@@ -108,6 +109,40 @@ export function ofertasGetOnBoard(texto, fecha) {
   return ofertas;
 }
 
+/** Puestos de programación: Bumeran recomienda según el perfil y manda de todo (choferes, ventas...). */
+const ES_DE_PROGRAMACION =
+  /desarroll|program|software|front|back-?end|full ?-?stack|\bweb\b|javascript|react|node|developer|\bqa\b|devops|sistemas|inform[aá]tic|\bti\b/i;
+
+const slug = (t) =>
+  limpiar(t)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+/**
+ * Bumeran (texto plano, "Jobi encontró para ti"): cada aviso empieza en "Publicado hace ..." y sigue con
+ * puesto, empresa, lugar, jornada y modalidad. Sus enlaces son de rastreo y no vienen en el texto: se
+ * enlaza a la búsqueda del puesto en Bumeran. Solo pasan los puestos de programación.
+ */
+export function ofertasBumeran(texto, fecha) {
+  const ofertas = [];
+  for (const bloque of String(texto).split(/^\s*Publicado hace[^\n]*$/m).slice(1)) {
+    const lineas = bloque
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean);
+    const fin = lineas.findIndex((l) => /^Postula(rme|ci[oó]n r[aá]pida)$/i.test(l));
+    const [titulo, empresa, lugar = "", , modalidad = ""] = fin === -1 ? [] : lineas.slice(0, fin);
+    if (!titulo || !empresa || !ES_DE_PROGRAMACION.test(titulo)) continue;
+    const id = `bumeran:${slug(`${titulo} ${empresa}`)}`;
+    const url = `https://www.bumeran.com.pe/empleos-busqueda-${slug(titulo)}.html`;
+    ofertas.push(oferta({ id, fuente: "Bumeran", titulo, empresa, lugar: /remoto/i.test(modalidad) ? `${lugar} (remoto)` : lugar, fecha, url }));
+  }
+  return ofertas;
+}
+
 /**
  * Todos los correos que entrega el script de Google, convertidos en ofertas sin repetir (la más nueva
  * gana). @param {{ de: string, fecha: string, texto?: string, html?: string }[]} correos
@@ -119,7 +154,7 @@ export function ofertasDeCorreos(correos = []) {
     const fuente = fuenteDe(c.de);
     const fecha = String(c.fecha ?? "").slice(0, 10) || null;
     const lista =
-      fuente === "LinkedIn" ? ofertasLinkedin(c.texto, fecha) : fuente === "Glassdoor" ? ofertasGlassdoor(c.html, fecha) : fuente === "Get on Board" ? ofertasGetOnBoard(c.texto, fecha) : [];
+      fuente === "LinkedIn" ? ofertasLinkedin(c.texto, fecha) : fuente === "Glassdoor" ? ofertasGlassdoor(c.html, fecha) : fuente === "Get on Board" ? ofertasGetOnBoard(c.texto, fecha) : fuente === "Bumeran" ? ofertasBumeran(c.texto, fecha) : [];
     for (const o of lista) if (o.titulo) porId.set(o.id, o);
   }
   return [...porId.values()];

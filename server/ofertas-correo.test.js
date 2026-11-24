@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { fuenteDe, ofertasDeCorreos, ofertasGetOnBoard, ofertasGlassdoor, ofertasLinkedin } from "./ofertas-correo.js";
+import { fuenteDe, ofertasBumeran, ofertasDeCorreos, ofertasGetOnBoard, ofertasGlassdoor, ofertasLinkedin } from "./ofertas-correo.js";
 
 // Recortes con la misma forma que los correos reales (enlaces acortados)
 const LINKEDIN = `Tu alerta de empleo para Desarrollador de front-end en Perú
@@ -55,6 +55,9 @@ const GETONBOARD = `Featured jobs
   https://www.getonbrd.com/jobs/sysadmin-devops-qa/qa-engineer-manual-and-automation-improving-remote-80a6?utm_content=y
 Find more jobs: https://www.getonbrd.com/myjobs`;
 
+// Bumeran: texto plano con tabulaciones y líneas vacías entre los datos de cada aviso
+const BUMERAN = "\tHola Angel, te acercamos estos empleos que Jobi encontró para ti\n\n\t\tPublicado hace 7 días\n\n\t\t\t Programador Senior\n\t\t\t Pedregal\n\t\t\t Ica, Ica\n\t\t\t Full-time\n\t\t\t Presencial\n\n\t\t\t\tApto discapacidad\n\n\t\t\t\t\tPostularme\n\n\t\tPublicado hace 7 días\n\n\t\t\t Practicante Community Manager\n\t\t\t Bravva Agencia de Marketing Digital 360\n\t\t\t Ica, Ica\n\t\t\t Full-time\n\t\t\t Presencial\n\n\t\t\t\tApto discapacidad\n\n\t\t\t\t\tPostularme\n\n\t\tPublicado hace más de 15 días\n\n\t\t\t DESARROLLADOR JUNIOR DE SOFTWARE - CANALES ALTERNATIVOS - ICA\n\t\t\t Caja Ica\n\t\t\t Ica, Ica\n\t\t\t Full-time\n\t\t\t Presencial\n\n\t\t\t\tApto discapacidad\n\n\t\t\t\t\tPostularme\n\n\t\tPublicado hace 5 días\n\n\t\t\t Funerario/Chofer - Ica\n\t\t\t MAPFRE PERU\n\t\t\t Ica, Ica\n\t\t\t Full-time\n\t\t\t Presencial\n\n\t\t\t\tApto discapacidad\n\n\t\t\t\t\tPostularme\n\n\t\tPublicado hace 2 días\n\n\t\t\t Desarrollador Frontend React\n\t\t\t Empresa X\n\t\t\t Lima, Lima\n\t\t\t Full-time\n\t\t\t Remoto\n\n\t\t\t\tApto discapacidad\n\n\t\t\t\t\tPostularme\n\n\tTe recomendamos empleos según tu perfil. ¿No es lo que estás buscando?\n";
+
 describe("ofertas que llegan al correo", () => {
   it("reconoce el remitente", () => {
     expect(fuenteDe("Alertas de empleo de LinkedIn <jobalerts-noreply@linkedin.com>")).toBe("LinkedIn");
@@ -90,6 +93,19 @@ describe("ofertas que llegan al correo", () => {
       ["Desarrollador Back-end", "BC Tecnología", false],
       ["QA Engineer Manual and Automation", "Improving", true],
     ]);
+  });
+
+  it("Bumeran: solo los puestos de programación, con enlace a la búsqueda del puesto", () => {
+    expect(fuenteDe("Bumeran <no_reply@bumeran.com>")).toBe("Bumeran");
+    const o = ofertasBumeran(BUMERAN, "2026-11-24");
+    expect(o.map((x) => [x.titulo, x.empresa, x.ubicacion, x.remoto])).toEqual([
+      ["Programador Senior", "Pedregal", "Ica, Ica, Perú", false],
+      ["DESARROLLADOR JUNIOR DE SOFTWARE - CANALES ALTERNATIVOS - ICA", "Caja Ica", "Ica, Ica, Perú", false],
+      ["Desarrollador Frontend React", "Empresa X", "Lima, Lima (remoto)", true],
+    ]);
+    expect(o[0].url).toBe("https://www.bumeran.com.pe/empleos-busqueda-programador-senior.html");
+    expect(o[0].id).toBe("bumeran:programador-senior-pedregal");
+    expect(ofertasDeCorreos([{ de: "no_reply@bumeran.com", fecha: "2026-11-24T09:00:00Z", texto: BUMERAN }])).toHaveLength(3);
   });
 
   it("junta todos los correos sin repetir la misma oferta", () => {
