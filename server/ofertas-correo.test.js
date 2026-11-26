@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { fuenteDe, ofertasBumeran, ofertasDeCorreos, ofertasGetOnBoard, ofertasGlassdoor, ofertasLinkedin } from "./ofertas-correo.js";
+import { fuenteDe, ofertasBumeran, ofertasComputrabajo, ofertasDeCorreos, ofertasGetOnBoard, ofertasGlassdoor, ofertasIndeed, ofertasLinkedin } from "./ofertas-correo.js";
 
 // Recortes con la misma forma que los correos reales (enlaces acortados)
 const LINKEDIN = `Tu alerta de empleo para Desarrollador de front-end en Perú
@@ -58,6 +58,35 @@ Find more jobs: https://www.getonbrd.com/myjobs`;
 // Bumeran: texto plano con tabulaciones y líneas vacías entre los datos de cada aviso
 const BUMERAN = "\tHola Angel, te acercamos estos empleos que Jobi encontró para ti\n\n\t\tPublicado hace 7 días\n\n\t\t\t Programador Senior\n\t\t\t Pedregal\n\t\t\t Ica, Ica\n\t\t\t Full-time\n\t\t\t Presencial\n\n\t\t\t\tApto discapacidad\n\n\t\t\t\t\tPostularme\n\n\t\tPublicado hace 7 días\n\n\t\t\t Practicante Community Manager\n\t\t\t Bravva Agencia de Marketing Digital 360\n\t\t\t Ica, Ica\n\t\t\t Full-time\n\t\t\t Presencial\n\n\t\t\t\tApto discapacidad\n\n\t\t\t\t\tPostularme\n\n\t\tPublicado hace más de 15 días\n\n\t\t\t DESARROLLADOR JUNIOR DE SOFTWARE - CANALES ALTERNATIVOS - ICA\n\t\t\t Caja Ica\n\t\t\t Ica, Ica\n\t\t\t Full-time\n\t\t\t Presencial\n\n\t\t\t\tApto discapacidad\n\n\t\t\t\t\tPostularme\n\n\t\tPublicado hace 5 días\n\n\t\t\t Funerario/Chofer - Ica\n\t\t\t MAPFRE PERU\n\t\t\t Ica, Ica\n\t\t\t Full-time\n\t\t\t Presencial\n\n\t\t\t\tApto discapacidad\n\n\t\t\t\t\tPostularme\n\n\t\tPublicado hace 2 días\n\n\t\t\t Desarrollador Frontend React\n\t\t\t Empresa X\n\t\t\t Lima, Lima\n\t\t\t Full-time\n\t\t\t Remoto\n\n\t\t\t\tApto discapacidad\n\n\t\t\t\t\tPostularme\n\n\tTe recomendamos empleos según tu perfil. ¿No es lo que estás buscando?\n";
 
+const INDEED = `Alerta de empleo de Indeed
+6 puestos disponibles de practicante desarrollo web en Perú
+
+Practicante de Desarrollo Web
+R&C CONSULTING - Lince, Lima
+Postulación vía Indeed
+Desarrollo web: HTML, PHP y WordPress.
+hace 4 días
+https://pe.indeed.com/rc/clk/dl?jk=ea715c40933d00cb&from=ja&qd=x
+
+Practicante de Recursos Humanos - Grupo Falabella Perú
+Grupo Falabella - San Isidro, Lima
+Participar en iniciativas de atracción de talento.
+hace 5 días
+https://pe.indeed.com/rc/clk/dl?jk=43c5176018a07ca5&from=ja
+
+Desarrollador Frontend React
+Empresa Y - Remote
+S/.3000 por mes
+hace 1 día
+https://pe.indeed.com/rc/clk/dl?jk=00aa11bb22cc33dd&from=ja
+`;
+
+const CT = (titulo, empresa, id) =>
+  `[| || || || Sé el primero en postularte || ${titulo} || 4.2 ${empresa} || Marcona, Ica || S/. 2.000,00 (Mensual) || Hoy |](https://go.computrabajo.com/go/app/o_detail?url=https%3A%2F%2Fpe.computrabajo.com%2Fofertas-de-trabajo%2Foferta-de-trabajo-de-x-${id}%3Futm_source%3Dauto&idp=1)`;
+const COMPUTRABAJO = `Computrabajo
+${CT("Auxiliar operativo", "Coopsol Consultoria", "AC9BEDF5AF168E6561373E686DCF3405")}
+${CT("Practicante de Sistemas", "Caja Ica", "BB9BEDF5AF168E6561373E686DCF3405")}`;
+
 describe("ofertas que llegan al correo", () => {
   it("reconoce el remitente", () => {
     expect(fuenteDe("Alertas de empleo de LinkedIn <jobalerts-noreply@linkedin.com>")).toBe("LinkedIn");
@@ -106,6 +135,29 @@ describe("ofertas que llegan al correo", () => {
     expect(o[0].url).toBe("https://www.bumeran.com.pe/empleos-busqueda-programador-senior.html");
     expect(o[0].id).toBe("bumeran:programador-senior-pedregal");
     expect(ofertasDeCorreos([{ de: "no_reply@bumeran.com", fecha: "2026-11-24T09:00:00Z", texto: BUMERAN }])).toHaveLength(3);
+  });
+
+  it("Indeed: solo los de programación, con empresa, lugar y enlace al aviso", () => {
+    expect(fuenteDe("Indeed <donotreply@jobalert.indeed.com>")).toBe("Indeed");
+    const o = ofertasIndeed(INDEED, "2026-11-25");
+    expect(o.map((x) => [x.titulo, x.empresa, x.ubicacion, x.remoto, x.url])).toEqual([
+      ["Practicante de Desarrollo Web", "R&C CONSULTING", "Lince, Lima, Perú", false, "https://pe.indeed.com/viewjob?jk=ea715c40933d00cb"],
+      ["Desarrollador Frontend React", "Empresa Y", "Remoto", true, "https://pe.indeed.com/viewjob?jk=00aa11bb22cc33dd"],
+    ]);
+    expect(ofertasDeCorreos([{ de: "donotreply@jobalert.indeed.com", fecha: "2026-11-25T02:00:00Z", texto: INDEED }])).toHaveLength(2);
+  });
+
+  it("Computrabajo: decodifica el enlace real y salta lo que no es de programación", () => {
+    expect(fuenteDe("trabajos_pe@computrabajo.com")).toBe("Computrabajo");
+    const o = ofertasComputrabajo(COMPUTRABAJO, "2026-11-25");
+    expect(o).toHaveLength(1);
+    expect(o[0]).toMatchObject({
+      id: "computrabajo:BB9BEDF5AF168E6561373E686DCF3405",
+      titulo: "Practicante de Sistemas",
+      empresa: "Caja Ica",
+      ubicacion: "Marcona, Ica, Perú",
+      url: "https://pe.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-x-BB9BEDF5AF168E6561373E686DCF3405",
+    });
   });
 
   it("junta todos los correos sin repetir la misma oferta", () => {

@@ -1,4 +1,4 @@
-// Ofertas que llegan a tu correo (alertas de LinkedIn, Glassdoor, Get on Board y Bumeran): LinkedIn y Glassdoor no
+// Ofertas que llegan a tu correo (alertas de LinkedIn, Glassdoor, Get on Board, Bumeran, Indeed y Computrabajo): LinkedIn y Glassdoor no
 // tienen API, pero sí mandan alertas. Un script de Google en tu cuenta (scripts/apps-script-ofertas.gs) lee
 // la etiqueta "Ofertas de trabajo" de Gmail y entrega los correos tal cual; aquí se convierten en ofertas
 // con la misma forma que las de las bolsas (ver ofertas-auto.js), para puntuarlas y ordenarlas igual.
@@ -10,6 +10,8 @@ export const REMITENTES = {
   "noreply@glassdoor.com": "Glassdoor",
   "no-reply@getonbrd.com": "Get on Board",
   "no_reply@bumeran.com": "Bumeran",
+  "donotreply@jobalert.indeed.com": "Indeed",
+  "trabajos_pe@computrabajo.com": "Computrabajo",
 };
 
 export const fuenteDe = (de = "") => {
@@ -144,6 +146,52 @@ export function ofertasBumeran(texto, fecha) {
 }
 
 /**
+ * Indeed (texto plano): avisos separados por una línea en blanco; cada uno con puesto, "Empresa - Lugar",
+ * a veces sueldo, una descripción corta, la antigüedad y el enlace con su id (jk=). Indeed también manda
+ * puestos que no son de programación (RR. HH., comercial): solo pasan los de programación.
+ */
+export function ofertasIndeed(texto, fecha) {
+  const ofertas = [];
+  for (const bloque of String(texto).replace(/\r/g, "").split(/\n\s*\n/)) {
+    const id = bloque.match(/https:\/\/pe\.indeed\.com\/rc\/clk\/dl\?jk=([a-f0-9]+)/)?.[1];
+    if (!id) continue;
+    const [titulo = "", empresaLugar = ""] = bloque.split("\n").map((l) => l.trim()).filter(Boolean);
+    if (!ES_DE_PROGRAMACION.test(titulo)) continue;
+    const corte = empresaLugar.lastIndexOf(" - ");
+    const empresa = corte === -1 ? empresaLugar : empresaLugar.slice(0, corte);
+    const lugar = corte === -1 ? "" : empresaLugar.slice(corte + 3);
+    ofertas.push(oferta({ id: `indeed:${id}`, fuente: "Indeed", titulo, empresa, lugar: lugar.replace(/^remote$/i, "Remoto"), fecha, url: `https://pe.indeed.com/viewjob?jk=${id}` }));
+  }
+  return ofertas;
+}
+
+/**
+ * Computrabajo (texto plano): cada aviso es un enlace "[| Puesto || 4.2 Empresa || Lugar || Sueldo || Hoy |](...)"
+ * cuyo destino real va codificado en "url=". Solo pasan los de programación (las alertas mandan de todo).
+ */
+export function ofertasComputrabajo(texto, fecha) {
+  const ofertas = [];
+  for (const m of String(texto).matchAll(/\[([^\]]*)\]\(https:\/\/go\.computrabajo\.com\/go\/app\/o_detail\?url=([^&)]+)/g)) {
+    let destino;
+    try {
+      destino = decodeURIComponent(m[2]).split("?")[0];
+    } catch {
+      continue;
+    }
+    const id = destino.match(/-([A-F0-9]{16,})$/)?.[1];
+    if (!id || !/^https:\/\/pe\.computrabajo\.com\/ofertas-de-trabajo\//.test(destino)) continue;
+    const partes = m[1]
+      .split("|")
+      .map((p) => p.trim())
+      .filter((p) => p && !/^s[ée] el primero/i.test(p));
+    const [titulo = "", empresa = "", lugar = ""] = partes;
+    if (!ES_DE_PROGRAMACION.test(titulo)) continue;
+    ofertas.push(oferta({ id: `computrabajo:${id}`, fuente: "Computrabajo", titulo, empresa: empresa.replace(/^\d([.,]\d)?\s+/, ""), lugar, fecha, url: destino }));
+  }
+  return ofertas;
+}
+
+/**
  * Todos los correos que entrega el script de Google, convertidos en ofertas sin repetir (la más nueva
  * gana). @param {{ de: string, fecha: string, texto?: string, html?: string }[]} correos
  */
@@ -154,7 +202,7 @@ export function ofertasDeCorreos(correos = []) {
     const fuente = fuenteDe(c.de);
     const fecha = String(c.fecha ?? "").slice(0, 10) || null;
     const lista =
-      fuente === "LinkedIn" ? ofertasLinkedin(c.texto, fecha) : fuente === "Glassdoor" ? ofertasGlassdoor(c.html, fecha) : fuente === "Get on Board" ? ofertasGetOnBoard(c.texto, fecha) : fuente === "Bumeran" ? ofertasBumeran(c.texto, fecha) : [];
+      fuente === "LinkedIn" ? ofertasLinkedin(c.texto, fecha) : fuente === "Glassdoor" ? ofertasGlassdoor(c.html, fecha) : fuente === "Get on Board" ? ofertasGetOnBoard(c.texto, fecha) : fuente === "Bumeran" ? ofertasBumeran(c.texto, fecha) : fuente === "Indeed" ? ofertasIndeed(c.texto, fecha) : fuente === "Computrabajo" ? ofertasComputrabajo(c.texto, fecha) : [];
     for (const o of lista) if (o.titulo) porId.set(o.id, o);
   }
   return [...porId.values()];
