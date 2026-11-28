@@ -52,6 +52,11 @@ describe("¿ya postulaste a esta oferta?", () => {
     expect(yaPostulaste({ titulo: "Practicante Frontend", empresa: "TEINOR SAC" }, indeed)).toBe(true);
     expect(yaPostulaste({ titulo: "Practicante Backend", empresa: "TEINOR SAC" }, indeed)).toBe(false);
   });
+  it("sin empresa, un puesto genérico de otra oferta no cuenta; y solo con la empresa no marca nada", () => {
+    const bumeran = { puesto: "Programador Web Jr - Primer empleo, Remoto", empresa: "" };
+    expect(yaPostulaste({ titulo: "Programador Web", empresa: "EJB Solutions" }, bumeran)).toBe(false);
+    expect(yaPostulaste({ titulo: "Junior React Developer", empresa: "BairesDev" }, { puesto: "", empresa: "Bairesdev" })).toBe(false);
+  });
   it("con la empresa conocida, tiene que coincidir también", () => {
     const ct = { puesto: "Desarrollador Junior Full Stack", empresa: "RBR CONSULTING SERVICES S.A.C" };
     expect(yaPostulaste({ titulo: "Desarrollador Junior Full Stack", empresa: "RBR Consulting Services SAC" }, ct)).toBe(false);

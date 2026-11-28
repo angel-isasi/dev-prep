@@ -85,8 +85,13 @@ export function yaPostulaste(oferta, postulacion) {
   const pe = normalizar(postulacion.empresa);
   const ot = normalizar(oferta.titulo);
   const oe = normalizar(oferta.empresa);
-  const mismaEmpresa = pe && oe && (oe.includes(pe) || pe.includes(oe));
-  if (!po) return !!mismaEmpresa && !!pe && oe === pe; // solo la empresa: tiene que ser exactamente la misma
-  const mismoPuesto = ot === po || (po.length >= 10 && (ot.includes(po) || po.includes(ot)));
-  return mismoPuesto && (!pe || !oe || mismaEmpresa);
+  // Sin puesto (solo "tu postulación a BairesDev está activa") no se marca ninguna oferta: serían todas las de esa empresa
+  if (!po) return false;
+  // Sin empresa (Indeed, Bumeran) el puesto tiene que ser exactamente el mismo: "Programador Web" sale en muchas
+  if (!pe) return ot === po;
+  const mismaEmpresa = !!oe && (oe.includes(pe) || pe.includes(oe));
+  // Con la empresa, basta un puesto casi igual ("Practicante de Sistemas" ≈ "Practicante Preprofesional de Sistemas")
+  const [corto, largo] = ot.length <= po.length ? [ot, po] : [po, ot];
+  const casiIgual = corto.length >= 12 && largo.includes(corto) && corto.length / largo.length >= 0.6;
+  return mismaEmpresa && (ot === po || casiIgual);
 }
