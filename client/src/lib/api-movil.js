@@ -62,7 +62,7 @@ async function ofertasDelCorreo(nuevo) {
   if (!url || ES_VISITA) return { ofertas: [], fuente: null };
   const guardada = leerJson(CLAVE_CORREO);
   // Una copia guardada antes de que el script trajera las confirmaciones de postulación se pide de nuevo
-  const fresca = guardada && Array.isArray(guardada.postulaciones) && Date.now() - Date.parse(guardada.buscadoEn) < 60 * 60 * 1000;
+  const fresca = guardada && Array.isArray(guardada.postulaciones) && Date.now() - Date.parse(guardada.buscadoEn) < 10 * 60 * 1000; // 10 min: una postulación nueva se ve pronto
   let correos = !nuevo && fresca ? guardada.correos : null;
   let confirmaciones = guardada?.postulaciones ?? [];
   let ok = true;
