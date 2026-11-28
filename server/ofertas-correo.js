@@ -24,7 +24,7 @@ const esRemoto = (texto) => /remot|desde casa|home office|teletrabajo/i.test(tex
 const conPais = (lugar) => (!lugar || /per[uú]/i.test(lugar) || esRemoto(lugar) ? lugar : `${lugar}, Perú`);
 
 /** Una oferta con la forma de las de las bolsas. */
-function oferta({ id, fuente, titulo, empresa, url, lugar, fecha }) {
+function oferta({ id, fuente, titulo, empresa, url, lugar, fecha, sueldo = "" }) {
   const ubicacion = conPais(limpiar(lugar));
   return {
     id,
@@ -35,10 +35,10 @@ function oferta({ id, fuente, titulo, empresa, url, lugar, fecha }) {
     remoto: esRemoto(`${titulo} ${lugar}`),
     ubicacion,
     seniority: null,
-    salario: null,
+    salario: sueldo ? { texto: limpiar(sueldo) } : null,
     fecha,
     // Del aviso solo llega esto: el puntaje se basa en el puesto. Para el CV, abre la oferta y pega su texto.
-    texto: [limpiar(titulo), limpiar(empresa), ubicacion].filter(Boolean).join("\n"),
+    texto: [limpiar(titulo), limpiar(empresa), ubicacion, sueldo ? `Sueldo: ${limpiar(sueldo)}` : ""].filter(Boolean).join("\n"),
     idioma: /[áéíóúñ]|desarrollador|programador|practicante|analista/i.test(titulo) ? "es" : null,
   };
 }
@@ -155,12 +155,14 @@ export function ofertasIndeed(texto, fecha) {
   for (const bloque of String(texto).replace(/\r/g, "").split(/\n\s*\n/)) {
     const id = bloque.match(/https:\/\/pe\.indeed\.com\/rc\/clk\/dl\?jk=([a-f0-9]+)/)?.[1];
     if (!id) continue;
-    const [titulo = "", empresaLugar = ""] = bloque.split("\n").map((l) => l.trim()).filter(Boolean);
+    const lineasBloque = bloque.split("\n").map((l) => l.trim()).filter(Boolean);
+    const [titulo = "", empresaLugar = ""] = lineasBloque;
+    const sueldo = lineasBloque.slice(2, 4).find((l) => /^(S\/|US\$|\$)\s*\.?\s*[\d]/.test(l)) ?? "";
     if (!ES_DE_PROGRAMACION.test(titulo)) continue;
     const corte = empresaLugar.lastIndexOf(" - ");
     const empresa = corte === -1 ? empresaLugar : empresaLugar.slice(0, corte);
     const lugar = corte === -1 ? "" : empresaLugar.slice(corte + 3);
-    ofertas.push(oferta({ id: `indeed:${id}`, fuente: "Indeed", titulo, empresa, lugar: lugar.replace(/^remote$/i, "Remoto"), fecha, url: `https://pe.indeed.com/viewjob?jk=${id}` }));
+    ofertas.push(oferta({ id: `indeed:${id}`, fuente: "Indeed", titulo, empresa, lugar: lugar.replace(/^remote$/i, "Remoto"), fecha, sueldo, url: `https://pe.indeed.com/viewjob?jk=${id}` }));
   }
   return ofertas;
 }

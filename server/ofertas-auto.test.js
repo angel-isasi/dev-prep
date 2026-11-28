@@ -401,6 +401,23 @@ describe("ofertas para un practicante en Ica", () => {
     expect(de("Programador junior", { ubicacion: "Ica, Perú" }).puntaje).toBeGreaterThan(de("Programador junior").puntaje);
   });
 
+  test("un sueldo simbólico (S/ 1 al mes) cuenta como no pagada; uno real no", () => {
+    expect(de("Practicante de Desarrollo Web", { texto: "Sueldo: S/.1 por mes" }).puntaje).toBeLessThan(40);
+    expect(de("Practicante de Desarrollo Web", { texto: "Sueldo: S/.1,300 - S/.1,500 al mes" }).razones.some((r) => /No es pagada/.test(r.texto))).toBe(false);
+  });
+
+  test("Get on Board: 'no_remote' es presencial y 'remote_local' de otro país no te sirve", async () => {
+    const { normalizarGetOnBoard } = await import("./ofertas-auto.js");
+    const [presencial, local] = normalizarGetOnBoard({
+      data: [
+        { id: "a", attributes: { title: "Dev Jr", remote: false, remote_modality: "no_remote", countries: ["Chile"] }, links: {} },
+        { id: "b", attributes: { title: "Dev Jr", remote: true, remote_modality: "remote_local", countries: ["Chile"] }, links: {} },
+      ],
+    });
+    expect(presencial.remoto).toBe(false);
+    expect(local.soloOtrosPaises).toBe(true);
+  });
+
   test("un lenguaje que no es el tuyo no entra en Solo para mí, y lo ad honorem baja mucho", () => {
     expect(de("Desarrollador Elixir Junior", { remoto: true }).paraMi).toBe(false);
     expect(de("Desarrollo Web - Ad Honorem").puntaje).toBeLessThan(20);

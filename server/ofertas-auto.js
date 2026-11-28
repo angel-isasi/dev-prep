@@ -59,12 +59,14 @@ export function normalizarGetOnBoard(json) {
       titulo: a.title ?? "",
       empresa: a.company?.data?.attributes?.name ?? "",
       url: urlSegura(d.links?.public_url, `https://www.getonbrd.com/jobs/${encodeURIComponent(d.id)}`),
-      remoto: !!a.remote || /remote/.test(a.remote_modality ?? ""),
+      remoto: a.remote_modality ? /^(fully_remote|remote_local)$/.test(a.remote_modality) : !!a.remote,
       // countries y location_cities a veces vienen como lista y a veces como objeto: solo se toman los textos
       ubicacion: [a.countries, a.location_cities]
         .flatMap((v) => (Array.isArray(v) ? v : []))
         .filter((x) => typeof x === "string")
         .join(", "),
+      // Remoto solo para quienes viven en el país de la oferta: si no es Perú, no te sirve
+      soloOtrosPaises: a.remote_modality === "remote_local" && !/per[uú]/i.test(JSON.stringify(a.countries ?? "")),
       seniority: a.seniority?.data?.attributes?.name ?? null,
       salario: a.min_salary || a.max_salary ? { min: a.min_salary ?? null, max: a.max_salary ?? null, moneda: "USD" } : null,
       fecha: fechaIso(a.published_at),
@@ -514,8 +516,12 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
   if (junior) sumar(25, "Busca junior, practicante o trainee");
   else if (senior) sumar(-35, "Pide nivel senior o líder");
   else if (/semi/i.test(oferta.seniority ?? "")) sumar(-10, "Pide nivel semi senior");
-  // Sin sueldo no te sirve (descartas ad honorem y voluntariados)
-  if (/ad[\s-]?honorem|sin remuneraci[oó]n|no remunerad|voluntariado/i.test(todo)) sumar(-40, "No es pagada (ad honorem o voluntariado)");
+  // Sin sueldo no te sirve (descartas ad honorem, voluntariados y los "S/ 1 al mes")
+  const simbolico = /S\/\.?\s*([\d.,]+)\s*(?:-\s*S\/\.?\s*([\d.,]+)\s*)?(?:al|por)\s*(mes|a[nñ]o)/i.exec(todo);
+  const montoMax = simbolico ? Number(String(simbolico[2] ?? simbolico[1]).replace(/,/g, "")) : NaN;
+  const noPagada = /ad[\s-]?honorem|sin remuneraci[oó]n|no remunerad|voluntariado/i.test(todo) || montoMax < 100;
+  if (noPagada)
+    sumar(-40, "No es pagada (ad honorem, voluntariado o un sueldo simbólico)");
   const anios = Number(ANIOS.exec(todo)?.[1]);
   if (anios >= 3) sumar(-15, `Pide ${anios} o más años de experiencia`);
   else if (anios > 0 && anios <= 2) sumar(5, `Pide poca experiencia (${anios} ${anios === 1 ? "año" : "años"})`);
@@ -569,12 +575,12 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
     sumar(-15, `Lleva ${dias} días: en ${oferta.fuente} suelen cerrar rápido, revisa si sigue abierta`);
 
   // Para el aviso al celular: lo que importa sin depender de tu mapa (la Lambda no lo tiene)
-  const paraAvisar = junior && !senior && lugarOk && dias != null && dias <= 7 && alertas.length === 0;
+  const paraAvisar = junior && !senior && !noPagada && lugarOk && dias != null && dias <= 7 && alertas.length === 0;
   // "Solo para mí": junior o práctica, en Perú o remota para Latinoamérica, y de frontend o con React/JavaScript
   // Un puesto de programación general cuenta si no pide un lenguaje que no es el tuyo (Elixir, PHP, C#...)
   const otroLenguaje = /\b(elixir|ruby|golang|rust|c\+\+|c#|php|kotlin|swift|scala|cobol|abap)\b/i.test(titulo);
   const usaTuStack = esFrontend || esFull || (esDesarrollo && !otroLenguaje) || tecnologias.some((t) => t.nombre === "React" || t.nombre === "JavaScript");
-  const paraMi = junior && !senior && lugarOk && usaTuStack && alertas.length === 0;
+  const paraMi = junior && !senior && !noPagada && lugarOk && usaTuStack && alertas.length === 0;
   return {
     puntaje: Math.max(1, Math.min(100, Math.round(puntaje))),
     razones,
