@@ -61,7 +61,8 @@ async function ofertasDelCorreo(nuevo) {
   const { url, clave } = progreso.ajuste("correoOfertas", {});
   if (!url || ES_VISITA) return { ofertas: [], fuente: null };
   const guardada = leerJson(CLAVE_CORREO);
-  const fresca = guardada && Date.now() - Date.parse(guardada.buscadoEn) < 60 * 60 * 1000;
+  // Una copia guardada antes de que el script trajera las confirmaciones de postulación se pide de nuevo
+  const fresca = guardada && Array.isArray(guardada.postulaciones) && Date.now() - Date.parse(guardada.buscadoEn) < 60 * 60 * 1000;
   let correos = !nuevo && fresca ? guardada.correos : null;
   let confirmaciones = guardada?.postulaciones ?? [];
   let ok = true;
