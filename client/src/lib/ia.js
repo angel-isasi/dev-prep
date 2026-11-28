@@ -144,6 +144,75 @@ export async function pedirIa(pedido) {
   return datos.resultado;
 }
 
+/**
+ * Conversa con Aksu en vivo: la respuesta llega a trozos mientras se escribe (server/aksu-vivo.js).
+ * @param {object} pedido  { pregunta, momento, datos, codigo, historial, catalogo, ingles }
+ * @param {{ alTexto?: (trozo: string, todo: string) => void }} [opciones]  alTexto: cada trozo que llega
+ * @returns {Promise<{ texto: string, acciones: { nombre: string, datos: object }[], error: string|null }>}
+ */
+export async function conversarIa(pedido, { alTexto } = {}) {
+  if (usoIa().usd >= topeIa()) throw new Error(`Llegaste a tu tope de IA de este mes (${topeIa()} USD). Puedes subirlo en "Uso de IA".`);
+  const perfil = await import("./perfil-tutor.js").then((m) => m.perfilTutor()).catch(() => "");
+  const r = await fetch("/api/ia", {
+    method: "POST",
+    headers: { "content-type": "application/json", "x-clave": claveIa() },
+    body: JSON.stringify({ ...pedido, tarea: "aksu-vivo", ...(perfil ? { perfil } : {}) }),
+    signal: AbortSignal.timeout(118_000),
+  }).catch((e) => {
+    throw new Error(e?.name === "TimeoutError" ? "Tardé demasiado en pensar. Dímelo otra vez." : "Sin conexión: necesito internet para pensar.");
+  });
+  if (r.status === 401) {
+    guardarClaveIa("");
+    throw Object.assign(new Error("La contraseña de IA no es correcta"), { clave: true });
+  }
+  if (r.status === 503) throw new Error("La IA todavía no está configurada en Vercel");
+  if (!(r.headers.get("content-type") ?? "").includes("ndjson") || !r.body) {
+    const datos = await r.json().catch(() => ({}));
+    throw new Error(datos.error ?? "No pude responder. Inténtalo otra vez.");
+  }
+
+  let texto = "";
+  let error = null;
+  const acciones = [];
+  const procesar = (linea) => {
+    if (!linea.trim()) return;
+    let ev;
+    try {
+      ev = JSON.parse(linea);
+    } catch {
+      return; // una línea rota no tumba la respuesta
+    }
+    if (ev.t === "texto" && ev.d) {
+      texto += ev.d;
+      alTexto?.(ev.d, texto);
+    } else if (ev.t === "accion") acciones.push({ nombre: ev.nombre, datos: ev.datos ?? {} });
+    else if (ev.t === "error") error = ev.error ?? "No pude responder.";
+    if (ev.uso) {
+      registrarUso(ev.uso);
+      anotarPedido("aksu-vivo", ev.uso);
+      ultimo = ev.uso.modelo ?? null;
+    }
+  };
+  const lector = r.body.pipeThrough(new TextDecoderStream()).getReader();
+  let resto = "";
+  try {
+    for (;;) {
+      const { value, done } = await lector.read();
+      if (done) break;
+      resto += value;
+      const lineas = resto.split("\n");
+      resto = lineas.pop();
+      lineas.forEach(procesar);
+    }
+  } catch {
+    error ??= "Se me cortó la conexión a mitad de respuesta.";
+  }
+  procesar(resto);
+  if (error && !texto && !acciones.length) throw new Error(error);
+  anotarHerramienta();
+  return { texto, acciones, error };
+}
+
 // Tareas que deben salir distintas cada vez (crean algo nuevo o siguen una charla): nunca se guardan
 const SIN_GUARDAR = /crear$|^jarvis|^aksu|^mentor$|^variante$|^conversacion$|^plan-semana$|^tarjeta-|^defensa$|^negociacion$|^reunion$|^entrevista-en$|^cv-oferta$/;
 const CLAVE_GUARDADAS = "devprep.iaGuardadas";

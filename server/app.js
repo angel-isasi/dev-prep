@@ -81,10 +81,18 @@ export function crearApp(deps) {
         method: req.method,
         headers,
         body: req.method === "POST" ? JSON.stringify(req.body ?? {}) : undefined,
-        signal: AbortSignal.timeout(60_000),
+        signal: AbortSignal.timeout(req.body?.tarea === "aksu-vivo" ? 115_000 : 60_000),
       });
+      // Aksu en vivo responde a trozos (líneas JSON): se van pasando tal cual llegan, sin esperar el final
+      if ((r.headers.get("content-type") ?? "").includes("ndjson") && r.body) {
+        res.status(r.status).set({ "Content-Type": "application/x-ndjson; charset=utf-8", "Cache-Control": "no-store" });
+        res.flushHeaders?.();
+        for await (const trozo of r.body) res.write(trozo);
+        return res.end();
+      }
       res.status(r.status).set("Cache-Control", "no-store").json(await r.json().catch(() => ({})));
     } catch {
+      if (res.headersSent) return res.end();
       if (req.method === "GET") return res.json({ configurada: false });
       res.status(502).json({ error: "Sin conexión a internet: la IA necesita internet." });
     }

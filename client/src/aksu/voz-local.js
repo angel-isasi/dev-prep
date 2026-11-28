@@ -23,26 +23,33 @@ export function callarLocal() {
 export const velocidadDe = (tono) => (tono >= 1 ? 1 : tono >= 0.7 ? 0.9 : tono >= 0.4 ? 0.82 : 0.74);
 
 /**
- * Dice un texto con la voz neuronal. Rechaza si el motor no está o no tiene voces (quien llama
- * usa entonces la voz del navegador).
+ * Genera el audio de un texto con la voz neuronal, sin reproducirlo (así se prepara la frase siguiente
+ * mientras suena la actual). Rechaza si el motor no está o no tiene voces.
  * @param {string} texto
- * @param {{ voz?: string, tono?: number, enWeb?: boolean }} [opciones]  enWeb: la voz está guardada en este
- *   dispositivo y el audio se calcula aquí mismo (voz-web.js), sin la laptop
+ * @param {{ voz?: string, enWeb?: boolean }} [opciones]  enWeb: la voz está guardada en este dispositivo y
+ *   el audio se calcula aquí mismo (voz-web.js), sin la laptop
+ * @returns {Promise<AudioBuffer>}
  */
-export async function decirLocal(texto, { voz = "", tono = 0.7, enWeb = false } = {}) {
+export async function generarLocal(texto, { voz = "", enWeb = false } = {}) {
   if (!enWeb && !api.audioDeVoz) throw new Error("Sin motor");
-  const mio = ++turno;
   contexto ??= new AudioContext();
   if (contexto.state === "suspended") contexto.resume().catch(() => {});
-  let audio;
   if (enWeb) {
     const { pcm, frecuencia } = await audioWeb(texto, voz);
-    audio = contexto.createBuffer(1, pcm.length, frecuencia);
+    const audio = contexto.createBuffer(1, pcm.length, frecuencia);
     audio.copyToChannel(pcm, 0);
-  } else {
-    audio = await contexto.decodeAudioData(await api.audioDeVoz(texto, voz));
+    return audio;
   }
-  if (mio !== turno) return; // mientras se generaba, llegó otra frase o lo callaron
+  return contexto.decodeAudioData(await api.audioDeVoz(texto, voz));
+}
+
+/**
+ * Reproduce un audio ya generado (corta lo que esté sonando). Termina cuando acaba de sonar o lo callan.
+ * @param {AudioBuffer} audio
+ * @param {number} [tono]
+ * @returns {Promise<void>}
+ */
+export function reproducirLocal(audio, tono = 0.7) {
   try {
     fuente?.stop();
   } catch {
@@ -60,6 +67,23 @@ export async function decirLocal(texto, { voz = "", tono = 0.7, enWeb = false } 
   agudos.type = "lowpass";
   agudos.frequency.value = velocidad < 0.85 ? 5200 : 9000;
   f.connect(graves).connect(agudos).connect(contexto.destination);
+  const termina = new Promise((listo) => {
+    f.onended = () => listo();
+  });
   f.start();
   fuente = f;
+  return termina;
+}
+
+/**
+ * Dice un texto con la voz neuronal. Rechaza si el motor no está o no tiene voces (quien llama
+ * usa entonces la voz del navegador).
+ * @param {string} texto
+ * @param {{ voz?: string, tono?: number, enWeb?: boolean }} [opciones]
+ */
+export async function decirLocal(texto, { voz = "", tono = 0.7, enWeb = false } = {}) {
+  const mio = ++turno;
+  const audio = await generarLocal(texto, { voz, enWeb });
+  if (mio !== turno) return; // mientras se generaba, llegó otra frase o lo callaron
+  reproducirLocal(audio, tono);
 }

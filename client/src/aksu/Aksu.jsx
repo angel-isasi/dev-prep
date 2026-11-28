@@ -15,7 +15,7 @@ import {
 } from "./reglas.js";
 import {
   abrir, cambiar, cargarVocesLocales, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, instalarVozWeb, NOMBRE, NOMBRE_DESTINO, olvidarPlan, palabraDeIngles, pedirAvisos, pensar, planActual,
-  probarVoz, probarVozIngles, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
+  paraVoz, probarVoz, probarVozIngles, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
 } from "./aksu.js";
 import { Figura } from "./Figura.jsx";
 import { cvsAutomaticos } from "../lib/cv-oferta.js";
@@ -352,14 +352,14 @@ function RelojEntrevista({ entrevista }) {
 
 /** Un mensaje de la conversación. */
 function Mensaje({ m, alIr }) {
-  const ruta = m.destino ? rutaDe(m.destino) : null;
+  const ruta = m.ruta || (m.destino ? rutaDe(m.destino) : null);
   return (
-    <li className={estilos.mensaje} data-de={m.de === "yo" ? "yo" : "aksu"}>
-      <p>{m.texto}</p>
+    <li className={estilos.mensaje} data-de={m.de === "yo" ? "yo" : "aksu"} data-vivo={m.vivo || undefined}>
+      {m.de === "yo" ? <p>{m.texto}</p> : <Texto>{m.texto}</Texto>}
       {m.pregunta && <p className={estilos.suPregunta}>{m.pregunta}</p>}
-      {ruta && (
+      {ruta && !m.vivo && (
         <button type="button" className={estilos.ir} onClick={() => alIr(ruta)}>
-          {NOMBRE_DESTINO[m.destino] ?? "Abrir"} <IconoFlechaDer tamano={14} />
+          {m.etiqueta || NOMBRE_DESTINO[m.destino] || "Abrir"} <IconoFlechaDer tamano={14} />
         </button>
       )}
     </li>
@@ -604,12 +604,16 @@ function Suelta({ e }) {
 
   // Lo último que dijo se asoma unos segundos (o se queda si te hizo una pregunta)
   useEffect(() => {
-    if (!ultimo || Date.now() - ultimo.en > 4000) return;
+    if (!ultimo) return;
+    if (Date.now() - ultimo.en > 4000 && !ultimo.vivo && globo?.en !== ultimo.en) return;
     setGlobo(ultimo);
+    if (ultimo.vivo) return; // sigue llegando: no se esconde todavía
     if (ultimo.pregunta && ultimo.tipo !== "palabra") return;
-    const t = setTimeout(() => setGlobo(null), ultimo.tipo === "palabra" ? 25_000 : 14_000);
+    const palabras = String(ultimo.texto ?? "").split(/\s+/).length;
+    const t = setTimeout(() => setGlobo(null), ultimo.tipo === "palabra" ? 25_000 : Math.max(14_000, palabras * 420));
     return () => clearTimeout(t);
-  }, [ultimo?.en]);
+  }, [ultimo?.en, ultimo?.vivo]);
+  const globoVivo = globo && ultimo?.en === globo.en ? ultimo : globo;
   // La marca de la pantalla se va sola
   useEffect(() => {
     if (!e.marca) return;
@@ -676,8 +680,8 @@ function Suelta({ e }) {
           <Reto key={e.reto.clave} reto={e.reto} />
         ) : globo && !enBloque ? (
           <button type="button" className={estilos.globo} onClick={() => (setGlobo(null), abrir())}>
-            {globo.texto}
-            {globo.pregunta && <strong>{globo.pregunta}</strong>}
+            {limpio(paraVoz(globoVivo.texto))}
+            {globoVivo.pregunta && <strong>{globoVivo.pregunta}</strong>}
           </button>
         ) : e.marca && !enBloque ? (
           <button type="button" className={estilos.marca} onClick={() => cambiar({ marca: null })}>
@@ -705,7 +709,7 @@ export function Aksu() {
 
   useEffect(() => {
     if (e.abierto) fin.current?.scrollIntoView({ block: "end" });
-  }, [e.abierto, e.mensajes.length, e.pensando, e.vista]);
+  }, [e.abierto, e.mensajes.length, e.mensajes.at(-1)?.texto?.length, e.pensando, e.vista]);
 
   // Alt + A (y el Alt + J de antes) abre y cierra
   useEffect(() => {
@@ -741,6 +745,9 @@ export function Aksu() {
     navegar(ruta);
     if (window.innerWidth < 900) cerrar();
   };
+  useEffect(() => {
+    if (e.navegar?.ruta) ir(e.navegar.ruta);
+  }, [e.navegar?.en]);
   const microfono = () => {
     if (oyendo) {
       oyendo.detener();
@@ -959,7 +966,7 @@ export function Aksu() {
             {e.mensajes.map((m, i) => (
               <Mensaje key={i} m={m} alIr={ir} />
             ))}
-            {e.pensando && (
+            {e.pensando && !e.mensajes.at(-1)?.vivo && (
               <li className={estilos.mensaje} data-de="aksu" data-pensando>
                 <p>...</p>
               </li>
@@ -974,13 +981,14 @@ export function Aksu() {
           {!e.entrevista && (
             <div className={estilos.atajos}>
               <button type="button" onClick={() => atajo("¿Qué sigue?")}>¿Qué sigue?</button>
+              <button type="button" onClick={() => atajo("Estudiemos 25 minutos", "Quiere estudiar contigo 25 minutos y que tú dirijas la sesión.")}>Estudiemos 25 min</button>
               {e.ejercicio && e.ejercicio.estado !== "resuelto" && (
                 <button type="button" onClick={() => atajo("Estoy trabado", "Dice que está trabado: mira su código y los tests que fallan, y dale un empujón sin la solución.")}>
                   Estoy trabado
                 </button>
               )}
               {e.ejercicio && (
-                <button type="button" onClick={() => atajo("Revisa mi código", "Te pide revisar su código como un senior: dos frases y una repregunta de entrevistador.")}>
+                <button type="button" onClick={() => atajo("Revisa mi código", "Te pide revisar su código como un senior: lo más importante que mejorarías y una repregunta de entrevistador.")}>
                   Revisa mi código
                 </button>
               )}

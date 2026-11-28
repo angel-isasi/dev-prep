@@ -522,6 +522,8 @@
 /* Lo último que dijo, asomado unos segundos */
 .globo {
   display: grid;
+  max-height: 40vh;
+  overflow-y: auto;
   gap: 4px;
   max-width: 100%;
   padding: var(--espacio-3) var(--espacio-4);
@@ -695,6 +697,32 @@
 .mensaje[data-de="yo"] {
   justify-self: end;
   background: color-mix(in srgb, var(--acento) 18%, var(--superficie-2));
+}
+
+/* Código en lo que explica Aksu */
+.mensaje pre {
+  overflow-x: auto;
+  margin: 0;
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio);
+  background: var(--hundido, var(--fondo));
+  font-family: var(--fuente-codigo);
+  font-size: var(--letra-3);
+  white-space: pre;
+}
+
+/* Mientras llega la respuesta, un cursor al final */
+.mensaje[data-vivo] > :last-child::after {
+  content: "▍";
+  margin-left: 2px;
+  color: var(--texto-suave);
+  animation: parpadeo 1s steps(2) infinite;
+}
+
+@keyframes parpadeo {
+  to {
+    opacity: 0;
+  }
 }
 
 .mensaje[data-pensando] {

@@ -9,12 +9,12 @@ export function GET(request) {
   return manejarGet(process.env, request);
 }
 
-// 45 s y un solo reintento: la función de Vercel se corta a los 60 s y un pedido colgado igual se cobra
+// 45 s y un solo reintento: un pedido colgado igual se cobra. Aksu en vivo tiene más margen (la función dura hasta 120 s)
 // El invitado usa su propia API key: su gasto tiene el tope de su espacio de trabajo, no toca el tuyo
-const crearCliente = (rol) =>
+const crearCliente = (rol, { vivo = false } = {}) =>
   new Anthropic({
     apiKey: rol === "invitado" ? process.env.ANTHROPIC_API_KEY_INVITADO : process.env.ANTHROPIC_API_KEY,
-    timeout: 45_000,
+    timeout: vivo ? 100_000 : 45_000,
     maxRetries: 1,
   });
 

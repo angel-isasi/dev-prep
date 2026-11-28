@@ -18,6 +18,7 @@
 //   Vercel, si existe, manda sobre todas.
 import { createHash, timingSafeEqual } from "node:crypto";
 import { MODELOS } from "./ia-precios.js";
+import { armarAksuVivo, MODELO_AKSU, responderEnVivo } from "./aksu-vivo.js";
 import { ESTILO, PERSONALIDADES, TAREAS, limpiarPorEsquema } from "./ia-tareas.js";
 
 /** Topes de lo que se acepta en cada pedido (en caracteres), para no gastar de más. */
@@ -403,6 +404,12 @@ export async function manejarPost(request, { env, crearCliente }) {
     cuerpo = await request.json();
   } catch {
     return json({ error: "El pedido no es JSON" }, 400);
+  }
+  // Aksu en vivo: la respuesta llega a trozos (ver aksu-vivo.js)
+  if (cuerpo?.tarea === "aksu-vivo") {
+    const vivo = armarAksuVivo(cuerpo);
+    if (vivo.error) return json({ error: vivo.error }, 400);
+    return responderEnVivo(crearCliente(rol, { vivo: true }), vivo, env.IA_MODELO || MODELO_AKSU);
   }
   const pedido = armarPedido(cuerpo);
   if (pedido.error) return json({ error: pedido.error }, 400);

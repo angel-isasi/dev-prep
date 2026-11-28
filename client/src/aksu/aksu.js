@@ -2,15 +2,18 @@
 // observa, notas de cada día y los contadores que usan las reglas) y la función que le pide a la IA
 // qué decir. La pantalla está en Aksu.jsx y las reglas de cuándo interviene en reglas.js.
 import { api } from "../lib/api.js";
-import { claveIa, estadoIa, pedirIa, topeIa, ultimoModeloIa, usoIa } from "../lib/ia.js";
+import { claveIa, conversarIa, estadoIa, topeIa, ultimoModeloIa, usoIa } from "../lib/ia.js";
 import { almacen } from "../lib/visita.js";
-import { callarLocal, decirLocal } from "./voz-local.js";
+import { callarLocal, decirLocal, generarLocal, reproducirLocal } from "./voz-local.js";
 import { descargarVozWeb, vocesWebGuardadas } from "./voz-web.js";
+import { frasesListas, paraVoz } from "./frases.js";
+
+export { paraVoz };
 import { callar, decir, dictar, hayVozEn, microDisponible, vocesListas } from "../lib/voz.js";
 import { cargarPlan } from "../lib/plan-junior.js";
 import { resumenParaAksu } from "../lib/cv-oferta.js";
 import {
-  anotar, bloqueActivo, BLOQUE_MIN, diaNuevo, enFranjaIngles, enSilencio, guardarVeredicto, marcarHecho, NIVELES, notaDelDia, PREGUNTAS_ENTREVISTA, restanteBloque, subirA, TEXTOS,
+  anotar, bloqueActivo, BLOQUE_MIN, diaNuevo, enFranjaIngles, enSilencio, guardarVeredicto, marcarHecho, NIVELES, notaDelDia, PREGUNTAS_ENTREVISTA, restanteBloque, TEXTOS,
 } from "./reglas.js";
 
 export const NOMBRE = "Aksu";
@@ -38,9 +41,16 @@ function leer() {
   };
   if (!NIVELES.includes(base.nivel)) base.nivel = "normal";
   if (!Array.isArray(base.veredictos)) base.veredictos = [];
+  if (!Array.isArray(base.diario)) base.diario = [];
+  base.mensajes = (base.mensajes ?? []).map((m) => (m.vivo ? { ...m, vivo: false } : m));
   // Día nuevo: la conversación y los contadores empiezan de cero; el libro y los ajustes se quedan
   if (base.dia?.fecha !== fecha) {
     base.ayer = { fecha: base.dia?.fecha ?? null, resueltos: base.dia?.resueltos?.length ?? 0, cierre: base.mensajes.findLast?.((m) => m.tipo === "cierre")?.texto ?? null };
+    // Lo que conversaron ese día queda resumido (sin IA) para que mañana sepa en qué quedaron
+    const dicho = base.mensajes.filter((m) => m.de === "yo").slice(-6).map((m) => m.texto.slice(0, 140));
+    if (base.dia?.fecha && (dicho.length || base.ayer.resueltos)) {
+      base.diario = [...(Array.isArray(base.diario) ? base.diario : []), { fecha: base.dia.fecha, resueltos: base.ayer.resueltos, dicho }].slice(-5);
+    }
     base.dia = diaNuevo(fecha, Date.now());
     base.mensajes = [];
     base.bloque = null;
@@ -49,7 +59,7 @@ function leer() {
 }
 
 // Lo que no se guarda: vive solo mientras la pestaña está abierta
-const PASAJERO = { abierto: false, vista: "charla", pensando: false, sinLeer: 0, sesion: null, pantalla: "", ejercicio: null, entrevista: null, oyendo: null, vocesLocales: [], vocesWeb: [], descargaVoz: null, reto: null, marca: null, frente: false, ir: null, uso: null, distraidoCon: null };
+const PASAJERO = { abierto: false, vista: "charla", pensando: false, sinLeer: 0, sesion: null, pantalla: "", ejercicio: null, entrevista: null, oyendo: null, vocesLocales: [], vocesWeb: [], descargaVoz: null, reto: null, marca: null, frente: false, ir: null, navegar: null, uso: null, distraidoCon: null };
 let estado = { ...leer(), ...PASAJERO };
 const oyentes = new Set();
 
@@ -156,6 +166,7 @@ export async function palabraDeIngles() {
 }
 
 export const silencio = () => {
+  turnoVoz++; // corta también las frases que esperaban su turno
   callar();
   callarLocal();
 };
@@ -302,7 +313,7 @@ function usoEnTexto(uso) {
 
 async function contexto() {
   const e = estado;
-  const [plan, meta, busqueda] = await Promise.all([planActual(), diasParaMeta(), resumenParaAksu().catch(() => "")]);
+  const [plan, meta, busqueda, config] = await Promise.all([planActual(), diasParaMeta(), resumenParaAksu().catch(() => ""), api.config?.().catch(() => null)]);
   const ahora = new Date();
   const ej = e.ejercicio;
   const s = e.sesion;
@@ -310,6 +321,7 @@ async function contexto() {
   const g = gasto();
   const diasMes = new Date(ahora.getFullYear(), ahora.getMonth() + 1, 0).getDate() - ahora.getDate() + 1;
   return [
+    config?.nombre ? `Se llama ${String(config.nombre).trim()}.` : "",
     `Hora: ${ahora.getHours()}:${String(ahora.getMinutes()).padStart(2, "0")}. Pantalla abierta: ${nombrePantalla(e.pantalla)}.`,
     `Presupuesto de IA: van ${g.usd.toFixed(2)} de ${g.tope} USD este mes y quedan ${diasMes} días del mes.`,
     meta !== null ? (meta >= 0 ? `Faltan ${meta} días para su fecha meta de postular.` : `Su fecha meta de postular pasó hace ${-meta} días.`) : "",
@@ -331,6 +343,9 @@ async function contexto() {
     `Hoy resolvió ${e.dia.resueltos.length} ejercicios.`,
     e.ayer?.fecha ? `Ayer (${e.ayer.fecha}) resolvió ${e.ayer.resueltos}.${e.ayer.cierre ? ` Tu cierre de ayer: ${e.ayer.cierre}` : ""}` : "",
     e.veredictos.length ? `Las notas que le pusiste a sus últimos días: ${e.veredictos.slice(-7).map((v) => `${v.fecha.slice(5)} ${v.nota}`).join(", ")}.` : "",
+    e.diario?.length
+      ? `Los últimos días (lo que te dijo y cuánto resolvió):\n${e.diario.map((d) => `- ${d.fecha}: resolvió ${d.resueltos}.${d.dicho?.length ? ` Te dijo: ${d.dicho.map((t) => `"${t}"`).join("; ")}` : ""}`).join("\n")}`
+      : "",
     e.cuaderno.length ? `Tu libro (lo que has observado de él):\n${e.cuaderno.slice(-12).map((n) => `- ${n.texto}`).join("\n")}` : "Tu libro está vacío: recién lo conoces.",
   ]
     .filter(Boolean)
@@ -339,7 +354,7 @@ async function contexto() {
 
 const historial = () =>
   estado.mensajes
-    .slice(-8)
+    .slice(-14)
     .map((m) => ({ de: m.de === "yo" ? "yo" : "jarvis", texto: [m.texto, m.pregunta].filter(Boolean).join(" ") }));
 
 /** Tu archivo del ejercicio abierto (solo con la laptop conectada). */
@@ -362,9 +377,88 @@ export function pareceIngles(texto) {
 export const probarVozIngles = () => vocesListas().then(() => enVozAlta("I am Aksu. You solved three exercises today, and two of them by looking at the answer. That does not count.", "en"));
 
 let enCurso = false;
+let turnoVoz = 0;
+
+// ---------- Lo que la app tiene (para que Aksu abra ejercicios y temas por su id) ----------
+let catalogoGuardado = null;
+async function catalogoApp() {
+  catalogoGuardado ??= Promise.all([api.ejercicios?.().catch(() => []), api.temas?.().catch(() => [])]).then(([ejercicios, temas]) => {
+    const listaTemas = (Array.isArray(temas) ? temas : (temas?.temas ?? [])).map((t) => `${t.id}: ${t.titulo}`);
+    const listaEj = (Array.isArray(ejercicios) ? ejercicios : []).map((e) => `${e.id}: ${e.titulo} (tema ${e.tema}, nivel ${e.nivel})`);
+    return [listaTemas.length ? `Temas de Aprender:\n${listaTemas.join("\n")}` : "", listaEj.length ? `Ejercicios:\n${listaEj.join("\n")}` : ""].filter(Boolean).join("\n\n");
+  });
+  const texto = await catalogoGuardado;
+  if (!texto) catalogoGuardado = null; // sin datos todavía: se vuelve a intentar la próxima vez
+  return texto;
+}
+
+// ---------- La voz en vivo: frase por frase, mientras llega el resto ----------
+/** Una cola de frases: cada una se prepara apenas llega y suena cuando termina la anterior. */
+function colaDeVoz(enIngles) {
+  const mio = ++turnoVoz;
+  callar();
+  callarLocal();
+  let cadena = Promise.resolve();
+  return (frase) => {
+    const idioma = enIngles || pareceIngles(frase) ? "en" : "es";
+    const lista = prepararFrase(frase, idioma);
+    cadena = cadena.then(async () => {
+      if (mio !== turnoVoz) return;
+      const sonar = await lista;
+      if (mio === turnoVoz) await sonar();
+    });
+  };
+}
+
+/** Prepara una frase (genera el audio neuronal si hay) y devuelve con qué hacerla sonar. */
+async function prepararFrase(texto, idioma) {
+  const { vozNombre, vozTono, vocesLocales, vocesWeb } = estado;
+  const delNavegador = () =>
+    new Promise((listo) => {
+      if (!hayVozEn(idioma)) return listo();
+      decir(texto, { idioma, grave: true, voz: vozNombre.startsWith(LOCAL) ? "" : vozNombre, tono: vozTono, alTerminar: listo });
+    });
+  const quiereLocal = vozNombre.startsWith(LOCAL) || vozNombre === "";
+  const delMotor = vocesLocales.filter((v) => v.startsWith(`${idioma}_`));
+  const delIdioma = delMotor.length ? delMotor : vocesWeb.filter((v) => v.startsWith(`${idioma}_`));
+  if (!delIdioma.length || !quiereLocal) return delNavegador;
+  const pedida = vozNombre.slice(LOCAL.length);
+  const voz = delIdioma.includes(pedida) ? pedida : (delIdioma.find((v) => /davefx/.test(v)) ?? delIdioma[0]);
+  try {
+    const audio = await generarLocal(texto, { voz, enWeb: !delMotor.length });
+    return () => reproducirLocal(audio, vozTono);
+  } catch {
+    return delNavegador;
+  }
+}
+
+// ---------- Lo que Aksu hace en la app ----------
+/** Ejecuta lo que pidió la IA. Si se lo pediste tú, te lleva de una; si habló solo, te deja el botón. */
+function ejecutar(acciones, enMensaje, desdeTi) {
+  let boton = null;
+  for (const { nombre, datos } of acciones) {
+    if (nombre === "anotar_en_libro") cambiar((e) => ({ cuaderno: anotar(e.cuaderno, datos.nota, e.dia.fecha) }));
+    else if (nombre === "ir_a") boton = { destino: datos.destino, ruta: rutaDe(datos.destino) };
+    else if (nombre === "abrir_ejercicio") boton = { ruta: `/practicar/${encodeURIComponent(datos.id)}`, etiqueta: "Abrir el ejercicio" };
+    else if (nombre === "abrir_tema") boton = { ruta: `/aprender/${encodeURIComponent(datos.id)}`, etiqueta: "Abrir el tema" };
+    else if (nombre === "abrir_en_vscode") {
+      const id = estado.ejercicio?.id;
+      if (id && api.abrir) api.abrir(id).catch(() => hablar({ texto: "No pude abrir VS Code: ¿está prendido el motor de la laptop?", frente: false }));
+      else hablar({ texto: "Primero abre un ejercicio en la app y te lo abro en VS Code.", frente: false });
+    } else if (nombre === "bloque_concentracion") setTimeout(() => iniciarBloque(datos.minutos), 0);
+    else if (nombre === "silencio") setTimeout(() => silenciar(datos.minutos), 0);
+    else if (nombre === "entrevista_sorpresa") setTimeout(() => iniciarEntrevista(), 300);
+  }
+  if (!boton?.ruta) return;
+  cambiar((e) => ({
+    mensajes: e.mensajes.map((m) => (m.en === enMensaje && m.de === "aksu" ? { ...m, destino: boton.destino ?? "", ruta: boton.ruta, etiqueta: boton.etiqueta ?? "" } : m)),
+    ...(desdeTi ? { navegar: { ruta: boton.ruta, en: Date.now() } } : {}),
+  }));
+}
+
 /**
- * Le pide a la IA qué decir y lo dice. Siempre lee primero el modelo rápido, con todo el contexto y el
- * presupuesto, y él decide si responde o si lo pasa a uno de más criterio (reglas.js: subirA).
+ * Le pide a la IA qué decir y lo dice mientras llega: el texto aparece a trozos y, con la voz
+ * encendida, cada frase suena apenas está completa. Siempre con el modelo de más criterio (server/aksu-vivo.js).
  * @param {object} p
  * @param {string} [p.momento]   qué acaba de pasar (lo escriben las reglas)
  * @param {string} [p.pregunta]  lo que tú le dijiste
@@ -373,7 +467,7 @@ let enCurso = false;
  * @param {boolean} [p.solo]     interviene por su cuenta: se calla si pediste silencio o estás en un bloque
  * @param {string} [p.ir]        parte de la pantalla a la que se acerca al decirlo
  * @param {boolean} [p.frente]   se pone delante
- * @returns {Promise<object|null>}
+ * @returns {Promise<{ mensaje: string } | null>}
  */
 export async function pensar({ momento = "", pregunta = "", tipo = "", ingles = false, solo = false, ir, frente } = {}) {
   if (solo && !puedeSolo()) return null;
@@ -385,24 +479,55 @@ export async function pensar({ momento = "", pregunta = "", tipo = "", ingles = 
   enCurso = true;
   cambiar({ pensando: true });
   const enIngles = ingles || enFranjaIngles(new Date().getHours(), estado.franjaIngles);
-  try {
-    const [datos, codigo] = await Promise.all([contexto(), codigoActual()]);
-    const pedido = { datos, momento, pregunta, historial: historial(), ...(codigo ? { codigo } : {}), ...(enIngles ? { ingles: true } : {}) };
-    let r = await pedirIa({ tarea: "aksu", ...pedido });
-    // Él eligió: si pidió un modelo de más criterio, responde ese (como mucho dos saltos: sonnet y opus)
-    let nivel = "haiku";
-    for (let salto = 0; salto < 2; salto++) {
-      const sube = subirA(r?.modelo, nivel);
-      if (!sube) break;
-      nivel = sube;
-      r = (await pedirIa({ tarea: `aksu-${sube}`, ...pedido, elegido: true }).catch(() => null)) ?? r;
+  const en = Date.now();
+  const decirFrase = estado.voz ? colaDeVoz(enIngles) : null;
+  let dicho = 0; // caracteres del texto hablable que ya se mandaron a la voz
+  let creado = false;
+  const mostrar = (todo, vivo) => {
+    if (!creado) {
+      creado = true;
+      const mensaje = { de: "aksu", texto: todo, pregunta: "", destino: "", tipo, en, vivo };
+      return cambiar((e) => ({
+        mensajes: [...e.mensajes, mensaje].slice(-MAX_MENSAJES),
+        sinLeer: e.abierto ? 0 : e.sinLeer + 1,
+        frente: !e.abierto && (frente ?? false),
+        ir: ir ?? null,
+      }));
     }
-    if (!r?.mensaje) return null;
-    if (r.nota) cambiar((e) => ({ cuaderno: anotar(e.cuaderno, r.nota, e.dia.fecha) }));
-    hablar({ texto: r.mensaje, pregunta: r.pregunta, destino: r.destino, tipo, ingles: enIngles || pareceIngles(`${r.mensaje} ${r.pregunta ?? ""}`), ir, frente });
-    return r;
+    cambiar((e) => ({ mensajes: e.mensajes.map((m) => (m.en === en && m.de === "aksu" ? { ...m, texto: todo, vivo } : m)) }));
+  };
+  const hablarLoNuevo = (todo, final) => {
+    if (!decirFrase) return;
+    const { frases, usado } = frasesListas(paraVoz(todo).slice(dicho), final);
+    dicho += usado;
+    frases.forEach(decirFrase);
+  };
+  try {
+    const [datos, codigo, catalogo] = await Promise.all([contexto(), codigoActual(), catalogoApp()]);
+    const pedido = { datos, momento, pregunta, historial: historial(), catalogo, ...(codigo ? { codigo } : {}), ...(enIngles ? { ingles: true } : {}) };
+    const r = await conversarIa(pedido, {
+      alTexto: (_trozo, todo) => {
+        mostrar(todo, true);
+        hablarLoNuevo(todo, false);
+      },
+    });
+    const hizoAlgo = r.acciones.some((a) => a.nombre !== "anotar_en_libro");
+    let texto = r.texto.trim() || (hizoAlgo ? "Listo." : "");
+    if (r.error && r.texto.trim()) texto = `${texto}\n\n(${r.error})`;
+    if (texto) mostrar(texto, false);
+    if (r.texto.trim()) hablarLoNuevo(r.texto, true);
+    else if (texto && decirFrase) decirFrase(texto);
+    ejecutar(r.acciones, en, !!pregunta);
+    if (texto && estado.avisos && document.visibilityState !== "visible" && globalThis.Notification?.permission === "granted") {
+      try {
+        new Notification(NOMBRE, { body: paraVoz(texto).slice(0, 220), tag: "aksu" });
+      } catch {
+        // algunos navegadores solo permiten avisos desde el service worker: se queda en la app
+      }
+    }
+    return texto ? { mensaje: texto } : null;
   } catch (e) {
-    if (pregunta) hablar({ texto: e.message ?? "No pude responder. Inténtalo otra vez." });
+    if (pregunta || creado) hablar({ texto: e.message ?? "No pude responder. Inténtalo otra vez." });
     return null;
   } finally {
     enCurso = false;
