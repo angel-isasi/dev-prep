@@ -36,6 +36,7 @@ export function crearApi(base = "") {
     ejercicio: (id) => pedir(`/api/ejercicios/${encodeURIComponent(id)}`),
     abrir: (id) => post(`/api/ejercicios/${encodeURIComponent(id)}/abrir`),
     reiniciar: (id) => post(`/api/ejercicios/${encodeURIComponent(id)}/reiniciar`),
+    empezarDeCero: () => post("/api/empezar-de-cero"),
     correr: (id) => post(`${ruta(id)}/correr`),
     verPista: (id, n) => post(`${ruta(id)}/pistas/${n}`),
     verSolucion: (id) => post(`${ruta(id)}/solucion`),

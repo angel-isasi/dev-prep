@@ -18,7 +18,7 @@ import {
   programarRepaso,
   validarConfig,
 } from "./progreso-reglas.js";
-import { diasCombinados, documentoParaSubir, fusionarDocumento } from "./combinar.js";
+import { diasCombinados, documentoParaSubir, fusionarDocumento, vaciarProgreso } from "./combinar.js";
 import { categoriasDeResultado } from "./errores.js";
 
 const RESPALDOS_DIARIOS = 7;
@@ -144,6 +144,18 @@ export async function crearProgreso({ datosDir }) {
       // Si la mezcla no cambió nada, no se escribe. Y nunca avisa a la sincronización: lo que llegó
       // de la nube no hay que volver a subirlo (avisar aquí hacía sincronizar cada 8 segundos sin parar).
       if (JSON.stringify(datos) !== antes) await guardar({ avisar: false });
+    },
+    /**
+     * Empezar de cero desde la laptop: guarda un respaldo, borra el progreso (se quedan ajustes, config,
+     * pitch, STAR y CV) y deja la marca de reinicio que la sincronización lleva a tus otros dispositivos.
+     */
+    async empezarDeCero() {
+      await respaldoDiario();
+      const id = `r-${Date.now().toString(36)}`;
+      datos.ajustes = { ...(datos.ajustes ?? {}), reinicio: { id, en: ahoraIso() } };
+      datos = { ...progresoVacio(), ...vaciarProgreso(datos, id) };
+      await guardar();
+      return { ok: true };
     },
     alCambiar(oyente) {
       oyentes.add(oyente);

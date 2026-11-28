@@ -27,6 +27,11 @@ export function rutasProgreso({ indice, progreso }) {
 
   router.get("/config", (req, res) => res.json(progreso.config()));
 
+  // Empezar de cero (Ajustes): borra el progreso en la laptop y, al sincronizar, en tus otros dispositivos
+  router.post("/empezar-de-cero", async (req, res) => {
+    res.json(await progreso.empezarDeCero());
+  });
+
   router.put("/config", async (req, res) => {
     res.json(await progreso.cambiarConfig(req.body));
   });

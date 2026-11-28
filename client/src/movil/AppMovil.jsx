@@ -19,7 +19,7 @@ import { iniciarSincronizacion } from "../lib/sync-movil.js";
 import { Layout } from "../components/Layout.jsx";
 import { LayoutMovil } from "./LayoutMovil.jsx";
 import { AvisoPWA } from "./AvisoPWA.jsx";
-import { SeccionWeb } from "./SeccionWeb.jsx";
+import { SeccionEmpezarDeCero, SeccionWeb } from "./SeccionWeb.jsx";
 import { SeccionRutina } from "../components/SeccionRutina.jsx";
 import { SeccionAvisos } from "../components/SeccionAvisos.jsx";
 import { perezoso } from "../lib/perezoso.js";
@@ -125,6 +125,7 @@ export function App() {
               <SeccionLaptop />
               <SeccionAvisos />
               <SeccionRutina />
+              <SeccionEmpezarDeCero />
             </>
           }
         >

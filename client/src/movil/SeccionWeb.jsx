@@ -121,28 +121,7 @@ export function SeccionWeb() {
           </button>
           <input ref={archivo} type="file" accept="application/json,.json" hidden onChange={restaurar} />
         </div>
-        <p className={estilos.ayuda}>
-          <strong>Empezar de cero:</strong> borra tu progreso en todos tus dispositivos. No se puede deshacer.
-        </p>
-        <div className={estilos.acciones}>
-          {/* El detalle de qué se borra y qué se queda va en el diálogo, que es donde se decide */}
-          <Confirmar
-            disparador={
-              <button type="button" className="boton boton-peligro">
-                Empezar de cero
-              </button>
-            }
-            titulo="¿Empezar de cero?"
-            descripcion="Se borra tu progreso en TODOS tus dispositivos: ejercicios, racha, repasos, tarjetas, lecciones, inglés, exámenes, simulacros, logros, postulaciones y diario. Se quedan tus ajustes, tu pitch, tus historias STAR y tu CV. Descarga un respaldo antes si quieres guardarlo. No se puede deshacer."
-            textoConfirmar="Sí, borrar todo"
-            peligro
-            alConfirmar={async () => {
-              await api.empezarDeCero();
-              await sincronizar().catch(() => {});
-              location.assign("/");
-            }}
-          />
-        </div>
+        <EmpezarDeCero />
         {aviso && <p className={estilos.ayuda}>{aviso}</p>}
       </section>
 
@@ -184,5 +163,45 @@ export function SeccionWeb() {
         </div>
       </section>
     </>
+  );
+}
+
+/** Empezar de cero: borra tu progreso en todos tus dispositivos (en la laptop conectada, también el suyo). */
+export function EmpezarDeCero() {
+  return (
+    <>
+      <p className={estilos.ayuda}>
+        <strong>Empezar de cero:</strong> borra tu progreso en todos tus dispositivos. No se puede deshacer.
+      </p>
+      <div className={estilos.acciones}>
+        {/* El detalle de qué se borra y qué se queda va en el diálogo, que es donde se decide */}
+        <Confirmar
+          disparador={
+            <button type="button" className="boton boton-peligro">
+              Empezar de cero
+            </button>
+          }
+          titulo="¿Empezar de cero?"
+          descripcion="Se borra tu progreso en TODOS tus dispositivos: ejercicios, racha, repasos, tarjetas, lecciones, inglés, exámenes, simulacros, logros, postulaciones y diario. Se quedan tus ajustes, tu pitch, tus historias STAR y tu CV. Descarga un respaldo antes si quieres guardarlo. No se puede deshacer."
+          textoConfirmar="Sí, borrar todo"
+          peligro
+          alConfirmar={async () => {
+            await api.empezarDeCero();
+            await sincronizar().catch(() => {});
+            location.assign("/");
+          }}
+        />
+      </div>
+    </>
+  );
+}
+
+/** El botón con su sección, para la web conectada a tu laptop (allí no sale "Tu progreso en este navegador"). */
+export function SeccionEmpezarDeCero() {
+  return (
+    <section className={estilos.seccion}>
+      <h2>Empezar de cero</h2>
+      <EmpezarDeCero />
+    </section>
   );
 }
