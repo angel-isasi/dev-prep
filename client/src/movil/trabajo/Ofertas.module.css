@@ -48,9 +48,9 @@
 
 .oferta {
   display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: var(--espacio-4);
-  padding: var(--espacio-4) var(--espacio-5);
+  grid-template-columns: 44px 1fr;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
   border: 1px solid var(--borde);
   border-radius: var(--radio-grande);
   background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
@@ -64,11 +64,11 @@
 .puntaje {
   display: grid;
   place-items: center;
-  width: 56px;
-  height: 56px;
-  border-radius: var(--radio-xl);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radio-grande);
   font-family: var(--fuente-titulos);
-  font-size: var(--titulo-2);
+  font-size: var(--titulo-4, var(--letra-7));
   font-weight: var(--peso-negrita);
   font-variant-numeric: tabular-nums;
 }
@@ -91,17 +91,58 @@
 .cuerpo {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-2);
+  gap: 6px;
   min-width: 0;
 }
 
 .titulo {
   overflow-wrap: anywhere;
   color: var(--texto);
-  font-size: var(--letra-7);
+  font-size: var(--letra-5);
   font-weight: var(--peso-semi);
   line-height: 1.35;
   text-decoration: none;
+}
+
+/* Cerrada, el título ocupa como mucho 2 líneas; abierta se lee entero */
+.titulo[data-abierta="false"] {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* Línea 1: el título y, a la derecha, guardar y abrir */
+.cabeza {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+}
+
+.rapidas {
+  display: flex;
+  flex-shrink: 0;
+  gap: 2px;
+}
+
+.icono {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radio);
+  background: none;
+  color: var(--texto-suave);
+  cursor: pointer;
+}
+
+.icono:hover,
+.icono[data-activo="true"] {
+  border-color: var(--borde);
+  color: var(--texto);
 }
 
 .titulo:hover {
@@ -199,10 +240,17 @@
   padding-top: var(--espacio-2);
 }
 
+/* En el celular el puntaje sigue a la izquierda (más chico): así cada oferta ocupa unas 3 líneas */
 @media (max-width: 600px) {
   .oferta {
-    grid-template-columns: 1fr;
-    padding: var(--espacio-4);
+    grid-template-columns: 36px 1fr;
+    gap: var(--espacio-2);
+    padding: var(--espacio-3);
+  }
+  .puntaje {
+    width: 36px;
+    height: 36px;
+    font-size: var(--letra-5);
   }
 }
 
@@ -304,7 +352,8 @@ details.ayuda .estado {
 .insignias {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  align-items: center;
+  gap: 4px 8px;
 }
 
 .insignias span {

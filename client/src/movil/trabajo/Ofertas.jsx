@@ -12,7 +12,7 @@ import { mensajePostulacion } from "../../../../server/postulaciones.js";
 import estilos from "./Ofertas.module.css";
 import { BotonCvOferta } from "./CvOferta.jsx";
 import { recordarOfertas } from "../../lib/cv-oferta.js";
-import { IconoAlerta, IconoCandado, IconoEstrella } from "../../components/Iconos.jsx";
+import { IconoAlerta, IconoCandado, IconoEstrella, IconoFlechaDer } from "../../components/Iconos.jsx";
 
 /** Cuántas ofertas se muestran de entrada y cuántas más con cada "Ver más". */
 const POR_PAGINA = 20;
@@ -266,10 +266,34 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
         {o.puntaje}
       </div>
       <div className={estilos.cuerpo}>
-        <a href={o.url} target="_blank" rel="noreferrer" className={estilos.titulo}>
-          {o.titulo}
-        </a>
+        <div className={estilos.cabeza}>
+          <a href={o.url} target="_blank" rel="noreferrer" className={estilos.titulo} data-abierta={abierta}>
+            {o.titulo}
+          </a>
+          {!abierta && (
+            <span className={estilos.rapidas}>
+              {marca !== "oculta" && (
+                <button
+                  type="button"
+                  className={estilos.icono}
+                  data-activo={marca === "guardada"}
+                  aria-label={marca === "guardada" ? "Quitar de guardadas" : "Guardar"}
+                  title={marca === "guardada" ? "Guardada" : "Guardar"}
+                  onClick={() => alMarcar(marca === "guardada" ? null : "guardada")}
+                >
+                  <IconoEstrella tamano={16} llena={marca === "guardada"} />
+                </button>
+              )}
+              <button type="button" className={estilos.icono} aria-label="Ver detalle" title="Ver detalle" aria-expanded={false} onClick={() => setAbierta(true)}>
+                <IconoFlechaDer tamano={16} />
+              </button>
+            </span>
+          )}
+        </div>
         <div className={estilos.insignias}>
+          <small className={estilos.meta}>
+            {[o.empresa, o.remoto ? "Remoto" : null, o.remoto && /^remot/i.test(o.ubicacion ?? "") ? null : o.ubicacion, salario(o.salario), hace(o.fecha)].filter(Boolean).join(" · ")}
+          </small>
           {o.nueva && <span data-tipo="nueva">Nueva</span>}
           {o.confianza && (
             <span data-tipo="confianza" data-nivel={o.confianza.nivel} title={o.confianza.detalle}>
@@ -283,9 +307,6 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
             </span>
           )}
         </div>
-        <small className={estilos.meta}>
-          {[o.empresa, o.remoto ? "Remoto" : null, o.ubicacion, salario(o.salario), hace(o.fecha)].filter(Boolean).join(" · ")}
-        </small>
         {abierta ? (
           <ul className={estilos.razones}>
             {o.razones.map((r) => (
@@ -298,7 +319,7 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
           <ul className={estilos.chips}>
             {o.razones
               .filter((r) => !r.texto.startsWith("Posible estafa"))
-              .slice(0, 4)
+              .slice(0, 3)
               .map((r) => (
                 <li key={r.texto} data-tipo={r.tipo} title={r.texto}>
                   {chipDe(r.texto)}
@@ -310,6 +331,7 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
         {abierta && <Detalle oferta={o} cv={cv} />}
         {abierta && <BotonCvOferta oferta={o} />}
 
+        {abierta && (
         <div className={estilos.acciones}>
           <button type="button" className="boton" onClick={() => setAbierta((v) => !v)} aria-expanded={abierta}>
             {abierta ? "Ver menos" : "Ver detalle"}
@@ -350,6 +372,8 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
             </>
           )}
         </div>
+        )}
+        {!abierta && enPostulaciones && <small className={estilos.tenue}>✓ En tus postulaciones</small>}
       </div>
     </article>
   );

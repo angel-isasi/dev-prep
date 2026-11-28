@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { fuenteDe, ofertasBumeran, ofertasComputrabajo, ofertasDeCorreos, ofertasGetOnBoard, ofertasGlassdoor, ofertasIndeed, ofertasLinkedin } from "./ofertas-correo.js";
+import { fuenteDe, ofertasBumeran, ofertasComputrabajo, ofertasComputrabajoNuevo, ofertasDeCorreos, ofertasGetOnBoard, ofertasGlassdoor, ofertasIndeed, ofertasLinkedin } from "./ofertas-correo.js";
 
 // Recortes con la misma forma que los correos reales (enlaces acortados)
 const LINKEDIN = `Tu alerta de empleo para Desarrollador de front-end en Perú
@@ -169,5 +169,41 @@ describe("ofertas que llegan al correo", () => {
     ]);
     expect(o).toHaveLength(5);
     expect(o.find((x) => x.id === "linkedin:4492321182").fecha).toBe("2026-11-22");
+  });
+});
+
+describe("correos con saltos de línea de Windows y formatos nuevos", () => {
+  it("LinkedIn con saltos de Windows lee todas las ofertas del resumen, no solo la primera", () => {
+    const CRLF = String.fromCharCode(13, 10);
+    const bloque = (n, titulo) =>
+      [titulo, `Empresa ${n}`, "Lima", "1 persona estudió en la misma institución educativa que tú", `Ver anuncio de empleo: https://www.linkedin.com/comm/jobs/view/${n}/`, ""].join(CRLF);
+    const texto = [bloque(11, "Programador junior"), bloque(22, "Desarrollador Frontend")].join(`${CRLF}------------------------------${CRLF}`);
+    const lista = ofertasDeCorreos([{ de: "jobalerts-noreply@linkedin.com", fecha: "2026-11-27", texto }]);
+    expect(lista.map((o) => [o.titulo, o.empresa, o.ubicacion])).toEqual([
+      ["Programador junior", "Empresa 11", "Lima, Perú"],
+      ["Desarrollador Frontend", "Empresa 22", "Lima, Perú"],
+    ]);
+  });
+
+  it("Computrabajo con el formato de noviembre: puesto entre asteriscos y enlace entre < >", () => {
+    const destino = "https://pe.computrabajo.com/ofertas-de-trabajo/oferta-de-trabajo-de-practicante-en-ica-AC9BEDF5AF168E6561373E686DCF3405?utm=1";
+    const enlace = (sufijo) => `<https://go.computrabajo.com/go/app/o_detail?url=${encodeURIComponent(destino + sufijo)}&idp=1>`;
+    const texto = [
+      "Sé el primero en postularte",
+      "*Practicante de desarrollo web*",
+      "[image: star]*4.2 *[image: verificada] Coopsol",
+      "Ica, Ica",
+      "S/. 1.200,00 (Mensual)",
+      "Hoy",
+      enlace(""),
+      "*Auxiliar operativo*",
+      "Otra",
+      "Ica",
+      enlace("&x=2"),
+    ].join("\n");
+    const lista = ofertasComputrabajoNuevo(texto, "2026-11-27");
+    expect(lista).toHaveLength(1);
+    expect(lista[0]).toMatchObject({ titulo: "Practicante de desarrollo web", empresa: "Coopsol", ubicacion: "Ica, Ica, Perú" });
+    expect(lista[0].url.startsWith("https://pe.computrabajo.com/ofertas-de-trabajo/")).toBe(true);
   });
 });

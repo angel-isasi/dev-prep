@@ -375,7 +375,13 @@ export function sinRepetir(ofertas) {
 // ---------------------------------------------------------------------------
 
 const FRONTEND =
-  /\b(front[\s-]?end|frontend|react|javascript|typescript|web developer|desarrollador web|ui developer|vue|angular|next\.?js)\b/i;
+  /\b(front[\s-]?end|frontend|react|javascript|typescript|web developer|desarrollador(a)? web|desarrollo web|programador(\(a\)|a)? web|ui developer|vue|angular|next\.?js)\b/i;
+// Puestos de programación en general ("Programador junior", "Desarrollador de software", "Practicante de sistemas"):
+// para un practicante cuentan, aunque por debajo de los de frontend
+const DESARROLLO =
+  /\b(programador(\(a\)|a)?|programaci[oó]n|desarrollador(\(a\)|a)?|desarrollo de software|software developer|software engineer|developer|analista programador|practicante (pre[\s-]?profesional )?(de )?(sistemas|desarrollo|ti)\b)/i;
+// En Ica (su ciudad) un puesto presencial le sirve; en otra ciudad de Perú, solo si es remoto
+const CIUDAD = /\bica\b/i;
 const FULLSTACK = /\b(full[\s-]?stack|fullstack)\b/i;
 const OTRO_ROL =
   /\b(back[\s-]?end|data (engineer|scientist|analyst)|devops|sre|machine learning|ml engineer|ai engineer|no[\s-]?code|ios|android|mobile|qa|tester|sales|marketing|designer|recruiter|account|support|customer|content|writer|hardware|mechanical|embedded|golang|java developer|php developer|salesforce|sap|integrations?)\b/i;
@@ -475,8 +481,10 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
   // ¿Es un puesto de desarrollo web?
   const esFrontend = FRONTEND.test(titulo);
   const esFull = FULLSTACK.test(titulo);
+  const esDesarrollo = !esFrontend && !esFull && DESARROLLO.test(titulo) && !OTRO_ROL.test(titulo) && !/soporte|t[eé]cnico|datos|inteligencia artificial|\bia\b|odoo|vb6|wpf|outsystems|python|java\b|\.net|dise[nñ]o gr[aá]fico/i.test(titulo);
   const relevante =
     esFull ||
+    esDesarrollo ||
     (esFrontend && !/\b(back[\s-]?end|mobile|ios|android|qa)\b/i.test(titulo)) ||
     (!OTRO_ROL.test(titulo) &&
       FRONTEND.test(oferta.texto ?? "") &&
@@ -498,6 +506,7 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
 
   if (esFrontend) sumar(15, "Es un puesto de frontend");
   else if (esFull) sumar(6, "Es full stack: incluye frontend");
+  else if (esDesarrollo) sumar(0, "Es de programación en general: pregunta si incluye frontend");
 
   // Nivel
   const senior = SENIOR.test(titulo) || /senior|lead/i.test(oferta.seniority ?? "");
@@ -505,6 +514,8 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
   if (junior) sumar(25, "Busca junior, practicante o trainee");
   else if (senior) sumar(-35, "Pide nivel senior o líder");
   else if (/semi/i.test(oferta.seniority ?? "")) sumar(-10, "Pide nivel semi senior");
+  // Sin sueldo no te sirve (descartas ad honorem y voluntariados)
+  if (/ad[\s-]?honorem|sin remuneraci[oó]n|no remunerad|voluntariado/i.test(todo)) sumar(-40, "No es pagada (ad honorem o voluntariado)");
   const anios = Number(ANIOS.exec(todo)?.[1]);
   if (anios >= 3) sumar(-15, `Pide ${anios} o más años de experiencia`);
   else if (anios > 0 && anios <= 2) sumar(5, `Pide poca experiencia (${anios} ${anios === 1 ? "año" : "años"})`);
@@ -517,9 +528,15 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
     /^(usa|us|united states|uk|europe|germany|deutschland)/i.test(oferta.ubicacion ?? "")
   )
     sumar(-20, "Solo para personas en otro país");
-  else if (PERU.test(`${oferta.ubicacion} ${todo}`)) {
-    sumar(15, "Es en Perú o acepta Perú");
+  else if (CIUDAD.test(oferta.ubicacion ?? "")) {
+    sumar(20, "Es en Ica, tu ciudad");
     lugarOk = true;
+  } else if (PERU.test(`${oferta.ubicacion} ${todo}`)) {
+    // Remoto desde Ica sí; presencial en Lima u otra ciudad, no (sin dato de modalidad, cuenta como presencial)
+    if (oferta.remoto) {
+      sumar(15, "Es en Perú y remoto");
+      lugarOk = true;
+    } else sumar(-12, "Presencial fuera de Ica: pregunta si puede ser remoto");
   } else if (oferta.remoto && LUGAR_BUENO.test(`${oferta.ubicacion} remote`)) {
     sumar(10, "Remoto y abierto a Latinoamérica");
     lugarOk = true;
@@ -551,7 +568,9 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
   // Para el aviso al celular: lo que importa sin depender de tu mapa (la Lambda no lo tiene)
   const paraAvisar = junior && !senior && lugarOk && dias != null && dias <= 7 && alertas.length === 0;
   // "Solo para mí": junior o práctica, en Perú o remota para Latinoamérica, y de frontend o con React/JavaScript
-  const usaTuStack = esFrontend || tecnologias.some((t) => t.nombre === "React" || t.nombre === "JavaScript");
+  // Un puesto de programación general cuenta si no pide un lenguaje que no es el tuyo (Elixir, PHP, C#...)
+  const otroLenguaje = /\b(elixir|ruby|golang|rust|c\+\+|c#|php|kotlin|swift|scala|cobol|abap)\b/i.test(titulo);
+  const usaTuStack = esFrontend || esFull || (esDesarrollo && !otroLenguaje) || tecnologias.some((t) => t.nombre === "React" || t.nombre === "JavaScript");
   const paraMi = junior && !senior && lugarOk && usaTuStack && alertas.length === 0;
   return {
     puntaje: Math.max(1, Math.min(100, Math.round(puntaje))),

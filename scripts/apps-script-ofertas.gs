@@ -11,7 +11,7 @@ function doGet(e) {
   if (!clave || !e || e.parameter.clave !== clave) return salida({ error: 'clave' });
   const desde = Date.now() - DIAS * 24 * 60 * 60 * 1000;
   const correos = [];
-  GmailApp.search('label:' + ETIQUETA + ' newer_than:' + DIAS + 'd', 0, 60).forEach(function (hilo) {
+  GmailApp.search('label:' + ETIQUETA + ' newer_than:' + DIAS + 'd', 0, 150).forEach(function (hilo) {
     hilo.getMessages().forEach(function (m) {
       if (m.getDate().getTime() < desde) return;
       const de = m.getFrom();

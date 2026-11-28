@@ -168,7 +168,7 @@ describe("buscarOfertas", () => {
 describe("ofertas para avisar", () => {
   test("una oferta junior, en Perú y de esta semana sí; una senior o vieja, no", () => {
     const buena = puntuarOferta(
-      { ...base, titulo: "Frontend Junior", ubicacion: "Lima, Perú", remoto: false, texto: "", fecha: "2026-11-14T00:00:00Z" },
+      { ...base, titulo: "Frontend Junior", ubicacion: "Lima, Perú", remoto: true, texto: "", fecha: "2026-11-14T00:00:00Z" },
       perfil,
     );
     const senior = puntuarOferta({ ...base, titulo: "Senior Frontend", texto: "", fecha: "2026-11-14T00:00:00Z" }, perfil);
@@ -324,7 +324,7 @@ describe("seguridad", () => {
   });
 
   test("con alertas baja el puntaje, lo dice primero y no se avisa ni entra en 'Solo para mí'", () => {
-    const oferta = { ...base, titulo: "Frontend Junior", ubicacion: "Lima, Perú", remoto: false, fecha: "2026-11-14T00:00:00Z" };
+    const oferta = { ...base, titulo: "Frontend Junior", ubicacion: "Lima, Perú", remoto: true, fecha: "2026-11-14T00:00:00Z" };
     const limpia = puntuarOferta({ ...oferta, texto: "React" }, perfil);
     const rara = puntuarOferta({ ...oferta, texto: "React. Escríbenos por WhatsApp al +51 999 888 777" }, perfil);
     expect(limpia.puntaje - rara.puntaje).toBeGreaterThanOrEqual(20); // -25 (la limpia toca el tope de 100)
@@ -370,4 +370,29 @@ test("los enlaces de las ofertas solo pueden ser http o https", () => {
   expect(urlSegura("data:text/html,hola", "r")).toBe("r");
   expect(urlSegura(undefined, "r")).toBe("r");
   expect(normalizarRemotive({ jobs: [{ id: 1, title: "Frontend", url: "javascript:alert(1)" }] })[0].url).toBe("https://remotive.com/remote-jobs");
+});
+
+describe("ofertas para un practicante en Ica", () => {
+  const de = (titulo, extra = {}) => puntuarOferta({ ...base, titulo, texto: "", remoto: false, ubicacion: "Lima, Perú", ...extra }, perfil);
+
+  test("los puestos de programación en general cuentan, no solo los que dicen frontend", () => {
+    for (const t of ["Programador junior", "Practicante de Desarrollo Web", "Desarrollador de Software Junior", "Practicante de Sistemas"]) {
+      expect(de(t).relevante, t).toBe(true);
+    }
+    for (const t of ["Programador Junior Backend Java (Spring Boot)", "Practicante de Soporte Técnico TI", "Analista de Datos Jr."]) {
+      expect(de(t).relevante, t).toBe(false);
+    }
+  });
+
+  test("en Ica sirve presencial; en Lima solo si es remoto", () => {
+    expect(de("Programador junior", { ubicacion: "Ica, Perú" }).paraMi).toBe(true);
+    expect(de("Programador junior").paraMi).toBe(false);
+    expect(de("Programador junior", { remoto: true }).paraMi).toBe(true);
+    expect(de("Programador junior", { ubicacion: "Ica, Perú" }).puntaje).toBeGreaterThan(de("Programador junior").puntaje);
+  });
+
+  test("un lenguaje que no es el tuyo no entra en Solo para mí, y lo ad honorem baja mucho", () => {
+    expect(de("Desarrollador Elixir Junior", { remoto: true }).paraMi).toBe(false);
+    expect(de("Desarrollo Web - Ad Honorem").puntaje).toBeLessThan(20);
+  });
 });

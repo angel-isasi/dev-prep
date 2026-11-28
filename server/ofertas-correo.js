@@ -50,7 +50,7 @@ function oferta({ id, fuente, titulo, empresa, url, lugar, fecha }) {
 // Líneas de un bloque de LinkedIn que no son puesto, empresa ni lugar
 const RUIDO_LINKEDIN = [
   /https?:\/\//,
-  /personas? estudiaron/i,
+  /personas? estudi(aron|ó|o)/i,
   /^Solicitar con/i,
   /busca personal/i,
   /^\d+ contactos?$/i,
@@ -192,17 +192,52 @@ export function ofertasComputrabajo(texto, fecha) {
 }
 
 /**
+ * Computrabajo, formato nuevo (desde nov 2026): el puesto entre asteriscos, luego "★ 4.2 Empresa", lugar,
+ * sueldo y antigüedad, y al final el enlace de rastreo entre < > con el destino real en "url=".
+ */
+export function ofertasComputrabajoNuevo(texto, fecha) {
+  const ofertas = [];
+  const t = String(texto);
+  let desde = 0;
+  for (const m of t.matchAll(/<https:\/\/go\.computrabajo\.com\/go\/app\/o_detail\?url=([^&>]+)[^>]*>/g)) {
+    const antes = t.slice(desde, m.index);
+    desde = m.index + m[0].length;
+    let destino;
+    try {
+      destino = decodeURIComponent(m[1]).split("?")[0];
+    } catch {
+      continue;
+    }
+    const id = destino.match(/-([A-F0-9]{16,})$/)?.[1];
+    if (!id || !/^https:\/\/pe\.computrabajo\.com\/ofertas-de-trabajo\//.test(destino)) continue;
+    const lineas = antes
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean);
+    const i = lineas.findLastIndex((l) => /^\*[^*]+\*$/.test(l));
+    if (i === -1) continue;
+    const titulo = lineas[i].replace(/\*/g, "");
+    const empresa = (lineas[i + 1] ?? "").replace(/\[image:[^\]]*\]/g, "").replace(/\*?\d([.,]\d)?\s*\*?/, "").replace(/\*/g, "");
+    const lugar = lineas[i + 2] ?? "";
+    if (!ES_DE_PROGRAMACION.test(titulo)) continue;
+    ofertas.push(oferta({ id: `computrabajo:${id}`, fuente: "Computrabajo", titulo, empresa, lugar, fecha, url: destino }));
+  }
+  return ofertas;
+}
+
+/**
  * Todos los correos que entrega el script de Google, convertidos en ofertas sin repetir (la más nueva
  * gana). @param {{ de: string, fecha: string, texto?: string, html?: string }[]} correos
  */
 export function ofertasDeCorreos(correos = []) {
   const porId = new Map();
   const ordenados = [...correos].sort((a, b) => String(a.fecha).localeCompare(String(b.fecha)));
-  for (const c of ordenados) {
+  for (const original of ordenados) {
+    const c = { ...original, texto: original.texto == null ? original.texto : String(original.texto).replace(/\r\n?/g, "\n") };
     const fuente = fuenteDe(c.de);
     const fecha = String(c.fecha ?? "").slice(0, 10) || null;
     const lista =
-      fuente === "LinkedIn" ? ofertasLinkedin(c.texto, fecha) : fuente === "Glassdoor" ? ofertasGlassdoor(c.html, fecha) : fuente === "Get on Board" ? ofertasGetOnBoard(c.texto, fecha) : fuente === "Bumeran" ? ofertasBumeran(c.texto, fecha) : fuente === "Indeed" ? ofertasIndeed(c.texto, fecha) : fuente === "Computrabajo" ? ofertasComputrabajo(c.texto, fecha) : [];
+      fuente === "LinkedIn" ? ofertasLinkedin(c.texto, fecha) : fuente === "Glassdoor" ? ofertasGlassdoor(c.html, fecha) : fuente === "Get on Board" ? ofertasGetOnBoard(c.texto, fecha) : fuente === "Bumeran" ? ofertasBumeran(c.texto, fecha) : fuente === "Indeed" ? ofertasIndeed(c.texto, fecha) : fuente === "Computrabajo" ? [...ofertasComputrabajo(c.texto, fecha), ...ofertasComputrabajoNuevo(c.texto, fecha)] : [];
     for (const o of lista) if (o.titulo) porId.set(o.id, o);
   }
   return [...porId.values()];
