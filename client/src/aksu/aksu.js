@@ -35,7 +35,7 @@ function leer() {
   }
   const fecha = hoyLocal();
   const base = {
-    nivel: "normal", voz: false, avisos: false, cuaderno: [], veredictos: [], informe: null, mensajes: [], franjaIngles: null, silencioHasta: 0, bloque: null, vozNombre: "", vozTono: 0.7,
+    nivel: "normal", modo: "revisando", voz: false, avisos: false, cuaderno: [], veredictos: [], informe: null, mensajes: [], franjaIngles: null, silencioHasta: 0, bloque: null, vozNombre: "", vozTono: 0.7,
     dia: diaNuevo(fecha, Date.now()),
     ...(g ?? {}),
   };
@@ -56,7 +56,7 @@ function leer() {
     base.dia = diaNuevo(fecha, Date.now());
     base.mensajes = [];
     base.bloque = null;
-    base.modo = "estudio";
+    base.modo = "revisando";
   }
   return base;
 }
@@ -119,6 +119,11 @@ export const puedeSolo = () => estado.modo !== "revisando" && !enSilencio(estado
  * Qué estás haciendo: "estudio" (te acompaña, te pregunta, te avisa) o "revisando" (solo entraste a
  * mirar algo: no interviene por su cuenta ni te presiona; si le hablas, responde). Cada día empieza en estudio.
  */
+/** Empezaste a estudiar (Modo enfoque, "Estudiemos"): Aksu pasa a acompañarte con el nivel que elegiste. */
+export function empezarAEstudiar() {
+  if (estado.modo === "revisando") cambiarModo(estado.nivel === "encima" ? "encima" : "normal");
+}
+
 export function cambiarModo(modo) {
   if (modo === "revisando") {
     cambiar({ modo: "revisando" });

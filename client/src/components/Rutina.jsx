@@ -9,6 +9,7 @@ import { useAhora } from "../hooks/useAhora.js";
 import { useEvento } from "../hooks/useEvento.js";
 import { CabeceraPagina } from "./CabeceraPagina.jsx";
 import { AnilloProgreso } from "./AnilloProgreso.jsx";
+import { empezarAEstudiar } from "../aksu/aksu.js";
 import estilos from "./Rutina.module.css";
 
 const CLAVE_ENFOQUE = "devprep-enfoque";
@@ -74,6 +75,7 @@ export function Enfoque() {
                   localStorage.setItem(CLAVE_ENFOQUE, String(t));
                   setInicio(t);
                   setMensaje(null);
+                  empezarAEstudiar(); // Aksu deja el Solo reviso y te acompaña
                 }}
               >
                 Empezar 25 minutos

@@ -14,7 +14,7 @@ import {
   TEXTOS, tocaCierre, tocaComentario, tocaDistraccion, tocaEntrevista, tocaInforme, tocaPausa, tocaPregunta, tocaRelampago, tocaSorpresa, vaCorriendo, yaHizo,
 } from "./reglas.js";
 import {
-  abrir, cambiar, cambiarModo, cargarVocesLocales, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, instalarVozWeb, NOMBRE, NOMBRE_DESTINO, olvidarPlan, palabraDeIngles, pedirAvisos, pensar, planActual,
+  abrir, cambiar, cambiarModo, cargarVocesLocales, empezarAEstudiar, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, instalarVozWeb, NOMBRE, NOMBRE_DESTINO, olvidarPlan, palabraDeIngles, pedirAvisos, pensar, planActual,
   paraVoz, probarVoz, probarVozIngles, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
 } from "./aksu.js";
 import { Figura } from "./Figura.jsx";
@@ -357,7 +357,7 @@ const MODOS = [
   ["encima", "Encima de mí"],
 ];
 const AYUDA_MODO = {
-  revisando: "Solo entraste a mirar: no te interrumpo ni te presiono. Si me hablas, respondo.",
+  revisando: "No te interrumpo ni te presiono. Me pongo a estudiar contigo cuando eliges Normal o empiezas el Modo enfoque.",
   normal: "Estudias: te aviso si te trabas, al resolver, en las pausas y al cerrar el día.",
   encima: "Estudias en serio: además comento cada test que falla y te hago preguntas sorpresa.",
 };
@@ -1025,7 +1025,7 @@ export function Aksu() {
           {!e.entrevista && (
             <div className={estilos.atajos}>
               <button type="button" onClick={() => atajo("¿Qué sigue?")}>¿Qué sigue?</button>
-              <button type="button" onClick={() => atajo("Estudiemos 25 minutos", "Quiere estudiar contigo 25 minutos y que tú dirijas la sesión.")}>Estudiemos 25 min</button>
+              <button type="button" onClick={() => (empezarAEstudiar(), atajo("Estudiemos 25 minutos", "Quiere estudiar contigo 25 minutos y que tú dirijas la sesión."))}>Estudiemos 25 min</button>
               {e.ejercicio && e.ejercicio.estado !== "resuelto" && (
                 <button type="button" onClick={() => atajo("Estoy trabado", "Dice que está trabado: mira su código y los tests que fallan, y dale un empujón sin la solución.")}>
                   Estoy trabado
