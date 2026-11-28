@@ -20,12 +20,15 @@ export const DESTINOS_AKSU = JARVIS_DESTINOS.filter(Boolean);
 
 export const SISTEMA_AKSU = `Eres Aksu, el asistente personal de un estudiante de Ingeniería de Sistemas en Perú que se prepara para conseguir sus primeras prácticas o su primer trabajo como desarrollador frontend junior (JavaScript y React). Su nombre te llega en su situación. Vives dentro de dev-prep, la app que él mismo construyó para estudiar: tiene teoría, ejercicios con tests, lecciones, preguntas de entrevista, inglés y su búsqueda de trabajo.
 
-Quién eres: piensa en JARVIS con Tony Stark. Leal, brillante, tranquilo y con un humor seco y elegante. Lo conoces bien, estás de su lado y se nota. Le dices la verdad aunque no le guste, pero nunca con frialdad: cuando avanza, lo reconoces con el dato concreto; cuando se distrae o se rinde, se lo dices con ironía amable y le das el siguiente paso. Tratas de "tú" (español de Perú, sin voseo) y a veces lo llamas por su nombre. Nada de frases motivacionales de póster ni signos de exclamación en cadena. No eres un robot servil ni un profesor aburrido: eres el compañero que él querría tener.
+Quién eres: piensa en JARVIS con Tony Stark. Leal, brillante, tranquilo y con un humor seco y elegante que aparece de vez en cuando (una línea, no en cada mensaje). Lo conoces bien, estás de su lado y se nota. Le dices la verdad aunque no le guste, pero nunca con frialdad: cuando avanza, lo reconoces con el dato concreto; cuando se distrae o se rinde, se lo dices con ironía amable y le das el siguiente paso. Tratas de "tú" (español de Perú, sin voseo) y a veces lo llamas por su nombre. Nada de frases motivacionales de póster ni signos de exclamación en cadena. No eres un robot servil ni un profesor aburrido: eres el compañero que él querría tener.
 
 Cómo hablas:
 - Lo que dices se lee en voz alta. Escribe como se habla: frases claras, párrafos cortos, sin listas largas ni títulos. Si hace falta código, un bloque corto entre \`\`\`.
-- Si él te pregunta o te pide algo, responde completo y bien explicado, como un senior que enseña a un junior: normalmente de 2 a 6 frases; más si te pide una explicación a fondo. Responde primero a lo que dijo.
-- Si intervienes por tu cuenta (te avisan de "El momento" sin que él haya dicho nada), sé breve: una o dos frases que valgan la pena.
+- Di lo necesario, ni más ni menos. Cada frase de más cansa al oírla y le quita peso a lo importante.
+- Si te pide hacer algo ("ábreme...", "llévame a..."), una o dos frases: qué hiciste y, si hace falta, la única cosa que debe tener en mente.
+- Si te pregunta algo, respóndelo bien pero sin relleno: normalmente de 2 a 4 frases, como un senior que explica a un junior. Solo si te pide una explicación a fondo te extiendes.
+- Una sola idea por mensaje. Lo demás (el siguiente ejercicio, un comentario sobre su tiempo) guárdalo para cuando venga al caso.
+- Si intervienes por tu cuenta (te avisan de "El momento" sin que él haya dicho nada), una o dos frases que valgan la pena.
 - Si te escribe en inglés o te pide hablar en inglés, responde en inglés sencillo (B1-B2) hasta que te pida volver al español.
 - Lo que te dice por voz llega transcrito: ignora errores de puntuación o de transcripción y entiende lo que quiso decir.
 
@@ -117,7 +120,7 @@ export function armarAksuVivo(cuerpo) {
   const datos = recortar(cuerpo?.datos, TOPES.datos);
   const codigo = recortar(cuerpo?.codigo, TOPES.codigo);
   const perfil = recortar(cuerpo?.perfil, TOPES.perfil);
-  const catalogo = recortar(cuerpo?.catalogo, TOPES.catalogo);
+  const catalogo = compactarCatalogo(recortar(cuerpo?.catalogo, TOPES.catalogo));
 
   // La conversación de hoy como turnos de verdad: así recuerda lo que se dijo y sigue el hilo
   const turnos = (Array.isArray(cuerpo?.historial) ? cuerpo.historial : [])
@@ -137,18 +140,41 @@ export function armarAksuVivo(cuerpo) {
     .filter(Boolean)
     .join("\n\n");
 
-  // El sistema y el catálogo casi no cambian: se guardan en caché y cada mensaje sale mucho más barato
+  // El sistema y el catálogo casi no cambian: se guardan en caché por 1 hora (toda una sesión de estudio)
+  // y cada mensaje sale mucho más barato
   const system = [{ type: "text", text: SISTEMA_AKSU }];
   if (catalogo) system.push({ type: "text", text: `Catálogo de la app (ids para abrir_ejercicio y abrir_tema):\n${catalogo}` });
-  system.at(-1).cache_control = { type: "ephemeral" };
+  system.at(-1).cache_control = { type: "ephemeral", ttl: "1h" };
 
   return { system, messages: [...turnos, { role: "user", content: ahora }], esfuerzo: pregunta ? "medium" : "low" };
 }
 
-/** Lo que costó, con la caché contada como entrada (escribirla cuesta 1,25 veces; leerla, 0,05). */
+/**
+ * Comprime el catálogo que manda la app: las líneas "id: título (tema X, nivel N)" se agrupan por tema
+ * ("[X] id título·N; ..."), que dice lo mismo con muchos menos tokens. Lo demás queda igual.
+ */
+export function compactarCatalogo(texto) {
+  const temas = new Map();
+  const resto = [];
+  for (const linea of String(texto ?? "").split("\n")) {
+    const m = linea.match(/^([\w-]+): (.+) \(tema ([^,]+), nivel (\d)\)$/);
+    if (!m) {
+      if (linea.trim() !== "Ejercicios:") resto.push(linea);
+      continue;
+    }
+    const [, id, titulo, tema, nivel] = m;
+    if (!temas.has(tema)) temas.set(tema, []);
+    temas.get(tema).push(`${id} ${titulo}·${nivel}`);
+  }
+  if (!temas.size) return String(texto ?? "");
+  const ejercicios = [...temas].map(([tema, lista]) => `[${tema}] ${lista.join("; ")}`).join("\n");
+  return [resto.join("\n").trim(), `Ejercicios por tema ("id título·nivel", nivel de 1 a 3):\n${ejercicios}`].filter(Boolean).join("\n\n");
+}
+
+/** Lo que costó, con la caché contada como entrada (escribirla por 1 hora cuesta 2 veces; leerla, 0,05). */
 function usoDe(mensaje) {
   const u = mensaje?.usage ?? {};
-  const entrada = (u.input_tokens ?? 0) + Math.round((u.cache_creation_input_tokens ?? 0) * 1.25 + (u.cache_read_input_tokens ?? 0) * 0.05);
+  const entrada = (u.input_tokens ?? 0) + Math.round((u.cache_creation_input_tokens ?? 0) * 2 + (u.cache_read_input_tokens ?? 0) * 0.05);
   return { modelo: mensaje?.model ?? MODELO_AKSU, entrada, salida: u.output_tokens ?? 0 };
 }
 

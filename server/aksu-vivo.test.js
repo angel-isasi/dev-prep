@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { accionValida, armarAksuVivo, HERRAMIENTAS_AKSU, MODELO_AKSU, responderEnVivo } from "./aksu-vivo.js";
+import { accionValida, armarAksuVivo, compactarCatalogo, HERRAMIENTAS_AKSU, MODELO_AKSU, responderEnVivo } from "./aksu-vivo.js";
 import { manejarPost } from "./ia.js";
 
 /** Un cliente falso: devuelve los eventos dados y el mensaje final. */
@@ -59,8 +59,23 @@ describe("armarAksuVivo", () => {
     expect(p.esfuerzo).toBe("low");
     expect(p.system).toHaveLength(2);
     expect(p.system[1].text).toContain("js-gu-001");
-    expect(p.system[1].cache_control).toEqual({ type: "ephemeral" });
+    expect(p.system[1].cache_control).toEqual({ type: "ephemeral", ttl: "1h" });
     expect(p.system[0].cache_control).toBeUndefined();
+  });
+});
+
+describe("compactarCatalogo", () => {
+  it("agrupa los ejercicios por tema y deja los temas igual", () => {
+    const texto = "Temas de Aprender:\nvariables-y-tipos: Variables y tipos\n\nEjercicios:\njs-1: Sumar (tema arrays, nivel 1)\njs-2: Promedio (tema arrays, nivel 2)\njs-3: Ficha (tema variables, nivel 1)";
+    const c = compactarCatalogo(texto);
+    expect(c).toContain("variables-y-tipos: Variables y tipos");
+    expect(c).toContain("[arrays] js-1 Sumar·1; js-2 Promedio·2");
+    expect(c).toContain("[variables] js-3 Ficha·1");
+    expect(c.length).toBeLessThan(texto.length + 60);
+  });
+
+  it("si no reconoce el formato, lo deja como vino", () => {
+    expect(compactarCatalogo("algo raro")).toBe("algo raro");
   });
 });
 
