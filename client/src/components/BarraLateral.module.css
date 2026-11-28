@@ -383,6 +383,27 @@
   border-color: var(--borde);
 }
 
+/* Barra plegada: solo cabe la llama, así que el número va como insignia en su esquina (no se sale de la barra) */
+.racha {
+  position: relative;
+}
+
+.barra:not(:hover):not(:has(:focus-visible)) .racha strong {
+  position: absolute;
+  top: 5px;
+  left: 25px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--superficie);
+  font-size: 10px;
+  font-weight: var(--peso-semi);
+  line-height: 14px;
+  text-align: center;
+}
+
 .sub:hover {
   background: var(--velo-2);
 }

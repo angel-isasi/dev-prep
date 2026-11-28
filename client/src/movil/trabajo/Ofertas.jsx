@@ -58,6 +58,12 @@ const CHIPS = [
   [/^Tiene más de mes y medio/, "Más de 45 días"],
   [/^Tiene más de un mes/, "Más de un mes"],
   [/^No es un puesto de desarrollo web/, "No es desarrollo web"],
+  [/^Lleva (\d+) días/, (m) => `¿Sigue abierta? (${m[1]} días)`],
+  [/^Es en Ica/, "En Ica"],
+  [/^Es en Perú y remoto/, "Perú remoto"],
+  [/^Presencial fuera de Ica/, "Presencial fuera de Ica"],
+  [/^No es pagada/, "No pagada"],
+  [/^Es de programación en general/, "Programación"],
 ];
 
 function chipDe(texto) {
@@ -285,6 +291,11 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
                   onClick={() => alMarcar(marca === "guardada" ? null : "guardada")}
                 >
                   <IconoEstrella tamano={16} llena={marca === "guardada"} />
+                </button>
+              )}
+              {marca !== "oculta" && (
+                <button type="button" className={estilos.icono} aria-label="Quitar: ya cerró o no me interesa" title="Quitar: ya cerró o no me interesa" onClick={() => alMarcar("oculta")}>
+                  ✕
                 </button>
               )}
               <button type="button" className={estilos.icono} aria-label="Ver detalle" title="Ver detalle" aria-expanded={false} onClick={() => setAbierta(true)}>

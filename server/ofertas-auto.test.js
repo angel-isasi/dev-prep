@@ -372,6 +372,16 @@ test("los enlaces de las ofertas solo pueden ser http o https", () => {
   expect(normalizarRemotive({ jobs: [{ id: 1, title: "Frontend", url: "javascript:alert(1)" }] })[0].url).toBe("https://remotive.com/remote-jobs");
 });
 
+describe("ofertas viejas de las alertas del correo", () => {
+  test("desde los 10 días bajan y avisan que revises si sigue abierta", () => {
+    const o = { ...base, titulo: "Practicante Frontend", texto: "", fuente: "LinkedIn", remoto: true, ubicacion: "Perú" };
+    const nueva = puntuarOferta({ ...o, fecha: "2026-11-14T00:00:00Z" }, perfil);
+    const vieja = puntuarOferta({ ...o, fecha: "2026-11-02T00:00:00Z" }, perfil);
+    expect(nueva.puntaje - vieja.puntaje).toBeGreaterThanOrEqual(15);
+    expect(vieja.razones.some((r) => /sigue abierta/.test(r.texto))).toBe(true);
+  });
+});
+
 describe("ofertas para un practicante en Ica", () => {
   const de = (titulo, extra = {}) => puntuarOferta({ ...base, titulo, texto: "", remoto: false, ubicacion: "Lima, Perú", ...extra }, perfil);
 

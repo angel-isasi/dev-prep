@@ -887,7 +887,13 @@ const apiWeb = {
     const registradas = progreso.registros("postulaciones");
     const comoOferta = (p) => ({ titulo: p.puesto, empresa: p.empresa });
     for (const p of correo.postulaciones ?? []) {
-      if (registradas[p.id] || Object.values(registradas).some((r) => yaPostulaste(comoOferta(r), p))) continue;
+      // Las detectadas antes se guardaron con la fecha de hoy: se corrige a la del correo de confirmación
+      const previa = registradas[p.id];
+      if (previa && p.fecha && previa.enviadaEl !== p.fecha && String(previa.notas ?? "").startsWith("Detectada sola")) {
+        await apiWeb.guardarPostulacion({ id: p.id, ...previa, enviadaEl: p.fecha, fecha: p.fecha });
+        continue;
+      }
+      if (previa || Object.values(registradas).some((r) => yaPostulaste(comoOferta(r), p))) continue;
       const deOferta = ordenadas.find((o) => yaPostulaste(o, p));
       await apiWeb.guardarPostulacion({
         id: p.id,
@@ -897,6 +903,7 @@ const apiWeb = {
         fuente: p.fuente,
         etapa: "enviada",
         fecha: p.fecha ?? progreso.hoy(),
+        enviadaEl: p.fecha ?? progreso.hoy(),
         notas: "Detectada sola: te llegó la confirmación de la postulación a tu correo.",
         proximo: "Esperar respuesta (si en 1 o 2 semanas no hay nada, haz seguimiento)",
         proximoFecha: "",

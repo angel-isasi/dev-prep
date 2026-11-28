@@ -564,6 +564,9 @@ export function puntuarOferta(oferta, { mapa = [], ingles = {}, hoy = new Date()
   else if (dias != null && dias > 90) sumar(-40, `Tiene ${Math.floor(dias / 30)} meses publicada: probablemente ya cerró`);
   else if (dias != null && dias > 45) sumar(-25, "Tiene más de mes y medio publicada: puede que ya esté cerrada");
   else if (dias != null && dias > 30) sumar(-10, "Tiene más de un mes publicada");
+  // LinkedIn, Glassdoor, Indeed y las demás alertas del correo suelen dejar de recibir postulaciones en 1 o 2 semanas
+  else if (dias != null && dias > 10 && /linkedin|glassdoor|indeed|computrabajo|bumeran/i.test(oferta.fuente ?? ""))
+    sumar(-15, `Lleva ${dias} días: en ${oferta.fuente} suelen cerrar rápido, revisa si sigue abierta`);
 
   // Para el aviso al celular: lo que importa sin depender de tu mapa (la Lambda no lo tiene)
   const paraAvisar = junior && !senior && lugarOk && dias != null && dias <= 7 && alertas.length === 0;
