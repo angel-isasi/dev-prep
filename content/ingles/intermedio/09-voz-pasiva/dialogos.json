@@ -47,7 +47,7 @@
       { "quien": "Carlos", "en": "I didn't know that. Can it be restored?", "es": "No lo sabía. ¿Se puede recuperar?" },
       { "quien": "María", "en": "Yes. Deleted branches are kept on the server for another week.", "es": "Sí. Las ramas borradas se guardan en el servidor una semana más." },
       { "quien": "Carlos", "en": "Phew. Please restore it, there are two days of work in it.", "es": "Uf. Recupérala, por favor, ahí hay dos días de trabajo." },
-      { "quien": "María", "en": "Done. And next time, push your changes more often.", "es": "Listo. Y la próxima vez, sube tus cambios más seguido." }
+      { "quien": "María", "en": "Done. And next time, push to your branch more often so it doesn't look abandoned.", "es": "Listo. Y la próxima vez, sube cambios a tu rama más seguido para que no parezca abandonada." }
     ],
     "preguntas": [
       { "pregunta": "¿Cuándo se borró la rama?", "opciones": ["El lunes", "El martes", "Hoy"],

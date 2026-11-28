@@ -862,7 +862,10 @@ const apiWeb = {
         busqueda = conectada()
           ? await apiLocal.buscarOfertasMotor(nuevo)
           : { ...(await buscarOfertas(fetch, { soloNavegador: true })), buscadoEn: new Date().toISOString() };
-        almacen.setItem(CLAVE, JSON.stringify(busqueda));
+        // Si fallaron todas las fuentes (sin internet), no se pisa la última búsqueda buena
+        const fallo = busqueda.sinConexion || ((busqueda.fuentes ?? []).length > 0 && busqueda.fuentes.every((f) => !f.ok));
+        if (fallo && guardada) busqueda = { ...guardada, sinConexion: true };
+        else if (!fallo) almacen.setItem(CLAVE, JSON.stringify(busqueda));
       } catch (error) {
         if (!guardada) throw error;
         busqueda = { ...guardada, sinConexion: true };

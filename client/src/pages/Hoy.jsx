@@ -139,7 +139,7 @@ export function Hoy() {
               ? "Armando tu sesión..."
               : sesion.completa || pasos.length === sesion.hechos
                 ? "Sesión completa"
-                : `Te ${pasos.length - sesion.hechos === 1 ? "falta 1 perforación" : `faltan ${pasos.length - sesion.hechos} perforaciones`}`}
+                : `Te ${pasos.length - sesion.hechos === 1 ? "falta 1 paso" : `faltan ${pasos.length - sesion.hechos} pasos`}`}
           </p>
         </div>
 

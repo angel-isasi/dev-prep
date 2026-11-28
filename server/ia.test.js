@@ -171,9 +171,9 @@ describe("código de invitado", () => {
     const crearCliente = vi.fn(falso.crearCliente);
     const r = await manejarPost(request(pedidoEntrevista, "codigo-invitado"), { env: ENV_INV, crearCliente });
     expect(r.status).toBe(200);
-    expect(crearCliente).toHaveBeenCalledWith("invitado");
+    expect(crearCliente).toHaveBeenCalledWith("invitado", { largo: false });
     await manejarPost(request(pedidoEntrevista), { env: ENV_INV, crearCliente });
-    expect(crearCliente).toHaveBeenLastCalledWith("dueno");
+    expect(crearCliente).toHaveBeenLastCalledWith("dueno", { largo: false });
   });
 
   it("sin su API key propia, el código de invitado no sirve (nunca gasta de la tuya)", async () => {

@@ -40,6 +40,8 @@ function leer() {
     ...(g ?? {}),
   };
   if (!NIVELES.includes(base.nivel)) base.nivel = "normal";
+  // "Callado" pasó a ser "Solo reviso": mismo silencio, y la IA sabe que no estás estudiando
+  if (base.nivel === "callado") Object.assign(base, { nivel: "normal", modo: "revisando" });
   if (!Array.isArray(base.veredictos)) base.veredictos = [];
   if (!Array.isArray(base.diario)) base.diario = [];
   base.mensajes = (base.mensajes ?? []).map((m) => (m.vivo ? { ...m, vivo: false } : m));
@@ -54,6 +56,7 @@ function leer() {
     base.dia = diaNuevo(fecha, Date.now());
     base.mensajes = [];
     base.bloque = null;
+    base.modo = "estudio";
   }
   return base;
 }
@@ -73,9 +76,9 @@ function guardar() {
 }
 
 /** Cambia el estado y avisa a la pantalla. @param {object | ((e: object) => object)} cambio */
-export function cambiar(cambio) {
+export function cambiar(cambio, { sinGuardar = false } = {}) {
   const nuevo = typeof cambio === "function" ? cambio(estado) : cambio;
-  const tocaGuardar = Object.keys(nuevo).some((k) => !(k in PASAJERO));
+  const tocaGuardar = !sinGuardar && Object.keys(nuevo).some((k) => !(k in PASAJERO));
   estado = { ...estado, ...nuevo };
   if (tocaGuardar) guardar();
   for (const o of oyentes) o();
@@ -110,7 +113,19 @@ export async function pedirAvisos() {
 }
 
 /** ¿Puede intervenir por su cuenta? En silencio o cuidando un bloque de concentración, no. */
-export const puedeSolo = () => !enSilencio(estado, Date.now()) && !bloqueActivo(estado.bloque, Date.now()) && !estado.entrevista;
+export const puedeSolo = () => estado.modo !== "revisando" && !enSilencio(estado, Date.now()) && !bloqueActivo(estado.bloque, Date.now()) && !estado.entrevista;
+
+/**
+ * Qué estás haciendo: "estudio" (te acompaña, te pregunta, te avisa) o "revisando" (solo entraste a
+ * mirar algo: no interviene por su cuenta ni te presiona; si le hablas, responde). Cada día empieza en estudio.
+ */
+export function cambiarModo(modo) {
+  if (modo === "revisando") {
+    cambiar({ modo: "revisando" });
+    return silencio();
+  }
+  cambiar({ modo: "estudio", nivel: modo === "encima" ? "encima" : "normal" });
+}
 
 /**
  * Aksu dice algo: queda en la conversación, suena si la voz está encendida y, si no estás mirando
@@ -322,6 +337,9 @@ async function contexto() {
   const diasMes = new Date(ahora.getFullYear(), ahora.getMonth() + 1, 0).getDate() - ahora.getDate() + 1;
   return [
     config?.nombre ? `Se llama ${String(config.nombre).trim()}.` : "",
+    e.modo === "revisando"
+      ? "Ahora NO está estudiando: entró solo a revisar algo de la app. No lo presiones a estudiar, no le hagas preguntas de repaso ni le recuerdes metas: ayúdalo con lo que pida y punto."
+      : "",
     `Hora: ${ahora.getHours()}:${String(ahora.getMinutes()).padStart(2, "0")}. Pantalla abierta: ${nombrePantalla(e.pantalla)}.`,
     `Presupuesto de IA: van ${g.usd.toFixed(2)} de ${g.tope} USD este mes y quedan ${diasMes} días del mes.`,
     meta !== null ? (meta >= 0 ? `Faltan ${meta} días para su fecha meta de postular.` : `Su fecha meta de postular pasó hace ${-meta} días.`) : "",
@@ -399,9 +417,11 @@ function colaDeVoz(enIngles) {
   callar();
   callarLocal();
   let cadena = Promise.resolve();
+  let generando = Promise.resolve();
   return (frase) => {
     const idioma = enIngles || pareceIngles(frase) ? "en" : "es";
-    const lista = prepararFrase(frase, idioma);
+    // Se prepara apenas termina la anterior (no todas a la vez), mientras suena la que va delante
+    const lista = (generando = generando.then(() => (mio === turnoVoz ? prepararFrase(frase, idioma) : () => Promise.resolve())));
     cadena = cadena.then(async () => {
       if (mio !== turnoVoz) return;
       const sonar = await lista;
@@ -483,6 +503,7 @@ export async function pensar({ momento = "", pregunta = "", tipo = "", ingles = 
   const decirFrase = estado.voz ? colaDeVoz(enIngles) : null;
   let dicho = 0; // caracteres del texto hablable que ya se mandaron a la voz
   let creado = false;
+  let ultimoTexto = null; // el texto que espera su cuadro para dibujarse
   const mostrar = (todo, vivo) => {
     if (!creado) {
       creado = true;
@@ -494,7 +515,19 @@ export async function pensar({ momento = "", pregunta = "", tipo = "", ingles = 
         ir: ir ?? null,
       }));
     }
-    cambiar((e) => ({ mensajes: e.mensajes.map((m) => (m.en === en && m.de === "aksu" ? { ...m, texto: todo, vivo } : m)) }));
+    const poner = (t, v, opciones) => cambiar((e) => ({ mensajes: e.mensajes.map((m) => (m.en === en && m.de === "aksu" ? { ...m, texto: t, vivo: v } : m)) }), opciones);
+    if (!vivo) {
+      ultimoTexto = null;
+      return poner(todo, false);
+    }
+    // En vivo: el último texto se dibuja una vez por cuadro y se guarda recién al terminar
+    const yaHabia = ultimoTexto !== null;
+    ultimoTexto = todo;
+    if (yaHabia) return;
+    requestAnimationFrame(() => {
+      if (ultimoTexto !== null) poner(ultimoTexto, true, { sinGuardar: true });
+      ultimoTexto = null;
+    });
   };
   const hablarLoNuevo = (todo, final) => {
     if (!decirFrase) return;
@@ -592,7 +625,8 @@ export function decirle(texto) {
   }
   if (estado.entrevista) return responderEntrevista(limpio);
   const ultimo = estado.mensajes.findLast?.((m) => m.de !== "yo");
-  return pensar({ pregunta: limpio, momento: ultimo?.pregunta ? "Está respondiendo a la pregunta que le hiciste: evalúa su respuesta." : "" });
+  const lePreguntaste = ultimo && ultimo.tipo !== "palabra" && (ultimo.pregunta || /\?\s*$/.test(ultimo.texto ?? ""));
+  return pensar({ pregunta: limpio, momento: lePreguntaste ? "Puede que esté respondiendo a la pregunta que le hiciste: si es así, evalúa su respuesta." : "" });
 }
 
 /** A dónde lleva cada destino que puede elegir la IA. */

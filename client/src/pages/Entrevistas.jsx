@@ -303,7 +303,7 @@ export function Entrevistas() {
 
   return (
     <section className={estilos.pagina}>
-      <CabeceraPagina etiqueta={`${dominadas} de ${total} preguntas dominadas`} titulo="Entrevistas">
+      <CabeceraPagina etiqueta={`${total} preguntas · técnicas y personales`} titulo="Entrevistas">
         Preguntas reales de entrevistas junior, con la respuesta que conviene dar, y prácticas para decirlas en voz alta.
       </CabeceraPagina>
 
@@ -451,7 +451,7 @@ function Preparacion({ resumen, alEmpezar, alIr }) {
           <div>
             <dt>Pitch</dt>
             <dd>{extra?.pitch?.trim() ? "Listo" : "Falta"}</dd>
-            <small>{extra?.pitch?.trim() ? `${extra.pitch.trim().split(/s+/).length} palabras` : "\"háblame de ti\""}</small>
+            <small>{extra?.pitch?.trim() ? `${extra.pitch.trim().split(/\s+/).length} palabras` : "\"háblame de ti\""}</small>
           </div>
           <div>
             <dt>Historias STAR</dt>

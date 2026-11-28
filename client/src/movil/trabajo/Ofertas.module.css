@@ -96,6 +96,7 @@
 }
 
 .titulo {
+  overflow-wrap: anywhere;
   color: var(--texto);
   font-size: var(--letra-7);
   font-weight: var(--peso-semi);

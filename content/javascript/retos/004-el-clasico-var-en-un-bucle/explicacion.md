@@ -44,7 +44,7 @@ Por eso el arreglo está vacío justo después de llamar a la función: los `set
 - **Predecir `[0, 1, 2]`.** Es la respuesta "intuitiva", pero olvida que los `setTimeout` corren cuando el bucle ya terminó. Lo reconoces porque el test de la predicción dice que recibió `[3, 3, 3]`.
 - **Predecir `[2, 2, 2]`.** Olvidas que el `i++` de la última vuelta deja `i` en 3, no en 2.
 - **Arreglarlo quitando el `setTimeout` y haciendo `salida.push(i)` directo.** El resultado es correcto, pero cambiaste el problema. Lo reconoces porque falla el test "devuelve el arreglo vacío al instante".
-- **Escribir `setTimeout(salida.push(i), 0)`.** Ejecuta el `push` en ese momento y le pasa un número a `setTimeout`. Mismo síntoma que el anterior.
+- **Escribir `setTimeout(salida.push(i), 0)`.** Ejecuta el `push` en ese momento y le pasa a `setTimeout` un número en vez de una función. En Node (y en los tests) lanza `TypeError: Callback must be a function`; en el navegador no da error, pero el arreglo ya se llenó al instante.
 
 ## Otra forma de resolverlo
 

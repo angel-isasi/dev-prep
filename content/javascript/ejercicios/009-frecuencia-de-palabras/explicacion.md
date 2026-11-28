@@ -48,7 +48,7 @@ Con el texto vacío, `"".split(/\s+/)` da `[""]`, el filtro lo deja en `[]`, el 
 
 ## Errores comunes
 
-- **Usar `split(" ")` en vez de `split(/\s+/)`.** Con `"a  b"` (dos espacios) da `["a", "", "b"]` y terminas contando la palabra vacía: `{ a: 1, "": 1, b: 1 }`. Lo reconoces porque en el test de espacios dobles aparece una clave `""` en lo recibido.
+- **Usar `split(" ")` sin `filter(Boolean)`.** Con `"a  b"` (dos espacios) da `["a", "", "b"]` y terminas contando la palabra vacía: `{ a: 1, "": 1, b: 1 }`. Con el filtro funciona igual, pero `split(/\s+/)` también corta tabulaciones y saltos de línea. Lo reconoces porque en el test de espacios dobles aparece una clave `""` en lo recibido.
 - **Olvidar el `filter(Boolean)`.** Con el texto vacío devuelves `{ "": 1 }` en vez de `{}`.
 - **Sumar sin inicializar: `conteo[palabra]++` o `conteo[palabra] += 1`.** La primera vez `conteo[palabra]` es `undefined`, y `undefined + 1` es `NaN`. Lo reconoces porque recibes `{ ica: NaN, es: NaN }`.
 - **Olvidar `toLowerCase()`.** Con `"Hola hola HOLA"` recibes `{ Hola: 1, hola: 1, HOLA: 1 }`.

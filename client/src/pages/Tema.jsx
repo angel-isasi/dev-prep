@@ -4,6 +4,7 @@
 // cuánto dominas el tema y qué te falta para ponerlo en verde.
 import { useEffect, useRef, useState } from "react";
 import { Markdown } from "../components/Markdown.jsx";
+import { TextoConCodigo } from "../components/TextoConCodigo.jsx";
 import { Link, useParams } from "react-router";
 import { api } from "../lib/api.js";
 import { usePestanaUrl } from "../hooks/usePestanaUrl.js";
@@ -95,6 +96,7 @@ export function Tema() {
   // Las pestañas de lecciones y de entrevista solo existen en la versión web
   const pestanas = [
     { id: "teoria", texto: "Teoría" },
+    centro?.metodos?.length ? { id: "metodos", texto: "Métodos", extra: String(centro.metodos.length) } : null,
     plan?.total ? { id: "lecciones", texto: "Lecciones", extra: `${plan.hechas}/${plan.total}` } : null,
     { id: "ejercicios", texto: "Ejercicios", extra: `${tema.resueltos}/${tema.totalEjercicios}` },
     { id: "quiz", texto: "Quiz", extra: mejor != null ? `${mejor}/${tema.preguntasQuiz}` : undefined },
@@ -151,7 +153,12 @@ export function Tema() {
         {activa === "teoria" && (
           <>
             <TeoriaTema id={tema.id} markdown={tema.teoria} />
-            {centro?.metodos.length > 0 && (
+            <AprenderIa tema={tema.titulo} teoria={tema.teoria} />
+            <PreguntaAncla key={tema.id} preguntas={tema.quiz} alSeguir={() => setPestana(plan?.total ? "lecciones" : "ejercicios")} />
+          </>
+        )}
+
+        {activa === "metodos" && centro?.metodos?.length > 0 && (
               <section className={estilos.metodosTeoria}>
                 <h2 className={estilos.subtitulo}>
                   Métodos de este tema <small>son los que preguntan las lecciones de Métodos a fondo: léelos antes</small>
@@ -161,20 +168,18 @@ export function Tema() {
                     <details key={m.id} className={estilos.metodoFicha}>
                       <summary>
                         <code>{m.nombre.replace("String.prototype.", "").replace("Array.prototype.", "").replace("Number.prototype.", "").replace("Object.prototype.", "")}</code>
-                        <span>{m.descripcion}</span>
+                        <span>
+                          <TextoConCodigo>{m.descripcion}</TextoConCodigo>
+                        </span>
                       </summary>
                       <Markdown>{["```js", m.ejemplo, "```"].join(String.fromCharCode(10))}</Markdown>
                       <p>
-                        <strong>Error típico:</strong> {m.errorTipico}
+                        <strong>Error típico:</strong> <TextoConCodigo>{m.errorTipico}</TextoConCodigo>
                       </p>
                     </details>
                   ))}
                 </div>
               </section>
-            )}
-            <AprenderIa tema={tema.titulo} teoria={tema.teoria} />
-            <PreguntaAncla key={tema.id} preguntas={tema.quiz} alSeguir={() => setPestana(plan?.total ? "lecciones" : "ejercicios")} />
-          </>
         )}
 
         {activa === "lecciones" && plan && (

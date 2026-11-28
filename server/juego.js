@@ -7,6 +7,7 @@
 import { sumarDias } from "./progreso-reglas.js";
 import { diaSemana, hechoDe, lunesDe, metaDelDia } from "./metricas.js";
 import { PUNTOS, puntosDe } from "./puntos.js";
+import { retoDeLaSemana } from "./avance.js";
 
 /** La misma tabla de puntos, vista como minutos de tiempo libre (1 punto = 1 minuto). */
 export const GANANCIA = PUNTOS.map((p) => ({ ...p, minutos: p.puntos }));
@@ -85,15 +86,12 @@ export function estudioContraJuego(dias, hoy) {
 }
 
 /**
- * Jefe de la semana: un reto difícil sin resolver, el mismo toda la semana (se elige por el lunes).
+ * Jefe de la semana: el mismo ejercicio que el Reto de la semana de Practicar (así no hay dos retos
+ * distintos), mientras no esté resuelto.
  * @param {{ id: string, coleccion: string, nivel: number }[]} ejercicios
  * @param {object} registros
  */
 export function jefeDeLaSemana(ejercicios, registros, hoy) {
-  const candidatos = ejercicios.filter((e) => /\/retos$/.test(e.coleccion) && (e.nivel ?? 1) >= 2 && registros[e.id]?.estado !== "resuelto");
-  if (!candidatos.length) return null;
-  const lunes = lunesDe(hoy);
-  let h = 0;
-  for (const c of lunes) h = (h * 31 + c.charCodeAt(0)) >>> 0;
-  return candidatos[h % candidatos.length];
+  const reto = retoDeLaSemana(ejercicios, registros, lunesDe(hoy));
+  return reto && registros[reto.id]?.estado !== "resuelto" ? reto : null;
 }

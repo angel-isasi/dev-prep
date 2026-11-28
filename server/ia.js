@@ -419,7 +419,7 @@ export async function manejarPost(request, { env, crearCliente }) {
   // El modelo pequeño (haiku) no tiene ese respaldo: ahí no se pide.
   const conRespaldo = !modelo.includes("haiku");
   try {
-    const respuesta = await crearCliente(rol).beta.messages.create({
+    const respuesta = await crearCliente(rol, { largo: pedido.tarea === "cv-oferta" }).beta.messages.create({
       model: modelo,
       max_tokens: 8000,
       // structured-outputs: el mismo encabezado que pone la librería para respuestas con formato JSON
@@ -443,6 +443,7 @@ export async function manejarPost(request, { env, crearCliente }) {
     }
     return json({ resultado: limpiarResultado(pedido.tarea, crudo), uso });
   } catch (e) {
+    console.error("ia", pedido.tarea, e?.status ?? "", e?.message ?? e); // queda en los registros de Vercel
     const status = e?.status;
     const mensaje =
       status === 401

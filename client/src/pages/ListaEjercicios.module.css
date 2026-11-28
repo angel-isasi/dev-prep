@@ -119,8 +119,20 @@
   background: linear-gradient(var(--superficie), var(--superficie)), var(--fondo-solido);
 }
 
-.grupo + .grupo {
-  margin-top: var(--espacio-2);
+/* Dentro de un grupo (ya en media pantalla) una fila por ejercicio, para que el título se lea entero */
+.grupos .filas {
+  grid-template-columns: 1fr;
+}
+
+/* En la laptop los grupos van en dos columnas: aprovechan el ancho y se ven más de un vistazo */
+.grupos {
+  columns: 2 420px;
+  column-gap: var(--espacio-3);
+}
+
+.grupo {
+  break-inside: avoid;
+  margin-bottom: var(--espacio-2);
 }
 
 .grupo[open] {

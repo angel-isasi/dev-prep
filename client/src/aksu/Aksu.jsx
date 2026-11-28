@@ -14,7 +14,7 @@ import {
   TEXTOS, tocaCierre, tocaComentario, tocaDistraccion, tocaEntrevista, tocaInforme, tocaPausa, tocaPregunta, tocaRelampago, tocaSorpresa, vaCorriendo, yaHizo,
 } from "./reglas.js";
 import {
-  abrir, cambiar, cargarVocesLocales, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, instalarVozWeb, NOMBRE, NOMBRE_DESTINO, olvidarPlan, palabraDeIngles, pedirAvisos, pensar, planActual,
+  abrir, cambiar, cambiarModo, cargarVocesLocales, cerrar, cerrarDia, decirle, LOCAL, duracion, escuchar, gasto, hablar, hayIa, iniciarBloque, iniciarEntrevista, instalarVozWeb, NOMBRE, NOMBRE_DESTINO, olvidarPlan, palabraDeIngles, pedirAvisos, pensar, planActual,
   paraVoz, probarVoz, probarVozIngles, puedeSolo, quitarSilencio, rutaDe, silenciar, silencio, suscribir, terminarBloque, verEstado,
 } from "./aksu.js";
 import { Figura } from "./Figura.jsx";
@@ -179,7 +179,7 @@ function useObservador() {
 
       const enBloque = bloqueActivo(e.bloque, ahora);
       if (e.bloque && !enBloque) return terminarBloque(true);
-      if (puede(e.nivel, "distraccion") && !enSilencio(e, ahora) && tocaDistraccion(e.uso?.actual, enBloque, e.distraidoCon)) {
+      if (puede(e.nivel, "distraccion") && e.modo !== "revisando" && !enSilencio(e, ahora) && tocaDistraccion(e.uso?.actual, enBloque, e.distraidoCon)) {
         cambiar({ distraidoCon: e.uso.actual.nombre });
         return pensar({
           tipo: "frena",
@@ -349,6 +349,18 @@ function RelojEntrevista({ entrevista }) {
     </div>
   );
 }
+
+/** Cuánto te acompaña: lo único que se cambia a menudo, arriba del chat. */
+const MODOS = [
+  ["revisando", "Solo reviso"],
+  ["normal", "Normal"],
+  ["encima", "Encima de mí"],
+];
+const AYUDA_MODO = {
+  revisando: "Solo entraste a mirar: no te interrumpo ni te presiono. Si me hablas, respondo.",
+  normal: "Estudias: te aviso si te trabas, al resolver, en las pausas y al cerrar el día.",
+  encima: "Estudias en serio: además comento cada test que falla y te hago preguntas sorpresa.",
+};
 
 /** Un mensaje de la conversación. */
 function Mensaje({ m, alIr }) {
@@ -704,6 +716,8 @@ export function Aksu() {
   const ahora = Date.now();
   const enBloque = bloqueActivo(e.bloque, ahora);
   const callado = enSilencio(e, ahora);
+  const revisando = e.modo === "revisando";
+  const modoActual = revisando ? "revisando" : e.nivel === "encima" ? "encima" : "normal";
   useHayVoz(); // vuelve a dibujar cuando el navegador termina de cargar sus voces
   const vocesEs = vocesEnEspanol();
 
@@ -798,119 +812,149 @@ export function Aksu() {
         </span>
         <div>
           <strong>{NOMBRE}</strong>
-          <small>{e.pensando ? "pensando..." : oyendo || e.oyendo !== null ? "te escucho..." : enBloque ? "cuidando tu bloque" : callado ? "en silencio" : NOMBRE_NIVEL[e.nivel]}</small>
+          <small>{e.pensando ? "pensando..." : oyendo || e.oyendo !== null ? "te escucho..." : enBloque ? "cuidando tu bloque" : revisando ? "solo reviso" : callado ? "en silencio" : NOMBRE_NIVEL[e.nivel]}</small>
         </div>
-        <button type="button" className={estilos.enlace} onClick={() => cambiar({ vista: e.vista === "charla" ? "libro" : "charla" })}>
-          {e.vista === "charla" ? "Su libro" : "Conversación"}
-        </button>
+        <nav className={estilos.pestanas} aria-label="Secciones de Aksu">
+          {[
+            ["charla", "Chat"],
+            ["ajustes", "Ajustes"],
+            ["libro", "Libro"],
+          ].map(([v, t]) => (
+            <button key={v} type="button" className={estilos.enlace} data-activo={e.vista === v} aria-current={e.vista === v ? "page" : undefined} onClick={() => cambiar({ vista: v })}>
+              {t}
+            </button>
+          ))}
+        </nav>
         <button type="button" className={estilos.cerrar} onClick={cerrar} aria-label="Cerrar">
           ×
         </button>
       </header>
 
-      <div className={estilos.ajustes}>
-        <div className={estilos.niveles} role="radiogroup" aria-label="Cuánto interviene">
-          {NIVELES.map((n) => (
-            <button key={n} type="button" role="radio" aria-checked={e.nivel === n} data-activo={e.nivel === n} onClick={() => cambiar({ nivel: n })}>
-              {NOMBRE_NIVEL[n]}
+      {/* Lo único que se cambia a menudo: si estás estudiando o solo entraste a mirar */}
+      <div className={estilos.modo}>
+        <div className={estilos.niveles} role="radiogroup" aria-label="Cuánto te acompaña">
+          {MODOS.map(([v, t]) => (
+            <button key={v} type="button" role="radio" aria-checked={modoActual === v} data-activo={modoActual === v} onClick={() => cambiarModo(v)}>
+              {t}
             </button>
           ))}
         </div>
-        <button type="button" className={estilos.interruptor} data-activo={e.voz} onClick={() => (e.voz ? (silencio(), cambiar({ voz: false })) : cambiar({ voz: true }))} title="Que hable en voz alta">
-          Voz
-        </button>
-        <button type="button" className={estilos.interruptor} data-activo={e.avisos} onClick={cambiarAvisos} title="Avisos del sistema cuando la app está en otra pestaña">
-          Avisos
-        </button>
+        <small>{AYUDA_MODO[modoActual]}</small>
       </div>
-      <div className={estilos.ajustes}>
-        <button type="button" className={estilos.interruptor} data-activo={enBloque} onClick={() => (enBloque ? terminarBloque() : iniciarBloque())} title="Se queda en su esquina y no te interrumpe; si te vas a otra cosa, te lo dice">
-          {enBloque ? `Bloque: quedan ${Math.ceil(restanteBloque(e.bloque, ahora) / 60_000)} min` : `Bloque de ${BLOQUE_MIN} min`}
-        </button>
-        <button type="button" className={estilos.interruptor} data-activo={callado} onClick={() => (callado ? quitarSilencio() : silenciar(30))} title="No interviene por su cuenta; si le hablas, responde">
-          {callado ? `Silencio: ${Math.ceil((e.silencioHasta - ahora) / 60_000)} min` : "Silencio 30 min"}
-        </button>
-        <select
-          className={estilos.franja}
-          value={franja}
-          aria-label="Franja en la que habla solo en inglés"
-          onChange={(ev) => {
-            const [desde, hasta] = ev.target.value.split("-").map(Number);
-            cambiar({ franjaIngles: ev.target.value ? { desde, hasta } : null });
-          }}
-        >
-          {FRANJAS.map(([v, t]) => (
-            <option key={v} value={v}>
-              {t}
-            </option>
-          ))}
-        </select>
-        <small className={estilos.gasto} title="Lo gastado en IA este mes en este navegador y tu tope mensual (puedes cambiarlo aquí), y el modelo que respondió lo último">
-          {g.usd.toFixed(2)} /{" "}
-          <input
-            type="number"
-            min="1"
-            max="500"
-            className={estilos.tope}
-            aria-label="Tope mensual de IA en dólares"
-            defaultValue={g.tope}
-            onChange={(ev) => Number(ev.target.value) >= 1 && (guardarTopeIa(Number(ev.target.value)), cambiar({}))}
-          />{" "}
-          USD{g.modelo ? ` · ${g.modelo}` : ""}
-        </small>
-      </div>
-
-      {e.voz && (
-        <div className={estilos.ajustes}>
-          <select className={estilos.franja} value={e.vozNombre} aria-label="Voz de Aksu" onChange={(ev) => cambiar({ vozNombre: ev.target.value })}>
-            <option value="">Voz automática{[...e.vocesLocales, ...e.vocesWeb].some((v) => v.startsWith("es_")) ? " (neuronal)" : nombreVozGrave() ? ` (${nombreVozGrave().replace(/^Microsoft | - .*$/g, "")})` : ""}</option>
-            {e.vocesLocales.filter((v) => v.startsWith("es_")).map((v) => (
-              <option key={v} value={LOCAL + v}>
-                Neuronal: {v.split("-")[1]} ({v.slice(3, 5)}) · hombre
-              </option>
-            ))}
-            {vocesEs.map((v) => (
-              <option key={v.nombre} value={v.nombre}>
-                {v.nombre.replace(/^Microsoft /, "")}
-                {v.hombre ? " · hombre" : ""}
-              </option>
-            ))}
-          </select>
-          <select className={estilos.franja} value={e.vozTono} aria-label="Tono de la voz" onChange={(ev) => cambiar({ vozTono: Number(ev.target.value) })}>
-            {TONOS.map(([v, t]) => (
-              <option key={v} value={v}>
-                {t}
-              </option>
-            ))}
-          </select>
-          <button type="button" className={estilos.interruptor} onClick={probarVoz}>
-            Probar
-          </button>
-          {/* La voz en inglés no se elige: si la laptop tiene una neuronal en inglés, usa esa */}
-          <button type="button" className={estilos.interruptor} onClick={probarVozIngles} title="Con esta voz dice las palabras de inglés y responde cuando le hablas en inglés">
-            Probar inglés{[...e.vocesLocales, ...e.vocesWeb].some((v) => v.startsWith("en_")) ? ` (neuronal: ${[...e.vocesLocales, ...e.vocesWeb].find((v) => v.startsWith("en_")).split("-")[1]})` : " (voz del navegador)"}
-          </button>
-          {/* Sin la laptop (en el celular): la misma voz neuronal se descarga una vez y corre en el propio dispositivo */}
-          {puedeVozWeb() &&
-            Object.entries(VOCES_WEB)
-              .filter(([, d]) => !e.vocesLocales.some((l) => l.startsWith(`${d.idioma}_`)))
-              .map(([v, d]) =>
-                e.vocesWeb.includes(v) ? (
-                  <small key={v} className={estilos.vozInstalada}>
-                    Voz neuronal {d.nombre}: guardada en este dispositivo
-                  </small>
-                ) : (
-                  <button key={v} type="button" className={estilos.interruptor} disabled={!!e.descargaVoz} onClick={() => instalarVozWeb(v)}>
-                    {e.descargaVoz?.voz === v ? (e.descargaVoz.error ?? `Descargando ${d.nombre}: ${e.descargaVoz.pct} %`) : `Descargar voz neuronal ${d.nombre} · ${d.mb} MB`}
-                  </button>
-                ),
-              )}
-        </div>
-      )}
 
       {e.entrevista && <RelojEntrevista entrevista={e.entrevista} />}
 
-      {e.vista === "libro" ? (
+      {e.vista === "ajustes" ? (
+        <div className={estilos.cuerpo}>
+          <div className={estilos.grupos}>
+            <section className={estilos.grupo}>
+              <h3 className={estilos.seccion}>Concentración</h3>
+              <div className={estilos.fila}>
+                <button type="button" className={estilos.interruptor} data-activo={enBloque} onClick={() => (enBloque ? terminarBloque() : iniciarBloque())} title="Se queda en su esquina y no te interrumpe; si te vas a otra cosa, te lo dice">
+                  {enBloque ? `Bloque: quedan ${Math.ceil(restanteBloque(e.bloque, ahora) / 60_000)} min` : `Bloque de ${BLOQUE_MIN} min`}
+                </button>
+                <button type="button" className={estilos.interruptor} data-activo={callado} onClick={() => (callado ? quitarSilencio() : silenciar(30))} title="No interviene por su cuenta; si le hablas, responde">
+                  {callado ? `Silencio: ${Math.ceil((e.silencioHasta - ahora) / 60_000)} min` : "Silencio 30 min"}
+                </button>
+              </div>
+            </section>
+            <section className={estilos.grupo}>
+              <h3 className={estilos.seccion}>Inglés y avisos</h3>
+              <div className={estilos.fila}>
+                <select
+                  className={estilos.franja}
+                  value={franja}
+                  aria-label="Franja en la que habla solo en inglés"
+                  onChange={(ev) => {
+                    const [desde, hasta] = ev.target.value.split("-").map(Number);
+                    cambiar({ franjaIngles: ev.target.value ? { desde, hasta } : null });
+                  }}
+                >
+                  {FRANJAS.map(([v, t]) => (
+                    <option key={v} value={v}>
+                      {t}
+                    </option>
+                  ))}
+                </select>
+                <button type="button" className={estilos.interruptor} data-activo={e.avisos} onClick={cambiarAvisos} title="Avisos del sistema cuando la app está en otra pestaña">
+                  Avisos
+                </button>
+              </div>
+            </section>
+            <section className={estilos.grupo}>
+              <h3 className={estilos.seccion}>Gasto de IA este mes</h3>
+              <small className={estilos.gasto} title="Lo gastado en IA este mes en este navegador y tu tope mensual (puedes cambiarlo aquí), y el modelo que respondió lo último">
+                {g.usd.toFixed(2)} /{" "}
+                <input
+                  type="number"
+                  min="1"
+                  max="500"
+                  className={estilos.tope}
+                  aria-label="Tope mensual de IA en dólares"
+                  defaultValue={g.tope}
+                  onChange={(ev) => Number(ev.target.value) >= 1 && (guardarTopeIa(Number(ev.target.value)), cambiar({}))}
+                />{" "}
+                USD{g.modelo ? ` · ${g.modelo}` : ""}
+              </small>
+            </section>
+            <section className={estilos.grupo} data-ancho>
+              <h3 className={estilos.seccion}>Voz</h3>
+              <div className={estilos.fila}>
+                <button type="button" className={estilos.interruptor} data-activo={e.voz} onClick={() => (e.voz ? (silencio(), cambiar({ voz: false })) : cambiar({ voz: true }))} title="Que hable en voz alta">
+                  {e.voz ? "Voz encendida" : "Voz apagada"}
+                </button>
+                {e.voz && (
+                  <>
+                      <select className={estilos.franja} value={e.vozNombre} aria-label="Voz de Aksu" onChange={(ev) => cambiar({ vozNombre: ev.target.value })}>
+                        <option value="">Voz automática{[...e.vocesLocales, ...e.vocesWeb].some((v) => v.startsWith("es_")) ? " (neuronal)" : nombreVozGrave() ? ` (${nombreVozGrave().replace(/^Microsoft | - .*$/g, "")})` : ""}</option>
+                        {e.vocesLocales.filter((v) => v.startsWith("es_")).map((v) => (
+                          <option key={v} value={LOCAL + v}>
+                            Neuronal: {v.split("-")[1]} ({v.slice(3, 5)}) · hombre
+                          </option>
+                        ))}
+                        {vocesEs.map((v) => (
+                          <option key={v.nombre} value={v.nombre}>
+                            {v.nombre.replace(/^Microsoft /, "")}
+                            {v.hombre ? " · hombre" : ""}
+                          </option>
+                        ))}
+                      </select>
+                      <select className={estilos.franja} value={e.vozTono} aria-label="Tono de la voz" onChange={(ev) => cambiar({ vozTono: Number(ev.target.value) })}>
+                        {TONOS.map(([v, t]) => (
+                          <option key={v} value={v}>
+                            {t}
+                          </option>
+                        ))}
+                      </select>
+                      <button type="button" className={estilos.interruptor} onClick={probarVoz}>
+                        Probar
+                      </button>
+                      {/* La voz en inglés no se elige: si la laptop tiene una neuronal en inglés, usa esa */}
+                      <button type="button" className={estilos.interruptor} onClick={probarVozIngles} title="Con esta voz dice las palabras de inglés y responde cuando le hablas en inglés">
+                        Probar inglés{[...e.vocesLocales, ...e.vocesWeb].some((v) => v.startsWith("en_")) ? ` (neuronal: ${[...e.vocesLocales, ...e.vocesWeb].find((v) => v.startsWith("en_")).split("-")[1]})` : " (voz del navegador)"}
+                      </button>
+                      {/* Sin la laptop (en el celular): la misma voz neuronal se descarga una vez y corre en el propio dispositivo */}
+                      {puedeVozWeb() &&
+                        Object.entries(VOCES_WEB)
+                          .filter(([, d]) => !e.vocesLocales.some((l) => l.startsWith(`${d.idioma}_`)))
+                          .map(([v, d]) =>
+                            e.vocesWeb.includes(v) ? (
+                              <small key={v} className={estilos.vozInstalada}>
+                                Voz neuronal {d.nombre}: guardada en este dispositivo
+                              </small>
+                            ) : (
+                              <button key={v} type="button" className={estilos.interruptor} disabled={!!e.descargaVoz} onClick={() => instalarVozWeb(v)}>
+                                {e.descargaVoz?.voz === v ? (e.descargaVoz.error ?? `Descargando ${d.nombre}: ${e.descargaVoz.pct} %`) : `Descargar voz neuronal ${d.nombre} · ${d.mb} MB`}
+                              </button>
+                            ),
+                          )}
+                  </>
+                )}
+              </div>
+            </section>
+          </div>
+        </div>
+      ) : e.vista === "libro" ? (
         <div className={estilos.cuerpo}>
           <h3 className={estilos.seccion}>Las notas de tus días</h3>
           {e.veredictos.length === 0 ? (

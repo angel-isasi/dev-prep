@@ -109,8 +109,12 @@ export function SeccionRutina({ partes }) {
           <h2>Semanas de exámenes</h2>
           <p className={estilos.ayuda}>Una pausa (desde mañana, hasta 2 semanas) no suma deuda ni rompe tu racha.</p>
           <div className={propios.fila}>
-            <input type="date" value={pausa.desde} onChange={(e) => setPausa({ ...pausa, desde: e.target.value })} aria-label="Desde" />
-            <input type="date" value={pausa.hasta} onChange={(e) => setPausa({ ...pausa, hasta: e.target.value })} aria-label="Hasta" />
+            <label>
+              Desde <input type="date" value={pausa.desde} onChange={(e) => setPausa({ ...pausa, desde: e.target.value })} />
+            </label>
+            <label>
+              Hasta <input type="date" value={pausa.hasta} onChange={(e) => setPausa({ ...pausa, hasta: e.target.value })} />
+            </label>
             <button type="button" className="boton" onClick={agregarPausa}>
               Agregar pausa
             </button>

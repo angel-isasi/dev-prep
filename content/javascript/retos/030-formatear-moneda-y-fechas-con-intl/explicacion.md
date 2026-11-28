@@ -48,7 +48,7 @@ Para el dinero, `"es-PE"` define coma para los miles y punto para los decimales,
 - **Armar el texto a mano: `` `S/ ${monto.toFixed(2)}` ``.** Te faltan las comas de los miles: `"S/ 1234.50"`. Lo reconoces porque el primer test lo rechaza.
 - **Olvidar `timeZone`.** Funciona en tu laptop en Perú y falla en otra zona horaria (por ejemplo, en un servidor o en la máquina de un compañero). Lo reconoces porque el test de "la hora de Lima" da el día siguiente.
 - **Leer el día con `getDate()`.** Usa la zona de la computadora, mismo problema que el anterior.
-- **Usar `month: "2-digit"` o `"short"`.** Sale `"17/11/2026"` o `"17 nov 2026"`.
+- **Usar `month: "2-digit"` o `"short"`.** Sale `"17/11/2026"` o `"17 nov. 2026"`.
 - **Comparar con `toBe("S/ 1,234.50")` escribiendo un espacio normal.** Falla por el espacio duro aunque se vea igual. No es un error de tu función, pero confunde la primera vez.
 
 ## Otra forma de resolverlo

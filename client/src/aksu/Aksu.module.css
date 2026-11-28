@@ -39,6 +39,19 @@
   cursor: grabbing;
 }
 
+/* Cuando no te está hablando se vuelve tenue, para no tapar lo que lees; al acercar el mouse vuelve */
+.suelta[data-estado="atento"] .cuerpo2,
+.suelta[data-estado="silencio"] .cuerpo2,
+.suelta[data-estado="guardia"] .cuerpo2 {
+  opacity: 0.45;
+  transition: opacity 0.3s;
+}
+
+.suelta .cuerpo2:hover,
+.suelta .cuerpo2:focus-visible {
+  opacity: 1;
+}
+
 .cuerpo2:focus-visible {
   outline: 2px solid var(--acento);
   outline-offset: 4px;
@@ -563,7 +576,7 @@
 
 .cabeza {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  grid-template-columns: auto minmax(0, 1fr) auto auto auto;
   align-items: center;
   gap: var(--espacio-3);
   padding: var(--espacio-3) var(--espacio-4);
@@ -586,9 +599,16 @@
 
 .avatar {
   display: grid;
+  overflow: hidden;
   place-items: center;
   width: 36px;
   height: 36px;
+  border-radius: 50%;
+}
+
+.pestanas {
+  display: flex;
+  gap: var(--espacio-3);
 }
 
 .enlace {
@@ -624,6 +644,62 @@
   gap: var(--espacio-2);
   padding: var(--espacio-2) var(--espacio-4);
   border-bottom: 1px solid var(--borde);
+}
+
+/* Estudiando / Solo reviso: lo único que queda arriba, encima de la conversación */
+.modo {
+  display: grid;
+  gap: 4px;
+  padding: var(--espacio-2) var(--espacio-4);
+  border-bottom: 1px solid var(--borde);
+}
+
+.modo small {
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+}
+
+.enlace[data-activo="true"] {
+  color: var(--texto);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* La pestaña de ajustes: grupos en dos columnas si hay ancho */
+.grupos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--espacio-3);
+}
+
+.grupo {
+  display: grid;
+  align-content: start;
+  gap: var(--espacio-2);
+  padding: var(--espacio-3);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio-grande);
+}
+
+.grupo[data-ancho] {
+  grid-column: 1 / -1;
+}
+
+.grupo .seccion {
+  margin: 0;
+}
+
+.fila {
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.ayuda {
+  color: var(--texto-suave);
+  font-size: var(--letra-2);
+  line-height: 1.4;
 }
 
 .niveles {

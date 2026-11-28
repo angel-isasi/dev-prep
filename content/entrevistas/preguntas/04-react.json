@@ -187,8 +187,8 @@
       "id": "ent-063",
       "pregunta": "¿Componentes controlados y no controlados?",
       "preguntaEn": "Controlled versus uncontrolled components?",
-      "respuesta": "En un input controlado, React guarda el valor en estado y lo actualiza en cada tecla: tengo control total para validar en vivo. En uno no controlado, el valor vive en el DOM y lo leo al enviar, con un ref o con `FormData`. Para formularios grandes uso React Hook Form, que es no controlado por dentro y muy rápido.",
-      "respuestaEn": "In a controlled input, React holds the value in state and updates it on every keystroke, giving me full control for live validation. In an uncontrolled one, the value lives in the DOM and I read it on submit with a ref or `FormData`. For big forms I use React Hook Form, which is uncontrolled internally and very fast.",
+      "respuesta": "En un input controlado, React guarda el valor en estado y lo actualiza en cada tecla: tengo control total para validar en vivo. En uno no controlado, el valor vive en el DOM y lo leo al enviar, con un ref o con `FormData`. Para formularios grandes usaría una librería como React Hook Form, que es no controlada por dentro y muy rápida.",
+      "respuestaEn": "In a controlled input, React holds the value in state and updates it on every keystroke, giving me full control for live validation. In an uncontrolled one, the value lives in the DOM and I read it on submit with a ref or `FormData`. For big forms I would use a library like React Hook Form, which is uncontrolled internally and very fast.",
       "claves": [
         "Controlado: `value={texto}` más `onChange={e => setTexto(e.target.value)}`; la fuente de verdad es el estado.",
         "No controlado: usa `defaultValue` y lees el valor al enviar.",

@@ -232,7 +232,8 @@ export function ListaEjercicios() {
       {visibles.length === 0 ? (
         <p className={estilos.vacio}>Ningún ejercicio coincide con los filtros.</p>
       ) : (
-        grupos.map(({ clave, lista, ...grupo }) => {
+        <div className={estilos.grupos}>
+          {grupos.map(({ clave, lista, ...grupo }) => {
           const abierto = estaAbierto(clave);
           return (
             // Cada grupo (tema o patrón) es un <details> plegable. Lo controla React (open + clic en el
@@ -283,7 +284,8 @@ export function ListaEjercicios() {
               )}
             </details>
           );
-        })
+        })}
+        </div>
       )}
     </section>
   );

@@ -557,6 +557,10 @@
   grid-template-columns: 1fr;
 }
 
+.historialEntero {
+  grid-column: 1 / -1;
+}
+
 .bloque {
   display: flex;
   flex-direction: column;

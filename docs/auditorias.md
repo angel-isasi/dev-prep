@@ -80,6 +80,25 @@ Pedido de Angel: que Inglés se entienda mucho mejor, que deje de parecerse al c
 
 **Propuesto, sin hacer:** que repetir el examen con peor resultado no reduzca las unidades aprobadas; que fallar un repaso no mantenga la racha.
 
+## 2026-11-28: toda la app
+
+**Aksu v3** (mismo día, antes de la auditoría): responde en vivo, actúa en la app, "Solo reviso" y panel con pestañas Chat, Ajustes y Libro.
+
+**Arreglado**
+- Tiempos de la IA desalineados: el CV por oferta se cortaba a los 45 s y un reintento escondido se cobraba sin anotarse.
+- Aksu recibía dos veces lo que le decías; generaba todas las frases de voz a la vez; guardaba todo en cada trozo de la respuesta; tomaba como respuesta lo que decías después de una palabra de inglés.
+- Ofertas: sin internet, una búsqueda vacía quedaba guardada 3 horas y pisaba la última buena.
+- El contador de palabras del pitch cortaba en cada letra "s".
+- Hoy y Practicar mostraban dos retos de la semana distintos: ahora es el mismo.
+- Métodos de un tema mostraban las comillas del código tal cual.
+- Contenido: 6 explicaciones con detalles falsos (reto 004, 030, ejercicios 009 y 013, falso amigo de gripe, "for about a year") y 4 ajustes (React Hook Form, pitch de dev-prep, diálogo de git, ejercicio 021).
+
+**Ordenado**
+- Aksu: un solo selector (Solo reviso, Normal, Encima de mí), ajustes en su pestaña, figura tenue cuando no habla.
+- Tema: Métodos en su propia pestaña. Entrevistas › Simular: cada etapa una sola vez, con su botón. Lista de ejercicios en dos columnas. Aprender: una barra de avance menos por tema. Ofertas: empieza en "Solo para mí", títulos largos sin desbordar. Pausas con Desde y Hasta. "Perforaciones" ahora es "pasos".
+
+**Propuesto, sin hacer:** ofertas en filas compactas; Hoy sin la tarjeta de Aksu repetida; variantes en vez de copias exactas en repasos; validar automáticamente los errores comunes de las explicaciones.
+
 ## Última auditoría
 
-2026-11-19, toda la app (ver arriba). Siguiente: priorizar lo cambiado después de este commit.
+2026-11-28, toda la app (ver arriba). Siguiente: priorizar lo cambiado después de este commit.

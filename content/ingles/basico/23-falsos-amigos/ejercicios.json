@@ -3,7 +3,7 @@
     "correcta": 1, "explicacion": "Asistir a un evento es **attend**, y va sin preposición: I attended a conference. **Assist** parece asistir, pero significa ayudar: \"I assisted a conference\" suena a que ayudaste al congreso." },
   { "id": "en-basico-23-e02", "pregunta": "¿Cómo dices \"Actualmente trabajo en una tienda\"?", "opciones": ["I'm actually working at a store.", "I'm currently working at a store.", "I'm actual working at a store."],
     "correcta": 1, "explicacion": "Actualmente es **currently**. **Actually** significa \"en realidad\": \"I'm actually working at a store\" suena a que corriges algo (\"en realidad trabajo en una tienda\")." },
-  { "id": "en-basico-23-e03", "pregunta": "Tienes gripe y no vas a la oficina. ¿Qué le escribes a tu jefe?", "opciones": ["I'm constipated today.", "I have a cold today.", "I'm embarrassed today."],
+  { "id": "en-basico-23-e03", "pregunta": "Estás resfriado y no vas a la oficina. ¿Qué le escribes a tu jefe?", "opciones": ["I'm constipated today.", "I have a cold today.", "I'm embarrassed today."],
     "correcta": 1, "explicacion": "Estar resfriado es **have a cold**. **Constipated** parece constipado, pero significa estreñido. Es uno de los falsos amigos más vergonzosos." },
   { "id": "en-basico-23-e04", "pregunta": "Save the PDFs in this ___. (carpeta)", "opciones": ["carpet", "folder", "file"],
     "correcta": 1, "explicacion": "Una carpeta de archivos es una **folder**. **Carpet** es alfombra y **file** es el archivo, no la carpeta." },

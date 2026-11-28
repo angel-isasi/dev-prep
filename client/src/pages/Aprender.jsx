@@ -122,11 +122,6 @@ export function Aprender() {
                       {t.quiz ? `Quiz ${t.quiz.mejor}/${t.quiz.total}` : "Quiz pendiente"}
                     </span>
                   </div>
-                  {d && (
-                    <span className={estilos.barraDominio} data-estado={d.estado} aria-hidden>
-                      <i style={{ width: `${Math.round(d.valor * 100)}%` }} />
-                    </span>
-                  )}
                 </Link>
               </MagicCard>
             );

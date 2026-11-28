@@ -54,6 +54,12 @@ describe("armarAksuVivo", () => {
     expect(p.esfuerzo).toBe("medium");
   });
 
+  it("lo que te acaba de decir no se manda dos veces", () => {
+    const p = armarAksuVivo({ pregunta: "ábreme uno", historial: [{ de: "jarvis", texto: "Hola." }, { de: "yo", texto: "ábreme uno" }] });
+    expect(p.messages.map((m) => m.role)).toEqual(["user", "assistant", "user"]);
+    expect(p.messages.at(-1).content).toContain("Él te dice: ábreme uno");
+  });
+
   it("si habla por su cuenta piensa menos, y guarda en caché el sistema con el catálogo", () => {
     const p = armarAksuVivo({ momento: "Arranque del día", catalogo: "js-gu-001: Ficha" });
     expect(p.esfuerzo).toBe("low");

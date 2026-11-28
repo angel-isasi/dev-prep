@@ -283,66 +283,36 @@ function Portada({ proceso, categorias = [], ingles, setIngles, cargando, alEmpe
         </div>
       </section>
 
+      {/* Cada etapa una sola vez: tu avance y el botón para simularla (la más floja, resaltada) */}
       <section className={`tarjeta ${estilos.sueltas}`}>
         <span className="etiqueta">O una sola etapa</span>
-        <div className={estilos.gridEtapas}>
-          {etapas.map((e, i) => (
-            <button key={e.id} type="button" className={`brillo ${estilos.etapa}`} disabled={cargando} title={e.descripcion} onClick={() => alEmpezar([e.id])}>
-              <span className={estilos.etapaNumero} aria-hidden>
-                {ICONOS[e.id] ?? i + 1}
+        <ol className={estilos.dominio}>
+          {porEtapa.map((e, i) => (
+            <li key={e.id} data-floja={e.id === floja?.id} title={e.descripcion}>
+              <span className={estilos.dominioNombre}>
+                <strong>
+                  {ICONOS[e.id] ?? i + 1} {e.titulo}
+                </strong>
+                <small>
+                  {e.minutos} min · {e.pct === null ? "sin tarjetas" : `${e.dominadas}/${e.total} dominadas`}
+                  {e.id === floja?.id ? " · tu etapa más floja" : ""}
+                </small>
               </span>
-              <span className={estilos.etapaNombre}>
-                <strong>{e.titulo}</strong>
-                <span className={estilos.etapaMinutos}>{e.minutos} min</span>
+              <span className={estilos.barra} aria-hidden>
+                <span style={{ width: `${e.pct ?? 0}%` }} />
               </span>
-            </button>
+              <button type="button" className={e.id === floja?.id ? "boton boton-primario" : "boton"} disabled={cargando} onClick={() => alEmpezar([e.id])}>
+                Simular
+              </button>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
-      {/* Fila de abajo: tus cifras en columna, qué etapa te conviene y tu historial */}
-      <div className={estilos.abajo}>
-        <dl className={estilos.cifras}>
-          <div className="tarjeta">
-            <dt>Simulacros hechos</dt>
-            <dd>{hechos?.length ?? "–"}</dd>
-          </div>
-          <div className="tarjeta">
-            <dt>Último</dt>
-            <dd>{ultimo?.fecha ?? "–"}</dd>
-          </div>
-          <div className="tarjeta">
-            <dt>Mejor nota</dt>
-            <dd>{mejor ? `${mejor}/10` : "–"}</dd>
-          </div>
-        </dl>
-
-        <section className={`tarjeta ${estilos.bloque}`}>
-          <span className="etiqueta">Qué etapa te conviene</span>
-          <ol className={estilos.dominio}>
-            {porEtapa.map((e, i) => (
-              <li key={e.id} data-floja={e.id === floja?.id}>
-                <span className={estilos.dominioNombre}>
-                  <strong>
-                    {i + 1}. {e.titulo}
-                  </strong>
-                  <small>{e.pct === null ? "sin tarjetas" : `${e.dominadas}/${e.total} · ${e.pct}%`}</small>
-                </span>
-                <span className={estilos.barra} aria-hidden>
-                  <span style={{ width: `${e.pct ?? 0}%` }} />
-                </span>
-                {e.id === floja?.id && (
-                  <button type="button" className="boton" disabled={cargando} onClick={() => alEmpezar([e.id])}>
-                    Simular esta
-                  </button>
-                )}
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className={`tarjeta ${estilos.bloque}`}>
-          <span className="etiqueta">Tus últimos simulacros</span>
+        <section className={`tarjeta ${estilos.bloque} ${estilos.historialEntero}`}>
+          <span className="etiqueta">
+            Tus simulacros · {hechos?.length ?? 0} hechos{mejor ? ` · mejor nota ${mejor}/10` : ""}
+          </span>
           {hechos?.length ? (
             <ul className={estilos.historial}>
               {hechos.slice(0, 4).map((h) => (
@@ -366,7 +336,6 @@ function Portada({ proceso, categorias = [], ingles, setIngles, cargando, alEmpe
             </div>
           )}
         </section>
-      </div>
     </div>
   );
 }

@@ -72,7 +72,7 @@ export function OfertasParaTi() {
   const [datos, setDatos] = useState(null);
   const [error, setError] = useState(null);
   const [cargando, setCargando] = useState(false);
-  const [filtro, setFiltro] = useState(() => localStorage.getItem(CLAVE_FILTRO) ?? "todas");
+  const [filtro, setFiltro] = useState(() => localStorage.getItem(CLAVE_FILTRO) ?? "para-mi");
   const [mostrar, setMostrar] = useState(POR_PAGINA);
   const [marcas, setMarcas] = useState({});
   const [fuera, setFuera] = useState([]);
@@ -273,8 +273,8 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
           {o.nueva && <span data-tipo="nueva">Nueva</span>}
           {o.confianza && (
             <span data-tipo="confianza" data-nivel={o.confianza.nivel} title={o.confianza.detalle}>
-              {o.confianza.nivel === "alta" ? "✓ " : o.confianza.nivel === "baja" ? "! " : ""}
-              {o.fuente}: {o.confianza.texto}
+              {/* Si la bolsa es conocida basta su nombre; solo se explica cuando hay que tener cuidado */}
+              {o.confianza.nivel === "alta" ? `✓ ${o.fuente}` : `${o.confianza.nivel === "baja" ? "! " : ""}${o.fuente}: ${o.confianza.texto}`}
             </span>
           )}
           {alertas.length > 0 && (

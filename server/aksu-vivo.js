@@ -127,6 +127,8 @@ export function armarAksuVivo(cuerpo) {
     .slice(-TOPES.turnos)
     .map((t) => ({ role: t?.de === "yo" ? "user" : "assistant", content: recortar(t?.texto, TOPES.turno) }))
     .filter((t) => t.content);
+  // Lo que te acaba de decir ya va abajo como "Él te dice": no se manda dos veces
+  if (pregunta && turnos.at(-1)?.role === "user" && turnos.at(-1).content === pregunta) turnos.pop();
   if (turnos[0]?.role === "assistant") turnos.unshift({ role: "user", content: "(Empieza la conversación de hoy.)" });
 
   const ahora = [
@@ -206,9 +208,8 @@ export function responderEnVivo(cliente, pedido, modelo = MODELO_AKSU) {
         const flujo = cliente.beta.messages.stream({
           model: modelo,
           max_tokens: 8000,
-          // Si el modelo declina por sus filtros de seguridad, el servidor sigue con otro modelo
-          betas: ["server-side-fallback-2026-07-01"],
-          fallbacks: "default",
+          // Si el modelo declina por sus filtros de seguridad, el servidor sigue con otro modelo (el pequeño no tiene ese respaldo)
+          ...(modelo.includes("haiku") ? {} : { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" }),
           output_config: { effort: pedido.esfuerzo },
           system: pedido.system,
           tools: HERRAMIENTAS_AKSU,
@@ -233,6 +234,7 @@ export function responderEnVivo(cliente, pedido, modelo = MODELO_AKSU) {
           enviar({ t: "fin", uso });
         }
       } catch (e) {
+        console.error("aksu-vivo", e?.status ?? "", e?.message ?? e); // queda en los registros de Vercel
         enviar({ t: "error", error: mensajeDeError(e) });
       } finally {
         control.close();
@@ -248,5 +250,6 @@ function mensajeDeError(e) {
   if (status === 429) return "Demasiados pedidos seguidos o sin saldo: espera un momento.";
   if (/credit|balance/i.test(e?.message ?? "")) return "Tu cuenta de la API no tiene saldo.";
   if (/usage limit|spend limit|workspace.*limit|limit.*reached/i.test(e?.message ?? "")) return "Llegaste al límite de gasto que pusiste en la consola de la API.";
+  if (status === 400) return "El pedido salió mal armado. Inténtalo otra vez y, si se repite, revisa la configuración de la IA.";
   return "Se me cortó la conexión. Dímelo otra vez.";
 }

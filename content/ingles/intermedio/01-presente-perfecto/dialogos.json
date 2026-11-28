@@ -6,7 +6,7 @@
       { "quien": "Sarah", "en": "Have you ever worked on a real project for a client?", "es": "¿Alguna vez has trabajado en un proyecto real para un cliente?" },
       { "quien": "Luis", "en": "Not for a company, but I've built a website for a small bakery in Lima.", "es": "No para una empresa, pero hice un sitio web para una pequeña panadería en Lima." },
       { "quien": "Sarah", "en": "That's great. Which technologies have you used so far?", "es": "Excelente. ¿Qué tecnologías has usado hasta ahora?" },
-      { "quien": "Luis", "en": "I've worked with React for about a year, and I've just started learning TypeScript.", "es": "Trabajo con React desde hace casi un año y acabo de empezar a aprender TypeScript." },
+      { "quien": "Luis", "en": "I've worked with React for about a year, and I've just started learning TypeScript.", "es": "Trabajo con React desde hace más o menos un año y acabo de empezar a aprender TypeScript." },
       { "quien": "Sarah", "en": "Have you used Git on a team?", "es": "¿Has usado Git en equipo?" },
       { "quien": "Luis", "en": "Yes, I have. I've reviewed my classmates' pull requests several times.", "es": "Sí. He revisado los pull requests de mis compañeros varias veces." }
     ],

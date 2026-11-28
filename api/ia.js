@@ -9,13 +9,14 @@ export function GET(request) {
   return manejarGet(process.env, request);
 }
 
-// 45 s y un solo reintento: un pedido colgado igual se cobra. Aksu en vivo tiene más margen (la función dura hasta 120 s)
+// Sin reintentos escondidos: un segundo intento se cobraba aunque la app ya se hubiera rendido y no lo anotara.
+// Tiempos: 55 s normal (la app espera 65), 110 s para el CV de una oferta y Aksu en vivo (la función dura hasta 120 s)
 // El invitado usa su propia API key: su gasto tiene el tope de su espacio de trabajo, no toca el tuyo
-const crearCliente = (rol, { vivo = false } = {}) =>
+const crearCliente = (rol, { vivo = false, largo = false } = {}) =>
   new Anthropic({
     apiKey: rol === "invitado" ? process.env.ANTHROPIC_API_KEY_INVITADO : process.env.ANTHROPIC_API_KEY,
-    timeout: vivo ? 100_000 : 45_000,
-    maxRetries: 1,
+    timeout: vivo || largo ? 110_000 : 55_000,
+    maxRetries: 0,
   });
 
 export function POST(request) {

@@ -15,7 +15,12 @@ export function rutasOfertasAuto() {
   let cache = null;
   router.get("/ofertas/buscar", async (req, res) => {
     if (!cache || req.query.nuevo === "1" || Date.now() - cache.en > TRES_HORAS) {
-      cache = { en: Date.now(), ...(await buscarOfertas(pedir)) };
+      const nueva = { en: Date.now(), ...(await buscarOfertas(pedir)) };
+      // Sin internet todas las fuentes fallan: no se guarda una lista vacía por 3 horas
+      const fallo = (nueva.fuentes ?? []).length > 0 && nueva.fuentes.every((f) => !f.ok);
+      if (fallo && cache) return res.json({ ofertas: cache.ofertas, fuentes: nueva.fuentes, buscadoEn: new Date(cache.en).toISOString(), sinConexion: true });
+      if (fallo) return res.json({ ofertas: [], fuentes: nueva.fuentes, buscadoEn: new Date(nueva.en).toISOString(), sinConexion: true });
+      cache = nueva;
     }
     res.json({ ofertas: cache.ofertas, fuentes: cache.fuentes, buscadoEn: new Date(cache.en).toISOString() });
   });

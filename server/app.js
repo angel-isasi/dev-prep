@@ -81,7 +81,7 @@ export function crearApp(deps) {
         method: req.method,
         headers,
         body: req.method === "POST" ? JSON.stringify(req.body ?? {}) : undefined,
-        signal: AbortSignal.timeout(req.body?.tarea === "aksu-vivo" ? 115_000 : 60_000),
+        signal: AbortSignal.timeout(["aksu-vivo", "cv-oferta"].includes(req.body?.tarea) ? 117_000 : 62_000),
       });
       // Aksu en vivo responde a trozos (líneas JSON): se van pasando tal cual llegan, sin esperar el final
       if ((r.headers.get("content-type") ?? "").includes("ndjson") && r.body) {

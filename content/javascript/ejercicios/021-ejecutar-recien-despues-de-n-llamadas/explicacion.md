@@ -51,7 +51,7 @@ Se usa `>=` y no `===` porque la regla dice que, desde la llamada `veces` en ade
 
 ## Otra forma de resolverlo
 
-Con el operador ternario, como en la fuente original:
+Con el operador ternario, más compacto:
 
 ```js
 export function despuesDe(veces, fn) {

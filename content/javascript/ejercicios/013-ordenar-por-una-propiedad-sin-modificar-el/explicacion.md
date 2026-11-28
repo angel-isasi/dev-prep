@@ -43,7 +43,7 @@ El original sigue intacto porque `sort` reordenó la copia. Ojo: la copia es **s
 - **Ordenar el original**: `return lista.sort(...)`. Los dos primeros tests pasan, pero falla "no modifica el arreglo original": `alumnos[0].nombre` ya no es `"Luz"`. También falla "devuelve un arreglo nuevo", porque `sort` devuelve el mismo arreglo.
 - **Restar en vez de comparar**: `(a, b) => a[clave] - b[clave]`. Funciona con números, pero con textos `"Luz" - "Ana"` es `NaN` y el orden queda como estaba. Lo reconoces porque el test de texto recibe `["Luz", "Ana", "Eva"]`.
 - **Usar `a.clave` en vez de `a[clave]`**: lee una propiedad llamada "clave" que no existe; todo es `undefined` y nada se ordena.
-- **Devolver un booleano**: `(a, b) => a[clave] > b[clave]`. Devuelve `true` o `false` (que se convierten en `1` y `0`), nunca negativo, así que `sort` no tiene información suficiente y el resultado depende del caso. A veces pasa y a veces no.
+- **Devolver un booleano**: `(a, b) => a[clave] > b[clave]`. Devuelve `true` o `false` (que se convierten en `1` y `0`), nunca negativo, así que `sort` no sabe cuándo `a` va antes. Con estos tests fallan los dos de ordenar: recibes la lista sin cambios. En otros casos puede parecer que funciona, y eso es lo peligroso.
 - **Llamar `sort()` sin función**: con objetos los convierte todos a `"[object Object]"` y no cambia nada. Con números solos, ordenaría como texto: `[8, 15, 18].sort()` da `[15, 18, 8]`.
 
 ## Otra forma de resolverlo
