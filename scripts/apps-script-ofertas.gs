@@ -5,6 +5,8 @@
 // Propiedades del script → CLAVE.
 const ETIQUETA = 'ofertas-de-trabajo';
 const DIAS = 14;
+// Confirmaciones de postulación (Indeed, Bumeran, Computrabajo, LinkedIn, empresas): para marcar las ofertas a las que ya postulaste
+const POSTULACIONES = 'newer_than:90d subject:("Indeed Application" OR "tu postulación" OR "tu postulacion" OR "tu solicitud se ha enviado" OR "thank you for applying" OR "thanks for applying" OR "your application" OR "gracias por postular")';
 
 function doGet(e) {
   const clave = PropertiesService.getScriptProperties().getProperty('CLAVE');
@@ -22,7 +24,12 @@ function doGet(e) {
       correos.push(correo);
     });
   });
-  return salida({ correos: correos });
+  const postulaciones = [];
+  GmailApp.search(POSTULACIONES, 0, 100).forEach(function (hilo) {
+    const m = hilo.getMessages()[0];
+    postulaciones.push({ de: m.getFrom(), asunto: m.getSubject(), fecha: m.getDate().toISOString(), texto: m.getPlainBody().slice(0, 3000) });
+  });
+  return salida({ correos: correos, postulaciones: postulaciones });
 }
 
 function salida(datos) {

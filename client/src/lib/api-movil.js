@@ -32,6 +32,7 @@ import { unidadTrasExamen } from "../movil/ingles/examen.js";
 import { compararAvance, marcaPersonal, planDeLaSemana, resultadoReto, retoDeLaSemana } from "../../../server/avance.js";
 import { buscarOfertas, nuevasDesde, ordenarOfertas, sinRepetir } from "../../../server/ofertas-auto.js";
 import { ofertasDeCorreos } from "../../../server/ofertas-correo.js";
+import { postulacionesDeCorreos, yaPostulaste } from "../../../server/postulaciones-correo.js";
 import { CV_BASE_INICIAL, UMBRAL_CV_AUTO } from "../../../server/cv-oferta.js";
 import { conFechaDeEnvio, metaSemanal, numerosPostulaciones, seguimientosPendientes } from "../../../server/postulaciones.js";
 import { crearApiMapache } from "../movil/mapache/api-mapache.js";
@@ -62,6 +63,7 @@ async function ofertasDelCorreo(nuevo) {
   const guardada = leerJson(CLAVE_CORREO);
   const fresca = guardada && Date.now() - Date.parse(guardada.buscadoEn) < 60 * 60 * 1000;
   let correos = !nuevo && fresca ? guardada.correos : null;
+  let confirmaciones = guardada?.postulaciones ?? [];
   let ok = true;
   if (!correos) {
     try {
@@ -69,8 +71,9 @@ async function ofertasDelCorreo(nuevo) {
       const datos = await r.json();
       if (!Array.isArray(datos.correos)) throw new Error(datos.error ?? "respuesta rara");
       correos = datos.correos;
+      confirmaciones = Array.isArray(datos.postulaciones) ? datos.postulaciones : [];
       try {
-        almacen.setItem(CLAVE_CORREO, JSON.stringify({ buscadoEn: new Date().toISOString(), correos }));
+        almacen.setItem(CLAVE_CORREO, JSON.stringify({ buscadoEn: new Date().toISOString(), correos, postulaciones: confirmaciones }));
       } catch {
         // si no cabe en el almacenamiento, igual se usan esta vez
       }
@@ -80,7 +83,7 @@ async function ofertasDelCorreo(nuevo) {
     }
   }
   const ofertas = ofertasDeCorreos(correos);
-  return { ofertas, fuente: { id: "correo", nombre: `tu correo (${ofertas.length})`, ok, cantidad: ofertas.length } };
+  return { ofertas, postulaciones: postulacionesDeCorreos(confirmaciones), fuente: { id: "correo", nombre: `tu correo (${ofertas.length})`, ok, cantidad: ofertas.length } };
 }
 
 function leerJson(clave) {
@@ -878,6 +881,30 @@ const apiWeb = {
     const correo = await ofertasDelCorreo(nuevo);
     const ordenadas = ordenarOfertas(sinRepetir([...(busqueda.ofertas ?? []), ...correo.ofertas]), perfil, { limite: 300 });
 
+    // Postulaciones que llegaron confirmadas a tu correo: se registran solas (en "Enviada") si todavía no
+    // estaban, y las ofertas que coinciden se marcan como "Ya postulaste"
+    const registradas = progreso.registros("postulaciones");
+    const comoOferta = (p) => ({ titulo: p.puesto, empresa: p.empresa });
+    for (const p of correo.postulaciones ?? []) {
+      if (registradas[p.id] || Object.values(registradas).some((r) => yaPostulaste(comoOferta(r), p))) continue;
+      const deOferta = ordenadas.find((o) => yaPostulaste(o, p));
+      await apiWeb.guardarPostulacion({
+        id: p.id,
+        empresa: p.empresa || deOferta?.empresa || "Por confirmar",
+        puesto: p.puesto || deOferta?.titulo || "Postulación (revisa el correo)",
+        enlace: deOferta?.url ?? "",
+        fuente: p.fuente,
+        etapa: "enviada",
+        fecha: p.fecha ?? progreso.hoy(),
+        notas: "Detectada sola: te llegó la confirmación de la postulación a tu correo.",
+        proximo: "Esperar respuesta (si en 1 o 2 semanas no hay nada, haz seguimiento)",
+        proximoFecha: "",
+      });
+    }
+    const misPostulaciones = Object.values(progreso.registros("postulaciones")).filter((r) => r.etapa && r.etapa !== "por-postular");
+    const postulada = (o) =>
+      (correo.postulaciones ?? []).some((p) => yaPostulaste(o, p)) || misPostulaciones.some((r) => (r.enlace && r.enlace === o.url) || yaPostulaste(o, comoOferta(r)));
+
     // "Nuevas desde tu última visita": se compara con lo que había la vez anterior que abriste la app
     // (se lee una vez por visita, así guardar u ocultar no borra las marcas de "Nueva").
     const ids = ordenadas.map((o) => o.id);
@@ -904,6 +931,7 @@ const apiWeb = {
         texto: String(texto ?? "").slice(0, 6000),
         tieneCv: !!conCv[o.id],
         guardada: yaGuardadas.has(o.url),
+        postulada: postulada(o),
         marca: marcas[o.id]?.estado ?? null,
         nueva: nuevas.has(o.id),
         paraCv: palabrasParaCv(o.tecnologias, textoCv),

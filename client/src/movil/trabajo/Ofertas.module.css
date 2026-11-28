@@ -365,6 +365,16 @@ details.ayuda .estado {
   line-height: 1.6;
 }
 
+.insignias [data-tipo="postulada"] {
+  border-color: var(--borde-fuerte);
+  color: var(--texto);
+  font-weight: var(--peso-semi);
+}
+
+.oferta:has([data-tipo="postulada"]) {
+  opacity: 0.72;
+}
+
 .insignias [data-tipo="nueva"] {
   border-color: var(--acento);
   background: var(--acento-suave);

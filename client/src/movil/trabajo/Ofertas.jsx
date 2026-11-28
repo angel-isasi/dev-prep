@@ -31,6 +31,7 @@ const FILTROS = {
   junior: (o) => o.junior,
   peru: (o) => o.lugarOk,
   nuevas: (o) => o.nueva,
+  postuladas: (o) => o.postulada,
 };
 
 /**
@@ -121,6 +122,7 @@ export function OfertasParaTi() {
     guardadas: todas.filter((o) => marcaDe(o) === "guardada").length + fuera.length,
     ocultas: todas.length - sinOcultas.length,
     paraMi: sinOcultas.filter((o) => o.paraMi).length,
+    postuladas: sinOcultas.filter((o) => o.postulada).length,
   };
   const visibles =
     filtro === "ocultas"
@@ -136,6 +138,7 @@ export function OfertasParaTi() {
     ["peru", "Perú o Latinoamérica"],
     ["nuevas", `Nuevas (${cuenta.nuevas})`],
     ["guardadas", `Guardadas (${cuenta.guardadas})`],
+    ...(cuenta.postuladas || filtro === "postuladas" ? [["postuladas", `Postuladas (${cuenta.postuladas})`]] : []),
     ...(cuenta.ocultas || filtro === "ocultas" ? [["ocultas", `Ocultas (${cuenta.ocultas})`]] : []),
   ];
 
@@ -294,7 +297,8 @@ function Oferta({ oferta: o, marca, alMarcar, cv }) {
           <small className={estilos.meta}>
             {[o.empresa, o.remoto ? "Remoto" : null, o.remoto && /^remot/i.test(o.ubicacion ?? "") ? null : o.ubicacion, salario(o.salario), hace(o.fecha)].filter(Boolean).join(" · ")}
           </small>
-          {o.nueva && <span data-tipo="nueva">Nueva</span>}
+          {o.postulada && <span data-tipo="postulada">✓ Ya postulaste</span>}
+          {o.nueva && !o.postulada && <span data-tipo="nueva">Nueva</span>}
           {o.confianza && (
             <span data-tipo="confianza" data-nivel={o.confianza.nivel} title={o.confianza.detalle}>
               {/* Si la bolsa es conocida basta su nombre; solo se explica cuando hay que tener cuidado */}
